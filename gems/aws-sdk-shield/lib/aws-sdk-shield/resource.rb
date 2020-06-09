@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Shield
+
   class Resource
 
     # @param options ({})

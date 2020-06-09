@@ -13,14 +13,15 @@ module Aws::Greengrass
     #
     #       {
     #         group_id: "__string", # required
-    #         role_arn: "__string",
+    #         role_arn: "__string", # required
     #       }
     #
     # @!attribute [rw] group_id
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the role you wish to associate with this group.
+    #   The ARN of the role you wish to associate with this group. The
+    #   existence of the role is not validated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateRoleToGroupRequest AWS API Documentation
@@ -47,7 +48,7 @@ module Aws::Greengrass
     #   data as a hash:
     #
     #       {
-    #         role_arn: "__string",
+    #         role_arn: "__string", # required
     #       }
     #
     # @!attribute [rw] role_arn
@@ -69,6 +70,23 @@ module Aws::Greengrass
     #
     class AssociateServiceRoleToAccountResponse < Struct.new(
       :associated_at)
+      include Aws::Structure
+    end
+
+    # General error information.
+    #
+    # @!attribute [rw] error_details
+    #   A list of error details.
+    #   @return [Array<Types::ErrorDetail>]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :error_details,
+      :message)
       include Aws::Structure
     end
 
@@ -144,8 +162,8 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] deployment_status
-    #   The current status of the group deployment: ''Pending'',
-    #   ''InProgress'', ''Success'', or ''Failure''.
+    #   The current status of the group deployment: ''InProgress'',
+    #   ''Building'', ''Success'', or ''Failure''.
     #   @return [String]
     #
     # @!attribute [rw] deployment_type
@@ -224,8 +242,8 @@ module Aws::Greengrass
     #   data as a hash:
     #
     #       {
-    #         connector_arn: "__string",
-    #         id: "__string",
+    #         connector_arn: "__string", # required
+    #         id: "__string", # required
     #         parameters: {
     #           "__string" => "__string",
     #         },
@@ -263,8 +281,8 @@ module Aws::Greengrass
     #       {
     #         connectors: [
     #           {
-    #             connector_arn: "__string",
-    #             id: "__string",
+    #             connector_arn: "__string", # required
+    #             id: "__string", # required
     #             parameters: {
     #               "__string" => "__string",
     #             },
@@ -290,10 +308,10 @@ module Aws::Greengrass
     #   data as a hash:
     #
     #       {
-    #         certificate_arn: "__string",
-    #         id: "__string",
+    #         certificate_arn: "__string", # required
+    #         id: "__string", # required
     #         sync_shadow: false,
-    #         thing_arn: "__string",
+    #         thing_arn: "__string", # required
     #       }
     #
     # @!attribute [rw] certificate_arn
@@ -333,10 +351,10 @@ module Aws::Greengrass
     #       {
     #         cores: [
     #           {
-    #             certificate_arn: "__string",
-    #             id: "__string",
+    #             certificate_arn: "__string", # required
+    #             id: "__string", # required
     #             sync_shadow: false,
-    #             thing_arn: "__string",
+    #             thing_arn: "__string", # required
     #           },
     #         ],
     #       }
@@ -360,8 +378,8 @@ module Aws::Greengrass
     #         initial_version: {
     #           connectors: [
     #             {
-    #               connector_arn: "__string",
-    #               id: "__string",
+    #               connector_arn: "__string", # required
+    #               id: "__string", # required
     #               parameters: {
     #                 "__string" => "__string",
     #               },
@@ -369,6 +387,9 @@ module Aws::Greengrass
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -382,12 +403,17 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateConnectorDefinitionRequest AWS API Documentation
     #
     class CreateConnectorDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -433,8 +459,8 @@ module Aws::Greengrass
     #         connector_definition_id: "__string", # required
     #         connectors: [
     #           {
-    #             connector_arn: "__string",
-    #             id: "__string",
+    #             connector_arn: "__string", # required
+    #             id: "__string", # required
     #             parameters: {
     #               "__string" => "__string",
     #             },
@@ -490,14 +516,17 @@ module Aws::Greengrass
     #         initial_version: {
     #           cores: [
     #             {
-    #               certificate_arn: "__string",
-    #               id: "__string",
+    #               certificate_arn: "__string", # required
+    #               id: "__string", # required
     #               sync_shadow: false,
-    #               thing_arn: "__string",
+    #               thing_arn: "__string", # required
     #             },
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -510,12 +539,17 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionRequest AWS API Documentation
     #
     class CreateCoreDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -561,10 +595,10 @@ module Aws::Greengrass
     #         core_definition_id: "__string", # required
     #         cores: [
     #           {
-    #             certificate_arn: "__string",
-    #             id: "__string",
+    #             certificate_arn: "__string", # required
+    #             id: "__string", # required
     #             sync_shadow: false,
-    #             thing_arn: "__string",
+    #             thing_arn: "__string", # required
     #           },
     #         ],
     #       }
@@ -617,7 +651,7 @@ module Aws::Greengrass
     #       {
     #         amzn_client_token: "__string",
     #         deployment_id: "__string",
-    #         deployment_type: "NewDeployment", # accepts NewDeployment, Redeployment, ResetDeployment, ForceResetDeployment
+    #         deployment_type: "NewDeployment", # required, accepts NewDeployment, Redeployment, ResetDeployment, ForceResetDeployment
     #         group_id: "__string", # required
     #         group_version_id: "__string",
     #       }
@@ -631,7 +665,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] deployment_type
-    #   The type of deployment. When used in ''CreateDeployment'', only
+    #   The type of deployment. When used for ''CreateDeployment'', only
     #   ''NewDeployment'' and ''Redeployment'' are valid.
     #   @return [String]
     #
@@ -677,14 +711,17 @@ module Aws::Greengrass
     #         initial_version: {
     #           devices: [
     #             {
-    #               certificate_arn: "__string",
-    #               id: "__string",
+    #               certificate_arn: "__string", # required
+    #               id: "__string", # required
     #               sync_shadow: false,
-    #               thing_arn: "__string",
+    #               thing_arn: "__string", # required
     #             },
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -697,12 +734,17 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinitionRequest AWS API Documentation
     #
     class CreateDeviceDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -748,10 +790,10 @@ module Aws::Greengrass
     #         device_definition_id: "__string", # required
     #         devices: [
     #           {
-    #             certificate_arn: "__string",
-    #             id: "__string",
+    #             certificate_arn: "__string", # required
+    #             id: "__string", # required
     #             sync_shadow: false,
-    #             thing_arn: "__string",
+    #             thing_arn: "__string", # required
     #           },
     #         ],
     #       }
@@ -805,6 +847,10 @@ module Aws::Greengrass
     #           default_config: {
     #             execution: {
     #               isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #               run_as: {
+    #                 gid: 1,
+    #                 uid: 1,
+    #               },
     #             },
     #           },
     #           functions: [
@@ -824,7 +870,7 @@ module Aws::Greengrass
     #                   resource_access_policies: [
     #                     {
     #                       permission: "ro", # accepts ro, rw
-    #                       resource_id: "__string",
+    #                       resource_id: "__string", # required
     #                     },
     #                   ],
     #                   variables: {
@@ -837,11 +883,14 @@ module Aws::Greengrass
     #                 pinned: false,
     #                 timeout: 1,
     #               },
-    #               id: "__string",
+    #               id: "__string", # required
     #             },
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -854,12 +903,17 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionRequest AWS API Documentation
     #
     class CreateFunctionDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -905,6 +959,10 @@ module Aws::Greengrass
     #         default_config: {
     #           execution: {
     #             isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #             run_as: {
+    #               gid: 1,
+    #               uid: 1,
+    #             },
     #           },
     #         },
     #         function_definition_id: "__string", # required
@@ -925,7 +983,7 @@ module Aws::Greengrass
     #                 resource_access_policies: [
     #                   {
     #                     permission: "ro", # accepts ro, rw
-    #                     resource_id: "__string",
+    #                     resource_id: "__string", # required
     #                   },
     #                 ],
     #                 variables: {
@@ -938,7 +996,7 @@ module Aws::Greengrass
     #               pinned: false,
     #               timeout: 1,
     #             },
-    #             id: "__string",
+    #             id: "__string", # required
     #           },
     #         ],
     #       }
@@ -947,8 +1005,8 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] default_config
-    #   Default configuration that will apply to all Lambda functions in the
-    #   group.
+    #   The default configuration that applies to all Lambda functions in
+    #   the group. Individual Lambda functions can override these settings.
     #   @return [Types::FunctionDefaultConfig]
     #
     # @!attribute [rw] function_definition_id
@@ -1037,6 +1095,9 @@ module Aws::Greengrass
     #           subscription_definition_version_arn: "__string",
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -1049,12 +1110,17 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupRequest AWS API Documentation
     #
     class CreateGroupRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1179,15 +1245,18 @@ module Aws::Greengrass
     #         initial_version: {
     #           loggers: [
     #             {
-    #               component: "GreengrassSystem", # accepts GreengrassSystem, Lambda
-    #               id: "__string",
-    #               level: "DEBUG", # accepts DEBUG, INFO, WARN, ERROR, FATAL
+    #               component: "GreengrassSystem", # required, accepts GreengrassSystem, Lambda
+    #               id: "__string", # required
+    #               level: "DEBUG", # required, accepts DEBUG, INFO, WARN, ERROR, FATAL
     #               space: 1,
-    #               type: "FileSystem", # accepts FileSystem, AWSCloudWatch
+    #               type: "FileSystem", # required, accepts FileSystem, AWSCloudWatch
     #             },
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -1200,12 +1269,17 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionRequest AWS API Documentation
     #
     class CreateLoggerDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1251,11 +1325,11 @@ module Aws::Greengrass
     #         logger_definition_id: "__string", # required
     #         loggers: [
     #           {
-    #             component: "GreengrassSystem", # accepts GreengrassSystem, Lambda
-    #             id: "__string",
-    #             level: "DEBUG", # accepts DEBUG, INFO, WARN, ERROR, FATAL
+    #             component: "GreengrassSystem", # required, accepts GreengrassSystem, Lambda
+    #             id: "__string", # required
+    #             level: "DEBUG", # required, accepts DEBUG, INFO, WARN, ERROR, FATAL
     #             space: 1,
-    #             type: "FileSystem", # accepts FileSystem, AWSCloudWatch
+    #             type: "FileSystem", # required, accepts FileSystem, AWSCloudWatch
     #           },
     #         ],
     #       }
@@ -1308,9 +1382,9 @@ module Aws::Greengrass
     #         initial_version: {
     #           resources: [
     #             {
-    #               id: "__string",
-    #               name: "__string",
-    #               resource_data_container: {
+    #               id: "__string", # required
+    #               name: "__string", # required
+    #               resource_data_container: { # required
     #                 local_device_resource_data: {
     #                   group_owner_setting: {
     #                     auto_add_group_owner: false,
@@ -1328,10 +1402,18 @@ module Aws::Greengrass
     #                 },
     #                 s3_machine_learning_model_resource_data: {
     #                   destination_path: "__string",
+    #                   owner_setting: {
+    #                     group_owner: "__string", # required
+    #                     group_permission: "ro", # required, accepts ro, rw
+    #                   },
     #                   s3_uri: "__string",
     #                 },
     #                 sage_maker_machine_learning_model_resource_data: {
     #                   destination_path: "__string",
+    #                   owner_setting: {
+    #                     group_owner: "__string", # required
+    #                     group_permission: "ro", # required, accepts ro, rw
+    #                   },
     #                   sage_maker_job_arn: "__string",
     #                 },
     #                 secrets_manager_secret_resource_data: {
@@ -1343,6 +1425,9 @@ module Aws::Greengrass
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -1355,12 +1440,17 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionRequest AWS API Documentation
     #
     class CreateResourceDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1406,9 +1496,9 @@ module Aws::Greengrass
     #         resource_definition_id: "__string", # required
     #         resources: [
     #           {
-    #             id: "__string",
-    #             name: "__string",
-    #             resource_data_container: {
+    #             id: "__string", # required
+    #             name: "__string", # required
+    #             resource_data_container: { # required
     #               local_device_resource_data: {
     #                 group_owner_setting: {
     #                   auto_add_group_owner: false,
@@ -1426,10 +1516,18 @@ module Aws::Greengrass
     #               },
     #               s3_machine_learning_model_resource_data: {
     #                 destination_path: "__string",
+    #                 owner_setting: {
+    #                   group_owner: "__string", # required
+    #                   group_permission: "ro", # required, accepts ro, rw
+    #                 },
     #                 s3_uri: "__string",
     #               },
     #               sage_maker_machine_learning_model_resource_data: {
     #                 destination_path: "__string",
+    #                 owner_setting: {
+    #                   group_owner: "__string", # required
+    #                   group_permission: "ro", # required, accepts ro, rw
+    #                 },
     #                 sage_maker_job_arn: "__string",
     #               },
     #               secrets_manager_secret_resource_data: {
@@ -1488,12 +1586,12 @@ module Aws::Greengrass
     #
     #       {
     #         amzn_client_token: "__string",
-    #         s3_url_signer_role: "S3UrlSignerRole",
-    #         software_to_update: "core", # accepts core, ota_agent
+    #         s3_url_signer_role: "S3UrlSignerRole", # required
+    #         software_to_update: "core", # required, accepts core, ota_agent
     #         update_agent_log_level: "NONE", # accepts NONE, TRACE, DEBUG, VERBOSE, INFO, WARN, ERROR, FATAL
-    #         update_targets: ["__string"],
-    #         update_targets_architecture: "armv7l", # accepts armv7l, x86_64, aarch64
-    #         update_targets_operating_system: "ubuntu", # accepts ubuntu, raspbian, amazon_linux
+    #         update_targets: ["__string"], # required
+    #         update_targets_architecture: "armv6l", # required, accepts armv6l, armv7l, x86_64, aarch64
+    #         update_targets_operating_system: "ubuntu", # required, accepts ubuntu, raspbian, amazon_linux, openwrt
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -1548,11 +1646,17 @@ module Aws::Greengrass
     #   The IoT Job Id corresponding to this update.
     #   @return [String]
     #
+    # @!attribute [rw] platform_software_version
+    #   The software version installed on the device or devices after the
+    #   update.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJobResponse AWS API Documentation
     #
     class CreateSoftwareUpdateJobResponse < Struct.new(
       :iot_job_arn,
-      :iot_job_id)
+      :iot_job_id,
+      :platform_software_version)
       include Aws::Structure
     end
 
@@ -1564,14 +1668,17 @@ module Aws::Greengrass
     #         initial_version: {
     #           subscriptions: [
     #             {
-    #               id: "__string",
-    #               source: "__string",
-    #               subject: "__string",
-    #               target: "__string",
+    #               id: "__string", # required
+    #               source: "__string", # required
+    #               subject: "__string", # required
+    #               target: "__string", # required
     #             },
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -1584,12 +1691,17 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionRequest AWS API Documentation
     #
     class CreateSubscriptionDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1635,10 +1747,10 @@ module Aws::Greengrass
     #         subscription_definition_id: "__string", # required
     #         subscriptions: [
     #           {
-    #             id: "__string",
-    #             source: "__string",
-    #             subject: "__string",
-    #             target: "__string",
+    #             id: "__string", # required
+    #             source: "__string", # required
+    #             subject: "__string", # required
+    #             target: "__string", # required
     #           },
     #         ],
     #       }
@@ -1704,16 +1816,20 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] latest_version
-    #   The latest version of the definition.
+    #   The ID of the latest version associated with the definition.
     #   @return [String]
     #
     # @!attribute [rw] latest_version_arn
-    #   The ARN of the latest version of the definition.
+    #   The ARN of the latest version associated with the definition.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the definition.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tag(s) attached to the resource arn.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DefinitionInformation AWS API Documentation
     #
@@ -1724,7 +1840,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1936,10 +2053,10 @@ module Aws::Greengrass
     #   data as a hash:
     #
     #       {
-    #         certificate_arn: "__string",
-    #         id: "__string",
+    #         certificate_arn: "__string", # required
+    #         id: "__string", # required
     #         sync_shadow: false,
-    #         thing_arn: "__string",
+    #         thing_arn: "__string", # required
     #       }
     #
     # @!attribute [rw] certificate_arn
@@ -1979,10 +2096,10 @@ module Aws::Greengrass
     #       {
     #         devices: [
     #           {
-    #             certificate_arn: "__string",
-    #             id: "__string",
+    #             certificate_arn: "__string", # required
+    #             id: "__string", # required
     #             sync_shadow: false,
-    #             thing_arn: "__string",
+    #             thing_arn: "__string", # required
     #           },
     #         ],
     #       }
@@ -2089,7 +2206,7 @@ module Aws::Greengrass
     #             resource_access_policies: [
     #               {
     #                 permission: "ro", # accepts ro, rw
-    #                 resource_id: "__string",
+    #                 resource_id: "__string", # required
     #               },
     #             ],
     #             variables: {
@@ -2102,7 +2219,7 @@ module Aws::Greengrass
     #           pinned: false,
     #           timeout: 1,
     #         },
-    #         id: "__string",
+    #         id: "__string", # required
     #       }
     #
     # @!attribute [rw] function_arn
@@ -2147,7 +2264,7 @@ module Aws::Greengrass
     #           resource_access_policies: [
     #             {
     #               permission: "ro", # accepts ro, rw
-    #               resource_id: "__string",
+    #               resource_id: "__string", # required
     #             },
     #           ],
     #           variables: {
@@ -2225,7 +2342,7 @@ module Aws::Greengrass
     #         resource_access_policies: [
     #           {
     #             permission: "ro", # accepts ro, rw
-    #             resource_id: "__string",
+    #             resource_id: "__string", # required
     #           },
     #         ],
     #         variables: {
@@ -2265,8 +2382,8 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Default configuration that will apply to all Lambda functions in the
-    # group.
+    # The default configuration that applies to all Lambda functions in the
+    # group. Individual Lambda functions can override these settings.
     #
     # @note When making an API call, you may pass FunctionDefaultConfig
     #   data as a hash:
@@ -2274,13 +2391,15 @@ module Aws::Greengrass
     #       {
     #         execution: {
     #           isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #           run_as: {
+    #             gid: 1,
+    #             uid: 1,
+    #           },
     #         },
     #       }
     #
     # @!attribute [rw] execution
-    #   Configuration that defines the default containerization used for
-    #   when running Lambda functions in the group. Individual Lambda
-    #   functions can be override this setting.
+    #   Configuration information that specifies how a Lambda function runs.
     #   @return [Types::FunctionDefaultExecutionConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionDefaultConfig AWS API Documentation
@@ -2290,15 +2409,17 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Configuration that defines the default containerization used for when
-    # running Lambda functions in the group. Individual Lambda functions can
-    # be override this setting.
+    # Configuration information that specifies how a Lambda function runs.
     #
     # @note When making an API call, you may pass FunctionDefaultExecutionConfig
     #   data as a hash:
     #
     #       {
     #         isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #         run_as: {
+    #           gid: 1,
+    #           uid: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] isolation_mode
@@ -2309,10 +2430,22 @@ module Aws::Greengrass
     #   with the default containerization for the group.
     #   @return [String]
     #
+    # @!attribute [rw] run_as
+    #   Specifies the user and group whose permissions are used when running
+    #   the Lambda function. You can specify one or both values to override
+    #   the default values. We recommend that you avoid running as root
+    #   unless absolutely necessary to minimize the risk of unintended
+    #   changes or malicious attacks. To run as root, you must set
+    #   ''IsolationMode'' to ''NoContainer'' and update config.json
+    #   in ''greengrass-root/config'' to set
+    #   ''allowFunctionsToRunAsRoot'' to ''yes''.
+    #   @return [Types::FunctionRunAsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionDefaultExecutionConfig AWS API Documentation
     #
     class FunctionDefaultExecutionConfig < Struct.new(
-      :isolation_mode)
+      :isolation_mode,
+      :run_as)
       include Aws::Structure
     end
 
@@ -2325,6 +2458,10 @@ module Aws::Greengrass
     #         default_config: {
     #           execution: {
     #             isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #             run_as: {
+    #               gid: 1,
+    #               uid: 1,
+    #             },
     #           },
     #         },
     #         functions: [
@@ -2344,7 +2481,7 @@ module Aws::Greengrass
     #                 resource_access_policies: [
     #                   {
     #                     permission: "ro", # accepts ro, rw
-    #                     resource_id: "__string",
+    #                     resource_id: "__string", # required
     #                   },
     #                 ],
     #                 variables: {
@@ -2357,14 +2494,15 @@ module Aws::Greengrass
     #               pinned: false,
     #               timeout: 1,
     #             },
-    #             id: "__string",
+    #             id: "__string", # required
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] default_config
-    #   Default configuration that will apply to all Lambda functions in
-    #   this function definition version
+    #   The default configuration that applies to all Lambda functions in
+    #   this function definition version. Individual Lambda functions can
+    #   override these settings.
     #   @return [Types::FunctionDefaultConfig]
     #
     # @!attribute [rw] functions
@@ -2379,7 +2517,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Configuration information that specifies how the Lambda function runs.
+    # Configuration information that specifies how a Lambda function runs.
     #
     # @note When making an API call, you may pass FunctionExecutionConfig
     #   data as a hash:
@@ -2401,14 +2539,14 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] run_as
-    #   Specifies the user and/or group whose permissions are used when
-    #   running the Lambda function. You can specify one or both values to
-    #   override the default values (ggc\_user/ggc\_group). We recommend
-    #   that you avoid running as root unless absolutely necessary to
-    #   minimize the risk of unintended changes or malicious attacks. To run
-    #   as root, you must set IsolationMode to NoContainer and you must
-    #   update config.json in greengrass-root/config to set
-    #   allowFunctionsToRunAsRoot to yes.
+    #   Specifies the user and group whose permissions are used when running
+    #   the Lambda function. You can specify one or both values to override
+    #   the default values. We recommend that you avoid running as root
+    #   unless absolutely necessary to minimize the risk of unintended
+    #   changes or malicious attacks. To run as root, you must set
+    #   ''IsolationMode'' to ''NoContainer'' and update config.json
+    #   in ''greengrass-root/config'' to set
+    #   ''allowFunctionsToRunAsRoot'' to ''yes''.
     #   @return [Types::FunctionRunAsConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionExecutionConfig AWS API Documentation
@@ -2419,13 +2557,14 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Specifies the user and/or group whose permissions are used when
-    # running the Lambda function. You can specify one or both values to
-    # override the default values (ggc\_user/ggc\_group). We recommend that
-    # you avoid running as root unless absolutely necessary to minimize the
-    # risk of unintended changes or malicious attacks. To run as root, you
-    # must set IsolationMode to NoContainer and you must update config.json
-    # in greengrass-root/config to set allowFunctionsToRunAsRoot to yes.
+    # Specifies the user and group whose permissions are used when running
+    # the Lambda function. You can specify one or both values to override
+    # the default values. We recommend that you avoid running as root unless
+    # absolutely necessary to minimize the risk of unintended changes or
+    # malicious attacks. To run as root, you must set ''IsolationMode''
+    # to ''NoContainer'' and update config.json in
+    # ''greengrass-root/config'' to set
+    # ''allowFunctionsToRunAsRoot'' to ''yes''.
     #
     # @note When making an API call, you may pass FunctionRunAsConfig
     #   data as a hash:
@@ -2436,11 +2575,11 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] gid
-    #   The Group ID whose permissions are used to run a Lambda function.
+    #   The group ID whose permissions are used to run a Lambda function.
     #   @return [Integer]
     #
     # @!attribute [rw] uid
-    #   The User ID whose permissions are used to run a Lambda function.
+    #   The user ID whose permissions are used to run a Lambda function.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionRunAsConfig AWS API Documentation
@@ -2542,6 +2681,10 @@ module Aws::Greengrass
     #   Error message
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetBulkDeploymentStatusResponse AWS API Documentation
     #
     class GetBulkDeploymentStatusResponse < Struct.new(
@@ -2549,7 +2692,8 @@ module Aws::Greengrass
       :bulk_deployment_status,
       :created_at,
       :error_details,
-      :error_message)
+      :error_message,
+      :tags)
       include Aws::Structure
     end
 
@@ -2626,6 +2770,10 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectorDefinitionResponse AWS API Documentation
     #
     class GetConnectorDefinitionResponse < Struct.new(
@@ -2635,7 +2783,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -2744,6 +2893,10 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionResponse AWS API Documentation
     #
     class GetCoreDefinitionResponse < Struct.new(
@@ -2753,7 +2906,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -2842,7 +2996,7 @@ module Aws::Greengrass
     # Information about the status of a deployment for a group.
     #
     # @!attribute [rw] deployment_status
-    #   The status of the deployment: ''Pending'', ''InProgress'',
+    #   The status of the deployment: ''InProgress'', ''Building'',
     #   ''Success'', or ''Failure''.
     #   @return [String]
     #
@@ -2912,6 +3066,10 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionResponse AWS API Documentation
     #
     class GetDeviceDefinitionResponse < Struct.new(
@@ -2921,7 +3079,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -3028,6 +3187,10 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionResponse AWS API Documentation
     #
     class GetFunctionDefinitionResponse < Struct.new(
@@ -3037,7 +3200,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -3226,6 +3390,10 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupResponse AWS API Documentation
     #
     class GetGroupResponse < Struct.new(
@@ -3235,7 +3403,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -3277,11 +3446,11 @@ module Aws::Greengrass
     #   @return [Types::GroupVersion]
     #
     # @!attribute [rw] id
-    #   The ID of the group version.
+    #   The ID of the group that the version is associated with.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The unique ID for the version of the group.
+    #   The ID of the group version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupVersionResponse AWS API Documentation
@@ -3333,6 +3502,10 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionResponse AWS API Documentation
     #
     class GetLoggerDefinitionResponse < Struct.new(
@@ -3342,7 +3515,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -3445,6 +3619,10 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionResponse AWS API Documentation
     #
     class GetResourceDefinitionResponse < Struct.new(
@@ -3454,7 +3632,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -3574,6 +3753,10 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionResponse AWS API Documentation
     #
     class GetSubscriptionDefinitionResponse < Struct.new(
@@ -3583,7 +3766,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -3718,11 +3902,11 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] latest_version
-    #   The latest version of the group.
+    #   The ID of the latest version associated with the group.
     #   @return [String]
     #
     # @!attribute [rw] latest_version_arn
-    #   The ARN of the latest version of the group.
+    #   The ARN of the latest version associated with the group.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3825,6 +4009,23 @@ module Aws::Greengrass
       :logger_definition_version_arn,
       :resource_definition_version_arn,
       :subscription_definition_version_arn)
+      include Aws::Structure
+    end
+
+    # General error information.
+    #
+    # @!attribute [rw] error_details
+    #   A list of error details.
+    #   @return [Array<Types::ErrorDetail>]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :error_details,
+      :message)
       include Aws::Structure
     end
 
@@ -4622,6 +4823,34 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # A list of versions.
     #
     # @!attribute [rw] next_token
@@ -4717,11 +4946,11 @@ module Aws::Greengrass
     #   data as a hash:
     #
     #       {
-    #         component: "GreengrassSystem", # accepts GreengrassSystem, Lambda
-    #         id: "__string",
-    #         level: "DEBUG", # accepts DEBUG, INFO, WARN, ERROR, FATAL
+    #         component: "GreengrassSystem", # required, accepts GreengrassSystem, Lambda
+    #         id: "__string", # required
+    #         level: "DEBUG", # required, accepts DEBUG, INFO, WARN, ERROR, FATAL
     #         space: 1,
-    #         type: "FileSystem", # accepts FileSystem, AWSCloudWatch
+    #         type: "FileSystem", # required, accepts FileSystem, AWSCloudWatch
     #       }
     #
     # @!attribute [rw] component
@@ -4766,11 +4995,11 @@ module Aws::Greengrass
     #       {
     #         loggers: [
     #           {
-    #             component: "GreengrassSystem", # accepts GreengrassSystem, Lambda
-    #             id: "__string",
-    #             level: "DEBUG", # accepts DEBUG, INFO, WARN, ERROR, FATAL
+    #             component: "GreengrassSystem", # required, accepts GreengrassSystem, Lambda
+    #             id: "__string", # required
+    #             level: "DEBUG", # required, accepts DEBUG, INFO, WARN, ERROR, FATAL
     #             space: 1,
-    #             type: "FileSystem", # accepts FileSystem, AWSCloudWatch
+    #             type: "FileSystem", # required, accepts FileSystem, AWSCloudWatch
     #           },
     #         ],
     #       }
@@ -4838,9 +5067,9 @@ module Aws::Greengrass
     #   data as a hash:
     #
     #       {
-    #         id: "__string",
-    #         name: "__string",
-    #         resource_data_container: {
+    #         id: "__string", # required
+    #         name: "__string", # required
+    #         resource_data_container: { # required
     #           local_device_resource_data: {
     #             group_owner_setting: {
     #               auto_add_group_owner: false,
@@ -4858,10 +5087,18 @@ module Aws::Greengrass
     #           },
     #           s3_machine_learning_model_resource_data: {
     #             destination_path: "__string",
+    #             owner_setting: {
+    #               group_owner: "__string", # required
+    #               group_permission: "ro", # required, accepts ro, rw
+    #             },
     #             s3_uri: "__string",
     #           },
     #           sage_maker_machine_learning_model_resource_data: {
     #             destination_path: "__string",
+    #             owner_setting: {
+    #               group_owner: "__string", # required
+    #               group_permission: "ro", # required, accepts ro, rw
+    #             },
     #             sage_maker_job_arn: "__string",
     #           },
     #           secrets_manager_secret_resource_data: {
@@ -4905,7 +5142,7 @@ module Aws::Greengrass
     #
     #       {
     #         permission: "ro", # accepts ro, rw
-    #         resource_id: "__string",
+    #         resource_id: "__string", # required
     #       }
     #
     # @!attribute [rw] permission
@@ -4954,10 +5191,18 @@ module Aws::Greengrass
     #         },
     #         s3_machine_learning_model_resource_data: {
     #           destination_path: "__string",
+    #           owner_setting: {
+    #             group_owner: "__string", # required
+    #             group_permission: "ro", # required, accepts ro, rw
+    #           },
     #           s3_uri: "__string",
     #         },
     #         sage_maker_machine_learning_model_resource_data: {
     #           destination_path: "__string",
+    #           owner_setting: {
+    #             group_owner: "__string", # required
+    #             group_permission: "ro", # required, accepts ro, rw
+    #           },
     #           sage_maker_job_arn: "__string",
     #         },
     #         secrets_manager_secret_resource_data: {
@@ -5007,9 +5252,9 @@ module Aws::Greengrass
     #       {
     #         resources: [
     #           {
-    #             id: "__string",
-    #             name: "__string",
-    #             resource_data_container: {
+    #             id: "__string", # required
+    #             name: "__string", # required
+    #             resource_data_container: { # required
     #               local_device_resource_data: {
     #                 group_owner_setting: {
     #                   auto_add_group_owner: false,
@@ -5027,10 +5272,18 @@ module Aws::Greengrass
     #               },
     #               s3_machine_learning_model_resource_data: {
     #                 destination_path: "__string",
+    #                 owner_setting: {
+    #                   group_owner: "__string", # required
+    #                   group_permission: "ro", # required, accepts ro, rw
+    #                 },
     #                 s3_uri: "__string",
     #               },
     #               sage_maker_machine_learning_model_resource_data: {
     #                 destination_path: "__string",
+    #                 owner_setting: {
+    #                   group_owner: "__string", # required
+    #                   group_permission: "ro", # required, accepts ro, rw
+    #                 },
     #                 sage_maker_job_arn: "__string",
     #               },
     #               secrets_manager_secret_resource_data: {
@@ -5053,6 +5306,35 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # The owner setting for downloaded machine learning resources.
+    #
+    # @note When making an API call, you may pass ResourceDownloadOwnerSetting
+    #   data as a hash:
+    #
+    #       {
+    #         group_owner: "__string", # required
+    #         group_permission: "ro", # required, accepts ro, rw
+    #       }
+    #
+    # @!attribute [rw] group_owner
+    #   The group owner of the resource. This is the name of an existing
+    #   Linux OS group on the system or a GID. The group's permissions are
+    #   added to the Lambda process.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_permission
+    #   The permissions that the group owner has to the resource. Valid
+    #   values are ''rw'' (read/write) or ''ro'' (read-only).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceDownloadOwnerSetting AWS API Documentation
+    #
+    class ResourceDownloadOwnerSetting < Struct.new(
+      :group_owner,
+      :group_permission)
+      include Aws::Structure
+    end
+
     # Attributes that define an Amazon S3 machine learning resource.
     #
     # @note When making an API call, you may pass S3MachineLearningModelResourceData
@@ -5060,6 +5342,10 @@ module Aws::Greengrass
     #
     #       {
     #         destination_path: "__string",
+    #         owner_setting: {
+    #           group_owner: "__string", # required
+    #           group_permission: "ro", # required, accepts ro, rw
+    #         },
     #         s3_uri: "__string",
     #       }
     #
@@ -5067,6 +5353,10 @@ module Aws::Greengrass
     #   The absolute local path of the resource inside the Lambda
     #   environment.
     #   @return [String]
+    #
+    # @!attribute [rw] owner_setting
+    #   The owner setting for downloaded machine learning resources.
+    #   @return [Types::ResourceDownloadOwnerSetting]
     #
     # @!attribute [rw] s3_uri
     #   The URI of the source model in an S3 bucket. The model package must
@@ -5077,6 +5367,7 @@ module Aws::Greengrass
     #
     class S3MachineLearningModelResourceData < Struct.new(
       :destination_path,
+      :owner_setting,
       :s3_uri)
       include Aws::Structure
     end
@@ -5088,6 +5379,10 @@ module Aws::Greengrass
     #
     #       {
     #         destination_path: "__string",
+    #         owner_setting: {
+    #           group_owner: "__string", # required
+    #           group_permission: "ro", # required, accepts ro, rw
+    #         },
     #         sage_maker_job_arn: "__string",
     #       }
     #
@@ -5095,6 +5390,10 @@ module Aws::Greengrass
     #   The absolute local path of the resource inside the Lambda
     #   environment.
     #   @return [String]
+    #
+    # @!attribute [rw] owner_setting
+    #   The owner setting for downloaded machine learning resources.
+    #   @return [Types::ResourceDownloadOwnerSetting]
     #
     # @!attribute [rw] sage_maker_job_arn
     #   The ARN of the Amazon SageMaker training job that represents the
@@ -5105,6 +5404,7 @@ module Aws::Greengrass
     #
     class SageMakerMachineLearningModelResourceData < Struct.new(
       :destination_path,
+      :owner_setting,
       :sage_maker_job_arn)
       include Aws::Structure
     end
@@ -5150,8 +5450,11 @@ module Aws::Greengrass
     #
     #       {
     #         amzn_client_token: "__string",
-    #         execution_role_arn: "__string",
-    #         input_file_uri: "__string",
+    #         execution_role_arn: "__string", # required
+    #         input_file_uri: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -5175,12 +5478,17 @@ module Aws::Greengrass
     #   ''NewDeployment'' deployment types.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/StartBulkDeploymentRequest AWS API Documentation
     #
     class StartBulkDeploymentRequest < Struct.new(
       :amzn_client_token,
       :execution_role_arn,
-      :input_file_uri)
+      :input_file_uri,
+      :tags)
       include Aws::Structure
     end
 
@@ -5227,10 +5535,10 @@ module Aws::Greengrass
     #   data as a hash:
     #
     #       {
-    #         id: "__string",
-    #         source: "__string",
-    #         subject: "__string",
-    #         target: "__string",
+    #         id: "__string", # required
+    #         source: "__string", # required
+    #         subject: "__string", # required
+    #         target: "__string", # required
     #       }
     #
     # @!attribute [rw] id
@@ -5246,7 +5554,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] subject
-    #   The subject of the message.
+    #   The MQTT topic used to route the message.
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -5273,10 +5581,10 @@ module Aws::Greengrass
     #       {
     #         subscriptions: [
     #           {
-    #             id: "__string",
-    #             source: "__string",
-    #             subject: "__string",
-    #             target: "__string",
+    #             id: "__string", # required
+    #             source: "__string", # required
+    #             subject: "__string", # required
+    #             target: "__string", # required
     #           },
     #         ],
     #       }
@@ -5289,6 +5597,53 @@ module Aws::Greengrass
     #
     class SubscriptionDefinitionVersion < Struct.new(
       :subscriptions)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 
@@ -5602,11 +5957,11 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID of the version.
+    #   The ID of the parent definition that the version is associated with.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The unique ID of the version.
+    #   The ID of the version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/VersionInformation AWS API Documentation

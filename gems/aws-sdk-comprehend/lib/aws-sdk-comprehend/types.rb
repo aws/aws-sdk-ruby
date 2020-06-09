@@ -96,7 +96,7 @@ module Aws::Comprehend
     #
     #       {
     #         text_list: ["String"], # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
     # @!attribute [rw] text_list
@@ -106,9 +106,9 @@ module Aws::Comprehend
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
-    #   language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectEntitiesRequest AWS API Documentation
@@ -166,7 +166,7 @@ module Aws::Comprehend
     #
     #       {
     #         text_list: ["String"], # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
     # @!attribute [rw] text_list
@@ -176,9 +176,9 @@ module Aws::Comprehend
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
-    #   language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectKeyPhrasesRequest AWS API Documentation
@@ -241,7 +241,7 @@ module Aws::Comprehend
     #
     #       {
     #         text_list: ["String"], # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
     # @!attribute [rw] text_list
@@ -251,9 +251,9 @@ module Aws::Comprehend
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
-    #   language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectSentimentRequest AWS API Documentation
@@ -321,8 +321,10 @@ module Aws::Comprehend
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   following languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
     #   @return [String]
     #
@@ -381,6 +383,19 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # The number of documents in the request exceeds the limit of 25. Try
+    # your request again with fewer documents.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchSizeLimitExceededException AWS API Documentation
+    #
+    class BatchSizeLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the result metrics for the test data associated with an
     # documentation classifier.
     #
@@ -410,13 +425,50 @@ module Aws::Comprehend
     #   score is 1, and the worst score is 0.
     #   @return [Float]
     #
+    # @!attribute [rw] micro_precision
+    #   A measure of the usefulness of the recognizer results in the test
+    #   data. High precision means that the recognizer returned
+    #   substantially more relevant results than irrelevant ones. Unlike the
+    #   Precision metric which comes from averaging the precision of all
+    #   available labels, this is based on the overall score of all
+    #   precision scores added together.
+    #   @return [Float]
+    #
+    # @!attribute [rw] micro_recall
+    #   A measure of how complete the classifier results are for the test
+    #   data. High recall means that the classifier returned most of the
+    #   relevant results. Specifically, this indicates how many of the
+    #   correct categories in the text that the model can predict. It is a
+    #   percentage of correct categories in the text that can found. Instead
+    #   of averaging the recall scores of all labels (as with Recall), micro
+    #   Recall is based on the overall score of all recall scores added
+    #   together.
+    #   @return [Float]
+    #
+    # @!attribute [rw] micro_f1_score
+    #   A measure of how accurate the classifier results are for the test
+    #   data. It is a combination of the `Micro Precision` and `Micro
+    #   Recall` values. The `Micro F1Score` is the harmonic mean of the two
+    #   scores. The highest score is 1, and the worst score is 0.
+    #   @return [Float]
+    #
+    # @!attribute [rw] hamming_loss
+    #   Indicates the fraction of labels that are incorrectly predicted.
+    #   Also seen as the fraction of wrong labels compared to the total
+    #   number of labels. Scores closer to zero are better.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifierEvaluationMetrics AWS API Documentation
     #
     class ClassifierEvaluationMetrics < Struct.new(
       :accuracy,
       :precision,
       :recall,
-      :f1_score)
+      :f1_score,
+      :micro_precision,
+      :micro_recall,
+      :micro_f1_score,
+      :hamming_loss)
       include Aws::Structure
     end
 
@@ -453,17 +505,96 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ClassifyDocumentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         text: "String", # required
+    #         endpoint_arn: "DocumentClassifierEndpointArn", # required
+    #       }
+    #
+    # @!attribute [rw] text
+    #   The document text to be analyzed.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifyDocumentRequest AWS API Documentation
+    #
+    class ClassifyDocumentRequest < Struct.new(
+      :text,
+      :endpoint_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] classes
+    #   The classes used by the document being analyzed. These are used for
+    #   multi-class trained models. Individual classes are mutually
+    #   exclusive and each document is expected to have only a single class
+    #   assigned to it. For example, an animal can be a dog or a cat, but
+    #   not both at the same time.
+    #   @return [Array<Types::DocumentClass>]
+    #
+    # @!attribute [rw] labels
+    #   The labels used the document being analyzed. These are used for
+    #   multi-label trained models. Individual labels represent different
+    #   categories that are related in some manner and are not multually
+    #   exclusive. For example, a movie can be just an action movie, or it
+    #   can be an action movie, a science fiction movie, and a comedy, all
+    #   at the same time.
+    #   @return [Array<Types::DocumentLabel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifyDocumentResponse AWS API Documentation
+    #
+    class ClassifyDocumentResponse < Struct.new(
+      :classes,
+      :labels)
+      include Aws::Structure
+    end
+
+    # Concurrent modification of the tags associated with an Amazon
+    # Comprehend resource is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDocumentClassifierRequest
     #   data as a hash:
     #
     #       {
     #         document_classifier_name: "ComprehendArnName", # required
     #         data_access_role_arn: "IamRoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           label_delimiter: "LabelDelimiter",
+    #         },
+    #         output_data_config: {
+    #           s3_uri: "S3Uri",
+    #           kms_key_id: "KmsKeyId",
     #         },
     #         client_request_token: "ClientRequestTokenString",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
+    #         mode: "MULTI_CLASS", # accepts MULTI_CLASS, MULTI_LABEL
     #       }
     #
     # @!attribute [rw] document_classifier_name
@@ -476,9 +607,22 @@ module Aws::Comprehend
     #   data.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the document classifier being created. A
+    #   tag is a key-value pair that adds as a metadata to a resource used
+    #   by Amazon Comprehend. For example, a tag with "Sales" as the key
+    #   might be added to a resource to indicate its use by the sales
+    #   department.
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data for the job.
     #   @return [Types::DocumentClassifierInputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Enables the addition of output results configuration parameters for
+    #   custom classifier jobs.
+    #   @return [Types::DocumentClassifierOutputDataConfig]
     #
     # @!attribute [rw] client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -489,9 +633,42 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
+    #   The language of the input documents. You can specify any of the
+    #   following languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your custom
+    #   classifier. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] mode
+    #   Indicates the mode in which the classifier will be trained. The
+    #   classifier can be trained in multi-class mode, which identifies one
+    #   and only one class for each document, or multi-label mode, which
+    #   identifies one or more labels for each document. In multi-label
+    #   mode, multiple labels for an individual document are separated by a
+    #   delimiter. The default delimiter between labels is a pipe (\|).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateDocumentClassifierRequest AWS API Documentation
@@ -499,9 +676,14 @@ module Aws::Comprehend
     class CreateDocumentClassifierRequest < Struct.new(
       :document_classifier_name,
       :data_access_role_arn,
+      :tags,
       :input_data_config,
+      :output_data_config,
       :client_request_token,
-      :language_code)
+      :language_code,
+      :volume_kms_key_id,
+      :vpc_config,
+      :mode)
       include Aws::Structure
     end
 
@@ -517,12 +699,88 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_name: "ComprehendEndpointName", # required
+    #         model_arn: "ComprehendModelArn", # required
+    #         desired_inference_units: 1, # required
+    #         client_request_token: "ClientRequestTokenString",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] endpoint_name
+    #   This is the descriptive suffix that becomes part of the
+    #   `EndpointArn` used for all subsequent requests to this resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Number (ARN) of the model to which the endpoint
+    #   will be attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_inference_units
+    #   The desired number of inference units to be used by the model using
+    #   this endpoint. Each inference unit represents of a throughput of 100
+    #   characters per second.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_request_token
+    #   An idempotency token provided by the customer. If this token matches
+    #   a previous endpoint creation request, Amazon Comprehend will not
+    #   return a `ResourceInUseException`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the endpoint being created. A tag is a
+    #   key-value pair that adds metadata to the endpoint. For example, a
+    #   tag with "Sales" as the key might be added to an endpoint to
+    #   indicate its use by the sales department.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEndpointRequest AWS API Documentation
+    #
+    class CreateEndpointRequest < Struct.new(
+      :endpoint_name,
+      :model_arn,
+      :desired_inference_units,
+      :client_request_token,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint being created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEndpointResponse AWS API Documentation
+    #
+    class CreateEndpointResponse < Struct.new(
+      :endpoint_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateEntityRecognizerRequest
     #   data as a hash:
     #
     #       {
     #         recognizer_name: "ComprehendArnName", # required
     #         data_access_role_arn: "IamRoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #         input_data_config: { # required
     #           entity_types: [ # required
     #             {
@@ -540,7 +798,12 @@ module Aws::Comprehend
     #           },
     #         },
     #         client_request_token: "ClientRequestTokenString",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] recognizer_name
@@ -555,6 +818,14 @@ module Aws::Comprehend
     #   (IAM) role that grants Amazon Comprehend read access to your input
     #   data.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the entity recognizer being created. A
+    #   tag is a key-value pair that adds as a metadata to a resource used
+    #   by Amazon Comprehend. For example, a tag with "Sales" as the key
+    #   might be added to a resource to indicate its use by the sales
+    #   department.
+    #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data. The S3 bucket
@@ -575,14 +846,39 @@ module Aws::Comprehend
     #   same language. Only English ("en") is currently supported.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your custom
+    #   entity recognizer. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEntityRecognizerRequest AWS API Documentation
     #
     class CreateEntityRecognizerRequest < Struct.new(
       :recognizer_name,
       :data_access_role_arn,
+      :tags,
       :input_data_config,
       :client_request_token,
-      :language_code)
+      :language_code,
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -620,6 +916,28 @@ module Aws::Comprehend
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteDocumentClassifierResponse AWS API Documentation
     #
     class DeleteDocumentClassifierResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_arn: "ComprehendEndpointArn", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteEndpointRequest AWS API Documentation
+    #
+    class DeleteEndpointRequest < Struct.new(
+      :endpoint_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteEndpointResponse AWS API Documentation
+    #
+    class DeleteEndpointResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteEntityRecognizerRequest
     #   data as a hash:
@@ -734,6 +1052,35 @@ module Aws::Comprehend
     #
     class DescribeDominantLanguageDetectionJobResponse < Struct.new(
       :dominant_language_detection_job_properties)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_arn: "ComprehendEndpointArn", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint being described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEndpointRequest AWS API Documentation
+    #
+    class DescribeEndpointRequest < Struct.new(
+      :endpoint_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_properties
+    #   Describes information associated with the specific endpoint.
+    #   @return [Types::EndpointProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEndpointResponse AWS API Documentation
+    #
+    class DescribeEndpointResponse < Struct.new(
+      :endpoint_properties)
       include Aws::Structure
     end
 
@@ -933,7 +1280,7 @@ module Aws::Comprehend
     #
     #       {
     #         text: "String", # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
     # @!attribute [rw] text
@@ -942,9 +1289,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
-    #   language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectEntitiesRequest AWS API Documentation
@@ -975,7 +1322,7 @@ module Aws::Comprehend
     #
     #       {
     #         text: "String", # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
     # @!attribute [rw] text
@@ -984,9 +1331,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
-    #   language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectKeyPhrasesRequest AWS API Documentation
@@ -1017,7 +1364,7 @@ module Aws::Comprehend
     #
     #       {
     #         text: "String", # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
     # @!attribute [rw] text
@@ -1026,9 +1373,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
-    #   language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectSentimentRequest AWS API Documentation
@@ -1071,8 +1418,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code of the input documents. You can specify English
-    #   ("en") or Spanish ("es").
+    #   The language code of the input documents. You can specify any of the
+    #   following languages supported by Amazon Comprehend: German ("de"),
+    #   English ("en"), Spanish ("es"), French ("fr"), Italian
+    #   ("it"), or Portuguese ("pt").
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectSyntaxRequest AWS API Documentation
@@ -1095,6 +1444,25 @@ module Aws::Comprehend
     #
     class DetectSyntaxResponse < Struct.new(
       :syntax_tokens)
+      include Aws::Structure
+    end
+
+    # Specifies the class that categorizes the document being analyzed
+    #
+    # @!attribute [rw] name
+    #   The name of the class.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The confidence score that Amazon Comprehend has this class correctly
+    #   attributed.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClass AWS API Documentation
+    #
+    class DocumentClass < Struct.new(
+      :name,
+      :score)
       include Aws::Structure
     end
 
@@ -1194,6 +1562,28 @@ module Aws::Comprehend
     #   your input data.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your document
+    #   classification job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassificationJobProperties AWS API Documentation
     #
     class DocumentClassificationJobProperties < Struct.new(
@@ -1206,7 +1596,9 @@ module Aws::Comprehend
       :document_classifier_arn,
       :input_data_config,
       :output_data_config,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -1260,6 +1652,7 @@ module Aws::Comprehend
     #
     #       {
     #         s3_uri: "S3Uri", # required
+    #         label_delimiter: "LabelDelimiter",
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -1274,10 +1667,69 @@ module Aws::Comprehend
     #   all of them as input.
     #   @return [String]
     #
+    # @!attribute [rw] label_delimiter
+    #   Indicates the delimiter used to separate each label for training a
+    #   multi-label classifier. The default delimiter between labels is a
+    #   pipe (\|). You can use a different character as a delimiter (if
+    #   it's an allowed character) by specifying it under Delimiter for
+    #   labels. If the training documents use a delimiter other than the
+    #   default or the delimiter you specify, the labels on that line will
+    #   be combined to make a single unique label, such as LABELLABELLABEL.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierInputDataConfig AWS API Documentation
     #
     class DocumentClassifierInputDataConfig < Struct.new(
-      :s3_uri)
+      :s3_uri,
+      :label_delimiter)
+      include Aws::Structure
+    end
+
+    # Provides output results configuration parameters for custom classifier
+    # jobs.
+    #
+    # @note When making an API call, you may pass DocumentClassifierOutputDataConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_uri: "S3Uri",
+    #         kms_key_id: "KmsKeyId",
+    #       }
+    #
+    # @!attribute [rw] s3_uri
+    #   When you use the `OutputDataConfig` object while creating a custom
+    #   classifier, you specify the Amazon S3 location where you want to
+    #   write the confusion matrix. The URI must be in the same region as
+    #   the API endpoint that you are calling. The location is used as the
+    #   prefix for the actual location of this output file.
+    #
+    #   When the custom classifier job is finished, the service creates the
+    #   output file in a directory specific to the job. The `S3Uri` field
+    #   contains the location of the output file, called `output.tar.gz`. It
+    #   is a compressed archive that contains the confusion matrix.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt the output results from an analysis job.
+    #   The KmsKeyId can be one of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * KMS Key Alias: `"alias/ExampleAlias"`
+    #
+    #   * ARN of a KMS Key Alias:
+    #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierOutputDataConfig AWS API Documentation
+    #
+    class DocumentClassifierOutputDataConfig < Struct.new(
+      :s3_uri,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -1330,6 +1782,11 @@ module Aws::Comprehend
     #   document classifier for training.
     #   @return [Types::DocumentClassifierInputDataConfig]
     #
+    # @!attribute [rw] output_data_config
+    #   Provides output results configuration parameters for custom
+    #   classifier jobs.
+    #   @return [Types::DocumentClassifierOutputDataConfig]
+    #
     # @!attribute [rw] classifier_metadata
     #   Information about the document classifier, including the number of
     #   documents used for training the classifier, the number of documents
@@ -1340,6 +1797,35 @@ module Aws::Comprehend
     #   The Amazon Resource Name (ARN) of the AWS Identity and Management
     #   (IAM) role that grants Amazon Comprehend read access to your input
     #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your custom classifier.
+    #   For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] mode
+    #   Indicates the mode in which the specific classifier was trained.
+    #   This also indicates the format of input documents and the format of
+    #   the confusion matrix. Each classifier can only be trained in one
+    #   mode and this cannot be changed once the classifier is trained.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierProperties AWS API Documentation
@@ -1354,8 +1840,32 @@ module Aws::Comprehend
       :training_start_time,
       :training_end_time,
       :input_data_config,
+      :output_data_config,
       :classifier_metadata,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id,
+      :vpc_config,
+      :mode)
+      include Aws::Structure
+    end
+
+    # Specifies one of the label or labels that categorize the document
+    # being analyzed.
+    #
+    # @!attribute [rw] name
+    #   The name of the label.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The confidence score that Amazon Comprehend has this label correctly
+    #   attributed.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentLabel AWS API Documentation
+    #
+    class DocumentLabel < Struct.new(
+      :name,
+      :score)
       include Aws::Structure
     end
 
@@ -1476,6 +1986,28 @@ module Aws::Comprehend
     #   access to your input data.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your dominant language
+    #   detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DominantLanguageDetectionJobProperties AWS API Documentation
     #
     class DominantLanguageDetectionJobProperties < Struct.new(
@@ -1487,7 +2019,107 @@ module Aws::Comprehend
       :end_time,
       :input_data_config,
       :output_data_config,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id,
+      :vpc_config)
+      include Aws::Structure
+    end
+
+    # The filter used to determine which endpoints are are returned. You can
+    # filter jobs on their name, model, status, or the date and time that
+    # they were created. You can only set one filter at a time.
+    #
+    # @note When making an API call, you may pass EndpointFilter
+    #   data as a hash:
+    #
+    #       {
+    #         model_arn: "ComprehendModelArn",
+    #         status: "CREATING", # accepts CREATING, DELETING, FAILED, IN_SERVICE, UPDATING
+    #         creation_time_before: Time.now,
+    #         creation_time_after: Time.now,
+    #       }
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Number (ARN) of the model to which the endpoint
+    #   is attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies the status of the endpoint being returned. Possible values
+    #   are: Creating, Ready, Updating, Deleting, Failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Specifies a date before which the returned endpoint or endpoints
+    #   were created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_after
+    #   Specifies a date after which the returned endpoint or endpoints were
+    #   created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EndpointFilter AWS API Documentation
+    #
+    class EndpointFilter < Struct.new(
+      :model_arn,
+      :status,
+      :creation_time_before,
+      :creation_time_after)
+      include Aws::Structure
+    end
+
+    # Specifies information about the specified endpoint.
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies the status of the endpoint. Because the endpoint updates
+    #   and creation are asynchronous, so customers will need to wait for
+    #   the endpoint to be `Ready` status before making inference requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Specifies a reason for failure in cases of `Failed` status.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Number (ARN) of the model to which the endpoint
+    #   is attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_inference_units
+    #   The desired number of inference units to be used by the model using
+    #   this endpoint. Each inference unit represents of a throughput of 100
+    #   characters per second.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] current_inference_units
+    #   The number of inference units currently used by the model using this
+    #   endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation date and time of the endpoint.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the endpoint was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EndpointProperties AWS API Documentation
+    #
+    class EndpointProperties < Struct.new(
+      :endpoint_arn,
+      :status,
+      :message,
+      :model_arn,
+      :desired_inference_units,
+      :current_inference_units,
+      :creation_time,
+      :last_modified_time)
       include Aws::Structure
     end
 
@@ -1589,6 +2221,28 @@ module Aws::Comprehend
     #   access to your input data.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your entity detection
+    #   job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntitiesDetectionJobProperties AWS API Documentation
     #
     class EntitiesDetectionJobProperties < Struct.new(
@@ -1602,7 +2256,9 @@ module Aws::Comprehend
       :input_data_config,
       :output_data_config,
       :language_code,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -1808,7 +2464,9 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] entity_types
-    #   The entity types in the input data for an entity recognizer.
+    #   The entity types in the input data for an entity recognizer. A
+    #   maximum of 12 entity types can be used at one time to train an
+    #   entity recognizer.
     #   @return [Array<Types::EntityTypesListItem>]
     #
     # @!attribute [rw] documents
@@ -1873,10 +2531,22 @@ module Aws::Comprehend
     #   entity recognizer.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_metrics
+    #   Detailed information about the accuracy of the entity recognizer for
+    #   a specific item on the list of entity types.
+    #   @return [Types::EntityTypesEvaluationMetrics]
+    #
+    # @!attribute [rw] number_of_train_mentions
+    #   Indicates the number of times the given entity type was seen in the
+    #   training data.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerMetadataEntityTypesListItem AWS API Documentation
     #
     class EntityRecognizerMetadataEntityTypesListItem < Struct.new(
-      :type)
+      :type,
+      :evaluation_metrics,
+      :number_of_train_mentions)
       include Aws::Structure
     end
 
@@ -1930,6 +2600,28 @@ module Aws::Comprehend
     #   data.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your custom entity
+    #   recognizer. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerProperties AWS API Documentation
     #
     class EntityRecognizerProperties < Struct.new(
@@ -1943,7 +2635,42 @@ module Aws::Comprehend
       :training_end_time,
       :input_data_config,
       :recognizer_metadata,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id,
+      :vpc_config)
+      include Aws::Structure
+    end
+
+    # Detailed information about the accuracy of an entity recognizer for a
+    # specific entity type.
+    #
+    # @!attribute [rw] precision
+    #   A measure of the usefulness of the recognizer results for a specific
+    #   entity type in the test data. High precision means that the
+    #   recognizer returned substantially more relevant results than
+    #   irrelevant ones.
+    #   @return [Float]
+    #
+    # @!attribute [rw] recall
+    #   A measure of how complete the recognizer results are for a specific
+    #   entity type in the test data. High recall means that the recognizer
+    #   returned most of the relevant results.
+    #   @return [Float]
+    #
+    # @!attribute [rw] f1_score
+    #   A measure of how accurate the recognizer results are for for a
+    #   specific entity type in the test data. It is derived from the
+    #   `Precision` and `Recall` values. The `F1Score` is the harmonic
+    #   average of the two scores. The highest score is 1, and the worst
+    #   score is 0.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityTypesEvaluationMetrics AWS API Documentation
+    #
+    class EntityTypesEvaluationMetrics < Struct.new(
+      :precision,
+      :recall,
+      :f1_score)
       include Aws::Structure
     end
 
@@ -2006,6 +2733,55 @@ module Aws::Comprehend
     class InputDataConfig < Struct.new(
       :s3_uri,
       :input_format)
+      include Aws::Structure
+    end
+
+    # An internal server error occurred. Retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The filter specified for the operation is invalid. Specify a different
+    # filter.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InvalidFilterException AWS API Documentation
+    #
+    class InvalidFilterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified job was not found. Check the job ID and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/JobNotFoundException AWS API Documentation
+    #
+    class JobNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2140,6 +2916,28 @@ module Aws::Comprehend
     #   access to your input data.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your key phrases
+    #   detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/KeyPhrasesDetectionJobProperties AWS API Documentation
     #
     class KeyPhrasesDetectionJobProperties < Struct.new(
@@ -2152,7 +2950,22 @@ module Aws::Comprehend
       :input_data_config,
       :output_data_config,
       :language_code,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id,
+      :vpc_config)
+      include Aws::Structure
+    end
+
+    # The KMS customer managed key (CMK) entered cannot be validated. Verify
+    # the key and re-enter it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/KmsKeyValidationException AWS API Documentation
+    #
+    class KmsKeyValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2313,6 +3126,61 @@ module Aws::Comprehend
     #
     class ListDominantLanguageDetectionJobsResponse < Struct.new(
       :dominant_language_detection_job_properties_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           model_arn: "ComprehendModelArn",
+    #           status: "CREATING", # accepts CREATING, DELETING, FAILED, IN_SERVICE, UPDATING
+    #           creation_time_before: Time.now,
+    #           creation_time_after: Time.now,
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Filters the endpoints that are returned. You can filter endpoints on
+    #   their name, model, status, or the date and time that they were
+    #   created. You can only set one filter at a time.
+    #   @return [Types::EndpointFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEndpointsRequest AWS API Documentation
+    #
+    class ListEndpointsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_properties_list
+    #   Displays a list of endpoint properties being retrieved by the
+    #   service in response to the request.
+    #   @return [Array<Types::EndpointProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEndpointsResponse AWS API Documentation
+    #
+    class ListEndpointsResponse < Struct.new(
+      :endpoint_properties_list,
       :next_token)
       include Aws::Structure
     end
@@ -2532,6 +3400,46 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ComprehendArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend
+    #   resource you are querying.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend
+    #   resource you are querying.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the Amazon Comprehend resource being queried. A
+    #   tag is a key-value pair that adds as a metadata to a resource used
+    #   by Amazon Comprehend. For example, a tag with "Sales" as the key
+    #   might be added to a resource to indicate its use by the sales
+    #   department.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTopicsDetectionJobsRequest
     #   data as a hash:
     #
@@ -2594,6 +3502,7 @@ module Aws::Comprehend
     #
     #       {
     #         s3_uri: "S3Uri", # required
+    #         kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -2609,10 +3518,27 @@ module Aws::Comprehend
     #   is a compressed archive that contains the ouput of the operation.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt the output results from an analysis job.
+    #   The KmsKeyId can be one of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * KMS Key Alias: `"alias/ExampleAlias"`
+    #
+    #   * ARN of a KMS Key Alias:
+    #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/OutputDataConfig AWS API Documentation
     #
     class OutputDataConfig < Struct.new(
-      :s3_uri)
+      :s3_uri,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -2635,6 +3561,59 @@ module Aws::Comprehend
     class PartOfSpeechTag < Struct.new(
       :tag,
       :score)
+      include Aws::Structure
+    end
+
+    # The specified name is already in use. Use a different name and try
+    # your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The maximum number of recognizers per account has been exceeded.
+    # Review the recognizers, perform cleanup, and then try your request
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ResourceLimitExceededException AWS API Documentation
+    #
+    class ResourceLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource ARN was not found. Check the ARN and try your
+    # request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource is not available. Check to see if the resource
+    # is in the `TRAINED` state and try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ResourceUnavailableException AWS API Documentation
+    #
+    class ResourceUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2731,6 +3710,28 @@ module Aws::Comprehend
     #   access to your input data.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your sentiment detection
+    #   job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/SentimentDetectionJobProperties AWS API Documentation
     #
     class SentimentDetectionJobProperties < Struct.new(
@@ -2743,7 +3744,9 @@ module Aws::Comprehend
       :input_data_config,
       :output_data_config,
       :language_code,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -2792,9 +3795,15 @@ module Aws::Comprehend
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         client_request_token: "ClientRequestTokenString",
+    #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] job_name
@@ -2828,6 +3837,28 @@ module Aws::Comprehend
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your document
+    #   classification job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDocumentClassificationJobRequest AWS API Documentation
     #
     class StartDocumentClassificationJobRequest < Struct.new(
@@ -2836,7 +3867,9 @@ module Aws::Comprehend
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
-      :client_request_token)
+      :client_request_token,
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -2881,10 +3914,16 @@ module Aws::Comprehend
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
     #         client_request_token: "ClientRequestTokenString",
+    #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -2918,6 +3957,28 @@ module Aws::Comprehend
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your dominant
+    #   language detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDominantLanguageDetectionJobRequest AWS API Documentation
     #
     class StartDominantLanguageDetectionJobRequest < Struct.new(
@@ -2925,7 +3986,9 @@ module Aws::Comprehend
       :output_data_config,
       :data_access_role_arn,
       :job_name,
-      :client_request_token)
+      :client_request_token,
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -2967,12 +4030,18 @@ module Aws::Comprehend
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
     #         entity_recognizer_arn: "EntityRecognizerArn",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #         client_request_token: "ClientRequestTokenString",
+    #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -3007,10 +4076,9 @@ module Aws::Comprehend
     # @!attribute [rw] language_code
     #   The language of the input documents. All documents must be in the
     #   same language. You can specify any of the languages supported by
-    #   Amazon Comprehend: English ("en"), Spanish ("es"), French
-    #   ("fr"), German ("de"), Italian ("it"), or Portuguese ("pt").
-    #   If custom entities recognition is used, this parameter is ignored
-    #   and the language used for training the model is used instead.
+    #   Amazon Comprehend. If custom entities recognition is used, this
+    #   parameter is ignored and the language used for training the model is
+    #   used instead.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -3021,6 +4089,28 @@ module Aws::Comprehend
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your entity
+    #   detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEntitiesDetectionJobRequest AWS API Documentation
     #
     class StartEntitiesDetectionJobRequest < Struct.new(
@@ -3030,7 +4120,9 @@ module Aws::Comprehend
       :job_name,
       :entity_recognizer_arn,
       :language_code,
-      :client_request_token)
+      :client_request_token,
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -3077,11 +4169,17 @@ module Aws::Comprehend
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #         client_request_token: "ClientRequestTokenString",
+    #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -3108,9 +4206,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
-    #   language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -3121,6 +4219,28 @@ module Aws::Comprehend
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your key
+    #   phrases detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartKeyPhrasesDetectionJobRequest AWS API Documentation
     #
     class StartKeyPhrasesDetectionJobRequest < Struct.new(
@@ -3129,7 +4249,9 @@ module Aws::Comprehend
       :data_access_role_arn,
       :job_name,
       :language_code,
-      :client_request_token)
+      :client_request_token,
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -3171,11 +4293,17 @@ module Aws::Comprehend
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #         client_request_token: "ClientRequestTokenString",
+    #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -3202,9 +4330,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify English
-    #   ("en") or Spanish ("es"). All documents must be in the same
-    #   language.
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -3215,6 +4343,28 @@ module Aws::Comprehend
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your
+    #   sentiment detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartSentimentDetectionJobRequest AWS API Documentation
     #
     class StartSentimentDetectionJobRequest < Struct.new(
@@ -3223,7 +4373,9 @@ module Aws::Comprehend
       :data_access_role_arn,
       :job_name,
       :language_code,
-      :client_request_token)
+      :client_request_token,
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -3265,11 +4417,17 @@ module Aws::Comprehend
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
     #         number_of_topics: 1,
     #         client_request_token: "ClientRequestTokenString",
+    #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -3310,6 +4468,28 @@ module Aws::Comprehend
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your topic
+    #   detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartTopicsDetectionJobRequest AWS API Documentation
     #
     class StartTopicsDetectionJobRequest < Struct.new(
@@ -3318,7 +4498,9 @@ module Aws::Comprehend
       :data_access_role_arn,
       :job_name,
       :number_of_topics,
-      :client_request_token)
+      :client_request_token,
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -3579,6 +4761,130 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # A key-value pair that adds as a metadata to a resource used by Amazon
+    # Comprehend. For example, a tag with the key-value pair
+    # ‘Department’:’Sales’ might be added to a resource to indicate its use
+    # by a particular department.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The initial part of a key-value pair that forms a tag associated
+    #   with a given resource. For instance, if you want to show which
+    #   resources are used by which departments, you might use “Department”
+    #   as the key portion of the pair, with multiple possible values such
+    #   as “sales,” “legal,” and “administration.”
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The second part of a key-value pair that forms a tag associated with
+    #   a given resource. For instance, if you want to show which resources
+    #   are used by which departments, you might use “Department” as the
+    #   initial (key) portion of the pair, with a value of “sales” to
+    #   indicate the sales department.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ComprehendArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend
+    #   resource to which you want to associate the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags being associated with a specific Amazon Comprehend resource.
+    #   There can be a maximum of 50 tags (both existing and pending)
+    #   associated with a specific resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The size of the input text exceeds the limit. Use a smaller document.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TextSizeLimitExceededException AWS API Documentation
+    #
+    class TextSizeLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The number of requests exceeds the limit. Resubmit your request later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request contains more tag keys than can be associated with a
+    # resource (50 tag keys per resource).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TooManyTagKeysException AWS API Documentation
+    #
+    class TooManyTagKeysException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request contains more tags than can be associated with a resource
+    # (50 tags per resource). The maximum number of tags includes both
+    # existing tags and those included in your current request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Provides information for filtering topic detection jobs. For more
     # information, see .
     #
@@ -3667,6 +4973,34 @@ module Aws::Comprehend
     #   detection job. The default is 10.
     #   @return [Integer]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that grants Amazon Comprehend read access to your job
+    #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your topic detection job.
+    #   For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TopicsDetectionJobProperties AWS API Documentation
     #
     class TopicsDetectionJobProperties < Struct.new(
@@ -3678,7 +5012,140 @@ module Aws::Comprehend
       :end_time,
       :input_data_config,
       :output_data_config,
-      :number_of_topics)
+      :number_of_topics,
+      :data_access_role_arn,
+      :volume_kms_key_id,
+      :vpc_config)
+      include Aws::Structure
+    end
+
+    # Amazon Comprehend can't process the language of the input text. For
+    # all custom entity recognition APIs (such as `CreateEntityRecognizer`),
+    # only English is accepted. For most other APIs, such as those for
+    # Custom Classification, Amazon Comprehend accepts text in all supported
+    # languages. For a list of supported languages, see supported-languages.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UnsupportedLanguageException AWS API Documentation
+    #
+    class UnsupportedLanguageException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ComprehendArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend
+    #   resource from which you want to remove the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The initial part of a key-value pair that forms a tag being removed
+    #   from a given resource. For example, a tag with "Sales" as the key
+    #   might be added to a resource to indicate its use by the sales
+    #   department. Keys must be unique and cannot be duplicated for a
+    #   particular resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_arn: "ComprehendEndpointArn", # required
+    #         desired_inference_units: 1, # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_inference_units
+    #   The desired number of inference units to be used by the model using
+    #   this endpoint. Each inference unit represents of a throughput of 100
+    #   characters per second.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UpdateEndpointRequest AWS API Documentation
+    #
+    class UpdateEndpointRequest < Struct.new(
+      :endpoint_arn,
+      :desired_inference_units)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UpdateEndpointResponse AWS API Documentation
+    #
+    class UpdateEndpointResponse < Aws::EmptyStructure; end
+
+    # Configuration parameters for an optional private Virtual Private Cloud
+    # (VPC) containing the resources you are using for the job. For For more
+    # information, see [Amazon VPC][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
+    # @note When making an API call, you may pass VpcConfig
+    #   data as a hash:
+    #
+    #       {
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       }
+    #
+    # @!attribute [rw] security_group_ids
+    #   The ID number for a security group on an instance of your private
+    #   VPC. Security groups on your VPC function serve as a virtual
+    #   firewall to control inbound and outbound traffic and provides
+    #   security for the resources that you’ll be accessing on the VPC. This
+    #   ID number is preceded by "sg-", for instance:
+    #   "sg-03b388029b0a285ea". For more information, see [Security Groups
+    #   for your VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The ID for each subnet being used in your private VPC. This subnet
+    #   is a subset of the a range of IPv4 addresses used by the VPC and is
+    #   specific to a given availability zone in the VPC’s region. This ID
+    #   number is preceded by "subnet-", for instance:
+    #   "subnet-04ccf456919e69055". For more information, see [VPCs and
+    #   Subnets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/VpcConfig AWS API Documentation
+    #
+    class VpcConfig < Struct.new(
+      :security_group_ids,
+      :subnets)
       include Aws::Structure
     end
 

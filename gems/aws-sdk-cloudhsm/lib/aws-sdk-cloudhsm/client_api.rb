@@ -104,6 +104,12 @@ module Aws::CloudHSM
 
     ClientList.member = Shapes::ShapeRef.new(shape: ClientArn)
 
+    CloudHsmInternalException.struct_class = Types::CloudHsmInternalException
+
+    CloudHsmServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    CloudHsmServiceException.add_member(:retryable, Shapes::ShapeRef.new(shape: Boolean, location_name: "retryable"))
+    CloudHsmServiceException.struct_class = Types::CloudHsmServiceException
+
     CreateHapgRequest.add_member(:label, Shapes::ShapeRef.new(shape: Label, required: true, location_name: "Label"))
     CreateHapgRequest.struct_class = Types::CreateHapgRequest
 
@@ -213,6 +219,8 @@ module Aws::CloudHSM
     HapgList.member = Shapes::ShapeRef.new(shape: HapgArn)
 
     HsmList.member = Shapes::ShapeRef.new(shape: HsmArn)
+
+    InvalidRequestException.struct_class = Types::InvalidRequestException
 
     ListAvailableZonesRequest.struct_class = Types::ListAvailableZonesRequest
 

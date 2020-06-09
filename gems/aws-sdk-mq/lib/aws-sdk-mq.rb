@@ -24,17 +24,20 @@ require_relative 'aws-sdk-mq/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     mq = Aws::MQ::Client.new
+#     resp = mq.create_broker(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AmazonMQ all
-# extend {Errors::ServiceError}.
+# Errors returned from AmazonMQ are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::MQ::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AmazonMQ API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-mq/customizations'
 # @service
 module Aws::MQ
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.27.0'
 
 end

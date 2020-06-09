@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::LexModelBuildingService
+
   class Resource
 
     # @param options ({})

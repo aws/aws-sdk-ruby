@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Provides information about AWS partitions, regions, and services.'
   spec.description   = 'Provides interfaces to enumerate AWS partitions, regions, and services.'
   spec.author        = 'Amazon Web Services'
-  spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
+  spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
   spec.files         = ['partitions.json'] + Dir['lib/**/*.rb']
 

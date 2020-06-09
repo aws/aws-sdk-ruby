@@ -1,0 +1,90 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "endpointPrefix":"svc",
+    "protocol": "rest-json",
+    "signatureVersion":"v4"
+  },
+  "operations": {
+    "Streaming": {
+      "name": "Streaming",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {"shape": "StreamingRequest"}
+    },
+    "NonStreaming": {
+      "name": "NonStreaming",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {"shape": "NonStreamingRequest"}
+    },
+    "UnsignRequireLenStreaming": {
+      "name": "UnsignRequireLenStreaming",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {"shape": "UnsignRequireLenStreamingRequest"},
+      "authtype":"v4-unsigned-body"
+    },
+    "UnsignStreaming": {
+      "name": "UnsignStreaming",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {"shape": "UnsignStreamingRequest"},
+      "authtype":"v4-unsigned-body"
+    }
+  },
+  "shapes": {
+    "StreamingRequest": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "Body",
+          "requiresLength": true,
+          "streaming": true
+        }
+      },
+      "payload": "Body"
+    },
+    "UnsignStreamingRequest": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "StreamingBody"
+        }
+      },
+      "payload": "Body"
+    },
+    "UnsignRequireLenStreamingRequest": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "Body",
+          "requiresLength": true,
+          "streaming": true
+        }
+      },
+      "payload": "Body"
+    },
+    "NonStreamingRequest": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "Body"
+        }
+      }
+    },
+    "Body": {"type": "blob"},
+    "StreamingBody": {
+      "type": "blob",
+      "streaming": true
+    }
+  }
+}

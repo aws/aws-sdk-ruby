@@ -22,6 +22,7 @@ require_relative 'aws-sdk-ec2/internet_gateway'
 require_relative 'aws-sdk-ec2/key_pair'
 require_relative 'aws-sdk-ec2/key_pair_info'
 require_relative 'aws-sdk-ec2/network_acl'
+require_relative 'aws-sdk-ec2/nat_gateway'
 require_relative 'aws-sdk-ec2/network_interface'
 require_relative 'aws-sdk-ec2/network_interface_association'
 require_relative 'aws-sdk-ec2/placement_group'
@@ -47,17 +48,20 @@ require_relative 'aws-sdk-ec2/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     ec2 = Aws::EC2::Client.new
+#     resp = ec2.accept_reserved_instances_exchange_quote(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Elastic Compute Cloud all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Elastic Compute Cloud are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::EC2::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Elastic Compute Cloud API errors
 #     end
 #
 # See {Errors} for more information.
@@ -65,6 +69,6 @@ require_relative 'aws-sdk-ec2/customizations'
 # @service
 module Aws::EC2
 
-  GEM_VERSION = '1.65.0'
+  GEM_VERSION = '1.165.0'
 
 end

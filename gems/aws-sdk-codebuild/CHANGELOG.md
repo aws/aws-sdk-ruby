@@ -1,6 +1,141 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2020-05-21)
+------------------
+
+* Feature - CodeBuild adds support for tagging with report groups
+
+1.50.0 (2020-05-07)
+------------------
+
+* Feature - Add COMMIT_MESSAGE enum for webhook filter types
+
+1.49.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2020-02-06)
+------------------
+
+* Feature - AWS CodeBuild adds support for Amazon Elastic File Systems
+
+1.47.0 (2020-01-07)
+------------------
+
+* Feature - Add encryption key override to StartBuild API in AWS CodeBuild.
+
+1.46.0 (2019-12-13)
+------------------
+
+* Feature - CodeBuild adds support for cross account
+
+1.45.0 (2019-11-25)
+------------------
+
+* Feature - CodeBuild adds support for test reporting
+
+1.44.0 (2019-11-22)
+------------------
+
+* Feature - Add Canonical ARN to LogsLocation.
+
+1.43.0 (2019-11-19)
+------------------
+
+* Feature - Add support for ARM and GPU-enhanced build environments and a new SSD-backed Linux compute type with additional CPU and memory in CodeBuild
+
+1.42.0 (2019-11-06)
+------------------
+
+* Feature - Add support for Build Number, Secrets Manager and Exported Environment Variables.
+
+1.41.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2019-08-08)
+------------------
+
+* Feature - CodeBuild adds CloudFormation support for SourceCredential
+
+1.39.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2019-06-10)
+------------------
+
+* Feature - AWS CodeBuild adds support for source version on project level.
+
+1.35.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.34.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.33.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.32.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.31.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.30.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.29.0 (2019-03-08)
+------------------
+
+* Feature - API update.
+
+1.28.0 (2019-02-21)
+------------------
+
+* Feature - API update.
+
+1.27.0 (2019-02-11)
+------------------
+
+* Feature - API update.
+
+1.26.0 (2019-01-24)
+------------------
+
+* Feature - API update.
+
 1.25.0 (2018-12-06)
 ------------------
 

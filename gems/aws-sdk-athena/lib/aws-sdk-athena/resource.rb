@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Athena
+
   class Resource
 
     # @param options ({})

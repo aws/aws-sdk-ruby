@@ -8,6 +8,33 @@
 module Aws::Mobile
   module Types
 
+    # Account Action is required in order to continue the request.
+    #
+    # @!attribute [rw] message
+    #   The Exception Error Message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/AccountActionRequiredException AWS API Documentation
+    #
+    class AccountActionRequiredException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request cannot be processed because some parameter is not valid or
+    # the project state prevents the operation from being performed.
+    #
+    # @!attribute [rw] message
+    #   The Exception Error Message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The details of the bundle.
     #
     # @!attribute [rw] bundle_id
@@ -319,6 +346,41 @@ module Aws::Mobile
       include Aws::Structure
     end
 
+    # The service has encountered an unexpected error condition which
+    # prevents it from servicing the request.
+    #
+    # @!attribute [rw] message
+    #   The Exception Error Message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There are too many AWS Mobile Hub projects in the account or the
+    # account has exceeded the maximum number of resources in some AWS
+    # service. You should create another sub-account using AWS Organizations
+    # or remove some resources and retry your request.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The Exception Error Message.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The Exception Error Message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
     # Request structure to request all available bundles.
     #
     # @note When making an API call, you may pass ListBundlesRequest
@@ -413,6 +475,19 @@ module Aws::Mobile
     class ListProjectsResult < Struct.new(
       :projects,
       :next_token)
+      include Aws::Structure
+    end
+
+    # No entity can be found with the specified identifier.
+    #
+    # @!attribute [rw] message
+    #   The Exception Error Message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -518,6 +593,57 @@ module Aws::Mobile
       :arn,
       :feature,
       :attributes)
+      include Aws::Structure
+    end
+
+    # The service is temporarily unavailable. The request should be retried
+    # after some time delay.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The Exception Error Message.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The Exception Error Message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
+    # Too many requests have been received for this AWS account in too short
+    # a time. The request should be retried after some time delay.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The Exception Error Message.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The Exception Error Message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
+    # Credentials of the caller are insufficient to authorize the request.
+    #
+    # @!attribute [rw] message
+    #   The Exception Error Message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

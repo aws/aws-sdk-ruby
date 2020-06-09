@@ -73,8 +73,14 @@ module Aws::Mobile
     UpdateProjectRequest = Shapes::StructureShape.new(name: 'UpdateProjectRequest')
     UpdateProjectResult = Shapes::StructureShape.new(name: 'UpdateProjectResult')
 
+    AccountActionRequiredException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AccountActionRequiredException.struct_class = Types::AccountActionRequiredException
+
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeKey)
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
+
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
 
     BundleDetails.add_member(:bundle_id, Shapes::ShapeRef.new(shape: BundleId, location_name: "bundleId"))
     BundleDetails.add_member(:title, Shapes::ShapeRef.new(shape: BundleTitle, location_name: "title"))
@@ -133,6 +139,13 @@ module Aws::Mobile
     ExportProjectResult.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "snapshotId"))
     ExportProjectResult.struct_class = Types::ExportProjectResult
 
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    LimitExceededException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: ErrorMessage, location: "header", location_name: "Retry-After"))
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListBundlesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListBundlesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListBundlesRequest.struct_class = Types::ListBundlesRequest
@@ -148,6 +161,9 @@ module Aws::Mobile
     ListProjectsResult.add_member(:projects, Shapes::ShapeRef.new(shape: ProjectSummaries, location_name: "projects"))
     ListProjectsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListProjectsResult.struct_class = Types::ListProjectsResult
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     Platforms.member = Shapes::ShapeRef.new(shape: Platform)
 
@@ -175,6 +191,17 @@ module Aws::Mobile
     Resource.struct_class = Types::Resource
 
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
+
+    ServiceUnavailableException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: ErrorMessage, location: "header", location_name: "Retry-After"))
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
+    TooManyRequestsException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: ErrorMessage, location: "header", location_name: "Retry-After"))
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
 
     UpdateProjectRequest.add_member(:contents, Shapes::ShapeRef.new(shape: Contents, location_name: "contents"))
     UpdateProjectRequest.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location: "querystring", location_name: "projectId"))

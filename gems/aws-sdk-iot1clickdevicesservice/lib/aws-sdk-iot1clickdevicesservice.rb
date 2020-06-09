@@ -24,17 +24,20 @@ require_relative 'aws-sdk-iot1clickdevicesservice/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     io_t1_click_devices_service = Aws::IoT1ClickDevicesService::Client.new
+#     resp = io_t1_click_devices_service.claim_devices_by_claim_code(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS IoT 1-Click Devices Service all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS IoT 1-Click Devices Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::IoT1ClickDevicesService::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS IoT 1-Click Devices Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-iot1clickdevicesservice/customizations'
 # @service
 module Aws::IoT1ClickDevicesService
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.21.0'
 
 end

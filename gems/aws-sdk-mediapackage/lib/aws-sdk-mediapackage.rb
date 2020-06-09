@@ -24,17 +24,20 @@ require_relative 'aws-sdk-mediapackage/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     media_package = Aws::MediaPackage::Client.new
+#     resp = media_package.create_channel(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Elemental MediaPackage all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Elemental MediaPackage are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::MediaPackage::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Elemental MediaPackage API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-mediapackage/customizations'
 # @service
 module Aws::MediaPackage
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.28.0'
 
 end

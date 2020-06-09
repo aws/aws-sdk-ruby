@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Chime
+
   class Resource
 
     # @param options ({})

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AppStream
+
   class Resource
 
     # @param options ({})

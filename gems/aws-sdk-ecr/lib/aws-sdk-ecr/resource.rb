@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ECR
+
   class Resource
 
     # @param options ({})

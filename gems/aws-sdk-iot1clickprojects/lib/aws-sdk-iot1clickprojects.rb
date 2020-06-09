@@ -24,17 +24,20 @@ require_relative 'aws-sdk-iot1clickprojects/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     io_t1_click_projects = Aws::IoT1ClickProjects::Client.new
+#     resp = io_t1_click_projects.associate_device_with_placement(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS IoT 1-Click Projects Service all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS IoT 1-Click Projects Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::IoT1ClickProjects::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS IoT 1-Click Projects Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-iot1clickprojects/customizations'
 # @service
 module Aws::IoT1ClickProjects
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.21.0'
 
 end

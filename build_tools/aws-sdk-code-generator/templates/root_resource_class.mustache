@@ -2,6 +2,20 @@
 {{generated_src_warning}}
 {{/generated_src_warning}}
 module {{module_name}}
+
+  {{#documentation?}}
+  # This class provides a resource oriented interface for {{service_name}}.
+  # To create a resource object:
+  #
+  #     resource = {{module_name}}::Resource.new(region: 'us-west-2')
+  #
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass `:client`, a default client will be constructed.
+  #
+  #     client = {{module_name}}::Client.new(region: 'us-west-2')
+  #     resource = {{module_name}}::Resource.new(client: client)
+  #
+  {{/documentation?}}
   class Resource
 
     # @param options ({})

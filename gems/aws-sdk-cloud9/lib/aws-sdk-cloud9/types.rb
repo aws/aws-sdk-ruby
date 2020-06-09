@@ -8,6 +8,18 @@
 module Aws::Cloud9
   module Types
 
+    # The target request is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Aws::EmptyStructure; end
+
+    # A conflict occurred.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ConflictException AWS API Documentation
+    #
+    class ConflictException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CreateEnvironmentEC2Request
     #   data as a hash:
     #
@@ -19,6 +31,12 @@ module Aws::Cloud9
     #         subnet_id: "SubnetId",
     #         automatic_stop_time_minutes: 1,
     #         owner_arn: "UserArn",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -64,6 +82,11 @@ module Aws::Cloud9
     #   specified, the ARN defaults to this environment's creator.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs that will be associated with the new AWS
+    #   Cloud9 development environment.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/CreateEnvironmentEC2Request AWS API Documentation
     #
     class CreateEnvironmentEC2Request < Struct.new(
@@ -73,7 +96,8 @@ module Aws::Cloud9
       :instance_type,
       :subnet_id,
       :automatic_stop_time_minutes,
-      :owner_arn)
+      :owner_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -375,6 +399,10 @@ module Aws::Cloud9
     #   The Amazon Resource Name (ARN) of the environment owner.
     #   @return [String]
     #
+    # @!attribute [rw] lifecycle
+    #   The state of the environment in its creation or deletion lifecycle.
+    #   @return [Types::EnvironmentLifecycle]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/Environment AWS API Documentation
     #
     class Environment < Struct.new(
@@ -383,7 +411,44 @@ module Aws::Cloud9
       :description,
       :type,
       :arn,
-      :owner_arn)
+      :owner_arn,
+      :lifecycle)
+      include Aws::Structure
+    end
+
+    # Information about the current creation or deletion lifecycle state of
+    # an AWS Cloud9 development environment.
+    #
+    # @!attribute [rw] status
+    #   The current creation or deletion lifecycle state of the environment.
+    #
+    #   * `CREATING`\: The environment is in the process of being created.
+    #
+    #   * `CREATED`\: The environment was successfully created.
+    #
+    #   * `CREATE_FAILED`\: The environment failed to be created.
+    #
+    #   * `DELETING`\: The environment is in the process of being deleted.
+    #
+    #   * `DELETE_FAILED`\: The environment failed to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   Any informational message about the lifecycle state of the
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_resource
+    #   If the environment failed to delete, the Amazon Resource Name (ARN)
+    #   of the related AWS resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/EnvironmentLifecycle AWS API Documentation
+    #
+    class EnvironmentLifecycle < Struct.new(
+      :status,
+      :reason,
+      :failure_resource)
       include Aws::Structure
     end
 
@@ -429,6 +494,24 @@ module Aws::Cloud9
       :last_access)
       include Aws::Structure
     end
+
+    # An access permissions issue occurred.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Aws::EmptyStructure; end
+
+    # An internal server error occurred.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Aws::EmptyStructure; end
+
+    # A service limit was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListEnvironmentsRequest
     #   data as a hash:
@@ -478,6 +561,145 @@ module Aws::Cloud9
       :environment_ids)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "EnvironmentArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the AWS Cloud9 development
+    #   environment to get the tags for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags associated with the AWS Cloud9 development
+    #   environment.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
+    # The target resource cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Aws::EmptyStructure; end
+
+    # Metadata that is associated with AWS resources. In particular, a
+    # name-value pair that can be associated with an AWS Cloud9 development
+    # environment. There are two types of tags: *user tags* and *system
+    # tags*. A user tag is created by the user. A system tag is
+    # automatically created by AWS services. A system tag is prefixed with
+    # "aws:" and cannot be modified by the user.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The **name** part of a tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The **value** part of a tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "EnvironmentArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the AWS Cloud9 development
+    #   environment to add tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags to add to the given AWS Cloud9 development
+    #   environment.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Too many service requests were made over the given time period.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "EnvironmentArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the AWS Cloud9 development
+    #   environment to remove tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag names of the tags to remove from the given AWS Cloud9
+    #   development environment.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateEnvironmentMembershipRequest
     #   data as a hash:

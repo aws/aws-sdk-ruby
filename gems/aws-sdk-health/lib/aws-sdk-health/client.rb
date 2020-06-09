@@ -23,12 +23,25 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:health)
 
 module Aws::Health
+  # An API client for Health.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::Health::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +68,7 @@ module Aws::Health
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +105,7 @@ module Aws::Health
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +120,12 @@ module Aws::Health
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +133,10 @@ module Aws::Health
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +150,10 @@ module Aws::Health
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +161,7 @@ module Aws::Health
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +176,7 @@ module Aws::Health
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +188,29 @@ module Aws::Health
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +218,30 @@ module Aws::Health
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,11 +270,110 @@ module Aws::Health
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
+
+    # Returns a list of accounts in the organization from AWS Organizations
+    # that are affected by the provided event.
+    #
+    # Before you can call this operation, you must first enable AWS Health
+    # to work with AWS Organizations. To do this, call the
+    # EnableHealthServiceAccessForOrganization operation from your
+    # organization's master account.
+    #
+    # @option params [required, String] :event_arn
+    #   The unique identifier for the event. Format:
+    #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+    #   `. Example: `Example:
+    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #
+    # @option params [String] :next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
+    #
+    # @return [Types::DescribeAffectedAccountsForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAffectedAccountsForOrganizationResponse#affected_accounts #affected_accounts} => Array&lt;String&gt;
+    #   * {Types::DescribeAffectedAccountsForOrganizationResponse#event_scope_code #event_scope_code} => String
+    #   * {Types::DescribeAffectedAccountsForOrganizationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_affected_accounts_for_organization({
+    #     event_arn: "eventArn", # required
+    #     next_token: "nextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.affected_accounts #=> Array
+    #   resp.affected_accounts[0] #=> String
+    #   resp.event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedAccountsForOrganization AWS API Documentation
+    #
+    # @overload describe_affected_accounts_for_organization(params = {})
+    # @param [Hash] params ({})
+    def describe_affected_accounts_for_organization(params = {}, options = {})
+      req = build_request(:describe_affected_accounts_for_organization, params)
+      req.send_request(options)
+    end
 
     # Returns a list of entities that have been affected by the specified
     # events, based on the specified filter criteria. Entities can refer to
@@ -248,6 +408,8 @@ module Aws::Health
     #
     #   * {Types::DescribeAffectedEntitiesResponse#entities #entities} => Array&lt;Types::AffectedEntity&gt;
     #   * {Types::DescribeAffectedEntitiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -294,6 +456,89 @@ module Aws::Health
     # @param [Hash] params ({})
     def describe_affected_entities(params = {}, options = {})
       req = build_request(:describe_affected_entities, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of entities that have been affected by one or more
+    # events for one or more accounts in your organization in AWS
+    # Organizations, based on the filter criteria. Entities can refer to
+    # individual customer resources, groups of customer resources, or any
+    # other construct, depending on the AWS service.
+    #
+    # At least one event ARN and account ID are required. Results are sorted
+    # by the `lastUpdatedTime` of the entity, starting with the most recent.
+    #
+    # Before you can call this operation, you must first enable AWS Health
+    # to work with AWS Organizations. To do this, call the
+    # EnableHealthServiceAccessForOrganization operation from your
+    # organization's master account.
+    #
+    # @option params [required, Array<Types::EventAccountFilter>] :organization_entity_filters
+    #   A JSON set of elements including the `awsAccountId` and the
+    #   `eventArn`.
+    #
+    # @option params [String] :locale
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
+    #
+    # @option params [String] :next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
+    #
+    # @return [Types::DescribeAffectedEntitiesForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAffectedEntitiesForOrganizationResponse#entities #entities} => Array&lt;Types::AffectedEntity&gt;
+    #   * {Types::DescribeAffectedEntitiesForOrganizationResponse#failed_set #failed_set} => Array&lt;Types::OrganizationAffectedEntitiesErrorItem&gt;
+    #   * {Types::DescribeAffectedEntitiesForOrganizationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_affected_entities_for_organization({
+    #     organization_entity_filters: [ # required
+    #       {
+    #         event_arn: "eventArn", # required
+    #         aws_account_id: "accountId",
+    #       },
+    #     ],
+    #     locale: "locale",
+    #     next_token: "nextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities #=> Array
+    #   resp.entities[0].entity_arn #=> String
+    #   resp.entities[0].event_arn #=> String
+    #   resp.entities[0].entity_value #=> String
+    #   resp.entities[0].entity_url #=> String
+    #   resp.entities[0].aws_account_id #=> String
+    #   resp.entities[0].last_updated_time #=> Time
+    #   resp.entities[0].status_code #=> String, one of "IMPAIRED", "UNIMPAIRED", "UNKNOWN"
+    #   resp.entities[0].tags #=> Hash
+    #   resp.entities[0].tags["tagKey"] #=> String
+    #   resp.failed_set #=> Array
+    #   resp.failed_set[0].aws_account_id #=> String
+    #   resp.failed_set[0].event_arn #=> String
+    #   resp.failed_set[0].error_name #=> String
+    #   resp.failed_set[0].error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedEntitiesForOrganization AWS API Documentation
+    #
+    # @overload describe_affected_entities_for_organization(params = {})
+    # @param [Hash] params ({})
+    def describe_affected_entities_for_organization(params = {}, options = {})
+      req = build_request(:describe_affected_entities_for_organization, params)
       req.send_request(options)
     end
 
@@ -357,6 +602,8 @@ module Aws::Health
     #   * {Types::DescribeEventAggregatesResponse#event_aggregates #event_aggregates} => Array&lt;Types::EventAggregate&gt;
     #   * {Types::DescribeEventAggregatesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_event_aggregates({
@@ -386,7 +633,7 @@ module Aws::Health
     #       ],
     #       entity_arns: ["entityArn"],
     #       entity_values: ["entityValue"],
-    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #       tags: [
     #         {
     #           "tagKey" => "tagValue",
@@ -416,8 +663,8 @@ module Aws::Health
     end
 
     # Returns detailed information about one or more specified events.
-    # Information includes standard event data (region, service, etc., as
-    # returned by DescribeEvents), a detailed event description, and
+    # Information includes standard event data (region, service, and so on,
+    # as returned by DescribeEvents), a detailed event description, and
     # possible additional metadata that depends upon the nature of the
     # event. Affected entities are not included; to retrieve those, use the
     # DescribeAffectedEntities operation.
@@ -452,13 +699,14 @@ module Aws::Health
     #   resp.successful_set[0].event.arn #=> String
     #   resp.successful_set[0].event.service #=> String
     #   resp.successful_set[0].event.event_type_code #=> String
-    #   resp.successful_set[0].event.event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange"
+    #   resp.successful_set[0].event.event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange", "investigation"
     #   resp.successful_set[0].event.region #=> String
     #   resp.successful_set[0].event.availability_zone #=> String
     #   resp.successful_set[0].event.start_time #=> Time
     #   resp.successful_set[0].event.end_time #=> Time
     #   resp.successful_set[0].event.last_updated_time #=> Time
     #   resp.successful_set[0].event.status_code #=> String, one of "open", "closed", "upcoming"
+    #   resp.successful_set[0].event.event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
     #   resp.successful_set[0].event_description.latest_description #=> String
     #   resp.successful_set[0].event_metadata #=> Hash
     #   resp.successful_set[0].event_metadata["metadataKey"] #=> String
@@ -473,6 +721,77 @@ module Aws::Health
     # @param [Hash] params ({})
     def describe_event_details(params = {}, options = {})
       req = build_request(:describe_event_details, params)
+      req.send_request(options)
+    end
+
+    # Returns detailed information about one or more specified events for
+    # one or more accounts in your organization. Information includes
+    # standard event data (Region, service, and so on, as returned by
+    # DescribeEventsForOrganization, a detailed event description, and
+    # possible additional metadata that depends upon the nature of the
+    # event. Affected entities are not included; to retrieve those, use the
+    # DescribeAffectedEntitiesForOrganization operation.
+    #
+    # Before you can call this operation, you must first enable AWS Health
+    # to work with AWS Organizations. To do this, call the
+    # EnableHealthServiceAccessForOrganization operation from your
+    # organization's master account.
+    #
+    # @option params [required, Array<Types::EventAccountFilter>] :organization_event_detail_filters
+    #   A set of JSON elements that includes the `awsAccountId` and the
+    #   `eventArn`.
+    #
+    # @option params [String] :locale
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
+    #
+    # @return [Types::DescribeEventDetailsForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEventDetailsForOrganizationResponse#successful_set #successful_set} => Array&lt;Types::OrganizationEventDetails&gt;
+    #   * {Types::DescribeEventDetailsForOrganizationResponse#failed_set #failed_set} => Array&lt;Types::OrganizationEventDetailsErrorItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_event_details_for_organization({
+    #     organization_event_detail_filters: [ # required
+    #       {
+    #         event_arn: "eventArn", # required
+    #         aws_account_id: "accountId",
+    #       },
+    #     ],
+    #     locale: "locale",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_set #=> Array
+    #   resp.successful_set[0].aws_account_id #=> String
+    #   resp.successful_set[0].event.arn #=> String
+    #   resp.successful_set[0].event.service #=> String
+    #   resp.successful_set[0].event.event_type_code #=> String
+    #   resp.successful_set[0].event.event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange", "investigation"
+    #   resp.successful_set[0].event.region #=> String
+    #   resp.successful_set[0].event.availability_zone #=> String
+    #   resp.successful_set[0].event.start_time #=> Time
+    #   resp.successful_set[0].event.end_time #=> Time
+    #   resp.successful_set[0].event.last_updated_time #=> Time
+    #   resp.successful_set[0].event.status_code #=> String, one of "open", "closed", "upcoming"
+    #   resp.successful_set[0].event.event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
+    #   resp.successful_set[0].event_description.latest_description #=> String
+    #   resp.successful_set[0].event_metadata #=> Hash
+    #   resp.successful_set[0].event_metadata["metadataKey"] #=> String
+    #   resp.failed_set #=> Array
+    #   resp.failed_set[0].aws_account_id #=> String
+    #   resp.failed_set[0].event_arn #=> String
+    #   resp.failed_set[0].error_name #=> String
+    #   resp.failed_set[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventDetailsForOrganization AWS API Documentation
+    #
+    # @overload describe_event_details_for_organization(params = {})
+    # @param [Hash] params ({})
+    def describe_event_details_for_organization(params = {}, options = {})
+      req = build_request(:describe_event_details_for_organization, params)
       req.send_request(options)
     end
 
@@ -503,13 +822,15 @@ module Aws::Health
     #   * {Types::DescribeEventTypesResponse#event_types #event_types} => Array&lt;Types::EventType&gt;
     #   * {Types::DescribeEventTypesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_event_types({
     #     filter: {
     #       event_type_codes: ["eventTypeCode"],
     #       services: ["service"],
-    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #     },
     #     locale: "locale",
     #     next_token: "nextToken",
@@ -521,7 +842,7 @@ module Aws::Health
     #   resp.event_types #=> Array
     #   resp.event_types[0].service #=> String
     #   resp.event_types[0].code #=> String
-    #   resp.event_types[0].category #=> String, one of "issue", "accountNotification", "scheduledChange"
+    #   resp.event_types[0].category #=> String, one of "issue", "accountNotification", "scheduledChange", "investigation"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypes AWS API Documentation
@@ -565,6 +886,8 @@ module Aws::Health
     #   * {Types::DescribeEventsResponse#events #events} => Array&lt;Types::Event&gt;
     #   * {Types::DescribeEventsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_events({
@@ -594,7 +917,7 @@ module Aws::Health
     #       ],
     #       entity_arns: ["entityArn"],
     #       entity_values: ["entityValue"],
-    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #       tags: [
     #         {
     #           "tagKey" => "tagValue",
@@ -613,13 +936,14 @@ module Aws::Health
     #   resp.events[0].arn #=> String
     #   resp.events[0].service #=> String
     #   resp.events[0].event_type_code #=> String
-    #   resp.events[0].event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange"
+    #   resp.events[0].event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange", "investigation"
     #   resp.events[0].region #=> String
     #   resp.events[0].availability_zone #=> String
     #   resp.events[0].start_time #=> Time
     #   resp.events[0].end_time #=> Time
     #   resp.events[0].last_updated_time #=> Time
     #   resp.events[0].status_code #=> String, one of "open", "closed", "upcoming"
+    #   resp.events[0].event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEvents AWS API Documentation
@@ -628,6 +952,162 @@ module Aws::Health
     # @param [Hash] params ({})
     def describe_events(params = {}, options = {})
       req = build_request(:describe_events, params)
+      req.send_request(options)
+    end
+
+    # Returns information about events across your organization in AWS
+    # Organizations, meeting the specified filter criteria. Events are
+    # returned in a summary form and do not include the accounts impacted,
+    # detailed description, any additional metadata that depends on the
+    # event type, or any affected resources. To retrieve that information,
+    # use the DescribeAffectedAccountsForOrganization,
+    # DescribeEventDetailsForOrganization, and
+    # DescribeAffectedEntitiesForOrganization operations.
+    #
+    # If no filter criteria are specified, all events across your
+    # organization are returned. Results are sorted by `lastModifiedTime`,
+    # starting with the most recent.
+    #
+    # Before you can call this operation, you must first enable Health to
+    # work with AWS Organizations. To do this, call the
+    # EnableHealthServiceAccessForOrganization operation from your
+    # organization's master account.
+    #
+    # @option params [Types::OrganizationEventFilter] :filter
+    #   Values to narrow the results returned.
+    #
+    # @option params [String] :next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
+    #
+    # @option params [String] :locale
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
+    #
+    # @return [Types::DescribeEventsForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEventsForOrganizationResponse#events #events} => Array&lt;Types::OrganizationEvent&gt;
+    #   * {Types::DescribeEventsForOrganizationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_events_for_organization({
+    #     filter: {
+    #       event_type_codes: ["eventType"],
+    #       aws_account_ids: ["accountId"],
+    #       services: ["service"],
+    #       regions: ["region"],
+    #       start_time: {
+    #         from: Time.now,
+    #         to: Time.now,
+    #       },
+    #       end_time: {
+    #         from: Time.now,
+    #         to: Time.now,
+    #       },
+    #       last_updated_time: {
+    #         from: Time.now,
+    #         to: Time.now,
+    #       },
+    #       entity_arns: ["entityArn"],
+    #       entity_values: ["entityValue"],
+    #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
+    #       event_status_codes: ["open"], # accepts open, closed, upcoming
+    #     },
+    #     next_token: "nextToken",
+    #     max_results: 1,
+    #     locale: "locale",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events #=> Array
+    #   resp.events[0].arn #=> String
+    #   resp.events[0].service #=> String
+    #   resp.events[0].event_type_code #=> String
+    #   resp.events[0].event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange", "investigation"
+    #   resp.events[0].event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
+    #   resp.events[0].region #=> String
+    #   resp.events[0].start_time #=> Time
+    #   resp.events[0].end_time #=> Time
+    #   resp.events[0].last_updated_time #=> Time
+    #   resp.events[0].status_code #=> String, one of "open", "closed", "upcoming"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventsForOrganization AWS API Documentation
+    #
+    # @overload describe_events_for_organization(params = {})
+    # @param [Hash] params ({})
+    def describe_events_for_organization(params = {}, options = {})
+      req = build_request(:describe_events_for_organization, params)
+      req.send_request(options)
+    end
+
+    # This operation provides status information on enabling or disabling
+    # AWS Health to work with your organization. To call this operation, you
+    # must sign in as an IAM user, assume an IAM role, or sign in as the
+    # root user (not recommended) in the organization's master account.
+    #
+    # @return [Types::DescribeHealthServiceStatusForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeHealthServiceStatusForOrganizationResponse#health_service_access_status_for_organization #health_service_access_status_for_organization} => String
+    #
+    # @example Response structure
+    #
+    #   resp.health_service_access_status_for_organization #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeHealthServiceStatusForOrganization AWS API Documentation
+    #
+    # @overload describe_health_service_status_for_organization(params = {})
+    # @param [Hash] params ({})
+    def describe_health_service_status_for_organization(params = {}, options = {})
+      req = build_request(:describe_health_service_status_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Calling this operation disables Health from working with AWS
+    # Organizations. This does not remove the Service Linked Role (SLR) from
+    # the the master account in your organization. Use the IAM console, API,
+    # or AWS CLI to remove the SLR if desired. To call this operation, you
+    # must sign in as an IAM user, assume an IAM role, or sign in as the
+    # root user (not recommended) in the organization's master account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DisableHealthServiceAccessForOrganization AWS API Documentation
+    #
+    # @overload disable_health_service_access_for_organization(params = {})
+    # @param [Hash] params ({})
+    def disable_health_service_access_for_organization(params = {}, options = {})
+      req = build_request(:disable_health_service_access_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Calling this operation enables AWS Health to work with AWS
+    # Organizations. This applies a Service Linked Role (SLR) to the master
+    # account in the organization. To learn more about the steps in this
+    # process, visit enabling service access for AWS Health in AWS
+    # Organizations. To call this operation, you must sign in as an IAM
+    # user, assume an IAM role, or sign in as the root user (not
+    # recommended) in the organization's master account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EnableHealthServiceAccessForOrganization AWS API Documentation
+    #
+    # @overload enable_health_service_access_for_organization(params = {})
+    # @param [Hash] params ({})
+    def enable_health_service_access_for_organization(params = {}, options = {})
+      req = build_request(:enable_health_service_access_for_organization, params)
       req.send_request(options)
     end
 
@@ -644,7 +1124,7 @@ module Aws::Health
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

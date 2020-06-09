@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ElasticsearchService
+
   class Resource
 
     # @param options ({})

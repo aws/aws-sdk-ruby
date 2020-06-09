@@ -8,7 +8,7 @@ module Aws
         describe '#stub_data' do
 
           def normalize(xml)
-            result = ''
+            result = String.new # REXML only accepts mutable strings
             REXML::Document.new(xml).write(result, 2)
             result.strip
           end

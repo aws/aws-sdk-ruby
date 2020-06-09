@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Inspector
+
   class Resource
 
     # @param options ({})

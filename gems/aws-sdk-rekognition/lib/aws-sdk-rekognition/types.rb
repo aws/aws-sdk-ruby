@@ -8,6 +8,10 @@
 module Aws::Rekognition
   module Types
 
+    # You are not authorized to perform the action.
+    #
+    class AccessDeniedException < Aws::EmptyStructure; end
+
     # Structure containing the estimated age range, in years, for a face.
     #
     # Amazon Rekognition estimates an age range for faces detected in the
@@ -26,6 +30,32 @@ module Aws::Rekognition
     class AgeRange < Struct.new(
       :low,
       :high)
+      include Aws::Structure
+    end
+
+    # Assets are the images that you use to train and evaluate a model
+    # version. Assets are referenced by Sagemaker GroundTruth manifest
+    # files.
+    #
+    # @note When making an API call, you may pass Asset
+    #   data as a hash:
+    #
+    #       {
+    #         ground_truth_manifest: {
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ground_truth_manifest
+    #   The S3 bucket that contains the Ground Truth manifest file.
+    #   @return [Types::GroundTruthManifest]
+    #
+    class Asset < Struct.new(
+      :ground_truth_manifest)
       include Aws::Structure
     end
 
@@ -71,6 +101,16 @@ module Aws::Rekognition
     #
     #  </note>
     #
+    # @note When making an API call, you may pass BoundingBox
+    #   data as a hash:
+    #
+    #       {
+    #         width: 1.0,
+    #         height: 1.0,
+    #         left: 1.0,
+    #         top: 1.0,
+    #       }
+    #
     # @!attribute [rw] width
     #   Width of the bounding box as a ratio of the overall image width.
     #   @return [Float]
@@ -97,7 +137,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Provides information about a celebrity recognized by the operation.
+    # Provides information about a celebrity recognized by the
+    # RecognizeCelebrities operation.
     #
     # @!attribute [rw] urls
     #   An array of URLs pointing to additional information about the
@@ -230,18 +271,29 @@ module Aws::Rekognition
     #           },
     #         },
     #         similarity_threshold: 1.0,
+    #         quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #       }
     #
     # @!attribute [rw] source_image
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] target_image
     #   The target image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] similarity_threshold
@@ -249,10 +301,27 @@ module Aws::Rekognition
     #   must meet to be included in the `FaceMatches` array.
     #   @return [Float]
     #
+    # @!attribute [rw] quality_filter
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't compared. If you specify
+    #   `AUTO`, Amazon Rekognition chooses the quality bar. If you specify
+    #   `LOW`, `MEDIUM`, or `HIGH`, filtering removes all faces that don’t
+    #   meet the chosen quality bar. The quality bar is based on a variety
+    #   of common use cases. Low-quality detections can occur for a number
+    #   of reasons. Some examples are an object that's misidentified as a
+    #   face, a face that's too blurry, or a face with a pose that's too
+    #   extreme to use. If you specify `NONE`, no filtering is performed.
+    #   The default value is `NONE`.
+    #
+    #   To use quality filtering, the collection you are using must be
+    #   associated with version 3 of the face model or higher.
+    #   @return [String]
+    #
     class CompareFacesRequest < Struct.new(
       :source_image,
       :target_image,
-      :similarity_threshold)
+      :similarity_threshold,
+      :quality_filter)
       include Aws::Structure
     end
 
@@ -369,15 +438,15 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Information about a moderation label detection in a stored video.
+    # Information about an unsafe content label detection in a stored video.
     #
     # @!attribute [rw] timestamp
     #   Time, in milliseconds from the beginning of the video, that the
-    #   moderation label was detected.
+    #   unsafe content label was detected.
     #   @return [Integer]
     #
     # @!attribute [rw] moderation_label
-    #   The moderation label detected by in the stored video.
+    #   The unsafe content label detected by in the stored video.
     #   @return [Types::ModerationLabel]
     #
     class ContentModerationDetection < Struct.new(
@@ -423,6 +492,112 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateProjectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project to create.
+    #   @return [String]
+    #
+    class CreateProjectRequest < Struct.new(
+      :project_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the new project. You can use the
+    #   ARN to configure IAM access to the project.
+    #   @return [String]
+    #
+    class CreateProjectResponse < Struct.new(
+      :project_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateProjectVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_arn: "ProjectArn", # required
+    #         version_name: "VersionName", # required
+    #         output_config: { # required
+    #           s3_bucket: "S3Bucket",
+    #           s3_key_prefix: "S3KeyPrefix",
+    #         },
+    #         training_data: { # required
+    #           assets: [
+    #             {
+    #               ground_truth_manifest: {
+    #                 s3_object: {
+    #                   bucket: "S3Bucket",
+    #                   name: "S3ObjectName",
+    #                   version: "S3ObjectVersion",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         testing_data: { # required
+    #           assets: [
+    #             {
+    #               ground_truth_manifest: {
+    #                 s3_object: {
+    #                   bucket: "S3Bucket",
+    #                   name: "S3ObjectName",
+    #                   version: "S3ObjectVersion",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           auto_create: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] project_arn
+    #   The ARN of the Amazon Rekognition Custom Labels project that manages
+    #   the model that you want to train.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   A name for the version of the model. This value must be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_config
+    #   The Amazon S3 location to store the results of training.
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] training_data
+    #   The dataset to use for training.
+    #   @return [Types::TrainingData]
+    #
+    # @!attribute [rw] testing_data
+    #   The dataset to use for testing.
+    #   @return [Types::TestingData]
+    #
+    class CreateProjectVersionRequest < Struct.new(
+      :project_arn,
+      :version_name,
+      :output_config,
+      :training_data,
+      :testing_data)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_version_arn
+    #   The ARN of the model version that was created. Use
+    #   `DescribeProjectVersion` to get the current status of the training
+    #   operation.
+    #   @return [String]
+    #
+    class CreateProjectVersionResponse < Struct.new(
+      :project_version_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateStreamProcessorRequest
     #   data as a hash:
     #
@@ -462,7 +637,8 @@ module Aws::Rekognition
     # @!attribute [rw] name
     #   An identifier you assign to the stream processor. You can use `Name`
     #   to manage the stream processor. For example, you can get the current
-    #   status of the stream processor by calling . `Name` is idempotent.
+    #   status of the stream processor by calling DescribeStreamProcessor.
+    #   `Name` is idempotent.
     #   @return [String]
     #
     # @!attribute [rw] settings
@@ -490,6 +666,32 @@ module Aws::Rekognition
     #
     class CreateStreamProcessorResponse < Struct.new(
       :stream_processor_arn)
+      include Aws::Structure
+    end
+
+    # A custom label detected in an image by a call to DetectCustomLabels.
+    #
+    # @!attribute [rw] name
+    #   The name of the custom label.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that the model has in the detection of the custom
+    #   label. The range is 0-100. A higher value indicates a higher
+    #   confidence.
+    #   @return [Float]
+    #
+    # @!attribute [rw] geometry
+    #   The location of the detected object on the image that corresponds to
+    #   the custom label. Includes an axis aligned coarse bounding box
+    #   surrounding the object and a finer grain polygon for more accurate
+    #   spatial information.
+    #   @return [Types::Geometry]
+    #
+    class CustomLabel < Struct.new(
+      :name,
+      :confidence,
+      :geometry)
       include Aws::Structure
     end
 
@@ -549,6 +751,58 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteProjectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_arn: "ProjectArn", # required
+    #       }
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project that you want to
+    #   delete.
+    #   @return [String]
+    #
+    class DeleteProjectRequest < Struct.new(
+      :project_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current status of the delete project operation.
+    #   @return [String]
+    #
+    class DeleteProjectResponse < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteProjectVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_version_arn: "ProjectVersionArn", # required
+    #       }
+    #
+    # @!attribute [rw] project_version_arn
+    #   The Amazon Resource Name (ARN) of the model version that you want to
+    #   delete.
+    #   @return [String]
+    #
+    class DeleteProjectVersionRequest < Struct.new(
+      :project_version_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the deletion operation.
+    #   @return [String]
+    #
+    class DeleteProjectVersionResponse < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteStreamProcessorRequest
     #   data as a hash:
     #
@@ -585,7 +839,7 @@ module Aws::Rekognition
 
     # @!attribute [rw] face_count
     #   The number of faces that are indexed into the collection. To index
-    #   faces into a collection, use .
+    #   faces into a collection, use IndexFaces.
     #   @return [Integer]
     #
     # @!attribute [rw] face_model_version
@@ -611,6 +865,113 @@ module Aws::Rekognition
       :face_model_version,
       :collection_arn,
       :creation_timestamp)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeProjectVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_arn: "ProjectArn", # required
+    #         version_names: ["VersionName"],
+    #         next_token: "ExtendedPaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project that contains the
+    #   models you want to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_names
+    #   A list of model version names that you want to describe. You can add
+    #   up to 10 model version names to the list. If you don't specify a
+    #   value, all model descriptions are returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   results to retrieve), Amazon Rekognition Custom Labels returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #   @return [Integer]
+    #
+    class DescribeProjectVersionsRequest < Struct.new(
+      :project_arn,
+      :version_names,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_version_descriptions
+    #   A list of model descriptions. The list is sorted by the creation
+    #   date and time of the model versions, latest to earliest.
+    #   @return [Array<Types::ProjectVersionDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   results to retrieve), Amazon Rekognition Custom Labels returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of results.
+    #   @return [String]
+    #
+    class DescribeProjectVersionsResponse < Struct.new(
+      :project_version_descriptions,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeProjectsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "ExtendedPaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   results to retrieve), Amazon Rekognition Custom Labels returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #   @return [Integer]
+    #
+    class DescribeProjectsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_descriptions
+    #   A list of project descriptions. The list is sorted by the date and
+    #   time the projects are created.
+    #   @return [Array<Types::ProjectDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   results to retrieve), Amazon Rekognition Custom Labels returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of results.
+    #   @return [String]
+    #
+    class DescribeProjectsResponse < Struct.new(
+      :project_descriptions,
+      :next_token)
       include Aws::Structure
     end
 
@@ -689,6 +1050,88 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DetectCustomLabelsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_version_arn: "ProjectVersionArn", # required
+    #         image: { # required
+    #           bytes: "data",
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         max_results: 1,
+    #         min_confidence: 1.0,
+    #       }
+    #
+    # @!attribute [rw] project_version_arn
+    #   The ARN of the model version that you want to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] image
+    #   Provides the input image either as bytes or an S3 object.
+    #
+    #   You pass image bytes to an Amazon Rekognition API operation by using
+    #   the `Bytes` property. For example, you would use the `Bytes`
+    #   property to pass an image loaded from a local file system. Image
+    #   bytes passed by using the `Bytes` property must be base64-encoded.
+    #   Your code may not need to encode image bytes if you are using an AWS
+    #   SDK to call Amazon Rekognition API operations.
+    #
+    #   For more information, see Analyzing an Image Loaded from a Local
+    #   File System in the Amazon Rekognition Developer Guide.
+    #
+    #   You pass images stored in an S3 bucket to an Amazon Rekognition API
+    #   operation by using the `S3Object` property. Images stored in an S3
+    #   bucket do not need to be base64-encoded.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   If you use the AWS CLI to call Amazon Rekognition operations,
+    #   passing image bytes using the Bytes property is not supported. You
+    #   must first upload the image to an Amazon S3 bucket and then call the
+    #   operation using the S3Object property.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see
+    #   Resource Based Policies in the Amazon Rekognition Developer Guide.
+    #   @return [Types::Image]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results you want the service to return in the
+    #   response. The service returns the specified number of highest
+    #   confidence labels ranked from highest confidence to lowest.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_confidence
+    #   Specifies the minimum confidence level for the labels to return.
+    #   Amazon Rekognition doesn't return any labels with a confidence
+    #   lower than this specified value. If you specify a value of 0, all
+    #   labels are return, regardless of the default thresholds that the
+    #   model version applies.
+    #   @return [Float]
+    #
+    class DetectCustomLabelsRequest < Struct.new(
+      :project_version_arn,
+      :image,
+      :max_results,
+      :min_confidence)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_labels
+    #   An array of custom labels detected in the input image.
+    #   @return [Array<Types::CustomLabel>]
+    #
+    class DetectCustomLabelsResponse < Struct.new(
+      :custom_labels)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DetectFacesRequest
     #   data as a hash:
     #
@@ -708,6 +1151,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] attributes
@@ -775,8 +1223,14 @@ module Aws::Rekognition
     #
     # @!attribute [rw] image
     #   The input image as base64-encoded bytes or an S3 object. If you use
-    #   the AWS CLI to call Amazon Rekognition operations, passing
-    #   base64-encoded image bytes is not supported.
+    #   the AWS CLI to call Amazon Rekognition operations, passing image
+    #   bytes is not supported. Images stored in an S3 Bucket do not need to
+    #   be base64-encoded.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] max_labels
@@ -791,7 +1245,7 @@ module Aws::Rekognition
     #   than this specified value.
     #
     #   If `MinConfidence` is not specified, the operation returns labels
-    #   with a confidence values greater than or equal to 50 percent.
+    #   with a confidence values greater than or equal to 55 percent.
     #   @return [Float]
     #
     class DetectLabelsRequest < Struct.new(
@@ -847,12 +1301,24 @@ module Aws::Rekognition
     #           },
     #         },
     #         min_confidence: 1.0,
+    #         human_loop_config: {
+    #           human_loop_name: "HumanLoopName", # required
+    #           flow_definition_arn: "FlowDefinitionArn", # required
+    #           data_attributes: {
+    #             content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] image
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] min_confidence
@@ -864,19 +1330,78 @@ module Aws::Rekognition
     #   with confidence values greater than or equal to 50 percent.
     #   @return [Float]
     #
+    # @!attribute [rw] human_loop_config
+    #   Sets up the configuration for human evaluation, including the
+    #   FlowDefinition the image will be sent to.
+    #   @return [Types::HumanLoopConfig]
+    #
     class DetectModerationLabelsRequest < Struct.new(
       :image,
-      :min_confidence)
+      :min_confidence,
+      :human_loop_config)
       include Aws::Structure
     end
 
     # @!attribute [rw] moderation_labels
-    #   Array of detected Moderation labels and the time, in millseconds
+    #   Array of detected Moderation labels and the time, in milliseconds
     #   from the start of the video, they were detected.
     #   @return [Array<Types::ModerationLabel>]
     #
+    # @!attribute [rw] moderation_model_version
+    #   Version number of the moderation detection model that was used to
+    #   detect unsafe content.
+    #   @return [String]
+    #
+    # @!attribute [rw] human_loop_activation_output
+    #   Shows the results of the human in the loop evaluation.
+    #   @return [Types::HumanLoopActivationOutput]
+    #
     class DetectModerationLabelsResponse < Struct.new(
-      :moderation_labels)
+      :moderation_labels,
+      :moderation_model_version,
+      :human_loop_activation_output)
+      include Aws::Structure
+    end
+
+    # A set of optional parameters that you can use to set the criteria that
+    # the text must meet to be included in your response. `WordFilter` looks
+    # at a word’s height, width, and minimum confidence. `RegionOfInterest`
+    # lets you set a specific region of the image to look for text in.
+    #
+    # @note When making an API call, you may pass DetectTextFilters
+    #   data as a hash:
+    #
+    #       {
+    #         word_filter: {
+    #           min_confidence: 1.0,
+    #           min_bounding_box_height: 1.0,
+    #           min_bounding_box_width: 1.0,
+    #         },
+    #         regions_of_interest: [
+    #           {
+    #             bounding_box: {
+    #               width: 1.0,
+    #               height: 1.0,
+    #               left: 1.0,
+    #               top: 1.0,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] word_filter
+    #   A set of parameters that allow you to filter out certain results
+    #   from your returned results.
+    #   @return [Types::DetectionFilter]
+    #
+    # @!attribute [rw] regions_of_interest
+    #   A Filter focusing on a certain area of the image. Uses a
+    #   `BoundingBox` object to set the region of the image.
+    #   @return [Array<Types::RegionOfInterest>]
+    #
+    class DetectTextFilters < Struct.new(
+      :word_filter,
+      :regions_of_interest)
       include Aws::Structure
     end
 
@@ -892,16 +1417,44 @@ module Aws::Rekognition
     #             version: "S3ObjectVersion",
     #           },
     #         },
+    #         filters: {
+    #           word_filter: {
+    #             min_confidence: 1.0,
+    #             min_bounding_box_height: 1.0,
+    #             min_bounding_box_width: 1.0,
+    #           },
+    #           regions_of_interest: [
+    #             {
+    #               bounding_box: {
+    #                 width: 1.0,
+    #                 height: 1.0,
+    #                 left: 1.0,
+    #                 top: 1.0,
+    #               },
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] image
     #   The input image as base64-encoded bytes or an Amazon S3 object. If
     #   you use the AWS CLI to call Amazon Rekognition operations, you
     #   can't pass image bytes.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
+    # @!attribute [rw] filters
+    #   Optional parameters that let you set the criteria that the text must
+    #   meet to be included in your response.
+    #   @return [Types::DetectTextFilters]
+    #
     class DetectTextRequest < Struct.new(
-      :image)
+      :image,
+      :filters)
       include Aws::Structure
     end
 
@@ -909,13 +1462,60 @@ module Aws::Rekognition
     #   An array of text that was detected in the input image.
     #   @return [Array<Types::TextDetection>]
     #
+    # @!attribute [rw] text_model_version
+    #   The model version used to detect text.
+    #   @return [String]
+    #
     class DetectTextResponse < Struct.new(
-      :text_detections)
+      :text_detections,
+      :text_model_version)
       include Aws::Structure
     end
 
-    # The emotions detected on the face, and the confidence level in the
-    # determination. For example, HAPPY, SAD, and ANGRY.
+    # A set of parameters that allow you to filter out certain results from
+    # your returned results.
+    #
+    # @note When making an API call, you may pass DetectionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         min_confidence: 1.0,
+    #         min_bounding_box_height: 1.0,
+    #         min_bounding_box_width: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min_confidence
+    #   Sets confidence of word detection. Words with detection confidence
+    #   below this will be excluded from the result. Values should be
+    #   between 0.5 and 1 as Text in Video will not return any result below
+    #   0.5.
+    #   @return [Float]
+    #
+    # @!attribute [rw] min_bounding_box_height
+    #   Sets the minimum height of the word bounding box. Words with
+    #   bounding box heights lesser than this value will be excluded from
+    #   the result. Value is relative to the video frame height.
+    #   @return [Float]
+    #
+    # @!attribute [rw] min_bounding_box_width
+    #   Sets the minimum width of the word bounding box. Words with bounding
+    #   boxes widths lesser than this value will be excluded from the
+    #   result. Value is relative to the video frame width.
+    #   @return [Float]
+    #
+    class DetectionFilter < Struct.new(
+      :min_confidence,
+      :min_bounding_box_height,
+      :min_bounding_box_width)
+      include Aws::Structure
+    end
+
+    # The emotions that appear to be expressed on the face, and the
+    # confidence level in the determination. The API is only making a
+    # determination of the physical appearance of a person's face. It is
+    # not a determination of the person’s internal emotional state and
+    # should not be used in such a way. For example, a person pretending to
+    # have a sad face might not be sad emotionally.
     #
     # @!attribute [rw] type
     #   Type of emotion detected.
@@ -928,6 +1528,26 @@ module Aws::Rekognition
     class Emotion < Struct.new(
       :type,
       :confidence)
+      include Aws::Structure
+    end
+
+    # The evaluation results for the training of a model.
+    #
+    # @!attribute [rw] f1_score
+    #   The F1 score for the evaluation of all labels. The F1 score metric
+    #   evaluates the overall precision and recall performance of the model
+    #   as a single value. A higher value indicates better precision and
+    #   recall performance. A lower score indicates that precision, recall,
+    #   or both are performing poorly.
+    #   @return [Float]
+    #
+    # @!attribute [rw] summary
+    #   The S3 bucket that contains the training summary.
+    #   @return [Types::Summary]
+    #
+    class EvaluationResult < Struct.new(
+      :f1_score,
+      :summary)
       include Aws::Structure
     end
 
@@ -1007,12 +1627,12 @@ module Aws::Rekognition
     # all facial attributes. The default attributes are `BoundingBox`,
     # `Confidence`, `Landmarks`, `Pose`, and `Quality`.
     #
-    # is the only Amazon Rekognition Video stored video operation that can
-    # return a `FaceDetail` object with all attributes. To specify which
-    # attributes to return, use the `FaceAttributes` input parameter for .
-    # The following Amazon Rekognition Video operations return only the
-    # default attributes. The corresponding Start operations don't have a
-    # `FaceAttributes` input parameter.
+    # GetFaceDetection is the only Amazon Rekognition Video stored video
+    # operation that can return a `FaceDetail` object with all attributes.
+    # To specify which attributes to return, use the `FaceAttributes` input
+    # parameter for StartFaceDetection. The following Amazon Rekognition
+    # Video operations return only the default attributes. The corresponding
+    # Start operations don't have a `FaceAttributes` input parameter.
     #
     # * GetCelebrityRecognition
     #
@@ -1020,10 +1640,10 @@ module Aws::Rekognition
     #
     # * GetFaceSearch
     #
-    # The Amazon Rekognition Image and operations can return all facial
-    # attributes. To specify which attributes to return, use the
-    # `Attributes` input parameter for `DetectFaces`. For `IndexFaces`, use
-    # the `DetectAttributes` input parameter.
+    # The Amazon Rekognition Image DetectFaces and IndexFaces operations can
+    # return all facial attributes. To specify which attributes to return,
+    # use the `Attributes` input parameter for `DetectFaces`. For
+    # `IndexFaces`, use the `DetectAttributes` input parameter.
     #
     # @!attribute [rw] bounding_box
     #   Bounding box of the face. Default attribute.
@@ -1050,7 +1670,7 @@ module Aws::Rekognition
     #   @return [Types::Sunglasses]
     #
     # @!attribute [rw] gender
-    #   Gender of the face and the confidence level in the determination.
+    #   The predicted gender of a detected face.
     #   @return [Types::Gender]
     #
     # @!attribute [rw] beard
@@ -1074,8 +1694,12 @@ module Aws::Rekognition
     #   @return [Types::MouthOpen]
     #
     # @!attribute [rw] emotions
-    #   The emotions detected on the face, and the confidence level in the
-    #   determination. For example, HAPPY, SAD, and ANGRY.
+    #   The emotions that appear to be expressed on the face, and the
+    #   confidence level in the determination. The API is only making a
+    #   determination of the physical appearance of a person's face. It is
+    #   not a determination of the person’s internal emotional state and
+    #   should not be used in such a way. For example, a person pretending
+    #   to have a sad face might not be sad emotionally.
     #   @return [Array<Types::Emotion>]
     #
     # @!attribute [rw] landmarks
@@ -1174,7 +1798,8 @@ module Aws::Rekognition
     end
 
     # Input face recognition parameters for an Amazon Rekognition stream
-    # processor. `FaceRecognitionSettings` is a request parameter for .
+    # processor. `FaceRecognitionSettings` is a request parameter for
+    # CreateStreamProcessor.
     #
     # @note When making an API call, you may pass FaceSearchSettings
     #   data as a hash:
@@ -1191,7 +1816,7 @@ module Aws::Rekognition
     #
     # @!attribute [rw] face_match_threshold
     #   Minimum face match confidence score that must be met to return a
-    #   result for a recognized face. Default is 70. 0 is the lowest
+    #   result for a recognized face. Default is 80. 0 is the lowest
     #   confidence. 100 is the highest confidence.
     #   @return [Float]
     #
@@ -1201,14 +1826,30 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Gender of the face and the confidence level in the determination.
+    # The predicted gender of a detected face.
+    #
+    # Amazon Rekognition makes gender binary (male/female) predictions based
+    # on the physical appearance of a face in a particular image. This kind
+    # of prediction is not designed to categorize a person’s gender
+    # identity, and you shouldn't use Amazon Rekognition to make such a
+    # determination. For example, a male actor wearing a long-haired wig and
+    # earrings for a role might be predicted as female.
+    #
+    # Using Amazon Rekognition to make gender binary predictions is best
+    # suited for use cases where aggregate gender distribution statistics
+    # need to be analyzed without identifying specific users. For example,
+    # the percentage of female users compared to male users on a social
+    # media platform.
+    #
+    # We don't recommend using gender binary predictions to make decisions
+    # that impact  an individual's rights, privacy, or access to services.
     #
     # @!attribute [rw] value
-    #   Gender of the face.
+    #   The predicted gender of the face.
     #   @return [String]
     #
     # @!attribute [rw] confidence
-    #   Level of confidence in the determination.
+    #   Level of confidence in the prediction.
     #   @return [Float]
     #
     class Gender < Struct.new(
@@ -1217,16 +1858,17 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Information about where the text detected by is located on an image.
+    # Information about where an object (DetectCustomLabels) or text
+    # (DetectText) is located on an image.
     #
     # @!attribute [rw] bounding_box
-    #   An axis-aligned coarse representation of the detected text's
+    #   An axis-aligned coarse representation of the detected item's
     #   location on the image.
     #   @return [Types::BoundingBox]
     #
     # @!attribute [rw] polygon
     #   Within the bounding box, a fine-grained polygon around the detected
-    #   text.
+    #   item.
     #   @return [Array<Types::Point>]
     #
     class Geometry < Struct.new(
@@ -1244,7 +1886,8 @@ module Aws::Rekognition
     #
     # @!attribute [rw] id
     #   The ID for the celebrity. You get the celebrity ID from a call to
-    #   the operation, which recognizes celebrities in an image.
+    #   the RecognizeCelebrities operation, which recognizes celebrities in
+    #   an image.
     #   @return [String]
     #
     class GetCelebrityInfoRequest < Struct.new(
@@ -1355,8 +1998,8 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] job_id
-    #   The identifier for the content moderation job. Use `JobId` to
-    #   identify the job in a subsequent call to `GetContentModeration`.
+    #   The identifier for the unsafe content job. Use `JobId` to identify
+    #   the job in a subsequent call to `GetContentModeration`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1370,7 +2013,7 @@ module Aws::Rekognition
     #   If the previous response was incomplete (because there is more data
     #   to retrieve), Amazon Rekognition returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
-    #   of content moderation labels.
+    #   of unsafe content labels.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -1390,7 +2033,7 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] job_status
-    #   The current status of the content moderation job.
+    #   The current status of the unsafe content analysis job.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -1405,13 +2048,19 @@ module Aws::Rekognition
     #   @return [Types::VideoMetadata]
     #
     # @!attribute [rw] moderation_labels
-    #   The detected moderation labels and the time(s) they were detected.
+    #   The detected unsafe content labels and the time(s) they were
+    #   detected.
     #   @return [Array<Types::ContentModerationDetection>]
     #
     # @!attribute [rw] next_token
     #   If the response is truncated, Amazon Rekognition Video returns this
     #   token that you can use in the subsequent request to retrieve the
-    #   next set of moderation labels.
+    #   next set of unsafe content labels.
+    #   @return [String]
+    #
+    # @!attribute [rw] moderation_model_version
+    #   Version number of the moderation detection model that was used to
+    #   detect unsafe content.
     #   @return [String]
     #
     class GetContentModerationResponse < Struct.new(
@@ -1419,7 +2068,8 @@ module Aws::Rekognition
       :status_message,
       :video_metadata,
       :moderation_labels,
-      :next_token)
+      :next_token,
+      :moderation_model_version)
       include Aws::Structure
     end
 
@@ -1559,13 +2209,14 @@ module Aws::Rekognition
     #   @return [Types::VideoMetadata]
     #
     # @!attribute [rw] persons
-    #   An array of persons, , in the video whose face(s) match the face(s)
-    #   in an Amazon Rekognition collection. It also includes time
-    #   information for when persons are matched in the video. You specify
-    #   the input collection in an initial call to `StartFaceSearch`. Each
-    #   `Persons` element includes a time the person was matched, face match
-    #   details (`FaceMatches`) for matching faces in the collection, and
-    #   person information (`Person`) for the matched person.
+    #   An array of persons, PersonMatch, in the video whose face(s) match
+    #   the face(s) in an Amazon Rekognition collection. It also includes
+    #   time information for when persons are matched in the video. You
+    #   specify the input collection in an initial call to
+    #   `StartFaceSearch`. Each `Persons` element includes a time the person
+    #   was matched, face match details (`FaceMatches`) for matching faces
+    #   in the collection, and person information (`Person`) for the matched
+    #   person.
     #   @return [Array<Types::PersonMatch>]
     #
     class GetFaceSearchResponse < Struct.new(
@@ -1650,12 +2301,18 @@ module Aws::Rekognition
     #   video, that the label was detected.
     #   @return [Array<Types::LabelDetection>]
     #
+    # @!attribute [rw] label_model_version
+    #   Version number of the label detection model that was used to detect
+    #   labels.
+    #   @return [String]
+    #
     class GetLabelDetectionResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :next_token,
-      :labels)
+      :labels,
+      :label_model_version)
       include Aws::Structure
     end
 
@@ -1740,6 +2397,214 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetTextDetectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   Job identifier for the label detection operation for which you want
+    #   results returned. You get the job identifer from an initial call to
+    #   `StartTextDetection`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there are more
+    #   labels to retrieve), Amazon Rekognition Video returns a pagination
+    #   token in the response. You can use this pagination token to retrieve
+    #   the next set of text.
+    #   @return [String]
+    #
+    class GetTextDetectionRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   Current status of the text detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If the job fails, `StatusMessage` provides a descriptive error
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_metadata
+    #   Information about a video that Amazon Rekognition analyzed.
+    #   `Videometadata` is returned in every page of paginated responses
+    #   from a Amazon Rekognition video operation.
+    #   @return [Types::VideoMetadata]
+    #
+    # @!attribute [rw] text_detections
+    #   An array of text detected in the video. Each element contains the
+    #   detected text, the time in milliseconds from the start of the video
+    #   that the text was detected, and where it was detected on the screen.
+    #   @return [Array<Types::TextDetectionResult>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Rekognition Video returns this
+    #   token that you can use in the subsequent request to retrieve the
+    #   next set of text.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_model_version
+    #   Version number of the text detection model that was used to detect
+    #   text.
+    #   @return [String]
+    #
+    class GetTextDetectionResponse < Struct.new(
+      :job_status,
+      :status_message,
+      :video_metadata,
+      :text_detections,
+      :next_token,
+      :text_model_version)
+      include Aws::Structure
+    end
+
+    # The S3 bucket that contains the Ground Truth manifest file.
+    #
+    # @note When making an API call, you may pass GroundTruthManifest
+    #   data as a hash:
+    #
+    #       {
+    #         s3_object: {
+    #           bucket: "S3Bucket",
+    #           name: "S3ObjectName",
+    #           version: "S3ObjectVersion",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_object
+    #   Provides the S3 bucket name and object name.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see
+    #   Resource-Based Policies in the Amazon Rekognition Developer Guide.
+    #   @return [Types::S3Object]
+    #
+    class GroundTruthManifest < Struct.new(
+      :s3_object)
+      include Aws::Structure
+    end
+
+    # Shows the results of the human in the loop evaluation. If there is no
+    # HumanLoopArn, the input did not trigger human review.
+    #
+    # @!attribute [rw] human_loop_arn
+    #   The Amazon Resource Name (ARN) of the HumanLoop created.
+    #   @return [String]
+    #
+    # @!attribute [rw] human_loop_activation_reasons
+    #   Shows if and why human review was needed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] human_loop_activation_conditions_evaluation_results
+    #   Shows the result of condition evaluations, including those
+    #   conditions which activated a human review.
+    #   @return [String]
+    #
+    class HumanLoopActivationOutput < Struct.new(
+      :human_loop_arn,
+      :human_loop_activation_reasons,
+      :human_loop_activation_conditions_evaluation_results)
+      include Aws::Structure
+    end
+
+    # Sets up the flow definition the image will be sent to if one of the
+    # conditions is met. You can also set certain attributes of the image
+    # before review.
+    #
+    # @note When making an API call, you may pass HumanLoopConfig
+    #   data as a hash:
+    #
+    #       {
+    #         human_loop_name: "HumanLoopName", # required
+    #         flow_definition_arn: "FlowDefinitionArn", # required
+    #         data_attributes: {
+    #           content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
+    #         },
+    #       }
+    #
+    # @!attribute [rw] human_loop_name
+    #   The name of the human review used for this image. This should be
+    #   kept unique within a region.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_definition_arn
+    #   The Amazon Resource Name (ARN) of the flow definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_attributes
+    #   Sets attributes of the input data.
+    #   @return [Types::HumanLoopDataAttributes]
+    #
+    class HumanLoopConfig < Struct.new(
+      :human_loop_name,
+      :flow_definition_arn,
+      :data_attributes)
+      include Aws::Structure
+    end
+
+    # Allows you to set attributes of the image. Currently, you can declare
+    # an image as free of personally identifiable information.
+    #
+    # @note When making an API call, you may pass HumanLoopDataAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
+    #       }
+    #
+    # @!attribute [rw] content_classifiers
+    #   Sets whether the input image is free of personally identifiable
+    #   information.
+    #   @return [Array<String>]
+    #
+    class HumanLoopDataAttributes < Struct.new(
+      :content_classifiers)
+      include Aws::Structure
+    end
+
+    # The number of in-progress human reviews you have has exceeded the
+    # number allowed.
+    #
+    # @!attribute [rw] resource_type
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   @return [String]
+    #
+    class HumanLoopQuotaExceededException < Struct.new(
+      :resource_type,
+      :quota_code,
+      :service_code)
+      include Aws::Structure
+    end
+
+    # A `ClientRequestToken` input parameter was reused with an operation,
+    # but at least one of the other input parameters is different from the
+    # previous call to the operation.
+    #
+    class IdempotentParameterMismatchException < Aws::EmptyStructure; end
+
     # Provides the input image either as bytes or an S3 object.
     #
     # You pass image bytes to an Amazon Rekognition API operation by using
@@ -1814,6 +2679,12 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The input image size exceeds the allowed limit. For more information,
+    # see Limits in Amazon Rekognition in the Amazon Rekognition Developer
+    # Guide.
+    #
+    class ImageTooLargeException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass IndexFacesRequest
     #   data as a hash:
     #
@@ -1830,7 +2701,7 @@ module Aws::Rekognition
     #         external_image_id: "ExternalImageId",
     #         detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL
     #         max_faces: 1,
-    #         quality_filter: "NONE", # accepts NONE, AUTO
+    #         quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #       }
     #
     # @!attribute [rw] collection_id
@@ -1842,6 +2713,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes isn't supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] external_image_id
@@ -1884,19 +2760,19 @@ module Aws::Rekognition
     #   @return [Integer]
     #
     # @!attribute [rw] quality_filter
-    #   A filter that specifies how much filtering is done to identify faces
-    #   that are detected with low quality. Filtered faces aren't indexed.
-    #   If you specify `AUTO`, filtering prioritizes the identification of
-    #   faces that don’t meet the required quality bar chosen by Amazon
-    #   Rekognition. The quality bar is based on a variety of common use
-    #   cases. Low-quality detections can occur for a number of reasons.
-    #   Some examples are an object that's misidentified as a face, a face
-    #   that's too blurry, or a face with a pose that's too extreme to
-    #   use. If you specify `NONE`, no filtering is performed. The default
-    #   value is AUTO.
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't indexed. If you specify
+    #   `AUTO`, Amazon Rekognition chooses the quality bar. If you specify
+    #   `LOW`, `MEDIUM`, or `HIGH`, filtering removes all faces that don’t
+    #   meet the chosen quality bar. The default value is `AUTO`. The
+    #   quality bar is based on a variety of common use cases. Low-quality
+    #   detections can occur for a number of reasons. Some examples are an
+    #   object that's misidentified as a face, a face that's too blurry,
+    #   or a face with a pose that's too extreme to use. If you specify
+    #   `NONE`, no filtering is performed.
     #
     #   To use quality filtering, the collection you are using must be
-    #   associated with version 3 of the face model.
+    #   associated with version 3 of the face model or higher.
     #   @return [String]
     #
     class IndexFacesRequest < Struct.new(
@@ -1940,7 +2816,8 @@ module Aws::Rekognition
     #     object locations before the image is rotated.
     #
     #   Bounding box information is returned in the `FaceRecords` array. You
-    #   can get the version of the face detection model by calling .
+    #   can get the version of the face detection model by calling
+    #   DescribeCollection.
     #   @return [String]
     #
     # @!attribute [rw] face_model_version
@@ -1964,15 +2841,16 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # An instance of a label detected by .
+    # An instance of a label returned by Amazon Rekognition Image
+    # (DetectLabels) or by Amazon Rekognition Video (GetLabelDetection).
     #
     # @!attribute [rw] bounding_box
     #   The position of the label instance on the image.
     #   @return [Types::BoundingBox]
     #
     # @!attribute [rw] confidence
-    #   The confidence that Amazon Rekognition Image has in the accuracy of
-    #   the bounding box.
+    #   The confidence that Amazon Rekognition has in the accuracy of the
+    #   bounding box.
     #   @return [Float]
     #
     class Instance < Struct.new(
@@ -1980,6 +2858,28 @@ module Aws::Rekognition
       :confidence)
       include Aws::Structure
     end
+
+    # Amazon Rekognition experienced a service issue. Try your call again.
+    #
+    class InternalServerError < Aws::EmptyStructure; end
+
+    # The provided image format is not supported.
+    #
+    class InvalidImageFormatException < Aws::EmptyStructure; end
+
+    # Pagination token in the request is not valid.
+    #
+    class InvalidPaginationTokenException < Aws::EmptyStructure; end
+
+    # Input parameter violated a constraint. Validate your parameter before
+    # calling the API operation again.
+    #
+    class InvalidParameterException < Aws::EmptyStructure; end
+
+    # Amazon Rekognition is unable to access the S3 object specified in the
+    # request.
+    #
+    class InvalidS3ObjectException < Aws::EmptyStructure; end
 
     # The Kinesis data stream Amazon Rekognition to which the analysis
     # results of a Amazon Rekognition stream processor are streamed. For
@@ -2024,13 +2924,7 @@ module Aws::Rekognition
     end
 
     # Structure containing details about the detected label, including the
-    # name, and level of confidence.
-    #
-    # The Amazon Rekognition Image operation operation returns a
-    # hierarchical taxonomy (`Parents`) for detected labels and also
-    # bounding box information (`Instances`) for detected labels. Amazon
-    # Rekognition Video doesn't return this information and returns `null`
-    # for the `Parents` and `Instances` attributes.
+    # name, detected instances, parent labels, and level of confidence.
     #
     # @!attribute [rw] name
     #   The name (label) of the object or scene.
@@ -2045,23 +2939,11 @@ module Aws::Rekognition
     #   boxes for each instance of the detected object. Bounding boxes are
     #   returned for common object labels such as people, cars, furniture,
     #   apparel or pets.
-    #
-    #   <note markdown="1"> Amazon Rekognition Video does not support bounding box information
-    #   for detected labels. The value of `Instances` is returned as `null`
-    #   by `GetLabelDetection`.
-    #
-    #    </note>
     #   @return [Array<Types::Instance>]
     #
     # @!attribute [rw] parents
     #   The parent labels for a label. The response includes all ancestor
     #   labels.
-    #
-    #   <note markdown="1"> Amazon Rekognition Video does not support a hierarchical taxonomy of
-    #   detected labels. The value of `Parents` is returned as `null` by
-    #   `GetLabelDetection`.
-    #
-    #    </note>
     #   @return [Array<Types::Parent>]
     #
     class Label < Struct.new(
@@ -2116,6 +2998,15 @@ module Aws::Rekognition
       :y)
       include Aws::Structure
     end
+
+    # An Amazon Rekognition service limit was exceeded. For example, if you
+    # start too many Amazon Rekognition Video jobs concurrently, calls to
+    # start operations (`StartLabelDetection`, for example) will raise a
+    # `LimitExceededException` exception (HTTP status code: 400) until the
+    # number of concurrently running jobs is below the Amazon Rekognition
+    # service limit.
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListCollectionsRequest
     #   data as a hash:
@@ -2258,8 +3149,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Provides information about a single type of moderated content found in
-    # an image or video. Each type of moderated content has a label within a
+    # Provides information about a single type of unsafe content found in an
+    # image or video. Each type of moderated content has a label within a
     # hierarchical taxonomy. For more information, see Detecting Unsafe
     # Content in the Amazon Rekognition Developer Guide.
     #
@@ -2273,7 +3164,7 @@ module Aws::Rekognition
     #   @return [Float]
     #
     # @!attribute [rw] name
-    #   The label name for the type of content detected in the image.
+    #   The label name for the type of unsafe content detected in the image.
     #   @return [String]
     #
     # @!attribute [rw] parent_name
@@ -2351,6 +3242,30 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The S3 bucket and folder location where training output is placed.
+    #
+    # @note When making an API call, you may pass OutputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket: "S3Bucket",
+    #         s3_key_prefix: "S3KeyPrefix",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket
+    #   The S3 bucket where training output is placed.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key_prefix
+    #   The prefix applied to the training output files.
+    #   @return [String]
+    #
+    class OutputConfig < Struct.new(
+      :s3_bucket,
+      :s3_key_prefix)
+      include Aws::Structure
+    end
+
     # A parent label for a label. A label can have 0, 1, or more parents.
     #
     # @!attribute [rw] name
@@ -2390,8 +3305,8 @@ module Aws::Rekognition
     # people's paths return an array of `PersonDetection` objects with
     # elements for each time a person's path is tracked in a video.
     #
-    # For more information, see API\_GetPersonTracking in the Amazon
-    # Rekognition Developer Guide.
+    # For more information, see GetPersonTracking in the Amazon Rekognition
+    # Developer Guide.
     #
     # @!attribute [rw] timestamp
     #   The time, in milliseconds from the start of the video, that the
@@ -2410,9 +3325,10 @@ module Aws::Rekognition
 
     # Information about a person whose face matches a face(s) in an Amazon
     # Rekognition collection. Includes information about the faces in the
-    # Amazon Rekognition collection (), information about the person
-    # (PersonDetail), and the time stamp for when the person was detected in
-    # a video. An array of `PersonMatch` objects is returned by .
+    # Amazon Rekognition collection (FaceMatch), information about the
+    # person (PersonDetail), and the time stamp for when the person was
+    # detected in a video. An array of `PersonMatch` objects is returned by
+    # GetFaceSearch.
     #
     # @!attribute [rw] timestamp
     #   The time, in milliseconds from the beginning of the video, that the
@@ -2440,9 +3356,10 @@ module Aws::Rekognition
     # input image is 700x200 and the operation returns X=0.5 and Y=0.25,
     # then the point is at the (350,50) pixel coordinate on the image.
     #
-    # An array of `Point` objects, `Polygon`, is returned by . `Polygon`
-    # represents a fine-grained polygon around detected text. For more
-    # information, see Geometry in the Amazon Rekognition Developer Guide.
+    # An array of `Point` objects, `Polygon`, is returned by DetectText and
+    # by DetectCustomLabels. `Polygon` represents a fine-grained polygon
+    # around a detected item. For more information, see Geometry in the
+    # Amazon Rekognition Developer Guide.
     #
     # @!attribute [rw] x
     #   The value of the X coordinate for a point on a `Polygon`.
@@ -2480,6 +3397,98 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # A description of a Amazon Rekognition Custom Labels project.
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The Unix timestamp for the date and time that the project was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the project.
+    #   @return [String]
+    #
+    class ProjectDescription < Struct.new(
+      :project_arn,
+      :creation_timestamp,
+      :status)
+      include Aws::Structure
+    end
+
+    # The description of a version of a model.
+    #
+    # @!attribute [rw] project_version_arn
+    #   The Amazon Resource Name (ARN) of the model version.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The Unix datetime for the date and time that training started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] min_inference_units
+    #   The minimum number of inference units used by the model. For more
+    #   information, see StartProjectVersion.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The current status of the model version.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A descriptive message for an error or warning that occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] billable_training_time_in_seconds
+    #   The duration, in seconds, that the model version has been billed for
+    #   training. This value is only returned if the model version has been
+    #   successfully trained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] training_end_timestamp
+    #   The Unix date and time that training of the model ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] output_config
+    #   The location where training results are saved.
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] training_data_result
+    #   The manifest file that represents the training results.
+    #   @return [Types::TrainingDataResult]
+    #
+    # @!attribute [rw] testing_data_result
+    #   The manifest file that represents the testing results.
+    #   @return [Types::TestingDataResult]
+    #
+    # @!attribute [rw] evaluation_result
+    #   The training results. `EvaluationResult` is only returned if
+    #   training is successful.
+    #   @return [Types::EvaluationResult]
+    #
+    class ProjectVersionDescription < Struct.new(
+      :project_version_arn,
+      :creation_timestamp,
+      :min_inference_units,
+      :status,
+      :status_message,
+      :billable_training_time_in_seconds,
+      :training_end_timestamp,
+      :output_config,
+      :training_data_result,
+      :testing_data_result,
+      :evaluation_result)
+      include Aws::Structure
+    end
+
+    # The number of requests exceeded your throughput limit. If you want to
+    # increase this limit, contact Amazon Rekognition.
+    #
+    class ProvisionedThroughputExceededException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass RecognizeCelebritiesRequest
     #   data as a hash:
     #
@@ -2498,6 +3507,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     class RecognizeCelebritiesRequest < Struct.new(
@@ -2539,6 +3553,51 @@ module Aws::Rekognition
       :orientation_correction)
       include Aws::Structure
     end
+
+    # Specifies a location within the frame that Rekognition checks for
+    # text. Uses a `BoundingBox` object to set a region of the screen.
+    #
+    # A word is included in the region if the word is more than half in that
+    # region. If there is more than one region, the word will be compared
+    # with all regions of the screen. Any word more than half in a region is
+    # kept in the results.
+    #
+    # @note When making an API call, you may pass RegionOfInterest
+    #   data as a hash:
+    #
+    #       {
+    #         bounding_box: {
+    #           width: 1.0,
+    #           height: 1.0,
+    #           left: 1.0,
+    #           top: 1.0,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bounding_box
+    #   The box representing a region of interest on screen.
+    #   @return [Types::BoundingBox]
+    #
+    class RegionOfInterest < Struct.new(
+      :bounding_box)
+      include Aws::Structure
+    end
+
+    # A collection with the specified ID already exists.
+    #
+    class ResourceAlreadyExistsException < Aws::EmptyStructure; end
+
+    class ResourceInUseException < Aws::EmptyStructure; end
+
+    # The collection specified in the request cannot be found.
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
+    # The requested resource isn't ready. For example, this exception
+    # occurs when you call `DetectCustomLabels` with a model version that
+    # isn't deployed.
+    #
+    class ResourceNotReadyException < Aws::EmptyStructure; end
 
     # Provides the S3 bucket name and object name.
     #
@@ -2593,6 +3652,7 @@ module Aws::Rekognition
     #         },
     #         max_faces: 1,
     #         face_match_threshold: 1.0,
+    #         quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #       }
     #
     # @!attribute [rw] collection_id
@@ -2603,6 +3663,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] max_faces
@@ -2613,14 +3678,31 @@ module Aws::Rekognition
     # @!attribute [rw] face_match_threshold
     #   (Optional) Specifies the minimum confidence in the face match to
     #   return. For example, don't return any matches where confidence in
-    #   matches is less than 70%.
+    #   matches is less than 70%. The default value is 80%.
     #   @return [Float]
+    #
+    # @!attribute [rw] quality_filter
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't searched for in the
+    #   collection. If you specify `AUTO`, Amazon Rekognition chooses the
+    #   quality bar. If you specify `LOW`, `MEDIUM`, or `HIGH`, filtering
+    #   removes all faces that don’t meet the chosen quality bar. The
+    #   quality bar is based on a variety of common use cases. Low-quality
+    #   detections can occur for a number of reasons. Some examples are an
+    #   object that's misidentified as a face, a face that's too blurry,
+    #   or a face with a pose that's too extreme to use. If you specify
+    #   `NONE`, no filtering is performed. The default value is `NONE`.
+    #
+    #   To use quality filtering, the collection you are using must be
+    #   associated with version 3 of the face model or higher.
+    #   @return [String]
     #
     class SearchFacesByImageRequest < Struct.new(
       :collection_id,
       :image,
       :max_faces,
-      :face_match_threshold)
+      :face_match_threshold,
+      :quality_filter)
       include Aws::Structure
     end
 
@@ -2678,7 +3760,7 @@ module Aws::Rekognition
     # @!attribute [rw] face_match_threshold
     #   Optional value specifying the minimum confidence in the face match
     #   to return. For example, don't return any matches where confidence
-    #   in matches is less than 70%.
+    #   in matches is less than 70%. The default value is 80%.
     #   @return [Float]
     #
     class SearchFacesRequest < Struct.new(
@@ -2765,8 +3847,10 @@ module Aws::Rekognition
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartCelebrityRecognitionRequest < Struct.new(
@@ -2809,8 +3893,8 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] video
-    #   The video in which you want to moderate content. The video must be
-    #   stored in an Amazon S3 bucket.
+    #   The video in which you want to detect unsafe content. The video must
+    #   be stored in an Amazon S3 bucket.
     #   @return [Types::Video]
     #
     # @!attribute [rw] min_confidence
@@ -2833,12 +3917,14 @@ module Aws::Rekognition
     #
     # @!attribute [rw] notification_channel
     #   The Amazon SNS topic ARN that you want Amazon Rekognition Video to
-    #   publish the completion status of the content moderation analysis to.
+    #   publish the completion status of the unsafe content analysis to.
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartContentModerationRequest < Struct.new(
@@ -2851,8 +3937,8 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] job_id
-    #   The identifier for the content moderation analysis job. Use `JobId`
-    #   to identify the job in a subsequent call to `GetContentModeration`.
+    #   The identifier for the unsafe content analysis job. Use `JobId` to
+    #   identify the job in a subsequent call to `GetContentModeration`.
     #   @return [String]
     #
     class StartContentModerationResponse < Struct.new(
@@ -2908,8 +3994,10 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartFaceDetectionRequest < Struct.new(
@@ -2967,7 +4055,7 @@ module Aws::Rekognition
     # @!attribute [rw] face_match_threshold
     #   The minimum confidence in the person match to return. For example,
     #   don't return any matches where confidence in matches is less than
-    #   70%.
+    #   70%. The default value is 80%.
     #   @return [Float]
     #
     # @!attribute [rw] collection_id
@@ -2980,8 +4068,10 @@ module Aws::Rekognition
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartFaceSearchRequest < Struct.new(
@@ -3054,8 +4144,10 @@ module Aws::Rekognition
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartLabelDetectionRequest < Struct.new(
@@ -3114,8 +4206,10 @@ module Aws::Rekognition
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
-    #   Unique identifier you specify to identify the job in the completion
-    #   status published to the Amazon Simple Notification Service topic.
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
     #   @return [String]
     #
     class StartPersonTrackingRequest < Struct.new(
@@ -3133,6 +4227,42 @@ module Aws::Rekognition
     #
     class StartPersonTrackingResponse < Struct.new(
       :job_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartProjectVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_version_arn: "ProjectVersionArn", # required
+    #         min_inference_units: 1, # required
+    #       }
+    #
+    # @!attribute [rw] project_version_arn
+    #   The Amazon Resource Name(ARN) of the model version that you want to
+    #   start.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_inference_units
+    #   The minimum number of inference units to use. A single inference
+    #   unit represents 1 hour of processing and can support up to 5
+    #   Transaction Pers Second (TPS). Use a higher number to increase the
+    #   TPS throughput of your model. You are charged for the number of
+    #   inference units that you use.
+    #   @return [Integer]
+    #
+    class StartProjectVersionRequest < Struct.new(
+      :project_version_arn,
+      :min_inference_units)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current running status of the model.
+    #   @return [String]
+    #
+    class StartProjectVersionResponse < Struct.new(
+      :status)
       include Aws::Structure
     end
 
@@ -3154,6 +4284,164 @@ module Aws::Rekognition
 
     class StartStreamProcessorResponse < Aws::EmptyStructure; end
 
+    # Set of optional parameters that let you set the criteria text must
+    # meet to be included in your response. `WordFilter` looks at a word's
+    # height, width and minimum confidence. `RegionOfInterest` lets you set
+    # a specific region of the screen to look for text in.
+    #
+    # @note When making an API call, you may pass StartTextDetectionFilters
+    #   data as a hash:
+    #
+    #       {
+    #         word_filter: {
+    #           min_confidence: 1.0,
+    #           min_bounding_box_height: 1.0,
+    #           min_bounding_box_width: 1.0,
+    #         },
+    #         regions_of_interest: [
+    #           {
+    #             bounding_box: {
+    #               width: 1.0,
+    #               height: 1.0,
+    #               left: 1.0,
+    #               top: 1.0,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] word_filter
+    #   Filters focusing on qualities of the text, such as confidence or
+    #   size.
+    #   @return [Types::DetectionFilter]
+    #
+    # @!attribute [rw] regions_of_interest
+    #   Filter focusing on a certain area of the frame. Uses a `BoundingBox`
+    #   object to set the region of the screen.
+    #   @return [Array<Types::RegionOfInterest>]
+    #
+    class StartTextDetectionFilters < Struct.new(
+      :word_filter,
+      :regions_of_interest)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartTextDetectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         video: { # required
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         notification_channel: {
+    #           sns_topic_arn: "SNSTopicArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         job_tag: "JobTag",
+    #         filters: {
+    #           word_filter: {
+    #             min_confidence: 1.0,
+    #             min_bounding_box_height: 1.0,
+    #             min_bounding_box_width: 1.0,
+    #           },
+    #           regions_of_interest: [
+    #             {
+    #               bounding_box: {
+    #                 width: 1.0,
+    #                 height: 1.0,
+    #                 left: 1.0,
+    #                 top: 1.0,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify
+    #   a video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartTextDetection` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same
+    #   job from being accidentaly started more than once.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_channel
+    #   The Amazon Simple Notification Service topic to which Amazon
+    #   Rekognition publishes the completion status of a video analysis
+    #   operation. For more information, see api-video.
+    #   @return [Types::NotificationChannel]
+    #
+    # @!attribute [rw] job_tag
+    #   An identifier returned in the completion status published by your
+    #   Amazon Simple Notification Service topic. For example, you can use
+    #   `JobTag` to group related jobs and identify them in the completion
+    #   notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Optional parameters that let you set criteria the text must meet to
+    #   be included in your response.
+    #   @return [Types::StartTextDetectionFilters]
+    #
+    class StartTextDetectionRequest < Struct.new(
+      :video,
+      :client_request_token,
+      :notification_channel,
+      :job_tag,
+      :filters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   Identifier for the text detection job. Use `JobId` to identify the
+    #   job in a subsequent call to `GetTextDetection`.
+    #   @return [String]
+    #
+    class StartTextDetectionResponse < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopProjectVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_version_arn: "ProjectVersionArn", # required
+    #       }
+    #
+    # @!attribute [rw] project_version_arn
+    #   The Amazon Resource Name (ARN) of the model version that you want to
+    #   delete.
+    #
+    #   This operation requires permissions to perform the
+    #   `rekognition:StopProjectVersion` action.
+    #   @return [String]
+    #
+    class StopProjectVersionRequest < Struct.new(
+      :project_version_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current status of the stop operation.
+    #   @return [String]
+    #
+    class StopProjectVersionResponse < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopStreamProcessorRequest
     #   data as a hash:
     #
@@ -3162,7 +4450,7 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] name
-    #   The name of a stream processor created by .
+    #   The name of a stream processor created by CreateStreamProcessor.
     #   @return [String]
     #
     class StopStreamProcessorRequest < Struct.new(
@@ -3173,10 +4461,11 @@ module Aws::Rekognition
     class StopStreamProcessorResponse < Aws::EmptyStructure; end
 
     # An object that recognizes faces in a streaming video. An Amazon
-    # Rekognition stream processor is created by a call to . The request
-    # parameters for `CreateStreamProcessor` describe the Kinesis video
-    # stream source for the streaming video, face recognition parameters,
-    # and where to stream the analysis resullts.
+    # Rekognition stream processor is created by a call to
+    # CreateStreamProcessor. The request parameters for
+    # `CreateStreamProcessor` describe the Kinesis video stream source for
+    # the streaming video, face recognition parameters, and where to stream
+    # the analysis resullts.
     #
     # @!attribute [rw] name
     #   Name of the Amazon Rekognition stream processor.
@@ -3259,6 +4548,29 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The S3 bucket that contains the training summary. The training summary
+    # includes aggregated evaluation metrics for the entire testing dataset
+    # and metrics for each individual label.
+    #
+    # You get the training summary S3 bucket location by calling
+    # DescribeProjectVersions.
+    #
+    # @!attribute [rw] s3_object
+    #   Provides the S3 bucket name and object name.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see
+    #   Resource-Based Policies in the Amazon Rekognition Developer Guide.
+    #   @return [Types::S3Object]
+    #
+    class Summary < Struct.new(
+      :s3_object)
+      include Aws::Structure
+    end
+
     # Indicates whether or not the face is wearing sunglasses, and the
     # confidence level in the determination.
     #
@@ -3277,7 +4589,63 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Information about a word or line of text detected by .
+    # The dataset used for testing. Optionally, if `AutoCreate` is set,
+    # Amazon Rekognition Custom Labels creates a testing dataset using an
+    # 80/20 split of the training dataset.
+    #
+    # @note When making an API call, you may pass TestingData
+    #   data as a hash:
+    #
+    #       {
+    #         assets: [
+    #           {
+    #             ground_truth_manifest: {
+    #               s3_object: {
+    #                 bucket: "S3Bucket",
+    #                 name: "S3ObjectName",
+    #                 version: "S3ObjectVersion",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         auto_create: false,
+    #       }
+    #
+    # @!attribute [rw] assets
+    #   The assets used for testing.
+    #   @return [Array<Types::Asset>]
+    #
+    # @!attribute [rw] auto_create
+    #   If specified, Amazon Rekognition Custom Labels creates a testing
+    #   dataset with an 80/20 split of the training dataset.
+    #   @return [Boolean]
+    #
+    class TestingData < Struct.new(
+      :assets,
+      :auto_create)
+      include Aws::Structure
+    end
+
+    # A Sagemaker Groundtruth format manifest file representing the dataset
+    # used for testing.
+    #
+    # @!attribute [rw] input
+    #   The testing dataset that was supplied for training.
+    #   @return [Types::TestingData]
+    #
+    # @!attribute [rw] output
+    #   The subset of the dataset that was actually tested. Some images
+    #   (assets) might not be tested due to file formatting and other
+    #   issues.
+    #   @return [Types::TestingData]
+    #
+    class TestingDataResult < Struct.new(
+      :input,
+      :output)
+      include Aws::Structure
+    end
+
+    # Information about a word or line of text detected by DetectText.
     #
     # The `DetectedText` field contains the text that Amazon Rekognition
     # detected in the image.
@@ -3331,8 +4699,79 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # A face that detected, but didn't index. Use the `Reasons` response
-    # attribute to determine why a face wasn't indexed.
+    # Information about text detected in a video. Incudes the detected text,
+    # the time in milliseconds from the start of the video that the text was
+    # detected, and where it was detected on the screen.
+    #
+    # @!attribute [rw] timestamp
+    #   The time, in milliseconds from the start of the video, that the text
+    #   was detected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] text_detection
+    #   Details about text detected in a video.
+    #   @return [Types::TextDetection]
+    #
+    class TextDetectionResult < Struct.new(
+      :timestamp,
+      :text_detection)
+      include Aws::Structure
+    end
+
+    # Amazon Rekognition is temporarily unable to process the request. Try
+    # your call again.
+    #
+    class ThrottlingException < Aws::EmptyStructure; end
+
+    # The dataset used for training.
+    #
+    # @note When making an API call, you may pass TrainingData
+    #   data as a hash:
+    #
+    #       {
+    #         assets: [
+    #           {
+    #             ground_truth_manifest: {
+    #               s3_object: {
+    #                 bucket: "S3Bucket",
+    #                 name: "S3ObjectName",
+    #                 version: "S3ObjectVersion",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] assets
+    #   A Sagemaker GroundTruth manifest file that contains the training
+    #   images (assets).
+    #   @return [Array<Types::Asset>]
+    #
+    class TrainingData < Struct.new(
+      :assets)
+      include Aws::Structure
+    end
+
+    # A Sagemaker Groundtruth format manifest file that represents the
+    # dataset used for training.
+    #
+    # @!attribute [rw] input
+    #   The training assets that you supplied for training.
+    #   @return [Types::TrainingData]
+    #
+    # @!attribute [rw] output
+    #   The images (assets) that were actually trained by Amazon Rekognition
+    #   Custom Labels.
+    #   @return [Types::TrainingData]
+    #
+    class TrainingDataResult < Struct.new(
+      :input,
+      :output)
+      include Aws::Structure
+    end
+
+    # A face that IndexFaces detected, but didn't index. Use the `Reasons`
+    # response attribute to determine why a face wasn't indexed.
     #
     # @!attribute [rw] reasons
     #   An array of reasons that specify why a face wasn't indexed.
@@ -3366,8 +4805,9 @@ module Aws::Rekognition
     end
 
     # Video file stored in an Amazon S3 bucket. Amazon Rekognition video
-    # start operations such as use `Video` to specify a video for analysis.
-    # The supported file formats are .mp4, .mov and .avi.
+    # start operations such as StartLabelDetection use `Video` to specify a
+    # video for analysis. The supported file formats are .mp4, .mov and
+    # .avi.
     #
     # @note When making an API call, you may pass Video
     #   data as a hash:
@@ -3426,6 +4866,11 @@ module Aws::Rekognition
       :frame_width)
       include Aws::Structure
     end
+
+    # The file size or duration of the supplied media is too large. The
+    # maximum file size is 10GB. The maximum duration is 6 hours.
+    #
+    class VideoTooLargeException < Aws::EmptyStructure; end
 
   end
 end

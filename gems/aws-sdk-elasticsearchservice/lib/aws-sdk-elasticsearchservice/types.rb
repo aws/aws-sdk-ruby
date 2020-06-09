@@ -8,6 +8,43 @@
 module Aws::ElasticsearchService
   module Types
 
+    # Container for the parameters to the
+    # `AcceptInboundCrossClusterSearchConnection` operation.
+    #
+    # @note When making an API call, you may pass AcceptInboundCrossClusterSearchConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #       }
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   The id of the inbound connection that you want to accept.
+    #   @return [String]
+    #
+    class AcceptInboundCrossClusterSearchConnectionRequest < Struct.new(
+      :cross_cluster_search_connection_id)
+      include Aws::Structure
+    end
+
+    # The result of a `AcceptInboundCrossClusterSearchConnection` operation.
+    # Contains details of accepted inbound connection.
+    #
+    # @!attribute [rw] cross_cluster_search_connection
+    #   Specifies the `InboundCrossClusterSearchConnection` of accepted
+    #   inbound connection.
+    #   @return [Types::InboundCrossClusterSearchConnection]
+    #
+    class AcceptInboundCrossClusterSearchConnectionResponse < Struct.new(
+      :cross_cluster_search_connection)
+      include Aws::Structure
+    end
+
+    # An error occurred because user does not have permissions to access the
+    # resource. Returns HTTP status code 403.
+    #
+    class AccessDeniedException < Aws::EmptyStructure; end
+
     # The configured access rules for the domain's document and search
     # endpoints, and the current status of those rules.
     #
@@ -114,6 +151,127 @@ module Aws::ElasticsearchService
     class AdvancedOptionsStatus < Struct.new(
       :options,
       :status)
+      include Aws::Structure
+    end
+
+    # Specifies the advanced security configuration: whether advanced
+    # security is enabled, whether the internal database option is enabled.
+    #
+    # @!attribute [rw] enabled
+    #   True if advanced security is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] internal_user_database_enabled
+    #   True if the internal user database is enabled.
+    #   @return [Boolean]
+    #
+    class AdvancedSecurityOptions < Struct.new(
+      :enabled,
+      :internal_user_database_enabled)
+      include Aws::Structure
+    end
+
+    # Specifies the advanced security configuration: whether advanced
+    # security is enabled, whether the internal database option is enabled,
+    # master username and password (if internal database is enabled), and
+    # master user ARN (if IAM is enabled).
+    #
+    # @note When making an API call, you may pass AdvancedSecurityOptionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         internal_user_database_enabled: false,
+    #         master_user_options: {
+    #           master_user_arn: "ARN",
+    #           master_user_name: "Username",
+    #           master_user_password: "Password",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   True if advanced security is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] internal_user_database_enabled
+    #   True if the internal user database is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] master_user_options
+    #   Credentials for the master user: username and password, ARN, or
+    #   both.
+    #   @return [Types::MasterUserOptions]
+    #
+    class AdvancedSecurityOptionsInput < Struct.new(
+      :enabled,
+      :internal_user_database_enabled,
+      :master_user_options)
+      include Aws::Structure
+    end
+
+    # Specifies the status of advanced security options for the specified
+    # Elasticsearch domain.
+    #
+    # @!attribute [rw] options
+    #   Specifies advanced security options for the specified Elasticsearch
+    #   domain.
+    #   @return [Types::AdvancedSecurityOptions]
+    #
+    # @!attribute [rw] status
+    #   Status of the advanced security options for the specified
+    #   Elasticsearch domain.
+    #   @return [Types::OptionStatus]
+    #
+    class AdvancedSecurityOptionsStatus < Struct.new(
+      :options,
+      :status)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` AssociatePackage ` operation.
+    #
+    # @note When making an API call, you may pass AssociatePackageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_id: "PackageID", # required
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] package_id
+    #   Internal ID of the package that you want to associate with a domain.
+    #   Use `DescribePackages` to find this value.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   Name of the domain that you want to associate the package with.
+    #   @return [String]
+    #
+    class AssociatePackageRequest < Struct.new(
+      :package_id,
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` AssociatePackage ` operation.
+    #
+    # @!attribute [rw] domain_package_details
+    #   `DomainPackageDetails`
+    #   @return [Types::DomainPackageDetails]
+    #
+    class AssociatePackageResponse < Struct.new(
+      :domain_package_details)
+      include Aws::Structure
+    end
+
+    # An error occurred while processing the request.
+    #
+    # @!attribute [rw] message
+    #   A description of the error.
+    #   @return [String]
+    #
+    class BaseException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -229,6 +387,11 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # An error occurred because the client attempts to remove a resource
+    # that is currently in use. Returns HTTP status code 409.
+    #
+    class ConflictException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CreateElasticsearchDomainRequest
     #   data as a hash:
     #
@@ -236,12 +399,18 @@ module Aws::ElasticsearchService
     #         domain_name: "DomainName", # required
     #         elasticsearch_version: "ElasticsearchVersionString",
     #         elasticsearch_cluster_config: {
-    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           instance_count: 1,
     #           dedicated_master_enabled: false,
     #           zone_awareness_enabled: false,
-    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #           zone_awareness_config: {
+    #             availability_zone_count: 1,
+    #           },
+    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           dedicated_master_count: 1,
+    #           warm_enabled: false,
+    #           warm_type: "ultrawarm1.medium.elasticsearch", # accepts ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch
+    #           warm_count: 1,
     #         },
     #         ebs_options: {
     #           ebs_enabled: false,
@@ -279,12 +448,25 @@ module Aws::ElasticsearchService
     #             enabled: false,
     #           },
     #         },
+    #         domain_endpoint_options: {
+    #           enforce_https: false,
+    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #         },
+    #         advanced_security_options: {
+    #           enabled: false,
+    #           internal_user_database_enabled: false,
+    #           master_user_options: {
+    #             master_user_arn: "ARN",
+    #             master_user_name: "Username",
+    #             master_user_password: "Password",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the Elasticsearch domain that you are creating. Domain
     #   names are unique across the domains owned by an account within an
-    #   AWS region. Domain names must start with a letter or number and can
+    #   AWS region. Domain names must start with a lowercase letter and can
     #   contain the following characters: a-z (lowercase), 0-9, and -
     #   (hyphen).
     #   @return [String]
@@ -363,6 +545,15 @@ module Aws::ElasticsearchService
     #   to publish a given type of Elasticsearch log.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
+    # @!attribute [rw] domain_endpoint_options
+    #   Options to specify configuration that will be applied to the domain
+    #   endpoint.
+    #   @return [Types::DomainEndpointOptions]
+    #
+    # @!attribute [rw] advanced_security_options
+    #   Specifies advanced security options.
+    #   @return [Types::AdvancedSecurityOptionsInput]
+    #
     class CreateElasticsearchDomainRequest < Struct.new(
       :domain_name,
       :elasticsearch_version,
@@ -375,7 +566,9 @@ module Aws::ElasticsearchService
       :encryption_at_rest_options,
       :node_to_node_encryption_options,
       :advanced_options,
-      :log_publishing_options)
+      :log_publishing_options,
+      :domain_endpoint_options,
+      :advanced_security_options)
       include Aws::Structure
     end
 
@@ -388,6 +581,136 @@ module Aws::ElasticsearchService
     #
     class CreateElasticsearchDomainResponse < Struct.new(
       :domain_status)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `CreateOutboundCrossClusterSearchConnection` operation.
+    #
+    # @note When making an API call, you may pass CreateOutboundCrossClusterSearchConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source_domain_info: { # required
+    #           owner_id: "OwnerId",
+    #           domain_name: "DomainName", # required
+    #           region: "Region",
+    #         },
+    #         destination_domain_info: { # required
+    #           owner_id: "OwnerId",
+    #           domain_name: "DomainName", # required
+    #           region: "Region",
+    #         },
+    #         connection_alias: "ConnectionAlias", # required
+    #       }
+    #
+    # @!attribute [rw] source_domain_info
+    #   Specifies the `DomainInformation` for the source Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] destination_domain_info
+    #   Specifies the `DomainInformation` for the destination Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] connection_alias
+    #   Specifies the connection alias that will be used by the customer for
+    #   this connection.
+    #   @return [String]
+    #
+    class CreateOutboundCrossClusterSearchConnectionRequest < Struct.new(
+      :source_domain_info,
+      :destination_domain_info,
+      :connection_alias)
+      include Aws::Structure
+    end
+
+    # The result of a `CreateOutboundCrossClusterSearchConnection` request.
+    # Contains the details of the newly created cross-cluster search
+    # connection.
+    #
+    # @!attribute [rw] source_domain_info
+    #   Specifies the `DomainInformation` for the source Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] destination_domain_info
+    #   Specifies the `DomainInformation` for the destination Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] connection_alias
+    #   Specifies the connection alias provided during the create connection
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_status
+    #   Specifies the `OutboundCrossClusterSearchConnectionStatus` for the
+    #   newly created connection.
+    #   @return [Types::OutboundCrossClusterSearchConnectionStatus]
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   Unique id for the created outbound connection, which is used for
+    #   subsequent operations on connection.
+    #   @return [String]
+    #
+    class CreateOutboundCrossClusterSearchConnectionResponse < Struct.new(
+      :source_domain_info,
+      :destination_domain_info,
+      :connection_alias,
+      :connection_status,
+      :cross_cluster_search_connection_id)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` CreatePackage ` operation.
+    #
+    # @note When making an API call, you may pass CreatePackageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_name: "PackageName", # required
+    #         package_type: "TXT-DICTIONARY", # required, accepts TXT-DICTIONARY
+    #         package_description: "PackageDescription",
+    #         package_source: { # required
+    #           s3_bucket_name: "S3BucketName",
+    #           s3_key: "S3Key",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] package_name
+    #   Unique identifier for the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_type
+    #   Type of package. Currently supports only TXT-DICTIONARY.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_description
+    #   Description of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_source
+    #   The customer S3 location `PackageSource` for importing the package.
+    #   @return [Types::PackageSource]
+    #
+    class CreatePackageRequest < Struct.new(
+      :package_name,
+      :package_type,
+      :package_description,
+      :package_source)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` CreatePackage ` operation.
+    #
+    # @!attribute [rw] package_details
+    #   Information about the package `PackageDetails`.
+    #   @return [Types::PackageDetails]
+    #
+    class CreatePackageResponse < Struct.new(
+      :package_details)
       include Aws::Structure
     end
 
@@ -422,6 +745,102 @@ module Aws::ElasticsearchService
     #
     class DeleteElasticsearchDomainResponse < Struct.new(
       :domain_status)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `DeleteInboundCrossClusterSearchConnection` operation.
+    #
+    # @note When making an API call, you may pass DeleteInboundCrossClusterSearchConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #       }
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   The id of the inbound connection that you want to permanently
+    #   delete.
+    #   @return [String]
+    #
+    class DeleteInboundCrossClusterSearchConnectionRequest < Struct.new(
+      :cross_cluster_search_connection_id)
+      include Aws::Structure
+    end
+
+    # The result of a `DeleteInboundCrossClusterSearchConnection` operation.
+    # Contains details of deleted inbound connection.
+    #
+    # @!attribute [rw] cross_cluster_search_connection
+    #   Specifies the `InboundCrossClusterSearchConnection` of deleted
+    #   inbound connection.
+    #   @return [Types::InboundCrossClusterSearchConnection]
+    #
+    class DeleteInboundCrossClusterSearchConnectionResponse < Struct.new(
+      :cross_cluster_search_connection)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `DeleteOutboundCrossClusterSearchConnection` operation.
+    #
+    # @note When making an API call, you may pass DeleteOutboundCrossClusterSearchConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #       }
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   The id of the outbound connection that you want to permanently
+    #   delete.
+    #   @return [String]
+    #
+    class DeleteOutboundCrossClusterSearchConnectionRequest < Struct.new(
+      :cross_cluster_search_connection_id)
+      include Aws::Structure
+    end
+
+    # The result of a `DeleteOutboundCrossClusterSearchConnection`
+    # operation. Contains details of deleted outbound connection.
+    #
+    # @!attribute [rw] cross_cluster_search_connection
+    #   Specifies the `OutboundCrossClusterSearchConnection` of deleted
+    #   outbound connection.
+    #   @return [Types::OutboundCrossClusterSearchConnection]
+    #
+    class DeleteOutboundCrossClusterSearchConnectionResponse < Struct.new(
+      :cross_cluster_search_connection)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` DeletePackage ` operation.
+    #
+    # @note When making an API call, you may pass DeletePackageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_id: "PackageID", # required
+    #       }
+    #
+    # @!attribute [rw] package_id
+    #   Internal ID of the package that you want to delete. Use
+    #   `DescribePackages` to find this value.
+    #   @return [String]
+    #
+    class DeletePackageRequest < Struct.new(
+      :package_id)
+      include Aws::Structure
+    end
+
+    # Container for response parameters to ` DeletePackage ` operation.
+    #
+    # @!attribute [rw] package_details
+    #   `PackageDetails`
+    #   @return [Types::PackageDetails]
+    #
+    class DeletePackageResponse < Struct.new(
+      :package_details)
       include Aws::Structure
     end
 
@@ -530,7 +949,7 @@ module Aws::ElasticsearchService
     #
     #       {
     #         domain_name: "DomainName",
-    #         instance_type: "m3.medium.elasticsearch", # required, accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #         instance_type: "m3.medium.elasticsearch", # required, accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #         elasticsearch_version: "ElasticsearchVersionString", # required
     #       }
     #
@@ -562,12 +981,220 @@ module Aws::ElasticsearchService
     # @!attribute [rw] limits_by_role
     #   Map of Role of the Instance and Limits that are applicable. Role
     #   performed by given Instance in Elasticsearch can be one of the
-    #   following: * Data: If the given InstanceType is used as Data node
-    #   * Master: If the given InstanceType is used as Master node
+    #   following: * data: If the given InstanceType is used as data node
+    #   * master: If the given InstanceType is used as master node
+    #   * ultra\_warm: If the given InstanceType is used as warm node
     #   @return [Hash<String,Types::Limits>]
     #
     class DescribeElasticsearchInstanceTypeLimitsResponse < Struct.new(
       :limits_by_role)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `DescribeInboundCrossClusterSearchConnections` operation.
+    #
+    # @note When making an API call, you may pass DescribeInboundCrossClusterSearchConnectionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "NonEmptyString",
+    #             values: ["NonEmptyString"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   A list of filters used to match properties for inbound cross-cluster
+    #   search connection. Available `Filter` names for this operation are:
+    #   * cross-cluster-search-connection-id
+    #   * source-domain-info.domain-name
+    #   * source-domain-info.owner-id
+    #   * source-domain-info.region
+    #   * destination-domain-info.domain-name
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   Set this value to limit the number of results returned. If not
+    #   specified, defaults to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken is sent in case the earlier API call results contain the
+    #   NextToken. It is used for pagination.
+    #   @return [String]
+    #
+    class DescribeInboundCrossClusterSearchConnectionsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # The result of a `DescribeInboundCrossClusterSearchConnections`
+    # request. Contains the list of connections matching the filter
+    # criteria.
+    #
+    # @!attribute [rw] cross_cluster_search_connections
+    #   Consists of list of `InboundCrossClusterSearchConnection` matching
+    #   the specified filter criteria.
+    #   @return [Array<Types::InboundCrossClusterSearchConnection>]
+    #
+    # @!attribute [rw] next_token
+    #   If more results are available and NextToken is present, make the
+    #   next request to the same API with the received NextToken to paginate
+    #   the remaining results.
+    #   @return [String]
+    #
+    class DescribeInboundCrossClusterSearchConnectionsResponse < Struct.new(
+      :cross_cluster_search_connections,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `DescribeOutboundCrossClusterSearchConnections` operation.
+    #
+    # @note When making an API call, you may pass DescribeOutboundCrossClusterSearchConnectionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "NonEmptyString",
+    #             values: ["NonEmptyString"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   A list of filters used to match properties for outbound
+    #   cross-cluster search connection. Available `Filter` names for this
+    #   operation are: * cross-cluster-search-connection-id
+    #   * destination-domain-info.domain-name
+    #   * destination-domain-info.owner-id
+    #   * destination-domain-info.region
+    #   * source-domain-info.domain-name
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   Set this value to limit the number of results returned. If not
+    #   specified, defaults to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken is sent in case the earlier API call results contain the
+    #   NextToken. It is used for pagination.
+    #   @return [String]
+    #
+    class DescribeOutboundCrossClusterSearchConnectionsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # The result of a `DescribeOutboundCrossClusterSearchConnections`
+    # request. Contains the list of connections matching the filter
+    # criteria.
+    #
+    # @!attribute [rw] cross_cluster_search_connections
+    #   Consists of list of `OutboundCrossClusterSearchConnection` matching
+    #   the specified filter criteria.
+    #   @return [Array<Types::OutboundCrossClusterSearchConnection>]
+    #
+    # @!attribute [rw] next_token
+    #   If more results are available and NextToken is present, make the
+    #   next request to the same API with the received NextToken to paginate
+    #   the remaining results.
+    #   @return [String]
+    #
+    class DescribeOutboundCrossClusterSearchConnectionsResponse < Struct.new(
+      :cross_cluster_search_connections,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Filter to apply in `DescribePackage` response.
+    #
+    # @note When making an API call, you may pass DescribePackagesFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "PackageID", # accepts PackageID, PackageName, PackageStatus
+    #         value: ["DescribePackagesFilterValue"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Any field from `PackageDetails`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A list of values for the specified field.
+    #   @return [Array<String>]
+    #
+    class DescribePackagesFilter < Struct.new(
+      :name,
+      :value)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` DescribePackage ` operation.
+    #
+    # @note When making an API call, you may pass DescribePackagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "PackageID", # accepts PackageID, PackageName, PackageStatus
+    #             value: ["DescribePackagesFilterValue"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Only returns packages that match the `DescribePackagesFilterList`
+    #   values.
+    #   @return [Array<Types::DescribePackagesFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   Limits results to a maximum number of packages.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Used for pagination. Only necessary if a previous API call includes
+    #   a non-null NextToken value. If provided, returns results for the
+    #   next page.
+    #   @return [String]
+    #
+    class DescribePackagesRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` DescribePackages ` operation.
+    #
+    # @!attribute [rw] package_details_list
+    #   List of `PackageDetails` objects.
+    #   @return [Array<Types::PackageDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    class DescribePackagesResponse < Struct.new(
+      :package_details_list,
+      :next_token)
       include Aws::Structure
     end
 
@@ -673,12 +1300,180 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # An error occured because the client wanted to access a not supported
+    # operation. Gives http status code of 409.
+    #
+    class DisabledOperationException < Aws::EmptyStructure; end
+
+    # Container for request parameters to ` DissociatePackage ` operation.
+    #
+    # @note When making an API call, you may pass DissociatePackageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_id: "PackageID", # required
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] package_id
+    #   Internal ID of the package that you want to associate with a domain.
+    #   Use `DescribePackages` to find this value.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   Name of the domain that you want to associate the package with.
+    #   @return [String]
+    #
+    class DissociatePackageRequest < Struct.new(
+      :package_id,
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` DissociatePackage ` operation.
+    #
+    # @!attribute [rw] domain_package_details
+    #   `DomainPackageDetails`
+    #   @return [Types::DomainPackageDetails]
+    #
+    class DissociatePackageResponse < Struct.new(
+      :domain_package_details)
+      include Aws::Structure
+    end
+
+    # Options to configure endpoint for the Elasticsearch domain.
+    #
+    # @note When making an API call, you may pass DomainEndpointOptions
+    #   data as a hash:
+    #
+    #       {
+    #         enforce_https: false,
+    #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #       }
+    #
+    # @!attribute [rw] enforce_https
+    #   Specify if only HTTPS endpoint should be enabled for the
+    #   Elasticsearch domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tls_security_policy
+    #   Specify the TLS security policy that needs to be applied to the
+    #   HTTPS endpoint of Elasticsearch domain.
+    #    It can be one of the following values: *
+    #   <b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which
+    #     supports TLSv1.0 and higher.
+    #   * <b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which
+    #     supports only TLSv1.2
+    #   @return [String]
+    #
+    class DomainEndpointOptions < Struct.new(
+      :enforce_https,
+      :tls_security_policy)
+      include Aws::Structure
+    end
+
+    # The configured endpoint options for the domain and their current
+    # status.
+    #
+    # @!attribute [rw] options
+    #   Options to configure endpoint for the Elasticsearch domain.
+    #   @return [Types::DomainEndpointOptions]
+    #
+    # @!attribute [rw] status
+    #   The status of the endpoint options for the Elasticsearch domain. See
+    #   `OptionStatus` for the status information that's included.
+    #   @return [Types::OptionStatus]
+    #
+    class DomainEndpointOptionsStatus < Struct.new(
+      :options,
+      :status)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_name
     #   Specifies the `DomainName`.
     #   @return [String]
     #
     class DomainInfo < Struct.new(
       :domain_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DomainInformation
+    #   data as a hash:
+    #
+    #       {
+    #         owner_id: "OwnerId",
+    #         domain_name: "DomainName", # required
+    #         region: "Region",
+    #       }
+    #
+    # @!attribute [rw] owner_id
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   @return [String]
+    #
+    class DomainInformation < Struct.new(
+      :owner_id,
+      :domain_name,
+      :region)
+      include Aws::Structure
+    end
+
+    # Information on a package that is associated with a domain.
+    #
+    # @!attribute [rw] package_id
+    #   Internal ID of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_name
+    #   User specified name of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_type
+    #   Currently supports only TXT-DICTIONARY.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated
+    #   Timestamp of the most-recent update to the association status.
+    #   @return [Time]
+    #
+    # @!attribute [rw] domain_name
+    #   Name of the domain you've associated a package with.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_package_status
+    #   State of the association. Values are
+    #   ASSOCIATING/ASSOCIATION\_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION\_FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_path
+    #   The relative path on Amazon ES nodes, which can be used as
+    #   synonym\_path when the package is synonym file.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_details
+    #   Additional information if the package is in an error state. Null
+    #   otherwise.
+    #   @return [Types::ErrorDetails]
+    #
+    class DomainPackageDetails < Struct.new(
+      :package_id,
+      :package_name,
+      :package_type,
+      :last_updated,
+      :domain_name,
+      :domain_package_status,
+      :reference_path,
+      :error_details)
       include Aws::Structure
     end
 
@@ -748,16 +1543,23 @@ module Aws::ElasticsearchService
     #   data as a hash:
     #
     #       {
-    #         instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #         instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #         instance_count: 1,
     #         dedicated_master_enabled: false,
     #         zone_awareness_enabled: false,
-    #         dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #         zone_awareness_config: {
+    #           availability_zone_count: 1,
+    #         },
+    #         dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #         dedicated_master_count: 1,
+    #         warm_enabled: false,
+    #         warm_type: "ultrawarm1.medium.elasticsearch", # accepts ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch
+    #         warm_count: 1,
     #       }
     #
     # @!attribute [rw] instance_type
-    #   The instance type for an Elasticsearch cluster.
+    #   The instance type for an Elasticsearch cluster. UltraWarm instance
+    #   types are not supported for data instances.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -782,6 +1584,11 @@ module Aws::ElasticsearchService
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness
     #   @return [Boolean]
     #
+    # @!attribute [rw] zone_awareness_config
+    #   Specifies the zone awareness configuration for a domain when zone
+    #   awareness is enabled.
+    #   @return [Types::ZoneAwarenessConfig]
+    #
     # @!attribute [rw] dedicated_master_type
     #   The instance type for a dedicated master node.
     #   @return [String]
@@ -791,13 +1598,29 @@ module Aws::ElasticsearchService
     #   the cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] warm_enabled
+    #   True to enable warm storage.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] warm_type
+    #   The instance type for the Elasticsearch cluster's warm nodes.
+    #   @return [String]
+    #
+    # @!attribute [rw] warm_count
+    #   The number of warm nodes in the cluster.
+    #   @return [Integer]
+    #
     class ElasticsearchClusterConfig < Struct.new(
       :instance_type,
       :instance_count,
       :dedicated_master_enabled,
       :zone_awareness_enabled,
+      :zone_awareness_config,
       :dedicated_master_type,
-      :dedicated_master_count)
+      :dedicated_master_count,
+      :warm_enabled,
+      :warm_type,
+      :warm_count)
       include Aws::Structure
     end
 
@@ -885,6 +1708,14 @@ module Aws::ElasticsearchService
     #   Log publishing options for the given domain.
     #   @return [Types::LogPublishingOptionsStatus]
     #
+    # @!attribute [rw] domain_endpoint_options
+    #   Specifies the `DomainEndpointOptions` for the Elasticsearch domain.
+    #   @return [Types::DomainEndpointOptionsStatus]
+    #
+    # @!attribute [rw] advanced_security_options
+    #   Specifies `AdvancedSecurityOptions` for the domain.
+    #   @return [Types::AdvancedSecurityOptionsStatus]
+    #
     class ElasticsearchDomainConfig < Struct.new(
       :elasticsearch_version,
       :elasticsearch_cluster_config,
@@ -896,7 +1727,9 @@ module Aws::ElasticsearchService
       :encryption_at_rest_options,
       :node_to_node_encryption_options,
       :advanced_options,
-      :log_publishing_options)
+      :log_publishing_options,
+      :domain_endpoint_options,
+      :advanced_security_options)
       include Aws::Structure
     end
 
@@ -1021,6 +1854,15 @@ module Aws::ElasticsearchService
     #   The current status of the Elasticsearch domain's service software.
     #   @return [Types::ServiceSoftwareOptions]
     #
+    # @!attribute [rw] domain_endpoint_options
+    #   The current status of the Elasticsearch domain's endpoint options.
+    #   @return [Types::DomainEndpointOptions]
+    #
+    # @!attribute [rw] advanced_security_options
+    #   The current status of the Elasticsearch domain's advanced security
+    #   options.
+    #   @return [Types::AdvancedSecurityOptions]
+    #
     class ElasticsearchDomainStatus < Struct.new(
       :domain_id,
       :domain_name,
@@ -1042,7 +1884,9 @@ module Aws::ElasticsearchService
       :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options,
-      :service_software_options)
+      :service_software_options,
+      :domain_endpoint_options,
+      :advanced_security_options)
       include Aws::Structure
     end
 
@@ -1105,6 +1949,45 @@ module Aws::ElasticsearchService
     class EncryptionAtRestOptionsStatus < Struct.new(
       :options,
       :status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_type
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
+    #
+    class ErrorDetails < Struct.new(
+      :error_type,
+      :error_message)
+      include Aws::Structure
+    end
+
+    # A filter used to limit results when describing inbound or outbound
+    # cross-cluster search connections. Multiple values can be specified per
+    # filter. A cross-cluster search connection must match at least one of
+    # the specified values for it to be returned from an operation.
+    #
+    # @note When making an API call, you may pass Filter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         values: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Specifies the name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   Contains one or more values for the filter.
+    #   @return [Array<String>]
+    #
+    class Filter < Struct.new(
+      :name,
+      :values)
       include Aws::Structure
     end
 
@@ -1247,6 +2130,63 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Specifies details of an inbound connection.
+    #
+    # @!attribute [rw] source_domain_info
+    #   Specifies the `DomainInformation` for the source Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] destination_domain_info
+    #   Specifies the `DomainInformation` for the destination Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   Specifies the connection id for the inbound cross-cluster search
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_status
+    #   Specifies the `InboundCrossClusterSearchConnectionStatus` for the
+    #   outbound connection.
+    #   @return [Types::InboundCrossClusterSearchConnectionStatus]
+    #
+    class InboundCrossClusterSearchConnection < Struct.new(
+      :source_domain_info,
+      :destination_domain_info,
+      :cross_cluster_search_connection_id,
+      :connection_status)
+      include Aws::Structure
+    end
+
+    # Specifies the coonection status of an inbound cross-cluster search
+    # connection.
+    #
+    # @!attribute [rw] status_code
+    #   The state code for inbound connection. This can be one of the
+    #   following:
+    #
+    #   * PENDING\_ACCEPTANCE: Inbound connection is not yet accepted by
+    #     destination domain owner.
+    #   * APPROVED: Inbound connection is pending acceptance by destination
+    #     domain owner.
+    #   * REJECTING: Inbound connection rejection is in process.
+    #   * REJECTED: Inbound connection is rejected.
+    #   * DELETING: Inbound connection deletion is in progress.
+    #   * DELETED: Inbound connection is deleted and cannot be used further.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Specifies verbose information for the inbound connection status.
+    #   @return [String]
+    #
+    class InboundCrossClusterSearchConnectionStatus < Struct.new(
+      :status_code,
+      :message)
+      include Aws::Structure
+    end
+
     # InstanceCountLimits represents the limits on number of instances that
     # be created in Amazon Elasticsearch for given InstanceType.
     #
@@ -1278,6 +2218,27 @@ module Aws::ElasticsearchService
       :instance_count_limits)
       include Aws::Structure
     end
+
+    # The request processing has failed because of an unknown error,
+    # exception or failure (the failure is internal to the service) . Gives
+    # http status code of 500.
+    #
+    class InternalException < Aws::EmptyStructure; end
+
+    # The request processing has failed because of invalid pagination token
+    # provided by customer. Returns an HTTP status code of 400.
+    #
+    class InvalidPaginationTokenException < Aws::EmptyStructure; end
+
+    # An exception for trying to create or access sub-resource that is
+    # either invalid or not supported. Gives http status code of 409.
+    #
+    class InvalidTypeException < Aws::EmptyStructure; end
+
+    # An exception for trying to create more than allowed resources or
+    # sub-resources. Gives http status code of 409.
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # Limits for given InstanceType and for each of it's role.
     #  Limits contains following ` StorageTypes, ` ` InstanceLimits ` and `
@@ -1314,6 +2275,55 @@ module Aws::ElasticsearchService
     #
     class ListDomainNamesResponse < Struct.new(
       :domain_names)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` ListDomainsForPackage `
+    # operation.
+    #
+    # @note When making an API call, you may pass ListDomainsForPackageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_id: "PackageID", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] package_id
+    #   The package for which to list domains.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Limits results to a maximum number of domains.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Used for pagination. Only necessary if a previous API call includes
+    #   a non-null NextToken value. If provided, returns results for the
+    #   next page.
+    #   @return [String]
+    #
+    class ListDomainsForPackageRequest < Struct.new(
+      :package_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for response parameters to ` ListDomainsForPackage `
+    # operation.
+    #
+    # @!attribute [rw] domain_package_details_list
+    #   List of `DomainPackageDetails` objects.
+    #   @return [Array<Types::DomainPackageDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    class ListDomainsForPackageResponse < Struct.new(
+      :domain_package_details_list,
+      :next_token)
       include Aws::Structure
     end
 
@@ -1433,6 +2443,58 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Container for request parameters to ` ListPackagesForDomain `
+    # operation.
+    #
+    # @note When making an API call, you may pass ListPackagesForDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain for which you want to list associated
+    #   packages.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Limits results to a maximum number of packages.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Used for pagination. Only necessary if a previous API call includes
+    #   a non-null NextToken value. If provided, returns results for the
+    #   next page.
+    #   @return [String]
+    #
+    class ListPackagesForDomainRequest < Struct.new(
+      :domain_name,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for response parameters to ` ListPackagesForDomain `
+    # operation.
+    #
+    # @!attribute [rw] domain_package_details_list
+    #   List of `DomainPackageDetails` objects.
+    #   @return [Array<Types::DomainPackageDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token that needs to be supplied to the next call to get
+    #   the next page of results.
+    #   @return [String]
+    #
+    class ListPackagesForDomainResponse < Struct.new(
+      :domain_package_details_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `ListTags` operation. Specify the
     # `ARN` for the Elasticsearch domain to which the tags are attached that
     # you want to view are attached.
@@ -1514,6 +2576,38 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Credentials for the master user: username and password, ARN, or both.
+    #
+    # @note When making an API call, you may pass MasterUserOptions
+    #   data as a hash:
+    #
+    #       {
+    #         master_user_arn: "ARN",
+    #         master_user_name: "Username",
+    #         master_user_password: "Password",
+    #       }
+    #
+    # @!attribute [rw] master_user_arn
+    #   ARN for the master user (if IAM is enabled).
+    #   @return [String]
+    #
+    # @!attribute [rw] master_user_name
+    #   The master user's username, which is stored in the Amazon
+    #   Elasticsearch Service domain's internal database.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_user_password
+    #   The master user's password, which is stored in the Amazon
+    #   Elasticsearch Service domain's internal database.
+    #   @return [String]
+    #
+    class MasterUserOptions < Struct.new(
+      :master_user_arn,
+      :master_user_name,
+      :master_user_password)
+      include Aws::Structure
+    end
+
     # Specifies the node-to-node encryption options.
     #
     # @note When making an API call, you may pass NodeToNodeEncryptionOptions
@@ -1582,6 +2676,140 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Specifies details of an outbound connection.
+    #
+    # @!attribute [rw] source_domain_info
+    #   Specifies the `DomainInformation` for the source Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] destination_domain_info
+    #   Specifies the `DomainInformation` for the destination Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   Specifies the connection id for the outbound cross-cluster search
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_alias
+    #   Specifies the connection alias for the outbound cross-cluster search
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_status
+    #   Specifies the `OutboundCrossClusterSearchConnectionStatus` for the
+    #   outbound connection.
+    #   @return [Types::OutboundCrossClusterSearchConnectionStatus]
+    #
+    class OutboundCrossClusterSearchConnection < Struct.new(
+      :source_domain_info,
+      :destination_domain_info,
+      :cross_cluster_search_connection_id,
+      :connection_alias,
+      :connection_status)
+      include Aws::Structure
+    end
+
+    # Specifies the connection status of an outbound cross-cluster search
+    # connection.
+    #
+    # @!attribute [rw] status_code
+    #   The state code for outbound connection. This can be one of the
+    #   following:
+    #
+    #   * VALIDATING: The outbound connection request is being validated.
+    #   * VALIDATION\_FAILED: Validation failed for the connection request.
+    #   * PENDING\_ACCEPTANCE: Outbound connection request is validated and
+    #     is not yet accepted by destination domain owner.
+    #   * PROVISIONING: Outbound connection request is in process.
+    #   * ACTIVE: Outbound connection is active and ready to use.
+    #   * REJECTED: Outbound connection request is rejected by destination
+    #     domain owner.
+    #   * DELETING: Outbound connection deletion is in progress.
+    #   * DELETED: Outbound connection is deleted and cannot be used
+    #     further.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Specifies verbose information for the outbound connection status.
+    #   @return [String]
+    #
+    class OutboundCrossClusterSearchConnectionStatus < Struct.new(
+      :status_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Basic information about a package.
+    #
+    # @!attribute [rw] package_id
+    #   Internal ID of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_name
+    #   User specified name of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_type
+    #   Currently supports only TXT-DICTIONARY.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_description
+    #   User-specified description of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_status
+    #   Current state of the package. Values are
+    #   COPYING/COPY\_FAILED/AVAILABLE/DELETING/DELETE\_FAILED
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp which tells creation date of the package.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_details
+    #   Additional information if the package is in an error state. Null
+    #   otherwise.
+    #   @return [Types::ErrorDetails]
+    #
+    class PackageDetails < Struct.new(
+      :package_id,
+      :package_name,
+      :package_type,
+      :package_description,
+      :package_status,
+      :created_at,
+      :error_details)
+      include Aws::Structure
+    end
+
+    # The S3 location for importing the package specified as `S3BucketName`
+    # and `S3Key`
+    #
+    # @note When making an API call, you may pass PackageSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket_name: "S3BucketName",
+    #         s3_key: "S3Key",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   Name of the bucket containing the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   Key (file name) of the package.
+    #   @return [String]
+    #
+    class PackageSource < Struct.new(
+      :s3_bucket_name,
+      :s3_key)
+      include Aws::Structure
+    end
+
     # Container for parameters to
     # `PurchaseReservedElasticsearchInstanceOffering`
     #
@@ -1645,6 +2873,38 @@ module Aws::ElasticsearchService
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `RejectInboundCrossClusterSearchConnection` operation.
+    #
+    # @note When making an API call, you may pass RejectInboundCrossClusterSearchConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #       }
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   The id of the inbound connection that you want to reject.
+    #   @return [String]
+    #
+    class RejectInboundCrossClusterSearchConnectionRequest < Struct.new(
+      :cross_cluster_search_connection_id)
+      include Aws::Structure
+    end
+
+    # The result of a `RejectInboundCrossClusterSearchConnection` operation.
+    # Contains details of rejected inbound connection.
+    #
+    # @!attribute [rw] cross_cluster_search_connection
+    #   Specifies the `InboundCrossClusterSearchConnection` of rejected
+    #   inbound connection.
+    #   @return [Types::InboundCrossClusterSearchConnection]
+    #
+    class RejectInboundCrossClusterSearchConnectionResponse < Struct.new(
+      :cross_cluster_search_connection)
       include Aws::Structure
     end
 
@@ -1804,6 +3064,16 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # An exception for creating a resource that already exists. Gives http
+    # status code of 400.
+    #
+    class ResourceAlreadyExistsException < Aws::EmptyStructure; end
+
+    # An exception for accessing or deleting a resource that does not exist.
+    # Gives http status code of 400.
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
     # The current options of an Elasticsearch domain service software
     # options.
     #
@@ -1842,6 +3112,12 @@ module Aws::ElasticsearchService
     #   your service software.
     #   @return [Time]
     #
+    # @!attribute [rw] optional_deployment
+    #   `True` if a service software is never automatically updated. `False`
+    #   if a service software is automatically updated after
+    #   `AutomatedUpdateDate`.
+    #   @return [Boolean]
+    #
     class ServiceSoftwareOptions < Struct.new(
       :current_version,
       :new_version,
@@ -1849,7 +3125,8 @@ module Aws::ElasticsearchService
       :cancellable,
       :update_status,
       :description,
-      :automated_update_date)
+      :automated_update_date,
+      :optional_deployment)
       include Aws::Structure
     end
 
@@ -2016,12 +3293,18 @@ module Aws::ElasticsearchService
     #       {
     #         domain_name: "DomainName", # required
     #         elasticsearch_cluster_config: {
-    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           instance_count: 1,
     #           dedicated_master_enabled: false,
     #           zone_awareness_enabled: false,
-    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #           zone_awareness_config: {
+    #             availability_zone_count: 1,
+    #           },
+    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           dedicated_master_count: 1,
+    #           warm_enabled: false,
+    #           warm_type: "ultrawarm1.medium.elasticsearch", # accepts ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch
+    #           warm_count: 1,
     #         },
     #         ebs_options: {
     #           ebs_enabled: false,
@@ -2050,6 +3333,19 @@ module Aws::ElasticsearchService
     #           "INDEX_SLOW_LOGS" => {
     #             cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
     #             enabled: false,
+    #           },
+    #         },
+    #         domain_endpoint_options: {
+    #           enforce_https: false,
+    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #         },
+    #         advanced_security_options: {
+    #           enabled: false,
+    #           internal_user_database_enabled: false,
+    #           master_user_options: {
+    #             master_user_arn: "ARN",
+    #             master_user_name: "Username",
+    #             master_user_password: "Password",
     #           },
     #         },
     #       }
@@ -2112,6 +3408,15 @@ module Aws::ElasticsearchService
     #   to publish a given type of Elasticsearch log.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
+    # @!attribute [rw] domain_endpoint_options
+    #   Options to specify configuration that will be applied to the domain
+    #   endpoint.
+    #   @return [Types::DomainEndpointOptions]
+    #
+    # @!attribute [rw] advanced_security_options
+    #   Specifies advanced security options.
+    #   @return [Types::AdvancedSecurityOptionsInput]
+    #
     class UpdateElasticsearchDomainConfigRequest < Struct.new(
       :domain_name,
       :elasticsearch_cluster_config,
@@ -2121,7 +3426,9 @@ module Aws::ElasticsearchService
       :cognito_options,
       :advanced_options,
       :access_policies,
-      :log_publishing_options)
+      :log_publishing_options,
+      :domain_endpoint_options,
+      :advanced_security_options)
       include Aws::Structure
     end
 
@@ -2349,6 +3656,32 @@ module Aws::ElasticsearchService
     class VPCOptions < Struct.new(
       :subnet_ids,
       :security_group_ids)
+      include Aws::Structure
+    end
+
+    # An exception for missing / invalid input fields. Gives http status
+    # code of 400.
+    #
+    class ValidationException < Aws::EmptyStructure; end
+
+    # Specifies the zone awareness configuration for the domain cluster,
+    # such as the number of availability zones.
+    #
+    # @note When making an API call, you may pass ZoneAwarenessConfig
+    #   data as a hash:
+    #
+    #       {
+    #         availability_zone_count: 1,
+    #       }
+    #
+    # @!attribute [rw] availability_zone_count
+    #   An integer value to indicate the number of availability zones for a
+    #   domain when zone awareness is enabled. This should be equal to
+    #   number of subnets if VPC endpoints is enabled
+    #   @return [Integer]
+    #
+    class ZoneAwarenessConfig < Struct.new(
+      :availability_zone_count)
       include Aws::Structure
     end
 

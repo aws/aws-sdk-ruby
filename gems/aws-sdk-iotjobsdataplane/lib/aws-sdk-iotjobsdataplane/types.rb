@@ -8,6 +8,17 @@
 module Aws::IoTJobsDataPlane
   module Types
 
+    # The certificate is invalid.
+    #
+    # @!attribute [rw] message
+    #   Additional information about the exception.
+    #   @return [String]
+    #
+    class CertificateValidationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeJobExecutionRequest
     #   data as a hash:
     #
@@ -82,6 +93,33 @@ module Aws::IoTJobsDataPlane
     class GetPendingJobExecutionsResponse < Struct.new(
       :in_progress_jobs,
       :queued_jobs)
+      include Aws::Structure
+    end
+
+    # The contents of the request were invalid. For example, this code is
+    # returned when an UpdateJobExecution request contains invalid status
+    # details. The message contains details about the error.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An update attempted to change the job execution to a state that is
+    # invalid because of the job execution's current state (for example, an
+    # attempt to change a request in state SUCCESS to state IN\_PROGRESS).
+    # In this case, the body of the error message also contains the
+    # executionState field.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InvalidStateTransitionException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -222,6 +260,28 @@ module Aws::IoTJobsDataPlane
       include Aws::Structure
     end
 
+    # The specified resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The service is temporarily unavailable.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartNextPendingJobExecutionRequest
     #   data as a hash:
     #
@@ -267,6 +327,32 @@ module Aws::IoTJobsDataPlane
     #
     class StartNextPendingJobExecutionResponse < Struct.new(
       :execution)
+      include Aws::Structure
+    end
+
+    # The job is in a terminal state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TerminalStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The rate exceeds the limit.
+    #
+    # @!attribute [rw] message
+    #   The message associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   The payload associated with the exception.
+    #   @return [String]
+    #
+    class ThrottlingException < Struct.new(
+      :message,
+      :payload)
       include Aws::Structure
     end
 

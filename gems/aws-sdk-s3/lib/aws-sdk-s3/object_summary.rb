@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::S3
+
   class ObjectSummary
 
     extend Aws::Deprecations
@@ -24,6 +25,7 @@ module Aws::S3
       @key = extract_key(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -38,16 +40,20 @@ module Aws::S3
       @key
     end
 
+    # The date the Object was Last Modified
     # @return [Time]
     def last_modified
       data[:last_modified]
     end
 
+    # The entity tag is an MD5 hash of the object. ETag reflects only
+    # changes to the contents of an object, not its metadata.
     # @return [String]
     def etag
       data[:etag]
     end
 
+    # Size in bytes of the object
     # @return [Integer]
     def size
       data[:size]
@@ -59,6 +65,7 @@ module Aws::S3
       data[:storage_class]
     end
 
+    # The owner of the object
     # @return [Types::Owner]
     def owner
       data[:owner]
@@ -114,10 +121,10 @@ module Aws::S3
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [ObjectSummary]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::ObjectExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(bucket: @bucket_name,
         key: @key))
       ObjectSummary.new({
@@ -133,10 +140,10 @@ module Aws::S3
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [ObjectSummary]
-    def wait_until_not_exists(options = {})
+    def wait_until_not_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::ObjectNotExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(bucket: @bucket_name,
         key: @key))
       ObjectSummary.new({
@@ -151,7 +158,8 @@ module Aws::S3
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -164,13 +172,15 @@ module Aws::S3
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -201,17 +211,16 @@ module Aws::S3
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -268,12 +277,13 @@ module Aws::S3
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
+    #     ssekms_encryption_context: "SSEKMSEncryptionContext",
     #     copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
     #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
@@ -331,8 +341,8 @@ module Aws::S3
     #   Specifies whether the object tag-set are copied from the source object
     #   or replaced with tag-set provided in the request.
     # @option options [String] :server_side_encryption
-    #   The Server-side encryption algorithm used when storing this object in
-    #   S3 (e.g., AES256, aws:kms).
+    #   The server-side encryption algorithm used when storing this object in
+    #   Amazon S3 (for example, AES256, aws:kms).
     # @option options [String] :storage_class
     #   The type of storage to use for the object. Defaults to 'STANDARD'.
     # @option options [String] :website_redirect_location
@@ -340,27 +350,36 @@ module Aws::S3
     #   object to another object in the same bucket or to an external URL.
     #   Amazon S3 stores the value of this header in the object metadata.
     # @option options [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     # @option options [String] :sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use in
     #   encrypting data. This value is used to store the object and then it is
-    #   discarded; Amazon does not store the encryption key. The key must be
-    #   appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header.
+    #   discarded; Amazon S3 does not store the encryption key. The key must
+    #   be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
-    #   ensure the encryption key was transmitted without error.
+    #   ensure that the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
     #   Specifies the AWS KMS key ID to use for object encryption. All GET and
     #   PUT requests for an object protected by AWS KMS will fail if not made
-    #   via SSL or using SigV4. Documentation on configuring any of the
-    #   officially supported AWS SDKs and CLI can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    #   via SSL or using SigV4. For information about configuring using any of
+    #   the officially supported AWS SDKs and AWS CLI, see [Specifying the
+    #   Signature Version in Request Authentication][1] in the *Amazon S3
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    # @option options [String] :ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object encryption.
+    #   The value of this header is a base64-encoded UTF-8 string holding JSON
+    #   with the encryption context key-value pairs.
     # @option options [String] :copy_source_sse_customer_algorithm
-    #   Specifies the algorithm to use when decrypting the source object
-    #   (e.g., AES256).
+    #   Specifies the algorithm to use when decrypting the source object (for
+    #   example, AES256).
     # @option options [String] :copy_source_sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use to
     #   decrypt the source object. The encryption key provided in this header
@@ -368,17 +387,21 @@ module Aws::S3
     # @option options [String] :copy_source_sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
-    #   ensure the encryption key was transmitted without error.
+    #   ensure that the encryption key was transmitted without error.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :tagging
     #   The tag-set for the object destination object this value must be used
-    #   in conjunction with the TaggingDirective. The tag-set must be encoded
-    #   as URL Query parameters
+    #   in conjunction with the `TaggingDirective`. The tag-set must be
+    #   encoded as URL Query parameters.
     # @option options [String] :object_lock_mode
     #   The Object Lock mode that you want to apply to the copied object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
@@ -408,14 +431,20 @@ module Aws::S3
     # @option options [String] :mfa
     #   The concatenation of the authentication device's serial number, a
     #   space, and the value that is displayed on your authentication device.
+    #   Required to permanently delete a versioned object if versioning is
+    #   configured with MFA delete enabled.
     # @option options [String] :version_id
     #   VersionId used to reference a specific version of the object.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
     #   Indicates whether S3 Object Lock should bypass Governance-mode
     #   restrictions to process this operation.
@@ -465,41 +494,54 @@ module Aws::S3
     #   time, otherwise return a 412 (precondition failed).
     # @option options [String] :range
     #   Downloads the specified range bytes of an object. For more information
-    #   about the HTTP Range header, go to
-    #   http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
+    #   about the HTTP Range header, see
+    #   [https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
+    #
+    #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
+    #   `GET` request.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
     # @option options [String] :response_cache_control
-    #   Sets the Cache-Control header of the response.
+    #   Sets the `Cache-Control` header of the response.
     # @option options [String] :response_content_disposition
-    #   Sets the Content-Disposition header of the response
+    #   Sets the `Content-Disposition` header of the response
     # @option options [String] :response_content_encoding
-    #   Sets the Content-Encoding header of the response.
+    #   Sets the `Content-Encoding` header of the response.
     # @option options [String] :response_content_language
-    #   Sets the Content-Language header of the response.
+    #   Sets the `Content-Language` header of the response.
     # @option options [String] :response_content_type
-    #   Sets the Content-Type header of the response.
+    #   Sets the `Content-Type` header of the response.
     # @option options [Time,DateTime,Date,Integer,String] :response_expires
-    #   Sets the Expires header of the response.
+    #   Sets the `Expires` header of the response.
     # @option options [String] :version_id
     #   VersionId used to reference a specific version of the object.
     # @option options [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     # @option options [String] :sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use in
     #   encrypting data. This value is used to store the object and then it is
-    #   discarded; Amazon does not store the encryption key. The key must be
-    #   appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header.
+    #   discarded; Amazon S3 does not store the encryption key. The key must
+    #   be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
-    #   ensure the encryption key was transmitted without error.
+    #   ensure that the encryption key was transmitted without error.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Integer] :part_number
     #   Part number of the object being read. This is a positive integer
     #   between 1 and 10,000. Effectively performs a 'ranged' GET request
@@ -533,12 +575,13 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
+    #     ssekms_encryption_context: "SSEKMSEncryptionContext",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -574,8 +617,8 @@ module Aws::S3
     # @option options [Hash<String,String>] :metadata
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
-    #   The Server-side encryption algorithm used when storing this object in
-    #   S3 (e.g., AES256, aws:kms).
+    #   The server-side encryption algorithm used when storing this object in
+    #   Amazon S3 (for example, AES256, aws:kms).
     # @option options [String] :storage_class
     #   The type of storage to use for the object. Defaults to 'STANDARD'.
     # @option options [String] :website_redirect_location
@@ -583,33 +626,46 @@ module Aws::S3
     #   object to another object in the same bucket or to an external URL.
     #   Amazon S3 stores the value of this header in the object metadata.
     # @option options [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     # @option options [String] :sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use in
     #   encrypting data. This value is used to store the object and then it is
-    #   discarded; Amazon does not store the encryption key. The key must be
-    #   appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header.
+    #   discarded; Amazon S3 does not store the encryption key. The key must
+    #   be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
-    #   ensure the encryption key was transmitted without error.
+    #   ensure that the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
-    #   Specifies the AWS KMS key ID to use for object encryption. All GET and
-    #   PUT requests for an object protected by AWS KMS will fail if not made
-    #   via SSL or using SigV4. Documentation on configuring any of the
-    #   officially supported AWS SDKs and CLI can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    #   Specifies the ID of the symmetric customer managed AWS KMS CMK to use
+    #   for object encryption. All GET and PUT requests for an object
+    #   protected by AWS KMS will fail if not made via SSL or using SigV4. For
+    #   information about configuring using any of the officially supported
+    #   AWS SDKs and AWS CLI, see [Specifying the Signature Version in Request
+    #   Authentication][1] in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    # @option options [String] :ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object encryption.
+    #   The value of this header is a base64-encoded UTF-8 string holding JSON
+    #   with the encryption context key-value pairs.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
-    #   parameters
+    #   parameters.
     # @option options [String] :object_lock_mode
     #   Specifies the Object Lock mode that you want to apply to the uploaded
     #   object.
@@ -654,12 +710,13 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
+    #     ssekms_encryption_context: "SSEKMSEncryptionContext",
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -668,28 +725,77 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
-    #   The canned ACL to apply to the object.
+    #   The canned ACL to apply to the object. For more information, see
+    #   [Canned ACL][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
     # @option options [String, IO] :body
     #   Object data.
     # @option options [String] :cache_control
-    #   Specifies caching behavior along the request/reply chain.
+    #   Can be used to specify caching behavior along the request/reply chain.
+    #   For more information, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9][1].
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
     # @option options [String] :content_disposition
-    #   Specifies presentational information for the object.
+    #   Specifies presentational information for the object. For more
+    #   information, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1][1].
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1
     # @option options [String] :content_encoding
     #   Specifies what content encodings have been applied to the object and
     #   thus what decoding mechanisms must be applied to obtain the media-type
-    #   referenced by the Content-Type header field.
+    #   referenced by the Content-Type header field. For more information, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11][1].
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
     # @option options [String] :content_language
     #   The language the content is in.
     # @option options [Integer] :content_length
     #   Size of the body in bytes. This parameter is useful when the size of
-    #   the body cannot be determined automatically.
+    #   the body cannot be determined automatically. For more information, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13][1].
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13
     # @option options [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the part data.
+    #   The base64-encoded 128-bit MD5 digest of the message (without the
+    #   headers) according to RFC 1864. This header can be used as a message
+    #   integrity check to verify that the data is the same data that was
+    #   originally sent. Although it is optional, we recommend using the
+    #   Content-MD5 mechanism as an end-to-end integrity check. For more
+    #   information about REST request authentication, see [REST
+    #   Authentication][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
     # @option options [String] :content_type
-    #   A standard MIME type describing the format of the object data.
+    #   A standard MIME type describing the format of the contents. For more
+    #   information, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17][1].
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
     # @option options [Time,DateTime,Date,Integer,String] :expires
-    #   The date and time at which the object is no longer cacheable.
+    #   The date and time at which the object is no longer cacheable. For more
+    #   information, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21][1].
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
     # @option options [String] :grant_full_control
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
@@ -702,39 +808,75 @@ module Aws::S3
     # @option options [Hash<String,String>] :metadata
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
-    #   The Server-side encryption algorithm used when storing this object in
-    #   S3 (e.g., AES256, aws:kms).
+    #   The server-side encryption algorithm used when storing this object in
+    #   Amazon S3 (for example, AES256, aws:kms).
     # @option options [String] :storage_class
-    #   The type of storage to use for the object. Defaults to 'STANDARD'.
+    #   If you don't specify, S3 Standard is the default storage class.
+    #   Amazon S3 supports other storage classes.
     # @option options [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
     #   object to another object in the same bucket or to an external URL.
-    #   Amazon S3 stores the value of this header in the object metadata.
+    #   Amazon S3 stores the value of this header in the object metadata. For
+    #   information about object metadata, see [Object Key and Metadata][1].
+    #
+    #   In the following example, the request header sets the redirect to an
+    #   object (anotherPage.html) in the same bucket:
+    #
+    #   `x-amz-website-redirect-location: /anotherPage.html`
+    #
+    #   In the following example, the request header sets the object redirect
+    #   to another website:
+    #
+    #   `x-amz-website-redirect-location: http://www.example.com/`
+    #
+    #   For more information about website hosting in Amazon S3, see [Hosting
+    #   Websites on Amazon S3][2] and [How to Configure Website Page
+    #   Redirects][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
+    #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html
     # @option options [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     # @option options [String] :sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use in
     #   encrypting data. This value is used to store the object and then it is
-    #   discarded; Amazon does not store the encryption key. The key must be
-    #   appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header.
+    #   discarded; Amazon S3 does not store the encryption key. The key must
+    #   be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
-    #   ensure the encryption key was transmitted without error.
+    #   ensure that the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
-    #   Specifies the AWS KMS key ID to use for object encryption. All GET and
-    #   PUT requests for an object protected by AWS KMS will fail if not made
-    #   via SSL or using SigV4. Documentation on configuring any of the
-    #   officially supported AWS SDKs and CLI can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    #   If `x-amz-server-side-encryption` is present and has the value of
+    #   `aws:kms`, this header specifies the ID of the AWS Key Management
+    #   Service (AWS KMS) symmetrical customer managed customer master key
+    #   (CMK) that was used for the object.
+    #
+    #   If the value of `x-amz-server-side-encryption` is `aws:kms`, this
+    #   header specifies the ID of the symmetric customer managed AWS KMS CMK
+    #   that will be used for the object. If you specify
+    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the AWS
+    #   managed CMK in AWS to protect the data.
+    # @option options [String] :ssekms_encryption_context
+    #   Specifies the AWS KMS Encryption Context to use for object encryption.
+    #   The value of this header is a base64-encoded UTF-8 string holding JSON
+    #   with the encryption context key-value pairs.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters. (For example, "Key1=Value1")
@@ -743,7 +885,12 @@ module Aws::S3
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
     #   The date and time when you want this object's Object Lock to expire.
     # @option options [String] :object_lock_legal_hold_status
-    #   The Legal Hold status that you want to apply to the specified object.
+    #   Specifies whether a legal hold will be applied to this object. For
+    #   more information about S3 Object Lock, see [Object Lock][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
     # @return [Types::PutObjectOutput]
     def put(options = {})
       options = options.merge(
@@ -835,7 +982,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #         },
     #       },
     #     },
@@ -843,14 +990,19 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :version_id
+    #   VersionId used to reference a specific version of the object.
     # @option options [Types::RestoreRequest] :restore_request
     #   Container for restore job parameters.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @return [Types::RestoreObjectOutput]
     def restore_object(options = {})
       options = options.merge(
@@ -947,8 +1099,8 @@ module Aws::S3
 
     def yield_waiter_and_warn(waiter, &block)
       if !@waiter_block_warned
-        msg = "pass options to configure the waiter; "
-        msg << "yielding the waiter is deprecated"
+        msg = "pass options to configure the waiter; "\
+              "yielding the waiter is deprecated"
         warn(msg)
         @waiter_block_warned = true
       end
@@ -956,7 +1108,9 @@ module Aws::S3
     end
 
     def separate_params_and_options(options)
-      opts = Set.new([:client, :max_attempts, :delay, :before_attempt, :before_wait])
+      opts = Set.new(
+        [:client, :max_attempts, :delay, :before_attempt, :before_wait]
+      )
       waiter_opts = {}
       waiter_params = {}
       options.each_pair do |key, value|
@@ -985,12 +1139,18 @@ module Aws::S3
       # @option options [String] :mfa
       #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication device.
+      #   Required to permanently delete a versioned object if versioning is
+      #   configured with MFA delete enabled.
       # @option options [String] :request_payer
-      #   Confirms that the requester knows that she or he will be charged for
-      #   the request. Bucket owners need not specify this parameter in their
-      #   requests. Documentation on downloading objects from requester pays
-      #   buckets can be found at
-      #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      #   Confirms that the requester knows that they will be charged for the
+      #   request. Bucket owners need not specify this parameter in their
+      #   requests. For information about downloading objects from requester
+      #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+      #   in the *Amazon S3 Developer Guide*.
+      #
+      #
+      #
+      #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       # @option options [Boolean] :bypass_governance_retention
       #   Specifies whether you want to delete this object even if it has a
       #   Governance-type Object Lock in place. You must have sufficient

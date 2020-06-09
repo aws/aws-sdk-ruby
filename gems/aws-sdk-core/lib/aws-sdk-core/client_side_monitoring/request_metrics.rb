@@ -83,6 +83,7 @@ module Aws
           @final_aws_exception_message = opts[:final_aws_exception_message]
           @final_sdk_exception = opts[:final_sdk_exception]
           @final_sdk_exception_message = opts[:final_sdk_exception_message]
+          @region = opts[:region] if opts[:region] # in case region changes
         end
 
         def to_json(*a)
@@ -121,11 +122,11 @@ module Aws
       end
 
       class ApiCallAttempt
-        attr_reader :service, :api, :client_id, :version, :timestamp, :fqdn,
-          :region, :user_agent, :access_key, :session_token
-        attr_accessor :request_latency, :http_status_code, :aws_exception_msg,
-          :x_amz_request_id, :x_amz_id_2, :x_amzn_request_id, :sdk_exception,
-          :aws_exception, :sdk_exception_msg
+        attr_reader :service, :api, :client_id, :version, :timestamp,
+          :user_agent, :access_key, :session_token
+        attr_accessor :region, :fqdn, :request_latency, :http_status_code,
+          :aws_exception_msg, :x_amz_request_id, :x_amz_id_2,
+          :x_amzn_request_id, :sdk_exception, :aws_exception, :sdk_exception_msg
 
         def initialize(
           service,

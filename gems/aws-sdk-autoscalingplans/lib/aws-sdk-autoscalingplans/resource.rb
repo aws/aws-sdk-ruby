@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AutoScalingPlans
+
   class Resource
 
     # @param options ({})

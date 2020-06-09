@@ -15,9 +15,9 @@ module Seahorse
           @event = false
           @eventstream = false
           @eventpayload = false
-          @eventpayload_type = ''
+          @eventpayload_type = ''.freeze
           @eventheader = false
-          @eventheader_type = ''
+          @eventheader_type = ''.freeze
           options.each do |key, value|
             if key == :metadata
               value.each do |k,v|

@@ -1,6 +1,96 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-05-07)
+------------------
+
+* Feature - Amazon Route 53 now supports the EU (Milan) Region (eu-south-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
+1.33.0 (2020-04-28)
+------------------
+
+* Feature - Amazon Route 53 now supports the Africa (Cape Town) Region (af-south-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
+1.32.0 (2020-03-23)
+------------------
+
+* Feature - Documentation updates for Route 53.
+
+1.31.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2019-07-30)
+------------------
+
+* Feature - Amazon Route 53 now supports the Middle East (Bahrain) Region (me-south-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
+1.28.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.24.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.23.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2019-04-24)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-03-22)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.18.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
 1.17.0 (2018-12-12)
 ------------------
 

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-iotjobsdataplane/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     io_t_jobs_data_plane = Aws::IoTJobsDataPlane::Client.new
+#     resp = io_t_jobs_data_plane.describe_job_execution(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS IoT Jobs Data Plane all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS IoT Jobs Data Plane are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::IoTJobsDataPlane::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS IoT Jobs Data Plane API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-iotjobsdataplane/customizations'
 # @service
 module Aws::IoTJobsDataPlane
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.20.0'
 
 end

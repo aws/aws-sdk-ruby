@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MarketplaceCommerceAnalytics
+
   class Resource
 
     # @param options ({})

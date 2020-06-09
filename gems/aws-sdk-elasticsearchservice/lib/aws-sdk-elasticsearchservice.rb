@@ -24,17 +24,20 @@ require_relative 'aws-sdk-elasticsearchservice/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     elasticsearch_service = Aws::ElasticsearchService::Client.new
+#     resp = elasticsearch_service.accept_inbound_cross_cluster_search_connection(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Elasticsearch Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Elasticsearch Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ElasticsearchService::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Elasticsearch Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-elasticsearchservice/customizations'
 # @service
 module Aws::ElasticsearchService
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.36.0'
 
 end

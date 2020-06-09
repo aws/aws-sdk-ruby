@@ -24,17 +24,20 @@ require_relative 'aws-sdk-directconnect/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     direct_connect = Aws::DirectConnect::Client.new
+#     resp = direct_connect.accept_direct_connect_gateway_association_proposal(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Direct Connect all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Direct Connect are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::DirectConnect::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Direct Connect API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-directconnect/customizations'
 # @service
 module Aws::DirectConnect
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.30.0'
 
 end

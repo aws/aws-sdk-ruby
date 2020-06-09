@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Mobile
+
   class Resource
 
     # @param options ({})

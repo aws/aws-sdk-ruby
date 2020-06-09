@@ -1,6 +1,86 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2020-05-19)
+------------------
+
+* Feature - Feature: Health: AWS Health added a new field to differentiate Public events from Account-Specific events in the API request and response. Visit https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html to learn more.
+
+1.23.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2019-12-23)
+------------------
+
+* Feature - With this release, you can now centrally aggregate AWS Health events from all accounts in your AWS organization. Visit AWS Health documentation to learn more about enabling and using this feature: https://docs.aws.amazon.com/health/latest/ug/organizational-view-health.html.
+
+1.20.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2019-06-20)
+------------------
+
+* Feature - API improvements for the AWS Health service.
+
+1.16.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.14.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.13.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.12.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.11.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.10.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
 1.9.0 (2018-12-04)
 ------------------
 

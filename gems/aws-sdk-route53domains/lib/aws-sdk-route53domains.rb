@@ -24,17 +24,20 @@ require_relative 'aws-sdk-route53domains/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     route_53_domains = Aws::Route53Domains::Client.new
+#     resp = route_53_domains.accept_domain_transfer_from_another_aws_account(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Route 53 Domains all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Route 53 Domains are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Route53Domains::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Route 53 Domains API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-route53domains/customizations'
 # @service
 module Aws::Route53Domains
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.22.0'
 
 end

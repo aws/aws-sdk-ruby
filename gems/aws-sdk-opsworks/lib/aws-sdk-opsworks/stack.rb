@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::OpsWorks
+
   class Stack
 
     extend Aws::Deprecations
@@ -21,6 +22,7 @@ module Aws::OpsWorks
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -53,7 +55,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     # @return [String]
     def region
       data[:region]
@@ -83,7 +85,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def default_instance_profile_arn
       data[:default_instance_profile_arn]
@@ -106,7 +108,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     # @return [String]
     def default_availability_zone
       data[:default_availability_zone]
@@ -132,7 +134,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
     # @return [String]
     def custom_json
       data[:custom_json]
@@ -150,7 +152,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     # @return [Types::ChefConfiguration]
     def chef_configuration
       data[:chef_configuration]
@@ -170,13 +172,13 @@ module Aws::OpsWorks
     end
 
     # Contains the information required to retrieve an app or cookbook from
-    # a repository. For more information, see [Creating Apps][1] or [Custom
-    # Recipes and Cookbooks][2].
+    # a repository. For more information, see [Adding Apps][1] or [Cookbooks
+    # and Recipes][2].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
     # @return [Types::Source]
     def custom_cookbooks_source
       data[:custom_cookbooks_source]
@@ -201,7 +203,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     # @return [String]
     def default_root_device_type
       data[:default_root_device_type]
@@ -254,7 +256,8 @@ module Aws::OpsWorks
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -267,13 +270,15 @@ module Aws::OpsWorks
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -304,17 +309,16 @@ module Aws::OpsWorks
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -427,7 +431,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
     # @option options [Hash<String,String>] :attributes
     #   One or more user-defined key-value pairs to be added to the stack
     #   attributes.
@@ -443,7 +447,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @option options [String] :custom_json
     #   A JSON-formatted string containing custom stack configuration and
     #   deployment attributes to be installed on the layer's instances. For
@@ -452,7 +456,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
     # @option options [Array<String>] :custom_security_group_ids
     #   An array containing the layer custom security group IDs.
     # @option options [Array<String>] :packages
@@ -469,8 +473,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     # @option options [Boolean] :auto_assign_public_ips
     #   For stacks that are running in a VPC, whether to automatically assign
     #   a public IP address to the layer's instances. For more information,
@@ -478,7 +482,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     # @option options [Types::Recipes] :custom_recipes
     #   A `LayerCustomRecipes` object that specifies the layer custom recipes.
     # @option options [Boolean] :install_updates_on_boot

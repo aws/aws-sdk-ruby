@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CodeDeploy
+
   class Resource
 
     # @param options ({})

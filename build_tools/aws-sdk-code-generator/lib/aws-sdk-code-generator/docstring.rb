@@ -133,8 +133,15 @@ module AwsSdkCodeGenerator
           # turn them into YARD links.
           html = html.gsub(/<a>(.+?)<\/a>/) { $1 }
 
+          # For span tags, it can contain customized attributes, e.g. data-target
+          # keeping text context only for now
+          html = html.gsub(/<span.*?>(.+?)<\/span>/) { $1 }
+
           # <important> tag doesn't render well
           html = html.gsub(/<important>(.+?)<\/important>/){ "<p>#{$1}</p>" }
+
+          # <replaceable> doesn't render anything, so sub it out for italic
+          html = html.gsub(/<replaceable>(.+?)<\/replaceable>/) { "<i>#{$1}</i>" }
 
           markdown = Kramdown::Document.new(
             html,

@@ -8,6 +8,18 @@
 module Aws::Budgets
   module Types
 
+    # You are not authorized to use this operation with the given
+    # parameters.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the output of the `CreateBudget` operation. The content
     # consists of the detailed metadata and data file information, and the
     # current status of the `budget` object.
@@ -24,6 +36,12 @@ module Aws::Budgets
     #         budget_limit: {
     #           amount: "NumericValue", # required
     #           unit: "UnitValue", # required
+    #         },
+    #         planned_budget_limits: {
+    #           "GenericString" => {
+    #             amount: "NumericValue", # required
+    #             unit: "UnitValue", # required
+    #           },
     #         },
     #         cost_filters: {
     #           "GenericString" => ["GenericString"],
@@ -56,27 +74,67 @@ module Aws::Budgets
     #             unit: "UnitValue", # required
     #           },
     #         },
-    #         budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
+    #         budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, SAVINGS_PLANS_COVERAGE
     #         last_updated_time: Time.now,
     #       }
     #
     # @!attribute [rw] budget_name
-    #   The name of a budget. The name must be unique within accounts. The
+    #   The name of a budget. The name must be unique within an account. The
     #   `:` and `` characters aren't allowed in `BudgetName`.
     #   @return [String]
     #
     # @!attribute [rw] budget_limit
-    #   The total amount of cost, usage, RI utilization, or RI coverage that
-    #   you want to track with your budget.
+    #   The total amount of cost, usage, RI utilization, RI coverage,
+    #   Savings Plans utilization, or Savings Plans coverage that you want
+    #   to track with your budget.
     #
     #   `BudgetLimit` is required for cost or usage budgets, but optional
-    #   for RI utilization or coverage budgets. RI utilization or coverage
-    #   budgets default to `100`, which is the only valid value for RI
-    #   utilization or coverage budgets.
+    #   for RI or Savings Plans utilization or coverage budgets. RI and
+    #   Savings Plans utilization or coverage budgets default to `100`,
+    #   which is the only valid value for RI or Savings Plans utilization or
+    #   coverage budgets. You can't use `BudgetLimit` with
+    #   `PlannedBudgetLimits` for `CreateBudget` and `UpdateBudget` actions.
     #   @return [Types::Spend]
     #
+    # @!attribute [rw] planned_budget_limits
+    #   A map containing multiple `BudgetLimit`, including current or future
+    #   limits.
+    #
+    #   `PlannedBudgetLimits` is available for cost or usage budget and
+    #   supports monthly and quarterly `TimeUnit`.
+    #
+    #   For monthly budgets, provide 12 months of `PlannedBudgetLimits`
+    #   values. This must start from the current month and include the next
+    #   11 months. The `key` is the start of the month, `UTC` in epoch
+    #   seconds.
+    #
+    #   For quarterly budgets, provide 4 quarters of `PlannedBudgetLimits`
+    #   value entries in standard calendar quarter increments. This must
+    #   start from the current quarter and include the next 3 quarters. The
+    #   `key` is the start of the quarter, `UTC` in epoch seconds.
+    #
+    #   If the planned budget expires before 12 months for monthly or 4
+    #   quarters for quarterly, provide the `PlannedBudgetLimits` values
+    #   only for the remaining periods.
+    #
+    #   If the budget begins at a date in the future, provide
+    #   `PlannedBudgetLimits` values from the start date of the budget.
+    #
+    #   After all of the `BudgetLimit` values in `PlannedBudgetLimits` are
+    #   used, the budget continues to use the last limit as the
+    #   `BudgetLimit`. At that point, the planned budget provides the same
+    #   experience as a fixed budget.
+    #
+    #   `DescribeBudget` and `DescribeBudgets` response along with
+    #   `PlannedBudgetLimits` will also contain `BudgetLimit` representing
+    #   the current month or quarter limit present in `PlannedBudgetLimits`.
+    #   This only applies to budgets created with `PlannedBudgetLimits`.
+    #   Budgets created without `PlannedBudgetLimits` will only contain
+    #   `BudgetLimit`, and no `PlannedBudgetLimits`.
+    #   @return [Hash<String,Types::Spend>]
+    #
     # @!attribute [rw] cost_filters
-    #   The cost filters, such as service or region, that are applied to a
+    #   The cost filters, such as service or tag, that are applied to a
     #   budget.
     #
     #   AWS Budgets supports the following services as a filter for RI
@@ -96,14 +154,16 @@ module Aws::Budgets
     # @!attribute [rw] cost_types
     #   The types of costs that are included in this `COST` budget.
     #
-    #   `USAGE`, `RI_UTILIZATION`, and `RI_COVERAGE` budgets do not have
-    #   `CostTypes`.
+    #   `USAGE`, `RI_UTILIZATION`, `RI_COVERAGE`,
+    #   `Savings_Plans_Utilization`, and `Savings_Plans_Coverage` budgets do
+    #   not have `CostTypes`.
     #   @return [Types::CostTypes]
     #
     # @!attribute [rw] time_unit
     #   The length of time until a budget resets the actual and forecasted
-    #   spend. `DAILY` is available only for `RI_UTILIZATION` and
-    #   `RI_COVERAGE` budgets.
+    #   spend. `DAILY` is available only for `RI_UTILIZATION`,
+    #   `RI_COVERAGE`, `Savings_Plans_Utilization`, and
+    #   `Savings_Plans_Coverage` budgets.
     #   @return [String]
     #
     # @!attribute [rw] time_period
@@ -132,8 +192,8 @@ module Aws::Budgets
     #   @return [Types::CalculatedSpend]
     #
     # @!attribute [rw] budget_type
-    #   Whether this budget tracks monetary costs, usage, RI utilization, or
-    #   RI coverage.
+    #   Whether this budget tracks costs, usage, RI utilization, RI
+    #   coverage, Savings Plans utilization, or Savings Plans coverage.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_time
@@ -143,6 +203,7 @@ module Aws::Budgets
     class Budget < Struct.new(
       :budget_name,
       :budget_limit,
+      :planned_budget_limits,
       :cost_filters,
       :cost_types,
       :time_unit,
@@ -374,6 +435,12 @@ module Aws::Budgets
     #             amount: "NumericValue", # required
     #             unit: "UnitValue", # required
     #           },
+    #           planned_budget_limits: {
+    #             "GenericString" => {
+    #               amount: "NumericValue", # required
+    #               unit: "UnitValue", # required
+    #             },
+    #           },
     #           cost_filters: {
     #             "GenericString" => ["GenericString"],
     #           },
@@ -405,7 +472,7 @@ module Aws::Budgets
     #               unit: "UnitValue", # required
     #             },
     #           },
-    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
+    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, SAVINGS_PLANS_COVERAGE
     #           last_updated_time: Time.now,
     #         },
     #         notifications_with_subscribers: [
@@ -560,6 +627,17 @@ module Aws::Budgets
     # Response of CreateSubscriber
     #
     class CreateSubscriberResponse < Aws::EmptyStructure; end
+
+    # You've exceeded the notification or subscriber limit.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class CreationLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # Request of DeleteBudget
     #
@@ -957,6 +1035,75 @@ module Aws::Budgets
       include Aws::Structure
     end
 
+    # The budget name already exists. Budget names must be unique within an
+    # account.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class DuplicateRecordException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The pagination token expired.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class ExpiredNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An error on the server occurred during the processing of your request.
+    # Try again later.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class InternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The pagination token is invalid.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An error on the client occurred. Typically, the cause is an invalid
+    # input value.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # We can’t locate the resource that you specified.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A notification that is associated with a budget. A budget can have up
     # to five notifications.
     #
@@ -1120,6 +1267,9 @@ module Aws::Budgets
     # @!attribute [rw] address
     #   The address that AWS sends budget notifications to, either an SNS
     #   topic or an email.
+    #
+    #   When you create a subscriber, the value of `Address` can't contain
+    #   line breaks.
     #   @return [String]
     #
     class Subscriber < Struct.new(
@@ -1182,6 +1332,12 @@ module Aws::Budgets
     #             amount: "NumericValue", # required
     #             unit: "UnitValue", # required
     #           },
+    #           planned_budget_limits: {
+    #             "GenericString" => {
+    #               amount: "NumericValue", # required
+    #               unit: "UnitValue", # required
+    #             },
+    #           },
     #           cost_filters: {
     #             "GenericString" => ["GenericString"],
     #           },
@@ -1213,7 +1369,7 @@ module Aws::Budgets
     #               unit: "UnitValue", # required
     #             },
     #           },
-    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
+    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, SAVINGS_PLANS_COVERAGE
     #           last_updated_time: Time.now,
     #         },
     #       }

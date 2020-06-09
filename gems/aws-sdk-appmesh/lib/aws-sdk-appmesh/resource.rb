@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AppMesh
+
   class Resource
 
     # @param options ({})

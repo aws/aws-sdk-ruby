@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SWF
+
   class Resource
 
     # @param options ({})

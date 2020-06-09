@@ -194,21 +194,21 @@ module Aws
           allow(utc).to receive(:strftime).and_return(datetime)
         }
 
-        it `unsigns payload for operations has 'v4-unsigned-payload' for 'authtype'` do
+        it "unsigns payload for operations has 'v4-unsigned-payload' for 'authtype'" do
           resp = client.streaming_foo(foo_name: 'foo')
           req = resp.context.http_request
           expect(req.headers['x-amz-content-sha256']).to eq('UNSIGNED-PAYLOAD')
           expect(req.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=stubbed-akid/20120101/region/svc-name/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=6d86306ea8dcf03db133cd35bcf626b0a440daefadc8ddde3304517126edb1bb')
         end
 
-        it `signs payload for operations without 'v4-unsigned-payload' for 'authtype'` do
+        it "signs payload for operations without 'v4-unsigned-payload' for 'authtype'" do
           resp = client.non_streaming_bar(bar_name: 'bar')
           req = resp.context.http_request
           expect(req.headers['x-amz-content-sha256']).not_to eq('UNSIGNED-PAYLOAD')
           expect(req.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=stubbed-akid/20120101/region/svc-name/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=c6394995838d4b4a1ec9b19229d92bac3f11441308f953d89306663230e95713')
         end
 
-        it `signs payload for HTTP request even when 'v4-unsigned-payload' is set` do
+        it "signs payload for HTTP request even when 'v4-unsigned-payload' is set" do
           client = svc::Client.new(options.merge(
             region: 'region',
             endpoint: 'http://domain.region.amazonaws.com',
@@ -220,6 +220,65 @@ module Aws
           expect(req.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=stubbed-akid/20120101/region/svc-name/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=0b7174139a9847c6e1dd4b3b56bfe95e88f8550cdf02e84561c6b18111579e11')
         end
 
+      end
+
+      describe 'clock skew correction' do
+        let(:clock_skew) { Retries::ClockSkew.new }
+        let(:now) { Time.now }
+        let(:utc) { now.utc }
+
+        before(:each) do
+          allow(Time).to receive(:now).and_return(now)
+          allow(now).to receive(:utc).and_return(utc)
+        end
+
+        it 'skips clock skew correction when clock_skew is not available on the configuration' do
+          client = Sigv4Client.new(options.merge(
+            clock_skew: nil,
+            stub_responses: true
+          ))
+          resp = client.example_operation
+          expect(resp.context.http_request.headers['X-Amz-Date']).
+            to eq now.utc.strftime("%Y%m%dT%H%M%SZ")
+        end
+
+        it 'skips clock skew correction when correct_clock_skew is false' do
+          client = Sigv4Client.new(options.merge(
+            clock_skew: clock_skew,
+            correct_clock_skew: false,
+            stub_responses: true
+          ))
+          expect(clock_skew).not_to receive(:clock_correction)
+          resp = client.example_operation
+          expect(resp.context.http_request.headers['X-Amz-Date']).
+            to eq now.utc.strftime("%Y%m%dT%H%M%SZ")
+        end
+
+        it 'skips clock skew correction when clock skew is 0' do
+          client = Sigv4Client.new(options.merge(
+            clock_skew: clock_skew,
+            correct_clock_skew: true,
+            stub_responses: true
+          ))
+          clock_skew = client.config.clock_skew
+          expect(clock_skew).to receive(:clock_correction).and_return(0)
+          resp = client.example_operation
+          expect(resp.context.http_request.headers['X-Amz-Date']).
+            to eq now.utc.strftime("%Y%m%dT%H%M%SZ")
+        end
+
+        it 'applies clock skew correction when clock skew is non zero' do
+          client = Sigv4Client.new(options.merge(
+            clock_skew: clock_skew,
+            correct_clock_skew: true,
+            stub_responses: true
+          ))
+          clock_skew = client.config.clock_skew
+          expect(clock_skew).to receive(:clock_correction).and_return(1000)
+          resp = client.example_operation
+          expect(resp.context.http_request.headers['X-Amz-Date']).
+            to eq (now.utc + 1000).strftime("%Y%m%dT%H%M%SZ")
+        end
       end
     end
   end

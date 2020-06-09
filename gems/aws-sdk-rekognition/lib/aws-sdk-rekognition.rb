@@ -12,6 +12,7 @@ require_relative 'aws-sdk-rekognition/types'
 require_relative 'aws-sdk-rekognition/client_api'
 require_relative 'aws-sdk-rekognition/client'
 require_relative 'aws-sdk-rekognition/errors'
+require_relative 'aws-sdk-rekognition/waiters'
 require_relative 'aws-sdk-rekognition/resource'
 require_relative 'aws-sdk-rekognition/customizations'
 
@@ -24,17 +25,20 @@ require_relative 'aws-sdk-rekognition/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     rekognition = Aws::Rekognition::Client.new
+#     resp = rekognition.compare_faces(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Rekognition all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Rekognition are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Rekognition::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Rekognition API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +46,6 @@ require_relative 'aws-sdk-rekognition/customizations'
 # @service
 module Aws::Rekognition
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.38.0'
 
 end

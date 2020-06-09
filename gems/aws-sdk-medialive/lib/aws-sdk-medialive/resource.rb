@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MediaLive
+
   class Resource
 
     # @param options ({})

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RDSDataService
+
   class Resource
 
     # @param options ({})

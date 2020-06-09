@@ -24,17 +24,20 @@ require_relative 'aws-sdk-pinpoint/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     pinpoint = Aws::Pinpoint::Client.new
+#     resp = pinpoint.create_app(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Pinpoint all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Pinpoint are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Pinpoint::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Pinpoint API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-pinpoint/customizations'
 # @service
 module Aws::Pinpoint
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.41.0'
 
 end

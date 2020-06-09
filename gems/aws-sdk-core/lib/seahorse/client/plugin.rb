@@ -53,12 +53,12 @@ module Seahorse
           # For backwards-compat reasons, the default value can be passed as 2nd
           # positional argument (before the options hash) or as the `:default` option
           # in the options hash.
-          if Hash === default
+          if default.is_a? Hash
             options = default
           else
             options[:default] = default
           end
-          options[:default_block] = Proc.new if block_given?
+          options[:default_block] = block if block_given?
           self.options << PluginOption.new(name, options)
         end
 
@@ -109,6 +109,7 @@ module Seahorse
 
         def initialize(name, options = {})
           @name = name
+          @doc_default = nil
           options.each_pair do |opt_name, opt_value|
             self.send("#{opt_name}=", opt_value)
           end
@@ -119,14 +120,14 @@ module Seahorse
         attr_accessor :default_block
         attr_accessor :required
         attr_accessor :doc_type
-        attr_accessor :doc_default
+        attr_writer :doc_default
         attr_accessor :docstring
 
-        def doc_default
-          if @doc_default.nil?
-            Proc === default ? nil : default
+        def doc_default(options)
+          if @doc_default.nil? && !default.is_a?(Proc)
+            default
           else
-            @doc_default
+            @doc_default.respond_to?(:call) ? @doc_default.call(options) : @doc_default
           end
         end
 

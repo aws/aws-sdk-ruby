@@ -24,17 +24,20 @@ require_relative 'aws-sdk-globalaccelerator/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     global_accelerator = Aws::GlobalAccelerator::Client.new
+#     resp = global_accelerator.advertise_byoip_cidr(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Global Accelerator all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Global Accelerator are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::GlobalAccelerator::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Global Accelerator API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-globalaccelerator/customizations'
 # @service
 module Aws::GlobalAccelerator
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.18.0'
 
 end

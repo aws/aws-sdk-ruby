@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MarketplaceMetering
+
   class Resource
 
     # @param options ({})

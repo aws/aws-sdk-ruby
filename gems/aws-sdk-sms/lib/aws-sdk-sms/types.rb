@@ -883,6 +883,30 @@ module Aws::SMS
     #
     class ImportServerCatalogResponse < Aws::EmptyStructure; end
 
+    # An internal error occurred.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/InternalError AWS API Documentation
+    #
+    class InternalError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A specified parameter is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass LaunchAppRequest
     #   data as a hash:
     #
@@ -973,6 +997,42 @@ module Aws::SMS
     class ListAppsResponse < Struct.new(
       :apps,
       :next_token)
+      include Aws::Structure
+    end
+
+    # A required parameter is missing.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/MissingRequiredParameterException AWS API Documentation
+    #
+    class MissingRequiredParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There are no connectors available.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/NoConnectorsAvailableException AWS API Documentation
+    #
+    class NoConnectorsAvailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This operation is not allowed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/OperationNotPermittedException AWS API Documentation
+    #
+    class OperationNotPermittedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1224,6 +1284,30 @@ module Aws::SMS
       include Aws::Structure
     end
 
+    # The specified replication job already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ReplicationJobAlreadyExistsException AWS API Documentation
+    #
+    class ReplicationJobAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified replication job does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ReplicationJobNotFoundException AWS API Documentation
+    #
+    class ReplicationJobNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents a replication run.
     #
     # @!attribute [rw] replication_run_id
@@ -1298,6 +1382,19 @@ module Aws::SMS
       :description,
       :encrypted,
       :kms_key_id)
+      include Aws::Structure
+    end
+
+    # You have exceeded the number of on-demand replication runs you can
+    # request in a 24-hour period.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ReplicationRunLimitExceededException AWS API Documentation
+    #
+    class ReplicationRunLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1396,6 +1493,18 @@ module Aws::SMS
       :vm_server,
       :replication_job_id,
       :replication_job_terminated)
+      include Aws::Structure
+    end
+
+    # The specified server cannot be replicated.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ServerCannotBeReplicatedException AWS API Documentation
+    #
+    class ServerCannotBeReplicatedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1885,6 +1994,12 @@ module Aws::SMS
       include Aws::Structure
     end
 
+    # The service is temporarily unavailable.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/TemporarilyUnavailableException AWS API Documentation
+    #
+    class TemporarilyUnavailableException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass TerminateAppRequest
     #   data as a hash:
     #
@@ -1906,6 +2021,19 @@ module Aws::SMS
     # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/TerminateAppResponse AWS API Documentation
     #
     class TerminateAppResponse < Aws::EmptyStructure; end
+
+    # You lack permissions needed to perform this operation. Check your IAM
+    # policies, and ensure that you are using the correct access keys.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UnauthorizedOperationException AWS API Documentation
+    #
+    class UnauthorizedOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateAppRequest
     #   data as a hash:

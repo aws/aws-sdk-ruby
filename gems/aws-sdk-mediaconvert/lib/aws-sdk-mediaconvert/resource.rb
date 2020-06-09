@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MediaConvert
+
   class Resource
 
     # @param options ({})

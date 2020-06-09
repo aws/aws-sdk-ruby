@@ -24,17 +24,20 @@ require_relative 'aws-sdk-chime/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     chime = Aws::Chime::Client.new
+#     resp = chime.associate_phone_number_with_user(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Chime all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Chime are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Chime::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Chime API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-chime/customizations'
 # @service
 module Aws::Chime
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.28.0'
 
 end

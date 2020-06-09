@@ -1,6 +1,91 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2020-03-10)
+------------------
+
+* Feature - Change the disbursement data set to look past 31 days instead until the beginning of the month.
+
+1.20.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2020-01-21)
+------------------
+
+* Feature - Remove 4 deprecated data sets, change some data sets available dates to 2017-09-15
+
+1.18.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2019-10-16)
+------------------
+
+* Feature - add 2 more values for the supporting sections - age of past due funds + uncollected funds breakdown
+
+1.16.0 (2019-09-09)
+------------------
+
+* Feature - Add FDP+FPS (monthly_revenue_field_demonstration_usage + monthly_revenue_flexible_payment_schedule)  to Marketplace Commerce Analytics Service
+
+1.15.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.11.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.10.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.9.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.8.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.7.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
 1.6.0 (2018-11-20)
 ------------------
 

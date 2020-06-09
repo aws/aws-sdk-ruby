@@ -122,7 +122,7 @@ module Seahorse
         describe 'IO object target' do
 
           it 'writes to the given object' do
-            buffer = StringIO.new('')
+            buffer = StringIO.new(String.new)
             request.send_request(target: buffer)
             expect(buffer.string).to eq("part1part2part3")
           end

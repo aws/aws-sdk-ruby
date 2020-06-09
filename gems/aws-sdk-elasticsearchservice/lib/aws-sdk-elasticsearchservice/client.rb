@@ -23,12 +23,25 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:elasticsearchservice)
 
 module Aws::ElasticsearchService
+  # An API client for ElasticsearchService.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::ElasticsearchService::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +68,7 @@ module Aws::ElasticsearchService
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -91,7 +105,7 @@ module Aws::ElasticsearchService
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +120,12 @@ module Aws::ElasticsearchService
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +133,10 @@ module Aws::ElasticsearchService
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +150,10 @@ module Aws::ElasticsearchService
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +161,7 @@ module Aws::ElasticsearchService
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +176,7 @@ module Aws::ElasticsearchService
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +188,29 @@ module Aws::ElasticsearchService
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +218,30 @@ module Aws::ElasticsearchService
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -199,11 +260,88 @@ module Aws::ElasticsearchService
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
+
+    # Allows the destination domain owner to accept an inbound cross-cluster
+    # search connection request.
+    #
+    # @option params [required, String] :cross_cluster_search_connection_id
+    #   The id of the inbound connection that you want to accept.
+    #
+    # @return [Types::AcceptInboundCrossClusterSearchConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptInboundCrossClusterSearchConnectionResponse#cross_cluster_search_connection #cross_cluster_search_connection} => Types::InboundCrossClusterSearchConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_inbound_cross_cluster_search_connection({
+    #     cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_cluster_search_connection.source_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.cross_cluster_search_connection_id #=> String
+    #   resp.cross_cluster_search_connection.connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "APPROVED", "REJECTING", "REJECTED", "DELETING", "DELETED"
+    #   resp.cross_cluster_search_connection.connection_status.message #=> String
+    #
+    # @overload accept_inbound_cross_cluster_search_connection(params = {})
+    # @param [Hash] params ({})
+    def accept_inbound_cross_cluster_search_connection(params = {}, options = {})
+      req = build_request(:accept_inbound_cross_cluster_search_connection, params)
+      req.send_request(options)
+    end
 
     # Attaches tags to an existing Elasticsearch domain. Tags are a set of
     # case-sensitive key value pairs. An Elasticsearch domain may have up to
@@ -241,6 +379,45 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Associates a package with an Amazon ES domain.
+    #
+    # @option params [required, String] :package_id
+    #   Internal ID of the package that you want to associate with a domain.
+    #   Use `DescribePackages` to find this value.
+    #
+    # @option params [required, String] :domain_name
+    #   Name of the domain that you want to associate the package with.
+    #
+    # @return [Types::AssociatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociatePackageResponse#domain_package_details #domain_package_details} => Types::DomainPackageDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_package({
+    #     package_id: "PackageID", # required
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_package_details.package_id #=> String
+    #   resp.domain_package_details.package_name #=> String
+    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details.last_updated #=> Time
+    #   resp.domain_package_details.domain_name #=> String
+    #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details.reference_path #=> String
+    #   resp.domain_package_details.error_details.error_type #=> String
+    #   resp.domain_package_details.error_details.error_message #=> String
+    #
+    # @overload associate_package(params = {})
+    # @param [Hash] params ({})
+    def associate_package(params = {}, options = {})
+      req = build_request(:associate_package, params)
+      req.send_request(options)
+    end
+
     # Cancels a scheduled service software update for an Amazon ES domain.
     # You can only perform this operation before the `AutomatedUpdateDate`
     # and when the `UpdateStatus` is in the `PENDING_UPDATE` state.
@@ -268,6 +445,7 @@ module Aws::ElasticsearchService
     #   resp.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.service_software_options.description #=> String
     #   resp.service_software_options.automated_update_date #=> Time
+    #   resp.service_software_options.optional_deployment #=> Boolean
     #
     # @overload cancel_elasticsearch_service_software_update(params = {})
     # @param [Hash] params ({})
@@ -287,7 +465,7 @@ module Aws::ElasticsearchService
     # @option params [required, String] :domain_name
     #   The name of the Elasticsearch domain that you are creating. Domain
     #   names are unique across the domains owned by an account within an AWS
-    #   region. Domain names must start with a letter or number and can
+    #   region. Domain names must start with a lowercase letter and can
     #   contain the following characters: a-z (lowercase), 0-9, and -
     #   (hyphen).
     #
@@ -354,6 +532,13 @@ module Aws::ElasticsearchService
     #   Map of `LogType` and `LogPublishingOption`, each containing options to
     #   publish a given type of Elasticsearch log.
     #
+    # @option params [Types::DomainEndpointOptions] :domain_endpoint_options
+    #   Options to specify configuration that will be applied to the domain
+    #   endpoint.
+    #
+    # @option params [Types::AdvancedSecurityOptionsInput] :advanced_security_options
+    #   Specifies advanced security options.
+    #
     # @return [Types::CreateElasticsearchDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateElasticsearchDomainResponse#domain_status #domain_status} => Types::ElasticsearchDomainStatus
@@ -364,12 +549,18 @@ module Aws::ElasticsearchService
     #     domain_name: "DomainName", # required
     #     elasticsearch_version: "ElasticsearchVersionString",
     #     elasticsearch_cluster_config: {
-    #       instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #       instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #       instance_count: 1,
     #       dedicated_master_enabled: false,
     #       zone_awareness_enabled: false,
-    #       dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #       zone_awareness_config: {
+    #         availability_zone_count: 1,
+    #       },
+    #       dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #       dedicated_master_count: 1,
+    #       warm_enabled: false,
+    #       warm_type: "ultrawarm1.medium.elasticsearch", # accepts ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch
+    #       warm_count: 1,
     #     },
     #     ebs_options: {
     #       ebs_enabled: false,
@@ -407,6 +598,19 @@ module Aws::ElasticsearchService
     #         enabled: false,
     #       },
     #     },
+    #     domain_endpoint_options: {
+    #       enforce_https: false,
+    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #     },
+    #     advanced_security_options: {
+    #       enabled: false,
+    #       internal_user_database_enabled: false,
+    #       master_user_options: {
+    #         master_user_arn: "ARN",
+    #         master_user_name: "Username",
+    #         master_user_password: "Password",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -422,12 +626,16 @@ module Aws::ElasticsearchService
     #   resp.domain_status.processing #=> Boolean
     #   resp.domain_status.upgrade_processing #=> Boolean
     #   resp.domain_status.elasticsearch_version #=> String
-    #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_status.elasticsearch_cluster_config.instance_count #=> Integer
     #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_enabled #=> Boolean
     #   resp.domain_status.elasticsearch_cluster_config.zone_awareness_enabled #=> Boolean
-    #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.domain_status.elasticsearch_cluster_config.zone_awareness_config.availability_zone_count #=> Integer
+    #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_count #=> Integer
+    #   resp.domain_status.elasticsearch_cluster_config.warm_enabled #=> Boolean
+    #   resp.domain_status.elasticsearch_cluster_config.warm_type #=> String, one of "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch"
+    #   resp.domain_status.elasticsearch_cluster_config.warm_count #=> Integer
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
@@ -460,11 +668,122 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.domain_status.service_software_options.description #=> String
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
+    #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.advanced_security_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
     #
     # @overload create_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
     def create_elasticsearch_domain(params = {}, options = {})
       req = build_request(:create_elasticsearch_domain, params)
+      req.send_request(options)
+    end
+
+    # Creates a new cross-cluster search connection from a source domain to
+    # a destination domain.
+    #
+    # @option params [required, Types::DomainInformation] :source_domain_info
+    #   Specifies the `DomainInformation` for the source Elasticsearch domain.
+    #
+    # @option params [required, Types::DomainInformation] :destination_domain_info
+    #   Specifies the `DomainInformation` for the destination Elasticsearch
+    #   domain.
+    #
+    # @option params [required, String] :connection_alias
+    #   Specifies the connection alias that will be used by the customer for
+    #   this connection.
+    #
+    # @return [Types::CreateOutboundCrossClusterSearchConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOutboundCrossClusterSearchConnectionResponse#source_domain_info #source_domain_info} => Types::DomainInformation
+    #   * {Types::CreateOutboundCrossClusterSearchConnectionResponse#destination_domain_info #destination_domain_info} => Types::DomainInformation
+    #   * {Types::CreateOutboundCrossClusterSearchConnectionResponse#connection_alias #connection_alias} => String
+    #   * {Types::CreateOutboundCrossClusterSearchConnectionResponse#connection_status #connection_status} => Types::OutboundCrossClusterSearchConnectionStatus
+    #   * {Types::CreateOutboundCrossClusterSearchConnectionResponse#cross_cluster_search_connection_id #cross_cluster_search_connection_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_outbound_cross_cluster_search_connection({
+    #     source_domain_info: { # required
+    #       owner_id: "OwnerId",
+    #       domain_name: "DomainName", # required
+    #       region: "Region",
+    #     },
+    #     destination_domain_info: { # required
+    #       owner_id: "OwnerId",
+    #       domain_name: "DomainName", # required
+    #       region: "Region",
+    #     },
+    #     connection_alias: "ConnectionAlias", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_domain_info.owner_id #=> String
+    #   resp.source_domain_info.domain_name #=> String
+    #   resp.source_domain_info.region #=> String
+    #   resp.destination_domain_info.owner_id #=> String
+    #   resp.destination_domain_info.domain_name #=> String
+    #   resp.destination_domain_info.region #=> String
+    #   resp.connection_alias #=> String
+    #   resp.connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "VALIDATING", "VALIDATION_FAILED", "PROVISIONING", "ACTIVE", "REJECTED", "DELETING", "DELETED"
+    #   resp.connection_status.message #=> String
+    #   resp.cross_cluster_search_connection_id #=> String
+    #
+    # @overload create_outbound_cross_cluster_search_connection(params = {})
+    # @param [Hash] params ({})
+    def create_outbound_cross_cluster_search_connection(params = {}, options = {})
+      req = build_request(:create_outbound_cross_cluster_search_connection, params)
+      req.send_request(options)
+    end
+
+    # Create a package for use with Amazon ES domains.
+    #
+    # @option params [required, String] :package_name
+    #   Unique identifier for the package.
+    #
+    # @option params [required, String] :package_type
+    #   Type of package. Currently supports only TXT-DICTIONARY.
+    #
+    # @option params [String] :package_description
+    #   Description of the package.
+    #
+    # @option params [required, Types::PackageSource] :package_source
+    #   The customer S3 location `PackageSource` for importing the package.
+    #
+    # @return [Types::CreatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePackageResponse#package_details #package_details} => Types::PackageDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_package({
+    #     package_name: "PackageName", # required
+    #     package_type: "TXT-DICTIONARY", # required, accepts TXT-DICTIONARY
+    #     package_description: "PackageDescription",
+    #     package_source: { # required
+    #       s3_bucket_name: "S3BucketName",
+    #       s3_key: "S3Key",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_details.package_id #=> String
+    #   resp.package_details.package_name #=> String
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details.package_description #=> String
+    #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.package_details.created_at #=> Time
+    #   resp.package_details.error_details.error_type #=> String
+    #   resp.package_details.error_details.error_message #=> String
+    #
+    # @overload create_package(params = {})
+    # @param [Hash] params ({})
+    def create_package(params = {}, options = {})
+      req = build_request(:create_package, params)
       req.send_request(options)
     end
 
@@ -498,12 +817,16 @@ module Aws::ElasticsearchService
     #   resp.domain_status.processing #=> Boolean
     #   resp.domain_status.upgrade_processing #=> Boolean
     #   resp.domain_status.elasticsearch_version #=> String
-    #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_status.elasticsearch_cluster_config.instance_count #=> Integer
     #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_enabled #=> Boolean
     #   resp.domain_status.elasticsearch_cluster_config.zone_awareness_enabled #=> Boolean
-    #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.domain_status.elasticsearch_cluster_config.zone_awareness_config.availability_zone_count #=> Integer
+    #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_count #=> Integer
+    #   resp.domain_status.elasticsearch_cluster_config.warm_enabled #=> Boolean
+    #   resp.domain_status.elasticsearch_cluster_config.warm_type #=> String, one of "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch"
+    #   resp.domain_status.elasticsearch_cluster_config.warm_count #=> Integer
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
@@ -536,6 +859,11 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.domain_status.service_software_options.description #=> String
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
+    #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.advanced_security_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
     #
     # @overload delete_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -561,6 +889,111 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def delete_elasticsearch_service_role(params = {}, options = {})
       req = build_request(:delete_elasticsearch_service_role, params)
+      req.send_request(options)
+    end
+
+    # Allows the destination domain owner to delete an existing inbound
+    # cross-cluster search connection.
+    #
+    # @option params [required, String] :cross_cluster_search_connection_id
+    #   The id of the inbound connection that you want to permanently delete.
+    #
+    # @return [Types::DeleteInboundCrossClusterSearchConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteInboundCrossClusterSearchConnectionResponse#cross_cluster_search_connection #cross_cluster_search_connection} => Types::InboundCrossClusterSearchConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_inbound_cross_cluster_search_connection({
+    #     cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_cluster_search_connection.source_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.cross_cluster_search_connection_id #=> String
+    #   resp.cross_cluster_search_connection.connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "APPROVED", "REJECTING", "REJECTED", "DELETING", "DELETED"
+    #   resp.cross_cluster_search_connection.connection_status.message #=> String
+    #
+    # @overload delete_inbound_cross_cluster_search_connection(params = {})
+    # @param [Hash] params ({})
+    def delete_inbound_cross_cluster_search_connection(params = {}, options = {})
+      req = build_request(:delete_inbound_cross_cluster_search_connection, params)
+      req.send_request(options)
+    end
+
+    # Allows the source domain owner to delete an existing outbound
+    # cross-cluster search connection.
+    #
+    # @option params [required, String] :cross_cluster_search_connection_id
+    #   The id of the outbound connection that you want to permanently delete.
+    #
+    # @return [Types::DeleteOutboundCrossClusterSearchConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteOutboundCrossClusterSearchConnectionResponse#cross_cluster_search_connection #cross_cluster_search_connection} => Types::OutboundCrossClusterSearchConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_outbound_cross_cluster_search_connection({
+    #     cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_cluster_search_connection.source_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.cross_cluster_search_connection_id #=> String
+    #   resp.cross_cluster_search_connection.connection_alias #=> String
+    #   resp.cross_cluster_search_connection.connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "VALIDATING", "VALIDATION_FAILED", "PROVISIONING", "ACTIVE", "REJECTED", "DELETING", "DELETED"
+    #   resp.cross_cluster_search_connection.connection_status.message #=> String
+    #
+    # @overload delete_outbound_cross_cluster_search_connection(params = {})
+    # @param [Hash] params ({})
+    def delete_outbound_cross_cluster_search_connection(params = {}, options = {})
+      req = build_request(:delete_outbound_cross_cluster_search_connection, params)
+      req.send_request(options)
+    end
+
+    # Delete the package.
+    #
+    # @option params [required, String] :package_id
+    #   Internal ID of the package that you want to delete. Use
+    #   `DescribePackages` to find this value.
+    #
+    # @return [Types::DeletePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePackageResponse#package_details #package_details} => Types::PackageDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_package({
+    #     package_id: "PackageID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_details.package_id #=> String
+    #   resp.package_details.package_name #=> String
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details.package_description #=> String
+    #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.package_details.created_at #=> Time
+    #   resp.package_details.error_details.error_type #=> String
+    #   resp.package_details.error_details.error_message #=> String
+    #
+    # @overload delete_package(params = {})
+    # @param [Hash] params ({})
+    def delete_package(params = {}, options = {})
+      req = build_request(:delete_package, params)
       req.send_request(options)
     end
 
@@ -594,12 +1027,16 @@ module Aws::ElasticsearchService
     #   resp.domain_status.processing #=> Boolean
     #   resp.domain_status.upgrade_processing #=> Boolean
     #   resp.domain_status.elasticsearch_version #=> String
-    #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_status.elasticsearch_cluster_config.instance_count #=> Integer
     #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_enabled #=> Boolean
     #   resp.domain_status.elasticsearch_cluster_config.zone_awareness_enabled #=> Boolean
-    #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.domain_status.elasticsearch_cluster_config.zone_awareness_config.availability_zone_count #=> Integer
+    #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_count #=> Integer
+    #   resp.domain_status.elasticsearch_cluster_config.warm_enabled #=> Boolean
+    #   resp.domain_status.elasticsearch_cluster_config.warm_type #=> String, one of "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch"
+    #   resp.domain_status.elasticsearch_cluster_config.warm_count #=> Integer
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
@@ -632,6 +1069,11 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.domain_status.service_software_options.description #=> String
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
+    #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.advanced_security_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
     #
     # @overload describe_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -665,12 +1107,16 @@ module Aws::ElasticsearchService
     #   resp.domain_config.elasticsearch_version.status.update_version #=> Integer
     #   resp.domain_config.elasticsearch_version.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.elasticsearch_version.status.pending_deletion #=> Boolean
-    #   resp.domain_config.elasticsearch_cluster_config.options.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.domain_config.elasticsearch_cluster_config.options.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_config.elasticsearch_cluster_config.options.instance_count #=> Integer
     #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_enabled #=> Boolean
     #   resp.domain_config.elasticsearch_cluster_config.options.zone_awareness_enabled #=> Boolean
-    #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.domain_config.elasticsearch_cluster_config.options.zone_awareness_config.availability_zone_count #=> Integer
+    #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_count #=> Integer
+    #   resp.domain_config.elasticsearch_cluster_config.options.warm_enabled #=> Boolean
+    #   resp.domain_config.elasticsearch_cluster_config.options.warm_type #=> String, one of "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch"
+    #   resp.domain_config.elasticsearch_cluster_config.options.warm_count #=> Integer
     #   resp.domain_config.elasticsearch_cluster_config.status.creation_date #=> Time
     #   resp.domain_config.elasticsearch_cluster_config.status.update_date #=> Time
     #   resp.domain_config.elasticsearch_cluster_config.status.update_version #=> Integer
@@ -746,6 +1192,20 @@ module Aws::ElasticsearchService
     #   resp.domain_config.log_publishing_options.status.update_version #=> Integer
     #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
+    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_config.domain_endpoint_options.status.creation_date #=> Time
+    #   resp.domain_config.domain_endpoint_options.status.update_date #=> Time
+    #   resp.domain_config.domain_endpoint_options.status.update_version #=> Integer
+    #   resp.domain_config.domain_endpoint_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.domain_endpoint_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.status.creation_date #=> Time
+    #   resp.domain_config.advanced_security_options.status.update_date #=> Time
+    #   resp.domain_config.advanced_security_options.status.update_version #=> Integer
+    #   resp.domain_config.advanced_security_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.advanced_security_options.status.pending_deletion #=> Boolean
     #
     # @overload describe_elasticsearch_domain_config(params = {})
     # @param [Hash] params ({})
@@ -785,12 +1245,16 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].processing #=> Boolean
     #   resp.domain_status_list[0].upgrade_processing #=> Boolean
     #   resp.domain_status_list[0].elasticsearch_version #=> String
-    #   resp.domain_status_list[0].elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.domain_status_list[0].elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_status_list[0].elasticsearch_cluster_config.instance_count #=> Integer
     #   resp.domain_status_list[0].elasticsearch_cluster_config.dedicated_master_enabled #=> Boolean
     #   resp.domain_status_list[0].elasticsearch_cluster_config.zone_awareness_enabled #=> Boolean
-    #   resp.domain_status_list[0].elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.domain_status_list[0].elasticsearch_cluster_config.zone_awareness_config.availability_zone_count #=> Integer
+    #   resp.domain_status_list[0].elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_status_list[0].elasticsearch_cluster_config.dedicated_master_count #=> Integer
+    #   resp.domain_status_list[0].elasticsearch_cluster_config.warm_enabled #=> Boolean
+    #   resp.domain_status_list[0].elasticsearch_cluster_config.warm_type #=> String, one of "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch"
+    #   resp.domain_status_list[0].elasticsearch_cluster_config.warm_count #=> Integer
     #   resp.domain_status_list[0].ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status_list[0].ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
     #   resp.domain_status_list[0].ebs_options.volume_size #=> Integer
@@ -823,6 +1287,11 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.domain_status_list[0].service_software_options.description #=> String
     #   resp.domain_status_list[0].service_software_options.automated_update_date #=> Time
+    #   resp.domain_status_list[0].service_software_options.optional_deployment #=> Boolean
+    #   resp.domain_status_list[0].domain_endpoint_options.enforce_https #=> Boolean
+    #   resp.domain_status_list[0].domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status_list[0].advanced_security_options.enabled #=> Boolean
+    #   resp.domain_status_list[0].advanced_security_options.internal_user_database_enabled #=> Boolean
     #
     # @overload describe_elasticsearch_domains(params = {})
     # @param [Hash] params ({})
@@ -855,7 +1324,7 @@ module Aws::ElasticsearchService
     #
     #   resp = client.describe_elasticsearch_instance_type_limits({
     #     domain_name: "DomainName",
-    #     instance_type: "m3.medium.elasticsearch", # required, accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #     instance_type: "m3.medium.elasticsearch", # required, accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #     elasticsearch_version: "ElasticsearchVersionString", # required
     #   })
     #
@@ -883,6 +1352,184 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Lists all the inbound cross-cluster search connections for a
+    # destination domain.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A list of filters used to match properties for inbound cross-cluster
+    #   search connection. Available `Filter` names for this operation are: *
+    #   cross-cluster-search-connection-id
+    #   * source-domain-info.domain-name
+    #   * source-domain-info.owner-id
+    #   * source-domain-info.region
+    #   * destination-domain-info.domain-name
+    #
+    # @option params [Integer] :max_results
+    #   Set this value to limit the number of results returned. If not
+    #   specified, defaults to 100.
+    #
+    # @option params [String] :next_token
+    #   NextToken is sent in case the earlier API call results contain the
+    #   NextToken. It is used for pagination.
+    #
+    # @return [Types::DescribeInboundCrossClusterSearchConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInboundCrossClusterSearchConnectionsResponse#cross_cluster_search_connections #cross_cluster_search_connections} => Array&lt;Types::InboundCrossClusterSearchConnection&gt;
+    #   * {Types::DescribeInboundCrossClusterSearchConnectionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inbound_cross_cluster_search_connections({
+    #     filters: [
+    #       {
+    #         name: "NonEmptyString",
+    #         values: ["NonEmptyString"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_cluster_search_connections #=> Array
+    #   resp.cross_cluster_search_connections[0].source_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connections[0].source_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connections[0].source_domain_info.region #=> String
+    #   resp.cross_cluster_search_connections[0].destination_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connections[0].destination_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connections[0].destination_domain_info.region #=> String
+    #   resp.cross_cluster_search_connections[0].cross_cluster_search_connection_id #=> String
+    #   resp.cross_cluster_search_connections[0].connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "APPROVED", "REJECTING", "REJECTED", "DELETING", "DELETED"
+    #   resp.cross_cluster_search_connections[0].connection_status.message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_inbound_cross_cluster_search_connections(params = {})
+    # @param [Hash] params ({})
+    def describe_inbound_cross_cluster_search_connections(params = {}, options = {})
+      req = build_request(:describe_inbound_cross_cluster_search_connections, params)
+      req.send_request(options)
+    end
+
+    # Lists all the outbound cross-cluster search connections for a source
+    # domain.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A list of filters used to match properties for outbound cross-cluster
+    #   search connection. Available `Filter` names for this operation are: *
+    #   cross-cluster-search-connection-id
+    #   * destination-domain-info.domain-name
+    #   * destination-domain-info.owner-id
+    #   * destination-domain-info.region
+    #   * source-domain-info.domain-name
+    #
+    # @option params [Integer] :max_results
+    #   Set this value to limit the number of results returned. If not
+    #   specified, defaults to 100.
+    #
+    # @option params [String] :next_token
+    #   NextToken is sent in case the earlier API call results contain the
+    #   NextToken. It is used for pagination.
+    #
+    # @return [Types::DescribeOutboundCrossClusterSearchConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOutboundCrossClusterSearchConnectionsResponse#cross_cluster_search_connections #cross_cluster_search_connections} => Array&lt;Types::OutboundCrossClusterSearchConnection&gt;
+    #   * {Types::DescribeOutboundCrossClusterSearchConnectionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_outbound_cross_cluster_search_connections({
+    #     filters: [
+    #       {
+    #         name: "NonEmptyString",
+    #         values: ["NonEmptyString"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_cluster_search_connections #=> Array
+    #   resp.cross_cluster_search_connections[0].source_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connections[0].source_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connections[0].source_domain_info.region #=> String
+    #   resp.cross_cluster_search_connections[0].destination_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connections[0].destination_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connections[0].destination_domain_info.region #=> String
+    #   resp.cross_cluster_search_connections[0].cross_cluster_search_connection_id #=> String
+    #   resp.cross_cluster_search_connections[0].connection_alias #=> String
+    #   resp.cross_cluster_search_connections[0].connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "VALIDATING", "VALIDATION_FAILED", "PROVISIONING", "ACTIVE", "REJECTED", "DELETING", "DELETED"
+    #   resp.cross_cluster_search_connections[0].connection_status.message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_outbound_cross_cluster_search_connections(params = {})
+    # @param [Hash] params ({})
+    def describe_outbound_cross_cluster_search_connections(params = {}, options = {})
+      req = build_request(:describe_outbound_cross_cluster_search_connections, params)
+      req.send_request(options)
+    end
+
+    # Describes all packages available to Amazon ES. Includes options for
+    # filtering, limiting the number of results, and pagination.
+    #
+    # @option params [Array<Types::DescribePackagesFilter>] :filters
+    #   Only returns packages that match the `DescribePackagesFilterList`
+    #   values.
+    #
+    # @option params [Integer] :max_results
+    #   Limits results to a maximum number of packages.
+    #
+    # @option params [String] :next_token
+    #   Used for pagination. Only necessary if a previous API call includes a
+    #   non-null NextToken value. If provided, returns results for the next
+    #   page.
+    #
+    # @return [Types::DescribePackagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePackagesResponse#package_details_list #package_details_list} => Array&lt;Types::PackageDetails&gt;
+    #   * {Types::DescribePackagesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_packages({
+    #     filters: [
+    #       {
+    #         name: "PackageID", # accepts PackageID, PackageName, PackageStatus
+    #         value: ["DescribePackagesFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_details_list #=> Array
+    #   resp.package_details_list[0].package_id #=> String
+    #   resp.package_details_list[0].package_name #=> String
+    #   resp.package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details_list[0].package_description #=> String
+    #   resp.package_details_list[0].package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.package_details_list[0].created_at #=> Time
+    #   resp.package_details_list[0].error_details.error_type #=> String
+    #   resp.package_details_list[0].error_details.error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_packages(params = {})
+    # @param [Hash] params ({})
+    def describe_packages(params = {}, options = {})
+      req = build_request(:describe_packages, params)
+      req.send_request(options)
+    end
+
     # Lists available reserved Elasticsearch instance offerings.
     #
     # @option params [String] :reserved_elasticsearch_instance_offering_id
@@ -903,6 +1550,8 @@ module Aws::ElasticsearchService
     #   * {Types::DescribeReservedElasticsearchInstanceOfferingsResponse#next_token #next_token} => String
     #   * {Types::DescribeReservedElasticsearchInstanceOfferingsResponse#reserved_elasticsearch_instance_offerings #reserved_elasticsearch_instance_offerings} => Array&lt;Types::ReservedElasticsearchInstanceOffering&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_reserved_elasticsearch_instance_offerings({
@@ -916,7 +1565,7 @@ module Aws::ElasticsearchService
     #   resp.next_token #=> String
     #   resp.reserved_elasticsearch_instance_offerings #=> Array
     #   resp.reserved_elasticsearch_instance_offerings[0].reserved_elasticsearch_instance_offering_id #=> String
-    #   resp.reserved_elasticsearch_instance_offerings[0].elasticsearch_instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.reserved_elasticsearch_instance_offerings[0].elasticsearch_instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.reserved_elasticsearch_instance_offerings[0].duration #=> Integer
     #   resp.reserved_elasticsearch_instance_offerings[0].fixed_price #=> Float
     #   resp.reserved_elasticsearch_instance_offerings[0].usage_price #=> Float
@@ -954,6 +1603,8 @@ module Aws::ElasticsearchService
     #   * {Types::DescribeReservedElasticsearchInstancesResponse#next_token #next_token} => String
     #   * {Types::DescribeReservedElasticsearchInstancesResponse#reserved_elasticsearch_instances #reserved_elasticsearch_instances} => Array&lt;Types::ReservedElasticsearchInstance&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_reserved_elasticsearch_instances({
@@ -969,7 +1620,7 @@ module Aws::ElasticsearchService
     #   resp.reserved_elasticsearch_instances[0].reservation_name #=> String
     #   resp.reserved_elasticsearch_instances[0].reserved_elasticsearch_instance_id #=> String
     #   resp.reserved_elasticsearch_instances[0].reserved_elasticsearch_instance_offering_id #=> String
-    #   resp.reserved_elasticsearch_instances[0].elasticsearch_instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.reserved_elasticsearch_instances[0].elasticsearch_instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.reserved_elasticsearch_instances[0].start_time #=> Time
     #   resp.reserved_elasticsearch_instances[0].duration #=> Integer
     #   resp.reserved_elasticsearch_instances[0].fixed_price #=> Float
@@ -986,6 +1637,45 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def describe_reserved_elasticsearch_instances(params = {}, options = {})
       req = build_request(:describe_reserved_elasticsearch_instances, params)
+      req.send_request(options)
+    end
+
+    # Dissociates a package from the Amazon ES domain.
+    #
+    # @option params [required, String] :package_id
+    #   Internal ID of the package that you want to associate with a domain.
+    #   Use `DescribePackages` to find this value.
+    #
+    # @option params [required, String] :domain_name
+    #   Name of the domain that you want to associate the package with.
+    #
+    # @return [Types::DissociatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DissociatePackageResponse#domain_package_details #domain_package_details} => Types::DomainPackageDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.dissociate_package({
+    #     package_id: "PackageID", # required
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_package_details.package_id #=> String
+    #   resp.domain_package_details.package_name #=> String
+    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details.last_updated #=> Time
+    #   resp.domain_package_details.domain_name #=> String
+    #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details.reference_path #=> String
+    #   resp.domain_package_details.error_details.error_type #=> String
+    #   resp.domain_package_details.error_details.error_message #=> String
+    #
+    # @overload dissociate_package(params = {})
+    # @param [Hash] params ({})
+    def dissociate_package(params = {}, options = {})
+      req = build_request(:dissociate_package, params)
       req.send_request(options)
     end
 
@@ -1044,6 +1734,8 @@ module Aws::ElasticsearchService
     #
     #   * {Types::GetUpgradeHistoryResponse#upgrade_histories #upgrade_histories} => Array&lt;Types::UpgradeHistory&gt;
     #   * {Types::GetUpgradeHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1127,6 +1819,55 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Lists all Amazon ES domains associated with the package.
+    #
+    # @option params [required, String] :package_id
+    #   The package for which to list domains.
+    #
+    # @option params [Integer] :max_results
+    #   Limits results to a maximum number of domains.
+    #
+    # @option params [String] :next_token
+    #   Used for pagination. Only necessary if a previous API call includes a
+    #   non-null NextToken value. If provided, returns results for the next
+    #   page.
+    #
+    # @return [Types::ListDomainsForPackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDomainsForPackageResponse#domain_package_details_list #domain_package_details_list} => Array&lt;Types::DomainPackageDetails&gt;
+    #   * {Types::ListDomainsForPackageResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domains_for_package({
+    #     package_id: "PackageID", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_package_details_list #=> Array
+    #   resp.domain_package_details_list[0].package_id #=> String
+    #   resp.domain_package_details_list[0].package_name #=> String
+    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details_list[0].last_updated #=> Time
+    #   resp.domain_package_details_list[0].domain_name #=> String
+    #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details_list[0].reference_path #=> String
+    #   resp.domain_package_details_list[0].error_details.error_type #=> String
+    #   resp.domain_package_details_list[0].error_details.error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_domains_for_package(params = {})
+    # @param [Hash] params ({})
+    def list_domains_for_package(params = {}, options = {})
+      req = build_request(:list_domains_for_package, params)
+      req.send_request(options)
+    end
+
     # List all Elasticsearch instance types that are supported for given
     # ElasticsearchVersion
     #
@@ -1152,6 +1893,8 @@ module Aws::ElasticsearchService
     #   * {Types::ListElasticsearchInstanceTypesResponse#elasticsearch_instance_types #elasticsearch_instance_types} => Array&lt;String&gt;
     #   * {Types::ListElasticsearchInstanceTypesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_elasticsearch_instance_types({
@@ -1164,7 +1907,7 @@ module Aws::ElasticsearchService
     # @example Response structure
     #
     #   resp.elasticsearch_instance_types #=> Array
-    #   resp.elasticsearch_instance_types[0] #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.elasticsearch_instance_types[0] #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.next_token #=> String
     #
     # @overload list_elasticsearch_instance_types(params = {})
@@ -1190,6 +1933,8 @@ module Aws::ElasticsearchService
     #   * {Types::ListElasticsearchVersionsResponse#elasticsearch_versions #elasticsearch_versions} => Array&lt;String&gt;
     #   * {Types::ListElasticsearchVersionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_elasticsearch_versions({
@@ -1207,6 +1952,55 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def list_elasticsearch_versions(params = {}, options = {})
       req = build_request(:list_elasticsearch_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists all packages associated with the Amazon ES domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain for which you want to list associated packages.
+    #
+    # @option params [Integer] :max_results
+    #   Limits results to a maximum number of packages.
+    #
+    # @option params [String] :next_token
+    #   Used for pagination. Only necessary if a previous API call includes a
+    #   non-null NextToken value. If provided, returns results for the next
+    #   page.
+    #
+    # @return [Types::ListPackagesForDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPackagesForDomainResponse#domain_package_details_list #domain_package_details_list} => Array&lt;Types::DomainPackageDetails&gt;
+    #   * {Types::ListPackagesForDomainResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_packages_for_domain({
+    #     domain_name: "DomainName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_package_details_list #=> Array
+    #   resp.domain_package_details_list[0].package_id #=> String
+    #   resp.domain_package_details_list[0].package_name #=> String
+    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details_list[0].last_updated #=> Time
+    #   resp.domain_package_details_list[0].domain_name #=> String
+    #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details_list[0].reference_path #=> String
+    #   resp.domain_package_details_list[0].error_details.error_type #=> String
+    #   resp.domain_package_details_list[0].error_details.error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_packages_for_domain(params = {})
+    # @param [Hash] params ({})
+    def list_packages_for_domain(params = {}, options = {})
+      req = build_request(:list_packages_for_domain, params)
       req.send_request(options)
     end
 
@@ -1275,6 +2069,41 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Allows the destination domain owner to reject an inbound cross-cluster
+    # search connection request.
+    #
+    # @option params [required, String] :cross_cluster_search_connection_id
+    #   The id of the inbound connection that you want to reject.
+    #
+    # @return [Types::RejectInboundCrossClusterSearchConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectInboundCrossClusterSearchConnectionResponse#cross_cluster_search_connection #cross_cluster_search_connection} => Types::InboundCrossClusterSearchConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_inbound_cross_cluster_search_connection({
+    #     cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_cluster_search_connection.source_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.cross_cluster_search_connection_id #=> String
+    #   resp.cross_cluster_search_connection.connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "APPROVED", "REJECTING", "REJECTED", "DELETING", "DELETED"
+    #   resp.cross_cluster_search_connection.connection_status.message #=> String
+    #
+    # @overload reject_inbound_cross_cluster_search_connection(params = {})
+    # @param [Hash] params ({})
+    def reject_inbound_cross_cluster_search_connection(params = {}, options = {})
+      req = build_request(:reject_inbound_cross_cluster_search_connection, params)
+      req.send_request(options)
+    end
+
     # Removes the specified set of tags from the specified Elasticsearch
     # domain.
     #
@@ -1327,6 +2156,7 @@ module Aws::ElasticsearchService
     #   resp.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.service_software_options.description #=> String
     #   resp.service_software_options.automated_update_date #=> Time
+    #   resp.service_software_options.optional_deployment #=> Boolean
     #
     # @overload start_elasticsearch_service_software_update(params = {})
     # @param [Hash] params ({})
@@ -1388,6 +2218,13 @@ module Aws::ElasticsearchService
     #   Map of `LogType` and `LogPublishingOption`, each containing options to
     #   publish a given type of Elasticsearch log.
     #
+    # @option params [Types::DomainEndpointOptions] :domain_endpoint_options
+    #   Options to specify configuration that will be applied to the domain
+    #   endpoint.
+    #
+    # @option params [Types::AdvancedSecurityOptionsInput] :advanced_security_options
+    #   Specifies advanced security options.
+    #
     # @return [Types::UpdateElasticsearchDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateElasticsearchDomainConfigResponse#domain_config #domain_config} => Types::ElasticsearchDomainConfig
@@ -1397,12 +2234,18 @@ module Aws::ElasticsearchService
     #   resp = client.update_elasticsearch_domain_config({
     #     domain_name: "DomainName", # required
     #     elasticsearch_cluster_config: {
-    #       instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #       instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #       instance_count: 1,
     #       dedicated_master_enabled: false,
     #       zone_awareness_enabled: false,
-    #       dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #       zone_awareness_config: {
+    #         availability_zone_count: 1,
+    #       },
+    #       dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #       dedicated_master_count: 1,
+    #       warm_enabled: false,
+    #       warm_type: "ultrawarm1.medium.elasticsearch", # accepts ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch
+    #       warm_count: 1,
     #     },
     #     ebs_options: {
     #       ebs_enabled: false,
@@ -1433,6 +2276,19 @@ module Aws::ElasticsearchService
     #         enabled: false,
     #       },
     #     },
+    #     domain_endpoint_options: {
+    #       enforce_https: false,
+    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #     },
+    #     advanced_security_options: {
+    #       enabled: false,
+    #       internal_user_database_enabled: false,
+    #       master_user_options: {
+    #         master_user_arn: "ARN",
+    #         master_user_name: "Username",
+    #         master_user_password: "Password",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1443,12 +2299,16 @@ module Aws::ElasticsearchService
     #   resp.domain_config.elasticsearch_version.status.update_version #=> Integer
     #   resp.domain_config.elasticsearch_version.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.elasticsearch_version.status.pending_deletion #=> Boolean
-    #   resp.domain_config.elasticsearch_cluster_config.options.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.domain_config.elasticsearch_cluster_config.options.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_config.elasticsearch_cluster_config.options.instance_count #=> Integer
     #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_enabled #=> Boolean
     #   resp.domain_config.elasticsearch_cluster_config.options.zone_awareness_enabled #=> Boolean
-    #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.domain_config.elasticsearch_cluster_config.options.zone_awareness_config.availability_zone_count #=> Integer
+    #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "m5.large.elasticsearch", "m5.xlarge.elasticsearch", "m5.2xlarge.elasticsearch", "m5.4xlarge.elasticsearch", "m5.12xlarge.elasticsearch", "r5.large.elasticsearch", "r5.xlarge.elasticsearch", "r5.2xlarge.elasticsearch", "r5.4xlarge.elasticsearch", "r5.12xlarge.elasticsearch", "c5.large.elasticsearch", "c5.xlarge.elasticsearch", "c5.2xlarge.elasticsearch", "c5.4xlarge.elasticsearch", "c5.9xlarge.elasticsearch", "c5.18xlarge.elasticsearch", "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
     #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_count #=> Integer
+    #   resp.domain_config.elasticsearch_cluster_config.options.warm_enabled #=> Boolean
+    #   resp.domain_config.elasticsearch_cluster_config.options.warm_type #=> String, one of "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch"
+    #   resp.domain_config.elasticsearch_cluster_config.options.warm_count #=> Integer
     #   resp.domain_config.elasticsearch_cluster_config.status.creation_date #=> Time
     #   resp.domain_config.elasticsearch_cluster_config.status.update_date #=> Time
     #   resp.domain_config.elasticsearch_cluster_config.status.update_version #=> Integer
@@ -1524,6 +2384,20 @@ module Aws::ElasticsearchService
     #   resp.domain_config.log_publishing_options.status.update_version #=> Integer
     #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
+    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_config.domain_endpoint_options.status.creation_date #=> Time
+    #   resp.domain_config.domain_endpoint_options.status.update_date #=> Time
+    #   resp.domain_config.domain_endpoint_options.status.update_version #=> Integer
+    #   resp.domain_config.domain_endpoint_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.domain_endpoint_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.status.creation_date #=> Time
+    #   resp.domain_config.advanced_security_options.status.update_date #=> Time
+    #   resp.domain_config.advanced_security_options.status.update_version #=> Integer
+    #   resp.domain_config.advanced_security_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.advanced_security_options.status.pending_deletion #=> Boolean
     #
     # @overload update_elasticsearch_domain_config(params = {})
     # @param [Hash] params ({})
@@ -1589,7 +2463,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

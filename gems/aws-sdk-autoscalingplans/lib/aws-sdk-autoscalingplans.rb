@@ -24,17 +24,20 @@ require_relative 'aws-sdk-autoscalingplans/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     auto_scaling_plans = Aws::AutoScalingPlans::Client.new
+#     resp = auto_scaling_plans.create_scaling_plan(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Auto Scaling Plans all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Auto Scaling Plans are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::AutoScalingPlans::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Auto Scaling Plans API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-autoscalingplans/customizations'
 # @service
 module Aws::AutoScalingPlans
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.23.0'
 
 end

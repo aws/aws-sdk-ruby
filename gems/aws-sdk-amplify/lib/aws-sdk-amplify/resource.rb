@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Amplify
+
   class Resource
 
     # @param options ({})

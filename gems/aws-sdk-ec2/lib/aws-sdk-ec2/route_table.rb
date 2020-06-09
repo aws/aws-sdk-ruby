@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2
+
   class RouteTable
 
     extend Aws::Deprecations
@@ -21,6 +22,7 @@ module Aws::EC2
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -95,7 +97,8 @@ module Aws::EC2
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -108,13 +111,15 @@ module Aws::EC2
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -145,17 +150,16 @@ module Aws::EC2
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -191,7 +195,8 @@ module Aws::EC2
     #
     #   routetableassociation = route_table.associate_with_subnet({
     #     dry_run: false,
-    #     subnet_id: "String", # required
+    #     subnet_id: "SubnetId",
+    #     gateway_id: "RouteGatewayId",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -199,8 +204,10 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :subnet_id
+    # @option options [String] :subnet_id
     #   The ID of the subnet.
+    # @option options [String] :gateway_id
+    #   The ID of the internet gateway or virtual private gateway.
     # @return [RouteTableAssociation]
     def associate_with_subnet(options = {})
       options = options.merge(route_table_id: @id)
@@ -217,13 +224,14 @@ module Aws::EC2
     #     destination_cidr_block: "String",
     #     destination_ipv_6_cidr_block: "String",
     #     dry_run: false,
-    #     egress_only_internet_gateway_id: "String",
-    #     gateway_id: "String",
-    #     instance_id: "String",
-    #     nat_gateway_id: "String",
-    #     transit_gateway_id: "String",
-    #     network_interface_id: "String",
-    #     vpc_peering_connection_id: "String",
+    #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
+    #     gateway_id: "RouteGatewayId",
+    #     instance_id: "InstanceId",
+    #     nat_gateway_id: "NatGatewayId",
+    #     transit_gateway_id: "TransitGatewayId",
+    #     local_gateway_id: "LocalGatewayId",
+    #     network_interface_id: "NetworkInterfaceId",
+    #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :destination_cidr_block
@@ -250,6 +258,8 @@ module Aws::EC2
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
     # @option options [String] :transit_gateway_id
     #   The ID of a transit gateway.
+    # @option options [String] :local_gateway_id
+    #   The ID of the local gateway.
     # @option options [String] :network_interface_id
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id
@@ -257,7 +267,7 @@ module Aws::EC2
     # @return [Route]
     def create_route(options = {})
       options = options.merge(route_table_id: @id)
-      resp = @client.create_route(options)
+      @client.create_route(options)
       Route.new(
         route_table_id: @id,
         destination_cidr_block: options[:destination_cidr_block],
@@ -283,14 +293,57 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
       resp = @client.create_tags(options)
+      options[:tags].each do |t|
+        batch << Tag.new(
+          resource_id: @id,
+          key: t[:key],
+          value: t[:value],
+          client: @client
+        )
+      end
+      Tag::Collection.new([batch], size: batch.size)
+    end
+
+    # @example Request syntax with placeholder values
+    #
+    #   tag = route_table.delete_tags({
+    #     dry_run: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<Types::Tag>] :tags
+    #   The tags to delete. Specify a tag key and an optional tag value to
+    #   delete specific tags. If you specify a tag key without a tag value, we
+    #   delete any tag with this key regardless of its value. If you specify a
+    #   tag key with an empty string as the tag value, we delete the tag only
+    #   if its value is an empty string.
+    #
+    #   If you omit this parameter, we delete all user-defined tags for the
+    #   specified resources. We do not delete AWS-generated tags (tags that
+    #   have the `aws:` prefix).
+    # @return [Tag::Collection]
+    def delete_tags(options = {})
+      batch = []
+      options = Aws::Util.deep_merge(options, resources: [@id])
+      resp = @client.delete_tags(options)
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,

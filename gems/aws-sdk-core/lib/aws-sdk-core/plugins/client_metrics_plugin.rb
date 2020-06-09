@@ -1,4 +1,5 @@
 require 'date'
+require_relative 'retries/error_inspector'
 
 module Aws
   module Plugins
@@ -22,6 +23,16 @@ Required for publishing client metrics. The port that the client side monitoring
 agent is running on, where client metrics will be published via UDP.
       DOCS
         resolve_client_side_monitoring_port(cfg)
+      end
+
+      option(:client_side_monitoring_host,
+        default: "127.0.0.1",
+        doc_type: String,
+        docstring: <<-DOCS) do |cfg|
+Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+side monitoring agent is running on, where client metrics will be published via UDP.
+      DOCS
+        resolve_client_side_monitoring_host(cfg)
       end
 
       option(:client_side_monitoring_publisher,
@@ -49,6 +60,7 @@ all generated client side metrics. Defaults to an empty string.
           handlers.add(Handler, step: :initialize)
           publisher = config.client_side_monitoring_publisher
           publisher.agent_port = config.client_side_monitoring_port
+          publisher.agent_host = config.client_side_monitoring_host
         end
       end
 
@@ -67,6 +79,19 @@ all generated client side metrics. Defaults to an empty string.
           cfg_source.to_i
         else
           31000
+        end
+      end
+
+      def self.resolve_client_side_monitoring_host(cfg)
+        env_source = ENV["AWS_CSM_HOST"]
+        env_source = nil if env_source == ""
+        cfg_source = Aws.shared_config.csm_host(profile: cfg.profile)
+        if env_source
+          env_source
+        elsif cfg_source
+          cfg_source
+        else
+          "127.0.0.1"
         end
       end
 
@@ -117,7 +142,7 @@ all generated client side metrics. Defaults to an empty string.
             @handler.call(context)
           rescue StandardError => e
             # Handle SDK Exceptions
-            inspector = Aws::Plugins::RetryErrors::ErrorInspector.new(
+            inspector = Retries::ErrorInspector.new(
               e,
               context.http_response.status_code
             )
@@ -149,7 +174,7 @@ all generated client side metrics. Defaults to an empty string.
             raise e
           ensure
             end_time = Aws::Util.monotonic_milliseconds
-            request_metrics.api_call.complete(
+            complete_opts = {
               latency: end_time - start_time,
               attempt_count: context.retries + 1,
               user_agent: context.http_request.headers["user-agent"],
@@ -158,8 +183,12 @@ all generated client side metrics. Defaults to an empty string.
               final_aws_exception: final_aws_exception,
               final_aws_exception_message: final_aws_exception_message,
               final_sdk_exception: final_sdk_exception,
-              final_sdk_exception_message: final_sdk_exception_message,
-            )
+              final_sdk_exception_message: final_sdk_exception_message
+            }
+            if context.metadata[:redirect_region]
+              complete_opts[:region] = context.metadata[:redirect_region]
+            end
+            request_metrics.api_call.complete(complete_opts)
             # Report the metrics by passing the complete RequestMetrics object
             if publisher
               publisher.publish(request_metrics)

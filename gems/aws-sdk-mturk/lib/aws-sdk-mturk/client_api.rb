@@ -590,6 +590,10 @@ module Aws::MTurk
 
     RejectQualificationRequestResponse.struct_class = Types::RejectQualificationRequestResponse
 
+    RequestError.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    RequestError.add_member(:turk_error_code, Shapes::ShapeRef.new(shape: TurkErrorCode, location_name: "TurkErrorCode"))
+    RequestError.struct_class = Types::RequestError
+
     ReviewActionDetail.add_member(:action_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "ActionId"))
     ReviewActionDetail.add_member(:action_name, Shapes::ShapeRef.new(shape: String, location_name: "ActionName"))
     ReviewActionDetail.add_member(:target_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "TargetId"))
@@ -636,6 +640,10 @@ module Aws::MTurk
     SendTestEventNotificationRequest.struct_class = Types::SendTestEventNotificationRequest
 
     SendTestEventNotificationResponse.struct_class = Types::SendTestEventNotificationResponse
+
+    ServiceFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ServiceFault.add_member(:turk_error_code, Shapes::ShapeRef.new(shape: TurkErrorCode, location_name: "TurkErrorCode"))
+    ServiceFault.struct_class = Types::ServiceFault
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 

@@ -8,6 +8,143 @@
 module Aws::FSx
   module Types
 
+    # The Microsoft AD attributes of the Amazon FSx for Windows File Server
+    # file system.
+    #
+    # @!attribute [rw] domain_name
+    #   The fully qualified domain name of the self-managed AD directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_directory_id
+    #   The ID of the AWS Managed Microsoft Active Directory instance to
+    #   which the file system is joined.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ActiveDirectoryBackupAttributes AWS API Documentation
+    #
+    class ActiveDirectoryBackupAttributes < Struct.new(
+      :domain_name,
+      :active_directory_id)
+      include Aws::Structure
+    end
+
+    # An Active Directory error.
+    #
+    # @!attribute [rw] active_directory_id
+    #   The directory ID of the directory that an error pertains to.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of Active Directory error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ActiveDirectoryError AWS API Documentation
+    #
+    class ActiveDirectoryError < Struct.new(
+      :active_directory_id,
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # Describes a specific Amazon FSx Administrative Action for the current
+    # Windows file system.
+    #
+    # @!attribute [rw] administrative_action_type
+    #   Describes the type of administrative action, as follows:
+    #
+    #   * `FILE_SYSTEM_UPDATE` - A file system update administrative action
+    #     initiated by the user from the Amazon FSx console, API
+    #     (UpdateFileSystem), or CLI (update-file-system). A
+    #
+    #   * `STORAGE_OPTIMIZATION` - Once the `FILE_SYSTEM_UPDATE` task to
+    #     increase a file system's storage capacity completes successfully,
+    #     a `STORAGE_OPTIMIZATION` task starts. Storage optimization is the
+    #     process of migrating the file system data to the new, larger
+    #     disks. You can track the storage migration progress using the
+    #     `ProgressPercent` property. When `STORAGE_OPTIMIZATION` completes
+    #     successfully, the parent `FILE_SYSTEM_UPDATE` action status
+    #     changes to `COMPLETED`. For more information, see [Managing
+    #     Storage Capacity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   @return [String]
+    #
+    # @!attribute [rw] progress_percent
+    #   Provides the percent complete of a `STORAGE_OPTIMIZATION`
+    #   administrative action.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_time
+    #   Time that the administrative action request was received.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   Describes the status of the administrative action, as follows:
+    #
+    #   * `FAILED` - Amazon FSx failed to process the administrative action
+    #     successfully.
+    #
+    #   * `IN_PROGRESS` - Amazon FSx is processing the administrative
+    #     action.
+    #
+    #   * `PENDING` - Amazon FSx is waiting to process the administrative
+    #     action.
+    #
+    #   * `COMPLETED` - Amazon FSx has finished processing the
+    #     administrative task.
+    #
+    #   * `UPDATED_OPTIMIZING` - For a storage capacity increase update,
+    #     Amazon FSx has updated the file system with the new storage
+    #     capacity, and is now performing the storage optimization process.
+    #     For more information, see [Managing Storage Capacity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   @return [String]
+    #
+    # @!attribute [rw] target_file_system_values
+    #   Describes the target `StorageCapacity` or `ThroughputCapacity` value
+    #   provided in the `UpdateFileSystem` operation. Returned for
+    #   `FILE_SYSTEM_UPDATE` administrative actions.
+    #   @return [Types::FileSystem]
+    #
+    # @!attribute [rw] failure_details
+    #   Provides information about a failed administrative action.
+    #   @return [Types::AdministrativeActionFailureDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AdministrativeAction AWS API Documentation
+    #
+    class AdministrativeAction < Struct.new(
+      :administrative_action_type,
+      :progress_percent,
+      :request_time,
+      :status,
+      :target_file_system_values,
+      :failure_details)
+      include Aws::Structure
+    end
+
+    # Provides information about a failed administrative action.
+    #
+    # @!attribute [rw] message
+    #   Error message providing details about the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AdministrativeActionFailureDetails AWS API Documentation
+    #
+    class AdministrativeActionFailureDetails < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A backup of an Amazon FSx for Windows File Server file system. You can
     # create a new file system from a backup to protect against data loss.
     #
@@ -37,7 +174,8 @@ module Aws::FSx
     #
     # @!attribute [rw] kms_key_id
     #   The ID of the AWS Key Management Service (AWS KMS) key used to
-    #   encrypt this backup's data.
+    #   encrypt this backup of the Amazon FSx for Windows file system's
+    #   data at rest. Amazon FSx for Lustre does not support KMS encryption.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -53,6 +191,11 @@ module Aws::FSx
     #   metadata is persisted even if the file system is deleted.
     #   @return [Types::FileSystem]
     #
+    # @!attribute [rw] directory_information
+    #   The configuration of the self-managed Microsoft Active Directory
+    #   (AD) to which the Windows File Server instance is joined.
+    #   @return [Types::ActiveDirectoryBackupAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Backup AWS API Documentation
     #
     class Backup < Struct.new(
@@ -65,7 +208,8 @@ module Aws::FSx
       :kms_key_id,
       :resource_arn,
       :tags,
-      :file_system)
+      :file_system,
+      :directory_information)
       include Aws::Structure
     end
 
@@ -80,6 +224,178 @@ module Aws::FSx
     #
     class BackupFailureDetails < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # Another backup is already under way. Wait for completion before
+    # initiating additional backups of this file system.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/BackupInProgress AWS API Documentation
+    #
+    class BackupInProgress < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # No Amazon FSx backups were found based upon the supplied parameters.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/BackupNotFound AWS API Documentation
+    #
+    class BackupNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You can't delete a backup while it's being used to restore a file
+    # system.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   The ID of a file system being restored from the backup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/BackupRestoring AWS API Documentation
+    #
+    class BackupRestoring < Struct.new(
+      :message,
+      :file_system_id)
+      include Aws::Structure
+    end
+
+    # A generic error indicating a failure with a client request.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/BadRequest AWS API Documentation
+    #
+    class BadRequest < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Cancels a data repository task.
+    #
+    # @note When making an API call, you may pass CancelDataRepositoryTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "TaskId", # required
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   Specifies the data repository task to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CancelDataRepositoryTaskRequest AWS API Documentation
+    #
+    class CancelDataRepositoryTaskRequest < Struct.new(
+      :task_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the data repository task, as follows:
+    #
+    #   * `PENDING` - Amazon FSx has not started the task.
+    #
+    #   * `EXECUTING` - Amazon FSx is processing the task.
+    #
+    #   * `FAILED` - Amazon FSx was not able to complete the task. For
+    #     example, there may be files the task failed to process. The
+    #     DataRepositoryTaskFailureDetails property provides more
+    #     information about task failures.
+    #
+    #   * `SUCCEEDED` - FSx completed the task successfully.
+    #
+    #   * `CANCELED` - Amazon FSx canceled the task and it did not complete.
+    #
+    #   * `CANCELING` - FSx is in process of canceling the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_id
+    #   The ID of the task being canceled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CancelDataRepositoryTaskResponse AWS API Documentation
+    #
+    class CancelDataRepositoryTaskResponse < Struct.new(
+      :lifecycle,
+      :task_id)
+      include Aws::Structure
+    end
+
+    # Provides a report detailing the data repository task results of the
+    # files processed that match the criteria specified in the report
+    # `Scope` parameter. FSx delivers the report to the file system's
+    # linked data repository in Amazon S3, using the path specified in the
+    # report `Path` parameter. You can specify whether or not a report gets
+    # generated for a task using the `Enabled` parameter.
+    #
+    # @note When making an API call, you may pass CompletionReport
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         path: "ArchivePath",
+    #         format: "REPORT_CSV_20191124", # accepts REPORT_CSV_20191124
+    #         scope: "FAILED_FILES_ONLY", # accepts FAILED_FILES_ONLY
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Set `Enabled` to `True` to generate a `CompletionReport` when the
+    #   task completes. If set to `true`, then you need to provide a report
+    #   `Scope`, `Path`, and `Format`. Set `Enabled` to `False` if you do
+    #   not want a `CompletionReport` generated when the task completes.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] path
+    #   Required if `Enabled` is set to `true`. Specifies the location of
+    #   the report on the file system's linked S3 data repository. An
+    #   absolute path that defines where the completion report will be
+    #   stored in the destination location. The `Path` you provide must be
+    #   located within the file system’s ExportPath. An example `Path` value
+    #   is "s3://myBucket/myExportPath/optionalPrefix". The report
+    #   provides the following information for each file in the report:
+    #   FilePath, FileStatus, and ErrorCode. To learn more about a file
+    #   system's `ExportPath`, see .
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   Required if `Enabled` is set to `true`. Specifies the format of the
+    #   `CompletionReport`. `REPORT_CSV_20191124` is the only format
+    #   currently supported. When `Format` is set to `REPORT_CSV_20191124`,
+    #   the `CompletionReport` is provided in CSV format, and is delivered
+    #   to `\{path\}/task-\{id\}/failures.csv`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   Required if `Enabled` is set to `true`. Specifies the scope of the
+    #   `CompletionReport`; `FAILED_FILES_ONLY` is the only scope currently
+    #   supported. When `Scope` is set to `FAILED_FILES_ONLY`, the
+    #   `CompletionReport` only contains information about files that the
+    #   data repository task failed to process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CompletionReport AWS API Documentation
+    #
+    class CompletionReport < Struct.new(
+      :enabled,
+      :path,
+      :format,
+      :scope)
       include Aws::Structure
     end
 
@@ -140,6 +456,95 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateDataRepositoryTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         type: "EXPORT_TO_REPOSITORY", # required, accepts EXPORT_TO_REPOSITORY
+    #         paths: ["DataRepositoryTaskPath"],
+    #         file_system_id: "FileSystemId", # required
+    #         report: { # required
+    #           enabled: false, # required
+    #           path: "ArchivePath",
+    #           format: "REPORT_CSV_20191124", # accepts REPORT_CSV_20191124
+    #           scope: "FAILED_FILES_ONLY", # accepts FAILED_FILES_ONLY
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] type
+    #   Specifies the type of data repository task to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] paths
+    #   (Optional) The path or paths on the Amazon FSx file system to use
+    #   when the data repository task is processed. The default path is the
+    #   file system root directory. The paths you provide need to be
+    #   relative to the mount point of the file system. If the mount point
+    #   is `/mnt/fsx` and `/mnt/fsx/path1` is a directory or file on the
+    #   file system you want to export, then the path to provide is `path1`.
+    #   If a path that you provide isn't valid, the task fails.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @!attribute [rw] report
+    #   Defines whether or not Amazon FSx provides a CompletionReport once
+    #   the task has completed. A CompletionReport provides a detailed
+    #   report on the files that Amazon FSx processed that meet the criteria
+    #   specified by the `Scope` parameter. For more information, see
+    #   [Working with Task Completion Reports][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html
+    #   @return [Types::CompletionReport]
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
+    #   an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateDataRepositoryTaskRequest AWS API Documentation
+    #
+    class CreateDataRepositoryTaskRequest < Struct.new(
+      :type,
+      :paths,
+      :file_system_id,
+      :report,
+      :client_request_token,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_repository_task
+    #   The description of the data repository task that you just created.
+    #   @return [Types::DataRepositoryTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateDataRepositoryTaskResponse AWS API Documentation
+    #
+    class CreateDataRepositoryTaskResponse < Struct.new(
+      :data_repository_task)
+      include Aws::Structure
+    end
+
     # The request object for the `CreateFileSystemFromBackup` operation.
     #
     # @note When making an API call, you may pass CreateFileSystemFromBackupRequest
@@ -158,16 +563,28 @@ module Aws::FSx
     #         ],
     #         windows_configuration: {
     #           active_directory_id: "DirectoryId",
+    #           self_managed_active_directory_configuration: {
+    #             domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #             organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #             file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #             user_name: "DirectoryUserName", # required
+    #             password: "DirectoryPassword", # required
+    #             dns_ips: ["IpAddress"], # required
+    #           },
+    #           deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2
+    #           preferred_subnet_id: "SubnetId",
     #           throughput_capacity: 1, # required
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           daily_automatic_backup_start_time: "DailyTime",
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
     #         },
+    #         storage_type: "SSD", # accepts SSD, HDD
     #       }
     #
     # @!attribute [rw] backup_id
-    #   The ID of the backup.
+    #   The ID of the backup. Specifies the backup to use if you're
+    #   creating a file system from an existing backup.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -181,16 +598,23 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   A list of IDs for the subnets that the file system will be
-    #   accessible from. Currently, you can specify only one subnet. The
-    #   file server is also launched in that subnet's Availability Zone.
+    #   Specifies the IDs of the subnets that the file system will be
+    #   accessible from. For Windows `MULTI_AZ_1` file system deployment
+    #   types, provide exactly two subnet IDs, one for the preferred file
+    #   server and one for the standby file server. You specify one of these
+    #   subnets as the preferred subnet using the `WindowsConfiguration >
+    #   PreferredSubnetID` property.
+    #
+    #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` deployment types and
+    #   Lustre file systems, provide exactly one subnet ID. The file server
+    #   is launched in that subnet's Availability Zone.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
     #   A list of IDs for the security groups that apply to the specified
     #   network interfaces created for file system access. These security
     #   groups apply to all network interfaces. This value isn't returned
-    #   in later describe requests.
+    #   in later DescribeFileSystem requests.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -203,6 +627,29 @@ module Aws::FSx
     #   The configuration for this Microsoft Windows file system.
     #   @return [Types::CreateFileSystemWindowsConfiguration]
     #
+    # @!attribute [rw] storage_type
+    #   Sets the storage type for the Windows file system you're creating
+    #   from a backup. Valid values are `SSD` and `HDD`.
+    #
+    #   * Set to `SSD` to use solid state drive storage. Supported on all
+    #     Windows deployment types.
+    #
+    #   * Set to `HDD` to use hard disk drive storage. Supported on
+    #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment
+    #     types.
+    #
+    #   Default value is `SSD`.
+    #
+    #   <note markdown="1"> HDD and SSD storage types have different minimum storage capacity
+    #   requirements. A restored file system's storage capacity is tied to
+    #   the file system that was backed up. You can create a file system
+    #   that uses HDD storage from a backup of a file system that used SSD
+    #   storage only if the original SSD file system had a storage capacity
+    #   of at least 2000 GiB.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackupRequest AWS API Documentation
     #
     class CreateFileSystemFromBackupRequest < Struct.new(
@@ -211,7 +658,8 @@ module Aws::FSx
       :subnet_ids,
       :security_group_ids,
       :tags,
-      :windows_configuration)
+      :windows_configuration,
+      :storage_type)
       include Aws::Structure
     end
 
@@ -228,8 +676,7 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The configuration object for Lustre file systems used in the
-    # `CreateFileSystem` operation.
+    # The Lustre configuration for the file system being created.
     #
     # @note When making an API call, you may pass CreateFileSystemLustreConfiguration
     #   data as a hash:
@@ -237,20 +684,48 @@ module Aws::FSx
     #       {
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         import_path: "ArchivePath",
+    #         export_path: "ArchivePath",
     #         imported_file_chunk_size: 1,
+    #         deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #         per_unit_storage_throughput: 1,
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The preferred time to perform weekly maintenance, in the UTC time
-    #   zone.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @!attribute [rw] import_path
-    #   (Optional) The path to the Amazon S3 bucket (and optional prefix)
-    #   that you're using as the data repository for your FSx for Lustre
-    #   file system, for example `s3://import-bucket/optional-prefix`. If
-    #   you specify a prefix after the Amazon S3 bucket name, only object
-    #   keys with that prefix are loaded into the file system.
+    #   (Optional) The path to the Amazon S3 bucket (including the optional
+    #   prefix) that you're using as the data repository for your Amazon
+    #   FSx for Lustre file system. The root of your FSx for Lustre file
+    #   system will be mapped to the root of the Amazon S3 bucket you
+    #   select. An example is `s3://import-bucket/optional-prefix`. If you
+    #   specify a prefix after the Amazon S3 bucket name, only object keys
+    #   with that prefix are loaded into the file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_path
+    #   (Optional) The path in Amazon S3 where the root of your Amazon FSx
+    #   file system is exported. The path must use the same Amazon S3 bucket
+    #   as specified in ImportPath. You can provide an optional prefix to
+    #   which new and changed data is to be exported from your Amazon FSx
+    #   for Lustre file system. If an `ExportPath` value is not provided,
+    #   Amazon FSx sets a default export path,
+    #   `s3://import-bucket/FSxLustre[creation-timestamp]`. The timestamp is
+    #   in UTC format, for example
+    #   `s3://import-bucket/FSxLustre20181105T222312Z`.
+    #
+    #   The Amazon S3 export bucket must be the same as the import bucket
+    #   specified by `ImportPath`. If you only specify a bucket name, such
+    #   as `s3://import-bucket`, you get a 1:1 mapping of file system
+    #   objects to S3 bucket objects. This mapping means that the input data
+    #   in S3 is overwritten on export. If you provide a custom prefix in
+    #   the export path, such as
+    #   `s3://import-bucket/[custom-optional-prefix]`, Amazon FSx exports
+    #   the contents of your file system to that export prefix in the Amazon
+    #   S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] imported_file_chunk_size
@@ -260,9 +735,48 @@ module Aws::FSx
     #   that a single file can be striped across is limited by the total
     #   number of disks that make up the file system.
     #
-    #   The chunk size default is 1,024 MiB (1 GiB) and can go as high as
+    #   The default chunk size is 1,024 MiB (1 GiB) and can go as high as
     #   512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5
     #   TB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] deployment_type
+    #   (Optional) Choose `SCRATCH_1` and `SCRATCH_2` deployment types when
+    #   you need temporary storage and shorter-term processing of data. The
+    #   `SCRATCH_2` deployment type provides in-transit encryption of data
+    #   and higher burst throughput capacity than `SCRATCH_1`.
+    #
+    #   Choose `PERSISTENT_1` deployment type for longer-term storage and
+    #   workloads and encryption of data in transit. To learn more about
+    #   deployment types, see [ FSx for Lustre Deployment Options][1].
+    #
+    #   Encryption of data in-transit is automatically enabled when you
+    #   access a `SCRATCH_2` or `PERSISTENT_1` file system from Amazon EC2
+    #   instances that [support this feature][2]. (Default = `SCRATCH_1`)
+    #
+    #   Encryption of data in-transit for `SCRATCH_2` and `PERSISTENT_1`
+    #   deployment types is supported when accessed from supported instance
+    #   types in supported AWS Regions. To learn more, [Encrypting Data in
+    #   Transit][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data- protection.html
+    #   [3]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html
+    #   @return [String]
+    #
+    # @!attribute [rw] per_unit_storage_throughput
+    #   Required for the `PERSISTENT_1` deployment type, describes the
+    #   amount of read and write throughput for each 1 tebibyte of storage,
+    #   in MB/s/TiB. File system throughput capacity is calculated by
+    #   multiplying ﬁle system storage capacity (TiB) by the
+    #   PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system,
+    #   provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 117 MB/s
+    #   of ﬁle system throughput. You pay for the amount of throughput that
+    #   you provision.
+    #
+    #   Valid values are 50, 100, 200.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration AWS API Documentation
@@ -270,11 +784,14 @@ module Aws::FSx
     class CreateFileSystemLustreConfiguration < Struct.new(
       :weekly_maintenance_start_time,
       :import_path,
-      :imported_file_chunk_size)
+      :export_path,
+      :imported_file_chunk_size,
+      :deployment_type,
+      :per_unit_storage_throughput)
       include Aws::Structure
     end
 
-    # The request object for the `CreateFileSystem` operation.
+    # The request object used to create a new Amazon FSx file system.
     #
     # @note When making an API call, you may pass CreateFileSystemRequest
     #   data as a hash:
@@ -283,6 +800,7 @@ module Aws::FSx
     #         client_request_token: "ClientRequestToken",
     #         file_system_type: "WINDOWS", # required, accepts WINDOWS, LUSTRE
     #         storage_capacity: 1, # required
+    #         storage_type: "SSD", # accepts SSD, HDD
     #         subnet_ids: ["SubnetId"], # required
     #         security_group_ids: ["SecurityGroupId"],
     #         tags: [
@@ -294,6 +812,16 @@ module Aws::FSx
     #         kms_key_id: "KmsKeyId",
     #         windows_configuration: {
     #           active_directory_id: "DirectoryId",
+    #           self_managed_active_directory_configuration: {
+    #             domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #             organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #             file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #             user_name: "DirectoryUserName", # required
+    #             password: "DirectoryPassword", # required
+    #             dns_ips: ["IpAddress"], # required
+    #           },
+    #           deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2
+    #           preferred_subnet_id: "SubnetId",
     #           throughput_capacity: 1, # required
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           daily_automatic_backup_start_time: "DailyTime",
@@ -303,7 +831,10 @@ module Aws::FSx
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           import_path: "ArchivePath",
+    #           export_path: "ArchivePath",
     #           imported_file_chunk_size: 1,
+    #           deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #           per_unit_storage_throughput: 1,
     #         },
     #       }
     #
@@ -318,56 +849,95 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] file_system_type
-    #   The type of file system.
+    #   The type of Amazon FSx file system to create, either `WINDOWS` or
+    #   `LUSTRE`.
     #   @return [String]
     #
     # @!attribute [rw] storage_capacity
-    #   The storage capacity of the file system.
+    #   Sets the storage capacity of the file system that you're creating.
     #
-    #   For Windows file systems, the storage capacity has a minimum of 300
-    #   GiB, and a maximum of 65,536 GiB.
+    #   For Lustre file systems:
     #
-    #   For Lustre file systems, the storage capacity has a minimum of 3,600
-    #   GiB. Storage capacity is provisioned in increments of 3,600 GiB.
+    #   * For `SCRATCH_2` and `PERSISTENT_1` deployment types, valid values
+    #     are 1.2, 2.4, and increments of 2.4 TiB.
+    #
+    #   * For `SCRATCH_1` deployment type, valid values are 1.2, 2.4, and
+    #     increments of 3.6 TiB.
+    #
+    #   For Windows file systems:
+    #
+    #   * If `StorageType=SSD`, valid values are 32 GiB - 65,536 GiB (64
+    #     TiB).
+    #
+    #   * If `StorageType=HDD`, valid values are 2000 GiB - 65,536 GiB (64
+    #     TiB).
     #   @return [Integer]
     #
+    # @!attribute [rw] storage_type
+    #   Sets the storage type for the Amazon FSx for Windows file system
+    #   you're creating. Valid values are `SSD` and `HDD`.
+    #
+    #   * Set to `SSD` to use solid state drive storage. SSD is supported on
+    #     all Windows deployment types.
+    #
+    #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
+    #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment
+    #     types.
+    #
+    #   Default value is `SSD`. For more information, see [ Storage Type
+    #   Options][1] in the *Amazon FSx for Windows User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options
+    #   @return [String]
+    #
     # @!attribute [rw] subnet_ids
-    #   A list of IDs for the subnets that the file system will be
-    #   accessible from. File systems support only one subnet. The file
-    #   server is also launched in that subnet's Availability Zone.
+    #   Specifies the IDs of the subnets that the file system will be
+    #   accessible from. For Windows `MULTI_AZ_1` file system deployment
+    #   types, provide exactly two subnet IDs, one for the preferred file
+    #   server and one for the standby file server. You specify one of these
+    #   subnets as the preferred subnet using the `WindowsConfiguration >
+    #   PreferredSubnetID` property.
+    #
+    #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` file system deployment
+    #   types and Lustre file systems, provide exactly one subnet ID. The
+    #   file server is launched in that subnet's Availability Zone.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   A list of IDs for the security groups that apply to the specified
-    #   network interfaces created for file system access. These security
-    #   groups will apply to all network interfaces. This list isn't
-    #   returned in later describe requests.
+    #   A list of IDs specifying the security groups to apply to all network
+    #   interfaces created for file system access. This list isn't returned
+    #   in later requests to describe the file system.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   The tags to be applied to the file system at file system creation.
-    #   The key value of the `Name` tag appears in the console as the file
-    #   system name.
+    #   The tags to apply to the file system being created. The key value of
+    #   the `Name` tag appears in the console as the file system name.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of your AWS Key Management Service (AWS KMS) key. This ID is
-    #   used to encrypt the data in your file system at rest. For more
-    #   information, see [Encrypt][1] in the *AWS Key Management Service API
-    #   Reference*.
+    #   The ID of the AWS Key Management Service (AWS KMS) key used to
+    #   encrypt the file system's data for Amazon FSx for Windows File
+    #   Server file systems and Amazon FSx for Lustre `PERSISTENT_1` file
+    #   systems at rest. In either case, if not specified, the Amazon FSx
+    #   managed key is used. The Amazon FSx for Lustre `SCRATCH_1` and
+    #   `SCRATCH_2` file systems are always encrypted at rest using Amazon
+    #   FSx managed keys. For more information, see [Encrypt][1] in the *AWS
+    #   Key Management Service API Reference*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #   @return [String]
     #
     # @!attribute [rw] windows_configuration
-    #   The configuration for this Microsoft Windows file system.
+    #   The Microsoft Windows configuration for the file system being
+    #   created.
     #   @return [Types::CreateFileSystemWindowsConfiguration]
     #
     # @!attribute [rw] lustre_configuration
-    #   The configuration object for Lustre file systems used in the
-    #   `CreateFileSystem` operation.
+    #   The Lustre configuration for the file system being created.
     #   @return [Types::CreateFileSystemLustreConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemRequest AWS API Documentation
@@ -376,6 +946,7 @@ module Aws::FSx
       :client_request_token,
       :file_system_type,
       :storage_capacity,
+      :storage_type,
       :subnet_ids,
       :security_group_ids,
       :tags,
@@ -385,10 +956,10 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The response object for the `CreateFileSystem` operation.
+    # The response object returned after the file system is created.
     #
     # @!attribute [rw] file_system
-    #   A description of the file system.
+    #   The configuration of the file system that was created.
     #   @return [Types::FileSystem]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemResponse AWS API Documentation
@@ -406,6 +977,16 @@ module Aws::FSx
     #
     #       {
     #         active_directory_id: "DirectoryId",
+    #         self_managed_active_directory_configuration: {
+    #           domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #           file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #           user_name: "DirectoryUserName", # required
+    #           password: "DirectoryPassword", # required
+    #           dns_ips: ["IpAddress"], # required
+    #         },
+    #         deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2
+    #         preferred_subnet_id: "SubnetId",
     #         throughput_capacity: 1, # required
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         daily_automatic_backup_start_time: "DailyTime",
@@ -414,23 +995,65 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] active_directory_id
-    #   The ID for an existing Microsoft Active Directory instance that the
-    #   file system should join when it's created.
+    #   The ID for an existing AWS Managed Microsoft Active Directory (AD)
+    #   instance that the file system should join when it's created.
+    #   @return [String]
+    #
+    # @!attribute [rw] self_managed_active_directory_configuration
+    #   The configuration that Amazon FSx uses to join the Windows File
+    #   Server instance to your self-managed (including on-premises)
+    #   Microsoft Active Directory (AD) directory.
+    #   @return [Types::SelfManagedActiveDirectoryConfiguration]
+    #
+    # @!attribute [rw] deployment_type
+    #   Specifies the file system deployment type, valid values are the
+    #   following:
+    #
+    #   * `MULTI_AZ_1` - Deploys a high availability file system that is
+    #     configured for Multi-AZ redundancy to tolerate temporary
+    #     Availability Zone (AZ) unavailability. You can only deploy a
+    #     Multi-AZ file system in AWS Regions that have a minimum of three
+    #     Availability Zones. Also supports HDD storage type
+    #
+    #   * `SINGLE_AZ_1` - (Default) Choose to deploy a file system that is
+    #     configured for single AZ redundancy.
+    #
+    #   * `SINGLE_AZ_2` - The latest generation Single AZ file system.
+    #     Specifies a file system that is configured for single AZ
+    #     redundancy and supports HDD storage type.
+    #
+    #   For more information, see [ Availability and Durability: Single-AZ
+    #   and Multi-AZ File Systems][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_subnet_id
+    #   Required when `DeploymentType` is set to `MULTI_AZ_1`. This
+    #   specifies the subnet in which you want the preferred file server to
+    #   be located. For in-AWS applications, we recommend that you launch
+    #   your clients in the same Availability Zone (AZ) as your preferred
+    #   file server to reduce cross-AZ data transfer costs and minimize
+    #   latency.
     #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
     #   The throughput of an Amazon FSx file system, measured in megabytes
-    #   per second.
+    #   per second, in 2 to the *n*th increments, between 2^3 (8) and 2^11
+    #   (2048).
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The preferred start time to perform weekly maintenance, in the UTC
-    #   time zone.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
-    #   The preferred time to take daily automatic backups, in the UTC time
-    #   zone.
+    #   The preferred time to take daily automatic backups, formatted HH:MM
+    #   in the UTC time zone.
     #   @return [String]
     #
     # @!attribute [rw] automatic_backup_retention_days
@@ -441,18 +1064,23 @@ module Aws::FSx
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
-    #   A boolean flag indicating whether tags on the file system should be
+    #   A boolean flag indicating whether tags for the file system should be
     #   copied to backups. This value defaults to false. If it's set to
-    #   true, all tags on the file system are copied to all automatic
-    #   backups and any user-initiated backups where the user doesn't
-    #   specify any tags. If this value is true, and you specify one or more
-    #   tags, only the specified tags are copied to backups.
+    #   true, all tags for the file system are copied to all automatic and
+    #   user-initiated backups where the user doesn't specify tags. If this
+    #   value is true, and you specify one or more tags, only the specified
+    #   tags are copied to backups. If you specify one or more tags when
+    #   creating a user-initiated backup, no tags are copied from the file
+    #   system, regardless of this value.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemWindowsConfiguration AWS API Documentation
     #
     class CreateFileSystemWindowsConfiguration < Struct.new(
       :active_directory_id,
+      :self_managed_active_directory_configuration,
+      :deployment_type,
+      :preferred_subnet_id,
       :throughput_capacity,
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
@@ -473,14 +1101,8 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] export_path
-    #   The Amazon S3 commit path to use for storing new and changed Lustre
-    #   file system files as part of the archive operation from the file
-    #   system to Amazon S3. The value is
-    #   `s3://import-bucket/FSxLustre[creationtimestamp]`. The timestamp is
-    #   presented in UTC format, for example
-    #   `s3://import-bucket/FSxLustre20181105T222312Z`. Files are archived
-    #   to a different prefix in the Amazon S3 bucket, preventing input data
-    #   from being overwritten.
+    #   The export path to the Amazon S3 bucket (and prefix) that you are
+    #   using to store new and changed Lustre file system files in S3.
     #   @return [String]
     #
     # @!attribute [rw] imported_file_chunk_size
@@ -501,6 +1123,261 @@ module Aws::FSx
       :import_path,
       :export_path,
       :imported_file_chunk_size)
+      include Aws::Structure
+    end
+
+    # A description of the data repository task. You use data repository
+    # tasks to perform bulk transfer operations between your Amazon FSx file
+    # system and its linked data repository.
+    #
+    # @!attribute [rw] task_id
+    #   The system-generated, unique 17-digit ID of the data repository
+    #   task.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the data repository task, as follows:
+    #
+    #   * `PENDING` - Amazon FSx has not started the task.
+    #
+    #   * `EXECUTING` - Amazon FSx is processing the task.
+    #
+    #   * `FAILED` - Amazon FSx was not able to complete the task. For
+    #     example, there may be files the task failed to process. The
+    #     DataRepositoryTaskFailureDetails property provides more
+    #     information about task failures.
+    #
+    #   * `SUCCEEDED` - FSx completed the task successfully.
+    #
+    #   * `CANCELED` - Amazon FSx canceled the task and it did not complete.
+    #
+    #   * `CANCELING` - FSx is in process of canceling the task.
+    #
+    #   <note markdown="1"> You cannot delete an FSx for Lustre file system if there are data
+    #   repository tasks for the file system in the `PENDING` or `EXECUTING`
+    #   states. Please retry when the data repository task is finished (with
+    #   a status of `CANCELED`, `SUCCEEDED`, or `FAILED`). You can use the
+    #   DescribeDataRepositoryTask action to monitor the task status.
+    #   Contact the FSx team if you need to delete your file system
+    #   immediately.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of data repository task; EXPORT\_TO\_REPOSITORY is the only
+    #   type currently supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the resource was created, in seconds (since
+    #   1970-01-01T00:00:00Z), also known as Unix time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The time that Amazon FSx began processing the task.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that Amazon FSx completed processing the task, populated
+    #   after the task is complete.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify AWS resources. We require an ARN when you need to specify a
+    #   resource unambiguously across all of AWS. For more information, see
+    #   [Amazon Resource Names (ARNs) and AWS Service Namespaces][1] in the
+    #   *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @!attribute [rw] paths
+    #   An array of paths on the Amazon FSx for Lustre file system that
+    #   specify the data for the data repository task to process. For
+    #   example, in an EXPORT\_TO\_REPOSITORY task, the paths specify which
+    #   data to export to the linked data repository.
+    #
+    #   (Default) If `Paths` is not specified, Amazon FSx uses the file
+    #   system root directory.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failure_details
+    #   Failure message describing why the task failed, it is populated only
+    #   when `Lifecycle` is set to `FAILED`.
+    #   @return [Types::DataRepositoryTaskFailureDetails]
+    #
+    # @!attribute [rw] status
+    #   Provides the status of the number of files that the task has
+    #   processed successfully and failed to process.
+    #   @return [Types::DataRepositoryTaskStatus]
+    #
+    # @!attribute [rw] report
+    #   Provides a report detailing the data repository task results of the
+    #   files processed that match the criteria specified in the report
+    #   `Scope` parameter. FSx delivers the report to the file system's
+    #   linked data repository in Amazon S3, using the path specified in the
+    #   report `Path` parameter. You can specify whether or not a report
+    #   gets generated for a task using the `Enabled` parameter.
+    #   @return [Types::CompletionReport]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTask AWS API Documentation
+    #
+    class DataRepositoryTask < Struct.new(
+      :task_id,
+      :lifecycle,
+      :type,
+      :creation_time,
+      :start_time,
+      :end_time,
+      :resource_arn,
+      :tags,
+      :file_system_id,
+      :paths,
+      :failure_details,
+      :status,
+      :report)
+      include Aws::Structure
+    end
+
+    # The data repository task could not be canceled because the task has
+    # already ended.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTaskEnded AWS API Documentation
+    #
+    class DataRepositoryTaskEnded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An existing data repository task is currently executing on the file
+    # system. Wait until the existing task has completed, then create the
+    # new task.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTaskExecuting AWS API Documentation
+    #
+    class DataRepositoryTaskExecuting < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Provides information about why a data repository task failed. Only
+    # populated when the task `Lifecycle` is set to `FAILED`.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTaskFailureDetails AWS API Documentation
+    #
+    class DataRepositoryTaskFailureDetails < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # (Optional) An array of filter objects you can use to filter the
+    # response of data repository tasks you will see in the the response.
+    # You can filter the tasks returned in the response by one or more file
+    # system IDs, task lifecycles, and by task type. A filter object
+    # consists of a filter `Name`, and one or more `Values` for the filter.
+    #
+    # @note When making an API call, you may pass DataRepositoryTaskFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "file-system-id", # accepts file-system-id, task-lifecycle
+    #         values: ["DataRepositoryTaskFilterValue"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the task property to use in filtering the tasks returned in
+    #   the response.
+    #
+    #   * Use `file-system-id` to retrieve data repository tasks for
+    #     specific file systems.
+    #
+    #   * Use `task-lifecycle` to retrieve data repository tasks with one or
+    #     more specific lifecycle states, as follows: CANCELED, EXECUTING,
+    #     FAILED, PENDING, and SUCCEEDED.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   Use Values to include the specific file system IDs and task
+    #   lifecycle states for the filters you are using.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTaskFilter AWS API Documentation
+    #
+    class DataRepositoryTaskFilter < Struct.new(
+      :name,
+      :values)
+      include Aws::Structure
+    end
+
+    # The data repository task or tasks you specified could not be found.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTaskNotFound AWS API Documentation
+    #
+    class DataRepositoryTaskNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Provides the task status showing a running total of the total number
+    # of files to be processed, the number successfully processed, and the
+    # number of files the task failed to process.
+    #
+    # @!attribute [rw] total_count
+    #   The total number of files that the task will process. While a task
+    #   is executing, the sum of `SucceededCount` plus `FailedCount` may not
+    #   equal `TotalCount`. When the task is complete, `TotalCount` equals
+    #   the sum of `SucceededCount` plus `FailedCount`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] succeeded_count
+    #   A running total of the number of files that the task has
+    #   successfully processed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_count
+    #   A running total of the number of files that the task failed to
+    #   process.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time at which the task status was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTaskStatus AWS API Documentation
+    #
+    class DataRepositoryTaskStatus < Struct.new(
+      :total_count,
+      :succeeded_count,
+      :failed_count,
+      :last_updated_time)
       include Aws::Structure
     end
 
@@ -751,6 +1628,73 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeDataRepositoryTasksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_ids: ["TaskId"],
+    #         filters: [
+    #           {
+    #             name: "file-system-id", # accepts file-system-id, task-lifecycle
+    #             values: ["DataRepositoryTaskFilterValue"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] task_ids
+    #   (Optional) IDs of the tasks whose descriptions you want to retrieve
+    #   (String).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   (Optional) You can use filters to narrow the
+    #   `DescribeDataRepositoryTasks` response to include just tasks for
+    #   specific file systems, or tasks in a specific lifecycle state.
+    #   @return [Array<Types::DataRepositoryTaskFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resources to return in the response. This
+    #   value must be an integer greater than zero.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeDataRepositoryTasksRequest AWS API Documentation
+    #
+    class DescribeDataRepositoryTasksRequest < Struct.new(
+      :task_ids,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_repository_tasks
+    #   The collection of data repository task descriptions returned.
+    #   @return [Array<Types::DataRepositoryTask>]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeDataRepositoryTasksResponse AWS API Documentation
+    #
+    class DescribeDataRepositoryTasksResponse < Struct.new(
+      :data_repository_tasks,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The request object for `DescribeFileSystems` operation.
     #
     # @note When making an API call, you may pass DescribeFileSystemsRequest
@@ -814,8 +1758,8 @@ module Aws::FSx
     #
     # @!attribute [rw] owner_id
     #   The AWS account that created the file system. If the file system was
-    #   created by an IAM user, the AWS account to which the IAM user
-    #   belongs is the owner.
+    #   created by an AWS Identity and Access Management (IAM) user, the AWS
+    #   account to which the IAM user belongs is the owner.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -824,35 +1768,67 @@ module Aws::FSx
     #   @return [Time]
     #
     # @!attribute [rw] file_system_id
-    #   The eight-digit ID of the file system that was automatically
-    #   assigned by Amazon FSx.
+    #   The system-generated, unique 17-digit ID of the file system.
     #   @return [String]
     #
     # @!attribute [rw] file_system_type
-    #   Type of file system. Currently the only supported type is WINDOWS.
+    #   The type of Amazon FSx file system, either `LUSTRE` or `WINDOWS`.
     #   @return [String]
     #
     # @!attribute [rw] lifecycle
-    #   The lifecycle status of the file system.
+    #   The lifecycle status of the file system, following are the possible
+    #   values and what they mean:
+    #
+    #   * `AVAILABLE` - The file system is in a healthy state, and is
+    #     reachable and available for use.
+    #
+    #   * `CREATING` - Amazon FSx is creating the new file system.
+    #
+    #   * `DELETING` - Amazon FSx is deleting an existing file system.
+    #
+    #   * `FAILED` - An existing file system has experienced an
+    #     unrecoverable failure. When creating a new file system, Amazon FSx
+    #     was unable to create the file system.
+    #
+    #   * `MISCONFIGURED` indicates that the file system is in a failed but
+    #     recoverable state.
+    #
+    #   * `UPDATING` indicates that the file system is undergoing a customer
+    #     initiated update.
     #   @return [String]
     #
     # @!attribute [rw] failure_details
-    #   Structure providing details of any failures that occur when creating
-    #   the file system has failed.
+    #   A structure providing details of any failures that occur when
+    #   creating the file system has failed.
     #   @return [Types::FileSystemFailureDetails]
     #
     # @!attribute [rw] storage_capacity
-    #   The storage capacity of the file system in gigabytes.
+    #   The storage capacity of the file system in gigabytes (GB).
     #   @return [Integer]
+    #
+    # @!attribute [rw] storage_type
+    #   The storage type of the file system. Valid values are `SSD` and
+    #   `HDD`. If set to `SSD`, the file system uses solid state drive
+    #   storage. If set to `HDD`, the file system uses hard disk drive
+    #   storage.
+    #   @return [String]
     #
     # @!attribute [rw] vpc_id
     #   The ID of the primary VPC for the file system.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   The IDs of the subnets to contain the endpoint for the file system.
-    #   One and only one is supported. The file system is launched in the
-    #   Availability Zone associated with this subnet.
+    #   Specifies the IDs of the subnets that the file system is accessible
+    #   from. For Windows `MULTI_AZ_1` file system deployment type, there
+    #   are two subnet IDs, one for the preferred file server and one for
+    #   the standby file server. The preferred file server subnet identified
+    #   in the `PreferredSubnetID` property. All other file systems have
+    #   only one subnet ID.
+    #
+    #   For Lustre file systems, and Single-AZ Windows file systems, this is
+    #   the ID of the subnet that contains the endpoint for the file system.
+    #   For `MULTI_AZ_1` Windows file systems, the endpoint for the file
+    #   system is available in the `PreferredSubnetID`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_ids
@@ -863,12 +1839,12 @@ module Aws::FSx
     #   *Amazon EC2 User Guide.*
     #
     #   For an Amazon FSx for Windows File Server file system, you can have
-    #   one network interface Id. For an Amazon FSx for Lustre file system,
+    #   one network interface ID. For an Amazon FSx for Lustre file system,
     #   you can have more than one.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] dns_name
@@ -877,12 +1853,21 @@ module Aws::FSx
     #
     # @!attribute [rw] kms_key_id
     #   The ID of the AWS Key Management Service (AWS KMS) key used to
-    #   encrypt the file system's data for an Amazon FSx for Windows File
-    #   Server file system.
+    #   encrypt the file system's data for Amazon FSx for Windows File
+    #   Server file systems and persistent Amazon FSx for Lustre file
+    #   systems at rest. In either case, if not specified, the Amazon FSx
+    #   managed key is used. The scratch Amazon FSx for Lustre file systems
+    #   are always encrypted at rest using Amazon FSx managed keys. For more
+    #   information, see [Encrypt][1] in the *AWS Key Management Service API
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The resource ARN of the file system.
+    #   The Amazon Resource Name (ARN) for the file system resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -892,7 +1877,7 @@ module Aws::FSx
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] windows_configuration
@@ -902,6 +1887,13 @@ module Aws::FSx
     # @!attribute [rw] lustre_configuration
     #   The configuration for the Amazon FSx for Lustre file system.
     #   @return [Types::LustreFileSystemConfiguration]
+    #
+    # @!attribute [rw] administrative_actions
+    #   A list of administrative actions for the file system that are in
+    #   process or waiting to be processed. Administrative actions describe
+    #   changes to the Windows file system that you have initiated using the
+    #   `UpdateFileSystem` action.
+    #   @return [Array<Types::AdministrativeAction>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystem AWS API Documentation
     #
@@ -913,6 +1905,7 @@ module Aws::FSx
       :lifecycle,
       :failure_details,
       :storage_capacity,
+      :storage_type,
       :vpc_id,
       :subnet_ids,
       :network_interface_ids,
@@ -921,21 +1914,35 @@ module Aws::FSx
       :resource_arn,
       :tags,
       :windows_configuration,
-      :lustre_configuration)
+      :lustre_configuration,
+      :administrative_actions)
       include Aws::Structure
     end
 
-    # Structure providing details of any failures that occur when creating
+    # A structure providing details of any failures that occur when creating
     # the file system has failed.
     #
     # @!attribute [rw] message
-    #   Message describing the failures that occurred during file system
+    #   A message describing any failures that occurred during file system
     #   creation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystemFailureDetails AWS API Documentation
     #
     class FileSystemFailureDetails < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # No Amazon FSx file systems were found based upon supplied parameters.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystemNotFound AWS API Documentation
+    #
+    class FileSystemNotFound < Struct.new(
       :message)
       include Aws::Structure
     end
@@ -966,6 +1973,121 @@ module Aws::FSx
     class Filter < Struct.new(
       :name,
       :values)
+      include Aws::Structure
+    end
+
+    # The error returned when a second request is received with the same
+    # client request token but different parameters settings. A client
+    # request token should always uniquely identify a single request.
+    #
+    # @!attribute [rw] parameter
+    #   A parameter that is incompatible with the earlier request.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/IncompatibleParameterError AWS API Documentation
+    #
+    class IncompatibleParameterError < Struct.new(
+      :parameter,
+      :message)
+      include Aws::Structure
+    end
+
+    # A generic error indicating a server-side failure.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The path provided for data repository export isn't valid.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidExportPath AWS API Documentation
+    #
+    class InvalidExportPath < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The path provided for data repository import isn't valid.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidImportPath AWS API Documentation
+    #
+    class InvalidImportPath < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more network settings specified in the request are invalid.
+    # `InvalidVpcId` means that the ID passed for the virtual private cloud
+    # (VPC) is invalid. `InvalidSubnetIds` returns the list of IDs for
+    # subnets that are either invalid or not part of the VPC specified.
+    # `InvalidSecurityGroupIds` returns the list of IDs for security groups
+    # that are either invalid or not part of the VPC specified.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] invalid_subnet_id
+    #   The ID for a subnet. A *subnet* is a range of IP addresses in your
+    #   virtual private cloud (VPC). For more information, see [VPC and
+    #   Subnets][1] in the *Amazon VPC User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html
+    #   @return [String]
+    #
+    # @!attribute [rw] invalid_security_group_id
+    #   The ID of your Amazon EC2 security group. This ID is used to control
+    #   network access to the endpoint that Amazon FSx creates on your
+    #   behalf in each subnet. For more information, see [Amazon EC2
+    #   Security Groups for Linux Instances][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidNetworkSettings AWS API Documentation
+    #
+    class InvalidNetworkSettings < Struct.new(
+      :message,
+      :invalid_subnet_id,
+      :invalid_security_group_id)
+      include Aws::Structure
+    end
+
+    # An invalid value for `PerUnitStorageThroughput` was provided. Please
+    # create your file system again, using a valid value.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidPerUnitStorageThroughput AWS API Documentation
+    #
+    class InvalidPerUnitStorageThroughput < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1030,7 +2152,9 @@ module Aws::FSx
     # The configuration for the Amazon FSx for Lustre file system.
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The UTC time that you want to begin your weekly maintenance window.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone. d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @!attribute [rw] data_repository_configuration
@@ -1038,11 +2162,294 @@ module Aws::FSx
     #   returned in the response of the `CreateFileSystem` operation.
     #   @return [Types::DataRepositoryConfiguration]
     #
+    # @!attribute [rw] deployment_type
+    #   The deployment type of the FSX for Lustre file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] per_unit_storage_throughput
+    #   Per unit storage throughput represents the megabytes per second of
+    #   read or write throughput per 1 tebibyte of storage provisioned. File
+    #   system throughput capacity is equal to Storage capacity (TiB) *
+    #   PerUnitStorageThroughput (MB/s/TiB). This option is only valid for
+    #   `PERSISTENT_1` deployment types. Valid values are 50, 100, 200.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mount_name
+    #   You use the `MountName` value when mounting the file system.
+    #
+    #   For the `SCRATCH_1` deployment type, this value is always "`fsx`".
+    #   For `SCRATCH_2` and `PERSISTENT_1` deployment types, this value is a
+    #   string that is unique within an AWS Region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreFileSystemConfiguration AWS API Documentation
     #
     class LustreFileSystemConfiguration < Struct.new(
       :weekly_maintenance_start_time,
-      :data_repository_configuration)
+      :data_repository_configuration,
+      :deployment_type,
+      :per_unit_storage_throughput,
+      :mount_name)
+      include Aws::Structure
+    end
+
+    # A file system configuration is required for this operation.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/MissingFileSystemConfiguration AWS API Documentation
+    #
+    class MissingFileSystemConfiguration < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource specified for the tagging operation is not a resource
+    # type owned by Amazon FSx. Use the API of the relevant service to
+    # perform the operation.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the non-Amazon FSx resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/NotServiceResourceError AWS API Documentation
+    #
+    class NotServiceResourceError < Struct.new(
+      :resource_arn,
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource specified does not support tagging.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that doesn't support
+    #   tagging.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ResourceDoesNotSupportTagging AWS API Documentation
+    #
+    class ResourceDoesNotSupportTagging < Struct.new(
+      :resource_arn,
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource specified by the Amazon Resource Name (ARN) can't be
+    # found.
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource ARN of the resource that can't be found.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ResourceNotFound AWS API Documentation
+    #
+    class ResourceNotFound < Struct.new(
+      :resource_arn,
+      :message)
+      include Aws::Structure
+    end
+
+    # The configuration of the self-managed Microsoft Active Directory (AD)
+    # directory to which the Windows File Server instance is joined.
+    #
+    # @!attribute [rw] domain_name
+    #   The fully qualified domain name of the self-managed AD directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_distinguished_name
+    #   The fully qualified distinguished name of the organizational unit
+    #   within the self-managed AD directory to which the Windows File
+    #   Server instance is joined.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_administrators_group
+    #   The name of the domain group whose members have administrative
+    #   privileges for the FSx file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The user name for the service account on your self-managed AD domain
+    #   that FSx uses to join to your AD domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_ips
+    #   A list of up to two IP addresses of DNS servers or domain
+    #   controllers in the self-managed AD directory.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryAttributes AWS API Documentation
+    #
+    class SelfManagedActiveDirectoryAttributes < Struct.new(
+      :domain_name,
+      :organizational_unit_distinguished_name,
+      :file_system_administrators_group,
+      :user_name,
+      :dns_ips)
+      include Aws::Structure
+    end
+
+    # The configuration that Amazon FSx uses to join the Windows File Server
+    # instance to your self-managed (including on-premises) Microsoft Active
+    # Directory (AD) directory.
+    #
+    # @note When making an API call, you may pass SelfManagedActiveDirectoryConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #         user_name: "DirectoryUserName", # required
+    #         password: "DirectoryPassword", # required
+    #         dns_ips: ["IpAddress"], # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The fully qualified domain name of the self-managed AD directory,
+    #   such as `corp.example.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_distinguished_name
+    #   (Optional) The fully qualified distinguished name of the
+    #   organizational unit within your self-managed AD directory that the
+    #   Windows File Server instance will join. Amazon FSx only accepts OU
+    #   as the direct parent of the file system. An example is
+    #   `OU=FSx,DC=yourdomain,DC=corp,DC=com`. To learn more, see [RFC
+    #   2253][1]. If none is provided, the FSx file system is created in the
+    #   default location of your self-managed AD directory.
+    #
+    #   Only Organizational Unit (OU) objects can be the direct parent of
+    #   the file system that you're creating.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc2253
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_administrators_group
+    #   (Optional) The name of the domain group whose members are granted
+    #   administrative privileges for the file system. Administrative
+    #   privileges include taking ownership of files and folders, setting
+    #   audit controls (audit ACLs) on files and folders, and administering
+    #   the file system remotely by using the FSx Remote PowerShell. The
+    #   group that you specify must already exist in your domain. If you
+    #   don't provide one, your AD domain's Domain Admins group is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The user name for the service account on your self-managed AD domain
+    #   that Amazon FSx will use to join to your AD domain. This account
+    #   must have the permission to join computers to the domain in the
+    #   organizational unit provided in
+    #   `OrganizationalUnitDistinguishedName`, or in the default location of
+    #   your AD domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password for the service account on your self-managed AD domain
+    #   that Amazon FSx will use to join to your AD domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_ips
+    #   A list of up to two IP addresses of DNS servers or domain
+    #   controllers in the self-managed AD directory. The IP addresses need
+    #   to be either in the same VPC CIDR range as the one in which your
+    #   Amazon FSx file system is being created, or in the private IP
+    #   version 4 (IPv4) address ranges, as specified in [RFC 1918][1]\:
+    #
+    #   * 10\.0.0.0 - 10.255.255.255 (10/8 prefix)
+    #
+    #   * 172\.16.0.0 - 172.31.255.255 (172.16/12 prefix)
+    #
+    #   * 192\.168.0.0 - 192.168.255.255 (192.168/16 prefix)
+    #
+    #
+    #
+    #   [1]: http://www.faqs.org/rfcs/rfc1918.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfiguration AWS API Documentation
+    #
+    class SelfManagedActiveDirectoryConfiguration < Struct.new(
+      :domain_name,
+      :organizational_unit_distinguished_name,
+      :file_system_administrators_group,
+      :user_name,
+      :password,
+      :dns_ips)
+      include Aws::Structure
+    end
+
+    # The configuration that Amazon FSx uses to join the Windows File Server
+    # instance to a self-managed Microsoft Active Directory (AD) directory.
+    #
+    # @note When making an API call, you may pass SelfManagedActiveDirectoryConfigurationUpdates
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "DirectoryUserName",
+    #         password: "DirectoryPassword",
+    #         dns_ips: ["IpAddress"],
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The user name for the service account on your self-managed AD domain
+    #   that Amazon FSx will use to join to your AD domain. This account
+    #   must have the permission to join computers to the domain in the
+    #   organizational unit provided in
+    #   `OrganizationalUnitDistinguishedName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password for the service account on your self-managed AD domain
+    #   that Amazon FSx will use to join to your AD domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_ips
+    #   A list of up to two IP addresses of DNS servers or domain
+    #   controllers in the self-managed AD directory.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfigurationUpdates AWS API Documentation
+    #
+    class SelfManagedActiveDirectoryConfigurationUpdates < Struct.new(
+      :user_name,
+      :password,
+      :dns_ips)
+      include Aws::Structure
+    end
+
+    # An error indicating that a particular service limit was exceeded. You
+    # can increase some service limits by contacting AWS Support.
+    #
+    # @!attribute [rw] limit
+    #   Enumeration of the service limit that was exceeded.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ServiceLimitExceeded AWS API Documentation
+    #
+    class ServiceLimitExceeded < Struct.new(
+      :limit,
+      :message)
       include Aws::Structure
     end
 
@@ -1116,6 +2523,19 @@ module Aws::FSx
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The requested operation is not supported for this resource or API.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UnsupportedOperation AWS API Documentation
+    #
+    class UnsupportedOperation < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The request object for `UntagResource` action.
     #
     # @note When making an API call, you may pass UntagResourceRequest
@@ -1160,8 +2580,9 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The preferred time to perform weekly maintenance, in the UTC time
-    #   zone.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone. d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreConfiguration AWS API Documentation
@@ -1179,10 +2600,17 @@ module Aws::FSx
     #       {
     #         file_system_id: "FileSystemId", # required
     #         client_request_token: "ClientRequestToken",
+    #         storage_capacity: 1,
     #         windows_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           daily_automatic_backup_start_time: "DailyTime",
     #           automatic_backup_retention_days: 1,
+    #           throughput_capacity: 1,
+    #           self_managed_active_directory_configuration: {
+    #             user_name: "DirectoryUserName",
+    #             password: "DirectoryPassword",
+    #             dns_ips: ["IpAddress"],
+    #           },
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -1190,22 +2618,38 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] file_system_id
-    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   Identifies the file system that you are updating.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx
-    #   uses to ensure idempotent updates. This string is automatically
-    #   filled on your behalf when you use the AWS Command Line Interface
-    #   (AWS CLI) or an AWS SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent updates. This string is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an
+    #   AWS SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] storage_capacity
+    #   Use this parameter to increase the storage capacity of an Amazon FSx
+    #   for Windows File Server file system. Specifies the storage capacity
+    #   target value, GiB, for the file system you're updating. The storage
+    #   capacity target value must be at least 10 percent (%) greater than
+    #   the current storage capacity value. In order to increase storage
+    #   capacity, the file system needs to have at least 16 MB/s of
+    #   throughput capacity. You cannot make a storage capacity increase
+    #   request if there is an existing storage capacity increase request in
+    #   progress. For more information, see [Managing Storage Capacity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   @return [Integer]
+    #
     # @!attribute [rw] windows_configuration
-    #   The configuration for this Microsoft Windows file system. The only
-    #   supported options are for backup and maintenance.
+    #   The configuration updates for an Amazon FSx for Windows File Server
+    #   file system.
     #   @return [Types::UpdateFileSystemWindowsConfiguration]
     #
     # @!attribute [rw] lustre_configuration
@@ -1218,6 +2662,7 @@ module Aws::FSx
     class UpdateFileSystemRequest < Struct.new(
       :file_system_id,
       :client_request_token,
+      :storage_capacity,
       :windows_configuration,
       :lustre_configuration)
       include Aws::Structure
@@ -1226,7 +2671,7 @@ module Aws::FSx
     # The response object for the `UpdateFileSystem` operation.
     #
     # @!attribute [rw] file_system
-    #   A description of the file system.
+    #   A description of the file system that was updated.
     #   @return [Types::FileSystem]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemResponse AWS API Documentation
@@ -1236,8 +2681,9 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The configuration object for the Microsoft Windows file system used in
-    # the `UpdateFileSystem` operation.
+    # Updates the configuration for an existing Amazon FSx for Windows File
+    # Server file system. Amazon FSx only overwrites existing properties
+    # with non-null values provided in the request.
     #
     # @note When making an API call, you may pass UpdateFileSystemWindowsConfiguration
     #   data as a hash:
@@ -1246,30 +2692,64 @@ module Aws::FSx
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         daily_automatic_backup_start_time: "DailyTime",
     #         automatic_backup_retention_days: 1,
+    #         throughput_capacity: 1,
+    #         self_managed_active_directory_configuration: {
+    #           user_name: "DirectoryUserName",
+    #           password: "DirectoryPassword",
+    #           dns_ips: ["IpAddress"],
+    #         },
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The preferred time to perform weekly maintenance, in the UTC time
-    #   zone.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone. Where d is the weekday number, from 1
+    #   through 7, with 1 = Monday and 7 = Sunday.
     #   @return [String]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
-    #   The preferred time to take daily automatic backups, in the UTC time
-    #   zone.
+    #   The preferred time to start the daily automatic backup, in the UTC
+    #   time zone, for example, `02:00`
     #   @return [String]
     #
     # @!attribute [rw] automatic_backup_retention_days
-    #   The number of days to retain automatic backups. Setting this to 0
-    #   disables automatic backups. You can retain automatic backups for a
-    #   maximum of 35 days.
+    #   The number of days to retain automatic daily backups. Setting this
+    #   to zero (0) disables automatic daily backups. You can retain
+    #   automatic daily backups for a maximum of 35 days. For more
+    #   information, see [Working with Automatic Daily Backups][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups
     #   @return [Integer]
+    #
+    # @!attribute [rw] throughput_capacity
+    #   Sets the target value for a file system's throughput capacity, in
+    #   MB/s, that you are updating the file system to. Valid values are 8,
+    #   16, 32, 64, 128, 256, 512, 1024, 2048. You cannot make a throughput
+    #   capacity update request if there is an existing throughput capacity
+    #   update request in progress. For more information, see [Managing
+    #   Throughput Capacity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] self_managed_active_directory_configuration
+    #   The configuration Amazon FSx uses to join the Windows File Server
+    #   instance to the self-managed Microsoft AD directory. You cannot make
+    #   a self-managed Microsoft AD update request if there is an existing
+    #   self-managed Microsoft AD update request in progress.
+    #   @return [Types::SelfManagedActiveDirectoryConfigurationUpdates]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemWindowsConfiguration AWS API Documentation
     #
     class UpdateFileSystemWindowsConfiguration < Struct.new(
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
-      :automatic_backup_retention_days)
+      :automatic_backup_retention_days,
+      :throughput_capacity,
+      :self_managed_active_directory_configuration)
       include Aws::Structure
     end
 
@@ -1278,6 +2758,81 @@ module Aws::FSx
     # @!attribute [rw] active_directory_id
     #   The ID for an existing Microsoft Active Directory instance that the
     #   file system should join when it's created.
+    #   @return [String]
+    #
+    # @!attribute [rw] self_managed_active_directory_configuration
+    #   The configuration of the self-managed Microsoft Active Directory
+    #   (AD) directory to which the Windows File Server instance is joined.
+    #   @return [Types::SelfManagedActiveDirectoryAttributes]
+    #
+    # @!attribute [rw] deployment_type
+    #   Specifies the file system deployment type, valid values are the
+    #   following:
+    #
+    #   * `MULTI_AZ_1` - Specifies a high availability file system that is
+    #     configured for Multi-AZ redundancy to tolerate temporary
+    #     Availability Zone (AZ) unavailability, and supports SSD and HDD
+    #     storage.
+    #
+    #   * `SINGLE_AZ_1` - (Default) Specifies a file system that is
+    #     configured for single AZ redundancy, only supports SSD storage.
+    #
+    #   * `SINGLE_AZ_2` - Latest generation Single AZ file system. Specifies
+    #     a file system that is configured for single AZ redundancy and
+    #     supports SSD and HDD storage.
+    #
+    #   For more information, see [Single-AZ and Multi-AZ File Systems][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_administration_endpoint
+    #   For `MULTI_AZ_1` deployment types, use this endpoint when performing
+    #   administrative tasks on the file system using Amazon FSx Remote
+    #   PowerShell.
+    #
+    #   For `SINGLE_AZ_1` and `SINGLE_AZ_2` deployment types, this is the
+    #   DNS name of the file system.
+    #
+    #   This endpoint is temporarily unavailable when the file system is
+    #   undergoing maintenance.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_subnet_id
+    #   For `MULTI_AZ_1` deployment types, it specifies the ID of the subnet
+    #   where the preferred file server is located. Must be one of the two
+    #   subnet IDs specified in `SubnetIds` property. Amazon FSx serves
+    #   traffic from this subnet except in the event of a failover to the
+    #   secondary file server.
+    #
+    #   For `SINGLE_AZ_1` and `SINGLE_AZ_2` deployment types, this value is
+    #   the same as that for `SubnetIDs`. For more information, see
+    #   [Availability and Durability: Single-AZ and Multi-AZ File
+    #   Systems][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_file_server_ip
+    #   For `MULTI_AZ_1` deployment types, the IP address of the primary, or
+    #   preferred, file server.
+    #
+    #   Use this IP address when mounting the file system on Linux SMB
+    #   clients or Windows SMB clients that are not joined to a Microsoft
+    #   Active Directory. Applicable for all Windows file system deployment
+    #   types. This IP address is temporarily unavailable when the file
+    #   system is undergoing maintenance. For Linux and Windows SMB clients
+    #   that are joined to an Active Directory, use the file system's
+    #   DNSName instead. For more information on mapping and mounting file
+    #   shares, see [Accessing File Shares][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html
     #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
@@ -1290,8 +2845,9 @@ module Aws::FSx
     #   @return [Array<String>]
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The preferred time to perform weekly maintenance, in the UTC time
-    #   zone.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone. d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -1311,13 +2867,20 @@ module Aws::FSx
     #   true, all tags on the file system are copied to all automatic
     #   backups and any user-initiated backups where the user doesn't
     #   specify any tags. If this value is true, and you specify one or more
-    #   tags, only the specified tags are copied to backups.
+    #   tags, only the specified tags are copied to backups. If you specify
+    #   one or more tags when creating a user-initiated backup, no tags are
+    #   copied from the file system, regardless of this value.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsFileSystemConfiguration AWS API Documentation
     #
     class WindowsFileSystemConfiguration < Struct.new(
       :active_directory_id,
+      :self_managed_active_directory_configuration,
+      :deployment_type,
+      :remote_administration_endpoint,
+      :preferred_subnet_id,
+      :preferred_file_server_ip,
       :throughput_capacity,
       :maintenance_operations_in_progress,
       :weekly_maintenance_start_time,

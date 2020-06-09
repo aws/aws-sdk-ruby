@@ -87,6 +87,21 @@
         {"shape":"InternalServerError"}
       ]
     },
+    "DeleteMetricPolicy":{
+      "name":"DeleteMetricPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteMetricPolicyInput"},
+      "output":{"shape":"DeleteMetricPolicyOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"PolicyNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
     "DescribeContainer":{
       "name":"DescribeContainer",
       "http":{
@@ -145,6 +160,21 @@
         {"shape":"InternalServerError"}
       ]
     },
+    "GetMetricPolicy":{
+      "name":"GetMetricPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetMetricPolicyInput"},
+      "output":{"shape":"GetMetricPolicyOutput"},
+      "errors":[
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"PolicyNotFoundException"},
+        {"shape":"ContainerInUseException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
     "ListContainers":{
       "name":"ListContainers",
       "http":{
@@ -154,6 +184,20 @@
       "input":{"shape":"ListContainersInput"},
       "output":{"shape":"ListContainersOutput"},
       "errors":[
+        {"shape":"InternalServerError"}
+      ]
+    },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForResourceInput"},
+      "output":{"shape":"ListTagsForResourceOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
         {"shape":"InternalServerError"}
       ]
     },
@@ -198,6 +242,76 @@
         {"shape":"ContainerNotFoundException"},
         {"shape":"InternalServerError"}
       ]
+    },
+    "PutMetricPolicy":{
+      "name":"PutMetricPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutMetricPolicyInput"},
+      "output":{"shape":"PutMetricPolicyOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
+    "StartAccessLogging":{
+      "name":"StartAccessLogging",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartAccessLoggingInput"},
+      "output":{"shape":"StartAccessLoggingOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
+    "StopAccessLogging":{
+      "name":"StopAccessLogging",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopAccessLoggingInput"},
+      "output":{"shape":"StopAccessLoggingOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagResourceInput"},
+      "output":{"shape":"TagResourceOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagResourceInput"},
+      "output":{"shape":"UntagResourceOutput"},
+      "errors":[
+        {"shape":"ContainerInUseException"},
+        {"shape":"ContainerNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
     }
   },
   "shapes":{
@@ -226,21 +340,30 @@
         "CreationTime":{"shape":"TimeStamp"},
         "ARN":{"shape":"ContainerARN"},
         "Name":{"shape":"ContainerName"},
-        "Status":{"shape":"ContainerStatus"}
+        "Status":{"shape":"ContainerStatus"},
+        "AccessLoggingEnabled":{"shape":"ContainerAccessLoggingEnabled"}
       }
     },
     "ContainerARN":{
       "type":"string",
       "max":1024,
       "min":1,
-      "pattern":"arn:aws:mediastore:[a-z]+-[a-z]+-\\d:\\d{12}:container/\\w{1,255}"
+      "pattern":"arn:aws:mediastore:[a-z]+-[a-z]+-\\d:\\d{12}:container/[\\w-]{1,255}"
     },
+    "ContainerAccessLoggingEnabled":{"type":"boolean"},
     "ContainerInUseException":{
       "type":"structure",
       "members":{
         "Message":{"shape":"ErrorMessage"}
       },
       "exception":true
+    },
+    "ContainerLevelMetrics":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "ContainerList":{
       "type":"list",
@@ -268,7 +391,7 @@
       "type":"string",
       "max":8192,
       "min":1,
-      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+      "pattern":"[\\x00-\\x7F]+"
     },
     "ContainerStatus":{
       "type":"string",
@@ -311,7 +434,8 @@
       "type":"structure",
       "required":["ContainerName"],
       "members":{
-        "ContainerName":{"shape":"ContainerName"}
+        "ContainerName":{"shape":"ContainerName"},
+        "Tags":{"shape":"TagList"}
       }
     },
     "CreateContainerOutput":{
@@ -369,6 +493,18 @@
       "members":{
       }
     },
+    "DeleteMetricPolicyInput":{
+      "type":"structure",
+      "required":["ContainerName"],
+      "members":{
+        "ContainerName":{"shape":"ContainerName"}
+      }
+    },
+    "DeleteMetricPolicyOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DescribeContainerInput":{
       "type":"structure",
       "members":{
@@ -384,7 +520,8 @@
     "Endpoint":{
       "type":"string",
       "max":255,
-      "min":1
+      "min":1,
+      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
     },
     "ErrorMessage":{
       "type":"string",
@@ -440,6 +577,20 @@
         "LifecyclePolicy":{"shape":"LifecyclePolicy"}
       }
     },
+    "GetMetricPolicyInput":{
+      "type":"structure",
+      "required":["ContainerName"],
+      "members":{
+        "ContainerName":{"shape":"ContainerName"}
+      }
+    },
+    "GetMetricPolicyOutput":{
+      "type":"structure",
+      "required":["MetricPolicy"],
+      "members":{
+        "MetricPolicy":{"shape":"MetricPolicy"}
+      }
+    },
     "Header":{
       "type":"string",
       "max":8192,
@@ -482,6 +633,19 @@
         "NextToken":{"shape":"PaginationToken"}
       }
     },
+    "ListTagsForResourceInput":{
+      "type":"structure",
+      "required":["Resource"],
+      "members":{
+        "Resource":{"shape":"ContainerARN"}
+      }
+    },
+    "ListTagsForResourceOutput":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"TagList"}
+      }
+    },
     "MaxAgeSeconds":{
       "type":"integer",
       "max":2147483647,
@@ -496,6 +660,43 @@
         "HEAD"
       ]
     },
+    "MetricPolicy":{
+      "type":"structure",
+      "required":["ContainerLevelMetrics"],
+      "members":{
+        "ContainerLevelMetrics":{"shape":"ContainerLevelMetrics"},
+        "MetricPolicyRules":{"shape":"MetricPolicyRules"}
+      }
+    },
+    "MetricPolicyRule":{
+      "type":"structure",
+      "required":[
+        "ObjectGroup",
+        "ObjectGroupName"
+      ],
+      "members":{
+        "ObjectGroup":{"shape":"ObjectGroup"},
+        "ObjectGroupName":{"shape":"ObjectGroupName"}
+      }
+    },
+    "MetricPolicyRules":{
+      "type":"list",
+      "member":{"shape":"MetricPolicyRule"},
+      "max":300,
+      "min":1
+    },
+    "ObjectGroup":{
+      "type":"string",
+      "max":900,
+      "min":1,
+      "pattern":"/?(?:[A-Za-z0-9_=:\\.\\-\\~\\*]+/){0,10}(?:[A-Za-z0-9_=:\\.\\-\\~\\*]+)?/?"
+    },
+    "ObjectGroupName":{
+      "type":"string",
+      "max":30,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_]+"
+    },
     "Origin":{
       "type":"string",
       "max":2048,
@@ -504,7 +705,7 @@
     },
     "PaginationToken":{
       "type":"string",
-      "max":255,
+      "max":1024,
       "min":1,
       "pattern":"[0-9A-Za-z=/+]+"
     },
@@ -563,6 +764,108 @@
       "members":{
       }
     },
-    "TimeStamp":{"type":"timestamp"}
+    "PutMetricPolicyInput":{
+      "type":"structure",
+      "required":[
+        "ContainerName",
+        "MetricPolicy"
+      ],
+      "members":{
+        "ContainerName":{"shape":"ContainerName"},
+        "MetricPolicy":{"shape":"MetricPolicy"}
+      }
+    },
+    "PutMetricPolicyOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "StartAccessLoggingInput":{
+      "type":"structure",
+      "required":["ContainerName"],
+      "members":{
+        "ContainerName":{"shape":"ContainerName"}
+      }
+    },
+    "StartAccessLoggingOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "StopAccessLoggingInput":{
+      "type":"structure",
+      "required":["ContainerName"],
+      "members":{
+        "ContainerName":{"shape":"ContainerName"}
+      }
+    },
+    "StopAccessLoggingOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "Tag":{
+      "type":"structure",
+      "required":["Key"],
+      "members":{
+        "Key":{"shape":"TagKey"},
+        "Value":{"shape":"TagValue"}
+      }
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*"
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"},
+      "max":200,
+      "min":1
+    },
+    "TagResourceInput":{
+      "type":"structure",
+      "required":[
+        "Resource",
+        "Tags"
+      ],
+      "members":{
+        "Resource":{"shape":"ContainerARN"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "TagResourceOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*"
+    },
+    "TimeStamp":{"type":"timestamp"},
+    "UntagResourceInput":{
+      "type":"structure",
+      "required":[
+        "Resource",
+        "TagKeys"
+      ],
+      "members":{
+        "Resource":{"shape":"ContainerARN"},
+        "TagKeys":{"shape":"TagKeyList"}
+      }
+    },
+    "UntagResourceOutput":{
+      "type":"structure",
+      "members":{
+      }
+    }
   }
 }

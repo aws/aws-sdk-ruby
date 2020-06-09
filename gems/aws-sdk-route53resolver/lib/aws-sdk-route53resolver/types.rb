@@ -565,6 +565,85 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
+    # We encountered an unknown error. Try again in a few minutes.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/InternalServiceErrorException AWS API Documentation
+    #
+    class InternalServiceErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The value that you specified for `NextToken` in a `List` request
+    # isn't valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more parameters in this request are not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] field_name
+    #   For an `InvalidParameterException` error, the name of the parameter
+    #   that's invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message,
+      :field_name)
+      include Aws::Structure
+    end
+
+    # The specified resolver rule policy is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/InvalidPolicyDocument AWS API Documentation
+    #
+    class InvalidPolicyDocument < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified tag is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/InvalidTagException AWS API Documentation
+    #
+    class InvalidTagException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # In an CreateResolverEndpoint request, a subnet and IP address that you
     # want to use for DNS queries.
     #
@@ -672,6 +751,24 @@ module Aws::Route53Resolver
       :ip_id,
       :subnet_id,
       :ip)
+      include Aws::Structure
+    end
+
+    # The request caused one or more limits to be exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   For a `LimitExceededException` error, the type of resource that
+    #   exceeded the current limit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message,
+      :resource_type)
       include Aws::Structure
     end
 
@@ -1325,6 +1422,78 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
+    # The resource that you tried to create already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   For a `ResourceExistsException` error, the type of resource that the
+    #   error applies to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResourceExistsException AWS API Documentation
+    #
+    class ResourceExistsException < Struct.new(
+      :message,
+      :resource_type)
+      include Aws::Structure
+    end
+
+    # The resource that you tried to update or delete is currently in use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   For a `ResourceInUseException` error, the type of resource that is
+    #   currently in use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message,
+      :resource_type)
+      include Aws::Structure
+    end
+
+    # The specified resource doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   For a `ResourceNotFoundException` error, the type of resource that
+    #   doesn't exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :resource_type)
+      include Aws::Structure
+    end
+
+    # The specified resource isn't available.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   For a `ResourceUnavailableException` error, the type of resource
+    #   that isn't available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResourceUnavailableException AWS API Documentation
+    #
+    class ResourceUnavailableException < Struct.new(
+      :message,
+      :resource_type)
+      include Aws::Structure
+    end
+
     # One tag that you want to add to the specified resource. A tag consists
     # of a `Key` (a name for the tag) and a `Value`.
     #
@@ -1428,6 +1597,30 @@ module Aws::Route53Resolver
     class TargetAddress < Struct.new(
       :ip,
       :port)
+      include Aws::Structure
+    end
+
+    # The request was throttled. Try again in a few minutes.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UnknownResourceException AWS API Documentation
+    #
+    class UnknownResourceException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

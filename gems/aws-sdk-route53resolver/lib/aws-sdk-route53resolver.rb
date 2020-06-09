@@ -24,17 +24,20 @@ require_relative 'aws-sdk-route53resolver/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     route_53_resolver = Aws::Route53Resolver::Client.new
+#     resp = route_53_resolver.associate_resolver_endpoint_ip_address(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Route 53 Resolver all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Route 53 Resolver are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Route53Resolver::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Route 53 Resolver API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-route53resolver/customizations'
 # @service
 module Aws::Route53Resolver
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.14.0'
 
 end

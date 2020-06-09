@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::STS
+
   class Resource
 
     # @param options ({})

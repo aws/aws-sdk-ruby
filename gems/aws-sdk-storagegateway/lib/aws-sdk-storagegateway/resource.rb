@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::StorageGateway
+
   class Resource
 
     # @param options ({})

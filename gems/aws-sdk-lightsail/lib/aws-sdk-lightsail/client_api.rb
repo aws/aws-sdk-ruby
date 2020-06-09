@@ -14,6 +14,14 @@ module Aws::Lightsail
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessDirection = Shapes::StringShape.new(name: 'AccessDirection')
     AccountSetupInProgressException = Shapes::StructureShape.new(name: 'AccountSetupInProgressException')
+    AddOn = Shapes::StructureShape.new(name: 'AddOn')
+    AddOnList = Shapes::ListShape.new(name: 'AddOnList')
+    AddOnRequest = Shapes::StructureShape.new(name: 'AddOnRequest')
+    AddOnRequestList = Shapes::ListShape.new(name: 'AddOnRequestList')
+    AddOnType = Shapes::StringShape.new(name: 'AddOnType')
+    Alarm = Shapes::StructureShape.new(name: 'Alarm')
+    AlarmState = Shapes::StringShape.new(name: 'AlarmState')
+    AlarmsList = Shapes::ListShape.new(name: 'AlarmsList')
     AllocateStaticIpRequest = Shapes::StructureShape.new(name: 'AllocateStaticIpRequest')
     AllocateStaticIpResult = Shapes::StructureShape.new(name: 'AllocateStaticIpResult')
     AttachDiskRequest = Shapes::StructureShape.new(name: 'AttachDiskRequest')
@@ -24,7 +32,14 @@ module Aws::Lightsail
     AttachLoadBalancerTlsCertificateResult = Shapes::StructureShape.new(name: 'AttachLoadBalancerTlsCertificateResult')
     AttachStaticIpRequest = Shapes::StructureShape.new(name: 'AttachStaticIpRequest')
     AttachStaticIpResult = Shapes::StructureShape.new(name: 'AttachStaticIpResult')
+    AttachedDisk = Shapes::StructureShape.new(name: 'AttachedDisk')
+    AttachedDiskList = Shapes::ListShape.new(name: 'AttachedDiskList')
     AttachedDiskMap = Shapes::MapShape.new(name: 'AttachedDiskMap')
+    AutoSnapshotAddOnRequest = Shapes::StructureShape.new(name: 'AutoSnapshotAddOnRequest')
+    AutoSnapshotDate = Shapes::StringShape.new(name: 'AutoSnapshotDate')
+    AutoSnapshotDetails = Shapes::StructureShape.new(name: 'AutoSnapshotDetails')
+    AutoSnapshotDetailsList = Shapes::ListShape.new(name: 'AutoSnapshotDetailsList')
+    AutoSnapshotStatus = Shapes::StringShape.new(name: 'AutoSnapshotStatus')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     Base64 = Shapes::StringShape.new(name: 'Base64')
@@ -40,10 +55,19 @@ module Aws::Lightsail
     CloudFormationStackRecordSourceInfo = Shapes::StructureShape.new(name: 'CloudFormationStackRecordSourceInfo')
     CloudFormationStackRecordSourceInfoList = Shapes::ListShape.new(name: 'CloudFormationStackRecordSourceInfoList')
     CloudFormationStackRecordSourceType = Shapes::StringShape.new(name: 'CloudFormationStackRecordSourceType')
+    ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
+    ContactMethod = Shapes::StructureShape.new(name: 'ContactMethod')
+    ContactMethodStatus = Shapes::StringShape.new(name: 'ContactMethodStatus')
+    ContactMethodVerificationProtocol = Shapes::StringShape.new(name: 'ContactMethodVerificationProtocol')
+    ContactMethodsList = Shapes::ListShape.new(name: 'ContactMethodsList')
+    ContactProtocol = Shapes::StringShape.new(name: 'ContactProtocol')
+    ContactProtocolsList = Shapes::ListShape.new(name: 'ContactProtocolsList')
     CopySnapshotRequest = Shapes::StructureShape.new(name: 'CopySnapshotRequest')
     CopySnapshotResult = Shapes::StructureShape.new(name: 'CopySnapshotResult')
     CreateCloudFormationStackRequest = Shapes::StructureShape.new(name: 'CreateCloudFormationStackRequest')
     CreateCloudFormationStackResult = Shapes::StructureShape.new(name: 'CreateCloudFormationStackResult')
+    CreateContactMethodRequest = Shapes::StructureShape.new(name: 'CreateContactMethodRequest')
+    CreateContactMethodResult = Shapes::StructureShape.new(name: 'CreateContactMethodResult')
     CreateDiskFromSnapshotRequest = Shapes::StructureShape.new(name: 'CreateDiskFromSnapshotRequest')
     CreateDiskFromSnapshotResult = Shapes::StructureShape.new(name: 'CreateDiskFromSnapshotResult')
     CreateDiskRequest = Shapes::StructureShape.new(name: 'CreateDiskRequest')
@@ -72,6 +96,12 @@ module Aws::Lightsail
     CreateRelationalDatabaseResult = Shapes::StructureShape.new(name: 'CreateRelationalDatabaseResult')
     CreateRelationalDatabaseSnapshotRequest = Shapes::StructureShape.new(name: 'CreateRelationalDatabaseSnapshotRequest')
     CreateRelationalDatabaseSnapshotResult = Shapes::StructureShape.new(name: 'CreateRelationalDatabaseSnapshotResult')
+    DeleteAlarmRequest = Shapes::StructureShape.new(name: 'DeleteAlarmRequest')
+    DeleteAlarmResult = Shapes::StructureShape.new(name: 'DeleteAlarmResult')
+    DeleteAutoSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteAutoSnapshotRequest')
+    DeleteAutoSnapshotResult = Shapes::StructureShape.new(name: 'DeleteAutoSnapshotResult')
+    DeleteContactMethodRequest = Shapes::StructureShape.new(name: 'DeleteContactMethodRequest')
+    DeleteContactMethodResult = Shapes::StructureShape.new(name: 'DeleteContactMethodResult')
     DeleteDiskRequest = Shapes::StructureShape.new(name: 'DeleteDiskRequest')
     DeleteDiskResult = Shapes::StructureShape.new(name: 'DeleteDiskResult')
     DeleteDiskSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteDiskSnapshotRequest')
@@ -86,6 +116,8 @@ module Aws::Lightsail
     DeleteInstanceSnapshotResult = Shapes::StructureShape.new(name: 'DeleteInstanceSnapshotResult')
     DeleteKeyPairRequest = Shapes::StructureShape.new(name: 'DeleteKeyPairRequest')
     DeleteKeyPairResult = Shapes::StructureShape.new(name: 'DeleteKeyPairResult')
+    DeleteKnownHostKeysRequest = Shapes::StructureShape.new(name: 'DeleteKnownHostKeysRequest')
+    DeleteKnownHostKeysResult = Shapes::StructureShape.new(name: 'DeleteKnownHostKeysResult')
     DeleteLoadBalancerRequest = Shapes::StructureShape.new(name: 'DeleteLoadBalancerRequest')
     DeleteLoadBalancerResult = Shapes::StructureShape.new(name: 'DeleteLoadBalancerResult')
     DeleteLoadBalancerTlsCertificateRequest = Shapes::StructureShape.new(name: 'DeleteLoadBalancerTlsCertificateRequest')
@@ -101,6 +133,8 @@ module Aws::Lightsail
     DetachInstancesFromLoadBalancerResult = Shapes::StructureShape.new(name: 'DetachInstancesFromLoadBalancerResult')
     DetachStaticIpRequest = Shapes::StructureShape.new(name: 'DetachStaticIpRequest')
     DetachStaticIpResult = Shapes::StructureShape.new(name: 'DetachStaticIpResult')
+    DisableAddOnRequest = Shapes::StructureShape.new(name: 'DisableAddOnRequest')
+    DisableAddOnResult = Shapes::StructureShape.new(name: 'DisableAddOnResult')
     Disk = Shapes::StructureShape.new(name: 'Disk')
     DiskInfo = Shapes::StructureShape.new(name: 'DiskInfo')
     DiskInfoList = Shapes::ListShape.new(name: 'DiskInfoList')
@@ -123,6 +157,8 @@ module Aws::Lightsail
     DomainNameList = Shapes::ListShape.new(name: 'DomainNameList')
     DownloadDefaultKeyPairRequest = Shapes::StructureShape.new(name: 'DownloadDefaultKeyPairRequest')
     DownloadDefaultKeyPairResult = Shapes::StructureShape.new(name: 'DownloadDefaultKeyPairResult')
+    EnableAddOnRequest = Shapes::StructureShape.new(name: 'EnableAddOnRequest')
+    EnableAddOnResult = Shapes::StructureShape.new(name: 'EnableAddOnResult')
     ExportSnapshotRecord = Shapes::StructureShape.new(name: 'ExportSnapshotRecord')
     ExportSnapshotRecordList = Shapes::ListShape.new(name: 'ExportSnapshotRecordList')
     ExportSnapshotRecordSourceInfo = Shapes::StructureShape.new(name: 'ExportSnapshotRecordSourceInfo')
@@ -131,12 +167,18 @@ module Aws::Lightsail
     ExportSnapshotResult = Shapes::StructureShape.new(name: 'ExportSnapshotResult')
     GetActiveNamesRequest = Shapes::StructureShape.new(name: 'GetActiveNamesRequest')
     GetActiveNamesResult = Shapes::StructureShape.new(name: 'GetActiveNamesResult')
+    GetAlarmsRequest = Shapes::StructureShape.new(name: 'GetAlarmsRequest')
+    GetAlarmsResult = Shapes::StructureShape.new(name: 'GetAlarmsResult')
+    GetAutoSnapshotsRequest = Shapes::StructureShape.new(name: 'GetAutoSnapshotsRequest')
+    GetAutoSnapshotsResult = Shapes::StructureShape.new(name: 'GetAutoSnapshotsResult')
     GetBlueprintsRequest = Shapes::StructureShape.new(name: 'GetBlueprintsRequest')
     GetBlueprintsResult = Shapes::StructureShape.new(name: 'GetBlueprintsResult')
     GetBundlesRequest = Shapes::StructureShape.new(name: 'GetBundlesRequest')
     GetBundlesResult = Shapes::StructureShape.new(name: 'GetBundlesResult')
     GetCloudFormationStackRecordsRequest = Shapes::StructureShape.new(name: 'GetCloudFormationStackRecordsRequest')
     GetCloudFormationStackRecordsResult = Shapes::StructureShape.new(name: 'GetCloudFormationStackRecordsResult')
+    GetContactMethodsRequest = Shapes::StructureShape.new(name: 'GetContactMethodsRequest')
+    GetContactMethodsResult = Shapes::StructureShape.new(name: 'GetContactMethodsResult')
     GetDiskRequest = Shapes::StructureShape.new(name: 'GetDiskRequest')
     GetDiskResult = Shapes::StructureShape.new(name: 'GetDiskResult')
     GetDiskSnapshotRequest = Shapes::StructureShape.new(name: 'GetDiskSnapshotRequest')
@@ -215,6 +257,8 @@ module Aws::Lightsail
     GetStaticIpResult = Shapes::StructureShape.new(name: 'GetStaticIpResult')
     GetStaticIpsRequest = Shapes::StructureShape.new(name: 'GetStaticIpsRequest')
     GetStaticIpsResult = Shapes::StructureShape.new(name: 'GetStaticIpsResult')
+    HostKeyAttributes = Shapes::StructureShape.new(name: 'HostKeyAttributes')
+    HostKeysList = Shapes::ListShape.new(name: 'HostKeysList')
     ImportKeyPairRequest = Shapes::StructureShape.new(name: 'ImportKeyPairRequest')
     ImportKeyPairResult = Shapes::StructureShape.new(name: 'ImportKeyPairResult')
     Instance = Shapes::StructureShape.new(name: 'Instance')
@@ -274,14 +318,17 @@ module Aws::Lightsail
     LogEventList = Shapes::ListShape.new(name: 'LogEventList')
     MetricDatapoint = Shapes::StructureShape.new(name: 'MetricDatapoint')
     MetricDatapointList = Shapes::ListShape.new(name: 'MetricDatapointList')
+    MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricPeriod = Shapes::IntegerShape.new(name: 'MetricPeriod')
     MetricStatistic = Shapes::StringShape.new(name: 'MetricStatistic')
     MetricStatisticList = Shapes::ListShape.new(name: 'MetricStatisticList')
     MetricUnit = Shapes::StringShape.new(name: 'MetricUnit')
+    MonitoredResourceInfo = Shapes::StructureShape.new(name: 'MonitoredResourceInfo')
     MonthlyTransfer = Shapes::StructureShape.new(name: 'MonthlyTransfer')
     NetworkProtocol = Shapes::StringShape.new(name: 'NetworkProtocol')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    NotificationTriggerList = Shapes::ListShape.new(name: 'NotificationTriggerList')
     OpenInstancePublicPortsRequest = Shapes::StructureShape.new(name: 'OpenInstancePublicPortsRequest')
     OpenInstancePublicPortsResult = Shapes::StructureShape.new(name: 'OpenInstancePublicPortsResult')
     Operation = Shapes::StructureShape.new(name: 'Operation')
@@ -302,6 +349,8 @@ module Aws::Lightsail
     PortInfoSourceType = Shapes::StringShape.new(name: 'PortInfoSourceType')
     PortList = Shapes::ListShape.new(name: 'PortList')
     PortState = Shapes::StringShape.new(name: 'PortState')
+    PutAlarmRequest = Shapes::StructureShape.new(name: 'PutAlarmRequest')
+    PutAlarmResult = Shapes::StructureShape.new(name: 'PutAlarmResult')
     PutInstancePublicPortsRequest = Shapes::StructureShape.new(name: 'PutInstancePublicPortsRequest')
     PutInstancePublicPortsResult = Shapes::StructureShape.new(name: 'PutInstancePublicPortsResult')
     RebootInstanceRequest = Shapes::StructureShape.new(name: 'RebootInstanceRequest')
@@ -331,10 +380,13 @@ module Aws::Lightsail
     RelationalDatabaseSnapshotList = Shapes::ListShape.new(name: 'RelationalDatabaseSnapshotList')
     ReleaseStaticIpRequest = Shapes::StructureShape.new(name: 'ReleaseStaticIpRequest')
     ReleaseStaticIpResult = Shapes::StructureShape.new(name: 'ReleaseStaticIpResult')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceLocation = Shapes::StructureShape.new(name: 'ResourceLocation')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNameList = Shapes::ListShape.new(name: 'ResourceNameList')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    SendContactMethodVerificationRequest = Shapes::StructureShape.new(name: 'SendContactMethodVerificationRequest')
+    SendContactMethodVerificationResult = Shapes::StructureShape.new(name: 'SendContactMethodVerificationResult')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     StartInstanceRequest = Shapes::StructureShape.new(name: 'StartInstanceRequest')
@@ -356,6 +408,10 @@ module Aws::Lightsail
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResult = Shapes::StructureShape.new(name: 'TagResourceResult')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TestAlarmRequest = Shapes::StructureShape.new(name: 'TestAlarmRequest')
+    TestAlarmResult = Shapes::StructureShape.new(name: 'TestAlarmResult')
+    TimeOfDay = Shapes::StringShape.new(name: 'TimeOfDay')
+    TreatMissingData = Shapes::StringShape.new(name: 'TreatMissingData')
     UnauthenticatedException = Shapes::StructureShape.new(name: 'UnauthenticatedException')
     UnpeerVpcRequest = Shapes::StructureShape.new(name: 'UnpeerVpcRequest')
     UnpeerVpcResult = Shapes::StructureShape.new(name: 'UnpeerVpcResult')
@@ -375,6 +431,56 @@ module Aws::Lightsail
     integer = Shapes::IntegerShape.new(name: 'integer')
     string = Shapes::StringShape.new(name: 'string')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
+
+    AccessDeniedException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    AccessDeniedException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    AccessDeniedException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccountSetupInProgressException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    AccountSetupInProgressException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    AccountSetupInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    AccountSetupInProgressException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    AccountSetupInProgressException.struct_class = Types::AccountSetupInProgressException
+
+    AddOn.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
+    AddOn.add_member(:status, Shapes::ShapeRef.new(shape: string, location_name: "status"))
+    AddOn.add_member(:snapshot_time_of_day, Shapes::ShapeRef.new(shape: TimeOfDay, location_name: "snapshotTimeOfDay"))
+    AddOn.add_member(:next_snapshot_time_of_day, Shapes::ShapeRef.new(shape: TimeOfDay, location_name: "nextSnapshotTimeOfDay"))
+    AddOn.struct_class = Types::AddOn
+
+    AddOnList.member = Shapes::ShapeRef.new(shape: AddOn)
+
+    AddOnRequest.add_member(:add_on_type, Shapes::ShapeRef.new(shape: AddOnType, required: true, location_name: "addOnType"))
+    AddOnRequest.add_member(:auto_snapshot_add_on_request, Shapes::ShapeRef.new(shape: AutoSnapshotAddOnRequest, location_name: "autoSnapshotAddOnRequest"))
+    AddOnRequest.struct_class = Types::AddOnRequest
+
+    AddOnRequestList.member = Shapes::ShapeRef.new(shape: AddOnRequest)
+
+    Alarm.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    Alarm.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    Alarm.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    Alarm.add_member(:location, Shapes::ShapeRef.new(shape: ResourceLocation, location_name: "location"))
+    Alarm.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    Alarm.add_member(:support_code, Shapes::ShapeRef.new(shape: string, location_name: "supportCode"))
+    Alarm.add_member(:monitored_resource_info, Shapes::ShapeRef.new(shape: MonitoredResourceInfo, location_name: "monitoredResourceInfo"))
+    Alarm.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, location_name: "comparisonOperator"))
+    Alarm.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: integer, location_name: "evaluationPeriods"))
+    Alarm.add_member(:period, Shapes::ShapeRef.new(shape: MetricPeriod, location_name: "period"))
+    Alarm.add_member(:threshold, Shapes::ShapeRef.new(shape: double, location_name: "threshold"))
+    Alarm.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: integer, location_name: "datapointsToAlarm"))
+    Alarm.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: TreatMissingData, location_name: "treatMissingData"))
+    Alarm.add_member(:statistic, Shapes::ShapeRef.new(shape: MetricStatistic, location_name: "statistic"))
+    Alarm.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "metricName"))
+    Alarm.add_member(:state, Shapes::ShapeRef.new(shape: AlarmState, location_name: "state"))
+    Alarm.add_member(:unit, Shapes::ShapeRef.new(shape: MetricUnit, location_name: "unit"))
+    Alarm.add_member(:contact_protocols, Shapes::ShapeRef.new(shape: ContactProtocolsList, location_name: "contactProtocols"))
+    Alarm.add_member(:notification_triggers, Shapes::ShapeRef.new(shape: NotificationTriggerList, location_name: "notificationTriggers"))
+    Alarm.add_member(:notification_enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "notificationEnabled"))
+    Alarm.struct_class = Types::Alarm
+
+    AlarmsList.member = Shapes::ShapeRef.new(shape: Alarm)
 
     AllocateStaticIpRequest.add_member(:static_ip_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "staticIpName"))
     AllocateStaticIpRequest.struct_class = Types::AllocateStaticIpRequest
@@ -411,8 +517,25 @@ module Aws::Lightsail
     AttachStaticIpResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     AttachStaticIpResult.struct_class = Types::AttachStaticIpResult
 
+    AttachedDisk.add_member(:path, Shapes::ShapeRef.new(shape: string, location_name: "path"))
+    AttachedDisk.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "sizeInGb"))
+    AttachedDisk.struct_class = Types::AttachedDisk
+
+    AttachedDiskList.member = Shapes::ShapeRef.new(shape: AttachedDisk)
+
     AttachedDiskMap.key = Shapes::ShapeRef.new(shape: ResourceName)
     AttachedDiskMap.value = Shapes::ShapeRef.new(shape: DiskMapList)
+
+    AutoSnapshotAddOnRequest.add_member(:snapshot_time_of_day, Shapes::ShapeRef.new(shape: TimeOfDay, location_name: "snapshotTimeOfDay"))
+    AutoSnapshotAddOnRequest.struct_class = Types::AutoSnapshotAddOnRequest
+
+    AutoSnapshotDetails.add_member(:date, Shapes::ShapeRef.new(shape: string, location_name: "date"))
+    AutoSnapshotDetails.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    AutoSnapshotDetails.add_member(:status, Shapes::ShapeRef.new(shape: AutoSnapshotStatus, location_name: "status"))
+    AutoSnapshotDetails.add_member(:from_attached_disks, Shapes::ShapeRef.new(shape: AttachedDiskList, location_name: "fromAttachedDisks"))
+    AutoSnapshotDetails.struct_class = Types::AutoSnapshotDetails
+
+    AutoSnapshotDetailsList.member = Shapes::ShapeRef.new(shape: AutoSnapshotDetails)
 
     AvailabilityZone.add_member(:zone_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "zoneName"))
     AvailabilityZone.add_member(:state, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "state"))
@@ -477,7 +600,25 @@ module Aws::Lightsail
 
     CloudFormationStackRecordSourceInfoList.member = Shapes::ShapeRef.new(shape: CloudFormationStackRecordSourceInfo)
 
-    CopySnapshotRequest.add_member(:source_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "sourceSnapshotName"))
+    ContactMethod.add_member(:contact_endpoint, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "contactEndpoint"))
+    ContactMethod.add_member(:status, Shapes::ShapeRef.new(shape: ContactMethodStatus, location_name: "status"))
+    ContactMethod.add_member(:protocol, Shapes::ShapeRef.new(shape: ContactProtocol, location_name: "protocol"))
+    ContactMethod.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    ContactMethod.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    ContactMethod.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    ContactMethod.add_member(:location, Shapes::ShapeRef.new(shape: ResourceLocation, location_name: "location"))
+    ContactMethod.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    ContactMethod.add_member(:support_code, Shapes::ShapeRef.new(shape: string, location_name: "supportCode"))
+    ContactMethod.struct_class = Types::ContactMethod
+
+    ContactMethodsList.member = Shapes::ShapeRef.new(shape: ContactMethod)
+
+    ContactProtocolsList.member = Shapes::ShapeRef.new(shape: ContactProtocol)
+
+    CopySnapshotRequest.add_member(:source_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "sourceSnapshotName"))
+    CopySnapshotRequest.add_member(:source_resource_name, Shapes::ShapeRef.new(shape: string, location_name: "sourceResourceName"))
+    CopySnapshotRequest.add_member(:restore_date, Shapes::ShapeRef.new(shape: string, location_name: "restoreDate"))
+    CopySnapshotRequest.add_member(:use_latest_restorable_auto_snapshot, Shapes::ShapeRef.new(shape: boolean, location_name: "useLatestRestorableAutoSnapshot"))
     CopySnapshotRequest.add_member(:target_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "targetSnapshotName"))
     CopySnapshotRequest.add_member(:source_region, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "sourceRegion"))
     CopySnapshotRequest.struct_class = Types::CopySnapshotRequest
@@ -491,11 +632,22 @@ module Aws::Lightsail
     CreateCloudFormationStackResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     CreateCloudFormationStackResult.struct_class = Types::CreateCloudFormationStackResult
 
+    CreateContactMethodRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: ContactProtocol, required: true, location_name: "protocol"))
+    CreateContactMethodRequest.add_member(:contact_endpoint, Shapes::ShapeRef.new(shape: StringMax256, required: true, location_name: "contactEndpoint"))
+    CreateContactMethodRequest.struct_class = Types::CreateContactMethodRequest
+
+    CreateContactMethodResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    CreateContactMethodResult.struct_class = Types::CreateContactMethodResult
+
     CreateDiskFromSnapshotRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
-    CreateDiskFromSnapshotRequest.add_member(:disk_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskSnapshotName"))
+    CreateDiskFromSnapshotRequest.add_member(:disk_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "diskSnapshotName"))
     CreateDiskFromSnapshotRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "availabilityZone"))
     CreateDiskFromSnapshotRequest.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "sizeInGb"))
     CreateDiskFromSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateDiskFromSnapshotRequest.add_member(:add_ons, Shapes::ShapeRef.new(shape: AddOnRequestList, location_name: "addOns"))
+    CreateDiskFromSnapshotRequest.add_member(:source_disk_name, Shapes::ShapeRef.new(shape: string, location_name: "sourceDiskName"))
+    CreateDiskFromSnapshotRequest.add_member(:restore_date, Shapes::ShapeRef.new(shape: string, location_name: "restoreDate"))
+    CreateDiskFromSnapshotRequest.add_member(:use_latest_restorable_auto_snapshot, Shapes::ShapeRef.new(shape: boolean, location_name: "useLatestRestorableAutoSnapshot"))
     CreateDiskFromSnapshotRequest.struct_class = Types::CreateDiskFromSnapshotRequest
 
     CreateDiskFromSnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
@@ -505,13 +657,15 @@ module Aws::Lightsail
     CreateDiskRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "availabilityZone"))
     CreateDiskRequest.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "sizeInGb"))
     CreateDiskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateDiskRequest.add_member(:add_ons, Shapes::ShapeRef.new(shape: AddOnRequestList, location_name: "addOns"))
     CreateDiskRequest.struct_class = Types::CreateDiskRequest
 
     CreateDiskResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     CreateDiskResult.struct_class = Types::CreateDiskResult
 
-    CreateDiskSnapshotRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
+    CreateDiskSnapshotRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "diskName"))
     CreateDiskSnapshotRequest.add_member(:disk_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskSnapshotName"))
+    CreateDiskSnapshotRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "instanceName"))
     CreateDiskSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDiskSnapshotRequest.struct_class = Types::CreateDiskSnapshotRequest
 
@@ -543,11 +697,15 @@ module Aws::Lightsail
     CreateInstancesFromSnapshotRequest.add_member(:instance_names, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "instanceNames"))
     CreateInstancesFromSnapshotRequest.add_member(:attached_disk_mapping, Shapes::ShapeRef.new(shape: AttachedDiskMap, location_name: "attachedDiskMapping"))
     CreateInstancesFromSnapshotRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: string, required: true, location_name: "availabilityZone"))
-    CreateInstancesFromSnapshotRequest.add_member(:instance_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceSnapshotName"))
+    CreateInstancesFromSnapshotRequest.add_member(:instance_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "instanceSnapshotName"))
     CreateInstancesFromSnapshotRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "bundleId"))
     CreateInstancesFromSnapshotRequest.add_member(:user_data, Shapes::ShapeRef.new(shape: string, location_name: "userData"))
     CreateInstancesFromSnapshotRequest.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "keyPairName"))
     CreateInstancesFromSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateInstancesFromSnapshotRequest.add_member(:add_ons, Shapes::ShapeRef.new(shape: AddOnRequestList, location_name: "addOns"))
+    CreateInstancesFromSnapshotRequest.add_member(:source_instance_name, Shapes::ShapeRef.new(shape: string, location_name: "sourceInstanceName"))
+    CreateInstancesFromSnapshotRequest.add_member(:restore_date, Shapes::ShapeRef.new(shape: string, location_name: "restoreDate"))
+    CreateInstancesFromSnapshotRequest.add_member(:use_latest_restorable_auto_snapshot, Shapes::ShapeRef.new(shape: boolean, location_name: "useLatestRestorableAutoSnapshot"))
     CreateInstancesFromSnapshotRequest.struct_class = Types::CreateInstancesFromSnapshotRequest
 
     CreateInstancesFromSnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
@@ -561,6 +719,7 @@ module Aws::Lightsail
     CreateInstancesRequest.add_member(:user_data, Shapes::ShapeRef.new(shape: string, location_name: "userData"))
     CreateInstancesRequest.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "keyPairName"))
     CreateInstancesRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateInstancesRequest.add_member(:add_ons, Shapes::ShapeRef.new(shape: AddOnRequestList, location_name: "addOns"))
     CreateInstancesRequest.struct_class = Types::CreateInstancesRequest
 
     CreateInstancesResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
@@ -636,7 +795,27 @@ module Aws::Lightsail
     CreateRelationalDatabaseSnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     CreateRelationalDatabaseSnapshotResult.struct_class = Types::CreateRelationalDatabaseSnapshotResult
 
+    DeleteAlarmRequest.add_member(:alarm_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "alarmName"))
+    DeleteAlarmRequest.struct_class = Types::DeleteAlarmRequest
+
+    DeleteAlarmResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DeleteAlarmResult.struct_class = Types::DeleteAlarmResult
+
+    DeleteAutoSnapshotRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
+    DeleteAutoSnapshotRequest.add_member(:date, Shapes::ShapeRef.new(shape: AutoSnapshotDate, required: true, location_name: "date"))
+    DeleteAutoSnapshotRequest.struct_class = Types::DeleteAutoSnapshotRequest
+
+    DeleteAutoSnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DeleteAutoSnapshotResult.struct_class = Types::DeleteAutoSnapshotResult
+
+    DeleteContactMethodRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: ContactProtocol, required: true, location_name: "protocol"))
+    DeleteContactMethodRequest.struct_class = Types::DeleteContactMethodRequest
+
+    DeleteContactMethodResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DeleteContactMethodResult.struct_class = Types::DeleteContactMethodResult
+
     DeleteDiskRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
+    DeleteDiskRequest.add_member(:force_delete_add_ons, Shapes::ShapeRef.new(shape: boolean, location_name: "forceDeleteAddOns"))
     DeleteDiskRequest.struct_class = Types::DeleteDiskRequest
 
     DeleteDiskResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
@@ -662,6 +841,7 @@ module Aws::Lightsail
     DeleteDomainResult.struct_class = Types::DeleteDomainResult
 
     DeleteInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
+    DeleteInstanceRequest.add_member(:force_delete_add_ons, Shapes::ShapeRef.new(shape: boolean, location_name: "forceDeleteAddOns"))
     DeleteInstanceRequest.struct_class = Types::DeleteInstanceRequest
 
     DeleteInstanceResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
@@ -678,6 +858,12 @@ module Aws::Lightsail
 
     DeleteKeyPairResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
     DeleteKeyPairResult.struct_class = Types::DeleteKeyPairResult
+
+    DeleteKnownHostKeysRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
+    DeleteKnownHostKeysRequest.struct_class = Types::DeleteKnownHostKeysRequest
+
+    DeleteKnownHostKeysResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DeleteKnownHostKeysResult.struct_class = Types::DeleteKnownHostKeysResult
 
     DeleteLoadBalancerRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
     DeleteLoadBalancerRequest.struct_class = Types::DeleteLoadBalancerRequest
@@ -730,6 +916,13 @@ module Aws::Lightsail
     DetachStaticIpResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     DetachStaticIpResult.struct_class = Types::DetachStaticIpResult
 
+    DisableAddOnRequest.add_member(:add_on_type, Shapes::ShapeRef.new(shape: AddOnType, required: true, location_name: "addOnType"))
+    DisableAddOnRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
+    DisableAddOnRequest.struct_class = Types::DisableAddOnRequest
+
+    DisableAddOnResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DisableAddOnResult.struct_class = Types::DisableAddOnResult
+
     Disk.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     Disk.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
     Disk.add_member(:support_code, Shapes::ShapeRef.new(shape: string, location_name: "supportCode"))
@@ -737,6 +930,7 @@ module Aws::Lightsail
     Disk.add_member(:location, Shapes::ShapeRef.new(shape: ResourceLocation, location_name: "location"))
     Disk.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     Disk.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    Disk.add_member(:add_ons, Shapes::ShapeRef.new(shape: AddOnList, location_name: "addOns"))
     Disk.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "sizeInGb"))
     Disk.add_member(:is_system_disk, Shapes::ShapeRef.new(shape: boolean, location_name: "isSystemDisk"))
     Disk.add_member(:iops, Shapes::ShapeRef.new(shape: integer, location_name: "iops"))
@@ -776,6 +970,9 @@ module Aws::Lightsail
     DiskSnapshot.add_member(:progress, Shapes::ShapeRef.new(shape: string, location_name: "progress"))
     DiskSnapshot.add_member(:from_disk_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "fromDiskName"))
     DiskSnapshot.add_member(:from_disk_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fromDiskArn"))
+    DiskSnapshot.add_member(:from_instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "fromInstanceName"))
+    DiskSnapshot.add_member(:from_instance_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fromInstanceArn"))
+    DiskSnapshot.add_member(:is_from_auto_snapshot, Shapes::ShapeRef.new(shape: boolean, location_name: "isFromAutoSnapshot"))
     DiskSnapshot.struct_class = Types::DiskSnapshot
 
     DiskSnapshotInfo.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "sizeInGb"))
@@ -816,6 +1013,13 @@ module Aws::Lightsail
     DownloadDefaultKeyPairResult.add_member(:private_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "privateKeyBase64"))
     DownloadDefaultKeyPairResult.struct_class = Types::DownloadDefaultKeyPairResult
 
+    EnableAddOnRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
+    EnableAddOnRequest.add_member(:add_on_request, Shapes::ShapeRef.new(shape: AddOnRequest, required: true, location_name: "addOnRequest"))
+    EnableAddOnRequest.struct_class = Types::EnableAddOnRequest
+
+    EnableAddOnResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    EnableAddOnResult.struct_class = Types::EnableAddOnResult
+
     ExportSnapshotRecord.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     ExportSnapshotRecord.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
     ExportSnapshotRecord.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
@@ -851,6 +1055,23 @@ module Aws::Lightsail
     GetActiveNamesResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
     GetActiveNamesResult.struct_class = Types::GetActiveNamesResult
 
+    GetAlarmsRequest.add_member(:alarm_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "alarmName"))
+    GetAlarmsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetAlarmsRequest.add_member(:monitored_resource_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "monitoredResourceName"))
+    GetAlarmsRequest.struct_class = Types::GetAlarmsRequest
+
+    GetAlarmsResult.add_member(:alarms, Shapes::ShapeRef.new(shape: AlarmsList, location_name: "alarms"))
+    GetAlarmsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetAlarmsResult.struct_class = Types::GetAlarmsResult
+
+    GetAutoSnapshotsRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
+    GetAutoSnapshotsRequest.struct_class = Types::GetAutoSnapshotsRequest
+
+    GetAutoSnapshotsResult.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "resourceName"))
+    GetAutoSnapshotsResult.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    GetAutoSnapshotsResult.add_member(:auto_snapshots, Shapes::ShapeRef.new(shape: AutoSnapshotDetailsList, location_name: "autoSnapshots"))
+    GetAutoSnapshotsResult.struct_class = Types::GetAutoSnapshotsResult
+
     GetBlueprintsRequest.add_member(:include_inactive, Shapes::ShapeRef.new(shape: boolean, location_name: "includeInactive"))
     GetBlueprintsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
     GetBlueprintsRequest.struct_class = Types::GetBlueprintsRequest
@@ -873,6 +1094,12 @@ module Aws::Lightsail
     GetCloudFormationStackRecordsResult.add_member(:cloud_formation_stack_records, Shapes::ShapeRef.new(shape: CloudFormationStackRecordList, location_name: "cloudFormationStackRecords"))
     GetCloudFormationStackRecordsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
     GetCloudFormationStackRecordsResult.struct_class = Types::GetCloudFormationStackRecordsResult
+
+    GetContactMethodsRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: ContactProtocolsList, location_name: "protocols"))
+    GetContactMethodsRequest.struct_class = Types::GetContactMethodsRequest
+
+    GetContactMethodsResult.add_member(:contact_methods, Shapes::ShapeRef.new(shape: ContactMethodsList, location_name: "contactMethods"))
+    GetContactMethodsResult.struct_class = Types::GetContactMethodsResult
 
     GetDiskRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
     GetDiskRequest.struct_class = Types::GetDiskRequest
@@ -1162,6 +1389,17 @@ module Aws::Lightsail
     GetStaticIpsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
     GetStaticIpsResult.struct_class = Types::GetStaticIpsResult
 
+    HostKeyAttributes.add_member(:algorithm, Shapes::ShapeRef.new(shape: string, location_name: "algorithm"))
+    HostKeyAttributes.add_member(:public_key, Shapes::ShapeRef.new(shape: string, location_name: "publicKey"))
+    HostKeyAttributes.add_member(:witnessed_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "witnessedAt"))
+    HostKeyAttributes.add_member(:fingerprint_sha1, Shapes::ShapeRef.new(shape: string, location_name: "fingerprintSHA1"))
+    HostKeyAttributes.add_member(:fingerprint_sha256, Shapes::ShapeRef.new(shape: string, location_name: "fingerprintSHA256"))
+    HostKeyAttributes.add_member(:not_valid_before, Shapes::ShapeRef.new(shape: IsoDate, location_name: "notValidBefore"))
+    HostKeyAttributes.add_member(:not_valid_after, Shapes::ShapeRef.new(shape: IsoDate, location_name: "notValidAfter"))
+    HostKeyAttributes.struct_class = Types::HostKeyAttributes
+
+    HostKeysList.member = Shapes::ShapeRef.new(shape: HostKeyAttributes)
+
     ImportKeyPairRequest.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "keyPairName"))
     ImportKeyPairRequest.add_member(:public_key_base_64, Shapes::ShapeRef.new(shape: Base64, required: true, location_name: "publicKeyBase64"))
     ImportKeyPairRequest.struct_class = Types::ImportKeyPairRequest
@@ -1179,6 +1417,7 @@ module Aws::Lightsail
     Instance.add_member(:blueprint_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "blueprintId"))
     Instance.add_member(:blueprint_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "blueprintName"))
     Instance.add_member(:bundle_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "bundleId"))
+    Instance.add_member(:add_ons, Shapes::ShapeRef.new(shape: AddOnList, location_name: "addOns"))
     Instance.add_member(:is_static_ip, Shapes::ShapeRef.new(shape: boolean, location_name: "isStaticIp"))
     Instance.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "privateIpAddress"))
     Instance.add_member(:public_ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "publicIpAddress"))
@@ -1199,6 +1438,7 @@ module Aws::Lightsail
     InstanceAccessDetails.add_member(:protocol, Shapes::ShapeRef.new(shape: InstanceAccessProtocol, location_name: "protocol"))
     InstanceAccessDetails.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "instanceName"))
     InstanceAccessDetails.add_member(:username, Shapes::ShapeRef.new(shape: string, location_name: "username"))
+    InstanceAccessDetails.add_member(:host_keys, Shapes::ShapeRef.new(shape: HostKeysList, location_name: "hostKeys"))
     InstanceAccessDetails.struct_class = Types::InstanceAccessDetails
 
     InstanceEntry.add_member(:source_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "sourceName"))
@@ -1237,6 +1477,8 @@ module Aws::Lightsail
     InstancePortInfo.add_member(:access_type, Shapes::ShapeRef.new(shape: PortAccessType, location_name: "accessType"))
     InstancePortInfo.add_member(:common_name, Shapes::ShapeRef.new(shape: string, location_name: "commonName"))
     InstancePortInfo.add_member(:access_direction, Shapes::ShapeRef.new(shape: AccessDirection, location_name: "accessDirection"))
+    InstancePortInfo.add_member(:cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrs"))
+    InstancePortInfo.add_member(:cidr_list_aliases, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrListAliases"))
     InstancePortInfo.struct_class = Types::InstancePortInfo
 
     InstancePortInfoList.member = Shapes::ShapeRef.new(shape: InstancePortInfo)
@@ -1245,6 +1487,8 @@ module Aws::Lightsail
     InstancePortState.add_member(:to_port, Shapes::ShapeRef.new(shape: Port, location_name: "toPort"))
     InstancePortState.add_member(:protocol, Shapes::ShapeRef.new(shape: NetworkProtocol, location_name: "protocol"))
     InstancePortState.add_member(:state, Shapes::ShapeRef.new(shape: PortState, location_name: "state"))
+    InstancePortState.add_member(:cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrs"))
+    InstancePortState.add_member(:cidr_list_aliases, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrListAliases"))
     InstancePortState.struct_class = Types::InstancePortState
 
     InstancePortStateList.member = Shapes::ShapeRef.new(shape: InstancePortState)
@@ -1263,6 +1507,7 @@ module Aws::Lightsail
     InstanceSnapshot.add_member(:from_instance_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fromInstanceArn"))
     InstanceSnapshot.add_member(:from_blueprint_id, Shapes::ShapeRef.new(shape: string, location_name: "fromBlueprintId"))
     InstanceSnapshot.add_member(:from_bundle_id, Shapes::ShapeRef.new(shape: string, location_name: "fromBundleId"))
+    InstanceSnapshot.add_member(:is_from_auto_snapshot, Shapes::ShapeRef.new(shape: boolean, location_name: "isFromAutoSnapshot"))
     InstanceSnapshot.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "sizeInGb"))
     InstanceSnapshot.struct_class = Types::InstanceSnapshot
 
@@ -1276,6 +1521,12 @@ module Aws::Lightsail
     InstanceState.add_member(:code, Shapes::ShapeRef.new(shape: integer, location_name: "code"))
     InstanceState.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
     InstanceState.struct_class = Types::InstanceState
+
+    InvalidInputException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    InvalidInputException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidInputException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    InvalidInputException.struct_class = Types::InvalidInputException
 
     IsVpcPeeredRequest.struct_class = Types::IsVpcPeeredRequest
 
@@ -1390,8 +1641,21 @@ module Aws::Lightsail
 
     MetricStatisticList.member = Shapes::ShapeRef.new(shape: MetricStatistic)
 
+    MonitoredResourceInfo.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
+    MonitoredResourceInfo.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    MonitoredResourceInfo.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    MonitoredResourceInfo.struct_class = Types::MonitoredResourceInfo
+
     MonthlyTransfer.add_member(:gb_per_month_allocated, Shapes::ShapeRef.new(shape: integer, location_name: "gbPerMonthAllocated"))
     MonthlyTransfer.struct_class = Types::MonthlyTransfer
+
+    NotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    NotFoundException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    NotFoundException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    NotFoundException.struct_class = Types::NotFoundException
+
+    NotificationTriggerList.member = Shapes::ShapeRef.new(shape: AlarmState)
 
     OpenInstancePublicPortsRequest.add_member(:port_info, Shapes::ShapeRef.new(shape: PortInfo, required: true, location_name: "portInfo"))
     OpenInstancePublicPortsRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
@@ -1413,6 +1677,12 @@ module Aws::Lightsail
     Operation.add_member(:error_code, Shapes::ShapeRef.new(shape: string, location_name: "errorCode"))
     Operation.add_member(:error_details, Shapes::ShapeRef.new(shape: string, location_name: "errorDetails"))
     Operation.struct_class = Types::Operation
+
+    OperationFailureException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    OperationFailureException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    OperationFailureException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    OperationFailureException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    OperationFailureException.struct_class = Types::OperationFailureException
 
     OperationList.member = Shapes::ShapeRef.new(shape: Operation)
 
@@ -1440,11 +1710,29 @@ module Aws::Lightsail
     PortInfo.add_member(:from_port, Shapes::ShapeRef.new(shape: Port, location_name: "fromPort"))
     PortInfo.add_member(:to_port, Shapes::ShapeRef.new(shape: Port, location_name: "toPort"))
     PortInfo.add_member(:protocol, Shapes::ShapeRef.new(shape: NetworkProtocol, location_name: "protocol"))
+    PortInfo.add_member(:cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrs"))
+    PortInfo.add_member(:cidr_list_aliases, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrListAliases"))
     PortInfo.struct_class = Types::PortInfo
 
     PortInfoList.member = Shapes::ShapeRef.new(shape: PortInfo)
 
     PortList.member = Shapes::ShapeRef.new(shape: Port)
+
+    PutAlarmRequest.add_member(:alarm_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "alarmName"))
+    PutAlarmRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "metricName"))
+    PutAlarmRequest.add_member(:monitored_resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "monitoredResourceName"))
+    PutAlarmRequest.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "comparisonOperator"))
+    PutAlarmRequest.add_member(:threshold, Shapes::ShapeRef.new(shape: double, required: true, location_name: "threshold"))
+    PutAlarmRequest.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "evaluationPeriods"))
+    PutAlarmRequest.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: integer, location_name: "datapointsToAlarm"))
+    PutAlarmRequest.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: TreatMissingData, location_name: "treatMissingData"))
+    PutAlarmRequest.add_member(:contact_protocols, Shapes::ShapeRef.new(shape: ContactProtocolsList, location_name: "contactProtocols"))
+    PutAlarmRequest.add_member(:notification_triggers, Shapes::ShapeRef.new(shape: NotificationTriggerList, location_name: "notificationTriggers"))
+    PutAlarmRequest.add_member(:notification_enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "notificationEnabled"))
+    PutAlarmRequest.struct_class = Types::PutAlarmRequest
+
+    PutAlarmResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    PutAlarmResult.struct_class = Types::PutAlarmResult
 
     PutInstancePublicPortsRequest.add_member(:port_infos, Shapes::ShapeRef.new(shape: PortInfoList, required: true, location_name: "portInfos"))
     PutInstancePublicPortsRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
@@ -1500,6 +1788,7 @@ module Aws::Lightsail
     RelationalDatabase.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: boolean, location_name: "publiclyAccessible"))
     RelationalDatabase.add_member(:master_endpoint, Shapes::ShapeRef.new(shape: RelationalDatabaseEndpoint, location_name: "masterEndpoint"))
     RelationalDatabase.add_member(:pending_maintenance_actions, Shapes::ShapeRef.new(shape: PendingMaintenanceActionList, location_name: "pendingMaintenanceActions"))
+    RelationalDatabase.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: string, location_name: "caCertificateIdentifier"))
     RelationalDatabase.struct_class = Types::RelationalDatabase
 
     RelationalDatabaseBlueprint.add_member(:blueprint_id, Shapes::ShapeRef.new(shape: string, location_name: "blueprintId"))
@@ -1587,6 +1876,18 @@ module Aws::Lightsail
 
     ResourceNameList.member = Shapes::ShapeRef.new(shape: ResourceName)
 
+    SendContactMethodVerificationRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: ContactMethodVerificationProtocol, required: true, location_name: "protocol"))
+    SendContactMethodVerificationRequest.struct_class = Types::SendContactMethodVerificationRequest
+
+    SendContactMethodVerificationResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    SendContactMethodVerificationResult.struct_class = Types::SendContactMethodVerificationResult
+
+    ServiceException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    ServiceException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ServiceException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    ServiceException.struct_class = Types::ServiceException
+
     StartInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
     StartInstanceRequest.struct_class = Types::StartInstanceRequest
 
@@ -1637,11 +1938,25 @@ module Aws::Lightsail
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
     TagResourceRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     TagResourceResult.struct_class = Types::TagResourceResult
+
+    TestAlarmRequest.add_member(:alarm_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "alarmName"))
+    TestAlarmRequest.add_member(:state, Shapes::ShapeRef.new(shape: AlarmState, required: true, location_name: "state"))
+    TestAlarmRequest.struct_class = Types::TestAlarmRequest
+
+    TestAlarmResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    TestAlarmResult.struct_class = Types::TestAlarmResult
+
+    UnauthenticatedException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    UnauthenticatedException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    UnauthenticatedException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    UnauthenticatedException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    UnauthenticatedException.struct_class = Types::UnauthenticatedException
 
     UnpeerVpcRequest.struct_class = Types::UnpeerVpcRequest
 
@@ -1649,6 +1964,7 @@ module Aws::Lightsail
     UnpeerVpcResult.struct_class = Types::UnpeerVpcResult
 
     UntagResourceRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
@@ -1686,6 +2002,7 @@ module Aws::Lightsail
     UpdateRelationalDatabaseRequest.add_member(:disable_backup_retention, Shapes::ShapeRef.new(shape: boolean, location_name: "disableBackupRetention"))
     UpdateRelationalDatabaseRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: boolean, location_name: "publiclyAccessible"))
     UpdateRelationalDatabaseRequest.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: boolean, location_name: "applyImmediately"))
+    UpdateRelationalDatabaseRequest.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: string, location_name: "caCertificateIdentifier"))
     UpdateRelationalDatabaseRequest.struct_class = Types::UpdateRelationalDatabaseRequest
 
     UpdateRelationalDatabaseResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
@@ -1826,6 +2143,20 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:create_contact_method, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateContactMethod"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateContactMethodRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateContactMethodResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -2039,6 +2370,48 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:delete_alarm, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAlarm"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAlarmRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAlarmResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:delete_auto_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAutoSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAutoSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAutoSnapshotResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:delete_contact_method, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteContactMethod"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteContactMethodRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteContactMethodResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:delete_disk, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDisk"
         o.http_method = "POST"
@@ -2135,6 +2508,21 @@ module Aws::Lightsail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteKeyPairRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteKeyPairResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:delete_known_host_keys, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteKnownHostKeys"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteKnownHostKeysRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteKnownHostKeysResult)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2249,6 +2637,20 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:disable_add_on, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableAddOn"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableAddOnRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableAddOnResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:download_default_key_pair, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DownloadDefaultKeyPair"
         o.http_method = "POST"
@@ -2261,6 +2663,20 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:enable_add_on, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableAddOn"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableAddOnRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableAddOnResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -2291,6 +2707,34 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_alarms, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAlarms"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAlarmsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAlarmsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:get_auto_snapshots, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAutoSnapshots"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAutoSnapshotsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAutoSnapshotsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -2336,6 +2780,20 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_contact_methods, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContactMethods"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetContactMethodsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContactMethodsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -2984,6 +3442,20 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:put_alarm, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAlarm"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutAlarmRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAlarmResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:put_instance_public_ports, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutInstancePublicPorts"
         o.http_method = "POST"
@@ -3042,6 +3514,20 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:send_contact_method_verification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendContactMethodVerification"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendContactMethodVerificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendContactMethodVerificationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:start_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -3117,6 +3603,20 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:test_alarm, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TestAlarm"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TestAlarmRequest)
+        o.output = Shapes::ShapeRef.new(shape: TestAlarmResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:unpeer_vpc, Seahorse::Model::Operation.new.tap do |o|

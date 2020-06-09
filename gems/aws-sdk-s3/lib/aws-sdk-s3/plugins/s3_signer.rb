@@ -6,7 +6,6 @@ module Aws
       # This plugin is an implementation detail and may be modified.
       # @api private
       class S3Signer < Seahorse::Client::Plugin
-
         option(:signature_version, 'v4')
 
         option(:sigv4_signer) do |cfg|
@@ -17,6 +16,8 @@ module Aws
         end
 
         option(:sigv4_region) do |cfg|
+          raise Aws::Errors::MissingRegionError if cfg.region.nil?
+
           Aws::Partitions::EndpointProvider.signing_region(cfg.region, 's3')
         end
 
@@ -48,7 +49,6 @@ module Aws
         end
 
         class V4Handler < Seahorse::Client::Handler
-
           def call(context)
             Aws::Plugins::SignatureV4.apply_signature(
               context: context,
@@ -62,10 +62,8 @@ module Aws
           def sigv4_signer(context)
             # If the client was configured with the wrong region,
             # we have to build a new signer.
-            if
-              context[:cached_sigv4_region] &&
-              context[:cached_sigv4_region] != context.config.sigv4_signer.region
-            then
+            if context[:cached_sigv4_region] &&
+               context[:cached_sigv4_region] != context.config.sigv4_signer.region
               S3Signer.build_v4_signer(
                 region: context[:cached_sigv4_region],
                 credentials: context.config.credentials
@@ -74,13 +72,11 @@ module Aws
               context.config.sigv4_signer
             end
           end
-
         end
 
         # This handler will update the http endpoint when the bucket region
         # is known/cached.
         class CachedBucketRegionHandler < Seahorse::Client::Handler
-
           def call(context)
             bucket = context.params[:bucket]
             check_for_cached_region(context, bucket) if bucket
@@ -96,7 +92,6 @@ module Aws
               context[:cached_sigv4_region] = cached_region
             end
           end
-
         end
 
         # This handler detects when a request fails because of a mismatched bucket
@@ -104,7 +99,6 @@ module Aws
         # region, then finally a version 4 signed request against the correct
         # regional endpoint.
         class BucketRegionErrorHandler < Seahorse::Client::Handler
-
           def call(context)
             response = @handler.call(context)
             handle_region_errors(response)
@@ -113,7 +107,9 @@ module Aws
           private
 
           def handle_region_errors(response)
-            if wrong_sigv4_region?(response) && !fips_region?(response)
+            if wrong_sigv4_region?(response) &&
+               !fips_region?(response) &&
+               !custom_endpoint?(response)
               get_region_and_retry(response.context)
             else
               response
@@ -137,17 +133,23 @@ module Aws
             resp.context.http_request.endpoint.host.include?('fips')
           end
 
+          def custom_endpoint?(resp)
+            resolved_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(
+              resp.context.config.region
+            )
+            !resp.context.http_request.endpoint.hostname.include?(resolved_suffix)
+          end
+
           def wrong_sigv4_region?(resp)
             resp.context.http_response.status_code == 400 &&
-            (
-              resp.context.http_response.headers['x-amz-bucket-region'] ||
-              resp.context.http_response.body_contents.match(/<Region>.+?<\/Region>/)
-            )
+              (resp.context.http_response.headers['x-amz-bucket-region'] ||
+               resp.context.http_response.body_contents.match(/<Region>.+?<\/Region>/))
           end
 
           def resign_with_new_region(context, actual_region)
             context.http_response.body.truncate(0)
             context.http_request.endpoint.host = S3Signer.new_hostname(context, actual_region)
+            context.metadata[:redirect_region] = actual_region
             Aws::Plugins::SignatureV4.apply_signature(
               context: context,
               signer: S3Signer.build_v4_signer(
@@ -159,7 +161,7 @@ module Aws
 
           def region_from_body(body)
             region = body.match(/<Region>(.+?)<\/Region>/)[1]
-            if region.nil? || region == ""
+            if region.nil? || region == ''
               raise "couldn't get region from body: #{body}"
             else
               region
@@ -167,44 +169,50 @@ module Aws
           end
 
           def log_warning(context, actual_region)
-            msg = "S3 client configured for #{context.config.region.inspect} " +
-              "but the bucket #{context.params[:bucket].inspect} is in " +
-              "#{actual_region.inspect}; Please configure the proper region " +
-              "to avoid multiple unnecessary redirects and signing attempts\n"
-            if logger = context.config.logger
+            msg = "S3 client configured for #{context.config.region.inspect} " \
+                  "but the bucket #{context.params[:bucket].inspect} is in " \
+                  "#{actual_region.inspect}; Please configure the proper region " \
+                  "to avoid multiple unnecessary redirects and signing attempts\n"
+            if (logger = context.config.logger)
               logger.warn(msg)
             else
               warn(msg)
             end
           end
-
         end
 
         class << self
-
           # @option options [required, String] :region
           # @option options [required, #credentials] :credentials
           # @api private
           def build_v4_signer(options = {})
-            Aws::Sigv4::Signer.new({
+            Aws::Sigv4::Signer.new(
               service: 's3',
               region: options[:region],
               credentials_provider: options[:credentials],
               uri_escape_path: false,
-              unsigned_headers: ['content-length', 'x-amzn-trace-id'],
-            })
+              unsigned_headers: ['content-length', 'x-amzn-trace-id']
+            )
           end
 
           def new_hostname(context, region)
-            bucket = context.params[:bucket]
-            if region == 'us-east-1'
-              "#{bucket}.s3.amazonaws.com"
+            # Check to see if the bucket is actually an ARN and resolve it
+            # Otherwise it will retry with the ARN as the bucket name.
+            resolved_bucket, resolved_region, arn = BucketARN.resolve_arn!(
+              context.params[:bucket],
+              region,
+              context.config.s3_use_arn_region
+            )
+            uri = URI.parse(
+              Aws::Partitions::EndpointProvider.resolve(resolved_region, 's3')
+            )
+
+            if arn
+              BucketARN.resolve_url!(uri, arn).host
             else
-              endpoint = Aws::Partitions::EndpointProvider.resolve(region, 's3')
-              bucket + '.' + URI.parse(endpoint).host
+              resolved_bucket + '.' + uri.host
             end
           end
-
         end
       end
     end

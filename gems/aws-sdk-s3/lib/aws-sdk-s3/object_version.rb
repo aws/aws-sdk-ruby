@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::S3
+
   class ObjectVersion
 
     extend Aws::Deprecations
@@ -27,6 +28,7 @@ module Aws::S3
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -46,6 +48,7 @@ module Aws::S3
       @id
     end
 
+    # The entity tag is an MD5 hash of that version of the object.
     # @return [String]
     def etag
       data[:etag]
@@ -88,6 +91,7 @@ module Aws::S3
       data[:last_modified]
     end
 
+    # Specifies the owner of the object.
     # @return [Types::Owner]
     def owner
       data[:owner]
@@ -128,7 +132,8 @@ module Aws::S3
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -141,13 +146,15 @@ module Aws::S3
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -178,17 +185,16 @@ module Aws::S3
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -231,12 +237,18 @@ module Aws::S3
     # @option options [String] :mfa
     #   The concatenation of the authentication device's serial number, a
     #   space, and the value that is displayed on your authentication device.
+    #   Required to permanently delete a versioned object if versioning is
+    #   configured with MFA delete enabled.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
     #   Indicates whether S3 Object Lock should bypass Governance-mode
     #   restrictions to process this operation.
@@ -286,39 +298,52 @@ module Aws::S3
     #   time, otherwise return a 412 (precondition failed).
     # @option options [String] :range
     #   Downloads the specified range bytes of an object. For more information
-    #   about the HTTP Range header, go to
-    #   http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
+    #   about the HTTP Range header, see
+    #   [https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
+    #
+    #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
+    #   `GET` request.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
     # @option options [String] :response_cache_control
-    #   Sets the Cache-Control header of the response.
+    #   Sets the `Cache-Control` header of the response.
     # @option options [String] :response_content_disposition
-    #   Sets the Content-Disposition header of the response
+    #   Sets the `Content-Disposition` header of the response
     # @option options [String] :response_content_encoding
-    #   Sets the Content-Encoding header of the response.
+    #   Sets the `Content-Encoding` header of the response.
     # @option options [String] :response_content_language
-    #   Sets the Content-Language header of the response.
+    #   Sets the `Content-Language` header of the response.
     # @option options [String] :response_content_type
-    #   Sets the Content-Type header of the response.
+    #   Sets the `Content-Type` header of the response.
     # @option options [Time,DateTime,Date,Integer,String] :response_expires
-    #   Sets the Expires header of the response.
+    #   Sets the `Expires` header of the response.
     # @option options [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     # @option options [String] :sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use in
     #   encrypting data. This value is used to store the object and then it is
-    #   discarded; Amazon does not store the encryption key. The key must be
-    #   appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header.
+    #   discarded; Amazon S3 does not store the encryption key. The key must
+    #   be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
-    #   ensure the encryption key was transmitted without error.
+    #   ensure that the encryption key was transmitted without error.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Integer] :part_number
     #   Part number of the object being read. This is a positive integer
     #   between 1 and 10,000. Effectively performs a 'ranged' GET request
@@ -364,27 +389,36 @@ module Aws::S3
     #   time, otherwise return a 412 (precondition failed).
     # @option options [String] :range
     #   Downloads the specified range bytes of an object. For more information
-    #   about the HTTP Range header, go to
-    #   http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
+    #   about the HTTP Range header, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35]().
+    #
+    #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
+    #   `GET` request.
+    #
+    #    </note>
     # @option options [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     # @option options [String] :sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use in
     #   encrypting data. This value is used to store the object and then it is
-    #   discarded; Amazon does not store the encryption key. The key must be
-    #   appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header.
+    #   discarded; Amazon S3 does not store the encryption key. The key must
+    #   be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
-    #   ensure the encryption key was transmitted without error.
+    #   ensure that the encryption key was transmitted without error.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Integer] :part_number
     #   Part number of the object being read. This is a positive integer
     #   between 1 and 10,000. Effectively performs a 'ranged' HEAD request
@@ -473,12 +507,18 @@ module Aws::S3
       # @option options [String] :mfa
       #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication device.
+      #   Required to permanently delete a versioned object if versioning is
+      #   configured with MFA delete enabled.
       # @option options [String] :request_payer
-      #   Confirms that the requester knows that she or he will be charged for
-      #   the request. Bucket owners need not specify this parameter in their
-      #   requests. Documentation on downloading objects from requester pays
-      #   buckets can be found at
-      #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      #   Confirms that the requester knows that they will be charged for the
+      #   request. Bucket owners need not specify this parameter in their
+      #   requests. For information about downloading objects from requester
+      #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+      #   in the *Amazon S3 Developer Guide*.
+      #
+      #
+      #
+      #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       # @option options [Boolean] :bypass_governance_retention
       #   Specifies whether you want to delete this object even if it has a
       #   Governance-type Object Lock in place. You must have sufficient

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Comprehend
+
   class Resource
 
     # @param options ({})

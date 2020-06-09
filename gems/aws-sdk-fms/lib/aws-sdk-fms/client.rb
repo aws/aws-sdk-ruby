@@ -23,12 +23,25 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:fms)
 
 module Aws::FMS
+  # An API client for FMS.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::FMS::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +68,7 @@ module Aws::FMS
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +105,7 @@ module Aws::FMS
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +120,12 @@ module Aws::FMS
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +133,10 @@ module Aws::FMS
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +150,10 @@ module Aws::FMS
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +161,7 @@ module Aws::FMS
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +176,7 @@ module Aws::FMS
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +188,29 @@ module Aws::FMS
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +218,30 @@ module Aws::FMS
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,6 +270,48 @@ module Aws::FMS
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -216,7 +319,7 @@ module Aws::FMS
     # @!group API Operations
 
     # Sets the AWS Firewall Manager administrator account. AWS Firewall
-    # Manager must be associated with the master account your AWS
+    # Manager must be associated with the master account of your AWS
     # organization or associated with a member account that has the
     # appropriate permissions. If the account ID that you submit is not an
     # AWS Organizations master account, AWS Firewall Manager will set the
@@ -274,12 +377,43 @@ module Aws::FMS
     #   The ID of the policy that you want to delete. `PolicyId` is returned
     #   by `PutPolicy` and by `ListPolicies`.
     #
+    # @option params [Boolean] :delete_all_policy_resources
+    #   If `True`, the request performs cleanup according to the policy type.
+    #
+    #   For AWS WAF and Shield Advanced policies, the cleanup does the
+    #   following:
+    #
+    #   * Deletes rule groups created by AWS Firewall Manager
+    #
+    #   * Removes web ACLs from in-scope resources
+    #
+    #   * Deletes web ACLs that contain no rules or rule groups
+    #
+    #   For security group policies, the cleanup does the following for each
+    #   security group in the policy:
+    #
+    #   * Disassociates the security group from in-scope resources
+    #
+    #   * Deletes the security group if it was created through Firewall
+    #     Manager and if it's no longer associated with any resources through
+    #     another policy
+    #
+    #   After the cleanup, in-scope resources are no longer protected by web
+    #   ACLs in this policy. Protection of out-of-scope resources remains
+    #   unchanged. Scope is determined by tags that you create and accounts
+    #   that you associate with the policy. When creating the policy, if you
+    #   specify that only resources in specific accounts or with specific tags
+    #   are in scope of the policy, those accounts and resources are handled
+    #   by the policy. All others are out of scope. If you don't specify tags
+    #   or accounts, all resources are in scope.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_policy({
     #     policy_id: "PolicyId", # required
+    #     delete_all_policy_resources: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeletePolicy AWS API Documentation
@@ -292,9 +426,9 @@ module Aws::FMS
     end
 
     # Disassociates the account that has been set as the AWS Firewall
-    # Manager administrator account. You will need to submit an
-    # `AssociateAdminAccount` request to set a new account as the AWS
-    # Firewall administrator.
+    # Manager administrator account. To set a different account as the
+    # administrator account, you must submit an `AssociateAdminAccount`
+    # request.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -331,8 +465,12 @@ module Aws::FMS
 
     # Returns detailed compliance information about the specified member
     # account. Details include resources that are in and out of compliance
-    # with the specified policy. Resources are considered non-compliant if
-    # the specified policy has not been applied to them.
+    # with the specified policy. Resources are considered noncompliant for
+    # AWS WAF and Shield Advanced policies if the specified policy has not
+    # been applied to them. Resources are considered noncompliant for
+    # security group policies if they are in scope of the policy, they
+    # violate one or more of the policy rules, and remediation is disabled
+    # or not possible.
     #
     # @option params [required, String] :policy_id
     #   The ID of the policy that you want to get the details for. `PolicyId`
@@ -360,7 +498,7 @@ module Aws::FMS
     #   resp.policy_compliance_detail.member_account #=> String
     #   resp.policy_compliance_detail.violators #=> Array
     #   resp.policy_compliance_detail.violators[0].resource_id #=> String
-    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL"
+    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION", "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION", "RESOURCE_MISSING_SECURITY_GROUP", "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP", "SECURITY_GROUP_UNUSED", "SECURITY_GROUP_REDUNDANT"
     #   resp.policy_compliance_detail.violators[0].resource_type #=> String
     #   resp.policy_compliance_detail.evaluation_limit_exceeded #=> Boolean
     #   resp.policy_compliance_detail.expired_at #=> Time
@@ -376,8 +514,8 @@ module Aws::FMS
       req.send_request(options)
     end
 
-    # Returns information about the Amazon Simple Notification Service (SNS)
-    # topic that is used to record AWS Firewall Manager SNS logs.
+    # Information about the Amazon Simple Notification Service (SNS) topic
+    # that is used to record AWS Firewall Manager SNS logs.
     #
     # @return [Types::GetNotificationChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -420,9 +558,11 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
+    #   resp.policy.resource_type_list #=> Array
+    #   resp.policy.resource_type_list[0] #=> String
     #   resp.policy.resource_tags #=> Array
     #   resp.policy.resource_tags[0].key #=> String
     #   resp.policy.resource_tags[0].value #=> String
@@ -442,6 +582,78 @@ module Aws::FMS
     # @param [Hash] params ({})
     def get_policy(params = {}, options = {})
       req = build_request(:get_policy, params)
+      req.send_request(options)
+    end
+
+    # If you created a Shield Advanced policy, returns policy-level attack
+    # summary information in the event of a potential DDoS attack. Other
+    # policy types are currently unsupported.
+    #
+    # @option params [required, String] :policy_id
+    #   The ID of the policy for which you want to get the attack information.
+    #
+    # @option params [String] :member_account_id
+    #   The AWS account that is in scope of the policy that you want to get
+    #   the details for.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The start of the time period to query for the attacks. This is a
+    #   `timestamp` type. The request syntax listing indicates a `number` type
+    #   because the default used by AWS Firewall Manager is Unix time in
+    #   seconds. However, any valid `timestamp` format is allowed.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end of the time period to query for the attacks. This is a
+    #   `timestamp` type. The request syntax listing indicates a `number` type
+    #   because the default used by AWS Firewall Manager is Unix time in
+    #   seconds. However, any valid `timestamp` format is allowed.
+    #
+    # @option params [String] :next_token
+    #   If you specify a value for `MaxResults` and you have more objects than
+    #   the number that you specify for `MaxResults`, AWS Firewall Manager
+    #   returns a `NextToken` value in the response, which you can use to
+    #   retrieve another group of objects. For the second and subsequent
+    #   `GetProtectionStatus` requests, specify the value of `NextToken` from
+    #   the previous response to get information about another batch of
+    #   objects.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the number of objects that you want AWS Firewall Manager to
+    #   return for this request. If you have more objects than the number that
+    #   you specify for `MaxResults`, the response includes a `NextToken`
+    #   value that you can use to get another batch of objects.
+    #
+    # @return [Types::GetProtectionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProtectionStatusResponse#admin_account_id #admin_account_id} => String
+    #   * {Types::GetProtectionStatusResponse#service_type #service_type} => String
+    #   * {Types::GetProtectionStatusResponse#data #data} => String
+    #   * {Types::GetProtectionStatusResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_protection_status({
+    #     policy_id: "PolicyId", # required
+    #     member_account_id: "AWSAccountId",
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.admin_account_id #=> String
+    #   resp.service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
+    #   resp.data #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetProtectionStatus AWS API Documentation
+    #
+    # @overload get_protection_status(params = {})
+    # @param [Hash] params ({})
+    def get_protection_status(params = {}, options = {})
+      req = build_request(:get_protection_status, params)
       req.send_request(options)
     end
 
@@ -474,6 +686,8 @@ module Aws::FMS
     #
     #   * {Types::ListComplianceStatusResponse#policy_compliance_status_list #policy_compliance_status_list} => Array&lt;Types::PolicyComplianceStatus&gt;
     #   * {Types::ListComplianceStatusResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -528,12 +742,14 @@ module Aws::FMS
     #   Manager to return for this request. If you have more IDs than the
     #   number that you specify for `MaxResults`, the response includes a
     #   `NextToken` value that you can use to get another batch of member
-    #   account IDs. The maximum value for `MaxResults` is 100.
+    #   account IDs.
     #
     # @return [Types::ListMemberAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListMemberAccountsResponse#member_accounts #member_accounts} => Array&lt;String&gt;
     #   * {Types::ListMemberAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -580,6 +796,8 @@ module Aws::FMS
     #   * {Types::ListPoliciesResponse#policy_list #policy_list} => Array&lt;Types::PolicySummary&gt;
     #   * {Types::ListPoliciesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policies({
@@ -594,7 +812,7 @@ module Aws::FMS
     #   resp.policy_list[0].policy_id #=> String
     #   resp.policy_list[0].policy_name #=> String
     #   resp.policy_list[0].resource_type #=> String
-    #   resp.policy_list[0].security_service_type #=> String, one of "WAF"
+    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
     #   resp.policy_list[0].remediation_enabled #=> Boolean
     #   resp.next_token #=> String
     #
@@ -604,6 +822,38 @@ module Aws::FMS
     # @param [Hash] params ({})
     def list_policies(params = {}, options = {})
       req = build_request(:list_policies, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the list of tags for the specified AWS resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to return tags for. The
+    #   Firewall Manager policy is the only AWS resource that supports
+    #   tagging, so this ARN is a policy ARN..
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tag_list #tag_list} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tag_list #=> Array
+    #   resp.tag_list[0].key #=> String
+    #   resp.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -638,8 +888,37 @@ module Aws::FMS
 
     # Creates an AWS Firewall Manager policy.
     #
+    # Firewall Manager provides the following types of policies:
+    #
+    # * A Shield Advanced policy, which applies Shield Advanced protection
+    #   to specified accounts and resources
+    #
+    # * An AWS WAF policy (type WAFV2), which defines rule groups to run
+    #   first in the corresponding AWS WAF web ACL and rule groups to run
+    #   last in the web ACL.
+    #
+    # * An AWS WAF Classic policy (type WAF), which defines a rule group.
+    #
+    # * A security group policy, which manages VPC security groups across
+    #   your AWS organization.
+    #
+    # Each policy is specific to one of the types. If you want to enforce
+    # more than one policy type across accounts, create multiple policies.
+    # You can create multiple policies for each type.
+    #
+    # You must be subscribed to Shield Advanced to create a Shield Advanced
+    # policy. For more information about subscribing to Shield Advanced, see
+    # [CreateSubscription][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateSubscription.html
+    #
     # @option params [required, Types::Policy] :policy
     #   The details of the AWS Firewall Manager policy to be created.
+    #
+    # @option params [Array<Types::Tag>] :tag_list
+    #   The tags to add to the AWS resource.
     #
     # @return [Types::PutPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -654,14 +933,15 @@ module Aws::FMS
     #       policy_name: "ResourceName", # required
     #       policy_update_token: "PolicyUpdateToken",
     #       security_service_policy_data: { # required
-    #         type: "WAF", # required, accepts WAF
+    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
     #         managed_service_data: "ManagedServiceData",
     #       },
     #       resource_type: "ResourceType", # required
+    #       resource_type_list: ["ResourceType"],
     #       resource_tags: [
     #         {
-    #           key: "TagKey", # required
-    #           value: "TagValue",
+    #           key: "ResourceTagKey", # required
+    #           value: "ResourceTagValue",
     #         },
     #       ],
     #       exclude_resource_tags: false, # required
@@ -673,6 +953,12 @@ module Aws::FMS
     #         "ACCOUNT" => ["CustomerPolicyScopeId"],
     #       },
     #     },
+    #     tag_list: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -680,9 +966,11 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
+    #   resp.policy.resource_type_list #=> Array
+    #   resp.policy.resource_type_list[0] #=> String
     #   resp.policy.resource_tags #=> Array
     #   resp.policy.resource_tags[0].key #=> String
     #   resp.policy.resource_tags[0].value #=> String
@@ -705,6 +993,67 @@ module Aws::FMS
       req.send_request(options)
     end
 
+    # Adds one or more tags to an AWS resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. The Firewall Manager
+    #   policy is the only AWS resource that supports tagging, so this ARN is
+    #   a policy ARN.
+    #
+    # @option params [required, Array<Types::Tag>] :tag_list
+    #   The tags to add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_list: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from an AWS resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. The Firewall Manager
+    #   policy is the only AWS resource that supports tagging, so this ARN is
+    #   a policy ARN.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -718,7 +1067,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

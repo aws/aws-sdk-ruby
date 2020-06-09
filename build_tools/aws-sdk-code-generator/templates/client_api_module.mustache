@@ -30,6 +30,9 @@ module {{module_name}}
       {{#endpoint_operation}}
       api.endpoint_operation = :{{endpoint_operation}}
       {{/endpoint_operation}}
+      {{#require_endpoint_discovery}}
+      api.require_endpoint_discovery = true
+      {{/require_endpoint_discovery}}
       {{#operations}}
 
       api.add_operation(:{{method_name}}, Seahorse::Model::Operation.new.tap do |o|
@@ -76,6 +79,9 @@ module {{module_name}}
         {{#lines}}
         {{{.}}}{{/lines}}
         {{/pager}}
+        {{#async}}
+        o.async = true
+        {{/async}}
       end)
       {{/operations}}
       {{#apig_authorizer}}

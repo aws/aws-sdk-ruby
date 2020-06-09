@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SecurityHub
+
   class Resource
 
     # @param options ({})

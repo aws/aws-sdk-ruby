@@ -186,6 +186,21 @@ module Aws::Batch
     #
     class CancelJobResponse < Aws::EmptyStructure; end
 
+    # These errors are usually caused by a client action, such as using an
+    # action or resource on behalf of a user that doesn't have permissions
+    # to use the action or resource, or specifying an identifier that is not
+    # valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ClientException AWS API Documentation
+    #
+    class ClientException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing an AWS Batch compute environment.
     #
     # @!attribute [rw] compute_environment_name
@@ -293,6 +308,7 @@ module Aws::Batch
     #
     #       {
     #         type: "EC2", # required, accepts EC2, SPOT
+    #         allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
     #         minv_cpus: 1, # required
     #         maxv_cpus: 1, # required
     #         desiredv_cpus: 1,
@@ -316,29 +332,55 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] type
-    #   The type of compute environment.
+    #   The type of compute environment: `EC2` or `SPOT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocation_strategy
+    #   The allocation strategy to use for the compute resource in case not
+    #   enough instances of the best fitting instance type can be allocated.
+    #   This could be due to availability of the instance type in the region
+    #   or [Amazon EC2 service limits][1]. If this is not specified, the
+    #   default is `BEST_FIT`, which will use only the best fitting instance
+    #   type, waiting for additional capacity if it's not available. This
+    #   allocation strategy keeps costs lower but can limit scaling. If you
+    #   are using Spot Fleets with `BEST_FIT` then the Spot Fleet IAM Role
+    #   must be specified. `BEST_FIT_PROGRESSIVE` will select additional
+    #   instance types that are large enough to meet the requirements of the
+    #   jobs in the queue, with a preference for instance types with a lower
+    #   cost per vCPU. `SPOT_CAPACITY_OPTIMIZED` is only available for Spot
+    #   Instance compute resources and will select additional instance types
+    #   that are large enough to meet the requirements of the jobs in the
+    #   queue, with a preference for instance types that are less likely to
+    #   be interrupted. For more information, see [Allocation Strategies][2]
+    #   in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html
     #   @return [String]
     #
     # @!attribute [rw] minv_cpus
-    #   The minimum number of EC2 vCPUs that an environment should maintain
-    #   (even if the compute environment is `DISABLED`).
+    #   The minimum number of Amazon EC2 vCPUs that an environment should
+    #   maintain (even if the compute environment is `DISABLED`).
     #   @return [Integer]
     #
     # @!attribute [rw] maxv_cpus
-    #   The maximum number of EC2 vCPUs that an environment can reach.
+    #   The maximum number of Amazon EC2 vCPUs that an environment can
+    #   reach.
     #   @return [Integer]
     #
     # @!attribute [rw] desiredv_cpus
-    #   The desired number of EC2 vCPUS in the compute environment.
+    #   The desired number of Amazon EC2 vCPUS in the compute environment.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_types
     #   The instances types that may be launched. You can specify instance
     #   families to launch any instance type within those families (for
-    #   example, `c4` or `p3`), or you can specify specific sizes within a
-    #   family (such as `c4.8xlarge`). You can also choose `optimal` to pick
-    #   instance types (from the latest C, M, and R instance families) on
-    #   the fly that match the demand of your job queues.
+    #   example, `c5` or `p3`), or you can specify specific sizes within a
+    #   family (such as `c5.8xlarge`). You can also choose `optimal` to pick
+    #   instance types (from the C, M, and R instance families) on the fly
+    #   that match the demand of your job queues.
     #   @return [Array<String>]
     #
     # @!attribute [rw] image_id
@@ -347,36 +389,49 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   The VPC subnets into which the compute resources are launched.
+    #   The VPC subnets into which the compute resources are launched. For
+    #   more information, see [VPCs and Subnets][1] in the *Amazon VPC User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   The EC2 security group that is associated with instances launched in
-    #   the compute environment.
+    #   The Amazon EC2 security groups associated with instances launched in
+    #   the compute environment. One or more security groups must be
+    #   specified, either in `securityGroupIds` or using a launch template
+    #   referenced in `launchTemplate`. If security groups are specified
+    #   using both `securityGroupIds` and `launchTemplate`, the values in
+    #   `securityGroupIds` will be used.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ec2_key_pair
-    #   The EC2 key pair that is used for instances launched in the compute
-    #   environment.
+    #   The Amazon EC2 key pair that is used for instances launched in the
+    #   compute environment.
     #   @return [String]
     #
     # @!attribute [rw] instance_role
     #   The Amazon ECS instance profile applied to Amazon EC2 instances in a
     #   compute environment. You can specify the short name or full Amazon
-    #   Resource Name (ARN) of an instance profile. For example,
-    #   `ecsInstanceRole` or
-    #   `arn:aws:iam::<aws_account_id>:instance-profile/ecsInstanceRole`.
+    #   Resource Name (ARN) of an instance profile. For example, `
+    #   ecsInstanceRole ` or
+    #   `arn:aws:iam::<aws_account_id>:instance-profile/ecsInstanceRole `.
     #   For more information, see [Amazon ECS Instance Role][1] in the *AWS
     #   Batch User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/instance_IAM_role.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/instance_IAM_role.html
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   Key-value pair tags to be applied to resources that are launched in
-    #   the compute environment.
+    #   the compute environment. For AWS Batch, these take the form of
+    #   "String1": "String2", where String1 is the tag key and String2
+    #   is the tag value—for example, \\\{ "Name": "AWS Batch Instance -
+    #   C4OnDemand" \\}.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] placement_group
@@ -391,7 +446,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #   @return [String]
     #
     # @!attribute [rw] bid_percentage
@@ -399,14 +454,22 @@ module Aws::Batch
     #   compared with the On-Demand price for that instance type before
     #   instances are launched. For example, if your maximum percentage is
     #   20%, then the Spot price must be below 20% of the current On-Demand
-    #   price for that EC2 instance. You always pay the lowest (market)
-    #   price and never more than your maximum percentage. If you leave this
-    #   field empty, the default value is 100% of the On-Demand price.
+    #   price for that Amazon EC2 instance. You always pay the lowest
+    #   (market) price and never more than your maximum percentage. If you
+    #   leave this field empty, the default value is 100% of the On-Demand
+    #   price.
     #   @return [Integer]
     #
     # @!attribute [rw] spot_iam_fleet_role
     #   The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role
-    #   applied to a `SPOT` compute environment.
+    #   applied to a `SPOT` compute environment. This role is required if
+    #   the allocation strategy set to `BEST_FIT` or if the allocation
+    #   strategy is not specified. For more information, see [Amazon EC2
+    #   Spot Fleet Role][1] in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html
     #   @return [String]
     #
     # @!attribute [rw] launch_template
@@ -414,13 +477,20 @@ module Aws::Batch
     #   compute resource parameters that you specify in a
     #   CreateComputeEnvironment API operation override the same parameters
     #   in the launch template. You must specify either the launch template
-    #   ID or launch template name in the request, but not both.
+    #   ID or launch template name in the request, but not both. For more
+    #   information, see [Launch Template Support][1] in the *AWS Batch User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResource AWS API Documentation
     #
     class ComputeResource < Struct.new(
       :type,
+      :allocation_strategy,
       :minv_cpus,
       :maxv_cpus,
       :desiredv_cpus,
@@ -451,15 +521,17 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] minv_cpus
-    #   The minimum number of EC2 vCPUs that an environment should maintain.
+    #   The minimum number of Amazon EC2 vCPUs that an environment should
+    #   maintain.
     #   @return [Integer]
     #
     # @!attribute [rw] maxv_cpus
-    #   The maximum number of EC2 vCPUs that an environment can reach.
+    #   The maximum number of Amazon EC2 vCPUs that an environment can
+    #   reach.
     #   @return [Integer]
     #
     # @!attribute [rw] desiredv_cpus
-    #   The desired number of EC2 vCPUS in the compute environment.
+    #   The desired number of Amazon EC2 vCPUS in the compute environment.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResourceUpdate AWS API Documentation
@@ -568,6 +640,16 @@ module Aws::Batch
     #   The network interfaces associated with the job.
     #   @return [Array<Types::NetworkInterface>]
     #
+    # @!attribute [rw] resource_requirements
+    #   The type and amount of a resource to assign to a container.
+    #   Currently, the only supported resource is `GPU`.
+    #   @return [Array<Types::ResourceRequirement>]
+    #
+    # @!attribute [rw] linux_parameters
+    #   Linux-specific modifications that are applied to the container, such
+    #   as details for device mappings.
+    #   @return [Types::LinuxParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
     #
     class ContainerDetail < Struct.new(
@@ -589,7 +671,9 @@ module Aws::Batch
       :task_arn,
       :log_stream_name,
       :instance_type,
-      :network_interfaces)
+      :network_interfaces,
+      :resource_requirements,
+      :linux_parameters)
       include Aws::Structure
     end
 
@@ -607,6 +691,12 @@ module Aws::Batch
     #           {
     #             name: "String",
     #             value: "String",
+    #           },
+    #         ],
+    #         resource_requirements: [
+    #           {
+    #             value: "String", # required
+    #             type: "GPU", # required, accepts GPU
     #           },
     #         ],
     #       }
@@ -644,6 +734,12 @@ module Aws::Batch
     #    </note>
     #   @return [Array<Types::KeyValuePair>]
     #
+    # @!attribute [rw] resource_requirements
+    #   The type and amount of a resource to assign to a container. This
+    #   value overrides the value set in the job definition. Currently, the
+    #   only supported resource is `GPU`.
+    #   @return [Array<Types::ResourceRequirement>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerOverrides AWS API Documentation
     #
     class ContainerOverrides < Struct.new(
@@ -651,7 +747,8 @@ module Aws::Batch
       :memory,
       :command,
       :instance_type,
-      :environment)
+      :environment,
+      :resource_requirements)
       include Aws::Structure
     end
 
@@ -699,6 +796,21 @@ module Aws::Batch
     #         ],
     #         user: "String",
     #         instance_type: "String",
+    #         resource_requirements: [
+    #           {
+    #             value: "String", # required
+    #             type: "GPU", # required, accepts GPU
+    #           },
+    #         ],
+    #         linux_parameters: {
+    #           devices: [
+    #             {
+    #               host_path: "String", # required
+    #               container_path: "String",
+    #               permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] image
@@ -726,8 +838,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -740,8 +852,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Integer]
     #
@@ -761,10 +873,10 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
-    #   [4]: http://docs.aws.amazon.com/batch/latest/userguide/memory-management.html
+    #   [4]: https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html
     #   @return [Integer]
     #
     # @!attribute [rw] command
@@ -776,8 +888,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/reference/builder/#cmd
     #   @return [Array<String>]
@@ -807,8 +919,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::KeyValuePair>]
     #
@@ -819,8 +931,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::MountPoint>]
     #
@@ -832,8 +944,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   @return [Boolean]
     #
     # @!attribute [rw] privileged
@@ -845,8 +957,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Boolean]
     #
@@ -857,8 +969,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Ulimit>]
     #
@@ -869,8 +981,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -880,6 +992,16 @@ module Aws::Batch
     #   instance type. This parameter is not valid for single-node container
     #   jobs.
     #   @return [String]
+    #
+    # @!attribute [rw] resource_requirements
+    #   The type and amount of a resource to assign to a container.
+    #   Currently, the only supported resource is `GPU`.
+    #   @return [Array<Types::ResourceRequirement>]
+    #
+    # @!attribute [rw] linux_parameters
+    #   Linux-specific modifications that are applied to the container, such
+    #   as details for device mappings.
+    #   @return [Types::LinuxParameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerProperties AWS API Documentation
     #
@@ -896,7 +1018,9 @@ module Aws::Batch
       :privileged,
       :ulimits,
       :user,
-      :instance_type)
+      :instance_type,
+      :resource_requirements,
+      :linux_parameters)
       include Aws::Structure
     end
 
@@ -928,6 +1052,7 @@ module Aws::Batch
     #         state: "ENABLED", # accepts ENABLED, DISABLED
     #         compute_resources: {
     #           type: "EC2", # required, accepts EC2, SPOT
+    #           allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
     #           minv_cpus: 1, # required
     #           maxv_cpus: 1, # required
     #           desiredv_cpus: 1,
@@ -963,7 +1088,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -974,7 +1099,13 @@ module Aws::Batch
     #
     # @!attribute [rw] compute_resources
     #   Details of the compute resources managed by the compute environment.
-    #   This parameter is required for managed compute environments.
+    #   This parameter is required for managed compute environments. For
+    #   more information, see [Compute Environments][1] in the *AWS Batch
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #   @return [Types::ComputeResource]
     #
     # @!attribute [rw] service_role
@@ -1242,8 +1373,8 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] job_definitions
-    #   A space-separated list of up to 100 job definition names or full
-    #   Amazon Resource Name (ARN) entries.
+    #   A list of up to 100 job definition names or full Amazon Resource
+    #   Name (ARN) entries.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -1389,7 +1520,7 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] jobs
-    #   A space-separated list of up to 100 job IDs.
+    #   A list of up to 100 job IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobsRequest AWS API Documentation
@@ -1410,11 +1541,46 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # The contents of the `host` parameter determine whether your data
-    # volume persists on the host container instance and where it is stored.
-    # If the host parameter is empty, then the Docker daemon assigns a host
-    # path for your data volume, but the data is not guaranteed to persist
-    # after the containers associated with it stop running.
+    # An object representing a container instance host device.
+    #
+    # @note When making an API call, you may pass Device
+    #   data as a hash:
+    #
+    #       {
+    #         host_path: "String", # required
+    #         container_path: "String",
+    #         permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #       }
+    #
+    # @!attribute [rw] host_path
+    #   The path for the device on the host container instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_path
+    #   The path inside the container at which to expose the host device. By
+    #   default the `hostPath` value is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The explicit permissions to provide to the container for the device.
+    #   By default, the container has permissions for `read`, `write`, and
+    #   `mknod` for the device.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Device AWS API Documentation
+    #
+    class Device < Struct.new(
+      :host_path,
+      :container_path,
+      :permissions)
+      include Aws::Structure
+    end
+
+    # Determine whether your data volume persists on the host container
+    # instance and where it is stored. If this parameter is empty, then the
+    # Docker daemon assigns a host path for your data volume, but the data
+    # is not guaranteed to persist after the containers associated with it
+    # stop running.
     #
     # @note When making an API call, you may pass Host
     #   data as a hash:
@@ -1426,12 +1592,12 @@ module Aws::Batch
     # @!attribute [rw] source_path
     #   The path on the host container instance that is presented to the
     #   container. If this parameter is empty, then the Docker daemon has
-    #   assigned a host path for you. If the `host` parameter contains a
-    #   `sourcePath` file location, then the data volume persists at the
-    #   specified location on the host container instance until you delete
-    #   it manually. If the `sourcePath` value does not exist on the host
-    #   container instance, the Docker daemon creates it. If the location
-    #   does exist, the contents of the source path folder are exported.
+    #   assigned a host path for you. If this parameter contains a file
+    #   location, then the data volume persists at the specified location on
+    #   the host container instance until you delete it manually. If the
+    #   source path location does not exist on the host container instance,
+    #   the Docker daemon creates it. If the location does exist, the
+    #   contents of the source path folder are exported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Host AWS API Documentation
@@ -1467,7 +1633,13 @@ module Aws::Batch
     #   Default parameters or parameter substitution placeholders that are
     #   set in the job definition. Parameters are specified as a key-value
     #   pair mapping. Parameters in a `SubmitJob` request override any
-    #   corresponding parameter defaults from the job definition.
+    #   corresponding parameter defaults from the job definition. For more
+    #   information about specifying parameters, see [Job Definition
+    #   Parameters][1] in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/job_definition_parameters.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] retry_strategy
@@ -1551,14 +1723,14 @@ module Aws::Batch
     #   The current status for the job.
     #
     #   <note markdown="1"> If your jobs do not progress to `STARTING`, see [Jobs Stuck in
-    #   `RUNNABLE` Status][1] in the troubleshooting section of the *AWS
-    #   Batch User Guide*.
+    #   RUNNABLE Status][1] in the troubleshooting section of the *AWS Batch
+    #   User Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable
     #   @return [String]
     #
     # @!attribute [rw] attempts
@@ -1595,7 +1767,7 @@ module Aws::Batch
     #   @return [Integer]
     #
     # @!attribute [rw] depends_on
-    #   A list of job names or IDs on which this job depends.
+    #   A list of job IDs on which this job depends.
     #   @return [Array<Types::JobDependency>]
     #
     # @!attribute [rw] job_definition
@@ -1854,6 +2026,41 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Linux-specific modifications that are applied to the container, such
+    # as details for device mappings.
+    #
+    # @note When making an API call, you may pass LinuxParameters
+    #   data as a hash:
+    #
+    #       {
+    #         devices: [
+    #           {
+    #             host_path: "String", # required
+    #             container_path: "String",
+    #             permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] devices
+    #   Any host devices to expose to the container. This parameter maps to
+    #   `Devices` in the [Create a container][1] section of the [Docker
+    #   Remote API][2] and the `--device` option to [docker run][3].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   @return [Array<Types::Device>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LinuxParameters AWS API Documentation
+    #
+    class LinuxParameters < Struct.new(
+      :devices)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListJobsRequest
     #   data as a hash:
     #
@@ -1944,7 +2151,13 @@ module Aws::Batch
     end
 
     # Details on a Docker volume mount point that is used in a job's
-    # container properties.
+    # container properties. This parameter maps to `Volumes` in the [Create
+    # a container][1] section of the Docker Remote API and the `--volume`
+    # option to docker run.
+    #
+    #
+    #
+    # [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.19/#create-a-container
     #
     # @note When making an API call, you may pass MountPoint
     #   data as a hash:
@@ -2030,6 +2243,7 @@ module Aws::Batch
     #   data as a hash:
     #
     #       {
+    #         num_nodes: 1,
     #         node_property_overrides: [
     #           {
     #             target_nodes: "String", # required
@@ -2044,10 +2258,32 @@ module Aws::Batch
     #                   value: "String",
     #                 },
     #               ],
+    #               resource_requirements: [
+    #                 {
+    #                   value: "String", # required
+    #                   type: "GPU", # required, accepts GPU
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
     #       }
+    #
+    # @!attribute [rw] num_nodes
+    #   The number of nodes to use with a multi-node parallel job. This
+    #   value overrides the number of nodes that are specified in the job
+    #   definition. To use this override:
+    #
+    #   * There must be at least one node range in your job definition that
+    #     has an open upper boundary (such as `:` or `n:`).
+    #
+    #   * The lower boundary of the node range specified in the job
+    #     definition must be fewer than the number of nodes specified in the
+    #     override.
+    #
+    #   * The main node index specified in the job definition must be fewer
+    #     than the number of nodes specified in the override.
+    #   @return [Integer]
     #
     # @!attribute [rw] node_property_overrides
     #   The node property overrides for the job.
@@ -2056,6 +2292,7 @@ module Aws::Batch
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodeOverrides AWS API Documentation
     #
     class NodeOverrides < Struct.new(
+      :num_nodes,
       :node_property_overrides)
       include Aws::Structure
     end
@@ -2110,6 +2347,21 @@ module Aws::Batch
     #               ],
     #               user: "String",
     #               instance_type: "String",
+    #               resource_requirements: [
+    #                 {
+    #                   value: "String", # required
+    #                   type: "GPU", # required, accepts GPU
+    #                 },
+    #               ],
+    #               linux_parameters: {
+    #                 devices: [
+    #                   {
+    #                     host_path: "String", # required
+    #                     container_path: "String",
+    #                     permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #                   },
+    #                 ],
+    #               },
     #             },
     #           },
     #         ],
@@ -2121,7 +2373,7 @@ module Aws::Batch
     #
     # @!attribute [rw] main_node
     #   Specifies the node index for the main node of a multi-node parallel
-    #   job.
+    #   job. This node index value must be fewer than the number of nodes.
     #   @return [Integer]
     #
     # @!attribute [rw] node_range_properties
@@ -2182,6 +2434,12 @@ module Aws::Batch
     #             {
     #               name: "String",
     #               value: "String",
+    #             },
+    #           ],
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU
     #             },
     #           ],
     #         },
@@ -2253,6 +2511,21 @@ module Aws::Batch
     #           ],
     #           user: "String",
     #           instance_type: "String",
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU
+    #             },
+    #           ],
+    #           linux_parameters: {
+    #             devices: [
+    #               {
+    #                 host_path: "String", # required
+    #                 container_path: "String",
+    #                 permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #               },
+    #             ],
+    #           },
     #         },
     #       }
     #
@@ -2326,6 +2599,21 @@ module Aws::Batch
     #           ],
     #           user: "String",
     #           instance_type: "String",
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU
+    #             },
+    #           ],
+    #           linux_parameters: {
+    #             devices: [
+    #               {
+    #                 host_path: "String", # required
+    #                 container_path: "String",
+    #                 permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #               },
+    #             ],
+    #           },
     #         },
     #         node_properties: {
     #           num_nodes: 1, # required
@@ -2371,6 +2659,21 @@ module Aws::Batch
     #                 ],
     #                 user: "String",
     #                 instance_type: "String",
+    #                 resource_requirements: [
+    #                   {
+    #                     value: "String", # required
+    #                     type: "GPU", # required, accepts GPU
+    #                   },
+    #                 ],
+    #                 linux_parameters: {
+    #                   devices: [
+    #                     {
+    #                       host_path: "String", # required
+    #                       container_path: "String",
+    #                       permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #             },
     #           ],
@@ -2417,7 +2720,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html
     #   @return [Types::NodeProperties]
     #
     # @!attribute [rw] retry_strategy
@@ -2439,7 +2742,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #   @return [Types::JobTimeout]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinitionRequest AWS API Documentation
@@ -2476,6 +2779,37 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # The type and amount of a resource to assign to a container. Currently,
+    # the only supported resource type is `GPU`.
+    #
+    # @note When making an API call, you may pass ResourceRequirement
+    #   data as a hash:
+    #
+    #       {
+    #         value: "String", # required
+    #         type: "GPU", # required, accepts GPU
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The number of physical GPUs to reserve for the container. The number
+    #   of GPUs reserved for all containers in a job should not exceed the
+    #   number of available GPUs on the compute resource that the job is
+    #   launched on.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of resource to assign to a container. Currently, the only
+    #   supported resource type is `GPU`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ResourceRequirement AWS API Documentation
+    #
+    class ResourceRequirement < Struct.new(
+      :value,
+      :type)
+      include Aws::Structure
+    end
+
     # The retry strategy associated with a job.
     #
     # @note When making an API call, you may pass RetryStrategy
@@ -2496,6 +2830,18 @@ module Aws::Batch
     #
     class RetryStrategy < Struct.new(
       :attempts)
+      include Aws::Structure
+    end
+
+    # These errors are usually caused by a server issue.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServerException AWS API Documentation
+    #
+    class ServerException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2529,8 +2875,15 @@ module Aws::Batch
     #               value: "String",
     #             },
     #           ],
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU
+    #             },
+    #           ],
     #         },
     #         node_overrides: {
+    #           num_nodes: 1,
     #           node_property_overrides: [
     #             {
     #               target_nodes: "String", # required
@@ -2543,6 +2896,12 @@ module Aws::Batch
     #                   {
     #                     name: "String",
     #                     value: "String",
+    #                   },
+    #                 ],
+    #                 resource_requirements: [
+    #                   {
+    #                     value: "String", # required
+    #                     type: "GPU", # required, accepts GPU
     #                   },
     #                 ],
     #               },
@@ -2576,7 +2935,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html
     #   @return [Types::ArrayProperties]
     #
     # @!attribute [rw] depends_on
@@ -2590,9 +2949,10 @@ module Aws::Batch
     #   @return [Array<Types::JobDependency>]
     #
     # @!attribute [rw] job_definition
-    #   The job definition used by this job. This value can be either a
-    #   `name:revision` or the Amazon Resource Name (ARN) for the job
-    #   definition.
+    #   The job definition used by this job. This value can be one of
+    #   `name`, `name:revision`, or the Amazon Resource Name (ARN) for the
+    #   job definition. If `name` is specified without a revision then the
+    #   latest active revision is used.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -2638,7 +2998,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #   @return [Types::JobTimeout]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJobRequest AWS API Documentation

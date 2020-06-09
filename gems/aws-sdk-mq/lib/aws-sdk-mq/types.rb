@@ -8,6 +8,79 @@
 module Aws::MQ
   module Types
 
+    # Name of the availability zone.
+    #
+    # @!attribute [rw] name
+    #   Id for the availability zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/AvailabilityZone AWS API Documentation
+    #
+    class AvailabilityZone < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] error_attribute
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :error_attribute,
+      :message)
+      include Aws::Structure
+    end
+
+    # Types of broker engines.
+    #
+    # @!attribute [rw] engine_type
+    #   The type of broker engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_versions
+    #   The list of engine versions.
+    #   @return [Array<Types::EngineVersion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerEngineType AWS API Documentation
+    #
+    class BrokerEngineType < Struct.new(
+      :engine_type,
+      :engine_versions)
+      include Aws::Structure
+    end
+
+    # Returns a list of broker engine type.
+    #
+    # @!attribute [rw] broker_engine_types
+    #   List of available engine types and versions.
+    #   @return [Array<Types::BrokerEngineType>]
+    #
+    # @!attribute [rw] max_results
+    #   Required. The maximum number of engine types that can be returned
+    #   per page (20 by default). This value must be an integer from 5 to
+    #   100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that specifies the next page of results Amazon MQ should
+    #   return. To request the first page, leave nextToken empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerEngineTypeOutput AWS API Documentation
+    #
+    class BrokerEngineTypeOutput < Struct.new(
+      :broker_engine_types,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Returns information about all brokers.
     #
     # @!attribute [rw] console_url
@@ -29,6 +102,70 @@ module Aws::MQ
       :console_url,
       :endpoints,
       :ip_address)
+      include Aws::Structure
+    end
+
+    # Option for host instance type.
+    #
+    # @!attribute [rw] availability_zones
+    #   The list of available az.
+    #   @return [Array<Types::AvailabilityZone>]
+    #
+    # @!attribute [rw] engine_type
+    #   The type of broker engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_instance_type
+    #   The type of broker instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_type
+    #   The broker's storage type.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_deployment_modes
+    #   The list of supported deployment modes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_engine_versions
+    #   The list of supported engine versions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerInstanceOption AWS API Documentation
+    #
+    class BrokerInstanceOption < Struct.new(
+      :availability_zones,
+      :engine_type,
+      :host_instance_type,
+      :storage_type,
+      :supported_deployment_modes,
+      :supported_engine_versions)
+      include Aws::Structure
+    end
+
+    # Returns a list of broker instance options.
+    #
+    # @!attribute [rw] broker_instance_options
+    #   List of available broker instance options.
+    #   @return [Array<Types::BrokerInstanceOption>]
+    #
+    # @!attribute [rw] max_results
+    #   Required. The maximum number of instance options that can be
+    #   returned per page (20 by default). This value must be an integer
+    #   from 5 to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that specifies the next page of results Amazon MQ should
+    #   return. To request the first page, leave nextToken empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerInstanceOptionsOutput AWS API Documentation
+    #
+    class BrokerInstanceOptionsOutput < Struct.new(
+      :broker_instance_options,
+      :max_results,
+      :next_token)
       include Aws::Structure
     end
 
@@ -210,6 +347,22 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # Returns information about an error.
+    #
+    # @!attribute [rw] error_attribute
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :error_attribute,
+      :message)
+      include Aws::Structure
+    end
+
     # Required. The time period during which Amazon MQ applies pending
     # updates or patches to the broker.
     #
@@ -240,6 +393,10 @@ module Aws::MQ
     #   Required. The deployment mode of the broker.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_options
+    #   Encryption options for the broker.
+    #   @return [Types::EncryptionOptions]
+    #
     # @!attribute [rw] engine_type
     #   Required. The type of broker engine. Note: Currently, Amazon MQ
     #   supports only ACTIVEMQ.
@@ -269,9 +426,13 @@ module Aws::MQ
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
-    #   The list of rules (1 minimum, 125 maximum) that authorize
+    #   The list of security groups (1 minimum, 5 maximum) that authorizes
     #   connections to brokers.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] storage_type
+    #   The broker's storage type.
+    #   @return [String]
     #
     # @!attribute [rw] subnet_ids
     #   The list of groups (2 maximum) that define which subnets and IP
@@ -300,6 +461,7 @@ module Aws::MQ
       :configuration,
       :creator_request_id,
       :deployment_mode,
+      :encryption_options,
       :engine_type,
       :engine_version,
       :host_instance_type,
@@ -307,6 +469,7 @@ module Aws::MQ
       :maintenance_window_start_time,
       :publicly_accessible,
       :security_groups,
+      :storage_type,
       :subnet_ids,
       :tags,
       :users)
@@ -343,6 +506,10 @@ module Aws::MQ
     #         },
     #         creator_request_id: "__string",
     #         deployment_mode: "SINGLE_INSTANCE", # accepts SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ
+    #         encryption_options: {
+    #           kms_key_id: "__string",
+    #           use_aws_owned_key: false, # required
+    #         },
     #         engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
     #         engine_version: "__string",
     #         host_instance_type: "__string",
@@ -357,6 +524,7 @@ module Aws::MQ
     #         },
     #         publicly_accessible: false,
     #         security_groups: ["__string"],
+    #         storage_type: "EBS", # accepts EBS, EFS
     #         subnet_ids: ["__string"],
     #         tags: {
     #           "__string" => "__string",
@@ -390,6 +558,10 @@ module Aws::MQ
     #   The deployment mode of the broker.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_options
+    #   Encryption options for the broker.
+    #   @return [Types::EncryptionOptions]
+    #
     # @!attribute [rw] engine_type
     #   The type of broker engine. Note: Currently, Amazon MQ supports only
     #   ActiveMQ.
@@ -417,6 +589,10 @@ module Aws::MQ
     # @!attribute [rw] security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type of the broker.
+    #   @return [String]
+    #
     # @!attribute [rw] subnet_ids
     #   @return [Array<String>]
     #
@@ -434,6 +610,7 @@ module Aws::MQ
       :configuration,
       :creator_request_id,
       :deployment_mode,
+      :encryption_options,
       :engine_type,
       :engine_version,
       :host_instance_type,
@@ -441,6 +618,7 @@ module Aws::MQ
       :maintenance_window_start_time,
       :publicly_accessible,
       :security_groups,
+      :storage_type,
       :subnet_ids,
       :tags,
       :users)
@@ -777,6 +955,106 @@ module Aws::MQ
     #
     class DeleteUserResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DescribeBrokerEngineTypesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         engine_type: "__string",
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] engine_type
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerEngineTypesRequest AWS API Documentation
+    #
+    class DescribeBrokerEngineTypesRequest < Struct.new(
+      :engine_type,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] broker_engine_types
+    #   @return [Array<Types::BrokerEngineType>]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerEngineTypesResponse AWS API Documentation
+    #
+    class DescribeBrokerEngineTypesResponse < Struct.new(
+      :broker_engine_types,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeBrokerInstanceOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         engine_type: "__string",
+    #         host_instance_type: "__string",
+    #         max_results: 1,
+    #         next_token: "__string",
+    #         storage_type: "__string",
+    #       }
+    #
+    # @!attribute [rw] engine_type
+    #   @return [String]
+    #
+    # @!attribute [rw] host_instance_type
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptionsRequest AWS API Documentation
+    #
+    class DescribeBrokerInstanceOptionsRequest < Struct.new(
+      :engine_type,
+      :host_instance_type,
+      :max_results,
+      :next_token,
+      :storage_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] broker_instance_options
+    #   @return [Array<Types::BrokerInstanceOption>]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptionsResponse AWS API Documentation
+    #
+    class DescribeBrokerInstanceOptionsResponse < Struct.new(
+      :broker_instance_options,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The version of the broker engine. For a list of supported engine
     # versions, see
     # https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
@@ -823,6 +1101,10 @@ module Aws::MQ
     #   Required. The deployment mode of the broker.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_options
+    #   Encryption options for the broker.
+    #   @return [Types::EncryptionOptions]
+    #
     # @!attribute [rw] engine_type
     #   Required. The type of broker engine. Note: Currently, Amazon MQ
     #   supports only ACTIVEMQ.
@@ -853,15 +1135,30 @@ module Aws::MQ
     #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
+    # @!attribute [rw] pending_host_instance_type
+    #   The host instance type of the broker to upgrade to. For a list of
+    #   supported instance types, see
+    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_security_groups
+    #   The list of pending security groups to authorize connections to
+    #   brokers.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] publicly_accessible
     #   Required. Enables connections from applications outside of the VPC
     #   that hosts the broker's subnets.
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
-    #   Required. The list of rules (1 minimum, 125 maximum) that authorize
+    #   The list of security groups (1 minimum, 5 maximum) that authorizes
     #   connections to brokers.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] storage_type
+    #   The broker's storage type.
+    #   @return [String]
     #
     # @!attribute [rw] subnet_ids
     #   The list of groups (2 maximum) that define which subnets and IP
@@ -891,14 +1188,18 @@ module Aws::MQ
       :configurations,
       :created,
       :deployment_mode,
+      :encryption_options,
       :engine_type,
       :engine_version,
       :host_instance_type,
       :logs,
       :maintenance_window_start_time,
       :pending_engine_version,
+      :pending_host_instance_type,
+      :pending_security_groups,
       :publicly_accessible,
       :security_groups,
+      :storage_type,
       :subnet_ids,
       :tags,
       :users)
@@ -952,6 +1253,10 @@ module Aws::MQ
     #   The deployment mode of the broker.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_options
+    #   Encryption options for the broker.
+    #   @return [Types::EncryptionOptions]
+    #
     # @!attribute [rw] engine_type
     #   The type of broker engine. Note: Currently, Amazon MQ supports only
     #   ActiveMQ.
@@ -976,11 +1281,21 @@ module Aws::MQ
     # @!attribute [rw] pending_engine_version
     #   @return [String]
     #
+    # @!attribute [rw] pending_host_instance_type
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_security_groups
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] publicly_accessible
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] storage_type
+    #   The storage type of the broker.
+    #   @return [String]
     #
     # @!attribute [rw] subnet_ids
     #   @return [Array<String>]
@@ -1003,14 +1318,18 @@ module Aws::MQ
       :configurations,
       :created,
       :deployment_mode,
+      :encryption_options,
       :engine_type,
       :engine_version,
       :host_instance_type,
       :logs,
       :maintenance_window_start_time,
       :pending_engine_version,
+      :pending_host_instance_type,
+      :pending_security_groups,
       :publicly_accessible,
       :security_groups,
+      :storage_type,
       :subnet_ids,
       :tags,
       :users)
@@ -1242,6 +1561,48 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # Encryption options for the broker.
+    #
+    # @note When making an API call, you may pass EncryptionOptions
+    #   data as a hash:
+    #
+    #       {
+    #         kms_key_id: "__string",
+    #         use_aws_owned_key: false, # required
+    #       }
+    #
+    # @!attribute [rw] kms_key_id
+    #   The customer master key (CMK) to use for the AWS Key Management
+    #   Service (KMS). This key is used to encrypt your data at rest. If not
+    #   provided, Amazon MQ will use a default CMK to encrypt your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_aws_owned_key
+    #   Enables the use of an AWS owned CMK using AWS Key Management Service
+    #   (KMS).
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/EncryptionOptions AWS API Documentation
+    #
+    class EncryptionOptions < Struct.new(
+      :kms_key_id,
+      :use_aws_owned_key)
+      include Aws::Structure
+    end
+
+    # Id of the engine version.
+    #
+    # @!attribute [rw] name
+    #   Id for the version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/EngineVersion AWS API Documentation
+    #
+    class EngineVersion < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # Returns information about an error.
     #
     # @!attribute [rw] error_attribute
@@ -1255,6 +1616,38 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/Error AWS API Documentation
     #
     class Error < Struct.new(
+      :error_attribute,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] error_attribute
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :error_attribute,
+      :message)
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] error_attribute
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
       :error_attribute,
       :message)
       include Aws::Structure
@@ -1634,6 +2027,22 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # Returns information about an error.
+    #
+    # @!attribute [rw] error_attribute
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :error_attribute,
+      :message)
+      include Aws::Structure
+    end
+
     # The list of information about logs to be enabled for the specified
     # broker.
     #
@@ -1713,6 +2122,22 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # Returns information about an error.
+    #
+    # @!attribute [rw] error_attribute
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :error_attribute,
+      :message)
+      include Aws::Structure
+    end
+
     # Updates the broker using the specified properties.
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -1732,9 +2157,20 @@ module Aws::MQ
     #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
+    # @!attribute [rw] host_instance_type
+    #   The host instance type of the broker to upgrade to. For a list of
+    #   supported instance types, see
+    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+    #   @return [String]
+    #
     # @!attribute [rw] logs
     #   Enables Amazon CloudWatch logging for brokers.
     #   @return [Types::Logs]
+    #
+    # @!attribute [rw] security_groups
+    #   The list of security groups (1 minimum, 5 maximum) that authorizes
+    #   connections to brokers.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerInput AWS API Documentation
     #
@@ -1742,7 +2178,9 @@ module Aws::MQ
       :auto_minor_version_upgrade,
       :configuration,
       :engine_version,
-      :logs)
+      :host_instance_type,
+      :logs,
+      :security_groups)
       include Aws::Structure
     end
 
@@ -1767,10 +2205,21 @@ module Aws::MQ
     #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
+    # @!attribute [rw] host_instance_type
+    #   The host instance type of the broker to upgrade to. For a list of
+    #   supported instance types, see
+    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+    #   @return [String]
+    #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
     #   @return [Types::Logs]
+    #
+    # @!attribute [rw] security_groups
+    #   The list of security groups (1 minimum, 5 maximum) that authorizes
+    #   connections to brokers.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerOutput AWS API Documentation
     #
@@ -1779,7 +2228,9 @@ module Aws::MQ
       :broker_id,
       :configuration,
       :engine_version,
-      :logs)
+      :host_instance_type,
+      :logs,
+      :security_groups)
       include Aws::Structure
     end
 
@@ -1794,10 +2245,12 @@ module Aws::MQ
     #           revision: 1,
     #         },
     #         engine_version: "__string",
+    #         host_instance_type: "__string",
     #         logs: {
     #           audit: false,
     #           general: false,
     #         },
+    #         security_groups: ["__string"],
     #       }
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -1813,10 +2266,16 @@ module Aws::MQ
     # @!attribute [rw] engine_version
     #   @return [String]
     #
+    # @!attribute [rw] host_instance_type
+    #   @return [String]
+    #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
     #   @return [Types::Logs]
+    #
+    # @!attribute [rw] security_groups
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerRequest AWS API Documentation
     #
@@ -1825,7 +2284,9 @@ module Aws::MQ
       :broker_id,
       :configuration,
       :engine_version,
-      :logs)
+      :host_instance_type,
+      :logs,
+      :security_groups)
       include Aws::Structure
     end
 
@@ -1842,10 +2303,16 @@ module Aws::MQ
     # @!attribute [rw] engine_version
     #   @return [String]
     #
+    # @!attribute [rw] host_instance_type
+    #   @return [String]
+    #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
     #   @return [Types::Logs]
+    #
+    # @!attribute [rw] security_groups
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerResponse AWS API Documentation
     #
@@ -1854,7 +2321,9 @@ module Aws::MQ
       :broker_id,
       :configuration,
       :engine_version,
-      :logs)
+      :host_instance_type,
+      :logs,
+      :security_groups)
       include Aws::Structure
     end
 

@@ -1,6 +1,158 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2020-05-18)
+------------------
+
+* Feature - Documentation updates for dynamodb
+
+1.46.1 (2020-05-11)
+------------------
+
+* Issue - Allow simple attributes plugin to send empty sets, rejected by the server.
+
+1.46.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2020-03-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2020-02-17)
+------------------
+
+* Feature - Amazon DynamoDB enables you to restore your DynamoDB backup or table data across AWS Regions such that the restored table is created in a different AWS Region from where the source table or backup resides. You can do cross-region restores between AWS commercial Regions, AWS China Regions, and AWS GovCloud (US) Regions.
+
+1.42.0 (2020-02-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Feature - Allow objects responding to #to_h to be marshaled to DynamoDB as a Hash.
+
+1.41.0 (2019-12-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2019-11-26)
+------------------
+
+* Feature - 1) Amazon Contributor Insights for Amazon DynamoDB is a diagnostic tool for identifying frequently accessed keys and understanding database traffic trends. 2) Support for displaying new fields when a table's encryption state is Inaccessible or the table have been Archived.
+
+1.39.0 (2019-11-21)
+------------------
+
+* Feature - With this release, you can convert an existing Amazon DynamoDB table to a global table by adding replicas in other AWS Regions.
+
+1.38.0 (2019-11-12)
+------------------
+
+* Feature - Amazon DynamoDB enables you to restore your data to a new DynamoDB table using a point-in-time or on-demand backup. You now can modify the settings on the new restored table. Specifically, you can exclude some or all of the local and global secondary indexes from being created with the restored table. In addition, you can change the billing mode and provisioned capacity settings.
+
+1.37.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2019-10-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2019-09-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2019-06-27)
+------------------
+
+* Feature - Documentation updates for dynamodb
+
+1.31.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2019-06-06)
+------------------
+
+* Feature - Documentation updates for dynamodb
+
+1.29.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.28.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.27.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.26.0 (2019-04-25)
+------------------
+
+* Feature - API update.
+
+1.25.0 (2019-03-22)
+------------------
+
+* Feature - API update.
+
+1.24.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.23.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-02-13)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-01-16)
+------------------
+
+* Feature - API update.
+
 1.19.0 (2018-12-21)
 ------------------
 
@@ -177,4 +329,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-dynamodb` gem.
-

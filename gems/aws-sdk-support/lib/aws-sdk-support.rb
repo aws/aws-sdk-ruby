@@ -24,17 +24,20 @@ require_relative 'aws-sdk-support/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     support = Aws::Support::Client.new
+#     resp = support.add_attachments_to_set(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Support all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Support are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Support::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Support API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-support/customizations'
 # @service
 module Aws::Support
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.21.0'
 
 end

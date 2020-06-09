@@ -11,6 +11,13 @@ module Aws::AppSync
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AdditionalAuthenticationProvider = Shapes::StructureShape.new(name: 'AdditionalAuthenticationProvider')
+    AdditionalAuthenticationProviders = Shapes::ListShape.new(name: 'AdditionalAuthenticationProviders')
+    ApiCache = Shapes::StructureShape.new(name: 'ApiCache')
+    ApiCacheStatus = Shapes::StringShape.new(name: 'ApiCacheStatus')
+    ApiCacheType = Shapes::StringShape.new(name: 'ApiCacheType')
+    ApiCachingBehavior = Shapes::StringShape.new(name: 'ApiCachingBehavior')
     ApiKey = Shapes::StructureShape.new(name: 'ApiKey')
     ApiKeyLimitExceededException = Shapes::StructureShape.new(name: 'ApiKeyLimitExceededException')
     ApiKeyValidityOutOfBoundsException = Shapes::StructureShape.new(name: 'ApiKeyValidityOutOfBoundsException')
@@ -23,7 +30,15 @@ module Aws::AppSync
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BooleanValue = Shapes::BooleanShape.new(name: 'BooleanValue')
+    CachingConfig = Shapes::StructureShape.new(name: 'CachingConfig')
+    CachingKeys = Shapes::ListShape.new(name: 'CachingKeys')
+    CognitoUserPoolConfig = Shapes::StructureShape.new(name: 'CognitoUserPoolConfig')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ConflictDetectionType = Shapes::StringShape.new(name: 'ConflictDetectionType')
+    ConflictHandlerType = Shapes::StringShape.new(name: 'ConflictHandlerType')
+    CreateApiCacheRequest = Shapes::StructureShape.new(name: 'CreateApiCacheRequest')
+    CreateApiCacheResponse = Shapes::StructureShape.new(name: 'CreateApiCacheResponse')
     CreateApiKeyRequest = Shapes::StructureShape.new(name: 'CreateApiKeyRequest')
     CreateApiKeyResponse = Shapes::StructureShape.new(name: 'CreateApiKeyResponse')
     CreateDataSourceRequest = Shapes::StructureShape.new(name: 'CreateDataSourceRequest')
@@ -40,6 +55,8 @@ module Aws::AppSync
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     DataSources = Shapes::ListShape.new(name: 'DataSources')
     DefaultAction = Shapes::StringShape.new(name: 'DefaultAction')
+    DeleteApiCacheRequest = Shapes::StructureShape.new(name: 'DeleteApiCacheRequest')
+    DeleteApiCacheResponse = Shapes::StructureShape.new(name: 'DeleteApiCacheResponse')
     DeleteApiKeyRequest = Shapes::StructureShape.new(name: 'DeleteApiKeyRequest')
     DeleteApiKeyResponse = Shapes::StructureShape.new(name: 'DeleteApiKeyResponse')
     DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
@@ -52,13 +69,18 @@ module Aws::AppSync
     DeleteResolverResponse = Shapes::StructureShape.new(name: 'DeleteResolverResponse')
     DeleteTypeRequest = Shapes::StructureShape.new(name: 'DeleteTypeRequest')
     DeleteTypeResponse = Shapes::StructureShape.new(name: 'DeleteTypeResponse')
+    DeltaSyncConfig = Shapes::StructureShape.new(name: 'DeltaSyncConfig')
     DynamodbDataSourceConfig = Shapes::StructureShape.new(name: 'DynamodbDataSourceConfig')
     ElasticsearchDataSourceConfig = Shapes::StructureShape.new(name: 'ElasticsearchDataSourceConfig')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FieldLogLevel = Shapes::StringShape.new(name: 'FieldLogLevel')
+    FlushApiCacheRequest = Shapes::StructureShape.new(name: 'FlushApiCacheRequest')
+    FlushApiCacheResponse = Shapes::StructureShape.new(name: 'FlushApiCacheResponse')
     FunctionConfiguration = Shapes::StructureShape.new(name: 'FunctionConfiguration')
     Functions = Shapes::ListShape.new(name: 'Functions')
     FunctionsIds = Shapes::ListShape.new(name: 'FunctionsIds')
+    GetApiCacheRequest = Shapes::StructureShape.new(name: 'GetApiCacheRequest')
+    GetApiCacheResponse = Shapes::StructureShape.new(name: 'GetApiCacheResponse')
     GetDataSourceRequest = Shapes::StructureShape.new(name: 'GetDataSourceRequest')
     GetDataSourceResponse = Shapes::StructureShape.new(name: 'GetDataSourceResponse')
     GetFunctionRequest = Shapes::StructureShape.new(name: 'GetFunctionRequest')
@@ -78,6 +100,7 @@ module Aws::AppSync
     GraphqlApis = Shapes::ListShape.new(name: 'GraphqlApis')
     HttpDataSourceConfig = Shapes::StructureShape.new(name: 'HttpDataSourceConfig')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
+    LambdaConflictHandlerConfig = Shapes::StructureShape.new(name: 'LambdaConflictHandlerConfig')
     LambdaDataSourceConfig = Shapes::StructureShape.new(name: 'LambdaDataSourceConfig')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListApiKeysRequest = Shapes::StructureShape.new(name: 'ListApiKeysRequest')
@@ -92,6 +115,8 @@ module Aws::AppSync
     ListResolversByFunctionResponse = Shapes::StructureShape.new(name: 'ListResolversByFunctionResponse')
     ListResolversRequest = Shapes::StructureShape.new(name: 'ListResolversRequest')
     ListResolversResponse = Shapes::StructureShape.new(name: 'ListResolversResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTypesRequest = Shapes::StructureShape.new(name: 'ListTypesRequest')
     ListTypesResponse = Shapes::StructureShape.new(name: 'ListTypesResponse')
     LogConfig = Shapes::StructureShape.new(name: 'LogConfig')
@@ -110,15 +135,27 @@ module Aws::AppSync
     Resolver = Shapes::StructureShape.new(name: 'Resolver')
     ResolverKind = Shapes::StringShape.new(name: 'ResolverKind')
     Resolvers = Shapes::ListShape.new(name: 'Resolvers')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     SchemaStatus = Shapes::StringShape.new(name: 'SchemaStatus')
     StartSchemaCreationRequest = Shapes::StructureShape.new(name: 'StartSchemaCreationRequest')
     StartSchemaCreationResponse = Shapes::StructureShape.new(name: 'StartSchemaCreationResponse')
     String = Shapes::StringShape.new(name: 'String')
+    SyncConfig = Shapes::StructureShape.new(name: 'SyncConfig')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     Type = Shapes::StructureShape.new(name: 'Type')
     TypeDefinitionFormat = Shapes::StringShape.new(name: 'TypeDefinitionFormat')
     TypeList = Shapes::ListShape.new(name: 'TypeList')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateApiCacheRequest = Shapes::StructureShape.new(name: 'UpdateApiCacheRequest')
+    UpdateApiCacheResponse = Shapes::StructureShape.new(name: 'UpdateApiCacheResponse')
     UpdateApiKeyRequest = Shapes::StructureShape.new(name: 'UpdateApiKeyRequest')
     UpdateApiKeyResponse = Shapes::StructureShape.new(name: 'UpdateApiKeyResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
@@ -133,12 +170,39 @@ module Aws::AppSync
     UpdateTypeResponse = Shapes::StructureShape.new(name: 'UpdateTypeResponse')
     UserPoolConfig = Shapes::StructureShape.new(name: 'UserPoolConfig')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AdditionalAuthenticationProvider.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
+    AdditionalAuthenticationProvider.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: OpenIDConnectConfig, location_name: "openIDConnectConfig"))
+    AdditionalAuthenticationProvider.add_member(:user_pool_config, Shapes::ShapeRef.new(shape: CognitoUserPoolConfig, location_name: "userPoolConfig"))
+    AdditionalAuthenticationProvider.struct_class = Types::AdditionalAuthenticationProvider
+
+    AdditionalAuthenticationProviders.member = Shapes::ShapeRef.new(shape: AdditionalAuthenticationProvider)
+
+    ApiCache.add_member(:ttl, Shapes::ShapeRef.new(shape: Long, location_name: "ttl"))
+    ApiCache.add_member(:api_caching_behavior, Shapes::ShapeRef.new(shape: ApiCachingBehavior, location_name: "apiCachingBehavior"))
+    ApiCache.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "transitEncryptionEnabled"))
+    ApiCache.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "atRestEncryptionEnabled"))
+    ApiCache.add_member(:type, Shapes::ShapeRef.new(shape: ApiCacheType, location_name: "type"))
+    ApiCache.add_member(:status, Shapes::ShapeRef.new(shape: ApiCacheStatus, location_name: "status"))
+    ApiCache.struct_class = Types::ApiCache
+
     ApiKey.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     ApiKey.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ApiKey.add_member(:expires, Shapes::ShapeRef.new(shape: Long, location_name: "expires"))
     ApiKey.struct_class = Types::ApiKey
 
+    ApiKeyLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ApiKeyLimitExceededException.struct_class = Types::ApiKeyLimitExceededException
+
+    ApiKeyValidityOutOfBoundsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ApiKeyValidityOutOfBoundsException.struct_class = Types::ApiKeyValidityOutOfBoundsException
+
     ApiKeys.member = Shapes::ShapeRef.new(shape: ApiKey)
+
+    ApiLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ApiLimitExceededException.struct_class = Types::ApiLimitExceededException
 
     AuthorizationConfig.add_member(:authorization_type, Shapes::ShapeRef.new(shape: AuthorizationType, required: true, location_name: "authorizationType"))
     AuthorizationConfig.add_member(:aws_iam_config, Shapes::ShapeRef.new(shape: AwsIamConfig, location_name: "awsIamConfig"))
@@ -147,6 +211,34 @@ module Aws::AppSync
     AwsIamConfig.add_member(:signing_region, Shapes::ShapeRef.new(shape: String, location_name: "signingRegion"))
     AwsIamConfig.add_member(:signing_service_name, Shapes::ShapeRef.new(shape: String, location_name: "signingServiceName"))
     AwsIamConfig.struct_class = Types::AwsIamConfig
+
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
+    CachingConfig.add_member(:ttl, Shapes::ShapeRef.new(shape: Long, location_name: "ttl"))
+    CachingConfig.add_member(:caching_keys, Shapes::ShapeRef.new(shape: CachingKeys, location_name: "cachingKeys"))
+    CachingConfig.struct_class = Types::CachingConfig
+
+    CachingKeys.member = Shapes::ShapeRef.new(shape: String)
+
+    CognitoUserPoolConfig.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "userPoolId"))
+    CognitoUserPoolConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsRegion"))
+    CognitoUserPoolConfig.add_member(:app_id_client_regex, Shapes::ShapeRef.new(shape: String, location_name: "appIdClientRegex"))
+    CognitoUserPoolConfig.struct_class = Types::CognitoUserPoolConfig
+
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    CreateApiCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    CreateApiCacheRequest.add_member(:ttl, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ttl"))
+    CreateApiCacheRequest.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "transitEncryptionEnabled"))
+    CreateApiCacheRequest.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "atRestEncryptionEnabled"))
+    CreateApiCacheRequest.add_member(:api_caching_behavior, Shapes::ShapeRef.new(shape: ApiCachingBehavior, required: true, location_name: "apiCachingBehavior"))
+    CreateApiCacheRequest.add_member(:type, Shapes::ShapeRef.new(shape: ApiCacheType, required: true, location_name: "type"))
+    CreateApiCacheRequest.struct_class = Types::CreateApiCacheRequest
+
+    CreateApiCacheResponse.add_member(:api_cache, Shapes::ShapeRef.new(shape: ApiCache, location_name: "apiCache"))
+    CreateApiCacheResponse.struct_class = Types::CreateApiCacheResponse
 
     CreateApiKeyRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     CreateApiKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -188,6 +280,9 @@ module Aws::AppSync
     CreateGraphqlApiRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "authenticationType"))
     CreateGraphqlApiRequest.add_member(:user_pool_config, Shapes::ShapeRef.new(shape: UserPoolConfig, location_name: "userPoolConfig"))
     CreateGraphqlApiRequest.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: OpenIDConnectConfig, location_name: "openIDConnectConfig"))
+    CreateGraphqlApiRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateGraphqlApiRequest.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
+    CreateGraphqlApiRequest.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
     CreateGraphqlApiRequest.struct_class = Types::CreateGraphqlApiRequest
 
     CreateGraphqlApiResponse.add_member(:graphql_api, Shapes::ShapeRef.new(shape: GraphqlApi, location_name: "graphqlApi"))
@@ -201,6 +296,8 @@ module Aws::AppSync
     CreateResolverRequest.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
     CreateResolverRequest.add_member(:kind, Shapes::ShapeRef.new(shape: ResolverKind, location_name: "kind"))
     CreateResolverRequest.add_member(:pipeline_config, Shapes::ShapeRef.new(shape: PipelineConfig, location_name: "pipelineConfig"))
+    CreateResolverRequest.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
+    CreateResolverRequest.add_member(:caching_config, Shapes::ShapeRef.new(shape: CachingConfig, location_name: "cachingConfig"))
     CreateResolverRequest.struct_class = Types::CreateResolverRequest
 
     CreateResolverResponse.add_member(:resolver, Shapes::ShapeRef.new(shape: Resolver, location_name: "resolver"))
@@ -227,6 +324,11 @@ module Aws::AppSync
     DataSource.struct_class = Types::DataSource
 
     DataSources.member = Shapes::ShapeRef.new(shape: DataSource)
+
+    DeleteApiCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    DeleteApiCacheRequest.struct_class = Types::DeleteApiCacheRequest
+
+    DeleteApiCacheResponse.struct_class = Types::DeleteApiCacheResponse
 
     DeleteApiKeyRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     DeleteApiKeyRequest.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "id"))
@@ -264,14 +366,26 @@ module Aws::AppSync
 
     DeleteTypeResponse.struct_class = Types::DeleteTypeResponse
 
+    DeltaSyncConfig.add_member(:base_table_ttl, Shapes::ShapeRef.new(shape: Long, location_name: "baseTableTTL"))
+    DeltaSyncConfig.add_member(:delta_sync_table_name, Shapes::ShapeRef.new(shape: String, location_name: "deltaSyncTableName"))
+    DeltaSyncConfig.add_member(:delta_sync_table_ttl, Shapes::ShapeRef.new(shape: Long, location_name: "deltaSyncTableTTL"))
+    DeltaSyncConfig.struct_class = Types::DeltaSyncConfig
+
     DynamodbDataSourceConfig.add_member(:table_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "tableName"))
     DynamodbDataSourceConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsRegion"))
     DynamodbDataSourceConfig.add_member(:use_caller_credentials, Shapes::ShapeRef.new(shape: Boolean, location_name: "useCallerCredentials"))
+    DynamodbDataSourceConfig.add_member(:delta_sync_config, Shapes::ShapeRef.new(shape: DeltaSyncConfig, location_name: "deltaSyncConfig"))
+    DynamodbDataSourceConfig.add_member(:versioned, Shapes::ShapeRef.new(shape: Boolean, location_name: "versioned"))
     DynamodbDataSourceConfig.struct_class = Types::DynamodbDataSourceConfig
 
     ElasticsearchDataSourceConfig.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, required: true, location_name: "endpoint"))
     ElasticsearchDataSourceConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsRegion"))
     ElasticsearchDataSourceConfig.struct_class = Types::ElasticsearchDataSourceConfig
+
+    FlushApiCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    FlushApiCacheRequest.struct_class = Types::FlushApiCacheRequest
+
+    FlushApiCacheResponse.struct_class = Types::FlushApiCacheResponse
 
     FunctionConfiguration.add_member(:function_id, Shapes::ShapeRef.new(shape: String, location_name: "functionId"))
     FunctionConfiguration.add_member(:function_arn, Shapes::ShapeRef.new(shape: String, location_name: "functionArn"))
@@ -286,6 +400,12 @@ module Aws::AppSync
     Functions.member = Shapes::ShapeRef.new(shape: FunctionConfiguration)
 
     FunctionsIds.member = Shapes::ShapeRef.new(shape: String)
+
+    GetApiCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    GetApiCacheRequest.struct_class = Types::GetApiCacheRequest
+
+    GetApiCacheResponse.add_member(:api_cache, Shapes::ShapeRef.new(shape: ApiCache, location_name: "apiCache"))
+    GetApiCacheResponse.struct_class = Types::GetApiCacheResponse
 
     GetDataSourceRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     GetDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "name"))
@@ -309,6 +429,7 @@ module Aws::AppSync
 
     GetIntrospectionSchemaRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     GetIntrospectionSchemaRequest.add_member(:format, Shapes::ShapeRef.new(shape: OutputType, required: true, location: "querystring", location_name: "format"))
+    GetIntrospectionSchemaRequest.add_member(:include_directives, Shapes::ShapeRef.new(shape: BooleanValue, location: "querystring", location_name: "includeDirectives"))
     GetIntrospectionSchemaRequest.struct_class = Types::GetIntrospectionSchemaRequest
 
     GetIntrospectionSchemaResponse.add_member(:schema, Shapes::ShapeRef.new(shape: Blob, location_name: "schema"))
@@ -339,6 +460,9 @@ module Aws::AppSync
     GetTypeResponse.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
     GetTypeResponse.struct_class = Types::GetTypeResponse
 
+    GraphQLSchemaException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    GraphQLSchemaException.struct_class = Types::GraphQLSchemaException
+
     GraphqlApi.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     GraphqlApi.add_member(:api_id, Shapes::ShapeRef.new(shape: String, location_name: "apiId"))
     GraphqlApi.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
@@ -347,6 +471,9 @@ module Aws::AppSync
     GraphqlApi.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: OpenIDConnectConfig, location_name: "openIDConnectConfig"))
     GraphqlApi.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     GraphqlApi.add_member(:uris, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "uris"))
+    GraphqlApi.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GraphqlApi.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
+    GraphqlApi.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
     GraphqlApi.struct_class = Types::GraphqlApi
 
     GraphqlApis.member = Shapes::ShapeRef.new(shape: GraphqlApi)
@@ -355,8 +482,17 @@ module Aws::AppSync
     HttpDataSourceConfig.add_member(:authorization_config, Shapes::ShapeRef.new(shape: AuthorizationConfig, location_name: "authorizationConfig"))
     HttpDataSourceConfig.struct_class = Types::HttpDataSourceConfig
 
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    LambdaConflictHandlerConfig.add_member(:lambda_conflict_handler_arn, Shapes::ShapeRef.new(shape: String, location_name: "lambdaConflictHandlerArn"))
+    LambdaConflictHandlerConfig.struct_class = Types::LambdaConflictHandlerConfig
+
     LambdaDataSourceConfig.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "lambdaFunctionArn"))
     LambdaDataSourceConfig.struct_class = Types::LambdaDataSourceConfig
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListApiKeysRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     ListApiKeysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -413,6 +549,12 @@ module Aws::AppSync
     ListResolversResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListResolversResponse.struct_class = Types::ListResolversResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ListTypesRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     ListTypesRequest.add_member(:format, Shapes::ShapeRef.new(shape: TypeDefinitionFormat, required: true, location: "querystring", location_name: "format"))
     ListTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -425,10 +567,14 @@ module Aws::AppSync
 
     LogConfig.add_member(:field_log_level, Shapes::ShapeRef.new(shape: FieldLogLevel, required: true, location_name: "fieldLogLevel"))
     LogConfig.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cloudWatchLogsRoleArn"))
+    LogConfig.add_member(:exclude_verbose_content, Shapes::ShapeRef.new(shape: Boolean, location_name: "excludeVerboseContent"))
     LogConfig.struct_class = Types::LogConfig
 
     MapOfStringToString.key = Shapes::ShapeRef.new(shape: String)
     MapOfStringToString.value = Shapes::ShapeRef.new(shape: String)
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     OpenIDConnectConfig.add_member(:issuer, Shapes::ShapeRef.new(shape: String, required: true, location_name: "issuer"))
     OpenIDConnectConfig.add_member(:client_id, Shapes::ShapeRef.new(shape: String, location_name: "clientId"))
@@ -458,6 +604,8 @@ module Aws::AppSync
     Resolver.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
     Resolver.add_member(:kind, Shapes::ShapeRef.new(shape: ResolverKind, location_name: "kind"))
     Resolver.add_member(:pipeline_config, Shapes::ShapeRef.new(shape: PipelineConfig, location_name: "pipelineConfig"))
+    Resolver.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
+    Resolver.add_member(:caching_config, Shapes::ShapeRef.new(shape: CachingConfig, location_name: "cachingConfig"))
     Resolver.struct_class = Types::Resolver
 
     Resolvers.member = Shapes::ShapeRef.new(shape: Resolver)
@@ -469,6 +617,22 @@ module Aws::AppSync
     StartSchemaCreationResponse.add_member(:status, Shapes::ShapeRef.new(shape: SchemaStatus, location_name: "status"))
     StartSchemaCreationResponse.struct_class = Types::StartSchemaCreationResponse
 
+    SyncConfig.add_member(:conflict_handler, Shapes::ShapeRef.new(shape: ConflictHandlerType, location_name: "conflictHandler"))
+    SyncConfig.add_member(:conflict_detection, Shapes::ShapeRef.new(shape: ConflictDetectionType, location_name: "conflictDetection"))
+    SyncConfig.add_member(:lambda_conflict_handler_config, Shapes::ShapeRef.new(shape: LambdaConflictHandlerConfig, location_name: "lambdaConflictHandlerConfig"))
+    SyncConfig.struct_class = Types::SyncConfig
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     Type.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     Type.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     Type.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
@@ -477,6 +641,24 @@ module Aws::AppSync
     Type.struct_class = Types::Type
 
     TypeList.member = Shapes::ShapeRef.new(shape: Type)
+
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateApiCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    UpdateApiCacheRequest.add_member(:ttl, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ttl"))
+    UpdateApiCacheRequest.add_member(:api_caching_behavior, Shapes::ShapeRef.new(shape: ApiCachingBehavior, required: true, location_name: "apiCachingBehavior"))
+    UpdateApiCacheRequest.add_member(:type, Shapes::ShapeRef.new(shape: ApiCacheType, required: true, location_name: "type"))
+    UpdateApiCacheRequest.struct_class = Types::UpdateApiCacheRequest
+
+    UpdateApiCacheResponse.add_member(:api_cache, Shapes::ShapeRef.new(shape: ApiCache, location_name: "apiCache"))
+    UpdateApiCacheResponse.struct_class = Types::UpdateApiCacheResponse
 
     UpdateApiKeyRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     UpdateApiKeyRequest.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "id"))
@@ -521,6 +703,8 @@ module Aws::AppSync
     UpdateGraphqlApiRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     UpdateGraphqlApiRequest.add_member(:user_pool_config, Shapes::ShapeRef.new(shape: UserPoolConfig, location_name: "userPoolConfig"))
     UpdateGraphqlApiRequest.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: OpenIDConnectConfig, location_name: "openIDConnectConfig"))
+    UpdateGraphqlApiRequest.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
+    UpdateGraphqlApiRequest.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
     UpdateGraphqlApiRequest.struct_class = Types::UpdateGraphqlApiRequest
 
     UpdateGraphqlApiResponse.add_member(:graphql_api, Shapes::ShapeRef.new(shape: GraphqlApi, location_name: "graphqlApi"))
@@ -534,6 +718,8 @@ module Aws::AppSync
     UpdateResolverRequest.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
     UpdateResolverRequest.add_member(:kind, Shapes::ShapeRef.new(shape: ResolverKind, location_name: "kind"))
     UpdateResolverRequest.add_member(:pipeline_config, Shapes::ShapeRef.new(shape: PipelineConfig, location_name: "pipelineConfig"))
+    UpdateResolverRequest.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
+    UpdateResolverRequest.add_member(:caching_config, Shapes::ShapeRef.new(shape: CachingConfig, location_name: "cachingConfig"))
     UpdateResolverRequest.struct_class = Types::UpdateResolverRequest
 
     UpdateResolverResponse.add_member(:resolver, Shapes::ShapeRef.new(shape: Resolver, location_name: "resolver"))
@@ -572,6 +758,19 @@ module Aws::AppSync
         "signingName" => "appsync",
         "uid" => "appsync-2017-07-25",
       }
+
+      api.add_operation(:create_api_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateApiCache"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/apis/{apiId}/ApiCaches"
+        o.input = Shapes::ShapeRef.new(shape: CreateApiCacheRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateApiCacheResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
 
       api.add_operation(:create_api_key, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateApiKey"
@@ -653,6 +852,19 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:delete_api_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApiCache"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/apis/{apiId}/ApiCaches"
+        o.input = Shapes::ShapeRef.new(shape: DeleteApiCacheRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteApiCacheResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:delete_api_key, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteApiKey"
         o.http_method = "DELETE"
@@ -701,6 +913,7 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_resolver, Seahorse::Model::Operation.new.tap do |o|
@@ -721,6 +934,32 @@ module Aws::AppSync
         o.http_request_uri = "/v1/apis/{apiId}/types/{typeName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteTypeRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteTypeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:flush_api_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "FlushApiCache"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/apis/{apiId}/FlushCache"
+        o.input = Shapes::ShapeRef.new(shape: FlushApiCacheRequest)
+        o.output = Shapes::ShapeRef.new(shape: FlushApiCacheResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:get_api_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetApiCache"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apis/{apiId}/ApiCaches"
+        o.input = Shapes::ShapeRef.new(shape: GetApiCacheRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetApiCacheResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -762,6 +1001,7 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_introspection_schema, Seahorse::Model::Operation.new.tap do |o|
@@ -883,6 +1123,20 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:list_types, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTypes"
         o.http_method = "GET"
@@ -902,6 +1156,47 @@ module Aws::AppSync
         o.http_request_uri = "/v1/apis/{apiId}/schemacreation"
         o.input = Shapes::ShapeRef.new(shape: StartSchemaCreationRequest)
         o.output = Shapes::ShapeRef.new(shape: StartSchemaCreationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_api_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApiCache"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/apis/{apiId}/ApiCaches/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApiCacheRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateApiCacheResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -959,6 +1254,7 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_resolver, Seahorse::Model::Operation.new.tap do |o|

@@ -14,7 +14,7 @@ module Aws
         docstring: <<-DOCS) do |cfg|
 The AWS region to connect to.  The configured `:region` is
 used to determine the service `:endpoint`. When not passed,
-a default `:region` is search for in the following locations:
+a default `:region` is searched for in the following locations:
 
 * `Aws.config[:region]`
 * `ENV['AWS_REGION']`
@@ -31,11 +31,18 @@ a default `:region` is search for in the following locations:
       option(:endpoint, doc_type: String, docstring: <<-DOCS) do |cfg|
 The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting
-to test endpoints. This should be avalid HTTP(S) URI.
+to test endpoints. This should be a valid HTTP(S) URI.
         DOCS
         endpoint_prefix = cfg.api.metadata['endpointPrefix']
         if cfg.region && endpoint_prefix
-          Aws::Partitions::EndpointProvider.resolve(cfg.region, endpoint_prefix)
+          if cfg.respond_to?(:sts_regional_endpoints)
+            sts_regional = cfg.sts_regional_endpoints
+          end
+          Aws::Partitions::EndpointProvider.resolve(
+            cfg.region,
+            endpoint_prefix,
+            sts_regional
+          )
         end
       end
 

@@ -23,12 +23,25 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:neptune)
 
 module Aws::Neptune
+  # An API client for Neptune.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::Neptune::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +68,7 @@ module Aws::Neptune
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -91,7 +105,7 @@ module Aws::Neptune
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +120,12 @@ module Aws::Neptune
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +133,10 @@ module Aws::Neptune
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +150,10 @@ module Aws::Neptune
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +161,7 @@ module Aws::Neptune
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +176,7 @@ module Aws::Neptune
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +188,29 @@ module Aws::Neptune
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +218,30 @@ module Aws::Neptune
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -198,6 +259,48 @@ module Aws::Neptune
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -305,7 +408,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags to be assigned to the Amazon Neptune resource.
@@ -343,7 +446,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
     #
     # @option params [required, String] :apply_action
     #   The pending maintenance action to apply to this resource.
@@ -418,7 +521,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
     #
     # @option params [required, String] :target_db_cluster_parameter_group_identifier
     #   The identifier for the copied DB cluster parameter group.
@@ -439,12 +542,7 @@ module Aws::Neptune
     #   A description for the copied DB cluster parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be assigned to the copied DB cluster parameter group.
     #
     # @return [Types::CopyDBClusterParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -486,84 +584,17 @@ module Aws::Neptune
     # snapshot, `SourceDBClusterSnapshotIdentifier` must be the Amazon
     # Resource Name (ARN) of the shared DB cluster snapshot.
     #
-    # You can copy an encrypted DB cluster snapshot from another AWS Region.
-    # In that case, the AWS Region where you call the
-    # `CopyDBClusterSnapshot` action is the destination AWS Region for the
-    # encrypted DB cluster snapshot to be copied to. To copy an encrypted DB
-    # cluster snapshot from another AWS Region, you must provide the
-    # following values:
-    #
-    # * `KmsKeyId` - The AWS Key Management System (AWS KMS) key identifier
-    #   for the key to use to encrypt the copy of the DB cluster snapshot in
-    #   the destination AWS Region.
-    #
-    # * `PreSignedUrl` - A URL that contains a Signature Version 4 signed
-    #   request for the `CopyDBClusterSnapshot` action to be called in the
-    #   source AWS Region where the DB cluster snapshot is copied from. The
-    #   pre-signed URL must be a valid request for the
-    #   `CopyDBClusterSnapshot` API action that can be executed in the
-    #   source AWS Region that contains the encrypted DB cluster snapshot to
-    #   be copied.
-    #
-    #   The pre-signed URL request must contain the following parameter
-    #   values:
-    #
-    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
-    #     the copy of the DB cluster snapshot in the destination AWS Region.
-    #     This is the same identifier for both the `CopyDBClusterSnapshot`
-    #     action that is called in the destination AWS Region, and the
-    #     action contained in the pre-signed URL.
-    #
-    #   * `DestinationRegion` - The name of the AWS Region that the DB
-    #     cluster snapshot will be created in.
-    #
-    #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
-    #     identifier for the encrypted DB cluster snapshot to be copied.
-    #     This identifier must be in the Amazon Resource Name (ARN) format
-    #     for the source AWS Region. For example, if you are copying an
-    #     encrypted DB cluster snapshot from the us-west-2 AWS Region, then
-    #     your `SourceDBClusterSnapshotIdentifier` looks like the following
-    #     example:
-    #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:neptune-cluster1-snapshot-20161115`.
-    #
-    #   To learn how to generate a Signature Version 4 signed request, see [
-    #   Authenticating Requests: Using Query Parameters (AWS Signature
-    #   Version 4)][1] and [ Signature Version 4 Signing Process][2].
-    #
-    # * `TargetDBClusterSnapshotIdentifier` - The identifier for the new
-    #   copy of the DB cluster snapshot in the destination AWS Region.
-    #
-    # * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
-    #   identifier for the encrypted DB cluster snapshot to be copied. This
-    #   identifier must be in the ARN format for the source AWS Region and
-    #   is the same value as the `SourceDBClusterSnapshotIdentifier` in the
-    #   pre-signed URL.
-    #
-    # To cancel the copy operation once it is in progress, delete the target
-    # DB cluster snapshot identified by `TargetDBClusterSnapshotIdentifier`
-    # while that DB cluster snapshot is in "copying" status.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
-    # [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-    #
     # @option params [required, String] :source_db_cluster_snapshot_identifier
     #   The identifier of the DB cluster snapshot to copy. This parameter is
     #   not case-sensitive.
     #
-    #   You can't copy an encrypted, shared DB cluster snapshot from one AWS
-    #   Region to another.
+    #   You can't copy from one AWS Region to another.
     #
     #   Constraints:
     #
     #   * Must specify a valid system snapshot in the "available" state.
     #
-    #   * If the source snapshot is in the same AWS Region as the copy,
-    #     specify a valid DB snapshot identifier.
-    #
-    #   * If the source snapshot is in a different AWS Region than the copy,
-    #     specify a valid DB cluster snapshot ARN.
+    #   * Specify a valid DB snapshot identifier.
     #
     #   Example: `my-cluster-snapshot1`
     #
@@ -586,10 +617,6 @@ module Aws::Neptune
     #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
     #   KMS key alias for the KMS encryption key.
     #
-    #   If you copy an unencrypted DB cluster snapshot and specify a value for
-    #   the `KmsKeyId` parameter, Amazon Neptune encrypts the target DB
-    #   cluster snapshot using the specified KMS encryption key.
-    #
     #   If you copy an encrypted DB cluster snapshot from your AWS account,
     #   you can specify a value for `KmsKeyId` to encrypt the copy with a new
     #   KMS encryption key. If you don't specify a value for `KmsKeyId`, then
@@ -599,64 +626,23 @@ module Aws::Neptune
     #   If you copy an encrypted DB cluster snapshot that is shared from
     #   another AWS account, then you must specify a value for `KmsKeyId`.
     #
-    #   To copy an encrypted DB cluster snapshot to another AWS Region, you
-    #   must set `KmsKeyId` to the KMS key ID you want to use to encrypt the
-    #   copy of the DB cluster snapshot in the destination AWS Region. KMS
-    #   encryption keys are specific to the AWS Region that they are created
-    #   in, and you can't use encryption keys from one AWS Region in another
-    #   AWS Region.
+    #   KMS encryption keys are specific to the AWS Region that they are
+    #   created in, and you can't use encryption keys from one AWS Region in
+    #   another AWS Region.
+    #
+    #   You cannot encrypt an unencrypted DB cluster snapshot when you copy
+    #   it. If you try to copy an unencrypted DB cluster snapshot and specify
+    #   a value for the KmsKeyId parameter, an error is returned.
     #
     # @option params [String] :pre_signed_url
-    #   The URL that contains a Signature Version 4 signed request for the
-    #   `CopyDBClusterSnapshot` API action in the AWS Region that contains the
-    #   source DB cluster snapshot to copy. The `PreSignedUrl` parameter must
-    #   be used when copying an encrypted DB cluster snapshot from another AWS
-    #   Region.
-    #
-    #   The pre-signed URL must be a valid request for the
-    #   `CopyDBSClusterSnapshot` API action that can be executed in the source
-    #   AWS Region that contains the encrypted DB cluster snapshot to be
-    #   copied. The pre-signed URL request must contain the following
-    #   parameter values:
-    #
-    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the copy of the DB cluster snapshot in the destination AWS
-    #     Region. This is the same identifier for both the
-    #     `CopyDBClusterSnapshot` action that is called in the destination AWS
-    #     Region, and the action contained in the pre-signed URL.
-    #
-    #   * `DestinationRegion` - The name of the AWS Region that the DB cluster
-    #     snapshot will be created in.
-    #
-    #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
-    #     identifier for the encrypted DB cluster snapshot to be copied. This
-    #     identifier must be in the Amazon Resource Name (ARN) format for the
-    #     source AWS Region. For example, if you are copying an encrypted DB
-    #     cluster snapshot from the us-west-2 AWS Region, then your
-    #     `SourceDBClusterSnapshotIdentifier` looks like the following
-    #     example:
-    #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:neptune-cluster1-snapshot-20161115`.
-    #
-    #   To learn how to generate a Signature Version 4 signed request, see [
-    #   Authenticating Requests: Using Query Parameters (AWS Signature Version
-    #   4)][1] and [ Signature Version 4 Signing Process][2].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   Not currently supported.
     #
     # @option params [Boolean] :copy_tags
     #   True to copy all tags from the source DB cluster snapshot to the
     #   target DB cluster snapshot, and otherwise false. The default is false.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to assign to the new DB cluster snapshot copy.
     #
     # @return [Types::CopyDBClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -727,20 +713,20 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
     #
     # @option params [required, String] :target_db_parameter_group_identifier
     #   The identifier for the copied DB parameter group.
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Cannot be null, empty, or blank.
     #
-    #   * Must contain from 1 to 255 letters, numbers, or hyphens
+    #   * Must contain from 1 to 255 letters, numbers, or hyphens.
     #
-    #   * First character must be a letter
+    #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-db-parameter-group`
     #
@@ -748,12 +734,7 @@ module Aws::Neptune
     #   A description for the copied DB parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be assigned to the copied DB parameter group.
     #
     # @return [Types::CopyDBParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -793,9 +774,13 @@ module Aws::Neptune
     #
     # You can use the `ReplicationSourceIdentifier` parameter to create the
     # DB cluster as a Read Replica of another DB cluster or Amazon Neptune
-    # DB instance. For cross-region replication where the DB cluster
-    # identified by `ReplicationSourceIdentifier` is encrypted, you must
-    # also specify the `PreSignedUrl` parameter.
+    # DB instance.
+    #
+    # Note that when you create a new cluster using `CreateDBCluster`
+    # directly, deletion protection is disabled by default (when you create
+    # a new production cluster in the console, deletion protection is
+    # enabled by default). You can only delete a DB cluster if its
+    # `DeletionProtection` field is set to `false`.
     #
     # @option params [Array<String>] :availability_zones
     #   A list of EC2 Availability Zones that instances in the DB cluster can
@@ -814,8 +799,7 @@ module Aws::Neptune
     #   ^
     #
     # @option params [String] :character_set_name
-    #   A value that indicates that the DB cluster should be associated with
-    #   the specified CharacterSet.
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :database_name
     #   The name for your database of up to 64 alpha-numeric characters. If
@@ -864,7 +848,8 @@ module Aws::Neptune
     #   Valid Values: `neptune`
     #
     # @option params [String] :engine_version
-    #   The version number of the database engine to use.
+    #   The version number of the database engine to use. Currently, setting
+    #   this parameter has no effect.
     #
     #   Example: `1.0.1`
     #
@@ -892,12 +877,7 @@ module Aws::Neptune
     #   Constraints: Must contain from 8 to 41 characters.
     #
     # @option params [String] :option_group_name
-    #   A value that indicates that the DB cluster should be associated with
-    #   the specified option group.
-    #
-    #   Permanent options can't be removed from an option group. The option
-    #   group can't be removed from a DB cluster once it is associated with a
-    #   DB cluster.
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
@@ -921,7 +901,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     #
     # @option params [String] :preferred_maintenance_window
     #   The weekly time range during which system maintenance can occur, in
@@ -940,19 +920,14 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     #
     # @option params [String] :replication_source_identifier
     #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
     #   if this DB cluster is created as a Read Replica.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to assign to the new DB cluster.
     #
     # @option params [Boolean] :storage_encrypted
     #   Specifies whether the DB cluster is encrypted.
@@ -987,50 +962,22 @@ module Aws::Neptune
     #   in that AWS Region.
     #
     # @option params [String] :pre_signed_url
-    #   A URL that contains a Signature Version 4 signed request for the
-    #   `CreateDBCluster` action to be called in the source AWS Region where
-    #   the DB cluster is replicated from. You only need to specify
-    #   `PreSignedUrl` when you are performing cross-region replication from
-    #   an encrypted DB cluster.
-    #
-    #   The pre-signed URL must be a valid request for the `CreateDBCluster`
-    #   API action that can be executed in the source AWS Region that contains
-    #   the encrypted DB cluster to be copied.
-    #
-    #   The pre-signed URL request must contain the following parameter
-    #   values:
-    #
-    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the copy of the DB cluster in the destination AWS Region.
-    #     This should refer to the same KMS key for both the `CreateDBCluster`
-    #     action that is called in the destination AWS Region, and the action
-    #     contained in the pre-signed URL.
-    #
-    #   * `DestinationRegion` - The name of the AWS Region that Read Replica
-    #     will be created in.
-    #
-    #   * `ReplicationSourceIdentifier` - The DB cluster identifier for the
-    #     encrypted DB cluster to be copied. This identifier must be in the
-    #     Amazon Resource Name (ARN) format for the source AWS Region. For
-    #     example, if you are copying an encrypted DB cluster from the
-    #     us-west-2 AWS Region, then your `ReplicationSourceIdentifier` would
-    #     look like Example:
-    #     `arn:aws:rds:us-west-2:123456789012:cluster:neptune-cluster1`.
-    #
-    #   To learn how to generate a Signature Version 4 signed request, see [
-    #   Authenticating Requests: Using Query Parameters (AWS Signature Version
-    #   4)][1] and [ Signature Version 4 Signing Process][2].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   This parameter is not currently supported.
     #
     # @option params [Boolean] :enable_iam_database_authentication
     #   True to enable mapping of AWS Identity and Access Management (IAM)
     #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
+    #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of log types that need to be enabled for exporting to
+    #   CloudWatch Logs.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   A value that indicates whether the DB cluster has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is enabled.
     #
     # @return [Types::CreateDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1066,6 +1013,8 @@ module Aws::Neptune
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
     #     enable_iam_database_authentication: false,
+    #     enable_cloudwatch_logs_exports: ["String"],
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -1117,6 +1066,9 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -1184,12 +1136,7 @@ module Aws::Neptune
     #   The description for the DB cluster parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be assigned to the new DB cluster parameter group.
     #
     # @return [Types::CreateDBClusterParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1309,9 +1256,7 @@ module Aws::Neptune
     # Creates a new DB instance.
     #
     # @option params [String] :db_name
-    #   The database name.
-    #
-    #   Type: String
+    #   Not supported.
     #
     # @option params [required, String] :db_instance_identifier
     #   The DB instance identifier. This parameter is stored as a lowercase
@@ -1370,7 +1315,7 @@ module Aws::Neptune
     #   VPC.
     #
     # @option params [String] :availability_zone
-    #   The EC2 Availability Zone that the DB instance is created in.
+    #   The EC2 Availability Zone that the DB instance is created in
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   AWS Region.
@@ -1449,7 +1394,8 @@ module Aws::Neptune
     #   true.
     #
     # @option params [String] :engine_version
-    #   The version number of the database engine to use.
+    #   The version number of the database engine to use. Currently, setting
+    #   this parameter has no effect.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor engine upgrades are applied automatically to the
@@ -1468,31 +1414,16 @@ module Aws::Neptune
     #   be initially allocated for the DB instance.
     #
     # @option params [String] :option_group_name
-    #   Indicates that the DB instance should be associated with the specified
-    #   option group.
-    #
-    #   Permanent options, such as the TDE option for Oracle Advanced Security
-    #   TDE, can't be removed from an option group, and that option group
-    #   can't be removed from a DB instance once it is associated with a DB
-    #   instance
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :character_set_name
-    #   Indicates that the DB instance should be associated with the specified
-    #   CharacterSet.
-    #
-    #   Not applicable. The character set is managed by the DB cluster. For
-    #   more information, see CreateDBCluster.
+    #   *(Not supported by Neptune)*
     #
     # @option params [Boolean] :publicly_accessible
-    #   This parameter is not supported.
+    #   This flag should no longer be used.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to assign to the new instance.
     #
     # @option params [String] :db_cluster_identifier
     #   The identifier of the DB cluster that the instance will belong to.
@@ -1588,17 +1519,27 @@ module Aws::Neptune
     #   Default: `false`
     #
     # @option params [Boolean] :enable_performance_insights
-    #   True to enable Performance Insights for the DB instance, and otherwise
-    #   false.
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :performance_insights_kms_key_id
-    #   The AWS KMS key identifier for encryption of Performance Insights
-    #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
-    #   identifier, or the KMS key alias for the KMS encryption key.
+    #   *(Not supported by Neptune)*
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   A value that indicates whether the DB instance has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled. See [Deleting a
+    #   DB Instance][1].
+    #
+    #   DB instances in a DB cluster can be deleted even when deletion
+    #   protection is enabled in their parent DB cluster.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html
     #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1654,6 +1595,7 @@ module Aws::Neptune
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -1755,6 +1697,7 @@ module Aws::Neptune
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -1814,12 +1757,7 @@ module Aws::Neptune
     #   The description for the DB parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be assigned to the new DB parameter group.
     #
     # @return [Types::CreateDBParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1874,12 +1812,7 @@ module Aws::Neptune
     #   The EC2 Subnet IDs for the DB subnet group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be assigned to the new DB subnet group.
     #
     # @return [Types::CreateDBSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1994,12 +1927,7 @@ module Aws::Neptune
     #   **false** to create the subscription but not active it.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be applied to the new event subscription.
     #
     # @return [Types::CreateEventSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2050,6 +1978,10 @@ module Aws::Neptune
     # cluster. When you delete a DB cluster, all automated backups for that
     # DB cluster are deleted and can't be recovered. Manual DB cluster
     # snapshots of the specified DB cluster are not deleted.
+    #
+    # Note that the DB Cluster cannot be deleted if deletion protection is
+    # enabled. To delete it, you must first set its `DeletionProtection`
+    # field to `False`.
     #
     # @option params [required, String] :db_cluster_identifier
     #   The DB cluster identifier for the DB cluster to be deleted. This
@@ -2152,6 +2084,9 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -2267,18 +2202,8 @@ module Aws::Neptune
     # only delete it when the `SkipFinalSnapshot` parameter is set to
     # `true`.
     #
-    # If the specified DB instance is part of a DB cluster, you can't
-    # delete the DB instance if both of the following conditions are true:
-    #
-    # * The DB cluster is a Read Replica of another DB cluster.
-    #
-    # * The DB instance is the only instance in the DB cluster.
-    #
-    # To delete a DB instance in this case, first call the
-    # PromoteReadReplicaDBCluster API action to promote the DB cluster so
-    # it's no longer a Read Replica. After the promotion completes, then
-    # call the `DeleteDBInstance` API action to delete the final instance in
-    # the DB cluster.
+    # You can't delete a DB instance if it is the only instance in the DB
+    # cluster, or if it has deletion protection enabled.
     #
     # @option params [required, String] :db_instance_identifier
     #   The DB instance identifier for the DB instance to be deleted. This
@@ -2440,6 +2365,7 @@ module Aws::Neptune
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -2906,8 +2832,13 @@ module Aws::Neptune
       req.send_request(options)
     end
 
-    # Returns information about provisioned DB clusters. This API supports
+    # Returns information about provisioned DB clusters, and supports
     # pagination.
+    #
+    # <note markdown="1"> This operation can also return information for Amazon RDS clusters and
+    # Amazon DocDB clusters.
+    #
+    #  </note>
     #
     # @option params [String] :db_cluster_identifier
     #   The user-supplied DB cluster identifier. If this parameter is
@@ -2929,7 +2860,12 @@ module Aws::Neptune
     #     Amazon Resource Names (ARNs). The results list will only include
     #     information about the DB clusters identified by these ARNs.
     #
-    #   ^
+    #   * `engine` - Accepts an engine name (such as `neptune`), and restricts
+    #     the results list to DB clusters created by that engine.
+    #
+    #   For example, to invoke this API from the AWS CLI and filter so that
+    #   only Neptune DB clusters are returned, you could use the following
+    #   command:
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -3016,6 +2952,9 @@ module Aws::Neptune
     #   resp.db_clusters[0].iam_database_authentication_enabled #=> Boolean
     #   resp.db_clusters[0].clone_group_id #=> String
     #   resp.db_clusters[0].cluster_create_time #=> Time
+    #   resp.db_clusters[0].enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_clusters[0].enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_clusters[0].deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -3083,6 +3022,8 @@ module Aws::Neptune
     #   * {Types::DBEngineVersionMessage#marker #marker} => String
     #   * {Types::DBEngineVersionMessage#db_engine_versions #db_engine_versions} => Array&lt;Types::DBEngineVersion&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_engine_versions({
@@ -3138,8 +3079,13 @@ module Aws::Neptune
       req.send_request(options)
     end
 
-    # Returns information about provisioned instances. This API supports
+    # Returns information about provisioned instances, and supports
     # pagination.
+    #
+    # <note markdown="1"> This operation can also return information for Amazon RDS instances
+    # and Amazon DocDB instances.
+    #
+    #  </note>
     #
     # @option params [String] :db_instance_identifier
     #   The user-supplied instance identifier. If this parameter is specified,
@@ -3162,9 +3108,12 @@ module Aws::Neptune
     #     information about the DB instances associated with the DB clusters
     #     identified by these ARNs.
     #
-    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     Amazon Resource Names (ARNs). The results list will only include
-    #     information about the DB instances identified by these ARNs.
+    #   * `engine` - Accepts an engine name (such as `neptune`), and restricts
+    #     the results list to DB instances created by that engine.
+    #
+    #   For example, to invoke this API from the AWS CLI and filter so that
+    #   only Neptune DB instances are returned, you could use the following
+    #   command:
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -3186,6 +3135,8 @@ module Aws::Neptune
     #
     #   * {Types::DBInstanceMessage#marker #marker} => String
     #   * {Types::DBInstanceMessage#db_instances #db_instances} => Array&lt;Types::DBInstance&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3302,6 +3253,13 @@ module Aws::Neptune
     #   resp.db_instances[0].performance_insights_kms_key_id #=> String
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instances[0].deletion_protection #=> Boolean
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * db_instance_available
+    #   * db_instance_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBInstances AWS API Documentation
     #
@@ -3349,6 +3307,8 @@ module Aws::Neptune
     #
     #   * {Types::DBParameterGroupsMessage#marker #marker} => String
     #   * {Types::DBParameterGroupsMessage#db_parameter_groups #db_parameter_groups} => Array&lt;Types::DBParameterGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3425,6 +3385,8 @@ module Aws::Neptune
     #   * {Types::DBParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #   * {Types::DBParameterGroupDetails#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_parameters({
@@ -3500,6 +3462,8 @@ module Aws::Neptune
     #
     #   * {Types::DBSubnetGroupMessage#marker #marker} => String
     #   * {Types::DBSubnetGroupMessage#db_subnet_groups #db_subnet_groups} => Array&lt;Types::DBSubnetGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3636,6 +3600,8 @@ module Aws::Neptune
     #
     #   * {Types::DescribeEngineDefaultParametersResult#engine_defaults #engine_defaults} => Types::EngineDefaults
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_engine_default_parameters({
@@ -3752,6 +3718,8 @@ module Aws::Neptune
     #
     #   * {Types::EventSubscriptionsMessage#marker #marker} => String
     #   * {Types::EventSubscriptionsMessage#event_subscriptions_list #event_subscriptions_list} => Array&lt;Types::EventSubscription&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3879,6 +3847,8 @@ module Aws::Neptune
     #   * {Types::EventsMessage#marker #marker} => String
     #   * {Types::EventsMessage#events #events} => Array&lt;Types::Event&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_events({
@@ -3964,6 +3934,8 @@ module Aws::Neptune
     #
     #   * {Types::OrderableDBInstanceOptionsMessage#orderable_db_instance_options #orderable_db_instance_options} => Array&lt;Types::OrderableDBInstanceOption&gt;
     #   * {Types::OrderableDBInstanceOptionsMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4227,6 +4199,9 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -4246,7 +4221,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
     #
     # @option params [Array<Types::Filter>] :filters
     #   This parameter is not currently supported.
@@ -4359,18 +4334,7 @@ module Aws::Neptune
     #   Constraints: Must contain from 8 to 41 characters.
     #
     # @option params [String] :option_group_name
-    #   A value that indicates that the DB cluster should be associated with
-    #   the specified option group. Changing this parameter doesn't result in
-    #   an outage except in the following case, and the change is applied
-    #   during the next maintenance window unless the `ApplyImmediately`
-    #   parameter is set to `true` for this request. If the parameter change
-    #   results in an option group that enables OEM, this change can cause a
-    #   brief (sub-second) period during which new connections are rejected
-    #   but existing connections are not interrupted.
-    #
-    #   Permanent options can't be removed from an option group. The option
-    #   group can't be removed from a DB cluster once it is associated with a
-    #   DB cluster.
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
@@ -4410,14 +4374,22 @@ module Aws::Neptune
     #
     #   Default: `false`
     #
+    # @option params [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
+    #   The configuration setting for the log types to be enabled for export
+    #   to CloudWatch Logs for a specific DB cluster.
+    #
     # @option params [String] :engine_version
-    #   The version number of the database engine to which you want to
-    #   upgrade. Changing this parameter results in an outage. The change is
-    #   applied during the next maintenance window unless the ApplyImmediately
-    #   parameter is set to true.
+    #   The version number of the database engine. Currently, setting this
+    #   parameter has no effect. To upgrade your database engine to the most
+    #   recent release, use the ApplyPendingMaintenanceAction API.
     #
     #   For a list of valid engine versions, see CreateDBInstance, or call
     #   DescribeDBEngineVersions.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   A value that indicates whether the DB cluster has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled.
     #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4438,7 +4410,12 @@ module Aws::Neptune
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
     #     enable_iam_database_authentication: false,
+    #     cloudwatch_logs_export_configuration: {
+    #       enable_log_types: ["String"],
+    #       disable_log_types: ["String"],
+    #     },
     #     engine_version: "String",
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -4490,6 +4467,9 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -4732,12 +4712,7 @@ module Aws::Neptune
     #   Default: `false`
     #
     # @option params [String] :master_user_password
-    #   The new password for the master user. The password can include any
-    #   printable ASCII character except "/", """, or "@".
-    #
     #   Not applicable.
-    #
-    #   Default: Uses existing setting
     #
     # @option params [String] :db_parameter_group_name
     #   The name of the DB parameter group to apply to the DB instance.
@@ -4754,10 +4729,6 @@ module Aws::Neptune
     #   group family as this DB instance.
     #
     # @option params [Integer] :backup_retention_period
-    #   The number of days to retain automated backups. Setting this parameter
-    #   to a positive number enables backups. Setting this parameter to 0
-    #   disables automated backups.
-    #
     #   Not applicable. The retention period for automated backups is managed
     #   by the DB cluster. For more information, see ModifyDBCluster.
     #
@@ -4806,24 +4777,14 @@ module Aws::Neptune
     #   parameter is set to `true` for this request.
     #
     # @option params [String] :engine_version
-    #   The version number of the database engine to upgrade to. Changing this
-    #   parameter results in an outage and the change is applied during the
-    #   next maintenance window unless the `ApplyImmediately` parameter is set
-    #   to `true` for this request.
-    #
-    #   For major version upgrades, if a nondefault DB parameter group is
-    #   currently in use, a new DB parameter group in the DB parameter group
-    #   family for the new engine version must be specified. The new DB
-    #   parameter group can be the default for that DB parameter group family.
+    #   The version number of the database engine to upgrade to. Currently,
+    #   setting this parameter has no effect. To upgrade your database engine
+    #   to the most recent release, use the ApplyPendingMaintenanceAction API.
     #
     # @option params [Boolean] :allow_major_version_upgrade
     #   Indicates that major version upgrades are allowed. Changing this
     #   parameter doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible.
-    #
-    #   Constraints: This parameter must be set to true when specifying a
-    #   value for the EngineVersion parameter that is a different major
-    #   version than the DB instance's current version.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor version upgrades are applied automatically to the
@@ -4835,10 +4796,7 @@ module Aws::Neptune
     #   enabled auto patching for that engine version.
     #
     # @option params [String] :license_model
-    #   The license model for the DB instance.
-    #
-    #   Valid values: `license-included` \| `bring-your-own-license` \|
-    #   `general-public-license`
+    #   Not supported.
     #
     # @option params [Integer] :iops
     #   The new Provisioned IOPS (I/O operations per second) value for the
@@ -4851,19 +4809,7 @@ module Aws::Neptune
     #   Default: Uses existing setting
     #
     # @option params [String] :option_group_name
-    #   Indicates that the DB instance should be associated with the specified
-    #   option group. Changing this parameter doesn't result in an outage
-    #   except in the following case and the change is applied during the next
-    #   maintenance window unless the `ApplyImmediately` parameter is set to
-    #   `true` for this request. If the parameter change results in an option
-    #   group that enables OEM, this change can cause a brief (sub-second)
-    #   period during which new connections are rejected but existing
-    #   connections are not interrupted.
-    #
-    #   Permanent options, such as the TDE option for Oracle Advanced Security
-    #   TDE, can't be removed from an option group, and that option group
-    #   can't be removed from a DB instance once it is associated with a DB
-    #   instance
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :new_db_instance_identifier
     #   The new DB instance identifier for the DB instance when renaming a DB
@@ -4883,31 +4829,7 @@ module Aws::Neptune
     #   Example: `mydbinstance`
     #
     # @option params [String] :storage_type
-    #   Specifies the storage type to be associated with the DB instance.
-    #
-    #   If you specify Provisioned IOPS (`io1`), you must also include a value
-    #   for the `Iops` parameter.
-    #
-    #   If you choose to migrate your DB instance from using standard storage
-    #   to using Provisioned IOPS, or from using Provisioned IOPS to using
-    #   standard storage, the process can take time. The duration of the
-    #   migration depends on several factors such as database load, storage
-    #   size, storage type (standard or Provisioned IOPS), amount of IOPS
-    #   provisioned (if any), and the number of prior scale storage
-    #   operations. Typical migration times are under 24 hours, but the
-    #   process can take up to several days in some cases. During the
-    #   migration, the DB instance is available for use, but might experience
-    #   performance degradation. While the migration takes place, nightly
-    #   backups for the instance are suspended. No other Amazon Neptune
-    #   operations can take place for the instance, including modifying the
-    #   instance, rebooting the instance, deleting the instance, creating a
-    #   Read Replica for the instance, and creating a DB snapshot of the
-    #   instance.
-    #
-    #   Valid values: `standard | gp2 | io1`
-    #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise
-    #   `standard`
+    #   Not supported.
     #
     # @option params [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
@@ -4951,7 +4873,7 @@ module Aws::Neptune
     #   Default: `8182`
     #
     # @option params [Boolean] :publicly_accessible
-    #   This parameter is not supported.
+    #   This flag should no longer be used.
     #
     # @option params [String] :monitoring_role_arn
     #   The ARN for the IAM role that permits Neptune to send enhanced
@@ -4986,17 +4908,24 @@ module Aws::Neptune
     #   Default: `false`
     #
     # @option params [Boolean] :enable_performance_insights
-    #   True to enable Performance Insights for the DB instance, and otherwise
-    #   false.
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :performance_insights_kms_key_id
-    #   The AWS KMS key identifier for encryption of Performance Insights
-    #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
-    #   identifier, or the KMS key alias for the KMS encryption key.
+    #   *(Not supported by Neptune)*
     #
     # @option params [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
     #   to CloudWatch Logs for a specific DB instance or DB cluster.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   A value that indicates whether the DB instance has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled. See [Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html
     #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5044,6 +4973,7 @@ module Aws::Neptune
     #       enable_log_types: ["String"],
     #       disable_log_types: ["String"],
     #     },
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -5145,6 +5075,7 @@ module Aws::Neptune
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -5363,19 +5294,10 @@ module Aws::Neptune
       req.send_request(options)
     end
 
-    # Promotes a Read Replica DB cluster to a standalone DB cluster.
+    # Not supported.
     #
     # @option params [required, String] :db_cluster_identifier
-    #   The identifier of the DB cluster Read Replica to promote. This
-    #   parameter is not case-sensitive.
-    #
-    #   Constraints:
-    #
-    #   * Must match the identifier of an existing DBCluster Read Replica.
-    #
-    #   ^
-    #
-    #   Example: `my-cluster-replica1`
+    #   Not supported.
     #
     # @return [Types::PromoteReadReplicaDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5436,6 +5358,9 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -5581,6 +5506,7 @@ module Aws::Neptune
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -5676,7 +5602,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
     #
     # @option params [required, Array<String>] :tag_keys
     #   The tag key (name) of the tag to be removed.
@@ -5903,10 +5829,10 @@ module Aws::Neptune
     #   Example: `mySubnetgroup`
     #
     # @option params [String] :database_name
-    #   The database name for the restored DB cluster.
+    #   Not supported.
     #
     # @option params [String] :option_group_name
-    #   The name of the option group to use for the restored DB cluster.
+    #   *(Not supported by Neptune)*
     #
     # @option params [Array<String>] :vpc_security_group_ids
     #   A list of VPC security groups that the new DB cluster will belong to.
@@ -5940,6 +5866,26 @@ module Aws::Neptune
     #
     #   Default: `false`
     #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to Amazon
+    #   CloudWatch Logs.
+    #
+    # @option params [String] :db_cluster_parameter_group_name
+    #   The name of the DB cluster parameter group to associate with the new
+    #   DB cluster.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing
+    #     DBClusterParameterGroup.
+    #
+    #   ^
+    #
+    # @option params [Boolean] :deletion_protection
+    #   A value that indicates whether the DB cluster has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled.
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -5965,6 +5911,9 @@ module Aws::Neptune
     #     ],
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
+    #     enable_cloudwatch_logs_exports: ["String"],
+    #     db_cluster_parameter_group_name: "String",
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -6016,6 +5965,9 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -6062,9 +6014,6 @@ module Aws::Neptune
     #
     #   * `copy-on-write` - The new DB cluster is restored as a clone of the
     #     source DB cluster.
-    #
-    #   Constraints: You can't specify `copy-on-write` if the engine version
-    #   of the source DB cluster is earlier than 1.11.
     #
     #   If you don't specify a `RestoreType` value, then the new DB cluster
     #   is restored as a full copy of the source DB cluster.
@@ -6122,18 +6071,13 @@ module Aws::Neptune
     #   Example: `mySubnetgroup`
     #
     # @option params [String] :option_group_name
-    #   The name of the option group for the new DB cluster.
+    #   *(Not supported by Neptune)*
     #
     # @option params [Array<String>] :vpc_security_group_ids
     #   A list of VPC security groups that the new DB cluster belongs to.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be applied to the restored DB cluster.
     #
     # @option params [String] :kms_key_id
     #   The AWS KMS key identifier to use when restoring an encrypted DB
@@ -6169,6 +6113,26 @@ module Aws::Neptune
     #
     #   Default: `false`
     #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
+    #
+    # @option params [String] :db_cluster_parameter_group_name
+    #   The name of the DB cluster parameter group to associate with the new
+    #   DB cluster.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing
+    #     DBClusterParameterGroup.
+    #
+    #   ^
+    #
+    # @option params [Boolean] :deletion_protection
+    #   A value that indicates whether the DB cluster has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled.
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -6193,6 +6157,9 @@ module Aws::Neptune
     #     ],
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
+    #     enable_cloudwatch_logs_exports: ["String"],
+    #     db_cluster_parameter_group_name: "String",
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -6244,6 +6211,9 @@ module Aws::Neptune
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -6251,6 +6221,169 @@ module Aws::Neptune
     # @param [Hash] params ({})
     def restore_db_cluster_to_point_in_time(params = {}, options = {})
       req = build_request(:restore_db_cluster_to_point_in_time, params)
+      req.send_request(options)
+    end
+
+    # Starts an Amazon Neptune DB cluster that was stopped using the AWS
+    # console, the AWS CLI stop-db-cluster command, or the StopDBCluster
+    # API.
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The DB cluster identifier of the Neptune DB cluster to be started.
+    #   This parameter is stored as a lowercase string.
+    #
+    # @return [Types::StartDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_db_cluster({
+    #     db_cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster.allocated_storage #=> Integer
+    #   resp.db_cluster.availability_zones #=> Array
+    #   resp.db_cluster.availability_zones[0] #=> String
+    #   resp.db_cluster.backup_retention_period #=> Integer
+    #   resp.db_cluster.character_set_name #=> String
+    #   resp.db_cluster.database_name #=> String
+    #   resp.db_cluster.db_cluster_identifier #=> String
+    #   resp.db_cluster.db_cluster_parameter_group #=> String
+    #   resp.db_cluster.db_subnet_group #=> String
+    #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.percent_progress #=> String
+    #   resp.db_cluster.earliest_restorable_time #=> Time
+    #   resp.db_cluster.endpoint #=> String
+    #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.multi_az #=> Boolean
+    #   resp.db_cluster.engine #=> String
+    #   resp.db_cluster.engine_version #=> String
+    #   resp.db_cluster.latest_restorable_time #=> Time
+    #   resp.db_cluster.port #=> Integer
+    #   resp.db_cluster.master_username #=> String
+    #   resp.db_cluster.db_cluster_option_group_memberships #=> Array
+    #   resp.db_cluster.db_cluster_option_group_memberships[0].db_cluster_option_group_name #=> String
+    #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
+    #   resp.db_cluster.preferred_backup_window #=> String
+    #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.replication_source_identifier #=> String
+    #   resp.db_cluster.read_replica_identifiers #=> Array
+    #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.db_cluster_members #=> Array
+    #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
+    #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
+    #   resp.db_cluster.db_cluster_members[0].db_cluster_parameter_group_status #=> String
+    #   resp.db_cluster.db_cluster_members[0].promotion_tier #=> Integer
+    #   resp.db_cluster.vpc_security_groups #=> Array
+    #   resp.db_cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.db_cluster.vpc_security_groups[0].status #=> String
+    #   resp.db_cluster.hosted_zone_id #=> String
+    #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.kms_key_id #=> String
+    #   resp.db_cluster.db_cluster_resource_id #=> String
+    #   resp.db_cluster.db_cluster_arn #=> String
+    #   resp.db_cluster.associated_roles #=> Array
+    #   resp.db_cluster.associated_roles[0].role_arn #=> String
+    #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.clone_group_id #=> String
+    #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StartDBCluster AWS API Documentation
+    #
+    # @overload start_db_cluster(params = {})
+    # @param [Hash] params ({})
+    def start_db_cluster(params = {}, options = {})
+      req = build_request(:start_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Stops an Amazon Neptune DB cluster. When you stop a DB cluster,
+    # Neptune retains the DB cluster's metadata, including its endpoints
+    # and DB parameter groups.
+    #
+    # Neptune also retains the transaction logs so you can do a
+    # point-in-time restore if necessary.
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The DB cluster identifier of the Neptune DB cluster to be stopped.
+    #   This parameter is stored as a lowercase string.
+    #
+    # @return [Types::StopDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_db_cluster({
+    #     db_cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster.allocated_storage #=> Integer
+    #   resp.db_cluster.availability_zones #=> Array
+    #   resp.db_cluster.availability_zones[0] #=> String
+    #   resp.db_cluster.backup_retention_period #=> Integer
+    #   resp.db_cluster.character_set_name #=> String
+    #   resp.db_cluster.database_name #=> String
+    #   resp.db_cluster.db_cluster_identifier #=> String
+    #   resp.db_cluster.db_cluster_parameter_group #=> String
+    #   resp.db_cluster.db_subnet_group #=> String
+    #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.percent_progress #=> String
+    #   resp.db_cluster.earliest_restorable_time #=> Time
+    #   resp.db_cluster.endpoint #=> String
+    #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.multi_az #=> Boolean
+    #   resp.db_cluster.engine #=> String
+    #   resp.db_cluster.engine_version #=> String
+    #   resp.db_cluster.latest_restorable_time #=> Time
+    #   resp.db_cluster.port #=> Integer
+    #   resp.db_cluster.master_username #=> String
+    #   resp.db_cluster.db_cluster_option_group_memberships #=> Array
+    #   resp.db_cluster.db_cluster_option_group_memberships[0].db_cluster_option_group_name #=> String
+    #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
+    #   resp.db_cluster.preferred_backup_window #=> String
+    #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.replication_source_identifier #=> String
+    #   resp.db_cluster.read_replica_identifiers #=> Array
+    #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.db_cluster_members #=> Array
+    #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
+    #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
+    #   resp.db_cluster.db_cluster_members[0].db_cluster_parameter_group_status #=> String
+    #   resp.db_cluster.db_cluster_members[0].promotion_tier #=> Integer
+    #   resp.db_cluster.vpc_security_groups #=> Array
+    #   resp.db_cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.db_cluster.vpc_security_groups[0].status #=> String
+    #   resp.db_cluster.hosted_zone_id #=> String
+    #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.kms_key_id #=> String
+    #   resp.db_cluster.db_cluster_resource_id #=> String
+    #   resp.db_cluster.db_cluster_arn #=> String
+    #   resp.db_cluster.associated_roles #=> Array
+    #   resp.db_cluster.associated_roles[0].role_arn #=> String
+    #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.clone_group_id #=> String
+    #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StopDBCluster AWS API Documentation
+    #
+    # @overload stop_db_cluster(params = {})
+    # @param [Hash] params ({})
+    def stop_db_cluster(params = {}, options = {})
+      req = build_request(:stop_db_cluster, params)
       req.send_request(options)
     end
 
@@ -6267,7 +6400,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -6284,7 +6417,7 @@ module Aws::Neptune
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #
@@ -6333,10 +6466,10 @@ module Aws::Neptune
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name           | params                   | :delay   | :max_attempts |
-    # | --------------------- | ------------------------ | -------- | ------------- |
-    # | db_instance_available | {#describe_db_instances} | 30       | 60            |
-    # | db_instance_deleted   | {#describe_db_instances} | 30       | 60            |
+    # | waiter_name           | params                         | :delay   | :max_attempts |
+    # | --------------------- | ------------------------------ | -------- | ------------- |
+    # | db_instance_available | {Client#describe_db_instances} | 30       | 60            |
+    # | db_instance_deleted   | {Client#describe_db_instances} | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

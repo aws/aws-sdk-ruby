@@ -8,6 +8,16 @@
 module Aws::SES
   module Types
 
+    # Indicates that email sending is disabled for your entire Amazon SES
+    # account.
+    #
+    # You can enable or disable email sending for your Amazon SES account
+    # using UpdateAccountSendingEnabled.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/AccountSendingPausedException AWS API Documentation
+    #
+    class AccountSendingPausedException < Aws::EmptyStructure; end
+
     # When included in a receipt rule, this action adds a header to the
     # received email.
     #
@@ -16,7 +26,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-add-header.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-add-header.html
     #
     # @note When making an API call, you may pass AddHeaderAction
     #   data as a hash:
@@ -42,6 +52,21 @@ module Aws::SES
     class AddHeaderAction < Struct.new(
       :header_name,
       :header_value)
+      include Aws::Structure
+    end
+
+    # Indicates that a resource could not be created because of a naming
+    # conflict.
+    #
+    # @!attribute [rw] name
+    #   Indicates that a resource could not be created because the resource
+    #   name already exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Struct.new(
+      :name)
       include Aws::Structure
     end
 
@@ -93,7 +118,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-bounce.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-bounce.html
     #
     # @note When making an API call, you may pass BounceAction
     #   data as a hash:
@@ -115,7 +140,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @!attribute [rw] smtp_reply_code
@@ -163,7 +188,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
     #
     # @note When making an API call, you may pass BouncedRecipientInfo
     #   data as a hash:
@@ -201,7 +226,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] bounce_type
@@ -365,13 +390,27 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that the delete operation could not be completed.
+    #
+    # @!attribute [rw] name
+    #   Indicates that a resource could not be deleted because no resource
+    #   with the specified name exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CannotDeleteException AWS API Documentation
+    #
+    class CannotDeleteException < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # Represents a request to create a receipt rule set by cloning an
     # existing one. You use receipt rule sets to receive email with Amazon
     # SES. For more information, see the [Amazon SES Developer Guide][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass CloneReceiptRuleSetRequest
     #   data as a hash:
@@ -420,7 +459,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass CloudWatchDestination
     #   data as a hash:
@@ -455,7 +494,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass CloudWatchDimensionConfiguration
     #   data as a hash:
@@ -513,8 +552,8 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/using-configuration-sets.html
-    # [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/using-configuration-sets.html
+    # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/
     #
     # @note When making an API call, you may pass ConfigurationSet
     #   data as a hash:
@@ -537,6 +576,50 @@ module Aws::SES
     #
     class ConfigurationSet < Struct.new(
       :name)
+      include Aws::Structure
+    end
+
+    # Indicates that the configuration set could not be created because of a
+    # naming conflict.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ConfigurationSetAlreadyExistsException AWS API Documentation
+    #
+    class ConfigurationSetAlreadyExistsException < Struct.new(
+      :configuration_set_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the configuration set does not exist.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ConfigurationSetDoesNotExistException AWS API Documentation
+    #
+    class ConfigurationSetDoesNotExistException < Struct.new(
+      :configuration_set_name)
+      include Aws::Structure
+    end
+
+    # Indicates that email sending is disabled for the configuration set.
+    #
+    # You can enable or disable email sending for a configuration set using
+    # UpdateConfigurationSetSendingEnabled.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set for which email sending is
+    #   disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ConfigurationSetSendingPausedException AWS API Documentation
+    #
+    class ConfigurationSetSendingPausedException < Struct.new(
+      :configuration_set_name)
       include Aws::Structure
     end
 
@@ -580,7 +663,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass CreateConfigurationSetEventDestinationRequest
     #   data as a hash:
@@ -640,7 +723,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass CreateConfigurationSetRequest
     #   data as a hash:
@@ -692,9 +775,11 @@ module Aws::SES
     #   generated by Amazon SES emails.
     #
     #   For more information, see [Configuring Custom Domains to Handle Open
-    #   and Click
-    #   Tracking](ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
-    #   in the *Amazon SES Developer Guide*.
+    #   and Click Tracking][1] in the *Amazon SES Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
     #   @return [Types::TrackingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetTrackingOptionsRequest AWS API Documentation
@@ -746,7 +831,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq
     #   @return [String]
     #
     # @!attribute [rw] success_redirection_url
@@ -777,7 +862,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass CreateReceiptFilterRequest
     #   data as a hash:
@@ -817,7 +902,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass CreateReceiptRuleRequest
     #   data as a hash:
@@ -908,7 +993,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass CreateReceiptRuleSetRequest
     #   data as a hash:
@@ -946,7 +1031,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
     #
     # @note When making an API call, you may pass CreateTemplateRequest
     #   data as a hash:
@@ -975,6 +1060,13 @@ module Aws::SES
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateTemplateResponse AWS API Documentation
     #
     class CreateTemplateResponse < Aws::EmptyStructure; end
+
+    # Indicates that custom verification email template provided content is
+    # invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CustomVerificationEmailInvalidContentException AWS API Documentation
+    #
+    class CustomVerificationEmailInvalidContentException < Aws::EmptyStructure; end
 
     # Contains information about a custom verification email template.
     #
@@ -1011,6 +1103,36 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that a custom verification email template with the name you
+    # specified already exists.
+    #
+    # @!attribute [rw] custom_verification_email_template_name
+    #   Indicates that the provided custom verification email template with
+    #   the specified template name already exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CustomVerificationEmailTemplateAlreadyExistsException AWS API Documentation
+    #
+    class CustomVerificationEmailTemplateAlreadyExistsException < Struct.new(
+      :custom_verification_email_template_name)
+      include Aws::Structure
+    end
+
+    # Indicates that a custom verification email template with the name you
+    # specified does not exist.
+    #
+    # @!attribute [rw] custom_verification_email_template_name
+    #   Indicates that the provided custom verification email template does
+    #   not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CustomVerificationEmailTemplateDoesNotExistException AWS API Documentation
+    #
+    class CustomVerificationEmailTemplateDoesNotExistException < Struct.new(
+      :custom_verification_email_template_name)
+      include Aws::Structure
+    end
+
     # Represents a request to delete a configuration set event destination.
     # Configuration set event destinations are associated with configuration
     # sets, which enable you to publish email sending events. For
@@ -1019,7 +1141,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass DeleteConfigurationSetEventDestinationRequest
     #   data as a hash:
@@ -1058,7 +1180,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass DeleteConfigurationSetRequest
     #   data as a hash:
@@ -1141,7 +1263,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #
     # @note When making an API call, you may pass DeleteIdentityPolicyRequest
     #   data as a hash:
@@ -1213,7 +1335,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass DeleteReceiptFilterRequest
     #   data as a hash:
@@ -1245,7 +1367,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass DeleteReceiptRuleRequest
     #   data as a hash:
@@ -1285,7 +1407,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass DeleteReceiptRuleSetRequest
     #   data as a hash:
@@ -1316,7 +1438,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
     #
     # @note When making an API call, you may pass DeleteTemplateRequest
     #   data as a hash:
@@ -1361,6 +1483,31 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Specifies whether messages that use the configuration set are required
+    # to use Transport Layer Security (TLS).
+    #
+    # @note When making an API call, you may pass DeliveryOptions
+    #   data as a hash:
+    #
+    #       {
+    #         tls_policy: "Require", # accepts Require, Optional
+    #       }
+    #
+    # @!attribute [rw] tls_policy
+    #   Specifies whether messages that use the configuration set are
+    #   required to use Transport Layer Security (TLS). If the value is
+    #   `Require`, messages are only delivered if a TLS connection can be
+    #   established. If the value is `Optional`, messages can be delivered
+    #   in plain text if a TLS connection can't be established.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeliveryOptions AWS API Documentation
+    #
+    class DeliveryOptions < Struct.new(
+      :tls_policy)
+      include Aws::Structure
+    end
+
     # Represents a request to return the metadata and receipt rules for the
     # receipt rule set that is currently active. You use receipt rule sets
     # to receive email with Amazon SES. For more information, see the
@@ -1368,7 +1515,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @api private
     #
@@ -1404,14 +1551,14 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass DescribeConfigurationSetRequest
     #   data as a hash:
     #
     #       {
     #         configuration_set_name: "ConfigurationSetName", # required
-    #         configuration_set_attribute_names: ["eventDestinations"], # accepts eventDestinations, trackingOptions, reputationOptions
+    #         configuration_set_attribute_names: ["eventDestinations"], # accepts eventDestinations, trackingOptions, deliveryOptions, reputationOptions
     #       }
     #
     # @!attribute [rw] configuration_set_name
@@ -1436,7 +1583,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @!attribute [rw] configuration_set
     #   The configuration set object associated with the specified
@@ -1452,6 +1599,11 @@ module Aws::SES
     #   with the configuration set.
     #   @return [Types::TrackingOptions]
     #
+    # @!attribute [rw] delivery_options
+    #   Specifies whether messages that use the configuration set are
+    #   required to use Transport Layer Security (TLS).
+    #   @return [Types::DeliveryOptions]
+    #
     # @!attribute [rw] reputation_options
     #   An object that represents the reputation settings for the
     #   configuration set.
@@ -1463,6 +1615,7 @@ module Aws::SES
       :configuration_set,
       :event_destinations,
       :tracking_options,
+      :delivery_options,
       :reputation_options)
       include Aws::Structure
     end
@@ -1473,7 +1626,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass DescribeReceiptRuleRequest
     #   data as a hash:
@@ -1520,7 +1673,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass DescribeReceiptRuleSetRequest
     #   data as a hash:
@@ -1588,15 +1741,15 @@ module Aws::SES
     #       }
     #
     # @!attribute [rw] to_addresses
-    #   The To: field(s) of the message.
+    #   The recipients to place on the To: line of the message.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cc_addresses
-    #   The CC: field(s) of the message.
+    #   The recipients to place on the CC: line of the message.
     #   @return [Array<String>]
     #
     # @!attribute [rw] bcc_addresses
-    #   The BCC: field(s) of the message.
+    #   The recipients to place on the BCC: line of the message.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/Destination AWS API Documentation
@@ -1626,7 +1779,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass EventDestination
     #   data as a hash:
@@ -1703,6 +1856,43 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that the event destination could not be created because of a
+    # naming conflict.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_destination_name
+    #   Indicates that the event destination does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/EventDestinationAlreadyExistsException AWS API Documentation
+    #
+    class EventDestinationAlreadyExistsException < Struct.new(
+      :configuration_set_name,
+      :event_destination_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the event destination does not exist.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_destination_name
+    #   Indicates that the event destination does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/EventDestinationDoesNotExistException AWS API Documentation
+    #
+    class EventDestinationDoesNotExistException < Struct.new(
+      :configuration_set_name,
+      :event_destination_name)
+      include Aws::Structure
+    end
+
     # Additional X-headers to include in the Delivery Status Notification
     # (DSN) when an email that Amazon SES receives on your behalf bounces.
     #
@@ -1711,7 +1901,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
     #
     # @note When making an API call, you may pass ExtensionField
     #   data as a hash:
@@ -1737,6 +1927,22 @@ module Aws::SES
     class ExtensionField < Struct.new(
       :name,
       :value)
+      include Aws::Structure
+    end
+
+    # Indicates that the sender address specified for a custom verification
+    # email is not verified, and is therefore not eligible to send the
+    # custom verification email.
+    #
+    # @!attribute [rw] from_email_address
+    #   Indicates that the from email address associated with the custom
+    #   verification email template is not verified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/FromEmailAddressNotVerifiedException AWS API Documentation
+    #
+    class FromEmailAddressNotVerifiedException < Struct.new(
+      :from_email_address)
       include Aws::Structure
     end
 
@@ -1826,7 +2032,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #
     # @note When making an API call, you may pass GetIdentityDkimAttributesRequest
     #   data as a hash:
@@ -1869,7 +2075,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html
     #
     # @note When making an API call, you may pass GetIdentityMailFromDomainAttributesRequest
     #   data as a hash:
@@ -1908,7 +2114,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html
     #
     # @note When making an API call, you may pass GetIdentityNotificationAttributesRequest
     #   data as a hash:
@@ -1951,7 +2157,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #
     # @note When making an API call, you may pass GetIdentityPoliciesRequest
     #   data as a hash:
@@ -2005,7 +2211,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
     #
     # @note When making an API call, you may pass GetIdentityVerificationAttributesRequest
     #   data as a hash:
@@ -2119,8 +2325,8 @@ module Aws::SES
     # domain.
     #
     # @!attribute [rw] dkim_enabled
-    #   True if DKIM signing is enabled for email sent from the identity;
-    #   false otherwise. The default value is true.
+    #   Is true if DKIM signing is enabled for email sent from the identity.
+    #   It's false otherwise. The default value is true.
     #   @return [Boolean]
     #
     # @!attribute [rw] dkim_verification_status
@@ -2131,20 +2337,20 @@ module Aws::SES
     #
     # @!attribute [rw] dkim_tokens
     #   A set of character strings that represent the domain's identity.
-    #   Using these tokens, you will need to create DNS CNAME records that
-    #   point to DKIM public keys hosted by Amazon SES. Amazon Web Services
-    #   will eventually detect that you have updated your DNS records; this
-    #   detection process may take up to 72 hours. Upon successful
-    #   detection, Amazon SES will be able to DKIM-sign email originating
-    #   from that domain. (This only applies to domain identities, not email
+    #   Using these tokens, you need to create DNS CNAME records that point
+    #   to DKIM public keys that are hosted by Amazon SES. Amazon Web
+    #   Services eventually detects that you've updated your DNS records.
+    #   This detection process might take up to 72 hours. After successful
+    #   detection, Amazon SES is able to DKIM-sign email originating from
+    #   that domain. (This only applies to domain identities, not email
     #   address identities.)
     #
     #   For more information about creating DNS records using DKIM tokens,
-    #   go to the [Amazon SES Developer Guide][1].
+    #   see the [Amazon SES Developer Guide][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/IdentityDkimAttributes AWS API Documentation
@@ -2280,6 +2486,185 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that the Amazon CloudWatch destination is invalid. See the
+    # error message for details.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_destination_name
+    #   Indicates that the event destination does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidCloudWatchDestinationException AWS API Documentation
+    #
+    class InvalidCloudWatchDestinationException < Struct.new(
+      :configuration_set_name,
+      :event_destination_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the configuration set is invalid. See the error message
+    # for details.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidConfigurationSetException AWS API Documentation
+    #
+    class InvalidConfigurationSetException < Aws::EmptyStructure; end
+
+    # Indicates that provided delivery option is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidDeliveryOptionsException AWS API Documentation
+    #
+    class InvalidDeliveryOptionsException < Aws::EmptyStructure; end
+
+    # Indicates that the Amazon Kinesis Firehose destination is invalid. See
+    # the error message for details.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_destination_name
+    #   Indicates that the event destination does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidFirehoseDestinationException AWS API Documentation
+    #
+    class InvalidFirehoseDestinationException < Struct.new(
+      :configuration_set_name,
+      :event_destination_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided AWS Lambda function is invalid, or that
+    # Amazon SES could not execute the provided function, possibly due to
+    # permissions issues. For information about giving permissions, see the
+    # [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
+    #
+    # @!attribute [rw] function_arn
+    #   Indicates that the ARN of the function was not found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidLambdaFunctionException AWS API Documentation
+    #
+    class InvalidLambdaFunctionException < Struct.new(
+      :function_arn)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided policy is invalid. Check the error stack
+    # for more information about what caused the error.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidPolicyException AWS API Documentation
+    #
+    class InvalidPolicyException < Aws::EmptyStructure; end
+
+    # Indicates that one or more of the replacement values you provided is
+    # invalid. This error may occur when the TemplateData object contains
+    # invalid JSON.
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidRenderingParameterException AWS API Documentation
+    #
+    class InvalidRenderingParameterException < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided Amazon S3 bucket or AWS KMS encryption key
+    # is invalid, or that Amazon SES could not publish to the bucket,
+    # possibly due to permissions issues. For information about giving
+    # permissions, see the [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
+    #
+    # @!attribute [rw] bucket
+    #   Indicated that the S3 Bucket was not found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidS3ConfigurationException AWS API Documentation
+    #
+    class InvalidS3ConfigurationException < Struct.new(
+      :bucket)
+      include Aws::Structure
+    end
+
+    # Indicates that the Amazon Simple Notification Service (Amazon SNS)
+    # destination is invalid. See the error message for details.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that the configuration set does not exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_destination_name
+    #   Indicates that the event destination does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidSNSDestinationException AWS API Documentation
+    #
+    class InvalidSNSDestinationException < Struct.new(
+      :configuration_set_name,
+      :event_destination_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided Amazon SNS topic is invalid, or that
+    # Amazon SES could not publish to the topic, possibly due to permissions
+    # issues. For information about giving permissions, see the [Amazon SES
+    # Developer Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
+    #
+    # @!attribute [rw] topic
+    #   Indicates that the topic does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidSnsTopicException AWS API Documentation
+    #
+    class InvalidSnsTopicException < Struct.new(
+      :topic)
+      include Aws::Structure
+    end
+
+    # Indicates that the template that you specified could not be rendered.
+    # This issue may occur when a template refers to a partial that does not
+    # exist.
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidTemplateException AWS API Documentation
+    #
+    class InvalidTemplateException < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the custom domain to be used for open and click
+    # tracking redirects is invalid. This error appears most often in the
+    # following situations:
+    #
+    # * When the tracking domain you specified is not verified in Amazon
+    #   SES.
+    #
+    # * When the tracking domain you specified is not a valid domain or
+    #   subdomain.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidTrackingOptionsException AWS API Documentation
+    #
+    class InvalidTrackingOptionsException < Aws::EmptyStructure; end
+
     # Contains the delivery stream ARN and the IAM role ARN associated with
     # an Amazon Kinesis Firehose event destination.
     #
@@ -2290,7 +2675,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass KinesisFirehoseDestination
     #   data as a hash:
@@ -2332,8 +2717,8 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
-    # [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
+    # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html
     #
     # @note When making an API call, you may pass LambdaAction
     #   data as a hash:
@@ -2353,7 +2738,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @!attribute [rw] function_arn
@@ -2365,7 +2750,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/welcome.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
     #   @return [String]
     #
     # @!attribute [rw] invocation_type
@@ -2383,7 +2768,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/LambdaAction AWS API Documentation
@@ -2395,6 +2780,18 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that a resource could not be created because of service
+    # limits. For a list of Amazon SES limits, see the [Amazon SES Developer
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
+
     # Represents a request to list the configuration sets associated with
     # your AWS account. Configuration sets enable you to publish email
     # sending events. For information about using configuration sets, see
@@ -2402,7 +2799,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass ListConfigurationSetsRequest
     #   data as a hash:
@@ -2437,7 +2834,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @!attribute [rw] configuration_sets
     #   A list of configuration sets.
@@ -2461,9 +2858,12 @@ module Aws::SES
     # templates for your account.
     #
     # For more information about custom verification email templates, see
-    # [Using Custom Verification Email
-    # Templates](ses/latest/DeveloperGuide/custom-verification-emails.html)
-    # in the *Amazon SES Developer Guide*.
+    # [Using Custom Verification Email Templates][1] in the *Amazon SES
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html
     #
     # @note When making an API call, you may pass ListCustomVerificationEmailTemplatesRequest
     #   data as a hash:
@@ -2579,7 +2979,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #
     # @note When making an API call, you may pass ListIdentityPoliciesRequest
     #   data as a hash:
@@ -2626,7 +3026,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @api private
     #
@@ -2656,7 +3056,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass ListReceiptRuleSetsRequest
     #   data as a hash:
@@ -2761,6 +3161,19 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that the message could not be sent because Amazon SES could
+    # not read the MX record required to use the specified MAIL FROM domain.
+    # For information about editing the custom MAIL FROM domain settings for
+    # an identity, see the [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-edit.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/MailFromDomainNotVerifiedException AWS API Documentation
+    #
+    class MailFromDomainNotVerifiedException < Aws::EmptyStructure; end
+
     # Represents the message to be sent, composed of a subject and a body.
     #
     # @note When making an API call, you may pass Message
@@ -2809,7 +3222,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
     #
     # @note When making an API call, you may pass MessageDsn
     #   data as a hash:
@@ -2857,6 +3270,14 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that the action failed, and the message could not be sent.
+    # Check the error stack for more information about what caused the
+    # error.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/MessageRejected AWS API Documentation
+    #
+    class MessageRejected < Aws::EmptyStructure; end
+
     # Contains the name and value of a tag that you can provide to
     # `SendEmail` or `SendRawEmail` to apply to an email.
     #
@@ -2866,7 +3287,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass MessageTag
     #   data as a hash:
@@ -2902,6 +3323,64 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that one or more of the replacement values for the specified
+    # template was not specified. Ensure that the TemplateData object
+    # contains references to all of the replacement tags in the specified
+    # template.
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/MissingRenderingAttributeException AWS API Documentation
+    #
+    class MissingRenderingAttributeException < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the account has not been granted production access.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ProductionAccessNotGrantedException AWS API Documentation
+    #
+    class ProductionAccessNotGrantedException < Aws::EmptyStructure; end
+
+    # A request to modify the delivery options for a configuration set.
+    #
+    # @note When making an API call, you may pass PutConfigurationSetDeliveryOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_set_name: "ConfigurationSetName", # required
+    #         delivery_options: {
+    #           tls_policy: "Require", # accepts Require, Optional
+    #         },
+    #       }
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set that you want to specify the
+    #   delivery options for.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_options
+    #   Specifies whether messages that use the configuration set are
+    #   required to use Transport Layer Security (TLS).
+    #   @return [Types::DeliveryOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/PutConfigurationSetDeliveryOptionsRequest AWS API Documentation
+    #
+    class PutConfigurationSetDeliveryOptionsRequest < Struct.new(
+      :configuration_set_name,
+      :delivery_options)
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/PutConfigurationSetDeliveryOptionsResponse AWS API Documentation
+    #
+    class PutConfigurationSetDeliveryOptionsResponse < Aws::EmptyStructure; end
+
     # Represents a request to add or update a sending authorization policy
     # for an identity. Sending authorization is an Amazon SES feature that
     # enables you to authorize other senders to use your identities. For
@@ -2909,7 +3388,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #
     # @note When making an API call, you may pass PutIdentityPolicyRequest
     #   data as a hash:
@@ -2945,7 +3424,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/PutIdentityPolicyRequest AWS API Documentation
@@ -2996,7 +3475,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/RawMessage AWS API Documentation
@@ -3015,7 +3494,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html
     #
     # @note When making an API call, you may pass ReceiptAction
     #   data as a hash:
@@ -3114,7 +3593,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html
     #
     # @note When making an API call, you may pass ReceiptFilter
     #   data as a hash:
@@ -3160,7 +3639,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html
     #
     # @note When making an API call, you may pass ReceiptIpFilter
     #   data as a hash:
@@ -3209,7 +3688,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html
     #
     # @note When making an API call, you may pass ReceiptRule
     #   data as a hash:
@@ -3322,7 +3801,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html
     #
     # @!attribute [rw] name
     #   The name of the receipt rule set. The name must:
@@ -3356,7 +3835,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
     #
     # @note When making an API call, you may pass RecipientDsnFields
     #   data as a hash:
@@ -3466,7 +3945,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass ReorderReceiptRuleSetRequest
     #   data as a hash:
@@ -3544,6 +4023,32 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that the provided receipt rule does not exist.
+    #
+    # @!attribute [rw] name
+    #   Indicates that the named receipt rule does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/RuleDoesNotExistException AWS API Documentation
+    #
+    class RuleDoesNotExistException < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided receipt rule set does not exist.
+    #
+    # @!attribute [rw] name
+    #   Indicates that the named receipt rule set does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/RuleSetDoesNotExistException AWS API Documentation
+    #
+    class RuleSetDoesNotExistException < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # When included in a receipt rule, this action saves the received
     # message to an Amazon Simple Storage Service (Amazon S3) bucket and,
     # optionally, publishes a notification to Amazon Simple Notification
@@ -3566,8 +4071,8 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
-    # [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-s3.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
+    # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-s3.html
     #
     # @note When making an API call, you may pass S3Action
     #   data as a hash:
@@ -3587,7 +4092,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @!attribute [rw] bucket_name
@@ -3639,11 +4144,11 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
-    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html
     #   [3]: http://aws.amazon.com/sdk-for-java/
     #   [4]: http://aws.amazon.com/sdk-for-ruby/
-    #   [5]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
+    #   [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/S3Action AWS API Documentation
@@ -3678,8 +4183,8 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
-    # [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-sns.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
+    # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-sns.html
     #
     # @note When making an API call, you may pass SNSAction
     #   data as a hash:
@@ -3697,7 +4202,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @!attribute [rw] encoding
@@ -3726,7 +4231,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass SNSDestination
     #   data as a hash:
@@ -3743,7 +4248,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SNSDestination AWS API Documentation
@@ -3833,7 +4338,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBounceRequest AWS API Documentation
@@ -3867,7 +4372,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
     #
     # @note When making an API call, you may pass SendBulkTemplatedEmailRequest
     #   data as a hash:
@@ -3933,8 +4438,8 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #   [3]: https://tools.ietf.org/html/rfc6531
     #   [4]: https://en.wikipedia.org/wiki/Email_address#Local-part
     #   [5]: https://tools.ietf.org/html/rfc3492.html
@@ -3959,7 +4464,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] reply_to_addresses
@@ -3997,7 +4502,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] configuration_set_name
@@ -4154,7 +4659,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html
     #
     # @note When making an API call, you may pass SendEmailRequest
     #   data as a hash:
@@ -4222,8 +4727,8 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #   [3]: https://tools.ietf.org/html/rfc6531
     #   [4]: https://en.wikipedia.org/wiki/Email_address#Local-part
     #   [5]: https://tools.ietf.org/html/rfc3492.html
@@ -4274,7 +4779,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] return_path_arn
@@ -4295,7 +4800,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4343,7 +4848,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
     #
     # @note When making an API call, you may pass SendRawEmailRequest
     #   data as a hash:
@@ -4430,8 +4935,8 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html
-    #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
     #   [3]: https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6
     #   @return [Types::RawMessage]
     #
@@ -4454,7 +4959,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
     #   @return [String]
     #
     # @!attribute [rw] source_arn
@@ -4483,7 +4988,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
     #   @return [String]
     #
     # @!attribute [rw] return_path_arn
@@ -4512,7 +5017,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4560,7 +5065,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
     #
     # @note When making an API call, you may pass SendTemplatedEmailRequest
     #   data as a hash:
@@ -4614,8 +5119,8 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #   [3]: https://tools.ietf.org/html/rfc6531
     #   [4]: https://en.wikipedia.org/wiki/Email_address#Local-part
     #   [5]: https://tools.ietf.org/html/rfc3492.html
@@ -4663,7 +5168,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] return_path_arn
@@ -4684,7 +5189,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4749,7 +5254,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass SetActiveReceiptRuleSetRequest
     #   data as a hash:
@@ -4782,7 +5287,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #
     # @note When making an API call, you may pass SetIdentityDkimEnabledRequest
     #   data as a hash:
@@ -4822,7 +5327,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-email.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-email.html
     #
     # @note When making an API call, you may pass SetIdentityFeedbackForwardingEnabledRequest
     #   data as a hash:
@@ -4869,7 +5374,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html
     #
     # @note When making an API call, you may pass SetIdentityHeadersInNotificationsEnabledRequest
     #   data as a hash:
@@ -4922,7 +5427,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html
     #
     # @note When making an API call, you may pass SetIdentityMailFromDomainRequest
     #   data as a hash:
@@ -4949,7 +5454,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html
     #   @return [String]
     #
     # @!attribute [rw] behavior_on_mx_failure
@@ -4987,7 +5492,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html
     #
     # @note When making an API call, you may pass SetIdentityNotificationTopicRequest
     #   data as a hash:
@@ -5043,7 +5548,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass SetReceiptRulePositionRequest
     #   data as a hash:
@@ -5092,7 +5597,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-stop.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-stop.html
     #
     # @note When making an API call, you may pass StopAction
     #   data as a hash:
@@ -5103,7 +5608,7 @@ module Aws::SES
     #       }
     #
     # @!attribute [rw] scope
-    #   The name of the RuleSet that is being stopped.
+    #   The scope of the StopAction. The only acceptable value is `RuleSet`.
     #   @return [String]
     #
     # @!attribute [rw] topic_arn
@@ -5115,7 +5620,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/StopAction AWS API Documentation
@@ -5165,6 +5670,19 @@ module Aws::SES
       :subject_part,
       :text_part,
       :html_part)
+      include Aws::Structure
+    end
+
+    # Indicates that the Template object you specified does not exist in
+    # your Amazon SES account.
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TemplateDoesNotExistException AWS API Documentation
+    #
+    class TemplateDoesNotExistException < Struct.new(
+      :template_name)
       include Aws::Structure
     end
 
@@ -5231,9 +5749,11 @@ module Aws::SES
     # generated by Amazon SES emails.
     #
     # For more information, see [Configuring Custom Domains to Handle Open
-    # and Click
-    # Tracking](ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
-    # in the *Amazon SES Developer Guide*.
+    # and Click Tracking][1] in the *Amazon SES Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
     #
     # @note When making an API call, you may pass TrackingOptions
     #   data as a hash:
@@ -5251,6 +5771,36 @@ module Aws::SES
     #
     class TrackingOptions < Struct.new(
       :custom_redirect_domain)
+      include Aws::Structure
+    end
+
+    # Indicates that the configuration set you specified already contains a
+    # TrackingOptions object.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that a TrackingOptions object already exists in the
+    #   specified configuration set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TrackingOptionsAlreadyExistsException AWS API Documentation
+    #
+    class TrackingOptionsAlreadyExistsException < Struct.new(
+      :configuration_set_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the TrackingOptions object you specified does not
+    # exist.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Indicates that a TrackingOptions object does not exist in the
+    #   specified configuration set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TrackingOptionsDoesNotExistException AWS API Documentation
+    #
+    class TrackingOptionsDoesNotExistException < Struct.new(
+      :configuration_set_name)
       include Aws::Structure
     end
 
@@ -5283,7 +5833,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass UpdateConfigurationSetEventDestinationRequest
     #   data as a hash:
@@ -5418,9 +5968,11 @@ module Aws::SES
     #   generated by Amazon SES emails.
     #
     #   For more information, see [Configuring Custom Domains to Handle Open
-    #   and Click
-    #   Tracking](ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
-    #   in the *Amazon SES Developer Guide*.
+    #   and Click Tracking][1] in the *Amazon SES Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
     #   @return [Types::TrackingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetTrackingOptionsRequest AWS API Documentation
@@ -5474,7 +6026,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq
     #   @return [String]
     #
     # @!attribute [rw] success_redirection_url
@@ -5505,7 +6057,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
     #
     # @note When making an API call, you may pass UpdateReceiptRuleRequest
     #   data as a hash:
@@ -5615,7 +6167,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #
     # @note When making an API call, you may pass VerifyDomainDkimRequest
     #   data as a hash:
@@ -5643,19 +6195,20 @@ module Aws::SES
     #   the identity is an email address, the tokens represent the domain of
     #   that address.
     #
-    #   Using these tokens, you will need to create DNS CNAME records that
-    #   point to DKIM public keys hosted by Amazon SES. Amazon Web Services
-    #   will eventually detect that you have updated your DNS records; this
-    #   detection process may take up to 72 hours. Upon successful
-    #   detection, Amazon SES will be able to DKIM-sign emails originating
-    #   from that domain.
+    #   Using these tokens, you need to create DNS CNAME records that point
+    #   to DKIM public keys that are hosted by Amazon SES. Amazon Web
+    #   Services eventually detects that you've updated your DNS records.
+    #   This detection process might take up to 72 hours. After successful
+    #   detection, Amazon SES is able to DKIM-sign email originating from
+    #   that domain. (This only applies to domain identities, not email
+    #   address identities.)
     #
     #   For more information about creating DNS records using DKIM tokens,
-    #   go to the [Amazon SES Developer Guide][1].
+    #   see the [Amazon SES Developer Guide][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainDkimResponse AWS API Documentation
@@ -5672,7 +6225,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html
     #
     # @note When making an API call, you may pass VerifyDomainIdentityRequest
     #   data as a hash:
@@ -5721,7 +6274,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html
     #
     # @note When making an API call, you may pass VerifyEmailAddressRequest
     #   data as a hash:
@@ -5747,7 +6300,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html
     #
     # @note When making an API call, you may pass VerifyEmailIdentityRequest
     #   data as a hash:
@@ -5784,7 +6337,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-workmail.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-workmail.html
     #
     # @note When making an API call, you may pass WorkmailAction
     #   data as a hash:
@@ -5803,7 +6356,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @!attribute [rw] organization_arn
@@ -5815,7 +6368,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/workmail/latest/adminguide/organizations_overview.html
+    #   [1]: https://docs.aws.amazon.com/workmail/latest/adminguide/organizations_overview.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/WorkmailAction AWS API Documentation

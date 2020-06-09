@@ -171,24 +171,25 @@ module Aws
     # @raise [RuntimeError] Raises a runtime error when called
     #   on a client that has not enabled response stubbing via
     #   `:stub_responses => true`.
-    #
     def stub_responses(operation_name, *stubs)
       if config.stub_responses
         apply_stubs(operation_name, stubs.flatten)
       else
-        msg = 'stubbing is not enabled; enable stubbing in the constructor '
-        msg << 'with `:stub_responses => true`'
+        msg = 'stubbing is not enabled; enable stubbing in the constructor '\
+              'with `:stub_responses => true`'
         raise msg
       end
     end
 
-    # Allows you to access all of the requests that the stubbed client has made
+    # Allows you to access all of the requests that the stubbed client has made.
     #
-    # @params [Boolean] exclude_presign Setting to true for filtering out not sent requests from
-    #                 generating presigned urls. Default to false.
-    # @return [Array] Returns an array of the api requests made, each request object contains the
-    #                 :operation_name, :params, and :context of the request. 
-    # @raise [NotImplementedError] Raises `NotImplementedError` when the client is not stubbed
+    # @param [Hash] options The options for the api requests.
+    # @option options [Boolean] :exclude_presign (false) Set to true to filter
+    #   out unsent requests from generated presigned urls.
+    # @return [Array] Returns an array of the api requests made. Each request
+    #   object contains the :operation_name, :params, and :context.
+    # @raise [NotImplementedError] Raises `NotImplementedError` when the client
+    #   is not stubbed.
     def api_requests(options = {})
       if config.stub_responses
         if options[:exclude_presign]
@@ -197,8 +198,8 @@ module Aws
           @api_requests
         end
       else
-        msg = 'This method is only implemented for stubbed clients, and is '
-        msg << 'available when you enable stubbing in the constructor with `stub_responses: true`'
+        msg = 'This method is only implemented for stubbed clients, and is '\
+              'available when you enable stubbing in the constructor with `stub_responses: true`'
         raise NotImplementedError.new(msg)
       end
     end
@@ -291,7 +292,7 @@ module Aws
     def data_to_http_resp(operation_name, data)
       api = config.api
       operation = api.operation(operation_name)
-      ParamValidator.validate!(operation.output, data)
+      ParamValidator.new(operation.output, input: false).validate!(data)
       protocol_helper.stub_data(api, operation, data)
     end
 

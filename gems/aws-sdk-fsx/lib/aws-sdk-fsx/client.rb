@@ -23,12 +23,25 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:fsx)
 
 module Aws::FSx
+  # An API client for FSx.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::FSx::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +68,7 @@ module Aws::FSx
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +105,7 @@ module Aws::FSx
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +120,12 @@ module Aws::FSx
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +133,10 @@ module Aws::FSx
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +150,10 @@ module Aws::FSx
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +161,7 @@ module Aws::FSx
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +176,7 @@ module Aws::FSx
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +188,29 @@ module Aws::FSx
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +218,30 @@ module Aws::FSx
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,11 +270,92 @@ module Aws::FSx
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
+
+    # Cancels an existing Amazon FSx for Lustre data repository task if that
+    # task is in either the `PENDING` or `EXECUTING` state. When you cancel
+    # a task, Amazon FSx does the following.
+    #
+    # * Any files that FSx has already exported are not reverted.
+    #
+    # * FSx continues to export any files that are "in-flight" when the
+    #   cancel operation is received.
+    #
+    # * FSx does not export any files that have not yet been exported.
+    #
+    # @option params [required, String] :task_id
+    #   Specifies the data repository task to cancel.
+    #
+    # @return [Types::CancelDataRepositoryTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelDataRepositoryTaskResponse#lifecycle #lifecycle} => String
+    #   * {Types::CancelDataRepositoryTaskResponse#task_id #task_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_data_repository_task({
+    #     task_id: "TaskId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle #=> String, one of "PENDING", "EXECUTING", "FAILED", "SUCCEEDED", "CANCELED", "CANCELING"
+    #   resp.task_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CancelDataRepositoryTask AWS API Documentation
+    #
+    # @overload cancel_data_repository_task(params = {})
+    # @param [Hash] params ({})
+    def cancel_data_repository_task(params = {}, options = {})
+      req = build_request(:cancel_data_repository_task, params)
+      req.send_request(options)
+    end
 
     # Creates a backup of an existing Amazon FSx for Windows File Server
     # file system. Creating regular backups for your file system is a best
@@ -343,9 +485,10 @@ module Aws::FSx
     #   resp.backup.file_system.creation_time #=> Time
     #   resp.backup.file_system.file_system_id #=> String
     #   resp.backup.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
-    #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.backup.file_system.failure_details.message #=> String
     #   resp.backup.file_system.storage_capacity #=> Integer
+    #   resp.backup.file_system.storage_type #=> String, one of "SSD", "HDD"
     #   resp.backup.file_system.vpc_id #=> String
     #   resp.backup.file_system.subnet_ids #=> Array
     #   resp.backup.file_system.subnet_ids[0] #=> String
@@ -358,6 +501,16 @@ module Aws::FSx
     #   resp.backup.file_system.tags[0].key #=> String
     #   resp.backup.file_system.tags[0].value #=> String
     #   resp.backup.file_system.windows_configuration.active_directory_id #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.backup.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.backup.file_system.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.backup.file_system.windows_configuration.preferred_subnet_id #=> String
+    #   resp.backup.file_system.windows_configuration.preferred_file_server_ip #=> String
     #   resp.backup.file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.backup.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.backup.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -369,6 +522,18 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backup.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.backup.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.backup.file_system.lustre_configuration.mount_name #=> String
+    #   resp.backup.file_system.administrative_actions #=> Array
+    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
+    #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.backup.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.backup.file_system.administrative_actions[0].failure_details.message #=> String
+    #   resp.backup.directory_information.domain_name #=> String
+    #   resp.backup.directory_information.active_directory_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackup AWS API Documentation
     #
@@ -376,6 +541,120 @@ module Aws::FSx
     # @param [Hash] params ({})
     def create_backup(params = {}, options = {})
       req = build_request(:create_backup, params)
+      req.send_request(options)
+    end
+
+    # Creates an Amazon FSx for Lustre data repository task. You use data
+    # repository tasks to perform bulk operations between your Amazon FSx
+    # file system and its linked data repository. An example of a data
+    # repository task is exporting any data and metadata changes, including
+    # POSIX metadata, to files, directories, and symbolic links (symlinks)
+    # from your FSx file system to its linked data repository. A
+    # `CreateDataRepositoryTask` operation will fail if a data repository is
+    # not linked to the FSx file system. To learn more about data repository
+    # tasks, see [Using Data Repository Tasks][1]. To learn more about
+    # linking a data repository to your file system, see [Setting the Export
+    # Prefix][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html
+    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repository.html#export-prefix
+    #
+    # @option params [required, String] :type
+    #   Specifies the type of data repository task to create.
+    #
+    # @option params [Array<String>] :paths
+    #   (Optional) The path or paths on the Amazon FSx file system to use when
+    #   the data repository task is processed. The default path is the file
+    #   system root directory. The paths you provide need to be relative to
+    #   the mount point of the file system. If the mount point is `/mnt/fsx`
+    #   and `/mnt/fsx/path1` is a directory or file on the file system you
+    #   want to export, then the path to provide is `path1`. If a path that
+    #   you provide isn't valid, the task fails.
+    #
+    # @option params [required, String] :file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #
+    # @option params [required, Types::CompletionReport] :report
+    #   Defines whether or not Amazon FSx provides a CompletionReport once the
+    #   task has completed. A CompletionReport provides a detailed report on
+    #   the files that Amazon FSx processed that meet the criteria specified
+    #   by the `Scope` parameter. For more information, see [Working with Task
+    #   Completion Reports][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
+    #   SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @return [Types::CreateDataRepositoryTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataRepositoryTaskResponse#data_repository_task #data_repository_task} => Types::DataRepositoryTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_repository_task({
+    #     type: "EXPORT_TO_REPOSITORY", # required, accepts EXPORT_TO_REPOSITORY
+    #     paths: ["DataRepositoryTaskPath"],
+    #     file_system_id: "FileSystemId", # required
+    #     report: { # required
+    #       enabled: false, # required
+    #       path: "ArchivePath",
+    #       format: "REPORT_CSV_20191124", # accepts REPORT_CSV_20191124
+    #       scope: "FAILED_FILES_ONLY", # accepts FAILED_FILES_ONLY
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_repository_task.task_id #=> String
+    #   resp.data_repository_task.lifecycle #=> String, one of "PENDING", "EXECUTING", "FAILED", "SUCCEEDED", "CANCELED", "CANCELING"
+    #   resp.data_repository_task.type #=> String, one of "EXPORT_TO_REPOSITORY"
+    #   resp.data_repository_task.creation_time #=> Time
+    #   resp.data_repository_task.start_time #=> Time
+    #   resp.data_repository_task.end_time #=> Time
+    #   resp.data_repository_task.resource_arn #=> String
+    #   resp.data_repository_task.tags #=> Array
+    #   resp.data_repository_task.tags[0].key #=> String
+    #   resp.data_repository_task.tags[0].value #=> String
+    #   resp.data_repository_task.file_system_id #=> String
+    #   resp.data_repository_task.paths #=> Array
+    #   resp.data_repository_task.paths[0] #=> String
+    #   resp.data_repository_task.failure_details.message #=> String
+    #   resp.data_repository_task.status.total_count #=> Integer
+    #   resp.data_repository_task.status.succeeded_count #=> Integer
+    #   resp.data_repository_task.status.failed_count #=> Integer
+    #   resp.data_repository_task.status.last_updated_time #=> Time
+    #   resp.data_repository_task.report.enabled #=> Boolean
+    #   resp.data_repository_task.report.path #=> String
+    #   resp.data_repository_task.report.format #=> String, one of "REPORT_CSV_20191124"
+    #   resp.data_repository_task.report.scope #=> String, one of "FAILED_FILES_ONLY"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateDataRepositoryTask AWS API Documentation
+    #
+    # @overload create_data_repository_task(params = {})
+    # @param [Hash] params ({})
+    def create_data_repository_task(params = {}, options = {})
+      req = build_request(:create_data_repository_task, params)
       req.send_request(options)
     end
 
@@ -423,49 +702,84 @@ module Aws::FSx
     #   not need to pass this option.**
     #
     # @option params [required, String] :file_system_type
-    #   The type of file system.
+    #   The type of Amazon FSx file system to create, either `WINDOWS` or
+    #   `LUSTRE`.
     #
     # @option params [required, Integer] :storage_capacity
-    #   The storage capacity of the file system.
+    #   Sets the storage capacity of the file system that you're creating.
     #
-    #   For Windows file systems, the storage capacity has a minimum of 300
-    #   GiB, and a maximum of 65,536 GiB.
+    #   For Lustre file systems:
     #
-    #   For Lustre file systems, the storage capacity has a minimum of 3,600
-    #   GiB. Storage capacity is provisioned in increments of 3,600 GiB.
+    #   * For `SCRATCH_2` and `PERSISTENT_1` deployment types, valid values
+    #     are 1.2, 2.4, and increments of 2.4 TiB.
+    #
+    #   * For `SCRATCH_1` deployment type, valid values are 1.2, 2.4, and
+    #     increments of 3.6 TiB.
+    #
+    #   For Windows file systems:
+    #
+    #   * If `StorageType=SSD`, valid values are 32 GiB - 65,536 GiB (64 TiB).
+    #
+    #   * If `StorageType=HDD`, valid values are 2000 GiB - 65,536 GiB (64
+    #     TiB).
+    #
+    # @option params [String] :storage_type
+    #   Sets the storage type for the Amazon FSx for Windows file system
+    #   you're creating. Valid values are `SSD` and `HDD`.
+    #
+    #   * Set to `SSD` to use solid state drive storage. SSD is supported on
+    #     all Windows deployment types.
+    #
+    #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
+    #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment types.
+    #
+    #   Default value is `SSD`. For more information, see [ Storage Type
+    #   Options][1] in the *Amazon FSx for Windows User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options
     #
     # @option params [required, Array<String>] :subnet_ids
-    #   A list of IDs for the subnets that the file system will be accessible
-    #   from. File systems support only one subnet. The file server is also
-    #   launched in that subnet's Availability Zone.
+    #   Specifies the IDs of the subnets that the file system will be
+    #   accessible from. For Windows `MULTI_AZ_1` file system deployment
+    #   types, provide exactly two subnet IDs, one for the preferred file
+    #   server and one for the standby file server. You specify one of these
+    #   subnets as the preferred subnet using the `WindowsConfiguration >
+    #   PreferredSubnetID` property.
+    #
+    #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` file system deployment
+    #   types and Lustre file systems, provide exactly one subnet ID. The file
+    #   server is launched in that subnet's Availability Zone.
     #
     # @option params [Array<String>] :security_group_ids
-    #   A list of IDs for the security groups that apply to the specified
-    #   network interfaces created for file system access. These security
-    #   groups will apply to all network interfaces. This list isn't returned
-    #   in later describe requests.
+    #   A list of IDs specifying the security groups to apply to all network
+    #   interfaces created for file system access. This list isn't returned
+    #   in later requests to describe the file system.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to be applied to the file system at file system creation. The
-    #   key value of the `Name` tag appears in the console as the file system
-    #   name.
+    #   The tags to apply to the file system being created. The key value of
+    #   the `Name` tag appears in the console as the file system name.
     #
     # @option params [String] :kms_key_id
-    #   The ID of your AWS Key Management Service (AWS KMS) key. This ID is
-    #   used to encrypt the data in your file system at rest. For more
+    #   The ID of the AWS Key Management Service (AWS KMS) key used to encrypt
+    #   the file system's data for Amazon FSx for Windows File Server file
+    #   systems and Amazon FSx for Lustre `PERSISTENT_1` file systems at rest.
+    #   In either case, if not specified, the Amazon FSx managed key is used.
+    #   The Amazon FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems are
+    #   always encrypted at rest using Amazon FSx managed keys. For more
     #   information, see [Encrypt][1] in the *AWS Key Management Service API
     #   Reference*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #
     # @option params [Types::CreateFileSystemWindowsConfiguration] :windows_configuration
-    #   The configuration for this Microsoft Windows file system.
+    #   The Microsoft Windows configuration for the file system being created.
     #
     # @option params [Types::CreateFileSystemLustreConfiguration] :lustre_configuration
-    #   The configuration object for Lustre file systems used in the
-    #   `CreateFileSystem` operation.
+    #   The Lustre configuration for the file system being created.
     #
     # @return [Types::CreateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -539,6 +853,7 @@ module Aws::FSx
     #     client_request_token: "ClientRequestToken",
     #     file_system_type: "WINDOWS", # required, accepts WINDOWS, LUSTRE
     #     storage_capacity: 1, # required
+    #     storage_type: "SSD", # accepts SSD, HDD
     #     subnet_ids: ["SubnetId"], # required
     #     security_group_ids: ["SecurityGroupId"],
     #     tags: [
@@ -550,6 +865,16 @@ module Aws::FSx
     #     kms_key_id: "KmsKeyId",
     #     windows_configuration: {
     #       active_directory_id: "DirectoryId",
+    #       self_managed_active_directory_configuration: {
+    #         domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #         user_name: "DirectoryUserName", # required
+    #         password: "DirectoryPassword", # required
+    #         dns_ips: ["IpAddress"], # required
+    #       },
+    #       deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2
+    #       preferred_subnet_id: "SubnetId",
     #       throughput_capacity: 1, # required
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       daily_automatic_backup_start_time: "DailyTime",
@@ -559,7 +884,10 @@ module Aws::FSx
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       import_path: "ArchivePath",
+    #       export_path: "ArchivePath",
     #       imported_file_chunk_size: 1,
+    #       deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #       per_unit_storage_throughput: 1,
     #     },
     #   })
     #
@@ -569,9 +897,10 @@ module Aws::FSx
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
     #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
-    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
+    #   resp.file_system.storage_type #=> String, one of "SSD", "HDD"
     #   resp.file_system.vpc_id #=> String
     #   resp.file_system.subnet_ids #=> Array
     #   resp.file_system.subnet_ids[0] #=> String
@@ -584,6 +913,16 @@ module Aws::FSx
     #   resp.file_system.tags[0].key #=> String
     #   resp.file_system.tags[0].value #=> String
     #   resp.file_system.windows_configuration.active_directory_id #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.file_system.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.file_system.windows_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.windows_configuration.preferred_file_server_ip #=> String
     #   resp.file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -595,6 +934,16 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.file_system.lustre_configuration.mount_name #=> String
+    #   resp.file_system.administrative_actions #=> Array
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
+    #   resp.file_system.administrative_actions[0].request_time #=> Time
+    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystem AWS API Documentation
     #
@@ -609,9 +958,9 @@ module Aws::FSx
     # Windows File Server backup.
     #
     # If a file system with the specified client request token exists and
-    # the parameters match, this call returns the description of the
-    # existing file system. If a client request token specified by the file
-    # system exists and the parameters don't match, this call returns
+    # the parameters match, this operation returns the description of the
+    # file system. If a client request token specified by the file system
+    # exists and the parameters don't match, this call returns
     # `IncompatibleParameterError`. If a file system with the specified
     # client request token doesn't exist, this operation does the
     # following:
@@ -643,7 +992,8 @@ module Aws::FSx
     #  </note>
     #
     # @option params [required, String] :backup_id
-    #   The ID of the backup.
+    #   The ID of the backup. Specifies the backup to use if you're creating
+    #   a file system from an existing backup.
     #
     # @option params [String] :client_request_token
     #   (Optional) A string of up to 64 ASCII characters that Amazon FSx uses
@@ -655,15 +1005,22 @@ module Aws::FSx
     #   not need to pass this option.**
     #
     # @option params [required, Array<String>] :subnet_ids
-    #   A list of IDs for the subnets that the file system will be accessible
-    #   from. Currently, you can specify only one subnet. The file server is
-    #   also launched in that subnet's Availability Zone.
+    #   Specifies the IDs of the subnets that the file system will be
+    #   accessible from. For Windows `MULTI_AZ_1` file system deployment
+    #   types, provide exactly two subnet IDs, one for the preferred file
+    #   server and one for the standby file server. You specify one of these
+    #   subnets as the preferred subnet using the `WindowsConfiguration >
+    #   PreferredSubnetID` property.
+    #
+    #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` deployment types and
+    #   Lustre file systems, provide exactly one subnet ID. The file server is
+    #   launched in that subnet's Availability Zone.
     #
     # @option params [Array<String>] :security_group_ids
     #   A list of IDs for the security groups that apply to the specified
     #   network interfaces created for file system access. These security
     #   groups apply to all network interfaces. This value isn't returned in
-    #   later describe requests.
+    #   later DescribeFileSystem requests.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to be applied to the file system at file system creation. The
@@ -672,6 +1029,27 @@ module Aws::FSx
     #
     # @option params [Types::CreateFileSystemWindowsConfiguration] :windows_configuration
     #   The configuration for this Microsoft Windows file system.
+    #
+    # @option params [String] :storage_type
+    #   Sets the storage type for the Windows file system you're creating
+    #   from a backup. Valid values are `SSD` and `HDD`.
+    #
+    #   * Set to `SSD` to use solid state drive storage. Supported on all
+    #     Windows deployment types.
+    #
+    #   * Set to `HDD` to use hard disk drive storage. Supported on
+    #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment types.
+    #
+    #   Default value is `SSD`.
+    #
+    #   <note markdown="1"> HDD and SSD storage types have different minimum storage capacity
+    #   requirements. A restored file system's storage capacity is tied to
+    #   the file system that was backed up. You can create a file system that
+    #   uses HDD storage from a backup of a file system that used SSD storage
+    #   only if the original SSD file system had a storage capacity of at
+    #   least 2000 GiB.
+    #
+    #    </note>
     #
     # @return [Types::CreateFileSystemFromBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -748,12 +1126,23 @@ module Aws::FSx
     #     ],
     #     windows_configuration: {
     #       active_directory_id: "DirectoryId",
+    #       self_managed_active_directory_configuration: {
+    #         domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #         user_name: "DirectoryUserName", # required
+    #         password: "DirectoryPassword", # required
+    #         dns_ips: ["IpAddress"], # required
+    #       },
+    #       deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2
+    #       preferred_subnet_id: "SubnetId",
     #       throughput_capacity: 1, # required
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
     #     },
+    #     storage_type: "SSD", # accepts SSD, HDD
     #   })
     #
     # @example Response structure
@@ -762,9 +1151,10 @@ module Aws::FSx
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
     #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
-    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
+    #   resp.file_system.storage_type #=> String, one of "SSD", "HDD"
     #   resp.file_system.vpc_id #=> String
     #   resp.file_system.subnet_ids #=> Array
     #   resp.file_system.subnet_ids[0] #=> String
@@ -777,6 +1167,16 @@ module Aws::FSx
     #   resp.file_system.tags[0].key #=> String
     #   resp.file_system.tags[0].value #=> String
     #   resp.file_system.windows_configuration.active_directory_id #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.file_system.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.file_system.windows_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.windows_configuration.preferred_file_server_ip #=> String
     #   resp.file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -788,6 +1188,16 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.file_system.lustre_configuration.mount_name #=> String
+    #   resp.file_system.administrative_actions #=> Array
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
+    #   resp.file_system.administrative_actions[0].request_time #=> Time
+    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackup AWS API Documentation
     #
@@ -876,6 +1286,12 @@ module Aws::FSx
     # file system, the DescribeFileSystems returns a `FileSystemNotFound`
     # error.
     #
+    # <note markdown="1"> Deleting an Amazon FSx for Lustre file system will fail with a 400
+    # BadRequest if a data repository task is in a `PENDING` or `EXECUTING`
+    # state.
+    #
+    #  </note>
+    #
     # The data in a deleted file system is also deleted and can't be
     # recovered by any means.
     #
@@ -934,7 +1350,7 @@ module Aws::FSx
     # @example Response structure
     #
     #   resp.file_system_id #=> String
-    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.windows_response.final_backup_id #=> String
     #   resp.windows_response.final_backup_tags #=> Array
     #   resp.windows_response.final_backup_tags[0].key #=> String
@@ -1001,6 +1417,8 @@ module Aws::FSx
     #
     #   * {Types::DescribeBackupsResponse#backups #backups} => Array&lt;Types::Backup&gt;
     #   * {Types::DescribeBackupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe Amazon FSx backups
@@ -1072,9 +1490,10 @@ module Aws::FSx
     #   resp.backups[0].file_system.creation_time #=> Time
     #   resp.backups[0].file_system.file_system_id #=> String
     #   resp.backups[0].file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
-    #   resp.backups[0].file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.backups[0].file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.backups[0].file_system.failure_details.message #=> String
     #   resp.backups[0].file_system.storage_capacity #=> Integer
+    #   resp.backups[0].file_system.storage_type #=> String, one of "SSD", "HDD"
     #   resp.backups[0].file_system.vpc_id #=> String
     #   resp.backups[0].file_system.subnet_ids #=> Array
     #   resp.backups[0].file_system.subnet_ids[0] #=> String
@@ -1087,6 +1506,16 @@ module Aws::FSx
     #   resp.backups[0].file_system.tags[0].key #=> String
     #   resp.backups[0].file_system.tags[0].value #=> String
     #   resp.backups[0].file_system.windows_configuration.active_directory_id #=> String
+    #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.backups[0].file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.backups[0].file_system.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.backups[0].file_system.windows_configuration.preferred_subnet_id #=> String
+    #   resp.backups[0].file_system.windows_configuration.preferred_file_server_ip #=> String
     #   resp.backups[0].file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.backups[0].file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.backups[0].file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -1098,6 +1527,18 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backups[0].file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.backups[0].file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.backups[0].file_system.lustre_configuration.mount_name #=> String
+    #   resp.backups[0].file_system.administrative_actions #=> Array
+    #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].request_time #=> Time
+    #   resp.backups[0].file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.backups[0].file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.backups[0].file_system.administrative_actions[0].failure_details.message #=> String
+    #   resp.backups[0].directory_information.domain_name #=> String
+    #   resp.backups[0].directory_information.active_directory_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeBackups AWS API Documentation
@@ -1106,6 +1547,97 @@ module Aws::FSx
     # @param [Hash] params ({})
     def describe_backups(params = {}, options = {})
       req = build_request(:describe_backups, params)
+      req.send_request(options)
+    end
+
+    # Returns the description of specific Amazon FSx for Lustre data
+    # repository tasks, if one or more `TaskIds` values are provided in the
+    # request, or if filters are used in the request. You can use filters to
+    # narrow the response to include just tasks for specific file systems,
+    # or tasks in a specific lifecycle state. Otherwise, it returns all data
+    # repository tasks owned by your AWS account in the AWS Region of the
+    # endpoint that you're calling.
+    #
+    # When retrieving all tasks, you can paginate the response by using the
+    # optional `MaxResults` parameter to limit the number of tasks returned
+    # in a response. If more tasks remain, Amazon FSx returns a `NextToken`
+    # value in the response. In this case, send a later request with the
+    # `NextToken` request parameter set to the value of `NextToken` from the
+    # last response.
+    #
+    # @option params [Array<String>] :task_ids
+    #   (Optional) IDs of the tasks whose descriptions you want to retrieve
+    #   (String).
+    #
+    # @option params [Array<Types::DataRepositoryTaskFilter>] :filters
+    #   (Optional) You can use filters to narrow the
+    #   `DescribeDataRepositoryTasks` response to include just tasks for
+    #   specific file systems, or tasks in a specific lifecycle state.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources to return in the response. This value
+    #   must be an integer greater than zero.
+    #
+    # @option params [String] :next_token
+    #   (Optional) Opaque pagination token returned from a previous operation
+    #   (String). If present, this token indicates from what point you can
+    #   continue processing the request, where the previous `NextToken` value
+    #   left off.
+    #
+    # @return [Types::DescribeDataRepositoryTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataRepositoryTasksResponse#data_repository_tasks #data_repository_tasks} => Array&lt;Types::DataRepositoryTask&gt;
+    #   * {Types::DescribeDataRepositoryTasksResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_repository_tasks({
+    #     task_ids: ["TaskId"],
+    #     filters: [
+    #       {
+    #         name: "file-system-id", # accepts file-system-id, task-lifecycle
+    #         values: ["DataRepositoryTaskFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_repository_tasks #=> Array
+    #   resp.data_repository_tasks[0].task_id #=> String
+    #   resp.data_repository_tasks[0].lifecycle #=> String, one of "PENDING", "EXECUTING", "FAILED", "SUCCEEDED", "CANCELED", "CANCELING"
+    #   resp.data_repository_tasks[0].type #=> String, one of "EXPORT_TO_REPOSITORY"
+    #   resp.data_repository_tasks[0].creation_time #=> Time
+    #   resp.data_repository_tasks[0].start_time #=> Time
+    #   resp.data_repository_tasks[0].end_time #=> Time
+    #   resp.data_repository_tasks[0].resource_arn #=> String
+    #   resp.data_repository_tasks[0].tags #=> Array
+    #   resp.data_repository_tasks[0].tags[0].key #=> String
+    #   resp.data_repository_tasks[0].tags[0].value #=> String
+    #   resp.data_repository_tasks[0].file_system_id #=> String
+    #   resp.data_repository_tasks[0].paths #=> Array
+    #   resp.data_repository_tasks[0].paths[0] #=> String
+    #   resp.data_repository_tasks[0].failure_details.message #=> String
+    #   resp.data_repository_tasks[0].status.total_count #=> Integer
+    #   resp.data_repository_tasks[0].status.succeeded_count #=> Integer
+    #   resp.data_repository_tasks[0].status.failed_count #=> Integer
+    #   resp.data_repository_tasks[0].status.last_updated_time #=> Time
+    #   resp.data_repository_tasks[0].report.enabled #=> Boolean
+    #   resp.data_repository_tasks[0].report.path #=> String
+    #   resp.data_repository_tasks[0].report.format #=> String, one of "REPORT_CSV_20191124"
+    #   resp.data_repository_tasks[0].report.scope #=> String, one of "FAILED_FILES_ONLY"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeDataRepositoryTasks AWS API Documentation
+    #
+    # @overload describe_data_repository_tasks(params = {})
+    # @param [Hash] params ({})
+    def describe_data_repository_tasks(params = {}, options = {})
+      req = build_request(:describe_data_repository_tasks, params)
       req.send_request(options)
     end
 
@@ -1156,6 +1688,8 @@ module Aws::FSx
     #
     #   * {Types::DescribeFileSystemsResponse#file_systems #file_systems} => Array&lt;Types::FileSystem&gt;
     #   * {Types::DescribeFileSystemsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe an Amazon FSx file system
@@ -1216,9 +1750,10 @@ module Aws::FSx
     #   resp.file_systems[0].creation_time #=> Time
     #   resp.file_systems[0].file_system_id #=> String
     #   resp.file_systems[0].file_system_type #=> String, one of "WINDOWS", "LUSTRE"
-    #   resp.file_systems[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.file_systems[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_systems[0].failure_details.message #=> String
     #   resp.file_systems[0].storage_capacity #=> Integer
+    #   resp.file_systems[0].storage_type #=> String, one of "SSD", "HDD"
     #   resp.file_systems[0].vpc_id #=> String
     #   resp.file_systems[0].subnet_ids #=> Array
     #   resp.file_systems[0].subnet_ids[0] #=> String
@@ -1231,6 +1766,16 @@ module Aws::FSx
     #   resp.file_systems[0].tags[0].key #=> String
     #   resp.file_systems[0].tags[0].value #=> String
     #   resp.file_systems[0].windows_configuration.active_directory_id #=> String
+    #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.file_systems[0].windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.file_systems[0].windows_configuration.remote_administration_endpoint #=> String
+    #   resp.file_systems[0].windows_configuration.preferred_subnet_id #=> String
+    #   resp.file_systems[0].windows_configuration.preferred_file_server_ip #=> String
     #   resp.file_systems[0].windows_configuration.throughput_capacity #=> Integer
     #   resp.file_systems[0].windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.file_systems[0].windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -1242,6 +1787,16 @@ module Aws::FSx
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_systems[0].lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.file_systems[0].lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.file_systems[0].lustre_configuration.mount_name #=> String
+    #   resp.file_systems[0].administrative_actions #=> Array
+    #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].request_time #=> Time
+    #   resp.file_systems[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.file_systems[0].administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.file_systems[0].administrative_actions[0].failure_details.message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystems AWS API Documentation
@@ -1427,23 +1982,54 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Updates a file system configuration.
+    # Use this operation to update the configuration of an existing Amazon
+    # FSx file system. For an Amazon FSx for Lustre file system, you can
+    # update only the WeeklyMaintenanceStartTime. For an Amazon for Windows
+    # File Server file system, you can update the following properties:
+    #
+    # * AutomaticBackupRetentionDays
+    #
+    # * DailyAutomaticBackupStartTime
+    #
+    # * SelfManagedActiveDirectoryConfiguration
+    #
+    # * StorageCapacity
+    #
+    # * ThroughputCapacity
+    #
+    # * WeeklyMaintenanceStartTime
+    #
+    # You can update multiple properties in a single request.
     #
     # @option params [required, String] :file_system_id
-    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   Identifies the file system that you are updating.
     #
     # @option params [String] :client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx uses
-    #   to ensure idempotent updates. This string is automatically filled on
-    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
-    #   an AWS SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent updates. This string is automatically filled on your behalf
+    #   when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Integer] :storage_capacity
+    #   Use this parameter to increase the storage capacity of an Amazon FSx
+    #   for Windows File Server file system. Specifies the storage capacity
+    #   target value, GiB, for the file system you're updating. The storage
+    #   capacity target value must be at least 10 percent (%) greater than the
+    #   current storage capacity value. In order to increase storage capacity,
+    #   the file system needs to have at least 16 MB/s of throughput capacity.
+    #   You cannot make a storage capacity increase request if there is an
+    #   existing storage capacity increase request in progress. For more
+    #   information, see [Managing Storage Capacity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #
     # @option params [Types::UpdateFileSystemWindowsConfiguration] :windows_configuration
-    #   The configuration for this Microsoft Windows file system. The only
-    #   supported options are for backup and maintenance.
+    #   The configuration updates for an Amazon FSx for Windows File Server
+    #   file system.
     #
     # @option params [Types::UpdateFileSystemLustreConfiguration] :lustre_configuration
     #   The configuration object for Amazon FSx for Lustre file systems used
@@ -1502,10 +2088,17 @@ module Aws::FSx
     #   resp = client.update_file_system({
     #     file_system_id: "FileSystemId", # required
     #     client_request_token: "ClientRequestToken",
+    #     storage_capacity: 1,
     #     windows_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
+    #       throughput_capacity: 1,
+    #       self_managed_active_directory_configuration: {
+    #         user_name: "DirectoryUserName",
+    #         password: "DirectoryPassword",
+    #         dns_ips: ["IpAddress"],
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -1518,9 +2111,10 @@ module Aws::FSx
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
     #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
-    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING"
+    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
+    #   resp.file_system.storage_type #=> String, one of "SSD", "HDD"
     #   resp.file_system.vpc_id #=> String
     #   resp.file_system.subnet_ids #=> Array
     #   resp.file_system.subnet_ids[0] #=> String
@@ -1533,6 +2127,16 @@ module Aws::FSx
     #   resp.file_system.tags[0].key #=> String
     #   resp.file_system.tags[0].value #=> String
     #   resp.file_system.windows_configuration.active_directory_id #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.file_system.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.file_system.windows_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.windows_configuration.preferred_file_server_ip #=> String
     #   resp.file_system.windows_configuration.throughput_capacity #=> Integer
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
     #   resp.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
@@ -1544,6 +2148,16 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.file_system.lustre_configuration.mount_name #=> String
+    #   resp.file_system.administrative_actions #=> Array
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
+    #   resp.file_system.administrative_actions[0].request_time #=> Time
+    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystem AWS API Documentation
     #
@@ -1567,7 +2181,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

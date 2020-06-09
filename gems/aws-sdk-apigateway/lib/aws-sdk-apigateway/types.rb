@@ -22,7 +22,10 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] destination_arn
-    #   The ARN of the CloudWatch Logs log group to receive access logs.
+    #   The Amazon Resource Name (ARN) of the CloudWatch Logs log group or
+    #   Kinesis Data Firehose delivery stream to receive access logs. If you
+    #   specify a Kinesis Data Firehose delivery stream, the stream name
+    #   must begin with `amazon-apigateway-`.
     #   @return [String]
     #
     class AccessLogSettings < Struct.new(
@@ -152,6 +155,11 @@ module Aws::APIGateway
     #   resource.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class ApiKey < Struct.new(
       :id,
       :value,
@@ -161,7 +169,8 @@ module Aws::APIGateway
       :enabled,
       :created_date,
       :last_updated_date,
-      :stage_keys)
+      :stage_keys,
+      :tags)
       include Aws::Structure
     end
 
@@ -252,12 +261,14 @@ module Aws::APIGateway
     # method.
     #
     # <div class="seeAlso">
-    # [Enable custom authorization][1]
+    # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
+    # Authorizer][2]
     # </div>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html
     #
     # @!attribute [rw] id
     #   The identifier for the authorizer resource.
@@ -333,12 +344,13 @@ module Aws::APIGateway
     #
     # @!attribute [rw] identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
-    #   authorizers, this value is a regular expression. API Gateway will
-    #   match the `aud` field of the incoming token from the client against
-    #   the specified regular expression. It will invoke the authorizer's
-    #   Lambda function when there is a match. Otherwise, it will return a
-    #   401 Unauthorized response without calling the Lambda function. The
-    #   validation expression does not apply to the `REQUEST` authorizer.
+    #   authorizers, this value is a regular expression. For
+    #   `COGNITO_USER_POOLS` authorizers, API Gateway will match the `aud`
+    #   field of the incoming token from the client against the specified
+    #   regular expression. It will invoke the authorizer's Lambda function
+    #   when there is a match. Otherwise, it will return a 401 Unauthorized
+    #   response without calling the Lambda function. The validation
+    #   expression does not apply to the `REQUEST` authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
@@ -365,12 +377,14 @@ module Aws::APIGateway
     # Represents a collection of Authorizer resources.
     #
     # <div class="seeAlso">
-    # [Enable custom authorization][1]
+    # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
+    # Authorizer][2]
     # </div>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -382,6 +396,18 @@ module Aws::APIGateway
     class Authorizers < Struct.new(
       :position,
       :items)
+      include Aws::Structure
+    end
+
+    # The submitted request is not valid, for example, the input is
+    # incomplete or incorrect. See the accompanying error message for
+    # details.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class BadRequestException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -525,12 +551,18 @@ module Aws::APIGateway
     #   The timestamp when the client certificate will expire.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class ClientCertificate < Struct.new(
       :client_certificate_id,
       :description,
       :pem_encoded_certificate,
       :created_date,
-      :expiration_date)
+      :expiration_date,
+      :tags)
       include Aws::Structure
     end
 
@@ -557,6 +589,17 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # The request configuration has conflicts. For details, see the
+    # accompanying error message.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Request to create an ApiKey resource.
     #
     # @note When making an API call, you may pass CreateApiKeyRequest
@@ -575,6 +618,9 @@ module Aws::APIGateway
     #           },
     #         ],
     #         customer_id: "String",
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -591,7 +637,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] generate_distinct_id
     #   Specifies whether (`true`) or not (`false`) the key identifier is
-    #   distinct from the created API key value.
+    #   distinct from the created API key value. This parameter is
+    #   deprecated and should not be used.
     #   @return [Boolean]
     #
     # @!attribute [rw] value
@@ -608,6 +655,12 @@ module Aws::APIGateway
     #   AWS SaaS Marketplace.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class CreateApiKeyRequest < Struct.new(
       :name,
       :description,
@@ -615,7 +668,8 @@ module Aws::APIGateway
       :generate_distinct_id,
       :value,
       :stage_keys,
-      :customer_id)
+      :customer_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -712,12 +766,13 @@ module Aws::APIGateway
     #
     # @!attribute [rw] identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
-    #   authorizers, this value is a regular expression. API Gateway will
-    #   match the `aud` field of the incoming token from the client against
-    #   the specified regular expression. It will invoke the authorizer's
-    #   Lambda function when there is a match. Otherwise, it will return a
-    #   401 Unauthorized response without calling the Lambda function. The
-    #   validation expression does not apply to the `REQUEST` authorizer.
+    #   authorizers, this value is a regular expression. For
+    #   `COGNITO_USER_POOLS` authorizers, API Gateway will match the `aud`
+    #   field of the incoming token from the client against the specified
+    #   regular expression. It will invoke the authorizer's Lambda function
+    #   when there is a match. Otherwise, it will return a 401 Unauthorized
+    #   response without calling the Lambda function. The validation
+    #   expression does not apply to the `REQUEST` authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
@@ -761,7 +816,7 @@ module Aws::APIGateway
     # @!attribute [rw] base_path
     #   The base path name that callers of the API must provide as part of
     #   the URL after the domain name. This value must be unique for all of
-    #   the mappings across a single API. Leave this blank if you do not
+    #   the mappings across a single API. Specify '(none)' if you do not
     #   want callers to specify a base path name after the domain name.
     #   @return [String]
     #
@@ -771,8 +826,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] stage
     #   The name of the API's stage that you want to use for this mapping.
-    #   Leave this blank if you do not want callers to explicitly specify
-    #   the stage name after any base path name.
+    #   Specify '(none)' if you want callers to explicitly specify the
+    #   stage name after any base path name.
     #   @return [String]
     #
     class CreateBasePathMappingRequest < Struct.new(
@@ -958,7 +1013,12 @@ module Aws::APIGateway
     #         regional_certificate_arn: "String",
     #         endpoint_configuration: {
     #           types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #           vpc_endpoint_ids: ["String"],
     #         },
+    #         tags: {
+    #           "String" => "String",
+    #         },
+    #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
     #       }
     #
     # @!attribute [rw] domain_name
@@ -1014,6 +1074,17 @@ module Aws::APIGateway
     #   types of the domain name.
     #   @return [Types::EndpointConfiguration]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] security_policy
+    #   The Transport Layer Security (TLS) version + cipher suite for this
+    #   DomainName. The valid values are `TLS_1_0` and `TLS_1_2`.
+    #   @return [String]
+    #
     class CreateDomainNameRequest < Struct.new(
       :domain_name,
       :certificate_name,
@@ -1023,7 +1094,9 @@ module Aws::APIGateway
       :certificate_arn,
       :regional_certificate_name,
       :regional_certificate_arn,
-      :endpoint_configuration)
+      :endpoint_configuration,
+      :tags,
+      :security_policy)
       include Aws::Structure
     end
 
@@ -1159,8 +1232,12 @@ module Aws::APIGateway
     #         api_key_source: "HEADER", # accepts HEADER, AUTHORIZER
     #         endpoint_configuration: {
     #           types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #           vpc_endpoint_ids: ["String"],
     #         },
     #         policy: "String",
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1211,6 +1288,12 @@ module Aws::APIGateway
     #   A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class CreateRestApiRequest < Struct.new(
       :name,
       :description,
@@ -1220,7 +1303,8 @@ module Aws::APIGateway
       :minimum_compression_size,
       :api_key_source,
       :endpoint_configuration,
-      :policy)
+      :policy,
+      :tags)
       include Aws::Structure
     end
 
@@ -1259,7 +1343,9 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   \[Required\] The name for the Stage resource.
+    #   \[Required\] The name for the Stage resource. Stage names can only
+    #   contain alphanumeric characters, hyphens, and underscores. Maximum
+    #   length is 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
@@ -1385,6 +1471,9 @@ module Aws::APIGateway
     #           offset: 1,
     #           period: "DAY", # accepts DAY, WEEK, MONTH
     #         },
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1407,12 +1496,19 @@ module Aws::APIGateway
     #   The quota of the usage plan.
     #   @return [Types::QuotaSettings]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class CreateUsagePlanRequest < Struct.new(
       :name,
       :description,
       :api_stages,
       :throttle,
-      :quota)
+      :quota,
+      :tags)
       include Aws::Structure
     end
 
@@ -1428,6 +1524,9 @@ module Aws::APIGateway
     #         name: "String", # required
     #         description: "String",
     #         target_arns: ["String"], # required
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1439,15 +1538,22 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] target_arns
-    #   \[Required\] The ARNs of network load balancers of the VPC targeted
-    #   by the VPC link. The network load balancers must be owned by the
-    #   same AWS account of the API owner.
+    #   \[Required\] The ARN of the network load balancer of the VPC
+    #   targeted by the VPC link. The network load balancer must be owned by
+    #   the same AWS account of the API owner.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
     #
     class CreateVpcLinkRequest < Struct.new(
       :name,
       :description,
-      :target_arns)
+      :target_arns,
+      :tags)
       include Aws::Structure
     end
 
@@ -1511,6 +1617,8 @@ module Aws::APIGateway
     # @!attribute [rw] base_path
     #   \[Required\] The base path name of the BasePathMapping resource to
     #   delete.
+    #
+    #   To specify an empty base path, set this parameter to `'(none)'`.
     #   @return [String]
     #
     class DeleteBasePathMappingRequest < Struct.new(
@@ -2469,6 +2577,28 @@ module Aws::APIGateway
     #   types of the domain name.
     #   @return [Types::EndpointConfiguration]
     #
+    # @!attribute [rw] domain_name_status
+    #   The status of the DomainName migration. The valid values are
+    #   `AVAILABLE` and `UPDATING`. If the status is `UPDATING`, the domain
+    #   cannot be modified further until the existing operation is complete.
+    #   If it is `AVAILABLE`, the domain can be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_status_message
+    #   An optional text message containing detailed information about
+    #   status of the DomainName migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_policy
+    #   The Transport Layer Security (TLS) version + cipher suite for this
+    #   DomainName. The valid values are `TLS_1_0` and `TLS_1_2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class DomainName < Struct.new(
       :domain_name,
       :certificate_name,
@@ -2480,7 +2610,11 @@ module Aws::APIGateway
       :regional_certificate_arn,
       :distribution_domain_name,
       :distribution_hosted_zone_id,
-      :endpoint_configuration)
+      :endpoint_configuration,
+      :domain_name_status,
+      :domain_name_status_message,
+      :security_policy,
+      :tags)
       include Aws::Structure
     end
 
@@ -2515,6 +2649,7 @@ module Aws::APIGateway
     #
     #       {
     #         types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #         vpc_endpoint_ids: ["String"],
     #       }
     #
     # @!attribute [rw] types
@@ -2525,8 +2660,14 @@ module Aws::APIGateway
     #   API, the endpoint type is `PRIVATE`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] vpc_endpoint_ids
+    #   A list of VpcEndpointIds of an API (RestApi) against which to create
+    #   Route53 ALIASes. It is only supported for `PRIVATE` endpoint type.
+    #   @return [Array<String>]
+    #
     class EndpointConfiguration < Struct.new(
-      :types)
+      :types,
+      :vpc_endpoint_ids)
       include Aws::Structure
     end
 
@@ -2754,14 +2895,24 @@ module Aws::APIGateway
     #
     #       {
     #         description: "String",
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] description
     #   The description of the ClientCertificate.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class GenerateClientCertificateRequest < Struct.new(
-      :description)
+      :description,
+      :tags)
       include Aws::Structure
     end
 
@@ -2915,9 +3066,9 @@ module Aws::APIGateway
     # @!attribute [rw] base_path
     #   \[Required\] The base path name that callers of the API must provide
     #   as part of the URL after the domain name. This value must be unique
-    #   for all of the mappings across a single API. Leave this blank if you
-    #   do not want callers to specify any base path name after the domain
-    #   name.
+    #   for all of the mappings across a single API. Specify '(none)' if
+    #   you do not want callers to specify any base path name after the
+    #   domain name.
     #   @return [String]
     #
     class GetBasePathMappingRequest < Struct.new(
@@ -3953,9 +4104,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   \[Required\] The ARN of a resource that can be tagged.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -4305,8 +4454,8 @@ module Aws::APIGateway
     #   `endpointConfigurationTypes=PRIVATE`. The default endpoint type is
     #   `EDGE`.
     #
-    #   To handle imported `basePath`, set `parameters` as
-    #   `basePath=ignore`, `basePath=prepend` or `basePath=split`.
+    #   To handle imported `basepath`, set `parameters` as
+    #   `basepath=ignore`, `basepath=prepend` or `basepath=split`.
     #
     #   For example, the AWS CLI command to exclude documentation from the
     #   imported API is:
@@ -4503,7 +4652,7 @@ module Aws::APIGateway
     #
     #   If this property is not defined, the request payload will be passed
     #   through from the method request to integration request without
-    #   modification, provided that the `passthroughBehaviors` is configured
+    #   modification, provided that the `passthroughBehavior` is configured
     #   to support payload pass-through.
     #   @return [String]
     #
@@ -4513,11 +4662,15 @@ module Aws::APIGateway
     #   @return [Integer]
     #
     # @!attribute [rw] cache_namespace
-    #   Specifies the integration's cache namespace.
+    #   An API-specific tag group of related cached parameters. To be valid
+    #   values for `cacheKeyParameters`, these parameters must also be
+    #   specified for Method `requestParameters`.
     #   @return [String]
     #
     # @!attribute [rw] cache_key_parameters
-    #   Specifies the integration's cache key parameters.
+    #   A list of request parameters whose values API Gateway caches. To be
+    #   valid values for `cacheKeyParameters`, these parameters must also be
+    #   specified for Method `requestParameters`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] integration_responses
@@ -4554,6 +4707,10 @@ module Aws::APIGateway
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #   @return [Hash<String,Types::IntegrationResponse>]
     #
+    # @!attribute [rw] tls_config
+    #   Specifies the TLS configuration for an integration.
+    #   @return [Types::TlsConfig]
+    #
     class Integration < Struct.new(
       :type,
       :http_method,
@@ -4568,7 +4725,8 @@ module Aws::APIGateway
       :timeout_in_millis,
       :cache_namespace,
       :cache_key_parameters,
-      :integration_responses)
+      :integration_responses,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -4644,6 +4802,21 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       :content_handling)
+      include Aws::Structure
+    end
+
+    # The request exceeded the rate limit. Retry after the specified time
+    # period.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class LimitExceededException < Struct.new(
+      :retry_after_seconds,
+      :message)
       include Aws::Structure
     end
 
@@ -4725,11 +4898,7 @@ module Aws::APIGateway
     # @!attribute [rw] operation_name
     #   A human-friendly operation identifier for the method. For example,
     #   you can assign the `operationName` of `ListPets` for the `GET /pets`
-    #   method in [PetStore][1] example.
-    #
-    #
-    #
-    #   [1]: https://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #   method in the `PetStore` example.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -4936,7 +5105,9 @@ module Aws::APIGateway
     #   Specifies the logging level for this method, which affects the log
     #   entries pushed to Amazon CloudWatch Logs. The PATCH path for this
     #   setting is `/\{method_setting_key\}/logging/loglevel`, and the
-    #   available levels are `OFF`, `ERROR`, and `INFO`.
+    #   available levels are `OFF`, `ERROR`, and `INFO`. Choose `ERROR` to
+    #   write only error-level entries to CloudWatch Logs, or choose `INFO`
+    #   to include all `ERROR` events as well as extra informational events.
     #   @return [String]
     #
     # @!attribute [rw] data_trace_enabled
@@ -5114,6 +5285,17 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # The requested resource is not found. Make sure that the request URI is
+    # correct.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A single patch operation to apply to the specified resource. Please
     # refer to http://tools.ietf.org/html/rfc6902#section-4 for an
     # explanation of how each operation is used.
@@ -5280,6 +5462,9 @@ module Aws::APIGateway
     #         cache_key_parameters: ["String"],
     #         content_handling: "CONVERT_TO_BINARY", # accepts CONVERT_TO_BINARY, CONVERT_TO_TEXT
     #         timeout_in_millis: 1,
+    #         tls_config: {
+    #           insecure_skip_verification: false,
+    #         },
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -5397,11 +5582,11 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_namespace
-    #   Specifies a put integration input's cache namespace.
+    #   A list of request parameters whose values are to be cached.
     #   @return [String]
     #
     # @!attribute [rw] cache_key_parameters
-    #   Specifies a put integration input's cache key parameters.
+    #   An API-specific tag group of related cached parameters.
     #   @return [Array<String>]
     #
     # @!attribute [rw] content_handling
@@ -5417,7 +5602,7 @@ module Aws::APIGateway
     #
     #   If this property is not defined, the request payload will be passed
     #   through from the method request to integration request without
-    #   modification, provided that the `passthroughBehaviors` is configured
+    #   modification, provided that the `passthroughBehavior` is configured
     #   to support payload pass-through.
     #   @return [String]
     #
@@ -5425,6 +5610,9 @@ module Aws::APIGateway
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
     #   is 29,000 milliseconds or 29 seconds.
     #   @return [Integer]
+    #
+    # @!attribute [rw] tls_config
+    #   @return [Types::TlsConfig]
     #
     class PutIntegrationRequest < Struct.new(
       :rest_api_id,
@@ -5442,7 +5630,8 @@ module Aws::APIGateway
       :cache_namespace,
       :cache_key_parameters,
       :content_handling,
-      :timeout_in_millis)
+      :timeout_in_millis,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -5592,11 +5781,7 @@ module Aws::APIGateway
     # @!attribute [rw] operation_name
     #   A human-friendly operation identifier for the method. For example,
     #   you can assign the `operationName` of `ListPets` for the `GET /pets`
-    #   method in [PetStore][1] example.
-    #
-    #
-    #
-    #   [1]: https://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #   method in the `PetStore` example.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -6039,6 +6224,11 @@ module Aws::APIGateway
     #   A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class RestApi < Struct.new(
       :id,
       :name,
@@ -6050,7 +6240,8 @@ module Aws::APIGateway
       :minimum_compression_size,
       :api_key_source,
       :endpoint_configuration,
-      :policy)
+      :policy,
+      :tags)
       include Aws::Structure
     end
 
@@ -6175,6 +6366,21 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # The requested service is not available. For details see the
+    # accompanying error message. Retry after the specified time period.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ServiceUnavailableException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
     # Represents a unique identifier for a version of a deployed RestApi
     # that is callable by users.
     #
@@ -6196,7 +6402,9 @@ module Aws::APIGateway
     #
     # @!attribute [rw] stage_name
     #   The name of the stage is the first path segment in the Uniform
-    #   Resource Identifier (URI) of a call to API Gateway.
+    #   Resource Identifier (URI) of a call to API Gateway. Stage names can
+    #   only contain alphanumeric characters, hyphens, and underscores.
+    #   Maximum length is 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6342,9 +6550,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   \[Required\] The ARN of a resource that can be tagged.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6389,7 +6595,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: https://velocity.apache.org/engine/devel/vtl-reference-guide.html
+    #   [1]: https://velocity.apache.org/engine/devel/vtl-reference.html
     #   @return [String]
     #
     class Template < Struct.new(
@@ -6671,6 +6877,59 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TlsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         insecure_skip_verification: false,
+    #       }
+    #
+    # @!attribute [rw] insecure_skip_verification
+    #   Specifies whether API Gateway skips trust chain validation of the
+    #   server certificate during the TLS handshake. Supported only for
+    #   `HTTP` and `HTTP_PROXY` integrations. By default, API Gateway
+    #   validates that certificates for integration endpoints are issued by
+    #   a [supported Certificate Authority][1]. If enabled, API Gateway
+    #   skips trust chain validation of the server certificate. This is not
+    #   recommended, but it enables you to use certificates that are signed
+    #   by private Certificate Authorities, or certificates that are
+    #   self-signed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-supported-certificate-authorities-for-http-endpoints.html
+    #   @return [Boolean]
+    #
+    class TlsConfig < Struct.new(
+      :insecure_skip_verification)
+      include Aws::Structure
+    end
+
+    # The request has reached its throttling limit. Retry after the
+    # specified time period.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TooManyRequestsException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is denied because the caller has insufficient permissions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Removes a tag from a given resource.
     #
     # @note When making an API call, you may pass UntagResourceRequest
@@ -6682,9 +6941,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   \[Required\] The ARN of a resource that can be tagged.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -6820,6 +7077,8 @@ module Aws::APIGateway
     # @!attribute [rw] base_path
     #   \[Required\] The base path of the BasePathMapping resource to
     #   change.
+    #
+    #   To specify an empty base path, set this parameter to `'(none)'`.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -7656,6 +7915,11 @@ module Aws::APIGateway
     #   plan as a SaaS product on AWS Marketplace.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class UsagePlan < Struct.new(
       :id,
       :name,
@@ -7663,7 +7927,8 @@ module Aws::APIGateway
       :api_stages,
       :throttle,
       :quota,
-      :product_code)
+      :product_code,
+      :tags)
       include Aws::Structure
     end
 
@@ -7755,7 +8020,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # A API Gateway VPC link for a RestApi to access resources in an Amazon
+    # An API Gateway VPC link for a RestApi to access resources in an Amazon
     # Virtual Private Cloud (VPC).
     #
     # <div class="remarks" markdown="1">
@@ -7784,8 +8049,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] target_arns
-    #   The ARNs of network load balancers of the VPC targeted by the VPC
-    #   link. The network load balancers must be owned by the same AWS
+    #   The ARN of the network load balancer of the VPC targeted by the VPC
+    #   link. The network load balancer must be owned by the same AWS
     #   account of the API owner.
     #   @return [Array<String>]
     #
@@ -7799,13 +8064,19 @@ module Aws::APIGateway
     #   A description about the VPC link status.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class VpcLink < Struct.new(
       :id,
       :name,
       :description,
       :target_arns,
       :status,
-      :status_message)
+      :status_message,
+      :tags)
       include Aws::Structure
     end
 

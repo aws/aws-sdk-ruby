@@ -26,7 +26,7 @@ module Aws
           },
           'öther_encodings' => {
             data_type: 'String',
-            string_value: 'Tüst'.encode!('ISO-8859-1')
+            string_value: 'Tüst'.encode('ISO-8859-1')
           }
         }}
 
@@ -84,12 +84,22 @@ module Aws
             }.not_to raise_error
           end
 
+          it 'does not raise an error with empty message attributes' do
+            expect {
+              client.send_message(
+                queue_url:'https://queue.url',
+                message_body: message_body,
+                message_attributes: {},
+              )
+            }.not_to raise_error
+          end
+
           context 'when data types have custom labels' do
             let(:md5_of_attributes) { '5b7ef6c8a8d46001c7cdadaeea917aa4' }
 
             before(:each) do
               message_attributes.keys.each do |attribute_name|
-                message_attributes[attribute_name][:data_type] << '.test'
+                message_attributes[attribute_name][:data_type] += '.test'
               end
             end
 

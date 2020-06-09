@@ -23,12 +23,25 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:mediaconvert)
 
 module Aws::MediaConvert
+  # An API client for MediaConvert.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::MediaConvert::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +68,7 @@ module Aws::MediaConvert
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -91,7 +105,7 @@ module Aws::MediaConvert
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +120,12 @@ module Aws::MediaConvert
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +133,10 @@ module Aws::MediaConvert
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +150,10 @@ module Aws::MediaConvert
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +161,7 @@ module Aws::MediaConvert
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +176,7 @@ module Aws::MediaConvert
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +188,29 @@ module Aws::MediaConvert
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +218,30 @@ module Aws::MediaConvert
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -198,6 +259,48 @@ module Aws::MediaConvert
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -229,8 +332,8 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
-    # Permanently remove a job from a queue. Once you have canceled a job,
-    # you can't start it again. You can't delete a running job.
+    # Permanently cancel a job. Once you have canceled a job, you can't
+    # start it again.
     #
     # @option params [required, String] :id
     #   The Job ID of the job to be cancelled.
@@ -256,6 +359,12 @@ module Aws::MediaConvert
     # settings, see the User Guide at
     # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #
+    # @option params [Types::AccelerationSettings] :acceleration_settings
+    #   Optional. Accelerated transcoding can significantly speed up jobs with
+    #   long, visually complex content. Outputs that use this feature incur
+    #   pro-tier pricing. For information about feature limitations, see the
+    #   AWS Elemental MediaConvert User Guide.
+    #
     # @option params [String] :billing_tags_source
     #   Optional. Choose a tag type that AWS Billing and Cost Management will
     #   use to sort your AWS Elemental MediaConvert costs on any billing
@@ -265,12 +374,26 @@ module Aws::MediaConvert
     #   appear on the billing report unsorted.
     #
     # @option params [String] :client_request_token
-    #   Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
+    #   Optional. Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::HopDestination>] :hop_destinations
+    #   Optional. Use queue hopping to avoid overly long waits in the backlog
+    #   of the queue that you submit your job to. Specify an alternate queue
+    #   and the maximum time that your job will wait in the initial queue
+    #   before hopping. For more information about this feature, see the AWS
+    #   Elemental MediaConvert User Guide.
+    #
     # @option params [String] :job_template
-    #   When you create a job, you can either specify a job template or
-    #   specify the transcoding settings individually
+    #   Optional. When you create a job, you can either specify a job template
+    #   or specify the transcoding settings individually.
+    #
+    # @option params [Integer] :priority
+    #   Optional. Specify the relative priority for this job. In any given
+    #   queue, the service begins processing the job with the highest value
+    #   first. When more than one job has the same priority, the service
+    #   begins processing the job that you submitted first. If you don't
+    #   specify a priority, the service uses the default value 0.
     #
     # @option params [String] :queue
     #   Optional. When you create a job, you can specify a queue to send it
@@ -286,9 +409,27 @@ module Aws::MediaConvert
     # @option params [required, Types::JobSettings] :settings
     #   JobSettings contains all the transcode settings for a job.
     #
+    # @option params [String] :simulate_reserved_queue
+    #   Optional. Enable this setting when you run a test job to estimate how
+    #   many reserved transcoding slots (RTS) you need. When this is enabled,
+    #   MediaConvert runs your job from an on-demand queue with similar
+    #   performance to what you will see with one RTS in a reserved queue.
+    #   This setting is disabled by default.
+    #
+    # @option params [String] :status_update_interval
+    #   Optional. Specify how often MediaConvert sends STATUS\_UPDATE events
+    #   to Amazon CloudWatch Events. Set the interval, in seconds, between
+    #   status updates. MediaConvert sends an update at this interval from the
+    #   time the service begins processing your job to the time it completes
+    #   the transcode or encounters an error.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Optional. The tags that you want to add to the resource. You can tag
+    #   resources with a key-value pair or with only a key.
+    #
     # @option params [Hash<String,String>] :user_metadata
-    #   User-defined metadata that you want to associate with an MediaConvert
-    #   job. You specify metadata in key/value pairs.
+    #   Optional. User-defined metadata that you want to associate with an
+    #   MediaConvert job. You specify metadata in key/value pairs.
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -297,15 +438,35 @@ module Aws::MediaConvert
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_job({
-    #     billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE
+    #     acceleration_settings: {
+    #       mode: "DISABLED", # required, accepts DISABLED, ENABLED, PREFERRED
+    #     },
+    #     billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE, JOB
     #     client_request_token: "__string",
+    #     hop_destinations: [
+    #       {
+    #         priority: 1,
+    #         queue: "__string",
+    #         wait_minutes: 1,
+    #       },
+    #     ],
     #     job_template: "__string",
+    #     priority: 1,
     #     queue: "__string",
     #     role: "__string", # required
     #     settings: { # required
     #       ad_avail_offset: 1,
     #       avail_blanking: {
-    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG",
+    #       },
+    #       esam: {
+    #         manifest_confirm_condition_notification: {
+    #           mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS",
+    #         },
+    #         response_signal_preroll: 1,
+    #         signal_processing_notification: {
+    #           scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
+    #         },
     #       },
     #       inputs: [
     #         {
@@ -318,7 +479,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #               external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               offset: 1,
     #               pids: [1],
@@ -344,7 +505,9 @@ module Aws::MediaConvert
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               source_settings: {
     #                 ancillary_source_settings: {
+    #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                   source_ancillary_channel_number: 1,
+    #                   terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                 },
     #                 dvb_sub_source_settings: {
     #                   pid: 1,
@@ -353,18 +516,32 @@ module Aws::MediaConvert
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                   source_608_channel_number: 1,
     #                   source_608_track_number: 1,
+    #                   terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
+    #                   framerate: {
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                   },
+    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
-    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
+    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                 },
+    #                 track_source_settings: {
+    #                   track_number: 1,
+    #                 },
     #               },
     #             },
+    #           },
+    #           crop: {
+    #             height: 1,
+    #             width: 1,
+    #             x: 1,
+    #             y: 1,
     #           },
     #           deblock_filter: "ENABLED", # accepts ENABLED, DISABLED
     #           decryption_settings: {
@@ -374,7 +551,7 @@ module Aws::MediaConvert
     #             kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
     #           },
     #           denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #           file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM",
+    #           file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
     #           filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #           filter_strength: 1,
     #           image_inserter: {
@@ -384,7 +561,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -400,10 +577,19 @@ module Aws::MediaConvert
     #               start_timecode: "__stringPattern010920405090509092",
     #             },
     #           ],
+    #           position: {
+    #             height: 1,
+    #             width: 1,
+    #             x: 1,
+    #             y: 1,
+    #           },
     #           program_number: 1,
     #           psi_control: "IGNORE_PSI", # accepts IGNORE_PSI, USE_PSI
+    #           supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
     #           timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
+    #           timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #           video_selector: {
+    #             alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #             color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #             hdr_10_metadata: {
@@ -422,6 +608,7 @@ module Aws::MediaConvert
     #             },
     #             pid: 1,
     #             program_number: 1,
+    #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #           },
     #         },
     #       ],
@@ -430,7 +617,7 @@ module Aws::MediaConvert
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #         },
-    #         input: "__stringMin14Max1285PatternS3Mov09Png",
+    #         input: "__stringMin14Max1285PatternS3Mov09PngHttpsMov09Png",
     #         insertion_mode: "MOV", # accepts MOV, PNG
     #         offset: {
     #           image_x: 1,
@@ -449,39 +636,83 @@ module Aws::MediaConvert
     #           name: "__string",
     #           output_group_settings: {
     #             cmaf_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
-    #                 encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #                 encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 speke_key_provider: {
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
+    #                   dash_signaled_system_ids: ["__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
+    #                   hls_signaled_system_ids: ["__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
+    #                   resource_id: "__stringPatternW",
+    #                   url: "__stringPatternHttps",
+    #                 },
     #                 static_key_provider: {
     #                   key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
     #                   key_format_versions: "__stringPatternDD",
     #                   static_key_value: "__stringPatternAZaZ0932",
     #                   url: "__string",
     #                 },
-    #                 type: "STATIC_KEY", # accepts STATIC_KEY
+    #                 type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #               },
     #               fragment_length: 1,
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
+    #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             dash_iso_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
+    #                 playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -490,15 +721,33 @@ module Aws::MediaConvert
     #               fragment_length: 1,
     #               hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #               min_buffer_time: 1,
+    #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             file_group_settings: {
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #             },
     #             hls_group_settings: {
     #               ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               caption_language_mappings: [
     #                 {
@@ -512,13 +761,25 @@ module Aws::MediaConvert
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #               encryption: {
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -547,11 +808,28 @@ module Aws::MediaConvert
     #               timestamp_delta_milliseconds: 1,
     #             },
     #             ms_smooth_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -567,7 +845,7 @@ module Aws::MediaConvert
     #               audio_descriptions: [
     #                 {
     #                   audio_normalization_settings: {
-    #                     algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2
+    #                     algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
     #                     algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO, MEASURE_ONLY
     #                     correction_gate_level: 1,
     #                     loudness_logging: "LOG", # accepts LOG, DONT_LOG
@@ -604,7 +882,24 @@ module Aws::MediaConvert
     #                       channels: 1,
     #                       sample_rate: 1,
     #                     },
-    #                     codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #                     codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
+    #                     eac_3_atmos_settings: {
+    #                       bitrate: 1,
+    #                       bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
+    #                       coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #                       dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #                       dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                       dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                       lo_ro_center_mix_level: 1.0,
+    #                       lo_ro_surround_mix_level: 1.0,
+    #                       lt_rt_center_mix_level: 1.0,
+    #                       lt_rt_surround_mix_level: 1.0,
+    #                       metering_mode: "LEQ_A", # accepts LEQ_A, ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
+    #                       sample_rate: 1,
+    #                       speech_threshold: 1,
+    #                       stereo_downmix: "NOT_INDICATED", # accepts NOT_INDICATED, STEREO, SURROUND, DPL2
+    #                       surround_ex_mode: "NOT_INDICATED", # accepts NOT_INDICATED, ENABLED, DISABLED
+    #                     },
     #                     eac_3_settings: {
     #                       attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                       bitrate: 1,
@@ -633,6 +928,23 @@ module Aws::MediaConvert
     #                       channels: 1,
     #                       sample_rate: 1,
     #                     },
+    #                     mp_3_settings: {
+    #                       bitrate: 1,
+    #                       channels: 1,
+    #                       rate_control_mode: "CBR", # accepts CBR, VBR
+    #                       sample_rate: 1,
+    #                       vbr_quality: 1,
+    #                     },
+    #                     opus_settings: {
+    #                       bitrate: 1,
+    #                       channels: 1,
+    #                       sample_rate: 1,
+    #                     },
+    #                     vorbis_settings: {
+    #                       channels: 1,
+    #                       sample_rate: 1,
+    #                       vbr_quality: 1,
+    #                     },
     #                     wav_settings: {
     #                       bit_depth: 1,
     #                       channels: 1,
@@ -640,7 +952,7 @@ module Aws::MediaConvert
     #                       sample_rate: 1,
     #                     },
     #                   },
-    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                   remix_settings: {
@@ -660,7 +972,7 @@ module Aws::MediaConvert
     #               caption_descriptions: [
     #                 {
     #                   caption_selector_name: "__stringMin1",
-    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   destination_settings: {
     #                     burnin_destination_settings: {
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -669,6 +981,7 @@ module Aws::MediaConvert
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
+    #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
@@ -680,7 +993,7 @@ module Aws::MediaConvert
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
-    #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                     dvb_sub_destination_settings: {
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
     #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -688,6 +1001,7 @@ module Aws::MediaConvert
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
+    #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
@@ -695,15 +1009,24 @@ module Aws::MediaConvert
     #                       shadow_opacity: 1,
     #                       shadow_x_offset: 1,
     #                       shadow_y_offset: 1,
+    #                       subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
+    #                     embedded_destination_settings: {
+    #                       destination_608_channel_number: 1,
+    #                       destination_708_service_number: 1,
+    #                     },
+    #                     imsc_destination_settings: {
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                     },
     #                     scc_destination_settings: {
-    #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                     },
     #                     teletext_destination_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
+    #                       page_types: ["PAGE_TYPE_INITIAL"], # accepts PAGE_TYPE_INITIAL, PAGE_TYPE_SUBTITLE, PAGE_TYPE_ADDL_INFO, PAGE_TYPE_PROGRAM_SCHEDULE, PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE
     #                     },
     #                     ttml_destination_settings: {
     #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -714,7 +1037,11 @@ module Aws::MediaConvert
     #                 },
     #               ],
     #               container_settings: {
-    #                 container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #                 cmfc_settings: {
+    #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                 },
+    #                 container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #                 f4v_settings: {
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                 },
@@ -743,6 +1070,7 @@ module Aws::MediaConvert
     #                   ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
     #                   ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
     #                   es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                   fragment_time: 1.0,
     #                   max_pcr_interval: 1,
     #                   min_ebp_interval: 1,
@@ -756,6 +1084,9 @@ module Aws::MediaConvert
     #                   private_metadata_pid: 1,
     #                   program_number: 1,
     #                   rate_mode: "VBR", # accepts VBR, CBR
+    #                   scte_35_esam: {
+    #                     scte_35_esam_pid: 1,
+    #                   },
     #                   scte_35_pid: 1,
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -792,9 +1123,18 @@ module Aws::MediaConvert
     #                 },
     #                 mp_4_settings: {
     #                   cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   ctts_version: 1,
     #                   free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                   mp_4_major_brand: "__string",
+    #                 },
+    #                 mpd_settings: {
+    #                   caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                 },
+    #                 mxf_settings: {
+    #                   afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #                 },
     #               },
     #               extension: "__string",
@@ -802,6 +1142,7 @@ module Aws::MediaConvert
     #               output_settings: {
     #                 hls_settings: {
     #                   audio_group_id: "__string",
+    #                   audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #                   audio_rendition_sets: "__string",
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
     #                   i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -813,7 +1154,24 @@ module Aws::MediaConvert
     #                 afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                 anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_settings: {
-    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                   av_1_settings: {
+    #                     adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     max_bitrate: 1,
+    #                     number_b_frames_between_reference_frames: 1,
+    #                     qvbr_settings: {
+    #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
+    #                     },
+    #                     rate_control_mode: "QVBR", # accepts QVBR
+    #                     slices: 1,
+    #                     spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   },
+    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #                   frame_capture_settings: {
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
@@ -851,10 +1209,11 @@ module Aws::MediaConvert
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
     #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
     #                     },
     #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
-    #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                     slices: 1,
     #                     slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                     softness: 1,
@@ -894,10 +1253,11 @@ module Aws::MediaConvert
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
     #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
     #                     },
     #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
-    #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                     slices: 1,
     #                     slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                     spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -954,6 +1314,36 @@ module Aws::MediaConvert
     #                     slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                     telecine: "NONE", # accepts NONE, HARD
     #                   },
+    #                   vp_8_settings: {
+    #                     bitrate: 1,
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     hrd_buffer_size: 1,
+    #                     max_bitrate: 1,
+    #                     par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     par_denominator: 1,
+    #                     par_numerator: 1,
+    #                     quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                     rate_control_mode: "VBR", # accepts VBR
+    #                   },
+    #                   vp_9_settings: {
+    #                     bitrate: 1,
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     hrd_buffer_size: 1,
+    #                     max_bitrate: 1,
+    #                     par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     par_denominator: 1,
+    #                     par_numerator: 1,
+    #                     quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                     rate_control_mode: "VBR", # accepts VBR
+    #                   },
     #                 },
     #                 color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                 crop: {
@@ -1002,6 +1392,14 @@ module Aws::MediaConvert
     #                     control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                     mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #                   },
+    #                   dolby_vision: {
+    #                     l6_metadata: {
+    #                       max_cll: 1,
+    #                       max_fall: 1,
+    #                     },
+    #                     l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                     profile: "PROFILE_5", # accepts PROFILE_5
+    #                   },
     #                   image_inserter: {
     #                     insertable_images: [
     #                       {
@@ -1009,7 +1407,7 @@ module Aws::MediaConvert
     #                         fade_in: 1,
     #                         fade_out: 1,
     #                         height: 1,
-    #                         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                         image_x: 1,
     #                         image_y: 1,
     #                         layer: 1,
@@ -1020,12 +1418,18 @@ module Aws::MediaConvert
     #                     ],
     #                   },
     #                   noise_reducer: {
-    #                     filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #                     filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
     #                     filter_settings: {
     #                       strength: 1,
     #                     },
     #                     spatial_filter_settings: {
     #                       post_filter_sharpen_strength: 1,
+    #                       speed: 1,
+    #                       strength: 1,
+    #                     },
+    #                     temporal_filter_settings: {
+    #                       aggressive_mode: 1,
+    #                       post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                       speed: 1,
     #                       strength: 1,
     #                     },
@@ -1057,6 +1461,11 @@ module Aws::MediaConvert
     #         ],
     #       },
     #     },
+    #     simulate_reserved_queue: "DISABLED", # accepts DISABLED, ENABLED
+    #     status_update_interval: "SECONDS_10", # accepts SECONDS_10, SECONDS_12, SECONDS_15, SECONDS_20, SECONDS_30, SECONDS_60, SECONDS_120, SECONDS_180, SECONDS_240, SECONDS_300, SECONDS_360, SECONDS_420, SECONDS_480, SECONDS_540, SECONDS_600
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #     user_metadata: {
     #       "__string" => "__string",
     #     },
@@ -1064,22 +1473,43 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
+    #   resp.job.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
+    #   resp.job.acceleration_status #=> String, one of "NOT_APPLICABLE", "IN_PROGRESS", "ACCELERATED", "NOT_ACCELERATED"
     #   resp.job.arn #=> String
-    #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
+    #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE", "JOB"
     #   resp.job.created_at #=> Time
+    #   resp.job.current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.job.error_code #=> Integer
     #   resp.job.error_message #=> String
+    #   resp.job.hop_destinations #=> Array
+    #   resp.job.hop_destinations[0].priority #=> Integer
+    #   resp.job.hop_destinations[0].queue #=> String
+    #   resp.job.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job.id #=> String
+    #   resp.job.job_percent_complete #=> Integer
     #   resp.job.job_template #=> String
+    #   resp.job.messages.info #=> Array
+    #   resp.job.messages.info[0] #=> String
+    #   resp.job.messages.warning #=> Array
+    #   resp.job.messages.warning[0] #=> String
     #   resp.job.output_group_details #=> Array
     #   resp.job.output_group_details[0].output_details #=> Array
     #   resp.job.output_group_details[0].output_details[0].duration_in_ms #=> Integer
     #   resp.job.output_group_details[0].output_details[0].video_details.height_in_px #=> Integer
     #   resp.job.output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
+    #   resp.job.priority #=> Integer
     #   resp.job.queue #=> String
+    #   resp.job.queue_transitions #=> Array
+    #   resp.job.queue_transitions[0].destination_queue #=> String
+    #   resp.job.queue_transitions[0].source_queue #=> String
+    #   resp.job.queue_transitions[0].timestamp #=> Time
+    #   resp.job.retry_count #=> Integer
     #   resp.job.role #=> String
     #   resp.job.settings.ad_avail_offset #=> Integer
     #   resp.job.settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.job.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.job.settings.esam.response_signal_preroll #=> Integer
+    #   resp.job.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job.settings.inputs #=> Array
     #   resp.job.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -1104,16 +1534,26 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors #=> Hash
     #   resp.job.settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_channel_number #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
+    #   resp.job.settings.inputs[0].crop.height #=> Integer
+    #   resp.job.settings.inputs[0].crop.width #=> Integer
+    #   resp.job.settings.inputs[0].crop.x #=> Integer
+    #   resp.job.settings.inputs[0].crop.y #=> Integer
     #   resp.job.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.inputs[0].decryption_settings.decryption_mode #=> String, one of "AES_CTR", "AES_CBC", "AES_GCM"
     #   resp.job.settings.inputs[0].decryption_settings.encrypted_decryption_key #=> String
@@ -1138,9 +1578,17 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].input_clippings #=> Array
     #   resp.job.settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.job.settings.inputs[0].input_clippings[0].start_timecode #=> String
+    #   resp.job.settings.inputs[0].position.height #=> Integer
+    #   resp.job.settings.inputs[0].position.width #=> Integer
+    #   resp.job.settings.inputs[0].position.x #=> Integer
+    #   resp.job.settings.inputs[0].position.y #=> Integer
     #   resp.job.settings.inputs[0].program_number #=> Integer
     #   resp.job.settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
+    #   resp.job.settings.inputs[0].supplemental_imps #=> Array
+    #   resp.job.settings.inputs[0].supplemental_imps[0] #=> String
     #   resp.job.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
+    #   resp.job.settings.inputs[0].timecode_start #=> String
+    #   resp.job.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -1157,6 +1605,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.job.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.motion_image_inserter.input #=> String
@@ -1170,30 +1619,54 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups #=> Array
     #   resp.job.settings.output_groups[0].custom_name #=> String
     #   resp.job.settings.output_groups[0].name #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
-    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids[0] #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids[0] #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.resource_id #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format_versions #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
-    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "STATIC_KEY"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -1202,12 +1675,20 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -1218,10 +1699,14 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -1246,8 +1731,15 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -1258,7 +1750,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job.settings.output_groups[0].outputs #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
-    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
@@ -1287,7 +1779,22 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "PASSTHROUGH"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialogue_intelligence #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_rf #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_center_mix_level #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_surround_mix_level #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_center_mix_level #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_surround_mix_level #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.metering_mode #=> String, one of "LEQ_A", "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.speech_threshold #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.stereo_downmix #=> String, one of "NOT_INDICATED", "STEREO", "SURROUND", "DPL2"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_ex_mode #=> String, one of "NOT_INDICATED", "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -1312,6 +1819,17 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.channels #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.channels #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.vbr_quality #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -1334,6 +1852,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -1344,13 +1863,14 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -1358,15 +1878,23 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
-    #   resp.job.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
@@ -1388,6 +1916,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -1401,6 +1930,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -1432,12 +1962,18 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -1445,7 +1981,20 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES", "VP8", "VP9"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -1479,9 +2028,10 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.softness #=> Integer
@@ -1518,9 +2068,10 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -1572,6 +2123,32 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.par_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.gop_size #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.hrd_buffer_size #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.max_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.rate_control_mode #=> String, one of "VBR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.gop_size #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.hrd_buffer_size #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.max_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.rate_control_mode #=> String, one of "VBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.crop.height #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.crop.width #=> Integer
@@ -1608,6 +2185,10 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -1620,11 +2201,15 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -1636,7 +2221,9 @@ module Aws::MediaConvert
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.job.simulate_reserved_queue #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.status #=> String, one of "SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"
+    #   resp.job.status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job.timing.finish_time #=> Time
     #   resp.job.timing.start_time #=> Time
     #   resp.job.timing.submit_time #=> Time
@@ -1656,14 +2243,34 @@ module Aws::MediaConvert
     # User Guide at
     # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #
+    # @option params [Types::AccelerationSettings] :acceleration_settings
+    #   Accelerated transcoding can significantly speed up jobs with long,
+    #   visually complex content. Outputs that use this feature incur pro-tier
+    #   pricing. For information about feature limitations, see the AWS
+    #   Elemental MediaConvert User Guide.
+    #
     # @option params [String] :category
     #   Optional. A category for the job template you are creating
     #
     # @option params [String] :description
     #   Optional. A description of the job template you are creating.
     #
+    # @option params [Array<Types::HopDestination>] :hop_destinations
+    #   Optional. Use queue hopping to avoid overly long waits in the backlog
+    #   of the queue that you submit your job to. Specify an alternate queue
+    #   and the maximum time that your job will wait in the initial queue
+    #   before hopping. For more information about this feature, see the AWS
+    #   Elemental MediaConvert User Guide.
+    #
     # @option params [required, String] :name
     #   The name of the job template you are creating.
+    #
+    # @option params [Integer] :priority
+    #   Specify the relative priority for this job. In any given queue, the
+    #   service begins processing the job with the highest value first. When
+    #   more than one job has the same priority, the service begins processing
+    #   the job that you submitted first. If you don't specify a priority,
+    #   the service uses the default value 0.
     #
     # @option params [String] :queue
     #   Optional. The queue that jobs created from this template are assigned
@@ -1672,6 +2279,13 @@ module Aws::MediaConvert
     # @option params [required, Types::JobTemplateSettings] :settings
     #   JobTemplateSettings contains all the transcode settings saved in the
     #   template that will be applied to jobs created from it.
+    #
+    # @option params [String] :status_update_interval
+    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
+    #   CloudWatch Events. Set the interval, in seconds, between status
+    #   updates. MediaConvert sends an update at this interval from the time
+    #   the service begins processing your job to the time it completes the
+    #   transcode or encounters an error.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags that you want to add to the resource. You can tag resources
@@ -1684,14 +2298,34 @@ module Aws::MediaConvert
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_job_template({
+    #     acceleration_settings: {
+    #       mode: "DISABLED", # required, accepts DISABLED, ENABLED, PREFERRED
+    #     },
     #     category: "__string",
     #     description: "__string",
+    #     hop_destinations: [
+    #       {
+    #         priority: 1,
+    #         queue: "__string",
+    #         wait_minutes: 1,
+    #       },
+    #     ],
     #     name: "__string", # required
+    #     priority: 1,
     #     queue: "__string",
     #     settings: { # required
     #       ad_avail_offset: 1,
     #       avail_blanking: {
-    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG",
+    #       },
+    #       esam: {
+    #         manifest_confirm_condition_notification: {
+    #           mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS",
+    #         },
+    #         response_signal_preroll: 1,
+    #         signal_processing_notification: {
+    #           scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
+    #         },
     #       },
     #       inputs: [
     #         {
@@ -1704,7 +2338,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #               external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               offset: 1,
     #               pids: [1],
@@ -1730,7 +2364,9 @@ module Aws::MediaConvert
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               source_settings: {
     #                 ancillary_source_settings: {
+    #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                   source_ancillary_channel_number: 1,
+    #                   terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                 },
     #                 dvb_sub_source_settings: {
     #                   pid: 1,
@@ -1739,18 +2375,32 @@ module Aws::MediaConvert
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                   source_608_channel_number: 1,
     #                   source_608_track_number: 1,
+    #                   terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
+    #                   framerate: {
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                   },
+    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
-    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
+    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                 },
+    #                 track_source_settings: {
+    #                   track_number: 1,
+    #                 },
     #               },
     #             },
+    #           },
+    #           crop: {
+    #             height: 1,
+    #             width: 1,
+    #             x: 1,
+    #             y: 1,
     #           },
     #           deblock_filter: "ENABLED", # accepts ENABLED, DISABLED
     #           denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
@@ -1763,7 +2413,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -1779,10 +2429,18 @@ module Aws::MediaConvert
     #               start_timecode: "__stringPattern010920405090509092",
     #             },
     #           ],
+    #           position: {
+    #             height: 1,
+    #             width: 1,
+    #             x: 1,
+    #             y: 1,
+    #           },
     #           program_number: 1,
     #           psi_control: "IGNORE_PSI", # accepts IGNORE_PSI, USE_PSI
     #           timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
+    #           timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #           video_selector: {
+    #             alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #             color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #             hdr_10_metadata: {
@@ -1801,6 +2459,7 @@ module Aws::MediaConvert
     #             },
     #             pid: 1,
     #             program_number: 1,
+    #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #           },
     #         },
     #       ],
@@ -1809,7 +2468,7 @@ module Aws::MediaConvert
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #         },
-    #         input: "__stringMin14Max1285PatternS3Mov09Png",
+    #         input: "__stringMin14Max1285PatternS3Mov09PngHttpsMov09Png",
     #         insertion_mode: "MOV", # accepts MOV, PNG
     #         offset: {
     #           image_x: 1,
@@ -1828,39 +2487,83 @@ module Aws::MediaConvert
     #           name: "__string",
     #           output_group_settings: {
     #             cmaf_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
-    #                 encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #                 encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 speke_key_provider: {
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
+    #                   dash_signaled_system_ids: ["__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
+    #                   hls_signaled_system_ids: ["__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
+    #                   resource_id: "__stringPatternW",
+    #                   url: "__stringPatternHttps",
+    #                 },
     #                 static_key_provider: {
     #                   key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
     #                   key_format_versions: "__stringPatternDD",
     #                   static_key_value: "__stringPatternAZaZ0932",
     #                   url: "__string",
     #                 },
-    #                 type: "STATIC_KEY", # accepts STATIC_KEY
+    #                 type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #               },
     #               fragment_length: 1,
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
+    #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             dash_iso_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
+    #                 playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -1869,15 +2572,33 @@ module Aws::MediaConvert
     #               fragment_length: 1,
     #               hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #               min_buffer_time: 1,
+    #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             file_group_settings: {
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #             },
     #             hls_group_settings: {
     #               ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               caption_language_mappings: [
     #                 {
@@ -1891,13 +2612,25 @@ module Aws::MediaConvert
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #               encryption: {
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -1926,11 +2659,28 @@ module Aws::MediaConvert
     #               timestamp_delta_milliseconds: 1,
     #             },
     #             ms_smooth_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -1946,7 +2696,7 @@ module Aws::MediaConvert
     #               audio_descriptions: [
     #                 {
     #                   audio_normalization_settings: {
-    #                     algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2
+    #                     algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
     #                     algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO, MEASURE_ONLY
     #                     correction_gate_level: 1,
     #                     loudness_logging: "LOG", # accepts LOG, DONT_LOG
@@ -1983,7 +2733,24 @@ module Aws::MediaConvert
     #                       channels: 1,
     #                       sample_rate: 1,
     #                     },
-    #                     codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #                     codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
+    #                     eac_3_atmos_settings: {
+    #                       bitrate: 1,
+    #                       bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
+    #                       coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #                       dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #                       dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                       dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                       lo_ro_center_mix_level: 1.0,
+    #                       lo_ro_surround_mix_level: 1.0,
+    #                       lt_rt_center_mix_level: 1.0,
+    #                       lt_rt_surround_mix_level: 1.0,
+    #                       metering_mode: "LEQ_A", # accepts LEQ_A, ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
+    #                       sample_rate: 1,
+    #                       speech_threshold: 1,
+    #                       stereo_downmix: "NOT_INDICATED", # accepts NOT_INDICATED, STEREO, SURROUND, DPL2
+    #                       surround_ex_mode: "NOT_INDICATED", # accepts NOT_INDICATED, ENABLED, DISABLED
+    #                     },
     #                     eac_3_settings: {
     #                       attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                       bitrate: 1,
@@ -2012,6 +2779,23 @@ module Aws::MediaConvert
     #                       channels: 1,
     #                       sample_rate: 1,
     #                     },
+    #                     mp_3_settings: {
+    #                       bitrate: 1,
+    #                       channels: 1,
+    #                       rate_control_mode: "CBR", # accepts CBR, VBR
+    #                       sample_rate: 1,
+    #                       vbr_quality: 1,
+    #                     },
+    #                     opus_settings: {
+    #                       bitrate: 1,
+    #                       channels: 1,
+    #                       sample_rate: 1,
+    #                     },
+    #                     vorbis_settings: {
+    #                       channels: 1,
+    #                       sample_rate: 1,
+    #                       vbr_quality: 1,
+    #                     },
     #                     wav_settings: {
     #                       bit_depth: 1,
     #                       channels: 1,
@@ -2019,7 +2803,7 @@ module Aws::MediaConvert
     #                       sample_rate: 1,
     #                     },
     #                   },
-    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                   remix_settings: {
@@ -2039,7 +2823,7 @@ module Aws::MediaConvert
     #               caption_descriptions: [
     #                 {
     #                   caption_selector_name: "__stringMin1",
-    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   destination_settings: {
     #                     burnin_destination_settings: {
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -2048,6 +2832,7 @@ module Aws::MediaConvert
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
+    #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
@@ -2059,7 +2844,7 @@ module Aws::MediaConvert
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
-    #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                     dvb_sub_destination_settings: {
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
     #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -2067,6 +2852,7 @@ module Aws::MediaConvert
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
+    #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
@@ -2074,15 +2860,24 @@ module Aws::MediaConvert
     #                       shadow_opacity: 1,
     #                       shadow_x_offset: 1,
     #                       shadow_y_offset: 1,
+    #                       subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
+    #                     embedded_destination_settings: {
+    #                       destination_608_channel_number: 1,
+    #                       destination_708_service_number: 1,
+    #                     },
+    #                     imsc_destination_settings: {
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                     },
     #                     scc_destination_settings: {
-    #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                     },
     #                     teletext_destination_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
+    #                       page_types: ["PAGE_TYPE_INITIAL"], # accepts PAGE_TYPE_INITIAL, PAGE_TYPE_SUBTITLE, PAGE_TYPE_ADDL_INFO, PAGE_TYPE_PROGRAM_SCHEDULE, PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE
     #                     },
     #                     ttml_destination_settings: {
     #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -2093,7 +2888,11 @@ module Aws::MediaConvert
     #                 },
     #               ],
     #               container_settings: {
-    #                 container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #                 cmfc_settings: {
+    #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                 },
+    #                 container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #                 f4v_settings: {
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                 },
@@ -2122,6 +2921,7 @@ module Aws::MediaConvert
     #                   ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
     #                   ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
     #                   es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                   fragment_time: 1.0,
     #                   max_pcr_interval: 1,
     #                   min_ebp_interval: 1,
@@ -2135,6 +2935,9 @@ module Aws::MediaConvert
     #                   private_metadata_pid: 1,
     #                   program_number: 1,
     #                   rate_mode: "VBR", # accepts VBR, CBR
+    #                   scte_35_esam: {
+    #                     scte_35_esam_pid: 1,
+    #                   },
     #                   scte_35_pid: 1,
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -2171,9 +2974,18 @@ module Aws::MediaConvert
     #                 },
     #                 mp_4_settings: {
     #                   cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   ctts_version: 1,
     #                   free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                   mp_4_major_brand: "__string",
+    #                 },
+    #                 mpd_settings: {
+    #                   caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                 },
+    #                 mxf_settings: {
+    #                   afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #                 },
     #               },
     #               extension: "__string",
@@ -2181,6 +2993,7 @@ module Aws::MediaConvert
     #               output_settings: {
     #                 hls_settings: {
     #                   audio_group_id: "__string",
+    #                   audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #                   audio_rendition_sets: "__string",
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
     #                   i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -2192,7 +3005,24 @@ module Aws::MediaConvert
     #                 afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                 anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_settings: {
-    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                   av_1_settings: {
+    #                     adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     max_bitrate: 1,
+    #                     number_b_frames_between_reference_frames: 1,
+    #                     qvbr_settings: {
+    #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
+    #                     },
+    #                     rate_control_mode: "QVBR", # accepts QVBR
+    #                     slices: 1,
+    #                     spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   },
+    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #                   frame_capture_settings: {
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
@@ -2230,10 +3060,11 @@ module Aws::MediaConvert
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
     #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
     #                     },
     #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
-    #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                     slices: 1,
     #                     slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                     softness: 1,
@@ -2273,10 +3104,11 @@ module Aws::MediaConvert
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
     #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
     #                     },
     #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
-    #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                     slices: 1,
     #                     slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                     spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -2333,6 +3165,36 @@ module Aws::MediaConvert
     #                     slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                     telecine: "NONE", # accepts NONE, HARD
     #                   },
+    #                   vp_8_settings: {
+    #                     bitrate: 1,
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     hrd_buffer_size: 1,
+    #                     max_bitrate: 1,
+    #                     par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     par_denominator: 1,
+    #                     par_numerator: 1,
+    #                     quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                     rate_control_mode: "VBR", # accepts VBR
+    #                   },
+    #                   vp_9_settings: {
+    #                     bitrate: 1,
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     hrd_buffer_size: 1,
+    #                     max_bitrate: 1,
+    #                     par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     par_denominator: 1,
+    #                     par_numerator: 1,
+    #                     quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                     rate_control_mode: "VBR", # accepts VBR
+    #                   },
     #                 },
     #                 color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                 crop: {
@@ -2381,6 +3243,14 @@ module Aws::MediaConvert
     #                     control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                     mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #                   },
+    #                   dolby_vision: {
+    #                     l6_metadata: {
+    #                       max_cll: 1,
+    #                       max_fall: 1,
+    #                     },
+    #                     l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                     profile: "PROFILE_5", # accepts PROFILE_5
+    #                   },
     #                   image_inserter: {
     #                     insertable_images: [
     #                       {
@@ -2388,7 +3258,7 @@ module Aws::MediaConvert
     #                         fade_in: 1,
     #                         fade_out: 1,
     #                         height: 1,
-    #                         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                         image_x: 1,
     #                         image_y: 1,
     #                         layer: 1,
@@ -2399,12 +3269,18 @@ module Aws::MediaConvert
     #                     ],
     #                   },
     #                   noise_reducer: {
-    #                     filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #                     filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
     #                     filter_settings: {
     #                       strength: 1,
     #                     },
     #                     spatial_filter_settings: {
     #                       post_filter_sharpen_strength: 1,
+    #                       speed: 1,
+    #                       strength: 1,
+    #                     },
+    #                     temporal_filter_settings: {
+    #                       aggressive_mode: 1,
+    #                       post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                       speed: 1,
     #                       strength: 1,
     #                     },
@@ -2436,6 +3312,7 @@ module Aws::MediaConvert
     #         ],
     #       },
     #     },
+    #     status_update_interval: "SECONDS_10", # accepts SECONDS_10, SECONDS_12, SECONDS_15, SECONDS_20, SECONDS_30, SECONDS_60, SECONDS_120, SECONDS_180, SECONDS_240, SECONDS_300, SECONDS_360, SECONDS_420, SECONDS_480, SECONDS_540, SECONDS_600
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -2443,15 +3320,24 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
+    #   resp.job_template.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
     #   resp.job_template.arn #=> String
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
     #   resp.job_template.description #=> String
+    #   resp.job_template.hop_destinations #=> Array
+    #   resp.job_template.hop_destinations[0].priority #=> Integer
+    #   resp.job_template.hop_destinations[0].queue #=> String
+    #   resp.job_template.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job_template.last_updated #=> Time
     #   resp.job_template.name #=> String
+    #   resp.job_template.priority #=> Integer
     #   resp.job_template.queue #=> String
     #   resp.job_template.settings.ad_avail_offset #=> Integer
     #   resp.job_template.settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.job_template.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.job_template.settings.esam.response_signal_preroll #=> Integer
+    #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -2476,16 +3362,26 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors #=> Hash
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_channel_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
+    #   resp.job_template.settings.inputs[0].crop.height #=> Integer
+    #   resp.job_template.settings.inputs[0].crop.width #=> Integer
+    #   resp.job_template.settings.inputs[0].crop.x #=> Integer
+    #   resp.job_template.settings.inputs[0].crop.y #=> Integer
     #   resp.job_template.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
@@ -2505,9 +3401,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].input_clippings #=> Array
     #   resp.job_template.settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.job_template.settings.inputs[0].input_clippings[0].start_timecode #=> String
+    #   resp.job_template.settings.inputs[0].position.height #=> Integer
+    #   resp.job_template.settings.inputs[0].position.width #=> Integer
+    #   resp.job_template.settings.inputs[0].position.x #=> Integer
+    #   resp.job_template.settings.inputs[0].position.y #=> Integer
     #   resp.job_template.settings.inputs[0].program_number #=> Integer
     #   resp.job_template.settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
     #   resp.job_template.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
+    #   resp.job_template.settings.inputs[0].timecode_start #=> String
+    #   resp.job_template.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job_template.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -2524,6 +3426,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.input #=> String
@@ -2537,30 +3440,54 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups #=> Array
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
-    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids[0] #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids[0] #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.resource_id #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format_versions #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
-    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "STATIC_KEY"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -2569,12 +3496,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -2585,10 +3520,14 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -2613,8 +3552,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -2625,7 +3571,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
-    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
@@ -2654,7 +3600,22 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "PASSTHROUGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialogue_intelligence #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_rf #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_center_mix_level #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_surround_mix_level #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_center_mix_level #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_surround_mix_level #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.metering_mode #=> String, one of "LEQ_A", "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.speech_threshold #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.stereo_downmix #=> String, one of "NOT_INDICATED", "STEREO", "SURROUND", "DPL2"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_ex_mode #=> String, one of "NOT_INDICATED", "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -2679,6 +3640,17 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.channels #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.channels #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.vbr_quality #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -2701,6 +3673,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -2711,13 +3684,14 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -2725,15 +3699,23 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
-    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
@@ -2755,6 +3737,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -2768,6 +3751,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -2799,12 +3783,18 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -2812,7 +3802,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES", "VP8", "VP9"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -2846,9 +3849,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.softness #=> Integer
@@ -2885,9 +3889,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -2939,6 +3944,32 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.par_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.hrd_buffer_size #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.rate_control_mode #=> String, one of "VBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.hrd_buffer_size #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.rate_control_mode #=> String, one of "VBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.crop.height #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.crop.width #=> Integer
@@ -2975,6 +4006,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -2987,11 +4022,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -3003,6 +4042,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.job_template.status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job_template.type #=> String, one of "SYSTEM", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobTemplate AWS API Documentation
@@ -3048,7 +4088,7 @@ module Aws::MediaConvert
     #       audio_descriptions: [
     #         {
     #           audio_normalization_settings: {
-    #             algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2
+    #             algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
     #             algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO, MEASURE_ONLY
     #             correction_gate_level: 1,
     #             loudness_logging: "LOG", # accepts LOG, DONT_LOG
@@ -3085,7 +4125,24 @@ module Aws::MediaConvert
     #               channels: 1,
     #               sample_rate: 1,
     #             },
-    #             codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #             codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
+    #             eac_3_atmos_settings: {
+    #               bitrate: 1,
+    #               bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
+    #               coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #               dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #               dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #               dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #               lo_ro_center_mix_level: 1.0,
+    #               lo_ro_surround_mix_level: 1.0,
+    #               lt_rt_center_mix_level: 1.0,
+    #               lt_rt_surround_mix_level: 1.0,
+    #               metering_mode: "LEQ_A", # accepts LEQ_A, ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
+    #               sample_rate: 1,
+    #               speech_threshold: 1,
+    #               stereo_downmix: "NOT_INDICATED", # accepts NOT_INDICATED, STEREO, SURROUND, DPL2
+    #               surround_ex_mode: "NOT_INDICATED", # accepts NOT_INDICATED, ENABLED, DISABLED
+    #             },
     #             eac_3_settings: {
     #               attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #               bitrate: 1,
@@ -3114,6 +4171,23 @@ module Aws::MediaConvert
     #               channels: 1,
     #               sample_rate: 1,
     #             },
+    #             mp_3_settings: {
+    #               bitrate: 1,
+    #               channels: 1,
+    #               rate_control_mode: "CBR", # accepts CBR, VBR
+    #               sample_rate: 1,
+    #               vbr_quality: 1,
+    #             },
+    #             opus_settings: {
+    #               bitrate: 1,
+    #               channels: 1,
+    #               sample_rate: 1,
+    #             },
+    #             vorbis_settings: {
+    #               channels: 1,
+    #               sample_rate: 1,
+    #               vbr_quality: 1,
+    #             },
     #             wav_settings: {
     #               bit_depth: 1,
     #               channels: 1,
@@ -3121,7 +4195,7 @@ module Aws::MediaConvert
     #               sample_rate: 1,
     #             },
     #           },
-    #           custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #           custom_language_code: "__stringPatternAZaZ23AZaZ",
     #           language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #           language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #           remix_settings: {
@@ -3140,7 +4214,7 @@ module Aws::MediaConvert
     #       ],
     #       caption_descriptions: [
     #         {
-    #           custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #           custom_language_code: "__stringPatternAZaZ23AZaZ",
     #           destination_settings: {
     #             burnin_destination_settings: {
     #               alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -3149,6 +4223,7 @@ module Aws::MediaConvert
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #               font_opacity: 1,
     #               font_resolution: 1,
+    #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
     #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #               outline_size: 1,
@@ -3160,7 +4235,7 @@ module Aws::MediaConvert
     #               x_position: 1,
     #               y_position: 1,
     #             },
-    #             destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #             destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #             dvb_sub_destination_settings: {
     #               alignment: "CENTERED", # accepts CENTERED, LEFT
     #               background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -3168,6 +4243,7 @@ module Aws::MediaConvert
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #               font_opacity: 1,
     #               font_resolution: 1,
+    #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
     #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #               outline_size: 1,
@@ -3175,15 +4251,24 @@ module Aws::MediaConvert
     #               shadow_opacity: 1,
     #               shadow_x_offset: 1,
     #               shadow_y_offset: 1,
+    #               subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #               x_position: 1,
     #               y_position: 1,
     #             },
+    #             embedded_destination_settings: {
+    #               destination_608_channel_number: 1,
+    #               destination_708_service_number: 1,
+    #             },
+    #             imsc_destination_settings: {
+    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
     #             scc_destination_settings: {
-    #               framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #               framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #             },
     #             teletext_destination_settings: {
     #               page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
+    #               page_types: ["PAGE_TYPE_INITIAL"], # accepts PAGE_TYPE_INITIAL, PAGE_TYPE_SUBTITLE, PAGE_TYPE_ADDL_INFO, PAGE_TYPE_PROGRAM_SCHEDULE, PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE
     #             },
     #             ttml_destination_settings: {
     #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -3194,7 +4279,11 @@ module Aws::MediaConvert
     #         },
     #       ],
     #       container_settings: {
-    #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #         cmfc_settings: {
+    #           scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #         },
+    #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #         f4v_settings: {
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #         },
@@ -3223,6 +4312,7 @@ module Aws::MediaConvert
     #           ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
     #           ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
     #           es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #           fragment_time: 1.0,
     #           max_pcr_interval: 1,
     #           min_ebp_interval: 1,
@@ -3236,6 +4326,9 @@ module Aws::MediaConvert
     #           private_metadata_pid: 1,
     #           program_number: 1,
     #           rate_mode: "VBR", # accepts VBR, CBR
+    #           scte_35_esam: {
+    #             scte_35_esam_pid: 1,
+    #           },
     #           scte_35_pid: 1,
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -3272,16 +4365,42 @@ module Aws::MediaConvert
     #         },
     #         mp_4_settings: {
     #           cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           ctts_version: 1,
     #           free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           mp_4_major_brand: "__string",
+    #         },
+    #         mpd_settings: {
+    #           caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #           scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #         },
+    #         mxf_settings: {
+    #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #         },
     #       },
     #       video_description: {
     #         afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #         anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #         codec_settings: {
-    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #           av_1_settings: {
+    #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             gop_size: 1.0,
+    #             max_bitrate: 1,
+    #             number_b_frames_between_reference_frames: 1,
+    #             qvbr_settings: {
+    #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
+    #             },
+    #             rate_control_mode: "QVBR", # accepts QVBR
+    #             slices: 1,
+    #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
+    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #           frame_capture_settings: {
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
@@ -3319,10 +4438,11 @@ module Aws::MediaConvert
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
     #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
     #             },
     #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
-    #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             softness: 1,
@@ -3362,10 +4482,11 @@ module Aws::MediaConvert
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
     #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
     #             },
     #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
-    #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -3422,6 +4543,36 @@ module Aws::MediaConvert
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, HARD
     #           },
+    #           vp_8_settings: {
+    #             bitrate: 1,
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             gop_size: 1.0,
+    #             hrd_buffer_size: 1,
+    #             max_bitrate: 1,
+    #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             par_denominator: 1,
+    #             par_numerator: 1,
+    #             quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #             rate_control_mode: "VBR", # accepts VBR
+    #           },
+    #           vp_9_settings: {
+    #             bitrate: 1,
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             gop_size: 1.0,
+    #             hrd_buffer_size: 1,
+    #             max_bitrate: 1,
+    #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             par_denominator: 1,
+    #             par_numerator: 1,
+    #             quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #             rate_control_mode: "VBR", # accepts VBR
+    #           },
     #         },
     #         color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #         crop: {
@@ -3470,6 +4621,14 @@ module Aws::MediaConvert
     #             control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #             mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #           },
+    #           dolby_vision: {
+    #             l6_metadata: {
+    #               max_cll: 1,
+    #               max_fall: 1,
+    #             },
+    #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #             profile: "PROFILE_5", # accepts PROFILE_5
+    #           },
     #           image_inserter: {
     #             insertable_images: [
     #               {
@@ -3477,7 +4636,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -3488,12 +4647,18 @@ module Aws::MediaConvert
     #             ],
     #           },
     #           noise_reducer: {
-    #             filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #             filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
     #             filter_settings: {
     #               strength: 1,
     #             },
     #             spatial_filter_settings: {
     #               post_filter_sharpen_strength: 1,
+    #               speed: 1,
+    #               strength: 1,
+    #             },
+    #             temporal_filter_settings: {
+    #               aggressive_mode: 1,
+    #               post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #               speed: 1,
     #               strength: 1,
     #             },
@@ -3521,7 +4686,7 @@ module Aws::MediaConvert
     #   resp.preset.last_updated #=> Time
     #   resp.preset.name #=> String
     #   resp.preset.settings.audio_descriptions #=> Array
-    #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2"
+    #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
@@ -3550,7 +4715,22 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "PASSTHROUGH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialogue_intelligence #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_rf #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_center_mix_level #=> Float
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_surround_mix_level #=> Float
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_center_mix_level #=> Float
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_surround_mix_level #=> Float
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.metering_mode #=> String, one of "LEQ_A", "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.speech_threshold #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.stereo_downmix #=> String, one of "NOT_INDICATED", "STEREO", "SURROUND", "DPL2"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_ex_mode #=> String, one of "NOT_INDICATED", "ENABLED", "DISABLED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -3575,6 +4755,17 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.opus_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.opus_settings.channels #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.opus_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.vorbis_settings.channels #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.vorbis_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.vorbis_settings.vbr_quality #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -3596,6 +4787,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -3606,13 +4798,14 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -3620,15 +4813,23 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.preset.settings.caption_descriptions[0].language_description #=> String
-    #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.preset.settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
@@ -3650,6 +4851,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.preset.settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.preset.settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.preset.settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.preset.settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -3663,6 +4865,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.preset.settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -3694,12 +4897,30 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.preset.settings.container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.preset.settings.container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.preset.settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES", "VP8", "VP9"
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -3733,9 +4954,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slices #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.softness #=> Integer
@@ -3772,9 +4994,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
-    #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slices #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -3826,6 +5049,32 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.prores_settings.par_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.hrd_buffer_size #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.par_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.rate_control_mode #=> String, one of "VBR"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.hrd_buffer_size #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.par_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.rate_control_mode #=> String, one of "VBR"
     #   resp.preset.settings.video_description.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.preset.settings.video_description.crop.height #=> Integer
     #   resp.preset.settings.video_description.crop.width #=> Integer
@@ -3862,6 +5111,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -3874,11 +5127,15 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].opacity #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
-    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL"
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -3894,9 +5151,9 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
-    # Create a new transcoding queue. For information about job templates
-    # see the User Guide at
-    # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    # Create a new transcoding queue. For information about queues, see
+    # Working With Queues in the User Guide at
+    # https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html
     #
     # @option params [String] :description
     #   Optional. A description of the queue that you are creating.
@@ -3905,16 +5162,20 @@ module Aws::MediaConvert
     #   The name of the queue that you are creating.
     #
     # @option params [String] :pricing_plan
-    #   Optional; default is on-demand. Specifies whether the pricing plan for
-    #   the queue is on-demand or reserved. The pricing plan for the queue
-    #   determines whether you pay on-demand or reserved pricing for the
-    #   transcoding jobs you run through the queue. For reserved queue
-    #   pricing, you must set up a contract. You can create a reserved queue
-    #   contract through the AWS Elemental MediaConvert console.
+    #   Specifies whether the pricing plan for the queue is on-demand or
+    #   reserved. For on-demand, you pay per minute, billed in increments of
+    #   .01 minute. For reserved, you pay for the transcoding capacity of the
+    #   entire queue, regardless of how much or how little you use it.
+    #   Reserved pricing requires a 12-month commitment. When you use the API
+    #   to create a queue, the default is on-demand.
     #
     # @option params [Types::ReservationPlanSettings] :reservation_plan_settings
     #   Details about the pricing plan for your reserved queue. Required for
     #   reserved queues and not applicable to on-demand queues.
+    #
+    # @option params [String] :status
+    #   Initial state of the queue. If you create a paused queue, then jobs in
+    #   that queue won't begin.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags that you want to add to the resource. You can tag resources
@@ -3935,6 +5196,7 @@ module Aws::MediaConvert
     #       renewal_type: "AUTO_RENEW", # required, accepts AUTO_RENEW, EXPIRE
     #       reserved_slots: 1, # required
     #     },
+    #     status: "ACTIVE", # accepts ACTIVE, PAUSED
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -4015,7 +5277,7 @@ module Aws::MediaConvert
     # Permanently delete a queue you have created.
     #
     # @option params [required, String] :name
-    #   The name of the queue to be deleted.
+    #   The name of the queue that you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4056,6 +5318,8 @@ module Aws::MediaConvert
     #
     #   * {Types::DescribeEndpointsResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
     #   * {Types::DescribeEndpointsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4122,22 +5386,43 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
+    #   resp.job.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
+    #   resp.job.acceleration_status #=> String, one of "NOT_APPLICABLE", "IN_PROGRESS", "ACCELERATED", "NOT_ACCELERATED"
     #   resp.job.arn #=> String
-    #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
+    #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE", "JOB"
     #   resp.job.created_at #=> Time
+    #   resp.job.current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.job.error_code #=> Integer
     #   resp.job.error_message #=> String
+    #   resp.job.hop_destinations #=> Array
+    #   resp.job.hop_destinations[0].priority #=> Integer
+    #   resp.job.hop_destinations[0].queue #=> String
+    #   resp.job.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job.id #=> String
+    #   resp.job.job_percent_complete #=> Integer
     #   resp.job.job_template #=> String
+    #   resp.job.messages.info #=> Array
+    #   resp.job.messages.info[0] #=> String
+    #   resp.job.messages.warning #=> Array
+    #   resp.job.messages.warning[0] #=> String
     #   resp.job.output_group_details #=> Array
     #   resp.job.output_group_details[0].output_details #=> Array
     #   resp.job.output_group_details[0].output_details[0].duration_in_ms #=> Integer
     #   resp.job.output_group_details[0].output_details[0].video_details.height_in_px #=> Integer
     #   resp.job.output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
+    #   resp.job.priority #=> Integer
     #   resp.job.queue #=> String
+    #   resp.job.queue_transitions #=> Array
+    #   resp.job.queue_transitions[0].destination_queue #=> String
+    #   resp.job.queue_transitions[0].source_queue #=> String
+    #   resp.job.queue_transitions[0].timestamp #=> Time
+    #   resp.job.retry_count #=> Integer
     #   resp.job.role #=> String
     #   resp.job.settings.ad_avail_offset #=> Integer
     #   resp.job.settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.job.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.job.settings.esam.response_signal_preroll #=> Integer
+    #   resp.job.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job.settings.inputs #=> Array
     #   resp.job.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -4162,16 +5447,26 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors #=> Hash
     #   resp.job.settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_channel_number #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
+    #   resp.job.settings.inputs[0].crop.height #=> Integer
+    #   resp.job.settings.inputs[0].crop.width #=> Integer
+    #   resp.job.settings.inputs[0].crop.x #=> Integer
+    #   resp.job.settings.inputs[0].crop.y #=> Integer
     #   resp.job.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.inputs[0].decryption_settings.decryption_mode #=> String, one of "AES_CTR", "AES_CBC", "AES_GCM"
     #   resp.job.settings.inputs[0].decryption_settings.encrypted_decryption_key #=> String
@@ -4196,9 +5491,17 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].input_clippings #=> Array
     #   resp.job.settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.job.settings.inputs[0].input_clippings[0].start_timecode #=> String
+    #   resp.job.settings.inputs[0].position.height #=> Integer
+    #   resp.job.settings.inputs[0].position.width #=> Integer
+    #   resp.job.settings.inputs[0].position.x #=> Integer
+    #   resp.job.settings.inputs[0].position.y #=> Integer
     #   resp.job.settings.inputs[0].program_number #=> Integer
     #   resp.job.settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
+    #   resp.job.settings.inputs[0].supplemental_imps #=> Array
+    #   resp.job.settings.inputs[0].supplemental_imps[0] #=> String
     #   resp.job.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
+    #   resp.job.settings.inputs[0].timecode_start #=> String
+    #   resp.job.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -4215,6 +5518,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.job.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.motion_image_inserter.input #=> String
@@ -4228,30 +5532,54 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups #=> Array
     #   resp.job.settings.output_groups[0].custom_name #=> String
     #   resp.job.settings.output_groups[0].name #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
-    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids[0] #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids[0] #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.resource_id #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format_versions #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
-    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "STATIC_KEY"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -4260,12 +5588,20 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -4276,10 +5612,14 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -4304,8 +5644,15 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -4316,7 +5663,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job.settings.output_groups[0].outputs #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
-    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
@@ -4345,7 +5692,22 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "PASSTHROUGH"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialogue_intelligence #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_rf #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_center_mix_level #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_surround_mix_level #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_center_mix_level #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_surround_mix_level #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.metering_mode #=> String, one of "LEQ_A", "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.speech_threshold #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.stereo_downmix #=> String, one of "NOT_INDICATED", "STEREO", "SURROUND", "DPL2"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_ex_mode #=> String, one of "NOT_INDICATED", "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -4370,6 +5732,17 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.channels #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.channels #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.vbr_quality #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -4392,6 +5765,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -4402,13 +5776,14 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -4416,15 +5791,23 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
-    #   resp.job.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
@@ -4446,6 +5829,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -4459,6 +5843,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -4490,12 +5875,18 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -4503,7 +5894,20 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES", "VP8", "VP9"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -4537,9 +5941,10 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.softness #=> Integer
@@ -4576,9 +5981,10 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -4630,6 +6036,32 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.par_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.gop_size #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.hrd_buffer_size #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.max_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.rate_control_mode #=> String, one of "VBR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.gop_size #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.hrd_buffer_size #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.max_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.rate_control_mode #=> String, one of "VBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.crop.height #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.crop.width #=> Integer
@@ -4666,6 +6098,10 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -4678,11 +6114,15 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -4694,7 +6134,9 @@ module Aws::MediaConvert
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.job.simulate_reserved_queue #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.status #=> String, one of "SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"
+    #   resp.job.status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job.timing.finish_time #=> Time
     #   resp.job.timing.start_time #=> Time
     #   resp.job.timing.submit_time #=> Time
@@ -4727,15 +6169,24 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
+    #   resp.job_template.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
     #   resp.job_template.arn #=> String
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
     #   resp.job_template.description #=> String
+    #   resp.job_template.hop_destinations #=> Array
+    #   resp.job_template.hop_destinations[0].priority #=> Integer
+    #   resp.job_template.hop_destinations[0].queue #=> String
+    #   resp.job_template.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job_template.last_updated #=> Time
     #   resp.job_template.name #=> String
+    #   resp.job_template.priority #=> Integer
     #   resp.job_template.queue #=> String
     #   resp.job_template.settings.ad_avail_offset #=> Integer
     #   resp.job_template.settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.job_template.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.job_template.settings.esam.response_signal_preroll #=> Integer
+    #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -4760,16 +6211,26 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors #=> Hash
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_channel_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
+    #   resp.job_template.settings.inputs[0].crop.height #=> Integer
+    #   resp.job_template.settings.inputs[0].crop.width #=> Integer
+    #   resp.job_template.settings.inputs[0].crop.x #=> Integer
+    #   resp.job_template.settings.inputs[0].crop.y #=> Integer
     #   resp.job_template.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
@@ -4789,9 +6250,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].input_clippings #=> Array
     #   resp.job_template.settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.job_template.settings.inputs[0].input_clippings[0].start_timecode #=> String
+    #   resp.job_template.settings.inputs[0].position.height #=> Integer
+    #   resp.job_template.settings.inputs[0].position.width #=> Integer
+    #   resp.job_template.settings.inputs[0].position.x #=> Integer
+    #   resp.job_template.settings.inputs[0].position.y #=> Integer
     #   resp.job_template.settings.inputs[0].program_number #=> Integer
     #   resp.job_template.settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
     #   resp.job_template.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
+    #   resp.job_template.settings.inputs[0].timecode_start #=> String
+    #   resp.job_template.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job_template.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -4808,6 +6275,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.input #=> String
@@ -4821,30 +6289,54 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups #=> Array
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
-    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids[0] #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids[0] #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.resource_id #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format_versions #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
-    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "STATIC_KEY"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -4853,12 +6345,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -4869,10 +6369,14 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -4897,8 +6401,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -4909,7 +6420,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
-    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
@@ -4938,7 +6449,22 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "PASSTHROUGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialogue_intelligence #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_rf #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_center_mix_level #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_surround_mix_level #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_center_mix_level #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_surround_mix_level #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.metering_mode #=> String, one of "LEQ_A", "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.speech_threshold #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.stereo_downmix #=> String, one of "NOT_INDICATED", "STEREO", "SURROUND", "DPL2"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_ex_mode #=> String, one of "NOT_INDICATED", "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -4963,6 +6489,17 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.channels #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.channels #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.vbr_quality #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -4985,6 +6522,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -4995,13 +6533,14 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -5009,15 +6548,23 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
-    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
@@ -5039,6 +6586,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -5052,6 +6600,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -5083,12 +6632,18 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -5096,7 +6651,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES", "VP8", "VP9"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -5130,9 +6698,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.softness #=> Integer
@@ -5169,9 +6738,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -5223,6 +6793,32 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.par_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.hrd_buffer_size #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.rate_control_mode #=> String, one of "VBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.hrd_buffer_size #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.rate_control_mode #=> String, one of "VBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.crop.height #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.crop.width #=> Integer
@@ -5259,6 +6855,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -5271,11 +6871,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -5287,6 +6891,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.job_template.status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job_template.type #=> String, one of "SYSTEM", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJobTemplate AWS API Documentation
@@ -5322,7 +6927,7 @@ module Aws::MediaConvert
     #   resp.preset.last_updated #=> Time
     #   resp.preset.name #=> String
     #   resp.preset.settings.audio_descriptions #=> Array
-    #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2"
+    #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
@@ -5351,7 +6956,22 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "PASSTHROUGH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialogue_intelligence #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_rf #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_center_mix_level #=> Float
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_surround_mix_level #=> Float
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_center_mix_level #=> Float
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_surround_mix_level #=> Float
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.metering_mode #=> String, one of "LEQ_A", "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.speech_threshold #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.stereo_downmix #=> String, one of "NOT_INDICATED", "STEREO", "SURROUND", "DPL2"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_ex_mode #=> String, one of "NOT_INDICATED", "ENABLED", "DISABLED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -5376,6 +6996,17 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.opus_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.opus_settings.channels #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.opus_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.vorbis_settings.channels #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.vorbis_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.vorbis_settings.vbr_quality #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -5397,6 +7028,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -5407,13 +7039,14 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -5421,15 +7054,23 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.preset.settings.caption_descriptions[0].language_description #=> String
-    #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.preset.settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
@@ -5451,6 +7092,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.preset.settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.preset.settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.preset.settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.preset.settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -5464,6 +7106,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.preset.settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -5495,12 +7138,30 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.preset.settings.container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.preset.settings.container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.preset.settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES", "VP8", "VP9"
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -5534,9 +7195,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slices #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.softness #=> Integer
@@ -5573,9 +7235,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
-    #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slices #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -5627,6 +7290,32 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.prores_settings.par_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.hrd_buffer_size #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.par_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.rate_control_mode #=> String, one of "VBR"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.hrd_buffer_size #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.par_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.rate_control_mode #=> String, one of "VBR"
     #   resp.preset.settings.video_description.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.preset.settings.video_description.crop.height #=> Integer
     #   resp.preset.settings.video_description.crop.width #=> Integer
@@ -5663,6 +7352,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -5675,11 +7368,15 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].opacity #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
-    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL"
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -5761,14 +7458,16 @@ module Aws::MediaConvert
     #   request the next batch of job templates.
     #
     # @option params [String] :order
-    #   When you request lists of resources, you can optionally specify
-    #   whether they are sorted in ASCENDING or DESCENDING order. Default
-    #   varies by resource.
+    #   Optional. When you request lists of resources, you can specify whether
+    #   they are sorted in ASCENDING or DESCENDING order. Default varies by
+    #   resource.
     #
     # @return [Types::ListJobTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListJobTemplatesResponse#job_templates #job_templates} => Array&lt;Types::JobTemplate&gt;
     #   * {Types::ListJobTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5783,15 +7482,24 @@ module Aws::MediaConvert
     # @example Response structure
     #
     #   resp.job_templates #=> Array
+    #   resp.job_templates[0].acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
     #   resp.job_templates[0].arn #=> String
     #   resp.job_templates[0].category #=> String
     #   resp.job_templates[0].created_at #=> Time
     #   resp.job_templates[0].description #=> String
+    #   resp.job_templates[0].hop_destinations #=> Array
+    #   resp.job_templates[0].hop_destinations[0].priority #=> Integer
+    #   resp.job_templates[0].hop_destinations[0].queue #=> String
+    #   resp.job_templates[0].hop_destinations[0].wait_minutes #=> Integer
     #   resp.job_templates[0].last_updated #=> Time
     #   resp.job_templates[0].name #=> String
+    #   resp.job_templates[0].priority #=> Integer
     #   resp.job_templates[0].queue #=> String
     #   resp.job_templates[0].settings.ad_avail_offset #=> Integer
     #   resp.job_templates[0].settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.job_templates[0].settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.job_templates[0].settings.esam.response_signal_preroll #=> Integer
+    #   resp.job_templates[0].settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_templates[0].settings.inputs #=> Array
     #   resp.job_templates[0].settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job_templates[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -5816,16 +7524,26 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].caption_selectors #=> Hash
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_channel_number #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].crop.height #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].crop.width #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].crop.x #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].crop.y #=> Integer
     #   resp.job_templates[0].settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
@@ -5845,9 +7563,15 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].input_clippings #=> Array
     #   resp.job_templates[0].settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.job_templates[0].settings.inputs[0].input_clippings[0].start_timecode #=> String
+    #   resp.job_templates[0].settings.inputs[0].position.height #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].position.width #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].position.x #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].position.y #=> Integer
     #   resp.job_templates[0].settings.inputs[0].program_number #=> Integer
     #   resp.job_templates[0].settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
     #   resp.job_templates[0].settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
+    #   resp.job_templates[0].settings.inputs[0].timecode_start #=> String
+    #   resp.job_templates[0].settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job_templates[0].settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job_templates[0].settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -5864,6 +7588,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.job_templates[0].settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job_templates[0].settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job_templates[0].settings.motion_image_inserter.input #=> String
@@ -5877,30 +7602,54 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups #=> Array
     #   resp.job_templates[0].settings.output_groups[0].custom_name #=> String
     #   resp.job_templates[0].settings.output_groups[0].name #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
-    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids[0] #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids[0] #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.resource_id #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format_versions #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
-    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "STATIC_KEY"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -5909,12 +7658,20 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -5925,10 +7682,14 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -5953,8 +7714,15 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -5965,7 +7733,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job_templates[0].settings.output_groups[0].outputs #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions #=> Array
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
@@ -5994,7 +7762,22 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "PASSTHROUGH"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialogue_intelligence #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_rf #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_center_mix_level #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_surround_mix_level #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_center_mix_level #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_surround_mix_level #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.metering_mode #=> String, one of "LEQ_A", "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.sample_rate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.speech_threshold #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.stereo_downmix #=> String, one of "NOT_INDICATED", "STEREO", "SURROUND", "DPL2"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_ex_mode #=> String, one of "NOT_INDICATED", "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -6019,6 +7802,17 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.channels #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.sample_rate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.channels #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.sample_rate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.vbr_quality #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -6041,6 +7835,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -6051,13 +7846,14 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -6065,15 +7861,23 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
@@ -6095,6 +7899,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -6108,6 +7913,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -6139,12 +7945,18 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -6152,7 +7964,20 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES", "VP8", "VP9"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -6186,9 +8011,10 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.softness #=> Integer
@@ -6225,9 +8051,10 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -6279,6 +8106,32 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.par_numerator #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_denominator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_numerator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.gop_size #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.hrd_buffer_size #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.max_bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_denominator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_numerator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.rate_control_mode #=> String, one of "VBR"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_denominator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_numerator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.gop_size #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.hrd_buffer_size #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.max_bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_denominator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_numerator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.rate_control_mode #=> String, one of "VBR"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.crop.height #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.crop.width #=> Integer
@@ -6315,6 +8168,10 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -6327,11 +8184,15 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].opacity #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -6343,6 +8204,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job_templates[0].settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job_templates[0].settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.job_templates[0].status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job_templates[0].type #=> String, one of "SYSTEM", "CUSTOM"
     #   resp.next_token #=> String
     #
@@ -6366,25 +8228,27 @@ module Aws::MediaConvert
     #   time.
     #
     # @option params [String] :next_token
-    #   Use this string, provided with the response to a previous request, to
-    #   request the next batch of jobs.
+    #   Optional. Use this string, provided with the response to a previous
+    #   request, to request the next batch of jobs.
     #
     # @option params [String] :order
-    #   When you request lists of resources, you can optionally specify
-    #   whether they are sorted in ASCENDING or DESCENDING order. Default
-    #   varies by resource.
+    #   Optional. When you request lists of resources, you can specify whether
+    #   they are sorted in ASCENDING or DESCENDING order. Default varies by
+    #   resource.
     #
     # @option params [String] :queue
-    #   Provide a queue name to get back only jobs from that queue.
+    #   Optional. Provide a queue name to get back only jobs from that queue.
     #
     # @option params [String] :status
-    #   A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or
-    #   ERROR.
+    #   Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE,
+    #   CANCELED, or ERROR.
     #
     # @return [Types::ListJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListJobsResponse#jobs #jobs} => Array&lt;Types::Job&gt;
     #   * {Types::ListJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6399,22 +8263,43 @@ module Aws::MediaConvert
     # @example Response structure
     #
     #   resp.jobs #=> Array
+    #   resp.jobs[0].acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
+    #   resp.jobs[0].acceleration_status #=> String, one of "NOT_APPLICABLE", "IN_PROGRESS", "ACCELERATED", "NOT_ACCELERATED"
     #   resp.jobs[0].arn #=> String
-    #   resp.jobs[0].billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
+    #   resp.jobs[0].billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE", "JOB"
     #   resp.jobs[0].created_at #=> Time
+    #   resp.jobs[0].current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.jobs[0].error_code #=> Integer
     #   resp.jobs[0].error_message #=> String
+    #   resp.jobs[0].hop_destinations #=> Array
+    #   resp.jobs[0].hop_destinations[0].priority #=> Integer
+    #   resp.jobs[0].hop_destinations[0].queue #=> String
+    #   resp.jobs[0].hop_destinations[0].wait_minutes #=> Integer
     #   resp.jobs[0].id #=> String
+    #   resp.jobs[0].job_percent_complete #=> Integer
     #   resp.jobs[0].job_template #=> String
+    #   resp.jobs[0].messages.info #=> Array
+    #   resp.jobs[0].messages.info[0] #=> String
+    #   resp.jobs[0].messages.warning #=> Array
+    #   resp.jobs[0].messages.warning[0] #=> String
     #   resp.jobs[0].output_group_details #=> Array
     #   resp.jobs[0].output_group_details[0].output_details #=> Array
     #   resp.jobs[0].output_group_details[0].output_details[0].duration_in_ms #=> Integer
     #   resp.jobs[0].output_group_details[0].output_details[0].video_details.height_in_px #=> Integer
     #   resp.jobs[0].output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
+    #   resp.jobs[0].priority #=> Integer
     #   resp.jobs[0].queue #=> String
+    #   resp.jobs[0].queue_transitions #=> Array
+    #   resp.jobs[0].queue_transitions[0].destination_queue #=> String
+    #   resp.jobs[0].queue_transitions[0].source_queue #=> String
+    #   resp.jobs[0].queue_transitions[0].timestamp #=> Time
+    #   resp.jobs[0].retry_count #=> Integer
     #   resp.jobs[0].role #=> String
     #   resp.jobs[0].settings.ad_avail_offset #=> Integer
     #   resp.jobs[0].settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.jobs[0].settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.jobs[0].settings.esam.response_signal_preroll #=> Integer
+    #   resp.jobs[0].settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.jobs[0].settings.inputs #=> Array
     #   resp.jobs[0].settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.jobs[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -6439,16 +8324,26 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].caption_selectors #=> Hash
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_channel_number #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
+    #   resp.jobs[0].settings.inputs[0].crop.height #=> Integer
+    #   resp.jobs[0].settings.inputs[0].crop.width #=> Integer
+    #   resp.jobs[0].settings.inputs[0].crop.x #=> Integer
+    #   resp.jobs[0].settings.inputs[0].crop.y #=> Integer
     #   resp.jobs[0].settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.inputs[0].decryption_settings.decryption_mode #=> String, one of "AES_CTR", "AES_CBC", "AES_GCM"
     #   resp.jobs[0].settings.inputs[0].decryption_settings.encrypted_decryption_key #=> String
@@ -6473,9 +8368,17 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].input_clippings #=> Array
     #   resp.jobs[0].settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.jobs[0].settings.inputs[0].input_clippings[0].start_timecode #=> String
+    #   resp.jobs[0].settings.inputs[0].position.height #=> Integer
+    #   resp.jobs[0].settings.inputs[0].position.width #=> Integer
+    #   resp.jobs[0].settings.inputs[0].position.x #=> Integer
+    #   resp.jobs[0].settings.inputs[0].position.y #=> Integer
     #   resp.jobs[0].settings.inputs[0].program_number #=> Integer
     #   resp.jobs[0].settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
+    #   resp.jobs[0].settings.inputs[0].supplemental_imps #=> Array
+    #   resp.jobs[0].settings.inputs[0].supplemental_imps[0] #=> String
     #   resp.jobs[0].settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
+    #   resp.jobs[0].settings.inputs[0].timecode_start #=> String
+    #   resp.jobs[0].settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.jobs[0].settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.jobs[0].settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -6492,6 +8395,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.pid #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.jobs[0].settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.jobs[0].settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.jobs[0].settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.jobs[0].settings.motion_image_inserter.input #=> String
@@ -6505,30 +8409,54 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups #=> Array
     #   resp.jobs[0].settings.output_groups[0].custom_name #=> String
     #   resp.jobs[0].settings.output_groups[0].name #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
-    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids[0] #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids[0] #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.resource_id #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format_versions #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
-    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "STATIC_KEY"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -6537,12 +8465,20 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -6553,10 +8489,14 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -6581,8 +8521,15 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -6593,7 +8540,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.jobs[0].settings.output_groups[0].outputs #=> Array
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions #=> Array
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
@@ -6622,7 +8569,22 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "PASSTHROUGH"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialogue_intelligence #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_rf #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_center_mix_level #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_surround_mix_level #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_center_mix_level #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_surround_mix_level #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.metering_mode #=> String, one of "LEQ_A", "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.sample_rate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.speech_threshold #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.stereo_downmix #=> String, one of "NOT_INDICATED", "STEREO", "SURROUND", "DPL2"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_ex_mode #=> String, one of "NOT_INDICATED", "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -6647,6 +8609,17 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.channels #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.sample_rate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.channels #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.sample_rate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.vbr_quality #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -6669,6 +8642,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -6679,13 +8653,14 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -6693,15 +8668,23 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
@@ -6723,6 +8706,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -6736,6 +8720,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -6767,12 +8752,18 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].extension #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -6780,7 +8771,20 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].preset #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES", "VP8", "VP9"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -6814,9 +8818,10 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.softness #=> Integer
@@ -6853,9 +8858,10 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -6907,6 +8913,32 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.par_numerator #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_denominator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_numerator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.gop_size #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.hrd_buffer_size #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.max_bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_denominator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_numerator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.rate_control_mode #=> String, one of "VBR"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_denominator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_numerator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.gop_size #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.hrd_buffer_size #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.max_bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_denominator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_numerator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.rate_control_mode #=> String, one of "VBR"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.crop.height #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.crop.width #=> Integer
@@ -6943,6 +8975,10 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -6955,11 +8991,15 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].opacity #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -6971,7 +9011,9 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.jobs[0].settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.jobs[0].settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.jobs[0].simulate_reserved_queue #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].status #=> String, one of "SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"
+    #   resp.jobs[0].status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.jobs[0].timing.finish_time #=> Time
     #   resp.jobs[0].timing.start_time #=> Time
     #   resp.jobs[0].timing.submit_time #=> Time
@@ -7011,14 +9053,16 @@ module Aws::MediaConvert
     #   request the next batch of presets.
     #
     # @option params [String] :order
-    #   When you request lists of resources, you can optionally specify
-    #   whether they are sorted in ASCENDING or DESCENDING order. Default
-    #   varies by resource.
+    #   Optional. When you request lists of resources, you can specify whether
+    #   they are sorted in ASCENDING or DESCENDING order. Default varies by
+    #   resource.
     #
     # @return [Types::ListPresetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPresetsResponse#next_token #next_token} => String
     #   * {Types::ListPresetsResponse#presets #presets} => Array&lt;Types::Preset&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7041,7 +9085,7 @@ module Aws::MediaConvert
     #   resp.presets[0].last_updated #=> Time
     #   resp.presets[0].name #=> String
     #   resp.presets[0].settings.audio_descriptions #=> Array
-    #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2"
+    #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
@@ -7070,7 +9114,22 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "PASSTHROUGH"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialogue_intelligence #=> String, one of "ENABLED", "DISABLED"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_rf #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_center_mix_level #=> Float
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_surround_mix_level #=> Float
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_center_mix_level #=> Float
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_surround_mix_level #=> Float
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.metering_mode #=> String, one of "LEQ_A", "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.sample_rate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.speech_threshold #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.stereo_downmix #=> String, one of "NOT_INDICATED", "STEREO", "SURROUND", "DPL2"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_ex_mode #=> String, one of "NOT_INDICATED", "ENABLED", "DISABLED"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -7095,6 +9154,17 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.opus_settings.bitrate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.opus_settings.channels #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.opus_settings.sample_rate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.vorbis_settings.channels #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.vorbis_settings.sample_rate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.vorbis_settings.vbr_quality #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -7116,6 +9186,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -7126,13 +9197,14 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -7140,15 +9212,23 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.presets[0].settings.caption_descriptions[0].language_description #=> String
-    #   resp.presets[0].settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
+    #   resp.presets[0].settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.presets[0].settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.presets[0].settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.presets[0].settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.presets[0].settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.presets[0].settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
@@ -7170,6 +9250,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.presets[0].settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.presets[0].settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.presets[0].settings.container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.presets[0].settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.presets[0].settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -7183,6 +9264,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.presets[0].settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -7214,12 +9296,30 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.presets[0].settings.container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.presets[0].settings.container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.presets[0].settings.container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.presets[0].settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.presets[0].settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.presets[0].settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.presets[0].settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.presets[0].settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.presets[0].settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.presets[0].settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.presets[0].settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.presets[0].settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES", "VP8", "VP9"
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -7253,9 +9353,10 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
-    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.slices #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.softness #=> Integer
@@ -7292,9 +9393,10 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
-    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.slices #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -7346,6 +9448,32 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.prores_settings.par_numerator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
+    #   resp.presets[0].settings.video_description.codec_settings.vp_8_settings.bitrate #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_8_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.presets[0].settings.video_description.codec_settings.vp_8_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.presets[0].settings.video_description.codec_settings.vp_8_settings.framerate_denominator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_8_settings.framerate_numerator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_8_settings.gop_size #=> Float
+    #   resp.presets[0].settings.video_description.codec_settings.vp_8_settings.hrd_buffer_size #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_8_settings.max_bitrate #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_8_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.presets[0].settings.video_description.codec_settings.vp_8_settings.par_denominator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_8_settings.par_numerator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_8_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.presets[0].settings.video_description.codec_settings.vp_8_settings.rate_control_mode #=> String, one of "VBR"
+    #   resp.presets[0].settings.video_description.codec_settings.vp_9_settings.bitrate #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_9_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.presets[0].settings.video_description.codec_settings.vp_9_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.presets[0].settings.video_description.codec_settings.vp_9_settings.framerate_denominator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_9_settings.framerate_numerator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_9_settings.gop_size #=> Float
+    #   resp.presets[0].settings.video_description.codec_settings.vp_9_settings.hrd_buffer_size #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_9_settings.max_bitrate #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_9_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.presets[0].settings.video_description.codec_settings.vp_9_settings.par_denominator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_9_settings.par_numerator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.vp_9_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.presets[0].settings.video_description.codec_settings.vp_9_settings.rate_control_mode #=> String, one of "VBR"
     #   resp.presets[0].settings.video_description.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.presets[0].settings.video_description.crop.height #=> Integer
     #   resp.presets[0].settings.video_description.crop.width #=> Integer
@@ -7382,6 +9510,10 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.presets[0].settings.video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.presets[0].settings.video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -7394,11 +9526,15 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images[0].opacity #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
-    #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL"
+    #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.presets[0].settings.video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -7432,14 +9568,16 @@ module Aws::MediaConvert
     #   request the next batch of queues.
     #
     # @option params [String] :order
-    #   When you request lists of resources, you can optionally specify
-    #   whether they are sorted in ASCENDING or DESCENDING order. Default
-    #   varies by resource.
+    #   Optional. When you request lists of resources, you can specify whether
+    #   they are sorted in ASCENDING or DESCENDING order. Default varies by
+    #   resource.
     #
     # @return [Types::ListQueuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListQueuesResponse#next_token #next_token} => String
     #   * {Types::ListQueuesResponse#queues #queues} => Array&lt;Types::Queue&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7574,14 +9712,30 @@ module Aws::MediaConvert
 
     # Modify one of your existing job templates.
     #
+    # @option params [Types::AccelerationSettings] :acceleration_settings
+    #   Accelerated transcoding can significantly speed up jobs with long,
+    #   visually complex content. Outputs that use this feature incur pro-tier
+    #   pricing. For information about feature limitations, see the AWS
+    #   Elemental MediaConvert User Guide.
+    #
     # @option params [String] :category
     #   The new category for the job template, if you are changing it.
     #
     # @option params [String] :description
     #   The new description for the job template, if you are changing it.
     #
+    # @option params [Array<Types::HopDestination>] :hop_destinations
+    #   Optional list of hop destinations.
+    #
     # @option params [required, String] :name
     #   The name of the job template you are modifying
+    #
+    # @option params [Integer] :priority
+    #   Specify the relative priority for this job. In any given queue, the
+    #   service begins processing the job with the highest value first. When
+    #   more than one job has the same priority, the service begins processing
+    #   the job that you submitted first. If you don't specify a priority,
+    #   the service uses the default value 0.
     #
     # @option params [String] :queue
     #   The new queue for the job template, if you are changing it.
@@ -7590,6 +9744,13 @@ module Aws::MediaConvert
     #   JobTemplateSettings contains all the transcode settings saved in the
     #   template that will be applied to jobs created from it.
     #
+    # @option params [String] :status_update_interval
+    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
+    #   CloudWatch Events. Set the interval, in seconds, between status
+    #   updates. MediaConvert sends an update at this interval from the time
+    #   the service begins processing your job to the time it completes the
+    #   transcode or encounters an error.
+    #
     # @return [Types::UpdateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateJobTemplateResponse#job_template #job_template} => Types::JobTemplate
@@ -7597,14 +9758,34 @@ module Aws::MediaConvert
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_job_template({
+    #     acceleration_settings: {
+    #       mode: "DISABLED", # required, accepts DISABLED, ENABLED, PREFERRED
+    #     },
     #     category: "__string",
     #     description: "__string",
+    #     hop_destinations: [
+    #       {
+    #         priority: 1,
+    #         queue: "__string",
+    #         wait_minutes: 1,
+    #       },
+    #     ],
     #     name: "__string", # required
+    #     priority: 1,
     #     queue: "__string",
     #     settings: {
     #       ad_avail_offset: 1,
     #       avail_blanking: {
-    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG",
+    #       },
+    #       esam: {
+    #         manifest_confirm_condition_notification: {
+    #           mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS",
+    #         },
+    #         response_signal_preroll: 1,
+    #         signal_processing_notification: {
+    #           scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
+    #         },
     #       },
     #       inputs: [
     #         {
@@ -7617,7 +9798,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #               external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               offset: 1,
     #               pids: [1],
@@ -7643,7 +9824,9 @@ module Aws::MediaConvert
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               source_settings: {
     #                 ancillary_source_settings: {
+    #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                   source_ancillary_channel_number: 1,
+    #                   terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                 },
     #                 dvb_sub_source_settings: {
     #                   pid: 1,
@@ -7652,18 +9835,32 @@ module Aws::MediaConvert
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
     #                   source_608_channel_number: 1,
     #                   source_608_track_number: 1,
+    #                   terminate_captions: "END_OF_INPUT", # accepts END_OF_INPUT, DISABLED
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
+    #                   framerate: {
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                   },
+    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
-    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
+    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                 },
+    #                 track_source_settings: {
+    #                   track_number: 1,
+    #                 },
     #               },
     #             },
+    #           },
+    #           crop: {
+    #             height: 1,
+    #             width: 1,
+    #             x: 1,
+    #             y: 1,
     #           },
     #           deblock_filter: "ENABLED", # accepts ENABLED, DISABLED
     #           denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
@@ -7676,7 +9873,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -7692,10 +9889,18 @@ module Aws::MediaConvert
     #               start_timecode: "__stringPattern010920405090509092",
     #             },
     #           ],
+    #           position: {
+    #             height: 1,
+    #             width: 1,
+    #             x: 1,
+    #             y: 1,
+    #           },
     #           program_number: 1,
     #           psi_control: "IGNORE_PSI", # accepts IGNORE_PSI, USE_PSI
     #           timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
+    #           timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #           video_selector: {
+    #             alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #             color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #             hdr_10_metadata: {
@@ -7714,6 +9919,7 @@ module Aws::MediaConvert
     #             },
     #             pid: 1,
     #             program_number: 1,
+    #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #           },
     #         },
     #       ],
@@ -7722,7 +9928,7 @@ module Aws::MediaConvert
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #         },
-    #         input: "__stringMin14Max1285PatternS3Mov09Png",
+    #         input: "__stringMin14Max1285PatternS3Mov09PngHttpsMov09Png",
     #         insertion_mode: "MOV", # accepts MOV, PNG
     #         offset: {
     #           image_x: 1,
@@ -7741,39 +9947,83 @@ module Aws::MediaConvert
     #           name: "__string",
     #           output_group_settings: {
     #             cmaf_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
-    #                 encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #                 encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 speke_key_provider: {
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
+    #                   dash_signaled_system_ids: ["__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
+    #                   hls_signaled_system_ids: ["__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
+    #                   resource_id: "__stringPatternW",
+    #                   url: "__stringPatternHttps",
+    #                 },
     #                 static_key_provider: {
     #                   key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
     #                   key_format_versions: "__stringPatternDD",
     #                   static_key_value: "__stringPatternAZaZ0932",
     #                   url: "__string",
     #                 },
-    #                 type: "STATIC_KEY", # accepts STATIC_KEY
+    #                 type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #               },
     #               fragment_length: 1,
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
+    #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             dash_iso_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
+    #                 playback_device_compatibility: "CENC_V1", # accepts CENC_V1, UNENCRYPTED_SEI
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -7782,15 +10032,33 @@ module Aws::MediaConvert
     #               fragment_length: 1,
     #               hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #               min_buffer_time: 1,
+    #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             file_group_settings: {
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #             },
     #             hls_group_settings: {
     #               ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               base_url: "__string",
     #               caption_language_mappings: [
     #                 {
@@ -7804,13 +10072,25 @@ module Aws::MediaConvert
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #               encryption: {
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -7839,11 +10119,28 @@ module Aws::MediaConvert
     #               timestamp_delta_milliseconds: 1,
     #             },
     #             ms_smooth_group_settings: {
+    #               additional_manifests: [
+    #                 {
+    #                   manifest_name_modifier: "__stringMin1",
+    #                   selected_outputs: ["__stringMin1"],
+    #                 },
+    #               ],
     #               audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   access_control: {
+    #                     canned_acl: "PUBLIC_READ", # accepts PUBLIC_READ, AUTHENTICATED_READ, BUCKET_OWNER_READ, BUCKET_OWNER_FULL_CONTROL
+    #                   },
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -7859,7 +10156,7 @@ module Aws::MediaConvert
     #               audio_descriptions: [
     #                 {
     #                   audio_normalization_settings: {
-    #                     algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2
+    #                     algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
     #                     algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO, MEASURE_ONLY
     #                     correction_gate_level: 1,
     #                     loudness_logging: "LOG", # accepts LOG, DONT_LOG
@@ -7896,7 +10193,24 @@ module Aws::MediaConvert
     #                       channels: 1,
     #                       sample_rate: 1,
     #                     },
-    #                     codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #                     codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
+    #                     eac_3_atmos_settings: {
+    #                       bitrate: 1,
+    #                       bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
+    #                       coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #                       dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #                       dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                       dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #                       lo_ro_center_mix_level: 1.0,
+    #                       lo_ro_surround_mix_level: 1.0,
+    #                       lt_rt_center_mix_level: 1.0,
+    #                       lt_rt_surround_mix_level: 1.0,
+    #                       metering_mode: "LEQ_A", # accepts LEQ_A, ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
+    #                       sample_rate: 1,
+    #                       speech_threshold: 1,
+    #                       stereo_downmix: "NOT_INDICATED", # accepts NOT_INDICATED, STEREO, SURROUND, DPL2
+    #                       surround_ex_mode: "NOT_INDICATED", # accepts NOT_INDICATED, ENABLED, DISABLED
+    #                     },
     #                     eac_3_settings: {
     #                       attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                       bitrate: 1,
@@ -7925,6 +10239,23 @@ module Aws::MediaConvert
     #                       channels: 1,
     #                       sample_rate: 1,
     #                     },
+    #                     mp_3_settings: {
+    #                       bitrate: 1,
+    #                       channels: 1,
+    #                       rate_control_mode: "CBR", # accepts CBR, VBR
+    #                       sample_rate: 1,
+    #                       vbr_quality: 1,
+    #                     },
+    #                     opus_settings: {
+    #                       bitrate: 1,
+    #                       channels: 1,
+    #                       sample_rate: 1,
+    #                     },
+    #                     vorbis_settings: {
+    #                       channels: 1,
+    #                       sample_rate: 1,
+    #                       vbr_quality: 1,
+    #                     },
     #                     wav_settings: {
     #                       bit_depth: 1,
     #                       channels: 1,
@@ -7932,7 +10263,7 @@ module Aws::MediaConvert
     #                       sample_rate: 1,
     #                     },
     #                   },
-    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                   remix_settings: {
@@ -7952,7 +10283,7 @@ module Aws::MediaConvert
     #               caption_descriptions: [
     #                 {
     #                   caption_selector_name: "__stringMin1",
-    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   destination_settings: {
     #                     burnin_destination_settings: {
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -7961,6 +10292,7 @@ module Aws::MediaConvert
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
+    #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
@@ -7972,7 +10304,7 @@ module Aws::MediaConvert
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
-    #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                     dvb_sub_destination_settings: {
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
     #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -7980,6 +10312,7 @@ module Aws::MediaConvert
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
+    #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
@@ -7987,15 +10320,24 @@ module Aws::MediaConvert
     #                       shadow_opacity: 1,
     #                       shadow_x_offset: 1,
     #                       shadow_y_offset: 1,
+    #                       subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
+    #                     embedded_destination_settings: {
+    #                       destination_608_channel_number: 1,
+    #                       destination_708_service_number: 1,
+    #                     },
+    #                     imsc_destination_settings: {
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                     },
     #                     scc_destination_settings: {
-    #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                     },
     #                     teletext_destination_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
+    #                       page_types: ["PAGE_TYPE_INITIAL"], # accepts PAGE_TYPE_INITIAL, PAGE_TYPE_SUBTITLE, PAGE_TYPE_ADDL_INFO, PAGE_TYPE_PROGRAM_SCHEDULE, PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE
     #                     },
     #                     ttml_destination_settings: {
     #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -8006,7 +10348,11 @@ module Aws::MediaConvert
     #                 },
     #               ],
     #               container_settings: {
-    #                 container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #                 cmfc_settings: {
+    #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                 },
+    #                 container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #                 f4v_settings: {
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                 },
@@ -8035,6 +10381,7 @@ module Aws::MediaConvert
     #                   ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
     #                   ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
     #                   es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                   fragment_time: 1.0,
     #                   max_pcr_interval: 1,
     #                   min_ebp_interval: 1,
@@ -8048,6 +10395,9 @@ module Aws::MediaConvert
     #                   private_metadata_pid: 1,
     #                   program_number: 1,
     #                   rate_mode: "VBR", # accepts VBR, CBR
+    #                   scte_35_esam: {
+    #                     scte_35_esam_pid: 1,
+    #                   },
     #                   scte_35_pid: 1,
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -8084,9 +10434,18 @@ module Aws::MediaConvert
     #                 },
     #                 mp_4_settings: {
     #                   cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   ctts_version: 1,
     #                   free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                   mp_4_major_brand: "__string",
+    #                 },
+    #                 mpd_settings: {
+    #                   caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                 },
+    #                 mxf_settings: {
+    #                   afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #                 },
     #               },
     #               extension: "__string",
@@ -8094,6 +10453,7 @@ module Aws::MediaConvert
     #               output_settings: {
     #                 hls_settings: {
     #                   audio_group_id: "__string",
+    #                   audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #                   audio_rendition_sets: "__string",
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
     #                   i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -8105,7 +10465,24 @@ module Aws::MediaConvert
     #                 afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                 anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_settings: {
-    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                   av_1_settings: {
+    #                     adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     max_bitrate: 1,
+    #                     number_b_frames_between_reference_frames: 1,
+    #                     qvbr_settings: {
+    #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
+    #                     },
+    #                     rate_control_mode: "QVBR", # accepts QVBR
+    #                     slices: 1,
+    #                     spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   },
+    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #                   frame_capture_settings: {
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
@@ -8143,10 +10520,11 @@ module Aws::MediaConvert
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
     #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
     #                     },
     #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
-    #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                     slices: 1,
     #                     slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                     softness: 1,
@@ -8186,10 +10564,11 @@ module Aws::MediaConvert
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
     #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
     #                     },
     #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
-    #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #                     scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                     slices: 1,
     #                     slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                     spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -8246,6 +10625,36 @@ module Aws::MediaConvert
     #                     slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                     telecine: "NONE", # accepts NONE, HARD
     #                   },
+    #                   vp_8_settings: {
+    #                     bitrate: 1,
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     hrd_buffer_size: 1,
+    #                     max_bitrate: 1,
+    #                     par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     par_denominator: 1,
+    #                     par_numerator: 1,
+    #                     quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                     rate_control_mode: "VBR", # accepts VBR
+    #                   },
+    #                   vp_9_settings: {
+    #                     bitrate: 1,
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     hrd_buffer_size: 1,
+    #                     max_bitrate: 1,
+    #                     par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     par_denominator: 1,
+    #                     par_numerator: 1,
+    #                     quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                     rate_control_mode: "VBR", # accepts VBR
+    #                   },
     #                 },
     #                 color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                 crop: {
@@ -8294,6 +10703,14 @@ module Aws::MediaConvert
     #                     control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #                     mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #                   },
+    #                   dolby_vision: {
+    #                     l6_metadata: {
+    #                       max_cll: 1,
+    #                       max_fall: 1,
+    #                     },
+    #                     l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #                     profile: "PROFILE_5", # accepts PROFILE_5
+    #                   },
     #                   image_inserter: {
     #                     insertable_images: [
     #                       {
@@ -8301,7 +10718,7 @@ module Aws::MediaConvert
     #                         fade_in: 1,
     #                         fade_out: 1,
     #                         height: 1,
-    #                         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                         image_x: 1,
     #                         image_y: 1,
     #                         layer: 1,
@@ -8312,12 +10729,18 @@ module Aws::MediaConvert
     #                     ],
     #                   },
     #                   noise_reducer: {
-    #                     filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #                     filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
     #                     filter_settings: {
     #                       strength: 1,
     #                     },
     #                     spatial_filter_settings: {
     #                       post_filter_sharpen_strength: 1,
+    #                       speed: 1,
+    #                       strength: 1,
+    #                     },
+    #                     temporal_filter_settings: {
+    #                       aggressive_mode: 1,
+    #                       post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                       speed: 1,
     #                       strength: 1,
     #                     },
@@ -8349,19 +10772,29 @@ module Aws::MediaConvert
     #         ],
     #       },
     #     },
+    #     status_update_interval: "SECONDS_10", # accepts SECONDS_10, SECONDS_12, SECONDS_15, SECONDS_20, SECONDS_30, SECONDS_60, SECONDS_120, SECONDS_180, SECONDS_240, SECONDS_300, SECONDS_360, SECONDS_420, SECONDS_480, SECONDS_540, SECONDS_600
     #   })
     #
     # @example Response structure
     #
+    #   resp.job_template.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED", "PREFERRED"
     #   resp.job_template.arn #=> String
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
     #   resp.job_template.description #=> String
+    #   resp.job_template.hop_destinations #=> Array
+    #   resp.job_template.hop_destinations[0].priority #=> Integer
+    #   resp.job_template.hop_destinations[0].queue #=> String
+    #   resp.job_template.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job_template.last_updated #=> Time
     #   resp.job_template.name #=> String
+    #   resp.job_template.priority #=> Integer
     #   resp.job_template.queue #=> String
     #   resp.job_template.settings.ad_avail_offset #=> Integer
     #   resp.job_template.settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.job_template.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.job_template.settings.esam.response_signal_preroll #=> Integer
+    #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -8386,16 +10819,26 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors #=> Hash
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_channel_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
+    #   resp.job_template.settings.inputs[0].crop.height #=> Integer
+    #   resp.job_template.settings.inputs[0].crop.width #=> Integer
+    #   resp.job_template.settings.inputs[0].crop.x #=> Integer
+    #   resp.job_template.settings.inputs[0].crop.y #=> Integer
     #   resp.job_template.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
@@ -8415,9 +10858,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].input_clippings #=> Array
     #   resp.job_template.settings.inputs[0].input_clippings[0].end_timecode #=> String
     #   resp.job_template.settings.inputs[0].input_clippings[0].start_timecode #=> String
+    #   resp.job_template.settings.inputs[0].position.height #=> Integer
+    #   resp.job_template.settings.inputs[0].position.width #=> Integer
+    #   resp.job_template.settings.inputs[0].position.x #=> Integer
+    #   resp.job_template.settings.inputs[0].position.y #=> Integer
     #   resp.job_template.settings.inputs[0].program_number #=> Integer
     #   resp.job_template.settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
     #   resp.job_template.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
+    #   resp.job_template.settings.inputs[0].timecode_start #=> String
+    #   resp.job_template.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job_template.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
@@ -8434,6 +10883,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.input #=> String
@@ -8447,30 +10897,54 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups #=> Array
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
-    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.dash_signaled_system_ids[0] #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.hls_signaled_system_ids[0] #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.resource_id #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.key_format_versions #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
-    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "STATIC_KEY"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -8479,12 +10953,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
@@ -8495,10 +10977,14 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -8523,8 +11009,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].manifest_name_modifier #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs #=> Array
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.additional_manifests[0].selected_outputs[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -8535,7 +11028,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
-    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
@@ -8564,7 +11057,22 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "PASSTHROUGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialogue_intelligence #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_rf #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_center_mix_level #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_surround_mix_level #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_center_mix_level #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_surround_mix_level #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.metering_mode #=> String, one of "LEQ_A", "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.speech_threshold #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.stereo_downmix #=> String, one of "NOT_INDICATED", "STEREO", "SURROUND", "DPL2"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_ex_mode #=> String, one of "NOT_INDICATED", "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -8589,6 +11097,17 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.channels #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.opus_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.channels #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.vorbis_settings.vbr_quality #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -8611,6 +11130,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -8621,13 +11141,14 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -8635,15 +11156,23 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
-    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
@@ -8665,6 +11194,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -8678,6 +11208,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -8709,12 +11240,18 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -8722,7 +11259,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES", "VP8", "VP9"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -8756,9 +11306,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slices #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.softness #=> Integer
@@ -8795,9 +11346,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slices #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -8849,6 +11401,32 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.par_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.hrd_buffer_size #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.par_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_8_settings.rate_control_mode #=> String, one of "VBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.hrd_buffer_size #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.par_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.vp_9_settings.rate_control_mode #=> String, one of "VBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.crop.height #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.crop.width #=> Integer
@@ -8885,6 +11463,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -8897,11 +11479,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -8913,6 +11499,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.job_template.status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job_template.type #=> String, one of "SYSTEM", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateJobTemplate AWS API Documentation
@@ -8952,7 +11539,7 @@ module Aws::MediaConvert
     #       audio_descriptions: [
     #         {
     #           audio_normalization_settings: {
-    #             algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2
+    #             algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
     #             algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO, MEASURE_ONLY
     #             correction_gate_level: 1,
     #             loudness_logging: "LOG", # accepts LOG, DONT_LOG
@@ -8989,7 +11576,24 @@ module Aws::MediaConvert
     #               channels: 1,
     #               sample_rate: 1,
     #             },
-    #             codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #             codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
+    #             eac_3_atmos_settings: {
+    #               bitrate: 1,
+    #               bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
+    #               coding_mode: "CODING_MODE_9_1_6", # accepts CODING_MODE_9_1_6
+    #               dialogue_intelligence: "ENABLED", # accepts ENABLED, DISABLED
+    #               dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #               dynamic_range_compression_rf: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
+    #               lo_ro_center_mix_level: 1.0,
+    #               lo_ro_surround_mix_level: 1.0,
+    #               lt_rt_center_mix_level: 1.0,
+    #               lt_rt_surround_mix_level: 1.0,
+    #               metering_mode: "LEQ_A", # accepts LEQ_A, ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
+    #               sample_rate: 1,
+    #               speech_threshold: 1,
+    #               stereo_downmix: "NOT_INDICATED", # accepts NOT_INDICATED, STEREO, SURROUND, DPL2
+    #               surround_ex_mode: "NOT_INDICATED", # accepts NOT_INDICATED, ENABLED, DISABLED
+    #             },
     #             eac_3_settings: {
     #               attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #               bitrate: 1,
@@ -9018,6 +11622,23 @@ module Aws::MediaConvert
     #               channels: 1,
     #               sample_rate: 1,
     #             },
+    #             mp_3_settings: {
+    #               bitrate: 1,
+    #               channels: 1,
+    #               rate_control_mode: "CBR", # accepts CBR, VBR
+    #               sample_rate: 1,
+    #               vbr_quality: 1,
+    #             },
+    #             opus_settings: {
+    #               bitrate: 1,
+    #               channels: 1,
+    #               sample_rate: 1,
+    #             },
+    #             vorbis_settings: {
+    #               channels: 1,
+    #               sample_rate: 1,
+    #               vbr_quality: 1,
+    #             },
     #             wav_settings: {
     #               bit_depth: 1,
     #               channels: 1,
@@ -9025,7 +11646,7 @@ module Aws::MediaConvert
     #               sample_rate: 1,
     #             },
     #           },
-    #           custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #           custom_language_code: "__stringPatternAZaZ23AZaZ",
     #           language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #           language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #           remix_settings: {
@@ -9044,7 +11665,7 @@ module Aws::MediaConvert
     #       ],
     #       caption_descriptions: [
     #         {
-    #           custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #           custom_language_code: "__stringPatternAZaZ23AZaZ",
     #           destination_settings: {
     #             burnin_destination_settings: {
     #               alignment: "CENTERED", # accepts CENTERED, LEFT
@@ -9053,6 +11674,7 @@ module Aws::MediaConvert
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #               font_opacity: 1,
     #               font_resolution: 1,
+    #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
     #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #               outline_size: 1,
@@ -9064,7 +11686,7 @@ module Aws::MediaConvert
     #               x_position: 1,
     #               y_position: 1,
     #             },
-    #             destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
+    #             destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #             dvb_sub_destination_settings: {
     #               alignment: "CENTERED", # accepts CENTERED, LEFT
     #               background_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -9072,6 +11694,7 @@ module Aws::MediaConvert
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #               font_opacity: 1,
     #               font_resolution: 1,
+    #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
     #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #               outline_size: 1,
@@ -9079,15 +11702,24 @@ module Aws::MediaConvert
     #               shadow_opacity: 1,
     #               shadow_x_offset: 1,
     #               shadow_y_offset: 1,
+    #               subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #               x_position: 1,
     #               y_position: 1,
     #             },
+    #             embedded_destination_settings: {
+    #               destination_608_channel_number: 1,
+    #               destination_708_service_number: 1,
+    #             },
+    #             imsc_destination_settings: {
+    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
     #             scc_destination_settings: {
-    #               framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #               framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #             },
     #             teletext_destination_settings: {
     #               page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
+    #               page_types: ["PAGE_TYPE_INITIAL"], # accepts PAGE_TYPE_INITIAL, PAGE_TYPE_SUBTITLE, PAGE_TYPE_ADDL_INFO, PAGE_TYPE_PROGRAM_SCHEDULE, PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE
     #             },
     #             ttml_destination_settings: {
     #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -9098,7 +11730,11 @@ module Aws::MediaConvert
     #         },
     #       ],
     #       container_settings: {
-    #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #         cmfc_settings: {
+    #           scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #         },
+    #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #         f4v_settings: {
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #         },
@@ -9127,6 +11763,7 @@ module Aws::MediaConvert
     #           ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
     #           ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
     #           es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #           fragment_time: 1.0,
     #           max_pcr_interval: 1,
     #           min_ebp_interval: 1,
@@ -9140,6 +11777,9 @@ module Aws::MediaConvert
     #           private_metadata_pid: 1,
     #           program_number: 1,
     #           rate_mode: "VBR", # accepts VBR, CBR
+    #           scte_35_esam: {
+    #             scte_35_esam_pid: 1,
+    #           },
     #           scte_35_pid: 1,
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -9176,16 +11816,42 @@ module Aws::MediaConvert
     #         },
     #         mp_4_settings: {
     #           cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           ctts_version: 1,
     #           free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           mp_4_major_brand: "__string",
+    #         },
+    #         mpd_settings: {
+    #           caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #           scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #         },
+    #         mxf_settings: {
+    #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #         },
     #       },
     #       video_description: {
     #         afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #         anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #         codec_settings: {
-    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #           av_1_settings: {
+    #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             gop_size: 1.0,
+    #             max_bitrate: 1,
+    #             number_b_frames_between_reference_frames: 1,
+    #             qvbr_settings: {
+    #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
+    #             },
+    #             rate_control_mode: "QVBR", # accepts QVBR
+    #             slices: 1,
+    #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
+    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #           frame_capture_settings: {
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
@@ -9223,10 +11889,11 @@ module Aws::MediaConvert
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
     #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
     #             },
     #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
-    #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             softness: 1,
@@ -9266,10 +11933,11 @@ module Aws::MediaConvert
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
     #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
     #             },
     #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
-    #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -9326,6 +11994,36 @@ module Aws::MediaConvert
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, HARD
     #           },
+    #           vp_8_settings: {
+    #             bitrate: 1,
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             gop_size: 1.0,
+    #             hrd_buffer_size: 1,
+    #             max_bitrate: 1,
+    #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             par_denominator: 1,
+    #             par_numerator: 1,
+    #             quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #             rate_control_mode: "VBR", # accepts VBR
+    #           },
+    #           vp_9_settings: {
+    #             bitrate: 1,
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             gop_size: 1.0,
+    #             hrd_buffer_size: 1,
+    #             max_bitrate: 1,
+    #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             par_denominator: 1,
+    #             par_numerator: 1,
+    #             quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #             rate_control_mode: "VBR", # accepts VBR
+    #           },
     #         },
     #         color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #         crop: {
@@ -9374,6 +12072,14 @@ module Aws::MediaConvert
     #             control: "FORCE_ALL_FRAMES", # accepts FORCE_ALL_FRAMES, NORMAL
     #             mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #           },
+    #           dolby_vision: {
+    #             l6_metadata: {
+    #               max_cll: 1,
+    #               max_fall: 1,
+    #             },
+    #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
+    #             profile: "PROFILE_5", # accepts PROFILE_5
+    #           },
     #           image_inserter: {
     #             insertable_images: [
     #               {
@@ -9381,7 +12087,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -9392,12 +12098,18 @@ module Aws::MediaConvert
     #             ],
     #           },
     #           noise_reducer: {
-    #             filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #             filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
     #             filter_settings: {
     #               strength: 1,
     #             },
     #             spatial_filter_settings: {
     #               post_filter_sharpen_strength: 1,
+    #               speed: 1,
+    #               strength: 1,
+    #             },
+    #             temporal_filter_settings: {
+    #               aggressive_mode: 1,
+    #               post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #               speed: 1,
     #               strength: 1,
     #             },
@@ -9422,7 +12134,7 @@ module Aws::MediaConvert
     #   resp.preset.last_updated #=> Time
     #   resp.preset.name #=> String
     #   resp.preset.settings.audio_descriptions #=> Array
-    #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2"
+    #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.loudness_logging #=> String, one of "LOG", "DONT_LOG"
@@ -9451,7 +12163,22 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "PASSTHROUGH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialogue_intelligence #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dynamic_range_compression_rf #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_center_mix_level #=> Float
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lo_ro_surround_mix_level #=> Float
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_center_mix_level #=> Float
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.lt_rt_surround_mix_level #=> Float
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.metering_mode #=> String, one of "LEQ_A", "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.speech_threshold #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.stereo_downmix #=> String, one of "NOT_INDICATED", "STEREO", "SURROUND", "DPL2"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_ex_mode #=> String, one of "NOT_INDICATED", "ENABLED", "DISABLED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -9476,6 +12203,17 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.opus_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.opus_settings.channels #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.opus_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.vorbis_settings.channels #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.vorbis_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.vorbis_settings.vbr_quality #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -9497,6 +12235,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -9507,13 +12246,14 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -9521,15 +12261,23 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.preset.settings.caption_descriptions[0].language_description #=> String
-    #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW"
     #   resp.preset.settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
@@ -9551,6 +12299,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.preset.settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.preset.settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.preset.settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.preset.settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -9564,6 +12313,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.preset.settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -9595,12 +12345,30 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.preset.settings.container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.preset.settings.container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.preset.settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES", "VP8", "VP9"
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -9634,9 +12402,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slices #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.softness #=> Integer
@@ -9673,9 +12442,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
-    #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slices #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -9727,6 +12497,32 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.prores_settings.par_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.hrd_buffer_size #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.par_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.preset.settings.video_description.codec_settings.vp_8_settings.rate_control_mode #=> String, one of "VBR"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.hrd_buffer_size #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.par_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.quality_tuning_level #=> String, one of "MULTI_PASS", "MULTI_PASS_HQ"
+    #   resp.preset.settings.video_description.codec_settings.vp_9_settings.rate_control_mode #=> String, one of "VBR"
     #   resp.preset.settings.video_description.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.preset.settings.video_description.crop.height #=> Integer
     #   resp.preset.settings.video_description.crop.width #=> Integer
@@ -9763,6 +12559,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].duration #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].fade_in #=> Integer
@@ -9775,11 +12575,15 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].opacity #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
-    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL"
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -9804,8 +12608,12 @@ module Aws::MediaConvert
     #   The name of the queue that you are modifying.
     #
     # @option params [Types::ReservationPlanSettings] :reservation_plan_settings
-    #   Details about the pricing plan for your reserved queue. Required for
-    #   reserved queues and not applicable to on-demand queues.
+    #   The new details of your pricing plan for your reserved queue. When you
+    #   set up a new pricing plan to replace an expired one, you enter into
+    #   another 12-month commitment. When you add capacity to your queue by
+    #   increasing the number of RTS, you extend the term of your commitment
+    #   to 12 months from when you add capacity. After you make these
+    #   commitments, you can't cancel them.
     #
     # @option params [String] :status
     #   Pause or activate a queue by changing its status between ACTIVE and
@@ -9871,7 +12679,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

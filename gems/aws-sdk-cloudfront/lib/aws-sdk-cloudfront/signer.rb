@@ -20,9 +20,9 @@ module Aws
       private
 
       def scheme_and_uri(url)
-        url_sections = url.split('://')
+        url_sections = url.split('://', 2)
         if url_sections.length < 2
-          raise ArgumentError, "Invaild URL:#{url}"
+          raise ArgumentError, "Invalid URL:#{url}"
         end
         scheme = url_sections[0].gsub('*', '')
         uri = "#{scheme}://#{url_sections[1]}"

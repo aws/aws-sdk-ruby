@@ -49,6 +49,35 @@ module Aws::CloudTrail
     #
     class AddTagsResponse < Aws::EmptyStructure; end
 
+    # This exception is thrown when an operation is called with an invalid
+    # trail ARN. The format of a trail ARN is:
+    #
+    # `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CloudTrailARNInvalidException AWS API Documentation
+    #
+    class CloudTrailARNInvalidException < Aws::EmptyStructure; end
+
+    # This exception is thrown when trusted access has not been enabled
+    # between AWS CloudTrail and AWS Organizations. For more information,
+    # see [Enabling Trusted Access with Other AWS Services][1] and [Prepare
+    # For Creating a Trail For Your Organization][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CloudTrailAccessNotEnabledException AWS API Documentation
+    #
+    class CloudTrailAccessNotEnabledException < Aws::EmptyStructure; end
+
+    # Cannot set a CloudWatch Logs delivery for this region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CloudWatchLogsDeliveryUnavailableException AWS API Documentation
+    #
+    class CloudWatchLogsDeliveryUnavailableException < Aws::EmptyStructure; end
+
     # Specifies the settings for each trail.
     #
     # @note When making an API call, you may pass CreateTrailRequest
@@ -66,6 +95,12 @@ module Aws::CloudTrail
     #         cloud_watch_logs_role_arn: "String",
     #         kms_key_id: "String",
     #         is_organization_trail: false,
+    #         tags_list: [
+    #           {
+    #             key: "String", # required
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -91,7 +126,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
@@ -102,7 +137,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
@@ -117,7 +152,9 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] is_multi_region_trail
     #   Specifies whether the trail is created in the current region or in
-    #   all regions. The default is false.
+    #   all regions. The default is false, which creates a trail only in the
+    #   region where you are signed in. As a best practice, consider
+    #   creating trails that log events in all regions.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_log_file_validation
@@ -174,6 +211,10 @@ module Aws::CloudTrail
     #   organization in AWS Organizations.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags_list
+    #   A list of tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrailRequest AWS API Documentation
     #
     class CreateTrailRequest < Struct.new(
@@ -187,7 +228,8 @@ module Aws::CloudTrail
       :cloud_watch_logs_log_group_arn,
       :cloud_watch_logs_role_arn,
       :kms_key_id,
-      :is_organization_trail)
+      :is_organization_trail,
+      :tags_list)
       include Aws::Structure
     end
 
@@ -210,11 +252,11 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
-    #   This field is deprecated. Use SnsTopicARN.
+    #   This field is no longer in use. Use SnsTopicARN.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn
@@ -288,9 +330,9 @@ module Aws::CloudTrail
 
     # The Amazon S3 buckets or AWS Lambda functions that you specify in your
     # event selectors for your trail to log data events. Data events provide
-    # insight into the resource operations performed on or within a resource
-    # itself. These are also known as data plane operations. You can specify
-    # up to 250 data resources for a trail.
+    # information about the resource operations performed on or within a
+    # resource itself. These are also known as data plane operations. You
+    # can specify up to 250 data resources for a trail.
     #
     # <note markdown="1"> The total number of allowed data resources is 250. This number can be
     # distributed between 1 and 5 event selectors, but the total cannot
@@ -300,7 +342,7 @@ module Aws::CloudTrail
     #
     # The following example demonstrates how logging works when you
     # configure logging of all data events for an S3 bucket named
-    # `bucket-1`. In this example, the CloudTrail user spcified an empty
+    # `bucket-1`. In this example, the CloudTrail user specified an empty
     # prefix, and the option to log both `Read` and `Write` data events.
     #
     # 1.  A user uploads an image file to `bucket-1`.
@@ -364,11 +406,6 @@ module Aws::CloudTrail
     #
     #      </note>
     #
-    #   * To log data events for all objects in all S3 buckets that include
-    #     *my-bucket* in their names, specify the prefix as
-    #     `aws:s3:::my-bucket`. The trail logs data events for all objects
-    #     in all buckets whose name contains a match for *my-bucket*.
-    #
     #   * To log data events for all objects in an S3 bucket, specify the
     #     bucket and an empty object prefix such as
     #     `arn:aws:s3:::bucket-1/`. The trail logs data events for all
@@ -388,11 +425,11 @@ module Aws::CloudTrail
     #
     #      </note>
     #
-    #   * To log data eents for a specific Lambda function, specify the
+    #   * To log data events for a specific Lambda function, specify the
     #     function ARN.
     #
-    #     <note markdown="1"> Lambda function ARNs are exact. Unlike S3, you cannot use
-    #     matching. For example, if you specify a function ARN
+    #     <note markdown="1"> Lambda function ARNs are exact. For example, if you specify a
+    #     function ARN
     #     *arn:aws:lambda:us-west-2:111111111111:function:helloworld*, data
     #     events will only be logged for
     #     *arn:aws:lambda:us-west-2:111111111111:function:helloworld*. They
@@ -495,7 +532,12 @@ module Aws::CloudTrail
     # returns an error.
     #
     # @!attribute [rw] trail_list
-    #   The list of trail objects.
+    #   The list of trail objects. Trail objects with string values are only
+    #   returned if values for the objects exist in a trail's
+    #   configuration. For example, `SNSTopicName` and `SNSTopicARN` are
+    #   only returned in results if a trail is configured to send SNS
+    #   notifications. Similarly, `KMSKeyId` only appears in results if a
+    #   trail's log files are encrypted with AWS KMS-managed keys.
     #   @return [Array<Types::Trail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrailsResponse AWS API Documentation
@@ -586,6 +628,7 @@ module Aws::CloudTrail
     #             values: ["String"],
     #           },
     #         ],
+    #         exclude_management_event_sources: ["String"],
     #       }
     #
     # @!attribute [rw] read_write_type
@@ -608,7 +651,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events
     #   @return [Boolean]
     #
     # @!attribute [rw] data_resources
@@ -624,16 +667,26 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events
     #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
     #   @return [Array<Types::DataResource>]
+    #
+    # @!attribute [rw] exclude_management_event_sources
+    #   An optional list of service event sources from which you do not want
+    #   management events to be logged on your trail. In this release, the
+    #   list can be empty (disables the filter), or it can filter out AWS
+    #   Key Management Service events by containing `"kms.amazonaws.com"`.
+    #   By default, `ExcludeManagementEventSources` is empty, and AWS KMS
+    #   events are included in events that are logged to your trail.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventSelector AWS API Documentation
     #
     class EventSelector < Struct.new(
       :read_write_type,
       :include_management_events,
-      :data_resources)
+      :data_resources,
+      :exclude_management_event_sources)
       include Aws::Structure
     end
 
@@ -688,6 +741,90 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetInsightSelectorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         trail_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] trail_name
+    #   Specifies the name of the trail or trail ARN. If you specify a trail
+    #   name, the string must meet the following requirements:
+    #
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
+    #     underscores (\_), or dashes (-)
+    #
+    #   * Start with a letter or number, and end with a letter or number
+    #
+    #   * Be between 3 and 128 characters
+    #
+    #   * Have no adjacent periods, underscores or dashes. Names like
+    #     `my-_namespace` and `my--namespace` are not valid.
+    #
+    #   * Not be in IP address format (for example, 192.168.5.4)
+    #
+    #   If you specify a trail ARN, it must be in the format:
+    #
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetInsightSelectorsRequest AWS API Documentation
+    #
+    class GetInsightSelectorsRequest < Struct.new(
+      :trail_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trail_arn
+    #   The Amazon Resource Name (ARN) of a trail for which you want to get
+    #   Insights selectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_selectors
+    #   A JSON string that contains the insight types you want to log on a
+    #   trail. In this release, only `ApiCallRateInsight` is supported as an
+    #   insight type.
+    #   @return [Array<Types::InsightSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetInsightSelectorsResponse AWS API Documentation
+    #
+    class GetInsightSelectorsResponse < Struct.new(
+      :trail_arn,
+      :insight_selectors)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTrailRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name or the Amazon Resource Name (ARN) of the trail for which
+    #   you want to retrieve settings information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailRequest AWS API Documentation
+    #
+    class GetTrailRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trail
+    #   The settings for a trail.
+    #   @return [Types::Trail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailResponse AWS API Documentation
+    #
+    class GetTrailResponse < Struct.new(
+      :trail)
+      include Aws::Structure
+    end
+
     # The name of a trail about which you want the current status.
     #
     # @note When making an API call, you may pass GetTrailStatusRequest
@@ -736,7 +873,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
     #   @return [String]
     #
     # @!attribute [rw] latest_notification_error
@@ -746,7 +883,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/welcome.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/welcome.html
     #   @return [String]
     #
     # @!attribute [rw] latest_delivery_time
@@ -801,31 +938,31 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
     #   @return [String]
     #
     # @!attribute [rw] latest_delivery_attempt_time
-    #   This field is deprecated.
+    #   This field is no longer in use.
     #   @return [String]
     #
     # @!attribute [rw] latest_notification_attempt_time
-    #   This field is deprecated.
+    #   This field is no longer in use.
     #   @return [String]
     #
     # @!attribute [rw] latest_notification_attempt_succeeded
-    #   This field is deprecated.
+    #   This field is no longer in use.
     #   @return [String]
     #
     # @!attribute [rw] latest_delivery_attempt_succeeded
-    #   This field is deprecated.
+    #   This field is no longer in use.
     #   @return [String]
     #
     # @!attribute [rw] time_logging_started
-    #   This field is deprecated.
+    #   This field is no longer in use.
     #   @return [String]
     #
     # @!attribute [rw] time_logging_stopped
-    #   This field is deprecated.
+    #   This field is no longer in use.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailStatusResponse AWS API Documentation
@@ -850,6 +987,245 @@ module Aws::CloudTrail
       :time_logging_stopped)
       include Aws::Structure
     end
+
+    # If you run `GetInsightSelectors` on a trail that does not have
+    # Insights events enabled, the operation throws the exception
+    # `InsightNotEnabledException`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsightNotEnabledException AWS API Documentation
+    #
+    class InsightNotEnabledException < Aws::EmptyStructure; end
+
+    # A JSON string that contains a list of insight types that are logged on
+    # a trail.
+    #
+    # @note When making an API call, you may pass InsightSelector
+    #   data as a hash:
+    #
+    #       {
+    #         insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight
+    #       }
+    #
+    # @!attribute [rw] insight_type
+    #   The type of insights to log on a trail. In this release, only
+    #   `ApiCallRateInsight` is supported as an insight type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsightSelector AWS API Documentation
+    #
+    class InsightSelector < Struct.new(
+      :insight_type)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the IAM user or role that is used to
+    # create the organization trail is lacking one or more required
+    # permissions for creating an organization trail in a required service.
+    # For more information, see [Prepare For Creating a Trail For Your
+    # Organization][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsufficientDependencyServiceAccessPermissionException AWS API Documentation
+    #
+    class InsufficientDependencyServiceAccessPermissionException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the policy on the S3 bucket or KMS key
+    # is not sufficient.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsufficientEncryptionPolicyException AWS API Documentation
+    #
+    class InsufficientEncryptionPolicyException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the policy on the S3 bucket is not
+    # sufficient.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsufficientS3BucketPolicyException AWS API Documentation
+    #
+    class InsufficientS3BucketPolicyException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the policy on the SNS topic is not
+    # sufficient.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsufficientSnsTopicPolicyException AWS API Documentation
+    #
+    class InsufficientSnsTopicPolicyException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the provided CloudWatch log group is not
+    # valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidCloudWatchLogsLogGroupArnException AWS API Documentation
+    #
+    class InvalidCloudWatchLogsLogGroupArnException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the provided role is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidCloudWatchLogsRoleArnException AWS API Documentation
+    #
+    class InvalidCloudWatchLogsRoleArnException < Aws::EmptyStructure; end
+
+    # Occurs if an event category that is not valid is specified as a value
+    # of `EventCategory`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidEventCategoryException AWS API Documentation
+    #
+    class InvalidEventCategoryException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the `PutEventSelectors` operation is
+    # called with a number of event selectors or data resources that is not
+    # valid. The combination of event selectors and data resources is not
+    # valid. A trail can have up to 5 event selectors. A trail is limited to
+    # 250 data resources. These data resources can be distributed across
+    # event selectors, but the overall total cannot exceed 250.
+    #
+    # You can:
+    #
+    # * Specify a valid number of event selectors (1 to 5) for a trail.
+    #
+    # * Specify a valid number of data resources (1 to 250) for an event
+    #   selector. The limit of number of resources on an individual event
+    #   selector is configurable up to 250. However, this upper limit is
+    #   allowed only if the total number of data resources does not exceed
+    #   250 across all event selectors for a trail.
+    #
+    # * Specify a valid value for a parameter. For example, specifying the
+    #   `ReadWriteType` parameter with a value of `read-only` is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidEventSelectorsException AWS API Documentation
+    #
+    class InvalidEventSelectorsException < Aws::EmptyStructure; end
+
+    # This exception is thrown when an operation is called on a trail from a
+    # region other than the region in which the trail was created.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidHomeRegionException AWS API Documentation
+    #
+    class InvalidHomeRegionException < Aws::EmptyStructure; end
+
+    # The formatting or syntax of the `InsightSelectors` JSON statement in
+    # your `PutInsightSelectors` or `GetInsightSelectors` request is not
+    # valid, or the specified insight type in the `InsightSelectors`
+    # statement is not a valid insight type.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidInsightSelectorsException AWS API Documentation
+    #
+    class InvalidInsightSelectorsException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the KMS key ARN is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidKmsKeyIdException AWS API Documentation
+    #
+    class InvalidKmsKeyIdException < Aws::EmptyStructure; end
+
+    # Occurs when an invalid lookup attribute is specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidLookupAttributesException AWS API Documentation
+    #
+    class InvalidLookupAttributesException < Aws::EmptyStructure; end
+
+    # This exception is thrown if the limit specified is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidMaxResultsException AWS API Documentation
+    #
+    class InvalidMaxResultsException < Aws::EmptyStructure; end
+
+    # Invalid token or token that was previously used in a request with
+    # different parameters. This exception is thrown if the token is
+    # invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the combination of parameters provided
+    # is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidParameterCombinationException AWS API Documentation
+    #
+    class InvalidParameterCombinationException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the provided S3 bucket name is not
+    # valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidS3BucketNameException AWS API Documentation
+    #
+    class InvalidS3BucketNameException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the provided S3 prefix is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidS3PrefixException AWS API Documentation
+    #
+    class InvalidS3PrefixException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the provided SNS topic name is not
+    # valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidSnsTopicNameException AWS API Documentation
+    #
+    class InvalidSnsTopicNameException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the specified tag key or values are not
+    # valid. It can also occur if there are duplicate tags or too many tags
+    # on the resource.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidTagParameterException AWS API Documentation
+    #
+    class InvalidTagParameterException < Aws::EmptyStructure; end
+
+    # Occurs if the timestamp values are invalid. Either the start time
+    # occurs after the end time or the time range is outside the range of
+    # possible values.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidTimeRangeException AWS API Documentation
+    #
+    class InvalidTimeRangeException < Aws::EmptyStructure; end
+
+    # Reserved for future use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidTokenException AWS API Documentation
+    #
+    class InvalidTokenException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the provided trail name is not valid.
+    # Trail names must meet the following requirements:
+    #
+    # * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
+    #   underscores (\_), or dashes (-)
+    #
+    # * Start with a letter or number, and end with a letter or number
+    #
+    # * Be between 3 and 128 characters
+    #
+    # * Have no adjacent periods, underscores or dashes. Names like
+    #   `my-_namespace` and `my--namespace` are invalid.
+    #
+    # * Not be in IP address format (for example, 192.168.5.4)
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidTrailNameException AWS API Documentation
+    #
+    class InvalidTrailNameException < Aws::EmptyStructure; end
+
+    # This exception is thrown when there is an issue with the specified KMS
+    # key and the trail can’t be updated.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/KmsException AWS API Documentation
+    #
+    class KmsException < Aws::EmptyStructure; end
+
+    # This exception is no longer in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/KmsKeyDisabledException AWS API Documentation
+    #
+    class KmsKeyDisabledException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the KMS key does not exist, or when the
+    # S3 bucket and the KMS key are not in the same region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/KmsKeyNotFoundException AWS API Documentation
+    #
+    class KmsKeyNotFoundException < Aws::EmptyStructure; end
 
     # Requests the public keys for a specified time range.
     #
@@ -958,6 +1334,51 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTrailsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to get the next page of results after a previous
+    #   API call. This token must be passed in with the same parameters that
+    #   were specified in the the original call. For example, if the
+    #   original call specified an AttributeKey of 'Username' with a value
+    #   of 'root', the call with NextToken should include those same
+    #   parameters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTrailsRequest AWS API Documentation
+    #
+    class ListTrailsRequest < Struct.new(
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trails
+    #   Returns the name, ARN, and home region of trails in the current
+    #   account.
+    #   @return [Array<Types::TrailInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to get the next page of results after a previous
+    #   API call. If the token does not appear, there are no more results to
+    #   return. The token must be passed in with the same parameters as the
+    #   previous call. For example, if the original call specified an
+    #   AttributeKey of 'Username' with a value of 'root', the call with
+    #   NextToken should include those same parameters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTrailsResponse AWS API Documentation
+    #
+    class ListTrailsResponse < Struct.new(
+      :trails,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Specifies an attribute and value that filter the events returned.
     #
     # @note When making an API call, you may pass LookupAttribute
@@ -998,6 +1419,7 @@ module Aws::CloudTrail
     #         ],
     #         start_time: Time.now,
     #         end_time: Time.now,
+    #         event_category: "insight", # accepts insight
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -1019,6 +1441,13 @@ module Aws::CloudTrail
     #   start time, an error is returned.
     #   @return [Time]
     #
+    # @!attribute [rw] event_category
+    #   Specifies the event category. If you do not specify an event
+    #   category, events of the category are not returned in the response.
+    #   For example, if you do not specify `insight` as the value of
+    #   `EventCategory`, no Insights events are returned.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The number of events to return. Possible values are 1 through 50.
     #   The default is 50.
@@ -1039,6 +1468,7 @@ module Aws::CloudTrail
       :lookup_attributes,
       :start_time,
       :end_time,
+      :event_category,
       :max_results,
       :next_token)
       include Aws::Structure
@@ -1068,6 +1498,53 @@ module Aws::CloudTrail
       :next_token)
       include Aws::Structure
     end
+
+    # This exception is thrown when the maximum number of trails is reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/MaximumNumberOfTrailsExceededException AWS API Documentation
+    #
+    class MaximumNumberOfTrailsExceededException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the AWS account making the request to
+    # create or update an organization trail is not the master account for
+    # an organization in AWS Organizations. For more information, see
+    # [Prepare For Creating a Trail For Your Organization][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/NotOrganizationMasterAccountException AWS API Documentation
+    #
+    class NotOrganizationMasterAccountException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the requested operation is not
+    # permitted.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/OperationNotPermittedException AWS API Documentation
+    #
+    class OperationNotPermittedException < Aws::EmptyStructure; end
+
+    # This exception is thrown when AWS Organizations is not configured to
+    # support all features. All features must be enabled in AWS Organization
+    # to support creating an organization trail. For more information, see
+    # [Prepare For Creating a Trail For Your Organization][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/OrganizationNotInAllFeaturesModeException AWS API Documentation
+    #
+    class OrganizationNotInAllFeaturesModeException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the request is made from an AWS account
+    # that is not a member of an organization. To make this request, sign in
+    # using the credentials of an account that belongs to an organization.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/OrganizationsNotInUseException AWS API Documentation
+    #
+    class OrganizationsNotInUseException < Aws::EmptyStructure; end
 
     # Contains information about a returned public key.
     #
@@ -1112,6 +1589,7 @@ module Aws::CloudTrail
     #                 values: ["String"],
     #               },
     #             ],
+    #             exclude_management_event_sources: ["String"],
     #           },
     #         ],
     #       }
@@ -1169,6 +1647,56 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutInsightSelectorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         trail_name: "String", # required
+    #         insight_selectors: [ # required
+    #           {
+    #             insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] trail_name
+    #   The name of the CloudTrail trail for which you want to change or add
+    #   Insights selectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_selectors
+    #   A JSON string that contains the insight types you want to log on a
+    #   trail. In this release, only `ApiCallRateInsight` is supported as an
+    #   insight type.
+    #   @return [Array<Types::InsightSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectorsRequest AWS API Documentation
+    #
+    class PutInsightSelectorsRequest < Struct.new(
+      :trail_name,
+      :insight_selectors)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trail_arn
+    #   The Amazon Resource Name (ARN) of a trail for which you want to
+    #   change or add Insights selectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_selectors
+    #   A JSON string that contains the insight types you want to log on a
+    #   trail. In this release, only `ApiCallRateInsight` is supported as an
+    #   insight type.
+    #   @return [Array<Types::InsightSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectorsResponse AWS API Documentation
+    #
+    class PutInsightSelectorsResponse < Struct.new(
+      :trail_arn,
+      :insight_selectors)
+      include Aws::Structure
+    end
+
     # Specifies the tags to remove from a trail.
     #
     # @note When making an API call, you may pass RemoveTagsRequest
@@ -1216,13 +1744,13 @@ module Aws::CloudTrail
     #   The type of a resource referenced by the event returned. When the
     #   resource type cannot be determined, null is returned. Some examples
     #   of resource types are: **Instance** for EC2, **Trail** for
-    #   CloudTrail, **DBInstance** for RDS, and **AccessKey** for IAM. For a
-    #   list of resource types supported for event lookup, see [Resource
-    #   Types Supported for Event Lookup][1].
+    #   CloudTrail, **DBInstance** for RDS, and **AccessKey** for IAM. To
+    #   learn more about how to look up and filter events by the resource
+    #   types supported for a service, see [Filtering CloudTrail Events][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/lookup_supported_resourcetypes.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events-console.html#filtering-cloudtrail-events
     #   @return [String]
     #
     # @!attribute [rw] resource_name
@@ -1239,6 +1767,12 @@ module Aws::CloudTrail
       :resource_name)
       include Aws::Structure
     end
+
+    # This exception is thrown when the specified resource is not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
 
     # A resource tag.
     #
@@ -1257,6 +1791,19 @@ module Aws::CloudTrail
       :tags_list)
       include Aws::Structure
     end
+
+    # This exception is thrown when the specified resource type is not
+    # supported by CloudTrail.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ResourceTypeNotSupportedException AWS API Documentation
+    #
+    class ResourceTypeNotSupportedException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the specified S3 bucket does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/S3BucketDoesNotExistException AWS API Documentation
+    #
+    class S3BucketDoesNotExistException < Aws::EmptyStructure; end
 
     # The request to CloudTrail to start logging AWS API calls for an
     # account.
@@ -1351,6 +1898,13 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # The number of tags per trail has exceeded the permitted amount.
+    # Currently, the limit is 50.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/TagsLimitExceededException AWS API Documentation
+    #
+    class TagsLimitExceededException < Aws::EmptyStructure; end
+
     # The settings for a trail.
     #
     # @!attribute [rw] name
@@ -1364,7 +1918,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
@@ -1375,11 +1929,11 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
-    #   This field is deprecated. Use SnsTopicARN.
+    #   This field is no longer in use. Use SnsTopicARN.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn
@@ -1396,7 +1950,7 @@ module Aws::CloudTrail
     #   @return [Boolean]
     #
     # @!attribute [rw] is_multi_region_trail
-    #   Specifies whether the trail belongs only to one region or exists in
+    #   Specifies whether the trail exists only in one region or exists in
     #   all regions.
     #   @return [Boolean]
     #
@@ -1436,6 +1990,11 @@ module Aws::CloudTrail
     #   Specifies if the trail has custom event selectors.
     #   @return [Boolean]
     #
+    # @!attribute [rw] has_insight_selectors
+    #   Specifies whether a trail has insight types specified in an
+    #   `InsightSelector` list.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] is_organization_trail
     #   Specifies whether the trail is an organization trail.
     #   @return [Boolean]
@@ -1457,9 +2016,60 @@ module Aws::CloudTrail
       :cloud_watch_logs_role_arn,
       :kms_key_id,
       :has_custom_event_selectors,
+      :has_insight_selectors,
       :is_organization_trail)
       include Aws::Structure
     end
+
+    # This exception is thrown when the specified trail already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/TrailAlreadyExistsException AWS API Documentation
+    #
+    class TrailAlreadyExistsException < Aws::EmptyStructure; end
+
+    # Information about a CloudTrail trail, including the trail's name,
+    # home region, and Amazon Resource Name (ARN).
+    #
+    # @!attribute [rw] trail_arn
+    #   The ARN of a trail.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a trail.
+    #   @return [String]
+    #
+    # @!attribute [rw] home_region
+    #   The AWS region in which a trail was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/TrailInfo AWS API Documentation
+    #
+    class TrailInfo < Struct.new(
+      :trail_arn,
+      :name,
+      :home_region)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the trail with the given name is not
+    # found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/TrailNotFoundException AWS API Documentation
+    #
+    class TrailNotFoundException < Aws::EmptyStructure; end
+
+    # This exception is no longer in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/TrailNotProvidedException AWS API Documentation
+    #
+    class TrailNotProvidedException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the requested operation is not
+    # supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UnsupportedOperationException AWS API Documentation
+    #
+    class UnsupportedOperationException < Aws::EmptyStructure; end
 
     # Specifies settings to update for the trail.
     #
@@ -1507,7 +2117,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
@@ -1518,7 +2128,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
@@ -1538,7 +2148,8 @@ module Aws::CloudTrail
     #   (replications of the trail) will be created in the other regions. If
     #   the trail exists in all regions and this value is set to false, the
     #   trail will remain in the region where it was created, and its shadow
-    #   trails in other regions will be deleted.
+    #   trails in other regions will be deleted. As a best practice,
+    #   consider using trails that log events in all regions.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_log_file_validation
@@ -1636,11 +2247,11 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
-    #   This field is deprecated. Use SnsTopicARN.
+    #   This field is no longer in use. Use SnsTopicARN.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn

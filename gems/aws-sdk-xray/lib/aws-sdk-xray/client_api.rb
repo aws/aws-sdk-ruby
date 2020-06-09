@@ -44,6 +44,7 @@ module Aws::XRay
     EncryptionKeyId = Shapes::StringShape.new(name: 'EncryptionKeyId')
     EncryptionStatus = Shapes::StringShape.new(name: 'EncryptionStatus')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
+    EntitySelectorExpression = Shapes::StringShape.new(name: 'EntitySelectorExpression')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorRootCause = Shapes::StructureShape.new(name: 'ErrorRootCause')
     ErrorRootCauseEntity = Shapes::StructureShape.new(name: 'ErrorRootCauseEntity')
@@ -76,6 +77,8 @@ module Aws::XRay
     GetSamplingTargetsResult = Shapes::StructureShape.new(name: 'GetSamplingTargetsResult')
     GetServiceGraphRequest = Shapes::StructureShape.new(name: 'GetServiceGraphRequest')
     GetServiceGraphResult = Shapes::StructureShape.new(name: 'GetServiceGraphResult')
+    GetTimeSeriesServiceStatisticsRequest = Shapes::StructureShape.new(name: 'GetTimeSeriesServiceStatisticsRequest')
+    GetTimeSeriesServiceStatisticsResult = Shapes::StructureShape.new(name: 'GetTimeSeriesServiceStatisticsResult')
     GetTraceGraphRequest = Shapes::StructureShape.new(name: 'GetTraceGraphRequest')
     GetTraceGraphResult = Shapes::StructureShape.new(name: 'GetTraceGraphResult')
     GetTraceSummariesRequest = Shapes::StructureShape.new(name: 'GetTraceSummariesRequest')
@@ -128,6 +131,8 @@ module Aws::XRay
     SamplingStatisticSummaryList = Shapes::ListShape.new(name: 'SamplingStatisticSummaryList')
     SamplingStatisticsDocument = Shapes::StructureShape.new(name: 'SamplingStatisticsDocument')
     SamplingStatisticsDocumentList = Shapes::ListShape.new(name: 'SamplingStatisticsDocumentList')
+    SamplingStrategy = Shapes::StructureShape.new(name: 'SamplingStrategy')
+    SamplingStrategyName = Shapes::StringShape.new(name: 'SamplingStrategyName')
     SamplingTargetDocument = Shapes::StructureShape.new(name: 'SamplingTargetDocument')
     SamplingTargetDocumentList = Shapes::ListShape.new(name: 'SamplingTargetDocumentList')
     Segment = Shapes::StructureShape.new(name: 'Segment')
@@ -146,6 +151,9 @@ module Aws::XRay
     TelemetryRecord = Shapes::StructureShape.new(name: 'TelemetryRecord')
     TelemetryRecordList = Shapes::ListShape.new(name: 'TelemetryRecordList')
     ThrottledException = Shapes::StructureShape.new(name: 'ThrottledException')
+    TimeRangeType = Shapes::StringShape.new(name: 'TimeRangeType')
+    TimeSeriesServiceStatistics = Shapes::StructureShape.new(name: 'TimeSeriesServiceStatistics')
+    TimeSeriesServiceStatisticsList = Shapes::ListShape.new(name: 'TimeSeriesServiceStatisticsList')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Trace = Shapes::StructureShape.new(name: 'Trace')
     TraceAvailabilityZones = Shapes::ListShape.new(name: 'TraceAvailabilityZones')
@@ -263,6 +271,7 @@ module Aws::XRay
     EncryptionConfig.struct_class = Types::EncryptionConfig
 
     ErrorRootCause.add_member(:services, Shapes::ShapeRef.new(shape: ErrorRootCauseServices, location_name: "Services"))
+    ErrorRootCause.add_member(:client_impacting, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ClientImpacting"))
     ErrorRootCause.struct_class = Types::ErrorRootCause
 
     ErrorRootCauseEntity.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -290,6 +299,7 @@ module Aws::XRay
     ErrorStatistics.struct_class = Types::ErrorStatistics
 
     FaultRootCause.add_member(:services, Shapes::ShapeRef.new(shape: FaultRootCauseServices, location_name: "Services"))
+    FaultRootCause.add_member(:client_impacting, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ClientImpacting"))
     FaultRootCause.struct_class = Types::FaultRootCause
 
     FaultRootCauseEntity.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -370,6 +380,20 @@ module Aws::XRay
     GetServiceGraphResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetServiceGraphResult.struct_class = Types::GetServiceGraphResult
 
+    GetTimeSeriesServiceStatisticsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    GetTimeSeriesServiceStatisticsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    GetTimeSeriesServiceStatisticsRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
+    GetTimeSeriesServiceStatisticsRequest.add_member(:group_arn, Shapes::ShapeRef.new(shape: GroupARN, location_name: "GroupARN"))
+    GetTimeSeriesServiceStatisticsRequest.add_member(:entity_selector_expression, Shapes::ShapeRef.new(shape: EntitySelectorExpression, location_name: "EntitySelectorExpression"))
+    GetTimeSeriesServiceStatisticsRequest.add_member(:period, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "Period"))
+    GetTimeSeriesServiceStatisticsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetTimeSeriesServiceStatisticsRequest.struct_class = Types::GetTimeSeriesServiceStatisticsRequest
+
+    GetTimeSeriesServiceStatisticsResult.add_member(:time_series_service_statistics, Shapes::ShapeRef.new(shape: TimeSeriesServiceStatisticsList, location_name: "TimeSeriesServiceStatistics"))
+    GetTimeSeriesServiceStatisticsResult.add_member(:contains_old_group_versions, Shapes::ShapeRef.new(shape: Boolean, location_name: "ContainsOldGroupVersions"))
+    GetTimeSeriesServiceStatisticsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetTimeSeriesServiceStatisticsResult.struct_class = Types::GetTimeSeriesServiceStatisticsResult
+
     GetTraceGraphRequest.add_member(:trace_ids, Shapes::ShapeRef.new(shape: TraceIdList, required: true, location_name: "TraceIds"))
     GetTraceGraphRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetTraceGraphRequest.struct_class = Types::GetTraceGraphRequest
@@ -380,7 +404,9 @@ module Aws::XRay
 
     GetTraceSummariesRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
     GetTraceSummariesRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    GetTraceSummariesRequest.add_member(:time_range_type, Shapes::ShapeRef.new(shape: TimeRangeType, location_name: "TimeRangeType"))
     GetTraceSummariesRequest.add_member(:sampling, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Sampling"))
+    GetTraceSummariesRequest.add_member(:sampling_strategy, Shapes::ShapeRef.new(shape: SamplingStrategy, location_name: "SamplingStrategy"))
     GetTraceSummariesRequest.add_member(:filter_expression, Shapes::ShapeRef.new(shape: FilterExpression, location_name: "FilterExpression"))
     GetTraceSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetTraceSummariesRequest.struct_class = Types::GetTraceSummariesRequest
@@ -419,6 +445,9 @@ module Aws::XRay
     InstanceIdDetail.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
     InstanceIdDetail.struct_class = Types::InstanceIdDetail
 
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     PutEncryptionConfigRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: EncryptionKeyId, location_name: "KeyId"))
     PutEncryptionConfigRequest.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "Type"))
     PutEncryptionConfigRequest.struct_class = Types::PutEncryptionConfigRequest
@@ -444,6 +473,7 @@ module Aws::XRay
     ResourceARNDetail.struct_class = Types::ResourceARNDetail
 
     ResponseTimeRootCause.add_member(:services, Shapes::ShapeRef.new(shape: ResponseTimeRootCauseServices, location_name: "Services"))
+    ResponseTimeRootCause.add_member(:client_impacting, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ClientImpacting"))
     ResponseTimeRootCause.struct_class = Types::ResponseTimeRootCause
 
     ResponseTimeRootCauseEntity.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -470,6 +500,9 @@ module Aws::XRay
     RootCauseException.struct_class = Types::RootCauseException
 
     RootCauseExceptions.member = Shapes::ShapeRef.new(shape: RootCauseException)
+
+    RuleLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    RuleLimitExceededException.struct_class = Types::RuleLimitExceededException
 
     SamplingRule.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, location_name: "RuleName"))
     SamplingRule.add_member(:rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "RuleARN"))
@@ -525,6 +558,10 @@ module Aws::XRay
     SamplingStatisticsDocument.struct_class = Types::SamplingStatisticsDocument
 
     SamplingStatisticsDocumentList.member = Shapes::ShapeRef.new(shape: SamplingStatisticsDocument)
+
+    SamplingStrategy.add_member(:name, Shapes::ShapeRef.new(shape: SamplingStrategyName, location_name: "Name"))
+    SamplingStrategy.add_member(:value, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "Value"))
+    SamplingStrategy.struct_class = Types::SamplingStrategy
 
     SamplingTargetDocument.add_member(:rule_name, Shapes::ShapeRef.new(shape: String, location_name: "RuleName"))
     SamplingTargetDocument.add_member(:fixed_rate, Shapes::ShapeRef.new(shape: Double, location_name: "FixedRate"))
@@ -585,6 +622,17 @@ module Aws::XRay
 
     TelemetryRecordList.member = Shapes::ShapeRef.new(shape: TelemetryRecord)
 
+    ThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ThrottledException.struct_class = Types::ThrottledException
+
+    TimeSeriesServiceStatistics.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    TimeSeriesServiceStatistics.add_member(:edge_summary_statistics, Shapes::ShapeRef.new(shape: EdgeStatistics, location_name: "EdgeSummaryStatistics"))
+    TimeSeriesServiceStatistics.add_member(:service_summary_statistics, Shapes::ShapeRef.new(shape: ServiceStatistics, location_name: "ServiceSummaryStatistics"))
+    TimeSeriesServiceStatistics.add_member(:response_time_histogram, Shapes::ShapeRef.new(shape: Histogram, location_name: "ResponseTimeHistogram"))
+    TimeSeriesServiceStatistics.struct_class = Types::TimeSeriesServiceStatistics
+
+    TimeSeriesServiceStatisticsList.member = Shapes::ShapeRef.new(shape: TimeSeriesServiceStatistics)
+
     Trace.add_member(:id, Shapes::ShapeRef.new(shape: TraceId, location_name: "Id"))
     Trace.add_member(:duration, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "Duration"))
     Trace.add_member(:segments, Shapes::ShapeRef.new(shape: SegmentList, location_name: "Segments"))
@@ -621,6 +669,7 @@ module Aws::XRay
     TraceSummary.add_member(:error_root_causes, Shapes::ShapeRef.new(shape: ErrorRootCauses, location_name: "ErrorRootCauses"))
     TraceSummary.add_member(:response_time_root_causes, Shapes::ShapeRef.new(shape: ResponseTimeRootCauses, location_name: "ResponseTimeRootCauses"))
     TraceSummary.add_member(:revision, Shapes::ShapeRef.new(shape: Integer, location_name: "Revision"))
+    TraceSummary.add_member(:matched_event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "MatchedEventTime"))
     TraceSummary.struct_class = Types::TraceSummary
 
     TraceSummaryList.member = Shapes::ShapeRef.new(shape: TraceSummary)
@@ -767,6 +816,11 @@ module Aws::XRay
         o.output = Shapes::ShapeRef.new(shape: GetGroupsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_sampling_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -777,6 +831,11 @@ module Aws::XRay
         o.output = Shapes::ShapeRef.new(shape: GetSamplingRulesResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_sampling_statistic_summaries, Seahorse::Model::Operation.new.tap do |o|
@@ -787,6 +846,11 @@ module Aws::XRay
         o.output = Shapes::ShapeRef.new(shape: GetSamplingStatisticSummariesResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_sampling_targets, Seahorse::Model::Operation.new.tap do |o|
@@ -805,6 +869,21 @@ module Aws::XRay
         o.http_request_uri = "/ServiceGraph"
         o.input = Shapes::ShapeRef.new(shape: GetServiceGraphRequest)
         o.output = Shapes::ShapeRef.new(shape: GetServiceGraphResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_time_series_service_statistics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTimeSeriesServiceStatistics"
+        o.http_method = "POST"
+        o.http_request_uri = "/TimeSeriesServiceStatistics"
+        o.input = Shapes::ShapeRef.new(shape: GetTimeSeriesServiceStatisticsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTimeSeriesServiceStatisticsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
         o[:pager] = Aws::Pager.new(

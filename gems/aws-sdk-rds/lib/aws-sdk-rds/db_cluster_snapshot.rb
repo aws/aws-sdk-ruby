@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RDS
+
   class DBClusterSnapshot
 
     extend Aws::Deprecations
@@ -24,6 +25,7 @@ module Aws::RDS
       @snapshot_id = extract_snapshot_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -40,8 +42,8 @@ module Aws::RDS
     end
     alias :db_cluster_snapshot_identifier :snapshot_id
 
-    # Provides the list of EC2 Availability Zones that instances in the DB
-    # cluster snapshot can be restored in.
+    # Provides the list of Availability Zones (AZs) where instances in the
+    # DB cluster snapshot can be restored.
     # @return [Array<String>]
     def availability_zones
       data[:availability_zones]
@@ -198,7 +200,8 @@ module Aws::RDS
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -211,13 +214,15 @@ module Aws::RDS
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -248,17 +253,16 @@ module Aws::RDS
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -336,7 +340,7 @@ module Aws::RDS
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_cluster_snapshot_identifier
     #   The identifier of the new DB cluster snapshot to create from the
-    #   source DB cluster snapshot. This parameter is not case-sensitive.
+    #   source DB cluster snapshot. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -348,9 +352,9 @@ module Aws::RDS
     #
     #   Example: `my-cluster-snapshot2`
     # @option options [String] :kms_key_id
-    #   The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS
-    #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
-    #   KMS key alias for the KMS encryption key.
+    #   The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key
+    #   ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS
+    #   key alias for the KMS encryption key.
     #
     #   If you copy an encrypted DB cluster snapshot from your AWS account,
     #   you can specify a value for `KmsKeyId` to encrypt the copy with a new
@@ -375,10 +379,11 @@ module Aws::RDS
     #   `CopyDBClusterSnapshot` API action in the AWS Region that contains the
     #   source DB cluster snapshot to copy. The `PreSignedUrl` parameter must
     #   be used when copying an encrypted DB cluster snapshot from another AWS
-    #   Region.
+    #   Region. Don't specify `PreSignedUrl` when you are copying an
+    #   encrypted DB cluster snapshot in the same AWS Region.
     #
     #   The pre-signed URL must be a valid request for the
-    #   `CopyDBSClusterSnapshot` API action that can be executed in the source
+    #   `CopyDBClusterSnapshot` API action that can be executed in the source
     #   AWS Region that contains the encrypted DB cluster snapshot to be
     #   copied. The pre-signed URL request must contain the following
     #   parameter values:
@@ -390,7 +395,7 @@ module Aws::RDS
     #     Region, and the action contained in the pre-signed URL.
     #
     #   * `DestinationRegion` - The name of the AWS Region that the DB cluster
-    #     snapshot will be created in.
+    #     snapshot is to be created in.
     #
     #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
     #     identifier for the encrypted DB cluster snapshot to be copied. This
@@ -405,20 +410,29 @@ module Aws::RDS
     #   Authenticating Requests: Using Query Parameters (AWS Signature Version
     #   4)][1] and [ Signature Version 4 Signing Process][2].
     #
+    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
+    #   autogenerates a pre-signed URL that is a valid request for the
+    #   operation that can be executed in the source AWS Region.
+    #
+    #    </note>
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     # @option options [Boolean] :copy_tags
-    #   True to copy all tags from the source DB cluster snapshot to the
-    #   target DB cluster snapshot, and otherwise false. The default is false.
+    #   A value that indicates whether to copy all tags from the source DB
+    #   cluster snapshot to the target DB cluster snapshot. By default, tags
+    #   are not copied.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
     #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -479,14 +493,18 @@ module Aws::RDS
     #       max_capacity: 1,
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
+    #       timeout_action: "String",
     #     },
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
+    #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
-    #   Provides the list of Amazon EC2 Availability Zones that instances in
-    #   the restored DB cluster can be created in.
+    #   Provides the list of Availability Zones (AZs) where instances in the
+    #   restored DB cluster can be created.
     # @option options [required, String] :db_cluster_identifier
     #   The name of the DB cluster to create from the DB snapshot or DB
     #   cluster snapshot. This parameter isn't case-sensitive.
@@ -508,6 +526,38 @@ module Aws::RDS
     #   Constraint: Must be compatible with the engine of the source
     # @option options [String] :engine_version
     #   The version of the database engine to use for the new DB cluster.
+    #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for `aurora-postgresql`,
+    #   use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query "DBEngineVersions[].EngineVersion"`
+    #
+    #   <note markdown="1"> If you aren't using the default engine version, then you must specify
+    #   the engine version.
+    #
+    #    </note>
+    #
+    #   **Aurora MySQL**
+    #
+    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
+    #   `5.7.mysql_aurora.2.04.5`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `9.6.3`, `10.7`
     # @option options [Integer] :port
     #   The port number on which the new DB cluster accepts connections.
     #
@@ -546,13 +596,19 @@ module Aws::RDS
     #     encrypted, then the restored DB cluster is encrypted using the KMS
     #     key that was used to encrypt the DB snapshot or DB cluster snapshot.
     #
-    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
-    #     not encrypted, then the restored DB cluster is not encrypted.
+    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier`
+    #     isn't encrypted, then the restored DB cluster isn't encrypted.
     # @option options [Boolean] :enable_iam_database_authentication
-    #   True to enable mapping of AWS Identity and Access Management (IAM)
-    #   accounts to database accounts, and otherwise false.
+    #   A value that indicates whether to enable mapping of AWS Identity and
+    #   Access Management (IAM) accounts to database accounts. By default,
+    #   mapping is disabled.
     #
-    #   Default: `false`
+    #   For more information, see [ IAM Database Authentication][1] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
@@ -573,10 +629,10 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, or `parallelquery`.
+    #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.
@@ -596,9 +652,19 @@ module Aws::RDS
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens.
     # @option options [Boolean] :deletion_protection
-    #   Indicates if the DB cluster should have deletion protection enabled.
-    #   The database can't be deleted when this value is set to true. The
-    #   default is false.
+    #   A value that indicates whether the DB cluster has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled.
+    # @option options [Boolean] :copy_tags_to_snapshot
+    #   A value that indicates whether to copy all tags from the restored DB
+    #   cluster to snapshots of the restored DB cluster. The default is not to
+    #   copy them.
+    # @option options [String] :domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    # @option options [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(snapshot_identifier: @snapshot_id)
@@ -663,7 +729,7 @@ module Aws::RDS
     #   A list of event categories that trigger notifications for a event
     #   notification subscription.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [Event::Collection]
     def events(options = {})
       batches = Enumerator.new do |y|

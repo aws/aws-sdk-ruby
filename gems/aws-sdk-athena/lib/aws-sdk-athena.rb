@@ -24,17 +24,20 @@ require_relative 'aws-sdk-athena/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     athena = Aws::Athena::Client.new
+#     resp = athena.batch_get_named_query(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Athena all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Athena are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Athena::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Athena API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-athena/customizations'
 # @service
 module Aws::Athena
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.27.0'
 
 end

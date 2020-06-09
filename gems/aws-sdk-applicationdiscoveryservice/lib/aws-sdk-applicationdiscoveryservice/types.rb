@@ -138,6 +138,66 @@ module Aws::ApplicationDiscoveryService
 
     class AssociateConfigurationItemsToApplicationResponse < Aws::EmptyStructure; end
 
+    # The AWS user account does not have permission to perform the action.
+    # Check the IAM policy associated with this account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class AuthorizationErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Error messages returned for each import task that you deleted as a
+    # response for this command.
+    #
+    # @!attribute [rw] import_task_id
+    #   The unique import ID associated with the error that occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The type of error that occurred for a specific import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_description
+    #   The description of the error that occurred for a specific import
+    #   task.
+    #   @return [String]
+    #
+    class BatchDeleteImportDataError < Struct.new(
+      :import_task_id,
+      :error_code,
+      :error_description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDeleteImportDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         import_task_ids: ["ImportTaskIdentifier"], # required
+    #       }
+    #
+    # @!attribute [rw] import_task_ids
+    #   The IDs for the import tasks that you want to delete.
+    #   @return [Array<String>]
+    #
+    class BatchDeleteImportDataRequest < Struct.new(
+      :import_task_ids)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   Error messages returned for each import task that you deleted as a
+    #   response for this command.
+    #   @return [Array<Types::BatchDeleteImportDataError>]
+    #
+    class BatchDeleteImportDataResponse < Struct.new(
+      :errors)
+      include Aws::Structure
+    end
+
     # Tags for a configuration item. Tags are metadata that help you
     # categorize IT assets.
     #
@@ -173,6 +233,14 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ConflictErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A list of continuous export descriptions.
     #
     # @!attribute [rw] export_id
@@ -204,7 +272,54 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     #
     # @!attribute [rw] status_detail
-    #   Contains information about any errors that may have occurred.
+    #   Contains information about any errors that have occurred. This data
+    #   type can have the following values:
+    #
+    #   * ACCESS\_DENIED - You don’t have permission to start Data
+    #     Exploration in Amazon Athena. Contact your AWS administrator for
+    #     help. For more information, see [Setting Up AWS Application
+    #     Discovery Service][1] in the Application Discovery Service User
+    #     Guide.
+    #
+    #   * DELIVERY\_STREAM\_LIMIT\_FAILURE - You reached the limit for
+    #     Amazon Kinesis Data Firehose delivery streams. Reduce the number
+    #     of streams or request a limit increase and try again. For more
+    #     information, see [Kinesis Data Streams Limits][2] in the Amazon
+    #     Kinesis Data Streams Developer Guide.
+    #
+    #   * FIREHOSE\_ROLE\_MISSING - The Data Exploration feature is in an
+    #     error state because your IAM User is missing the
+    #     AWSApplicationDiscoveryServiceFirehose role. Turn on Data
+    #     Exploration in Amazon Athena and try again. For more information,
+    #     see [Step 3: Provide Application Discovery Service Access to
+    #     Non-Administrator Users by Attaching Policies][3] in the
+    #     Application Discovery Service User Guide.
+    #
+    #   * FIREHOSE\_STREAM\_DOES\_NOT\_EXIST - The Data Exploration feature
+    #     is in an error state because your IAM User is missing one or more
+    #     of the Kinesis data delivery streams.
+    #
+    #   * INTERNAL\_FAILURE - The Data Exploration feature is in an error
+    #     state because of an internal failure. Try again later. If this
+    #     problem persists, contact AWS Support.
+    #
+    #   * S3\_BUCKET\_LIMIT\_FAILURE - You reached the limit for Amazon S3
+    #     buckets. Reduce the number of Amazon S3 buckets or request a limit
+    #     increase and try again. For more information, see [Bucket
+    #     Restrictions and Limitations][4] in the Amazon Simple Storage
+    #     Service Developer Guide.
+    #
+    #   * S3\_NOT\_SIGNED\_UP - Your account is not signed up for the Amazon
+    #     S3 service. You must sign up before you can use Amazon S3. You can
+    #     sign up at the following URL: [https://aws.amazon.com/s3][5].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html
+    #   [2]: http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html
+    #   [3]: http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html#setting-up-user-policy
+    #   [4]: http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
+    #   [5]: https://aws.amazon.com/s3
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket
@@ -595,7 +710,7 @@ module Aws::ApplicationDiscoveryService
     #       }
     #
     # @!attribute [rw] export_ids
-    #   A list of continuous export ids to search for.
+    #   A list of continuous export IDs to search for.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -696,6 +811,57 @@ module Aws::ApplicationDiscoveryService
     class DescribeExportTasksResponse < Struct.new(
       :exports_info,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeImportTasksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "IMPORT_TASK_ID", # accepts IMPORT_TASK_ID, STATUS, NAME
+    #             values: ["ImportTaskFilterValue"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   An array of name-value pairs that you provide to filter the results
+    #   for the `DescribeImportTask` request to a specific subset of
+    #   results. Currently, wildcard values aren't supported for filters.
+    #   @return [Array<Types::ImportTaskFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that you want this request to return,
+    #   up to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request a specific page of results.
+    #   @return [String]
+    #
+    class DescribeImportTasksRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] tasks
+    #   A returned array of import tasks that match any applied filters, up
+    #   to the specified number of maximum results.
+    #   @return [Array<Types::ImportTask>]
+    #
+    class DescribeImportTasksResponse < Struct.new(
+      :next_token,
+      :tasks)
       include Aws::Structure
     end
 
@@ -886,11 +1052,12 @@ module Aws::ApplicationDiscoveryService
     # A filter that can use conditional operators.
     #
     # For more information about filters, see [Querying Discovered
-    # Configuration Items][1].
+    # Configuration Items][1] in the *AWS Application Discovery Service User
+    # Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html
+    # [1]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -967,6 +1134,175 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # The home region is not set. Set the home region to continue.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class HomeRegionNotSetException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An array of information related to the import task request that
+    # includes status information, times, IDs, the Amazon S3 Object URL for
+    # the import file, and more.
+    #
+    # @!attribute [rw] import_task_id
+    #   The unique ID for a specific import task. These IDs aren't globally
+    #   unique, but they are unique within an AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique token used to prevent the same import request from
+    #   occurring more than once. If you didn't provide a token, a token
+    #   was automatically generated when the import task request was sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A descriptive name for an import task. You can use this name to
+    #   filter future requests related to this import task, such as
+    #   identifying applications and servers that were included in this
+    #   import task. We recommend that you use a meaningful name for each
+    #   import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_url
+    #   The URL for your import file that you've uploaded to Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the import task. An import can have the status of
+    #   `IMPORT_COMPLETE` and still have some records fail to import from
+    #   the overall request. More information can be found in the
+    #   downloadable archive defined in the `errorsAndFailedEntriesZip`
+    #   field, or in the Migration Hub management console.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_request_time
+    #   The time that the import task request was made, presented in the
+    #   Unix time stamp format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] import_completion_time
+    #   The time that the import task request finished, presented in the
+    #   Unix time stamp format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] import_deleted_time
+    #   The time that the import task request was deleted, presented in the
+    #   Unix time stamp format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] server_import_success
+    #   The total number of server records in the import file that were
+    #   successfully imported.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_import_failure
+    #   The total number of server records in the import file that failed to
+    #   be imported.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] application_import_success
+    #   The total number of application records in the import file that were
+    #   successfully imported.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] application_import_failure
+    #   The total number of application records in the import file that
+    #   failed to be imported.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] errors_and_failed_entries_zip
+    #   A link to a compressed archive folder (in the ZIP format) that
+    #   contains an error log and a file of failed records. You can use
+    #   these two files to quickly identify records that failed, why they
+    #   failed, and correct those records. Afterward, you can upload the
+    #   corrected file to your Amazon S3 bucket and create another import
+    #   task request.
+    #
+    #   This field also includes authorization information so you can
+    #   confirm the authenticity of the compressed archive before you
+    #   download it.
+    #
+    #   If some records failed to be imported we recommend that you correct
+    #   the records in the failed entries file and then imports that failed
+    #   entries file. This prevents you from having to correct and update
+    #   the larger original file and attempt importing it again.
+    #   @return [String]
+    #
+    class ImportTask < Struct.new(
+      :import_task_id,
+      :client_request_token,
+      :name,
+      :import_url,
+      :status,
+      :import_request_time,
+      :import_completion_time,
+      :import_deleted_time,
+      :server_import_success,
+      :server_import_failure,
+      :application_import_success,
+      :application_import_failure,
+      :errors_and_failed_entries_zip)
+      include Aws::Structure
+    end
+
+    # A name-values pair of elements you can use to filter the results when
+    # querying your import tasks. Currently, wildcards are not supported for
+    # filters.
+    #
+    # <note markdown="1"> When filtering by import status, all other filter values are ignored.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass ImportTaskFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "IMPORT_TASK_ID", # accepts IMPORT_TASK_ID, STATUS, NAME
+    #         values: ["ImportTaskFilterValue"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name, status, or import task ID for a specific import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array of strings that you can provide to match against a specific
+    #   name, status, or import task ID to filter the results for your
+    #   import task queries.
+    #   @return [Array<String>]
+    #
+    class ImportTaskFilter < Struct.new(
+      :name,
+      :values)
+      include Aws::Structure
+    end
+
+    # One or more parameters are not valid. Verify the parameters and try
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The value of one or more parameters are either invalid or out of
+    # range. Verify the parameter values and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListConfigurationsRequest
     #   data as a hash:
     #
@@ -1000,11 +1336,12 @@ module Aws::ApplicationDiscoveryService
     #   `\{"key": "serverType", "value": "webServer"\}`
     #
     #   For a complete list of filter options and guidance about using them
-    #   with this action, see [Querying Discovered Configuration Items][1].
+    #   with this action, see [Using the ListConfigurations Action][1] in
+    #   the *AWS Application Discovery Service User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations
+    #   [1]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -1022,11 +1359,12 @@ module Aws::ApplicationDiscoveryService
     # @!attribute [rw] order_by
     #   Certain filter criteria return output that can be sorted in
     #   ascending or descending order. For a list of output characteristics
-    #   for each filter, see [Using the ListConfigurations Action][1].
+    #   for each filter, see [Using the ListConfigurations Action][1] in the
+    #   *AWS Application Discovery Service User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations
+    #   [1]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations
     #   @return [Array<Types::OrderByElement>]
     #
     class ListConfigurationsRequest < Struct.new(
@@ -1160,6 +1498,16 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # This operation is not permitted.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class OperationNotPermittedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A field and direction for ordered output.
     #
     # @note When making an API call, you may pass OrderByElement
@@ -1181,6 +1529,41 @@ module Aws::ApplicationDiscoveryService
     class OrderByElement < Struct.new(
       :field_name,
       :sort_order)
+      include Aws::Structure
+    end
+
+    # This issue occurs when the same `clientRequestToken` is used with the
+    # `StartImportTask` action, but with different parameters. For example,
+    # you use the same request token but have two different import URLs, you
+    # can encounter this issue. If the import tasks are meant to be
+    # different, use a different `clientRequestToken`, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified configuration ID was not located. Verify the
+    # configuration ID and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The server experienced an internal error. Try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ServerInternalErrorException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1316,6 +1699,62 @@ module Aws::ApplicationDiscoveryService
     #
     class StartExportTaskResponse < Struct.new(
       :export_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartImportTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         name: "ImportTaskName", # required
+    #         import_url: "ImportURL", # required
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   Optional. A unique token that you can provide to prevent the same
+    #   import request from occurring more than once. If you don't provide
+    #   a token, a token is automatically generated.
+    #
+    #   Sending more than one `StartImportTask` request with the same client
+    #   request token will return information about the original import task
+    #   with that client request token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A descriptive name for this request. You can use this name to filter
+    #   future requests related to this import task, such as identifying
+    #   applications and servers that were included in this import task. We
+    #   recommend that you use a meaningful name for each import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_url
+    #   The URL for your import file that you've uploaded to Amazon S3.
+    #
+    #   <note markdown="1"> If you're using the AWS CLI, this URL is structured as follows:
+    #   `s3://BucketName/ImportFileName.CSV`
+    #
+    #    </note>
+    #   @return [String]
+    #
+    class StartImportTaskRequest < Struct.new(
+      :client_request_token,
+      :name,
+      :import_url)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task
+    #   An array of information related to the import task request including
+    #   status information, times, IDs, the Amazon S3 Object URL for the
+    #   import file, and more.
+    #   @return [Types::ImportTask]
+    #
+    class StartImportTaskResponse < Struct.new(
+      :task)
       include Aws::Structure
     end
 

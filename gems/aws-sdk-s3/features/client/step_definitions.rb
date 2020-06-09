@@ -1,18 +1,20 @@
 require 'openssl'
-require "csv"
+require 'csv'
 
-Before("@s3", "@client") do
+Before('@s3', '@client') do
   @client = Aws::S3::Client.new
   @created_buckets = []
 end
 
-After("@s3", "@client") do
+After('@s3', '@client') do
   @created_buckets.each do |bucket|
     loop do
-      objects = @client.list_object_versions(bucket: bucket).data.versions.map do |v|
+      object_versions = @client.list_object_versions(bucket: bucket)
+      objects = object_versions.data.versions.map do |v|
         { key: v.key, version_id: v.version_id }
       end
       break if objects.empty?
+
       @client.delete_objects(bucket: bucket, delete: { objects: objects })
     end
     @client.delete_bucket(bucket: bucket)
@@ -22,7 +24,8 @@ end
 def create_bucket(options = {})
   @bucket_name = "aws-sdk-test-#{Time.now.to_i}-#{rand(1000)}"
   options[:bucket] = @bucket_name
-  if @client.config.region != 'us-east-1' && !options[:create_bucket_configuration]
+  if @client.config.region != 'us-east-1' &&
+     !options[:create_bucket_configuration]
     options[:create_bucket_configuration] = {
       location_constraint: @client.config.region
     }
@@ -49,9 +52,7 @@ Given(/^I create a DNS compatible bucket$/) do
 end
 
 When(/^I create a bucket with the location constraint "(.*?)"$/) do |loc|
-  create_bucket(create_bucket_configuration: {
-    location_constraint: loc
-  })
+  create_bucket(create_bucket_configuration: { location_constraint: loc })
 end
 
 Then(/^the bucket should have a location constraint of "(.*?)"$/) do |loc|
@@ -60,7 +61,9 @@ Then(/^the bucket should have a location constraint of "(.*?)"$/) do |loc|
 end
 
 Then(/^the bucket should exist$/) do
-  expect { @client.get_bucket_location(bucket: @bucket_name) }.not_to raise_error
+  expect do
+    @client.get_bucket_location(bucket: @bucket_name)
+  end.not_to raise_error
 end
 
 Then(/^I should be able to HEAD the bucket$/) do
@@ -76,7 +79,8 @@ Then(/^the bucket should not exist$/) do
   eventually(upto: 60) do
     begin
       @client.get_bucket_location(bucket: @bucket_name)
-    rescue => @error
+    rescue StandardError => e
+      @error = e
     end
     expect(@error).to be_kind_of(Aws::S3::Errors::NoSuchBucket)
   end
@@ -96,12 +100,14 @@ When(/^I put the test png to the key "(.*?)"$/) do |key|
   file.close
 end
 
-Then(/^the object with the key "(.*?)" should have a content length of (\d+)$/) do |key, size|
+Then(/^the object with the key "(.*?)" |
+      should have a content length of (\d+)$/x) do |key, size|
   resp = @client.head_object(bucket: @bucket_name, key: key)
   expect(resp.data.content_length).to eq(size.to_i)
 end
 
-When(/^I page s3 objects prefixed "(.*?)" delimited "(.*?)" limit (\d+)$/) do |prefix, delimiter, max_keys|
+When(/^I page s3 objects prefixed "(.*?)" |
+      delimited "(.*?)" limit (\d+)$/x) do |prefix, delimiter, max_keys|
   @responses = []
   @client.list_objects(
     bucket: @bucket_name,
@@ -148,7 +154,8 @@ When(/^I put "(.*?)" to the key "(.*?)" with an aes key$/) do |body, key|
     key: key,
     body: body,
     sse_customer_algorithm: 'AES256',
-    sse_customer_key: @aes_key)
+    sse_customer_key: @aes_key
+  )
 end
 
 Then(/^I can download the key "(.*?)" with the aes key$/) do |key|
@@ -156,7 +163,8 @@ Then(/^I can download the key "(.*?)" with the aes key$/) do |key|
     bucket: @bucket_name,
     key: key,
     sse_customer_algorithm: 'AES256',
-    sse_customer_key: @aes_key)
+    sse_customer_key: @aes_key
+  )
 end
 
 When(/^I get the object with the key "(.*?)"$/) do |key|
@@ -177,8 +185,10 @@ When(/^I put a large object with a broken content-md5$/) do
       bucket: @bucket_name,
       key: 'key',
       body: '.' * 1024 * 1024,
-      content_md5: 'abc')
-  rescue => @error
+      content_md5: 'abc'
+    )
+  rescue StandardError => e
+    @error = e
   end
 end
 
@@ -195,7 +205,8 @@ Then(/^the object should exist$/) do
   @client.head_object(bucket: @bucket_name, key: @key)
 end
 
-When(/^I create a (non-secure )?presigned url for "(.*?)" with:$/) do |non_secure, method, params|
+When(/^I create a (non-secure )?presigned url |
+      for "(.*?)" with:$/x) do |non_secure, method, params|
   presigner = Aws::S3::Presigner.new(client: @client)
   params = symbolized_params(params)
   params[:bucket] = @bucket_name
@@ -212,12 +223,13 @@ Then(/^the response should be "(.*?)"$/) do |expected|
   expect(@resp.body).to eq(expected)
 end
 
-When(/^I send an HTTP put request for the presigned url with body "(.*?)"$/) do |body|
+When(/^I send an HTTP put request for the |
+      presigned url with body "(.*?)"$/x) do |body|
   uri = URI(@url)
   http = Net::HTTP.new(uri.host)
-  req = Net::HTTP::Put.new(uri.request_uri, {
-    'content-length' => body.bytesize.to_s
-  })
+  req = Net::HTTP::Put.new(
+    uri.request_uri, 'content-length' => body.bytesize.to_s
+  )
   req.body = body
   @resp = http.request(req)
   expect(@resp.code).to eq('200')
@@ -242,8 +254,8 @@ When(/^I get an object that doesn't exist with a read block$/) do
     @client.get_object(bucket: @bucket_name, key: 'bad-key') do |chunk|
       @yielded << chunk
     end
-  rescue => error
-    @error = error
+  rescue StandardError => e
+    @error = e
   end
 end
 
@@ -252,11 +264,12 @@ Then(/^an error should be raise and the block should not yield$/) do
   expect(@yielded).to eq([])
 end
 
-Then(/^the response content\-type should be "(.*?)"$/) do |arg1|
+Then(/^the response content\-type should be "(.*?)"$/) do |_arg1|
   expect(@resp.to_hash['content-type']).to eq(['text/plain'])
 end
 
-When(/^I send an HTTP put request with the content type as "(.*?)"$/) do |content_type|
+When(/^I send an HTTP put request with the |
+      content type as "(.*?)"$/x) do |content_type|
   uri = URI(@url)
   http = Net::HTTP.new(uri.host)
   req = Net::HTTP::Put.new(uri.request_uri, 'content-type' => content_type)
@@ -265,16 +278,17 @@ When(/^I send an HTTP put request with the content type as "(.*?)"$/) do |conten
 end
 
 When(/^the response should have a (\d+) status code$/) do |code|
-  expect(@resp.code).to eq(code)
+  expect(@resp.code.to_i).to eq(code)
 end
 
-Then(/^the object "([^"]*)" should have a "([^"]*)" storage class$/) do |key, sc|
+Then(/^the object "([^"]*)" should have a |
+      "([^"]*)" storage class$/x) do |key, sc|
   resp = @client.list_objects(bucket: @bucket_name, prefix: key, max_keys: 1)
   expect(resp.contents.first.storage_class).to eq(sc)
 end
 
 Then(/^the keys in my bucket should be$/) do |table|
-  keys = @client.list_objects(bucket:@bucket_name).contents.map(&:key)
+  keys = @client.list_objects(bucket: @bucket_name).contents.map(&:key)
   expect(keys.sort).to eq(table.rows.map(&:first).sort)
 end
 
@@ -292,23 +306,23 @@ end
 
 Then(/^I can streaming download key "([^"]*)"$/) do |key|
   resp = @client.get_object(bucket: @bucket_name, key: key) do |chunk|
-    expect(chunk).to eq("hello world")
+    expect(chunk).to eq('hello world')
   end
   expect(resp.body).to be_a(Seahorse::Client::BlockIO)
   expect(resp.context[:response_target]).to be_a(Proc)
 end
 
 Given(/^I put a file with content:$/) do |table|
-  @select_file_name = "test.csv"
-  csv = Tempfile.new("file.csv")
-  CSV.open(csv.path, "wb") do |f|
-    table.raw.each {|row| f << row}
+  @select_file_name = 'test.csv'
+  csv = Tempfile.new('file.csv')
+  CSV.open(csv.path, 'wb') do |f|
+    table.raw.each { |row| f << row }
   end
   @client.put_object(
     bucket: @bucket_name,
     key: @select_file_name,
     body: File.read(csv.path)
-  ) 
+  )
   csv.unlink
 end
 
@@ -316,14 +330,14 @@ When(/^I select it with query "([^"]*)"$/) do |query|
   @select_resp = @client.select_object_content(
     bucket: @bucket_name,
     key: @select_file_name,
-    expression_type: "SQL",
+    expression_type: 'SQL',
     expression: query,
     input_serialization: {
       csv: {
-        file_header_info: "USE"
+        file_header_info: 'USE'
       }
     },
-    output_serialization: {csv: {}}
+    output_serialization: { csv: {} }
   )
   @tracker = Hash.new([])
 end
@@ -331,12 +345,14 @@ end
 Then(/^response should contain "([^"]*)" event$/) do |type|
   @select_resp.payload.each do |event|
     next unless event.event_type == type.to_sym
+
     @tracker[type.to_sym] << event
   end
   expect(@tracker[:records]).not_to be_nil
 end
 
-Then(/^the event should have payload member with content "([^"]*)"$/) do |payload|
+Then(/^the event should have payload member |
+      with content "([^"]*)"$/x) do |payload|
   @tracker[:records].each do |e|
     # same event process twice, same string IO
     e.payload.rewind
@@ -349,14 +365,14 @@ When(/^I select it with query "([^"]*)" with block$/) do |query|
   @select_resp = @client.select_object_content(
     bucket: @bucket_name,
     key: @select_file_name,
-    expression_type: "SQL",
+    expression_type: 'SQL',
     expression: query,
     input_serialization: {
       csv: {
-        file_header_info: "USE"
+        file_header_info: 'USE'
       }
     },
-    output_serialization: {csv: {}}
+    output_serialization: { csv: {} }
   ) do |stream|
     stream.on_records_event do |e|
       @tracker[e.event_type] << e
@@ -364,7 +380,8 @@ When(/^I select it with query "([^"]*)" with block$/) do |query|
   end
 end
 
-Then(/^"([^"]*)" event should be processed "(\d+)" times when it arrives$/) do |type, times|
+Then(/^"([^"]*)" event should be processed "(\d+)" |
+      times when it arrives$/x) do |type, times|
   expect(@tracker[type.to_sym].size).to eq(times.to_i)
 end
 
@@ -377,14 +394,14 @@ When(/^I select it with query "([^"]*)" with event stream handler$/) do |string|
   @select_resp = @client.select_object_content(
     bucket: @bucket_name,
     key: @select_file_name,
-    expression_type: "SQL",
+    expression_type: 'SQL',
     expression: string,
     input_serialization: {
       csv: {
-        file_header_info: "USE"
+        file_header_info: 'USE'
       }
     },
-    output_serialization: {csv: {}},
+    output_serialization: { csv: {} },
     event_stream_handler: handler
   )
 end
@@ -399,14 +416,14 @@ When(/^I select it with query "([^"]*)" with Proc Object$/) do |query|
   @select_resp = @client.select_object_content(
     bucket: @bucket_name,
     key: @select_file_name,
-    expression_type: "SQL",
+    expression_type: 'SQL',
     expression: query,
     input_serialization: {
       csv: {
-        file_header_info: "USE"
+        file_header_info: 'USE'
       }
     },
-    output_serialization: {csv: {}},
+    output_serialization: { csv: {} },
     event_stream_handler: handler
   )
 end
@@ -420,19 +437,18 @@ When(/^I select it with query "([^"]*)" with handler and block$/) do |query|
   @select_resp = @client.select_object_content(
     bucket: @bucket_name,
     key: @select_file_name,
-    expression_type: "SQL",
+    expression_type: 'SQL',
     expression: query,
     input_serialization: {
       csv: {
-        file_header_info: "USE"
+        file_header_info: 'USE'
       }
     },
-    output_serialization: {csv: {}},
+    output_serialization: { csv: {} },
     event_stream_handler: handler
   ) do |stream|
     stream.on_records_event do |e|
       @tracker[:records] << e
     end
   end
-
 end

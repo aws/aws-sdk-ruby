@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2
+
   class Volume
 
     extend Aws::Deprecations
@@ -21,6 +22,7 @@ module Aws::EC2
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -49,18 +51,24 @@ module Aws::EC2
       data[:create_time]
     end
 
-    # Indicates whether the volume will be encrypted.
+    # Indicates whether the volume is encrypted.
     # @return [Boolean]
     def encrypted
       data[:encrypted]
     end
 
-    # The full ARN of the AWS Key Management Service (AWS KMS) customer
-    # master key (CMK) that was used to protect the volume encryption key
-    # for the volume.
+    # The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS
+    # KMS) customer master key (CMK) that was used to protect the volume
+    # encryption key for the volume.
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
+    end
+
+    # The Amazon Resource Name (ARN) of the Outpost.
+    # @return [String]
+    def outpost_arn
+      data[:outpost_arn]
     end
 
     # The size of the volume, in GiBs.
@@ -86,17 +94,13 @@ module Aws::EC2
     # of IOPS that are provisioned for the volume. For General Purpose SSD
     # volumes, this represents the baseline performance of the volume and
     # the rate at which the volume accumulates I/O credits for bursting. For
-    # more information about General Purpose SSD baseline performance, I/O
-    # credits, and bursting, see [Amazon EBS Volume Types][1] in the *Amazon
+    # more information, see [Amazon EBS Volume Types][1] in the *Amazon
     # Elastic Compute Cloud User Guide*.
     #
     # Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
-    # 64,000IOPS for `io1` volumes in most regions. Maximum `io1`IOPS of
-    # 64,000 is guaranteed only on [Nitro-based
-    # instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
-    # Other instance families guarantee performance up to 32,000 IOPS. For
-    # more information, see [Amazon EBS Volume Types][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # 64,000IOPS for `io1` volumes, in most Regions. The maximum IOPS for
+    # `io1` of 64,000 is guaranteed only on [Nitro-based instances][2].
+    # Other instance families guarantee performance up to 32,000 IOPS.
     #
     # Condition: This parameter is required for requests to create `io1`
     # volumes; it is not used in requests to create `gp2`, `st1`, `sc1`, or
@@ -104,7 +108,8 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
     # @return [Integer]
     def iops
       data[:iops]
@@ -122,6 +127,18 @@ module Aws::EC2
     # @return [String]
     def volume_type
       data[:volume_type]
+    end
+
+    # Indicates whether the volume was created using fast snapshot restore.
+    # @return [Boolean]
+    def fast_restored
+      data[:fast_restored]
+    end
+
+    # Indicates whether Amazon EBS Multi-Attach is enabled.
+    # @return [Boolean]
+    def multi_attach_enabled
+      data[:multi_attach_enabled]
     end
 
     # @!endgroup
@@ -164,7 +181,8 @@ module Aws::EC2
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -177,13 +195,15 @@ module Aws::EC2
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -214,17 +234,16 @@ module Aws::EC2
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -260,7 +279,7 @@ module Aws::EC2
     #
     #   volume.attach_to_instance({
     #     device: "String", # required
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -286,7 +305,7 @@ module Aws::EC2
     #     description: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -336,14 +355,57 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
       resp = @client.create_tags(options)
+      options[:tags].each do |t|
+        batch << Tag.new(
+          resource_id: @id,
+          key: t[:key],
+          value: t[:value],
+          client: @client
+        )
+      end
+      Tag::Collection.new([batch], size: batch.size)
+    end
+
+    # @example Request syntax with placeholder values
+    #
+    #   tag = volume.delete_tags({
+    #     dry_run: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<Types::Tag>] :tags
+    #   The tags to delete. Specify a tag key and an optional tag value to
+    #   delete specific tags. If you specify a tag key without a tag value, we
+    #   delete any tag with this key regardless of its value. If you specify a
+    #   tag key with an empty string as the tag value, we delete the tag only
+    #   if its value is an empty string.
+    #
+    #   If you omit this parameter, we delete all user-defined tags for the
+    #   specified resources. We do not delete AWS-generated tags (tags that
+    #   have the `aws:` prefix).
+    # @return [Tag::Collection]
+    def delete_tags(options = {})
+      batch = []
+      options = Aws::Util.deep_merge(options, resources: [@id])
+      resp = @client.delete_tags(options)
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -409,7 +471,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `action.code` - The action code for the event (for example,
     #     `enable-volume-io`).
@@ -475,7 +537,7 @@ module Aws::EC2
     #   volume.detach_from_instance({
     #     device: "String",
     #     force: false,
-    #     instance_id: "String",
+    #     instance_id: "InstanceId",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -491,7 +553,8 @@ module Aws::EC2
     #   you use this option, you must perform file system check and repair
     #   procedures.
     # @option options [String] :instance_id
-    #   The ID of the instance.
+    #   The ID of the instance. If you are detaching a Multi-Attach enabled
+    #   volume, you must specify an instance ID.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -559,19 +622,22 @@ module Aws::EC2
     #     ],
     #     owner_ids: ["String"],
     #     restorable_by_user_ids: ["String"],
-    #     snapshot_ids: ["String"],
+    #     snapshot_ids: ["SnapshotId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `description` - A description of the snapshot.
     #
+    #   * `encrypted` - Indicates whether the snapshot is encrypted (`true` \|
+    #     `false`)
+    #
     #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
-    #     `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
-    #     confused with the user-configured AWS account alias, which is set
-    #     from the IAM console.
+    #     `self` \| `all` \| `aws-marketplace` \| `microsoft`) of snapshot
+    #     owners. Not to be confused with the user-configured AWS account
+    #     alias, which is set from the IAM console.
     #
     #   * `owner-id` - The ID of the AWS account that owns the snapshot.
     #
@@ -599,15 +665,14 @@ module Aws::EC2
     #
     #   * `volume-size` - The size of the volume, in GiB.
     # @option options [Array<String>] :owner_ids
-    #   Returns the snapshots owned by the specified owner. Multiple owners
-    #   can be specified.
+    #   Describes the snapshots owned by these owners.
     # @option options [Array<String>] :restorable_by_user_ids
-    #   One or more AWS accounts IDs that can create volumes from the
-    #   snapshot.
+    #   The IDs of the AWS accounts that can create volumes from the snapshot.
     # @option options [Array<String>] :snapshot_ids
-    #   One or more snapshot IDs.
+    #   The snapshot IDs.
     #
-    #   Default: Describes snapshots for which you have launch permissions.
+    #   Default: Describes the snapshots for which you have create volume
+    #   permissions.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

@@ -18,9 +18,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the accelerator. The name can have a maximum of 32
-    #   characters, must contain only alphanumeric characters or hyphens
-    #   (-), and must not begin or end with a hyphen.
+    #   The name of the accelerator. The name must contain only alphanumeric
+    #   characters or hyphens (-), and must not begin or end with a hyphen.
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
@@ -28,7 +27,7 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Indicates whether theaccelerator is enabled. The value is true or
+    #   Indicates whether the accelerator is enabled. The value is true or
     #   false. The default value is true.
     #
     #   If the value is set to true, the accelerator cannot be deleted. If
@@ -36,8 +35,27 @@ module Aws::GlobalAccelerator
     #   @return [Boolean]
     #
     # @!attribute [rw] ip_sets
-    #   IP address set associated with the accelerator.
+    #   The static IP addresses that Global Accelerator associates with the
+    #   accelerator.
     #   @return [Array<Types::IpSet>]
+    #
+    # @!attribute [rw] dns_name
+    #   The Domain Name System (DNS) name that Global Accelerator creates
+    #   that points to your accelerator's static IP addresses.
+    #
+    #   The naming convention for the DNS name is the following: A lowercase
+    #   letter a, followed by a 16-bit random hex string, followed by
+    #   .awsglobalaccelerator.com. For example:
+    #   a1234567890abcdef.awsglobalaccelerator.com.
+    #
+    #   For more information about the default DNS name, see [ Support for
+    #   DNS Addressing in Global Accelerator][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing
+    #   @return [String]
     #
     # @!attribute [rw] status
     #   Describes the deployment status of the accelerator.
@@ -59,6 +77,7 @@ module Aws::GlobalAccelerator
       :ip_address_type,
       :enabled,
       :ip_sets,
+      :dns_name,
       :status,
       :created_time,
       :last_modified_time)
@@ -89,9 +108,14 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] flow_logs_s3_prefix
     #   The prefix for the location in the Amazon S3 bucket for the flow
-    #   logs. Attribute is required if `FlowLogsEnabled` is `true`. If you
-    #   don’t specify a prefix, the flow logs are stored in the root of the
-    #   bucket.
+    #   logs. Attribute is required if `FlowLogsEnabled` is `true`.
+    #
+    #   If you don’t specify a prefix, the flow logs are stored in the root
+    #   of the bucket. If you specify slash (/) for the S3 bucket prefix,
+    #   the log file bucket folder structure will include a double slash
+    #   (//), like the following:
+    #
+    #   s3-bucket\_name//AWSLogs/aws\_account\_id
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorAttributes AWS API Documentation
@@ -103,14 +127,261 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # The accelerator that you specified could not be disabled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorNotDisabledException AWS API Documentation
+    #
+    class AcceleratorNotDisabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The accelerator that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorNotFoundException AWS API Documentation
+    #
+    class AcceleratorNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You don't have access permission.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AdvertiseByoipCidrRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cidr: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] cidr
+    #   The address range, in CIDR notation. This must be the exact range
+    #   that you provisioned. You can't advertise only a portion of the
+    #   provisioned range.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AdvertiseByoipCidrRequest AWS API Documentation
+    #
+    class AdvertiseByoipCidrRequest < Struct.new(
+      :cidr)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoip_cidr
+    #   Information about the address range.
+    #   @return [Types::ByoipCidr]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AdvertiseByoipCidrResponse AWS API Documentation
+    #
+    class AdvertiseByoipCidrResponse < Struct.new(
+      :byoip_cidr)
+      include Aws::Structure
+    end
+
+    # The listener that you specified has an endpoint group associated with
+    # it. You must remove all dependent resources from a listener before you
+    # can delete it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AssociatedEndpointGroupFoundException AWS API Documentation
+    #
+    class AssociatedEndpointGroupFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The accelerator that you specified has a listener associated with it.
+    # You must remove all dependent resources from an accelerator before you
+    # can delete it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AssociatedListenerFoundException AWS API Documentation
+    #
+    class AssociatedListenerFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Information about an IP address range that is provisioned for use with
+    # your AWS resources through bring your own IP address (BYOIP).
+    #
+    # The following describes each BYOIP `State` that your IP address range
+    # can be in.
+    #
+    # * **PENDING\_PROVISIONING** — You’ve submitted a request to provision
+    #   an IP address range but it is not yet provisioned with AWS Global
+    #   Accelerator.
+    #
+    # * **READY** — The address range is provisioned with AWS Global
+    #   Accelerator and can be advertised.
+    #
+    # * **PENDING\_ADVERTISING** — You’ve submitted a request for AWS Global
+    #   Accelerator to advertise an address range but it is not yet being
+    #   advertised.
+    #
+    # * **ADVERTISING** — The address range is being advertised by AWS
+    #   Global Accelerator.
+    #
+    # * **PENDING\_WITHDRAWING** — You’ve submitted a request to withdraw an
+    #   address range from being advertised but it is still being advertised
+    #   by AWS Global Accelerator.
+    #
+    # * **PENDING\_DEPROVISIONING** — You’ve submitted a request to
+    #   deprovision an address range from AWS Global Accelerator but it is
+    #   still provisioned.
+    #
+    # * **DEPROVISIONED** — The address range is deprovisioned from AWS
+    #   Global Accelerator.
+    #
+    # * <b>FAILED\_PROVISION </b> — The request to provision the address
+    #   range from AWS Global Accelerator was not successful. Please make
+    #   sure that you provide all of the correct information, and try again.
+    #   If the request fails a second time, contact AWS support.
+    #
+    # * **FAILED\_ADVERTISING** — The request for AWS Global Accelerator to
+    #   advertise the address range was not successful. Please make sure
+    #   that you provide all of the correct information, and try again. If
+    #   the request fails a second time, contact AWS support.
+    #
+    # * **FAILED\_WITHDRAW** — The request to withdraw the address range
+    #   from advertising by AWS Global Accelerator was not successful.
+    #   Please make sure that you provide all of the correct information,
+    #   and try again. If the request fails a second time, contact AWS
+    #   support.
+    #
+    # * <b>FAILED\_DEPROVISION </b> — The request to deprovision the address
+    #   range from AWS Global Accelerator was not successful. Please make
+    #   sure that you provide all of the correct information, and try again.
+    #   If the request fails a second time, contact AWS support.
+    #
+    # @!attribute [rw] cidr
+    #   The address range, in CIDR notation.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the address pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] events
+    #   A history of status changes for an IP address range that that you
+    #   bring to AWS Global Accelerator through bring your own IP address
+    #   (BYOIP).
+    #   @return [Array<Types::ByoipCidrEvent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ByoipCidr AWS API Documentation
+    #
+    class ByoipCidr < Struct.new(
+      :cidr,
+      :state,
+      :events)
+      include Aws::Structure
+    end
+
+    # A complex type that contains a `Message` and a `Timestamp` value for
+    # changes that you make in the status an IP address range that you bring
+    # to AWS Global Accelerator through bring your own IP address (BYOIP).
+    #
+    # @!attribute [rw] message
+    #   A string that contains an `Event` message describing changes that
+    #   you make in the status of an IP address range that you bring to AWS
+    #   Global Accelerator through bring your own IP address (BYOIP).
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   A timestamp when you make a status change for an IP address range
+    #   that you bring to AWS Global Accelerator through bring your own IP
+    #   address (BYOIP).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ByoipCidrEvent AWS API Documentation
+    #
+    class ByoipCidrEvent < Struct.new(
+      :message,
+      :timestamp)
+      include Aws::Structure
+    end
+
+    # The CIDR that you specified was not found or is incorrect.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ByoipCidrNotFoundException AWS API Documentation
+    #
+    class ByoipCidrNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Provides authorization for Amazon to bring a specific IP address range
+    # to a specific AWS account using bring your own IP addresses (BYOIP).
+    #
+    # For more information, see [Bring Your Own IP Addresses (BYOIP)][1] in
+    # the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #
+    # @note When making an API call, you may pass CidrAuthorizationContext
+    #   data as a hash:
+    #
+    #       {
+    #         message: "GenericString", # required
+    #         signature: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] message
+    #   The plain-text authorization message for the prefix and account.
+    #   @return [String]
+    #
+    # @!attribute [rw] signature
+    #   The signed authorization message for the prefix and account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CidrAuthorizationContext AWS API Documentation
+    #
+    class CidrAuthorizationContext < Struct.new(
+      :message,
+      :signature)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateAcceleratorRequest
     #   data as a hash:
     #
     #       {
     #         name: "GenericString", # required
     #         ip_address_type: "IPV4", # accepts IPV4
+    #         ip_addresses: ["IpAddress"],
     #         enabled: false,
     #         idempotency_token: "IdempotencyToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -123,6 +394,24 @@ module Aws::GlobalAccelerator
     #   The value for the address type must be IPv4.
     #   @return [String]
     #
+    # @!attribute [rw] ip_addresses
+    #   Optionally, if you've added your own IP address pool to Global
+    #   Accelerator, you can choose IP addresses from your own pool to use
+    #   for the accelerator's static IP addresses. You can specify one or
+    #   two addresses, separated by a comma. Do not include the /32 suffix.
+    #
+    #   If you specify only one IP address from your IP address range,
+    #   Global Accelerator assigns a second static IP address for the
+    #   accelerator from the AWS IP address pool.
+    #
+    #   For more information, see [Bring Your Own IP Addresses (BYOIP)][1]
+    #   in the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] enabled
     #   Indicates whether an accelerator is enabled. The value is true or
     #   false. The default value is true.
@@ -134,15 +423,31 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] idempotency_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency—that is, the uniqueness—of an accelerator.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Create tags for an accelerator.
+    #
+    #   For more information, see [Tagging in AWS Global Accelerator][1] in
+    #   the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateAcceleratorRequest AWS API Documentation
     #
     class CreateAcceleratorRequest < Struct.new(
       :name,
       :ip_address_type,
+      :ip_addresses,
       :enabled,
-      :idempotency_token)
+      :idempotency_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -168,6 +473,7 @@ module Aws::GlobalAccelerator
     #           {
     #             endpoint_id: "GenericString",
     #             weight: 1,
+    #             client_ip_preservation_enabled: false,
     #           },
     #         ],
     #         traffic_dial_percentage: 1.0,
@@ -238,6 +544,9 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] idempotency_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency—that is, the uniqueness—of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateEndpointGroupRequest AWS API Documentation
@@ -325,6 +634,9 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] idempotency_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency—that is, the uniqueness—of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateListenerRequest AWS API Documentation
@@ -403,16 +715,46 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeprovisionByoipCidrRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cidr: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] cidr
+    #   The address range, in CIDR notation. The prefix must be the same
+    #   prefix that you specified when you provisioned the address range.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeprovisionByoipCidrRequest AWS API Documentation
+    #
+    class DeprovisionByoipCidrRequest < Struct.new(
+      :cidr)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoip_cidr
+    #   Information about the address range.
+    #   @return [Types::ByoipCidr]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeprovisionByoipCidrResponse AWS API Documentation
+    #
+    class DeprovisionByoipCidrResponse < Struct.new(
+      :byoip_cidr)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeAcceleratorAttributesRequest
     #   data as a hash:
     #
     #       {
-    #         accelerator_arn: "GenericString",
+    #         accelerator_arn: "GenericString", # required
     #       }
     #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator with the
-    #   attributes that you want to describe. Value is required.
+    #   attributes that you want to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeAcceleratorAttributesRequest AWS API Documentation
@@ -528,13 +870,18 @@ module Aws::GlobalAccelerator
     #       {
     #         endpoint_id: "GenericString",
     #         weight: 1,
+    #         client_ip_preservation_enabled: false,
     #       }
     #
     # @!attribute [rw] endpoint_id
     #   An ID for the endpoint. If the endpoint is a Network Load Balancer
     #   or Application Load Balancer, this is the Amazon Resource Name (ARN)
     #   of the resource. If the endpoint is an Elastic IP address, this is
-    #   the Elastic IP address allocation ID.
+    #   the Elastic IP address allocation ID. For EC2 instances, this is the
+    #   EC2 instance ID.
+    #
+    #   An Application Load Balancer can be either internal or
+    #   internet-facing.
     #   @return [String]
     #
     # @!attribute [rw] weight
@@ -553,11 +900,31 @@ module Aws::GlobalAccelerator
     #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html
     #   @return [Integer]
     #
+    # @!attribute [rw] client_ip_preservation_enabled
+    #   Indicates whether client IP address preservation is enabled for an
+    #   Application Load Balancer endpoint. The value is true or false. The
+    #   default value is true for new accelerators.
+    #
+    #   If the value is set to true, the client's IP address is preserved
+    #   in the `X-Forwarded-For` request header as traffic travels to
+    #   applications on the Application Load Balancer endpoint fronted by
+    #   the accelerator.
+    #
+    #   For more information, see [ Preserve Client IP Addresses in AWS
+    #   Global Accelerator][1] in the *AWS Global Accelerator Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointConfiguration AWS API Documentation
     #
     class EndpointConfiguration < Struct.new(
       :endpoint_id,
-      :weight)
+      :weight,
+      :client_ip_preservation_enabled)
       include Aws::Structure
     end
 
@@ -568,7 +935,11 @@ module Aws::GlobalAccelerator
     #   An ID for the endpoint. If the endpoint is a Network Load Balancer
     #   or Application Load Balancer, this is the Amazon Resource Name (ARN)
     #   of the resource. If the endpoint is an Elastic IP address, this is
-    #   the Elastic IP address allocation ID.
+    #   the Elastic IP address allocation ID. For EC2 instances, this is the
+    #   EC2 instance ID.
+    #
+    #   An Application Load Balancer can be either internal or
+    #   internet-facing.
     #   @return [String]
     #
     # @!attribute [rw] weight
@@ -615,13 +986,33 @@ module Aws::GlobalAccelerator
     #     required to determine its health status.
     #   @return [String]
     #
+    # @!attribute [rw] client_ip_preservation_enabled
+    #   Indicates whether client IP address preservation is enabled for an
+    #   Application Load Balancer endpoint. The value is true or false. The
+    #   default value is true for new accelerators.
+    #
+    #   If the value is set to true, the client's IP address is preserved
+    #   in the `X-Forwarded-For` request header as traffic travels to
+    #   applications on the Application Load Balancer endpoint fronted by
+    #   the accelerator.
+    #
+    #   For more information, see [ Viewing Client IP Addresses in AWS
+    #   Global Accelerator][1] in the *AWS Global Accelerator Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointDescription AWS API Documentation
     #
     class EndpointDescription < Struct.new(
       :endpoint_id,
       :weight,
       :health_state,
-      :health_reason)
+      :health_reason,
+      :client_ip_preservation_enabled)
       include Aws::Structure
     end
 
@@ -699,6 +1090,92 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # The endpoint group that you specified already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointGroupAlreadyExistsException AWS API Documentation
+    #
+    class EndpointGroupAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The endpoint group that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointGroupNotFoundException AWS API Documentation
+    #
+    class EndpointGroupNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The CIDR that you specified is not valid for this action. For example,
+    # the state of the CIDR might be incorrect for this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/IncorrectCidrStateException AWS API Documentation
+    #
+    class IncorrectCidrStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There was an internal error for AWS Global Accelerator.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InternalServiceErrorException AWS API Documentation
+    #
+    class InternalServiceErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An argument that you specified is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There isn't another item to return.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The port numbers that you specified are not valid numbers or are not
+    # unique for this accelerator.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/InvalidPortRangeException AWS API Documentation
+    #
+    class InvalidPortRangeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type for the set of IP addresses for an accelerator.
     #
     # @!attribute [rw] ip_family
@@ -715,6 +1192,19 @@ module Aws::GlobalAccelerator
     class IpSet < Struct.new(
       :ip_family,
       :ip_addresses)
+      include Aws::Structure
+    end
+
+    # Processing your request would cause you to exceed an AWS Global
+    # Accelerator limit.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -757,6 +1247,48 @@ module Aws::GlobalAccelerator
     #
     class ListAcceleratorsResponse < Struct.new(
       :accelerators,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListByoipCidrsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListByoipCidrsRequest AWS API Documentation
+    #
+    class ListByoipCidrsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoip_cidrs
+    #   Information about your address ranges.
+    #   @return [Array<Types::ByoipCidr>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListByoipCidrsResponse AWS API Documentation
+    #
+    class ListByoipCidrsResponse < Struct.new(
+      :byoip_cidrs,
       :next_token)
       include Aws::Structure
     end
@@ -860,6 +1392,36 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the accelerator to list tags for.
+    #   An ARN uniquely identifies an accelerator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   Root level tag for the Tags parameters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # A complex type for a listener.
     #
     # @!attribute [rw] listener_arn
@@ -911,6 +1473,18 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # The listener that you specified doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListenerNotFoundException AWS API Documentation
+    #
+    class ListenerNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A complex type for a range of ports for a listener.
     #
     # @note When making an API call, you may pass PortRange
@@ -937,11 +1511,144 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ProvisionByoipCidrRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cidr: "GenericString", # required
+    #         cidr_authorization_context: { # required
+    #           message: "GenericString", # required
+    #           signature: "GenericString", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cidr
+    #   The public IPv4 address range, in CIDR notation. The most specific
+    #   IP prefix that you can specify is /24. The address range cannot
+    #   overlap with another address range that you've brought to this or
+    #   another Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_authorization_context
+    #   A signed document that proves that you are authorized to bring the
+    #   specified IP address range to Amazon using BYOIP.
+    #   @return [Types::CidrAuthorizationContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ProvisionByoipCidrRequest AWS API Documentation
+    #
+    class ProvisionByoipCidrRequest < Struct.new(
+      :cidr,
+      :cidr_authorization_context)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoip_cidr
+    #   Information about the address range.
+    #   @return [Types::ByoipCidr]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ProvisionByoipCidrResponse AWS API Documentation
+    #
+    class ProvisionByoipCidrResponse < Struct.new(
+      :byoip_cidr)
+      include Aws::Structure
+    end
+
+    # A complex type that contains a `Tag` key and `Tag` value.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   A string that contains a `Tag` key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A string that contains a `Tag` value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Global Accelerator resource to
+    #   add tags to. An ARN uniquely identifies a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to a resource. A tag consists of a key and a value
+    #   that you define.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Global Accelerator resource to
+    #   remove tags from. An ARN uniquely identifies a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag key pairs that you want to remove from the specified
+    #   resources.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateAcceleratorAttributesRequest
     #   data as a hash:
     #
     #       {
-    #         accelerator_arn: "GenericString",
+    #         accelerator_arn: "GenericString", # required
     #         flow_logs_enabled: false,
     #         flow_logs_s3_bucket: "GenericString",
     #         flow_logs_s3_prefix: "GenericString",
@@ -949,7 +1656,7 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator that you want to
-    #   update. Attribute is required.
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] flow_logs_enabled
@@ -974,9 +1681,14 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] flow_logs_s3_prefix
     #   Update the prefix for the location in the Amazon S3 bucket for the
-    #   flow logs. Attribute is required if `FlowLogsEnabled` is `true`. If
-    #   you don’t specify a prefix, the flow logs are stored in the root of
-    #   the bucket.
+    #   flow logs. Attribute is required if `FlowLogsEnabled` is `true`.
+    #
+    #   If you don’t specify a prefix, the flow logs are stored in the root
+    #   of the bucket. If you specify slash (/) for the S3 bucket prefix,
+    #   the log file bucket folder structure will include a double slash
+    #   (//), like the following:
+    #
+    #   s3-bucket\_name//AWSLogs/aws\_account\_id
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateAcceleratorAttributesRequest AWS API Documentation
@@ -1062,6 +1774,7 @@ module Aws::GlobalAccelerator
     #           {
     #             endpoint_id: "GenericString",
     #             weight: 1,
+    #             client_ip_preservation_enabled: false,
     #           },
     #         ],
     #         traffic_dial_percentage: 1.0,
@@ -1221,6 +1934,35 @@ module Aws::GlobalAccelerator
     #
     class UpdateListenerResponse < Struct.new(
       :listener)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass WithdrawByoipCidrRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cidr: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] cidr
+    #   The address range, in CIDR notation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/WithdrawByoipCidrRequest AWS API Documentation
+    #
+    class WithdrawByoipCidrRequest < Struct.new(
+      :cidr)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoip_cidr
+    #   Information about the address pool.
+    #   @return [Types::ByoipCidr]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/WithdrawByoipCidrResponse AWS API Documentation
+    #
+    class WithdrawByoipCidrResponse < Struct.new(
+      :byoip_cidr)
       include Aws::Structure
     end
 

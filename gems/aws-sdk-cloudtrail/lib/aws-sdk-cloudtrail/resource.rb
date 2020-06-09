@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudTrail
+
   class Resource
 
     # @param options ({})

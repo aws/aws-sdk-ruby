@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::GameLift
+
   class Resource
 
     # @param options ({})

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::WorkMail
+
   class Resource
 
     # @param options ({})

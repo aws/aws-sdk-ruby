@@ -50,7 +50,9 @@ module Aws
 
           def validate_single_message(body, attributes, response)
             validate_body(body, response)
-            validate_attributes(attributes, response) unless attributes.nil?
+            unless attributes.nil? || attributes.empty?
+              validate_attributes(attributes, response)
+            end
           end
 
           def validate_body(body, response)
@@ -117,14 +119,12 @@ module Aws
           end
 
           def mismatch_error_message(section, local_md5, returned_md5, response)
-            m = "MD5 returned by SQS does not match " <<
-            "the calculation on the original request. ("
-
+            m = 'MD5 returned by SQS does not match '\
+                'the calculation on the original request. ('
             if response.respond_to?(:id) && !response.id.nil?
-              m << "Message ID: #{response.id}, "
+              m = "#{m}Message ID: #{response.id}, "
             end
-
-            m << "MD5 calculated by the #{section}: " <<
+            "#{m}MD5 calculated by the #{section}: "\
             "'#{local_md5}', MD5 checksum returned: '#{returned_md5}')"
           end
         end

@@ -23,12 +23,25 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:support)
 
 module Aws::Support
+  # An API client for Support.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::Support::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +68,7 @@ module Aws::Support
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +105,7 @@ module Aws::Support
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +120,12 @@ module Aws::Support
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +133,10 @@ module Aws::Support
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +150,10 @@ module Aws::Support
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +161,7 @@ module Aws::Support
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +176,7 @@ module Aws::Support
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +188,29 @@ module Aws::Support
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +218,30 @@ module Aws::Support
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,23 +270,60 @@ module Aws::Support
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
 
-    # Adds one or more attachments to an attachment set. If an
-    # `attachmentSetId` is not specified, a new attachment set is created,
-    # and the ID of the set is returned in the response. If an
-    # `attachmentSetId` is specified, the attachments are added to the
-    # specified set, if it exists.
+    # Adds one or more attachments to an attachment set.
     #
-    # An attachment set is a temporary container for attachments that are to
-    # be added to a case or case communication. The set is available for one
-    # hour after it is created; the `expiryTime` returned in the response
-    # indicates when the set expires. The maximum number of attachments in a
-    # set is 3, and the maximum size of any attachment in the set is 5 MB.
+    # An attachment set is a temporary container for attachments that you
+    # add to a case or case communication. The set is available for 1 hour
+    # after it's created. The `expiryTime` returned in the response is when
+    # the set expires.
     #
     # @option params [String] :attachment_set_id
     #   The ID of the attachment set. If an `attachmentSetId` is not
@@ -234,8 +332,14 @@ module Aws::Support
     #   attachments are added to the specified set, if it exists.
     #
     # @option params [required, Array<Types::Attachment>] :attachments
-    #   One or more attachments to add to the set. The limit is 3 attachments
-    #   per set, and the size limit is 5 MB per attachment.
+    #   One or more attachments to add to the set. You can add up to three
+    #   attachments per set. The size limit is 5 MB per attachment.
+    #
+    #   In the `Attachment` object, use the `data` parameter to specify the
+    #   contents of the attachment file. In the previous request syntax, the
+    #   value for `data` appear as `blob`, which is represented as a
+    #   base64-encoded string. The value for `fileName` is the name of the
+    #   attachment, such as `troubleshoot-screenshot.png`.
     #
     # @return [Types::AddAttachmentsToSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -321,101 +425,105 @@ module Aws::Support
       req.send_request(options)
     end
 
-    # Creates a new case in the AWS Support Center. This operation is
-    # modeled on the behavior of the AWS Support Center [Create Case][1]
-    # page. Its parameters require you to specify the following information:
+    # Creates a case in the AWS Support Center. This operation is similar to
+    # how you create a case in the AWS Support Center [Create Case][1] page.
     #
-    # * **issueType.** The type of issue for the case. You can specify
-    #   either "customer-service" or "technical." If you do not indicate
-    #   a value, the default is "technical."
+    # The AWS Support API doesn't support requesting service limit
+    # increases. You can submit a service limit increase in the following
+    # ways:
     #
-    # * **serviceCode.** The code for an AWS service. You obtain the
-    #   `serviceCode` by calling DescribeServices.
+    # * Submit a request from the AWS Support Center [Create Case][1] page.
     #
-    # * **categoryCode.** The category for the service defined for the
-    #   `serviceCode` value. You also obtain the category code for a service
-    #   by calling DescribeServices. Each AWS service defines its own set of
-    #   category codes.
-    #
-    # * **severityCode.** A value that indicates the urgency of the case,
-    #   which in turn determines the response time according to your service
-    #   level agreement with AWS Support. You obtain the SeverityCode by
-    #   calling DescribeSeverityLevels.
-    #
-    # * **subject.** The **Subject** field on the AWS Support Center [Create
-    #   Case][1] page.
-    #
-    # * **communicationBody.** The **Description** field on the AWS Support
-    #   Center [Create Case][1] page.
-    #
-    # * **attachmentSetId.** The ID of a set of attachments that has been
-    #   created by using AddAttachmentsToSet.
-    #
-    # * **language.** The human language in which AWS Support handles the
-    #   case. English and Japanese are currently supported.
-    #
-    # * **ccEmailAddresses.** The AWS Support Center **CC** field on the
-    #   [Create Case][1] page. You can list email addresses to be copied on
-    #   any correspondence about the case. The account that opens the case
-    #   is already identified by passing the AWS Credentials in the HTTP
-    #   POST method or in a method or function call from one of the
-    #   programming languages supported by an [AWS SDK][2].
-    #
-    # <note markdown="1"> To add additional communication or attachments to an existing case,
-    # use AddCommunicationToCase.
-    #
-    #  </note>
+    # * Use the Service Quotas [RequestServiceQuotaIncrease][2] operation.
     #
     # A successful CreateCase request returns an AWS Support case number.
-    # Case numbers are used by the DescribeCases operation to retrieve
-    # existing AWS Support cases.
+    # You can use the DescribeCases operation and specify the case number to
+    # get existing AWS Support cases. After you create a case, you can use
+    # the AddCommunicationToCase operation to add additional communication
+    # or attachments to an existing case.
+    #
+    # <note markdown="1"> * The `caseId` is separate from the `displayId` that appears in the
+    #   [Support Center][3]. You can use the DescribeCases operation to get
+    #   the `displayId`.
+    #
+    # ^
+    #
+    #  </note>
     #
     #
     #
     # [1]: https://console.aws.amazon.com/support/home#/case/create
-    # [2]: http://aws.amazon.com/tools/
+    # [2]: https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_RequestServiceQuotaIncrease.html
+    # [3]: https://console.aws.amazon.com/support
     #
     # @option params [required, String] :subject
-    #   The title of the AWS Support case.
+    #   The title of the AWS Support case. The title appears in the
+    #   **Subject** field on the AWS Support Center [Create Case][1] page.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/support/home#/case/create
     #
     # @option params [String] :service_code
-    #   The code for the AWS service returned by the call to DescribeServices.
+    #   The code for the AWS service. You can use the DescribeServices
+    #   operation to get the possible `serviceCode` values.
     #
     # @option params [String] :severity_code
-    #   The code for the severity level returned by the call to
-    #   DescribeSeverityLevels.
+    #   A value that indicates the urgency of the case. This value determines
+    #   the response time according to your service level agreement with AWS
+    #   Support. You can use the DescribeSeverityLevels operation to get the
+    #   possible values for `severityCode`.
     #
-    #   <note markdown="1"> The availability of severity levels depends on each customer's
-    #   support subscription. In other words, your subscription may not
-    #   necessarily require the urgent level of response time.
+    #   For more information, see SeverityLevel and [Choosing a Severity][1]
+    #   in the *AWS Support User Guide*.
+    #
+    #   <note markdown="1"> The availability of severity levels depends on the support plan for
+    #   the AWS account.
     #
     #    </note>
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity
+    #
     # @option params [String] :category_code
-    #   The category of problem for the AWS Support case.
+    #   The category of problem for the AWS Support case. You also use the
+    #   DescribeServices operation to get the category code for a service.
+    #   Each AWS service defines its own set of category codes.
     #
     # @option params [required, String] :communication_body
-    #   The communication body text when you create an AWS Support case by
-    #   calling CreateCase.
+    #   The communication body text that describes the issue. This text
+    #   appears in the **Description** field on the AWS Support Center [Create
+    #   Case][1] page.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/support/home#/case/create
     #
     # @option params [Array<String>] :cc_email_addresses
     #   A list of email addresses that AWS Support copies on case
-    #   correspondence.
+    #   correspondence. AWS Support identifies the account that creates the
+    #   case when you specify your AWS credentials in an HTTP POST method or
+    #   use the [AWS SDKs][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/tools/
     #
     # @option params [String] :language
-    #   The ISO 639-1 code for the language in which AWS provides support. AWS
-    #   Support currently supports English ("en") and Japanese ("ja").
-    #   Language parameters must be passed explicitly for operations that take
-    #   them.
+    #   The language in which AWS Support handles the case. You must specify
+    #   the ISO 639-1 code for the `language` parameter if you want support in
+    #   that language. Currently, English ("en") and Japanese ("ja") are
+    #   supported.
     #
     # @option params [String] :issue_type
-    #   The type of issue for the case. You can specify either
-    #   "customer-service" or "technical." If you do not indicate a value,
-    #   the default is "technical."
+    #   The type of issue for the case. You can specify `customer-service` or
+    #   `technical`. If you don't specify a value, the default is
+    #   `technical`.
     #
     # @option params [String] :attachment_set_id
     #   The ID of a set of one or more attachments for the case. Create the
-    #   set by using AddAttachmentsToSet.
+    #   set by using the AddAttachmentsToSet operation.
     #
     # @return [Types::CreateCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -448,10 +556,11 @@ module Aws::Support
       req.send_request(options)
     end
 
-    # Returns the attachment that has the specified ID. Attachment IDs are
-    # generated by the case management system when you add an attachment to
-    # a case or case communication. Attachment IDs are returned in the
-    # AttachmentDetails objects that are returned by the
+    # Returns the attachment that has the specified ID. Attachments can
+    # include screenshots, error logs, or other files that describe your
+    # issue. Attachment IDs are generated by the case management system when
+    # you add an attachment to a case or case communication. Attachment IDs
+    # are returned in the AttachmentDetails objects that are returned by the
     # DescribeCommunications operation.
     #
     # @option params [required, String] :attachment_id
@@ -541,6 +650,8 @@ module Aws::Support
     #   * {Types::DescribeCasesResponse#cases #cases} => Array&lt;Types::CaseDetails&gt;
     #   * {Types::DescribeCasesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_cases({
@@ -629,6 +740,8 @@ module Aws::Support
     #
     #   * {Types::DescribeCommunicationsResponse#communications #communications} => Array&lt;Types::Communication&gt;
     #   * {Types::DescribeCommunicationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -910,7 +1023,8 @@ module Aws::Support
     # including name, ID, category, description, and metadata. You must
     # specify a language code; English ("en") and Japanese ("ja") are
     # currently supported. The response contains a
-    # TrustedAdvisorCheckDescription for each check.
+    # TrustedAdvisorCheckDescription for each check. The region must be set
+    # to us-east-1.
     #
     # @option params [required, String] :language
     #   The ISO 639-1 code for the language in which AWS provides support. AWS
@@ -960,8 +1074,20 @@ module Aws::Support
     # The response contains a TrustedAdvisorCheckRefreshStatus object, which
     # contains these fields:
     #
-    # * **status.** The refresh status of the check: "none", "enqueued",
-    #   "processing", "success", or "abandoned".
+    # * **status.** The refresh status of the check:
+    #
+    #   * `none:` The check is not refreshed or the non-success status
+    #     exceeds the timeout
+    #
+    #   * `enqueued:` The check refresh requests has entered the refresh
+    #     queue
+    #
+    #   * `processing:` The check refresh request is picked up by the rule
+    #     processing engine
+    #
+    #   * `success:` The check is successfully refreshed
+    #
+    #   * `abandoned:` The check refresh has failed
     #
     # * **millisUntilNextRefreshable.** The amount of time, in milliseconds,
     #   until the check is eligible for refresh.
@@ -1044,7 +1170,7 @@ module Aws::Support
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-support'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,141 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2020-04-21)
+------------------
+
+* Feature - Cost Explorer Rightsizing Recommendations integrates with Compute Optimizer and begins offering across instance family rightsizing recommendations, adding to existing support for within instance family rightsizing recommendations.
+
+1.39.0 (2020-04-20)
+------------------
+
+* Feature - Cost Categories API is now General Available with new dimensions and operations support. You can map costs by account name, service, and charge type dimensions as well as use contains, starts with, and ends with operations. Cost Categories can also be used in RI and SP coverage reports.
+
+1.38.0 (2020-03-25)
+------------------
+
+* Feature - Customers can now receive Savings Plans recommendations at the member (linked) account level.
+
+1.37.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2020-01-08)
+------------------
+
+* Feature - Documentation updates for CreateCostCategoryDefinition and UpdateCostCategoryDefinition API
+
+1.35.0 (2020-01-02)
+------------------
+
+* Feature - Documentation updates for GetReservationUtilization for the Cost Explorer API.
+
+1.34.0 (2019-11-25)
+------------------
+
+* Feature - This launch provides customers with access to Cost Category Public Beta APIs.
+
+1.33.0 (2019-11-18)
+------------------
+
+* Feature - add EstimatedOnDemandCostWithCurrentCommitment to GetSavingsPlansPurchaseRecommendationRequest API
+
+1.32.0 (2019-11-11)
+------------------
+
+* Feature - This launch provides customers with access to GetCostAndUsageWithResources API.
+
+1.31.0 (2019-11-06)
+------------------
+
+* Feature - This launch provides customers with access to Savings Plans management APIs.
+
+1.30.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2019-07-26)
+------------------
+
+* Feature - Adds support for resource optimization recommendations.
+
+1.28.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2019-07-08)
+------------------
+
+* Feature - This release introduces a new operation called GetUsageForecast, which allows you to programmatically access AWS Cost Explorer's forecasting engine on usage data (running hours, data transfer, etc).
+
+1.26.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.23.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.18.0 (2019-03-11)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2019-02-25)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2019-01-16)
+------------------
+
+* Feature - API update.
+
 1.15.0 (2018-12-05)
 ------------------
 

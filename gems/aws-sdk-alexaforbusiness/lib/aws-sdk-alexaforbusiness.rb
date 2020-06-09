@@ -24,17 +24,20 @@ require_relative 'aws-sdk-alexaforbusiness/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     alexa_for_business = Aws::AlexaForBusiness::Client.new
+#     resp = alexa_for_business.approve_skill(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Alexa For Business all
-# extend {Errors::ServiceError}.
+# Errors returned from Alexa For Business are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::AlexaForBusiness::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Alexa For Business API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-alexaforbusiness/customizations'
 # @service
 module Aws::AlexaForBusiness
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.36.0'
 
 end

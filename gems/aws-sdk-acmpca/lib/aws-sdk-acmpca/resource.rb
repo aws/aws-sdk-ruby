@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ACMPCA
+
   class Resource
 
     # @param options ({})

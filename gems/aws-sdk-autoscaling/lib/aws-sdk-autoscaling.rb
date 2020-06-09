@@ -35,17 +35,20 @@ require_relative 'aws-sdk-autoscaling/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     auto_scaling = Aws::AutoScaling::Client.new
+#     resp = auto_scaling.attach_instances(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Auto Scaling all
-# extend {Errors::ServiceError}.
+# Errors returned from Auto Scaling are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::AutoScaling::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Auto Scaling API errors
 #     end
 #
 # See {Errors} for more information.
@@ -53,6 +56,6 @@ require_relative 'aws-sdk-autoscaling/customizations'
 # @service
 module Aws::AutoScaling
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.37.0'
 
 end

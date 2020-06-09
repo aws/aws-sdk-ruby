@@ -11,6 +11,7 @@ module Aws::Budgets
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     Budget = Shapes::StructureShape.new(name: 'Budget')
     BudgetName = Shapes::StringShape.new(name: 'BudgetName')
@@ -65,6 +66,7 @@ module Aws::Budgets
     Notifications = Shapes::ListShape.new(name: 'Notifications')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NumericValue = Shapes::StringShape.new(name: 'NumericValue')
+    PlannedBudgetLimits = Shapes::MapShape.new(name: 'PlannedBudgetLimits')
     Spend = Shapes::StructureShape.new(name: 'Spend')
     Subscriber = Shapes::StructureShape.new(name: 'Subscriber')
     SubscriberAddress = Shapes::StringShape.new(name: 'SubscriberAddress')
@@ -82,8 +84,12 @@ module Aws::Budgets
     UpdateSubscriberResponse = Shapes::StructureShape.new(name: 'UpdateSubscriberResponse')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     Budget.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
     Budget.add_member(:budget_limit, Shapes::ShapeRef.new(shape: Spend, location_name: "BudgetLimit"))
+    Budget.add_member(:planned_budget_limits, Shapes::ShapeRef.new(shape: PlannedBudgetLimits, location_name: "PlannedBudgetLimits"))
     Budget.add_member(:cost_filters, Shapes::ShapeRef.new(shape: CostFilters, location_name: "CostFilters"))
     Budget.add_member(:cost_types, Shapes::ShapeRef.new(shape: CostTypes, location_name: "CostTypes"))
     Budget.add_member(:time_unit, Shapes::ShapeRef.new(shape: TimeUnit, required: true, location_name: "TimeUnit"))
@@ -152,6 +158,9 @@ module Aws::Budgets
     CreateSubscriberRequest.struct_class = Types::CreateSubscriberRequest
 
     CreateSubscriberResponse.struct_class = Types::CreateSubscriberResponse
+
+    CreationLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    CreationLimitExceededException.struct_class = Types::CreationLimitExceededException
 
     DeleteBudgetRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     DeleteBudgetRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
@@ -224,6 +233,24 @@ module Aws::Budgets
 
     DimensionValues.member = Shapes::ShapeRef.new(shape: GenericString)
 
+    DuplicateRecordException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    DuplicateRecordException.struct_class = Types::DuplicateRecordException
+
+    ExpiredNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    ExpiredNextTokenException.struct_class = Types::ExpiredNextTokenException
+
+    InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    InternalErrorException.struct_class = Types::InternalErrorException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     Notification.add_member(:notification_type, Shapes::ShapeRef.new(shape: NotificationType, required: true, location_name: "NotificationType"))
     Notification.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
     Notification.add_member(:threshold, Shapes::ShapeRef.new(shape: NotificationThreshold, required: true, location_name: "Threshold"))
@@ -238,6 +265,9 @@ module Aws::Budgets
     NotificationWithSubscribersList.member = Shapes::ShapeRef.new(shape: NotificationWithSubscribers)
 
     Notifications.member = Shapes::ShapeRef.new(shape: Notification)
+
+    PlannedBudgetLimits.key = Shapes::ShapeRef.new(shape: GenericString)
+    PlannedBudgetLimits.value = Shapes::ShapeRef.new(shape: Spend)
 
     Spend.add_member(:amount, Shapes::ShapeRef.new(shape: NumericValue, required: true, location_name: "Amount"))
     Spend.add_member(:unit, Shapes::ShapeRef.new(shape: UnitValue, required: true, location_name: "Unit"))
@@ -305,6 +335,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: CreationLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:create_notification, Seahorse::Model::Operation.new.tap do |o|
@@ -318,6 +349,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: CreationLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:create_subscriber, Seahorse::Model::Operation.new.tap do |o|
@@ -331,6 +363,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: CreationLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_budget, Seahorse::Model::Operation.new.tap do |o|
@@ -342,6 +375,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_notification, Seahorse::Model::Operation.new.tap do |o|
@@ -353,6 +387,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_subscriber, Seahorse::Model::Operation.new.tap do |o|
@@ -364,6 +399,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:describe_budget, Seahorse::Model::Operation.new.tap do |o|
@@ -375,6 +411,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:describe_budget_performance_history, Seahorse::Model::Operation.new.tap do |o|
@@ -388,6 +425,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:describe_budgets, Seahorse::Model::Operation.new.tap do |o|
@@ -401,6 +439,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:describe_notifications_for_budget, Seahorse::Model::Operation.new.tap do |o|
@@ -414,6 +453,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:describe_subscribers_for_notification, Seahorse::Model::Operation.new.tap do |o|
@@ -427,6 +467,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_budget, Seahorse::Model::Operation.new.tap do |o|
@@ -438,6 +479,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_notification, Seahorse::Model::Operation.new.tap do |o|
@@ -450,6 +492,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_subscriber, Seahorse::Model::Operation.new.tap do |o|
@@ -462,6 +505,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
     end
 

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::DataSync
+
   class Resource
 
     # @param options ({})

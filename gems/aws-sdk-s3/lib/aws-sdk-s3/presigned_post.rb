@@ -234,7 +234,7 @@ module Aws
       #   as hidden input fields.
       def fields
         check_required_values!
-        datetime = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
+        datetime = Time.now.utc.strftime('%Y%m%dT%H%M%SZ')
         fields = @fields.dup
         fields.update('policy' => policy(datetime))
         fields.update(signature_fields(datetime))
@@ -571,8 +571,8 @@ module Aws
 
       def check_required_values!
         unless @key_set
-          msg = "key required; you must provide a key via :key, "
-          msg << ":key_starts_with, or :allow_any => ['key']"
+          msg = 'key required; you must provide a key via :key, '\
+                ":key_starts_with, or :allow_any => ['key']"
           raise msg
         end
       end
@@ -584,6 +584,10 @@ module Aws
           url.host = @bucket_name + '.' + url.host
         else
           url.path = '/' + @bucket_name
+        end
+        if @bucket_region == 'us-east-1'
+          # keep legacy behavior by default
+          url.host = Plugins::IADRegionalEndpoint.legacy_host(url.host)
         end
         url.to_s
       end
@@ -613,7 +617,7 @@ module Aws
 
       def signature(datetime, string_to_sign)
         k_secret = @credentials.secret_access_key
-        k_date = hmac("AWS4" + k_secret, datetime[0,8])
+        k_date = hmac('AWS4' + k_secret, datetime[0,8])
         k_region = hmac(k_date, @bucket_region)
         k_service = hmac(k_region, 's3')
         k_credentials = hmac(k_service, 'aws4_request')

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CodePipeline
+
   class Resource
 
     # @param options ({})

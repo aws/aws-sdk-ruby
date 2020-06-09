@@ -48,6 +48,30 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
+    # Indicates that an internal error occurred.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CloudHsmInternalException AWS API Documentation
+    #
+    class CloudHsmInternalException < Aws::EmptyStructure; end
+
+    # Indicates that an exception occurred in the AWS CloudHSM service.
+    #
+    # @!attribute [rw] message
+    #   Additional information about the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] retryable
+    #   Indicates if the action can be retried.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CloudHsmServiceException AWS API Documentation
+    #
+    class CloudHsmServiceException < Struct.new(
+      :message,
+      :retryable)
+      include Aws::Structure
+    end
+
     # Contains the inputs for the CreateHapgRequest action.
     #
     # @note When making an API call, you may pass CreateHapgRequest
@@ -627,6 +651,12 @@ module Aws::CloudHSM
       :config_cred)
       include Aws::Structure
     end
+
+    # Indicates that one or more of the request parameters are not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Aws::EmptyStructure; end
 
     # Contains the inputs for the ListAvailableZones action.
     #

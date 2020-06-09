@@ -6,6 +6,18 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::S3
+
+  # This class provides a resource oriented interface for S3.
+  # To create a resource object:
+  #
+  #     resource = Aws::S3::Resource.new(region: 'us-west-2')
+  #
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass `:client`, a default client will be constructed.
+  #
+  #     client = Aws::S3::Client.new(region: 'us-west-2')
+  #     resource = Aws::S3::Resource.new(client: client)
+  #
   class Resource
 
     # @param options ({})
@@ -40,7 +52,9 @@ module Aws::S3
     # @option options [String] :acl
     #   The canned ACL to apply to the bucket.
     # @option options [required, String] :bucket
+    #   The name of the bucket to create.
     # @option options [Types::CreateBucketConfiguration] :create_bucket_configuration
+    #   The configuration information for the bucket.
     # @option options [String] :grant_full_control
     #   Allows grantee the read, write, read ACP, and write ACP permissions on
     #   the bucket.
@@ -58,7 +72,7 @@ module Aws::S3
     #   bucket.
     # @return [Bucket]
     def create_bucket(options = {})
-      resp = @client.create_bucket(options)
+      @client.create_bucket(options)
       Bucket.new(
         name: options[:bucket],
         client: @client

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RDS
+
   class DBEngineVersion
 
     extend Aws::Deprecations
@@ -24,6 +25,7 @@ module Aws::RDS
       @version = extract_version(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -59,7 +61,7 @@ module Aws::RDS
     end
 
     # The default character set for new instances of this engine version, if
-    # the `CharacterSetName` parameter of the CreateDBInstance API is not
+    # the `CharacterSetName` parameter of the CreateDBInstance API isn't
     # specified.
     # @return [Types::CharacterSet]
     def default_character_set
@@ -108,9 +110,33 @@ module Aws::RDS
     end
 
     # A list of the supported DB engine modes.
+    #
+    # <note markdown="1"> `global` engine mode only applies for global database clusters created
+    # with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
+    # the clusters in a global database use `provisioned` engine mode.
+    #
+    #  </note>
     # @return [Array<String>]
     def supported_engine_modes
       data[:supported_engine_modes]
+    end
+
+    # A list of features supported by the DB engine. Supported feature names
+    # include the following.
+    #
+    # * s3Import
+    #
+    # ^
+    # @return [Array<String>]
+    def supported_feature_names
+      data[:supported_feature_names]
+    end
+
+    # The status of the DB engine version, either `available` or
+    # `deprecated`.
+    # @return [String]
+    def status
+      data[:status]
     end
 
     # @!endgroup
@@ -156,7 +182,8 @@ module Aws::RDS
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -169,13 +196,15 @@ module Aws::RDS
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -206,17 +235,16 @@ module Aws::RDS
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -268,7 +296,7 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [OptionGroupOption::Collection]
     def option_group_options(options = {})
       batches = Enumerator.new do |y|
@@ -308,7 +336,7 @@ module Aws::RDS
     #   The name of the option group to describe. Can't be supplied together
     #   with EngineName or MajorEngineVersion.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [OptionGroup::Collection]
     def option_groups(options = {})
       batches = Enumerator.new do |y|

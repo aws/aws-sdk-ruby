@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::S3Control
+
   class Resource
 
     # @param options ({})

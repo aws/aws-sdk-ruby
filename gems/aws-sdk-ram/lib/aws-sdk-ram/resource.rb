@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RAM
+
   class Resource
 
     # @param options ({})

@@ -5,7 +5,7 @@ module Aws
   module Xml
     describe DocBuilder do
 
-      let(:result) { '' }
+      let(:result) { String.new }
 
       let(:options) { { target: result, indent: '' } }
 

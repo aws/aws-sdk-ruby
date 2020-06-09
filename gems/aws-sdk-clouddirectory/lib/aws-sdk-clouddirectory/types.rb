@@ -8,6 +8,18 @@
 module Aws::CloudDirectory
   module Types
 
+    # Access denied. Check your permissions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AddFacetToObjectRequest
     #   data as a hash:
     #
@@ -2847,6 +2859,26 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # A `BatchWrite` exception has occurred.
+    #
+    # @!attribute [rw] index
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchWriteException AWS API Documentation
+    #
+    class BatchWriteException < Struct.new(
+      :index,
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the output of a `BatchWrite` operation.
     #
     # @note When making an API call, you may pass BatchWriteOperation
@@ -3587,6 +3619,18 @@ module Aws::CloudDirectory
     #
     class BatchWriteResponse < Struct.new(
       :responses)
+      include Aws::Structure
+    end
+
+    # Cannot list the parents of a Directory root.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CannotListParentOfRootException AWS API Documentation
+    #
+    class CannotListParentOfRootException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4335,6 +4379,57 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # Indicates that a Directory could not be created due to a naming
+    # conflict. Choose a different name and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DirectoryAlreadyExistsException AWS API Documentation
+    #
+    class DirectoryAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A directory that has been deleted and to which access has been
+    # attempted. Note: The requested resource will eventually cease to
+    # exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DirectoryDeletedException AWS API Documentation
+    #
+    class DirectoryDeletedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An operation can only operate on a disabled directory.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DirectoryNotDisabledException AWS API Documentation
+    #
+    class DirectoryNotDisabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Operations are only permitted on enabled directories.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DirectoryNotEnabledException AWS API Documentation
+    #
+    class DirectoryNotEnabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisableDirectoryRequest
     #   data as a hash:
     #
@@ -4422,6 +4517,18 @@ module Aws::CloudDirectory
       :name,
       :object_type,
       :facet_style)
+      include Aws::Structure
+    end
+
+    # A facet with the same name already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetAlreadyExistsException AWS API Documentation
+    #
+    class FacetAlreadyExistsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4637,6 +4744,44 @@ module Aws::CloudDirectory
     class FacetAttributeUpdate < Struct.new(
       :attribute,
       :action)
+      include Aws::Structure
+    end
+
+    # Occurs when deleting a facet that contains an attribute that is a
+    # target to an attribute reference in a different facet.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetInUseException AWS API Documentation
+    #
+    class FacetInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified Facet could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetNotFoundException AWS API Documentation
+    #
+    class FacetNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The Facet that you provided was not well formed or could not be
+    # validated with the schema.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetValidationException AWS API Documentation
+    #
+    class FacetValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5008,6 +5153,20 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # Indicates a failure occurred while performing a check for backward
+    # compatibility between the specified schema and the schema that is
+    # currently applied to the directory.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/IncompatibleSchemaException AWS API Documentation
+    #
+    class IncompatibleSchemaException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents an index and an attached object.
     #
     # @!attribute [rw] indexed_attributes
@@ -5027,6 +5186,145 @@ module Aws::CloudDirectory
     class IndexAttachment < Struct.new(
       :indexed_attributes,
       :object_identifier)
+      include Aws::Structure
+    end
+
+    # An object has been attempted to be attached to an object that does not
+    # have the appropriate attribute value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/IndexedAttributeMissingException AWS API Documentation
+    #
+    class IndexedAttributeMissingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates a problem that must be resolved by Amazon Web Services. This
+    # might be a transient error in which case you can retry your request
+    # until it succeeds. Otherwise, go to the [AWS Service Health
+    # Dashboard][1] site to see if there are any operational issues with the
+    # service.
+    #
+    #
+    #
+    # [1]: http://status.aws.amazon.com/
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided ARN value is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidArnException AWS API Documentation
+    #
+    class InvalidArnException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that an attempt to make an attachment was invalid. For
+    # example, attaching two nodes with a link type that is not applicable
+    # to the nodes or attempting to apply a schema to a directory a second
+    # time.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidAttachmentException AWS API Documentation
+    #
+    class InvalidAttachmentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An attempt to modify a Facet resulted in an invalid schema exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidFacetUpdateException AWS API Documentation
+    #
+    class InvalidFacetUpdateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that the `NextToken` value is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Occurs when any of the rule parameter keys or values are invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidRuleException AWS API Documentation
+    #
+    class InvalidRuleException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided `SchemaDoc` value is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidSchemaDocException AWS API Documentation
+    #
+    class InvalidSchemaDocException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Can occur for multiple reasons such as when you tag a resource that
+    # doesn’t exist or if you specify a higher number of tags for a resource
+    # than the allowed limit. Allowed limit is 50 tags per resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidTaggingRequestException AWS API Documentation
+    #
+    class InvalidTaggingRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that limits are exceeded. See [Limits][1] for more
+    # information.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5099,6 +5397,19 @@ module Aws::CloudDirectory
     class LinkAttributeUpdate < Struct.new(
       :attribute_key,
       :attribute_action)
+      include Aws::Structure
+    end
+
+    # Indicates that a link could not be created due to a naming conflict.
+    # Choose a different name and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/LinkNameAlreadyInUseException AWS API Documentation
+    #
+    class LinkNameAlreadyInUseException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6422,6 +6733,58 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # Indicates that the requested operation can only operate on index
+    # objects.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/NotIndexException AWS API Documentation
+    #
+    class NotIndexException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Occurs when any invalid operations are performed on an object that is
+    # not a node, such as calling `ListObjectChildren` for a leaf node
+    # object.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/NotNodeException AWS API Documentation
+    #
+    class NotNodeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that the requested operation can only operate on policy
+    # objects.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/NotPolicyException AWS API Documentation
+    #
+    class NotPolicyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that the object is not attached to the index.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectAlreadyDetachedException AWS API Documentation
+    #
+    class ObjectAlreadyDetachedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The action to take on the object attribute.
     #
     # @note When making an API call, you may pass ObjectAttributeAction
@@ -6555,6 +6918,19 @@ module Aws::CloudDirectory
     class ObjectIdentifierAndLinkNameTuple < Struct.new(
       :object_identifier,
       :link_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the requested operation cannot be completed because the
+    # object has not been detached from the tree.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectNotDetachedException AWS API Documentation
+    #
+    class ObjectNotDetachedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6793,6 +7169,36 @@ module Aws::CloudDirectory
     #
     class RemoveFacetFromObjectResponse < Aws::EmptyStructure; end
 
+    # The specified resource could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Occurs when a conflict with a previous successful write is detected.
+    # For example, if a write operation occurs on an object and then an
+    # attempt is made to read the object using “SERIALIZABLE” consistency,
+    # this exception may result. This generally occurs when the previous
+    # write did not have time to propagate to the host serving the current
+    # request. A retry (with appropriate backoff logic) is the recommended
+    # response to this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/RetryableConflictException AWS API Documentation
+    #
+    class RetryableConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains an Amazon Resource Name (ARN) and parameters that are
     # associated with the rule.
     #
@@ -6820,6 +7226,31 @@ module Aws::CloudDirectory
     class Rule < Struct.new(
       :type,
       :parameters)
+      include Aws::Structure
+    end
+
+    # Indicates that a schema could not be created due to a naming conflict.
+    # Please select a different name and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/SchemaAlreadyExistsException AWS API Documentation
+    #
+    class SchemaAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that a schema is already published.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/SchemaAlreadyPublishedException AWS API Documentation
+    #
+    class SchemaAlreadyPublishedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6852,6 +7283,19 @@ module Aws::CloudDirectory
     class SchemaFacet < Struct.new(
       :schema_arn,
       :facet_name)
+      include Aws::Structure
+    end
+
+    # The object could not be deleted because links still exist. Remove the
+    # links and then try the operation again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/StillContainsLinksException AWS API Documentation
+    #
+    class StillContainsLinksException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -7322,6 +7766,18 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # Indicates that the requested index type is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UnsupportedIndexTypeException AWS API Documentation
+    #
+    class UnsupportedIndexTypeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -7787,6 +8243,19 @@ module Aws::CloudDirectory
     #
     class UpgradePublishedSchemaResponse < Struct.new(
       :upgraded_schema_arn)
+      include Aws::Structure
+    end
+
+    # Indicates that your request is malformed in some manner. See the
+    # exception message.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

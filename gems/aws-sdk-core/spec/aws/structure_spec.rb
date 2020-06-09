@@ -22,6 +22,14 @@ module Aws
         expect(Structure.new(:abc).new.to_hash).to eq({})
       end
 
+      it 'accepts :members member' do
+        s = Structure.new(:members, :foo).new(foo: 'bar', members: ['foo'])
+        expect(s.to_hash).to eq({
+          foo: 'bar',
+          members: ['foo']
+        })
+      end
+
       it 'only serializes non-nil members' do
         s = Structure.new(:abc, :mno).new(abc:'abc')
         expect(s.to_hash).to eq(abc: 'abc')

@@ -23,12 +23,25 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:appsync)
 
 module Aws::AppSync
+  # An API client for AppSync.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::AppSync::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +68,7 @@ module Aws::AppSync
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -91,7 +105,7 @@ module Aws::AppSync
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +120,12 @@ module Aws::AppSync
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +133,10 @@ module Aws::AppSync
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +150,10 @@ module Aws::AppSync
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +161,7 @@ module Aws::AppSync
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +176,7 @@ module Aws::AppSync
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +188,29 @@ module Aws::AppSync
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +218,30 @@ module Aws::AppSync
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -199,11 +260,129 @@ module Aws::AppSync
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
+
+    # Creates a cache for the GraphQL API.
+    #
+    # @option params [required, String] :api_id
+    #   The GraphQL API Id.
+    #
+    # @option params [required, Integer] :ttl
+    #   TTL in seconds for cache entries.
+    #
+    #   Valid values are between 1 and 3600 seconds.
+    #
+    # @option params [Boolean] :transit_encryption_enabled
+    #   Transit encryption flag when connecting to cache. This setting cannot
+    #   be updated after creation.
+    #
+    # @option params [Boolean] :at_rest_encryption_enabled
+    #   At rest encryption flag for cache. This setting cannot be updated
+    #   after creation.
+    #
+    # @option params [required, String] :api_caching_behavior
+    #   Caching behavior.
+    #
+    #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
+    #
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #     are cached.
+    #
+    # @option params [required, String] :type
+    #   The cache instance type.
+    #
+    #   * **T2\_SMALL**\: A t2.small instance type.
+    #
+    #   * **T2\_MEDIUM**\: A t2.medium instance type.
+    #
+    #   * **R4\_LARGE**\: A r4.large instance type.
+    #
+    #   * **R4\_XLARGE**\: A r4.xlarge instance type.
+    #
+    #   * **R4\_2XLARGE**\: A r4.2xlarge instance type.
+    #
+    #   * **R4\_4XLARGE**\: A r4.4xlarge instance type.
+    #
+    #   * **R4\_8XLARGE**\: A r4.8xlarge instance type.
+    #
+    # @return [Types::CreateApiCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateApiCacheResponse#api_cache #api_cache} => Types::ApiCache
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_api_cache({
+    #     api_id: "String", # required
+    #     ttl: 1, # required
+    #     transit_encryption_enabled: false,
+    #     at_rest_encryption_enabled: false,
+    #     api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
+    #     type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_cache.ttl #=> Integer
+    #   resp.api_cache.api_caching_behavior #=> String, one of "FULL_REQUEST_CACHING", "PER_RESOLVER_CACHING"
+    #   resp.api_cache.transit_encryption_enabled #=> Boolean
+    #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
+    #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE"
+    #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiCache AWS API Documentation
+    #
+    # @overload create_api_cache(params = {})
+    # @param [Hash] params ({})
+    def create_api_cache(params = {}, options = {})
+      req = build_request(:create_api_cache, params)
+      req.send_request(options)
+    end
 
     # Creates a unique key that you can distribute to clients who are
     # executing your API.
@@ -296,6 +475,12 @@ module Aws::AppSync
     #       table_name: "String", # required
     #       aws_region: "String", # required
     #       use_caller_credentials: false,
+    #       delta_sync_config: {
+    #         base_table_ttl: 1,
+    #         delta_sync_table_name: "String",
+    #         delta_sync_table_ttl: 1,
+    #       },
+    #       versioned: false,
     #     },
     #     lambda_config: {
     #       lambda_function_arn: "String", # required
@@ -336,6 +521,10 @@ module Aws::AppSync
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
     #   resp.data_source.dynamodb_config.use_caller_credentials #=> Boolean
+    #   resp.data_source.dynamodb_config.delta_sync_config.base_table_ttl #=> Integer
+    #   resp.data_source.dynamodb_config.delta_sync_config.delta_sync_table_name #=> String
+    #   resp.data_source.dynamodb_config.delta_sync_config.delta_sync_table_ttl #=> Integer
+    #   resp.data_source.dynamodb_config.versioned #=> Boolean
     #   resp.data_source.lambda_config.lambda_function_arn #=> String
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
@@ -432,14 +621,25 @@ module Aws::AppSync
     #   The Amazon CloudWatch Logs configuration.
     #
     # @option params [required, String] :authentication_type
-    #   The authentication type: API key, AWS IAM, or Amazon Cognito user
-    #   pools.
+    #   The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito
+    #   user pools.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
     #   The Amazon Cognito user pool configuration.
     #
     # @option params [Types::OpenIDConnectConfig] :open_id_connect_config
     #   The OpenID Connect configuration.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A `TagMap` object.
+    #
+    # @option params [Array<Types::AdditionalAuthenticationProvider>] :additional_authentication_providers
+    #   A list of additional authentication providers for the `GraphqlApi`
+    #   API.
+    #
+    # @option params [Boolean] :xray_enabled
+    #   A flag indicating whether to enable X-Ray tracing for the
+    #   `GraphqlApi`.
     #
     # @return [Types::CreateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -452,6 +652,7 @@ module Aws::AppSync
     #     log_config: {
     #       field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
     #       cloud_watch_logs_role_arn: "String", # required
+    #       exclude_verbose_content: false,
     #     },
     #     authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #     user_pool_config: {
@@ -466,6 +667,26 @@ module Aws::AppSync
     #       iat_ttl: 1,
     #       auth_ttl: 1,
     #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     additional_authentication_providers: [
+    #       {
+    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #         open_id_connect_config: {
+    #           issuer: "String", # required
+    #           client_id: "String",
+    #           iat_ttl: 1,
+    #           auth_ttl: 1,
+    #         },
+    #         user_pool_config: {
+    #           user_pool_id: "String", # required
+    #           aws_region: "String", # required
+    #           app_id_client_regex: "String",
+    #         },
+    #       },
+    #     ],
+    #     xray_enabled: false,
     #   })
     #
     # @example Response structure
@@ -475,6 +696,7 @@ module Aws::AppSync
     #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
     #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
     #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
+    #   resp.graphql_api.log_config.exclude_verbose_content #=> Boolean
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.user_pool_config.aws_region #=> String
     #   resp.graphql_api.user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
@@ -486,6 +708,18 @@ module Aws::AppSync
     #   resp.graphql_api.arn #=> String
     #   resp.graphql_api.uris #=> Hash
     #   resp.graphql_api.uris["String"] #=> String
+    #   resp.graphql_api.tags #=> Hash
+    #   resp.graphql_api.tags["TagKey"] #=> String
+    #   resp.graphql_api.additional_authentication_providers #=> Array
+    #   resp.graphql_api.additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.issuer #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.client_id #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.auth_ttl #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.xray_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApi AWS API Documentation
     #
@@ -538,6 +772,12 @@ module Aws::AppSync
     # @option params [Types::PipelineConfig] :pipeline_config
     #   The `PipelineConfig`.
     #
+    # @option params [Types::SyncConfig] :sync_config
+    #   The `SyncConfig` for a resolver attached to a versioned datasource.
+    #
+    # @option params [Types::CachingConfig] :caching_config
+    #   The caching configuration for the resolver.
+    #
     # @return [Types::CreateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResolverResponse#resolver #resolver} => Types::Resolver
@@ -555,6 +795,17 @@ module Aws::AppSync
     #     pipeline_config: {
     #       functions: ["String"],
     #     },
+    #     sync_config: {
+    #       conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
+    #       conflict_detection: "VERSION", # accepts VERSION, NONE
+    #       lambda_conflict_handler_config: {
+    #         lambda_conflict_handler_arn: "String",
+    #       },
+    #     },
+    #     caching_config: {
+    #       ttl: 1,
+    #       caching_keys: ["String"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -568,6 +819,12 @@ module Aws::AppSync
     #   resp.resolver.kind #=> String, one of "UNIT", "PIPELINE"
     #   resp.resolver.pipeline_config.functions #=> Array
     #   resp.resolver.pipeline_config.functions[0] #=> String
+    #   resp.resolver.sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.resolver.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.resolver.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.resolver.caching_config.ttl #=> Integer
+    #   resp.resolver.caching_config.caching_keys #=> Array
+    #   resp.resolver.caching_config.caching_keys[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolver AWS API Documentation
     #
@@ -622,6 +879,28 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def create_type(params = {}, options = {})
       req = build_request(:create_type, params)
+      req.send_request(options)
+    end
+
+    # Deletes an `ApiCache` object.
+    #
+    # @option params [required, String] :api_id
+    #   The API ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_api_cache({
+    #     api_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteApiCache AWS API Documentation
+    #
+    # @overload delete_api_cache(params = {})
+    # @param [Hash] params ({})
+    def delete_api_cache(params = {}, options = {})
+      req = build_request(:delete_api_cache, params)
       req.send_request(options)
     end
 
@@ -781,6 +1060,61 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Flushes an `ApiCache` object.
+    #
+    # @option params [required, String] :api_id
+    #   The API ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.flush_api_cache({
+    #     api_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/FlushApiCache AWS API Documentation
+    #
+    # @overload flush_api_cache(params = {})
+    # @param [Hash] params ({})
+    def flush_api_cache(params = {}, options = {})
+      req = build_request(:flush_api_cache, params)
+      req.send_request(options)
+    end
+
+    # Retrieves an `ApiCache` object.
+    #
+    # @option params [required, String] :api_id
+    #   The API ID.
+    #
+    # @return [Types::GetApiCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApiCacheResponse#api_cache #api_cache} => Types::ApiCache
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_api_cache({
+    #     api_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_cache.ttl #=> Integer
+    #   resp.api_cache.api_caching_behavior #=> String, one of "FULL_REQUEST_CACHING", "PER_RESOLVER_CACHING"
+    #   resp.api_cache.transit_encryption_enabled #=> Boolean
+    #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
+    #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE"
+    #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetApiCache AWS API Documentation
+    #
+    # @overload get_api_cache(params = {})
+    # @param [Hash] params ({})
+    def get_api_cache(params = {}, options = {})
+      req = build_request(:get_api_cache, params)
+      req.send_request(options)
+    end
+
     # Retrieves a `DataSource` object.
     #
     # @option params [required, String] :api_id
@@ -810,6 +1144,10 @@ module Aws::AppSync
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
     #   resp.data_source.dynamodb_config.use_caller_credentials #=> Boolean
+    #   resp.data_source.dynamodb_config.delta_sync_config.base_table_ttl #=> Integer
+    #   resp.data_source.dynamodb_config.delta_sync_config.delta_sync_table_name #=> String
+    #   resp.data_source.dynamodb_config.delta_sync_config.delta_sync_table_ttl #=> Integer
+    #   resp.data_source.dynamodb_config.versioned #=> Boolean
     #   resp.data_source.lambda_config.lambda_function_arn #=> String
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
@@ -894,6 +1232,7 @@ module Aws::AppSync
     #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
     #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
     #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
+    #   resp.graphql_api.log_config.exclude_verbose_content #=> Boolean
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.user_pool_config.aws_region #=> String
     #   resp.graphql_api.user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
@@ -905,6 +1244,18 @@ module Aws::AppSync
     #   resp.graphql_api.arn #=> String
     #   resp.graphql_api.uris #=> Hash
     #   resp.graphql_api.uris["String"] #=> String
+    #   resp.graphql_api.tags #=> Hash
+    #   resp.graphql_api.tags["TagKey"] #=> String
+    #   resp.graphql_api.additional_authentication_providers #=> Array
+    #   resp.graphql_api.additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.issuer #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.client_id #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.auth_ttl #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.xray_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApi AWS API Documentation
     #
@@ -923,6 +1274,10 @@ module Aws::AppSync
     # @option params [required, String] :format
     #   The schema format: SDL or JSON.
     #
+    # @option params [Boolean] :include_directives
+    #   A flag that specifies whether the schema introspection should contain
+    #   directives.
+    #
     # @return [Types::GetIntrospectionSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIntrospectionSchemaResponse#schema #schema} => String
@@ -932,6 +1287,7 @@ module Aws::AppSync
     #   resp = client.get_introspection_schema({
     #     api_id: "String", # required
     #     format: "SDL", # required, accepts SDL, JSON
+    #     include_directives: false,
     #   })
     #
     # @example Response structure
@@ -981,6 +1337,12 @@ module Aws::AppSync
     #   resp.resolver.kind #=> String, one of "UNIT", "PIPELINE"
     #   resp.resolver.pipeline_config.functions #=> Array
     #   resp.resolver.pipeline_config.functions[0] #=> String
+    #   resp.resolver.sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.resolver.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.resolver.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.resolver.caching_config.ttl #=> Integer
+    #   resp.resolver.caching_config.caching_keys #=> Array
+    #   resp.resolver.caching_config.caching_keys[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetResolver AWS API Documentation
     #
@@ -1009,7 +1371,7 @@ module Aws::AppSync
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "PROCESSING", "ACTIVE", "DELETING"
+    #   resp.status #=> String, one of "PROCESSING", "ACTIVE", "DELETING", "FAILED", "SUCCESS", "NOT_APPLICABLE"
     #   resp.details #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetSchemaCreationStatus AWS API Documentation
@@ -1148,6 +1510,10 @@ module Aws::AppSync
     #   resp.data_sources[0].dynamodb_config.table_name #=> String
     #   resp.data_sources[0].dynamodb_config.aws_region #=> String
     #   resp.data_sources[0].dynamodb_config.use_caller_credentials #=> Boolean
+    #   resp.data_sources[0].dynamodb_config.delta_sync_config.base_table_ttl #=> Integer
+    #   resp.data_sources[0].dynamodb_config.delta_sync_config.delta_sync_table_name #=> String
+    #   resp.data_sources[0].dynamodb_config.delta_sync_config.delta_sync_table_ttl #=> Integer
+    #   resp.data_sources[0].dynamodb_config.versioned #=> Boolean
     #   resp.data_sources[0].lambda_config.lambda_function_arn #=> String
     #   resp.data_sources[0].elasticsearch_config.endpoint #=> String
     #   resp.data_sources[0].elasticsearch_config.aws_region #=> String
@@ -1250,6 +1616,7 @@ module Aws::AppSync
     #   resp.graphql_apis[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
     #   resp.graphql_apis[0].log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
     #   resp.graphql_apis[0].log_config.cloud_watch_logs_role_arn #=> String
+    #   resp.graphql_apis[0].log_config.exclude_verbose_content #=> Boolean
     #   resp.graphql_apis[0].user_pool_config.user_pool_id #=> String
     #   resp.graphql_apis[0].user_pool_config.aws_region #=> String
     #   resp.graphql_apis[0].user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
@@ -1261,6 +1628,18 @@ module Aws::AppSync
     #   resp.graphql_apis[0].arn #=> String
     #   resp.graphql_apis[0].uris #=> Hash
     #   resp.graphql_apis[0].uris["String"] #=> String
+    #   resp.graphql_apis[0].tags #=> Hash
+    #   resp.graphql_apis[0].tags["TagKey"] #=> String
+    #   resp.graphql_apis[0].additional_authentication_providers #=> Array
+    #   resp.graphql_apis[0].additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_apis[0].additional_authentication_providers[0].open_id_connect_config.issuer #=> String
+    #   resp.graphql_apis[0].additional_authentication_providers[0].open_id_connect_config.client_id #=> String
+    #   resp.graphql_apis[0].additional_authentication_providers[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_apis[0].additional_authentication_providers[0].open_id_connect_config.auth_ttl #=> Integer
+    #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
+    #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.aws_region #=> String
+    #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_apis[0].xray_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApis AWS API Documentation
@@ -1314,6 +1693,12 @@ module Aws::AppSync
     #   resp.resolvers[0].kind #=> String, one of "UNIT", "PIPELINE"
     #   resp.resolvers[0].pipeline_config.functions #=> Array
     #   resp.resolvers[0].pipeline_config.functions[0] #=> String
+    #   resp.resolvers[0].sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.resolvers[0].sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.resolvers[0].sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.resolvers[0].caching_config.ttl #=> Integer
+    #   resp.resolvers[0].caching_config.caching_keys #=> Array
+    #   resp.resolvers[0].caching_config.caching_keys[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolvers AWS API Documentation
@@ -1367,6 +1752,12 @@ module Aws::AppSync
     #   resp.resolvers[0].kind #=> String, one of "UNIT", "PIPELINE"
     #   resp.resolvers[0].pipeline_config.functions #=> Array
     #   resp.resolvers[0].pipeline_config.functions[0] #=> String
+    #   resp.resolvers[0].sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.resolvers[0].sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.resolvers[0].sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.resolvers[0].caching_config.ttl #=> Integer
+    #   resp.resolvers[0].caching_config.caching_keys #=> Array
+    #   resp.resolvers[0].caching_config.caching_keys[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunction AWS API Documentation
@@ -1375,6 +1766,35 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def list_resolvers_by_function(params = {}, options = {})
       req = build_request(:list_resolvers_by_function, params)
+      req.send_request(options)
+    end
+
+    # Lists the tags for a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The `GraphqlApi` ARN.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1451,7 +1871,7 @@ module Aws::AppSync
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "PROCESSING", "ACTIVE", "DELETING"
+    #   resp.status #=> String, one of "PROCESSING", "ACTIVE", "DELETING", "FAILED", "SUCCESS", "NOT_APPLICABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartSchemaCreation AWS API Documentation
     #
@@ -1459,6 +1879,126 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def start_schema_creation(params = {}, options = {})
       req = build_request(:start_schema_creation, params)
+      req.send_request(options)
+    end
+
+    # Tags a resource with user-supplied tags.
+    #
+    # @option params [required, String] :resource_arn
+    #   The `GraphqlApi` ARN.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   A `TagMap` object.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Untags a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The `GraphqlApi` ARN.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of `TagKey` objects.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the cache for the GraphQL API.
+    #
+    # @option params [required, String] :api_id
+    #   The GraphQL API Id.
+    #
+    # @option params [required, Integer] :ttl
+    #   TTL in seconds for cache entries.
+    #
+    #   Valid values are between 1 and 3600 seconds.
+    #
+    # @option params [required, String] :api_caching_behavior
+    #   Caching behavior.
+    #
+    #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
+    #
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #     are cached.
+    #
+    # @option params [required, String] :type
+    #   The cache instance type.
+    #
+    #   * **T2\_SMALL**\: A t2.small instance type.
+    #
+    #   * **T2\_MEDIUM**\: A t2.medium instance type.
+    #
+    #   * **R4\_LARGE**\: A r4.large instance type.
+    #
+    #   * **R4\_XLARGE**\: A r4.xlarge instance type.
+    #
+    #   * **R4\_2XLARGE**\: A r4.2xlarge instance type.
+    #
+    #   * **R4\_4XLARGE**\: A r4.4xlarge instance type.
+    #
+    #   * **R4\_8XLARGE**\: A r4.8xlarge instance type.
+    #
+    # @return [Types::UpdateApiCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApiCacheResponse#api_cache #api_cache} => Types::ApiCache
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_api_cache({
+    #     api_id: "String", # required
+    #     ttl: 1, # required
+    #     api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
+    #     type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_cache.ttl #=> Integer
+    #   resp.api_cache.api_caching_behavior #=> String, one of "FULL_REQUEST_CACHING", "PER_RESOLVER_CACHING"
+    #   resp.api_cache.transit_encryption_enabled #=> Boolean
+    #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
+    #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE"
+    #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiCache AWS API Documentation
+    #
+    # @overload update_api_cache(params = {})
+    # @param [Hash] params ({})
+    def update_api_cache(params = {}, options = {})
+      req = build_request(:update_api_cache, params)
       req.send_request(options)
     end
 
@@ -1553,6 +2093,12 @@ module Aws::AppSync
     #       table_name: "String", # required
     #       aws_region: "String", # required
     #       use_caller_credentials: false,
+    #       delta_sync_config: {
+    #         base_table_ttl: 1,
+    #         delta_sync_table_name: "String",
+    #         delta_sync_table_ttl: 1,
+    #       },
+    #       versioned: false,
     #     },
     #     lambda_config: {
     #       lambda_function_arn: "String", # required
@@ -1593,6 +2139,10 @@ module Aws::AppSync
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
     #   resp.data_source.dynamodb_config.use_caller_credentials #=> Boolean
+    #   resp.data_source.dynamodb_config.delta_sync_config.base_table_ttl #=> Integer
+    #   resp.data_source.dynamodb_config.delta_sync_config.delta_sync_table_name #=> String
+    #   resp.data_source.dynamodb_config.delta_sync_config.delta_sync_table_ttl #=> Integer
+    #   resp.data_source.dynamodb_config.versioned #=> Boolean
     #   resp.data_source.lambda_config.lambda_function_arn #=> String
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
@@ -1702,6 +2252,14 @@ module Aws::AppSync
     # @option params [Types::OpenIDConnectConfig] :open_id_connect_config
     #   The OpenID Connect configuration for the `GraphqlApi` object.
     #
+    # @option params [Array<Types::AdditionalAuthenticationProvider>] :additional_authentication_providers
+    #   A list of additional authentication providers for the `GraphqlApi`
+    #   API.
+    #
+    # @option params [Boolean] :xray_enabled
+    #   A flag indicating whether to enable X-Ray tracing for the
+    #   `GraphqlApi`.
+    #
     # @return [Types::UpdateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGraphqlApiResponse#graphql_api #graphql_api} => Types::GraphqlApi
@@ -1714,6 +2272,7 @@ module Aws::AppSync
     #     log_config: {
     #       field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
     #       cloud_watch_logs_role_arn: "String", # required
+    #       exclude_verbose_content: false,
     #     },
     #     authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #     user_pool_config: {
@@ -1728,6 +2287,23 @@ module Aws::AppSync
     #       iat_ttl: 1,
     #       auth_ttl: 1,
     #     },
+    #     additional_authentication_providers: [
+    #       {
+    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #         open_id_connect_config: {
+    #           issuer: "String", # required
+    #           client_id: "String",
+    #           iat_ttl: 1,
+    #           auth_ttl: 1,
+    #         },
+    #         user_pool_config: {
+    #           user_pool_id: "String", # required
+    #           aws_region: "String", # required
+    #           app_id_client_regex: "String",
+    #         },
+    #       },
+    #     ],
+    #     xray_enabled: false,
     #   })
     #
     # @example Response structure
@@ -1737,6 +2313,7 @@ module Aws::AppSync
     #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
     #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
     #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
+    #   resp.graphql_api.log_config.exclude_verbose_content #=> Boolean
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.user_pool_config.aws_region #=> String
     #   resp.graphql_api.user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
@@ -1748,6 +2325,18 @@ module Aws::AppSync
     #   resp.graphql_api.arn #=> String
     #   resp.graphql_api.uris #=> Hash
     #   resp.graphql_api.uris["String"] #=> String
+    #   resp.graphql_api.tags #=> Hash
+    #   resp.graphql_api.tags["TagKey"] #=> String
+    #   resp.graphql_api.additional_authentication_providers #=> Array
+    #   resp.graphql_api.additional_authentication_providers[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.issuer #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.client_id #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].open_id_connect_config.auth_ttl #=> Integer
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
+    #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.xray_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApi AWS API Documentation
     #
@@ -1793,6 +2382,12 @@ module Aws::AppSync
     # @option params [Types::PipelineConfig] :pipeline_config
     #   The `PipelineConfig`.
     #
+    # @option params [Types::SyncConfig] :sync_config
+    #   The `SyncConfig` for a resolver attached to a versioned datasource.
+    #
+    # @option params [Types::CachingConfig] :caching_config
+    #   The caching configuration for the resolver.
+    #
     # @return [Types::UpdateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateResolverResponse#resolver #resolver} => Types::Resolver
@@ -1810,6 +2405,17 @@ module Aws::AppSync
     #     pipeline_config: {
     #       functions: ["String"],
     #     },
+    #     sync_config: {
+    #       conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
+    #       conflict_detection: "VERSION", # accepts VERSION, NONE
+    #       lambda_conflict_handler_config: {
+    #         lambda_conflict_handler_arn: "String",
+    #       },
+    #     },
+    #     caching_config: {
+    #       ttl: 1,
+    #       caching_keys: ["String"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1823,6 +2429,12 @@ module Aws::AppSync
     #   resp.resolver.kind #=> String, one of "UNIT", "PIPELINE"
     #   resp.resolver.pipeline_config.functions #=> Array
     #   resp.resolver.pipeline_config.functions[0] #=> String
+    #   resp.resolver.sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
+    #   resp.resolver.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
+    #   resp.resolver.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.resolver.caching_config.ttl #=> Integer
+    #   resp.resolver.caching_config.caching_keys #=> Array
+    #   resp.resolver.caching_config.caching_keys[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolver AWS API Documentation
     #
@@ -1890,7 +2502,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

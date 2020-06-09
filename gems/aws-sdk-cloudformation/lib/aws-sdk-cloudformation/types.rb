@@ -10,58 +10,58 @@ module Aws::CloudFormation
 
     # Structure that contains the results of the account gate function which
     # AWS CloudFormation invokes, if present, before proceeding with a stack
-    # set operation in an account and region.
+    # set operation in an account and Region.
     #
-    # For each account and region, AWS CloudFormation lets you specify a
+    # For each account and Region, AWS CloudFormation lets you specify a
     # Lamdba function that encapsulates any requirements that must be met
     # before CloudFormation can proceed with a stack set operation in that
-    # account and region. CloudFormation invokes the function each time a
-    # stack set operation is requested for that account and region; if the
+    # account and Region. CloudFormation invokes the function each time a
+    # stack set operation is requested for that account and Region; if the
     # function returns `FAILED`, CloudFormation cancels the operation in
-    # that account and region, and sets the stack set operation result
-    # status for that account and region to `FAILED`.
+    # that account and Region, and sets the stack set operation result
+    # status for that account and Region to `FAILED`.
     #
     # For more information, see [Configuring a target account gate][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-account-gating.html
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-account-gating.html
     #
     # @!attribute [rw] status
     #   The status of the account gate function.
     #
     #   * `SUCCEEDED`\: The account gate function has determined that the
-    #     account and region passes any requirements for a stack set
+    #     account and Region passes any requirements for a stack set
     #     operation to occur. AWS CloudFormation proceeds with the stack
-    #     operation in that account and region.
+    #     operation in that account and Region.
     #
     #   * `FAILED`\: The account gate function has determined that the
-    #     account and region does not meet the requirements for a stack set
+    #     account and Region does not meet the requirements for a stack set
     #     operation to occur. AWS CloudFormation cancels the stack set
-    #     operation in that account and region, and sets the stack set
-    #     operation result status for that account and region to `FAILED`.
+    #     operation in that account and Region, and sets the stack set
+    #     operation result status for that account and Region to `FAILED`.
     #
     #   * `SKIPPED`\: AWS CloudFormation has skipped calling the account
-    #     gate function for this account and region, for one of the
+    #     gate function for this account and Region, for one of the
     #     following reasons:
     #
     #     * An account gate function has not been specified for the account
-    #       and region. AWS CloudFormation proceeds with the stack set
-    #       operation in this account and region.
+    #       and Region. AWS CloudFormation proceeds with the stack set
+    #       operation in this account and Region.
     #
     #     * The `AWSCloudFormationStackSetExecutionRole` of the stack set
     #       adminstration account lacks permissions to invoke the function.
     #       AWS CloudFormation proceeds with the stack set operation in this
-    #       account and region.
+    #       account and Region.
     #
     #     * Either no action is necessary, or no action is possible, on the
     #       stack. AWS CloudFormation skips the stack set operation in this
-    #       account and region.
+    #       account and Region.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
     #   The reason for the account gate status assigned to this account and
-    #   region for the stack set operation.
+    #   Region for the stack set operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AccountGateResult AWS API Documentation
@@ -74,9 +74,27 @@ module Aws::CloudFormation
 
     # The AccountLimit data type.
     #
+    # CloudFormation has the following limits per account:
+    #
+    # * Number of concurrent resources
+    #
+    # * Number of stacks
+    #
+    # * Number of stack outputs
+    #
+    # For more information about these account limits, and other
+    # CloudFormation limits, see [AWS CloudFormation Limits][1] in the *AWS
+    # CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html
+    #
     # @!attribute [rw] name
-    #   The name of the account limit. Currently, the only account limit is
-    #   `StackLimit`.
+    #   The name of the account limit.
+    #
+    #   Values: `ConcurrentResourcesLimit` \| `StackLimit` \|
+    #   `StackOutputsLimit`
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -88,6 +106,58 @@ module Aws::CloudFormation
     class AccountLimit < Struct.new(
       :name,
       :value)
+      include Aws::Structure
+    end
+
+    # The resource with the name requested already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Aws::EmptyStructure; end
+
+    # \[`Service-managed` permissions\] Describes whether StackSets
+    # automatically deploys to AWS Organizations accounts that are added to
+    # a target organization or organizational unit (OU).
+    #
+    # @note When making an API call, you may pass AutoDeployment
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         retain_stacks_on_account_removal: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   If set to `true`, StackSets automatically deploys additional stack
+    #   instances to AWS Organizations accounts that are added to a target
+    #   organization or organizational unit (OU) in the specified Regions.
+    #   If an account is removed from a target organization or OU, StackSets
+    #   deletes stack instances from the account in the specified Regions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retain_stacks_on_account_removal
+    #   If set to `true`, stack resources are retained when an account is
+    #   removed from a target organization or OU. If set to `false`, stack
+    #   resources are deleted. Specify only if `Enabled` is set to `True`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AutoDeployment AWS API Documentation
+    #
+    class AutoDeployment < Struct.new(
+      :enabled,
+      :retain_stacks_on_account_removal)
+      include Aws::Structure
+    end
+
+    # An error occurred during a CloudFormation registry operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CFNRegistryException AWS API Documentation
+    #
+    class CFNRegistryException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -141,6 +211,13 @@ module Aws::CloudFormation
       :resource_change)
       include Aws::Structure
     end
+
+    # The specified change set name or ID doesn't exit. To view valid
+    # change sets for a stack, use the `ListChangeSets` action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ChangeSetNotFoundException AWS API Documentation
+    #
+    class ChangeSetNotFoundException < Aws::EmptyStructure; end
 
     # The `ChangeSetSummary` structure describes a change set, its status,
     # and the stack with which it's associated.
@@ -285,8 +362,8 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
-    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html#nested-stacks
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html#nested-stacks
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_request_token
@@ -354,7 +431,16 @@ module Aws::CloudFormation
     #         change_set_name: "ChangeSetName", # required
     #         client_token: "ClientToken",
     #         description: "Description",
-    #         change_set_type: "CREATE", # accepts CREATE, UPDATE
+    #         change_set_type: "CREATE", # accepts CREATE, UPDATE, IMPORT
+    #         resources_to_import: [
+    #           {
+    #             resource_type: "ResourceType", # required
+    #             logical_resource_id: "LogicalResourceId", # required
+    #             resource_identifier: { # required
+    #               "ResourceIdentifierPropertyKey" => "ResourceIdentifierPropertyValue",
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] stack_name
@@ -393,7 +479,7 @@ module Aws::CloudFormation
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] capabilities
-    #   In some cases, you must explicity acknowledge that your stack
+    #   In some cases, you must explicitly acknowledge that your stack
     #   template contains certain capabilities in order for AWS
     #   CloudFormation to create the stack.
     #
@@ -468,13 +554,13 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
-    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
-    #   [3]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
-    #   [5]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [6]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
-    #   [7]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
     #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
     #   [9]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
     #   [10]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
@@ -496,7 +582,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_arn
@@ -558,7 +644,8 @@ module Aws::CloudFormation
     # @!attribute [rw] change_set_type
     #   The type of change set operation. To create a change set for a new
     #   stack, specify `CREATE`. To create a change set for an existing
-    #   stack, specify `UPDATE`.
+    #   stack, specify `UPDATE`. To create a change set for an import
+    #   operation, specify `IMPORT`.
     #
     #   If you create a change set for a new stack, AWS Cloudformation
     #   creates a stack with a unique stack ID, but no template or
@@ -571,8 +658,12 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995
     #   @return [String]
+    #
+    # @!attribute [rw] resources_to_import
+    #   The resources to import into your stack.
+    #   @return [Array<Types::ResourceToImport>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetInput AWS API Documentation
     #
@@ -591,7 +682,8 @@ module Aws::CloudFormation
       :change_set_name,
       :client_token,
       :description,
-      :change_set_type)
+      :change_set_type,
+      :resources_to_import)
       include Aws::Structure
     end
 
@@ -660,7 +752,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] stack_name
     #   The name that is associated with the stack. The name must be unique
-    #   in the region in which you are creating the stack.
+    #   in the Region in which you are creating the stack.
     #
     #   <note markdown="1"> A stack name can contain only alphanumeric characters (case
     #   sensitive) and hyphens. It must start with an alphabetic character
@@ -679,7 +771,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] template_url
@@ -693,7 +785,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -702,7 +794,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] disable_rollback
@@ -732,7 +824,7 @@ module Aws::CloudFormation
     #   @return [Array<String>]
     #
     # @!attribute [rw] capabilities
-    #   In some cases, you must explicity acknowledge that your stack
+    #   In some cases, you must explicitly acknowledge that your stack
     #   template contains certain capabilities in order for AWS
     #   CloudFormation to create the stack.
     #
@@ -809,13 +901,13 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
-    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
-    #   [3]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
-    #   [5]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [6]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
-    #   [7]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
     #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
     #   [9]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
     #   [10]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
@@ -843,7 +935,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_arn
@@ -878,13 +970,13 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
     #   @return [String]
     #
     # @!attribute [rw] stack_policy_url
     #   Location of a file containing the stack policy. The URL must point
     #   to a policy (maximum size: 16 KB) located in an S3 bucket in the
-    #   same region as the stack. You can specify either the
+    #   same Region as the stack. You can specify either the
     #   `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
     #   @return [String]
     #
@@ -961,7 +1053,11 @@ module Aws::CloudFormation
     #
     #       {
     #         stack_set_name: "StackSetName", # required
-    #         accounts: ["Account"], # required
+    #         accounts: ["Account"],
+    #         deployment_targets: {
+    #           accounts: ["Account"],
+    #           organizational_unit_ids: ["OrganizationalUnitId"],
+    #         },
     #         regions: ["Region"], # required
     #         parameter_overrides: [
     #           {
@@ -987,12 +1083,22 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   The names of one or more AWS accounts that you want to create stack
-    #   instances in the specified region(s) for.
+    #   \[`Self-managed` permissions\] The names of one or more AWS accounts
+    #   that you want to create stack instances in the specified Region(s)
+    #   for.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts for
+    #   which to create stack instances in the specified Regions.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
+    #   @return [Types::DeploymentTargets]
+    #
     # @!attribute [rw] regions
-    #   The names of one or more regions where you want to create stack
+    #   The names of one or more Regions where you want to create stack
     #   instances using the specified AWS account(s).
     #   @return [Array<String>]
     #
@@ -1001,7 +1107,7 @@ module Aws::CloudFormation
     #   the selected stack instances.
     #
     #   Any overridden parameter values will be applied to all stack
-    #   instances in the specified accounts and regions. When specifying
+    #   instances in the specified accounts and Regions. When specifying
     #   parameters and their values, be aware of how AWS CloudFormation sets
     #   parameter values during stack instance operations:
     #
@@ -1033,7 +1139,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] operation_preferences
@@ -1065,6 +1171,7 @@ module Aws::CloudFormation
     class CreateStackInstancesInput < Struct.new(
       :stack_set_name,
       :accounts,
+      :deployment_targets,
       :regions,
       :parameter_overrides,
       :operation_preferences,
@@ -1121,12 +1228,17 @@ module Aws::CloudFormation
     #         ],
     #         administration_role_arn: "RoleARN",
     #         execution_role_name: "ExecutionRoleName",
+    #         permission_model: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SELF_MANAGED
+    #         auto_deployment: {
+    #           enabled: false,
+    #           retain_stacks_on_account_removal: false,
+    #         },
     #         client_request_token: "ClientRequestToken",
     #       }
     #
     # @!attribute [rw] stack_set_name
     #   The name to associate with the stack set. The name must be unique in
-    #   the region where you create your stack set.
+    #   the Region where you create your stack set.
     #
     #   <note markdown="1"> A stack name can contain only alphanumeric characters
     #   (case-sensitive) and hyphens. It must start with an alphabetic
@@ -1151,7 +1263,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] template_url
@@ -1165,7 +1277,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -1173,7 +1285,7 @@ module Aws::CloudFormation
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] capabilities
-    #   In some cases, you must explicity acknowledge that your stack set
+    #   In some cases, you must explicitly acknowledge that your stack set
     #   template contains certain capabilities in order for AWS
     #   CloudFormation to create the stack set and related stack instances.
     #
@@ -1236,13 +1348,13 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
-    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
-    #   [3]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
-    #   [5]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [6]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
-    #   [7]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
     #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
     #   [9]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
     #   [10]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
@@ -1288,6 +1400,33 @@ module Aws::CloudFormation
     #   their stack sets.
     #   @return [String]
     #
+    # @!attribute [rw] permission_model
+    #   Describes how the IAM roles required for stack set operations are
+    #   created. By default, `SELF-MANAGED` is specified.
+    #
+    #   * With `self-managed` permissions, you must create the administrator
+    #     and execution roles required to deploy to target accounts. For
+    #     more information, see [Grant Self-Managed Stack Set
+    #     Permissions][1].
+    #
+    #   * With `service-managed` permissions, StackSets automatically
+    #     creates the IAM roles required to deploy to accounts managed by
+    #     AWS Organizations. For more information, see [Grant
+    #     Service-Managed Stack Set Permissions][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_deployment
+    #   Describes whether StackSets automatically deploys to AWS
+    #   Organizations accounts that are added to the target organization or
+    #   organizational unit (OU). Specify only if `PermissionModel` is
+    #   `SERVICE_MANAGED`.
+    #   @return [Types::AutoDeployment]
+    #
     # @!attribute [rw] client_request_token
     #   A unique identifier for this `CreateStackSet` request. Specify this
     #   token if you plan to retry requests so that AWS CloudFormation knows
@@ -1314,6 +1453,8 @@ module Aws::CloudFormation
       :tags,
       :administration_role_arn,
       :execution_role_name,
+      :permission_model,
+      :auto_deployment,
       :client_request_token)
       include Aws::Structure
     end
@@ -1328,6 +1469,12 @@ module Aws::CloudFormation
       :stack_set_id)
       include Aws::Structure
     end
+
+    # The specified resource exists, but has been changed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreatedButModifiedException AWS API Documentation
+    #
+    class CreatedButModifiedException < Aws::EmptyStructure; end
 
     # The input for the DeleteChangeSet action.
     #
@@ -1438,7 +1585,11 @@ module Aws::CloudFormation
     #
     #       {
     #         stack_set_name: "StackSetName", # required
-    #         accounts: ["Account"], # required
+    #         accounts: ["Account"],
+    #         deployment_targets: {
+    #           accounts: ["Account"],
+    #           organizational_unit_ids: ["OrganizationalUnitId"],
+    #         },
     #         regions: ["Region"], # required
     #         operation_preferences: {
     #           region_order: ["Region"],
@@ -1457,12 +1608,21 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   The names of the AWS accounts that you want to delete stack
-    #   instances for.
+    #   \[`Self-managed` permissions\] The names of the AWS accounts that
+    #   you want to delete stack instances for.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts
+    #   from which to delete stack instances.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
+    #   @return [Types::DeploymentTargets]
+    #
     # @!attribute [rw] regions
-    #   The regions where you want to delete stack set instances.
+    #   The Regions where you want to delete stack set instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] operation_preferences
@@ -1479,7 +1639,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
     #   @return [Boolean]
     #
     # @!attribute [rw] operation_id
@@ -1506,6 +1666,7 @@ module Aws::CloudFormation
     class DeleteStackInstancesInput < Struct.new(
       :stack_set_name,
       :accounts,
+      :deployment_targets,
       :regions,
       :operation_preferences,
       :retain_stacks,
@@ -1546,6 +1707,94 @@ module Aws::CloudFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSetOutput AWS API Documentation
     #
     class DeleteStackSetOutput < Aws::EmptyStructure; end
+
+    # \[`Service-managed` permissions\] The AWS Organizations accounts to
+    # which StackSets deploys. StackSets does not deploy stack instances to
+    # the organization master account, even if the master account is in your
+    # organization or in an OU in your organization.
+    #
+    # For update operations, you can specify either `Accounts` or
+    # `OrganizationalUnitIds`. For create and delete operations, specify
+    # `OrganizationalUnitIds`.
+    #
+    # @note When making an API call, you may pass DeploymentTargets
+    #   data as a hash:
+    #
+    #       {
+    #         accounts: ["Account"],
+    #         organizational_unit_ids: ["OrganizationalUnitId"],
+    #       }
+    #
+    # @!attribute [rw] accounts
+    #   The names of one or more AWS accounts for which you want to deploy
+    #   stack set updates.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] organizational_unit_ids
+    #   The organization root ID or organizational unit (OU) IDs to which
+    #   StackSets deploys.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeploymentTargets AWS API Documentation
+    #
+    class DeploymentTargets < Struct.new(
+      :accounts,
+      :organizational_unit_ids)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeregisterTypeInput
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "PrivateTypeArn",
+    #         type: "RESOURCE", # accepts RESOURCE
+    #         type_name: "TypeName",
+    #         version_id: "TypeVersionId",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the type.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of a specific version of the type. The version ID is the
+    #   value at the end of the Amazon Resource Name (ARN) assigned to the
+    #   type version when it is registered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeregisterTypeInput AWS API Documentation
+    #
+    class DeregisterTypeInput < Struct.new(
+      :arn,
+      :type,
+      :type_name,
+      :version_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeregisterTypeOutput AWS API Documentation
+    #
+    class DeregisterTypeOutput < Aws::EmptyStructure; end
 
     # The input for the DescribeAccountLimits action.
     #
@@ -1653,7 +1902,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] creation_time
@@ -1911,7 +2160,7 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] stack_instance_region
-    #   The name of a region that's associated with this stack instance.
+    #   The name of a Region that's associated with this stack instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackInstanceInput AWS API Documentation
@@ -2002,7 +2251,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
     #   @return [Array<Types::StackResourceDrift>]
     #
     # @!attribute [rw] next_token
@@ -2261,6 +2510,257 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeTypeInput
+    #   data as a hash:
+    #
+    #       {
+    #         type: "RESOURCE", # accepts RESOURCE
+    #         type_name: "TypeName",
+    #         arn: "TypeArn",
+    #         version_id: "TypeVersionId",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the type.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of a specific version of the type. The version ID is the
+    #   value at the end of the Amazon Resource Name (ARN) assigned to the
+    #   type version when it is registered.
+    #
+    #   If you specify a `VersionId`, `DescribeType` returns information
+    #   about that specific type version. Otherwise, it returns information
+    #   about the default type version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeTypeInput AWS API Documentation
+    #
+    class DescribeTypeInput < Struct.new(
+      :type,
+      :type_name,
+      :arn,
+      :version_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the type.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the registered type.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version_id
+    #   The ID of the default version of the type. The default version is
+    #   used when the type version is not specified.
+    #
+    #   To set the default version of a type, use ` SetTypeDefaultVersion `.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default_version
+    #   Whether the specified type version is set as the default version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the registered type.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The schema that defines the type.
+    #
+    #   For more information on type schemas, see [Resource Provider
+    #   Schema][1] in the *CloudFormation CLI User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_type
+    #   The provisioning behavior of the type. AWS CloudFormation determines
+    #   the provisioning type during registration, based on the types of
+    #   handlers in the schema handler package submitted.
+    #
+    #   Valid values include:
+    #
+    #   * `FULLY_MUTABLE`\: The type includes an update handler to process
+    #     updates to the type during stack update operations.
+    #
+    #   * `IMMUTABLE`\: The type does not include an update handler, so the
+    #     type cannot be updated and must instead be replaced during stack
+    #     update operations.
+    #
+    #   * `NON_PROVISIONABLE`\: The type does not include all of the
+    #     following handlers, and therefore cannot actually be provisioned.
+    #
+    #     * create
+    #
+    #     * read
+    #
+    #     * delete
+    #   @return [String]
+    #
+    # @!attribute [rw] deprecated_status
+    #   The deprecation status of the type.
+    #
+    #   Valid values include:
+    #
+    #   * `LIVE`\: The type is registered and can be used in CloudFormation
+    #     operations, dependent on its provisioning behavior and visibility
+    #     scope.
+    #
+    #   * `DEPRECATED`\: The type has been deregistered and can no longer be
+    #     used in CloudFormation operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_config
+    #   Contains logging configuration information for a type.
+    #   @return [Types::LoggingConfig]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM execution role used to
+    #   register the type. If your resource type calls AWS APIs in any of
+    #   its handlers, you must create an <i> <a
+    #   href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM
+    #   execution role</a> </i> that includes the necessary permissions to
+    #   call those AWS APIs, and provision that execution role in your
+    #   account. CloudFormation then assumes that execution role to provide
+    #   your resource type with the appropriate credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] visibility
+    #   The scope at which the type is visible and usable in CloudFormation
+    #   operations.
+    #
+    #   Valid values include:
+    #
+    #   * `PRIVATE`\: The type is only visible and usable within the account
+    #     in which it is registered. Currently, AWS CloudFormation marks any
+    #     types you register as `PRIVATE`.
+    #
+    #   * `PUBLIC`\: The type is publically visible and usable within any
+    #     Amazon account.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_url
+    #   The URL of the source code for the type.
+    #   @return [String]
+    #
+    # @!attribute [rw] documentation_url
+    #   The URL of a page providing detailed documentation for this type.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated
+    #   When the specified type version was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] time_created
+    #   When the specified type version was registered.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeTypeOutput AWS API Documentation
+    #
+    class DescribeTypeOutput < Struct.new(
+      :arn,
+      :type,
+      :type_name,
+      :default_version_id,
+      :is_default_version,
+      :description,
+      :schema,
+      :provisioning_type,
+      :deprecated_status,
+      :logging_config,
+      :execution_role_arn,
+      :visibility,
+      :source_url,
+      :documentation_url,
+      :last_updated,
+      :time_created)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTypeRegistrationInput
+    #   data as a hash:
+    #
+    #       {
+    #         registration_token: "RegistrationToken", # required
+    #       }
+    #
+    # @!attribute [rw] registration_token
+    #   The identifier for this registration request.
+    #
+    #   This registration token is generated by CloudFormation when you
+    #   initiate a registration request using ` RegisterType `.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeTypeRegistrationInput AWS API Documentation
+    #
+    class DescribeTypeRegistrationInput < Struct.new(
+      :registration_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] progress_status
+    #   The current status of the type registration request.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the type registration request.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_arn
+    #   The Amazon Resource Name (ARN) of the type being registered.
+    #
+    #   For registration requests with a `ProgressStatus` of other than
+    #   `COMPLETE`, this will be `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_version_arn
+    #   The Amazon Resource Name (ARN) of this specific version of the type
+    #   being registered.
+    #
+    #   For registration requests with a `ProgressStatus` of other than
+    #   `COMPLETE`, this will be `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeTypeRegistrationOutput AWS API Documentation
+    #
+    class DescribeTypeRegistrationOutput < Struct.new(
+      :progress_status,
+      :description,
+      :type_arn,
+      :type_version_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DetectStackDriftInput
     #   data as a hash:
     #
@@ -2339,6 +2839,68 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DetectStackSetDriftInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetNameOrId", # required
+    #         operation_preferences: {
+    #           region_order: ["Region"],
+    #           failure_tolerance_count: 1,
+    #           failure_tolerance_percentage: 1,
+    #           max_concurrent_count: 1,
+    #           max_concurrent_percentage: 1,
+    #         },
+    #         operation_id: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name of the stack set on which to perform the drift detection
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_preferences
+    #   The user-specified preferences for how AWS CloudFormation performs a
+    #   stack set operation.
+    #
+    #   For more information on maximum concurrent accounts and failure
+    #   tolerance, see [Stack set operation options][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
+    #   @return [Types::StackSetOperationPreferences]
+    #
+    # @!attribute [rw] operation_id
+    #   *The ID of the stack set operation.*
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackSetDriftInput AWS API Documentation
+    #
+    class DetectStackSetDriftInput < Struct.new(
+      :stack_set_name,
+      :operation_preferences,
+      :operation_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_id
+    #   The ID of the drift detection stack set operation.
+    #
+    #   you can use this operation id with ` DescribeStackSetOperation ` to
+    #   monitor the progress of the drift detection operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackSetDriftOutput AWS API Documentation
+    #
+    class DetectStackSetDriftOutput < Struct.new(
+      :operation_id)
+      include Aws::Structure
+    end
+
     # The input for an EstimateTemplateCost action.
     #
     # @note When making an API call, you may pass EstimateTemplateCostInput
@@ -2367,7 +2929,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] template_url
@@ -2381,7 +2943,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -2515,7 +3077,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicyOutput AWS API Documentation
@@ -2585,7 +3147,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] stages_available
@@ -2627,7 +3189,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] template_url
@@ -2641,7 +3203,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] stack_name
@@ -2696,7 +3258,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
     #   @return [Array<String>]
     #
     # @!attribute [rw] capabilities_reason
@@ -2724,6 +3286,14 @@ module Aws::CloudFormation
     #   A list of the transforms that are declared in the template.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] resource_identifier_summaries
+    #   A list of resource identifier summaries that describe the target
+    #   resources of an import operation and the properties you can provide
+    #   during the import to identify the target resources. For example,
+    #   `BucketName` is a possible identifier property for an
+    #   `AWS::S3::Bucket` resource.
+    #   @return [Array<Types::ResourceIdentifierSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummaryOutput AWS API Documentation
     #
     class GetTemplateSummaryOutput < Struct.new(
@@ -2734,9 +3304,55 @@ module Aws::CloudFormation
       :resource_types,
       :version,
       :metadata,
-      :declared_transforms)
+      :declared_transforms,
+      :resource_identifier_summaries)
       include Aws::Structure
     end
+
+    # The template contains resources with capabilities that weren't
+    # specified in the Capabilities parameter.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/InsufficientCapabilitiesException AWS API Documentation
+    #
+    class InsufficientCapabilitiesException < Aws::EmptyStructure; end
+
+    # The specified change set can't be used to update the stack. For
+    # example, the change set status might be `CREATE_IN_PROGRESS`, or the
+    # stack status might be `UPDATE_IN_PROGRESS`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/InvalidChangeSetStatusException AWS API Documentation
+    #
+    class InvalidChangeSetStatusException < Aws::EmptyStructure; end
+
+    # The specified operation isn't valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/InvalidOperationException AWS API Documentation
+    #
+    class InvalidOperationException < Aws::EmptyStructure; end
+
+    # Error reserved for use by the [CloudFormation CLI][1]. CloudFormation
+    # does not return this error to users.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/InvalidStateTransitionException AWS API Documentation
+    #
+    class InvalidStateTransitionException < Aws::EmptyStructure; end
+
+    # The quota for the resource has already been reached.
+    #
+    # For information on resource and stack limitations, see [Limits][1] in
+    # the *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # The input for the ListChangeSets action.
     #
@@ -2907,7 +3523,7 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] stack_instance_region
-    #   The name of the region where you want to list stack instances.
+    #   The name of the Region where you want to list stack instances.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstancesInput AWS API Documentation
@@ -3046,7 +3662,7 @@ module Aws::CloudFormation
     # @!attribute [rw] summaries
     #   A list of `StackSetOperationResultSummary` structures that contain
     #   information about the specified operation results, for accounts and
-    #   regions that are included in the operation.
+    #   Regions that are included in the operation.
     #   @return [Array<Types::StackSetOperationResultSummary>]
     #
     # @!attribute [rw] next_token
@@ -3193,7 +3809,7 @@ module Aws::CloudFormation
     #
     #       {
     #         next_token: "NextToken",
-    #         stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS
+    #         stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS, IMPORT_IN_PROGRESS, IMPORT_COMPLETE, IMPORT_ROLLBACK_IN_PROGRESS, IMPORT_ROLLBACK_FAILED, IMPORT_ROLLBACK_COMPLETE
     #       }
     #
     # @!attribute [rw] next_token
@@ -3236,6 +3852,369 @@ module Aws::CloudFormation
       :next_token)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass ListTypeRegistrationsInput
+    #   data as a hash:
+    #
+    #       {
+    #         type: "RESOURCE", # accepts RESOURCE
+    #         type_name: "TypeName",
+    #         type_arn: "TypeArn",
+    #         registration_status_filter: "COMPLETE", # accepts COMPLETE, IN_PROGRESS, FAILED
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_arn
+    #   The Amazon Resource Name (ARN) of the type.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_status_filter
+    #   The current status of the type registration request.
+    #
+    #   The default is `IN_PROGRESS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request didn't return all of the
+    #   remaining results, the response object's `NextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   this action again and assign that token to the request object's
+    #   `NextToken` parameter. If there are no remaining results, the
+    #   previous response object's `NextToken` parameter is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeRegistrationsInput AWS API Documentation
+    #
+    class ListTypeRegistrationsInput < Struct.new(
+      :type,
+      :type_name,
+      :type_arn,
+      :registration_status_filter,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_token_list
+    #   A list of type registration tokens.
+    #
+    #   Use ` DescribeTypeRegistration ` to return detailed information
+    #   about a type registration request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all of the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call this action again and assign that token to the request
+    #   object's `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeRegistrationsOutput AWS API Documentation
+    #
+    class ListTypeRegistrationsOutput < Struct.new(
+      :registration_token_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTypeVersionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         type: "RESOURCE", # accepts RESOURCE
+    #         type_name: "TypeName",
+    #         arn: "PrivateTypeArn",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The kind of the type.
+    #
+    #   Currently the only valid value is `RESOURCE`.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type for which you want version summary information.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the type for which you want
+    #   version summary information.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request didn't return all of the
+    #   remaining results, the response object's `NextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   this action again and assign that token to the request object's
+    #   `NextToken` parameter. If there are no remaining results, the
+    #   previous response object's `NextToken` parameter is set to `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] deprecated_status
+    #   The deprecation status of the type versions that you want to get
+    #   summary information about.
+    #
+    #   Valid values include:
+    #
+    #   * `LIVE`\: The type version is registered and can be used in
+    #     CloudFormation operations, dependent on its provisioning behavior
+    #     and visibility scope.
+    #
+    #   * `DEPRECATED`\: The type version has been deregistered and can no
+    #     longer be used in CloudFormation operations.
+    #
+    #   The default is `LIVE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeVersionsInput AWS API Documentation
+    #
+    class ListTypeVersionsInput < Struct.new(
+      :type,
+      :type_name,
+      :arn,
+      :max_results,
+      :next_token,
+      :deprecated_status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] type_version_summaries
+    #   A list of `TypeVersionSummary` structures that contain information
+    #   about the specified type's versions.
+    #   @return [Array<Types::TypeVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all of the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call this action again and assign that token to the request
+    #   object's `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeVersionsOutput AWS API Documentation
+    #
+    class ListTypeVersionsOutput < Struct.new(
+      :type_version_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTypesInput
+    #   data as a hash:
+    #
+    #       {
+    #         visibility: "PUBLIC", # accepts PUBLIC, PRIVATE
+    #         provisioning_type: "NON_PROVISIONABLE", # accepts NON_PROVISIONABLE, IMMUTABLE, FULLY_MUTABLE
+    #         deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] visibility
+    #   The scope at which the type is visible and usable in CloudFormation
+    #   operations.
+    #
+    #   Valid values include:
+    #
+    #   * `PRIVATE`\: The type is only visible and usable within the account
+    #     in which it is registered. Currently, AWS CloudFormation marks any
+    #     types you create as `PRIVATE`.
+    #
+    #   * `PUBLIC`\: The type is publically visible and usable within any
+    #     Amazon account.
+    #
+    #   The default is `PRIVATE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_type
+    #   The provisioning behavior of the type. AWS CloudFormation determines
+    #   the provisioning type during registration, based on the types of
+    #   handlers in the schema handler package submitted.
+    #
+    #   Valid values include:
+    #
+    #   * `FULLY_MUTABLE`\: The type includes an update handler to process
+    #     updates to the type during stack update operations.
+    #
+    #   * `IMMUTABLE`\: The type does not include an update handler, so the
+    #     type cannot be updated and must instead be replaced during stack
+    #     update operations.
+    #
+    #   * `NON_PROVISIONABLE`\: The type does not include create, read, and
+    #     delete handlers, and therefore cannot actually be provisioned.
+    #   @return [String]
+    #
+    # @!attribute [rw] deprecated_status
+    #   The deprecation status of the types that you want to get summary
+    #   information about.
+    #
+    #   Valid values include:
+    #
+    #   * `LIVE`\: The type is registered for use in CloudFormation
+    #     operations.
+    #
+    #   * `DEPRECATED`\: The type has been deregistered and can no longer be
+    #     used in CloudFormation operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request didn't return all of the
+    #   remaining results, the response object's `NextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   this action again and assign that token to the request object's
+    #   `NextToken` parameter. If there are no remaining results, the
+    #   previous response object's `NextToken` parameter is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypesInput AWS API Documentation
+    #
+    class ListTypesInput < Struct.new(
+      :visibility,
+      :provisioning_type,
+      :deprecated_status,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] type_summaries
+    #   A list of `TypeSummary` structures that contain information about
+    #   the specified types.
+    #   @return [Array<Types::TypeSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all of the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call this action again and assign that token to the request
+    #   object's `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypesOutput AWS API Documentation
+    #
+    class ListTypesOutput < Struct.new(
+      :type_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Contains logging configuration information for a type.
+    #
+    # @note When making an API call, you may pass LoggingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         log_role_arn: "RoleArn", # required
+    #         log_group_name: "LogGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] log_role_arn
+    #   The ARN of the role that CloudFormation should assume when sending
+    #   log entries to CloudWatch logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name
+    #   The Amazon CloudWatch log group to which CloudFormation sends error
+    #   logging information when invoking the type's handlers.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/LoggingConfig AWS API Documentation
+    #
+    class LoggingConfig < Struct.new(
+      :log_role_arn,
+      :log_group_name)
+      include Aws::Structure
+    end
+
+    # The specified name is already in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/NameAlreadyExistsException AWS API Documentation
+    #
+    class NameAlreadyExistsException < Aws::EmptyStructure; end
+
+    # The specified operation ID already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationIdAlreadyExistsException AWS API Documentation
+    #
+    class OperationIdAlreadyExistsException < Aws::EmptyStructure; end
+
+    # Another operation is currently in progress for this stack set. Only
+    # one operation can be performed for a stack set at a given time.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationInProgressException AWS API Documentation
+    #
+    class OperationInProgressException < Aws::EmptyStructure; end
+
+    # The specified ID refers to an operation that doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationNotFoundException AWS API Documentation
+    #
+    class OperationNotFoundException < Aws::EmptyStructure; end
+
+    # Error reserved for use by the [CloudFormation CLI][1]. CloudFormation
+    # does not return this error to users.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationStatusCheckFailedException AWS API Documentation
+    #
+    class OperationStatusCheckFailedException < Aws::EmptyStructure; end
 
     # The Output data type.
     #
@@ -3300,7 +4279,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-ssm-parameter-types
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-ssm-parameter-types
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Parameter AWS API Documentation
@@ -3400,7 +4379,7 @@ module Aws::CloudFormation
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
     #
     # @!attribute [rw] property_path
     #   The fully-qualified path to the resource property.
@@ -3436,6 +4415,210 @@ module Aws::CloudFormation
       :expected_value,
       :actual_value,
       :difference_type)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RecordHandlerProgressInput
+    #   data as a hash:
+    #
+    #       {
+    #         bearer_token: "ClientToken", # required
+    #         operation_status: "PENDING", # required, accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
+    #         current_operation_status: "PENDING", # accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
+    #         status_message: "StatusMessage",
+    #         error_code: "NotUpdatable", # accepts NotUpdatable, InvalidRequest, AccessDenied, InvalidCredentials, AlreadyExists, NotFound, ResourceConflict, Throttling, ServiceLimitExceeded, NotStabilized, GeneralServiceException, ServiceInternalError, NetworkFailure, InternalFailure
+    #         resource_model: "ResourceModel",
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] bearer_token
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_status
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @!attribute [rw] current_operation_status
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_model
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Reserved for use by the [CloudFormation CLI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RecordHandlerProgressInput AWS API Documentation
+    #
+    class RecordHandlerProgressInput < Struct.new(
+      :bearer_token,
+      :operation_status,
+      :current_operation_status,
+      :status_message,
+      :error_code,
+      :resource_model,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RecordHandlerProgressOutput AWS API Documentation
+    #
+    class RecordHandlerProgressOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RegisterTypeInput
+    #   data as a hash:
+    #
+    #       {
+    #         type: "RESOURCE", # accepts RESOURCE
+    #         type_name: "TypeName", # required
+    #         schema_handler_package: "S3Url", # required
+    #         logging_config: {
+    #           log_role_arn: "RoleArn", # required
+    #           log_group_name: "LogGroupName", # required
+    #         },
+    #         execution_role_arn: "RoleArn",
+    #         client_request_token: "RequestToken",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #
+    #   Currently, the only valid value is `RESOURCE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type being registered.
+    #
+    #   We recommend that type names adhere to the following pattern:
+    #   *company\_or\_organization*\::*service*\::*type*.
+    #
+    #   <note markdown="1"> The following organization namespaces are reserved and cannot be
+    #   used in your resource type names:
+    #
+    #    * `Alexa`
+    #
+    #   * `AMZN`
+    #
+    #   * `Amazon`
+    #
+    #   * `AWS`
+    #
+    #   * `Custom`
+    #
+    #   * `Dev`
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_handler_package
+    #   A url to the S3 bucket containing the schema handler package that
+    #   contains the schema, event handlers, and associated files for the
+    #   type you want to register.
+    #
+    #   For information on generating a schema handler package for the type
+    #   you want to register, see [submit][1] in the *CloudFormation CLI
+    #   User Guide*.
+    #
+    #   <note markdown="1"> As part of registering a resource provider type, CloudFormation must
+    #   be able to access the S3 bucket which contains the schema handler
+    #   package for that resource provider. For more information, see [IAM
+    #   Permissions for Registering a Resource Provider][2] in the *AWS
+    #   CloudFormation User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-register-permissions
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_config
+    #   Specifies logging configuration information for a type.
+    #   @return [Types::LoggingConfig]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM execution role to use to
+    #   register the type. If your resource type calls AWS APIs in any of
+    #   its handlers, you must create an <i> <a
+    #   href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM
+    #   execution role</a> </i> that includes the necessary permissions to
+    #   call those AWS APIs, and provision that execution role in your
+    #   account. CloudFormation then assumes that execution role to provide
+    #   your resource type with the appropriate credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier that acts as an idempotency key for this
+    #   registration request. Specifying a client request token prevents
+    #   CloudFormation from generating more than one version of a type from
+    #   the same registeration request, even if the request is submitted
+    #   multiple times.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RegisterTypeInput AWS API Documentation
+    #
+    class RegisterTypeInput < Struct.new(
+      :type,
+      :type_name,
+      :schema_handler_package,
+      :logging_config,
+      :execution_role_arn,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_token
+    #   The identifier for this registration request.
+    #
+    #   Use this registration token when calling ` DescribeTypeRegistration
+    #   `, which returns information about the status and IDs of the type
+    #   registration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RegisterTypeOutput AWS API Documentation
+    #
+    class RegisterTypeOutput < Struct.new(
+      :registration_token)
       include Aws::Structure
     end
 
@@ -3584,6 +4767,36 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # Describes the target resources of a specific type in your import
+    # template (for example, all `AWS::S3::Bucket` resources) and the
+    # properties you can provide during the import to identify resources of
+    # that type.
+    #
+    # @!attribute [rw] resource_type
+    #   The template resource type of the target resources, such as
+    #   `AWS::S3::Bucket`.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_ids
+    #   The logical IDs of the target resources of the specified
+    #   `ResourceType`, as defined in the import template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_identifiers
+    #   The resource properties you can provide during the import to
+    #   identify your target resources. For example, `BucketName` is a
+    #   possible identifier property for `AWS::S3::Bucket` resources.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceIdentifierSummary AWS API Documentation
+    #
+    class ResourceIdentifierSummary < Struct.new(
+      :resource_type,
+      :logical_resource_ids,
+      :resource_identifiers)
+      include Aws::Structure
+    end
+
     # The field that AWS CloudFormation will change, such as the name of a
     # resource's property, and whether the resource will be recreated.
     #
@@ -3607,7 +4820,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceTargetDefinition AWS API Documentation
@@ -3616,6 +4829,44 @@ module Aws::CloudFormation
       :attribute,
       :name,
       :requires_recreation)
+      include Aws::Structure
+    end
+
+    # Describes the target resource of an import operation.
+    #
+    # @note When making an API call, you may pass ResourceToImport
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "ResourceType", # required
+    #         logical_resource_id: "LogicalResourceId", # required
+    #         resource_identifier: { # required
+    #           "ResourceIdentifierPropertyKey" => "ResourceIdentifierPropertyValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource to import into your stack, such as
+    #   `AWS::S3::Bucket`.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_id
+    #   The logical ID of the target resource as specified in the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   A key-value pair that identifies the target resource. The key is an
+    #   identifier property (for example, `BucketName` for `AWS::S3::Bucket`
+    #   resources) and the value is the actual property value (for example,
+    #   `MyS3Bucket`).
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceToImport AWS API Documentation
+    #
+    class ResourceToImport < Struct.new(
+      :resource_type,
+      :logical_resource_id,
+      :resource_identifier)
       include Aws::Structure
     end
 
@@ -3693,7 +4944,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CancelUpdateStack.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CancelUpdateStack.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration AWS API Documentation
@@ -3731,7 +4982,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger AWS API Documentation
@@ -3766,13 +5017,13 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
     #   @return [String]
     #
     # @!attribute [rw] stack_policy_url
     #   Location of a file containing the stack policy. The URL must point
     #   to a policy (maximum size: 16 KB) located in an S3 bucket in the
-    #   same region as the stack. You can specify either the
+    #   same Region as the stack. You can specify either the
     #   `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
     #   @return [String]
     #
@@ -3784,6 +5035,58 @@ module Aws::CloudFormation
       :stack_policy_url)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass SetTypeDefaultVersionInput
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "PrivateTypeArn",
+    #         type: "RESOURCE", # accepts RESOURCE
+    #         type_name: "TypeName",
+    #         version_id: "TypeVersionId",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the type for which you want
+    #   version summary information.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of a specific version of the type. The version ID is the
+    #   value at the end of the Amazon Resource Name (ARN) assigned to the
+    #   type version when it is registered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetTypeDefaultVersionInput AWS API Documentation
+    #
+    class SetTypeDefaultVersionInput < Struct.new(
+      :arn,
+      :type,
+      :type_name,
+      :version_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetTypeDefaultVersionOutput AWS API Documentation
+    #
+    class SetTypeDefaultVersionOutput < Aws::EmptyStructure; end
 
     # The input for the SignalResource action.
     #
@@ -3945,8 +5248,8 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] root_id
     #   For nested stacks--stacks created as resources for another
-    #   stack--the stack ID of the the top-level stack to which the nested
-    #   stack ultimately belongs.
+    #   stack--the stack ID of the top-level stack to which the nested stack
+    #   ultimately belongs.
     #
     #   For more information, see [Working with Nested Stacks][1] in the
     #   *AWS CloudFormation User Guide*.
@@ -4099,7 +5402,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
     # @!attribute [rw] timestamp
@@ -4153,9 +5456,9 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # An AWS CloudFormation stack, in a specific account and region, that's
+    # An AWS CloudFormation stack, in a specific account and Region, that's
     # part of a stack set operation. A stack instance is a reference to an
-    # attempted or actual stack in a given account within a given region. A
+    # attempted or actual stack in a given account within a given Region. A
     # stack instance can exist without a stack—for example, if the stack
     # couldn't be created for some reason. A stack instance is associated
     # with only one stack set. Each stack instance contains the ID of its
@@ -4168,13 +5471,13 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The name of the AWS region that the stack instance is associated
+    #   The name of the AWS Region that the stack instance is associated
     #   with.
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   The name of the AWS account that the stack instance is associated
-    #   with.
+    #   \[`Self-managed` permissions\] The name of the AWS account that the
+    #   stack instance is associated with.
     #   @return [String]
     #
     # @!attribute [rw] stack_id
@@ -4215,6 +5518,35 @@ module Aws::CloudFormation
     #   this stack instance.
     #   @return [String]
     #
+    # @!attribute [rw] organizational_unit_id
+    #   Reserved for internal use. No data returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] drift_status
+    #   Status of the stack instance's actual configuration compared to the
+    #   expected template and parameter configuration of the stack set to
+    #   which it belongs.
+    #
+    #   * `DRIFTED`\: The stack differs from the expected template and
+    #     parameter configuration of the stack set to which it belongs. A
+    #     stack instance is considered to have drifted if one or more of the
+    #     resources in the associated stack have drifted.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation has not checked if the stack
+    #     instance differs from its expected stack set configuration.
+    #
+    #   * `IN_SYNC`\: The stack instance's actual configuration matches its
+    #     expected stack set configuration.
+    #
+    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_drift_check_timestamp
+    #   Most recent time when CloudFormation performed a drift detection
+    #   operation on the stack instance. This value will be `NULL` for any
+    #   stack instance on which drift detection has not yet been performed.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstance AWS API Documentation
     #
     class StackInstance < Struct.new(
@@ -4224,9 +5556,18 @@ module Aws::CloudFormation
       :stack_id,
       :parameter_overrides,
       :status,
-      :status_reason)
+      :status_reason,
+      :organizational_unit_id,
+      :drift_status,
+      :last_drift_check_timestamp)
       include Aws::Structure
     end
+
+    # The specified stack instance doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstanceNotFoundException AWS API Documentation
+    #
+    class StackInstanceNotFoundException < Aws::EmptyStructure; end
 
     # The structure that contains summary information about a stack
     # instance.
@@ -4237,13 +5578,13 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The name of the AWS region that the stack instance is associated
+    #   The name of the AWS Region that the stack instance is associated
     #   with.
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   The name of the AWS account that the stack instance is associated
-    #   with.
+    #   \[`Self-managed` permissions\] The name of the AWS account that the
+    #   stack instance is associated with.
     #   @return [String]
     #
     # @!attribute [rw] stack_id
@@ -4279,6 +5620,35 @@ module Aws::CloudFormation
     #   instance.
     #   @return [String]
     #
+    # @!attribute [rw] organizational_unit_id
+    #   Reserved for internal use. No data returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] drift_status
+    #   Status of the stack instance's actual configuration compared to the
+    #   expected template and parameter configuration of the stack set to
+    #   which it belongs.
+    #
+    #   * `DRIFTED`\: The stack differs from the expected template and
+    #     parameter configuration of the stack set to which it belongs. A
+    #     stack instance is considered to have drifted if one or more of the
+    #     resources in the associated stack have drifted.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation has not checked if the stack
+    #     instance differs from its expected stack set configuration.
+    #
+    #   * `IN_SYNC`\: The stack instance's actual configuration matches its
+    #     expected stack set configuration.
+    #
+    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_drift_check_timestamp
+    #   Most recent time when CloudFormation performed a drift detection
+    #   operation on the stack instance. This value will be `NULL` for any
+    #   stack instance on which drift detection has not yet been performed.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstanceSummary AWS API Documentation
     #
     class StackInstanceSummary < Struct.new(
@@ -4287,7 +5657,10 @@ module Aws::CloudFormation
       :account,
       :stack_id,
       :status,
-      :status_reason)
+      :status_reason,
+      :organizational_unit_id,
+      :drift_status,
+      :last_drift_check_timestamp)
       include Aws::Structure
     end
 
@@ -4316,7 +5689,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
     # @!attribute [rw] timestamp
@@ -4388,7 +5761,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
     # @!attribute [rw] last_updated_timestamp
@@ -4414,7 +5787,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-metadata.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-metadata.html
     #   @return [String]
     #
     # @!attribute [rw] drift_information
@@ -4463,7 +5836,7 @@ module Aws::CloudFormation
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
     # [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
     #
     # @!attribute [rw] stack_id
@@ -4578,7 +5951,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
     #   @return [String]
     #
     # @!attribute [rw] last_check_timestamp
@@ -4624,8 +5997,8 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
-    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html
     #   @return [String]
     #
     # @!attribute [rw] last_check_timestamp
@@ -4658,7 +6031,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
     # @!attribute [rw] last_updated_timestamp
@@ -4699,7 +6072,7 @@ module Aws::CloudFormation
     end
 
     # A structure that contains information about a stack set. A stack set
-    # enables you to provision stacks into AWS accounts and across regions
+    # enables you to provision stacks into AWS accounts and across Regions
     # by using a single CloudFormation template. In the stack set, you
     # specify the template to use, as well as any parameters and
     # capabilities that the template requires.
@@ -4739,7 +6112,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -4774,6 +6147,44 @@ module Aws::CloudFormation
     #   users and groups can include in their stack sets.
     #   @return [String]
     #
+    # @!attribute [rw] stack_set_drift_detection_details
+    #   Detailed information about the drift status of the stack set.
+    #
+    #   For stack sets, contains information about the last *completed*
+    #   drift operation performed on the stack set. Information about drift
+    #   operations currently in progress is not included.
+    #   @return [Types::StackSetDriftDetectionDetails]
+    #
+    # @!attribute [rw] auto_deployment
+    #   \[`Service-managed` permissions\] Describes whether StackSets
+    #   automatically deploys to AWS Organizations accounts that are added
+    #   to a target organization or organizational unit (OU).
+    #   @return [Types::AutoDeployment]
+    #
+    # @!attribute [rw] permission_model
+    #   Describes how the IAM roles required for stack set operations are
+    #   created.
+    #
+    #   * With `self-managed` permissions, you must create the administrator
+    #     and execution roles required to deploy to target accounts. For
+    #     more information, see [Grant Self-Managed Stack Set
+    #     Permissions][1].
+    #
+    #   * With `service-managed` permissions, StackSets automatically
+    #     creates the IAM roles required to deploy to accounts managed by
+    #     AWS Organizations. For more information, see [Grant
+    #     Service-Managed Stack Set Permissions][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_ids
+    #   Reserved for internal use. No data returned.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSet AWS API Documentation
     #
     class StackSet < Struct.new(
@@ -4787,9 +6198,139 @@ module Aws::CloudFormation
       :tags,
       :stack_set_arn,
       :administration_role_arn,
-      :execution_role_name)
+      :execution_role_name,
+      :stack_set_drift_detection_details,
+      :auto_deployment,
+      :permission_model,
+      :organizational_unit_ids)
       include Aws::Structure
     end
+
+    # Detailed information about the drift status of the stack set.
+    #
+    # For stack sets, contains information about the last *completed* drift
+    # operation performed on the stack set. Information about drift
+    # operations in-progress is not included.
+    #
+    # For stack set operations, includes information about drift operations
+    # currently being performed on the stack set.
+    #
+    # For more information, see [Detecting Unmanaged Changes in Stack
+    # Sets][1] in the *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
+    #
+    # @!attribute [rw] drift_status
+    #   Status of the stack set's actual configuration compared to its
+    #   expected template and parameter configuration. A stack set is
+    #   considered to have drifted if one or more of its stack instances
+    #   have drifted from their expected template and parameter
+    #   configuration.
+    #
+    #   * `DRIFTED`\: One or more of the stack instances belonging to the
+    #     stack set stack differs from the expected template and parameter
+    #     configuration. A stack instance is considered to have drifted if
+    #     one or more of the resources in the associated stack have drifted.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation has not checked the stack set
+    #     for drift.
+    #
+    #   * `IN_SYNC`\: All of the stack instances belonging to the stack set
+    #     stack match from the expected template and parameter
+    #     configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] drift_detection_status
+    #   The status of the stack set drift detection operation.
+    #
+    #   * `COMPLETED`\: The drift detection operation completed without
+    #     failing on any stack instances.
+    #
+    #   * `FAILED`\: The drift detection operation exceeded the specified
+    #     failure tolerance.
+    #
+    #   * `PARTIAL_SUCCESS`\: The drift detection operation completed
+    #     without exceeding the failure tolerance for the operation.
+    #
+    #   * `IN_PROGRESS`\: The drift detection operation is currently being
+    #     performed.
+    #
+    #   * `STOPPED`\: The user has cancelled the drift detection operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_drift_check_timestamp
+    #   Most recent time when CloudFormation performed a drift detection
+    #   operation on the stack set. This value will be `NULL` for any stack
+    #   set on which drift detection has not yet been performed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] total_stack_instances_count
+    #   The total number of stack instances belonging to this stack set.
+    #
+    #   The total number of stack instances is equal to the total of:
+    #
+    #   * Stack instances that match the stack set configuration.
+    #
+    #   * Stack instances that have drifted from the stack set
+    #     configuration.
+    #
+    #   * Stack instances where the drift detection operation has failed.
+    #
+    #   * Stack instances currently being checked for drift.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] drifted_stack_instances_count
+    #   The number of stack instances that have drifted from the expected
+    #   template and parameter configuration of the stack set. A stack
+    #   instance is considered to have drifted if one or more of the
+    #   resources in the associated stack do not match their expected
+    #   configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] in_sync_stack_instances_count
+    #   The number of stack instances which match the expected template and
+    #   parameter configuration of the stack set.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] in_progress_stack_instances_count
+    #   The number of stack instances that are currently being checked for
+    #   drift.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_stack_instances_count
+    #   The number of stack instances for which the drift detection
+    #   operation failed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetDriftDetectionDetails AWS API Documentation
+    #
+    class StackSetDriftDetectionDetails < Struct.new(
+      :drift_status,
+      :drift_detection_status,
+      :last_drift_check_timestamp,
+      :total_stack_instances_count,
+      :drifted_stack_instances_count,
+      :in_sync_stack_instances_count,
+      :in_progress_stack_instances_count,
+      :failed_stack_instances_count)
+      include Aws::Structure
+    end
+
+    # You can't yet delete this stack set, because it still contains one or
+    # more stack instances. Delete all stack instances from the stack set
+    # before deleting the stack set.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetNotEmptyException AWS API Documentation
+    #
+    class StackSetNotEmptyException < Aws::EmptyStructure; end
+
+    # The specified stack set doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetNotFoundException AWS API Documentation
+    #
+    class StackSetNotFoundException < Aws::EmptyStructure; end
 
     # The structure that contains information about a stack set operation.
     #
@@ -4814,12 +6355,18 @@ module Aws::CloudFormation
     #
     #   * `FAILED`\: The operation exceeded the specified failure tolerance.
     #     The failure tolerance value that you've set for an operation is
-    #     applied for each region during stack create and update operations.
-    #     If the number of failed stacks within a region exceeds the failure
-    #     tolerance, the status of the operation in the region is set to
+    #     applied for each Region during stack create and update operations.
+    #     If the number of failed stacks within a Region exceeds the failure
+    #     tolerance, the status of the operation in the Region is set to
     #     `FAILED`. This in turn sets the status of the operation as a whole
     #     to `FAILED`, and AWS CloudFormation cancels the operation in any
-    #     remaining regions.
+    #     remaining Regions.
+    #
+    #   * `QUEUED`\: \[`Service-managed` permissions\] For automatic
+    #     deployments that require a sequence of operations, the operation
+    #     is queued to be performed. For more information, see the [stack
+    #     set operation status codes][1] in the AWS CloudFormation User
+    #     Guide.
     #
     #   * `RUNNING`\: The operation is currently being performed.
     #
@@ -4831,6 +6378,10 @@ module Aws::CloudFormation
     #   * `SUCCEEDED`\: The operation completed creating or updating all the
     #     specified stacks without exceeding the failure tolerance for the
     #     operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes
     #   @return [String]
     #
     # @!attribute [rw] operation_preferences
@@ -4872,16 +6423,37 @@ module Aws::CloudFormation
     #   creation times for the stack set operation might differ from the
     #   creation time of the individual stacks themselves. This is because
     #   AWS CloudFormation needs to perform preparatory work for the
-    #   operation, such as dispatching the work to the requested regions,
+    #   operation, such as dispatching the work to the requested Regions,
     #   before actually creating the first stacks.
     #   @return [Time]
     #
     # @!attribute [rw] end_timestamp
     #   The time at which the stack set operation ended, across all accounts
-    #   and regions specified. Note that this doesn't necessarily mean that
+    #   and Regions specified. Note that this doesn't necessarily mean that
     #   the stack set operation was successful, or even attempted, in each
-    #   account or region.
+    #   account or Region.
     #   @return [Time]
+    #
+    # @!attribute [rw] deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts
+    #   affected by the stack operation.
+    #   @return [Types::DeploymentTargets]
+    #
+    # @!attribute [rw] stack_set_drift_detection_details
+    #   Detailed information about the drift status of the stack set. This
+    #   includes information about drift operations currently being
+    #   performed on the stack set.
+    #
+    #   this information will only be present for stack set operations whose
+    #   `Action` type is `DETECT_DRIFT`.
+    #
+    #   For more information, see [Detecting Unmanaged Changes in Stack
+    #   Sets][1] in the AWS CloudFormation User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
+    #   @return [Types::StackSetDriftDetectionDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperation AWS API Documentation
     #
@@ -4895,7 +6467,9 @@ module Aws::CloudFormation
       :administration_role_arn,
       :execution_role_name,
       :creation_timestamp,
-      :end_timestamp)
+      :end_timestamp,
+      :deployment_targets,
+      :stack_set_drift_detection_details)
       include Aws::Structure
     end
 
@@ -4907,7 +6481,7 @@ module Aws::CloudFormation
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
     #
     # @note When making an API call, you may pass StackSetOperationPreferences
     #   data as a hash:
@@ -4921,26 +6495,26 @@ module Aws::CloudFormation
     #       }
     #
     # @!attribute [rw] region_order
-    #   The order of the regions in where you want to perform the stack
+    #   The order of the Regions in where you want to perform the stack
     #   operation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] failure_tolerance_count
-    #   The number of accounts, per region, for which this operation can
-    #   fail before AWS CloudFormation stops the operation in that region.
-    #   If the operation is stopped in a region, AWS CloudFormation doesn't
-    #   attempt the operation in any subsequent regions.
+    #   The number of accounts, per Region, for which this operation can
+    #   fail before AWS CloudFormation stops the operation in that Region.
+    #   If the operation is stopped in a Region, AWS CloudFormation doesn't
+    #   attempt the operation in any subsequent Regions.
     #
     #   Conditional: You must specify either `FailureToleranceCount` or
     #   `FailureTolerancePercentage` (but not both).
     #   @return [Integer]
     #
     # @!attribute [rw] failure_tolerance_percentage
-    #   The percentage of accounts, per region, for which this stack
+    #   The percentage of accounts, per Region, for which this stack
     #   operation can fail before AWS CloudFormation stops the operation in
-    #   that region. If the operation is stopped in a region, AWS
+    #   that Region. If the operation is stopped in a Region, AWS
     #   CloudFormation doesn't attempt the operation in any subsequent
-    #   regions.
+    #   Regions.
     #
     #   When calculating the number of accounts based on the specified
     #   percentage, AWS CloudFormation rounds *down* to the next whole
@@ -4995,39 +6569,40 @@ module Aws::CloudFormation
     end
 
     # The structure that contains information about a specified operation's
-    # results for a given account in a given region.
+    # results for a given account in a given Region.
     #
     # @!attribute [rw] account
-    #   The name of the AWS account for this operation result.
+    #   \[`Self-managed` permissions\] The name of the AWS account for this
+    #   operation result.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The name of the AWS region for this operation result.
+    #   The name of the AWS Region for this operation result.
     #   @return [String]
     #
     # @!attribute [rw] status
     #   The result status of the stack set operation for the given account
-    #   in the given region.
+    #   in the given Region.
     #
-    #   * `CANCELLED`\: The operation in the specified account and region
+    #   * `CANCELLED`\: The operation in the specified account and Region
     #     has been cancelled. This is either because a user has stopped the
     #     stack set operation, or because the failure tolerance of the stack
     #     set operation has been exceeded.
     #
-    #   * `FAILED`\: The operation in the specified account and region
+    #   * `FAILED`\: The operation in the specified account and Region
     #     failed.
     #
     #     If the stack set operation fails in enough accounts within a
-    #     region, the failure tolerance for the stack set operation as a
+    #     Region, the failure tolerance for the stack set operation as a
     #     whole might be exceeded.
     #
-    #   * `RUNNING`\: The operation in the specified account and region is
+    #   * `RUNNING`\: The operation in the specified account and Region is
     #     currently in progress.
     #
-    #   * `PENDING`\: The operation in the specified account and region has
+    #   * `PENDING`\: The operation in the specified account and Region has
     #     yet to start.
     #
-    #   * `SUCCEEDED`\: The operation in the specified account and region
+    #   * `SUCCEEDED`\: The operation in the specified account and Region
     #     completed successfully.
     #   @return [String]
     #
@@ -5041,6 +6616,10 @@ module Aws::CloudFormation
     #   account
     #   @return [Types::AccountGateResult]
     #
+    # @!attribute [rw] organizational_unit_id
+    #   Reserved for internal use. No data returned.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationResultSummary AWS API Documentation
     #
     class StackSetOperationResultSummary < Struct.new(
@@ -5048,7 +6627,8 @@ module Aws::CloudFormation
       :region,
       :status,
       :status_reason,
-      :account_gate_result)
+      :account_gate_result,
+      :organizational_unit_id)
       include Aws::Structure
     end
 
@@ -5072,12 +6652,18 @@ module Aws::CloudFormation
     #
     #   * `FAILED`\: The operation exceeded the specified failure tolerance.
     #     The failure tolerance value that you've set for an operation is
-    #     applied for each region during stack create and update operations.
-    #     If the number of failed stacks within a region exceeds the failure
-    #     tolerance, the status of the operation in the region is set to
+    #     applied for each Region during stack create and update operations.
+    #     If the number of failed stacks within a Region exceeds the failure
+    #     tolerance, the status of the operation in the Region is set to
     #     `FAILED`. This in turn sets the status of the operation as a whole
     #     to `FAILED`, and AWS CloudFormation cancels the operation in any
-    #     remaining regions.
+    #     remaining Regions.
+    #
+    #   * `QUEUED`\: \[`Service-managed` permissions\] For automatic
+    #     deployments that require a sequence of operations, the operation
+    #     is queued to be performed. For more information, see the [stack
+    #     set operation status codes][1] in the AWS CloudFormation User
+    #     Guide.
     #
     #   * `RUNNING`\: The operation is currently being performed.
     #
@@ -5089,6 +6675,10 @@ module Aws::CloudFormation
     #   * `SUCCEEDED`\: The operation completed creating or updating all the
     #     specified stacks without exceeding the failure tolerance for the
     #     operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
@@ -5096,15 +6686,15 @@ module Aws::CloudFormation
     #   creation times for the stack set operation might differ from the
     #   creation time of the individual stacks themselves. This is because
     #   AWS CloudFormation needs to perform preparatory work for the
-    #   operation, such as dispatching the work to the requested regions,
+    #   operation, such as dispatching the work to the requested Regions,
     #   before actually creating the first stacks.
     #   @return [Time]
     #
     # @!attribute [rw] end_timestamp
     #   The time at which the stack set operation ended, across all accounts
-    #   and regions specified. Note that this doesn't necessarily mean that
+    #   and Regions specified. Note that this doesn't necessarily mean that
     #   the stack set operation was successful, or even attempted, in each
-    #   account or region.
+    #   account or Region.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationSummary AWS API Documentation
@@ -5138,13 +6728,71 @@ module Aws::CloudFormation
     #   The status of the stack set.
     #   @return [String]
     #
+    # @!attribute [rw] auto_deployment
+    #   \[`Service-managed` permissions\] Describes whether StackSets
+    #   automatically deploys to AWS Organizations accounts that are added
+    #   to a target organizational unit (OU).
+    #   @return [Types::AutoDeployment]
+    #
+    # @!attribute [rw] permission_model
+    #   Describes how the IAM roles required for stack set operations are
+    #   created.
+    #
+    #   * With `self-managed` permissions, you must create the administrator
+    #     and execution roles required to deploy to target accounts. For
+    #     more information, see [Grant Self-Managed Stack Set
+    #     Permissions][1].
+    #
+    #   * With `service-managed` permissions, StackSets automatically
+    #     creates the IAM roles required to deploy to accounts managed by
+    #     AWS Organizations. For more information, see [Grant
+    #     Service-Managed Stack Set Permissions][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
+    #   @return [String]
+    #
+    # @!attribute [rw] drift_status
+    #   Status of the stack set's actual configuration compared to its
+    #   expected template and parameter configuration. A stack set is
+    #   considered to have drifted if one or more of its stack instances
+    #   have drifted from their expected template and parameter
+    #   configuration.
+    #
+    #   * `DRIFTED`\: One or more of the stack instances belonging to the
+    #     stack set stack differs from the expected template and parameter
+    #     configuration. A stack instance is considered to have drifted if
+    #     one or more of the resources in the associated stack have drifted.
+    #
+    #   * `NOT_CHECKED`\: AWS CloudFormation has not checked the stack set
+    #     for drift.
+    #
+    #   * `IN_SYNC`\: All of the stack instances belonging to the stack set
+    #     stack match from the expected template and parameter
+    #     configuration.
+    #
+    #   * `UNKNOWN`\: This value is reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_drift_check_timestamp
+    #   Most recent time when CloudFormation performed a drift detection
+    #   operation on the stack set. This value will be `NULL` for any stack
+    #   set on which drift detection has not yet been performed.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetSummary AWS API Documentation
     #
     class StackSetSummary < Struct.new(
       :stack_set_name,
       :stack_set_id,
       :description,
-      :status)
+      :status,
+      :auto_deployment,
+      :permission_model,
+      :drift_status,
+      :last_drift_check_timestamp)
       include Aws::Structure
     end
 
@@ -5199,8 +6847,8 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] root_id
     #   For nested stacks--stacks created as resources for another
-    #   stack--the stack ID of the the top-level stack to which the nested
-    #   stack ultimately belongs.
+    #   stack--the stack ID of the top-level stack to which the nested stack
+    #   ultimately belongs.
     #
     #   For more information, see [Working with Nested Stacks][1] in the
     #   *AWS CloudFormation User Guide*.
@@ -5238,6 +6886,13 @@ module Aws::CloudFormation
       :drift_information)
       include Aws::Structure
     end
+
+    # Another operation has been performed on this stack set since the
+    # specified operation was performed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StaleRequestException AWS API Documentation
+    #
+    class StaleRequestException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass StopStackSetOperationInput
     #   data as a hash:
@@ -5327,6 +6982,105 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # A client request token already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TokenAlreadyExistsException AWS API Documentation
+    #
+    class TokenAlreadyExistsException < Aws::EmptyStructure; end
+
+    # The specified type does not exist in the CloudFormation registry.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TypeNotFoundException AWS API Documentation
+    #
+    class TypeNotFoundException < Aws::EmptyStructure; end
+
+    # Contains summary information about the specified CloudFormation type.
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version_id
+    #   The ID of the default version of the type. The default version is
+    #   used when the type version is not specified.
+    #
+    #   To set the default version of a type, use ` SetTypeDefaultVersion `.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_arn
+    #   The Amazon Resource Name (ARN) of the type.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated
+    #   When the current default version of the type was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TypeSummary AWS API Documentation
+    #
+    class TypeSummary < Struct.new(
+      :type,
+      :type_name,
+      :default_version_id,
+      :type_arn,
+      :last_updated,
+      :description)
+      include Aws::Structure
+    end
+
+    # Contains summary information about a specific version of a
+    # CloudFormation type.
+    #
+    # @!attribute [rw] type
+    #   The kind of type.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of a specific version of the type. The version ID is the
+    #   value at the end of the Amazon Resource Name (ARN) assigned to the
+    #   type version when it is registered.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default_version
+    #   Whether the specified type version is set as the default version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the type version.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_created
+    #   When the version was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the type version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TypeVersionSummary AWS API Documentation
+    #
+    class TypeVersionSummary < Struct.new(
+      :type,
+      :type_name,
+      :version_id,
+      :is_default_version,
+      :arn,
+      :time_created,
+      :description)
+      include Aws::Structure
+    end
+
     # The input for an UpdateStack action.
     #
     # @note When making an API call, you may pass UpdateStackInput
@@ -5386,7 +7140,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] template_url
@@ -5401,7 +7155,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] use_previous_template
@@ -5427,7 +7181,7 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_policy_during_update_url
     #   Location of a file containing the temporary overriding stack policy.
     #   The URL must point to a policy (max size: 16KB) located in an S3
-    #   bucket in the same region as the stack. You can specify either the
+    #   bucket in the same Region as the stack. You can specify either the
     #   `StackPolicyDuringUpdateBody` or the `StackPolicyDuringUpdateURL`
     #   parameter, but not both.
     #
@@ -5443,11 +7197,11 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] capabilities
-    #   In some cases, you must explicity acknowledge that your stack
+    #   In some cases, you must explicitly acknowledge that your stack
     #   template contains certain capabilities in order for AWS
     #   CloudFormation to update the stack.
     #
@@ -5524,13 +7278,13 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
-    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
-    #   [3]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
-    #   [5]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [6]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
-    #   [7]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
     #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
     #   [9]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
     #   [10]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
@@ -5552,7 +7306,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_arn
@@ -5591,7 +7345,7 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_policy_url
     #   Location of a file containing the updated stack policy. The URL must
     #   point to a policy (max size: 16KB) located in an S3 bucket in the
-    #   same region as the stack. You can specify either the
+    #   same Region as the stack. You can specify either the
     #   `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
     #
     #   You might update the stack policy, for example, in order to protect
@@ -5665,7 +7419,11 @@ module Aws::CloudFormation
     #
     #       {
     #         stack_set_name: "StackSetNameOrId", # required
-    #         accounts: ["Account"], # required
+    #         accounts: ["Account"],
+    #         deployment_targets: {
+    #           accounts: ["Account"],
+    #           organizational_unit_ids: ["OrganizationalUnitId"],
+    #         },
     #         regions: ["Region"], # required
     #         parameter_overrides: [
     #           {
@@ -5691,17 +7449,30 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   The names of one or more AWS accounts for which you want to update
-    #   parameter values for stack instances. The overridden parameter
-    #   values will be applied to all stack instances in the specified
-    #   accounts and regions.
+    #   \[`Self-managed` permissions\] The names of one or more AWS accounts
+    #   for which you want to update parameter values for stack instances.
+    #   The overridden parameter values will be applied to all stack
+    #   instances in the specified accounts and Regions.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts for
+    #   which you want to update parameter values for stack instances. If
+    #   your update targets OUs, the overridden parameter values only apply
+    #   to the accounts that are currently in the target OUs and their child
+    #   OUs. Accounts added to the target OUs and their child OUs in the
+    #   future won't use the overridden values.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
+    #   @return [Types::DeploymentTargets]
+    #
     # @!attribute [rw] regions
-    #   The names of one or more regions in which you want to update
+    #   The names of one or more Regions in which you want to update
     #   parameter values for stack instances. The overridden parameter
     #   values will be applied to all stack instances in the specified
-    #   accounts and regions.
+    #   accounts and Regions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] parameter_overrides
@@ -5709,7 +7480,7 @@ module Aws::CloudFormation
     #   specified stack instances.
     #
     #   Any overridden parameter values will be applied to all stack
-    #   instances in the specified accounts and regions. When specifying
+    #   instances in the specified accounts and Regions. When specifying
     #   parameters and their values, be aware of how AWS CloudFormation sets
     #   parameter values during stack instance update operations:
     #
@@ -5747,7 +7518,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] operation_preferences
@@ -5776,6 +7547,7 @@ module Aws::CloudFormation
     class UpdateStackInstancesInput < Struct.new(
       :stack_set_name,
       :accounts,
+      :deployment_targets,
       :regions,
       :parameter_overrides,
       :operation_preferences,
@@ -5840,6 +7612,15 @@ module Aws::CloudFormation
     #         },
     #         administration_role_arn: "RoleARN",
     #         execution_role_name: "ExecutionRoleName",
+    #         deployment_targets: {
+    #           accounts: ["Account"],
+    #           organizational_unit_ids: ["OrganizationalUnitId"],
+    #         },
+    #         permission_model: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SELF_MANAGED
+    #         auto_deployment: {
+    #           enabled: false,
+    #           retain_stacks_on_account_removal: false,
+    #         },
     #         operation_id: "ClientRequestToken",
     #         accounts: ["Account"],
     #         regions: ["Region"],
@@ -5865,7 +7646,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] template_url
@@ -5880,7 +7661,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] use_previous_template
@@ -5897,7 +7678,7 @@ module Aws::CloudFormation
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] capabilities
-    #   In some cases, you must explicity acknowledge that your stack
+    #   In some cases, you must explicitly acknowledge that your stack
     #   template contains certain capabilities in order for AWS
     #   CloudFormation to update the stack set and its associated stack
     #   instances.
@@ -5959,13 +7740,13 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
-    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
-    #   [3]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
-    #   [5]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [6]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
-    #   [7]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
     #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
     #   [9]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
     #   [10]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
@@ -6019,14 +7800,13 @@ module Aws::CloudFormation
     #   Specify an IAM role only if you are using customized administrator
     #   roles to control which users or groups can manage specific stack
     #   sets within the same administrator account. For more information,
-    #   see [Define Permissions for Multiple Administrators][1] in the *AWS
+    #   see [Granting Permissions for Stack Set Operations][1] in the *AWS
     #   CloudFormation User Guide*.
     #
-    #   If you specify a customized administrator role, AWS CloudFormation
-    #   uses that role to update the stack. If you do not specify a
-    #   customized administrator role, AWS CloudFormation performs the
-    #   update using the role previously associated with the stack set, so
-    #   long as you have permissions to perform operations on the stack set.
+    #   If you specified a customized administrator role when you created
+    #   the stack set, you must specify a customized administrator role,
+    #   even if it is the same customized administrator role used with this
+    #   stack set previously.
     #
     #
     #
@@ -6050,6 +7830,54 @@ module Aws::CloudFormation
     #   permissions to perform operations on the stack set.
     #   @return [String]
     #
+    # @!attribute [rw] deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts in
+    #   which to update associated stack instances.
+    #
+    #   To update all the stack instances associated with this stack set, do
+    #   not specify `DeploymentTargets` or `Regions`.
+    #
+    #   If the stack set update includes changes to the template (that is,
+    #   if `TemplateBody` or `TemplateURL` is specified), or the
+    #   `Parameters`, AWS CloudFormation marks all stack instances with a
+    #   status of `OUTDATED` prior to updating the stack instances in the
+    #   specified accounts and Regions. If the stack set update does not
+    #   include changes to the template or parameters, AWS CloudFormation
+    #   updates the stack instances in the specified accounts and Regions,
+    #   while leaving all other stack instances with their existing stack
+    #   instance status.
+    #   @return [Types::DeploymentTargets]
+    #
+    # @!attribute [rw] permission_model
+    #   Describes how the IAM roles required for stack set operations are
+    #   created. You cannot modify `PermissionModel` if there are stack
+    #   instances associated with your stack set.
+    #
+    #   * With `self-managed` permissions, you must create the administrator
+    #     and execution roles required to deploy to target accounts. For
+    #     more information, see [Grant Self-Managed Stack Set
+    #     Permissions][1].
+    #
+    #   * With `service-managed` permissions, StackSets automatically
+    #     creates the IAM roles required to deploy to accounts managed by
+    #     AWS Organizations. For more information, see [Grant
+    #     Service-Managed Stack Set Permissions][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_deployment
+    #   \[`Service-managed` permissions\] Describes whether StackSets
+    #   automatically deploys to AWS Organizations accounts that are added
+    #   to a target organization or organizational unit (OU).
+    #
+    #   If you specify `AutoDeployment`, do not specify `DeploymentTargets`
+    #   or `Regions`.
+    #   @return [Types::AutoDeployment]
+    #
     # @!attribute [rw] operation_id
     #   The unique ID for this stack set operation.
     #
@@ -6070,9 +7898,9 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   The accounts in which to update associated stack instances. If you
-    #   specify accounts, you must also specify the regions in which to
-    #   update stack set instances.
+    #   \[`Self-managed` permissions\] The accounts in which to update
+    #   associated stack instances. If you specify accounts, you must also
+    #   specify the Regions in which to update stack set instances.
     #
     #   To update *all* the stack instances associated with this stack set,
     #   do not specify the `Accounts` or `Regions` properties.
@@ -6081,16 +7909,16 @@ module Aws::CloudFormation
     #   if the `TemplateBody` or `TemplateURL` properties are specified), or
     #   the `Parameters` property, AWS CloudFormation marks all stack
     #   instances with a status of `OUTDATED` prior to updating the stack
-    #   instances in the specified accounts and regions. If the stack set
+    #   instances in the specified accounts and Regions. If the stack set
     #   update does not include changes to the template or parameters, AWS
     #   CloudFormation updates the stack instances in the specified accounts
-    #   and regions, while leaving all other stack instances with their
+    #   and Regions, while leaving all other stack instances with their
     #   existing stack instance status.
     #   @return [Array<String>]
     #
     # @!attribute [rw] regions
-    #   The regions in which to update associated stack instances. If you
-    #   specify regions, you must also specify accounts in which to update
+    #   The Regions in which to update associated stack instances. If you
+    #   specify Regions, you must also specify accounts in which to update
     #   stack set instances.
     #
     #   To update *all* the stack instances associated with this stack set,
@@ -6100,10 +7928,10 @@ module Aws::CloudFormation
     #   if the `TemplateBody` or `TemplateURL` properties are specified), or
     #   the `Parameters` property, AWS CloudFormation marks all stack
     #   instances with a status of `OUTDATED` prior to updating the stack
-    #   instances in the specified accounts and regions. If the stack set
+    #   instances in the specified accounts and Regions. If the stack set
     #   update does not include changes to the template or parameters, AWS
     #   CloudFormation updates the stack instances in the specified accounts
-    #   and regions, while leaving all other stack instances with their
+    #   and Regions, while leaving all other stack instances with their
     #   existing stack instance status.
     #   @return [Array<String>]
     #
@@ -6121,6 +7949,9 @@ module Aws::CloudFormation
       :operation_preferences,
       :administration_role_arn,
       :execution_role_name,
+      :deployment_targets,
+      :permission_model,
+      :auto_deployment,
       :operation_id,
       :accounts,
       :regions)
@@ -6194,7 +8025,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @!attribute [rw] template_url
@@ -6208,7 +8039,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ValidateTemplateInput AWS API Documentation
@@ -6241,7 +8072,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
     #   @return [Array<String>]
     #
     # @!attribute [rw] capabilities_reason

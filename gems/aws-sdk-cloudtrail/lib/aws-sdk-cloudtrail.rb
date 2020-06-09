@@ -24,17 +24,20 @@ require_relative 'aws-sdk-cloudtrail/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     cloud_trail = Aws::CloudTrail::Client.new
+#     resp = cloud_trail.add_tags(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS CloudTrail all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS CloudTrail are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CloudTrail::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS CloudTrail API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-cloudtrail/customizations'
 # @service
 module Aws::CloudTrail
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.23.0'
 
 end

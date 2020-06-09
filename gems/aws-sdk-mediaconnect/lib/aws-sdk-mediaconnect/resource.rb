@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MediaConnect
+
   class Resource
 
     # @param options ({})

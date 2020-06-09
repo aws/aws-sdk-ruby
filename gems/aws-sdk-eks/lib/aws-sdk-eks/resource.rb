@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EKS
+
   class Resource
 
     # @param options ({})

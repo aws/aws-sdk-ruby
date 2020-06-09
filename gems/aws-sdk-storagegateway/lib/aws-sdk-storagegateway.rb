@@ -24,17 +24,20 @@ require_relative 'aws-sdk-storagegateway/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     storage_gateway = Aws::StorageGateway::Client.new
+#     resp = storage_gateway.activate_gateway(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Storage Gateway all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Storage Gateway are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::StorageGateway::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Storage Gateway API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-storagegateway/customizations'
 # @service
 module Aws::StorageGateway
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.41.0'
 
 end

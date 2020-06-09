@@ -104,7 +104,7 @@ module Aws::Glacier
     Size = Shapes::IntegerShape.new(name: 'Size')
     StatusCode = Shapes::StringShape.new(name: 'StatusCode')
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
-    Stream = Shapes::BlobShape.new(name: 'Stream')
+    Stream = Shapes::BlobShape.new(name: 'Stream', streaming: true)
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -349,6 +349,16 @@ module Aws::Glacier
     InputSerialization.add_member(:csv, Shapes::ShapeRef.new(shape: CSVInput, location_name: "csv"))
     InputSerialization.struct_class = Types::InputSerialization
 
+    InsufficientCapacityException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "type"))
+    InsufficientCapacityException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    InsufficientCapacityException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InsufficientCapacityException.struct_class = Types::InsufficientCapacityException
+
+    InvalidParameterValueException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "type"))
+    InvalidParameterValueException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
     InventoryRetrievalJobDescription.add_member(:format, Shapes::ShapeRef.new(shape: string, location_name: "Format"))
     InventoryRetrievalJobDescription.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartDate"))
     InventoryRetrievalJobDescription.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndDate"))
@@ -375,6 +385,11 @@ module Aws::Glacier
     JobParameters.add_member(:select_parameters, Shapes::ShapeRef.new(shape: SelectParameters, location_name: "SelectParameters"))
     JobParameters.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "OutputLocation"))
     JobParameters.struct_class = Types::JobParameters
+
+    LimitExceededException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "type"))
+    LimitExceededException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListJobsInput.add_member(:account_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "accountId"))
     ListJobsInput.add_member(:vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "vaultName"))
@@ -436,6 +451,11 @@ module Aws::Glacier
     ListVaultsOutput.add_member(:marker, Shapes::ShapeRef.new(shape: string, location_name: "Marker"))
     ListVaultsOutput.struct_class = Types::ListVaultsOutput
 
+    MissingParameterValueException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "type"))
+    MissingParameterValueException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    MissingParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    MissingParameterValueException.struct_class = Types::MissingParameterValueException
+
     NotificationEventList.member = Shapes::ShapeRef.new(shape: string)
 
     OutputLocation.add_member(:s3, Shapes::ShapeRef.new(shape: S3Location, location_name: "S3"))
@@ -449,6 +469,11 @@ module Aws::Glacier
     PartListElement.add_member(:range_in_bytes, Shapes::ShapeRef.new(shape: string, location_name: "RangeInBytes"))
     PartListElement.add_member(:sha256_tree_hash, Shapes::ShapeRef.new(shape: string, location_name: "SHA256TreeHash"))
     PartListElement.struct_class = Types::PartListElement
+
+    PolicyEnforcedException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "type"))
+    PolicyEnforcedException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    PolicyEnforcedException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    PolicyEnforcedException.struct_class = Types::PolicyEnforcedException
 
     ProvisionedCapacityDescription.add_member(:capacity_id, Shapes::ShapeRef.new(shape: string, location_name: "CapacityId"))
     ProvisionedCapacityDescription.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartDate"))
@@ -468,6 +493,16 @@ module Aws::Glacier
     RemoveTagsFromVaultInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys"))
     RemoveTagsFromVaultInput.struct_class = Types::RemoveTagsFromVaultInput
 
+    RequestTimeoutException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "type"))
+    RequestTimeoutException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    RequestTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    RequestTimeoutException.struct_class = Types::RequestTimeoutException
+
+    ResourceNotFoundException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "type"))
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     S3Location.add_member(:bucket_name, Shapes::ShapeRef.new(shape: string, location_name: "BucketName"))
     S3Location.add_member(:prefix, Shapes::ShapeRef.new(shape: string, location_name: "Prefix"))
     S3Location.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
@@ -483,6 +518,11 @@ module Aws::Glacier
     SelectParameters.add_member(:expression, Shapes::ShapeRef.new(shape: string, location_name: "Expression"))
     SelectParameters.add_member(:output_serialization, Shapes::ShapeRef.new(shape: OutputSerialization, location_name: "OutputSerialization"))
     SelectParameters.struct_class = Types::SelectParameters
+
+    ServiceUnavailableException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "type"))
+    ServiceUnavailableException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     SetDataRetrievalPolicyInput.add_member(:account_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "accountId"))
     SetDataRetrievalPolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: DataRetrievalPolicy, location_name: "Policy"))

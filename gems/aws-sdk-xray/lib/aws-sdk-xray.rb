@@ -24,17 +24,20 @@ require_relative 'aws-sdk-xray/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     x_ray = Aws::XRay::Client.new
+#     resp = x_ray.batch_get_traces(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS X-Ray all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS X-Ray are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::XRay::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS X-Ray API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-xray/customizations'
 # @service
 module Aws::XRay
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.26.0'
 
 end

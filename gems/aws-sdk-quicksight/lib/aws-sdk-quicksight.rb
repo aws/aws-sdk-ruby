@@ -24,17 +24,20 @@ require_relative 'aws-sdk-quicksight/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     quick_sight = Aws::QuickSight::Client.new
+#     resp = quick_sight.cancel_ingestion(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon QuickSight all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon QuickSight are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::QuickSight::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon QuickSight API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-quicksight/customizations'
 # @service
 module Aws::QuickSight
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.21.0'
 
 end

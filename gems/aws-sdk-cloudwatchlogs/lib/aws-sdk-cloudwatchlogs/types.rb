@@ -22,12 +22,14 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
-    #   data. For more information, see [Amazon Resource Names - AWS Key
-    #   Management Service (AWS KMS)][1].
+    #   data. This must be a symmetric CMK. For more information, see
+    #   [Amazon Resource Names - AWS Key Management Service (AWS KMS)][1]
+    #   and [Using Symmetric and Asymmetric Keys][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKeyRequest AWS API Documentation
@@ -150,7 +152,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -187,6 +189,18 @@ module Aws::CloudWatchLogs
     class CreateLogStreamRequest < Struct.new(
       :log_group_name,
       :log_stream_name)
+      include Aws::Structure
+    end
+
+    # The event was already logged.
+    #
+    # @!attribute [rw] expected_sequence_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DataAlreadyAcceptedException AWS API Documentation
+    #
+    class DataAlreadyAcceptedException < Struct.new(
+      :expected_sequence_token)
       include Aws::Structure
     end
 
@@ -271,6 +285,33 @@ module Aws::CloudWatchLogs
     class DeleteMetricFilterRequest < Struct.new(
       :log_group_name,
       :filter_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteQueryDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         query_definition_id: "QueryId", # required
+    #       }
+    #
+    # @!attribute [rw] query_definition_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteQueryDefinitionRequest AWS API Documentation
+    #
+    class DeleteQueryDefinitionRequest < Struct.new(
+      :query_definition_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] success
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteQueryDefinitionResponse AWS API Documentation
+    #
+    class DeleteQueryDefinitionResponse < Struct.new(
+      :success)
       include Aws::Structure
     end
 
@@ -701,6 +742,51 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeQueryDefinitionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         query_definition_name_prefix: "QueryDefinitionName",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] query_definition_name_prefix
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueryDefinitionsRequest AWS API Documentation
+    #
+    class DescribeQueryDefinitionsRequest < Struct.new(
+      :query_definition_name_prefix,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_definitions
+    #   @return [Array<Types::QueryDefinition>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueryDefinitionsResponse AWS API Documentation
+    #
+    class DescribeQueryDefinitionsResponse < Struct.new(
+      :query_definitions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeResourcePoliciesRequest
     #   data as a hash:
     #
@@ -1014,7 +1100,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1034,6 +1120,11 @@ module Aws::CloudWatchLogs
     #   all the matched log events in the first log stream are searched
     #   first, then those in the next log stream, and so on. The default is
     #   false.
+    #
+    #   **IMPORTANT:** Starting on June 17, 2019, this parameter will be
+    #   ignored and the value will be assumed to be true. The response from
+    #   this operation will always interleave events from multiple log
+    #   streams within a log group.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilterLogEventsRequest AWS API Documentation
@@ -1146,6 +1237,9 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
+    #
+    #   Using this token works only when you specify `true` for
+    #   `startFromHead`.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1158,6 +1252,9 @@ module Aws::CloudWatchLogs
     #   If the value is true, the earliest log events are returned first. If
     #   the value is false, the latest log events are returned first. The
     #   default value is false.
+    #
+    #   If you are using `nextToken` in this operation, you must specify
+    #   `true` for `startFromHead`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEventsRequest AWS API Documentation
@@ -1309,8 +1406,12 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] status
     #   The status of the most recent running of the query. Possible values
-    #   are `Cancelled`, `Complete`, `Failed`, `Running`, `Scheduled`, and
-    #   `Unknown`.
+    #   are `Cancelled`, `Complete`, `Failed`, `Running`, `Scheduled`,
+    #   `Timeout`, and `Unknown`.
+    #
+    #   Queries time out after 15 minutes of execution. To avoid having your
+    #   queries time out, reduce the time range being searched, or partition
+    #   your query into a number of queries.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResultsResponse AWS API Documentation
@@ -1349,6 +1450,38 @@ module Aws::CloudWatchLogs
       :message)
       include Aws::Structure
     end
+
+    # The operation is not valid on the specified resource.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InvalidOperationException AWS API Documentation
+    #
+    class InvalidOperationException < Aws::EmptyStructure; end
+
+    # A parameter is specified incorrectly.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Aws::EmptyStructure; end
+
+    # The sequence token is not valid. You can get the correct sequence
+    # token in the `expectedSequenceToken` field in the
+    # `InvalidSequenceTokenException` message.
+    #
+    # @!attribute [rw] expected_sequence_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InvalidSequenceTokenException AWS API Documentation
+    #
+    class InvalidSequenceTokenException < Struct.new(
+      :expected_sequence_token)
+      include Aws::Structure
+    end
+
+    # You have reached the maximum number of resources that can be created.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListTagsLogGroupRequest
     #   data as a hash:
@@ -1487,6 +1620,11 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] stored_bytes
     #   The number of bytes stored.
+    #
+    #   **IMPORTANT:**On June 17, 2019, this parameter was deprecated for
+    #   log streams, and is always reported as zero. This change applies
+    #   only to log streams. The `storedBytes` parameter for log groups is
+    #   not affected.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogStream AWS API Documentation
@@ -1500,6 +1638,29 @@ module Aws::CloudWatchLogs
       :upload_sequence_token,
       :arn,
       :stored_bytes)
+      include Aws::Structure
+    end
+
+    # The query string is not valid. Details about this error are displayed
+    # in a `QueryCompileError` object. For more information, see
+    # [QueryCompileError][1]"/&gt;.
+    #
+    # For more information about valid query syntax, see [CloudWatch Logs
+    # Insights Query Syntax][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_QueryCompileError.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #
+    # @!attribute [rw] query_compile_error
+    #   Reserved.
+    #   @return [Types::QueryCompileError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MalformedQueryException AWS API Documentation
+    #
+    class MalformedQueryException < Struct.new(
+      :query_compile_error)
       include Aws::Structure
     end
 
@@ -1565,7 +1726,7 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # Indicates how to transform ingested log eventsto metric data in a
+    # Indicates how to transform ingested log events to metric data in a
     # CloudWatch metric.
     #
     # @note When making an API call, you may pass MetricTransformation
@@ -1583,7 +1744,13 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] metric_namespace
-    #   The namespace of the CloudWatch metric.
+    #   A custom namespace to contain your metric in CloudWatch. Use
+    #   namespaces to group together metrics that are similar. For more
+    #   information, see [Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace
     #   @return [String]
     #
     # @!attribute [rw] metric_value
@@ -1605,6 +1772,12 @@ module Aws::CloudWatchLogs
       :default_value)
       include Aws::Structure
     end
+
+    # Multiple requests to update the same resource were in conflict.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/OperationAbortedException AWS API Documentation
+    #
+    class OperationAbortedException < Aws::EmptyStructure; end
 
     # Represents a log event.
     #
@@ -1731,9 +1904,14 @@ module Aws::CloudWatchLogs
     #   The sequence token obtained from the response of the previous
     #   `PutLogEvents` call. An upload in a newly created log stream does
     #   not require a sequence token. You can also get the sequence token
-    #   using DescribeLogStreams. If you call `PutLogEvents` twice within a
-    #   narrow time period using the same value for `sequenceToken`, both
-    #   calls may be successful, or one may be rejected.
+    #   using [DescribeLogStreams][1]. If you call `PutLogEvents` twice
+    #   within a narrow time period using the same value for
+    #   `sequenceToken`, both calls may be successful, or one may be
+    #   rejected.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogStreams.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEventsRequest AWS API Documentation
@@ -1807,6 +1985,48 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutQueryDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "QueryDefinitionName", # required
+    #         query_definition_id: "QueryId",
+    #         log_group_names: ["LogGroupName"],
+    #         query_string: "QueryDefinitionString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] query_definition_id
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_names
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] query_string
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutQueryDefinitionRequest AWS API Documentation
+    #
+    class PutQueryDefinitionRequest < Struct.new(
+      :name,
+      :query_definition_id,
+      :log_group_names,
+      :query_string)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_definition_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutQueryDefinitionResponse AWS API Documentation
+    #
+    class PutQueryDefinitionResponse < Struct.new(
+      :query_definition_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutResourcePolicyRequest
     #   data as a hash:
     #
@@ -1822,7 +2042,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] policy_document
     #   Details of the new policy, including the identity of the principal
     #   that is enabled to put logs to this account. This is formatted as a
-    #   JSON string.
+    #   JSON string. This parameter is required.
     #
     #   The following example creates a resource policy enabling the Route
     #   53 service to put DNS query logs in to the specified log group.
@@ -1901,7 +2121,11 @@ module Aws::CloudWatchLogs
     #   filter, you must specify the correct name in `filterName`.
     #   Otherwise, the call fails because you cannot associate a second
     #   filter with a log group. To find the name of the filter currently
-    #   associated with a log group, use DescribeSubscriptionFilters.
+    #   associated with a log group, use [DescribeSubscriptionFilters][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeSubscriptionFilters.html
     #   @return [String]
     #
     # @!attribute [rw] filter_pattern
@@ -1984,6 +2208,32 @@ module Aws::CloudWatchLogs
     class QueryCompileErrorLocation < Struct.new(
       :start_char_offset,
       :end_char_offset)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_definition_id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Integer]
+    #
+    # @!attribute [rw] log_group_names
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryDefinition AWS API Documentation
+    #
+    class QueryDefinition < Struct.new(
+      :query_definition_id,
+      :name,
+      :query_string,
+      :last_modified,
+      :log_group_names)
       include Aws::Structure
     end
 
@@ -2071,6 +2321,18 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # The specified resource already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Aws::EmptyStructure; end
+
+    # The specified resource does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
     # A policy enabling one or more entities to put logs to a log group in
     # this account.
     #
@@ -2098,6 +2360,13 @@ module Aws::CloudWatchLogs
 
     # Contains one field from one log event returned by a CloudWatch Logs
     # Insights query, along with the value of that field.
+    #
+    # For more information about the fields that are generated by CloudWatch
+    # logs, see [Supported Logs and Discovered Fields][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html
     #
     # @!attribute [rw] field
     #   The log event field.
@@ -2133,11 +2402,18 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # The service cannot complete the request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass StartQueryRequest
     #   data as a hash:
     #
     #       {
-    #         log_group_name: "LogGroupName", # required
+    #         log_group_name: "LogGroupName",
+    #         log_group_names: ["LogGroupName"],
     #         start_time: 1, # required
     #         end_time: 1, # required
     #         query_string: "QueryString", # required
@@ -2146,17 +2422,30 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] log_group_name
     #   The log group on which to perform the query.
+    #
+    #   A `StartQuery` operation must include a `logGroupNames` or a
+    #   `logGroupName` parameter, but not both.
     #   @return [String]
     #
+    # @!attribute [rw] log_group_names
+    #   The list of log groups to be queried. You can include up to 20 log
+    #   groups.
+    #
+    #   A `StartQuery` operation must include a `logGroupNames` or a
+    #   `logGroupName` parameter, but not both.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] start_time
-    #   The time to start the query. Specified as epoch time, the number of
-    #   seconds since January 1, 1970, 00:00:00 UTC.
+    #   The beginning of the time range to query. The range is inclusive, so
+    #   the specified start time is included in the query. Specified as
+    #   epoch time, the number of seconds since January 1, 1970, 00:00:00
+    #   UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
-    #   The time to end this query, if it is still running. Specified as
-    #   epoch time, the number of seconds since January 1, 1970, 00:00:00
-    #   UTC.
+    #   The end of the time range to query. The range is inclusive, so the
+    #   specified end time is included in the query. Specified as epoch
+    #   time, the number of seconds since January 1, 1970, 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] query_string
@@ -2165,19 +2454,20 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
     #   @return [String]
     #
     # @!attribute [rw] limit
     #   The maximum number of log events to return in the query. If the
     #   query string uses the `fields` command, only the specified fields
-    #   and their values are returned.
+    #   and their values are returned. The default is 1000.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartQueryRequest AWS API Documentation
     #
     class StartQueryRequest < Struct.new(
       :log_group_name,
+      :log_group_names,
       :start_time,
       :end_time,
       :query_string,
@@ -2336,6 +2626,12 @@ module Aws::CloudWatchLogs
       :matches)
       include Aws::Structure
     end
+
+    # The most likely cause is an invalid AWS access key ID or secret key.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UnrecognizedClientException AWS API Documentation
+    #
+    class UnrecognizedClientException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UntagLogGroupRequest
     #   data as a hash:

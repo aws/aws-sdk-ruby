@@ -24,17 +24,20 @@ require_relative 'aws-sdk-comprehendmedical/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     comprehend_medical = Aws::ComprehendMedical::Client.new
+#     resp = comprehend_medical.describe_entities_detection_v2_job(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Comprehend Medical all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Comprehend Medical are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ComprehendMedical::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Comprehend Medical API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-comprehendmedical/customizations'
 # @service
 module Aws::ComprehendMedical
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.17.0'
 
 end

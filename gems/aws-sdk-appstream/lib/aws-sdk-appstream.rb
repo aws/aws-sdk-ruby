@@ -25,17 +25,20 @@ require_relative 'aws-sdk-appstream/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     app_stream = Aws::AppStream::Client.new
+#     resp = app_stream.associate_fleet(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon AppStream all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon AppStream are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::AppStream::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon AppStream API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +46,6 @@ require_relative 'aws-sdk-appstream/customizations'
 # @service
 module Aws::AppStream
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.41.0'
 
 end

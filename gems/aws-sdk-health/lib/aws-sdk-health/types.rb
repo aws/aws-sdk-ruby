@@ -29,6 +29,7 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] entity_url
+    #   The URL of the affected entity.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
@@ -62,6 +63,20 @@ module Aws::Health
       include Aws::Structure
     end
 
+    # EnableHealthServiceAccessForOrganization is already in progress. Wait
+    # for the action to complete before trying again. To get the current
+    # status, use the DescribeHealthServiceStatusForOrganization operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A range of dates and times that is used by the EventFilter and
     # EntityFilter objects. If `from` is set and `to` is set: match items
     # where the timestamp (`startTime`, `endTime`, or `lastUpdatedTime`) is
@@ -91,6 +106,144 @@ module Aws::Health
     class DateTimeRange < Struct.new(
       :from,
       :to)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAffectedAccountsForOrganizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_arn: "eventArn", # required
+    #         next_token: "nextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] event_arn
+    #   The unique identifier for the event. Format:
+    #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+    #   `. Example: `Example:
+    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedAccountsForOrganizationRequest AWS API Documentation
+    #
+    class DescribeAffectedAccountsForOrganizationRequest < Struct.new(
+      :event_arn,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] affected_accounts
+    #   A JSON set of elements of the affected accounts.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] event_scope_code
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedAccountsForOrganizationResponse AWS API Documentation
+    #
+    class DescribeAffectedAccountsForOrganizationResponse < Struct.new(
+      :affected_accounts,
+      :event_scope_code,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAffectedEntitiesForOrganizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_entity_filters: [ # required
+    #           {
+    #             event_arn: "eventArn", # required
+    #             aws_account_id: "accountId",
+    #           },
+    #         ],
+    #         locale: "locale",
+    #         next_token: "nextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] organization_entity_filters
+    #   A JSON set of elements including the `awsAccountId` and the
+    #   `eventArn`.
+    #   @return [Array<Types::EventAccountFilter>]
+    #
+    # @!attribute [rw] locale
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedEntitiesForOrganizationRequest AWS API Documentation
+    #
+    class DescribeAffectedEntitiesForOrganizationRequest < Struct.new(
+      :organization_entity_filters,
+      :locale,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entities
+    #   A JSON set of elements including the `awsAccountId` and its
+    #   `entityArn`, `entityValue` and its `entityArn`, `lastUpdatedTime`,
+    #   `statusCode`, and `tags`.
+    #   @return [Array<Types::AffectedEntity>]
+    #
+    # @!attribute [rw] failed_set
+    #   A JSON set of elements of the failed response, including the
+    #   `awsAccountId`, `errorMessage`, `errorName`, and `eventArn`.
+    #   @return [Array<Types::OrganizationAffectedEntitiesErrorItem>]
+    #
+    # @!attribute [rw] next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedEntitiesForOrganizationResponse AWS API Documentation
+    #
+    class DescribeAffectedEntitiesForOrganizationResponse < Struct.new(
+      :entities,
+      :failed_set,
+      :next_token)
       include Aws::Structure
     end
 
@@ -235,7 +388,7 @@ module Aws::Health
     #           ],
     #           entity_arns: ["entityArn"],
     #           entity_values: ["entityValue"],
-    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #           tags: [
     #             {
     #               "tagKey" => "tagValue",
@@ -300,6 +453,53 @@ module Aws::Health
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeEventDetailsForOrganizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_event_detail_filters: [ # required
+    #           {
+    #             event_arn: "eventArn", # required
+    #             aws_account_id: "accountId",
+    #           },
+    #         ],
+    #         locale: "locale",
+    #       }
+    #
+    # @!attribute [rw] organization_event_detail_filters
+    #   A set of JSON elements that includes the `awsAccountId` and the
+    #   `eventArn`.
+    #   @return [Array<Types::EventAccountFilter>]
+    #
+    # @!attribute [rw] locale
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventDetailsForOrganizationRequest AWS API Documentation
+    #
+    class DescribeEventDetailsForOrganizationRequest < Struct.new(
+      :organization_event_detail_filters,
+      :locale)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful_set
+    #   Information about the events that could be retrieved.
+    #   @return [Array<Types::OrganizationEventDetails>]
+    #
+    # @!attribute [rw] failed_set
+    #   Error messages for any events that could not be retrieved.
+    #   @return [Array<Types::OrganizationEventDetailsErrorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventDetailsForOrganizationResponse AWS API Documentation
+    #
+    class DescribeEventDetailsForOrganizationResponse < Struct.new(
+      :successful_set,
+      :failed_set)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeEventDetailsRequest
     #   data as a hash:
     #
@@ -350,7 +550,7 @@ module Aws::Health
     #         filter: {
     #           event_type_codes: ["eventTypeCode"],
     #           services: ["service"],
-    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #         },
     #         locale: "locale",
     #         next_token: "nextToken",
@@ -414,6 +614,89 @@ module Aws::Health
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeEventsForOrganizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           event_type_codes: ["eventType"],
+    #           aws_account_ids: ["accountId"],
+    #           services: ["service"],
+    #           regions: ["region"],
+    #           start_time: {
+    #             from: Time.now,
+    #             to: Time.now,
+    #           },
+    #           end_time: {
+    #             from: Time.now,
+    #             to: Time.now,
+    #           },
+    #           last_updated_time: {
+    #             from: Time.now,
+    #             to: Time.now,
+    #           },
+    #           entity_arns: ["entityArn"],
+    #           entity_values: ["entityValue"],
+    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
+    #           event_status_codes: ["open"], # accepts open, closed, upcoming
+    #         },
+    #         next_token: "nextToken",
+    #         max_results: 1,
+    #         locale: "locale",
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Values to narrow the results returned.
+    #   @return [Types::OrganizationEventFilter]
+    #
+    # @!attribute [rw] next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] locale
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventsForOrganizationRequest AWS API Documentation
+    #
+    class DescribeEventsForOrganizationRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results,
+      :locale)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events
+    #   The events that match the specified filter criteria.
+    #   @return [Array<Types::OrganizationEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventsForOrganizationResponse AWS API Documentation
+    #
+    class DescribeEventsForOrganizationResponse < Struct.new(
+      :events,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeEventsRequest
     #   data as a hash:
     #
@@ -444,7 +727,7 @@ module Aws::Health
     #           ],
     #           entity_arns: ["entityArn"],
     #           entity_values: ["entityValue"],
-    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #           event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #           tags: [
     #             {
     #               "tagKey" => "tagValue",
@@ -506,6 +789,20 @@ module Aws::Health
     class DescribeEventsResponse < Struct.new(
       :events,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] health_service_access_status_for_organization
+    #   Information about the status of enabling or disabling AWS Health
+    #   Organizational View in your organization.
+    #
+    #   Valid values are `ENABLED | DISABLED | PENDING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeHealthServiceStatusForOrganizationResponse AWS API Documentation
+    #
+    class DescribeHealthServiceStatusForOrganizationResponse < Struct.new(
+      :health_service_access_status_for_organization)
       include Aws::Structure
     end
 
@@ -596,10 +893,7 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # Summary information about an event, returned by the DescribeEvents
-    # operation. The DescribeEventDetails operation also returns this
-    # information, as well as the EventDescription and additional event
-    # metadata.
+    # Summary information about an AWS Health event.
     #
     # @!attribute [rw] arn
     #   The unique identifier for the event. Format:
@@ -649,6 +943,9 @@ module Aws::Health
     #   `closed`, and `upcoming`.
     #   @return [String]
     #
+    # @!attribute [rw] event_scope_code
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/Event AWS API Documentation
     #
     class Event < Struct.new(
@@ -661,7 +958,40 @@ module Aws::Health
       :start_time,
       :end_time,
       :last_updated_time,
-      :status_code)
+      :status_code,
+      :event_scope_code)
+      include Aws::Structure
+    end
+
+    # The values used to filter results from the
+    # DescribeEventDetailsForOrganization and
+    # DescribeAffectedEntitiesForOrganization operations.
+    #
+    # @note When making an API call, you may pass EventAccountFilter
+    #   data as a hash:
+    #
+    #       {
+    #         event_arn: "eventArn", # required
+    #         aws_account_id: "accountId",
+    #       }
+    #
+    # @!attribute [rw] event_arn
+    #   The unique identifier for the event. Format:
+    #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+    #   `. Example: `Example:
+    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The 12-digit AWS account numbers that contains the affected
+    #   entities.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventAccountFilter AWS API Documentation
+    #
+    class EventAccountFilter < Struct.new(
+      :event_arn,
+      :aws_account_id)
       include Aws::Structure
     end
 
@@ -782,7 +1112,7 @@ module Aws::Health
     #         ],
     #         entity_arns: ["entityArn"],
     #         entity_values: ["entityValue"],
-    #         event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #         event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #         tags: [
     #           {
     #             "tagKey" => "tagValue",
@@ -799,7 +1129,7 @@ module Aws::Health
     #
     # @!attribute [rw] event_type_codes
     #   A list of unique identifiers for event types. For example,
-    #   `"AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED"`
+    #   `"AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".`
     #   @return [Array<String>]
     #
     # @!attribute [rw] services
@@ -907,7 +1237,7 @@ module Aws::Health
     #       {
     #         event_type_codes: ["eventTypeCode"],
     #         services: ["service"],
-    #         event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange
+    #         event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #       }
     #
     # @!attribute [rw] event_type_codes
@@ -930,6 +1260,309 @@ module Aws::Health
       :event_type_codes,
       :services,
       :event_type_categories)
+      include Aws::Structure
+    end
+
+    # The specified pagination token (`nextToken`) is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/InvalidPaginationToken AWS API Documentation
+    #
+    class InvalidPaginationToken < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Error information returned when a
+    # DescribeAffectedEntitiesForOrganization operation cannot find or
+    # process a specific entity.
+    #
+    # @!attribute [rw] aws_account_id
+    #   The 12-digit AWS account numbers that contains the affected
+    #   entities.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_arn
+    #   The unique identifier for the event. Format:
+    #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+    #   `. Example: `Example:
+    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   @return [String]
+    #
+    # @!attribute [rw] error_name
+    #   The name of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The unique identifier for the event type. The format is
+    #   `AWS_SERVICE_DESCRIPTION`. For example,
+    #   `AWS_EC2_SYSTEM_MAINTENANCE_EVENT`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationAffectedEntitiesErrorItem AWS API Documentation
+    #
+    class OrganizationAffectedEntitiesErrorItem < Struct.new(
+      :aws_account_id,
+      :event_arn,
+      :error_name,
+      :error_message)
+      include Aws::Structure
+    end
+
+    # Summary information about an event, returned by the
+    # DescribeEventsForOrganization operation.
+    #
+    # @!attribute [rw] arn
+    #   The unique identifier for the event. Format:
+    #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+    #   `. Example: `Example:
+    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The AWS service that is affected by the event. For example, EC2,
+    #   RDS.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_code
+    #   The unique identifier for the event type. The format is
+    #   `AWS_SERVICE_DESCRIPTION`. For example,
+    #   `AWS_EC2_SYSTEM_MAINTENANCE_EVENT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_category
+    #   The category of the event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_scope_code
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region name of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time that the event began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The date and time that the event ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The most recent date and time that the event was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_code
+    #   The most recent status of the event. Possible values are `open`,
+    #   `closed`, and `upcoming`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationEvent AWS API Documentation
+    #
+    class OrganizationEvent < Struct.new(
+      :arn,
+      :service,
+      :event_type_code,
+      :event_type_category,
+      :event_scope_code,
+      :region,
+      :start_time,
+      :end_time,
+      :last_updated_time,
+      :status_code)
+      include Aws::Structure
+    end
+
+    # Detailed information about an event. A combination of an Event object,
+    # an EventDescription object, and additional metadata about the event.
+    # Returned by the DescribeEventDetailsForOrganization operation.
+    #
+    # @!attribute [rw] aws_account_id
+    #   The 12-digit AWS account numbers that contains the affected
+    #   entities.
+    #   @return [String]
+    #
+    # @!attribute [rw] event
+    #   Summary information about an AWS Health event.
+    #   @return [Types::Event]
+    #
+    # @!attribute [rw] event_description
+    #   The detailed description of the event. Included in the information
+    #   returned by the DescribeEventDetails operation.
+    #   @return [Types::EventDescription]
+    #
+    # @!attribute [rw] event_metadata
+    #   Additional metadata about the event.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationEventDetails AWS API Documentation
+    #
+    class OrganizationEventDetails < Struct.new(
+      :aws_account_id,
+      :event,
+      :event_description,
+      :event_metadata)
+      include Aws::Structure
+    end
+
+    # Error information returned when a DescribeEventDetailsForOrganization
+    # operation cannot find a specified event.
+    #
+    # @!attribute [rw] aws_account_id
+    #   Error information returned when a
+    #   DescribeEventDetailsForOrganization operation cannot find a
+    #   specified event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_arn
+    #   The unique identifier for the event. Format:
+    #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+    #   `. Example: `Example:
+    #   arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   @return [String]
+    #
+    # @!attribute [rw] error_name
+    #   The name of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message that describes the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationEventDetailsErrorItem AWS API Documentation
+    #
+    class OrganizationEventDetailsErrorItem < Struct.new(
+      :aws_account_id,
+      :event_arn,
+      :error_name,
+      :error_message)
+      include Aws::Structure
+    end
+
+    # The values to filter results from the DescribeEventsForOrganization
+    # operation.
+    #
+    # @note When making an API call, you may pass OrganizationEventFilter
+    #   data as a hash:
+    #
+    #       {
+    #         event_type_codes: ["eventType"],
+    #         aws_account_ids: ["accountId"],
+    #         services: ["service"],
+    #         regions: ["region"],
+    #         start_time: {
+    #           from: Time.now,
+    #           to: Time.now,
+    #         },
+    #         end_time: {
+    #           from: Time.now,
+    #           to: Time.now,
+    #         },
+    #         last_updated_time: {
+    #           from: Time.now,
+    #           to: Time.now,
+    #         },
+    #         entity_arns: ["entityArn"],
+    #         entity_values: ["entityValue"],
+    #         event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
+    #         event_status_codes: ["open"], # accepts open, closed, upcoming
+    #       }
+    #
+    # @!attribute [rw] event_type_codes
+    #   A list of unique identifiers for event types. For example,
+    #   `"AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] aws_account_ids
+    #   A list of 12-digit AWS account numbers that contains the affected
+    #   entities.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] services
+    #   The AWS services associated with the event. For example, `EC2`,
+    #   `RDS`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regions
+    #   A list of AWS Regions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] start_time
+    #   A range of dates and times that is used by the EventFilter and
+    #   EntityFilter objects. If `from` is set and `to` is set: match items
+    #   where the timestamp (`startTime`, `endTime`, or `lastUpdatedTime`)
+    #   is between `from` and `to` inclusive. If `from` is set and `to` is
+    #   not set: match items where the timestamp value is equal to or after
+    #   `from`. If `from` is not set and `to` is set: match items where the
+    #   timestamp value is equal to or before `to`.
+    #   @return [Types::DateTimeRange]
+    #
+    # @!attribute [rw] end_time
+    #   A range of dates and times that is used by the EventFilter and
+    #   EntityFilter objects. If `from` is set and `to` is set: match items
+    #   where the timestamp (`startTime`, `endTime`, or `lastUpdatedTime`)
+    #   is between `from` and `to` inclusive. If `from` is set and `to` is
+    #   not set: match items where the timestamp value is equal to or after
+    #   `from`. If `from` is not set and `to` is set: match items where the
+    #   timestamp value is equal to or before `to`.
+    #   @return [Types::DateTimeRange]
+    #
+    # @!attribute [rw] last_updated_time
+    #   A range of dates and times that is used by the EventFilter and
+    #   EntityFilter objects. If `from` is set and `to` is set: match items
+    #   where the timestamp (`startTime`, `endTime`, or `lastUpdatedTime`)
+    #   is between `from` and `to` inclusive. If `from` is set and `to` is
+    #   not set: match items where the timestamp value is equal to or after
+    #   `from`. If `from` is not set and `to` is set: match items where the
+    #   timestamp value is equal to or before `to`.
+    #   @return [Types::DateTimeRange]
+    #
+    # @!attribute [rw] entity_arns
+    #   REPLACEME
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] entity_values
+    #   A list of entity identifiers, such as EC2 instance IDs (i-34ab692e)
+    #   or EBS volumes (vol-426ab23e).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] event_type_categories
+    #   REPLACEME
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] event_status_codes
+    #   A list of event status codes.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationEventFilter AWS API Documentation
+    #
+    class OrganizationEventFilter < Struct.new(
+      :event_type_codes,
+      :aws_account_ids,
+      :services,
+      :regions,
+      :start_time,
+      :end_time,
+      :last_updated_time,
+      :entity_arns,
+      :entity_values,
+      :event_type_categories,
+      :event_status_codes)
+      include Aws::Structure
+    end
+
+    # The specified locale is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/UnsupportedLocale AWS API Documentation
+    #
+    class UnsupportedLocale < Struct.new(
+      :message)
       include Aws::Structure
     end
 

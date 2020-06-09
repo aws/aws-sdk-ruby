@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::DirectoryService
+
   class Resource
 
     # @param options ({})

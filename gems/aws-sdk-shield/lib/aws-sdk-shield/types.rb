@@ -8,6 +8,40 @@
 module Aws::Shield
   module Types
 
+    # Exception that indicates the specified `AttackId` does not exist, or
+    # the requester does not have the appropriate permissions to access the
+    # `AttackId`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # In order to grant the necessary access to the DDoS Response Team
+    # (DRT), the user submitting the request must have the `iam:PassRole`
+    # permission. This error indicates the user did not have the appropriate
+    # permissions. For more information, see [Granting a User Permissions to
+    # Pass a Role to an AWS Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AccessDeniedForDependencyException AWS API Documentation
+    #
+    class AccessDeniedForDependencyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateDRTLogBucketRequest
     #   data as a hash:
     #
@@ -16,7 +50,7 @@ module Aws::Shield
     #       }
     #
     # @!attribute [rw] log_bucket
-    #   The Amazon S3 bucket that contains your flow logs.
+    #   The Amazon S3 bucket that contains your AWS WAF logs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTLogBucketRequest AWS API Documentation
@@ -61,6 +95,76 @@ module Aws::Shield
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTRoleResponse AWS API Documentation
     #
     class AssociateDRTRoleResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass AssociateHealthCheckRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protection_id: "ProtectionId", # required
+    #         health_check_arn: "HealthCheckArn", # required
+    #       }
+    #
+    # @!attribute [rw] protection_id
+    #   The unique identifier (ID) for the Protection object to add the
+    #   health check association to.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_arn
+    #   The Amazon Resource Name (ARN) of the health check to associate with
+    #   the protection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateHealthCheckRequest AWS API Documentation
+    #
+    class AssociateHealthCheckRequest < Struct.new(
+      :protection_id,
+      :health_check_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateHealthCheckResponse AWS API Documentation
+    #
+    class AssociateHealthCheckResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass AssociateProactiveEngagementDetailsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         emergency_contact_list: [ # required
+    #           {
+    #             email_address: "EmailAddress", # required
+    #             phone_number: "PhoneNumber",
+    #             contact_notes: "ContactNotes",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] emergency_contact_list
+    #   A list of email addresses and phone numbers that the DDoS Response
+    #   Team (DRT) can use to contact you for escalations to the DRT and to
+    #   initiate proactive customer support.
+    #
+    #   To enable proactive engagement, the contact list must include at
+    #   least one phone number.
+    #
+    #   <note markdown="1"> The contacts that you provide here replace any contacts that were
+    #   already defined. If you already have contacts defined and want to
+    #   use them, retrieve the list using `DescribeEmergencyContactSettings`
+    #   and then provide it here.
+    #
+    #    </note>
+    #   @return [Array<Types::EmergencyContact>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateProactiveEngagementDetailsRequest AWS API Documentation
+    #
+    class AssociateProactiveEngagementDetailsRequest < Struct.new(
+      :emergency_contact_list)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateProactiveEngagementDetailsResponse AWS API Documentation
+    #
+    class AssociateProactiveEngagementDetailsResponse < Aws::EmptyStructure; end
 
     # The details of a DDoS attack.
     #
@@ -125,12 +229,16 @@ module Aws::Shield
     # Details of the described attack.
     #
     # @!attribute [rw] attack_layer
-    #   The type of DDoS event that was observed. `NETWORK` indicates layer
-    #   3 and layer 4 events and `APPLICATION` indicates layer 7 events.
+    #   The type of distributed denial of service (DDoS) event that was
+    #   observed. `NETWORK` indicates layer 3 and layer 4 events and
+    #   `APPLICATION` indicates layer 7 events.
     #   @return [String]
     #
     # @!attribute [rw] attack_property_identifier
-    #   Defines the DDoS attack property information that is provided.
+    #   Defines the DDoS attack property information that is provided. The
+    #   `WORDPRESS_PINGBACK_REFLECTOR` and `WORDPRESS_PINGBACK_SOURCE`
+    #   values are valid only for WordPress reflective pingback DDoS
+    #   attacks.
     #   @return [String]
     #
     # @!attribute [rw] top_contributors
@@ -235,6 +343,12 @@ module Aws::Shield
     #   * ACK\_FLOOD
     #
     #   * REQUEST\_FLOOD
+    #
+    #   * HTTP\_REFLECTION
+    #
+    #   * UDS\_REFLECTION
+    #
+    #   * MEMCACHED\_REFLECTION
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackVectorDescription AWS API Documentation
@@ -291,8 +405,12 @@ module Aws::Shield
     #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
     #     `
     #
-    #   * For AWS CloudFront distribution:
+    #   * For an AWS CloudFront distribution:
     #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
+    #
+    #   * For an AWS Global Accelerator accelerator:
+    #     `arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
+    #     `
     #
     #   * For Amazon Route 53: `arn:aws:route53:::hostedzone/hosted-zone-id
     #     `
@@ -422,8 +540,10 @@ module Aws::Shield
     class DescribeEmergencyContactSettingsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] emergency_contact_list
-    #   A list of email addresses that the DRT can use to contact you during
-    #   a suspected attack.
+    #   A list of email addresses and phone numbers that the DDoS Response
+    #   Team (DRT) can use to contact you if you have proactive engagement
+    #   enabled, for escalations to the DRT and to initiate proactive
+    #   customer support.
     #   @return [Array<Types::EmergencyContact>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeEmergencyContactSettingsResponse AWS API Documentation
@@ -437,18 +557,29 @@ module Aws::Shield
     #   data as a hash:
     #
     #       {
-    #         protection_id: "ProtectionId", # required
+    #         protection_id: "ProtectionId",
+    #         resource_arn: "ResourceArn",
     #       }
     #
     # @!attribute [rw] protection_id
     #   The unique identifier (ID) for the Protection object that is
-    #   described.
+    #   described. When submitting the `DescribeProtection` request you must
+    #   provide either the `ResourceArn` or the `ProtectionID`, but not
+    #   both.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN (Amazon Resource Name) of the AWS resource for the
+    #   Protection object that is described. When submitting the
+    #   `DescribeProtection` request you must provide either the
+    #   `ResourceArn` or the `ProtectionID`, but not both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionRequest AWS API Documentation
     #
     class DescribeProtectionRequest < Struct.new(
-      :protection_id)
+      :protection_id,
+      :resource_arn)
       include Aws::Structure
     end
 
@@ -480,6 +611,16 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisableProactiveEngagementRequest AWS API Documentation
+    #
+    class DisableProactiveEngagementRequest < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisableProactiveEngagementResponse AWS API Documentation
+    #
+    class DisableProactiveEngagementResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociateDRTLogBucketRequest
     #   data as a hash:
     #
@@ -488,7 +629,7 @@ module Aws::Shield
     #       }
     #
     # @!attribute [rw] log_bucket
-    #   The Amazon S3 bucket that contains your flow logs.
+    #   The Amazon S3 bucket that contains your AWS WAF logs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTLogBucketRequest AWS API Documentation
@@ -512,27 +653,79 @@ module Aws::Shield
     #
     class DisassociateDRTRoleResponse < Aws::EmptyStructure; end
 
-    # Contact information that the DRT can use to contact you during a
-    # suspected attack.
+    # @note When making an API call, you may pass DisassociateHealthCheckRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protection_id: "ProtectionId", # required
+    #         health_check_arn: "HealthCheckArn", # required
+    #       }
+    #
+    # @!attribute [rw] protection_id
+    #   The unique identifier (ID) for the Protection object to remove the
+    #   health check association from.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_arn
+    #   The Amazon Resource Name (ARN) of the health check that is
+    #   associated with the protection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateHealthCheckRequest AWS API Documentation
+    #
+    class DisassociateHealthCheckRequest < Struct.new(
+      :protection_id,
+      :health_check_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateHealthCheckResponse AWS API Documentation
+    #
+    class DisassociateHealthCheckResponse < Aws::EmptyStructure; end
+
+    # Contact information that the DRT can use to contact you if you have
+    # proactive engagement enabled, for escalations to the DRT and to
+    # initiate proactive customer support.
     #
     # @note When making an API call, you may pass EmergencyContact
     #   data as a hash:
     #
     #       {
     #         email_address: "EmailAddress", # required
+    #         phone_number: "PhoneNumber",
+    #         contact_notes: "ContactNotes",
     #       }
     #
     # @!attribute [rw] email_address
-    #   An email address that the DRT can use to contact you during a
-    #   suspected attack.
+    #   The email address for the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number for the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_notes
+    #   Additional notes regarding the contact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EmergencyContact AWS API Documentation
     #
     class EmergencyContact < Struct.new(
-      :email_address)
+      :email_address,
+      :phone_number,
+      :contact_notes)
       include Aws::Structure
     end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EnableProactiveEngagementRequest AWS API Documentation
+    #
+    class EnableProactiveEngagementRequest < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EnableProactiveEngagementResponse AWS API Documentation
+    #
+    class EnableProactiveEngagementResponse < Aws::EmptyStructure; end
 
     # @api private
     #
@@ -548,6 +741,72 @@ module Aws::Shield
     #
     class GetSubscriptionStateResponse < Struct.new(
       :subscription_state)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that a problem occurred with the service
+    # infrastructure. You can retry the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InternalErrorException AWS API Documentation
+    #
+    class InternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the operation would not cause any change
+    # to occur.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InvalidOperationException AWS API Documentation
+    #
+    class InvalidOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the NextToken specified in the request
+    # is invalid. Submit the request using the NextToken value that was
+    # returned in the response.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InvalidPaginationTokenException AWS API Documentation
+    #
+    class InvalidPaginationTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the parameters passed to the API are
+    # invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the resource is invalid. You might not
+    # have access to the resource, or the resource might not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InvalidResourceException AWS API Documentation
+    #
+    class InvalidResourceException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -567,6 +826,30 @@ module Aws::Shield
     class Limit < Struct.new(
       :type,
       :max)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the operation would exceed a limit.
+    #
+    # `Type` is the type of limit that would be exceeded.
+    #
+    # `Limit` is the threshold that would be exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/LimitsExceededException AWS API Documentation
+    #
+    class LimitsExceededException < Struct.new(
+      :message,
+      :type,
+      :limit)
       include Aws::Structure
     end
 
@@ -727,6 +1010,21 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # You are trying to update a subscription that has not yet completed the
+    # 1-year commitment. You can change the `AutoRenew` parameter during the
+    # last 30 days of your subscription. This exception indicates that you
+    # are attempting to change `AutoRenew` prior to that period.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/LockedSubscriptionException AWS API Documentation
+    #
+    class LockedSubscriptionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The mitigation applied to a DDoS attack.
     #
     # @!attribute [rw] mitigation_name
@@ -737,6 +1035,31 @@ module Aws::Shield
     #
     class Mitigation < Struct.new(
       :mitigation_name)
+      include Aws::Structure
+    end
+
+    # The ARN of the role that you specifed does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/NoAssociatedRoleException AWS API Documentation
+    #
+    class NoAssociatedRoleException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the resource state has been modified by
+    # another client. Retrieve the resource and then retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/OptimisticLockException AWS API Documentation
+    #
+    class OptimisticLockException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -756,12 +1079,42 @@ module Aws::Shield
     #   protected.
     #   @return [String]
     #
+    # @!attribute [rw] health_check_ids
+    #   The unique identifier (ID) for the Route 53 health check that's
+    #   associated with the protection.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Protection AWS API Documentation
     #
     class Protection < Struct.new(
       :id,
       :name,
-      :resource_arn)
+      :resource_arn,
+      :health_check_ids)
+      include Aws::Structure
+    end
+
+    # Exception indicating the specified resource already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception indicating the specified resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -828,6 +1181,19 @@ module Aws::Shield
     #   Specifies how many protections of a given type you can create.
     #   @return [Array<Types::Limit>]
     #
+    # @!attribute [rw] proactive_engagement_status
+    #   If `ENABLED`, the DDoS Response Team (DRT) will use email and phone
+    #   to notify contacts about escalations to the DRT and to initiate
+    #   proactive customer support.
+    #
+    #   If `PENDING`, you have requested proactive engagement and the
+    #   request is pending. The status changes to `ENABLED` when your
+    #   request is fully processed.
+    #
+    #   If `DISABLED`, the DRT will not proactively notify contacts about
+    #   escalations or to initiate proactive customer support.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Subscription AWS API Documentation
     #
     class Subscription < Struct.new(
@@ -835,7 +1201,8 @@ module Aws::Shield
       :end_time,
       :time_commitment_in_seconds,
       :auto_renew,
-      :limits)
+      :limits,
+      :proactive_engagement_status)
       include Aws::Structure
     end
 
@@ -938,13 +1305,20 @@ module Aws::Shield
     #         emergency_contact_list: [
     #           {
     #             email_address: "EmailAddress", # required
+    #             phone_number: "PhoneNumber",
+    #             contact_notes: "ContactNotes",
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] emergency_contact_list
-    #   A list of email addresses that the DRT can use to contact you during
-    #   a suspected attack.
+    #   A list of email addresses and phone numbers that the DDoS Response
+    #   Team (DRT) can use to contact you if you have proactive engagement
+    #   enabled, for escalations to the DRT and to initiate proactive
+    #   customer support.
+    #
+    #   If you have proactive engagement enabled, the contact list must
+    #   include at least one phone number.
     #   @return [Array<Types::EmergencyContact>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateEmergencyContactSettingsRequest AWS API Documentation

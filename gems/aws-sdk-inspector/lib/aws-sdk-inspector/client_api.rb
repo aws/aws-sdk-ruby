@@ -229,6 +229,11 @@ module Aws::Inspector
     UserAttributeList = Shapes::ListShape.new(name: 'UserAttributeList')
     Version = Shapes::StringShape.new(name: 'Version')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    AccessDeniedException.add_member(:error_code, Shapes::ShapeRef.new(shape: AccessDeniedErrorCode, required: true, location_name: "errorCode"))
+    AccessDeniedException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AddAttributesToFindingsRequest.add_member(:finding_arns, Shapes::ShapeRef.new(shape: AddRemoveAttributesFindingArnList, required: true, location_name: "findingArns"))
     AddAttributesToFindingsRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: UserAttributeList, required: true, location_name: "attributes"))
     AddAttributesToFindingsRequest.struct_class = Types::AddAttributesToFindingsRequest
@@ -265,6 +270,12 @@ module Aws::Inspector
     AgentPreview.struct_class = Types::AgentPreview
 
     AgentPreviewList.member = Shapes::ShapeRef.new(shape: AgentPreview)
+
+    AgentsAlreadyRunningAssessmentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    AgentsAlreadyRunningAssessmentException.add_member(:agents, Shapes::ShapeRef.new(shape: AgentAlreadyRunningAssessmentList, required: true, location_name: "agents"))
+    AgentsAlreadyRunningAssessmentException.add_member(:agents_truncated, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "agentsTruncated"))
+    AgentsAlreadyRunningAssessmentException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    AgentsAlreadyRunningAssessmentException.struct_class = Types::AgentsAlreadyRunningAssessmentException
 
     AssessmentRulesPackageArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
@@ -309,6 +320,12 @@ module Aws::Inspector
     AssessmentRunFindingCounts.value = Shapes::ShapeRef.new(shape: FindingCount)
 
     AssessmentRunInProgressArnList.member = Shapes::ShapeRef.new(shape: Arn)
+
+    AssessmentRunInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    AssessmentRunInProgressException.add_member(:assessment_run_arns, Shapes::ShapeRef.new(shape: AssessmentRunInProgressArnList, required: true, location_name: "assessmentRunArns"))
+    AssessmentRunInProgressException.add_member(:assessment_run_arns_truncated, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "assessmentRunArnsTruncated"))
+    AssessmentRunInProgressException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    AssessmentRunInProgressException.struct_class = Types::AssessmentRunInProgressException
 
     AssessmentRunList.member = Shapes::ShapeRef.new(shape: AssessmentRun)
 
@@ -582,9 +599,28 @@ module Aws::Inspector
     InspectorServiceAttributes.add_member(:rules_package_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "rulesPackageArn"))
     InspectorServiceAttributes.struct_class = Types::InspectorServiceAttributes
 
+    InternalException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    InternalException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    InternalException.struct_class = Types::InternalException
+
+    InvalidCrossAccountRoleException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    InvalidCrossAccountRoleException.add_member(:error_code, Shapes::ShapeRef.new(shape: InvalidCrossAccountRoleErrorCode, required: true, location_name: "errorCode"))
+    InvalidCrossAccountRoleException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    InvalidCrossAccountRoleException.struct_class = Types::InvalidCrossAccountRoleException
+
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    InvalidInputException.add_member(:error_code, Shapes::ShapeRef.new(shape: InvalidInputErrorCode, required: true, location_name: "errorCode"))
+    InvalidInputException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    InvalidInputException.struct_class = Types::InvalidInputException
+
     Ipv4AddressList.member = Shapes::ShapeRef.new(shape: Ipv4Address)
 
     Ipv6Addresses.member = Shapes::ShapeRef.new(shape: Text)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    LimitExceededException.add_member(:error_code, Shapes::ShapeRef.new(shape: LimitExceededErrorCode, required: true, location_name: "errorCode"))
+    LimitExceededException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListAssessmentRunAgentsRequest.add_member(:assessment_run_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentRunArn"))
     ListAssessmentRunAgentsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: AgentFilter, location_name: "filter"))
@@ -685,6 +721,11 @@ module Aws::Inspector
 
     NetworkInterfaces.member = Shapes::ShapeRef.new(shape: NetworkInterface)
 
+    NoSuchEntityException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    NoSuchEntityException.add_member(:error_code, Shapes::ShapeRef.new(shape: NoSuchEntityErrorCode, required: true, location_name: "errorCode"))
+    NoSuchEntityException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    NoSuchEntityException.struct_class = Types::NoSuchEntityException
+
     PreviewAgentsRequest.add_member(:preview_agents_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "previewAgentsArn"))
     PreviewAgentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     PreviewAgentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PreviewAgentsMaxResults, location_name: "maxResults"))
@@ -693,6 +734,9 @@ module Aws::Inspector
     PreviewAgentsResponse.add_member(:agent_previews, Shapes::ShapeRef.new(shape: AgentPreviewList, required: true, location_name: "agentPreviews"))
     PreviewAgentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     PreviewAgentsResponse.struct_class = Types::PreviewAgentsResponse
+
+    PreviewGenerationInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    PreviewGenerationInProgressException.struct_class = Types::PreviewGenerationInProgressException
 
     PrivateIp.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: Text, location_name: "privateDnsName"))
     PrivateIp.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: Text, location_name: "privateIpAddress"))
@@ -746,6 +790,10 @@ module Aws::Inspector
 
     SecurityGroups.member = Shapes::ShapeRef.new(shape: SecurityGroup)
 
+    ServiceTemporarilyUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    ServiceTemporarilyUnavailableException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    ServiceTemporarilyUnavailableException.struct_class = Types::ServiceTemporarilyUnavailableException
+
     SetTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
     SetTagsForResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     SetTagsForResourceRequest.struct_class = Types::SetTagsForResourceRequest
@@ -798,6 +846,10 @@ module Aws::Inspector
     UnsubscribeFromEventRequest.add_member(:event, Shapes::ShapeRef.new(shape: InspectorEvent, required: true, location_name: "event"))
     UnsubscribeFromEventRequest.add_member(:topic_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "topicArn"))
     UnsubscribeFromEventRequest.struct_class = Types::UnsubscribeFromEventRequest
+
+    UnsupportedFeatureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    UnsupportedFeatureException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    UnsupportedFeatureException.struct_class = Types::UnsupportedFeatureException
 
     UpdateAssessmentTargetRequest.add_member(:assessment_target_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentTargetArn"))
     UpdateAssessmentTargetRequest.add_member(:assessment_target_name, Shapes::ShapeRef.new(shape: AssessmentTargetName, required: true, location_name: "assessmentTargetName"))

@@ -29,6 +29,8 @@ module Aws::CodeDeploy
     ApplicationRevisionSortBy = Shapes::StringShape.new(name: 'ApplicationRevisionSortBy')
     ApplicationsInfoList = Shapes::ListShape.new(name: 'ApplicationsInfoList')
     ApplicationsList = Shapes::ListShape.new(name: 'ApplicationsList')
+    Arn = Shapes::StringShape.new(name: 'Arn')
+    ArnNotSupportedException = Shapes::StructureShape.new(name: 'ArnNotSupportedException')
     AutoRollbackConfiguration = Shapes::StructureShape.new(name: 'AutoRollbackConfiguration')
     AutoRollbackEvent = Shapes::StringShape.new(name: 'AutoRollbackEvent')
     AutoRollbackEventsList = Shapes::ListShape.new(name: 'AutoRollbackEventsList')
@@ -57,6 +59,8 @@ module Aws::CodeDeploy
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BucketNameFilterRequiredException = Shapes::StructureShape.new(name: 'BucketNameFilterRequiredException')
     BundleType = Shapes::StringShape.new(name: 'BundleType')
+    CloudFormationResourceType = Shapes::StringShape.new(name: 'CloudFormationResourceType')
+    CloudFormationTarget = Shapes::StructureShape.new(name: 'CloudFormationTarget')
     CommitId = Shapes::StringShape.new(name: 'CommitId')
     ComputePlatform = Shapes::StringShape.new(name: 'ComputePlatform')
     ContinueDeploymentInput = Shapes::StructureShape.new(name: 'ContinueDeploymentInput')
@@ -74,6 +78,8 @@ module Aws::CodeDeploy
     DeleteDeploymentGroupOutput = Shapes::StructureShape.new(name: 'DeleteDeploymentGroupOutput')
     DeleteGitHubAccountTokenInput = Shapes::StructureShape.new(name: 'DeleteGitHubAccountTokenInput')
     DeleteGitHubAccountTokenOutput = Shapes::StructureShape.new(name: 'DeleteGitHubAccountTokenOutput')
+    DeleteResourcesByExternalIdInput = Shapes::StructureShape.new(name: 'DeleteResourcesByExternalIdInput')
+    DeleteResourcesByExternalIdOutput = Shapes::StructureShape.new(name: 'DeleteResourcesByExternalIdOutput')
     DeploymentAlreadyCompletedException = Shapes::StructureShape.new(name: 'DeploymentAlreadyCompletedException')
     DeploymentAlreadyStartedException = Shapes::StructureShape.new(name: 'DeploymentAlreadyStartedException')
     DeploymentConfigAlreadyExistsException = Shapes::StructureShape.new(name: 'DeploymentConfigAlreadyExistsException')
@@ -148,6 +154,7 @@ module Aws::CodeDeploy
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorInformation = Shapes::StructureShape.new(name: 'ErrorInformation')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExternalId = Shapes::StringShape.new(name: 'ExternalId')
     FileExistsBehavior = Shapes::StringShape.new(name: 'FileExistsBehavior')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
@@ -205,12 +212,14 @@ module Aws::CodeDeploy
     InstancesList = Shapes::ListShape.new(name: 'InstancesList')
     InvalidAlarmConfigException = Shapes::StructureShape.new(name: 'InvalidAlarmConfigException')
     InvalidApplicationNameException = Shapes::StructureShape.new(name: 'InvalidApplicationNameException')
+    InvalidArnException = Shapes::StructureShape.new(name: 'InvalidArnException')
     InvalidAutoRollbackConfigException = Shapes::StructureShape.new(name: 'InvalidAutoRollbackConfigException')
     InvalidAutoScalingGroupException = Shapes::StructureShape.new(name: 'InvalidAutoScalingGroupException')
     InvalidBlueGreenDeploymentConfigurationException = Shapes::StructureShape.new(name: 'InvalidBlueGreenDeploymentConfigurationException')
     InvalidBucketNameFilterException = Shapes::StructureShape.new(name: 'InvalidBucketNameFilterException')
     InvalidComputePlatformException = Shapes::StructureShape.new(name: 'InvalidComputePlatformException')
     InvalidDeployedStateFilterException = Shapes::StructureShape.new(name: 'InvalidDeployedStateFilterException')
+    InvalidDeploymentConfigIdException = Shapes::StructureShape.new(name: 'InvalidDeploymentConfigIdException')
     InvalidDeploymentConfigNameException = Shapes::StructureShape.new(name: 'InvalidDeploymentConfigNameException')
     InvalidDeploymentGroupNameException = Shapes::StructureShape.new(name: 'InvalidDeploymentGroupNameException')
     InvalidDeploymentIdException = Shapes::StructureShape.new(name: 'InvalidDeploymentIdException')
@@ -222,6 +231,7 @@ module Aws::CodeDeploy
     InvalidEC2TagCombinationException = Shapes::StructureShape.new(name: 'InvalidEC2TagCombinationException')
     InvalidEC2TagException = Shapes::StructureShape.new(name: 'InvalidEC2TagException')
     InvalidECSServiceException = Shapes::StructureShape.new(name: 'InvalidECSServiceException')
+    InvalidExternalIdException = Shapes::StructureShape.new(name: 'InvalidExternalIdException')
     InvalidFileExistsBehaviorException = Shapes::StructureShape.new(name: 'InvalidFileExistsBehaviorException')
     InvalidGitHubAccountTokenException = Shapes::StructureShape.new(name: 'InvalidGitHubAccountTokenException')
     InvalidGitHubAccountTokenNameException = Shapes::StructureShape.new(name: 'InvalidGitHubAccountTokenNameException')
@@ -248,6 +258,7 @@ module Aws::CodeDeploy
     InvalidSortOrderException = Shapes::StructureShape.new(name: 'InvalidSortOrderException')
     InvalidTagException = Shapes::StructureShape.new(name: 'InvalidTagException')
     InvalidTagFilterException = Shapes::StructureShape.new(name: 'InvalidTagFilterException')
+    InvalidTagsToAddException = Shapes::StructureShape.new(name: 'InvalidTagsToAddException')
     InvalidTargetException = Shapes::StructureShape.new(name: 'InvalidTargetException')
     InvalidTargetFilterNameException = Shapes::StructureShape.new(name: 'InvalidTargetFilterNameException')
     InvalidTargetGroupPairException = Shapes::StructureShape.new(name: 'InvalidTargetGroupPairException')
@@ -257,6 +268,9 @@ module Aws::CodeDeploy
     InvalidTriggerConfigException = Shapes::StructureShape.new(name: 'InvalidTriggerConfigException')
     InvalidUpdateOutdatedInstancesOnlyValueException = Shapes::StructureShape.new(name: 'InvalidUpdateOutdatedInstancesOnlyValueException')
     Key = Shapes::StringShape.new(name: 'Key')
+    LambdaFunctionAlias = Shapes::StringShape.new(name: 'LambdaFunctionAlias')
+    LambdaFunctionInfo = Shapes::StructureShape.new(name: 'LambdaFunctionInfo')
+    LambdaFunctionName = Shapes::StringShape.new(name: 'LambdaFunctionName')
     LambdaTarget = Shapes::StructureShape.new(name: 'LambdaTarget')
     LastDeploymentInfo = Shapes::StructureShape.new(name: 'LastDeploymentInfo')
     LifecycleErrorCode = Shapes::StringShape.new(name: 'LifecycleErrorCode')
@@ -287,6 +301,8 @@ module Aws::CodeDeploy
     ListOnPremisesInstancesInput = Shapes::StructureShape.new(name: 'ListOnPremisesInstancesInput')
     ListOnPremisesInstancesOutput = Shapes::StructureShape.new(name: 'ListOnPremisesInstancesOutput')
     ListStateFilterAction = Shapes::StringShape.new(name: 'ListStateFilterAction')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListenerArn = Shapes::StringShape.new(name: 'ListenerArn')
     ListenerArnList = Shapes::ListShape.new(name: 'ListenerArnList')
     LoadBalancerInfo = Shapes::StructureShape.new(name: 'LoadBalancerInfo')
@@ -312,6 +328,7 @@ module Aws::CodeDeploy
     RegistrationStatus = Shapes::StringShape.new(name: 'RegistrationStatus')
     RemoveTagsFromOnPremisesInstancesInput = Shapes::StructureShape.new(name: 'RemoveTagsFromOnPremisesInstancesInput')
     Repository = Shapes::StringShape.new(name: 'Repository')
+    ResourceArnRequiredException = Shapes::StructureShape.new(name: 'ResourceArnRequiredException')
     ResourceValidationException = Shapes::StructureShape.new(name: 'ResourceValidationException')
     RevisionDoesNotExistException = Shapes::StructureShape.new(name: 'RevisionDoesNotExistException')
     RevisionInfo = Shapes::StructureShape.new(name: 'RevisionInfo')
@@ -336,9 +353,12 @@ module Aws::CodeDeploy
     TagFilter = Shapes::StructureShape.new(name: 'TagFilter')
     TagFilterList = Shapes::ListShape.new(name: 'TagFilterList')
     TagFilterType = Shapes::StringShape.new(name: 'TagFilterType')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagLimitExceededException = Shapes::StructureShape.new(name: 'TagLimitExceededException')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagRequiredException = Shapes::StructureShape.new(name: 'TagRequiredException')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagSetListLimitExceededException = Shapes::StructureShape.new(name: 'TagSetListLimitExceededException')
     TargetArn = Shapes::StringShape.new(name: 'TargetArn')
     TargetFilterName = Shapes::StringShape.new(name: 'TargetFilterName')
@@ -371,10 +391,13 @@ module Aws::CodeDeploy
     TriggerTargetArn = Shapes::StringShape.new(name: 'TriggerTargetArn')
     TriggerTargetsLimitExceededException = Shapes::StructureShape.new(name: 'TriggerTargetsLimitExceededException')
     UnsupportedActionForDeploymentTypeException = Shapes::StructureShape.new(name: 'UnsupportedActionForDeploymentTypeException')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateApplicationInput = Shapes::StructureShape.new(name: 'UpdateApplicationInput')
     UpdateDeploymentGroupInput = Shapes::StructureShape.new(name: 'UpdateDeploymentGroupInput')
     UpdateDeploymentGroupOutput = Shapes::StructureShape.new(name: 'UpdateDeploymentGroupOutput')
     Value = Shapes::StringShape.new(name: 'Value')
+    Version = Shapes::StringShape.new(name: 'Version')
     VersionId = Shapes::StringShape.new(name: 'VersionId')
     WaitTimeInMins = Shapes::IntegerShape.new(name: 'WaitTimeInMins')
 
@@ -392,9 +415,15 @@ module Aws::CodeDeploy
 
     AlarmList.member = Shapes::ShapeRef.new(shape: Alarm)
 
+    AlarmsLimitExceededException.struct_class = Types::AlarmsLimitExceededException
+
     AppSpecContent.add_member(:content, Shapes::ShapeRef.new(shape: RawStringContent, location_name: "content"))
     AppSpecContent.add_member(:sha256, Shapes::ShapeRef.new(shape: RawStringSha256, location_name: "sha256"))
     AppSpecContent.struct_class = Types::AppSpecContent
+
+    ApplicationAlreadyExistsException.struct_class = Types::ApplicationAlreadyExistsException
+
+    ApplicationDoesNotExistException.struct_class = Types::ApplicationDoesNotExistException
 
     ApplicationInfo.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId"))
     ApplicationInfo.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "applicationName"))
@@ -404,9 +433,15 @@ module Aws::CodeDeploy
     ApplicationInfo.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
     ApplicationInfo.struct_class = Types::ApplicationInfo
 
+    ApplicationLimitExceededException.struct_class = Types::ApplicationLimitExceededException
+
+    ApplicationNameRequiredException.struct_class = Types::ApplicationNameRequiredException
+
     ApplicationsInfoList.member = Shapes::ShapeRef.new(shape: ApplicationInfo)
 
     ApplicationsList.member = Shapes::ShapeRef.new(shape: ApplicationName)
+
+    ArnNotSupportedException.struct_class = Types::ArnNotSupportedException
 
     AutoRollbackConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     AutoRollbackConfiguration.add_member(:events, Shapes::ShapeRef.new(shape: AutoRollbackEventsList, location_name: "events"))
@@ -472,6 +507,8 @@ module Aws::CodeDeploy
     BatchGetOnPremisesInstancesOutput.add_member(:instance_infos, Shapes::ShapeRef.new(shape: InstanceInfoList, location_name: "instanceInfos"))
     BatchGetOnPremisesInstancesOutput.struct_class = Types::BatchGetOnPremisesInstancesOutput
 
+    BatchLimitExceededException.struct_class = Types::BatchLimitExceededException
+
     BlueGreenDeploymentConfiguration.add_member(:terminate_blue_instances_on_deployment_success, Shapes::ShapeRef.new(shape: BlueInstanceTerminationOption, location_name: "terminateBlueInstancesOnDeploymentSuccess"))
     BlueGreenDeploymentConfiguration.add_member(:deployment_ready_option, Shapes::ShapeRef.new(shape: DeploymentReadyOption, location_name: "deploymentReadyOption"))
     BlueGreenDeploymentConfiguration.add_member(:green_fleet_provisioning_option, Shapes::ShapeRef.new(shape: GreenFleetProvisioningOption, location_name: "greenFleetProvisioningOption"))
@@ -481,12 +518,24 @@ module Aws::CodeDeploy
     BlueInstanceTerminationOption.add_member(:termination_wait_time_in_minutes, Shapes::ShapeRef.new(shape: Duration, location_name: "terminationWaitTimeInMinutes"))
     BlueInstanceTerminationOption.struct_class = Types::BlueInstanceTerminationOption
 
+    BucketNameFilterRequiredException.struct_class = Types::BucketNameFilterRequiredException
+
+    CloudFormationTarget.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
+    CloudFormationTarget.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, location_name: "targetId"))
+    CloudFormationTarget.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Time, location_name: "lastUpdatedAt"))
+    CloudFormationTarget.add_member(:lifecycle_events, Shapes::ShapeRef.new(shape: LifecycleEventList, location_name: "lifecycleEvents"))
+    CloudFormationTarget.add_member(:status, Shapes::ShapeRef.new(shape: TargetStatus, location_name: "status"))
+    CloudFormationTarget.add_member(:resource_type, Shapes::ShapeRef.new(shape: CloudFormationResourceType, location_name: "resourceType"))
+    CloudFormationTarget.add_member(:target_version_weight, Shapes::ShapeRef.new(shape: TrafficWeight, location_name: "targetVersionWeight"))
+    CloudFormationTarget.struct_class = Types::CloudFormationTarget
+
     ContinueDeploymentInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
     ContinueDeploymentInput.add_member(:deployment_wait_type, Shapes::ShapeRef.new(shape: DeploymentWaitType, location_name: "deploymentWaitType"))
     ContinueDeploymentInput.struct_class = Types::ContinueDeploymentInput
 
     CreateApplicationInput.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "applicationName"))
     CreateApplicationInput.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
+    CreateApplicationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateApplicationInput.struct_class = Types::CreateApplicationInput
 
     CreateApplicationOutput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId"))
@@ -517,6 +566,7 @@ module Aws::CodeDeploy
     CreateDeploymentGroupInput.add_member(:ec2_tag_set, Shapes::ShapeRef.new(shape: EC2TagSet, location_name: "ec2TagSet"))
     CreateDeploymentGroupInput.add_member(:ecs_services, Shapes::ShapeRef.new(shape: ECSServiceList, location_name: "ecsServices"))
     CreateDeploymentGroupInput.add_member(:on_premises_tag_set, Shapes::ShapeRef.new(shape: OnPremisesTagSet, location_name: "onPremisesTagSet"))
+    CreateDeploymentGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDeploymentGroupInput.struct_class = Types::CreateDeploymentGroupInput
 
     CreateDeploymentGroupOutput.add_member(:deployment_group_id, Shapes::ShapeRef.new(shape: DeploymentGroupId, location_name: "deploymentGroupId"))
@@ -556,6 +606,21 @@ module Aws::CodeDeploy
     DeleteGitHubAccountTokenOutput.add_member(:token_name, Shapes::ShapeRef.new(shape: GitHubAccountTokenName, location_name: "tokenName"))
     DeleteGitHubAccountTokenOutput.struct_class = Types::DeleteGitHubAccountTokenOutput
 
+    DeleteResourcesByExternalIdInput.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
+    DeleteResourcesByExternalIdInput.struct_class = Types::DeleteResourcesByExternalIdInput
+
+    DeleteResourcesByExternalIdOutput.struct_class = Types::DeleteResourcesByExternalIdOutput
+
+    DeploymentAlreadyCompletedException.struct_class = Types::DeploymentAlreadyCompletedException
+
+    DeploymentAlreadyStartedException.struct_class = Types::DeploymentAlreadyStartedException
+
+    DeploymentConfigAlreadyExistsException.struct_class = Types::DeploymentConfigAlreadyExistsException
+
+    DeploymentConfigDoesNotExistException.struct_class = Types::DeploymentConfigDoesNotExistException
+
+    DeploymentConfigInUseException.struct_class = Types::DeploymentConfigInUseException
+
     DeploymentConfigInfo.add_member(:deployment_config_id, Shapes::ShapeRef.new(shape: DeploymentConfigId, location_name: "deploymentConfigId"))
     DeploymentConfigInfo.add_member(:deployment_config_name, Shapes::ShapeRef.new(shape: DeploymentConfigName, location_name: "deploymentConfigName"))
     DeploymentConfigInfo.add_member(:minimum_healthy_hosts, Shapes::ShapeRef.new(shape: MinimumHealthyHosts, location_name: "minimumHealthyHosts"))
@@ -564,7 +629,17 @@ module Aws::CodeDeploy
     DeploymentConfigInfo.add_member(:traffic_routing_config, Shapes::ShapeRef.new(shape: TrafficRoutingConfig, location_name: "trafficRoutingConfig"))
     DeploymentConfigInfo.struct_class = Types::DeploymentConfigInfo
 
+    DeploymentConfigLimitExceededException.struct_class = Types::DeploymentConfigLimitExceededException
+
+    DeploymentConfigNameRequiredException.struct_class = Types::DeploymentConfigNameRequiredException
+
     DeploymentConfigsList.member = Shapes::ShapeRef.new(shape: DeploymentConfigName)
+
+    DeploymentDoesNotExistException.struct_class = Types::DeploymentDoesNotExistException
+
+    DeploymentGroupAlreadyExistsException.struct_class = Types::DeploymentGroupAlreadyExistsException
+
+    DeploymentGroupDoesNotExistException.struct_class = Types::DeploymentGroupDoesNotExistException
 
     DeploymentGroupInfo.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "applicationName"))
     DeploymentGroupInfo.add_member(:deployment_group_id, Shapes::ShapeRef.new(shape: DeploymentGroupId, location_name: "deploymentGroupId"))
@@ -591,7 +666,13 @@ module Aws::CodeDeploy
 
     DeploymentGroupInfoList.member = Shapes::ShapeRef.new(shape: DeploymentGroupInfo)
 
+    DeploymentGroupLimitExceededException.struct_class = Types::DeploymentGroupLimitExceededException
+
+    DeploymentGroupNameRequiredException.struct_class = Types::DeploymentGroupNameRequiredException
+
     DeploymentGroupsList.member = Shapes::ShapeRef.new(shape: DeploymentGroupName)
+
+    DeploymentIdRequiredException.struct_class = Types::DeploymentIdRequiredException
 
     DeploymentInfo.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "applicationName"))
     DeploymentInfo.add_member(:deployment_group_name, Shapes::ShapeRef.new(shape: DeploymentGroupName, location_name: "deploymentGroupName"))
@@ -620,7 +701,14 @@ module Aws::CodeDeploy
     DeploymentInfo.add_member(:file_exists_behavior, Shapes::ShapeRef.new(shape: FileExistsBehavior, location_name: "fileExistsBehavior"))
     DeploymentInfo.add_member(:deployment_status_messages, Shapes::ShapeRef.new(shape: DeploymentStatusMessageList, location_name: "deploymentStatusMessages"))
     DeploymentInfo.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
+    DeploymentInfo.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     DeploymentInfo.struct_class = Types::DeploymentInfo
+
+    DeploymentIsNotInReadyStateException.struct_class = Types::DeploymentIsNotInReadyStateException
+
+    DeploymentLimitExceededException.struct_class = Types::DeploymentLimitExceededException
+
+    DeploymentNotStartedException.struct_class = Types::DeploymentNotStartedException
 
     DeploymentOverview.add_member(:pending, Shapes::ShapeRef.new(shape: InstanceCount, location_name: "Pending"))
     DeploymentOverview.add_member(:in_progress, Shapes::ShapeRef.new(shape: InstanceCount, location_name: "InProgress"))
@@ -646,9 +734,16 @@ module Aws::CodeDeploy
     DeploymentTarget.add_member(:instance_target, Shapes::ShapeRef.new(shape: InstanceTarget, location_name: "instanceTarget"))
     DeploymentTarget.add_member(:lambda_target, Shapes::ShapeRef.new(shape: LambdaTarget, location_name: "lambdaTarget"))
     DeploymentTarget.add_member(:ecs_target, Shapes::ShapeRef.new(shape: ECSTarget, location_name: "ecsTarget"))
+    DeploymentTarget.add_member(:cloud_formation_target, Shapes::ShapeRef.new(shape: CloudFormationTarget, location_name: "cloudFormationTarget"))
     DeploymentTarget.struct_class = Types::DeploymentTarget
 
+    DeploymentTargetDoesNotExistException.struct_class = Types::DeploymentTargetDoesNotExistException
+
+    DeploymentTargetIdRequiredException.struct_class = Types::DeploymentTargetIdRequiredException
+
     DeploymentTargetList.member = Shapes::ShapeRef.new(shape: DeploymentTarget)
+
+    DeploymentTargetListSizeExceededException.struct_class = Types::DeploymentTargetListSizeExceededException
 
     DeploymentsInfoList.member = Shapes::ShapeRef.new(shape: DeploymentInfo)
 
@@ -656,6 +751,8 @@ module Aws::CodeDeploy
 
     DeregisterOnPremisesInstanceInput.add_member(:instance_name, Shapes::ShapeRef.new(shape: InstanceName, required: true, location_name: "instanceName"))
     DeregisterOnPremisesInstanceInput.struct_class = Types::DeregisterOnPremisesInstanceInput
+
+    DescriptionTooLongException.struct_class = Types::DescriptionTooLongException
 
     Diagnostics.add_member(:error_code, Shapes::ShapeRef.new(shape: LifecycleErrorCode, location_name: "errorCode"))
     Diagnostics.add_member(:script_name, Shapes::ShapeRef.new(shape: ScriptName, location_name: "scriptName"))
@@ -680,6 +777,8 @@ module Aws::CodeDeploy
     ECSService.struct_class = Types::ECSService
 
     ECSServiceList.member = Shapes::ShapeRef.new(shape: ECSService)
+
+    ECSServiceMappingLimitExceededException.struct_class = Types::ECSServiceMappingLimitExceededException
 
     ECSTarget.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
     ECSTarget.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, location_name: "targetId"))
@@ -774,7 +873,11 @@ module Aws::CodeDeploy
     GetOnPremisesInstanceOutput.add_member(:instance_info, Shapes::ShapeRef.new(shape: InstanceInfo, location_name: "instanceInfo"))
     GetOnPremisesInstanceOutput.struct_class = Types::GetOnPremisesInstanceOutput
 
+    GitHubAccountTokenDoesNotExistException.struct_class = Types::GitHubAccountTokenDoesNotExistException
+
     GitHubAccountTokenNameList.member = Shapes::ShapeRef.new(shape: GitHubAccountTokenName)
+
+    GitHubAccountTokenNameRequiredException.struct_class = Types::GitHubAccountTokenNameRequiredException
 
     GitHubLocation.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
     GitHubLocation.add_member(:commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "commitId"))
@@ -782,6 +885,18 @@ module Aws::CodeDeploy
 
     GreenFleetProvisioningOption.add_member(:action, Shapes::ShapeRef.new(shape: GreenFleetProvisioningAction, location_name: "action"))
     GreenFleetProvisioningOption.struct_class = Types::GreenFleetProvisioningOption
+
+    IamArnRequiredException.struct_class = Types::IamArnRequiredException
+
+    IamSessionArnAlreadyRegisteredException.struct_class = Types::IamSessionArnAlreadyRegisteredException
+
+    IamUserArnAlreadyRegisteredException.struct_class = Types::IamUserArnAlreadyRegisteredException
+
+    IamUserArnRequiredException.struct_class = Types::IamUserArnRequiredException
+
+    InstanceDoesNotExistException.struct_class = Types::InstanceDoesNotExistException
+
+    InstanceIdRequiredException.struct_class = Types::InstanceIdRequiredException
 
     InstanceInfo.add_member(:instance_name, Shapes::ShapeRef.new(shape: InstanceName, location_name: "instanceName"))
     InstanceInfo.add_member(:iam_session_arn, Shapes::ShapeRef.new(shape: IamSessionArn, location_name: "iamSessionArn"))
@@ -794,7 +909,15 @@ module Aws::CodeDeploy
 
     InstanceInfoList.member = Shapes::ShapeRef.new(shape: InstanceInfo)
 
+    InstanceLimitExceededException.struct_class = Types::InstanceLimitExceededException
+
+    InstanceNameAlreadyRegisteredException.struct_class = Types::InstanceNameAlreadyRegisteredException
+
     InstanceNameList.member = Shapes::ShapeRef.new(shape: InstanceName)
+
+    InstanceNameRequiredException.struct_class = Types::InstanceNameRequiredException
+
+    InstanceNotRegisteredException.struct_class = Types::InstanceNotRegisteredException
 
     InstanceStatusList.member = Shapes::ShapeRef.new(shape: InstanceStatus, deprecated: true)
 
@@ -821,12 +944,134 @@ module Aws::CodeDeploy
 
     InstancesList.member = Shapes::ShapeRef.new(shape: InstanceId)
 
+    InvalidAlarmConfigException.struct_class = Types::InvalidAlarmConfigException
+
+    InvalidApplicationNameException.struct_class = Types::InvalidApplicationNameException
+
+    InvalidArnException.struct_class = Types::InvalidArnException
+
+    InvalidAutoRollbackConfigException.struct_class = Types::InvalidAutoRollbackConfigException
+
+    InvalidAutoScalingGroupException.struct_class = Types::InvalidAutoScalingGroupException
+
+    InvalidBlueGreenDeploymentConfigurationException.struct_class = Types::InvalidBlueGreenDeploymentConfigurationException
+
+    InvalidBucketNameFilterException.struct_class = Types::InvalidBucketNameFilterException
+
+    InvalidComputePlatformException.struct_class = Types::InvalidComputePlatformException
+
+    InvalidDeployedStateFilterException.struct_class = Types::InvalidDeployedStateFilterException
+
+    InvalidDeploymentConfigIdException.struct_class = Types::InvalidDeploymentConfigIdException
+
+    InvalidDeploymentConfigNameException.struct_class = Types::InvalidDeploymentConfigNameException
+
+    InvalidDeploymentGroupNameException.struct_class = Types::InvalidDeploymentGroupNameException
+
+    InvalidDeploymentIdException.struct_class = Types::InvalidDeploymentIdException
+
+    InvalidDeploymentInstanceTypeException.struct_class = Types::InvalidDeploymentInstanceTypeException
+
+    InvalidDeploymentStatusException.struct_class = Types::InvalidDeploymentStatusException
+
+    InvalidDeploymentStyleException.struct_class = Types::InvalidDeploymentStyleException
+
+    InvalidDeploymentTargetIdException.struct_class = Types::InvalidDeploymentTargetIdException
+
+    InvalidDeploymentWaitTypeException.struct_class = Types::InvalidDeploymentWaitTypeException
+
+    InvalidEC2TagCombinationException.struct_class = Types::InvalidEC2TagCombinationException
+
+    InvalidEC2TagException.struct_class = Types::InvalidEC2TagException
+
+    InvalidECSServiceException.struct_class = Types::InvalidECSServiceException
+
+    InvalidExternalIdException.struct_class = Types::InvalidExternalIdException
+
+    InvalidFileExistsBehaviorException.struct_class = Types::InvalidFileExistsBehaviorException
+
+    InvalidGitHubAccountTokenException.struct_class = Types::InvalidGitHubAccountTokenException
+
+    InvalidGitHubAccountTokenNameException.struct_class = Types::InvalidGitHubAccountTokenNameException
+
+    InvalidIamSessionArnException.struct_class = Types::InvalidIamSessionArnException
+
+    InvalidIamUserArnException.struct_class = Types::InvalidIamUserArnException
+
+    InvalidIgnoreApplicationStopFailuresValueException.struct_class = Types::InvalidIgnoreApplicationStopFailuresValueException
+
+    InvalidInputException.struct_class = Types::InvalidInputException
+
+    InvalidInstanceIdException.struct_class = Types::InvalidInstanceIdException
+
+    InvalidInstanceNameException.struct_class = Types::InvalidInstanceNameException
+
+    InvalidInstanceStatusException.struct_class = Types::InvalidInstanceStatusException
+
+    InvalidInstanceTypeException.struct_class = Types::InvalidInstanceTypeException
+
+    InvalidKeyPrefixFilterException.struct_class = Types::InvalidKeyPrefixFilterException
+
+    InvalidLifecycleEventHookExecutionIdException.struct_class = Types::InvalidLifecycleEventHookExecutionIdException
+
+    InvalidLifecycleEventHookExecutionStatusException.struct_class = Types::InvalidLifecycleEventHookExecutionStatusException
+
+    InvalidLoadBalancerInfoException.struct_class = Types::InvalidLoadBalancerInfoException
+
+    InvalidMinimumHealthyHostValueException.struct_class = Types::InvalidMinimumHealthyHostValueException
+
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidOnPremisesTagCombinationException.struct_class = Types::InvalidOnPremisesTagCombinationException
+
+    InvalidOperationException.struct_class = Types::InvalidOperationException
+
+    InvalidRegistrationStatusException.struct_class = Types::InvalidRegistrationStatusException
+
+    InvalidRevisionException.struct_class = Types::InvalidRevisionException
+
+    InvalidRoleException.struct_class = Types::InvalidRoleException
+
+    InvalidSortByException.struct_class = Types::InvalidSortByException
+
+    InvalidSortOrderException.struct_class = Types::InvalidSortOrderException
+
+    InvalidTagException.struct_class = Types::InvalidTagException
+
+    InvalidTagFilterException.struct_class = Types::InvalidTagFilterException
+
+    InvalidTagsToAddException.struct_class = Types::InvalidTagsToAddException
+
+    InvalidTargetException.struct_class = Types::InvalidTargetException
+
+    InvalidTargetFilterNameException.struct_class = Types::InvalidTargetFilterNameException
+
+    InvalidTargetGroupPairException.struct_class = Types::InvalidTargetGroupPairException
+
+    InvalidTargetInstancesException.struct_class = Types::InvalidTargetInstancesException
+
+    InvalidTimeRangeException.struct_class = Types::InvalidTimeRangeException
+
+    InvalidTrafficRoutingConfigurationException.struct_class = Types::InvalidTrafficRoutingConfigurationException
+
+    InvalidTriggerConfigException.struct_class = Types::InvalidTriggerConfigException
+
+    InvalidUpdateOutdatedInstancesOnlyValueException.struct_class = Types::InvalidUpdateOutdatedInstancesOnlyValueException
+
+    LambdaFunctionInfo.add_member(:function_name, Shapes::ShapeRef.new(shape: LambdaFunctionName, location_name: "functionName"))
+    LambdaFunctionInfo.add_member(:function_alias, Shapes::ShapeRef.new(shape: LambdaFunctionAlias, location_name: "functionAlias"))
+    LambdaFunctionInfo.add_member(:current_version, Shapes::ShapeRef.new(shape: Version, location_name: "currentVersion"))
+    LambdaFunctionInfo.add_member(:target_version, Shapes::ShapeRef.new(shape: Version, location_name: "targetVersion"))
+    LambdaFunctionInfo.add_member(:target_version_weight, Shapes::ShapeRef.new(shape: TrafficWeight, location_name: "targetVersionWeight"))
+    LambdaFunctionInfo.struct_class = Types::LambdaFunctionInfo
+
     LambdaTarget.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
     LambdaTarget.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, location_name: "targetId"))
     LambdaTarget.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetArn, location_name: "targetArn"))
     LambdaTarget.add_member(:status, Shapes::ShapeRef.new(shape: TargetStatus, location_name: "status"))
     LambdaTarget.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Time, location_name: "lastUpdatedAt"))
     LambdaTarget.add_member(:lifecycle_events, Shapes::ShapeRef.new(shape: LifecycleEventList, location_name: "lifecycleEvents"))
+    LambdaTarget.add_member(:lambda_function_info, Shapes::ShapeRef.new(shape: LambdaFunctionInfo, location_name: "lambdaFunctionInfo"))
     LambdaTarget.struct_class = Types::LambdaTarget
 
     LastDeploymentInfo.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
@@ -842,7 +1087,11 @@ module Aws::CodeDeploy
     LifecycleEvent.add_member(:status, Shapes::ShapeRef.new(shape: LifecycleEventStatus, location_name: "status"))
     LifecycleEvent.struct_class = Types::LifecycleEvent
 
+    LifecycleEventAlreadyCompletedException.struct_class = Types::LifecycleEventAlreadyCompletedException
+
     LifecycleEventList.member = Shapes::ShapeRef.new(shape: LifecycleEvent)
+
+    LifecycleHookLimitExceededException.struct_class = Types::LifecycleHookLimitExceededException
 
     ListApplicationRevisionsInput.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "applicationName"))
     ListApplicationRevisionsInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: ApplicationRevisionSortBy, location_name: "sortBy"))
@@ -901,6 +1150,7 @@ module Aws::CodeDeploy
 
     ListDeploymentsInput.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "applicationName"))
     ListDeploymentsInput.add_member(:deployment_group_name, Shapes::ShapeRef.new(shape: DeploymentGroupName, location_name: "deploymentGroupName"))
+    ListDeploymentsInput.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     ListDeploymentsInput.add_member(:include_only_statuses, Shapes::ShapeRef.new(shape: DeploymentStatusList, location_name: "includeOnlyStatuses"))
     ListDeploymentsInput.add_member(:create_time_range, Shapes::ShapeRef.new(shape: TimeRange, location_name: "createTimeRange"))
     ListDeploymentsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -926,6 +1176,14 @@ module Aws::CodeDeploy
     ListOnPremisesInstancesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListOnPremisesInstancesOutput.struct_class = Types::ListOnPremisesInstancesOutput
 
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
     ListenerArnList.member = Shapes::ShapeRef.new(shape: ListenerArn)
 
     LoadBalancerInfo.add_member(:elb_info_list, Shapes::ShapeRef.new(shape: ELBInfoList, location_name: "elbInfoList"))
@@ -937,10 +1195,14 @@ module Aws::CodeDeploy
     MinimumHealthyHosts.add_member(:type, Shapes::ShapeRef.new(shape: MinimumHealthyHostsType, location_name: "type"))
     MinimumHealthyHosts.struct_class = Types::MinimumHealthyHosts
 
+    MultipleIamArnsProvidedException.struct_class = Types::MultipleIamArnsProvidedException
+
     OnPremisesTagSet.add_member(:on_premises_tag_set_list, Shapes::ShapeRef.new(shape: OnPremisesTagSetList, location_name: "onPremisesTagSetList"))
     OnPremisesTagSet.struct_class = Types::OnPremisesTagSet
 
     OnPremisesTagSetList.member = Shapes::ShapeRef.new(shape: TagFilterList)
+
+    OperationNotSupportedException.struct_class = Types::OperationNotSupportedException
 
     PutLifecycleEventHookExecutionStatusInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
     PutLifecycleEventHookExecutionStatusInput.add_member(:lifecycle_event_hook_execution_id, Shapes::ShapeRef.new(shape: LifecycleEventHookExecutionId, location_name: "lifecycleEventHookExecutionId"))
@@ -968,6 +1230,12 @@ module Aws::CodeDeploy
     RemoveTagsFromOnPremisesInstancesInput.add_member(:instance_names, Shapes::ShapeRef.new(shape: InstanceNameList, required: true, location_name: "instanceNames"))
     RemoveTagsFromOnPremisesInstancesInput.struct_class = Types::RemoveTagsFromOnPremisesInstancesInput
 
+    ResourceArnRequiredException.struct_class = Types::ResourceArnRequiredException
+
+    ResourceValidationException.struct_class = Types::ResourceValidationException
+
+    RevisionDoesNotExistException.struct_class = Types::RevisionDoesNotExistException
+
     RevisionInfo.add_member(:revision_location, Shapes::ShapeRef.new(shape: RevisionLocation, location_name: "revisionLocation"))
     RevisionInfo.add_member(:generic_revision_info, Shapes::ShapeRef.new(shape: GenericRevisionInfo, location_name: "genericRevisionInfo"))
     RevisionInfo.struct_class = Types::RevisionInfo
@@ -982,6 +1250,10 @@ module Aws::CodeDeploy
     RevisionLocation.struct_class = Types::RevisionLocation
 
     RevisionLocationList.member = Shapes::ShapeRef.new(shape: RevisionLocation)
+
+    RevisionRequiredException.struct_class = Types::RevisionRequiredException
+
+    RoleRequiredException.struct_class = Types::RoleRequiredException
 
     RollbackInfo.add_member(:rollback_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "rollbackDeploymentId"))
     RollbackInfo.add_member(:rollback_triggering_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "rollbackTriggeringDeploymentId"))
@@ -1017,7 +1289,21 @@ module Aws::CodeDeploy
 
     TagFilterList.member = Shapes::ShapeRef.new(shape: TagFilter)
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: Key)
+
+    TagLimitExceededException.struct_class = Types::TagLimitExceededException
+
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagRequiredException.struct_class = Types::TagRequiredException
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
+    TagSetListLimitExceededException.struct_class = Types::TagSetListLimitExceededException
 
     TargetFilters.key = Shapes::ShapeRef.new(shape: TargetFilterName)
     TargetFilters.value = Shapes::ShapeRef.new(shape: FilterValueList)
@@ -1040,6 +1326,8 @@ module Aws::CodeDeploy
     TargetInstances.add_member(:auto_scaling_groups, Shapes::ShapeRef.new(shape: AutoScalingGroupNameList, location_name: "autoScalingGroups"))
     TargetInstances.add_member(:ec2_tag_set, Shapes::ShapeRef.new(shape: EC2TagSet, location_name: "ec2TagSet"))
     TargetInstances.struct_class = Types::TargetInstances
+
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     TimeBasedCanary.add_member(:canary_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "canaryPercentage"))
     TimeBasedCanary.add_member(:canary_interval, Shapes::ShapeRef.new(shape: WaitTimeInMins, location_name: "canaryInterval"))
@@ -1069,6 +1357,16 @@ module Aws::CodeDeploy
     TriggerConfigList.member = Shapes::ShapeRef.new(shape: TriggerConfig)
 
     TriggerEventTypeList.member = Shapes::ShapeRef.new(shape: TriggerEventType)
+
+    TriggerTargetsLimitExceededException.struct_class = Types::TriggerTargetsLimitExceededException
+
+    UnsupportedActionForDeploymentTypeException.struct_class = Types::UnsupportedActionForDeploymentTypeException
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     UpdateApplicationInput.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "applicationName"))
     UpdateApplicationInput.add_member(:new_application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "newApplicationName"))
@@ -1196,10 +1494,12 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentIdException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentIdRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DeploymentNotStartedException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentTargetIdRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentTargetIdException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentTargetDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentTargetListSizeExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InstanceDoesNotExistException)
       end)
 
       api.add_operation(:batch_get_deployments, Seahorse::Model::Operation.new.tap do |o|
@@ -1251,6 +1551,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: ApplicationAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ApplicationLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidComputePlatformException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagsToAddException)
       end)
 
       api.add_operation(:create_deployment, Seahorse::Model::Operation.new.tap do |o|
@@ -1282,6 +1583,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidUpdateOutdatedInstancesOnlyValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIgnoreApplicationStopFailuresValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGitHubAccountTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTrafficRoutingConfigurationException)
       end)
 
       api.add_operation(:create_deployment_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1336,6 +1638,8 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidECSServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTargetGroupPairException)
         o.errors << Shapes::ShapeRef.new(shape: ECSServiceMappingLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagsToAddException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTrafficRoutingConfigurationException)
       end)
 
       api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1346,6 +1650,7 @@ module Aws::CodeDeploy
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ApplicationNameRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationNameException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
       end)
 
       api.add_operation(:delete_deployment_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1384,6 +1689,14 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidGitHubAccountTokenNameException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceValidationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+      end)
+
+      api.add_operation(:delete_resources_by_external_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcesByExternalId"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcesByExternalIdInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcesByExternalIdOutput)
       end)
 
       api.add_operation(:deregister_on_premises_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -1484,6 +1797,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentIdException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentIdRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DeploymentNotStartedException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentTargetIdRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentTargetIdException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentTargetDoesNotExistException)
@@ -1624,6 +1938,8 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidTimeRangeException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentStatusException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidExternalIdException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o[:pager] = Aws::Pager.new(
           tokens: {
             "next_token" => "next_token"
@@ -1651,6 +1967,17 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidRegistrationStatusException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFilterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ArnNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceArnRequiredException)
       end)
 
       api.add_operation(:put_lifecycle_event_hook_execution_status, Seahorse::Model::Operation.new.tap do |o|
@@ -1741,6 +2068,39 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: DeploymentGroupDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentAlreadyCompletedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentIdException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedActionForDeploymentTypeException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceArnRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: ApplicationDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DeploymentGroupDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DeploymentConfigDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: TagRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagsToAddException)
+        o.errors << Shapes::ShapeRef.new(shape: ArnNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceArnRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: ApplicationDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DeploymentGroupDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DeploymentConfigDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: TagRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagsToAddException)
+        o.errors << Shapes::ShapeRef.new(shape: ArnNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
       end)
 
       api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1791,6 +2151,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidECSServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTargetGroupPairException)
         o.errors << Shapes::ShapeRef.new(shape: ECSServiceMappingLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTrafficRoutingConfigurationException)
       end)
     end
 

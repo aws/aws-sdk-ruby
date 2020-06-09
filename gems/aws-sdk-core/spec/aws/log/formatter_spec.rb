@@ -111,6 +111,8 @@ module Aws
           response.context.http_response.body = '-' * 1024 * 1024
           formatted = format(':http_response_body', max_string_size: 5)
           expect(formatted).to eq("#<String \"-----\" ... (1048576 bytes)>")
+          response.context.http_response.body = Seahorse::Client::BlockIO.new
+          expect(format(':http_response_body')).to eq('')
         end
 
         it 'provides a :error_class replacement' do

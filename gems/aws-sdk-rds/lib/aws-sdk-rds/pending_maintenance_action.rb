@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RDS
+
   class PendingMaintenanceAction
 
     extend Aws::Deprecations
@@ -24,6 +25,7 @@ module Aws::RDS
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -41,8 +43,7 @@ module Aws::RDS
 
     # The date of the maintenance window when the action is applied. The
     # maintenance action is applied to the resource during its first
-    # maintenance window after this date. If this date is specified, any
-    # `next-maintenance` opt-in requests are ignored.
+    # maintenance window after this date.
     # @return [Time]
     def auto_applied_after_date
       data[:auto_applied_after_date]
@@ -50,8 +51,7 @@ module Aws::RDS
 
     # The date when the maintenance action is automatically applied. The
     # maintenance action is applied to the resource on this date regardless
-    # of the maintenance window for the resource. If this date is specified,
-    # any `immediate` opt-in requests are ignored.
+    # of the maintenance window for the resource.
     # @return [Time]
     def forced_apply_date
       data[:forced_apply_date]
@@ -66,7 +66,7 @@ module Aws::RDS
 
     # The effective date when the pending maintenance action is applied to
     # the resource. This date takes into account opt-in requests received
-    # from the ApplyPendingMaintenanceAction API, the
+    # from the `ApplyPendingMaintenanceAction` API, the
     # `AutoAppliedAfterDate`, and the `ForcedApplyDate`. This value is blank
     # if an opt-in request has not been received and nothing has been
     # specified as `AutoAppliedAfterDate` or `ForcedApplyDate`.
@@ -116,7 +116,8 @@ module Aws::RDS
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -129,13 +130,15 @@ module Aws::RDS
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -166,17 +169,16 @@ module Aws::RDS
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #

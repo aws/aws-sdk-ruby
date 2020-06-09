@@ -13,6 +13,7 @@ module Aws::LexModelBuildingService
 
     AliasName = Shapes::StringShape.new(name: 'AliasName')
     AliasNameOrListAll = Shapes::StringShape.new(name: 'AliasNameOrListAll')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -40,6 +41,8 @@ module Aws::LexModelBuildingService
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentString = Shapes::StringShape.new(name: 'ContentString')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    ConversationLogsRequest = Shapes::StructureShape.new(name: 'ConversationLogsRequest')
+    ConversationLogsResponse = Shapes::StructureShape.new(name: 'ConversationLogsResponse')
     Count = Shapes::IntegerShape.new(name: 'Count')
     CreateBotVersionRequest = Shapes::StructureShape.new(name: 'CreateBotVersionRequest')
     CreateBotVersionResponse = Shapes::StructureShape.new(name: 'CreateBotVersionResponse')
@@ -58,6 +61,7 @@ module Aws::LexModelBuildingService
     DeleteSlotTypeVersionRequest = Shapes::StructureShape.new(name: 'DeleteSlotTypeVersionRequest')
     DeleteUtterancesRequest = Shapes::StructureShape.new(name: 'DeleteUtterancesRequest')
     Description = Shapes::StringShape.new(name: 'Description')
+    Destination = Shapes::StringShape.new(name: 'Destination')
     EnumerationValue = Shapes::StructureShape.new(name: 'EnumerationValue')
     EnumerationValues = Shapes::ListShape.new(name: 'EnumerationValues')
     ExportStatus = Shapes::StringShape.new(name: 'ExportStatus')
@@ -104,6 +108,7 @@ module Aws::LexModelBuildingService
     GetUtterancesViewRequest = Shapes::StructureShape.new(name: 'GetUtterancesViewRequest')
     GetUtterancesViewResponse = Shapes::StructureShape.new(name: 'GetUtterancesViewResponse')
     GroupNumber = Shapes::IntegerShape.new(name: 'GroupNumber')
+    IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     ImportStatus = Shapes::StringShape.new(name: 'ImportStatus')
     Intent = Shapes::StructureShape.new(name: 'Intent')
     IntentList = Shapes::ListShape.new(name: 'IntentList')
@@ -112,12 +117,20 @@ module Aws::LexModelBuildingService
     IntentName = Shapes::StringShape.new(name: 'IntentName')
     IntentUtteranceList = Shapes::ListShape.new(name: 'IntentUtteranceList')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LambdaARN = Shapes::StringShape.new(name: 'LambdaARN')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListOfUtterance = Shapes::ListShape.new(name: 'ListOfUtterance')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListsOfUtterances = Shapes::ListShape.new(name: 'ListsOfUtterances')
     Locale = Shapes::StringShape.new(name: 'Locale')
     LocaleList = Shapes::ListShape.new(name: 'LocaleList')
+    LogSettingsRequest = Shapes::StructureShape.new(name: 'LogSettingsRequest')
+    LogSettingsRequestList = Shapes::ListShape.new(name: 'LogSettingsRequestList')
+    LogSettingsResponse = Shapes::StructureShape.new(name: 'LogSettingsResponse')
+    LogSettingsResponseList = Shapes::ListShape.new(name: 'LogSettingsResponseList')
+    LogType = Shapes::StringShape.new(name: 'LogType')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MergeStrategy = Shapes::StringShape.new(name: 'MergeStrategy')
     Message = Shapes::StructureShape.new(name: 'Message')
@@ -127,6 +140,7 @@ module Aws::LexModelBuildingService
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NumericalVersion = Shapes::StringShape.new(name: 'NumericalVersion')
+    ObfuscationSetting = Shapes::StringShape.new(name: 'ObfuscationSetting')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     Priority = Shapes::IntegerShape.new(name: 'Priority')
     ProcessBehavior = Shapes::StringShape.new(name: 'ProcessBehavior')
@@ -141,7 +155,10 @@ module Aws::LexModelBuildingService
     PutSlotTypeRequest = Shapes::StructureShape.new(name: 'PutSlotTypeRequest')
     PutSlotTypeResponse = Shapes::StructureShape.new(name: 'PutSlotTypeResponse')
     ReferenceType = Shapes::StringShape.new(name: 'ReferenceType')
+    RegexPattern = Shapes::StringShape.new(name: 'RegexPattern')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
+    ResourcePrefix = Shapes::StringShape.new(name: 'ResourcePrefix')
     ResourceReference = Shapes::StructureShape.new(name: 'ResourceReference')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResponseCard = Shapes::StringShape.new(name: 'ResponseCard')
@@ -150,9 +167,12 @@ module Aws::LexModelBuildingService
     SlotConstraint = Shapes::StringShape.new(name: 'SlotConstraint')
     SlotList = Shapes::ListShape.new(name: 'SlotList')
     SlotName = Shapes::StringShape.new(name: 'SlotName')
+    SlotTypeConfiguration = Shapes::StructureShape.new(name: 'SlotTypeConfiguration')
+    SlotTypeConfigurations = Shapes::ListShape.new(name: 'SlotTypeConfigurations')
     SlotTypeMetadata = Shapes::StructureShape.new(name: 'SlotTypeMetadata')
     SlotTypeMetadataList = Shapes::ListShape.new(name: 'SlotTypeMetadataList')
     SlotTypeName = Shapes::StringShape.new(name: 'SlotTypeName')
+    SlotTypeRegexConfiguration = Shapes::StructureShape.new(name: 'SlotTypeRegexConfiguration')
     SlotUtteranceList = Shapes::ListShape.new(name: 'SlotUtteranceList')
     SlotValueSelectionStrategy = Shapes::StringShape.new(name: 'SlotValueSelectionStrategy')
     StartImportRequest = Shapes::StructureShape.new(name: 'StartImportRequest')
@@ -163,7 +183,16 @@ module Aws::LexModelBuildingService
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     SynonymList = Shapes::ListShape.new(name: 'SynonymList')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UserId = Shapes::StringShape.new(name: 'UserId')
     Utterance = Shapes::StringShape.new(name: 'Utterance')
     UtteranceData = Shapes::StructureShape.new(name: 'UtteranceData')
@@ -172,6 +201,9 @@ module Aws::LexModelBuildingService
     Value = Shapes::StringShape.new(name: 'Value')
     Version = Shapes::StringShape.new(name: 'Version')
 
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     BotAliasMetadata.add_member(:name, Shapes::ShapeRef.new(shape: AliasName, location_name: "name"))
     BotAliasMetadata.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     BotAliasMetadata.add_member(:bot_version, Shapes::ShapeRef.new(shape: Version, location_name: "botVersion"))
@@ -179,6 +211,7 @@ module Aws::LexModelBuildingService
     BotAliasMetadata.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
     BotAliasMetadata.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     BotAliasMetadata.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    BotAliasMetadata.add_member(:conversation_logs, Shapes::ShapeRef.new(shape: ConversationLogsResponse, location_name: "conversationLogs"))
     BotAliasMetadata.struct_class = Types::BotAliasMetadata
 
     BotAliasMetadataList.member = Shapes::ShapeRef.new(shape: BotAliasMetadata)
@@ -232,6 +265,17 @@ module Aws::LexModelBuildingService
     CodeHook.add_member(:message_version, Shapes::ShapeRef.new(shape: MessageVersion, required: true, location_name: "messageVersion"))
     CodeHook.struct_class = Types::CodeHook
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
+
+    ConversationLogsRequest.add_member(:log_settings, Shapes::ShapeRef.new(shape: LogSettingsRequestList, required: true, location_name: "logSettings"))
+    ConversationLogsRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "iamRoleArn"))
+    ConversationLogsRequest.struct_class = Types::ConversationLogsRequest
+
+    ConversationLogsResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LogSettingsResponseList, location_name: "logSettings"))
+    ConversationLogsResponse.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "iamRoleArn"))
+    ConversationLogsResponse.struct_class = Types::ConversationLogsResponse
+
     CreateBotVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "name"))
     CreateBotVersionRequest.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     CreateBotVersionRequest.struct_class = Types::CreateBotVersionRequest
@@ -251,6 +295,7 @@ module Aws::LexModelBuildingService
     CreateBotVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     CreateBotVersionResponse.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     CreateBotVersionResponse.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
+    CreateBotVersionResponse.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
     CreateBotVersionResponse.struct_class = Types::CreateBotVersionResponse
 
     CreateIntentVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))
@@ -286,6 +331,8 @@ module Aws::LexModelBuildingService
     CreateSlotTypeVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     CreateSlotTypeVersionResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     CreateSlotTypeVersionResponse.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
+    CreateSlotTypeVersionResponse.add_member(:parent_slot_type_signature, Shapes::ShapeRef.new(shape: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
+    CreateSlotTypeVersionResponse.add_member(:slot_type_configurations, Shapes::ShapeRef.new(shape: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
     CreateSlotTypeVersionResponse.struct_class = Types::CreateSlotTypeVersionResponse
 
     DeleteBotAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: AliasName, required: true, location: "uri", location_name: "name"))
@@ -347,6 +394,7 @@ module Aws::LexModelBuildingService
     GetBotAliasResponse.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
     GetBotAliasResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     GetBotAliasResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    GetBotAliasResponse.add_member(:conversation_logs, Shapes::ShapeRef.new(shape: ConversationLogsResponse, location_name: "conversationLogs"))
     GetBotAliasResponse.struct_class = Types::GetBotAliasResponse
 
     GetBotAliasesRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "botName"))
@@ -405,6 +453,7 @@ module Aws::LexModelBuildingService
     GetBotResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     GetBotResponse.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     GetBotResponse.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
+    GetBotResponse.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
     GetBotResponse.struct_class = Types::GetBotResponse
 
     GetBotVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "name"))
@@ -531,6 +580,8 @@ module Aws::LexModelBuildingService
     GetSlotTypeResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     GetSlotTypeResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     GetSlotTypeResponse.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
+    GetSlotTypeResponse.add_member(:parent_slot_type_signature, Shapes::ShapeRef.new(shape: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
+    GetSlotTypeResponse.add_member(:slot_type_configurations, Shapes::ShapeRef.new(shape: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
     GetSlotTypeResponse.struct_class = Types::GetSlotTypeResponse
 
     GetSlotTypeVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, required: true, location: "uri", location_name: "name"))
@@ -577,11 +628,41 @@ module Aws::LexModelBuildingService
 
     IntentUtteranceList.member = Shapes::ShapeRef.new(shape: Utterance)
 
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    LimitExceededException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Retry-After"))
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListOfUtterance.member = Shapes::ShapeRef.new(shape: UtteranceData)
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     ListsOfUtterances.member = Shapes::ShapeRef.new(shape: UtteranceList)
 
     LocaleList.member = Shapes::ShapeRef.new(shape: Locale)
+
+    LogSettingsRequest.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, required: true, location_name: "logType"))
+    LogSettingsRequest.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "destination"))
+    LogSettingsRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    LogSettingsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+    LogSettingsRequest.struct_class = Types::LogSettingsRequest
+
+    LogSettingsRequestList.member = Shapes::ShapeRef.new(shape: LogSettingsRequest)
+
+    LogSettingsResponse.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location_name: "logType"))
+    LogSettingsResponse.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, location_name: "destination"))
+    LogSettingsResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    LogSettingsResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn"))
+    LogSettingsResponse.add_member(:resource_prefix, Shapes::ShapeRef.new(shape: ResourcePrefix, location_name: "resourcePrefix"))
+    LogSettingsResponse.struct_class = Types::LogSettingsResponse
+
+    LogSettingsResponseList.member = Shapes::ShapeRef.new(shape: LogSettingsResponse)
 
     Message.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, required: true, location_name: "contentType"))
     Message.add_member(:content, Shapes::ShapeRef.new(shape: ContentString, required: true, location_name: "content"))
@@ -589,6 +670,12 @@ module Aws::LexModelBuildingService
     Message.struct_class = Types::Message
 
     MessageList.member = Shapes::ShapeRef.new(shape: Message)
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
+    PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    PreconditionFailedException.struct_class = Types::PreconditionFailedException
 
     Prompt.add_member(:messages, Shapes::ShapeRef.new(shape: MessageList, required: true, location_name: "messages"))
     Prompt.add_member(:max_attempts, Shapes::ShapeRef.new(shape: PromptMaxAttempts, required: true, location_name: "maxAttempts"))
@@ -600,6 +687,8 @@ module Aws::LexModelBuildingService
     PutBotAliasRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "botVersion"))
     PutBotAliasRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "botName"))
     PutBotAliasRequest.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    PutBotAliasRequest.add_member(:conversation_logs, Shapes::ShapeRef.new(shape: ConversationLogsRequest, location_name: "conversationLogs"))
+    PutBotAliasRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     PutBotAliasRequest.struct_class = Types::PutBotAliasRequest
 
     PutBotAliasResponse.add_member(:name, Shapes::ShapeRef.new(shape: AliasName, location_name: "name"))
@@ -609,6 +698,8 @@ module Aws::LexModelBuildingService
     PutBotAliasResponse.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
     PutBotAliasResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     PutBotAliasResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    PutBotAliasResponse.add_member(:conversation_logs, Shapes::ShapeRef.new(shape: ConversationLogsResponse, location_name: "conversationLogs"))
+    PutBotAliasResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     PutBotAliasResponse.struct_class = Types::PutBotAliasResponse
 
     PutBotRequest.add_member(:name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "name"))
@@ -622,7 +713,9 @@ module Aws::LexModelBuildingService
     PutBotRequest.add_member(:process_behavior, Shapes::ShapeRef.new(shape: ProcessBehavior, location_name: "processBehavior"))
     PutBotRequest.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, required: true, location_name: "locale"))
     PutBotRequest.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "childDirected"))
+    PutBotRequest.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
     PutBotRequest.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
+    PutBotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     PutBotRequest.struct_class = Types::PutBotRequest
 
     PutBotResponse.add_member(:name, Shapes::ShapeRef.new(shape: BotName, location_name: "name"))
@@ -641,6 +734,8 @@ module Aws::LexModelBuildingService
     PutBotResponse.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     PutBotResponse.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
     PutBotResponse.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
+    PutBotResponse.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
+    PutBotResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     PutBotResponse.struct_class = Types::PutBotResponse
 
     PutIntentRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))
@@ -682,6 +777,8 @@ module Aws::LexModelBuildingService
     PutSlotTypeRequest.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     PutSlotTypeRequest.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
     PutSlotTypeRequest.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
+    PutSlotTypeRequest.add_member(:parent_slot_type_signature, Shapes::ShapeRef.new(shape: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
+    PutSlotTypeRequest.add_member(:slot_type_configurations, Shapes::ShapeRef.new(shape: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
     PutSlotTypeRequest.struct_class = Types::PutSlotTypeRequest
 
     PutSlotTypeResponse.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name"))
@@ -693,7 +790,13 @@ module Aws::LexModelBuildingService
     PutSlotTypeResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     PutSlotTypeResponse.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
     PutSlotTypeResponse.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
+    PutSlotTypeResponse.add_member(:parent_slot_type_signature, Shapes::ShapeRef.new(shape: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
+    PutSlotTypeResponse.add_member(:slot_type_configurations, Shapes::ShapeRef.new(shape: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
     PutSlotTypeResponse.struct_class = Types::PutSlotTypeResponse
+
+    ResourceInUseException.add_member(:reference_type, Shapes::ShapeRef.new(shape: ReferenceType, location_name: "referenceType"))
+    ResourceInUseException.add_member(:example_reference, Shapes::ShapeRef.new(shape: ResourceReference, location_name: "exampleReference"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
 
     ResourceReference.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     ResourceReference.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
@@ -708,9 +811,15 @@ module Aws::LexModelBuildingService
     Slot.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "priority"))
     Slot.add_member(:sample_utterances, Shapes::ShapeRef.new(shape: SlotUtteranceList, location_name: "sampleUtterances"))
     Slot.add_member(:response_card, Shapes::ShapeRef.new(shape: ResponseCard, location_name: "responseCard"))
+    Slot.add_member(:obfuscation_setting, Shapes::ShapeRef.new(shape: ObfuscationSetting, location_name: "obfuscationSetting"))
     Slot.struct_class = Types::Slot
 
     SlotList.member = Shapes::ShapeRef.new(shape: Slot)
+
+    SlotTypeConfiguration.add_member(:regex_configuration, Shapes::ShapeRef.new(shape: SlotTypeRegexConfiguration, location_name: "regexConfiguration"))
+    SlotTypeConfiguration.struct_class = Types::SlotTypeConfiguration
+
+    SlotTypeConfigurations.member = Shapes::ShapeRef.new(shape: SlotTypeConfiguration)
 
     SlotTypeMetadata.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name"))
     SlotTypeMetadata.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -721,11 +830,15 @@ module Aws::LexModelBuildingService
 
     SlotTypeMetadataList.member = Shapes::ShapeRef.new(shape: SlotTypeMetadata)
 
+    SlotTypeRegexConfiguration.add_member(:pattern, Shapes::ShapeRef.new(shape: RegexPattern, required: true, location_name: "pattern"))
+    SlotTypeRegexConfiguration.struct_class = Types::SlotTypeRegexConfiguration
+
     SlotUtteranceList.member = Shapes::ShapeRef.new(shape: Utterance)
 
     StartImportRequest.add_member(:payload, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "payload"))
     StartImportRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     StartImportRequest.add_member(:merge_strategy, Shapes::ShapeRef.new(shape: MergeStrategy, required: true, location_name: "mergeStrategy"))
+    StartImportRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     StartImportRequest.struct_class = Types::StartImportRequest
 
     StartImportResponse.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -733,6 +846,7 @@ module Aws::LexModelBuildingService
     StartImportResponse.add_member(:merge_strategy, Shapes::ShapeRef.new(shape: MergeStrategy, location_name: "mergeStrategy"))
     StartImportResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: String, location_name: "importId"))
     StartImportResponse.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "importStatus"))
+    StartImportResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     StartImportResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     StartImportResponse.struct_class = Types::StartImportResponse
 
@@ -743,6 +857,26 @@ module Aws::LexModelBuildingService
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
     SynonymList.member = Shapes::ShapeRef.new(shape: Value)
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UtteranceData.add_member(:utterance_string, Shapes::ShapeRef.new(shape: UtteranceString, location_name: "utteranceString"))
     UtteranceData.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "count"))
@@ -1221,6 +1355,18 @@ module Aws::LexModelBuildingService
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:put_bot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBot"
         o.http_method = "PUT"
@@ -1282,6 +1428,32 @@ module Aws::LexModelBuildingService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
     end
 

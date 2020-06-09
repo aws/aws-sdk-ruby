@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'AWS SDK for Ruby - Elastic Load Balancing v2'
   spec.description   = 'Official AWS Ruby gem for Elastic Load Balancing (Elastic Load Balancing v2). This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
-  spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
+  spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
   spec.email         = ['trevrowe@amazon.com']
   spec.require_paths = ['lib']
@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-elasticloadbalancingv2/CHANGELOG.md'
   }
 
-  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.39.0')
-  spec.add_dependency('aws-sigv4', '~> 1.0')
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.71.0')
+  spec.add_dependency('aws-sigv4', '~> 1.1')
 
 end

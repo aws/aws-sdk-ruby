@@ -23,12 +23,25 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:costandusagereportservice)
 
 module Aws::CostandUsageReportService
+  # An API client for CostandUsageReportService.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::CostandUsageReportService::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +68,7 @@ module Aws::CostandUsageReportService
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +105,7 @@ module Aws::CostandUsageReportService
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +120,12 @@ module Aws::CostandUsageReportService
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +133,10 @@ module Aws::CostandUsageReportService
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +150,10 @@ module Aws::CostandUsageReportService
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +161,7 @@ module Aws::CostandUsageReportService
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +176,7 @@ module Aws::CostandUsageReportService
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +188,29 @@ module Aws::CostandUsageReportService
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +218,30 @@ module Aws::CostandUsageReportService
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,21 +270,72 @@ module Aws::CostandUsageReportService
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
 
-    # Delete a specified report definition
+    # Deletes the specified report.
     #
     # @option params [String] :report_name
-    #   Preferred name for a report, it has to be unique. Must starts with a
-    #   number/letter, case sensitive. Limited to 256 characters.
+    #   The name of the report that you want to create. The name must be
+    #   unique, is case sensitive, and can't include spaces.
     #
     # @return [Types::DeleteReportDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteReportDefinitionResponse#response_message #response_message} => String
+    #
+    #
+    # @example Example: To delete the AWS Cost and Usage report named ExampleReport.
+    #
+    #   # The following example deletes the AWS Cost and Usage report named ExampleReport.
+    #
+    #   resp = client.delete_report_definition({
+    #     report_name: "ExampleReport", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -244,10 +356,10 @@ module Aws::CostandUsageReportService
       req.send_request(options)
     end
 
-    # Describe a list of report definitions owned by the account
+    # Lists the AWS Cost and Usage reports available to this account.
     #
     # @option params [Integer] :max_results
-    #   The max number of results returned by the operation.
+    #   The maximum number of results that AWS returns for the operation.
     #
     # @option params [String] :next_token
     #   A generic string.
@@ -256,6 +368,53 @@ module Aws::CostandUsageReportService
     #
     #   * {Types::DescribeReportDefinitionsResponse#report_definitions #report_definitions} => Array&lt;Types::ReportDefinition&gt;
     #   * {Types::DescribeReportDefinitionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list the AWS Cost and Usage reports for the account.
+    #
+    #   # The following example lists the AWS Cost and Usage reports for the account.
+    #
+    #   resp = client.describe_report_definitions({
+    #     max_results: 5, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     report_definitions: [
+    #       {
+    #         additional_artifacts: [
+    #           "QUICKSIGHT", 
+    #         ], 
+    #         additional_schema_elements: [
+    #           "RESOURCES", 
+    #         ], 
+    #         compression: "GZIP", 
+    #         format: "textORcsv", 
+    #         report_name: "ExampleReport", 
+    #         s3_bucket: "example-s3-bucket", 
+    #         s3_prefix: "exampleprefix", 
+    #         s3_region: "us-east-1", 
+    #         time_unit: "HOURLY", 
+    #       }, 
+    #       {
+    #         additional_artifacts: [
+    #           "QUICKSIGHT", 
+    #         ], 
+    #         additional_schema_elements: [
+    #           "RESOURCES", 
+    #         ], 
+    #         compression: "GZIP", 
+    #         format: "textORcsv", 
+    #         report_name: "ExampleReport2", 
+    #         s3_bucket: "example-s3-bucket", 
+    #         s3_prefix: "exampleprefix", 
+    #         s3_region: "us-east-1", 
+    #         time_unit: "HOURLY", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -269,15 +428,17 @@ module Aws::CostandUsageReportService
     #   resp.report_definitions #=> Array
     #   resp.report_definitions[0].report_name #=> String
     #   resp.report_definitions[0].time_unit #=> String, one of "HOURLY", "DAILY"
-    #   resp.report_definitions[0].format #=> String, one of "textORcsv"
-    #   resp.report_definitions[0].compression #=> String, one of "ZIP", "GZIP"
+    #   resp.report_definitions[0].format #=> String, one of "textORcsv", "Parquet"
+    #   resp.report_definitions[0].compression #=> String, one of "ZIP", "GZIP", "Parquet"
     #   resp.report_definitions[0].additional_schema_elements #=> Array
     #   resp.report_definitions[0].additional_schema_elements[0] #=> String, one of "RESOURCES"
     #   resp.report_definitions[0].s3_bucket #=> String
     #   resp.report_definitions[0].s3_prefix #=> String
-    #   resp.report_definitions[0].s3_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1"
+    #   resp.report_definitions[0].s3_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "eu-north-1", "ap-northeast-3", "ap-east-1"
     #   resp.report_definitions[0].additional_artifacts #=> Array
-    #   resp.report_definitions[0].additional_artifacts[0] #=> String, one of "REDSHIFT", "QUICKSIGHT"
+    #   resp.report_definitions[0].additional_artifacts[0] #=> String, one of "REDSHIFT", "QUICKSIGHT", "ATHENA"
+    #   resp.report_definitions[0].refresh_closed_reports #=> Boolean
+    #   resp.report_definitions[0].report_versioning #=> String, one of "CREATE_NEW_REPORT", "OVERWRITE_REPORT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitions AWS API Documentation
@@ -289,14 +450,78 @@ module Aws::CostandUsageReportService
       req.send_request(options)
     end
 
-    # Create a new report definition
+    # Allows you to programatically update your report preferences.
+    #
+    # @option params [required, String] :report_name
+    #   The name of the report that you want to create. The name must be
+    #   unique, is case sensitive, and can't include spaces.
     #
     # @option params [required, Types::ReportDefinition] :report_definition
-    #   The definition of AWS Cost and Usage Report. Customer can specify the
-    #   report name, time unit, report format, compression format, S3 bucket
-    #   and additional artifacts and schema elements in the definition.
+    #   The definition of AWS Cost and Usage Report. You can specify the
+    #   report name, time unit, report format, compression format, S3 bucket,
+    #   additional artifacts, and schema elements in the definition.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_report_definition({
+    #     report_name: "ReportName", # required
+    #     report_definition: { # required
+    #       report_name: "ReportName", # required
+    #       time_unit: "HOURLY", # required, accepts HOURLY, DAILY
+    #       format: "textORcsv", # required, accepts textORcsv, Parquet
+    #       compression: "ZIP", # required, accepts ZIP, GZIP, Parquet
+    #       additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_prefix: "S3Prefix", # required
+    #       s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3, ap-east-1
+    #       additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
+    #       refresh_closed_reports: false,
+    #       report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ModifyReportDefinition AWS API Documentation
+    #
+    # @overload modify_report_definition(params = {})
+    # @param [Hash] params ({})
+    def modify_report_definition(params = {}, options = {})
+      req = build_request(:modify_report_definition, params)
+      req.send_request(options)
+    end
+
+    # Creates a new report using the description that you provide.
+    #
+    # @option params [required, Types::ReportDefinition] :report_definition
+    #   Represents the output of the PutReportDefinition operation. The
+    #   content consists of the detailed metadata and data file information.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To create a report named ExampleReport.
+    #
+    #   # The following example creates a AWS Cost and Usage report named ExampleReport.
+    #
+    #   resp = client.put_report_definition({
+    #     report_definition: {
+    #       additional_artifacts: [
+    #         "REDSHIFT", 
+    #         "QUICKSIGHT", 
+    #       ], 
+    #       additional_schema_elements: [
+    #         "RESOURCES", 
+    #       ], 
+    #       compression: "ZIP", 
+    #       format: "textORcsv", 
+    #       report_name: "ExampleReport", 
+    #       s3_bucket: "example-s3-bucket", 
+    #       s3_prefix: "exampleprefix", 
+    #       s3_region: "us-east-1", 
+    #       time_unit: "DAILY", 
+    #     }, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -304,13 +529,15 @@ module Aws::CostandUsageReportService
     #     report_definition: { # required
     #       report_name: "ReportName", # required
     #       time_unit: "HOURLY", # required, accepts HOURLY, DAILY
-    #       format: "textORcsv", # required, accepts textORcsv
-    #       compression: "ZIP", # required, accepts ZIP, GZIP
+    #       format: "textORcsv", # required, accepts textORcsv, Parquet
+    #       compression: "ZIP", # required, accepts ZIP, GZIP, Parquet
     #       additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES
     #       s3_bucket: "S3Bucket", # required
     #       s3_prefix: "S3Prefix", # required
-    #       s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1
-    #       additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT
+    #       s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3, ap-east-1
+    #       additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
+    #       refresh_closed_reports: false,
+    #       report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
     #     },
     #   })
     #
@@ -336,7 +563,7 @@ module Aws::CostandUsageReportService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costandusagereportservice'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

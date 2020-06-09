@@ -24,17 +24,20 @@ require_relative 'aws-sdk-waf/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     waf = Aws::WAF::Client.new
+#     resp = waf.create_byte_match_set(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS WAF all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS WAF are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::WAF::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS WAF API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-waf/customizations'
 # @service
 module Aws::WAF
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.30.0'
 
 end

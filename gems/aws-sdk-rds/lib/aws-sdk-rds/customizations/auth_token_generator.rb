@@ -27,10 +27,13 @@ module Aws
 
       # To create a auth login token, following parameters are required:
       #
-      # @params [required, String] :region Region the databaseis located in
-      # @params [required, String] :endpoint Hostname of the database with port number
+      # @param [Hash] params The parameters for auth token creation.
+      # @option params [required, String] :region Region where the database
+      #   is located.
+      # @option params [required, String] :endpoint Hostname of the database
+      #   with a port number.
       #   For example: my-instance.us-west-2.rds.amazonaws.com:3306
-      # @params [required, String] :user_name Username to login as
+      # @option params [required, String] :user_name Username to login as
       #
       # @return [String]
       def auth_token(params)

@@ -1,6 +1,221 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.83.0 (2020-04-23)
+------------------
+
+* Feature - Adds support for AWS Local Zones, including a new optional parameter AvailabilityZoneGroup for the DescribeOrderableDBInstanceOptions operation.
+
+1.82.0 (2020-04-16)
+------------------
+
+* Feature - This release adds support for Amazon RDS Proxy with PostgreSQL compatibility.
+
+1.81.0 (2020-04-08)
+------------------
+
+* Feature - Documentation updates for RDS: creating read replicas is now supported for SQL Server DB instances
+
+1.80.0 (2020-03-18)
+------------------
+
+* Feature - Updated the MaxRecords type in DescribeExportTasks to Integer.
+
+1.79.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.78.0 (2020-02-18)
+------------------
+
+* Feature - This release supports Microsoft Active Directory authentication for Amazon Aurora.
+
+1.77.0 (2020-02-07)
+------------------
+
+* Feature - Documentation updates for RDS: when restoring a DB cluster from a snapshot, must create DB instances
+
+1.76.0 (2020-01-23)
+------------------
+
+* Feature - This SDK release introduces APIs that automate the export of Amazon RDS snapshot data to Amazon S3. The new APIs include: StartExportTask, CancelExportTask, DescribeExportTasks. These APIs automate the extraction of data from an RDS snapshot and export it to an Amazon S3 bucket. The data is stored in a compressed, consistent, and query-able format. After the data is exported, you can query it directly using tools such as Amazon Athena or Redshift Spectrum. You can also consume the data as part of a data lake solution. If you archive the data in S3 Infrequent Access or Glacier, you can reduce long term data storage costs by applying data lifecycle policies.
+
+1.75.0 (2020-01-10)
+------------------
+
+* Feature - This release adds an operation that enables users to override the system-default SSL/TLS certificate for new Amazon RDS DB instances temporarily, or remove the customer override.
+
+1.74.0 (2019-12-20)
+------------------
+
+* Feature - This release adds an operation that enables users to specify whether a database is restarted when its SSL/TLS certificate is rotated. Only customers who do not use SSL/TLS should use this operation.
+
+1.73.0 (2019-12-04)
+------------------
+
+* Feature - This release adds support for the Amazon RDS Proxy
+
+1.72.0 (2019-11-25)
+------------------
+
+* Feature - Cluster Endpoints can now be tagged by using --tags in the create-db-cluster-endpoint API
+
+1.71.0 (2019-11-18)
+------------------
+
+* Feature - Documentation updates for rds
+
+1.70.0 (2019-11-05)
+------------------
+
+* Feature - Documentation updates for Amazon RDS
+
+1.69.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.68.0 (2019-10-17)
+------------------
+
+* Feature - Amazon RDS now supports Amazon RDS on VMware with the introduction of APIs related to Custom Availability Zones and Media installation.
+
+1.67.0 (2019-09-30)
+------------------
+
+* Feature - This release adds support for creating a Read Replica with Active Directory domain information. This release updates RDS API to indicate whether an OrderableDBInstanceOption supports Kerberos Authentication.
+
+1.66.0 (2019-09-20)
+------------------
+
+* Feature - Add a new LeaseID output field to DescribeReservedDBInstances, which shows the unique identifier for the lease associated with the reserved DB instance. AWS Support might request the lease ID for an issue related to a reserved DB instance.
+
+1.65.0 (2019-09-11)
+------------------
+
+* Feature - This release allows customers to specify a custom parameter group when creating a Read Replica, for DB engines which support this feature.
+
+1.64.0 (2019-08-22)
+------------------
+
+* Feature - This release allows users to enable RDS Data API while creating Aurora Serverless databases.
+
+1.63.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2019-07-03)
+------------------
+
+* Feature - This release supports Cross-Account Cloning for Amazon Aurora clusters.
+
+1.61.0 (2019-07-01)
+------------------
+
+* Feature - This release adds support for RDS DB Cluster major version upgrade
+
+1.60.0 (2019-06-20)
+------------------
+
+* Feature - This release adds support for RDS storage autoscaling
+
+1.59.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2019-06-03)
+------------------
+
+* Feature - Amazon RDS Data API is generally available. Removing beta notes in the documentation.
+
+1.57.0 (2019-05-30)
+------------------
+
+* Feature - This release adds support for Activity Streams for database clusters.
+
+1.56.0 (2019-05-29)
+------------------
+
+* Feature - Documentation updates for rds
+
+1.55.0 (2019-05-28)
+------------------
+
+* Feature - Add a new output field Status to DBEngineVersion which shows the status of the engine version (either available or deprecated). Add a new parameter IncludeAll to DescribeDBEngineVersions to make it possible to return both available and deprecated engine versions. These changes enable a user to create a Read Replica of an DB instance on a deprecated engine version.
+
+1.54.0 (2019-05-22)
+------------------
+
+* Feature - Documentation updates for rds
+
+1.53.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.52.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.51.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.50.0 (2019-04-24)
+------------------
+
+* Feature - API update.
+
+1.49.0 (2019-04-18)
+------------------
+
+* Feature - API update.
+
+1.48.0 (2019-03-22)
+------------------
+
+* Feature - API update.
+
+1.47.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.46.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.45.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.44.0 (2019-03-07)
+------------------
+
+* Feature - API update.
+
+1.43.0 (2019-01-24)
+------------------
+
+* Feature - API update.
+
 1.42.0 (2018-12-06)
 ------------------
 
@@ -312,4 +527,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-rds` gem.
-

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-migrationhub/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     migration_hub = Aws::MigrationHub::Client.new
+#     resp = migration_hub.associate_created_artifact(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Migration Hub all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Migration Hub are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::MigrationHub::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Migration Hub API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-migrationhub/customizations'
 # @service
 module Aws::MigrationHub
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.24.0'
 
 end

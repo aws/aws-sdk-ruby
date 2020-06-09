@@ -24,17 +24,20 @@ require_relative 'aws-sdk-iotdataplane/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     io_t_data_plane = Aws::IoTDataPlane::Client.new
+#     resp = io_t_data_plane.delete_thing_shadow(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS IoT Data Plane all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS IoT Data Plane are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::IoTDataPlane::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS IoT Data Plane API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-iotdataplane/customizations'
 # @service
 module Aws::IoTDataPlane
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.19.0'
 
 end

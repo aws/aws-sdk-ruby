@@ -24,17 +24,20 @@ require_relative 'aws-sdk-cloudwatchlogs/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     cloud_watch_logs = Aws::CloudWatchLogs::Client.new
+#     resp = cloud_watch_logs.associate_kms_key(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon CloudWatch Logs all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon CloudWatch Logs are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CloudWatchLogs::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon CloudWatch Logs API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-cloudwatchlogs/customizations'
 # @service
 module Aws::CloudWatchLogs
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.31.0'
 
 end

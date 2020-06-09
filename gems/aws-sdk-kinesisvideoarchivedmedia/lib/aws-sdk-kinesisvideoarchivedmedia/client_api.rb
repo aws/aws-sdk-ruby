@@ -12,8 +12,18 @@ module Aws::KinesisVideoArchivedMedia
     include Seahorse::Model
 
     ClientLimitExceededException = Shapes::StructureShape.new(name: 'ClientLimitExceededException')
+    ClipFragmentSelector = Shapes::StructureShape.new(name: 'ClipFragmentSelector')
+    ClipFragmentSelectorType = Shapes::StringShape.new(name: 'ClipFragmentSelectorType')
+    ClipTimestampRange = Shapes::StructureShape.new(name: 'ClipTimestampRange')
+    ContainerFormat = Shapes::StringShape.new(name: 'ContainerFormat')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
-    DiscontinuityMode = Shapes::StringShape.new(name: 'DiscontinuityMode')
+    DASHDisplayFragmentNumber = Shapes::StringShape.new(name: 'DASHDisplayFragmentNumber')
+    DASHDisplayFragmentTimestamp = Shapes::StringShape.new(name: 'DASHDisplayFragmentTimestamp')
+    DASHFragmentSelector = Shapes::StructureShape.new(name: 'DASHFragmentSelector')
+    DASHFragmentSelectorType = Shapes::StringShape.new(name: 'DASHFragmentSelectorType')
+    DASHPlaybackMode = Shapes::StringShape.new(name: 'DASHPlaybackMode')
+    DASHStreamingSessionURL = Shapes::StringShape.new(name: 'DASHStreamingSessionURL')
+    DASHTimestampRange = Shapes::StructureShape.new(name: 'DASHTimestampRange')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Expires = Shapes::IntegerShape.new(name: 'Expires')
     Fragment = Shapes::StructureShape.new(name: 'Fragment')
@@ -22,34 +32,60 @@ module Aws::KinesisVideoArchivedMedia
     FragmentNumberString = Shapes::StringShape.new(name: 'FragmentNumberString')
     FragmentSelector = Shapes::StructureShape.new(name: 'FragmentSelector')
     FragmentSelectorType = Shapes::StringShape.new(name: 'FragmentSelectorType')
+    GetClipInput = Shapes::StructureShape.new(name: 'GetClipInput')
+    GetClipOutput = Shapes::StructureShape.new(name: 'GetClipOutput')
+    GetDASHStreamingSessionURLInput = Shapes::StructureShape.new(name: 'GetDASHStreamingSessionURLInput')
+    GetDASHStreamingSessionURLOutput = Shapes::StructureShape.new(name: 'GetDASHStreamingSessionURLOutput')
     GetHLSStreamingSessionURLInput = Shapes::StructureShape.new(name: 'GetHLSStreamingSessionURLInput')
     GetHLSStreamingSessionURLOutput = Shapes::StructureShape.new(name: 'GetHLSStreamingSessionURLOutput')
     GetMediaForFragmentListInput = Shapes::StructureShape.new(name: 'GetMediaForFragmentListInput')
     GetMediaForFragmentListOutput = Shapes::StructureShape.new(name: 'GetMediaForFragmentListOutput')
+    HLSDiscontinuityMode = Shapes::StringShape.new(name: 'HLSDiscontinuityMode')
+    HLSDisplayFragmentTimestamp = Shapes::StringShape.new(name: 'HLSDisplayFragmentTimestamp')
     HLSFragmentSelector = Shapes::StructureShape.new(name: 'HLSFragmentSelector')
     HLSFragmentSelectorType = Shapes::StringShape.new(name: 'HLSFragmentSelectorType')
+    HLSPlaybackMode = Shapes::StringShape.new(name: 'HLSPlaybackMode')
     HLSStreamingSessionURL = Shapes::StringShape.new(name: 'HLSStreamingSessionURL')
     HLSTimestampRange = Shapes::StructureShape.new(name: 'HLSTimestampRange')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
     InvalidCodecPrivateDataException = Shapes::StructureShape.new(name: 'InvalidCodecPrivateDataException')
+    InvalidMediaFrameException = Shapes::StructureShape.new(name: 'InvalidMediaFrameException')
     ListFragmentsInput = Shapes::StructureShape.new(name: 'ListFragmentsInput')
     ListFragmentsOutput = Shapes::StructureShape.new(name: 'ListFragmentsOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MissingCodecPrivateDataException = Shapes::StructureShape.new(name: 'MissingCodecPrivateDataException')
+    NextToken = Shapes::StringShape.new(name: 'NextToken')
     NoDataRetentionException = Shapes::StructureShape.new(name: 'NoDataRetentionException')
     NotAuthorizedException = Shapes::StructureShape.new(name: 'NotAuthorizedException')
     PageLimit = Shapes::IntegerShape.new(name: 'PageLimit')
-    Payload = Shapes::BlobShape.new(name: 'Payload')
-    PlaybackMode = Shapes::StringShape.new(name: 'PlaybackMode')
+    Payload = Shapes::BlobShape.new(name: 'Payload', streaming: true)
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     StreamName = Shapes::StringShape.new(name: 'StreamName')
-    String = Shapes::StringShape.new(name: 'String')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampRange = Shapes::StructureShape.new(name: 'TimestampRange')
     UnsupportedStreamMediaTypeException = Shapes::StructureShape.new(name: 'UnsupportedStreamMediaTypeException')
 
-    Fragment.add_member(:fragment_number, Shapes::ShapeRef.new(shape: String, location_name: "FragmentNumber"))
+    ClientLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ClientLimitExceededException.struct_class = Types::ClientLimitExceededException
+
+    ClipFragmentSelector.add_member(:fragment_selector_type, Shapes::ShapeRef.new(shape: ClipFragmentSelectorType, required: true, location_name: "FragmentSelectorType"))
+    ClipFragmentSelector.add_member(:timestamp_range, Shapes::ShapeRef.new(shape: ClipTimestampRange, required: true, location_name: "TimestampRange"))
+    ClipFragmentSelector.struct_class = Types::ClipFragmentSelector
+
+    ClipTimestampRange.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTimestamp"))
+    ClipTimestampRange.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTimestamp"))
+    ClipTimestampRange.struct_class = Types::ClipTimestampRange
+
+    DASHFragmentSelector.add_member(:fragment_selector_type, Shapes::ShapeRef.new(shape: DASHFragmentSelectorType, location_name: "FragmentSelectorType"))
+    DASHFragmentSelector.add_member(:timestamp_range, Shapes::ShapeRef.new(shape: DASHTimestampRange, location_name: "TimestampRange"))
+    DASHFragmentSelector.struct_class = Types::DASHFragmentSelector
+
+    DASHTimestampRange.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimestamp"))
+    DASHTimestampRange.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
+    DASHTimestampRange.struct_class = Types::DASHTimestampRange
+
+    Fragment.add_member(:fragment_number, Shapes::ShapeRef.new(shape: FragmentNumberString, location_name: "FragmentNumber"))
     Fragment.add_member(:fragment_size_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "FragmentSizeInBytes"))
     Fragment.add_member(:producer_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ProducerTimestamp"))
     Fragment.add_member(:server_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ServerTimestamp"))
@@ -64,11 +100,37 @@ module Aws::KinesisVideoArchivedMedia
     FragmentSelector.add_member(:timestamp_range, Shapes::ShapeRef.new(shape: TimestampRange, required: true, location_name: "TimestampRange"))
     FragmentSelector.struct_class = Types::FragmentSelector
 
+    GetClipInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
+    GetClipInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
+    GetClipInput.add_member(:clip_fragment_selector, Shapes::ShapeRef.new(shape: ClipFragmentSelector, required: true, location_name: "ClipFragmentSelector"))
+    GetClipInput.struct_class = Types::GetClipInput
+
+    GetClipOutput.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location: "header", location_name: "Content-Type"))
+    GetClipOutput.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "Payload"))
+    GetClipOutput.struct_class = Types::GetClipOutput
+    GetClipOutput[:payload] = :payload
+    GetClipOutput[:payload_member] = GetClipOutput.member(:payload)
+
+    GetDASHStreamingSessionURLInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
+    GetDASHStreamingSessionURLInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
+    GetDASHStreamingSessionURLInput.add_member(:playback_mode, Shapes::ShapeRef.new(shape: DASHPlaybackMode, location_name: "PlaybackMode"))
+    GetDASHStreamingSessionURLInput.add_member(:display_fragment_timestamp, Shapes::ShapeRef.new(shape: DASHDisplayFragmentTimestamp, location_name: "DisplayFragmentTimestamp"))
+    GetDASHStreamingSessionURLInput.add_member(:display_fragment_number, Shapes::ShapeRef.new(shape: DASHDisplayFragmentNumber, location_name: "DisplayFragmentNumber"))
+    GetDASHStreamingSessionURLInput.add_member(:dash_fragment_selector, Shapes::ShapeRef.new(shape: DASHFragmentSelector, location_name: "DASHFragmentSelector"))
+    GetDASHStreamingSessionURLInput.add_member(:expires, Shapes::ShapeRef.new(shape: Expires, location_name: "Expires"))
+    GetDASHStreamingSessionURLInput.add_member(:max_manifest_fragment_results, Shapes::ShapeRef.new(shape: PageLimit, location_name: "MaxManifestFragmentResults"))
+    GetDASHStreamingSessionURLInput.struct_class = Types::GetDASHStreamingSessionURLInput
+
+    GetDASHStreamingSessionURLOutput.add_member(:dash_streaming_session_url, Shapes::ShapeRef.new(shape: DASHStreamingSessionURL, location_name: "DASHStreamingSessionURL"))
+    GetDASHStreamingSessionURLOutput.struct_class = Types::GetDASHStreamingSessionURLOutput
+
     GetHLSStreamingSessionURLInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     GetHLSStreamingSessionURLInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
-    GetHLSStreamingSessionURLInput.add_member(:playback_mode, Shapes::ShapeRef.new(shape: PlaybackMode, location_name: "PlaybackMode"))
+    GetHLSStreamingSessionURLInput.add_member(:playback_mode, Shapes::ShapeRef.new(shape: HLSPlaybackMode, location_name: "PlaybackMode"))
     GetHLSStreamingSessionURLInput.add_member(:hls_fragment_selector, Shapes::ShapeRef.new(shape: HLSFragmentSelector, location_name: "HLSFragmentSelector"))
-    GetHLSStreamingSessionURLInput.add_member(:discontinuity_mode, Shapes::ShapeRef.new(shape: DiscontinuityMode, location_name: "DiscontinuityMode"))
+    GetHLSStreamingSessionURLInput.add_member(:container_format, Shapes::ShapeRef.new(shape: ContainerFormat, location_name: "ContainerFormat"))
+    GetHLSStreamingSessionURLInput.add_member(:discontinuity_mode, Shapes::ShapeRef.new(shape: HLSDiscontinuityMode, location_name: "DiscontinuityMode"))
+    GetHLSStreamingSessionURLInput.add_member(:display_fragment_timestamp, Shapes::ShapeRef.new(shape: HLSDisplayFragmentTimestamp, location_name: "DisplayFragmentTimestamp"))
     GetHLSStreamingSessionURLInput.add_member(:expires, Shapes::ShapeRef.new(shape: Expires, location_name: "Expires"))
     GetHLSStreamingSessionURLInput.add_member(:max_media_playlist_fragment_results, Shapes::ShapeRef.new(shape: PageLimit, location_name: "MaxMediaPlaylistFragmentResults"))
     GetHLSStreamingSessionURLInput.struct_class = Types::GetHLSStreamingSessionURLInput
@@ -94,19 +156,43 @@ module Aws::KinesisVideoArchivedMedia
     HLSTimestampRange.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
     HLSTimestampRange.struct_class = Types::HLSTimestampRange
 
+    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidArgumentException.struct_class = Types::InvalidArgumentException
+
+    InvalidCodecPrivateDataException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidCodecPrivateDataException.struct_class = Types::InvalidCodecPrivateDataException
+
+    InvalidMediaFrameException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidMediaFrameException.struct_class = Types::InvalidMediaFrameException
+
     ListFragmentsInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     ListFragmentsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageLimit, location_name: "MaxResults"))
-    ListFragmentsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFragmentsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFragmentsInput.add_member(:fragment_selector, Shapes::ShapeRef.new(shape: FragmentSelector, location_name: "FragmentSelector"))
     ListFragmentsInput.struct_class = Types::ListFragmentsInput
 
     ListFragmentsOutput.add_member(:fragments, Shapes::ShapeRef.new(shape: FragmentList, location_name: "Fragments"))
-    ListFragmentsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFragmentsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFragmentsOutput.struct_class = Types::ListFragmentsOutput
+
+    MissingCodecPrivateDataException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MissingCodecPrivateDataException.struct_class = Types::MissingCodecPrivateDataException
+
+    NoDataRetentionException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NoDataRetentionException.struct_class = Types::NoDataRetentionException
+
+    NotAuthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    NotAuthorizedException.struct_class = Types::NotAuthorizedException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     TimestampRange.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTimestamp"))
     TimestampRange.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTimestamp"))
     TimestampRange.struct_class = Types::TimestampRange
+
+    UnsupportedStreamMediaTypeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnsupportedStreamMediaTypeException.struct_class = Types::UnsupportedStreamMediaTypeException
 
 
     # @api private
@@ -124,6 +210,39 @@ module Aws::KinesisVideoArchivedMedia
         "signatureVersion" => "v4",
         "uid" => "kinesis-video-archived-media-2017-09-30",
       }
+
+      api.add_operation(:get_clip, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetClip"
+        o.http_method = "POST"
+        o.http_request_uri = "/getClip"
+        o.input = Shapes::ShapeRef.new(shape: GetClipInput)
+        o.output = Shapes::ShapeRef.new(shape: GetClipOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedStreamMediaTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingCodecPrivateDataException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCodecPrivateDataException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMediaFrameException)
+        o.errors << Shapes::ShapeRef.new(shape: NoDataRetentionException)
+      end)
+
+      api.add_operation(:get_dash_streaming_session_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDASHStreamingSessionURL"
+        o.http_method = "POST"
+        o.http_request_uri = "/getDASHStreamingSessionURL"
+        o.input = Shapes::ShapeRef.new(shape: GetDASHStreamingSessionURLInput)
+        o.output = Shapes::ShapeRef.new(shape: GetDASHStreamingSessionURLOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedStreamMediaTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: NoDataRetentionException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingCodecPrivateDataException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCodecPrivateDataException)
+      end)
 
       api.add_operation(:get_hls_streaming_session_url, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetHLSStreamingSessionURL"
@@ -163,6 +282,12 @@ module Aws::KinesisVideoArchivedMedia
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
     end
 

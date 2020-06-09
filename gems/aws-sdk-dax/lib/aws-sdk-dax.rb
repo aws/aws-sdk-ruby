@@ -24,17 +24,20 @@ require_relative 'aws-sdk-dax/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     dax = Aws::DAX::Client.new
+#     resp = dax.create_cluster(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon DynamoDB Accelerator (DAX) all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon DynamoDB Accelerator (DAX) are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::DAX::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon DynamoDB Accelerator (DAX) API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-dax/customizations'
 # @service
 module Aws::DAX
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.22.0'
 
 end

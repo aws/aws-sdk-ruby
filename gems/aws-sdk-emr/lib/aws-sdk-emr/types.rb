@@ -84,11 +84,16 @@ module Aws::EMR
     #   The unique identifier of the instance fleet.
     #   @return [String]
     #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name of the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceFleetOutput AWS API Documentation
     #
     class AddInstanceFleetOutput < Struct.new(
       :cluster_id,
-      :instance_fleet_id)
+      :instance_fleet_id,
+      :cluster_arn)
       include Aws::Structure
     end
 
@@ -199,11 +204,16 @@ module Aws::EMR
     #   Instance group IDs of the newly created instance groups.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name of the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceGroupsOutput AWS API Documentation
     #
     class AddInstanceGroupsOutput < Struct.new(
       :job_flow_id,
-      :instance_group_ids)
+      :instance_group_ids,
+      :cluster_arn)
       include Aws::Structure
     end
 
@@ -304,31 +314,21 @@ module Aws::EMR
     #
     class AddTagsOutput < Aws::EmptyStructure; end
 
-    # An application is any Amazon or third-party software that you can add
-    # to the cluster. This structure contains a list of strings that
-    # indicates the software to use with the cluster and accepts a user
-    # argument list. Amazon EMR accepts and forwards the argument list to
-    # the corresponding installation script as bootstrap action argument.
-    # For more information, see [Using the MapR Distribution for Hadoop][1].
-    # Currently supported values are:
+    # With Amazon EMR release version 4.0 and later, the only accepted
+    # parameter is the application name. To pass arguments to applications,
+    # you use configuration classifications specified using configuration
+    # JSON objects. For more information, see [Configuring Applications][1].
     #
-    # * "mapr-m3" - launch the cluster using MapR M3 Edition.
-    #
-    # * "mapr-m5" - launch the cluster using MapR M5 Edition.
-    #
-    # * "mapr" with the user arguments specifying "--edition,m3" or
-    #   "--edition,m5" - launch the cluster using MapR M3 or M5 Edition,
-    #   respectively.
-    #
-    # <note markdown="1"> In Amazon EMR releases 4.x and later, the only accepted parameter is
-    # the application name. To pass arguments to applications, you supply a
-    # configuration for each application.
-    #
-    #  </note>
+    # With earlier Amazon EMR releases, the application is any Amazon or
+    # third-party software that you can add to the cluster. This structure
+    # contains a list of strings that indicates the software to use with the
+    # cluster and accepts a user argument list. Amazon EMR accepts and
+    # forwards the argument list to the corresponding installation script as
+    # bootstrap action argument.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-mapr.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html
     #
     # @note When making an API call, you may pass Application
     #   data as a hash:
@@ -508,6 +508,78 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # A configuration for Amazon EMR block public access. When
+    # `BlockPublicSecurityGroupRules` is set to `true`, Amazon EMR prevents
+    # cluster creation if one of the cluster's security groups has a rule
+    # that allows inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless
+    # the port is specified as an exception using
+    # `PermittedPublicSecurityGroupRuleRanges`.
+    #
+    # @note When making an API call, you may pass BlockPublicAccessConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         block_public_security_group_rules: false, # required
+    #         permitted_public_security_group_rule_ranges: [
+    #           {
+    #             min_range: 1, # required
+    #             max_range: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] block_public_security_group_rules
+    #   Indicates whether EMR block public access is enabled (`true`) or
+    #   disabled (`false`). By default, the value is `false` for accounts
+    #   that have created EMR clusters before July 2019. For accounts
+    #   created after this, the default is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] permitted_public_security_group_rule_ranges
+    #   Specifies ports and port ranges that are permitted to have security
+    #   group rules that allow inbound traffic from all public sources. For
+    #   example, if Port 23 (Telnet) is specified for
+    #   `PermittedPublicSecurityGroupRuleRanges`, Amazon EMR allows cluster
+    #   creation if a security group associated with the cluster has a rule
+    #   that allows inbound traffic on Port 23 from IPv4 0.0.0.0/0 or IPv6
+    #   port ::/0 as the source.
+    #
+    #   By default, Port 22, which is used for SSH access to the cluster EC2
+    #   instances, is in the list of
+    #   `PermittedPublicSecurityGroupRuleRanges`.
+    #   @return [Array<Types::PortRange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/BlockPublicAccessConfiguration AWS API Documentation
+    #
+    class BlockPublicAccessConfiguration < Struct.new(
+      :block_public_security_group_rules,
+      :permitted_public_security_group_rule_ranges)
+      include Aws::Structure
+    end
+
+    # Properties that describe the AWS principal that created the
+    # `BlockPublicAccessConfiguration` using the
+    # `PutBlockPublicAccessConfiguration` action as well as the date and
+    # time that the configuration was created. Each time a configuration for
+    # block public access is updated, Amazon EMR updates this metadata.
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time that the configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by_arn
+    #   The Amazon Resource Name that created or last modified the
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/BlockPublicAccessConfigurationMetadata AWS API Documentation
+    #
+    class BlockPublicAccessConfigurationMetadata < Struct.new(
+      :creation_date_time,
+      :created_by_arn)
+      include Aws::Structure
+    end
+
     # Configuration of a bootstrap action.
     #
     # @note When making an API call, you may pass BootstrapActionConfig
@@ -582,8 +654,9 @@ module Aws::EMR
     #   data as a hash:
     #
     #       {
-    #         cluster_id: "XmlStringMaxLen256",
-    #         step_ids: ["XmlStringMaxLen256"],
+    #         cluster_id: "XmlStringMaxLen256", # required
+    #         step_ids: ["XmlStringMaxLen256"], # required
+    #         step_cancellation_option: "SEND_INTERRUPT", # accepts SEND_INTERRUPT, TERMINATE_PROCESS
     #       }
     #
     # @!attribute [rw] cluster_id
@@ -596,11 +669,17 @@ module Aws::EMR
     #   their states for the specified cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] step_cancellation_option
+    #   The option to choose for cancelling `RUNNING` steps. By default, the
+    #   value is `SEND_INTERRUPT`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelStepsInput AWS API Documentation
     #
     class CancelStepsInput < Struct.new(
       :cluster_id,
-      :step_ids)
+      :step_ids,
+      :step_cancellation_option)
       include Aws::Structure
     end
 
@@ -648,9 +727,9 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] evaluation_periods
-    #   The number of periods, expressed in seconds using `Period`, during
-    #   which the alarm condition must exist before the alarm triggers
-    #   automatic scaling activity. The default value is `1`.
+    #   The number of periods, in five-minute increments, during which the
+    #   alarm condition must exist before the alarm triggers automatic
+    #   scaling activity. The default value is `1`.
     #   @return [Integer]
     #
     # @!attribute [rw] metric_name
@@ -740,6 +819,12 @@ module Aws::EMR
     #   stored.
     #   @return [String]
     #
+    # @!attribute [rw] log_encryption_kms_key_id
+    #   The AWS KMS customer master key (CMK) used for encrypting log files.
+    #   This attribute is only available with EMR version 5.30.0 and later,
+    #   excluding EMR 6.0.0.
+    #   @return [String]
+    #
     # @!attribute [rw] requested_ami_version
     #   The AMI version requested for this cluster.
     #   @return [String]
@@ -752,16 +837,16 @@ module Aws::EMR
     #   The Amazon EMR release label, which determines the version of
     #   open-source application packages installed on the cluster. Release
     #   labels are in the form `emr-x.x.x`, where x.x.x is an Amazon EMR
-    #   release version, for example, `emr-5.14.0`. For more information
-    #   about Amazon EMR release versions and included application versions
-    #   and features, see
-    #   [http://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The
-    #   release label applies only to Amazon EMR releases versions 4.x and
+    #   release version such as `emr-5.14.0`. For more information about
+    #   Amazon EMR release versions and included application versions and
+    #   features, see
+    #   [https://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The
+    #   release label applies only to Amazon EMR releases version 4.0 and
     #   later. Earlier versions use `AmiVersion`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #   @return [String]
     #
     # @!attribute [rw] auto_terminate
@@ -777,12 +862,14 @@ module Aws::EMR
     #
     # @!attribute [rw] visible_to_all_users
     #   Indicates whether the cluster is visible to all IAM users of the AWS
-    #   account associated with the cluster. If this value is set to `true`,
-    #   all IAM users of that AWS account can view and manage the cluster if
-    #   they have the proper policy permissions set. If this value is
-    #   `false`, only the IAM user that created the cluster can view and
-    #   manage it. This value can be changed using the SetVisibleToAllUsers
-    #   action.
+    #   account associated with the cluster. The default value, `true`,
+    #   indicates that all IAM users in the AWS account can perform cluster
+    #   actions if they have the proper IAM policy permissions. If this
+    #   value is `false`, only the IAM user that created the cluster can
+    #   perform actions. This value can be changed on a running cluster by
+    #   using the SetVisibleToAllUsers action. You can override the default
+    #   value of `true` when you create a cluster by using the
+    #   `VisibleToAllUsers` parameter of the `RunJobFlow` action.
     #   @return [Boolean]
     #
     # @!attribute [rw] applications
@@ -871,8 +958,21 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
     #   @return [Types::KerberosAttributes]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost where the cluster is
+    #   launched.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_concurrency_level
+    #   Specifies the number of steps that can be executed concurrently.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
     #
@@ -883,6 +983,7 @@ module Aws::EMR
       :ec2_instance_attributes,
       :instance_collection_type,
       :log_uri,
+      :log_encryption_kms_key_id,
       :requested_ami_version,
       :running_ami_version,
       :release_label,
@@ -901,7 +1002,10 @@ module Aws::EMR
       :custom_ami_id,
       :ebs_root_volume_size,
       :repo_upgrade_on_boot,
-      :kerberos_attributes)
+      :kerberos_attributes,
+      :cluster_arn,
+      :outpost_arn,
+      :step_concurrency_level)
       include Aws::Structure
     end
 
@@ -971,13 +1075,24 @@ module Aws::EMR
     #   billing rate.
     #   @return [Integer]
     #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost where the cluster is
+    #   launched.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ClusterSummary AWS API Documentation
     #
     class ClusterSummary < Struct.new(
       :id,
       :name,
       :status,
-      :normalized_instance_hours)
+      :normalized_instance_hours,
+      :cluster_arn,
+      :outpost_arn)
       include Aws::Structure
     end
 
@@ -1027,6 +1142,60 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # The EC2 unit limits for a managed scaling policy. The managed scaling
+    # activity of a cluster can not be above or below these limits. The
+    # limit only applies to the core and task nodes. The master node cannot
+    # be scaled after initial configuration.
+    #
+    # @note When making an API call, you may pass ComputeLimits
+    #   data as a hash:
+    #
+    #       {
+    #         unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
+    #         minimum_capacity_units: 1, # required
+    #         maximum_capacity_units: 1, # required
+    #         maximum_on_demand_capacity_units: 1,
+    #       }
+    #
+    # @!attribute [rw] unit_type
+    #   The unit type used for specifying a managed scaling policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_capacity_units
+    #   The lower boundary of EC2 units. It is measured through VCPU cores
+    #   or instances for instance groups and measured through units for
+    #   instance fleets. Managed scaling activities are not allowed beyond
+    #   this boundary. The limit only applies to the core and task nodes.
+    #   The master node cannot be scaled after initial configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_capacity_units
+    #   The upper boundary of EC2 units. It is measured through VCPU cores
+    #   or instances for instance groups and measured through units for
+    #   instance fleets. Managed scaling activities are not allowed beyond
+    #   this boundary. The limit only applies to the core and task nodes.
+    #   The master node cannot be scaled after initial configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_on_demand_capacity_units
+    #   The upper boundary of on-demand EC2 units. It is measured through
+    #   VCPU cores or instances for instance groups and measured through
+    #   units for instance fleets. The on-demand units are not allowed to
+    #   scale beyond this boundary. The limit only applies to the core and
+    #   task nodes. The master node cannot be scaled after initial
+    #   configuration.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ComputeLimits AWS API Documentation
+    #
+    class ComputeLimits < Struct.new(
+      :unit_type,
+      :minimum_capacity_units,
+      :maximum_capacity_units,
+      :maximum_on_demand_capacity_units)
+      include Aws::Structure
+    end
+
     # <note markdown="1"> Amazon EMR releases 4.x or later.
     #
     #  </note>
@@ -1041,7 +1210,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html
     #
     # @note When making an API call, you may pass Configuration
     #   data as a hash:
@@ -1105,7 +1274,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateSecurityConfigurationInput AWS API Documentation
@@ -1436,14 +1605,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] ec2_subnet_id
-    #   To launch the cluster in Amazon VPC, set this parameter to the
-    #   identifier of the Amazon VPC subnet where you want the cluster to
-    #   launch. If you do not specify this value, the cluster is launched in
-    #   the normal AWS cloud, outside of a VPC.
-    #
-    #   Amazon VPC currently does not support cluster compute quadruple
-    #   extra large (cc1.4xlarge) instances. Thus, you cannot specify the
-    #   cc1.4xlarge instance type for nodes of a cluster launched in a VPC.
+    #   Set this parameter to the identifier of the Amazon VPC subnet where
+    #   you want the cluster to launch. If you do not specify this value,
+    #   and your account supports EC2-Classic, the cluster launches in
+    #   EC2-Classic.
     #   @return [String]
     #
     # @!attribute [rw] requested_ec2_subnet_ids
@@ -1453,7 +1618,7 @@ module Aws::EMR
     #   same VPC. Amazon EMR chooses the EC2 subnet with the best fit from
     #   among the list of `RequestedEc2SubnetIds`, and then launches all
     #   cluster instances within that Subnet. If this value is not
-    #   specified, and the account and region support EC2-Classic networks,
+    #   specified, and the account and Region support EC2-Classic networks,
     #   the cluster launches instances in the EC2-Classic network and uses
     #   `RequestedEc2AvailabilityZones` instead of this setting. If
     #   EC2-Classic is not supported, and no Subnet is specified, Amazon EMR
@@ -1487,7 +1652,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] emr_managed_slave_security_group
-    #   The identifier of the Amazon EC2 security group for the slave nodes.
+    #   The identifier of the Amazon EC2 security group for the core and
+    #   task nodes.
     #   @return [String]
     #
     # @!attribute [rw] service_access_security_group
@@ -1501,8 +1667,8 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_slave_security_groups
-    #   A list of additional Amazon EC2 security group IDs for the slave
-    #   nodes.
+    #   A list of additional Amazon EC2 security group IDs for the core and
+    #   task nodes.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Ec2InstanceAttributes AWS API Documentation
@@ -1548,6 +1714,83 @@ module Aws::EMR
       :reason,
       :message,
       :log_file)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfigurationInput AWS API Documentation
+    #
+    class GetBlockPublicAccessConfigurationInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] block_public_access_configuration
+    #   A configuration for Amazon EMR block public access. The
+    #   configuration applies to all clusters created in your account for
+    #   the current Region. The configuration specifies whether block public
+    #   access is enabled. If block public access is enabled, security
+    #   groups associated with the cluster cannot have rules that allow
+    #   inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is
+    #   specified as an exception using
+    #   `PermittedPublicSecurityGroupRuleRanges` in the
+    #   `BlockPublicAccessConfiguration`. By default, Port 22 (SSH) is an
+    #   exception, and public access is allowed on this port. You can change
+    #   this by updating the block public access configuration to remove the
+    #   exception.
+    #
+    #   <note markdown="1"> For accounts that created clusters in a Region before November 25,
+    #   2019, block public access is disabled by default in that Region. To
+    #   use this feature, you must manually enable and configure it. For
+    #   accounts that did not create an EMR cluster in a Region before this
+    #   date, block public access is enabled by default in that Region.
+    #
+    #    </note>
+    #   @return [Types::BlockPublicAccessConfiguration]
+    #
+    # @!attribute [rw] block_public_access_configuration_metadata
+    #   Properties that describe the AWS principal that created the
+    #   `BlockPublicAccessConfiguration` using the
+    #   `PutBlockPublicAccessConfiguration` action as well as the date and
+    #   time that the configuration was created. Each time a configuration
+    #   for block public access is updated, Amazon EMR updates this
+    #   metadata.
+    #   @return [Types::BlockPublicAccessConfigurationMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfigurationOutput AWS API Documentation
+    #
+    class GetBlockPublicAccessConfigurationOutput < Struct.new(
+      :block_public_access_configuration,
+      :block_public_access_configuration_metadata)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetManagedScalingPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   Specifies the ID of the cluster for which the managed scaling policy
+    #   will be fetched.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetManagedScalingPolicyInput AWS API Documentation
+    #
+    class GetManagedScalingPolicyInput < Struct.new(
+      :cluster_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_scaling_policy
+    #   Specifies the managed scaling policy that is attached to an Amazon
+    #   EMR cluster.
+    #   @return [Types::ManagedScalingPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetManagedScalingPolicyOutput AWS API Documentation
+    #
+    class GetManagedScalingPolicyOutput < Struct.new(
+      :managed_scaling_policy)
       include Aws::Structure
     end
 
@@ -2154,12 +2397,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The maximum Spot price your are willing to pay for EC2 instances.
-    #
-    #   An optional, nullable field that applies if the `MarketType` for the
-    #   instance group is specified as `SPOT`. Specify the maximum spot
-    #   price in USD. If the value is NULL and `SPOT` is specified, the
-    #   maximum Spot price is set equal to the On-Demand price.
+    #   The bid price for each EC2 Spot instance type as defined by
+    #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
+    #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
+    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -2187,6 +2428,21 @@ module Aws::EMR
     #   group. You can specify a separate configuration for each instance
     #   group (master, core, and task).
     #   @return [Array<Types::Configuration>]
+    #
+    # @!attribute [rw] configurations_version
+    #   The version number of the requested configuration specification for
+    #   this instance group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_successfully_applied_configurations
+    #   A list of configurations that were successfully applied for an
+    #   instance group last time.
+    #   @return [Array<Types::Configuration>]
+    #
+    # @!attribute [rw] last_successfully_applied_configurations_version
+    #   The version number of a configuration specification that was
+    #   successfully applied for an instance group last time.
+    #   @return [Integer]
     #
     # @!attribute [rw] ebs_block_devices
     #   The EBS block devices that are mapped to this instance group.
@@ -2223,6 +2479,9 @@ module Aws::EMR
       :running_instance_count,
       :status,
       :configurations,
+      :configurations_version,
+      :last_successfully_applied_configurations,
+      :last_successfully_applied_configurations_version,
       :ebs_block_devices,
       :ebs_optimized,
       :shrink_policy,
@@ -2319,12 +2578,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The maximum Spot price your are willing to pay for EC2 instances.
-    #
-    #   An optional, nullable field that applies if the `MarketType` for the
-    #   instance group is specified as `SPOT`. Specify the maximum spot
-    #   price in USD. If the value is NULL and `SPOT` is specified, the
-    #   maximum Spot price is set equal to the On-Demand price.
+    #   The bid price for each EC2 Spot instance type as defined by
+    #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
+    #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
+    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -2392,12 +2649,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The maximum Spot price your are willing to pay for EC2 instances.
-    #
-    #   An optional, nullable field that applies if the `MarketType` for the
-    #   instance group is specified as `SPOT`. Specified in USD. If the
-    #   value is NULL and `SPOT` is specified, the maximum Spot price is set
-    #   equal to the On-Demand price.
+    #   The bid price for each EC2 Spot instance type as defined by
+    #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
+    #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
+    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -2457,7 +2712,7 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # Modify an instance group size.
+    # Modify the size or configurations of an instance group.
     #
     # @note When making an API call, you may pass InstanceGroupModifyConfig
     #   data as a hash:
@@ -2474,6 +2729,17 @@ module Aws::EMR
     #             instance_termination_timeout: 1,
     #           },
     #         },
+    #         configurations: [
+    #           {
+    #             classification: "String",
+    #             configurations: {
+    #               # recursive ConfigurationList
+    #             },
+    #             properties: {
+    #               "String" => "String",
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] instance_group_id
@@ -2493,13 +2759,19 @@ module Aws::EMR
     #   Policy for customizing shrink operations.
     #   @return [Types::ShrinkPolicy]
     #
+    # @!attribute [rw] configurations
+    #   A list of new or modified configurations to apply for an instance
+    #   group.
+    #   @return [Array<Types::Configuration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupModifyConfig AWS API Documentation
     #
     class InstanceGroupModifyConfig < Struct.new(
       :instance_group_id,
       :instance_count,
       :ec2_instance_ids_to_terminate,
-      :shrink_policy)
+      :shrink_policy,
+      :configurations)
       include Aws::Structure
     end
 
@@ -2822,6 +3094,45 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # Indicates that an error occurred while processing the request and that
+    # the request was not completed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Aws::EmptyStructure; end
+
+    # This exception occurs when there is an internal failure in the EMR
+    # service.
+    #
+    # @!attribute [rw] message
+    #   The message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception occurs when there is something wrong with user input.
+    #
+    # @!attribute [rw] error_code
+    #   The error code associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # A description of a cluster (job flow).
     #
     # @!attribute [rw] job_flow_id
@@ -2834,6 +3145,12 @@ module Aws::EMR
     #
     # @!attribute [rw] log_uri
     #   The location in Amazon S3 where log files for the job are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_encryption_kms_key_id
+    #   The AWS KMS customer master key (CMK) used for encrypting log files.
+    #   This attribute is only available with EMR version 5.30.0 and later,
+    #   excluding EMR 6.0.0.
     #   @return [String]
     #
     # @!attribute [rw] ami_version
@@ -2865,13 +3182,15 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   Specifies whether the cluster is visible to all IAM users of the AWS
-    #   account associated with the cluster. If this value is set to `true`,
-    #   all IAM users of that AWS account can view and (if they have the
-    #   proper policy permissions set) manage the cluster. If it is set to
-    #   `false`, only the IAM user that created the cluster can view and
-    #   manage it. This value can be changed using the SetVisibleToAllUsers
-    #   action.
+    #   Indicates whether the cluster is visible to all IAM users of the AWS
+    #   account associated with the cluster. The default value, `true`,
+    #   indicates that all IAM users in the AWS account can perform cluster
+    #   actions if they have the proper IAM policy permissions. If this
+    #   value is `false`, only the IAM user that created the cluster can
+    #   perform actions. This value can be changed on a running cluster by
+    #   using the SetVisibleToAllUsers action. You can override the default
+    #   value of `true` when you create a cluster by using the
+    #   `VisibleToAllUsers` parameter of the `RunJobFlow` action.
     #   @return [Boolean]
     #
     # @!attribute [rw] job_flow_role
@@ -2914,6 +3233,7 @@ module Aws::EMR
       :job_flow_id,
       :name,
       :log_uri,
+      :log_encryption_kms_key_id,
       :ami_version,
       :execution_status_detail,
       :instances,
@@ -3122,7 +3442,7 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] slave_instance_type
-    #   The EC2 instance type of the slave nodes.
+    #   The EC2 instance type of the core and task nodes.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -3178,14 +3498,8 @@ module Aws::EMR
     #   configuration. To launch the cluster in Amazon Virtual Private Cloud
     #   (Amazon VPC), set this parameter to the identifier of the Amazon VPC
     #   subnet where you want the cluster to launch. If you do not specify
-    #   this value, the cluster launches in the normal Amazon Web Services
-    #   cloud, outside of an Amazon VPC, if the account launching the
-    #   cluster supports EC2 Classic networks in the region where the
-    #   cluster launches.
-    #
-    #   Amazon VPC currently does not support cluster compute quadruple
-    #   extra large (cc1.4xlarge) instances. Thus you cannot specify the
-    #   cc1.4xlarge instance type for clusters launched in an Amazon VPC.
+    #   this value and your account supports EC2-Classic, the cluster
+    #   launches in EC2-Classic.
     #   @return [String]
     #
     # @!attribute [rw] ec2_subnet_ids
@@ -3204,7 +3518,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] emr_managed_slave_security_group
-    #   The identifier of the Amazon EC2 security group for the slave nodes.
+    #   The identifier of the Amazon EC2 security group for the core and
+    #   task nodes.
     #   @return [String]
     #
     # @!attribute [rw] service_access_security_group
@@ -3218,8 +3533,8 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_slave_security_groups
-    #   A list of additional Amazon EC2 security group IDs for the slave
-    #   nodes.
+    #   A list of additional Amazon EC2 security group IDs for the core and
+    #   task nodes.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/JobFlowInstancesConfig AWS API Documentation
@@ -3263,14 +3578,14 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] slave_instance_type
-    #   The Amazon EC2 slave node instance type.
+    #   The Amazon EC2 core and task node instance type.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
     #   The number of Amazon EC2 instances in the cluster. If the value is
-    #   1, the same instance serves as both the master and slave node. If
-    #   the value is greater than 1, one instance is the master node and all
-    #   others are slave nodes.
+    #   1, the same instance serves as both the master and core and task
+    #   node. If the value is greater than 1, one instance is the master
+    #   node and all others are core and task nodes.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_groups
@@ -3341,7 +3656,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
     #
     # @note When making an API call, you may pass KerberosAttributes
     #   data as a hash:
@@ -3751,7 +4066,8 @@ module Aws::EMR
     #
     # @!attribute [rw] step_ids
     #   The filter to limit the step list based on the identifier of the
-    #   steps.
+    #   steps. You can specify a maximum of ten Step IDs. The character
+    #   constraint applies to the overall length of the array.
     #   @return [Array<String>]
     #
     # @!attribute [rw] marker
@@ -3789,6 +4105,37 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # Managed scaling policy for an Amazon EMR cluster. The policy specifies
+    # the limits for resources that can be added or terminated from a
+    # cluster. The policy only applies to the core and task nodes. The
+    # master node cannot be scaled after initial configuration.
+    #
+    # @note When making an API call, you may pass ManagedScalingPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         compute_limits: {
+    #           unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
+    #           minimum_capacity_units: 1, # required
+    #           maximum_capacity_units: 1, # required
+    #           maximum_on_demand_capacity_units: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] compute_limits
+    #   The EC2 unit limits for a managed scaling policy. The managed
+    #   scaling activity of a cluster is not allowed to go above or below
+    #   these limits. The limit only applies to the core and task nodes. The
+    #   master node cannot be scaled after initial configuration.
+    #   @return [Types::ComputeLimits]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ManagedScalingPolicy AWS API Documentation
+    #
+    class ManagedScalingPolicy < Struct.new(
+      :compute_limits)
+      include Aws::Structure
+    end
+
     # A CloudWatch dimension, which is specified using a `Key` (known as a
     # `Name` in CloudWatch), `Value` pair. By default, Amazon EMR uses one
     # dimension whose `Key` is `JobFlowID` and `Value` is a variable
@@ -3816,6 +4163,42 @@ module Aws::EMR
     class MetricDimension < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyClusterInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "String", # required
+    #         step_concurrency_level: 1,
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   The unique identifier of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_concurrency_level
+    #   The number of steps that can be executed concurrently. You can
+    #   specify a maximum of 256 steps.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyClusterInput AWS API Documentation
+    #
+    class ModifyClusterInput < Struct.new(
+      :cluster_id,
+      :step_concurrency_level)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] step_concurrency_level
+    #   The number of steps that can be executed concurrently.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyClusterOutput AWS API Documentation
+    #
+    class ModifyClusterOutput < Struct.new(
+      :step_concurrency_level)
       include Aws::Structure
     end
 
@@ -3867,6 +4250,17 @@ module Aws::EMR
     #                 instance_termination_timeout: 1,
     #               },
     #             },
+    #             configurations: [
+    #               {
+    #                 classification: "String",
+    #                 configurations: {
+    #                   # recursive ConfigurationList
+    #                 },
+    #                 properties: {
+    #                   "String" => "String",
+    #                 },
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -3921,6 +4315,34 @@ module Aws::EMR
     class PlacementType < Struct.new(
       :availability_zone,
       :availability_zones)
+      include Aws::Structure
+    end
+
+    # A list of port ranges that are permitted to allow inbound traffic from
+    # all public IP addresses. To specify a single port, use the same value
+    # for `MinRange` and `MaxRange`.
+    #
+    # @note When making an API call, you may pass PortRange
+    #   data as a hash:
+    #
+    #       {
+    #         min_range: 1, # required
+    #         max_range: 1,
+    #       }
+    #
+    # @!attribute [rw] min_range
+    #   The smallest port number in a specified range of port numbers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_range
+    #   The smallest port number in a specified range of port numbers.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PortRange AWS API Documentation
+    #
+    class PortRange < Struct.new(
+      :min_range,
+      :max_range)
       include Aws::Structure
     end
 
@@ -4007,14 +4429,104 @@ module Aws::EMR
     #   The automatic scaling policy definition.
     #   @return [Types::AutoScalingPolicyDescription]
     #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name of the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoScalingPolicyOutput AWS API Documentation
     #
     class PutAutoScalingPolicyOutput < Struct.new(
       :cluster_id,
       :instance_group_id,
-      :auto_scaling_policy)
+      :auto_scaling_policy,
+      :cluster_arn)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass PutBlockPublicAccessConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         block_public_access_configuration: { # required
+    #           block_public_security_group_rules: false, # required
+    #           permitted_public_security_group_rule_ranges: [
+    #             {
+    #               min_range: 1, # required
+    #               max_range: 1,
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] block_public_access_configuration
+    #   A configuration for Amazon EMR block public access. The
+    #   configuration applies to all clusters created in your account for
+    #   the current Region. The configuration specifies whether block public
+    #   access is enabled. If block public access is enabled, security
+    #   groups associated with the cluster cannot have rules that allow
+    #   inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is
+    #   specified as an exception using
+    #   `PermittedPublicSecurityGroupRuleRanges` in the
+    #   `BlockPublicAccessConfiguration`. By default, Port 22 (SSH) is an
+    #   exception, and public access is allowed on this port. You can change
+    #   this by updating `BlockPublicSecurityGroupRules` to remove the
+    #   exception.
+    #
+    #   <note markdown="1"> For accounts that created clusters in a Region before November 25,
+    #   2019, block public access is disabled by default in that Region. To
+    #   use this feature, you must manually enable and configure it. For
+    #   accounts that did not create an EMR cluster in a Region before this
+    #   date, block public access is enabled by default in that Region.
+    #
+    #    </note>
+    #   @return [Types::BlockPublicAccessConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutBlockPublicAccessConfigurationInput AWS API Documentation
+    #
+    class PutBlockPublicAccessConfigurationInput < Struct.new(
+      :block_public_access_configuration)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutBlockPublicAccessConfigurationOutput AWS API Documentation
+    #
+    class PutBlockPublicAccessConfigurationOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutManagedScalingPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #         managed_scaling_policy: { # required
+    #           compute_limits: {
+    #             unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
+    #             minimum_capacity_units: 1, # required
+    #             maximum_capacity_units: 1, # required
+    #             maximum_on_demand_capacity_units: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   Specifies the ID of an EMR cluster where the managed scaling policy
+    #   is attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_scaling_policy
+    #   Specifies the constraints for the managed scaling policy.
+    #   @return [Types::ManagedScalingPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutManagedScalingPolicyInput AWS API Documentation
+    #
+    class PutManagedScalingPolicyInput < Struct.new(
+      :cluster_id,
+      :managed_scaling_policy)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutManagedScalingPolicyOutput AWS API Documentation
+    #
+    class PutManagedScalingPolicyOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RemoveAutoScalingPolicyInput
     #   data as a hash:
@@ -4045,6 +4557,29 @@ module Aws::EMR
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoScalingPolicyOutput AWS API Documentation
     #
     class RemoveAutoScalingPolicyOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RemoveManagedScalingPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   Specifies the ID of the cluster from which the managed scaling
+    #   policy will be removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveManagedScalingPolicyInput AWS API Documentation
+    #
+    class RemoveManagedScalingPolicyInput < Struct.new(
+      :cluster_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveManagedScalingPolicyOutput AWS API Documentation
+    #
+    class RemoveManagedScalingPolicyOutput < Aws::EmptyStructure; end
 
     # This input identifies a cluster and a list of tags to remove.
     #
@@ -4087,6 +4622,7 @@ module Aws::EMR
     #       {
     #         name: "XmlStringMaxLen256", # required
     #         log_uri: "XmlString",
+    #         log_encryption_kms_key_id: "XmlString",
     #         additional_info: "XmlString",
     #         ami_version: "XmlStringMaxLen256",
     #         release_label: "XmlStringMaxLen256",
@@ -4305,6 +4841,15 @@ module Aws::EMR
     #           ad_domain_join_user: "XmlStringMaxLen256",
     #           ad_domain_join_password: "XmlStringMaxLen256",
     #         },
+    #         step_concurrency_level: 1,
+    #         managed_scaling_policy: {
+    #           compute_limits: {
+    #             unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
+    #             minimum_capacity_units: 1, # required
+    #             maximum_capacity_units: 1, # required
+    #             maximum_on_demand_capacity_units: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -4314,6 +4859,13 @@ module Aws::EMR
     # @!attribute [rw] log_uri
     #   The location in Amazon S3 to write the log files of the job flow. If
     #   a value is not provided, logs are not created.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_encryption_kms_key_id
+    #   The AWS KMS customer master key (CMK) used for encrypting log files.
+    #   If a value is not provided, the logs will remain encrypted by
+    #   AES-256. This attribute is only available with EMR version 5.30.0
+    #   and later, excluding EMR 6.0.0.
     #   @return [String]
     #
     # @!attribute [rw] additional_info
@@ -4330,16 +4882,16 @@ module Aws::EMR
     #   The Amazon EMR release label, which determines the version of
     #   open-source application packages installed on the cluster. Release
     #   labels are in the form `emr-x.x.x`, where x.x.x is an Amazon EMR
-    #   release version, for example, `emr-5.14.0`. For more information
-    #   about Amazon EMR release versions and included application versions
-    #   and features, see
-    #   [http://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The
-    #   release label applies only to Amazon EMR releases versions 4.x and
+    #   release version such as `emr-5.14.0`. For more information about
+    #   Amazon EMR release versions and included application versions and
+    #   features, see
+    #   [https://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The
+    #   release label applies only to Amazon EMR releases version 4.0 and
     #   later. Earlier versions use `AmiVersion`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #   @return [String]
     #
     # @!attribute [rw] instances
@@ -4371,7 +4923,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
+    #   [1]: https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #   @return [Array<String>]
     #
     # @!attribute [rw] new_supported_products
@@ -4409,13 +4961,18 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
+    #   [1]: https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #   @return [Array<Types::SupportedProductConfig>]
     #
     # @!attribute [rw] applications
-    #   For Amazon EMR releases 4.0 and later. A list of applications for
-    #   the cluster. Valid values are: "Hadoop", "Hive", "Mahout",
-    #   "Pig", and "Spark." They are case insensitive.
+    #   Applies to Amazon EMR releases 4.0 and later. A case-insensitive
+    #   list of applications for Amazon EMR to install and configure when
+    #   launching the cluster. For a list of applications available for each
+    #   Amazon EMR release version, see the [Amazon EMR Release Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #   @return [Array<Types::Application>]
     #
     # @!attribute [rw] configurations
@@ -4424,11 +4981,10 @@ module Aws::EMR
     #   @return [Array<Types::Configuration>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   Whether the cluster is visible to all IAM users of the AWS account
-    #   associated with the cluster. If this value is set to `true`, all IAM
-    #   users of that AWS account can view and (if they have the proper
-    #   policy permissions set) manage the cluster. If it is set to `false`,
-    #   only the IAM user that created the cluster can view and manage it.
+    #   A value of `true` indicates that all IAM users in the AWS account
+    #   can perform cluster actions if they have the proper IAM policy
+    #   permissions. This is the default. A value of `false` indicates that
+    #   only the IAM user who created the cluster can perform actions.
     #   @return [Boolean]
     #
     # @!attribute [rw] job_flow_role
@@ -4493,9 +5049,9 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
-    #   [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
     #   @return [String]
     #
     # @!attribute [rw] ebs_root_volume_size
@@ -4520,14 +5076,24 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
     #   @return [Types::KerberosAttributes]
+    #
+    # @!attribute [rw] step_concurrency_level
+    #   Specifies the number of steps that can be executed concurrently. The
+    #   default value is `1`. The maximum value is `256`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] managed_scaling_policy
+    #   The specified managed scaling policy for an Amazon EMR cluster.
+    #   @return [Types::ManagedScalingPolicy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
     #
     class RunJobFlowInput < Struct.new(
       :name,
       :log_uri,
+      :log_encryption_kms_key_id,
       :additional_info,
       :ami_version,
       :release_label,
@@ -4548,7 +5114,9 @@ module Aws::EMR
       :custom_ami_id,
       :ebs_root_volume_size,
       :repo_upgrade_on_boot,
-      :kerberos_attributes)
+      :kerberos_attributes,
+      :step_concurrency_level,
+      :managed_scaling_policy)
       include Aws::Structure
     end
 
@@ -4558,10 +5126,15 @@ module Aws::EMR
     #   An unique identifier for the job flow.
     #   @return [String]
     #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name of the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowOutput AWS API Documentation
     #
     class RunJobFlowOutput < Struct.new(
-      :job_flow_id)
+      :job_flow_id,
+      :cluster_arn)
       include Aws::Structure
     end
 
@@ -4823,16 +5396,14 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] job_flow_ids
-    #   Identifiers of the job flows to receive the new visibility setting.
+    #   The unique identifier of the job flow (cluster).
     #   @return [Array<String>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   Whether the specified clusters are visible to all IAM users of the
-    #   AWS account associated with the cluster. If this value is set to
-    #   True, all IAM users of that AWS account can view and, if they have
-    #   the proper IAM policy permissions set, manage the clusters. If it is
-    #   set to False, only the IAM user that created a cluster can view and
-    #   manage it.
+    #   A value of `true` indicates that all IAM users in the AWS account
+    #   can perform cluster actions if they have the proper IAM policy
+    #   permissions. This is the default. A value of `false` indicates that
+    #   only the IAM user who created the cluster can perform actions.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetVisibleToAllUsersInput AWS API Documentation
@@ -4960,12 +5531,12 @@ module Aws::EMR
     #
     # @!attribute [rw] timeout_action
     #   The action to take when `TargetSpotCapacity` has not been fulfilled
-    #   when the `TimeoutDurationMinutes` has expired. Spot instances are
-    #   not uprovisioned within the Spot provisioining timeout. Valid values
-    #   are `TERMINATE_CLUSTER` and `SWITCH_TO_ON_DEMAND`.
-    #   SWITCH\_TO\_ON\_DEMAND specifies that if no Spot instances are
-    #   available, On-Demand Instances should be provisioned to fulfill any
-    #   remaining Spot capacity.
+    #   when the `TimeoutDurationMinutes` has expired; that is, when all
+    #   Spot instances could not be provisioned within the Spot provisioning
+    #   timeout. Valid values are `TERMINATE_CLUSTER` and
+    #   `SWITCH_TO_ON_DEMAND`. SWITCH\_TO\_ON\_DEMAND specifies that if no
+    #   Spot instances are available, On-Demand Instances should be
+    #   provisioned to fulfill any remaining Spot capacity.
     #   @return [String]
     #
     # @!attribute [rw] block_duration_minutes
@@ -5004,9 +5575,10 @@ module Aws::EMR
     #   @return [Types::HadoopStepConfig]
     #
     # @!attribute [rw] action_on_failure
-    #   This specifies what action to take when the cluster step fails.
-    #   Possible values are TERMINATE\_CLUSTER, CANCEL\_AND\_WAIT, and
-    #   CONTINUE.
+    #   The action to take when the cluster step fails. Possible values are
+    #   TERMINATE\_CLUSTER, CANCEL\_AND\_WAIT, and CONTINUE.
+    #   TERMINATE\_JOB\_FLOW is provided for backward compatibility. We
+    #   recommend using TERMINATE\_CLUSTER instead.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5050,7 +5622,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] action_on_failure
-    #   The action to take if the step fails.
+    #   The action to take when the cluster step fails. Possible values are
+    #   TERMINATE\_CLUSTER, CANCEL\_AND\_WAIT, and CONTINUE.
+    #   TERMINATE\_JOB\_FLOW is provided for backward compatibility. We
+    #   recommend using TERMINATE\_CLUSTER instead.
     #   @return [String]
     #
     # @!attribute [rw] hadoop_jar_step
@@ -5180,9 +5755,10 @@ module Aws::EMR
     #   @return [Types::HadoopStepConfig]
     #
     # @!attribute [rw] action_on_failure
-    #   This specifies what action to take when the cluster step fails.
-    #   Possible values are TERMINATE\_CLUSTER, CANCEL\_AND\_WAIT, and
-    #   CONTINUE.
+    #   The action to take when the cluster step fails. Possible values are
+    #   TERMINATE\_CLUSTER, CANCEL\_AND\_WAIT, and CONTINUE.
+    #   TERMINATE\_JOB\_FLOW is available for backward compatibility. We
+    #   recommend using TERMINATE\_CLUSTER instead.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5260,7 +5836,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -5276,7 +5852,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -5285,7 +5861,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Tag AWS API Documentation

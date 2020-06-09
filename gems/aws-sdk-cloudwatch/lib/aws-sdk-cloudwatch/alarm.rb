@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudWatch
+
   class Alarm
 
     extend Aws::Deprecations
@@ -21,6 +22,7 @@ module Aws::CloudWatch
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -104,7 +106,8 @@ module Aws::CloudWatch
       data[:state_updated_timestamp]
     end
 
-    # The name of the metric associated with the alarm.
+    # The name of the metric associated with the alarm, if this is an alarm
+    # based on a single metric.
     # @return [String]
     def metric_name
       data[:metric_name]
@@ -155,7 +158,7 @@ module Aws::CloudWatch
       data[:evaluation_periods]
     end
 
-    # The number of datapoints that must be breaching to trigger the alarm.
+    # The number of data points that must be breaching to trigger the alarm.
     # @return [Integer]
     def datapoints_to_alarm
       data[:datapoints_to_alarm]
@@ -192,10 +195,21 @@ module Aws::CloudWatch
       data[:evaluate_low_sample_count_percentile]
     end
 
-    
+    # An array of MetricDataQuery structures, used in an alarm based on a
+    # metric math expression. Each structure either retrieves a metric or
+    # performs a math expression. One item in the Metrics array is the math
+    # expression that the alarm watches. This expression by designated by
+    # having `ReturnValue` set to true.
     # @return [Array<Types::MetricDataQuery>]
     def metrics
       data[:metrics]
+    end
+
+    # In an alarm based on an anomaly detection model, this is the ID of the
+    # `ANOMALY_DETECTION_BAND` function used as the threshold for the alarm.
+    # @return [String]
+    def threshold_metric_id
+      data[:threshold_metric_id]
     end
 
     # @!endgroup
@@ -253,10 +267,10 @@ module Aws::CloudWatch
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Alarm]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::AlarmExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(alarm_names: [@name]))
       Alarm.new({
         name: @name,
@@ -269,7 +283,8 @@ module Aws::CloudWatch
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -282,13 +297,15 @@ module Aws::CloudWatch
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -319,17 +336,16 @@ module Aws::CloudWatch
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -375,13 +391,19 @@ module Aws::CloudWatch
     # @example Request syntax with placeholder values
     #
     #   alarm.describe_history({
+    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm
     #     history_item_type: "ConfigurationUpdate", # accepts ConfigurationUpdate, StateUpdate, Action
     #     start_date: Time.now,
     #     end_date: Time.now,
     #     max_records: 1,
     #     next_token: "NextToken",
+    #     scan_by: "TimestampDescending", # accepts TimestampDescending, TimestampAscending
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<String>] :alarm_types
+    #   Use this parameter to specify whether you want the operation to return
+    #   metric alarms or composite alarms. If you omit this parameter, only
+    #   metric alarms are returned.
     # @option options [String] :history_item_type
     #   The type of alarm histories to retrieve.
     # @option options [Time,DateTime,Date,Integer,String] :start_date
@@ -393,6 +415,11 @@ module Aws::CloudWatch
     # @option options [String] :next_token
     #   The token returned by a previous call to indicate that there is more
     #   data available.
+    # @option options [String] :scan_by
+    #   Specified whether to return the newest or oldest alarm history first.
+    #   Specify `TimestampDescending` to have the newest event history
+    #   returned first, and specify `TimestampAscending` to have the oldest
+    #   history returned first.
     # @return [Types::DescribeAlarmHistoryOutput]
     def describe_history(options = {})
       options = options.merge(alarm_name: @name)
@@ -438,6 +465,11 @@ module Aws::CloudWatch
     # @option options [String] :state_reason_data
     #   The reason that this alarm is set to this specific state, in JSON
     #   format.
+    #
+    #   For SNS or EC2 alarm actions, this is just informational. But for EC2
+    #   Auto Scaling or application Auto Scaling alarm actions, the Auto
+    #   Scaling policy uses the information in this field to take the correct
+    #   action.
     # @return [EmptyStructure]
     def set_state(options = {})
       options = options.merge(alarm_name: @name)
@@ -482,8 +514,8 @@ module Aws::CloudWatch
 
     def yield_waiter_and_warn(waiter, &block)
       if !@waiter_block_warned
-        msg = "pass options to configure the waiter; "
-        msg << "yielding the waiter is deprecated"
+        msg = "pass options to configure the waiter; "\
+              "yielding the waiter is deprecated"
         warn(msg)
         @waiter_block_warned = true
       end
@@ -491,7 +523,9 @@ module Aws::CloudWatch
     end
 
     def separate_params_and_options(options)
-      opts = Set.new([:client, :max_attempts, :delay, :before_attempt, :before_wait])
+      opts = Set.new(
+        [:client, :max_attempts, :delay, :before_attempt, :before_wait]
+      )
       waiter_opts = {}
       waiter_params = {}
       options.each_pair do |key, value|

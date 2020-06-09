@@ -4,35 +4,35 @@ require 'tempfile'
 module Aws
   module S3
     describe Object do
-
       let(:client) { S3::Client.new(stub_responses: true) }
       let(:tmpdir) { Dir.tmpdir }
 
       describe '#download_file' do
-
         let(:path) { Tempfile.new('destination').path }
 
-        let(:small_obj) {
+        let(:small_obj) do
           S3::Object.new(
             bucket_name: 'bucket',
             key: 'small',
             client: client
           )
-        }
-        let(:large_obj) {
+        end
+
+        let(:large_obj) do
           S3::Object.new(
             bucket_name: 'bucket',
             key: 'large',
             client: client
           )
-        }
-        let(:single_obj) {
+        end
+
+        let(:single_obj) do
           S3::Object.new(
             bucket_name: 'bucket',
             key: 'single',
             client: client
           )
-        }
+        end
 
         let(:one_meg) { 1024 * 1024 }
         let(:small_file) { Tempfile.new('small-file') }
@@ -42,44 +42,68 @@ module Aws
 
         before(:each) do
           allow(Dir).to receive(:tmpdir).and_return(tmpdir)
+
           allow(client).to receive(:head_object).with(
-              bucket: 'bucket',
-              key: 'small',
-              part_number: 1
-            ).and_return(
-              client.stub_data(:head_object, content_length: one_meg, parts_count: nil)
+            bucket: 'bucket',
+            key: 'small',
+            part_number: 1
+          ).and_return(
+            client.stub_data(
+              :head_object,
+              content_length: one_meg,
+              parts_count: nil
             )
+          )
+
           allow(client).to receive(:head_object).with(
-              bucket: 'bucket',
-              key: 'small',
-              part_number: 1,
-              version_id: version_id
-            ).and_return(
-              client.stub_data(:head_object, content_length: one_meg, parts_count: nil)
+            bucket: 'bucket',
+            key: 'small',
+            part_number: 1,
+            version_id: version_id
+          ).and_return(
+            client.stub_data(
+              :head_object,
+              content_length: one_meg,
+              parts_count: nil
             )
+          )
+
           allow(client).to receive(:head_object).with(
-              bucket: 'bucket',
-              key: 'large',
-              part_number: 1
-            ).and_return(
-              client.stub_data(:head_object, content_length: 5 * one_meg, parts_count: 4)
+            bucket: 'bucket',
+            key: 'large',
+            part_number: 1
+          ).and_return(
+            client.stub_data(
+              :head_object,
+              content_length: 5 * one_meg,
+              parts_count: 4
             )
+          )
+
           allow(client).to receive(:head_object).with(
-              bucket: 'bucket',
-              key: 'large',
-            ).and_return(
-              client.stub_data(:head_object, content_length: 20 * one_meg)
+            bucket: 'bucket',
+            key: 'large'
+          ).and_return(
+            client.stub_data(
+              :head_object,
+              content_length: 20 * one_meg
             )
+          )
+
           allow(client).to receive(:head_object).with(
-              bucket: 'bucket',
-              key: 'single',
-              part_number: 1
-            ).and_return(
-              client.stub_data(:head_object, content_length: 15 * one_meg, parts_count: nil)
+            bucket: 'bucket',
+            key: 'single',
+            part_number: 1
+          ).and_return(
+            client.stub_data(
+              :head_object,
+              content_length: 15 * one_meg,
+              parts_count: nil
             )
+          )
         end
 
-        it  'downloads single part files in Client#get_object' do
+        it 'downloads single part files in Client#get_object' do
           expect(client).to receive(:get_object).with(
             bucket: 'bucket',
             key: 'small',
@@ -125,26 +149,29 @@ module Aws
         end
 
         it 'raises an error if an invaild mode is specified' do
-          expect {
-            large_obj.download_file(path, mode: "invalid_mode")
-          }.to raise_error(
-            ArgumentError,
-            "Invalid mode invalid_mode provided, mode should be :single_request, :get_range or :auto"
-          )
+          expect { large_obj.download_file(path, mode: 'invalid_mode') }
+            .to raise_error(
+              ArgumentError,
+              'Invalid mode invalid_mode provided, mode should '\
+              'be :single_request, :get_range or :auto'
+            )
         end
 
         it 'raises an error if choose :get_range without :chunk_size' do
-          expect {
-            large_obj.download_file(path, mode: "get_range")
-          }.to raise_error(ArgumentError, "In :get_range mode, :chunk_size must be provided")
+          expect { large_obj.download_file(path, mode: 'get_range') }
+            .to raise_error(
+              ArgumentError,
+              'In :get_range mode, :chunk_size must be provided'
+            )
         end
 
         it 'raises an error if :chunk_size is larger than file size' do
-          expect {
-            large_obj.download_file(path, chunk_size: 50 * one_meg )
-          }.to raise_error(ArgumentError, ":chunk_size shouldn't exceed total file size.")
+          expect { large_obj.download_file(path, chunk_size: 50 * one_meg) }
+            .to raise_error(
+              ArgumentError,
+              ":chunk_size shouldn't exceed total file size."
+            )
         end
-
       end
     end
   end

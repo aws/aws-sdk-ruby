@@ -38,11 +38,9 @@ request URI and never moved to the host as a sub-domain.
           def move_dns_compat_bucket_to_subdomain(context)
             bucket_name = context.params[:bucket]
             endpoint = context.http_request.endpoint
-            if
-              bucket_name &&
-              BucketDns.dns_compatible?(bucket_name, https?(endpoint)) &&
-              context.operation_name.to_s != 'get_bucket_location'
-            then
+            if bucket_name &&
+               BucketDns.dns_compatible?(bucket_name, https?(endpoint)) &&
+               context.operation_name.to_s != 'get_bucket_location'
               move_bucket_to_subdomain(bucket_name, endpoint)
             end
           end
@@ -73,8 +71,10 @@ request URI and never moved to the host as a sub-domain.
             end
           end
 
-          private
-
+          # Checks for a valid RFC-3986 host name
+          # @see https://tools.ietf.org/html/rfc3986#section-3.2.2
+          # @param [String] bucket_name
+          # @return [Boolean]
           def valid_subdomain?(bucket_name)
             bucket_name.size < 64 &&
             bucket_name =~ /^[a-z0-9][a-z0-9.-]+[a-z0-9]$/ &&

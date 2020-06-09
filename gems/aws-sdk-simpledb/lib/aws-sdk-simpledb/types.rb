@@ -40,6 +40,16 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
+    # The specified attribute does not exist.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class AttributeDoesNotExist < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchDeleteAttributesRequest
     #   data as a hash:
     #
@@ -277,6 +287,16 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
+    # The item name was specified more than once.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class DuplicateItemName < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAttributesRequest
     #   data as a hash:
     #
@@ -317,6 +337,56 @@ module Aws::SimpleDB
     #
     class GetAttributesResult < Struct.new(
       :attributes)
+      include Aws::Structure
+    end
+
+    # The specified NextToken is not valid.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class InvalidNextToken < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
+    # Too many predicates exist in the query expression.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class InvalidNumberPredicates < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
+    # Too many predicates exist in the query expression.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class InvalidNumberValueTests < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
+    # The value for a parameter is invalid.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class InvalidParameterValue < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
+    # The specified query expression syntax is not valid.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class InvalidQueryExpression < Struct.new(
+      :box_usage)
       include Aws::Structure
     end
 
@@ -373,6 +443,86 @@ module Aws::SimpleDB
     class ListDomainsResult < Struct.new(
       :domain_names,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The request must contain the specified missing parameter.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class MissingParameter < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
+    # The specified domain does not exist.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class NoSuchDomain < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
+    # Too many attributes in this domain.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class NumberDomainAttributesExceeded < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
+    # Too many bytes in this domain.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class NumberDomainBytesExceeded < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
+    # Too many domains exist per this account.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class NumberDomainsExceeded < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
+    # Too many attributes in this item.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class NumberItemAttributesExceeded < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
+    # Too many attributes exist in a single call.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class NumberSubmittedAttributesExceeded < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
+    # Too many items exist in a single call.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class NumberSubmittedItemsExceeded < Struct.new(
+      :box_usage)
       include Aws::Structure
     end
 
@@ -479,6 +629,17 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
+    # A timeout occurred when attempting to query the specified domain with
+    # specified query expression.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class RequestTimeout < Struct.new(
+      :box_usage)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SelectRequest
     #   data as a hash:
     #
@@ -518,6 +679,16 @@ module Aws::SimpleDB
     class SelectResult < Struct.new(
       :items,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Too many attributes requested.
+    #
+    # @!attribute [rw] box_usage
+    #   @return [Float]
+    #
+    class TooManyRequestedAttributes < Struct.new(
+      :box_usage)
       include Aws::Structure
     end
 

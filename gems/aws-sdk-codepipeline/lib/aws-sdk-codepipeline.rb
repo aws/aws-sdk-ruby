@@ -24,17 +24,20 @@ require_relative 'aws-sdk-codepipeline/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     code_pipeline = Aws::CodePipeline::Client.new
+#     resp = code_pipeline.acknowledge_job(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS CodePipeline all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS CodePipeline are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CodePipeline::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS CodePipeline API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-codepipeline/customizations'
 # @service
 module Aws::CodePipeline
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.31.0'
 
 end

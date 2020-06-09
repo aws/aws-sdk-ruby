@@ -24,17 +24,20 @@ require_relative 'aws-sdk-organizations/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     organizations = Aws::Organizations::Client.new
+#     resp = organizations.accept_handshake(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Organizations all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Organizations are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Organizations::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Organizations API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-organizations/customizations'
 # @service
 module Aws::Organizations
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.41.0'
 
 end

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SimpleDB
+
   class Resource
 
     # @param options ({})

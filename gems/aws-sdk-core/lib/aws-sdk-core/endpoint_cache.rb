@@ -47,8 +47,8 @@ module Aws
       @mutex.synchronize do
         # delete the least recent used endpoint when cache is full
         unless @entries.size < @max_entries
-          old_key, _ = @entries.shift
-          self.delete_polling_thread(old_key)
+          old_key, = @entries.shift
+          delete_polling_thread(old_key)
         end
         # delete old value if exists
         @entries.delete(key)
@@ -60,10 +60,12 @@ module Aws
     # @param [String] key
     # @return [Boolean]
     def key?(key)
-      if @entries.key?(key) && (@entries[key].nil? || @entries[key].expired?)
-        self.delete(key)
+      @mutex.synchronize do
+        if @entries.key?(key) && (@entries[key].nil? || @entries[key].expired?)
+          @entries.delete(key)
+        end
+        @entries.key?(key)
       end
-      @entries.key?(key)
     end
 
     # checking whether an polling thread exist for the key
@@ -84,7 +86,7 @@ module Aws
     # kill the old polling thread and remove it from pool
     # @param [String] key
     def delete_polling_thread(key)
-      Thread.kill(@pool[key]) if self.threads_key?(key)
+      Thread.kill(@pool[key]) if threads_key?(key)
       @pool.delete(key)
     end
 
@@ -109,7 +111,7 @@ module Aws
       if _endpoint_operation_identifier(ctx)
         parts << ctx.operation_name
         ctx.operation.input.shape.members.inject(parts) do |p, (name, ref)|
-          p << ctx.params[name] if ref["endpointdiscoveryid"]
+          p << ctx.params[name] if ref['endpointdiscoveryid']
           p
         end
       end
@@ -141,7 +143,7 @@ module Aws
         # build identifier params when available
         params[:operation] = ctx.operation.name
         ctx.operation.input.shape.members.inject(params) do |p, (name, ref)|
-          if ref["endpointdiscoveryid"]
+          if ref['endpointdiscoveryid']
             p[:identifiers] ||= {}
             p[:identifiers][ref.location_name] = ctx.params[name]
           end
@@ -153,19 +155,20 @@ module Aws
         endpoint_operation_name = ctx.config.api.endpoint_operation
         ctx.client.send(endpoint_operation_name, params)
       rescue Aws::Errors::ServiceError
-        nil 
+        nil
       end
     end
 
     def _endpoint_operation_identifier(ctx)
       return @require_identifier unless @require_identifier.nil?
+
       operation_name = ctx.config.api.endpoint_operation
       operation = ctx.config.api.operation(operation_name)
       @require_identifier = operation.input.shape.members.any?
     end
 
     class Endpoint
-    
+
       # default endpoint cache time, 1 minute
       CACHE_PERIOD = 1
 
@@ -175,7 +178,7 @@ module Aws
         @created_time = Time.now
       end
 
-      # [String] valid URI address (with path) 
+      # [String] valid URI address (with path)
       attr_reader :address
 
       def expired?

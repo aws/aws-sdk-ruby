@@ -1,14 +1,17 @@
 module Aws
   module S3
     class Object
-
       alias size content_length
+
+      # Make the method redefinable
+      alias_method :copy_from, :copy_from
 
       # Copies another object to this object. Use `multipart_copy: true`
       # for large objects. This is required for objects that exceed 5GB.
       #
-      # @param [S3::Object, S3::ObjectVersion, S3::ObjectSummary, String, Hash] source
-      #   Where to copy object data from. `source` must be one of the following:
+      # @param [S3::Object, S3::ObjectVersion, S3::ObjectSummary, String, Hash]
+      #   source Where to copy object data from. `source` must be one of the
+      #   following:
       #
       #   * {Aws::S3::Object}
       #   * {Aws::S3::ObjectSummary}
@@ -25,7 +28,8 @@ module Aws
       #
       # @option options [Integer] :content_length Only used when
       #   `:multipart_copy` is `true`. Passing this options avoids a HEAD
-      #   request to query the source object size.
+      #   request to query the source object size. Raises an `ArgumentError` if
+      #   this option is provided when `:multipart_copy` is `false` or not set.
       #
       # @option options [S3::Client] :copy_source_client Only used when
       #   `:multipart_copy` is `true` and the source object is in a
@@ -103,8 +107,9 @@ module Aws
         ObjectCopier.new(self, options).copy_to(target, options)
       end
 
-      # Copies and deletes the current object. The object will only be
-      # deleted if the copy operation succeeds.
+      # Copies and deletes the current object. The object will only be deleted
+      # if the copy operation succeeds.
+      #
       # @param (see Object#copy_to)
       # @option (see Object#copy_to)
       # @return [void]
@@ -129,10 +134,7 @@ module Aws
           client.config.credentials,
           client.config.region,
           bucket_name,
-          {
-            key: key,
-            url: bucket.url,
-          }.merge(options)
+          { key: key, url: bucket.url }.merge(options)
         )
       end
 
@@ -186,10 +188,10 @@ module Aws
       #
       def presigned_url(http_method, params = {})
         presigner = Presigner.new(client: client)
-        presigner.presigned_url("#{http_method.downcase}_object", params.merge(
-          bucket: bucket_name,
-          key: key,
-        ))
+        presigner.presigned_url(
+          "#{http_method.downcase}_object",
+          params.merge(bucket: bucket_name, key: key)
+        )
       end
 
       # Returns the public (un-signed) URL for this object.
@@ -199,7 +201,8 @@ module Aws
       #
       # To use virtual hosted bucket url (disables https):
       #
-      #     s3.bucket('my.bucket.com').object('key').public_url(virtual_host: true)
+      #     s3.bucket('my.bucket.com').object('key')
+      #       .public_url(virtual_host: true)
       #     #=> "http://my.bucket.com/key"
       #
       # @option options [Boolean] :virtual_host (false) When `true`, the bucket
@@ -216,11 +219,12 @@ module Aws
 
       # Uploads a stream in a streaming fashion to the current object in S3.
       #
-      #     # Passed chunks automatically split into multipart upload parts
-      #     # and the parts are uploaded in parallel. This allows for streaming uploads
-      #     # that never touch the disk.
+      # Passed chunks automatically split into multipart upload parts and the
+      # parts are uploaded in parallel. This allows for streaming uploads that
+      # never touch the disk.
       #
-      #  Note that this is known to have issues in JRuby until jruby-9.1.15.0, so avoid using this with older versions of JRuby.
+      # Note that this is known to have issues in JRuby until jruby-9.1.15.0,
+      # so avoid using this with older versions of JRuby.
       #
       # @example Streaming chunks of data
       #     obj.upload_stream do |write_stream|
@@ -235,17 +239,15 @@ module Aws
       #       IO.copy_stream(STDIN, write_stream)
       #     end
       #
-      # @option options [Integer] :thread_count
-      #   The number of parallel multipart uploads
-      #   Default `:thread_count` is `10`.
+      # @option options [Integer] :thread_count (10) The number of parallel
+      #   multipart uploads
       #
-      # @option options [Boolean] :tempfile
-      #   Normally read data is stored in memory when building the parts in order to complete
-      #   the underlying multipart upload. By passing `:tempfile => true` data read will be
+      # @option options [Boolean] :tempfile (false) Normally read data is stored
+      #   in memory when building the parts in order to complete the underlying
+      #   multipart upload. By passing `:tempfile => true` data read will be
       #   temporarily stored on disk reducing the memory footprint vastly.
-      #   Default `:tempfile` is `false`.
       #
-      # @option options [Integer] :part_size
+      # @option options [Integer] :part_size (5242880)
       #   Define how big each part size but the last should be.
       #   Default `:part_size` is `5 * 1024 * 1024`.
       #
@@ -264,9 +266,12 @@ module Aws
           client: client,
           thread_count: uploading_options.delete(:thread_count),
           tempfile: uploading_options.delete(:tempfile),
-          part_size: uploading_options.delete(:part_size),
+          part_size: uploading_options.delete(:part_size)
         )
-        uploader.upload(uploading_options.merge(bucket: bucket_name, key: key), &block)
+        uploader.upload(
+          uploading_options.merge(bucket: bucket_name, key: key),
+          &block
+        )
         true
       end
 
@@ -282,14 +287,28 @@ module Aws
       #     # and the parts are uploaded in parallel
       #     obj.upload_file('/path/to/very_large_file')
       #
-      # @param [String,Pathname,File,Tempfile] source A file or path to a file
-      #   on the local file system that should be uploaded to this object.
-      #   If you pass an open file object, then it is your responsibility
-      #   to close the file object once the upload completes.
+      # The response of the S3 upload API is yielded if a block given.
+      #
+      #     # API response will have etag value of the file
+      #     obj.upload_file('/path/to/file') do |response|
+      #       etag = response.etag
+      #     end
+      #
+      # @param [String, Pathname, File, Tempfile] source A file on the local
+      #   file system that will be uploaded as this object. This can either be
+      #   a String or Pathname to the file, an open File object, or an open
+      #   Tempfile object. If you pass an open File or Tempfile object, then
+      #   you are responsible for closing it after the upload completes. When
+      #   using an open Tempfile, rewind it before uploading or else the object
+      #   will be empty.
       #
       # @option options [Integer] :multipart_threshold (15728640) Files larger
       #   than `:multipart_threshold` are uploaded using the S3 multipart APIs.
       #   Default threshold is 15MB.
+      #
+      # @option options [Integer] :thread_count (10) The number of parallel
+      #   multipart uploads. This option is not used if the file is smaller than
+      #   `:multipart_threshold`.
       #
       # @raise [MultipartUploadError] If an object is being uploaded in
       #   parts, and the upload can not be completed, then the upload is
@@ -304,8 +323,13 @@ module Aws
         uploading_options = options.dup
         uploader = FileUploader.new(
           multipart_threshold: uploading_options.delete(:multipart_threshold),
-          client: client)
-        uploader.upload(source, uploading_options.merge(bucket: bucket_name, key: key))
+          client: client
+        )
+        response = uploader.upload(
+          source,
+          uploading_options.merge(bucket: bucket_name, key: key)
+        )
+        yield response if block_given?
         true
       end
 
@@ -320,7 +344,7 @@ module Aws
       #     # and the parts are downloaded in parallel
       #     obj.download_file('/path/to/very_large_file')
       #
-      # @param [String] destination Where to download the file to
+      # @param [String] destination Where to download the file to.
       #
       # @option options [String] mode `auto`, `single_request`, `get_range`
       #  `single_request` mode forces only 1 GET request is made in download,
@@ -328,21 +352,23 @@ module Aws
       #  customizing each range size in multipart_download,
       #  By default, `auto` mode is enabled, which performs multipart_download
       #
-      # @option options [String] chunk_size required in get_range mode
+      # @option options [String] chunk_size required in get_range mode.
       #
-      # @option options [String] thread_count Customize threads used in multipart
-      #   download, if not provided, 10 is default value
+      # @option options [Integer] thread_count (10) Customize threads used in
+      #   the multipart download.
       #
-      # @option options [String] version_id The object version id used to retrieve
-      #   the object, to know more about object versioning, see:
+      # @option options [String] version_id The object version id used to
+      #   retrieve the object. For more about object versioning, see:
       #   https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html
       #
-      # @return [Boolean] Returns `true` when the file is downloaded
-      #   without any errors.
+      # @return [Boolean] Returns `true` when the file is downloaded without
+      #   any errors.
       def download_file(destination, options = {})
         downloader = FileDownloader.new(client: client)
         downloader.download(
-          destination, options.merge(bucket: bucket_name, key: key))
+          destination,
+          options.merge(bucket: bucket_name, key: key)
+        )
         true
       end
     end

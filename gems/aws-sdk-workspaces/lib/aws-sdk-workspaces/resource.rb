@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::WorkSpaces
+
   class Resource
 
     # @param options ({})

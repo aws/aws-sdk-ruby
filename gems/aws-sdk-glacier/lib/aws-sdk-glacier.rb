@@ -31,17 +31,20 @@ require_relative 'aws-sdk-glacier/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     glacier = Aws::Glacier::Client.new
+#     resp = glacier.abort_multipart_upload(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Glacier all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Glacier are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Glacier::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Glacier API errors
 #     end
 #
 # See {Errors} for more information.
@@ -49,6 +52,6 @@ require_relative 'aws-sdk-glacier/customizations'
 # @service
 module Aws::Glacier
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.29.0'
 
 end

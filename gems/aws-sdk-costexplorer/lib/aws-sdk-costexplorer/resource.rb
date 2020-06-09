@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CostExplorer
+
   class Resource
 
     # @param options ({})

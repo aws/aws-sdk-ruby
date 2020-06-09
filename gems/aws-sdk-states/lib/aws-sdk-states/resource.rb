@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::States
+
   class Resource
 
     # @param options ({})

@@ -45,17 +45,20 @@ require_relative 'aws-sdk-s3/event_streams'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     s3 = Aws::S3::Client.new
+#     resp = s3.abort_multipart_upload(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Simple Storage Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Simple Storage Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::S3::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Simple Storage Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -63,6 +66,6 @@ require_relative 'aws-sdk-s3/event_streams'
 # @service
 module Aws::S3
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.67.1'
 
 end

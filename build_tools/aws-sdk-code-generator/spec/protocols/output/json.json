@@ -431,5 +431,382 @@
         }
       }
     ]
+  },
+  {
+    "description": "Scalar eventheader members",
+    "metadata": {
+      "protocol": "json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "Payload": {
+            "shape": "EventStreamShape"
+          }
+        },
+        "payload": "Payload"
+      },
+      "EventStreamShape": {
+        "type": "structure",
+        "members": {
+          "EventMember": {
+            "shape": "EventShape"
+          }
+        },
+        "eventstream": true
+      },
+      "EventShape": {
+        "type": "structure",
+        "members": {
+          "Str": {
+            "shape": "StringType",
+            "eventheader": true
+          },
+          "Num": {
+            "shape": "IntegerType",
+            "eventheader": true
+          },
+          "FalseBool": {
+            "shape": "BooleanType",
+            "eventheader": true
+          },
+          "TrueBool": {
+            "shape": "BooleanType",
+            "eventheader": true
+          },
+          "Long": {
+            "shape": "LongType",
+            "eventheader": true
+          },
+          "Byte": {
+            "shape": "ByteType",
+            "eventheader": true
+          },
+          "Timestamp": {
+            "shape": "TimestampType",
+            "eventheader": true
+          }
+        },
+        "event": true
+      },
+      "StringType": {
+        "type": "string"
+      },
+      "IntegerType": {
+        "type": "integer"
+      },
+      "BooleanType": {
+        "type": "boolean"
+      },
+      "LongType": {
+        "type": "long"
+      },
+      "ByteType": {
+        "type": "byte"
+      },
+      "TimestampType": {
+        "type": "timestamp"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Payload": {
+            "EventMember": {
+              "Str": "myname",
+              "Num": 123,
+              "FalseBool": false,
+              "TrueBool": true,
+              "Long": 250,
+              "Byte": 5,
+              "Timestamp": 8675.309
+            }
+          }
+        },
+        "response": {
+          "eventstream": true,
+          "status_code": 200,
+          "headers": {},
+          "body":"AAAAkwAAAIOHNVAzCzpldmVudC10eXBlBwALRXZlbnRNZW1iZXINOm1lc3NhZ2UtdHlwZQcABWV2ZW50A1N0cgcABm15bmFtZQNOdW0EAAAAewlGYWxzZUJvb2wBCFRydWVCb29sAARMb25nBQAAAAAAAAD6BEJ5dGUCBQlUaW1lc3RhbXAIAAAAAACEX+1DFJaG"
+        }
+      }
+    ]
+  },
+  {
+    "description": "String eventpayload member",
+    "metadata": {
+      "protocol": "json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "Payload": {
+            "shape": "EventStreamShape"
+          }
+        },
+        "payload": "Payload"
+      },
+      "EventStreamShape": {
+        "type": "structure",
+        "members": {
+          "EventMember": {
+            "shape": "EventShape"
+          }
+        },
+        "eventstream": true
+      },
+      "EventShape": {
+        "type": "structure",
+        "members": {
+          "Str": {
+            "shape": "StringType",
+            "eventpayload": true
+          }
+        },
+        "event": true
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Payload": {
+            "EventMember": {
+              "Str": "foo"
+            }
+          }
+        },
+        "response": {
+          "eventstream": true,
+          "status_code": 200,
+          "headers": {},
+          "body": "AAAALQAAABqhEc2mCzpldmVudC10eXBlBwALRXZlbnRNZW1iZXJmb295x4zh"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Blob eventpayload members",
+    "metadata": {
+      "protocol": "json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "Payload": {
+            "shape": "EventStreamShape"
+          }
+        },
+        "payload": "Payload"
+      },
+      "EventStreamShape": {
+        "type": "structure",
+        "members": {
+          "EventMember": {
+            "shape": "EventShape"
+          }
+        },
+        "eventstream": true
+      },
+      "EventShape": {
+        "type": "structure",
+        "members": {
+          "Blob": {
+            "shape": "BlobType",
+            "eventpayload": true
+          }
+        },
+        "event": true
+      },
+      "BlobType": {
+        "type": "blob"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Payload": {
+            "EventMember": {
+              "Blob": "value"
+            }
+          }
+        },
+        "response": {
+          "eventstream": true,
+          "status_code": 200,
+          "headers": {},
+          "body": "AAAARQAAADDT6Dj8CzpldmVudC10eXBlBwALRXZlbnRNZW1iZXINOm1lc3NhZ2UtdHlwZQcABWV2ZW50dmFsdWXkSTLo"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Structure eventpayload members",
+    "metadata": {
+      "protocol": "json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "Payload": {
+            "shape": "EventStreamShape"
+          }
+        },
+        "payload": "Payload"
+      },
+      "EventStreamShape": {
+        "type": "structure",
+        "members": {
+          "EventMember": {
+            "shape": "EventShape"
+          }
+        },
+        "eventstream": true
+      },
+      "EventShape": {
+        "type": "structure",
+        "members": {
+          "Struct": {
+            "shape": "StructType",
+            "eventpayload": true
+          }
+        },
+        "event": true
+      },
+      "StructType": {
+        "type": "structure",
+        "members": {
+          "Foo": {
+            "shape": "StringType"
+          },
+          "Bar": {
+            "shape": "StringType"
+          }
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Payload": {
+            "EventMember": {
+              "Struct": {
+                "Foo": "foo",
+                "Bar": "bar"
+              }
+            }
+          }
+        },
+        "response": {
+          "eventstream": true,
+          "status_code": 200,
+          "headers": {},
+          "body": "AAAAQwAAABqHEwSKCzpldmVudC10eXBlBwALRXZlbnRNZW1iZXJ7IkZvbyI6ImZvbyIsIkJhciI6ImJhciJ9v2A/3A=="
+        }
+      }
+    ]
+  },
+  {
+    "description": "event with explicit eventheader and implicit eventpayloads",
+    "metadata": {
+      "protocol": "json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "Payload": {
+            "shape": "EventStreamShape"
+          }
+        },
+        "payload": "Payload"
+      },
+      "EventStreamShape": {
+        "type": "structure",
+        "members": {
+          "EventMember": {
+            "shape": "EventShape"
+          }
+        },
+        "eventstream": true
+      },
+      "EventShape": {
+        "type": "structure",
+        "members": {
+          "Str": {
+            "shape": "StringType"
+          },
+          "StrStr": {
+            "shape": "StringType"
+          },
+          "HeaderStr": {
+            "shape": "StringType",
+            "eventheader": true
+          }
+        },
+        "event": true
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Payload": {
+            "EventMember": {
+              "Str": "foo",
+              "StrStr": "foofoo",
+              "HeaderStr": "bar"
+            }
+          }
+        },
+        "response": {
+          "eventstream": true,
+          "status_code": 200,
+          "headers": {},
+          "body": "AAAAWQAAACqLmrsFCzpldmVudC10eXBlBwALRXZlbnRNZW1iZXIJSGVhZGVyU3RyBwADYmFyeyJTdHIiOiJmb28iLCJTdHJTdHIiOiJmb29mb28ifSQomfU"
+        }
+      }
+    ]
   }
 ]

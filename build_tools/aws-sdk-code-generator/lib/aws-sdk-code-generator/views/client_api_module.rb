@@ -19,7 +19,7 @@ module AwsSdkCodeGenerator
         'map' => 'MapShape',
         'string' => 'StringShape',
         'structure' => 'StructureShape',
-        'timestamp' => 'TimestampShape',
+        'timestamp' => 'TimestampShape'
       }
 
       SHAPE_KEYS = {
@@ -27,6 +27,8 @@ module AwsSdkCodeGenerator
         'flattened' => true,
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
+        'streaming' => true, # transfer-encoding
+        'requiresLength' => true, # transder-encoding
         # event stream modeling
         'event' => false,
         'eventstream' => false,
@@ -44,10 +46,9 @@ module AwsSdkCodeGenerator
         'members' => false,
         'member' => false,
         'key' => false,
-        'locationName'  => false,
+        'locationName' => false,
         'value' => false,
         'required' => false,
-        'streaming'  => false,
         'enum' => false,
         'exception' => false,
         'payload' => false,
@@ -57,6 +58,7 @@ module AwsSdkCodeGenerator
         'max' => false,
         'wrapper' => false,
         'xmlOrder' => false,
+        'retryable' => false
       }
 
       METADATA_KEYS = {
@@ -72,13 +74,12 @@ module AwsSdkCodeGenerator
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
         'protocolSettings' => {}, # current unused unless for h2 exclude
-
         'serviceId' => true,
         'apiVersion' => true,
         'checksumFormat' => true,
         'globalEndpoint' => true,
         'serviceAbbreviation' => true,
-        'uid' => true,
+        'uid' => true
       }
 
       # @option options [required, Service] :service
@@ -136,6 +137,15 @@ module AwsSdkCodeGenerator
               lines << "#{shape_name}[:payload] = :#{underscore(payload)}"
               lines << "#{shape_name}[:payload_member] = #{shape_name}.member(:#{underscore(payload)})"
             end
+            groups << lines.join("\n")
+          elsif error_struct?(shape)
+            required = Set.new(shape['required'] || [])
+            unless shape['members'].nil?
+              shape['members'].each do |member_name, member_ref|
+                lines << "#{shape_name}.add_member(:#{underscore(member_name)}, #{shape_ref(member_ref, member_name, required)})"
+              end
+            end
+            lines << "#{shape_name}.struct_class = Types::#{shape_name}"
             groups << lines.join("\n")
           elsif shape['type'] == 'list'
             lines << "#{shape_name}.member = #{shape_ref(shape['member'])}"
@@ -205,6 +215,8 @@ module AwsSdkCodeGenerator
             o.authtype = operation['authtype'] if operation.key?('authtype')
             o.require_apikey = operation['requiresApiKey'] if operation.key?('requiresApiKey')
             o.pager = pager(operation_name)
+            o.async = @service.protocol_settings['h2'] == 'eventstream' &&
+              AwsSdkCodeGenerator::Helper.operation_eventstreaming?(operation, @service.api)
           end
         end
       end
@@ -229,6 +241,10 @@ module AwsSdkCodeGenerator
           return underscore(name) if ref['endpointoperation']
         end
         nil
+      end
+
+      def require_endpoint_discovery
+        @service.require_endpoint_discovery
       end
 
       private
@@ -260,6 +276,20 @@ module AwsSdkCodeGenerator
       end
 
       def shape_enum
+        unless @service.protocol_settings.empty?
+          if @service.protocol_settings['h2'] == 'eventstream'
+            # some event shapes shared with error shapes
+            # might missing event trait
+            @service.api['shapes'].each do |_, shape|
+              if shape['eventstream']
+                # add event trait to all members if not exists
+                shape['members'].each do |name, ref|
+                  @service.api['shapes'][ref['shape']]['event'] = true
+                end
+              end
+            end
+          end
+        end
         Enumerator.new do |y|
           @service.api.fetch('shapes', {}).keys.sort.each do |shape_name|
             y.yield(shape_name, @service.api['shapes'].fetch(shape_name))
@@ -268,16 +298,25 @@ module AwsSdkCodeGenerator
       end
 
       def non_error_struct?(shape)
-        shape['type'] == 'structure' &&
-        !shape['error'] &&
-        !shape['exception']
+        if !!shape['event']
+          shape['type'] == 'structure'
+        else
+          shape['type'] == 'structure' &&
+            !shape['error'] &&
+            !shape['exception']
+        end
+      end
+
+      def error_struct?(shape)
+        shape['type'] == 'structure' && !!!shape['event'] &&
+          (shape['error'] || shape['exception'])
       end
 
       def structure_shape_enum
         Enumerator.new do |y|
           shape_enum.each do |shape_name, shape|
-            # skip error types
-            if non_error_struct?(shape)
+            # non error types && non empty error struct
+            if non_error_struct?(shape) || error_struct?(shape)
               y.yield(shape_name, shape)
             end
           end
@@ -508,6 +547,9 @@ module AwsSdkCodeGenerator
 
         # @return [Pager, nil]
         attr_accessor :pager
+
+        # @return [Boolean]
+        attr_accessor :async
 
       end
 

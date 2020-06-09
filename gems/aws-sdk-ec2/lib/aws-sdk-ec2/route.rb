@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2
+
   class Route
 
     extend Aws::Deprecations
@@ -24,6 +25,7 @@ module Aws::EC2
       @destination_cidr_block = extract_destination_cidr_block(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -84,6 +86,12 @@ module Aws::EC2
     # @return [String]
     def transit_gateway_id
       data[:transit_gateway_id]
+    end
+
+    # The ID of the local gateway.
+    # @return [String]
+    def local_gateway_id
+      data[:local_gateway_id]
     end
 
     # The ID of the network interface.
@@ -156,7 +164,8 @@ module Aws::EC2
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -169,13 +178,15 @@ module Aws::EC2
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -206,17 +217,16 @@ module Aws::EC2
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -278,13 +288,15 @@ module Aws::EC2
     #   route.replace({
     #     destination_ipv_6_cidr_block: "String",
     #     dry_run: false,
-    #     egress_only_internet_gateway_id: "String",
-    #     gateway_id: "String",
-    #     instance_id: "String",
-    #     nat_gateway_id: "String",
-    #     transit_gateway_id: "String",
-    #     network_interface_id: "String",
-    #     vpc_peering_connection_id: "String",
+    #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
+    #     gateway_id: "RouteGatewayId",
+    #     instance_id: "InstanceId",
+    #     local_target: false,
+    #     nat_gateway_id: "NatGatewayId",
+    #     transit_gateway_id: "TransitGatewayId",
+    #     local_gateway_id: "LocalGatewayId",
+    #     network_interface_id: "NetworkInterfaceId",
+    #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :destination_ipv_6_cidr_block
@@ -302,10 +314,15 @@ module Aws::EC2
     #   The ID of an internet gateway or virtual private gateway.
     # @option options [String] :instance_id
     #   The ID of a NAT instance in your VPC.
+    # @option options [Boolean] :local_target
+    #   Specifies whether to reset the local route to its default target
+    #   (`local`).
     # @option options [String] :nat_gateway_id
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
     # @option options [String] :transit_gateway_id
     #   The ID of a transit gateway.
+    # @option options [String] :local_gateway_id
+    #   The ID of the local gateway.
     # @option options [String] :network_interface_id
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id

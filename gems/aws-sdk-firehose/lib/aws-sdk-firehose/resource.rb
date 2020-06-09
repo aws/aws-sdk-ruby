@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Firehose
+
   class Resource
 
     # @param options ({})

@@ -26,6 +26,8 @@ module Aws::CloudWatchLogs
     DeleteLogGroupRequest = Shapes::StructureShape.new(name: 'DeleteLogGroupRequest')
     DeleteLogStreamRequest = Shapes::StructureShape.new(name: 'DeleteLogStreamRequest')
     DeleteMetricFilterRequest = Shapes::StructureShape.new(name: 'DeleteMetricFilterRequest')
+    DeleteQueryDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteQueryDefinitionRequest')
+    DeleteQueryDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteQueryDefinitionResponse')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteRetentionPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRetentionPolicyRequest')
     DeleteSubscriptionFilterRequest = Shapes::StructureShape.new(name: 'DeleteSubscriptionFilterRequest')
@@ -44,6 +46,8 @@ module Aws::CloudWatchLogs
     DescribeQueriesMaxResults = Shapes::IntegerShape.new(name: 'DescribeQueriesMaxResults')
     DescribeQueriesRequest = Shapes::StructureShape.new(name: 'DescribeQueriesRequest')
     DescribeQueriesResponse = Shapes::StructureShape.new(name: 'DescribeQueriesResponse')
+    DescribeQueryDefinitionsRequest = Shapes::StructureShape.new(name: 'DescribeQueryDefinitionsRequest')
+    DescribeQueryDefinitionsResponse = Shapes::StructureShape.new(name: 'DescribeQueryDefinitionsResponse')
     DescribeResourcePoliciesRequest = Shapes::StructureShape.new(name: 'DescribeResourcePoliciesRequest')
     DescribeResourcePoliciesResponse = Shapes::StructureShape.new(name: 'DescribeResourcePoliciesResponse')
     DescribeSubscriptionFiltersRequest = Shapes::StructureShape.new(name: 'DescribeSubscriptionFiltersRequest')
@@ -101,6 +105,7 @@ module Aws::CloudWatchLogs
     LogGroupField = Shapes::StructureShape.new(name: 'LogGroupField')
     LogGroupFieldList = Shapes::ListShape.new(name: 'LogGroupFieldList')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
+    LogGroupNames = Shapes::ListShape.new(name: 'LogGroupNames')
     LogGroups = Shapes::ListShape.new(name: 'LogGroups')
     LogRecord = Shapes::MapShape.new(name: 'LogRecord')
     LogRecordPointer = Shapes::StringShape.new(name: 'LogRecordPointer')
@@ -133,6 +138,8 @@ module Aws::CloudWatchLogs
     PutLogEventsRequest = Shapes::StructureShape.new(name: 'PutLogEventsRequest')
     PutLogEventsResponse = Shapes::StructureShape.new(name: 'PutLogEventsResponse')
     PutMetricFilterRequest = Shapes::StructureShape.new(name: 'PutMetricFilterRequest')
+    PutQueryDefinitionRequest = Shapes::StructureShape.new(name: 'PutQueryDefinitionRequest')
+    PutQueryDefinitionResponse = Shapes::StructureShape.new(name: 'PutQueryDefinitionResponse')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     PutRetentionPolicyRequest = Shapes::StructureShape.new(name: 'PutRetentionPolicyRequest')
@@ -140,9 +147,14 @@ module Aws::CloudWatchLogs
     QueryCharOffset = Shapes::IntegerShape.new(name: 'QueryCharOffset')
     QueryCompileError = Shapes::StructureShape.new(name: 'QueryCompileError')
     QueryCompileErrorLocation = Shapes::StructureShape.new(name: 'QueryCompileErrorLocation')
+    QueryDefinition = Shapes::StructureShape.new(name: 'QueryDefinition')
+    QueryDefinitionList = Shapes::ListShape.new(name: 'QueryDefinitionList')
+    QueryDefinitionName = Shapes::StringShape.new(name: 'QueryDefinitionName')
+    QueryDefinitionString = Shapes::StringShape.new(name: 'QueryDefinitionString')
     QueryId = Shapes::StringShape.new(name: 'QueryId')
     QueryInfo = Shapes::StructureShape.new(name: 'QueryInfo')
     QueryInfoList = Shapes::ListShape.new(name: 'QueryInfoList')
+    QueryListMaxResults = Shapes::IntegerShape.new(name: 'QueryListMaxResults')
     QueryResults = Shapes::ListShape.new(name: 'QueryResults')
     QueryStatistics = Shapes::StructureShape.new(name: 'QueryStatistics')
     QueryStatus = Shapes::StringShape.new(name: 'QueryStatus')
@@ -212,6 +224,9 @@ module Aws::CloudWatchLogs
     CreateLogStreamRequest.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, required: true, location_name: "logStreamName"))
     CreateLogStreamRequest.struct_class = Types::CreateLogStreamRequest
 
+    DataAlreadyAcceptedException.add_member(:expected_sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "expectedSequenceToken"))
+    DataAlreadyAcceptedException.struct_class = Types::DataAlreadyAcceptedException
+
     DeleteDestinationRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "destinationName"))
     DeleteDestinationRequest.struct_class = Types::DeleteDestinationRequest
 
@@ -225,6 +240,12 @@ module Aws::CloudWatchLogs
     DeleteMetricFilterRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     DeleteMetricFilterRequest.add_member(:filter_name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "filterName"))
     DeleteMetricFilterRequest.struct_class = Types::DeleteMetricFilterRequest
+
+    DeleteQueryDefinitionRequest.add_member(:query_definition_id, Shapes::ShapeRef.new(shape: QueryId, required: true, location_name: "queryDefinitionId"))
+    DeleteQueryDefinitionRequest.struct_class = Types::DeleteQueryDefinitionRequest
+
+    DeleteQueryDefinitionResponse.add_member(:success, Shapes::ShapeRef.new(shape: Success, location_name: "success"))
+    DeleteQueryDefinitionResponse.struct_class = Types::DeleteQueryDefinitionResponse
 
     DeleteResourcePolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "policyName"))
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
@@ -298,6 +319,15 @@ module Aws::CloudWatchLogs
     DescribeQueriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeQueriesResponse.struct_class = Types::DescribeQueriesResponse
 
+    DescribeQueryDefinitionsRequest.add_member(:query_definition_name_prefix, Shapes::ShapeRef.new(shape: QueryDefinitionName, location_name: "queryDefinitionNamePrefix"))
+    DescribeQueryDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: QueryListMaxResults, location_name: "maxResults"))
+    DescribeQueryDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeQueryDefinitionsRequest.struct_class = Types::DescribeQueryDefinitionsRequest
+
+    DescribeQueryDefinitionsResponse.add_member(:query_definitions, Shapes::ShapeRef.new(shape: QueryDefinitionList, location_name: "queryDefinitions"))
+    DescribeQueryDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeQueryDefinitionsResponse.struct_class = Types::DescribeQueryDefinitionsResponse
+
     DescribeResourcePoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeResourcePoliciesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
     DescribeResourcePoliciesRequest.struct_class = Types::DescribeResourcePoliciesRequest
@@ -361,7 +391,7 @@ module Aws::CloudWatchLogs
     FilterLogEventsRequest.add_member(:filter_pattern, Shapes::ShapeRef.new(shape: FilterPattern, location_name: "filterPattern"))
     FilterLogEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     FilterLogEventsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: EventsLimit, location_name: "limit"))
-    FilterLogEventsRequest.add_member(:interleaved, Shapes::ShapeRef.new(shape: Interleaved, location_name: "interleaved"))
+    FilterLogEventsRequest.add_member(:interleaved, Shapes::ShapeRef.new(shape: Interleaved, deprecated: true, location_name: "interleaved", metadata: {"deprecatedMessage"=>"Starting on June 17, 2019, this parameter will be ignored and the value will be assumed to be true. The response from this operation will always interleave events from multiple log streams within a log group."}))
     FilterLogEventsRequest.struct_class = Types::FilterLogEventsRequest
 
     FilterLogEventsResponse.add_member(:events, Shapes::ShapeRef.new(shape: FilteredLogEvents, location_name: "events"))
@@ -421,6 +451,15 @@ module Aws::CloudWatchLogs
 
     InputLogStreamNames.member = Shapes::ShapeRef.new(shape: LogStreamName)
 
+    InvalidOperationException.struct_class = Types::InvalidOperationException
+
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidSequenceTokenException.add_member(:expected_sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "expectedSequenceToken"))
+    InvalidSequenceTokenException.struct_class = Types::InvalidSequenceTokenException
+
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListTagsLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     ListTagsLogGroupRequest.struct_class = Types::ListTagsLogGroupRequest
 
@@ -442,6 +481,8 @@ module Aws::CloudWatchLogs
 
     LogGroupFieldList.member = Shapes::ShapeRef.new(shape: LogGroupField)
 
+    LogGroupNames.member = Shapes::ShapeRef.new(shape: LogGroupName)
+
     LogGroups.member = Shapes::ShapeRef.new(shape: LogGroup)
 
     LogRecord.key = Shapes::ShapeRef.new(shape: Field)
@@ -454,10 +495,13 @@ module Aws::CloudWatchLogs
     LogStream.add_member(:last_ingestion_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastIngestionTime"))
     LogStream.add_member(:upload_sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "uploadSequenceToken"))
     LogStream.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
-    LogStream.add_member(:stored_bytes, Shapes::ShapeRef.new(shape: StoredBytes, location_name: "storedBytes"))
+    LogStream.add_member(:stored_bytes, Shapes::ShapeRef.new(shape: StoredBytes, deprecated: true, location_name: "storedBytes", metadata: {"deprecatedMessage"=>"Starting on June 17, 2019, this parameter will be deprecated for log streams, and will be reported as zero. This change applies only to log streams. The storedBytes parameter for log groups is not affected."}))
     LogStream.struct_class = Types::LogStream
 
     LogStreams.member = Shapes::ShapeRef.new(shape: LogStream)
+
+    MalformedQueryException.add_member(:query_compile_error, Shapes::ShapeRef.new(shape: QueryCompileError, location_name: "queryCompileError"))
+    MalformedQueryException.struct_class = Types::MalformedQueryException
 
     MetricFilter.add_member(:filter_name, Shapes::ShapeRef.new(shape: FilterName, location_name: "filterName"))
     MetricFilter.add_member(:filter_pattern, Shapes::ShapeRef.new(shape: FilterPattern, location_name: "filterPattern"))
@@ -482,6 +526,8 @@ module Aws::CloudWatchLogs
     MetricTransformation.struct_class = Types::MetricTransformation
 
     MetricTransformations.member = Shapes::ShapeRef.new(shape: MetricTransformation)
+
+    OperationAbortedException.struct_class = Types::OperationAbortedException
 
     OutputLogEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "timestamp"))
     OutputLogEvent.add_member(:message, Shapes::ShapeRef.new(shape: EventMessage, location_name: "message"))
@@ -518,6 +564,15 @@ module Aws::CloudWatchLogs
     PutMetricFilterRequest.add_member(:metric_transformations, Shapes::ShapeRef.new(shape: MetricTransformations, required: true, location_name: "metricTransformations"))
     PutMetricFilterRequest.struct_class = Types::PutMetricFilterRequest
 
+    PutQueryDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: QueryDefinitionName, required: true, location_name: "name"))
+    PutQueryDefinitionRequest.add_member(:query_definition_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "queryDefinitionId"))
+    PutQueryDefinitionRequest.add_member(:log_group_names, Shapes::ShapeRef.new(shape: LogGroupNames, location_name: "logGroupNames"))
+    PutQueryDefinitionRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryDefinitionString, required: true, location_name: "queryString"))
+    PutQueryDefinitionRequest.struct_class = Types::PutQueryDefinitionRequest
+
+    PutQueryDefinitionResponse.add_member(:query_definition_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "queryDefinitionId"))
+    PutQueryDefinitionResponse.struct_class = Types::PutQueryDefinitionResponse
+
     PutResourcePolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "policyName"))
     PutResourcePolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policyDocument"))
     PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
@@ -545,6 +600,15 @@ module Aws::CloudWatchLogs
     QueryCompileErrorLocation.add_member(:end_char_offset, Shapes::ShapeRef.new(shape: QueryCharOffset, location_name: "endCharOffset"))
     QueryCompileErrorLocation.struct_class = Types::QueryCompileErrorLocation
 
+    QueryDefinition.add_member(:query_definition_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "queryDefinitionId"))
+    QueryDefinition.add_member(:name, Shapes::ShapeRef.new(shape: QueryDefinitionName, location_name: "name"))
+    QueryDefinition.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryDefinitionString, location_name: "queryString"))
+    QueryDefinition.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModified"))
+    QueryDefinition.add_member(:log_group_names, Shapes::ShapeRef.new(shape: LogGroupNames, location_name: "logGroupNames"))
+    QueryDefinition.struct_class = Types::QueryDefinition
+
+    QueryDefinitionList.member = Shapes::ShapeRef.new(shape: QueryDefinition)
+
     QueryInfo.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "queryId"))
     QueryInfo.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, location_name: "queryString"))
     QueryInfo.add_member(:status, Shapes::ShapeRef.new(shape: QueryStatus, location_name: "status"))
@@ -566,6 +630,10 @@ module Aws::CloudWatchLogs
     RejectedLogEventsInfo.add_member(:expired_log_event_end_index, Shapes::ShapeRef.new(shape: LogEventIndex, location_name: "expiredLogEventEndIndex"))
     RejectedLogEventsInfo.struct_class = Types::RejectedLogEventsInfo
 
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     ResourcePolicies.member = Shapes::ShapeRef.new(shape: ResourcePolicy)
 
     ResourcePolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "policyName"))
@@ -585,7 +653,10 @@ module Aws::CloudWatchLogs
 
     SearchedLogStreams.member = Shapes::ShapeRef.new(shape: SearchedLogStream)
 
-    StartQueryRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
+    StartQueryRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
+    StartQueryRequest.add_member(:log_group_names, Shapes::ShapeRef.new(shape: LogGroupNames, location_name: "logGroupNames"))
     StartQueryRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
     StartQueryRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
     StartQueryRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))
@@ -629,6 +700,8 @@ module Aws::CloudWatchLogs
 
     TestMetricFilterResponse.add_member(:matches, Shapes::ShapeRef.new(shape: MetricFilterMatches, location_name: "matches"))
     TestMetricFilterResponse.struct_class = Types::TestMetricFilterResponse
+
+    UnrecognizedClientException.struct_class = Types::UnrecognizedClientException
 
     UntagLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     UntagLogGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
@@ -763,6 +836,17 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:delete_query_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteQueryDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteQueryDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteQueryDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteResourcePolicy"
         o.http_method = "POST"
@@ -882,6 +966,16 @@ module Aws::CloudWatchLogs
         o.output = Shapes::ShapeRef.new(shape: DescribeQueriesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:describe_query_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeQueryDefinitions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeQueryDefinitionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeQueryDefinitionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -1049,6 +1143,17 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:put_query_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutQueryDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutQueryDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutQueryDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 

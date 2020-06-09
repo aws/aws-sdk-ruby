@@ -25,17 +25,20 @@ require_relative 'aws-sdk-emr/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     emr = Aws::EMR::Client.new
+#     resp = emr.add_instance_fleet(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Elastic MapReduce all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Elastic MapReduce are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::EMR::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Elastic MapReduce API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +46,6 @@ require_relative 'aws-sdk-emr/customizations'
 # @service
 module Aws::EMR
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.29.0'
 
 end

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SQS
+
   class Message
 
     extend Aws::Deprecations
@@ -24,6 +25,7 @@ module Aws::SQS
       @receipt_handle = extract_receipt_handle(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -105,7 +107,7 @@ module Aws::SQS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
+    # [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
     # @return [Hash<String,Types::MessageAttributeValue>]
     def message_attributes
       data[:message_attributes]

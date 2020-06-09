@@ -7,6 +7,7 @@ module Seahorse
         @operations = {}
         @authorizers = {}
         @endpoint_operation = nil
+        @require_endpoint_discovery = false
       end
 
       # @return [String, nil]
@@ -17,6 +18,9 @@ module Seahorse
 
       # @return [Symbol|nil]
       attr_accessor :endpoint_operation
+
+      # @return [Boolean|nil]
+      attr_accessor :require_endpoint_discovery
 
       def operations(&block)
         if block_given?
@@ -36,6 +40,10 @@ module Seahorse
 
       def operation_names
         @operations.keys
+      end
+
+      def async_operation_names
+        @operations.select {|_, op| op.async }.keys
       end
 
       def add_operation(name, operation)

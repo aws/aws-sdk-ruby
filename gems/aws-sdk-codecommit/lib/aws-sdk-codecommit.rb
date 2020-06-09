@@ -24,17 +24,20 @@ require_relative 'aws-sdk-codecommit/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     code_commit = Aws::CodeCommit::Client.new
+#     resp = code_commit.associate_approval_rule_template_with_repository(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS CodeCommit all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS CodeCommit are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CodeCommit::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS CodeCommit API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-codecommit/customizations'
 # @service
 module Aws::CodeCommit
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.33.0'
 
 end

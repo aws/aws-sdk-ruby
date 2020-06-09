@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CognitoIdentityProvider
+
   class Resource
 
     # @param options ({})

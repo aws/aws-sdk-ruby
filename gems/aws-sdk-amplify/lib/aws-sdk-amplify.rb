@@ -24,17 +24,20 @@ require_relative 'aws-sdk-amplify/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     amplify = Aws::Amplify::Client.new
+#     resp = amplify.create_app(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Amplify all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Amplify are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Amplify::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Amplify API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-amplify/customizations'
 # @service
 module Aws::Amplify
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.17.0'
 
 end

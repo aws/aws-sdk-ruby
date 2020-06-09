@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::OpsWorksCM
+
   class Resource
 
     # @param options ({})

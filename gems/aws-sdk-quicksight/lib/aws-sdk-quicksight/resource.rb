@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::QuickSight
+
   class Resource
 
     # @param options ({})

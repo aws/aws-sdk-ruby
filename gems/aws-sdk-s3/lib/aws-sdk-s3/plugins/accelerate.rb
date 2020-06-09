@@ -78,13 +78,13 @@ each bucket.  [Go here for more information](http://docs.aws.amazon.com/AmazonS3
 
           def validate_bucket_name!(bucket_name)
             unless BucketDns.dns_compatible?(bucket_name, _ssl = true)
-              msg = "unable to use `accelerate: true` on buckets with "
-              msg << "non-DNS compatible names"
+              msg = 'unable to use `accelerate: true` on buckets with '\
+                    'non-DNS compatible names'
               raise ArgumentError, msg
             end
             if bucket_name.include?('.')
-              msg = "unable to use `accelerate: true` on buckets with dots"
-              msg << "in their name: #{bucket_name.inspect}"
+              msg = 'unable to use `accelerate: true` on buckets with dots'\
+                    "in their name: #{bucket_name.inspect}"
               raise ArgumentError, msg
             end
           end
