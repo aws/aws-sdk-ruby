@@ -18,6 +18,6 @@ task 'update-sensitive-params' do
     filename: "#{$GEMS_DIR}/aws-sdk-core/lib/aws-sdk-core/log/param_filter.rb",
     start: /# begin/,
     stop: /# end/,
-    new_lines: "      SENSITIVE = #{sensitive}\n"
+    new_lines: "      SENSITIVE = #{sensitive}.freeze\n"
   )
 end

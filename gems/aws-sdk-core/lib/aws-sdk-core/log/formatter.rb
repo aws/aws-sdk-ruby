@@ -75,10 +75,10 @@ module Aws
       #   request parameters, strings longer than this value will be
       #   truncated.
       #
-      # @option options [Array<Symbol>] :filter A list of parameter
+      # @option options [Array<Symbol>] :filter A hash of parameter
       #   names that should be filtered when logging `:request_params`.
       #
-      #       Formatter.new(pattern, filter: [:password])
+      #       Formatter.new(pattern, filter: { 'S3' => [:body] })
       #
       #   The default list of filtered parameters is documented on the
       #   {ParamFilter} class.
@@ -121,7 +121,8 @@ module Aws
 
       def _request_params(response)
         params = response.context.params
-        @param_formatter.summarize(@param_filter.filter(params))
+        service = response.context.config.api.metadata['serviceId']
+        @param_formatter.summarize(@param_filter.filter(service, params))
       end
 
       def _time(response)
