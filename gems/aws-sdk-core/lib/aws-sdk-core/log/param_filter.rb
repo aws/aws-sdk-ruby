@@ -17,29 +17,35 @@ module Aws
       # end
 
       def initialize(options = {})
-        @filters = Set.new(SENSITIVE + Array(options[:filter]))
+        filters = options[:filter] || {}
+        @filters = SENSITIVE.merge(filters)
       end
 
-      def filter(value)
+      def filter(service, value)
         case value
-        when Struct, Hash then filter_hash(value)
-        when Array then filter_array(value)
+        when Struct, Hash then filter_hash(service, value)
+        when Array then filter_array(service, value)
         else value
         end
       end
 
       private
 
-      def filter_hash(values)
+      def filter_hash(service, values)
         filtered = {}
         values.each_pair do |key, value|
-          filtered[key] = @filters.any? { |f| f.to_s.casecmp(key.to_s).zero? } ? '[FILTERED]' : filter(value)
+          filters = @filters[service]
+          filtered[key] = if filters.any? { |f| f.to_s.casecmp(key.to_s).zero? }
+            '[FILTERED]'
+          else
+            filter(service, value)
+          end
         end
         filtered
       end
 
-      def filter_array(values)
-        values.map { |value| filter(value) }
+      def filter_array(service, values)
+        values.map { |value| filter(service, value) }
       end
 
     end
