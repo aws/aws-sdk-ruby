@@ -138,6 +138,10 @@
     "models": "logs/2014-03-28",
     "endpoint": "logs"
   },
+  "CodeArtifact": {
+    "models": "codeartifact/2018-09-22",
+    "endpoint": "codeartifact"
+  },
   "CodeBuild": {
     "models": "codebuild/2016-10-06",
     "endpoint": "codebuild"

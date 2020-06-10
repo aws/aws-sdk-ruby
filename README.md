@@ -416,8 +416,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
+| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Signaling Channels               | KinesisVideoSignalingChannels   | 2019-12-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
@@ -471,9 +471,10 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
+| CodeArtifact                                          | CodeArtifact                    | 2018-09-22  |
 | EC2 Image Builder                                     | Imagebuilder                    | 2019-12-02  |
-| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 | Schemas                                               | Schemas                         | 2019-12-02  |

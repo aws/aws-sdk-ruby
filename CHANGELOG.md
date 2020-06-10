@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppConfig - Updated the API, and documentation for Amazon AppConfig.
+
+* Feature - Aws::ComputeOptimizer - Updated the API, and documentation for AWS Compute Optimizer.
+
+* Feature - Aws::DLM - Updated the API for Amazon Data Lifecycle Manager.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Lightsail - Updated the documentation for Amazon Lightsail.
+
+* Feature - Aws::Macie2 - Updated the API, and documentation for Amazon Macie 2.
+
+* Feature - Aws::ServiceCatalog - Updated the documentation for AWS Service Catalog.
+
+* Feature - Aws::Shield - Updated the API, and documentation for AWS Shield.
+
+* Feature - Aws::CodeArtifact - Added support for a new service, CodeArtifact.
+
 2.11.524 (2020-06-09)
 ------------------
 

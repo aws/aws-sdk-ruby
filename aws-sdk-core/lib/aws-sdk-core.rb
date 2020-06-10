@@ -58,6 +58,7 @@ module Aws
     CloudWatch
     CloudWatchEvents
     CloudWatchLogs
+    CodeArtifact
     CodeBuild
     CodeCommit
     CodeDeploy
