@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.525 (2020-06-10)
+------------------
+
 * Feature - Aws::AppConfig - Updated the API, and documentation for Amazon AppConfig.
 
 * Feature - Aws::ComputeOptimizer - Updated the API, and documentation for AWS Compute Optimizer.
