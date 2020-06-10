@@ -243,13 +243,6 @@ a clock skew correction and retry requests with skewed client clocks.
             config.clock_skew.update_clock_correction(context)
           end
 
-        def invalid_bytes?
-          @error.is_a?(Seahorse::Client::NetworkingError) &&
-          @error.original_error.is_a?(Seahorse::Client::NetHttp::Handler::TruncatedBodyError)
-        end
-
-        def server?
-          (500..599).include?(@http_status_code)
           # Estimated skew needs to be updated on every request
           config.clock_skew.update_estimated_skew(context)
 
@@ -383,7 +376,7 @@ a clock skew correction and retry requests with skewed client clocks.
           context.retries += 1
           context.config.credentials.refresh! if error.expired_credentials?
           context.http_request.body.rewind
-          context.http_response.reset(truncate: error.invalid_bytes?)
+          context.http_response.reset
           call(context)
         end
 
@@ -392,9 +385,9 @@ a clock skew correction and retry requests with skewed client clocks.
         end
 
         def should_retry?(context, error)
-          error.retryable?(context) and
-          context.retries < retry_limit(context) and
-          (response_truncatable?(context) or !error.invalid_bytes?)
+          error.retryable?(context) &&
+            context.retries < retry_limit(context) &&
+            response_truncatable?(context)
         end
 
         def retry_limit(context)

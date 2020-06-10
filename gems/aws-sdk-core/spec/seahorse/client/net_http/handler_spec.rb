@@ -273,22 +273,6 @@ module Seahorse
               expect(resp_body.read).to eq('response-body')
             end
 
-            it 'populates part of response body that has not been written yet' do
-              context.http_response.body.write('response')
-              stub_request(:any, endpoint).to_return(body: 'response-body')
-              resp_body = make_request.context.http_response.body
-              resp_body.rewind
-              expect(resp_body.read).to eq('response-body')
-            end
-
-            it 'skips part of response body that has already been written' do
-              context.http_response.body.write('response-body')
-              stub_request(:any, endpoint).to_return(body: 'response-body')
-              resp_body = make_request.context.http_response.body
-              resp_body.rewind
-              expect(resp_body.read).to eq('response-body')
-            end
-
             it 'wraps errors with a NetworkingError' do
               stub_request(:any, endpoint).to_raise(EOFError)
               resp = make_request

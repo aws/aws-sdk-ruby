@@ -79,16 +79,8 @@ module Seahorse
               bytes_received = 0
               resp.signal_headers(status_code, headers)
               net_resp.read_body do |chunk|
-                if bytes_received < resp.body.size
-                  chunk_index = resp.body.size - bytes_received
-                  next_chunk = chunk.byteslice(chunk_index..-1)
-                else
-                  next_chunk = chunk
-                end
-
-                resp.signal_data(next_chunk) if next_chunk
-
                 bytes_received += chunk.bytesize
+                resp.signal_data(chunk)
               end
               complete_response(req, resp, bytes_received)
 
