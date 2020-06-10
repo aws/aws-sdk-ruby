@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2020-06-10)
+------------------
+
+* Feature - Service Catalog Documentation Update for Integration with AWS Organizations Delegated Administrator feature
+
 1.40.0 (2020-06-05)
 ------------------
 

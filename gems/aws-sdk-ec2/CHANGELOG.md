@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.166.0 (2020-06-10)
+------------------
+
+* Feature - New C6g instances powered by AWS Graviton2 processors and ideal for running advanced, compute-intensive workloads; New R6g instances powered by AWS Graviton2 processors and ideal for running memory-intensive workloads.
+
 1.165.0 (2020-06-04)
 ------------------
 

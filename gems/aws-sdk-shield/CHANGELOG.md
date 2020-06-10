@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-06-10)
+------------------
+
+* Feature - Corrections to the supported format for contact phone numbers and to the description for the create subscription action.
+
 1.26.0 (2020-06-08)
 ------------------
 

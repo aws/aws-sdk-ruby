@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.74.0 (2020-06-10)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-codeartifact` gem.
+
 3.73.0 (2020-05-13)
 ------------------
 

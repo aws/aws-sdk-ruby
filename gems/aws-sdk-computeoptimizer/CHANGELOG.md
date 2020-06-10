@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2020-06-10)
+------------------
+
+* Feature - Compute Optimizer supports exporting recommendations to Amazon S3.
+
 1.3.0 (2020-05-28)
 ------------------
 

@@ -232,7 +232,7 @@ module Aws::AppConfig
     #         name: "Name", # required
     #         description: "Description",
     #         location_uri: "Uri", # required
-    #         retrieval_role_arn: "Arn", # required
+    #         retrieval_role_arn: "RoleArn", # required
     #         validators: [
     #           {
     #             type: "JSON_SCHEMA", # required, accepts JSON_SCHEMA, LAMBDA
@@ -399,7 +399,7 @@ module Aws::AppConfig
     #         monitors: [
     #           {
     #             alarm_arn: "Arn",
-    #             alarm_role_arn: "Arn",
+    #             alarm_role_arn: "RoleArn",
     #           },
     #         ],
     #         tags: {
@@ -1247,7 +1247,7 @@ module Aws::AppConfig
     #
     #       {
     #         alarm_arn: "Arn",
-    #         alarm_role_arn: "Arn",
+    #         alarm_role_arn: "RoleArn",
     #       }
     #
     # @!attribute [rw] alarm_arn
@@ -1473,7 +1473,7 @@ module Aws::AppConfig
     #         configuration_profile_id: "Id", # required
     #         name: "Name",
     #         description: "Description",
-    #         retrieval_role_arn: "Arn",
+    #         retrieval_role_arn: "RoleArn",
     #         validators: [
     #           {
     #             type: "JSON_SCHEMA", # required, accepts JSON_SCHEMA, LAMBDA
@@ -1608,7 +1608,7 @@ module Aws::AppConfig
     #         monitors: [
     #           {
     #             alarm_arn: "Arn",
-    #             alarm_role_arn: "Arn",
+    #             alarm_role_arn: "RoleArn",
     #           },
     #         ],
     #       }

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.99.0 (2020-06-10)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
 * Feature - Support `httpChecksumRequired` on operations that require Content MD5 validation.
 * Issue - Validate `:region` as a valid DNS host label.
 

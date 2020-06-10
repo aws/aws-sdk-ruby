@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2020-06-10)
+------------------
+
+* Feature - This release of the Amazon Macie API removes support for the ArchiveFindings and UnarchiveFindings operations. This release also adds UNKNOWN as an encryption type for S3 bucket metadata.
+
 1.2.0 (2020-05-28)
 ------------------
 

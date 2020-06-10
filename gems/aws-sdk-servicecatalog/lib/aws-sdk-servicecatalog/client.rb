@@ -24,6 +24,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +70,7 @@ module Aws::ServiceCatalog
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +163,7 @@ module Aws::ServiceCatalog
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -433,6 +435,8 @@ module Aws::ServiceCatalog
     end
 
     # Associates the specified product with the specified portfolio.
+    #
+    # A delegated admin is authorized to invoke this command.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -722,6 +726,8 @@ module Aws::ServiceCatalog
 
     # Creates a constraint.
     #
+    # A delegated admin is authorized to invoke this command.
+    #
     # @option params [String] :accept_language
     #   The language code.
     #
@@ -876,6 +882,8 @@ module Aws::ServiceCatalog
 
     # Creates a portfolio.
     #
+    # A delegated admin is authorized to invoke this command.
+    #
     # @option params [String] :accept_language
     #   The language code.
     #
@@ -949,9 +957,15 @@ module Aws::ServiceCatalog
 
     # Shares the specified portfolio with the specified account or
     # organization node. Shares to an organization node can only be created
-    # by the master account of an Organization. AWSOrganizationsAccess must
-    # be enabled in order to create a portfolio share to an organization
-    # node.
+    # by the master account of an organization or by a delegated
+    # administrator. You can share portfolios to an organization, an
+    # organizational unit, or a specific account.
+    #
+    # Note that if a delegated admin is de-registered, they can no longer
+    # create portfolio shares.
+    #
+    # `AWSOrganizationsAccess` must be enabled in order to create a
+    # portfolio share to an organization node.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1005,6 +1019,8 @@ module Aws::ServiceCatalog
     end
 
     # Creates a product.
+    #
+    # A delegated admin is authorized to invoke this command.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1450,6 +1466,8 @@ module Aws::ServiceCatalog
 
     # Deletes the specified constraint.
     #
+    # A delegated admin is authorized to invoke this command.
+    #
     # @option params [String] :accept_language
     #   The language code.
     #
@@ -1485,6 +1503,8 @@ module Aws::ServiceCatalog
     # You cannot delete a portfolio if it was shared with you or if it has
     # associated products, users, constraints, or shared accounts.
     #
+    # A delegated admin is authorized to invoke this command.
+    #
     # @option params [String] :accept_language
     #   The language code.
     #
@@ -1517,7 +1537,11 @@ module Aws::ServiceCatalog
 
     # Stops sharing the specified portfolio with the specified account or
     # organization node. Shares to an organization node can only be deleted
-    # by the master account of an Organization.
+    # by the master account of an organization or by a delegated
+    # administrator.
+    #
+    # Note that if a delegated admin is de-registered, portfolio shares
+    # created from that account are removed.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1570,6 +1594,8 @@ module Aws::ServiceCatalog
     #
     # You cannot delete a product if it was shared with you or is associated
     # with a portfolio.
+    #
+    # A delegated admin is authorized to invoke this command.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1829,6 +1855,8 @@ module Aws::ServiceCatalog
 
     # Gets information about the specified portfolio.
     #
+    # A delegated admin is authorized to invoke this command.
+    #
     # @option params [String] :accept_language
     #   The language code.
     #
@@ -1884,7 +1912,8 @@ module Aws::ServiceCatalog
     end
 
     # Gets the status of the specified portfolio share operation. This API
-    # can only be called by the master account in the organization.
+    # can only be called by the master account in the organization or by a
+    # delegated admin.
     #
     # @option params [required, String] :portfolio_share_token
     #   The token for the portfolio share operation. This token is returned
@@ -2621,6 +2650,12 @@ module Aws::ServiceCatalog
     # after calling this API. This API can only be called by the master
     # account in the organization.
     #
+    # This API can't be invoked if there are active delegated
+    # administrators in the organization.
+    #
+    # Note that a delegated administrator is not authorized to invoke
+    # `DisableAWSOrganizationsAccess`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisableAWSOrganizationsAccess AWS API Documentation
@@ -2697,6 +2732,8 @@ module Aws::ServiceCatalog
     end
 
     # Disassociates the specified product from the specified portfolio.
+    #
+    # A delegated admin is authorized to invoke this command.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2809,6 +2846,9 @@ module Aws::ServiceCatalog
     # organizations:EnableAWSServiceAccess on your behalf so that your
     # shares can be in sync with any changes in your AWS Organizations
     # structure.
+    #
+    # Note that a delegated administrator is not authorized to invoke
+    # `EnableAWSOrganizationsAccess`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2962,7 +3002,8 @@ module Aws::ServiceCatalog
     end
 
     # Get the Access Status for AWS Organization portfolio share feature.
-    # This API can only be called by the master account in the organization.
+    # This API can only be called by the master account in the organization
+    # or by a delegated admin.
     #
     # @return [Types::GetAWSOrganizationsAccessStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3222,7 +3263,10 @@ module Aws::ServiceCatalog
 
     # Lists the organization nodes that have access to the specified
     # portfolio. This API can only be called by the master account in the
-    # organization.
+    # organization or by a delegated admin.
+    #
+    # If a delegated admin is de-registered, they can no longer perform this
+    # operation.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -3288,6 +3332,10 @@ module Aws::ServiceCatalog
     end
 
     # Lists the account IDs that have access to the specified portfolio.
+    #
+    # A delegated admin can list the accounts that have access to the shared
+    # portfolio. Note that if a delegated admin is de-registered, they can
+    # no longer perform this operation.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -5305,7 +5353,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

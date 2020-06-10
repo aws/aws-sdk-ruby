@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2020-06-10)
+------------------
+
+* Feature - This release allows customers to choose from a list of predefined deployment strategies while starting deployments.
+
 1.6.0 (2020-05-28)
 ------------------
 

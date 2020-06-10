@@ -24,6 +24,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +70,7 @@ module Aws::Lightsail
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +163,7 @@ module Aws::Lightsail
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -4608,7 +4610,7 @@ module Aws::Lightsail
     #
     #   * <b> <code>BurstCapacityPercentage</code> </b> - The percentage of
     #     CPU performance available for your instance to burst above its
-    #     baseline. Your instance continously accrues and consumes burst
+    #     baseline. Your instance continuously accrues and consumes burst
     #     capacity. Burst capacity stops accruing when your instance's
     #     `BurstCapacityPercentage` reaches 100%. For more information, see
     #     [Viewing instance burst capacity in Amazon Lightsail][1].
@@ -4620,7 +4622,7 @@ module Aws::Lightsail
     #
     #   * <b> <code>BurstCapacityTime</code> </b> - The available amount of
     #     time for your instance to burst at 100% CPU utilization. Your
-    #     instance continously accrues and consumes burst capacity. Burst
+    #     instance continuously accrues and consumes burst capacity. Burst
     #     capacity time stops accruing when your instance's
     #     `BurstCapacityPercentage` metric reaches 100%.
     #
@@ -8074,7 +8076,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

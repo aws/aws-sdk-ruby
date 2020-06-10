@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-06-10)
+------------------
+
+* Feature - Reducing the schedule name of DLM Lifecycle policy from 500 to 120 characters.
+
 1.29.0 (2020-05-28)
 ------------------
 

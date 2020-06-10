@@ -38,6 +38,7 @@ module Aws
   autoload :CloudWatch, 'aws-sdk-cloudwatch'
   autoload :CloudWatchEvents, 'aws-sdk-cloudwatchevents'
   autoload :CloudWatchLogs, 'aws-sdk-cloudwatchlogs'
+  autoload :CodeArtifact, 'aws-sdk-codeartifact'
   autoload :CodeBuild, 'aws-sdk-codebuild'
   autoload :CodeCommit, 'aws-sdk-codecommit'
   autoload :CodeDeploy, 'aws-sdk-codedeploy'

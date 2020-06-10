@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.328.0 (2020-06-10)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CodeArtifact`.
+
 1.327.0 (2020-06-09)
 ------------------
 

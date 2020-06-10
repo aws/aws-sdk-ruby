@@ -4649,7 +4649,7 @@ module Aws::Lightsail
     #
     #   * <b> <code>BurstCapacityPercentage</code> </b> - The percentage of
     #     CPU performance available for your instance to burst above its
-    #     baseline. Your instance continously accrues and consumes burst
+    #     baseline. Your instance continuously accrues and consumes burst
     #     capacity. Burst capacity stops accruing when your instance's
     #     `BurstCapacityPercentage` reaches 100%. For more information, see
     #     [Viewing instance burst capacity in Amazon Lightsail][1].
@@ -4661,7 +4661,7 @@ module Aws::Lightsail
     #
     #   * <b> <code>BurstCapacityTime</code> </b> - The available amount of
     #     time for your instance to burst at 100% CPU utilization. Your
-    #     instance continously accrues and consumes burst capacity. Burst
+    #     instance continuously accrues and consumes burst capacity. Burst
     #     capacity time stops accruing when your instance's
     #     `BurstCapacityPercentage` metric reaches 100%.
     #
@@ -6944,13 +6944,14 @@ module Aws::Lightsail
     #
     #   * TCP and UDP - `0` to `65535`
     #
-    #   * ICMP - `8` (to configure Ping)
+    #   * ICMP - The ICMP type. For example, specify `8` as the `fromPort`
+    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
+    #     Ping. For more information, see [Control Messages][1] on
+    #     *Wikipedia*.
     #
-    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
-    #     in Lightsail. To configure ping, specify the `fromPort` parameter
-    #     as `8`, and the `toPort` parameter as `-1`.
     #
-    #      </note>
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
@@ -6960,13 +6961,14 @@ module Aws::Lightsail
     #
     #   * TCP and UDP - `0` to `65535`
     #
-    #   * ICMP - `-1` (to configure Ping)
+    #   * ICMP - The ICMP code. For example, specify `8` as the `fromPort`
+    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
+    #     Ping. For more information, see [Control Messages][1] on
+    #     *Wikipedia*.
     #
-    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
-    #     in Lightsail. To configure ping, specify the `fromPort` parameter
-    #     as `8`, and the `toPort` parameter as `-1`.
     #
-    #      </note>
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
@@ -6995,13 +6997,10 @@ module Aws::Lightsail
     #   * `icmp` - Internet Control Message Protocol (ICMP) is used to send
     #     error messages and operational information indicating success or
     #     failure when communicating with an instance. For example, an error
-    #     is indicated when an instance could not be reached.
-    #
-    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
-    #     in Lightsail. To configure ping, specify the `fromPort` parameter
-    #     as `8`, and the `toPort` parameter as `-1`.
-    #
-    #      </note>
+    #     is indicated when an instance could not be reached. When you
+    #     specify `icmp` as the `protocol`, you must specify the ICMP type
+    #     using the `fromPort` parameter, and ICMP code using the `toPort`
+    #     parameter.
     #
     #
     #
@@ -7077,13 +7076,14 @@ module Aws::Lightsail
     #
     #   * TCP and UDP - `0` to `65535`
     #
-    #   * ICMP - `8` (to configure Ping)
+    #   * ICMP - The ICMP type. For example, specify `8` as the `fromPort`
+    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
+    #     Ping. For more information, see [Control Messages][1] on
+    #     *Wikipedia*.
     #
-    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
-    #     in Lightsail. To configure ping, specify the `fromPort` parameter
-    #     as `8`, and the `toPort` parameter as `-1`.
     #
-    #      </note>
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
@@ -7093,13 +7093,14 @@ module Aws::Lightsail
     #
     #   * TCP and UDP - `0` to `65535`
     #
-    #   * ICMP - `-1` (to configure Ping)
+    #   * ICMP - The ICMP code. For example, specify `8` as the `fromPort`
+    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
+    #     Ping. For more information, see [Control Messages][1] on
+    #     *Wikipedia*.
     #
-    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
-    #     in Lightsail. To configure ping, specify the `fromPort` parameter
-    #     as `8`, and the `toPort` parameter as `-1`.
     #
-    #      </note>
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
@@ -7128,13 +7129,10 @@ module Aws::Lightsail
     #   * `icmp` - Internet Control Message Protocol (ICMP) is used to send
     #     error messages and operational information indicating success or
     #     failure when communicating with an instance. For example, an error
-    #     is indicated when an instance could not be reached.
-    #
-    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
-    #     in Lightsail. To configure ping, specify the `fromPort` parameter
-    #     as `8`, and the `toPort` parameter as `-1`.
-    #
-    #      </note>
+    #     is indicated when an instance could not be reached. When you
+    #     specify `icmp` as the `protocol`, you must specify the ICMP type
+    #     using the `fromPort` parameter, and ICMP code using the `toPort`
+    #     parameter.
     #
     #
     #
@@ -8228,13 +8226,14 @@ module Aws::Lightsail
     #
     #   * TCP and UDP - `0` to `65535`
     #
-    #   * ICMP - `8` (to configure Ping)
+    #   * ICMP - The ICMP type. For example, specify `8` as the `fromPort`
+    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
+    #     Ping. For more information, see [Control Messages][1] on
+    #     *Wikipedia*.
     #
-    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
-    #     in Lightsail. To configure ping, specify the `fromPort` parameter
-    #     as `8`, and the `toPort` parameter as `-1`.
     #
-    #      </note>
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
@@ -8244,13 +8243,14 @@ module Aws::Lightsail
     #
     #   * TCP and UDP - `0` to `65535`
     #
-    #   * ICMP - `-1` (to configure Ping)
+    #   * ICMP - The ICMP code. For example, specify `8` as the `fromPort`
+    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
+    #     Ping. For more information, see [Control Messages][1] on
+    #     *Wikipedia*.
     #
-    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
-    #     in Lightsail. To configure ping, specify the `fromPort` parameter
-    #     as `8`, and the `toPort` parameter as `-1`.
     #
-    #      </note>
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
@@ -8279,13 +8279,10 @@ module Aws::Lightsail
     #   * `icmp` - Internet Control Message Protocol (ICMP) is used to send
     #     error messages and operational information indicating success or
     #     failure when communicating with an instance. For example, an error
-    #     is indicated when an instance could not be reached.
-    #
-    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
-    #     in Lightsail. To configure ping, specify the `fromPort` parameter
-    #     as `8`, and the `toPort` parameter as `-1`.
-    #
-    #      </note>
+    #     is indicated when an instance could not be reached. When you
+    #     specify `icmp` as the `protocol`, you must specify the ICMP type
+    #     using the `fromPort` parameter, and ICMP code using the `toPort`
+    #     parameter.
     #
     #
     #

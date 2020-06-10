@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-06-10)
+------------------
+
+* Feature - Documentation updates for lightsail
+
 1.32.0 (2020-06-04)
 ------------------
 

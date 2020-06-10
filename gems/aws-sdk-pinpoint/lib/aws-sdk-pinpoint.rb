@@ -45,6 +45,6 @@ require_relative 'aws-sdk-pinpoint/customizations'
 # @service
 module Aws::Pinpoint
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
