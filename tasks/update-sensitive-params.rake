@@ -9,7 +9,8 @@ task 'update-sensitive-params' do
         shape['members'].each_pair do |member_name, member_ref|
           if member_ref['sensitive'] || svc.api['shapes'][member_ref['shape']]['sensitive']
             name = AwsSdkCodeGenerator::Underscore.underscore(member_name).to_sym
-            sensitive[svc.name] << name unless sensitive[svc.name].include?(name)
+            service = svc.api['metadata']['serviceId']
+            sensitive[service] << name unless sensitive[service].include?(name)
           end
         end
       end

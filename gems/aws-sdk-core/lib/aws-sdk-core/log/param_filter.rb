@@ -18,7 +18,15 @@ module Aws
 
       def initialize(options = {})
         filters = options[:filter] || {}
-        @filters = SENSITIVE.merge(filters)
+        # Support backwards compatibility
+        @filters = if filters.is_a?(Array)
+          sensitive = SENSITIVE
+          sensitive.merge!(sensitive) { |_k, v| Set.new(v + Array(filters)) }
+        elsif filters.is_a?(Hash)
+          SENSITIVE.merge(filters)
+        else
+          SENSITIVE
+        end
       end
 
       def filter(service, value)
@@ -35,7 +43,7 @@ module Aws
         filtered = {}
         values.each_pair do |key, value|
           filters = @filters[service]
-          filtered[key] = if filters.any? { |f| f.to_s.casecmp(key.to_s).zero? }
+          filtered[key] = if filters.any? { |f| f.casecmp(key).zero? }
             '[FILTERED]'
           else
             filter(service, value)
