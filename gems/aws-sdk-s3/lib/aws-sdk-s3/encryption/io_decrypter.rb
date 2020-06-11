@@ -8,7 +8,8 @@ module Aws
         # @param [IO#write] io An IO-like object that responds to `#write`.
         def initialize(cipher, io)
           @cipher = cipher.clone
-          @io = io
+          # Ensure that IO is reset between retries
+          @io = io.tap { |io| io.truncate(0) if io.respond_to?(:truncate) }
         end
 
         # @return [#write]
@@ -21,6 +22,10 @@ module Aws
 
         def finalize
           @io.write(@cipher.final)
+        end
+
+        def size
+          @io.size
         end
 
       end
