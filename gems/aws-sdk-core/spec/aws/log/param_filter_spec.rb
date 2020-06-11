@@ -8,23 +8,27 @@ module Aws
       let(:array_filter) { [:password] }
 
       describe '#initialize' do
-        it 'accepts a filter as a hash' do
-          filter = ParamFilter.new(filter: hash_filter)
-          filters = filter.instance_variable_get(:@filters)
-          expect(filters).to include(hash_filter)
+        context 'with a hash' do
+          it 'adds the filter for new services' do
+            filter = ParamFilter.new(filter: hash_filter)
+            filters = filter.instance_variable_get(:@filters)
+            expect(filters).to include(hash_filter)
+          end
+
+          it 'adds filters to existing sensitive params' do
+            filter = ParamFilter.new(filter: { 'STS' => [:peccy_token] })
+            filters = filter.instance_variable_get(:@filters)
+            expect(filters['STS']).to include(:peccy_token)
+            expect(filters['STS']).to include(*ParamFilter::SENSITIVE['STS'])
+          end
         end
 
-        it 'adds filters to existing sensitive params' do
-          filter = ParamFilter.new(filter: { 'STS' => [:new_param] })
-          filters = filter.instance_variable_get(:@filters)
-          expect(filters['STS']).to include(:new_param)
-          expect(filters['STS']).to include(*ParamFilter::SENSITIVE['STS'])
-        end
-
-        it 'supports a filter as an array (legacy)' do
-          filter = ParamFilter.new(filter: array_filter)
-          filters = filter.instance_variable_get(:@filters)
-          expect(filters.values).to all(include(*array_filter))
+        context 'with an array' do
+          it 'supports a filter as an array (legacy)' do
+            filter = ParamFilter.new(filter: array_filter)
+            filters = filter.instance_variable_get(:@filters)
+            expect(filters.values).to all(include(*array_filter))
+          end
         end
       end
 
