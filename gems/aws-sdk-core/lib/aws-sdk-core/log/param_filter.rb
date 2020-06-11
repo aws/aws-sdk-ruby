@@ -23,8 +23,13 @@ module Aws
         end
 
         filters = options[:filter] || {}
-        filters = SENSITIVE.map { |k, _v| [k, filters] }.to_h if filters.is_a?(Array)
-        @filters = filters.merge(SENSITIVE.map { |k, v| [k, v | filters.fetch(k, [])] }.to_h)
+        # Support backwards compatibility. Convert filters array into a hash
+        if filters.is_a?(Array)
+          filters = SENSITIVE.map { |k, _v| [k, filters] }.to_h
+        end
+        @filters = filters.merge(
+          SENSITIVE.map { |k, v| [k, v | filters.fetch(k, [])] }.to_h
+        )
       end
 
       def filter(value, service = nil)
