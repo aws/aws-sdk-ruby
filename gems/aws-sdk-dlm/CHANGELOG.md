@@ -1,9 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
 1.30.0 (2020-06-10)
 ------------------
 
+* Issue - This version has been yanked. (#2327).
 * Feature - Reducing the schedule name of DLM Lifecycle policy from 500 to 120 characters.
 
 1.29.0 (2020-05-28)
@@ -160,4 +163,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-dlm`.
-

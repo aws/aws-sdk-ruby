@@ -68,7 +68,7 @@ module Aws::APIGateway
     #
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [API Gateway Limits][2] [Developer Guide][3], [AWS CLI][4]
     # </div>
     #
@@ -109,7 +109,7 @@ module Aws::APIGateway
     # on any RestApi, which indicates that the callers with the API key can
     # make requests to that stage.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Use API Keys][1]
     # </div>
     #
@@ -193,7 +193,7 @@ module Aws::APIGateway
     # Represents a collection of API keys as represented by an ApiKeys
     # resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Use API Keys][1]
     # </div>
     #
@@ -260,7 +260,7 @@ module Aws::APIGateway
     # API Gateway will activate the authorizer when a client calls the
     # method.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
     # Authorizer][2]
     # </div>
@@ -376,7 +376,7 @@ module Aws::APIGateway
 
     # Represents a collection of Authorizer resources.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
     # Authorizer][2]
     # </div>
@@ -414,12 +414,12 @@ module Aws::APIGateway
     # Represents the base path that callers of the API must provide as part
     # of the URL after the domain name.
     #
-    # <div class="remarks">
+    # <div class="remarks" markdown="1">
     # A custom domain name plus a `BasePathMapping` specification identifies
     # a deployed RestApi in a given stage of the owner Account.
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Use Custom Domain Names][1]
     # </div>
     #
@@ -449,7 +449,7 @@ module Aws::APIGateway
 
     # Represents a collection of BasePathMapping resources.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Use Custom Domain Names][1]
     # </div>
     #
@@ -521,7 +521,7 @@ module Aws::APIGateway
     # policies, a custom Authorizer or an Amazon Cognito user pool.
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Use Client-Side Certificate][1]
     # </div>
     #
@@ -568,7 +568,7 @@ module Aws::APIGateway
 
     # Represents a collection of ClientCertificate resources.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Use Client-Side Certificate][1]
     # </div>
     #
@@ -2103,14 +2103,14 @@ module Aws::APIGateway
     # by users using Stages. A deployment must be associated with a Stage
     # for it to be callable over the Internet.
     #
-    # <div class="remarks">
+    # <div class="remarks" markdown="1">
     # To create a deployment, call `POST` on the Deployments resource of a
     # RestApi. To view, update, or delete a deployment, call `GET`, `PATCH`,
     # or `DELETE` on the specified deployment resource
     # (`/restapis/\{restapi_id\}/deployments/\{deployment_id\}`).
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # RestApi, Deployments, Stage, [AWS CLI][1], [AWS SDKs][2]
     # </div>
     #
@@ -2187,14 +2187,14 @@ module Aws::APIGateway
     # interact with your collection. The collection offers a paginated view
     # of the contained deployments.
     #
-    # <div class="remarks">
+    # <div class="remarks" markdown="1">
     # To create a new deployment of a RestApi, make a `POST` request against
     # this resource. To view, update, or delete an existing deployment, make
     # a `GET`, `PATCH`, or `DELETE` request, respectively, on a specified
     # Deployment resource.
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Deploying an API][1], [AWS CLI][2], [AWS SDKs][3]
     # </div>
     #
@@ -2236,7 +2236,7 @@ module Aws::APIGateway
     #
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Documenting an API][1], DocumentationParts
     # </div>
     #
@@ -2284,7 +2284,7 @@ module Aws::APIGateway
     # external (e.g., OpenAPI) file are imported into API Gateway
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Documenting an API][1], [documentationpart:import][2],
     # DocumentationPart
     # </div>
@@ -2385,7 +2385,7 @@ module Aws::APIGateway
     #
     # <div class="remarks"></div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Documenting an API][1], DocumentationPart
     # </div>
     #
@@ -2415,7 +2415,7 @@ module Aws::APIGateway
     #
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Documenting an API][1], DocumentationPart, DocumentationVersions
     # </div>
     #
@@ -2450,7 +2450,7 @@ module Aws::APIGateway
     #
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Documenting an API][1], DocumentationPart, DocumentationVersion
     # </div>
     #
@@ -2488,7 +2488,7 @@ module Aws::APIGateway
     #
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Set a Custom Host Name for an API][1]
     # </div>
     #
@@ -2620,7 +2620,7 @@ module Aws::APIGateway
 
     # Represents a collection of DomainName resources.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Use Client-Side Certificate][1]
     # </div>
     #
@@ -2745,7 +2745,7 @@ module Aws::APIGateway
     # A gateway response of a given response type and status code, with
     # optional response parameters and mapping templates.
     #
-    # <div class="remarks">
+    # <div class="remarks" markdown="1">
     # For more information about valid gateway response types, see [Gateway
     # Response Types Supported by API Gateway][1]
     # <div class="example" markdown="1">
@@ -2772,7 +2772,7 @@ module Aws::APIGateway
     # </div>
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Customize Gateway Responses][2]
     # </div>
     #
@@ -2839,7 +2839,7 @@ module Aws::APIGateway
     # `responseType`-to-GatewayResponse object map of key-value pairs. As
     # such, pagination is not supported for querying this collection.
     #
-    # <div class="remarks">
+    # <div class="remarks" markdown="1">
     # For more information about valid gateway response types, see [Gateway
     # Response Types Supported by API Gateway][1]
     # <div class="example" markdown="1">
@@ -2866,7 +2866,7 @@ module Aws::APIGateway
     # </div>
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Customize Gateway Responses][2]
     # </div>
     #
@@ -4488,7 +4488,7 @@ module Aws::APIGateway
     # integration.
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Creating an API][1]
     # </div>
     #
@@ -4698,7 +4698,7 @@ module Aws::APIGateway
     #
     #   </div>
     #
-    #   <div class="seeAlso">
+    #   <div class="seeAlso" markdown="1">
     #   [Creating an API][1]
     #   </div>
     #
@@ -4734,7 +4734,7 @@ module Aws::APIGateway
     # existing MethodResponse, and parameters and templates can be used to
     # transform the back-end response.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Creating an API][1]
     # </div>
     #
@@ -4860,7 +4860,7 @@ module Aws::APIGateway
     #
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # MethodResponse, Integration, IntegrationResponse, Resource, [Set up an
     # API's method][2]
     # </div>
@@ -4948,7 +4948,7 @@ module Aws::APIGateway
     #
     #   </div>
     #
-    #   <div class="seeAlso">
+    #   <div class="seeAlso" markdown="1">
     #   [AWS CLI][1]
     #   </div>
     #
@@ -4984,7 +4984,7 @@ module Aws::APIGateway
     #
     #   </div>
     #
-    #   <div class="seeAlso">
+    #   <div class="seeAlso" markdown="1">
     #   [AWS CLI][1]
     #   </div>
     #
@@ -5048,7 +5048,7 @@ module Aws::APIGateway
     #
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # Method, IntegrationResponse, Integration [Creating an API][1]
     # </div>
     #
@@ -5216,7 +5216,7 @@ module Aws::APIGateway
     #
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # Method, MethodResponse, [Models and Mappings][1]
     # </div>
     #
@@ -5264,7 +5264,7 @@ module Aws::APIGateway
 
     # Represents a collection of Model resources.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # Method, MethodResponse, [Models and Mappings][1]
     # </div>
     #
@@ -6002,7 +6002,7 @@ module Aws::APIGateway
     #
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Enable Basic Request Validation in API Gateway][3]
     # </div>
     #
@@ -6046,7 +6046,7 @@ module Aws::APIGateway
     #
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Enable Basic Request Validation in API Gateway][2]
     # </div>
     #
@@ -6070,7 +6070,7 @@ module Aws::APIGateway
 
     # Represents an API resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Create an API][1]
     # </div>
     #
@@ -6135,7 +6135,7 @@ module Aws::APIGateway
 
     # Represents a collection of Resource resources.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Create an API][1]
     # </div>
     #
@@ -6158,7 +6158,7 @@ module Aws::APIGateway
 
     # Represents a REST API.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Create an API][1]
     # </div>
     #
@@ -6249,7 +6249,7 @@ module Aws::APIGateway
     # interact with your collection. A collection offers a paginated view of
     # your APIs.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Create an API][1]
     # </div>
     #
@@ -6384,7 +6384,7 @@ module Aws::APIGateway
     # Represents a unique identifier for a version of a deployed RestApi
     # that is callable by users.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Deploy an API][1]
     # </div>
     #
@@ -6520,7 +6520,7 @@ module Aws::APIGateway
     # A list of Stage resources that are associated with the ApiKey
     # resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Deploying API in Stages][1]
     # </div>
     #
@@ -6581,7 +6581,7 @@ module Aws::APIGateway
 
     # Represents a mapping template used to transform a payload.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Mapping Templates][1]
     # </div>
     #
@@ -6808,7 +6808,7 @@ module Aws::APIGateway
 
     # Represents the response of the test invoke request in the HTTP method.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Test API using the API Gateway console][1]
     # </div>
     #
@@ -7825,7 +7825,7 @@ module Aws::APIGateway
     #
     # <div class="remarks"></div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Create and Use Usage Plans][1], [Manage Usage in a Usage Plan][2]
     # </div>
     #
@@ -7877,7 +7877,7 @@ module Aws::APIGateway
     #
     # </div>
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Create and Use Usage Plans][1]
     # </div>
     #
@@ -7940,7 +7940,7 @@ module Aws::APIGateway
     #
     # </div>
     #
-    # " <div class="seeAlso">
+    # " <div class="seeAlso" markdown="1">
     # [Create and Use Usage Plans][1]
     # </div>
     #
@@ -7976,7 +7976,7 @@ module Aws::APIGateway
     # Represents the collection of usage plan keys added to usage plans for
     # the associated API keys and, possibly, other types of keys.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Create and Use Usage Plans][1]
     # </div>
     #
@@ -7999,7 +7999,7 @@ module Aws::APIGateway
 
     # Represents a collection of usage plans for an AWS account.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Create and Use Usage Plans][1]
     # </div>
     #
@@ -8082,7 +8082,7 @@ module Aws::APIGateway
 
     # The collection of VPC links under the caller's account in a region.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Getting Started with Private Integrations][1], [Set up Private
     # Integrations][2]
     # </div>

@@ -1,9 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
 3.74.0 (2020-06-10)
 ------------------
 
+* Issue - This version has been yanked. (#2327).
 * Feature - Added a dependency on the new `aws-sdk-codeartifact` gem.
 
 3.73.0 (2020-05-13)
