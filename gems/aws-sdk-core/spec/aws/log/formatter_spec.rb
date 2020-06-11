@@ -37,6 +37,13 @@ module Aws
             },
             huge: '-' * 1000
           }
+          response.context.config = Struct.new(:api).new(
+            Seahorse::Model::Api.new.tap do |api|
+              api.metadata = {
+                'serviceId' => 'PeccyService'
+              }
+            end
+          )
           formatted = format('{:request_params}', max_string_size: 20)
           size = File.size(__FILE__)
           expect(formatted).to eq(<<-FORMATTED.strip)
@@ -148,6 +155,13 @@ module Aws
         describe '.default' do
 
           it 'provides a basic logging format' do
+            response.context.config = Struct.new(:api).new(
+              Seahorse::Model::Api.new.tap do |api|
+                api.metadata = {
+                  'serviceId' => 'PeccyService'
+                }
+              end
+            )
             formatted = format(Formatter.default.pattern)
             expect(formatted).to eq(<<-EXAMPLE)
 [Class 200 1.12345 3 retries] operation_name(limit:1) RuntimeError error-message
@@ -170,6 +184,13 @@ module Aws
         describe '.colored' do
 
           it 'provides a basic logging format' do
+            response.context.config = Struct.new(:api).new(
+              Seahorse::Model::Api.new.tap do |api|
+                api.metadata = {
+                  'serviceId' => 'PeccyService'
+                }
+              end
+            )
             formatted = format(Formatter.colored.pattern)
             expect(formatted).to eq(<<-EXAMPLE)
 \e[1m\e[34m[Class 200 1.12345 3 retries]\e[0m\e[1m operation_name(limit:1) RuntimeError error-message\e[0m
