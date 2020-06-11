@@ -1,9 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
 1.33.0 (2020-06-10)
 ------------------
 
+* Issue - This version has been yanked. (#2327).
 * Feature - Documentation updates for lightsail
 
 1.32.0 (2020-06-04)
