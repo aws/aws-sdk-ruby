@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Don't retry streaming requests with blocks (#2311)
+
 3.99.1 (2020-06-11)
 ------------------
 
