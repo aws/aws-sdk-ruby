@@ -127,7 +127,7 @@ module Aws
       def _request_params(response)
         params = response.context.params
         service = response.context.config.api.metadata['serviceId']
-        @param_formatter.summarize(@param_filter.filter(service, params))
+        @param_formatter.summarize(@param_filter.filter(params, service))
       end
 
       def _time(response)

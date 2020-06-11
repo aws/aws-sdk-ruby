@@ -27,31 +27,37 @@ module Aws
         @filters = filters.merge(SENSITIVE.map { |k, v| [k, v | filters.fetch(k, [])] }.to_h)
       end
 
-      def filter(service, value)
+      def filter(value, service = nil)
         case value
-        when Struct, Hash then filter_hash(service, value)
-        when Array then filter_array(service, value)
+        when Struct, Hash then filter_hash(value, service)
+        when Array then filter_array(value, service)
         else value
         end
       end
 
       private
 
-      def filter_hash(service, values)
+      def filter_hash(values, service)
         filtered = {}
+        filters = if service.nil?
+          # If no service is given, take a conservative approach and filter
+          # using sensitive params from all services
+          Set.new(@filters.values.flatten)
+        else
+          @filters.fetch(service, [])
+        end
         values.each_pair do |key, value|
-          filters = @filters[service] || {}
           filtered[key] = if filters.include?(key)
             '[FILTERED]'
           else
-            filter(service, value)
+            filter(value, service)
           end
         end
         filtered
       end
 
-      def filter_array(service, values)
-        values.map { |value| filter(service, value) }
+      def filter_array(values, service)
+        values.map { |value| filter(value, service) }
       end
 
     end

@@ -8,6 +8,10 @@ module Aws
     describe Formatter do
 
       let(:response) { Seahorse::Client::Response.new }
+      let(:test_service) { 'test_service' }
+      before do
+        allow(response.context).to receive(:config).and_return(double(api: double(metadata: {'serviceId'=> test_service})))
+      end
 
       def format(pattern, options = {})
         Formatter.new(pattern, options).format(response)
