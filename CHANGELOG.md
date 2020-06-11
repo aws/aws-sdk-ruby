@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.526 (2020-06-11)
+------------------
+
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
 
 * Feature - Aws::Imagebuilder - Updated the API, and documentation for EC2 Image Builder.
