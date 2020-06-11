@@ -117,6 +117,7 @@ module Aws::Imagebuilder
     ImageTestsTimeoutMinutes = Shapes::IntegerShape.new(name: 'ImageTestsTimeoutMinutes')
     ImageVersion = Shapes::StructureShape.new(name: 'ImageVersion')
     ImageVersionArn = Shapes::StringShape.new(name: 'ImageVersionArn')
+    ImageVersionArnOrBuildVersionArn = Shapes::StringShape.new(name: 'ImageVersionArnOrBuildVersionArn')
     ImageVersionList = Shapes::ListShape.new(name: 'ImageVersionList')
     ImportComponentRequest = Shapes::StructureShape.new(name: 'ImportComponentRequest')
     ImportComponentResponse = Shapes::StructureShape.new(name: 'ImportComponentResponse')
@@ -178,11 +179,13 @@ module Aws::Imagebuilder
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePolicyDocument = Shapes::StringShape.new(name: 'ResourcePolicyDocument')
+    ResourceTagMap = Shapes::MapShape.new(name: 'ResourceTagMap')
     RestrictedInteger = Shapes::IntegerShape.new(name: 'RestrictedInteger')
     S3Logs = Shapes::StructureShape.new(name: 'S3Logs')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SnsTopicArn = Shapes::StringShape.new(name: 'SnsTopicArn')
     StartImagePipelineExecutionRequest = Shapes::StructureShape.new(name: 'StartImagePipelineExecutionRequest')
@@ -343,6 +346,7 @@ module Aws::Imagebuilder
     CreateImageRecipeRequest.add_member(:parent_image, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "parentImage"))
     CreateImageRecipeRequest.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: InstanceBlockDeviceMappings, location_name: "blockDeviceMappings"))
     CreateImageRecipeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateImageRecipeRequest.add_member(:working_directory, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "workingDirectory"))
     CreateImageRecipeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateImageRecipeRequest.struct_class = Types::CreateImageRecipeRequest
 
@@ -375,6 +379,7 @@ module Aws::Imagebuilder
     CreateInfrastructureConfigurationRequest.add_member(:key_pair, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "keyPair"))
     CreateInfrastructureConfigurationRequest.add_member(:terminate_instance_on_failure, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminateInstanceOnFailure"))
     CreateInfrastructureConfigurationRequest.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "snsTopicArn"))
+    CreateInfrastructureConfigurationRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
     CreateInfrastructureConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateInfrastructureConfigurationRequest.struct_class = Types::CreateInfrastructureConfigurationRequest
@@ -480,7 +485,7 @@ module Aws::Imagebuilder
     GetComponentPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, location_name: "policy"))
     GetComponentPolicyResponse.struct_class = Types::GetComponentPolicyResponse
 
-    GetComponentRequest.add_member(:component_build_version_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, required: true, location: "querystring", location_name: "componentBuildVersionArn"))
+    GetComponentRequest.add_member(:component_build_version_arn, Shapes::ShapeRef.new(shape: ComponentVersionArnOrBuildVersionArn, required: true, location: "querystring", location_name: "componentBuildVersionArn"))
     GetComponentRequest.struct_class = Types::GetComponentRequest
 
     GetComponentResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -522,7 +527,7 @@ module Aws::Imagebuilder
     GetImageRecipeResponse.add_member(:image_recipe, Shapes::ShapeRef.new(shape: ImageRecipe, location_name: "imageRecipe"))
     GetImageRecipeResponse.struct_class = Types::GetImageRecipeResponse
 
-    GetImageRequest.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, required: true, location: "querystring", location_name: "imageBuildVersionArn"))
+    GetImageRequest.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageVersionArnOrBuildVersionArn, required: true, location: "querystring", location_name: "imageBuildVersionArn"))
     GetImageRequest.struct_class = Types::GetImageRequest
 
     GetImageResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -588,6 +593,7 @@ module Aws::Imagebuilder
     ImageRecipe.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: InstanceBlockDeviceMappings, location_name: "blockDeviceMappings"))
     ImageRecipe.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
     ImageRecipe.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ImageRecipe.add_member(:working_directory, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "workingDirectory"))
     ImageRecipe.struct_class = Types::ImageRecipe
 
     ImageRecipeSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
@@ -666,6 +672,7 @@ module Aws::Imagebuilder
     InfrastructureConfiguration.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "snsTopicArn"))
     InfrastructureConfiguration.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
     InfrastructureConfiguration.add_member(:date_updated, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateUpdated"))
+    InfrastructureConfiguration.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
     InfrastructureConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     InfrastructureConfiguration.struct_class = Types::InfrastructureConfiguration
 
@@ -674,6 +681,7 @@ module Aws::Imagebuilder
     InfrastructureConfigurationSummary.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     InfrastructureConfigurationSummary.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
     InfrastructureConfigurationSummary.add_member(:date_updated, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateUpdated"))
+    InfrastructureConfigurationSummary.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
     InfrastructureConfigurationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     InfrastructureConfigurationSummary.struct_class = Types::InfrastructureConfigurationSummary
 
@@ -856,6 +864,9 @@ module Aws::Imagebuilder
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ResourceTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    ResourceTagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
     S3Logs.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "s3BucketName"))
     S3Logs.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "s3KeyPrefix"))
     S3Logs.struct_class = Types::S3Logs
@@ -868,6 +879,9 @@ module Aws::Imagebuilder
 
     ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ServiceException.struct_class = Types::ServiceException
+
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -939,6 +953,7 @@ module Aws::Imagebuilder
     UpdateInfrastructureConfigurationRequest.add_member(:terminate_instance_on_failure, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminateInstanceOnFailure"))
     UpdateInfrastructureConfigurationRequest.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "snsTopicArn"))
     UpdateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateInfrastructureConfigurationRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
     UpdateInfrastructureConfigurationRequest.struct_class = Types::UpdateInfrastructureConfigurationRequest
 
     UpdateInfrastructureConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -997,6 +1012,7 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: InvalidVersionNumberException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_distribution_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1015,6 +1031,7 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_image, Seahorse::Model::Operation.new.tap do |o|
@@ -1031,6 +1048,7 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_image_pipeline, Seahorse::Model::Operation.new.tap do |o|
@@ -1048,6 +1066,7 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_image_recipe, Seahorse::Model::Operation.new.tap do |o|
@@ -1066,6 +1085,7 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: InvalidVersionNumberException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_infrastructure_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1083,6 +1103,7 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:delete_component, Seahorse::Model::Operation.new.tap do |o|

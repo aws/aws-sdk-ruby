@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.15.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.15.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.14.0 (2020-06-04)
 ------------------
 
@@ -75,4 +86,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-mediapackagevod`.
-

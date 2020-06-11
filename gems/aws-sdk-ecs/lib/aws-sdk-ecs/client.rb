@@ -24,6 +24,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +70,7 @@ module Aws::ECS
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +163,7 @@ module Aws::ECS
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -396,13 +398,15 @@ module Aws::ECS
     #
     #   resp.capacity_provider.capacity_provider_arn #=> String
     #   resp.capacity_provider.name #=> String
-    #   resp.capacity_provider.status #=> String, one of "ACTIVE"
+    #   resp.capacity_provider.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.capacity_provider.auto_scaling_group_provider.auto_scaling_group_arn #=> String
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.minimum_scaling_step_size #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED"
+    #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
     #   resp.capacity_provider.tags[0].key #=> String
     #   resp.capacity_provider.tags[0].value #=> String
@@ -1736,6 +1740,65 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Deletes the specified capacity provider.
+    #
+    # <note markdown="1"> The `FARGATE` and `FARGATE_SPOT` capacity providers are reserved and
+    # cannot be deleted. You can disassociate them from a cluster using
+    # either the PutClusterCapacityProviders API or by deleting the cluster.
+    #
+    #  </note>
+    #
+    # Prior to a capacity provider being deleted, the capacity provider must
+    # be removed from the capacity provider strategy from all services. The
+    # UpdateService API can be used to remove a capacity provider from a
+    # service's capacity provider strategy. When updating a service, the
+    # `forceNewDeployment` option can be used to ensure that any tasks using
+    # the Amazon EC2 instance capacity provided by the capacity provider are
+    # transitioned to use the capacity from the remaining capacity
+    # providers. Only capacity providers that are not associated with a
+    # cluster can be deleted. To remove a capacity provider from a cluster,
+    # you can either use PutClusterCapacityProviders or delete the cluster.
+    #
+    # @option params [required, String] :capacity_provider
+    #   The short name or full Amazon Resource Name (ARN) of the capacity
+    #   provider to delete.
+    #
+    # @return [Types::DeleteCapacityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCapacityProviderResponse#capacity_provider #capacity_provider} => Types::CapacityProvider
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_capacity_provider({
+    #     capacity_provider: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_provider.capacity_provider_arn #=> String
+    #   resp.capacity_provider.name #=> String
+    #   resp.capacity_provider.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.capacity_provider.auto_scaling_group_provider.auto_scaling_group_arn #=> String
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.minimum_scaling_step_size #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED"
+    #   resp.capacity_provider.update_status_reason #=> String
+    #   resp.capacity_provider.tags #=> Array
+    #   resp.capacity_provider.tags[0].key #=> String
+    #   resp.capacity_provider.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCapacityProvider AWS API Documentation
+    #
+    # @overload delete_capacity_provider(params = {})
+    # @param [Hash] params ({})
+    def delete_capacity_provider(params = {}, options = {})
+      req = build_request(:delete_capacity_provider, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified cluster. The cluster will transition to the
     # `INACTIVE` state. Clusters with an `INACTIVE` status may remain
     # discoverable in your account for a period of time. However, this
@@ -2489,13 +2552,15 @@ module Aws::ECS
     #   resp.capacity_providers #=> Array
     #   resp.capacity_providers[0].capacity_provider_arn #=> String
     #   resp.capacity_providers[0].name #=> String
-    #   resp.capacity_providers[0].status #=> String, one of "ACTIVE"
+    #   resp.capacity_providers[0].status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.capacity_providers[0].auto_scaling_group_provider.auto_scaling_group_arn #=> String
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.minimum_scaling_step_size #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_providers[0].update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED"
+    #   resp.capacity_providers[0].update_status_reason #=> String
     #   resp.capacity_providers[0].tags #=> Array
     #   resp.capacity_providers[0].tags[0].key #=> String
     #   resp.capacity_providers[0].tags[0].value #=> String
@@ -3642,7 +3707,7 @@ module Aws::ECS
     # Lists the account settings for a specified principal.
     #
     # @option params [String] :name
-    #   The resource name you want to list the account settings for.
+    #   The name of the account setting you want to list the settings for.
     #
     # @option params [String] :value
     #   The value of the account settings with which to filter results. You
@@ -5149,8 +5214,16 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
     #
     # @option params [String] :execution_role_arn
-    #   The Amazon Resource Name (ARN) of the task execution role that the
-    #   Amazon ECS container agent and the Docker daemon can assume.
+    #   The Amazon Resource Name (ARN) of the task execution role that grants
+    #   the Amazon ECS container agent permission to make AWS API calls on
+    #   your behalf. The task execution IAM role is required depending on the
+    #   requirements of your task. For more information, see [Amazon ECS task
+    #   execution IAM role][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
     #
     # @option params [String] :network_mode
     #   The Docker networking mode to use for the containers in the task. The
@@ -7998,7 +8071,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

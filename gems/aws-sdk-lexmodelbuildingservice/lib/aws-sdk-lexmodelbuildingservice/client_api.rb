@@ -117,6 +117,8 @@ module Aws::LexModelBuildingService
     IntentName = Shapes::StringShape.new(name: 'IntentName')
     IntentUtteranceList = Shapes::ListShape.new(name: 'IntentUtteranceList')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
+    KendraConfiguration = Shapes::StructureShape.new(name: 'KendraConfiguration')
+    KendraIndexArn = Shapes::StringShape.new(name: 'KendraIndexArn')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LambdaARN = Shapes::StringShape.new(name: 'LambdaARN')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -154,6 +156,7 @@ module Aws::LexModelBuildingService
     PutIntentResponse = Shapes::StructureShape.new(name: 'PutIntentResponse')
     PutSlotTypeRequest = Shapes::StructureShape.new(name: 'PutSlotTypeRequest')
     PutSlotTypeResponse = Shapes::StructureShape.new(name: 'PutSlotTypeResponse')
+    QueryFilterString = Shapes::StringShape.new(name: 'QueryFilterString')
     ReferenceType = Shapes::StringShape.new(name: 'ReferenceType')
     RegexPattern = Shapes::StringShape.new(name: 'RegexPattern')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
@@ -200,6 +203,7 @@ module Aws::LexModelBuildingService
     UtteranceString = Shapes::StringShape.new(name: 'UtteranceString')
     Value = Shapes::StringShape.new(name: 'Value')
     Version = Shapes::StringShape.new(name: 'Version')
+    roleArn = Shapes::StringShape.new(name: 'roleArn')
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
@@ -317,6 +321,7 @@ module Aws::LexModelBuildingService
     CreateIntentVersionResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     CreateIntentVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     CreateIntentVersionResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    CreateIntentVersionResponse.add_member(:kendra_configuration, Shapes::ShapeRef.new(shape: KendraConfiguration, location_name: "kendraConfiguration"))
     CreateIntentVersionResponse.struct_class = Types::CreateIntentVersionResponse
 
     CreateSlotTypeVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, required: true, location: "uri", location_name: "name"))
@@ -548,6 +553,7 @@ module Aws::LexModelBuildingService
     GetIntentResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     GetIntentResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     GetIntentResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    GetIntentResponse.add_member(:kendra_configuration, Shapes::ShapeRef.new(shape: KendraConfiguration, location_name: "kendraConfiguration"))
     GetIntentResponse.struct_class = Types::GetIntentResponse
 
     GetIntentVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))
@@ -630,6 +636,11 @@ module Aws::LexModelBuildingService
 
     InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalFailureException.struct_class = Types::InternalFailureException
+
+    KendraConfiguration.add_member(:kendra_index, Shapes::ShapeRef.new(shape: KendraIndexArn, required: true, location_name: "kendraIndex"))
+    KendraConfiguration.add_member(:query_filter_string, Shapes::ShapeRef.new(shape: QueryFilterString, location_name: "queryFilterString"))
+    KendraConfiguration.add_member(:role, Shapes::ShapeRef.new(shape: roleArn, required: true, location_name: "role"))
+    KendraConfiguration.struct_class = Types::KendraConfiguration
 
     LimitExceededException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Retry-After"))
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -751,6 +762,7 @@ module Aws::LexModelBuildingService
     PutIntentRequest.add_member(:parent_intent_signature, Shapes::ShapeRef.new(shape: BuiltinIntentSignature, location_name: "parentIntentSignature"))
     PutIntentRequest.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     PutIntentRequest.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
+    PutIntentRequest.add_member(:kendra_configuration, Shapes::ShapeRef.new(shape: KendraConfiguration, location_name: "kendraConfiguration"))
     PutIntentRequest.struct_class = Types::PutIntentRequest
 
     PutIntentResponse.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, location_name: "name"))
@@ -769,6 +781,7 @@ module Aws::LexModelBuildingService
     PutIntentResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     PutIntentResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     PutIntentResponse.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
+    PutIntentResponse.add_member(:kendra_configuration, Shapes::ShapeRef.new(shape: KendraConfiguration, location_name: "kendraConfiguration"))
     PutIntentResponse.struct_class = Types::PutIntentResponse
 
     PutSlotTypeRequest.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, required: true, location: "uri", location_name: "name"))

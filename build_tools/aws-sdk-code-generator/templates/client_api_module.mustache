@@ -39,6 +39,9 @@ module {{module_name}}
         o.name = "{{name}}"
         o.http_method = "{{http_method}}"
         o.http_request_uri = "{{{http_request_uri}}}"
+        {{#http_checksum_required}}
+        o.http_checksum_required = true
+        {{/http_checksum_required}}
         {{#deprecated}}
         o.deprecated = true
         {{/deprecated}}

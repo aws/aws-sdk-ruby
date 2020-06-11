@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.41.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.41.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Service Catalog Documentation Update for Integration with AWS Organizations Delegated Administrator feature
+
 1.40.0 (2020-06-05)
 ------------------
 

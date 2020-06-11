@@ -24,6 +24,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +70,7 @@ module Aws::Shield
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +163,7 @@ module Aws::Shield
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -590,25 +592,10 @@ module Aws::Shield
 
     # Activates AWS Shield Advanced for an account.
     #
-    # As part of this request you can specify `EmergencySettings` that
-    # automaticaly grant the DDoS response team (DRT) needed permissions to
-    # assist you during a suspected DDoS attack. For more information see
-    # [Authorize the DDoS Response Team to Create Rules and Web ACLs on Your
-    # Behalf][1].
-    #
-    # To use the services of the DRT, you must be subscribed to the
-    # [Business Support plan][2] or the [Enterprise Support plan][3].
-    #
     # When you initally create a subscription, your subscription is set to
     # be automatically renewed at the end of the existing subscription
     # period. You can change this by submitting an `UpdateSubscription`
     # request.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/authorize-DRT.html
-    # [2]: https://aws.amazon.com/premiumsupport/business-support/
-    # [3]: https://aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1204,7 +1191,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

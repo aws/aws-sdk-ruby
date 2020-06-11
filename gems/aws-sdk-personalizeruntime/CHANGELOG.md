@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.12.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.12.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.11.0 (2020-06-05)
 ------------------
 
@@ -19,7 +30,7 @@ Unreleased Changes
 1.8.0 (2020-04-03)
 ------------------
 
-* Feature - Amazon Personalize: Add new response field "score" to each item returned by GetRecommendations and GetPersonalizedRanking (HRNN-based recipes only)
+* Feature - Add new response field "score" to each item returned by GetRecommendations and GetPersonalizedRanking (HRNN-based recipes only)
 
 1.7.0 (2020-03-09)
 ------------------
@@ -60,4 +71,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-personalizeruntime`.
-

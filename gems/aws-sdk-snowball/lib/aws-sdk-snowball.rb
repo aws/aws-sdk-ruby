@@ -45,6 +45,6 @@ require_relative 'aws-sdk-snowball/customizations'
 # @service
 module Aws::Snowball
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.1'
 
 end

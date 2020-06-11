@@ -76,6 +76,7 @@ module Aws::AppConfig
     ReplicateTo = Shapes::StringShape.new(name: 'ReplicateTo')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTags = Shapes::StructureShape.new(name: 'ResourceTags')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     StartDeploymentRequest = Shapes::StructureShape.new(name: 'StartDeploymentRequest')
     StopDeploymentRequest = Shapes::StructureShape.new(name: 'StopDeploymentRequest')
     String = Shapes::StringShape.new(name: 'String')
@@ -126,7 +127,7 @@ module Aws::AppConfig
     ConfigurationProfile.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     ConfigurationProfile.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     ConfigurationProfile.add_member(:location_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "LocationUri"))
-    ConfigurationProfile.add_member(:retrieval_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RetrievalRoleArn"))
+    ConfigurationProfile.add_member(:retrieval_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RetrievalRoleArn"))
     ConfigurationProfile.add_member(:validators, Shapes::ShapeRef.new(shape: ValidatorList, location_name: "Validators"))
     ConfigurationProfile.struct_class = Types::ConfigurationProfile
 
@@ -155,7 +156,7 @@ module Aws::AppConfig
     CreateConfigurationProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     CreateConfigurationProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateConfigurationProfileRequest.add_member(:location_uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "LocationUri"))
-    CreateConfigurationProfileRequest.add_member(:retrieval_role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RetrievalRoleArn"))
+    CreateConfigurationProfileRequest.add_member(:retrieval_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RetrievalRoleArn"))
     CreateConfigurationProfileRequest.add_member(:validators, Shapes::ShapeRef.new(shape: ValidatorList, location_name: "Validators"))
     CreateConfigurationProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateConfigurationProfileRequest.struct_class = Types::CreateConfigurationProfileRequest
@@ -325,7 +326,7 @@ module Aws::AppConfig
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     Monitor.add_member(:alarm_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AlarmArn"))
-    Monitor.add_member(:alarm_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AlarmRoleArn"))
+    Monitor.add_member(:alarm_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "AlarmRoleArn"))
     Monitor.struct_class = Types::Monitor
 
     MonitorList.member = Shapes::ShapeRef.new(shape: Monitor)
@@ -373,7 +374,7 @@ module Aws::AppConfig
     UpdateConfigurationProfileRequest.add_member(:configuration_profile_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ConfigurationProfileId"))
     UpdateConfigurationProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     UpdateConfigurationProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateConfigurationProfileRequest.add_member(:retrieval_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RetrievalRoleArn"))
+    UpdateConfigurationProfileRequest.add_member(:retrieval_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RetrievalRoleArn"))
     UpdateConfigurationProfileRequest.add_member(:validators, Shapes::ShapeRef.new(shape: ValidatorList, location_name: "Validators"))
     UpdateConfigurationProfileRequest.struct_class = Types::UpdateConfigurationProfileRequest
 
@@ -531,7 +532,6 @@ module Aws::AppConfig
         o.output = Shapes::ShapeRef.new(shape: Configuration)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 

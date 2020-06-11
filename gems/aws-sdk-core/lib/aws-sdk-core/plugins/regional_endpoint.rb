@@ -2,10 +2,6 @@ module Aws
   module Plugins
     # @api private
     class RegionalEndpoint < Seahorse::Client::Plugin
-
-      # raised when region is not configured
-      MISSING_REGION = 'missing required configuration option :region'
-
       option(:profile)
 
       option(:region,
@@ -31,13 +27,19 @@ a default `:region` is searched for in the following locations:
       option(:endpoint, doc_type: String, docstring: <<-DOCS) do |cfg|
 The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting
-to test endpoints. This should be a valid HTTP(S) URI.
+to test or custom endpoints. This should be a valid HTTP(S) URI.
         DOCS
         endpoint_prefix = cfg.api.metadata['endpointPrefix']
         if cfg.region && endpoint_prefix
           if cfg.respond_to?(:sts_regional_endpoints)
             sts_regional = cfg.sts_regional_endpoints
           end
+
+          # check region is a valid RFC host label
+          unless cfg.region =~ /^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{,63}(?<!-)$/
+            raise Errors::InvalidRegionError
+          end
+
           Aws::Partitions::EndpointProvider.resolve(
             cfg.region,
             endpoint_prefix,
@@ -47,21 +49,22 @@ to test endpoints. This should be a valid HTTP(S) URI.
       end
 
       def after_initialize(client)
-        if client.config.region.nil? or client.config.region == ''
+        if client.config.region.nil? || client.config.region == ''
           raise Errors::MissingRegionError
         end
       end
 
-      private
+      class << self
+        private
 
-      def self.resolve_region(cfg)
-        keys = %w(AWS_REGION AMAZON_REGION AWS_DEFAULT_REGION)
-        env_region = ENV.values_at(*keys).compact.first
-        env_region = nil if env_region == ''
-        cfg_region = Aws.shared_config.region(profile: cfg.profile)
-        env_region || cfg_region
+        def resolve_region(cfg)
+          keys = %w[AWS_REGION AMAZON_REGION AWS_DEFAULT_REGION]
+          env_region = ENV.values_at(*keys).compact.first
+          env_region = nil if env_region == ''
+          cfg_region = Aws.shared_config.region(profile: cfg.profile)
+          env_region || cfg_region
+        end
       end
-
     end
   end
 end

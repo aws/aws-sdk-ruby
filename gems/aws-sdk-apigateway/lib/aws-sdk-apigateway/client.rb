@@ -24,6 +24,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-apigateway/plugins/apply_content_type_header.rb'
@@ -70,6 +71,7 @@ module Aws::APIGateway
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::APIGateway::Plugins::ApplyContentTypeHeader)
@@ -163,7 +165,7 @@ module Aws::APIGateway
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -7009,7 +7011,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

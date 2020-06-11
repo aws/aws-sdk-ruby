@@ -45,6 +45,6 @@ require_relative 'aws-sdk-appsync/customizations'
 # @service
 module Aws::AppSync
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.1'
 
 end

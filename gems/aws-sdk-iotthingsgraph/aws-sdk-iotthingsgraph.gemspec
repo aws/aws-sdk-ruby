@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-iotthingsgraph/CHANGELOG.md'
   }
 
-  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.71.0')
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.99.0')
   spec.add_dependency('aws-sigv4', '~> 1.1')
 
 end

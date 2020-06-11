@@ -208,9 +208,37 @@ module Aws
     # Raised when a client is constructed and region is not specified.
     class MissingRegionError < ArgumentError
       def initialize(*args)
-        msg = 'missing region; use :region option or '\
-              "export region name to ENV['AWS_REGION']"
+        msg = 'No region was provided. Configure the `:region` option or '\
+          "export the region name to ENV['AWS_REGION']"
         super(msg)
+      end
+    end
+
+    # Raised when a client is contsructed and the region is not valid.
+    class InvalidRegionError < ArgumentError
+      def initialize(*args)
+        super(<<-MSG)
+Invalid `:region` option was provided.
+
+* Not every service is available in every region.
+
+* Never suffix region names with availability zones.
+  Use "us-east-1", not "us-east-1a"
+
+Known AWS regions include (not specific to this service):
+
+#{possible_regions}
+        MSG
+      end
+
+      private
+
+      def possible_regions
+        Aws.partitions.each_with_object([]) do |partition, region_names|
+          partition.regions.each do |region|
+            region_names << region.name
+          end
+        end.join("\n")
       end
     end
 
@@ -226,7 +254,7 @@ module Aws
         super(<<-MSG)
 Encountered a `SocketError` while attempting to connect to:
 
-  #{endpoint.to_s}
+  #{endpoint}
 
 This is typically the result of an invalid `:region` option or a
 poorly formatted `:endpoint` option.
@@ -255,14 +283,12 @@ Known AWS regions include (not specific to this service):
       private
 
       def possible_regions
-        Aws.partitions.inject([]) do |region_names, partition|
+        Aws.partitions.each_with_object([]) do |partition, region_names|
           partition.regions.each do |region|
             region_names << region.name
           end
-          region_names
         end.join("\n")
       end
-
     end
 
     # Raised when attempting to retry a request

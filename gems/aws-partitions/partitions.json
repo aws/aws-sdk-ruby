@@ -965,6 +965,20 @@
           "us-west-2" : { }
         }
       },
+      "codeartifact" : {
+        "endpoints" : {
+          "ap-northeast-1" : { },
+          "ap-south-1" : { },
+          "ap-southeast-1" : { },
+          "ap-southeast-2" : { },
+          "eu-central-1" : { },
+          "eu-north-1" : { },
+          "eu-west-1" : { },
+          "us-east-1" : { },
+          "us-east-2" : { },
+          "us-west-2" : { }
+        }
+      },
       "codebuild" : {
         "endpoints" : {
           "ap-east-1" : { },
@@ -2572,6 +2586,7 @@
           "ap-south-1" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
+          "ca-central-1" : { },
           "eu-central-1" : { },
           "eu-north-1" : { },
           "eu-west-1" : { },
@@ -6281,6 +6296,12 @@
           "cn-northwest-1" : { }
         }
       },
+      "kinesisanalytics" : {
+        "endpoints" : {
+          "cn-north-1" : { },
+          "cn-northwest-1" : { }
+        }
+      },
       "kms" : {
         "endpoints" : {
           "cn-north-1" : { },
@@ -6628,7 +6649,19 @@
       },
       "api.sagemaker" : {
         "endpoints" : {
-          "us-gov-west-1" : { }
+          "us-gov-west-1" : { },
+          "us-gov-west-1-fips" : {
+            "credentialScope" : {
+              "region" : "us-gov-west-1"
+            },
+            "hostname" : "api-fips.sagemaker.us-gov-west-1.amazonaws.com"
+          },
+          "us-gov-west-1-fips-secondary" : {
+            "credentialScope" : {
+              "region" : "us-gov-west-1"
+            },
+            "hostname" : "api.sagemaker.us-gov-west-1.amazonaws.com"
+          }
         }
       },
       "apigateway" : {

@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.27.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.27.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Corrections to the supported format for contact phone numbers and to the description for the create subscription action.
+
 1.26.0 (2020-06-08)
 ------------------
 
@@ -190,4 +201,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-shield`.
-
