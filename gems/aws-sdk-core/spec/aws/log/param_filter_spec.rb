@@ -16,6 +16,13 @@ module Aws
           expect(filters).to include(hash_filter)
         end
 
+        it 'adds filters to existing sensitive params' do
+          filter = ParamFilter.new(filter: {'STS' => [:new_param]})
+          filters = filter.instance_variable_get(:@filters)
+          expect(filters['STS']).to include(:new_param)
+          expect(filters['STS']).to include(*ParamFilter::SENSITIVE['STS'])
+        end
+
         it 'supports a filter as an array (legacy)' do
           filter = ParamFilter.new(filter: array_filter)
           filters = filter.instance_variable_get(:@filters)

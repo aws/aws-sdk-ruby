@@ -23,15 +23,8 @@ module Aws
         end
 
         filters = options[:filter] || {}
-        if filters.is_a?(Hash)
-          @filters = SENSITIVE.merge(filters)
-        # Support backwards compatibility for Array
-        elsif filters.is_a?(Array)
-          @filters = SENSITIVE.dup
-          @filters.update(@filters) { |_k, v| v | Array(filters) }
-        else
-          @filters = SENSITIVE
-        end
+        filters = SENSITIVE.map { |k, _v| [k, filters] }.to_h if filters.is_a?(Array)
+        @filters = filters.merge(SENSITIVE.map { |k, v| [k, v | filters.fetch(k, [])] }.to_h)
       end
 
       def filter(service, value)

@@ -77,8 +77,9 @@ module Aws
       #   request parameters, strings longer than this value will be
       #   truncated.
       #
-      # @option options [Hash<Array<Symbol>>] :filter A hash of parameter
-      #   names that should be filtered when logging `:request_params`.
+      # @option options [Hash<Array<Symbol>>] :filter A hash of additional
+      #   parameter names that should be filtered when logging
+      #   `:request_params`.
       #
       #       Formatter.new(pattern, filter: { 'S3' => [:body] })
       #
