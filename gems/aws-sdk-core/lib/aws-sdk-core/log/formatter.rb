@@ -83,6 +83,8 @@ module Aws
       #   The default list of filtered parameters is documented on the
       #   {ParamFilter} class.
       #
+      # @option options [Boolean] :filter_sensitive (true) Enable or disable
+      #   sensitive parameter filtering when logging `:request_params`.
       def initialize(pattern, options = {})
         @pattern = pattern
         @param_formatter = ParamFormatter.new(options)

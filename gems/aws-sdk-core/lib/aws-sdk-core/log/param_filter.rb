@@ -15,13 +15,18 @@ module Aws
       # end
 
       def initialize(options = {})
+        if options[:filter_sensitive] == false
+          @filters = {}
+          return
+        end
+
         filters = options[:filter] || {}
-        # Support backwards compatibility for Array
-        if filters.is_a?(Array)
-          @filters = SENSITIVE.dup
-          @filters.update(@filters) { |_k, v| v + Array(filters) }
-        elsif filters.is_a?(Hash)
+        if filters.is_a?(Hash)
           @filters = SENSITIVE.merge(filters)
+        # Support backwards compatibility for Array
+        elsif filters.is_a?(Array)
+          @filters = SENSITIVE.dup
+          @filters.update(@filters) { |_k, v| v | Array(filters) }
         else
           @filters = SENSITIVE
         end
@@ -40,8 +45,8 @@ module Aws
       def filter_hash(service, values)
         filtered = {}
         values.each_pair do |key, value|
-          filters = @filters[service]
-          filtered[key] = if filters.any? { |f| f.to_s.casecmp(key.to_s).zero? }
+          filters = @filters[service] || {}
+          filtered[key] = if filters.include?(key)
             '[FILTERED]'
           else
             filter(service, value)
