@@ -1172,7 +1172,7 @@ module Aws::Support
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-support'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.22.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.8.1 (2020-06-11)
+------------------
+
 * Issue - Republish previous version with correct dependency on `aws-sdk-core`.
 
 1.8.0 (2020-06-10)

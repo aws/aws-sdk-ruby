@@ -5072,7 +5072,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.42.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-06-11)
+------------------
+
+* Feature - This change adds the built-in AMAZON.KendraSearchIntent that enables integration with Amazon Kendra.
+
 * Issue - Republish previous version with correct dependency on `aws-sdk-core`.
 
 1.31.0 (2020-06-10)

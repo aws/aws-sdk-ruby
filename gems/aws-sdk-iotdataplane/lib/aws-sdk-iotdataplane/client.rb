@@ -310,10 +310,10 @@ module Aws::IoTDataPlane
 
     # @!group API Operations
 
-    # Deletes the thing shadow for the specified thing.
+    # Deletes the shadow for the specified thing.
     #
-    # For more information, see [DeleteThingShadow][1] in the *AWS IoT
-    # Developer Guide*.
+    # For more information, see [DeleteThingShadow][1] in the AWS IoT
+    # Developer Guide.
     #
     #
     #
@@ -321,6 +321,9 @@ module Aws::IoTDataPlane
     #
     # @option params [required, String] :thing_name
     #   The name of the thing.
+    #
+    # @option params [String] :shadow_name
+    #   The name of the shadow.
     #
     # @return [Types::DeleteThingShadowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -330,6 +333,7 @@ module Aws::IoTDataPlane
     #
     #   resp = client.delete_thing_shadow({
     #     thing_name: "ThingName", # required
+    #     shadow_name: "ShadowName",
     #   })
     #
     # @example Response structure
@@ -343,10 +347,10 @@ module Aws::IoTDataPlane
       req.send_request(options)
     end
 
-    # Gets the thing shadow for the specified thing.
+    # Gets the shadow for the specified thing.
     #
-    # For more information, see [GetThingShadow][1] in the *AWS IoT
-    # Developer Guide*.
+    # For more information, see [GetThingShadow][1] in the AWS IoT Developer
+    # Guide.
     #
     #
     #
@@ -354,6 +358,9 @@ module Aws::IoTDataPlane
     #
     # @option params [required, String] :thing_name
     #   The name of the thing.
+    #
+    # @option params [String] :shadow_name
+    #   The name of the shadow.
     #
     # @return [Types::GetThingShadowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -363,6 +370,7 @@ module Aws::IoTDataPlane
     #
     #   resp = client.get_thing_shadow({
     #     thing_name: "ThingName", # required
+    #     shadow_name: "ShadowName",
     #   })
     #
     # @example Response structure
@@ -376,10 +384,49 @@ module Aws::IoTDataPlane
       req.send_request(options)
     end
 
+    # Lists the shadows for the specified thing.
+    #
+    # @option params [required, String] :thing_name
+    #   The name of the thing.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results.
+    #
+    # @option params [Integer] :page_size
+    #   The result page size.
+    #
+    # @return [Types::ListNamedShadowsForThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNamedShadowsForThingResponse#results #results} => Array&lt;String&gt;
+    #   * {Types::ListNamedShadowsForThingResponse#next_token #next_token} => String
+    #   * {Types::ListNamedShadowsForThingResponse#timestamp #timestamp} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_named_shadows_for_thing({
+    #     thing_name: "ThingName", # required
+    #     next_token: "NextToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0] #=> String
+    #   resp.next_token #=> String
+    #   resp.timestamp #=> Integer
+    #
+    # @overload list_named_shadows_for_thing(params = {})
+    # @param [Hash] params ({})
+    def list_named_shadows_for_thing(params = {}, options = {})
+      req = build_request(:list_named_shadows_for_thing, params)
+      req.send_request(options)
+    end
+
     # Publishes state information.
     #
-    # For more information, see [HTTP Protocol][1] in the *AWS IoT Developer
-    # Guide*.
+    # For more information, see [HTTP Protocol][1] in the AWS IoT Developer
+    # Guide.
     #
     #
     #
@@ -411,10 +458,10 @@ module Aws::IoTDataPlane
       req.send_request(options)
     end
 
-    # Updates the thing shadow for the specified thing.
+    # Updates the shadow for the specified thing.
     #
-    # For more information, see [UpdateThingShadow][1] in the *AWS IoT
-    # Developer Guide*.
+    # For more information, see [UpdateThingShadow][1] in the AWS IoT
+    # Developer Guide.
     #
     #
     #
@@ -422,6 +469,9 @@ module Aws::IoTDataPlane
     #
     # @option params [required, String] :thing_name
     #   The name of the thing.
+    #
+    # @option params [String] :shadow_name
+    #   The name of the shadow.
     #
     # @option params [required, String, IO] :payload
     #   The state information, in JSON format.
@@ -434,6 +484,7 @@ module Aws::IoTDataPlane
     #
     #   resp = client.update_thing_shadow({
     #     thing_name: "ThingName", # required
+    #     shadow_name: "ShadowName",
     #     payload: "data", # required
     #   })
     #
@@ -461,7 +512,7 @@ module Aws::IoTDataPlane
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotdataplane'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

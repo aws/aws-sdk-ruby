@@ -587,7 +587,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.6.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

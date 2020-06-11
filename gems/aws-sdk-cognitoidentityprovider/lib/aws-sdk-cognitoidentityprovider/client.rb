@@ -6879,7 +6879,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.37.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

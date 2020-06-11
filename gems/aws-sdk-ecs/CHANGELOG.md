@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2020-06-11)
+------------------
+
+* Feature - This release adds support for deleting capacity providers.
+
 * Issue - Republish previous version with correct dependency on `aws-sdk-core`.
 
 1.64.0 (2020-06-10)

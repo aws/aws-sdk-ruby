@@ -1880,7 +1880,7 @@ module Aws::IoTThingsGraph
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotthingsgraph'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.8.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -45,6 +45,6 @@ require_relative 'aws-sdk-mediapackage/customizations'
 # @service
 module Aws::MediaPackage
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.29.1'
 
 end

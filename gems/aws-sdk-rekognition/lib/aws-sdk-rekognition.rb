@@ -46,6 +46,6 @@ require_relative 'aws-sdk-rekognition/customizations'
 # @service
 module Aws::Rekognition
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.39.1'
 
 end

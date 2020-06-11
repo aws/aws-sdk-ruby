@@ -841,7 +841,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.23.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

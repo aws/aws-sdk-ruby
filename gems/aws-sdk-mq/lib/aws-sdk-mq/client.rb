@@ -1301,7 +1301,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.28.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

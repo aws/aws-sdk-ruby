@@ -45,6 +45,6 @@ require_relative 'aws-sdk-directoryservice/customizations'
 # @service
 module Aws::DirectoryService
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.29.1'
 
 end

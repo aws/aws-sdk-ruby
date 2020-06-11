@@ -707,6 +707,9 @@ module Aws::Imagebuilder
     # @option params [Hash<String,String>] :tags
     #   The tags of the image recipe.
     #
+    # @option params [String] :working_directory
+    #   The working directory to be used during build and test workflows.
+    #
     # @option params [required, String] :client_token
     #   The idempotency token used to make this request idempotent.
     #
@@ -750,6 +753,7 @@ module Aws::Imagebuilder
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     working_directory: "NonEmptyString",
     #     client_token: "ClientToken", # required
     #   })
     #
@@ -811,6 +815,9 @@ module Aws::Imagebuilder
     # @option params [String] :sns_topic_arn
     #   The SNS topic on which to send image build events.
     #
+    # @option params [Hash<String,String>] :resource_tags
+    #   The tags attached to the resource created by Image Builder.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags of the infrastructure configuration.
     #
@@ -844,6 +851,9 @@ module Aws::Imagebuilder
     #     key_pair: "NonEmptyString",
     #     terminate_instance_on_failure: false,
     #     sns_topic_arn: "SnsTopicArn",
+    #     resource_tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1062,7 +1072,7 @@ module Aws::Imagebuilder
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_component({
-    #     component_build_version_arn: "ComponentBuildVersionArn", # required
+    #     component_build_version_arn: "ComponentVersionArnOrBuildVersionArn", # required
     #   })
     #
     # @example Response structure
@@ -1188,7 +1198,7 @@ module Aws::Imagebuilder
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_image({
-    #     image_build_version_arn: "ImageBuildVersionArn", # required
+    #     image_build_version_arn: "ImageVersionArnOrBuildVersionArn", # required
     #   })
     #
     # @example Response structure
@@ -1225,6 +1235,7 @@ module Aws::Imagebuilder
     #   resp.image.image_recipe.date_created #=> String
     #   resp.image.image_recipe.tags #=> Hash
     #   resp.image.image_recipe.tags["TagKey"] #=> String
+    #   resp.image.image_recipe.working_directory #=> String
     #   resp.image.source_pipeline_name #=> String
     #   resp.image.source_pipeline_arn #=> String
     #   resp.image.infrastructure_configuration.arn #=> String
@@ -1243,6 +1254,8 @@ module Aws::Imagebuilder
     #   resp.image.infrastructure_configuration.sns_topic_arn #=> String
     #   resp.image.infrastructure_configuration.date_created #=> String
     #   resp.image.infrastructure_configuration.date_updated #=> String
+    #   resp.image.infrastructure_configuration.resource_tags #=> Hash
+    #   resp.image.infrastructure_configuration.resource_tags["TagKey"] #=> String
     #   resp.image.infrastructure_configuration.tags #=> Hash
     #   resp.image.infrastructure_configuration.tags["TagKey"] #=> String
     #   resp.image.distribution_configuration.arn #=> String
@@ -1410,6 +1423,7 @@ module Aws::Imagebuilder
     #   resp.image_recipe.date_created #=> String
     #   resp.image_recipe.tags #=> Hash
     #   resp.image_recipe.tags["TagKey"] #=> String
+    #   resp.image_recipe.working_directory #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImageRecipe AWS API Documentation
     #
@@ -1487,6 +1501,8 @@ module Aws::Imagebuilder
     #   resp.infrastructure_configuration.sns_topic_arn #=> String
     #   resp.infrastructure_configuration.date_created #=> String
     #   resp.infrastructure_configuration.date_updated #=> String
+    #   resp.infrastructure_configuration.resource_tags #=> Hash
+    #   resp.infrastructure_configuration.resource_tags["TagKey"] #=> String
     #   resp.infrastructure_configuration.tags #=> Hash
     #   resp.infrastructure_configuration.tags["TagKey"] #=> String
     #
@@ -1770,7 +1786,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Returns a list of distribution configurations.
+    # Returns a list of image build versions.
     #
     # @option params [required, String] :image_version_arn
     #   The Amazon Resource Name (ARN) of the image whose build versions you
@@ -2043,8 +2059,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Returns the list of image build versions for the specified semantic
-    # version.
+    # Returns the list of images that you have access to.
     #
     # @option params [String] :owner
     #   The owner defines which images you want to list. By default, this
@@ -2149,6 +2164,8 @@ module Aws::Imagebuilder
     #   resp.infrastructure_configuration_summary_list[0].description #=> String
     #   resp.infrastructure_configuration_summary_list[0].date_created #=> String
     #   resp.infrastructure_configuration_summary_list[0].date_updated #=> String
+    #   resp.infrastructure_configuration_summary_list[0].resource_tags #=> Hash
+    #   resp.infrastructure_configuration_summary_list[0].resource_tags["TagKey"] #=> String
     #   resp.infrastructure_configuration_summary_list[0].tags #=> Hash
     #   resp.infrastructure_configuration_summary_list[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -2619,6 +2636,9 @@ module Aws::Imagebuilder
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,String>] :resource_tags
+    #   The tags attached to the resource created by Image Builder.
+    #
     # @return [Types::UpdateInfrastructureConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateInfrastructureConfigurationResponse#request_id #request_id} => String
@@ -2644,6 +2664,9 @@ module Aws::Imagebuilder
     #     terminate_instance_on_failure: false,
     #     sns_topic_arn: "SnsTopicArn",
     #     client_token: "ClientToken", # required
+    #     resource_tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2674,7 +2697,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

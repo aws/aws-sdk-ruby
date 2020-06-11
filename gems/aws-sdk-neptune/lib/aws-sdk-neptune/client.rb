@@ -6402,7 +6402,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.25.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

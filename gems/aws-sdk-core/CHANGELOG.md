@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.99.1 (2020-06-11)
+------------------
+
 * Issue - Republish previous version with correct dependency on `aws-sdk-core`.
 
 3.99.0 (2020-06-10)

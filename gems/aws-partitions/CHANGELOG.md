@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.329.0 (2020-06-11)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 * Issue - Republish previous version with correct dependency on `aws-sdk-core`.
 
 1.328.0 (2020-06-10)

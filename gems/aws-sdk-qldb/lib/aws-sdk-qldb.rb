@@ -45,6 +45,6 @@ require_relative 'aws-sdk-qldb/customizations'
 # @service
 module Aws::QLDB
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.6.1'
 
 end

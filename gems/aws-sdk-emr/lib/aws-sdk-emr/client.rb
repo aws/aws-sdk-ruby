@@ -2631,7 +2631,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.30.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

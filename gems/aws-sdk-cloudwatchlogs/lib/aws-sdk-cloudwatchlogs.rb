@@ -45,6 +45,6 @@ require_relative 'aws-sdk-cloudwatchlogs/customizations'
 # @service
 module Aws::CloudWatchLogs
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.32.1'
 
 end

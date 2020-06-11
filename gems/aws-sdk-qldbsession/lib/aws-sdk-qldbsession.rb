@@ -45,6 +45,6 @@ require_relative 'aws-sdk-qldbsession/customizations'
 # @service
 module Aws::QLDBSession
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.5.1'
 
 end

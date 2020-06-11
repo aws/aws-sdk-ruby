@@ -4270,7 +4270,7 @@ module Aws::CloudDirectory
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-clouddirectory'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.25.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

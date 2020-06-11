@@ -45,6 +45,6 @@ require_relative 'aws-sdk-resourcegroupstaggingapi/customizations'
 # @service
 module Aws::ResourceGroupsTaggingAPI
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.27.1'
 
 end

@@ -2817,7 +2817,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.29.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

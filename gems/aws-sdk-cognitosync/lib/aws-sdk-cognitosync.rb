@@ -45,6 +45,6 @@ require_relative 'aws-sdk-cognitosync/customizations'
 # @service
 module Aws::CognitoSync
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.20.1'
 
 end
