@@ -15,7 +15,7 @@ module Aws
         end
 
         it 'adds filters to existing sensitive params' do
-          filter = ParamFilter.new(filter: {'STS' => [:new_param]})
+          filter = ParamFilter.new(filter: { 'STS' => [:new_param] })
           filters = filter.instance_variable_get(:@filters)
           expect(filters['STS']).to include(:new_param)
           expect(filters['STS']).to include(*ParamFilter::SENSITIVE['STS'])
@@ -33,7 +33,7 @@ module Aws
 
         context 'with an array' do
           it 'filters parameter names' do
-            filtered = subject.filter(service, [{ password: 'p@assw0rd' }])
+            filtered = subject.filter([{ password: 'p@assw0rd' }], service)
             expect(filtered).to eq([{ password: '[FILTERED]' }])
           end
         end
@@ -41,15 +41,22 @@ module Aws
         context 'with a Struct' do
           it 'filters parameter names' do
             instance = Struct.new(:password).new('p@assw0rd')
-            filtered = subject.filter(service, instance)
+            filtered = subject.filter(instance, service)
             expect(filtered).to eq(password: '[FILTERED]')
           end
         end
 
         context 'with a hash' do
           it 'filters parameter names' do
-            filtered = subject.filter(service, password: 'p@ssw0rd')
+            filtered = subject.filter({password: 'p@ssw0rd'}, service)
             expect(filtered).to eq(password: '[FILTERED]')
+          end
+        end
+
+        context 'with no service' do
+          it 'filters parameter names from all services' do
+            filtered = subject.filter({password: 'p@ssw0rd', private_key: 'private'})
+            expect(filtered).to eq(password: '[FILTERED]', private_key: '[FILTERED]')
           end
         end
       end
