@@ -167,29 +167,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies one or more findings to archive.
-    #
-    # @note When making an API call, you may pass ArchiveFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_ids: ["__string"], # required
-    #       }
-    #
-    # @!attribute [rw] finding_ids
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ArchiveFindingsRequest AWS API Documentation
-    #
-    class ArchiveFindingsRequest < Struct.new(
-      :finding_ids)
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ArchiveFindingsResponse AWS API Documentation
-    #
-    class ArchiveFindingsResponse < Aws::EmptyStructure; end
-
     # Reserved for future use.
     #
     # @!attribute [rw] access_key_id
@@ -4392,29 +4369,6 @@ module Aws::Macie2
       :message)
       include Aws::Structure
     end
-
-    # Specifies one or more findings to reactivate (unarchive).
-    #
-    # @note When making an API call, you may pass UnarchiveFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_ids: ["__string"], # required
-    #       }
-    #
-    # @!attribute [rw] finding_ids
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UnarchiveFindingsRequest AWS API Documentation
-    #
-    class UnarchiveFindingsRequest < Struct.new(
-      :finding_ids)
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UnarchiveFindingsResponse AWS API Documentation
-    #
-    class UnarchiveFindingsResponse < Aws::EmptyStructure; end
 
     # Provides information about an account-related request that hasn't
     # been processed.

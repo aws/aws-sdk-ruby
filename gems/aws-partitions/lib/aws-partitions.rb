@@ -255,6 +255,7 @@ module Aws
             'CloudWatch' => 'monitoring',
             'CloudWatchEvents' => 'events',
             'CloudWatchLogs' => 'logs',
+            'CodeArtifact' => 'codeartifact',
             'CodeBuild' => 'codebuild',
             'CodeCommit' => 'codecommit',
             'CodeDeploy' => 'codedeploy',

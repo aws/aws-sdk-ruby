@@ -23,9 +23,26 @@ module Aws::ComputeOptimizer
     AutoScalingGroupRecommendationOptions = Shapes::ListShape.new(name: 'AutoScalingGroupRecommendationOptions')
     AutoScalingGroupRecommendations = Shapes::ListShape.new(name: 'AutoScalingGroupRecommendations')
     Code = Shapes::StringShape.new(name: 'Code')
+    CreationTimestamp = Shapes::TimestampShape.new(name: 'CreationTimestamp')
     CurrentInstanceType = Shapes::StringShape.new(name: 'CurrentInstanceType')
+    DescribeRecommendationExportJobsRequest = Shapes::StructureShape.new(name: 'DescribeRecommendationExportJobsRequest')
+    DescribeRecommendationExportJobsResponse = Shapes::StructureShape.new(name: 'DescribeRecommendationExportJobsResponse')
     DesiredCapacity = Shapes::IntegerShape.new(name: 'DesiredCapacity')
+    DestinationBucket = Shapes::StringShape.new(name: 'DestinationBucket')
+    DestinationKey = Shapes::StringShape.new(name: 'DestinationKey')
+    DestinationKeyPrefix = Shapes::StringShape.new(name: 'DestinationKeyPrefix')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExportAutoScalingGroupRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportAutoScalingGroupRecommendationsRequest')
+    ExportAutoScalingGroupRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportAutoScalingGroupRecommendationsResponse')
+    ExportDestination = Shapes::StructureShape.new(name: 'ExportDestination')
+    ExportEC2InstanceRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportEC2InstanceRecommendationsRequest')
+    ExportEC2InstanceRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportEC2InstanceRecommendationsResponse')
+    ExportableAutoScalingGroupField = Shapes::StringShape.new(name: 'ExportableAutoScalingGroupField')
+    ExportableAutoScalingGroupFields = Shapes::ListShape.new(name: 'ExportableAutoScalingGroupFields')
+    ExportableInstanceField = Shapes::StringShape.new(name: 'ExportableInstanceField')
+    ExportableInstanceFields = Shapes::ListShape.new(name: 'ExportableInstanceFields')
+    FailureReason = Shapes::StringShape.new(name: 'FailureReason')
+    FileFormat = Shapes::StringShape.new(name: 'FileFormat')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
@@ -55,12 +72,21 @@ module Aws::ComputeOptimizer
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
+    JobFilter = Shapes::StructureShape.new(name: 'JobFilter')
+    JobFilterName = Shapes::StringShape.new(name: 'JobFilterName')
+    JobFilters = Shapes::ListShape.new(name: 'JobFilters')
+    JobId = Shapes::StringShape.new(name: 'JobId')
+    JobIds = Shapes::ListShape.new(name: 'JobIds')
+    JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     LastRefreshTimestamp = Shapes::TimestampShape.new(name: 'LastRefreshTimestamp')
+    LastUpdatedTimestamp = Shapes::TimestampShape.new(name: 'LastUpdatedTimestamp')
+    LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LookBackPeriodInDays = Shapes::FloatShape.new(name: 'LookBackPeriodInDays')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxSize = Shapes::IntegerShape.new(name: 'MaxSize')
     MemberAccountsEnrolled = Shapes::BooleanShape.new(name: 'MemberAccountsEnrolled')
     Message = Shapes::StringShape.new(name: 'Message')
+    MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricStatistic = Shapes::StringShape.new(name: 'MetricStatistic')
     MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
@@ -75,6 +101,8 @@ module Aws::ComputeOptimizer
     ProjectedMetrics = Shapes::ListShape.new(name: 'ProjectedMetrics')
     ProjectedUtilizationMetrics = Shapes::ListShape.new(name: 'ProjectedUtilizationMetrics')
     Rank = Shapes::IntegerShape.new(name: 'Rank')
+    RecommendationExportJob = Shapes::StructureShape.new(name: 'RecommendationExportJob')
+    RecommendationExportJobs = Shapes::ListShape.new(name: 'RecommendationExportJobs')
     RecommendationOptions = Shapes::ListShape.new(name: 'RecommendationOptions')
     RecommendationSource = Shapes::StructureShape.new(name: 'RecommendationSource')
     RecommendationSourceArn = Shapes::StringShape.new(name: 'RecommendationSourceArn')
@@ -86,6 +114,9 @@ module Aws::ComputeOptimizer
     RecommendedOptionProjectedMetric = Shapes::StructureShape.new(name: 'RecommendedOptionProjectedMetric')
     RecommendedOptionProjectedMetrics = Shapes::ListShape.new(name: 'RecommendedOptionProjectedMetrics')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    S3Destination = Shapes::StructureShape.new(name: 'S3Destination')
+    S3DestinationConfig = Shapes::StructureShape.new(name: 'S3DestinationConfig')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusReason = Shapes::StringShape.new(name: 'StatusReason')
@@ -133,6 +164,47 @@ module Aws::ComputeOptimizer
     AutoScalingGroupRecommendationOptions.member = Shapes::ShapeRef.new(shape: AutoScalingGroupRecommendationOption)
 
     AutoScalingGroupRecommendations.member = Shapes::ShapeRef.new(shape: AutoScalingGroupRecommendation)
+
+    DescribeRecommendationExportJobsRequest.add_member(:job_ids, Shapes::ShapeRef.new(shape: JobIds, location_name: "jobIds"))
+    DescribeRecommendationExportJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: JobFilters, location_name: "filters"))
+    DescribeRecommendationExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeRecommendationExportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    DescribeRecommendationExportJobsRequest.struct_class = Types::DescribeRecommendationExportJobsRequest
+
+    DescribeRecommendationExportJobsResponse.add_member(:recommendation_export_jobs, Shapes::ShapeRef.new(shape: RecommendationExportJobs, location_name: "recommendationExportJobs"))
+    DescribeRecommendationExportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeRecommendationExportJobsResponse.struct_class = Types::DescribeRecommendationExportJobsResponse
+
+    ExportAutoScalingGroupRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    ExportAutoScalingGroupRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
+    ExportAutoScalingGroupRecommendationsRequest.add_member(:fields_to_export, Shapes::ShapeRef.new(shape: ExportableAutoScalingGroupFields, location_name: "fieldsToExport"))
+    ExportAutoScalingGroupRecommendationsRequest.add_member(:s3_destination_config, Shapes::ShapeRef.new(shape: S3DestinationConfig, required: true, location_name: "s3DestinationConfig"))
+    ExportAutoScalingGroupRecommendationsRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, location_name: "fileFormat"))
+    ExportAutoScalingGroupRecommendationsRequest.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: IncludeMemberAccounts, location_name: "includeMemberAccounts"))
+    ExportAutoScalingGroupRecommendationsRequest.struct_class = Types::ExportAutoScalingGroupRecommendationsRequest
+
+    ExportAutoScalingGroupRecommendationsResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
+    ExportAutoScalingGroupRecommendationsResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
+    ExportAutoScalingGroupRecommendationsResponse.struct_class = Types::ExportAutoScalingGroupRecommendationsResponse
+
+    ExportDestination.add_member(:s3, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3"))
+    ExportDestination.struct_class = Types::ExportDestination
+
+    ExportEC2InstanceRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    ExportEC2InstanceRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
+    ExportEC2InstanceRecommendationsRequest.add_member(:fields_to_export, Shapes::ShapeRef.new(shape: ExportableInstanceFields, location_name: "fieldsToExport"))
+    ExportEC2InstanceRecommendationsRequest.add_member(:s3_destination_config, Shapes::ShapeRef.new(shape: S3DestinationConfig, required: true, location_name: "s3DestinationConfig"))
+    ExportEC2InstanceRecommendationsRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, location_name: "fileFormat"))
+    ExportEC2InstanceRecommendationsRequest.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: IncludeMemberAccounts, location_name: "includeMemberAccounts"))
+    ExportEC2InstanceRecommendationsRequest.struct_class = Types::ExportEC2InstanceRecommendationsRequest
+
+    ExportEC2InstanceRecommendationsResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
+    ExportEC2InstanceRecommendationsResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
+    ExportEC2InstanceRecommendationsResponse.struct_class = Types::ExportEC2InstanceRecommendationsResponse
+
+    ExportableAutoScalingGroupFields.member = Shapes::ShapeRef.new(shape: ExportableAutoScalingGroupField)
+
+    ExportableInstanceFields.member = Shapes::ShapeRef.new(shape: ExportableInstanceField)
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))
@@ -227,6 +299,17 @@ module Aws::ComputeOptimizer
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
 
+    JobFilter.add_member(:name, Shapes::ShapeRef.new(shape: JobFilterName, location_name: "name"))
+    JobFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))
+    JobFilter.struct_class = Types::JobFilter
+
+    JobFilters.member = Shapes::ShapeRef.new(shape: JobFilter)
+
+    JobIds.member = Shapes::ShapeRef.new(shape: JobId)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     MetricValues.member = Shapes::ShapeRef.new(shape: MetricValue)
 
     MissingAuthenticationToken.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -243,6 +326,17 @@ module Aws::ComputeOptimizer
     ProjectedMetrics.member = Shapes::ShapeRef.new(shape: ProjectedMetric)
 
     ProjectedUtilizationMetrics.member = Shapes::ShapeRef.new(shape: UtilizationMetric)
+
+    RecommendationExportJob.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
+    RecommendationExportJob.add_member(:destination, Shapes::ShapeRef.new(shape: ExportDestination, location_name: "destination"))
+    RecommendationExportJob.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    RecommendationExportJob.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
+    RecommendationExportJob.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "creationTimestamp"))
+    RecommendationExportJob.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: LastUpdatedTimestamp, location_name: "lastUpdatedTimestamp"))
+    RecommendationExportJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    RecommendationExportJob.struct_class = Types::RecommendationExportJob
+
+    RecommendationExportJobs.member = Shapes::ShapeRef.new(shape: RecommendationExportJob)
 
     RecommendationOptions.member = Shapes::ShapeRef.new(shape: InstanceRecommendationOption)
 
@@ -268,6 +362,15 @@ module Aws::ComputeOptimizer
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    S3Destination.add_member(:bucket, Shapes::ShapeRef.new(shape: DestinationBucket, location_name: "bucket"))
+    S3Destination.add_member(:key, Shapes::ShapeRef.new(shape: DestinationKey, location_name: "key"))
+    S3Destination.add_member(:metadata_key, Shapes::ShapeRef.new(shape: MetadataKey, location_name: "metadataKey"))
+    S3Destination.struct_class = Types::S3Destination
+
+    S3DestinationConfig.add_member(:bucket, Shapes::ShapeRef.new(shape: DestinationBucket, location_name: "bucket"))
+    S3DestinationConfig.add_member(:key_prefix, Shapes::ShapeRef.new(shape: DestinationKeyPrefix, location_name: "keyPrefix"))
+    S3DestinationConfig.struct_class = Types::S3DestinationConfig
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -316,6 +419,54 @@ module Aws::ComputeOptimizer
         "targetPrefix" => "ComputeOptimizerService",
         "uid" => "compute-optimizer-2019-11-01",
       }
+
+      api.add_operation(:describe_recommendation_export_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRecommendationExportJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRecommendationExportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRecommendationExportJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:export_auto_scaling_group_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportAutoScalingGroupRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportAutoScalingGroupRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportAutoScalingGroupRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:export_ec2_instance_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportEC2InstanceRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportEC2InstanceRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportEC2InstanceRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
 
       api.add_operation(:get_auto_scaling_group_recommendations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAutoScalingGroupRecommendations"

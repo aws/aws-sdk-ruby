@@ -45,6 +45,6 @@ require_relative 'aws-sdk-kinesisvideosignalingchannels/customizations'
 # @service
 module Aws::KinesisVideoSignalingChannels
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.1'
 
 end

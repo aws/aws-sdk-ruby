@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.68.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.68.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Feature - Change `:compute_checksums` option to compute checksums only for optional operations when set to true, and no operations when set to false. Operations that require checksums are now modeled with `httpChecksumRequired` and computed automatically in aws-sdk-core.
 
 1.67.1 (2020-06-01)

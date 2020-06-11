@@ -24,6 +24,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +70,7 @@ module Aws::AppConfig
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +163,7 @@ module Aws::AppConfig
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -425,7 +427,7 @@ module Aws::AppConfig
     #     name: "Name", # required
     #     description: "Description",
     #     location_uri: "Uri", # required
-    #     retrieval_role_arn: "Arn", # required
+    #     retrieval_role_arn: "RoleArn", # required
     #     validators: [
     #       {
     #         type: "JSON_SCHEMA", # required, accepts JSON_SCHEMA, LAMBDA
@@ -609,7 +611,7 @@ module Aws::AppConfig
     #     monitors: [
     #       {
     #         alarm_arn: "Arn",
-    #         alarm_role_arn: "Arn",
+    #         alarm_role_arn: "RoleArn",
     #       },
     #     ],
     #     tags: {
@@ -1658,7 +1660,7 @@ module Aws::AppConfig
     #     configuration_profile_id: "Id", # required
     #     name: "Name",
     #     description: "Description",
-    #     retrieval_role_arn: "Arn",
+    #     retrieval_role_arn: "RoleArn",
     #     validators: [
     #       {
     #         type: "JSON_SCHEMA", # required, accepts JSON_SCHEMA, LAMBDA
@@ -1815,7 +1817,7 @@ module Aws::AppConfig
     #     monitors: [
     #       {
     #         alarm_arn: "Arn",
-    #         alarm_role_arn: "Arn",
+    #         alarm_role_arn: "RoleArn",
     #       },
     #     ],
     #   })
@@ -1884,7 +1886,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

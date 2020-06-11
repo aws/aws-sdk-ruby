@@ -181,10 +181,11 @@ module Aws::S3
     #     will use the Client Side Monitoring Agent Publisher.
     #
     #   @option options [Boolean] :compute_checksums (true)
-    #     When `true` a MD5 checksum will be computed for every request that
-    #     optionally allows for a Content MD5 header.  When `false`, MD5 checksums
-    #     will not be computed for optional operations. Checksum errors returned by
-    #     Amazon S3 are automatically retried up to `:retry_limit` times.
+    #     When `true` a MD5 checksum will be computed and sent in the Content Md5
+    #     header for :put_object and :upload_part. When `false`, MD5 checksums
+    #     will not be computed for these operations. Checksums are still computed
+    #     for operations requiring them. Checksum errors returned by Amazon S3 are
+    #     automatically retried up to `:retry_limit` times.
     #
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
@@ -201,7 +202,7 @@ module Aws::S3
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -11667,7 +11668,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.67.1'
+      context[:gem_version] = '1.68.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

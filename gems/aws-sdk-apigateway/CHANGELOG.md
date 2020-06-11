@@ -1,6 +1,19 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2020-06-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.43.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.42.0 (2020-06-05)
 ------------------
 
@@ -280,4 +293,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-apigateway` gem.
-
