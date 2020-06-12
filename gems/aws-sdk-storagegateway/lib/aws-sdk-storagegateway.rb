@@ -45,6 +45,6 @@ require_relative 'aws-sdk-storagegateway/customizations'
 # @service
 module Aws::StorageGateway
 
-  GEM_VERSION = '1.42.1'
+  GEM_VERSION = '1.43.0'
 
 end

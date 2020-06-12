@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2020-06-12)
+------------------
+
+* Feature - Display EndpointType in DescribeGatewayInformation
+
 1.42.1 (2020-06-11)
 ------------------
 

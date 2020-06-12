@@ -4644,7 +4644,7 @@ module Aws::APIGateway
     # @option params [required, String, IO] :body
     #   \[Required\] The POST request body containing external API
     #   definitions. Currently, only OpenAPI definition JSON/YAML files are
-    #   supported. The maximum size of the API definition file is 2MB.
+    #   supported. The maximum size of the API definition file is 6MB.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4882,10 +4882,15 @@ module Aws::APIGateway
     #     the same 415 response.
     #
     # @option params [String] :cache_namespace
-    #   A list of request parameters whose values are to be cached.
+    #   Specifies a group of related cached parameters. By default, API
+    #   Gateway uses the resource ID as the `cacheNamespace`. You can specify
+    #   the same `cacheNamespace` across resources to return the same cached
+    #   data for requests to different resources.
     #
     # @option params [Array<String>] :cache_key_parameters
-    #   An API-specific tag group of related cached parameters.
+    #   A list of request parameters whose values API Gateway caches. To be
+    #   valid values for `cacheKeyParameters`, these parameters must also be
+    #   specified for Method `requestParameters`.
     #
     # @option params [String] :content_handling
     #   Specifies how to handle request payload content type conversions.
@@ -5331,7 +5336,7 @@ module Aws::APIGateway
     # @option params [required, String, IO] :body
     #   \[Required\] The PUT request body containing external API definitions.
     #   Currently, only OpenAPI definition JSON/YAML files are supported. The
-    #   maximum size of the API definition file is 2MB.
+    #   maximum size of the API definition file is 6MB.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7011,7 +7016,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
