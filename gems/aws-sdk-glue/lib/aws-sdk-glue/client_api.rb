@@ -1312,6 +1312,8 @@ module Aws::Glue
     DevEndpointNames.member = Shapes::ShapeRef.new(shape: GenericString)
 
     DynamoDBTarget.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
+    DynamoDBTarget.add_member(:scan_all, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "scanAll"))
+    DynamoDBTarget.add_member(:scan_rate, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "scanRate"))
     DynamoDBTarget.struct_class = Types::DynamoDBTarget
 
     DynamoDBTargetList.member = Shapes::ShapeRef.new(shape: DynamoDBTarget)

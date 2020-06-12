@@ -4471,7 +4471,7 @@ module Aws::APIGateway
     # @!attribute [rw] body
     #   \[Required\] The POST request body containing external API
     #   definitions. Currently, only OpenAPI definition JSON/YAML files are
-    #   supported. The maximum size of the API definition file is 2MB.
+    #   supported. The maximum size of the API definition file is 6MB.
     #   @return [String]
     #
     class ImportRestApiRequest < Struct.new(
@@ -4662,9 +4662,10 @@ module Aws::APIGateway
     #   @return [Integer]
     #
     # @!attribute [rw] cache_namespace
-    #   An API-specific tag group of related cached parameters. To be valid
-    #   values for `cacheKeyParameters`, these parameters must also be
-    #   specified for Method `requestParameters`.
+    #   Specifies a group of related cached parameters. By default, API
+    #   Gateway uses the resource ID as the `cacheNamespace`. You can
+    #   specify the same `cacheNamespace` across resources to return the
+    #   same cached data for requests to different resources.
     #   @return [String]
     #
     # @!attribute [rw] cache_key_parameters
@@ -5582,11 +5583,16 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_namespace
-    #   A list of request parameters whose values are to be cached.
+    #   Specifies a group of related cached parameters. By default, API
+    #   Gateway uses the resource ID as the `cacheNamespace`. You can
+    #   specify the same `cacheNamespace` across resources to return the
+    #   same cached data for requests to different resources.
     #   @return [String]
     #
     # @!attribute [rw] cache_key_parameters
-    #   An API-specific tag group of related cached parameters.
+    #   A list of request parameters whose values API Gateway caches. To be
+    #   valid values for `cacheKeyParameters`, these parameters must also be
+    #   specified for Method `requestParameters`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] content_handling
@@ -5947,7 +5953,7 @@ module Aws::APIGateway
     # @!attribute [rw] body
     #   \[Required\] The PUT request body containing external API
     #   definitions. Currently, only OpenAPI definition JSON/YAML files are
-    #   supported. The maximum size of the API definition file is 2MB.
+    #   supported. The maximum size of the API definition file is 6MB.
     #   @return [String]
     #
     class PutRestApiRequest < Struct.new(
@@ -6885,15 +6891,15 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] insecure_skip_verification
-    #   Specifies whether API Gateway skips trust chain validation of the
-    #   server certificate during the TLS handshake. Supported only for
-    #   `HTTP` and `HTTP_PROXY` integrations. By default, API Gateway
-    #   validates that certificates for integration endpoints are issued by
-    #   a [supported Certificate Authority][1]. If enabled, API Gateway
-    #   skips trust chain validation of the server certificate. This is not
-    #   recommended, but it enables you to use certificates that are signed
-    #   by private Certificate Authorities, or certificates that are
-    #   self-signed.
+    #   Specifies whether or not API Gateway skips verification that the
+    #   certificate for an integration endpoint is issued by a [supported
+    #   certificate authority][1]. This isn’t recommended, but it enables
+    #   you to use certificates that are signed by private certificate
+    #   authorities, or certificates that are self-signed. If enabled, API
+    #   Gateway still performs basic certificate validation, which includes
+    #   checking the certificate's expiration date, hostname, and presence
+    #   of a root certificate authority. Supported only for `HTTP` and
+    #   `HTTP_PROXY` integrations.
     #
     #
     #

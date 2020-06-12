@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-06-12)
+------------------
+
+* Feature - Documentation updates for Amazon API Gateway
+
 1.44.0 (2020-06-11)
 ------------------
 

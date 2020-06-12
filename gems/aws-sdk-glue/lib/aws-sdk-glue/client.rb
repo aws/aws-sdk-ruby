@@ -647,6 +647,8 @@ module Aws::Glue
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.dynamo_db_targets #=> Array
     #   resp.crawlers[0].targets.dynamo_db_targets[0].path #=> String
+    #   resp.crawlers[0].targets.dynamo_db_targets[0].scan_all #=> Boolean
+    #   resp.crawlers[0].targets.dynamo_db_targets[0].scan_rate #=> Float
     #   resp.crawlers[0].targets.catalog_targets #=> Array
     #   resp.crawlers[0].targets.catalog_targets[0].database_name #=> String
     #   resp.crawlers[0].targets.catalog_targets[0].tables #=> Array
@@ -1339,14 +1341,13 @@ module Aws::Glue
     #   A list of collection of targets to crawl.
     #
     # @option params [String] :schedule
-    #   A `cron` expression used to specify the schedule. For more
-    #   information, see [Time-Based Schedules for Jobs and Crawlers][1]. For
-    #   example, to run something every day at 12:15 UTC, specify `cron(15 12
-    #   * * ? *)`.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #
     # @option params [Array<String>] :classifiers
     #   A list of custom classifiers that the user has registered. By default,
@@ -1361,26 +1362,26 @@ module Aws::Glue
     #   The policy for the crawler's update and deletion behavior.
     #
     # @option params [String] :configuration
-    #   The crawler configuration information. This versioned JSON string
-    #   allows users to specify aspects of a crawler's behavior. For more
+    #   Crawler configuration information. This versioned JSON string allows
+    #   users to specify aspects of a crawler's behavior. For more
     #   information, see [Configuring a Crawler][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #
     # @option params [String] :crawler_security_configuration
     #   The name of the `SecurityConfiguration` structure to be used by this
     #   crawler.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to use with this crawler request. You can use tags to limit
-    #   access to the crawler. For more information, see [AWS Tags in AWS
-    #   Glue][1].
+    #   The tags to use with this crawler request. You may use tags to limit
+    #   access to the crawler. For more information about tags in AWS Glue,
+    #   see [AWS Tags in AWS Glue][1] in the developer guide.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1408,6 +1409,8 @@ module Aws::Glue
     #       dynamo_db_targets: [
     #         {
     #           path: "Path",
+    #           scan_all: false,
+    #           scan_rate: 1.0,
     #         },
     #       ],
     #       catalog_targets: [
@@ -3333,6 +3336,8 @@ module Aws::Glue
     #   resp.crawler.targets.jdbc_targets[0].exclusions[0] #=> String
     #   resp.crawler.targets.dynamo_db_targets #=> Array
     #   resp.crawler.targets.dynamo_db_targets[0].path #=> String
+    #   resp.crawler.targets.dynamo_db_targets[0].scan_all #=> Boolean
+    #   resp.crawler.targets.dynamo_db_targets[0].scan_rate #=> Float
     #   resp.crawler.targets.catalog_targets #=> Array
     #   resp.crawler.targets.catalog_targets[0].database_name #=> String
     #   resp.crawler.targets.catalog_targets[0].tables #=> Array
@@ -3455,6 +3460,8 @@ module Aws::Glue
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.dynamo_db_targets #=> Array
     #   resp.crawlers[0].targets.dynamo_db_targets[0].path #=> String
+    #   resp.crawlers[0].targets.dynamo_db_targets[0].scan_all #=> Boolean
+    #   resp.crawlers[0].targets.dynamo_db_targets[0].scan_rate #=> Float
     #   resp.crawlers[0].targets.catalog_targets #=> Array
     #   resp.crawlers[0].targets.catalog_targets[0].database_name #=> String
     #   resp.crawlers[0].targets.catalog_targets[0].tables #=> Array
@@ -7360,14 +7367,13 @@ module Aws::Glue
     #   A list of targets to crawl.
     #
     # @option params [String] :schedule
-    #   A `cron` expression used to specify the schedule. For more
-    #   information, see [Time-Based Schedules for Jobs and Crawlers][1]. For
-    #   example, to run something every day at 12:15 UTC, specify `cron(15 12
-    #   * * ? *)`.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #
     # @option params [Array<String>] :classifiers
     #   A list of custom classifiers that the user has registered. By default,
@@ -7382,13 +7388,13 @@ module Aws::Glue
     #   The policy for the crawler's update and deletion behavior.
     #
     # @option params [String] :configuration
-    #   The crawler configuration information. This versioned JSON string
-    #   allows users to specify aspects of a crawler's behavior. For more
+    #   Crawler configuration information. This versioned JSON string allows
+    #   users to specify aspects of a crawler's behavior. For more
     #   information, see [Configuring a Crawler][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #
     # @option params [String] :crawler_security_configuration
     #   The name of the `SecurityConfiguration` structure to be used by this
@@ -7420,6 +7426,8 @@ module Aws::Glue
     #       dynamo_db_targets: [
     #         {
     #           path: "Path",
+    #           scan_all: false,
+    #           scan_rate: 1.0,
     #         },
     #       ],
     #       catalog_targets: [
@@ -7455,14 +7463,14 @@ module Aws::Glue
     #   The name of the crawler whose schedule to update.
     #
     # @option params [String] :schedule
-    #   The updated `cron` expression used to specify the schedule. For more
-    #   information, see [Time-Based Schedules for Jobs and Crawlers][1]. For
-    #   example, to run something every day at 12:15 UTC, specify `cron(15 12
-    #   * * ? *)`.
+    #   The updated `cron` expression used to specify the schedule (see
+    #   [Time-Based Schedules for Jobs and Crawlers][1]. For example, to run
+    #   something every day at 12:15 UTC, you would specify: `cron(15 12 * * ?
+    #   *)`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8159,7 +8167,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.58.1'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
