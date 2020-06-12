@@ -25,10 +25,10 @@ module Aws
         filters = options[:filter] || {}
         # Support backwards compatibility. Convert filters array into a hash
         if filters.is_a?(Array)
-          filters = SENSITIVE.map { |k, _v| [k, filters] }.to_h
+          filters = Hash[*SENSITIVE.map { |k, _v| [k, filters] }.flatten(1)]
         end
         @filters = filters.merge(
-          SENSITIVE.map { |k, v| [k, v | filters.fetch(k, [])] }.to_h
+          Hash[*SENSITIVE.map { |k, v| [k, v | filters.fetch(k, [])] }.flatten(1)]
         )
       end
 
