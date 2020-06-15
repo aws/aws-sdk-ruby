@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Bump `aws-eventstream` dependency to `~> 1`.
+
 1.1.4 (2020-05-28)
 ------------------
 
@@ -51,4 +53,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of the `aws-sigv4` gem.
-
