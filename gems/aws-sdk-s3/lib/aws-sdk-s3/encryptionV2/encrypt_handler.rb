@@ -11,6 +11,7 @@ module Aws
           context[:encryption][:cipher] = cipher
           apply_encryption_envelope(context, envelope)
           apply_encryption_cipher(context, cipher)
+          apply_cse_user_agent(context)
           @handler.call(context)
         end
 
@@ -41,6 +42,14 @@ module Aws
           end
           context.http_response.on_headers do
             context.params[:body].close
+          end
+        end
+
+        def apply_cse_user_agent(context)
+          if context.config.user_agent_suffix.nil?
+            context.config.user_agent_suffix = 'CSE_V2'
+          elsif !context.config.user_agent_suffix.include? 'CSE_V2'
+            context.config.user_agent_suffix += ' CSE_V2'
           end
         end
 

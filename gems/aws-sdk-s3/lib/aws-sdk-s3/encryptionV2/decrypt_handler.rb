@@ -40,6 +40,7 @@ module Aws
 
         def call(context)
           attach_http_event_listeners(context)
+          apply_cse_user_agent(context)
           @handler.call(context)
         end
 
@@ -178,6 +179,14 @@ module Aws
 
         def body_contains_auth_tag?(envelope)
           envelope.include? 'x-amz-tag-len'
+        end
+
+        def apply_cse_user_agent(context)
+          if context.config.user_agent_suffix.nil?
+            context.config.user_agent_suffix = 'CSE_V2'
+          elsif !context.config.user_agent_suffix.include? 'CSE_V2'
+            context.config.user_agent_suffix += ' CSE_V2'
+          end
         end
 
       end
