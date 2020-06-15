@@ -4,7 +4,13 @@ module Aws
   module S3
 
     # Provides an encryption client that encrypts and decrypts data client-side,
-    # storing the encrypted data in Amazon S3.
+    # storing the encrypted data in Amazon S3.  The EncryptionV2::Client
+    # provides improved security over the Encryption::Client by using more
+    # modern and secure algorithms.  The EncryptionV2::Client maintains
+    # backwards compatibility: Using the EncryptionV2::Client you can decrypt
+    # objects encrypted with the Encryption::Client.  However, objects you
+    # encrypt using the EncryptionV2::Client cannot be decrypted using the
+    # Encryption::Client.
     #
     # This client uses a process called "envelope encryption". Your private
     # encryption keys and your data's plain-text are **never** sent to
@@ -41,7 +47,7 @@ module Aws
     #     key = OpenSSL::PKey::RSA.new(1024)
     #
     #     # encryption client
-    #     s3 = Aws::S3::Encryption::Client.new(encryption_key: key)
+    #     s3 = Aws::S3::EncryptionV2::Client.new(encryption_key: key)
     #
     #     # round-trip an object, encrypted/decrypted locally
     #     s3.put_object(bucket:'aws-sdk', key:'secret', body:'handshake')
@@ -69,7 +75,7 @@ module Aws
     #     key = OpenSSL::Cipher.new("AES-256-ECB").random_key # symmetric key
     #     key = OpenSSL::PKey::RSA.new(1024) # asymmetric key pair
     #
-    #     s3 = Aws::S3::Encryption::Client.new(encryption_key: key)
+    #     s3 = Aws::S3::EncryptionV2::Client.new(encryption_key: key)
     #
     # ### Key Provider
     #
@@ -85,7 +91,7 @@ module Aws
     #     kms = Aws::KMS::Client.new
     #     key_id = kms.create_key.key_metadata.key_id
     #
-    #     Aws::S3::Encryption::Client.new(
+    #     Aws::S3::EncryptionV2::Client.new(
     #       kms_key_id: key_id,
     #       kms_client: kms,
     #     )
@@ -105,7 +111,7 @@ module Aws
     #
     #       def initialize(default_key_name, keys)
     #         @keys = keys
-    #         @encryption_materials = Aws::S3::Encryption::Materials.new(
+    #         @encryption_materials = Aws::S3::EncryptionV2::Materials.new(
     #           key: @keys[default_key_name],
     #           description: JSON.dump(key: default_key_name),
     #         )
@@ -136,7 +142,7 @@ module Aws
     #
     #     # chooses the key based on the materials description stored
     #     # with the encrypted object
-    #     s3 = Aws::S3::Encryption::Client.new(key_provider: keys)
+    #     s3 = Aws::S3::EncryptionV2::Client.new(key_provider: keys)
     #
     # ## Materials Description
     #
@@ -160,13 +166,13 @@ module Aws
     # use an instruction file for storing the envelope.
     #
     #     # default behavior
-    #     s3 = Aws::S3::Encryption::Client.new(
+    #     s3 = Aws::S3::EncryptionV2::Client.new(
     #       key_provider: ...,
     #       envelope_location: :metadata,
     #     )
     #
     #     # store envelope in a separate object
-    #     s3 = Aws::S3::Encryption::Client.new(
+    #     s3 = Aws::S3::EncryptionV2::Client.new(
     #       key_provider: ...,
     #       envelope_location: :instruction_file,
     #       instruction_file_suffix: '.instruction' # default
