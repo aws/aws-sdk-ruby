@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -232,7 +234,7 @@ module Aws::AppConfig
     #         name: "Name", # required
     #         description: "Description",
     #         location_uri: "Uri", # required
-    #         retrieval_role_arn: "RoleArn", # required
+    #         retrieval_role_arn: "RoleArn",
     #         validators: [
     #           {
     #             type: "JSON_SCHEMA", # required, accepts JSON_SCHEMA, LAMBDA
@@ -440,6 +442,63 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateHostedConfigurationVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "Id", # required
+    #         configuration_profile_id: "Id", # required
+    #         description: "Description",
+    #         content: "data", # required
+    #         content_type: "StringWithLengthBetween1And255", # required
+    #         latest_version_number: 1,
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   The application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_profile_id
+    #   The configuration profile ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the configuration or the configuration data.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   A standard MIME type describing the format of the configuration
+    #   content. For more information, see [Content-Type][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version_number
+    #   An optional locking token used to prevent race conditions from
+    #   overwriting configuration updates when creating a new version. To
+    #   ensure your data is not overwritten when creating multiple hosted
+    #   configuration versions in rapid succession, specify the version of
+    #   the latest hosted configuration version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateHostedConfigurationVersionRequest AWS API Documentation
+    #
+    class CreateHostedConfigurationVersionRequest < Struct.new(
+      :application_id,
+      :configuration_profile_id,
+      :description,
+      :content,
+      :content_type,
+      :latest_version_number)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteApplicationRequest
     #   data as a hash:
     #
@@ -522,6 +581,36 @@ module Aws::AppConfig
     class DeleteEnvironmentRequest < Struct.new(
       :application_id,
       :environment_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteHostedConfigurationVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "Id", # required
+    #         configuration_profile_id: "Id", # required
+    #         version_number: 1, # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   The application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_profile_id
+    #   The configuration profile ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The versions number to delete.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteHostedConfigurationVersionRequest AWS API Documentation
+    #
+    class DeleteHostedConfigurationVersionRequest < Struct.new(
+      :application_id,
+      :configuration_profile_id,
+      :version_number)
       include Aws::Structure
     end
 
@@ -1051,6 +1140,132 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetHostedConfigurationVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "Id", # required
+    #         configuration_profile_id: "Id", # required
+    #         version_number: 1, # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   The application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_profile_id
+    #   The configuration profile ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetHostedConfigurationVersionRequest AWS API Documentation
+    #
+    class GetHostedConfigurationVersionRequest < Struct.new(
+      :application_id,
+      :configuration_profile_id,
+      :version_number)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   The application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_profile_id
+    #   The configuration profile ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The configuration version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A description of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the configuration or the configuration data.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   A standard MIME type describing the format of the configuration
+    #   content. For more information, see [Content-Type][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/HostedConfigurationVersion AWS API Documentation
+    #
+    class HostedConfigurationVersion < Struct.new(
+      :application_id,
+      :configuration_profile_id,
+      :version_number,
+      :description,
+      :content,
+      :content_type)
+      include Aws::Structure
+    end
+
+    # Information about the configuration.
+    #
+    # @!attribute [rw] application_id
+    #   The application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_profile_id
+    #   The configuration profile ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The configuration version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A description of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   A standard MIME type describing the format of the configuration
+    #   content. For more information, see [Content-Type][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/HostedConfigurationVersionSummary AWS API Documentation
+    #
+    class HostedConfigurationVersionSummary < Struct.new(
+      :application_id,
+      :configuration_profile_id,
+      :version_number,
+      :description,
+      :content_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The elements from this collection.
+    #   @return [Array<Types::HostedConfigurationVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/HostedConfigurationVersions AWS API Documentation
+    #
+    class HostedConfigurationVersions < Struct.new(
+      :items,
+      :next_token)
+      include Aws::Structure
+    end
+
     # There was an internal failure in the AppConfig service.
     #
     # @!attribute [rw] message
@@ -1222,6 +1437,45 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListHostedConfigurationVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "Id", # required
+    #         configuration_profile_id: "Id", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   The application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_profile_id
+    #   The configuration profile ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListHostedConfigurationVersionsRequest AWS API Documentation
+    #
+    class ListHostedConfigurationVersionsRequest < Struct.new(
+      :application_id,
+      :configuration_profile_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -1266,6 +1520,30 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # The configuration size is too large.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] measure
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   @return [Float]
+    #
+    # @!attribute [rw] size
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/PayloadTooLargeException AWS API Documentation
+    #
+    class PayloadTooLargeException < Struct.new(
+      :message,
+      :measure,
+      :limit,
+      :size)
+      include Aws::Structure
+    end
+
     # The requested resource could not be found.
     #
     # @!attribute [rw] message
@@ -1292,6 +1570,20 @@ module Aws::AppConfig
     #
     class ResourceTags < Struct.new(
       :tags)
+      include Aws::Structure
+    end
+
+    # The number of hosted configuration versions exceeds the limit for the
+    # AppConfig configuration store. Delete one or more versions and try
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2020-06-15)
+------------------
+
+* Feature - This release adds a hosted configuration source provider. Customers can now store their application configurations directly in AppConfig, without the need for an external configuration source.
+
 1.7.1 (2020-06-11)
 ------------------
 

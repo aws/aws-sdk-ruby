@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Change sensitive param filtering to be a hash of services instead of a big list of operations across all services. Provide an option `:filter_sensitive` (defaulting to true) for `Aws::Log::Formatter` to disable sensitive param filtering (#2312, #2105, #2082).
 
+3.100.0 (2020-06-15)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 3.99.2 (2020-06-12)
 ------------------
 

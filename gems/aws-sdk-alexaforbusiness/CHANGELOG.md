@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-06-15)
+------------------
+
+* Feature - Adding support for optional tags in CreateBusinessReportSchedule, CreateProfile and CreateSkillGroup APIs
+
 1.37.1 (2020-06-11)
 ------------------
 

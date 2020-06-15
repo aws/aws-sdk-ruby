@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -572,6 +574,9 @@ module Aws::AlexaForBusiness
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the business report schedule.
+    #
     # @return [Types::CreateBusinessReportScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBusinessReportScheduleResponse#schedule_arn #schedule_arn} => String
@@ -584,12 +589,18 @@ module Aws::AlexaForBusiness
     #     s3_key_prefix: "S3KeyPrefix",
     #     format: "CSV", # required, accepts CSV, CSV_ZIP
     #     content_range: { # required
-    #       interval: "ONE_DAY", # accepts ONE_DAY, ONE_WEEK, THIRTY_DAYS
+    #       interval: "ONE_DAY", # required, accepts ONE_DAY, ONE_WEEK, THIRTY_DAYS
     #     },
     #     recurrence: {
     #       start_date: "Date",
     #     },
     #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -896,6 +907,9 @@ module Aws::AlexaForBusiness
     # @option params [Types::CreateMeetingRoomConfiguration] :meeting_room_configuration
     #   The meeting room settings of a room profile.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the profile.
+    #
     # @return [Types::CreateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProfileResponse#profile_arn #profile_arn} => String
@@ -930,6 +944,12 @@ module Aws::AlexaForBusiness
     #         enabled: false, # required
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -954,7 +974,7 @@ module Aws::AlexaForBusiness
     #   The description for the room.
     #
     # @option params [String] :profile_arn
-    #   The profile ARN for the room.
+    #   The profile ARN for the room. This is required.
     #
     # @option params [String] :provider_calendar_id
     #   The calendar ARN for the room.
@@ -1017,6 +1037,9 @@ module Aws::AlexaForBusiness
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the skill group.
+    #
     # @return [Types::CreateSkillGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSkillGroupResponse#skill_group_arn #skill_group_arn} => String
@@ -1027,6 +1050,12 @@ module Aws::AlexaForBusiness
     #     skill_group_name: "SkillGroupName", # required
     #     description: "SkillGroupDescription",
     #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1734,7 +1763,7 @@ module Aws::AlexaForBusiness
     #   resp.device.device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE", "DEREGISTERED", "FAILED"
     #   resp.device.device_status_info.device_status_details #=> Array
     #   resp.device.device_status_info.device_status_details[0].feature #=> String, one of "BLUETOOTH", "VOLUME", "NOTIFICATIONS", "LISTS", "SKILLS", "NETWORK_PROFILE", "SETTINGS", "ALL"
-    #   resp.device.device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE", "CREDENTIALS_ACCESS_FAILURE", "TLS_VERSION_MISMATCH", "ASSOCIATION_REJECTION", "AUTHENTICATION_FAILURE", "DHCP_FAILURE", "INTERNET_UNAVAILABLE", "DNS_FAILURE", "UNKNOWN_FAILURE", "CERTIFICATE_ISSUING_LIMIT_EXCEEDED", "INVALID_CERTIFICATE_AUTHORITY", "NETWORK_PROFILE_NOT_FOUND", "INVALID_PASSWORD_STATE", "PASSWORD_NOT_FOUND"
+    #   resp.device.device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE", "CREDENTIALS_ACCESS_FAILURE", "TLS_VERSION_MISMATCH", "ASSOCIATION_REJECTION", "AUTHENTICATION_FAILURE", "DHCP_FAILURE", "INTERNET_UNAVAILABLE", "DNS_FAILURE", "UNKNOWN_FAILURE", "CERTIFICATE_ISSUING_LIMIT_EXCEEDED", "INVALID_CERTIFICATE_AUTHORITY", "NETWORK_PROFILE_NOT_FOUND", "INVALID_PASSWORD_STATE", "PASSWORD_NOT_FOUND", "PASSWORD_MANAGER_ACCESS_DENIED", "CERTIFICATE_AUTHORITY_ACCESS_DENIED"
     #   resp.device.device_status_info.connection_status #=> String, one of "ONLINE", "OFFLINE"
     #   resp.device.device_status_info.connection_status_updated_time #=> Time
     #   resp.device.network_profile_info.network_profile_arn #=> String
@@ -3014,7 +3043,7 @@ module Aws::AlexaForBusiness
     #   resp.devices[0].room_name #=> String
     #   resp.devices[0].device_status_info.device_status_details #=> Array
     #   resp.devices[0].device_status_info.device_status_details[0].feature #=> String, one of "BLUETOOTH", "VOLUME", "NOTIFICATIONS", "LISTS", "SKILLS", "NETWORK_PROFILE", "SETTINGS", "ALL"
-    #   resp.devices[0].device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE", "CREDENTIALS_ACCESS_FAILURE", "TLS_VERSION_MISMATCH", "ASSOCIATION_REJECTION", "AUTHENTICATION_FAILURE", "DHCP_FAILURE", "INTERNET_UNAVAILABLE", "DNS_FAILURE", "UNKNOWN_FAILURE", "CERTIFICATE_ISSUING_LIMIT_EXCEEDED", "INVALID_CERTIFICATE_AUTHORITY", "NETWORK_PROFILE_NOT_FOUND", "INVALID_PASSWORD_STATE", "PASSWORD_NOT_FOUND"
+    #   resp.devices[0].device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE", "CREDENTIALS_ACCESS_FAILURE", "TLS_VERSION_MISMATCH", "ASSOCIATION_REJECTION", "AUTHENTICATION_FAILURE", "DHCP_FAILURE", "INTERNET_UNAVAILABLE", "DNS_FAILURE", "UNKNOWN_FAILURE", "CERTIFICATE_ISSUING_LIMIT_EXCEEDED", "INVALID_CERTIFICATE_AUTHORITY", "NETWORK_PROFILE_NOT_FOUND", "INVALID_PASSWORD_STATE", "PASSWORD_NOT_FOUND", "PASSWORD_MANAGER_ACCESS_DENIED", "CERTIFICATE_AUTHORITY_ACCESS_DENIED"
     #   resp.devices[0].device_status_info.connection_status #=> String, one of "ONLINE", "OFFLINE"
     #   resp.devices[0].device_status_info.connection_status_updated_time #=> Time
     #   resp.devices[0].created_time #=> Time
@@ -4111,7 +4140,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.37.1'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-06-15)
+------------------
+
+* Feature - feature: Chime: This release introduces the ability to create an AWS Chime SDK meeting with attendees.
+
 1.29.1 (2020-06-11)
 ------------------
 
