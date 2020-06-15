@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.528 (2020-06-15)
+------------------
+
 * Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
 
 * Feature - Aws::AppConfig - Updated the API, and documentation for Amazon AppConfig.
