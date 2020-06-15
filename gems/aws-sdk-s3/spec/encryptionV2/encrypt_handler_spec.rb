@@ -10,14 +10,15 @@ module Aws
         let(:next_handler) { double(call: nil) }
         let(:handler) { EncryptHandler.new(next_handler) }
 
-        let(:cipher) { double('cipher', update: '', final: '') }
+        let(:cipher) { double('cipher', update: '', final: '', auth_tag: '') }
         let(:envelope) { {'x-amz-key-v2' => 'env-key'} }
         let(:cipher_provider) { double('cipher_provider', encryption_cipher: [envelope, cipher]) }
         let(:context_enc) { { cipher_provider: cipher_provider, envelope_location: :metadata } }
         let(:params) { {bucket: 'bucket', key: 'key'} }
         let(:client) { double('client') }
         let(:http_response) { double(on_headers: nil) }
-        let(:context) { double(params: params, client: client, :[] => context_enc, http_response: http_response ) }
+        let(:config) { Struct.new(:user_agent_suffix).new }
+        let(:context) { double(params: params, client: client, :[] => context_enc, http_response: http_response, config: config ) }
         describe '#call' do
 
           context 'when envelope_location is :metadata' do
@@ -47,6 +48,11 @@ module Aws
           it 'adds unencrypted-content-length to metadata' do
             handler.call(context)
             expect(params[:metadata]).to include('x-amz-key-v2')
+          end
+
+          it 'adds a user_agent_suffix' do
+            handler.call(context)
+            expect(config.user_agent_suffix).to include('CSE_V2')
           end
 
           it 'sets the body to the IOEncrypter and calls close on_headers' do

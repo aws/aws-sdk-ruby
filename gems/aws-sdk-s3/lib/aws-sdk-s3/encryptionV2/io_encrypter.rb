@@ -5,7 +5,7 @@ module Aws
   module S3
     module EncryptionV2
 
-      # Provides an IO wrapper encrpyting a stream of data.
+      # Provides an IO wrapper encrypting a stream of data.
       # @api private
       class IOEncrypter
 
@@ -22,7 +22,7 @@ module Aws
         # @return [Integer]
         attr_reader :size
 
-        def read(bytes =  nil, output_buffer = nil)
+        def read(bytes = nil, output_buffer = nil)
           if @encrypted.is_a?(Tempfile) && @encrypted.closed?
             @encrypted.open
             @encrypted.binmode
@@ -43,7 +43,7 @@ module Aws
 
         def encrypt_to_stringio(cipher, plain_text)
           if plain_text.empty?
-            StringIO.new(cipher.final)
+            StringIO.new(cipher.final + cipher.auth_tag)
           else
             StringIO.new(cipher.update(plain_text) + cipher.final + cipher.auth_tag)
           end

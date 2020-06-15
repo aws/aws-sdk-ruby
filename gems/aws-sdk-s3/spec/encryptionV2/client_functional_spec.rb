@@ -113,29 +113,29 @@ module Aws
             expect(decrypted).to eq(plaintext)
           end
 
-          # it 'decrypts the object with response target under retry' do
-          #   client = Aws::S3::EncryptionV2::Client.new(
-          #     encryption_key: key, client: s3_client)
-          #   data = {}
-          #   data = stub_put(s3_client)
-          #   s3_client.handlers.add(Aws::Plugins::RetryErrors::LegacyHandler, step: :sign, priority: 99)
-          #
-          #   client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
-          #
-          #   resp_headers = { 'content-length' => data[:enc_body].length }
-          #   auth_tag = data[:enc_body].unpack('C*')[-16, 16].pack('C*')
-          #
-          #   # TODO: getting DecryptionError: unable to locate encryption envelope
-          #   s3_client.stub_responses(
-          #     :get_object,
-          #     Seahorse::Client::NetworkingError.new(RuntimeError.new),
-          #     {status_code: 200, body: data[:enc_body], headers: resp_headers},
-          #     {body: auth_tag}
-          #   )
-          #   decrypted = StringIO.new
-          #   client.get_object(bucket: test_bucket, key: test_object, response_target: decrypted)
-          #   expect(decrypted).to eq(plaintext)
-          # end
+          it 'decrypts the object with response target under retry' do
+            client = Aws::S3::EncryptionV2::Client.new(
+              encryption_key: key, client: s3_client)
+            data = {}
+            data = stub_put(s3_client)
+            s3_client.handlers.add(Aws::Plugins::RetryErrors::LegacyHandler, step: :sign, priority: 99)
+
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+
+            resp_headers = data[:metadata].map { |k, v| ["x-amz-meta-#{k.to_s}", v] }.to_h
+            resp_headers['content-length'] = data[:enc_body].length
+            auth_tag = data[:enc_body].unpack('C*')[-16, 16].pack('C*')
+
+            s3_client.stub_responses(
+              :get_object,
+              Seahorse::Client::NetworkingError.new(RuntimeError.new),
+              {status_code: 200, body: data[:enc_body], headers: resp_headers},
+              {body: auth_tag}
+            )
+            decrypted = StringIO.new
+            client.get_object(bucket: test_bucket, key: test_object, response_target: decrypted)
+            expect(decrypted.read).to eq(plaintext)
+          end
 
           # Error cases
           it 'raises a DecryptionError when the envelope is missing' do
