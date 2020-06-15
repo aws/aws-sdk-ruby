@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2020-06-15)
+------------------
+
+* Feature - Added support for job executions rollout configuration, job abort configuration, and job executions timeout configuration for AWS IoT Over-the-Air (OTA) Update Feature.
+
 1.51.1 (2020-06-11)
 ------------------
 

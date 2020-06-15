@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-06-15)
+------------------
+
+* Feature - Updated all AuthParameters to be sensitive.
+
 1.37.1 (2020-06-11)
 ------------------
 

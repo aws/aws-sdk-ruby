@@ -28,7 +28,9 @@ module Aws::AppConfig
   # * {BadRequestException}
   # * {ConflictException}
   # * {InternalServerException}
+  # * {PayloadTooLargeException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -81,6 +83,36 @@ module Aws::AppConfig
       end
     end
 
+    class PayloadTooLargeException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppConfig::Types::PayloadTooLargeException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def measure
+        @data[:measure]
+      end
+
+      # @return [String]
+      def limit
+        @data[:limit]
+      end
+
+      # @return [String]
+      def size
+        @data[:size]
+      end
+    end
+
     class ResourceNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -98,6 +130,21 @@ module Aws::AppConfig
       # @return [String]
       def resource_name
         @data[:resource_name]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppConfig::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

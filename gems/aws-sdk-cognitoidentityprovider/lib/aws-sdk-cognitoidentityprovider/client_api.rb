@@ -91,7 +91,6 @@ module Aws::CognitoIdentityProvider
     AuthEventsType = Shapes::ListShape.new(name: 'AuthEventsType')
     AuthFlowType = Shapes::StringShape.new(name: 'AuthFlowType')
     AuthParametersType = Shapes::MapShape.new(name: 'AuthParametersType')
-    AuthParametersValueType = Shapes::StringShape.new(name: 'AuthParametersValueType')
     AuthenticationResultType = Shapes::StructureShape.new(name: 'AuthenticationResultType')
     BlockedIPRangeListType = Shapes::ListShape.new(name: 'BlockedIPRangeListType')
     BooleanType = Shapes::BooleanShape.new(name: 'BooleanType')
@@ -749,7 +748,7 @@ module Aws::CognitoIdentityProvider
     AuthEventsType.member = Shapes::ShapeRef.new(shape: AuthEventType)
 
     AuthParametersType.key = Shapes::ShapeRef.new(shape: StringType)
-    AuthParametersType.value = Shapes::ShapeRef.new(shape: AuthParametersValueType)
+    AuthParametersType.value = Shapes::ShapeRef.new(shape: StringType)
 
     AuthenticationResultType.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
     AuthenticationResultType.add_member(:expires_in, Shapes::ShapeRef.new(shape: IntegerType, location_name: "ExpiresIn"))
@@ -2160,6 +2159,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AliasExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 

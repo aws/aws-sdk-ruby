@@ -338,7 +338,7 @@ module Aws::AlexaForBusiness
     #   data as a hash:
     #
     #       {
-    #         interval: "ONE_DAY", # accepts ONE_DAY, ONE_WEEK, THIRTY_DAYS
+    #         interval: "ONE_DAY", # required, accepts ONE_DAY, ONE_WEEK, THIRTY_DAYS
     #       }
     #
     # @!attribute [rw] interval
@@ -732,12 +732,18 @@ module Aws::AlexaForBusiness
     #         s3_key_prefix: "S3KeyPrefix",
     #         format: "CSV", # required, accepts CSV, CSV_ZIP
     #         content_range: { # required
-    #           interval: "ONE_DAY", # accepts ONE_DAY, ONE_WEEK, THIRTY_DAYS
+    #           interval: "ONE_DAY", # required, accepts ONE_DAY, ONE_WEEK, THIRTY_DAYS
     #         },
     #         recurrence: {
     #           start_date: "Date",
     #         },
     #         client_request_token: "ClientRequestToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] schedule_name
@@ -775,6 +781,10 @@ module Aws::AlexaForBusiness
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags for the business report schedule.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateBusinessReportScheduleRequest AWS API Documentation
     #
     class CreateBusinessReportScheduleRequest < Struct.new(
@@ -784,7 +794,8 @@ module Aws::AlexaForBusiness
       :format,
       :content_range,
       :recurrence,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -1246,6 +1257,12 @@ module Aws::AlexaForBusiness
     #             enabled: false, # required
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] profile_name
@@ -1301,6 +1318,10 @@ module Aws::AlexaForBusiness
     #   The meeting room settings of a room profile.
     #   @return [Types::CreateMeetingRoomConfiguration]
     #
+    # @!attribute [rw] tags
+    #   The tags for the profile.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateProfileRequest AWS API Documentation
     #
     class CreateProfileRequest < Struct.new(
@@ -1315,7 +1336,8 @@ module Aws::AlexaForBusiness
       :setup_mode_disabled,
       :max_volume_limit,
       :pstn_enabled,
-      :meeting_room_configuration)
+      :meeting_room_configuration,
+      :tags)
       include Aws::Structure
     end
 
@@ -1386,7 +1408,7 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] profile_arn
-    #   The profile ARN for the room.
+    #   The profile ARN for the room. This is required.
     #   @return [String]
     #
     # @!attribute [rw] provider_calendar_id
@@ -1435,6 +1457,12 @@ module Aws::AlexaForBusiness
     #         skill_group_name: "SkillGroupName", # required
     #         description: "SkillGroupDescription",
     #         client_request_token: "ClientRequestToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] skill_group_name
@@ -1453,12 +1481,17 @@ module Aws::AlexaForBusiness
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags for the skill group.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateSkillGroupRequest AWS API Documentation
     #
     class CreateSkillGroupRequest < Struct.new(
       :skill_group_name,
       :description,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -5084,6 +5117,8 @@ module Aws::AlexaForBusiness
     #   @return [Array<String>]
     #
     # @!attribute [rw] reviews
+    #   *This member has been deprecated.*
+    #
     #   The list of reviews for the skill, including Key and Value pair.
     #   @return [Hash<String,String>]
     #

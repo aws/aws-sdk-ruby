@@ -150,6 +150,7 @@ module Aws::AlexaForBusiness
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
     DeviceNetworkProfileInfo = Shapes::StructureShape.new(name: 'DeviceNetworkProfileInfo')
     DeviceNotRegisteredException = Shapes::StructureShape.new(name: 'DeviceNotRegisteredException')
+    DeviceRoomName = Shapes::StringShape.new(name: 'DeviceRoomName')
     DeviceSerialNumber = Shapes::StringShape.new(name: 'DeviceSerialNumber')
     DeviceSerialNumberForAVS = Shapes::StringShape.new(name: 'DeviceSerialNumberForAVS')
     DeviceStatus = Shapes::StringShape.new(name: 'DeviceStatus')
@@ -521,7 +522,7 @@ module Aws::AlexaForBusiness
     BusinessReport.add_member(:download_url, Shapes::ShapeRef.new(shape: BusinessReportDownloadUrl, location_name: "DownloadUrl"))
     BusinessReport.struct_class = Types::BusinessReport
 
-    BusinessReportContentRange.add_member(:interval, Shapes::ShapeRef.new(shape: BusinessReportInterval, location_name: "Interval"))
+    BusinessReportContentRange.add_member(:interval, Shapes::ShapeRef.new(shape: BusinessReportInterval, required: true, location_name: "Interval"))
     BusinessReportContentRange.struct_class = Types::BusinessReportContentRange
 
     BusinessReportRecurrence.add_member(:start_date, Shapes::ShapeRef.new(shape: Date, location_name: "StartDate"))
@@ -605,6 +606,7 @@ module Aws::AlexaForBusiness
     CreateBusinessReportScheduleRequest.add_member(:content_range, Shapes::ShapeRef.new(shape: BusinessReportContentRange, required: true, location_name: "ContentRange"))
     CreateBusinessReportScheduleRequest.add_member(:recurrence, Shapes::ShapeRef.new(shape: BusinessReportRecurrence, location_name: "Recurrence"))
     CreateBusinessReportScheduleRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateBusinessReportScheduleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateBusinessReportScheduleRequest.struct_class = Types::CreateBusinessReportScheduleRequest
 
     CreateBusinessReportScheduleResponse.add_member(:schedule_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ScheduleArn"))
@@ -683,6 +685,7 @@ module Aws::AlexaForBusiness
     CreateProfileRequest.add_member(:max_volume_limit, Shapes::ShapeRef.new(shape: MaxVolumeLimit, location_name: "MaxVolumeLimit"))
     CreateProfileRequest.add_member(:pstn_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PSTNEnabled"))
     CreateProfileRequest.add_member(:meeting_room_configuration, Shapes::ShapeRef.new(shape: CreateMeetingRoomConfiguration, location_name: "MeetingRoomConfiguration"))
+    CreateProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateProfileRequest.struct_class = Types::CreateProfileRequest
 
     CreateProfileResponse.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
@@ -706,6 +709,7 @@ module Aws::AlexaForBusiness
     CreateSkillGroupRequest.add_member(:skill_group_name, Shapes::ShapeRef.new(shape: SkillGroupName, required: true, location_name: "SkillGroupName"))
     CreateSkillGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: SkillGroupDescription, location_name: "Description"))
     CreateSkillGroupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateSkillGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateSkillGroupRequest.struct_class = Types::CreateSkillGroupRequest
 
     CreateSkillGroupResponse.add_member(:skill_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SkillGroupArn"))
@@ -825,7 +829,7 @@ module Aws::AlexaForBusiness
     DeviceData.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "NetworkProfileArn"))
     DeviceData.add_member(:network_profile_name, Shapes::ShapeRef.new(shape: NetworkProfileName, location_name: "NetworkProfileName"))
     DeviceData.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
-    DeviceData.add_member(:room_name, Shapes::ShapeRef.new(shape: RoomName, location_name: "RoomName"))
+    DeviceData.add_member(:room_name, Shapes::ShapeRef.new(shape: DeviceRoomName, location_name: "RoomName"))
     DeviceData.add_member(:device_status_info, Shapes::ShapeRef.new(shape: DeviceStatusInfo, location_name: "DeviceStatusInfo"))
     DeviceData.add_member(:created_time, Shapes::ShapeRef.new(shape: DeviceDataCreatedTime, location_name: "CreatedTime"))
     DeviceData.struct_class = Types::DeviceData

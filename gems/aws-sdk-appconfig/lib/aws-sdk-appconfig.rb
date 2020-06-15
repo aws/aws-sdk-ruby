@@ -45,6 +45,6 @@ require_relative 'aws-sdk-appconfig/customizations'
 # @service
 module Aws::AppConfig
 
-  GEM_VERSION = '1.7.1'
+  GEM_VERSION = '1.8.0'
 
 end

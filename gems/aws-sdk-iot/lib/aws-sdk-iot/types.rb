@@ -8,7 +8,7 @@
 module Aws::IoT
   module Types
 
-    # Details of abort criteria to abort the job.
+    # The criteria that determine when and how a job abort takes place.
     #
     # @note When making an API call, you may pass AbortConfig
     #   data as a hash:
@@ -25,7 +25,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] criteria_list
-    #   The list of abort criteria to define rules to abort the job.
+    #   The list of criteria that determine when and how to abort the job.
     #   @return [Array<Types::AbortCriteria>]
     #
     class AbortConfig < Struct.new(
@@ -33,7 +33,7 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Details of abort criteria to define rules to abort the job.
+    # The criteria that determine when and how a job abort takes place.
     #
     # @note When making an API call, you may pass AbortCriteria
     #   data as a hash:
@@ -46,24 +46,24 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] failure_type
-    #   The type of job execution failure to define a rule to initiate a job
-    #   abort.
+    #   The type of job execution failures that can initiate a job abort.
     #   @return [String]
     #
     # @!attribute [rw] action
-    #   The type of abort action to initiate a job abort.
+    #   The type of job action to take to initiate the job abort.
     #   @return [String]
     #
     # @!attribute [rw] threshold_percentage
-    #   The threshold as a percentage of the total number of executed things
-    #   that will initiate a job abort.
+    #   The minimum percentage of job execution failures that must occur to
+    #   initiate the job abort.
     #
     #   AWS IoT supports up to two digits after the decimal (for example,
     #   10.9 and 10.99, but not 10.999).
     #   @return [Float]
     #
     # @!attribute [rw] min_number_of_executed_things
-    #   Minimum number of executed things before evaluating an abort rule.
+    #   The minimum number of things which must receive job execution
+    #   notifications before the job can be aborted.
     #   @return [Integer]
     #
     class AbortCriteria < Struct.new(
@@ -709,7 +709,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html
     #   @return [String]
     #
     class AttachPolicyRequest < Struct.new(
@@ -1280,6 +1280,72 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The criteria that determine when and how a job abort takes place.
+    #
+    # @note When making an API call, you may pass AwsJobAbortConfig
+    #   data as a hash:
+    #
+    #       {
+    #         abort_criteria_list: [ # required
+    #           {
+    #             failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #             action: "CANCEL", # required, accepts CANCEL
+    #             threshold_percentage: 1.0, # required
+    #             min_number_of_executed_things: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] abort_criteria_list
+    #   The list of criteria that determine when and how to abort the job.
+    #   @return [Array<Types::AwsJobAbortCriteria>]
+    #
+    class AwsJobAbortConfig < Struct.new(
+      :abort_criteria_list)
+      include Aws::Structure
+    end
+
+    # The criteria that determine when and how a job abort takes place.
+    #
+    # @note When making an API call, you may pass AwsJobAbortCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #         action: "CANCEL", # required, accepts CANCEL
+    #         threshold_percentage: 1.0, # required
+    #         min_number_of_executed_things: 1, # required
+    #       }
+    #
+    # @!attribute [rw] failure_type
+    #   The type of job execution failures that can initiate a job abort.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The type of job action to take to initiate the job abort.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold_percentage
+    #   The minimum percentage of job execution failures that must occur to
+    #   initiate the job abort.
+    #
+    #   AWS IoT supports up to two digits after the decimal (for example,
+    #   10.9 and 10.99, but not 10.999).
+    #   @return [Float]
+    #
+    # @!attribute [rw] min_number_of_executed_things
+    #   The minimum number of things which must receive job execution
+    #   notifications before the job can be aborted.
+    #   @return [Integer]
+    #
+    class AwsJobAbortCriteria < Struct.new(
+      :failure_type,
+      :action,
+      :threshold_percentage,
+      :min_number_of_executed_things)
+      include Aws::Structure
+    end
+
     # Configuration for the rollout of OTA updates.
     #
     # @note When making an API call, you may pass AwsJobExecutionsRolloutConfig
@@ -1287,14 +1353,68 @@ module Aws::IoT
     #
     #       {
     #         maximum_per_minute: 1,
+    #         exponential_rate: {
+    #           base_rate_per_minute: 1, # required
+    #           increment_factor: 1.0, # required
+    #           rate_increase_criteria: { # required
+    #             number_of_notified_things: 1,
+    #             number_of_succeeded_things: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] maximum_per_minute
     #   The maximum number of OTA update job executions started per minute.
     #   @return [Integer]
     #
+    # @!attribute [rw] exponential_rate
+    #   The rate of increase for a job rollout. This parameter allows you to
+    #   define an exponential rate increase for a job rollout.
+    #   @return [Types::AwsJobExponentialRolloutRate]
+    #
     class AwsJobExecutionsRolloutConfig < Struct.new(
-      :maximum_per_minute)
+      :maximum_per_minute,
+      :exponential_rate)
+      include Aws::Structure
+    end
+
+    # The rate of increase for a job rollout. This parameter allows you to
+    # define an exponential rate increase for a job rollout.
+    #
+    # @note When making an API call, you may pass AwsJobExponentialRolloutRate
+    #   data as a hash:
+    #
+    #       {
+    #         base_rate_per_minute: 1, # required
+    #         increment_factor: 1.0, # required
+    #         rate_increase_criteria: { # required
+    #           number_of_notified_things: 1,
+    #           number_of_succeeded_things: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] base_rate_per_minute
+    #   The minimum number of things that will be notified of a pending job,
+    #   per minute, at the start of the job rollout. This is the initial
+    #   rate of the rollout.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] increment_factor
+    #   The rate of increase for a job rollout. The number of things
+    #   notified is multiplied by this factor.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rate_increase_criteria
+    #   The criteria to initiate the increase in rate of rollout for a job.
+    #
+    #   AWS IoT supports up to one digit after the decimal (for example,
+    #   1.5, but not 1.55).
+    #   @return [Types::AwsJobRateIncreaseCriteria]
+    #
+    class AwsJobExponentialRolloutRate < Struct.new(
+      :base_rate_per_minute,
+      :increment_factor,
+      :rate_increase_criteria)
       include Aws::Structure
     end
 
@@ -1316,6 +1436,60 @@ module Aws::IoT
     #
     class AwsJobPresignedUrlConfig < Struct.new(
       :expires_in_sec)
+      include Aws::Structure
+    end
+
+    # The criteria to initiate the increase in rate of rollout for a job.
+    #
+    # @note When making an API call, you may pass AwsJobRateIncreaseCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         number_of_notified_things: 1,
+    #         number_of_succeeded_things: 1,
+    #       }
+    #
+    # @!attribute [rw] number_of_notified_things
+    #   When this number of things have been notified, it will initiate an
+    #   increase in the rollout rate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_succeeded_things
+    #   When this number of things have succeeded in their job execution, it
+    #   will initiate an increase in the rollout rate.
+    #   @return [Integer]
+    #
+    class AwsJobRateIncreaseCriteria < Struct.new(
+      :number_of_notified_things,
+      :number_of_succeeded_things)
+      include Aws::Structure
+    end
+
+    # Specifies the amount of time each device has to finish its execution
+    # of the job. A timer is started when the job execution status is set to
+    # `IN_PROGRESS`. If the job execution status is not set to another
+    # terminal state before the timer expires, it will be automatically set
+    # to `TIMED_OUT`.
+    #
+    # @note When making an API call, you may pass AwsJobTimeoutConfig
+    #   data as a hash:
+    #
+    #       {
+    #         in_progress_timeout_in_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] in_progress_timeout_in_minutes
+    #   Specifies the amount of time, in minutes, this device has to finish
+    #   execution of this job. The timeout interval can be anywhere between
+    #   1 minute and 7 days (1 to 10080 minutes). The in progress timer
+    #   can't be updated and will apply to all job executions for the job.
+    #   Whenever a job execution remains in the IN\_PROGRESS status for
+    #   longer than this interval, the job execution will fail and switch to
+    #   the terminal `TIMED_OUT` status.
+    #   @return [Integer]
+    #
+    class AwsJobTimeoutConfig < Struct.new(
+      :in_progress_timeout_in_minutes)
       include Aws::Structure
     end
 
@@ -2912,9 +3086,30 @@ module Aws::IoT
     #         target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #         aws_job_executions_rollout_config: {
     #           maximum_per_minute: 1,
+    #           exponential_rate: {
+    #             base_rate_per_minute: 1, # required
+    #             increment_factor: 1.0, # required
+    #             rate_increase_criteria: { # required
+    #               number_of_notified_things: 1,
+    #               number_of_succeeded_things: 1,
+    #             },
+    #           },
     #         },
     #         aws_job_presigned_url_config: {
     #           expires_in_sec: 1,
+    #         },
+    #         aws_job_abort_config: {
+    #           abort_criteria_list: [ # required
+    #             {
+    #               failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #               action: "CANCEL", # required, accepts CANCEL
+    #               threshold_percentage: 1.0, # required
+    #               min_number_of_executed_things: 1, # required
+    #             },
+    #           ],
+    #         },
+    #         aws_job_timeout_config: {
+    #           in_progress_timeout_in_minutes: 1,
     #         },
     #         files: [ # required
     #           {
@@ -2985,7 +3180,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targeted devices to receive OTA updates.
+    #   The devices targeted to receive OTA updates.
     #   @return [Array<String>]
     #
     # @!attribute [rw] protocols
@@ -3012,12 +3207,25 @@ module Aws::IoT
     #   Configuration information for pre-signed URLs.
     #   @return [Types::AwsJobPresignedUrlConfig]
     #
+    # @!attribute [rw] aws_job_abort_config
+    #   The criteria that determine when and how a job abort takes place.
+    #   @return [Types::AwsJobAbortConfig]
+    #
+    # @!attribute [rw] aws_job_timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. A timer is started when the job execution status is set
+    #   to `IN_PROGRESS`. If the job execution status is not set to another
+    #   terminal state before the timer expires, it will be automatically
+    #   set to `TIMED_OUT`.
+    #   @return [Types::AwsJobTimeoutConfig]
+    #
     # @!attribute [rw] files
     #   The files to be streamed by the OTA update.
     #   @return [Array<Types::OTAUpdateFile>]
     #
     # @!attribute [rw] role_arn
-    #   The IAM role that allows access to the AWS IoT Jobs service.
+    #   The IAM role that grants AWS IoT access to the Amazon S3, AWS IoT
+    #   jobs and AWS Code Signing resources to create an OTA update job.
     #   @return [String]
     #
     # @!attribute [rw] additional_parameters
@@ -3037,6 +3245,8 @@ module Aws::IoT
       :target_selection,
       :aws_job_executions_rollout_config,
       :aws_job_presigned_url_config,
+      :aws_job_abort_config,
+      :aws_job_timeout_config,
       :files,
       :role_arn,
       :additional_parameters,
@@ -4623,7 +4833,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] ota_update_id
-    #   The OTA update ID to delete.
+    #   The ID of the OTA update to delete.
     #   @return [String]
     #
     # @!attribute [rw] delete_stream
@@ -4633,7 +4843,7 @@ module Aws::IoT
     #
     # @!attribute [rw] force_delete_aws_job
     #   Specifies if the AWS Job associated with the OTA update should be
-    #   deleted with the OTA update is deleted.
+    #   deleted when the OTA update is deleted.
     #   @return [Boolean]
     #
     class DeleteOTAUpdateRequest < Struct.new(

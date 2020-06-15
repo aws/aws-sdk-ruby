@@ -1142,7 +1142,7 @@ module Aws::CognitoIdentityProvider
     #     client_id: "ClientIdType", # required
     #     auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH, ADMIN_USER_PASSWORD_AUTH
     #     auth_parameters: {
-    #       "StringType" => "AuthParametersValueType",
+    #       "StringType" => "StringType",
     #     },
     #     client_metadata: {
     #       "StringType" => "StringType",
@@ -4526,7 +4526,7 @@ module Aws::CognitoIdentityProvider
     #   resp = client.initiate_auth({
     #     auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH, ADMIN_USER_PASSWORD_AUTH
     #     auth_parameters: {
-    #       "StringType" => "AuthParametersValueType",
+    #       "StringType" => "StringType",
     #     },
     #     client_metadata: {
     #       "StringType" => "StringType",
@@ -6879,7 +6879,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.37.1'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

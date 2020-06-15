@@ -17,6 +17,7 @@ module Aws::AppConfig
     Arn = Shapes::StringShape.new(name: 'Arn')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Blob = Shapes::BlobShape.new(name: 'Blob')
+    BytesMeasure = Shapes::StringShape.new(name: 'BytesMeasure')
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConfigurationProfile = Shapes::StructureShape.new(name: 'ConfigurationProfile')
     ConfigurationProfileSummary = Shapes::StructureShape.new(name: 'ConfigurationProfileSummary')
@@ -27,10 +28,12 @@ module Aws::AppConfig
     CreateConfigurationProfileRequest = Shapes::StructureShape.new(name: 'CreateConfigurationProfileRequest')
     CreateDeploymentStrategyRequest = Shapes::StructureShape.new(name: 'CreateDeploymentStrategyRequest')
     CreateEnvironmentRequest = Shapes::StructureShape.new(name: 'CreateEnvironmentRequest')
+    CreateHostedConfigurationVersionRequest = Shapes::StructureShape.new(name: 'CreateHostedConfigurationVersionRequest')
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
     DeleteConfigurationProfileRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationProfileRequest')
     DeleteDeploymentStrategyRequest = Shapes::StructureShape.new(name: 'DeleteDeploymentStrategyRequest')
     DeleteEnvironmentRequest = Shapes::StructureShape.new(name: 'DeleteEnvironmentRequest')
+    DeleteHostedConfigurationVersionRequest = Shapes::StructureShape.new(name: 'DeleteHostedConfigurationVersionRequest')
     Deployment = Shapes::StructureShape.new(name: 'Deployment')
     DeploymentEvent = Shapes::StructureShape.new(name: 'DeploymentEvent')
     DeploymentEventType = Shapes::StringShape.new(name: 'DeploymentEventType')
@@ -48,14 +51,20 @@ module Aws::AppConfig
     EnvironmentList = Shapes::ListShape.new(name: 'EnvironmentList')
     EnvironmentState = Shapes::StringShape.new(name: 'EnvironmentState')
     Environments = Shapes::StructureShape.new(name: 'Environments')
+    Float = Shapes::FloatShape.new(name: 'Float')
     GetApplicationRequest = Shapes::StructureShape.new(name: 'GetApplicationRequest')
     GetConfigurationProfileRequest = Shapes::StructureShape.new(name: 'GetConfigurationProfileRequest')
     GetConfigurationRequest = Shapes::StructureShape.new(name: 'GetConfigurationRequest')
     GetDeploymentRequest = Shapes::StructureShape.new(name: 'GetDeploymentRequest')
     GetDeploymentStrategyRequest = Shapes::StructureShape.new(name: 'GetDeploymentStrategyRequest')
     GetEnvironmentRequest = Shapes::StructureShape.new(name: 'GetEnvironmentRequest')
+    GetHostedConfigurationVersionRequest = Shapes::StructureShape.new(name: 'GetHostedConfigurationVersionRequest')
     GrowthFactor = Shapes::FloatShape.new(name: 'GrowthFactor')
     GrowthType = Shapes::StringShape.new(name: 'GrowthType')
+    HostedConfigurationVersion = Shapes::StructureShape.new(name: 'HostedConfigurationVersion')
+    HostedConfigurationVersionSummary = Shapes::StructureShape.new(name: 'HostedConfigurationVersionSummary')
+    HostedConfigurationVersionSummaryList = Shapes::ListShape.new(name: 'HostedConfigurationVersionSummaryList')
+    HostedConfigurationVersions = Shapes::StructureShape.new(name: 'HostedConfigurationVersions')
     Id = Shapes::StringShape.new(name: 'Id')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -65,6 +74,7 @@ module Aws::AppConfig
     ListDeploymentStrategiesRequest = Shapes::StructureShape.new(name: 'ListDeploymentStrategiesRequest')
     ListDeploymentsRequest = Shapes::StructureShape.new(name: 'ListDeploymentsRequest')
     ListEnvironmentsRequest = Shapes::StructureShape.new(name: 'ListEnvironmentsRequest')
+    ListHostedConfigurationVersionsRequest = Shapes::StructureShape.new(name: 'ListHostedConfigurationVersionsRequest')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MinutesBetween0And24Hours = Shapes::IntegerShape.new(name: 'MinutesBetween0And24Hours')
@@ -72,15 +82,18 @@ module Aws::AppConfig
     MonitorList = Shapes::ListShape.new(name: 'MonitorList')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    PayloadTooLargeException = Shapes::StructureShape.new(name: 'PayloadTooLargeException')
     Percentage = Shapes::FloatShape.new(name: 'Percentage')
     ReplicateTo = Shapes::StringShape.new(name: 'ReplicateTo')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTags = Shapes::StructureShape.new(name: 'ResourceTags')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StartDeploymentRequest = Shapes::StructureShape.new(name: 'StartDeploymentRequest')
     StopDeploymentRequest = Shapes::StructureShape.new(name: 'StopDeploymentRequest')
     String = Shapes::StringShape.new(name: 'String')
     StringWithLengthBetween0And32768 = Shapes::StringShape.new(name: 'StringWithLengthBetween0And32768')
+    StringWithLengthBetween1And255 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And255')
     StringWithLengthBetween1And64 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And64')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -156,7 +169,7 @@ module Aws::AppConfig
     CreateConfigurationProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     CreateConfigurationProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateConfigurationProfileRequest.add_member(:location_uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "LocationUri"))
-    CreateConfigurationProfileRequest.add_member(:retrieval_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RetrievalRoleArn"))
+    CreateConfigurationProfileRequest.add_member(:retrieval_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RetrievalRoleArn"))
     CreateConfigurationProfileRequest.add_member(:validators, Shapes::ShapeRef.new(shape: ValidatorList, location_name: "Validators"))
     CreateConfigurationProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateConfigurationProfileRequest.struct_class = Types::CreateConfigurationProfileRequest
@@ -178,6 +191,16 @@ module Aws::AppConfig
     CreateEnvironmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateEnvironmentRequest.struct_class = Types::CreateEnvironmentRequest
 
+    CreateHostedConfigurationVersionRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
+    CreateHostedConfigurationVersionRequest.add_member(:configuration_profile_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ConfigurationProfileId"))
+    CreateHostedConfigurationVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location: "header", location_name: "Description"))
+    CreateHostedConfigurationVersionRequest.add_member(:content, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "Content"))
+    CreateHostedConfigurationVersionRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And255, required: true, location: "header", location_name: "Content-Type"))
+    CreateHostedConfigurationVersionRequest.add_member(:latest_version_number, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Latest-Version-Number", metadata: {"box"=>true}))
+    CreateHostedConfigurationVersionRequest.struct_class = Types::CreateHostedConfigurationVersionRequest
+    CreateHostedConfigurationVersionRequest[:payload] = :content
+    CreateHostedConfigurationVersionRequest[:payload_member] = CreateHostedConfigurationVersionRequest.member(:content)
+
     DeleteApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
     DeleteApplicationRequest.struct_class = Types::DeleteApplicationRequest
 
@@ -191,6 +214,11 @@ module Aws::AppConfig
     DeleteEnvironmentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
     DeleteEnvironmentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "EnvironmentId"))
     DeleteEnvironmentRequest.struct_class = Types::DeleteEnvironmentRequest
+
+    DeleteHostedConfigurationVersionRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
+    DeleteHostedConfigurationVersionRequest.add_member(:configuration_profile_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ConfigurationProfileId"))
+    DeleteHostedConfigurationVersionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: Integer, required: true, location: "uri", location_name: "VersionNumber"))
+    DeleteHostedConfigurationVersionRequest.struct_class = Types::DeleteHostedConfigurationVersionRequest
 
     Deployment.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, location_name: "ApplicationId"))
     Deployment.add_member(:environment_id, Shapes::ShapeRef.new(shape: Id, location_name: "EnvironmentId"))
@@ -295,6 +323,34 @@ module Aws::AppConfig
     GetEnvironmentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "EnvironmentId"))
     GetEnvironmentRequest.struct_class = Types::GetEnvironmentRequest
 
+    GetHostedConfigurationVersionRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
+    GetHostedConfigurationVersionRequest.add_member(:configuration_profile_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ConfigurationProfileId"))
+    GetHostedConfigurationVersionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: Integer, required: true, location: "uri", location_name: "VersionNumber"))
+    GetHostedConfigurationVersionRequest.struct_class = Types::GetHostedConfigurationVersionRequest
+
+    HostedConfigurationVersion.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, location: "header", location_name: "Application-Id"))
+    HostedConfigurationVersion.add_member(:configuration_profile_id, Shapes::ShapeRef.new(shape: Id, location: "header", location_name: "Configuration-Profile-Id"))
+    HostedConfigurationVersion.add_member(:version_number, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Version-Number"))
+    HostedConfigurationVersion.add_member(:description, Shapes::ShapeRef.new(shape: Description, location: "header", location_name: "Description"))
+    HostedConfigurationVersion.add_member(:content, Shapes::ShapeRef.new(shape: Blob, location_name: "Content"))
+    HostedConfigurationVersion.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And255, location: "header", location_name: "Content-Type"))
+    HostedConfigurationVersion.struct_class = Types::HostedConfigurationVersion
+    HostedConfigurationVersion[:payload] = :content
+    HostedConfigurationVersion[:payload_member] = HostedConfigurationVersion.member(:content)
+
+    HostedConfigurationVersionSummary.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, location_name: "ApplicationId"))
+    HostedConfigurationVersionSummary.add_member(:configuration_profile_id, Shapes::ShapeRef.new(shape: Id, location_name: "ConfigurationProfileId"))
+    HostedConfigurationVersionSummary.add_member(:version_number, Shapes::ShapeRef.new(shape: Integer, location_name: "VersionNumber"))
+    HostedConfigurationVersionSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    HostedConfigurationVersionSummary.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And255, location_name: "ContentType"))
+    HostedConfigurationVersionSummary.struct_class = Types::HostedConfigurationVersionSummary
+
+    HostedConfigurationVersionSummaryList.member = Shapes::ShapeRef.new(shape: HostedConfigurationVersionSummary)
+
+    HostedConfigurationVersions.add_member(:items, Shapes::ShapeRef.new(shape: HostedConfigurationVersionSummaryList, location_name: "Items"))
+    HostedConfigurationVersions.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    HostedConfigurationVersions.struct_class = Types::HostedConfigurationVersions
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -322,6 +378,12 @@ module Aws::AppConfig
     ListEnvironmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
     ListEnvironmentsRequest.struct_class = Types::ListEnvironmentsRequest
 
+    ListHostedConfigurationVersionsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
+    ListHostedConfigurationVersionsRequest.add_member(:configuration_profile_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ConfigurationProfileId"))
+    ListHostedConfigurationVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box"=>true}))
+    ListHostedConfigurationVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
+    ListHostedConfigurationVersionsRequest.struct_class = Types::ListHostedConfigurationVersionsRequest
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -331,12 +393,21 @@ module Aws::AppConfig
 
     MonitorList.member = Shapes::ShapeRef.new(shape: Monitor)
 
+    PayloadTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    PayloadTooLargeException.add_member(:measure, Shapes::ShapeRef.new(shape: BytesMeasure, location_name: "Measure"))
+    PayloadTooLargeException.add_member(:limit, Shapes::ShapeRef.new(shape: Float, location_name: "Limit"))
+    PayloadTooLargeException.add_member(:size, Shapes::ShapeRef.new(shape: Float, location_name: "Size"))
+    PayloadTooLargeException.struct_class = Types::PayloadTooLargeException
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceNotFoundException.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, location_name: "ResourceName"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResourceTags.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ResourceTags.struct_class = Types::ResourceTags
+
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     StartDeploymentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
     StartDeploymentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "EnvironmentId"))
@@ -467,6 +538,20 @@ module Aws::AppConfig
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:create_hosted_configuration_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateHostedConfigurationVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions"
+        o.input = Shapes::ShapeRef.new(shape: CreateHostedConfigurationVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: HostedConfigurationVersion)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteApplication"
         o.http_method = "DELETE"
@@ -511,6 +596,17 @@ module Aws::AppConfig
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:delete_hosted_configuration_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteHostedConfigurationVersion"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions/{VersionNumber}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteHostedConfigurationVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_application, Seahorse::Model::Operation.new.tap do |o|
@@ -577,6 +673,17 @@ module Aws::AppConfig
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:get_hosted_configuration_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetHostedConfigurationVersion"
+        o.http_method = "GET"
+        o.http_request_uri = "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions/{VersionNumber}"
+        o.input = Shapes::ShapeRef.new(shape: GetHostedConfigurationVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: HostedConfigurationVersion)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:list_applications, Seahorse::Model::Operation.new.tap do |o|
@@ -654,6 +761,23 @@ module Aws::AppConfig
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_hosted_configuration_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListHostedConfigurationVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions"
+        o.input = Shapes::ShapeRef.new(shape: ListHostedConfigurationVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: HostedConfigurationVersions)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

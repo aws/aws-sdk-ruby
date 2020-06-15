@@ -120,8 +120,22 @@ module Aws::IoT
     AwsIotJobArn = Shapes::StringShape.new(name: 'AwsIotJobArn')
     AwsIotJobId = Shapes::StringShape.new(name: 'AwsIotJobId')
     AwsIotSqlVersion = Shapes::StringShape.new(name: 'AwsIotSqlVersion')
+    AwsJobAbortConfig = Shapes::StructureShape.new(name: 'AwsJobAbortConfig')
+    AwsJobAbortCriteria = Shapes::StructureShape.new(name: 'AwsJobAbortCriteria')
+    AwsJobAbortCriteriaAbortAction = Shapes::StringShape.new(name: 'AwsJobAbortCriteriaAbortAction')
+    AwsJobAbortCriteriaAbortThresholdPercentage = Shapes::FloatShape.new(name: 'AwsJobAbortCriteriaAbortThresholdPercentage')
+    AwsJobAbortCriteriaFailureType = Shapes::StringShape.new(name: 'AwsJobAbortCriteriaFailureType')
+    AwsJobAbortCriteriaList = Shapes::ListShape.new(name: 'AwsJobAbortCriteriaList')
+    AwsJobAbortCriteriaMinimumNumberOfExecutedThings = Shapes::IntegerShape.new(name: 'AwsJobAbortCriteriaMinimumNumberOfExecutedThings')
     AwsJobExecutionsRolloutConfig = Shapes::StructureShape.new(name: 'AwsJobExecutionsRolloutConfig')
+    AwsJobExponentialRolloutRate = Shapes::StructureShape.new(name: 'AwsJobExponentialRolloutRate')
     AwsJobPresignedUrlConfig = Shapes::StructureShape.new(name: 'AwsJobPresignedUrlConfig')
+    AwsJobRateIncreaseCriteria = Shapes::StructureShape.new(name: 'AwsJobRateIncreaseCriteria')
+    AwsJobRateIncreaseCriteriaNumberOfThings = Shapes::IntegerShape.new(name: 'AwsJobRateIncreaseCriteriaNumberOfThings')
+    AwsJobRolloutIncrementFactor = Shapes::FloatShape.new(name: 'AwsJobRolloutIncrementFactor')
+    AwsJobRolloutRatePerMinute = Shapes::IntegerShape.new(name: 'AwsJobRolloutRatePerMinute')
+    AwsJobTimeoutConfig = Shapes::StructureShape.new(name: 'AwsJobTimeoutConfig')
+    AwsJobTimeoutInProgressTimeoutInMinutes = Shapes::IntegerShape.new(name: 'AwsJobTimeoutInProgressTimeoutInMinutes')
     Behavior = Shapes::StructureShape.new(name: 'Behavior')
     BehaviorCriteria = Shapes::StructureShape.new(name: 'BehaviorCriteria')
     BehaviorMetric = Shapes::StringShape.new(name: 'BehaviorMetric')
@@ -1331,11 +1345,35 @@ module Aws::IoT
 
     Authorizers.member = Shapes::ShapeRef.new(shape: AuthorizerSummary)
 
+    AwsJobAbortConfig.add_member(:abort_criteria_list, Shapes::ShapeRef.new(shape: AwsJobAbortCriteriaList, required: true, location_name: "abortCriteriaList"))
+    AwsJobAbortConfig.struct_class = Types::AwsJobAbortConfig
+
+    AwsJobAbortCriteria.add_member(:failure_type, Shapes::ShapeRef.new(shape: AwsJobAbortCriteriaFailureType, required: true, location_name: "failureType"))
+    AwsJobAbortCriteria.add_member(:action, Shapes::ShapeRef.new(shape: AwsJobAbortCriteriaAbortAction, required: true, location_name: "action"))
+    AwsJobAbortCriteria.add_member(:threshold_percentage, Shapes::ShapeRef.new(shape: AwsJobAbortCriteriaAbortThresholdPercentage, required: true, location_name: "thresholdPercentage"))
+    AwsJobAbortCriteria.add_member(:min_number_of_executed_things, Shapes::ShapeRef.new(shape: AwsJobAbortCriteriaMinimumNumberOfExecutedThings, required: true, location_name: "minNumberOfExecutedThings"))
+    AwsJobAbortCriteria.struct_class = Types::AwsJobAbortCriteria
+
+    AwsJobAbortCriteriaList.member = Shapes::ShapeRef.new(shape: AwsJobAbortCriteria)
+
     AwsJobExecutionsRolloutConfig.add_member(:maximum_per_minute, Shapes::ShapeRef.new(shape: MaximumPerMinute, location_name: "maximumPerMinute"))
+    AwsJobExecutionsRolloutConfig.add_member(:exponential_rate, Shapes::ShapeRef.new(shape: AwsJobExponentialRolloutRate, location_name: "exponentialRate"))
     AwsJobExecutionsRolloutConfig.struct_class = Types::AwsJobExecutionsRolloutConfig
+
+    AwsJobExponentialRolloutRate.add_member(:base_rate_per_minute, Shapes::ShapeRef.new(shape: AwsJobRolloutRatePerMinute, required: true, location_name: "baseRatePerMinute"))
+    AwsJobExponentialRolloutRate.add_member(:increment_factor, Shapes::ShapeRef.new(shape: AwsJobRolloutIncrementFactor, required: true, location_name: "incrementFactor"))
+    AwsJobExponentialRolloutRate.add_member(:rate_increase_criteria, Shapes::ShapeRef.new(shape: AwsJobRateIncreaseCriteria, required: true, location_name: "rateIncreaseCriteria"))
+    AwsJobExponentialRolloutRate.struct_class = Types::AwsJobExponentialRolloutRate
 
     AwsJobPresignedUrlConfig.add_member(:expires_in_sec, Shapes::ShapeRef.new(shape: ExpiresInSeconds, location_name: "expiresInSec"))
     AwsJobPresignedUrlConfig.struct_class = Types::AwsJobPresignedUrlConfig
+
+    AwsJobRateIncreaseCriteria.add_member(:number_of_notified_things, Shapes::ShapeRef.new(shape: AwsJobRateIncreaseCriteriaNumberOfThings, location_name: "numberOfNotifiedThings"))
+    AwsJobRateIncreaseCriteria.add_member(:number_of_succeeded_things, Shapes::ShapeRef.new(shape: AwsJobRateIncreaseCriteriaNumberOfThings, location_name: "numberOfSucceededThings"))
+    AwsJobRateIncreaseCriteria.struct_class = Types::AwsJobRateIncreaseCriteria
+
+    AwsJobTimeoutConfig.add_member(:in_progress_timeout_in_minutes, Shapes::ShapeRef.new(shape: AwsJobTimeoutInProgressTimeoutInMinutes, location_name: "inProgressTimeoutInMinutes"))
+    AwsJobTimeoutConfig.struct_class = Types::AwsJobTimeoutConfig
 
     Behavior.add_member(:name, Shapes::ShapeRef.new(shape: BehaviorName, required: true, location_name: "name"))
     Behavior.add_member(:metric, Shapes::ShapeRef.new(shape: BehaviorMetric, location_name: "metric"))
@@ -1614,6 +1652,8 @@ module Aws::IoT
     CreateOTAUpdateRequest.add_member(:target_selection, Shapes::ShapeRef.new(shape: TargetSelection, location_name: "targetSelection"))
     CreateOTAUpdateRequest.add_member(:aws_job_executions_rollout_config, Shapes::ShapeRef.new(shape: AwsJobExecutionsRolloutConfig, location_name: "awsJobExecutionsRolloutConfig"))
     CreateOTAUpdateRequest.add_member(:aws_job_presigned_url_config, Shapes::ShapeRef.new(shape: AwsJobPresignedUrlConfig, location_name: "awsJobPresignedUrlConfig"))
+    CreateOTAUpdateRequest.add_member(:aws_job_abort_config, Shapes::ShapeRef.new(shape: AwsJobAbortConfig, location_name: "awsJobAbortConfig"))
+    CreateOTAUpdateRequest.add_member(:aws_job_timeout_config, Shapes::ShapeRef.new(shape: AwsJobTimeoutConfig, location_name: "awsJobTimeoutConfig"))
     CreateOTAUpdateRequest.add_member(:files, Shapes::ShapeRef.new(shape: OTAUpdateFiles, required: true, location_name: "files"))
     CreateOTAUpdateRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateOTAUpdateRequest.add_member(:additional_parameters, Shapes::ShapeRef.new(shape: AdditionalParameterMap, location_name: "additionalParameters"))
