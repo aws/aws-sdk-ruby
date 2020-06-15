@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
+
+* Feature - Aws::AppConfig - Updated the API, and documentation for Amazon AppConfig.
+
+* Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
+
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
 2.11.527 (2020-06-12)
 ------------------
 
