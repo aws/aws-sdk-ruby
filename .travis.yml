@@ -3,7 +3,7 @@ language: ruby
 before_install:
   - gem install bundler -v '< 2'
 
-dist: trusty
+dist: bionic
 
 rvm:
   - 1.9.3
