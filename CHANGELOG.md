@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.529 (2020-06-16)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
 
 * Feature - Aws::CloudFront - Updated the documentation for Amazon CloudFront.
