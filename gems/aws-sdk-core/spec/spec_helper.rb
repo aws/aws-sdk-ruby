@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'shared_spec_helper'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))

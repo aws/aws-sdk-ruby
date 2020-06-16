@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
 
   # A utility module that provides a class method that wraps
