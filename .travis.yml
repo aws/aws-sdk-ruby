@@ -26,6 +26,7 @@ env:
   - KITCHEN_SINK=1
 
 script: >
+  (ruby -ropenssl -e 'puts OpenSSL::OPENSSL_VERSION') &&
   (bundle exec rake build) &&
   (bundle exec rake test:spec)
 
