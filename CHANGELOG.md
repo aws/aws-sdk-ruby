@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
+
+* Feature - Aws::CloudFront - Updated the documentation for Amazon CloudFront.
+
+* Feature - Aws::DataExchange - Updated the API for AWS Data Exchange.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::Polly - Updated the API for Amazon Polly.
+
+* Feature - Aws::QLDB - Updated the documentation for Amazon QLDB.
+
 2.11.528 (2020-06-15)
 ------------------
 
