@@ -23,7 +23,7 @@ module Aws
         # during get get_object is called twice, once to get the full body and
         # again with a range to get just the auth_tag
         def stub_get(s3_client, data, stub_auth_tag)
-          resp_headers = data[:metadata].map { |k, v| ["x-amz-meta-#{k.to_s}", v] }.to_h
+          resp_headers = Hash[*data[:metadata].map { |k, v| ["x-amz-meta-#{k.to_s}", v] }.flatten(1)]
           resp_headers['content-length'] = data[:enc_body].length
           if stub_auth_tag
             auth_tag = data[:enc_body].unpack('C*')[-16, 16].pack('C*')
@@ -122,7 +122,7 @@ module Aws
 
             client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
 
-            resp_headers = data[:metadata].map { |k, v| ["x-amz-meta-#{k.to_s}", v] }.to_h
+            resp_headers = Hash[*data[:metadata].map { |k, v| ["x-amz-meta-#{k.to_s}", v] }.flatten(1)]
             resp_headers['content-length'] = data[:enc_body].length
             auth_tag = data[:enc_body].unpack('C*')[-16, 16].pack('C*')
 
