@@ -109,13 +109,12 @@ module Aws
         end
 
         def extract_envelope(hash)
+          return nil unless hash
           return v1_envelope(hash) if hash.key?('x-amz-key')
           return v2_envelope(hash) if hash.key?('x-amz-key-v2')
           if hash.keys.any? { |key| key.match(/^x-amz-key-(.+)$/) }
             msg = "unsupported envelope encryption version #{$1}"
             raise Errors::DecryptionError, msg
-          else
-            nil # no envelope found
           end
         end
 

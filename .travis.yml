@@ -26,7 +26,8 @@ env:
   - KITCHEN_SINK=1
 
 script: >
-  (ruby -ropenssl -e 'puts OpenSSL::OPENSSL_VERSION') &&
+  (openssl version) && (openssl enc -help 2>&1 | grep gcm) &&
+  (ruby -ropenssl -e 'puts OpenSSL::OPENSSL_VERSION; puts OpenSSL::Cipher.ciphers.include? "aes-256-gcm"') &&
   (bundle exec rake build) &&
   (bundle exec rake test:spec)
 

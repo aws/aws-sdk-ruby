@@ -9,9 +9,11 @@ module Aws
       describe Client do
 
         before do
-          unless OpenSSL::Cipher.ciphers.include? 'aes-256-gcm'
+          unless OpenSSL::Cipher.ciphers.include? 'id-aes128-GCM'
+            puts "SKIPPING TESTS.  Ciphers: #{OpenSSL::Cipher.ciphers}"
             skip('Skipping CSE tests due to old version of OpenSSL')
-          end
+          else
+            puts "id-aes128-GCM is supported.  Running tests: #{OpenSSL::Cipher.ciphers}"
         end
 
         # Captures the data (metadata and body) put to an s3 object
