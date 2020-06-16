@@ -183,6 +183,7 @@ module AwsSdkCodeGenerator
             o.method_name = underscore(operation_name)
             o.http_method = operation['http']['method']
             o.http_request_uri = operation['http']['requestUri']
+            o.http_checksum_required = true if operation['httpChecksumRequired']
             %w(input output).each do |key|
               if operation[key]
                 o.shape_references << "o.#{key} = #{operation_ref(operation[key])}"
@@ -241,6 +242,10 @@ module AwsSdkCodeGenerator
           return underscore(name) if ref['endpointoperation']
         end
         nil
+      end
+
+      def require_endpoint_discovery
+        @service.require_endpoint_discovery
       end
 
       private
@@ -505,6 +510,9 @@ module AwsSdkCodeGenerator
 
         # @return [String] "/", "/path?query", etc.
         attr_accessor :http_request_uri
+
+        # @return [Boolean]
+        attr_accessor :http_checksum_required
 
         # @return [Array<String>]
         attr_accessor :shape_references

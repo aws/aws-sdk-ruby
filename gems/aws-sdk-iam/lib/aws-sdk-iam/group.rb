@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -338,7 +340,7 @@ module Aws::IAM
     # @return [GroupPolicy]
     def create_policy(options = {})
       options = options.merge(group_name: @name)
-      resp = @client.put_group_policy(options)
+      @client.put_group_policy(options)
       GroupPolicy.new(
         group_name: @name,
         name: options[:policy_name],
@@ -434,7 +436,7 @@ module Aws::IAM
     # @return [Group]
     def update(options = {})
       options = options.merge(group_name: @name)
-      resp = @client.update_group(options)
+      @client.update_group(options)
       Group.new(
         name: options[:new_group_name],
         client: @client

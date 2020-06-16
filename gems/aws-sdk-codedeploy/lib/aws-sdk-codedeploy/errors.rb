@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -87,6 +89,7 @@ module Aws::CodeDeploy
   # * {InvalidEC2TagCombinationException}
   # * {InvalidEC2TagException}
   # * {InvalidECSServiceException}
+  # * {InvalidExternalIdException}
   # * {InvalidFileExistsBehaviorException}
   # * {InvalidGitHubAccountTokenException}
   # * {InvalidGitHubAccountTokenNameException}
@@ -759,6 +762,16 @@ module Aws::CodeDeploy
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodeDeploy::Types::InvalidECSServiceException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidExternalIdException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeDeploy::Types::InvalidExternalIdException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

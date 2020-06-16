@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -1669,7 +1671,7 @@ module Aws::S3
     PutBucketAclRequest.add_member(:acl, Shapes::ShapeRef.new(shape: BucketCannedACL, location: "header", location_name: "x-amz-acl"))
     PutBucketAclRequest.add_member(:access_control_policy, Shapes::ShapeRef.new(shape: AccessControlPolicy, location_name: "AccessControlPolicy", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketAclRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketAclRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketAclRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutBucketAclRequest.add_member(:grant_full_control, Shapes::ShapeRef.new(shape: GrantFullControl, location: "header", location_name: "x-amz-grant-full-control"))
     PutBucketAclRequest.add_member(:grant_read, Shapes::ShapeRef.new(shape: GrantRead, location: "header", location_name: "x-amz-grant-read"))
     PutBucketAclRequest.add_member(:grant_read_acp, Shapes::ShapeRef.new(shape: GrantReadACP, location: "header", location_name: "x-amz-grant-read-acp"))
@@ -1688,13 +1690,13 @@ module Aws::S3
 
     PutBucketCorsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketCorsRequest.add_member(:cors_configuration, Shapes::ShapeRef.new(shape: CORSConfiguration, required: true, location_name: "CORSConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
-    PutBucketCorsRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketCorsRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutBucketCorsRequest.struct_class = Types::PutBucketCorsRequest
     PutBucketCorsRequest[:payload] = :cors_configuration
     PutBucketCorsRequest[:payload_member] = PutBucketCorsRequest.member(:cors_configuration)
 
     PutBucketEncryptionRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketEncryptionRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketEncryptionRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutBucketEncryptionRequest.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, required: true, location_name: "ServerSideEncryptionConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketEncryptionRequest.struct_class = Types::PutBucketEncryptionRequest
     PutBucketEncryptionRequest[:payload] = :server_side_encryption_configuration
@@ -1714,7 +1716,7 @@ module Aws::S3
     PutBucketLifecycleConfigurationRequest[:payload_member] = PutBucketLifecycleConfigurationRequest.member(:lifecycle_configuration)
 
     PutBucketLifecycleRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketLifecycleRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketLifecycleRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutBucketLifecycleRequest.add_member(:lifecycle_configuration, Shapes::ShapeRef.new(shape: LifecycleConfiguration, location_name: "LifecycleConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketLifecycleRequest.struct_class = Types::PutBucketLifecycleRequest
     PutBucketLifecycleRequest[:payload] = :lifecycle_configuration
@@ -1722,7 +1724,7 @@ module Aws::S3
 
     PutBucketLoggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketLoggingRequest.add_member(:bucket_logging_status, Shapes::ShapeRef.new(shape: BucketLoggingStatus, required: true, location_name: "BucketLoggingStatus", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
-    PutBucketLoggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketLoggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutBucketLoggingRequest.struct_class = Types::PutBucketLoggingRequest
     PutBucketLoggingRequest[:payload] = :bucket_logging_status
     PutBucketLoggingRequest[:payload_member] = PutBucketLoggingRequest.member(:bucket_logging_status)
@@ -1741,14 +1743,14 @@ module Aws::S3
     PutBucketNotificationConfigurationRequest[:payload_member] = PutBucketNotificationConfigurationRequest.member(:notification_configuration)
 
     PutBucketNotificationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketNotificationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketNotificationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutBucketNotificationRequest.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfigurationDeprecated, required: true, location_name: "NotificationConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketNotificationRequest.struct_class = Types::PutBucketNotificationRequest
     PutBucketNotificationRequest[:payload] = :notification_configuration
     PutBucketNotificationRequest[:payload_member] = PutBucketNotificationRequest.member(:notification_configuration)
 
     PutBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketPolicyRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketPolicyRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutBucketPolicyRequest.add_member(:confirm_remove_self_bucket_access, Shapes::ShapeRef.new(shape: ConfirmRemoveSelfBucketAccess, location: "header", location_name: "x-amz-confirm-remove-self-bucket-access"))
     PutBucketPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
     PutBucketPolicyRequest.struct_class = Types::PutBucketPolicyRequest
@@ -1756,7 +1758,7 @@ module Aws::S3
     PutBucketPolicyRequest[:payload_member] = PutBucketPolicyRequest.member(:policy)
 
     PutBucketReplicationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketReplicationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketReplicationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutBucketReplicationRequest.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, required: true, location_name: "ReplicationConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketReplicationRequest.add_member(:token, Shapes::ShapeRef.new(shape: ObjectLockToken, location: "header", location_name: "x-amz-bucket-object-lock-token"))
     PutBucketReplicationRequest.struct_class = Types::PutBucketReplicationRequest
@@ -1764,21 +1766,21 @@ module Aws::S3
     PutBucketReplicationRequest[:payload_member] = PutBucketReplicationRequest.member(:replication_configuration)
 
     PutBucketRequestPaymentRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketRequestPaymentRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketRequestPaymentRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutBucketRequestPaymentRequest.add_member(:request_payment_configuration, Shapes::ShapeRef.new(shape: RequestPaymentConfiguration, required: true, location_name: "RequestPaymentConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketRequestPaymentRequest.struct_class = Types::PutBucketRequestPaymentRequest
     PutBucketRequestPaymentRequest[:payload] = :request_payment_configuration
     PutBucketRequestPaymentRequest[:payload_member] = PutBucketRequestPaymentRequest.member(:request_payment_configuration)
 
     PutBucketTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketTaggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketTaggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutBucketTaggingRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: Tagging, required: true, location_name: "Tagging", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketTaggingRequest.struct_class = Types::PutBucketTaggingRequest
     PutBucketTaggingRequest[:payload] = :tagging
     PutBucketTaggingRequest[:payload_member] = PutBucketTaggingRequest.member(:tagging)
 
     PutBucketVersioningRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketVersioningRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketVersioningRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutBucketVersioningRequest.add_member(:mfa, Shapes::ShapeRef.new(shape: MFA, location: "header", location_name: "x-amz-mfa"))
     PutBucketVersioningRequest.add_member(:versioning_configuration, Shapes::ShapeRef.new(shape: VersioningConfiguration, required: true, location_name: "VersioningConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketVersioningRequest.struct_class = Types::PutBucketVersioningRequest
@@ -1786,7 +1788,7 @@ module Aws::S3
     PutBucketVersioningRequest[:payload_member] = PutBucketVersioningRequest.member(:versioning_configuration)
 
     PutBucketWebsiteRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutBucketWebsiteRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketWebsiteRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutBucketWebsiteRequest.add_member(:website_configuration, Shapes::ShapeRef.new(shape: WebsiteConfiguration, required: true, location_name: "WebsiteConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketWebsiteRequest.struct_class = Types::PutBucketWebsiteRequest
     PutBucketWebsiteRequest[:payload] = :website_configuration
@@ -1798,7 +1800,7 @@ module Aws::S3
     PutObjectAclRequest.add_member(:acl, Shapes::ShapeRef.new(shape: ObjectCannedACL, location: "header", location_name: "x-amz-acl"))
     PutObjectAclRequest.add_member(:access_control_policy, Shapes::ShapeRef.new(shape: AccessControlPolicy, location_name: "AccessControlPolicy", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutObjectAclRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutObjectAclRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutObjectAclRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutObjectAclRequest.add_member(:grant_full_control, Shapes::ShapeRef.new(shape: GrantFullControl, location: "header", location_name: "x-amz-grant-full-control"))
     PutObjectAclRequest.add_member(:grant_read, Shapes::ShapeRef.new(shape: GrantRead, location: "header", location_name: "x-amz-grant-read"))
     PutObjectAclRequest.add_member(:grant_read_acp, Shapes::ShapeRef.new(shape: GrantReadACP, location: "header", location_name: "x-amz-grant-read-acp"))
@@ -1819,7 +1821,7 @@ module Aws::S3
     PutObjectLegalHoldRequest.add_member(:legal_hold, Shapes::ShapeRef.new(shape: ObjectLockLegalHold, location_name: "LegalHold", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutObjectLegalHoldRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     PutObjectLegalHoldRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
-    PutObjectLegalHoldRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutObjectLegalHoldRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutObjectLegalHoldRequest.struct_class = Types::PutObjectLegalHoldRequest
     PutObjectLegalHoldRequest[:payload] = :legal_hold
     PutObjectLegalHoldRequest[:payload_member] = PutObjectLegalHoldRequest.member(:legal_hold)
@@ -1831,7 +1833,7 @@ module Aws::S3
     PutObjectLockConfigurationRequest.add_member(:object_lock_configuration, Shapes::ShapeRef.new(shape: ObjectLockConfiguration, location_name: "ObjectLockConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutObjectLockConfigurationRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     PutObjectLockConfigurationRequest.add_member(:token, Shapes::ShapeRef.new(shape: ObjectLockToken, location: "header", location_name: "x-amz-bucket-object-lock-token"))
-    PutObjectLockConfigurationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutObjectLockConfigurationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutObjectLockConfigurationRequest.struct_class = Types::PutObjectLockConfigurationRequest
     PutObjectLockConfigurationRequest[:payload] = :object_lock_configuration
     PutObjectLockConfigurationRequest[:payload_member] = PutObjectLockConfigurationRequest.member(:object_lock_configuration)
@@ -1890,7 +1892,7 @@ module Aws::S3
     PutObjectRetentionRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     PutObjectRetentionRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
     PutObjectRetentionRequest.add_member(:bypass_governance_retention, Shapes::ShapeRef.new(shape: BypassGovernanceRetention, location: "header", location_name: "x-amz-bypass-governance-retention"))
-    PutObjectRetentionRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutObjectRetentionRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutObjectRetentionRequest.struct_class = Types::PutObjectRetentionRequest
     PutObjectRetentionRequest[:payload] = :retention
     PutObjectRetentionRequest[:payload_member] = PutObjectRetentionRequest.member(:retention)
@@ -1901,14 +1903,14 @@ module Aws::S3
     PutObjectTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutObjectTaggingRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
     PutObjectTaggingRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
-    PutObjectTaggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutObjectTaggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutObjectTaggingRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: Tagging, required: true, location_name: "Tagging", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutObjectTaggingRequest.struct_class = Types::PutObjectTaggingRequest
     PutObjectTaggingRequest[:payload] = :tagging
     PutObjectTaggingRequest[:payload_member] = PutObjectTaggingRequest.member(:tagging)
 
     PutPublicAccessBlockRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
-    PutPublicAccessBlockRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutPublicAccessBlockRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, deprecated: true, location: "header", location_name: "Content-MD5", metadata: {"deprecatedMessage"=>"Content-MD5 header will now be automatically computed and injected in associated operation's Http request."}))
     PutPublicAccessBlockRequest.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, required: true, location_name: "PublicAccessBlockConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutPublicAccessBlockRequest.struct_class = Types::PutPublicAccessBlockRequest
     PutPublicAccessBlockRequest[:payload] = :public_access_block_configuration
@@ -2378,6 +2380,7 @@ module Aws::S3
         o.name = "DeleteObjects"
         o.http_method = "POST"
         o.http_request_uri = "/{Bucket}?delete"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: DeleteObjectsRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteObjectsOutput)
       end)
@@ -2758,6 +2761,7 @@ module Aws::S3
         o.name = "PutBucketAcl"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?acl"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketAclRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2774,6 +2778,7 @@ module Aws::S3
         o.name = "PutBucketCors"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?cors"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketCorsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2782,6 +2787,7 @@ module Aws::S3
         o.name = "PutBucketEncryption"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?encryption"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketEncryptionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2798,6 +2804,7 @@ module Aws::S3
         o.name = "PutBucketLifecycle"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?lifecycle"
+        o.http_checksum_required = true
         o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketLifecycleRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -2807,6 +2814,7 @@ module Aws::S3
         o.name = "PutBucketLifecycleConfiguration"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?lifecycle"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketLifecycleConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2815,6 +2823,7 @@ module Aws::S3
         o.name = "PutBucketLogging"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?logging"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketLoggingRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2831,6 +2840,7 @@ module Aws::S3
         o.name = "PutBucketNotification"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?notification"
+        o.http_checksum_required = true
         o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketNotificationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -2848,6 +2858,7 @@ module Aws::S3
         o.name = "PutBucketPolicy"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?policy"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2856,6 +2867,7 @@ module Aws::S3
         o.name = "PutBucketReplication"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?replication"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketReplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2864,6 +2876,7 @@ module Aws::S3
         o.name = "PutBucketRequestPayment"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?requestPayment"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketRequestPaymentRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2872,6 +2885,7 @@ module Aws::S3
         o.name = "PutBucketTagging"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?tagging"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2880,6 +2894,7 @@ module Aws::S3
         o.name = "PutBucketVersioning"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?versioning"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketVersioningRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2888,6 +2903,7 @@ module Aws::S3
         o.name = "PutBucketWebsite"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?website"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketWebsiteRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2904,6 +2920,7 @@ module Aws::S3
         o.name = "PutObjectAcl"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}/{Key+}?acl"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutObjectAclRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectAclOutput)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchKey)
@@ -2913,6 +2930,7 @@ module Aws::S3
         o.name = "PutObjectLegalHold"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}/{Key+}?legal-hold"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutObjectLegalHoldRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectLegalHoldOutput)
       end)
@@ -2921,6 +2939,7 @@ module Aws::S3
         o.name = "PutObjectLockConfiguration"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?object-lock"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutObjectLockConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectLockConfigurationOutput)
       end)
@@ -2929,6 +2948,7 @@ module Aws::S3
         o.name = "PutObjectRetention"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}/{Key+}?retention"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutObjectRetentionRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectRetentionOutput)
       end)
@@ -2937,6 +2957,7 @@ module Aws::S3
         o.name = "PutObjectTagging"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}/{Key+}?tagging"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutObjectTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectTaggingOutput)
       end)
@@ -2945,6 +2966,7 @@ module Aws::S3
         o.name = "PutPublicAccessBlock"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?publicAccessBlock"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutPublicAccessBlockRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::QuickSight
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::QuickSight
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::QuickSight
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -1083,7 +1087,7 @@ module Aws::QuickSight
     #
     #
     #
-    # [1]: https://aws.example.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/
+    # [1]: https://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/
     #
     # @option params [required, String] :data_set_id
     #   The ID of the dataset used in the ingestion.
@@ -1743,12 +1747,14 @@ module Aws::QuickSight
     #   resp.dashboard.name #=> String
     #   resp.dashboard.version.created_time #=> Time
     #   resp.dashboard.version.errors #=> Array
-    #   resp.dashboard.version.errors[0].type #=> String, one of "DATA_SET_NOT_FOUND", "INTERNAL_FAILURE", "PARAMETER_VALUE_INCOMPATIBLE", "PARAMETER_TYPE_INVALID", "PARAMETER_NOT_FOUND", "COLUMN_TYPE_MISMATCH", "COLUMN_GEOGRAPHIC_ROLE_MISMATCH", "COLUMN_REPLACEMENT_MISSING"
+    #   resp.dashboard.version.errors[0].type #=> String, one of "ACCESS_DENIED", "SOURCE_NOT_FOUND", "DATA_SET_NOT_FOUND", "INTERNAL_FAILURE", "PARAMETER_VALUE_INCOMPATIBLE", "PARAMETER_TYPE_INVALID", "PARAMETER_NOT_FOUND", "COLUMN_TYPE_MISMATCH", "COLUMN_GEOGRAPHIC_ROLE_MISMATCH", "COLUMN_REPLACEMENT_MISSING"
     #   resp.dashboard.version.errors[0].message #=> String
     #   resp.dashboard.version.version_number #=> Integer
     #   resp.dashboard.version.status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED"
     #   resp.dashboard.version.arn #=> String
     #   resp.dashboard.version.source_entity_arn #=> String
+    #   resp.dashboard.version.data_set_arns #=> Array
+    #   resp.dashboard.version.data_set_arns[0] #=> String
     #   resp.dashboard.version.description #=> String
     #   resp.dashboard.created_time #=> Time
     #   resp.dashboard.last_published_time #=> Time
@@ -2278,7 +2284,7 @@ module Aws::QuickSight
     #   resp.template.name #=> String
     #   resp.template.version.created_time #=> Time
     #   resp.template.version.errors #=> Array
-    #   resp.template.version.errors[0].type #=> String, one of "DATA_SET_NOT_FOUND", "INTERNAL_FAILURE"
+    #   resp.template.version.errors[0].type #=> String, one of "SOURCE_NOT_FOUND", "DATA_SET_NOT_FOUND", "INTERNAL_FAILURE"
     #   resp.template.version.errors[0].message #=> String
     #   resp.template.version.version_number #=> Integer
     #   resp.template.version.status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED"
@@ -3430,7 +3436,7 @@ module Aws::QuickSight
     #
     #
     #
-    #   [1]: https://docs.aws.example.com/cli/latest/reference/sts/assume-role.html
+    #   [1]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that the user is in. Currently, you use the
@@ -4723,7 +4729,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.22.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

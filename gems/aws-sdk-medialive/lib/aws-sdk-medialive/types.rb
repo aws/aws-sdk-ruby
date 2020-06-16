@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -2973,7 +2975,7 @@ module Aws::MediaLive
     #                   filter_settings: {
     #                     temporal_filter_settings: {
     #                       post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
     #                     },
     #                   },
     #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
@@ -3132,6 +3134,7 @@ module Aws::MediaLive
     #                 },
     #                 server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #               },
+    #               smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #               source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #               video_selector: {
     #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709
@@ -3243,6 +3246,10 @@ module Aws::MediaLive
     #   Destination settings for PUSH type inputs.
     #   @return [Array<Types::InputDestinationRequest>]
     #
+    # @!attribute [rw] input_devices
+    #   Settings for the devices.
+    #   @return [Array<Types::InputDeviceSettings>]
+    #
     # @!attribute [rw] input_security_groups
     #   A list of security groups referenced by IDs to attach to the input.
     #   @return [Array<String>]
@@ -3294,6 +3301,7 @@ module Aws::MediaLive
     #
     class CreateInput < Struct.new(
       :destinations,
+      :input_devices,
       :input_security_groups,
       :media_connect_flows,
       :name,
@@ -3315,6 +3323,11 @@ module Aws::MediaLive
     #             stream_name: "__string",
     #           },
     #         ],
+    #         input_devices: [
+    #           {
+    #             id: "__string",
+    #           },
+    #         ],
     #         input_security_groups: ["__string"],
     #         media_connect_flows: [
     #           {
@@ -3334,7 +3347,7 @@ module Aws::MediaLive
     #         tags: {
     #           "__string" => "__string",
     #         },
-    #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT
+    #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE
     #         vpc: {
     #           security_group_ids: ["__string"],
     #           subnet_ids: ["__string"], # required
@@ -3343,6 +3356,9 @@ module Aws::MediaLive
     #
     # @!attribute [rw] destinations
     #   @return [Array<Types::InputDestinationRequest>]
+    #
+    # @!attribute [rw] input_devices
+    #   @return [Array<Types::InputDeviceSettings>]
     #
     # @!attribute [rw] input_security_groups
     #   @return [Array<String>]
@@ -3382,6 +3398,7 @@ module Aws::MediaLive
     #
     class CreateInputRequest < Struct.new(
       :destinations,
+      :input_devices,
       :input_security_groups,
       :media_connect_flows,
       :name,
@@ -4152,6 +4169,81 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeInputDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_device_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] input_device_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceRequest AWS API Documentation
+    #
+    class DescribeInputDeviceRequest < Struct.new(
+      :input_device_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   The state of the connection between the input device and AWS.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_settings_sync_state
+    #   The status of the action to synchronize the device configuration. If
+    #   you change the configuration of the input device (for example, the
+    #   maximum bitrate), MediaLive sends the new data to the device. The
+    #   device might not update itself immediately. SYNCED means the device
+    #   has updated its configuration. SYNCING means that it has not updated
+    #   its configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] hd_device_settings
+    #   Settings that describe the active source from the input device, and
+    #   the video characteristics of that source.
+    #   @return [Types::InputDeviceHdSettings]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_address
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] network_settings
+    #   The network settings for the input device.
+    #   @return [Types::InputDeviceNetworkSettings]
+    #
+    # @!attribute [rw] serial_number
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the input device. For an AWS Elemental Link device that
+    #   outputs resolutions up to 1080, choose "HD".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceResponse AWS API Documentation
+    #
+    class DescribeInputDeviceResponse < Struct.new(
+      :arn,
+      :connection_state,
+      :device_settings_sync_state,
+      :hd_device_settings,
+      :id,
+      :mac_address,
+      :name,
+      :network_settings,
+      :serial_number,
+      :type)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeInputRequest
     #   data as a hash:
     #
@@ -4185,6 +4277,9 @@ module Aws::MediaLive
     #   A standard input has two sources and a single pipeline input only
     #   has one.
     #   @return [String]
+    #
+    # @!attribute [rw] input_devices
+    #   @return [Array<Types::InputDeviceSettings>]
     #
     # @!attribute [rw] input_source_type
     #   There are two types of input sources, static and dynamic. If an
@@ -4226,6 +4321,7 @@ module Aws::MediaLive
       :destinations,
       :id,
       :input_class,
+      :input_devices,
       :input_source_type,
       :media_connect_flows,
       :name,
@@ -5745,7 +5841,7 @@ module Aws::MediaLive
     #                 filter_settings: {
     #                   temporal_filter_settings: {
     #                     post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                     strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #                     strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
     #                   },
     #                 },
     #                 fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
@@ -6157,10 +6253,11 @@ module Aws::MediaLive
     #   @return [Types::InputLossBehavior]
     #
     # @!attribute [rw] output_locking_mode
-    #   Indicates how MediaLive pipelines are synchronized. PIPELINELOCKING
-    #   - MediaLive will attempt to synchronize the output of each pipeline
-    #   to the other. EPOCHLOCKING - MediaLive will attempt to synchronize
-    #   the output of each pipeline to the Unix epoch.
+    #   Indicates how MediaLive pipelines are synchronized.
+    #   PIPELINE\_LOCKING - MediaLive will attempt to synchronize the output
+    #   of each pipeline to the other. EPOCH\_LOCKING - MediaLive will
+    #   attempt to synchronize the output of each pipeline to the Unix
+    #   epoch.
     #   @return [String]
     #
     # @!attribute [rw] output_timing_source
@@ -6231,7 +6328,7 @@ module Aws::MediaLive
     #       {
     #         temporal_filter_settings: {
     #           post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #           strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #           strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
     #         },
     #       }
     #
@@ -6270,7 +6367,7 @@ module Aws::MediaLive
     #         filter_settings: {
     #           temporal_filter_settings: {
     #             post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #             strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #             strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
     #           },
     #         },
     #         fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
@@ -6350,7 +6447,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] filter_settings
-    #   Settings associated with the specified filter.
+    #   Optional filters that you can apply to an encode.
     #   @return [Types::H264FilterSettings]
     #
     # @!attribute [rw] fixed_afd
@@ -6474,9 +6571,13 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] quality_level
-    #   If set to "ENHANCEDQUALITY," improves visual quality at an
-    #   increased output cost. If this video is being delivered to a
-    #   MediaLive Multiplex, "ENHANCEDQUALITY" is always used.
+    #   Leave as STANDARD\_QUALITY or choose a different value (which might
+    #   result in additional costs to run the channel). - ENHANCED\_QUALITY:
+    #   Produces a slightly better video quality without an increase in the
+    #   bitrate. Has an effect only when the Rate control mode is QVBR or
+    #   CBR. If this channel is in a MediaLive multiplex, the value must be
+    #   ENHANCED\_QUALITY. - STANDARD\_QUALITY: Valid for any Rate control
+    #   mode.
     #   @return [String]
     #
     # @!attribute [rw] qvbr_quality_level
@@ -7351,11 +7452,11 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] output_selection
-    #   MANIFESTSANDSEGMENTS: Generates manifests (master manifest, if
+    #   MANIFESTS\_AND\_SEGMENTS: Generates manifests (master manifest, if
     #   applicable, and media manifests) for this output group.
-    #   VARIANTMANIFESTSANDSEGMENTS: Generates media manifests for this
-    #   output group, but not a master manifest. SEGMENTSONLY: Does not
-    #   generate any manifests for this output group.
+    #   VARIANT\_MANIFESTS\_AND\_SEGMENTS: Generates media manifests for
+    #   this output group, but not a master manifest. SEGMENTS\_ONLY: Does
+    #   not generate any manifests for this output group.
     #   @return [String]
     #
     # @!attribute [rw] program_date_time
@@ -7421,8 +7522,8 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] ts_file_mode
-    #   SEGMENTEDFILES: Emit the program as segments - multiple .ts media
-    #   files. SINGLEFILE: Applies only if Mode field is VOD. Emit the
+    #   SEGMENTED\_FILES: Emit the program as segments - multiple .ts media
+    #   files. SINGLE\_FILE: Applies only if Mode field is VOD. Emit the
     #   program as a single .ts media file. The media manifest includes
     #   #EXT-X-BYTERANGE tags to index segments for playback. A typical use
     #   for this value is when sending the output to AWS Elemental
@@ -7845,6 +7946,10 @@ module Aws::MediaLive
     #   not valid because the channel requires two sources in the input.
     #   @return [String]
     #
+    # @!attribute [rw] input_devices
+    #   Settings for the input devices.
+    #   @return [Array<Types::InputDeviceSettings>]
+    #
     # @!attribute [rw] input_source_type
     #   Certain pull input sources can be dynamic, meaning that they can
     #   have their URL's dynamically changes during input switch actions.
@@ -7891,6 +7996,7 @@ module Aws::MediaLive
       :destinations,
       :id,
       :input_class,
+      :input_devices,
       :input_source_type,
       :media_connect_flows,
       :name,
@@ -7977,6 +8083,7 @@ module Aws::MediaLive
     #             },
     #             server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #           },
+    #           smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #           source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #           video_selector: {
     #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709
@@ -8151,6 +8258,306 @@ module Aws::MediaLive
     class InputDestinationVpc < Struct.new(
       :availability_zone,
       :network_interface_id)
+      include Aws::Structure
+    end
+
+    # An input device.
+    #
+    # @!attribute [rw] arn
+    #   The unique ARN of the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   The state of the connection between the input device and AWS.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_settings_sync_state
+    #   The status of the action to synchronize the device configuration. If
+    #   you change the configuration of the input device (for example, the
+    #   maximum bitrate), MediaLive sends the new data to the device. The
+    #   device might not update itself immediately. SYNCED means the device
+    #   has updated its configuration. SYNCING means that it has not updated
+    #   its configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] hd_device_settings
+    #   Settings that describe an input device that is type HD.
+    #   @return [Types::InputDeviceHdSettings]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_address
+    #   The network MAC address of the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name that you specify for the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_settings
+    #   The network settings for the input device.
+    #   @return [Types::InputDeviceNetworkSettings]
+    #
+    # @!attribute [rw] serial_number
+    #   The unique serial number of the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the input device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDevice AWS API Documentation
+    #
+    class InputDevice < Struct.new(
+      :arn,
+      :connection_state,
+      :device_settings_sync_state,
+      :hd_device_settings,
+      :id,
+      :mac_address,
+      :name,
+      :network_settings,
+      :serial_number,
+      :type)
+      include Aws::Structure
+    end
+
+    # Configurable settings for the input device.
+    #
+    # @note When making an API call, you may pass InputDeviceConfigurableSettings
+    #   data as a hash:
+    #
+    #       {
+    #         configured_input: "AUTO", # accepts AUTO, HDMI, SDI
+    #         max_bitrate: 1,
+    #       }
+    #
+    # @!attribute [rw] configured_input
+    #   The input source that you want to use. If the device has a source
+    #   connected to only one of its input ports, or if you don't care
+    #   which source the device sends, specify Auto. If the device has
+    #   sources connected to both its input ports, and you want to use a
+    #   specific source, specify the source.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_bitrate
+    #   The maximum bitrate in bits per second. Set a value here to throttle
+    #   the bitrate of the source video.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceConfigurableSettings AWS API Documentation
+    #
+    class InputDeviceConfigurableSettings < Struct.new(
+      :configured_input,
+      :max_bitrate)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_errors
+    #   A collection of validation error responses.
+    #   @return [Array<Types::ValidationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceConfigurationValidationError AWS API Documentation
+    #
+    class InputDeviceConfigurationValidationError < Struct.new(
+      :message,
+      :validation_errors)
+      include Aws::Structure
+    end
+
+    # Settings that describe the active source from the input device, and
+    # the video characteristics of that source.
+    #
+    # @!attribute [rw] active_input
+    #   If you specified Auto as the configured input, specifies which of
+    #   the sources is currently active (SDI or HDMI).
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_input
+    #   The source at the input device that is currently active. You can
+    #   specify this source.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_state
+    #   The state of the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate
+    #   The frame rate of the video source.
+    #   @return [Float]
+    #
+    # @!attribute [rw] height
+    #   The height of the video source, in pixels.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_bitrate
+    #   The current maximum bitrate for ingesting this source, in bits per
+    #   second. You can specify this maximum.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scan_type
+    #   The scan type of the video source.
+    #   @return [String]
+    #
+    # @!attribute [rw] width
+    #   The width of the video source, in pixels.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceHdSettings AWS API Documentation
+    #
+    class InputDeviceHdSettings < Struct.new(
+      :active_input,
+      :configured_input,
+      :device_state,
+      :framerate,
+      :height,
+      :max_bitrate,
+      :scan_type,
+      :width)
+      include Aws::Structure
+    end
+
+    # The network settings for the input device.
+    #
+    # @!attribute [rw] dns_addresses
+    #   The DNS addresses of the input device.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] gateway
+    #   The network gateway IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The IP address of the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_scheme
+    #   Specifies whether the input device has been configured (outside of
+    #   MediaLive) to use a dynamic IP address assignment (DHCP) or a static
+    #   IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_mask
+    #   The subnet mask of the input device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceNetworkSettings AWS API Documentation
+    #
+    class InputDeviceNetworkSettings < Struct.new(
+      :dns_addresses,
+      :gateway,
+      :ip_address,
+      :ip_scheme,
+      :subnet_mask)
+      include Aws::Structure
+    end
+
+    # Settings for an input device.
+    #
+    # @note When making an API call, you may pass InputDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "__string",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique ID for the device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceRequest AWS API Documentation
+    #
+    class InputDeviceRequest < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # Settings for an input device.
+    #
+    # @note When making an API call, you may pass InputDeviceSettings
+    #   data as a hash:
+    #
+    #       {
+    #         id: "__string",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique ID for the device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceSettings AWS API Documentation
+    #
+    class InputDeviceSettings < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # Details of the input device.
+    #
+    # @!attribute [rw] arn
+    #   The unique ARN of the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   The state of the connection between the input device and AWS.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_settings_sync_state
+    #   The status of the action to synchronize the device configuration. If
+    #   you change the configuration of the input device (for example, the
+    #   maximum bitrate), MediaLive sends the new data to the device. The
+    #   device might not update itself immediately. SYNCED means the device
+    #   has updated its configuration. SYNCING means that it has not updated
+    #   its configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] hd_device_settings
+    #   Settings that describe an input device that is type HD.
+    #   @return [Types::InputDeviceHdSettings]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_address
+    #   The network MAC address of the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name that you specify for the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_settings
+    #   Network settings for the input device.
+    #   @return [Types::InputDeviceNetworkSettings]
+    #
+    # @!attribute [rw] serial_number
+    #   The unique serial number of the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the input device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceSummary AWS API Documentation
+    #
+    class InputDeviceSummary < Struct.new(
+      :arn,
+      :connection_state,
+      :device_settings_sync_state,
+      :hd_device_settings,
+      :id,
+      :mac_address,
+      :name,
+      :network_settings,
+      :serial_number,
+      :type)
       include Aws::Structure
     end
 
@@ -8377,6 +8784,7 @@ module Aws::MediaLive
     #           },
     #           server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #         },
+    #         smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #         source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #         video_selector: {
     #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709
@@ -8427,6 +8835,15 @@ module Aws::MediaLive
     #   Input settings.
     #   @return [Types::NetworkInputSettings]
     #
+    # @!attribute [rw] smpte_2038_data_preference
+    #   Specifies whether to extract applicable ancillary data from a
+    #   SMPTE-2038 source in this input. Applicable data types are captions,
+    #   timecode, AFD, and SCTE-104 messages. - PREFER: Extract from
+    #   SMPTE-2038 if present in this input, otherwise extract from another
+    #   source (if any). - IGNORE: Never extract any ancillary data from
+    #   SMPTE-2038.
+    #   @return [String]
+    #
     # @!attribute [rw] source_end_behavior
     #   Loop input if it is a file. This allows a file input to be streamed
     #   indefinitely.
@@ -8447,6 +8864,7 @@ module Aws::MediaLive
       :filter_strength,
       :input_filter,
       :network_input_settings,
+      :smpte_2038_data_preference,
       :source_end_behavior,
       :video_selector)
       include Aws::Structure
@@ -8765,6 +9183,60 @@ module Aws::MediaLive
     #
     class ListChannelsResultModel < Struct.new(
       :channels,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListInputDevicesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputDevicesRequest AWS API Documentation
+    #
+    class ListInputDevicesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] input_devices
+    #   @return [Array<Types::InputDeviceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputDevicesResponse AWS API Documentation
+    #
+    class ListInputDevicesResponse < Struct.new(
+      :input_devices,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # The list of input devices owned by the AWS account.
+    #
+    # @!attribute [rw] input_devices
+    #   The list of input devices.
+    #   @return [Array<Types::InputDeviceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to get additional list results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputDevicesResultModel AWS API Documentation
+    #
+    class ListInputDevicesResultModel < Struct.new(
+      :input_devices,
       :next_token)
       include Aws::Structure
     end
@@ -9540,7 +10012,7 @@ module Aws::MediaLive
     #
     # @!attribute [rw] segmentation_time
     #   The length in seconds of each segment. Required unless markers is
-    #   set to None\_.
+    #   set to \_none\_.
     #   @return [Float]
     #
     # @!attribute [rw] timed_metadata_behavior
@@ -9906,9 +10378,8 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] acquisition_point_id
-    #   The value of the "Acquisition Point Identity" element used in each
-    #   message placed in the sparse track. Only enabled if sparseTrackType
-    #   is not "none".
+    #   The ID to include in each message in the sparse track. Ignored if
+    #   sparseTrackType is NONE.
     #   @return [String]
     #
     # @!attribute [rw] audio_only_timecode_control
@@ -9988,11 +10459,13 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] sparse_track_type
-    #   If set to scte35, use incoming SCTE-35 messages to generate a sparse
-    #   track in this group of MS-Smooth outputs. scte35WithoutSegmentation
-    #   is the same as scte35, except EML will not start a new segment at a
-    #   SCTE-35 marker. It will still encode an IDR frame at a SCTE-35
-    #   marker.
+    #   Identifies the type of data to place in the sparse track: - SCTE35:
+    #   Insert SCTE-35 messages from the source content. With each message,
+    #   insert an IDR frame to start a new segment. -
+    #   SCTE35\_WITHOUT\_SEGMENTATION: Insert SCTE-35 messages from the
+    #   source content. With each message, insert an IDR frame but don't
+    #   start a new segment. - NONE: Don't generate a sparse track for any
+    #   outputs in this output group.
     #   @return [String]
     #
     # @!attribute [rw] stream_manifest_behavior
@@ -10129,7 +10602,7 @@ module Aws::MediaLive
     #
     # @!attribute [rw] validation_errors
     #   A collection of validation error responses.
-    #   @return [Array<Types::MultiplexValidationError>]
+    #   @return [Array<Types::ValidationError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexConfigurationValidationError AWS API Documentation
     #
@@ -10532,22 +11005,6 @@ module Aws::MediaLive
       :program_count,
       :state,
       :tags)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] element_path
-    #   Path to the source of the error.
-    #   @return [String]
-    #
-    # @!attribute [rw] error_message
-    #   The error message.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexValidationError AWS API Documentation
-    #
-    class MultiplexValidationError < Struct.new(
-      :element_path,
-      :error_message)
       include Aws::Structure
     end
 
@@ -13882,17 +14339,21 @@ module Aws::MediaLive
     #
     #       {
     #         post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #         strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #         strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
     #       }
     #
     # @!attribute [rw] post_filter_sharpening
-    #   If set to "ENABLED," applies post-filter sharpening to improve
-    #   visual quality. This is most beneficial when using a noisy or
-    #   compressed input source and low output bitrates.
+    #   If you enable this filter, the results are the following: - If the
+    #   source content is noisy (it contains excessive digital artifacts),
+    #   the filter cleans up the source. - If the source content is already
+    #   clean, the filter tends to decrease the bitrate, especially when the
+    #   rate control mode is QVBR.
     #   @return [String]
     #
     # @!attribute [rw] strength
-    #   Filter strength. A higher value produces stronger filtering.
+    #   Choose a filter strength. We recommend a strength of 1 or 2. A
+    #   higher strength might take out good information, resulting in an
+    #   image that is overly soft.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TemporalFilterSettings AWS API Documentation
@@ -14974,7 +15435,7 @@ module Aws::MediaLive
     #                   filter_settings: {
     #                     temporal_filter_settings: {
     #                       post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
     #                     },
     #                   },
     #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
@@ -15133,6 +15594,7 @@ module Aws::MediaLive
     #                 },
     #                 server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #               },
+    #               smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #               source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #               video_selector: {
     #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709
@@ -15225,6 +15687,10 @@ module Aws::MediaLive
     #   Destination settings for PUSH type inputs.
     #   @return [Array<Types::InputDestinationRequest>]
     #
+    # @!attribute [rw] input_devices
+    #   Settings for the devices.
+    #   @return [Array<Types::InputDeviceRequest>]
+    #
     # @!attribute [rw] input_security_groups
     #   A list of security groups referenced by IDs to attach to the input.
     #   @return [Array<String>]
@@ -15256,11 +15722,119 @@ module Aws::MediaLive
     #
     class UpdateInput < Struct.new(
       :destinations,
+      :input_devices,
       :input_security_groups,
       :media_connect_flows,
       :name,
       :role_arn,
       :sources)
+      include Aws::Structure
+    end
+
+    # Updates an input device.
+    #
+    # @!attribute [rw] hd_device_settings
+    #   The settings that you want to apply to the input device.
+    #   @return [Types::InputDeviceConfigurableSettings]
+    #
+    # @!attribute [rw] name
+    #   The name that you assigned to this input device (not the unique ID).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDevice AWS API Documentation
+    #
+    class UpdateInputDevice < Struct.new(
+      :hd_device_settings,
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateInputDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hd_device_settings: {
+    #           configured_input: "AUTO", # accepts AUTO, HDMI, SDI
+    #           max_bitrate: 1,
+    #         },
+    #         input_device_id: "__string", # required
+    #         name: "__string",
+    #       }
+    #
+    # @!attribute [rw] hd_device_settings
+    #   Configurable settings for the input device.
+    #   @return [Types::InputDeviceConfigurableSettings]
+    #
+    # @!attribute [rw] input_device_id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDeviceRequest AWS API Documentation
+    #
+    class UpdateInputDeviceRequest < Struct.new(
+      :hd_device_settings,
+      :input_device_id,
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   The state of the connection between the input device and AWS.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_settings_sync_state
+    #   The status of the action to synchronize the device configuration. If
+    #   you change the configuration of the input device (for example, the
+    #   maximum bitrate), MediaLive sends the new data to the device. The
+    #   device might not update itself immediately. SYNCED means the device
+    #   has updated its configuration. SYNCING means that it has not updated
+    #   its configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] hd_device_settings
+    #   Settings that describe the active source from the input device, and
+    #   the video characteristics of that source.
+    #   @return [Types::InputDeviceHdSettings]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_address
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] network_settings
+    #   The network settings for the input device.
+    #   @return [Types::InputDeviceNetworkSettings]
+    #
+    # @!attribute [rw] serial_number
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the input device. For an AWS Elemental Link device that
+    #   outputs resolutions up to 1080, choose "HD".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDeviceResponse AWS API Documentation
+    #
+    class UpdateInputDeviceResponse < Struct.new(
+      :arn,
+      :connection_state,
+      :device_settings_sync_state,
+      :hd_device_settings,
+      :id,
+      :mac_address,
+      :name,
+      :network_settings,
+      :serial_number,
+      :type)
       include Aws::Structure
     end
 
@@ -15271,6 +15845,11 @@ module Aws::MediaLive
     #         destinations: [
     #           {
     #             stream_name: "__string",
+    #           },
+    #         ],
+    #         input_devices: [
+    #           {
+    #             id: "__string",
     #           },
     #         ],
     #         input_id: "__string", # required
@@ -15294,6 +15873,9 @@ module Aws::MediaLive
     # @!attribute [rw] destinations
     #   @return [Array<Types::InputDestinationRequest>]
     #
+    # @!attribute [rw] input_devices
+    #   @return [Array<Types::InputDeviceRequest>]
+    #
     # @!attribute [rw] input_id
     #   @return [String]
     #
@@ -15316,6 +15898,7 @@ module Aws::MediaLive
     #
     class UpdateInputRequest < Struct.new(
       :destinations,
+      :input_devices,
       :input_id,
       :input_security_groups,
       :media_connect_flows,
@@ -15606,9 +16189,11 @@ module Aws::MediaLive
     end
 
     # @!attribute [rw] element_path
+    #   Path to the source of the error.
     #   @return [String]
     #
     # @!attribute [rw] error_message
+    #   The error message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ValidationError AWS API Documentation
@@ -15648,7 +16233,7 @@ module Aws::MediaLive
     #           filter_settings: {
     #             temporal_filter_settings: {
     #               post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #               strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #               strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
     #             },
     #           },
     #           fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
@@ -15778,7 +16363,7 @@ module Aws::MediaLive
     #             filter_settings: {
     #               temporal_filter_settings: {
     #                 post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                 strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #                 strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
     #               },
     #             },
     #             fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
@@ -15886,18 +16471,18 @@ module Aws::MediaLive
     #   Indicates how to respond to the AFD values in the input stream.
     #   RESPOND causes input video to be clipped, depending on the AFD
     #   value, input display aspect ratio, and output display aspect ratio,
-    #   and (except for FRAMECAPTURE codec) includes the values in the
-    #   output. PASSTHROUGH (does not apply to FRAMECAPTURE codec) ignores
+    #   and (except for FRAME\_CAPTURE codec) includes the values in the
+    #   output. PASSTHROUGH (does not apply to FRAME\_CAPTURE codec) ignores
     #   the AFD values and includes the values in the output, so input video
     #   is not clipped. NONE ignores the AFD values and does not include the
     #   values through to the output, so input video is not clipped.
     #   @return [String]
     #
     # @!attribute [rw] scaling_behavior
-    #   STRETCHTOOUTPUT configures the output position to stretch the video
-    #   to the specified output resolution (height and width). This option
-    #   will override any position value. DEFAULT may insert black boxes
-    #   (pillar boxes or letter boxes) around the video to provide the
+    #   STRETCH\_TO\_OUTPUT configures the output position to stretch the
+    #   video to the specified output resolution (height and width). This
+    #   option will override any position value. DEFAULT may insert black
+    #   boxes (pillar boxes or letter boxes) around the video to provide the
     #   specified output resolution.
     #   @return [String]
     #

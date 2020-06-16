@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -67,6 +69,6 @@ require_relative 'aws-sdk-iam/customizations'
 # @service
 module Aws::IAM
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.40.1'
 
 end

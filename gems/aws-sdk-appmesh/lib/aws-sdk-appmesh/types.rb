@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -184,7 +186,7 @@ module Aws::AppMesh
     #
     # @!attribute [rw] resource_owner
     #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner, or another
+    #   not your own, then it's the ID of the mesh owner or of another
     #   account that the mesh is shared with. For more information about
     #   mesh sharing, see [Working with Shared Meshes][1].
     #
@@ -1203,6 +1205,12 @@ module Aws::AppMesh
     #   The full Amazon Resource Name (ARN) for the route.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   @return [Time]
+    #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh that the route resides in.
     #   @return [String]
@@ -1220,7 +1228,7 @@ module Aws::AppMesh
     #
     # @!attribute [rw] resource_owner
     #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner, or another
+    #   not your own, then it's the ID of the mesh owner or of another
     #   account that the mesh is shared with. For more information about
     #   mesh sharing, see [Working with Shared Meshes][1].
     #
@@ -1233,6 +1241,9 @@ module Aws::AppMesh
     #   The name of the route.
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   @return [Integer]
+    #
     # @!attribute [rw] virtual_router_name
     #   The virtual router that the route is associated with.
     #   @return [String]
@@ -1241,10 +1252,13 @@ module Aws::AppMesh
     #
     class RouteRef < Struct.new(
       :arn,
+      :created_at,
+      :last_updated_at,
       :mesh_name,
       :mesh_owner,
       :resource_owner,
       :route_name,
+      :version,
       :virtual_router_name)
       include Aws::Structure
     end
@@ -2780,6 +2794,12 @@ module Aws::AppMesh
     #   The full Amazon Resource Name (ARN) for the virtual service.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   @return [Time]
+    #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh that the virtual service resides in.
     #   @return [String]
@@ -2797,7 +2817,7 @@ module Aws::AppMesh
     #
     # @!attribute [rw] resource_owner
     #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner, or another
+    #   not your own, then it's the ID of the mesh owner or of another
     #   account that the mesh is shared with. For more information about
     #   mesh sharing, see [Working with Shared Meshes][1].
     #
@@ -2805,6 +2825,9 @@ module Aws::AppMesh
     #
     #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   @return [Integer]
     #
     # @!attribute [rw] virtual_service_name
     #   The name of the virtual service.
@@ -2814,9 +2837,12 @@ module Aws::AppMesh
     #
     class VirtualServiceRef < Struct.new(
       :arn,
+      :created_at,
+      :last_updated_at,
       :mesh_name,
       :mesh_owner,
       :resource_owner,
+      :version,
       :virtual_service_name)
       include Aws::Structure
     end
@@ -2841,6 +2867,12 @@ module Aws::AppMesh
     #   The full Amazon Resource Name (ARN) for the virtual router.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   @return [Time]
+    #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh that the virtual router resides in.
     #   @return [String]
@@ -2858,7 +2890,7 @@ module Aws::AppMesh
     #
     # @!attribute [rw] resource_owner
     #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner, or another
+    #   not your own, then it's the ID of the mesh owner or of another
     #   account that the mesh is shared with. For more information about
     #   mesh sharing, see [Working with Shared Meshes][1].
     #
@@ -2866,6 +2898,9 @@ module Aws::AppMesh
     #
     #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   @return [Integer]
     #
     # @!attribute [rw] virtual_router_name
     #   The name of the virtual router.
@@ -2875,9 +2910,12 @@ module Aws::AppMesh
     #
     class VirtualRouterRef < Struct.new(
       :arn,
+      :created_at,
+      :last_updated_at,
       :mesh_name,
       :mesh_owner,
       :resource_owner,
+      :version,
       :virtual_router_name)
       include Aws::Structure
     end
@@ -2965,6 +3003,12 @@ module Aws::AppMesh
     #   The full Amazon Resource Name (ARN) for the virtual node.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   @return [Time]
+    #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh that the virtual node resides in.
     #   @return [String]
@@ -2982,7 +3026,7 @@ module Aws::AppMesh
     #
     # @!attribute [rw] resource_owner
     #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner, or another
+    #   not your own, then it's the ID of the mesh owner or of another
     #   account that the mesh is shared with. For more information about
     #   mesh sharing, see [Working with Shared Meshes][1].
     #
@@ -2990,6 +3034,9 @@ module Aws::AppMesh
     #
     #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   @return [Integer]
     #
     # @!attribute [rw] virtual_node_name
     #   The name of the virtual node.
@@ -2999,9 +3046,12 @@ module Aws::AppMesh
     #
     class VirtualNodeRef < Struct.new(
       :arn,
+      :created_at,
+      :last_updated_at,
       :mesh_name,
       :mesh_owner,
       :resource_owner,
+      :version,
       :virtual_node_name)
       include Aws::Structure
     end
@@ -3091,7 +3141,7 @@ module Aws::AppMesh
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/service_limits.html
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/service-quotas.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3647,6 +3697,12 @@ module Aws::AppMesh
     #   The full Amazon Resource Name (ARN) of the service mesh.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   @return [Time]
+    #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh.
     #   @return [String]
@@ -3664,7 +3720,7 @@ module Aws::AppMesh
     #
     # @!attribute [rw] resource_owner
     #   The AWS IAM account ID of the resource owner. If the account ID is
-    #   not your own, then it's the ID of the mesh owner, or another
+    #   not your own, then it's the ID of the mesh owner or of another
     #   account that the mesh is shared with. For more information about
     #   mesh sharing, see [Working with Shared Meshes][1].
     #
@@ -3673,13 +3729,19 @@ module Aws::AppMesh
     #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshRef AWS API Documentation
     #
     class MeshRef < Struct.new(
       :arn,
+      :created_at,
+      :last_updated_at,
       :mesh_name,
       :mesh_owner,
-      :resource_owner)
+      :resource_owner,
+      :version)
       include Aws::Structure
     end
 
@@ -3952,7 +4014,7 @@ module Aws::AppMesh
     #   @return [Boolean]
     #
     # @!attribute [rw] ports
-    #   The range of ports that the policy is enforced for.
+    #   One or more ports that the policy is enforced for.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] validation
@@ -4041,7 +4103,7 @@ module Aws::AppMesh
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites
     #
     # @note When making an API call, you may pass ListenerTlsFileCertificate
     #   data as a hash:
@@ -4884,7 +4946,7 @@ module Aws::AppMesh
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListenerTlsAcmCertificate AWS API Documentation

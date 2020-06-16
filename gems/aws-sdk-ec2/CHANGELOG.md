@@ -1,6 +1,47 @@
 Unreleased Changes
 ------------------
 
+1.166.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.166.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - New C6g instances powered by AWS Graviton2 processors and ideal for running advanced, compute-intensive workloads; New R6g instances powered by AWS Graviton2 processors and ideal for running memory-intensive workloads.
+
+1.165.0 (2020-06-04)
+------------------
+
+* Feature - New C5a instances, the latest generation of EC2's compute-optimized instances featuring AMD's 2nd Generation EPYC processors. C5a instances offer up to 96 vCPUs, 192 GiB of instance memory, 20 Gbps in Network bandwidth; New G4dn.metal bare metal instance with 8 NVIDIA T4 GPUs.
+
+1.164.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.163.0 (2020-05-26)
+------------------
+
+* Feature - ebsOptimizedInfo, efaSupported and supportedVirtualizationTypes added to DescribeInstanceTypes API
+
+1.162.0 (2020-05-21)
+------------------
+
+* Feature - From this release onwards ProvisionByoipCidr publicly supports IPv6. Updated ProvisionByoipCidr API to support tags for public IPv4 and IPv6 pools. Added NetworkBorderGroup to the DescribePublicIpv4Pools response.
+
+1.161.0 (2020-05-19)
+------------------
+
+* Feature - This release adds support for Federated Authentication via SAML-2.0 in AWS ClientVPN.
+
+1.160.0 (2020-05-18)
+------------------
+
+* Feature - This release changes the RunInstances CLI and SDK's so that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.
+
 1.159.0 (2020-05-14)
 ------------------
 
@@ -904,4 +945,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-ec2` gem.
-

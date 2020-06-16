@@ -78,9 +78,9 @@ module Aws
 
         # locate event from eventstream
         name, ref = @rules.shape.member_by_location_name(event_type)
-        unless ref.event
-          raise Aws::Errors::EventStreamParserError.new(
-            "Failed to locate event shape for the event")
+        unless ref && ref.event
+          return Struct.new(:event_type, :raw_event_type, :raw_event)
+                       .new(:unknown_event, event_type, raw_event)
         end
 
         event = ref.shape.struct_class.new

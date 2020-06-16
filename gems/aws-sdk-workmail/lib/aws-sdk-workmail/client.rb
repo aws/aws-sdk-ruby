@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::WorkMail
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::WorkMail
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::WorkMail
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -668,6 +672,33 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Deletes the specified retention policy from the specified
+    # organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The organization ID.
+    #
+    # @option params [required, String] :id
+    #   The retention policy ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_retention_policy({
+    #     organization_id: "OrganizationId", # required
+    #     id: "ShortString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteRetentionPolicy AWS API Documentation
+    #
+    # @overload delete_retention_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_retention_policy(params = {}, options = {})
+      req = build_request(:delete_retention_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes a user from Amazon WorkMail and all subsequent systems. Before
     # you can delete a user, the user state must be `DISABLED`. Use the
     # DescribeUser action to confirm the user state.
@@ -1016,6 +1047,44 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def get_access_control_effect(params = {}, options = {})
       req = build_request(:get_access_control_effect, params)
+      req.send_request(options)
+    end
+
+    # Gets the default retention policy details for the specified
+    # organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The organization ID.
+    #
+    # @return [Types::GetDefaultRetentionPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDefaultRetentionPolicyResponse#id #id} => String
+    #   * {Types::GetDefaultRetentionPolicyResponse#name #name} => String
+    #   * {Types::GetDefaultRetentionPolicyResponse#description #description} => String
+    #   * {Types::GetDefaultRetentionPolicyResponse#folder_configurations #folder_configurations} => Array&lt;Types::FolderConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_default_retention_policy({
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.folder_configurations #=> Array
+    #   resp.folder_configurations[0].name #=> String, one of "INBOX", "DELETED_ITEMS", "SENT_ITEMS", "DRAFTS", "JUNK_EMAIL"
+    #   resp.folder_configurations[0].action #=> String, one of "NONE", "DELETE", "PERMANENTLY_DELETE"
+    #   resp.folder_configurations[0].period #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetDefaultRetentionPolicy AWS API Documentation
+    #
+    # @overload get_default_retention_policy(params = {})
+    # @param [Hash] params ({})
+    def get_default_retention_policy(params = {}, options = {})
+      req = build_request(:get_default_retention_policy, params)
       req.send_request(options)
     end
 
@@ -1625,6 +1694,50 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Puts a retention policy to the specified organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The organization ID.
+    #
+    # @option params [String] :id
+    #   The retention policy ID.
+    #
+    # @option params [required, String] :name
+    #   The retention policy name.
+    #
+    # @option params [String] :description
+    #   The retention policy description.
+    #
+    # @option params [required, Array<Types::FolderConfiguration>] :folder_configurations
+    #   The retention policy folder configurations.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_retention_policy({
+    #     organization_id: "OrganizationId", # required
+    #     id: "ShortString",
+    #     name: "ShortString", # required
+    #     description: "PolicyDescription",
+    #     folder_configurations: [ # required
+    #       {
+    #         name: "INBOX", # required, accepts INBOX, DELETED_ITEMS, SENT_ITEMS, DRAFTS, JUNK_EMAIL
+    #         action: "NONE", # required, accepts NONE, DELETE, PERMANENTLY_DELETE
+    #         period: 1,
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutRetentionPolicy AWS API Documentation
+    #
+    # @overload put_retention_policy(params = {})
+    # @param [Hash] params ({})
+    def put_retention_policy(params = {}, options = {})
+      req = build_request(:put_retention_policy, params)
+      req.send_request(options)
+    end
+
     # Registers an existing and disabled user, group, or resource for Amazon
     # WorkMail use by associating a mailbox and calendaring capabilities. It
     # performs no change if the user, group, or resource is enabled and
@@ -1880,7 +1993,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+3.100.0 (2020-06-15)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.99.2 (2020-06-12)
+------------------
+
+* Issue - Don't retry streaming requests with blocks (#2311)
+
+3.99.1 (2020-06-11)
+------------------
+
+* Issue - Republish after incorrect yank.
+
+3.99.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Feature - Support `httpChecksumRequired` on operations that require Content MD5 validation.
+* Issue - Validate `:region` as a valid DNS host label.
+
+3.98.0 (2020-06-05)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.97.1 (2020-06-01)
+------------------
+
+* Issue - Convert ENV['AWS_MAX_ATTEMPTS'] String value to Integer when set. (#2319)
+* Issue - Handle unknown and unmodeled events from event streams by ignoring them and providing a new callback rather than raising an error.
+
+3.97.0 (2020-05-28)
+------------------
+* Feature - Default endpoint_discovery to `true` for services with at least one operation that requires it.
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.96.1 (2020-05-18)
+------------------
+
 * Issue - Raise `ArgumentError` for XML services when required URI elements are not included.
 
 3.96.0 (2020-05-15)

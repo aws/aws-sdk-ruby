@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::LexModelBuildingService
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::LexModelBuildingService
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::LexModelBuildingService
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -449,6 +453,7 @@ module Aws::LexModelBuildingService
     #   * {Types::CreateIntentVersionResponse#created_date #created_date} => Time
     #   * {Types::CreateIntentVersionResponse#version #version} => String
     #   * {Types::CreateIntentVersionResponse#checksum #checksum} => String
+    #   * {Types::CreateIntentVersionResponse#kendra_configuration #kendra_configuration} => Types::KendraConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -517,6 +522,9 @@ module Aws::LexModelBuildingService
     #   resp.created_date #=> Time
     #   resp.version #=> String
     #   resp.checksum #=> String
+    #   resp.kendra_configuration.kendra_index #=> String
+    #   resp.kendra_configuration.query_filter_string #=> String
+    #   resp.kendra_configuration.role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateIntentVersion AWS API Documentation
     #
@@ -1756,6 +1764,7 @@ module Aws::LexModelBuildingService
     #   * {Types::GetIntentResponse#created_date #created_date} => Time
     #   * {Types::GetIntentResponse#version #version} => String
     #   * {Types::GetIntentResponse#checksum #checksum} => String
+    #   * {Types::GetIntentResponse#kendra_configuration #kendra_configuration} => Types::KendraConfiguration
     #
     #
     # @example Example: To get a information about an intent
@@ -1969,6 +1978,9 @@ module Aws::LexModelBuildingService
     #   resp.created_date #=> Time
     #   resp.version #=> String
     #   resp.checksum #=> String
+    #   resp.kendra_configuration.kendra_index #=> String
+    #   resp.kendra_configuration.query_filter_string #=> String
+    #   resp.kendra_configuration.role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntent AWS API Documentation
     #
@@ -3169,6 +3181,15 @@ module Aws::LexModelBuildingService
     #   This is the same as calling the `CreateIntentVersion` operation. If
     #   you do not specify `createVersion`, the default is `false`.
     #
+    # @option params [Types::KendraConfiguration] :kendra_configuration
+    #   Configuration information required to use the
+    #   `AMAZON.KendraSearchIntent` intent to connect to an Amazon Kendra
+    #   index. For more information, see [ AMAZON.KendraSearchIntent][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html
+    #
     # @return [Types::PutIntentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutIntentResponse#name #name} => String
@@ -3187,6 +3208,7 @@ module Aws::LexModelBuildingService
     #   * {Types::PutIntentResponse#version #version} => String
     #   * {Types::PutIntentResponse#checksum #checksum} => String
     #   * {Types::PutIntentResponse#create_version #create_version} => Boolean
+    #   * {Types::PutIntentResponse#kendra_configuration #kendra_configuration} => Types::KendraConfiguration
     #
     #
     # @example Example: To create an intent
@@ -3556,6 +3578,11 @@ module Aws::LexModelBuildingService
     #     parent_intent_signature: "BuiltinIntentSignature",
     #     checksum: "String",
     #     create_version: false,
+    #     kendra_configuration: {
+    #       kendra_index: "KendraIndexArn", # required
+    #       query_filter_string: "QueryFilterString",
+    #       role: "roleArn", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -3619,6 +3646,9 @@ module Aws::LexModelBuildingService
     #   resp.version #=> String
     #   resp.checksum #=> String
     #   resp.create_version #=> Boolean
+    #   resp.kendra_configuration.kendra_index #=> String
+    #   resp.kendra_configuration.query_filter_string #=> String
+    #   resp.kendra_configuration.role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntent AWS API Documentation
     #
@@ -3972,7 +4002,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -160,6 +162,11 @@ module Aws::MarketplaceCatalog
     #   The entity to be changed.
     #   @return [Types::Entity]
     #
+    # @!attribute [rw] details
+    #   This object contains details specific to the change type of the
+    #   requested change.
+    #   @return [String]
+    #
     # @!attribute [rw] error_detail_list
     #   An array of `ErrorDetail` objects associated with the change.
     #   @return [Array<Types::ErrorDetail>]
@@ -169,6 +176,7 @@ module Aws::MarketplaceCatalog
     class ChangeSummary < Struct.new(
       :change_type,
       :entity,
+      :details,
       :error_detail_list)
       include Aws::Structure
     end
@@ -346,7 +354,7 @@ module Aws::MarketplaceCatalog
     #
     # @!attribute [rw] name
     #   The name for the entity. This value is not unique. It is defined by
-    #   the provider.
+    #   the seller.
     #   @return [String]
     #
     # @!attribute [rw] entity_type
@@ -367,11 +375,11 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     #
     # @!attribute [rw] visibility
-    #   The visibility status of the entity to subscribers. This value can
-    #   be `Public` (everyone can view the entity), `Limited` (the entity is
+    #   The visibility status of the entity to buyers. This value can be
+    #   `Public` (everyone can view the entity), `Limited` (the entity is
     #   visible to limited accounts only), or `Restricted` (the entity was
-    #   published and then unpublished and only existing subscribers can
-    #   view it).
+    #   published and then unpublished and only existing buyers can view
+    #   it).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntitySummary AWS API Documentation
@@ -498,7 +506,7 @@ module Aws::MarketplaceCatalog
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] sort
-    #   An object that contains two attributes, `sortBy` and `sortOrder`.
+    #   An object that contains two attributes, `SortBy` and `SortOrder`.
     #   @return [Types::Sort]
     #
     # @!attribute [rw] max_results
@@ -574,7 +582,7 @@ module Aws::MarketplaceCatalog
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] sort
-    #   An object that contains two attributes, `sortBy` and `sortOrder`.
+    #   An object that contains two attributes, `SortBy` and `SortOrder`.
     #   @return [Types::Sort]
     #
     # @!attribute [rw] next_token
@@ -664,7 +672,7 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
-    # An object that contains two attributes, `sortBy` and `sortOrder`.
+    # An object that contains two attributes, `SortBy` and `SortOrder`.
     #
     # @note When making an API call, you may pass Sort
     #   data as a hash:

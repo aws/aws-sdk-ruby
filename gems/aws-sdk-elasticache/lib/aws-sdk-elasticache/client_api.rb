@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -186,6 +188,7 @@ module Aws::ElastiCache
     ModifyReplicationGroupResult = Shapes::StructureShape.new(name: 'ModifyReplicationGroupResult')
     ModifyReplicationGroupShardConfigurationMessage = Shapes::StructureShape.new(name: 'ModifyReplicationGroupShardConfigurationMessage')
     ModifyReplicationGroupShardConfigurationResult = Shapes::StructureShape.new(name: 'ModifyReplicationGroupShardConfigurationResult')
+    MultiAZStatus = Shapes::StringShape.new(name: 'MultiAZStatus')
     NoOperationFault = Shapes::StructureShape.new(name: 'NoOperationFault')
     NodeGroup = Shapes::StructureShape.new(name: 'NodeGroup')
     NodeGroupConfiguration = Shapes::StructureShape.new(name: 'NodeGroupConfiguration')
@@ -367,6 +370,7 @@ module Aws::ElastiCache
     CacheCluster.add_member(:auth_token_last_modified_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "AuthTokenLastModifiedDate"))
     CacheCluster.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
     CacheCluster.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AtRestEncryptionEnabled"))
+    CacheCluster.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     CacheCluster.struct_class = Types::CacheCluster
 
     CacheClusterAlreadyExistsFault.struct_class = Types::CacheClusterAlreadyExistsFault
@@ -442,6 +446,7 @@ module Aws::ElastiCache
     CacheParameterGroup.add_member(:cache_parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "CacheParameterGroupFamily"))
     CacheParameterGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CacheParameterGroup.add_member(:is_global, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsGlobal"))
+    CacheParameterGroup.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     CacheParameterGroup.struct_class = Types::CacheParameterGroup
 
     CacheParameterGroupAlreadyExistsFault.struct_class = Types::CacheParameterGroupAlreadyExistsFault
@@ -473,6 +478,7 @@ module Aws::ElastiCache
     CacheSecurityGroup.add_member(:cache_security_group_name, Shapes::ShapeRef.new(shape: String, location_name: "CacheSecurityGroupName"))
     CacheSecurityGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CacheSecurityGroup.add_member(:ec2_security_groups, Shapes::ShapeRef.new(shape: EC2SecurityGroupList, location_name: "EC2SecurityGroups"))
+    CacheSecurityGroup.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     CacheSecurityGroup.struct_class = Types::CacheSecurityGroup
 
     CacheSecurityGroupAlreadyExistsFault.struct_class = Types::CacheSecurityGroupAlreadyExistsFault
@@ -499,6 +505,7 @@ module Aws::ElastiCache
     CacheSubnetGroup.add_member(:cache_subnet_group_description, Shapes::ShapeRef.new(shape: String, location_name: "CacheSubnetGroupDescription"))
     CacheSubnetGroup.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
     CacheSubnetGroup.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
+    CacheSubnetGroup.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     CacheSubnetGroup.struct_class = Types::CacheSubnetGroup
 
     CacheSubnetGroupAlreadyExistsFault.struct_class = Types::CacheSubnetGroupAlreadyExistsFault
@@ -606,6 +613,7 @@ module Aws::ElastiCache
     CreateReplicationGroupMessage.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "GlobalReplicationGroupId"))
     CreateReplicationGroupMessage.add_member(:primary_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "PrimaryClusterId"))
     CreateReplicationGroupMessage.add_member(:automatic_failover_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutomaticFailoverEnabled"))
+    CreateReplicationGroupMessage.add_member(:multi_az_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZEnabled"))
     CreateReplicationGroupMessage.add_member(:num_cache_clusters, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumCacheClusters"))
     CreateReplicationGroupMessage.add_member(:preferred_cache_cluster_a_zs, Shapes::ShapeRef.new(shape: AvailabilityZonesList, location_name: "PreferredCacheClusterAZs"))
     CreateReplicationGroupMessage.add_member(:num_node_groups, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumNodeGroups"))
@@ -891,6 +899,7 @@ module Aws::ElastiCache
     GlobalReplicationGroup.add_member(:auth_token_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AuthTokenEnabled"))
     GlobalReplicationGroup.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
     GlobalReplicationGroup.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AtRestEncryptionEnabled"))
+    GlobalReplicationGroup.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     GlobalReplicationGroup.struct_class = Types::GlobalReplicationGroup
 
     GlobalReplicationGroupAlreadyExistsFault.struct_class = Types::GlobalReplicationGroupAlreadyExistsFault
@@ -1019,6 +1028,7 @@ module Aws::ElastiCache
     ModifyReplicationGroupMessage.add_member(:primary_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "PrimaryClusterId"))
     ModifyReplicationGroupMessage.add_member(:snapshotting_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "SnapshottingClusterId"))
     ModifyReplicationGroupMessage.add_member(:automatic_failover_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutomaticFailoverEnabled"))
+    ModifyReplicationGroupMessage.add_member(:multi_az_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZEnabled"))
     ModifyReplicationGroupMessage.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "NodeGroupId"))
     ModifyReplicationGroupMessage.add_member(:cache_security_group_names, Shapes::ShapeRef.new(shape: CacheSecurityGroupNameList, location_name: "CacheSecurityGroupNames"))
     ModifyReplicationGroupMessage.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdsList, location_name: "SecurityGroupIds"))
@@ -1216,6 +1226,7 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:node_groups, Shapes::ShapeRef.new(shape: NodeGroupList, location_name: "NodeGroups"))
     ReplicationGroup.add_member(:snapshotting_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "SnapshottingClusterId"))
     ReplicationGroup.add_member(:automatic_failover, Shapes::ShapeRef.new(shape: AutomaticFailoverStatus, location_name: "AutomaticFailover"))
+    ReplicationGroup.add_member(:multi_az, Shapes::ShapeRef.new(shape: MultiAZStatus, location_name: "MultiAZ"))
     ReplicationGroup.add_member(:configuration_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "ConfigurationEndpoint"))
     ReplicationGroup.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     ReplicationGroup.add_member(:snapshot_window, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
@@ -1226,6 +1237,7 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
     ReplicationGroup.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AtRestEncryptionEnabled"))
     ReplicationGroup.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    ReplicationGroup.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     ReplicationGroup.struct_class = Types::ReplicationGroup
 
     ReplicationGroupAlreadyExistsFault.struct_class = Types::ReplicationGroupAlreadyExistsFault
@@ -1379,6 +1391,7 @@ module Aws::ElastiCache
     Snapshot.add_member(:automatic_failover, Shapes::ShapeRef.new(shape: AutomaticFailoverStatus, location_name: "AutomaticFailover"))
     Snapshot.add_member(:node_snapshots, Shapes::ShapeRef.new(shape: NodeSnapshotList, location_name: "NodeSnapshots"))
     Snapshot.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    Snapshot.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     Snapshot.struct_class = Types::Snapshot
 
     SnapshotAlreadyExistsFault.struct_class = Types::SnapshotAlreadyExistsFault

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -47,6 +49,100 @@ module Aws::FSx
     class ActiveDirectoryError < Struct.new(
       :active_directory_id,
       :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # Describes a specific Amazon FSx Administrative Action for the current
+    # Windows file system.
+    #
+    # @!attribute [rw] administrative_action_type
+    #   Describes the type of administrative action, as follows:
+    #
+    #   * `FILE_SYSTEM_UPDATE` - A file system update administrative action
+    #     initiated by the user from the Amazon FSx console, API
+    #     (UpdateFileSystem), or CLI (update-file-system). A
+    #
+    #   * `STORAGE_OPTIMIZATION` - Once the `FILE_SYSTEM_UPDATE` task to
+    #     increase a file system's storage capacity completes successfully,
+    #     a `STORAGE_OPTIMIZATION` task starts. Storage optimization is the
+    #     process of migrating the file system data to the new, larger
+    #     disks. You can track the storage migration progress using the
+    #     `ProgressPercent` property. When `STORAGE_OPTIMIZATION` completes
+    #     successfully, the parent `FILE_SYSTEM_UPDATE` action status
+    #     changes to `COMPLETED`. For more information, see [Managing
+    #     Storage Capacity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   @return [String]
+    #
+    # @!attribute [rw] progress_percent
+    #   Provides the percent complete of a `STORAGE_OPTIMIZATION`
+    #   administrative action.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_time
+    #   Time that the administrative action request was received.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   Describes the status of the administrative action, as follows:
+    #
+    #   * `FAILED` - Amazon FSx failed to process the administrative action
+    #     successfully.
+    #
+    #   * `IN_PROGRESS` - Amazon FSx is processing the administrative
+    #     action.
+    #
+    #   * `PENDING` - Amazon FSx is waiting to process the administrative
+    #     action.
+    #
+    #   * `COMPLETED` - Amazon FSx has finished processing the
+    #     administrative task.
+    #
+    #   * `UPDATED_OPTIMIZING` - For a storage capacity increase update,
+    #     Amazon FSx has updated the file system with the new storage
+    #     capacity, and is now performing the storage optimization process.
+    #     For more information, see [Managing Storage Capacity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   @return [String]
+    #
+    # @!attribute [rw] target_file_system_values
+    #   Describes the target `StorageCapacity` or `ThroughputCapacity` value
+    #   provided in the `UpdateFileSystem` operation. Returned for
+    #   `FILE_SYSTEM_UPDATE` administrative actions.
+    #   @return [Types::FileSystem]
+    #
+    # @!attribute [rw] failure_details
+    #   Provides information about a failed administrative action.
+    #   @return [Types::AdministrativeActionFailureDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AdministrativeAction AWS API Documentation
+    #
+    class AdministrativeAction < Struct.new(
+      :administrative_action_type,
+      :progress_percent,
+      :request_time,
+      :status,
+      :target_file_system_values,
+      :failure_details)
+      include Aws::Structure
+    end
+
+    # Provides information about a failed administrative action.
+    #
+    # @!attribute [rw] message
+    #   Error message providing details about the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AdministrativeActionFailureDetails AWS API Documentation
+    #
+    class AdministrativeActionFailureDetails < Struct.new(
       :message)
       include Aws::Structure
     end
@@ -597,8 +693,9 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The preferred time to perform weekly maintenance, in the UTC time
-    #   zone.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @!attribute [rw] import_path
@@ -794,7 +891,7 @@ module Aws::FSx
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-tco.html#saz-maz-storage-type
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -952,7 +1049,8 @@ module Aws::FSx
     #
     # @!attribute [rw] weekly_maintenance_start_time
     #   The preferred start time to perform weekly maintenance, formatted
-    #   d:HH:MM in the UTC time zone.
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -1792,6 +1890,13 @@ module Aws::FSx
     #   The configuration for the Amazon FSx for Lustre file system.
     #   @return [Types::LustreFileSystemConfiguration]
     #
+    # @!attribute [rw] administrative_actions
+    #   A list of administrative actions for the file system that are in
+    #   process or waiting to be processed. Administrative actions describe
+    #   changes to the Windows file system that you have initiated using the
+    #   `UpdateFileSystem` action.
+    #   @return [Array<Types::AdministrativeAction>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystem AWS API Documentation
     #
     class FileSystem < Struct.new(
@@ -1811,7 +1916,8 @@ module Aws::FSx
       :resource_arn,
       :tags,
       :windows_configuration,
-      :lustre_configuration)
+      :lustre_configuration,
+      :administrative_actions)
       include Aws::Structure
     end
 
@@ -2048,7 +2154,9 @@ module Aws::FSx
     # The configuration for the Amazon FSx for Lustre file system.
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The UTC time that you want to begin your weekly maintenance window.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone. d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @!attribute [rw] data_repository_configuration
@@ -2290,8 +2398,7 @@ module Aws::FSx
     end
 
     # The configuration that Amazon FSx uses to join the Windows File Server
-    # instance to the self-managed Microsoft Active Directory (AD)
-    # directory.
+    # instance to a self-managed Microsoft Active Directory (AD) directory.
     #
     # @note When making an API call, you may pass SelfManagedActiveDirectoryConfigurationUpdates
     #   data as a hash:
@@ -2475,8 +2582,9 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The preferred time to perform weekly maintenance, in the UTC time
-    #   zone.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone. d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreConfiguration AWS API Documentation
@@ -2494,10 +2602,12 @@ module Aws::FSx
     #       {
     #         file_system_id: "FileSystemId", # required
     #         client_request_token: "ClientRequestToken",
+    #         storage_capacity: 1,
     #         windows_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           daily_automatic_backup_start_time: "DailyTime",
     #           automatic_backup_retention_days: 1,
+    #           throughput_capacity: 1,
     #           self_managed_active_directory_configuration: {
     #             user_name: "DirectoryUserName",
     #             password: "DirectoryPassword",
@@ -2510,23 +2620,38 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] file_system_id
-    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   Identifies the file system that you are updating.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx
-    #   uses to ensure idempotent updates. This string is automatically
-    #   filled on your behalf when you use the AWS Command Line Interface
-    #   (AWS CLI) or an AWS SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent updates. This string is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an
+    #   AWS SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] storage_capacity
+    #   Use this parameter to increase the storage capacity of an Amazon FSx
+    #   for Windows File Server file system. Specifies the storage capacity
+    #   target value, GiB, for the file system you're updating. The storage
+    #   capacity target value must be at least 10 percent (%) greater than
+    #   the current storage capacity value. In order to increase storage
+    #   capacity, the file system needs to have at least 16 MB/s of
+    #   throughput capacity. You cannot make a storage capacity increase
+    #   request if there is an existing storage capacity increase request in
+    #   progress. For more information, see [Managing Storage Capacity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   @return [Integer]
+    #
     # @!attribute [rw] windows_configuration
-    #   The configuration update for this Microsoft Windows file system. The
-    #   only supported options are for backup and maintenance and for
-    #   self-managed Active Directory configuration.
+    #   The configuration updates for an Amazon FSx for Windows File Server
+    #   file system.
     #   @return [Types::UpdateFileSystemWindowsConfiguration]
     #
     # @!attribute [rw] lustre_configuration
@@ -2539,6 +2664,7 @@ module Aws::FSx
     class UpdateFileSystemRequest < Struct.new(
       :file_system_id,
       :client_request_token,
+      :storage_capacity,
       :windows_configuration,
       :lustre_configuration)
       include Aws::Structure
@@ -2557,10 +2683,9 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Updates the Microsoft Windows configuration for an existing Amazon FSx
-    # for Windows File Server file system. Amazon FSx overwrites existing
-    # properties with non-null values provided in the request. If you don't
-    # specify a non-null value for a property, that property is not updated.
+    # Updates the configuration for an existing Amazon FSx for Windows File
+    # Server file system. Amazon FSx only overwrites existing properties
+    # with non-null values provided in the request.
     #
     # @note When making an API call, you may pass UpdateFileSystemWindowsConfiguration
     #   data as a hash:
@@ -2569,6 +2694,7 @@ module Aws::FSx
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         daily_automatic_backup_start_time: "DailyTime",
     #         automatic_backup_retention_days: 1,
+    #         throughput_capacity: 1,
     #         self_managed_active_directory_configuration: {
     #           user_name: "DirectoryUserName",
     #           password: "DirectoryPassword",
@@ -2577,24 +2703,45 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The preferred time to perform weekly maintenance, in the UTC time
-    #   zone.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone. Where d is the weekday number, from 1
+    #   through 7, with 1 = Monday and 7 = Sunday.
     #   @return [String]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
-    #   The preferred time to take daily automatic backups, in the UTC time
-    #   zone.
+    #   The preferred time to start the daily automatic backup, in the UTC
+    #   time zone, for example, `02:00`
     #   @return [String]
     #
     # @!attribute [rw] automatic_backup_retention_days
-    #   The number of days to retain automatic backups. Setting this to 0
-    #   disables automatic backups. You can retain automatic backups for a
-    #   maximum of 35 days.
+    #   The number of days to retain automatic daily backups. Setting this
+    #   to zero (0) disables automatic daily backups. You can retain
+    #   automatic daily backups for a maximum of 35 days. For more
+    #   information, see [Working with Automatic Daily Backups][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups
+    #   @return [Integer]
+    #
+    # @!attribute [rw] throughput_capacity
+    #   Sets the target value for a file system's throughput capacity, in
+    #   MB/s, that you are updating the file system to. Valid values are 8,
+    #   16, 32, 64, 128, 256, 512, 1024, 2048. You cannot make a throughput
+    #   capacity update request if there is an existing throughput capacity
+    #   update request in progress. For more information, see [Managing
+    #   Throughput Capacity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html
     #   @return [Integer]
     #
     # @!attribute [rw] self_managed_active_directory_configuration
     #   The configuration Amazon FSx uses to join the Windows File Server
-    #   instance to the self-managed Microsoft AD directory.
+    #   instance to the self-managed Microsoft AD directory. You cannot make
+    #   a self-managed Microsoft AD update request if there is an existing
+    #   self-managed Microsoft AD update request in progress.
     #   @return [Types::SelfManagedActiveDirectoryConfigurationUpdates]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemWindowsConfiguration AWS API Documentation
@@ -2603,6 +2750,7 @@ module Aws::FSx
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
+      :throughput_capacity,
       :self_managed_active_directory_configuration)
       include Aws::Structure
     end
@@ -2699,8 +2847,9 @@ module Aws::FSx
     #   @return [Array<String>]
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The preferred time to perform weekly maintenance, in the UTC time
-    #   zone.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone. d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @!attribute [rw] daily_automatic_backup_start_time

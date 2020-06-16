@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -69,6 +72,7 @@ module Aws::ElasticLoadBalancingV2
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -161,7 +165,7 @@ module Aws::ElasticLoadBalancingV2
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::ElasticLoadBalancingV2
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -520,6 +524,28 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancer\] If the action type is `fixed-response`,
     #   you drop specified client requests and return a custom HTTP response.
     #
+    # @option params [Array<String>] :alpn_policy
+    #   \[TLS listeners\] The name of the Application-Layer Protocol
+    #   Negotiation (ALPN) policy. You can specify one policy name. The
+    #   following are the possible values:
+    #
+    #   * `HTTP1Only`
+    #
+    #   * `HTTP2Only`
+    #
+    #   * `HTTP2Optional`
+    #
+    #   * `HTTP2Preferred`
+    #
+    #   * `None`
+    #
+    #   For more information, see [ALPN Policies][1] in the *Network Load
+    #   Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
+    #
     # @return [Types::CreateListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateListenerOutput#listeners #listeners} => Array&lt;Types::Listener&gt;
@@ -682,6 +708,7 @@ module Aws::ElasticLoadBalancingV2
     #         },
     #       },
     #     ],
+    #     alpn_policy: ["AlpnPolicyValue"],
     #   })
     #
     # @example Response structure
@@ -735,6 +762,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].weight #=> Integer
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
+    #   resp.listeners[0].alpn_policy #=> Array
+    #   resp.listeners[0].alpn_policy[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListener AWS API Documentation
     #
@@ -1892,6 +1921,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].weight #=> Integer
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
+    #   resp.listeners[0].alpn_policy #=> Array
+    #   resp.listeners[0].alpn_policy[0] #=> String
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListeners AWS API Documentation
@@ -2845,6 +2876,28 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancer\] If the action type is `fixed-response`,
     #   you drop specified client requests and return a custom HTTP response.
     #
+    # @option params [Array<String>] :alpn_policy
+    #   \[TLS listeners\] The name of the Application-Layer Protocol
+    #   Negotiation (ALPN) policy. You can specify one policy name. The
+    #   following are the possible values:
+    #
+    #   * `HTTP1Only`
+    #
+    #   * `HTTP2Only`
+    #
+    #   * `HTTP2Optional`
+    #
+    #   * `HTTP2Preferred`
+    #
+    #   * `None`
+    #
+    #   For more information, see [ALPN Policies][1] in the *Network Load
+    #   Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
+    #
     # @return [Types::ModifyListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyListenerOutput#listeners #listeners} => Array&lt;Types::Listener&gt;
@@ -2992,6 +3045,7 @@ module Aws::ElasticLoadBalancingV2
     #         },
     #       },
     #     ],
+    #     alpn_policy: ["AlpnPolicyValue"],
     #   })
     #
     # @example Response structure
@@ -3045,6 +3099,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].weight #=> Integer
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
+    #   resp.listeners[0].alpn_policy #=> Array
+    #   resp.listeners[0].alpn_policy[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListener AWS API Documentation
     #
@@ -4215,7 +4271,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.45.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

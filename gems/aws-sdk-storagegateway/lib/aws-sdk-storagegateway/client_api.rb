@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -142,6 +144,7 @@ module Aws::StorageGateway
     DoubleObject = Shapes::FloatShape.new(name: 'DoubleObject')
     Ec2InstanceId = Shapes::StringShape.new(name: 'Ec2InstanceId')
     Ec2InstanceRegion = Shapes::StringShape.new(name: 'Ec2InstanceRegion')
+    EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     FileShareARN = Shapes::StringShape.new(name: 'FileShareARN')
     FileShareARNList = Shapes::ListShape.new(name: 'FileShareARNList')
@@ -680,6 +683,7 @@ module Aws::StorageGateway
     DescribeGatewayInformationOutput.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: string, location_name: "VPCEndpoint"))
     DescribeGatewayInformationOutput.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupARN, location_name: "CloudWatchLogGroupARN"))
     DescribeGatewayInformationOutput.add_member(:host_environment, Shapes::ShapeRef.new(shape: HostEnvironment, location_name: "HostEnvironment"))
+    DescribeGatewayInformationOutput.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     DescribeGatewayInformationOutput.struct_class = Types::DescribeGatewayInformationOutput
 
     DescribeMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -45,6 +47,6 @@ require_relative 'aws-sdk-macie/customizations'
 # @service
 module Aws::Macie
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.21.1'
 
 end

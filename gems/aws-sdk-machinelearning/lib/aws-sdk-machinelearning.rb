@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -46,6 +48,6 @@ require_relative 'aws-sdk-machinelearning/customizations'
 # @service
 module Aws::MachineLearning
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.21.1'
 
 end

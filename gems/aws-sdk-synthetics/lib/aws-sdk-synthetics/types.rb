@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -252,6 +254,7 @@ module Aws::Synthetics
     #
     #       {
     #         timeout_in_seconds: 1, # required
+    #         memory_in_mb: 1,
     #       }
     #
     # @!attribute [rw] timeout_in_seconds
@@ -260,10 +263,16 @@ module Aws::Synthetics
     #   up to a maximum of 14 minutes.
     #   @return [Integer]
     #
+    # @!attribute [rw] memory_in_mb
+    #   The maximum amount of memory available to the canary while it is
+    #   running, in MB. The value you specify must be a multiple of 64.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryRunConfigInput AWS API Documentation
     #
     class CanaryRunConfigInput < Struct.new(
-      :timeout_in_seconds)
+      :timeout_in_seconds,
+      :memory_in_mb)
       include Aws::Structure
     end
 
@@ -273,10 +282,16 @@ module Aws::Synthetics
     #   How long the canary is allowed to run before it must stop.
     #   @return [Integer]
     #
+    # @!attribute [rw] memory_in_mb
+    #   The maximum amount of memory available to the canary while it is
+    #   running, in MB. The value you must be a multiple of 64.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryRunConfigOutput AWS API Documentation
     #
     class CanaryRunConfigOutput < Struct.new(
-      :timeout_in_seconds)
+      :timeout_in_seconds,
+      :memory_in_mb)
       include Aws::Structure
     end
 
@@ -481,6 +496,7 @@ module Aws::Synthetics
     #         },
     #         run_config: {
     #           timeout_in_seconds: 1, # required
+    #           memory_in_mb: 1,
     #         },
     #         success_retention_period_in_days: 1,
     #         failure_retention_period_in_days: 1,
@@ -631,7 +647,11 @@ module Aws::Synthetics
     #
     # @!attribute [rw] name
     #   The name of the canary that you want to delete. To find the names of
-    #   your canaries, use DescribeCanaries.
+    #   your canaries, use [DescribeCanaries][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DeleteCanaryRequest AWS API Documentation
@@ -973,7 +993,11 @@ module Aws::Synthetics
     #
     # @!attribute [rw] name
     #   The name of the canary that you want to run. To find canary names,
-    #   use DescribeCanaries.
+    #   use [DescribeCanaries][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/StartCanaryRequest AWS API Documentation
@@ -996,7 +1020,11 @@ module Aws::Synthetics
     #
     # @!attribute [rw] name
     #   The name of the canary that you want to stop. To find the names of
-    #   your canaries, use DescribeCanaries.
+    #   your canaries, use [DescribeCanaries][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/StopCanaryRequest AWS API Documentation
@@ -1094,6 +1122,7 @@ module Aws::Synthetics
     #         },
     #         run_config: {
     #           timeout_in_seconds: 1, # required
+    #           memory_in_mb: 1,
     #         },
     #         success_retention_period_in_days: 1,
     #         failure_retention_period_in_days: 1,
@@ -1105,10 +1134,14 @@ module Aws::Synthetics
     #
     # @!attribute [rw] name
     #   The name of the canary that you want to update. To find the names of
-    #   your canaries, use DescribeCanaries.
+    #   your canaries, use [DescribeCanaries][1].
     #
     #   You cannot change the name of a canary that has already been
     #   created.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
     #   @return [String]
     #
     # @!attribute [rw] code

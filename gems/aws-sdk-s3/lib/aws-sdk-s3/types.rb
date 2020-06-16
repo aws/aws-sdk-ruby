@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -389,8 +391,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] bucket_account_id
-    #   The account ID that owns the destination bucket. If no account ID is
-    #   provided, the owner will not be validated prior to exporting data.
+    #   The account ID that owns the destination S3 bucket. If no account ID
+    #   is provided, the owner is not validated before exporting data.
+    #
+    #   <note markdown="1"> Although this value is optional, we strongly recommend that you set
+    #   it to help prevent problems if the destination bucket ownership
+    #   changes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] bucket
@@ -2616,9 +2624,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] storage_class
-    #   The storage class to use when replicating objects, such as standard
-    #   or reduced redundancy. By default, Amazon S3 uses the storage class
-    #   of the source object to create the object replica.
+    #   The storage class to use when replicating objects, such as S3
+    #   Standard or reduced redundancy. By default, Amazon S3 uses the
+    #   storage class of the source object to create the object replica.
     #
     #   For valid values, see the `StorageClass` element of the [PUT Bucket
     #   replication][1] action in the *Amazon Simple Storage Service API
@@ -3916,7 +3924,8 @@ module Aws::S3
     # @!attribute [rw] location_constraint
     #   Specifies the Region where the bucket resides. For a list of all the
     #   Amazon S3 supported location constraints by Region, see [Regions and
-    #   Endpoints][1].
+    #   Endpoints][1]. Buckets in Region `us-east-1` have a
+    #   LocationConstraint of `null`.
     #
     #
     #
@@ -4028,7 +4037,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   Name of the bucket for which to get the notification configuration
+    #   Name of the bucket for which to get the notification configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotificationConfigurationRequest AWS API Documentation
@@ -4229,11 +4238,13 @@ module Aws::S3
     #   @return [Types::RedirectAllRequestsTo]
     #
     # @!attribute [rw] index_document
-    #   The name of the index document for the website.
+    #   The name of the index document for the website (for example
+    #   `index.html`).
     #   @return [Types::IndexDocument]
     #
     # @!attribute [rw] error_document
-    #   The name of the error document for the website.
+    #   The object key name of the website error document to use for 4XX
+    #   class errors.
     #   @return [Types::ErrorDocument]
     #
     # @!attribute [rw] routing_rules
@@ -4570,7 +4581,7 @@ module Aws::S3
     #
     # @!attribute [rw] storage_class
     #   Provides storage class information of the object. Amazon S3 returns
-    #   this header for all objects except for Standard storage class
+    #   this header for all objects except for S3 Standard storage class
     #   objects.
     #   @return [String]
     #
@@ -4713,7 +4724,16 @@ module Aws::S3
     # @!attribute [rw] range
     #   Downloads the specified range bytes of an object. For more
     #   information about the HTTP Range header, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35]().
+    #   [https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
+    #
+    #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
+    #   `GET` request.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
     #   @return [String]
     #
     # @!attribute [rw] response_cache_control
@@ -5027,7 +5047,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for Glacier job parameters.
+    # Container for S3 Glacier job parameters.
     #
     # @note When making an API call, you may pass GlacierJobParameters
     #   data as a hash:
@@ -5037,7 +5057,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] tier
-    #   Glacier retrieval tier at which the restore will be processed.
+    #   S3 Glacier retrieval tier at which the restore will be processed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GlacierJobParameters AWS API Documentation
@@ -5098,6 +5118,34 @@ module Aws::S3
     #
     # @!attribute [rw] email_address
     #   Email address of the grantee.
+    #
+    #   <note markdown="1"> Using email addresses to specify a grantee is only supported in the
+    #   following AWS Regions:
+    #
+    #    * US East (N. Virginia)
+    #
+    #   * US West (N. California)
+    #
+    #   * US West (Oregon)
+    #
+    #   * Asia Pacific (Singapore)
+    #
+    #   * Asia Pacific (Sydney)
+    #
+    #   * Asia Pacific (Tokyo)
+    #
+    #   * Europe (Ireland)
+    #
+    #   * South America (São Paulo)
+    #
+    #    For a list of all the Amazon S3 supported Regions and endpoints, see
+    #   [Regions and Endpoints][1] in the AWS General Reference.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -5275,7 +5323,7 @@ module Aws::S3
     #
     # @!attribute [rw] storage_class
     #   Provides storage class information of the object. Amazon S3 returns
-    #   this header for all objects except for Standard storage class
+    #   this header for all objects except for S3 Standard storage class
     #   objects.
     #
     #   For more information, see [Storage Classes][1].
@@ -5445,6 +5493,11 @@ module Aws::S3
     #   Downloads the specified range bytes of an object. For more
     #   information about the HTTP Range header, see
     #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35]().
+    #
+    #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
+    #   `GET` request.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -5795,7 +5848,14 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] account_id
-    #   The ID of the account that owns the destination bucket.
+    #   The account ID that owns the destination S3 bucket. If no account ID
+    #   is provided, the owner is not validated before exporting data.
+    #
+    #   <note markdown="1"> Although this value is optional, we strongly recommend that you set
+    #   it to help prevent problems if the destination bucket ownership
+    #   changes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] bucket
@@ -5877,7 +5937,8 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] record_delimiter
-    #   The value used to separate individual records in the output.
+    #   The value used to separate individual records in the output. If no
+    #   value is specified, Amazon S3 uses a newline character ('\\n').
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/JSONOutput AWS API Documentation
@@ -6777,10 +6838,11 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] max_keys
-    #   Sets the maximum number of keys returned in the response. The
-    #   response might contain fewer keys but will never contain more. If
-    #   additional keys satisfy the search criteria, but were not returned
-    #   because max-keys was exceeded, the response contains
+    #   Sets the maximum number of keys returned in the response. By default
+    #   the API returns up to 1,000 key names. The response might contain
+    #   fewer keys but will never contain more. If additional keys satisfy
+    #   the search criteria, but were not returned because max-keys was
+    #   exceeded, the response contains
     #   &lt;isTruncated&gt;true&lt;/isTruncated&gt;. To return the
     #   additional keys, see key-marker and version-id-marker.
     #   @return [Integer]
@@ -6931,8 +6993,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] max_keys
-    #   Sets the maximum number of keys returned in the response. The
-    #   response might contain fewer keys but will never contain more.
+    #   Sets the maximum number of keys returned in the response. By default
+    #   the API returns up to 1,000 key names. The response might contain
+    #   fewer keys but will never contain more.
     #   @return [Integer]
     #
     # @!attribute [rw] prefix
@@ -6998,8 +7061,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] max_keys
-    #   Sets the maximum number of keys returned in the response. The
-    #   response might contain fewer keys but will never contain more.
+    #   Sets the maximum number of keys returned in the response. By default
+    #   the API returns up to 1,000 key names. The response might contain
+    #   fewer keys but will never contain more.
     #   @return [Integer]
     #
     # @!attribute [rw] common_prefixes
@@ -7117,8 +7181,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] max_keys
-    #   Sets the maximum number of keys returned in the response. The
-    #   response might contain fewer keys but will never contain more.
+    #   Sets the maximum number of keys returned in the response. By default
+    #   the API returns up to 1,000 key names. The response might contain
+    #   fewer keys but will never contain more.
     #   @return [Integer]
     #
     # @!attribute [rw] prefix
@@ -8618,7 +8683,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev//cors.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html
     #   @return [Types::CORSConfiguration]
     #
     # @!attribute [rw] content_md5
@@ -9990,8 +10055,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] storage_class
-    #   If you don't specify, Standard is the default storage class. Amazon
-    #   S3 supports other storage classes.
+    #   If you don't specify, S3 Standard is the default storage class.
+    #   Amazon S3 supports other storage classes.
     #   @return [String]
     #
     # @!attribute [rw] website_redirect_location
@@ -11245,8 +11310,8 @@ module Aws::S3
     #   @return [Integer]
     #
     # @!attribute [rw] glacier_job_parameters
-    #   Glacier related parameters pertaining to this job. Do not use with
-    #   restores that specify `OutputLocation`.
+    #   S3 Glacier related parameters pertaining to this job. Do not use
+    #   with restores that specify `OutputLocation`.
     #   @return [Types::GlacierJobParameters]
     #
     # @!attribute [rw] type
@@ -11254,7 +11319,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   Glacier retrieval tier at which the restore will be processed.
+    #   S3 Glacier retrieval tier at which the restore will be processed.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -11324,12 +11389,14 @@ module Aws::S3
     end
 
     # Specifies lifecycle rules for an Amazon S3 bucket. For more
-    # information, see [PUT Bucket lifecycle][1] in the *Amazon Simple
-    # Storage Service API Reference*.
+    # information, see [Put Bucket Lifecycle Configuration][1] in the
+    # *Amazon Simple Storage Service API Reference*. For examples, see [Put
+    # Bucket Lifecycle Configuration Examples][2]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html#API_PutBucketLifecycleConfiguration_Examples
     #
     # @note When making an API call, you may pass Rule
     #   data as a hash:
@@ -11381,6 +11448,13 @@ module Aws::S3
     #
     # @!attribute [rw] transition
     #   Specifies when an object transitions to a specified storage class.
+    #   For more information about Amazon S3 lifecycle configuration rules,
+    #   see [Transitioning Objects Using Amazon S3 Lifecycle][1] in the
+    #   *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html
     #   @return [Types::Transition]
     #
     # @!attribute [rw] noncurrent_version_transition
@@ -11872,8 +11946,30 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id
-    #   KMS master key ID to use for the default encryption. This parameter
-    #   is allowed if and only if `SSEAlgorithm` is set to `aws:kms`.
+    #   AWS Key Management Service (KMS) customer master key ID to use for
+    #   the default encryption. This parameter is allowed if and only if
+    #   `SSEAlgorithm` is set to `aws:kms`.
+    #
+    #   You can specify the key ID or the Amazon Resource Name (ARN) of the
+    #   CMK. However, if you are using encryption with cross-account
+    #   operations, you must use a fully qualified CMK ARN. For more
+    #   information, see [Using encryption for cross-account operations][1].
+    #
+    #   **For example:**
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   Amazon S3 only supports symmetric CMKs and not asymmetric CMKs. For
+    #   more information, see [Using Symmetric and Asymmetric Keys][2] in
+    #   the *AWS Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionByDefault AWS API Documentation
@@ -12287,7 +12383,14 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies when an object transitions to a specified storage class.
+    # Specifies when an object transitions to a specified storage class. For
+    # more information about Amazon S3 lifecycle configuration rules, see
+    # [Transitioning Objects Using Amazon S3 Lifecycle][1] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html
     #
     # @note When making an API call, you may pass Transition
     #   data as a hash:

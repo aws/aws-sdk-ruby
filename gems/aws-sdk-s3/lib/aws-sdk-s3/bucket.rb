@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -437,8 +439,8 @@ module Aws::S3
     #   The server-side encryption algorithm used when storing this object in
     #   Amazon S3 (for example, AES256, aws:kms).
     # @option options [String] :storage_class
-    #   If you don't specify, Standard is the default storage class. Amazon
-    #   S3 supports other storage classes.
+    #   If you don't specify, S3 Standard is the default storage class.
+    #   Amazon S3 supports other storage classes.
     # @option options [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
     #   object to another object in the same bucket or to an external URL.
@@ -520,7 +522,7 @@ module Aws::S3
     # @return [Object]
     def put_object(options = {})
       options = options.merge(bucket: @name)
-      resp = @client.put_object(options)
+      @client.put_object(options)
       Object.new(
         bucket_name: @name,
         key: options[:key],

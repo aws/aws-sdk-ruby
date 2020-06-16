@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::SSM
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::SSM
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::SSM
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -580,13 +584,11 @@ module Aws::SSM
     # Associates the specified Systems Manager document with the specified
     # instances or targets.
     #
-    # When you associate a document with one or more instances using
-    # instance IDs or tags, SSM Agent running on the instance processes the
-    # document and configures the instance as specified.
-    #
-    # If you associate a document with an instance that already has an
-    # associated document, the system returns the AssociationAlreadyExists
-    # exception.
+    # When you associate a document with one or more instances, SSM Agent
+    # running on the instance processes the document and configures the
+    # instance as specified. If you associate a document with an instance
+    # that already has an associated document, the system returns the
+    # `AssociationAlreadyExists` exception.
     #
     # @option params [required, String] :name
     #   The name of the SSM document that contains the configuration
@@ -705,6 +707,12 @@ module Aws::SSM
     #
     #   By default, all associations use `AUTO` mode.
     #
+    # @option params [Boolean] :apply_only_at_cron_interval
+    #   By default, when you create a new associations, the system runs it
+    #   immediately after it is created and then according to the schedule you
+    #   specified. Specify this option if you don't want an association to
+    #   run immediately after you create it.
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -738,6 +746,7 @@ module Aws::SSM
     #     max_concurrency: "MaxConcurrency",
     #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #     sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #     apply_only_at_cron_interval: false,
     #   })
     #
     # @example Response structure
@@ -776,6 +785,7 @@ module Aws::SSM
     #   resp.association_description.max_concurrency #=> String
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_description.apply_only_at_cron_interval #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -836,6 +846,7 @@ module Aws::SSM
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #         apply_only_at_cron_interval: false,
     #       },
     #     ],
     #   })
@@ -877,6 +888,7 @@ module Aws::SSM
     #   resp.successful[0].max_concurrency #=> String
     #   resp.successful[0].compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.successful[0].sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.successful[0].apply_only_at_cron_interval #=> Boolean
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -898,6 +910,7 @@ module Aws::SSM
     #   resp.failed[0].entry.max_concurrency #=> String
     #   resp.failed[0].entry.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.failed[0].entry.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.failed[0].entry.apply_only_at_cron_interval #=> Boolean
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
@@ -963,7 +976,7 @@ module Aws::SSM
     #   You can't use the following strings as document name prefixes. These
     #   are reserved by AWS for use as document name prefixes:
     #
-    #    * `aws`
+    #    * `aws-`
     #
     #   * `amazon`
     #
@@ -2219,6 +2232,7 @@ module Aws::SSM
     #   resp.association_description.max_concurrency #=> String
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_description.apply_only_at_cron_interval #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -5817,6 +5831,7 @@ module Aws::SSM
     #   resp.association_versions[0].max_concurrency #=> String
     #   resp.association_versions[0].compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_versions[0].sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_versions[0].apply_only_at_cron_interval #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions AWS API Documentation
@@ -7047,7 +7062,7 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html
     #
     # @option params [String] :data_type
-    #   The data type for a String parameter. Supported data types include
+    #   The data type for a `String` parameter. Supported data types include
     #   plain text and Amazon Machine Image IDs.
     #
     #   **The following data type values are supported.**
@@ -7056,11 +7071,12 @@ module Aws::SSM
     #
     #   * `aws:ec2:image`
     #
-    #   When you create a String parameter and specify `aws:ec2:image`,
-    #   Systems Manager validates the parameter value you provide against that
-    #   data type. The required format is `ami-12345abcdeEXAMPLE`. For more
-    #   information, see [Native parameter support for Amazon Machine Image
-    #   IDs][1] in the *AWS Systems Manager User Guide*.
+    #   When you create a `String` parameter and specify `aws:ec2:image`,
+    #   Systems Manager validates the parameter value is in the required
+    #   format, such as `ami-12345abcdeEXAMPLE`, and that the specified AMI is
+    #   available in your AWS account. For more information, see [Native
+    #   parameter support for Amazon Machine Image IDs][1] in the *AWS Systems
+    #   Manager User Guide*.
     #
     #
     #
@@ -8261,6 +8277,19 @@ module Aws::SSM
     #
     #   By default, all associations use `AUTO` mode.
     #
+    # @option params [Boolean] :apply_only_at_cron_interval
+    #   By default, when you update an association, the system runs it
+    #   immediately after it is updated and then according to the schedule you
+    #   specified. Specify this option if you don't want an association to
+    #   run immediately after you update it.
+    #
+    #   Also, if you specified this option when you created the association,
+    #   you can reset it. To do so, specify the
+    #   `no-apply-only-at-cron-interval` parameter when you update the
+    #   association from the command line. This parameter forces the
+    #   association to run immediately after updating it and according to the
+    #   interval specified.
+    #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -8295,6 +8324,7 @@ module Aws::SSM
     #     max_concurrency: "MaxConcurrency",
     #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #     sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #     apply_only_at_cron_interval: false,
     #   })
     #
     # @example Response structure
@@ -8333,6 +8363,7 @@ module Aws::SSM
     #   resp.association_description.max_concurrency #=> String
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_description.apply_only_at_cron_interval #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -8408,6 +8439,7 @@ module Aws::SSM
     #   resp.association_description.max_concurrency #=> String
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_description.apply_only_at_cron_interval #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -9507,7 +9539,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.81.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

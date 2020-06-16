@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -39,13 +41,15 @@ module Aws::S3
       data[:redirect_all_requests_to]
     end
 
-    # The name of the index document for the website.
+    # The name of the index document for the website (for example
+    # `index.html`).
     # @return [Types::IndexDocument]
     def index_document
       data[:index_document]
     end
 
-    # The name of the error document for the website.
+    # The object key name of the website error document to use for 4XX class
+    # errors.
     # @return [Types::ErrorDocument]
     def error_document
       data[:error_document]

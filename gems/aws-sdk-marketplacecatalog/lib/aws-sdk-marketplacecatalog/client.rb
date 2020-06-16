@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::MarketplaceCatalog
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::MarketplaceCatalog
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::MarketplaceCatalog
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -388,6 +392,7 @@ module Aws::MarketplaceCatalog
     #   resp.change_set[0].change_type #=> String
     #   resp.change_set[0].entity.type #=> String
     #   resp.change_set[0].entity.identifier #=> String
+    #   resp.change_set[0].details #=> String
     #   resp.change_set[0].error_detail_list #=> Array
     #   resp.change_set[0].error_detail_list[0].error_code #=> String
     #   resp.change_set[0].error_detail_list[0].error_message #=> String
@@ -458,7 +463,7 @@ module Aws::MarketplaceCatalog
     #   An array of filter objects.
     #
     # @option params [Types::Sort] :sort
-    #   An object that contains two attributes, `sortBy` and `sortOrder`.
+    #   An object that contains two attributes, `SortBy` and `SortOrder`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by a single call. This value
@@ -529,7 +534,7 @@ module Aws::MarketplaceCatalog
     #   attributes, `filterName` and `filterValues`.
     #
     # @option params [Types::Sort] :sort
-    #   An object that contains two attributes, `sortBy` and `sortOrder`.
+    #   An object that contains two attributes, `SortBy` and `SortOrder`.
     #
     # @option params [String] :next_token
     #   The value of the next token, if it exists. Null if there are no more
@@ -585,7 +590,21 @@ module Aws::MarketplaceCatalog
       req.send_request(options)
     end
 
-    # This operation allows you to request changes in your entities.
+    # This operation allows you to request changes for your entities. Within
+    # a single ChangeSet, you cannot start the same change type against the
+    # same entity multiple times. Additionally, when a ChangeSet is running,
+    # all the entities targeted by the different changes are locked until
+    # the ChangeSet has completed (either succeeded, cancelled, or failed).
+    # If you try to start a ChangeSet containing a change against an entity
+    # that is already locked, you will receive a `ResourceInUseException`.
+    #
+    # For example, you cannot start the ChangeSet described in the
+    # [example][1] below because it contains two changes to execute the same
+    # change type (`AddRevisions`) against the same entity (`entity-id@1)`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples
     #
     # @option params [required, String] :catalog
     #   The catalog related to the request. Fixed value: `AWSMarketplace`
@@ -650,7 +669,7 @@ module Aws::MarketplaceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.4.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

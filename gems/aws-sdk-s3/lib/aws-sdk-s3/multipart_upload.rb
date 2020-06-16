@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -274,7 +276,7 @@ module Aws::S3
         key: @object_key,
         upload_id: @id
       )
-      resp = @client.complete_multipart_upload(options)
+      @client.complete_multipart_upload(options)
       Object.new(
         bucket_name: @bucket_name,
         key: @object_key,

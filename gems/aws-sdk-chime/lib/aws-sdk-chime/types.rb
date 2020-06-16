@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -737,6 +739,27 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The retention settings that determine how long to retain chat
+    # conversation messages for an Amazon Chime Enterprise account.
+    #
+    # @note When making an API call, you may pass ConversationRetentionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         retention_days: 1,
+    #       }
+    #
+    # @!attribute [rw] retention_days
+    #   The number of days for which to retain chat conversation messages.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ConversationRetentionSettings AWS API Documentation
+    #
+    class ConversationRetentionSettings < Struct.new(
+      :retention_days)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateAccountRequest
     #   data as a hash:
     #
@@ -950,11 +973,12 @@ module Aws::Chime
     #   @return [String]
     #
     # @!attribute [rw] media_region
-    #   The Region in which to create the meeting. Available values:
-    #   `ap-northeast-1`, `ap-southeast-1`, `ap-southeast-2`,
-    #   `ca-central-1`, `eu-central-1`, `eu-north-1`, `eu-west-1`,
-    #   `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`,
-    #   `us-west-1`, `us-west-2`.
+    #   The Region in which to create the meeting. Default: `us-east-1`.
+    #
+    #   Available values: `ap-northeast-1`, `ap-southeast-1`,
+    #   `ap-southeast-2`, `ca-central-1`, `eu-central-1`, `eu-north-1`,
+    #   `eu-west-1`, `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`,
+    #   `us-east-2`, `us-west-1`, `us-west-2`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -987,6 +1011,113 @@ module Aws::Chime
     #
     class CreateMeetingResponse < Struct.new(
       :meeting)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateMeetingWithAttendeesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken", # required
+    #         external_meeting_id: "ExternalMeetingIdType",
+    #         meeting_host_id: "ExternalUserIdType",
+    #         media_region: "String",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #         notifications_configuration: {
+    #           sns_topic_arn: "Arn",
+    #           sqs_queue_arn: "Arn",
+    #         },
+    #         attendees: [
+    #           {
+    #             external_user_id: "ExternalUserIdType", # required
+    #             tags: [
+    #               {
+    #                 key: "TagKey", # required
+    #                 value: "TagValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   The unique identifier for the client request. Use a different token
+    #   for different meetings.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_meeting_id
+    #   The external meeting ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] meeting_host_id
+    #   Reserved.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_region
+    #   The Region in which to create the meeting. Default: `us-east-1`.
+    #
+    #   Available values: `ap-northeast-1`, `ap-southeast-1`,
+    #   `ap-southeast-2`, `ca-central-1`, `eu-central-1`, `eu-north-1`,
+    #   `eu-west-1`, `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`,
+    #   `us-east-2`, `us-west-1`, `us-west-2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag key-value pairs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] notifications_configuration
+    #   The configuration for resource targets to receive notifications when
+    #   Amazon Chime SDK meeting and attendee events occur. The Amazon Chime
+    #   SDK supports resource targets located in the US East (N. Virginia)
+    #   AWS Region (`us-east-1`).
+    #   @return [Types::MeetingNotificationConfiguration]
+    #
+    # @!attribute [rw] attendees
+    #   The request containing the attendees to create.
+    #   @return [Array<Types::CreateAttendeeRequestItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeetingWithAttendeesRequest AWS API Documentation
+    #
+    class CreateMeetingWithAttendeesRequest < Struct.new(
+      :client_request_token,
+      :external_meeting_id,
+      :meeting_host_id,
+      :media_region,
+      :tags,
+      :notifications_configuration,
+      :attendees)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] meeting
+    #   A meeting created using the Amazon Chime SDK.
+    #   @return [Types::Meeting]
+    #
+    # @!attribute [rw] attendees
+    #   The attendee information, including attendees IDs and join tokens.
+    #   @return [Array<Types::Attendee>]
+    #
+    # @!attribute [rw] errors
+    #   If the action fails for one or more of the attendees in the request,
+    #   a list of the attendees is returned, along with error codes and
+    #   error messages.
+    #   @return [Array<Types::CreateAttendeeError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeetingWithAttendeesResponse AWS API Documentation
+    #
+    class CreateMeetingWithAttendeesResponse < Struct.new(
+      :meeting,
+      :attendees,
+      :errors)
       include Aws::Structure
     end
 
@@ -2181,6 +2312,41 @@ module Aws::Chime
     #
     class GetProxySessionResponse < Struct.new(
       :proxy_session)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetRetentionSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetRetentionSettingsRequest AWS API Documentation
+    #
+    class GetRetentionSettingsRequest < Struct.new(
+      :account_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retention_settings
+    #   The retention settings.
+    #   @return [Types::RetentionSettings]
+    #
+    # @!attribute [rw] initiate_deletion_timestamp
+    #   The timestamp representing the time at which the specified items are
+    #   permanently deleted, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetRetentionSettingsResponse AWS API Documentation
+    #
+    class GetRetentionSettingsResponse < Struct.new(
+      :retention_settings,
+      :initiate_deletion_timestamp)
       include Aws::Structure
     end
 
@@ -3426,7 +3592,9 @@ module Aws::Chime
     end
 
     # The configuration for resource targets to receive notifications when
-    # Amazon Chime SDK meeting and attendee events occur.
+    # Amazon Chime SDK meeting and attendee events occur. The Amazon Chime
+    # SDK supports resource targets located in the US East (N. Virginia) AWS
+    # Region (`us-east-1`).
     #
     # @note When making an API call, you may pass MeetingNotificationConfiguration
     #   data as a hash:
@@ -4032,6 +4200,54 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutRetentionSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         retention_settings: { # required
+    #           room_retention_settings: {
+    #             retention_days: 1,
+    #           },
+    #           conversation_retention_settings: {
+    #             retention_days: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_settings
+    #   The retention settings.
+    #   @return [Types::RetentionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutRetentionSettingsRequest AWS API Documentation
+    #
+    class PutRetentionSettingsRequest < Struct.new(
+      :account_id,
+      :retention_settings)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retention_settings
+    #   The retention settings.
+    #   @return [Types::RetentionSettings]
+    #
+    # @!attribute [rw] initiate_deletion_timestamp
+    #   The timestamp representing the time at which the specified items are
+    #   permanently deleted, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutRetentionSettingsResponse AWS API Documentation
+    #
+    class PutRetentionSettingsResponse < Struct.new(
+      :retention_settings,
+      :initiate_deletion_timestamp)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutVoiceConnectorLoggingConfigurationRequest
     #   data as a hash:
     #
@@ -4177,6 +4393,11 @@ module Aws::Chime
     #         streaming_configuration: { # required
     #           data_retention_in_hours: 1, # required
     #           disabled: false,
+    #           streaming_notification_targets: [
+    #             {
+    #               notification_target: "EventBridge", # required, accepts EventBridge, SNS, SQS
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -4276,6 +4497,74 @@ module Aws::Chime
       :termination)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass RedactConversationMessageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         conversation_id: "NonEmptyString", # required
+    #         message_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] conversation_id
+    #   The conversation ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The message ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactConversationMessageRequest AWS API Documentation
+    #
+    class RedactConversationMessageRequest < Struct.new(
+      :account_id,
+      :conversation_id,
+      :message_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactConversationMessageResponse AWS API Documentation
+    #
+    class RedactConversationMessageResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RedactRoomMessageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         room_id: "NonEmptyString", # required
+    #         message_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] room_id
+    #   The room ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The message ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactRoomMessageRequest AWS API Documentation
+    #
+    class RedactRoomMessageRequest < Struct.new(
+      :account_id,
+      :room_id,
+      :message_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactRoomMessageResponse AWS API Documentation
+    #
+    class RedactRoomMessageResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RegenerateSecurityTokenRequest
     #   data as a hash:
@@ -4393,6 +4682,38 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The retention settings for an Amazon Chime Enterprise account that
+    # determine how long to retain items such as chat room messages and chat
+    # conversation messages.
+    #
+    # @note When making an API call, you may pass RetentionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         room_retention_settings: {
+    #           retention_days: 1,
+    #         },
+    #         conversation_retention_settings: {
+    #           retention_days: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] room_retention_settings
+    #   The chat room retention settings.
+    #   @return [Types::RoomRetentionSettings]
+    #
+    # @!attribute [rw] conversation_retention_settings
+    #   The chat conversation retention settings.
+    #   @return [Types::ConversationRetentionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RetentionSettings AWS API Documentation
+    #
+    class RetentionSettings < Struct.new(
+      :room_retention_settings,
+      :conversation_retention_settings)
+      include Aws::Structure
+    end
+
     # The Amazon Chime chat room details.
     #
     # @!attribute [rw] room_id
@@ -4462,6 +4783,27 @@ module Aws::Chime
       :role,
       :invited_by,
       :updated_timestamp)
+      include Aws::Structure
+    end
+
+    # The retention settings that determine how long to retain chat room
+    # messages for an Amazon Chime Enterprise account.
+    #
+    # @note When making an API call, you may pass RoomRetentionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         retention_days: 1,
+    #       }
+    #
+    # @!attribute [rw] retention_days
+    #   The number of days for which to retain chat room messages.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RoomRetentionSettings AWS API Documentation
+    #
+    class RoomRetentionSettings < Struct.new(
+      :retention_days)
       include Aws::Structure
     end
 
@@ -4594,6 +4936,11 @@ module Aws::Chime
     #       {
     #         data_retention_in_hours: 1, # required
     #         disabled: false,
+    #         streaming_notification_targets: [
+    #           {
+    #             notification_target: "EventBridge", # required, accepts EventBridge, SNS, SQS
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] data_retention_in_hours
@@ -4604,11 +4951,36 @@ module Aws::Chime
     #   When true, media streaming to Amazon Kinesis is turned off.
     #   @return [Boolean]
     #
+    # @!attribute [rw] streaming_notification_targets
+    #   The streaming notification targets.
+    #   @return [Array<Types::StreamingNotificationTarget>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/StreamingConfiguration AWS API Documentation
     #
     class StreamingConfiguration < Struct.new(
       :data_retention_in_hours,
-      :disabled)
+      :disabled,
+      :streaming_notification_targets)
+      include Aws::Structure
+    end
+
+    # The targeted recipient for a streaming configuration notification.
+    #
+    # @note When making an API call, you may pass StreamingNotificationTarget
+    #   data as a hash:
+    #
+    #       {
+    #         notification_target: "EventBridge", # required, accepts EventBridge, SNS, SQS
+    #       }
+    #
+    # @!attribute [rw] notification_target
+    #   The streaming notification target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/StreamingNotificationTarget AWS API Documentation
+    #
+    class StreamingNotificationTarget < Struct.new(
+      :notification_target)
       include Aws::Structure
     end
 

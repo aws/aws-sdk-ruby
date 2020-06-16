@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -1312,6 +1314,8 @@ module Aws::Glue
     DevEndpointNames.member = Shapes::ShapeRef.new(shape: GenericString)
 
     DynamoDBTarget.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
+    DynamoDBTarget.add_member(:scan_all, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "scanAll"))
+    DynamoDBTarget.add_member(:scan_rate, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "scanRate"))
     DynamoDBTarget.struct_class = Types::DynamoDBTarget
 
     DynamoDBTargetList.member = Shapes::ShapeRef.new(shape: DynamoDBTarget)
@@ -2618,6 +2622,7 @@ module Aws::Glue
     UpdateXMLClassifierRequest.struct_class = Types::UpdateXMLClassifierRequest
 
     UserDefinedFunction.add_member(:function_name, Shapes::ShapeRef.new(shape: NameString, location_name: "FunctionName"))
+    UserDefinedFunction.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
     UserDefinedFunction.add_member(:class_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ClassName"))
     UserDefinedFunction.add_member(:owner_name, Shapes::ShapeRef.new(shape: NameString, location_name: "OwnerName"))
     UserDefinedFunction.add_member(:owner_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "OwnerType"))

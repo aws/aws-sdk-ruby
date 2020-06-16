@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -61,6 +63,10 @@ module Aws::Kinesis
         @event_emitter.on(:initial_response, block) if block_given?
       end
 
+      def on_unknown_event(&block)
+        @event_emitter.on(:unknown_event, block) if block_given?
+      end
+
       def on_event(&block)
         on_subscribe_to_shard_event_event(&block)
         on_resource_not_found_exception_event(&block)
@@ -74,6 +80,7 @@ module Aws::Kinesis
         on_internal_failure_exception_event(&block)
         on_error_event(&block)
         on_initial_response_event(&block)
+        on_unknown_event(&block)
       end
 
       # @api private

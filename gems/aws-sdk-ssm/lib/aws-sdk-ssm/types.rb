@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -373,6 +375,13 @@ module Aws::SSM
     #   By default, all associations use `AUTO` mode.
     #   @return [String]
     #
+    # @!attribute [rw] apply_only_at_cron_interval
+    #   By default, when you create a new associations, the system runs it
+    #   immediately after it is created and then according to the schedule
+    #   you specified. Specify this option if you don't want an association
+    #   to run immediately after you create it.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
     #
     class AssociationDescription < Struct.new(
@@ -396,7 +405,8 @@ module Aws::SSM
       :max_errors,
       :max_concurrency,
       :compliance_severity,
-      :sync_compliance)
+      :sync_compliance,
+      :apply_only_at_cron_interval)
       include Aws::Structure
     end
 
@@ -781,6 +791,13 @@ module Aws::SSM
     #   By default, all associations use `AUTO` mode.
     #   @return [String]
     #
+    # @!attribute [rw] apply_only_at_cron_interval
+    #   By default, when you create a new associations, the system runs it
+    #   immediately after it is created and then according to the schedule
+    #   you specified. Specify this option if you don't want an association
+    #   to run immediately after you create it.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo AWS API Documentation
     #
     class AssociationVersionInfo < Struct.new(
@@ -797,7 +814,8 @@ module Aws::SSM
       :max_errors,
       :max_concurrency,
       :compliance_severity,
-      :sync_compliance)
+      :sync_compliance,
+      :apply_only_at_cron_interval)
       include Aws::Structure
     end
 
@@ -2357,6 +2375,7 @@ module Aws::SSM
     #             max_concurrency: "MaxConcurrency",
     #             compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #             sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #             apply_only_at_cron_interval: false,
     #           },
     #         ],
     #       }
@@ -2405,6 +2424,7 @@ module Aws::SSM
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #         apply_only_at_cron_interval: false,
     #       }
     #
     # @!attribute [rw] name
@@ -2516,6 +2536,13 @@ module Aws::SSM
     #   By default, all associations use `AUTO` mode.
     #   @return [String]
     #
+    # @!attribute [rw] apply_only_at_cron_interval
+    #   By default, when you create a new associations, the system runs it
+    #   immediately after it is created and then according to the schedule
+    #   you specified. Specify this option if you don't want an association
+    #   to run immediately after you create it.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry AWS API Documentation
     #
     class CreateAssociationBatchRequestEntry < Struct.new(
@@ -2531,7 +2558,8 @@ module Aws::SSM
       :max_errors,
       :max_concurrency,
       :compliance_severity,
-      :sync_compliance)
+      :sync_compliance,
+      :apply_only_at_cron_interval)
       include Aws::Structure
     end
 
@@ -2581,6 +2609,7 @@ module Aws::SSM
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #         apply_only_at_cron_interval: false,
     #       }
     #
     # @!attribute [rw] name
@@ -2713,6 +2742,13 @@ module Aws::SSM
     #   By default, all associations use `AUTO` mode.
     #   @return [String]
     #
+    # @!attribute [rw] apply_only_at_cron_interval
+    #   By default, when you create a new associations, the system runs it
+    #   immediately after it is created and then according to the schedule
+    #   you specified. Specify this option if you don't want an association
+    #   to run immediately after you create it.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
     #
     class CreateAssociationRequest < Struct.new(
@@ -2728,7 +2764,8 @@ module Aws::SSM
       :max_errors,
       :max_concurrency,
       :compliance_severity,
-      :sync_compliance)
+      :sync_compliance,
+      :apply_only_at_cron_interval)
       include Aws::Structure
     end
 
@@ -2820,7 +2857,7 @@ module Aws::SSM
     #   You can't use the following strings as document name prefixes.
     #   These are reserved by AWS for use as document name prefixes:
     #
-    #    * `aws`
+    #    * `aws-`
     #
     #   * `amazon`
     #
@@ -13685,7 +13722,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] data_type
-    #   The data type for a String parameter. Supported data types include
+    #   The data type for a `String` parameter. Supported data types include
     #   plain text and Amazon Machine Image IDs.
     #
     #   **The following data type values are supported.**
@@ -13694,11 +13731,12 @@ module Aws::SSM
     #
     #   * `aws:ec2:image`
     #
-    #   When you create a String parameter and specify `aws:ec2:image`,
-    #   Systems Manager validates the parameter value you provide against
-    #   that data type. The required format is `ami-12345abcdeEXAMPLE`. For
-    #   more information, see [Native parameter support for Amazon Machine
-    #   Image IDs][1] in the *AWS Systems Manager User Guide*.
+    #   When you create a `String` parameter and specify `aws:ec2:image`,
+    #   Systems Manager validates the parameter value is in the required
+    #   format, such as `ami-12345abcdeEXAMPLE`, and that the specified AMI
+    #   is available in your AWS account. For more information, see [Native
+    #   parameter support for Amazon Machine Image IDs][1] in the *AWS
+    #   Systems Manager User Guide*.
     #
     #
     #
@@ -16271,6 +16309,7 @@ module Aws::SSM
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #         apply_only_at_cron_interval: false,
     #       }
     #
     # @!attribute [rw] association_id
@@ -16391,6 +16430,20 @@ module Aws::SSM
     #   By default, all associations use `AUTO` mode.
     #   @return [String]
     #
+    # @!attribute [rw] apply_only_at_cron_interval
+    #   By default, when you update an association, the system runs it
+    #   immediately after it is updated and then according to the schedule
+    #   you specified. Specify this option if you don't want an association
+    #   to run immediately after you update it.
+    #
+    #   Also, if you specified this option when you created the association,
+    #   you can reset it. To do so, specify the
+    #   `no-apply-only-at-cron-interval` parameter when you update the
+    #   association from the command line. This parameter forces the
+    #   association to run immediately after updating it and according to
+    #   the interval specified.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
     #
     class UpdateAssociationRequest < Struct.new(
@@ -16407,7 +16460,8 @@ module Aws::SSM
       :max_errors,
       :max_concurrency,
       :compliance_severity,
-      :sync_compliance)
+      :sync_compliance,
+      :apply_only_at_cron_interval)
       include Aws::Structure
     end
 

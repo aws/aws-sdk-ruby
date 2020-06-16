@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -586,7 +588,7 @@ module Aws::CloudWatch
         namespace: @namespace,
         metric_name: @name
       )
-      resp = @client.put_metric_alarm(options)
+      @client.put_metric_alarm(options)
       Alarm.new(
         name: options[:alarm_name],
         client: @client

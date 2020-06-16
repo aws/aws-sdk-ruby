@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -36,6 +38,7 @@ module Aws::ECS
     CapacityProviderStrategyItem = Shapes::StructureShape.new(name: 'CapacityProviderStrategyItem')
     CapacityProviderStrategyItemBase = Shapes::IntegerShape.new(name: 'CapacityProviderStrategyItemBase')
     CapacityProviderStrategyItemWeight = Shapes::IntegerShape.new(name: 'CapacityProviderStrategyItemWeight')
+    CapacityProviderUpdateStatus = Shapes::StringShape.new(name: 'CapacityProviderUpdateStatus')
     CapacityProviders = Shapes::ListShape.new(name: 'CapacityProviders')
     ClientException = Shapes::StructureShape.new(name: 'ClientException')
     Cluster = Shapes::StructureShape.new(name: 'Cluster')
@@ -80,6 +83,8 @@ module Aws::ECS
     DeleteAccountSettingResponse = Shapes::StructureShape.new(name: 'DeleteAccountSettingResponse')
     DeleteAttributesRequest = Shapes::StructureShape.new(name: 'DeleteAttributesRequest')
     DeleteAttributesResponse = Shapes::StructureShape.new(name: 'DeleteAttributesResponse')
+    DeleteCapacityProviderRequest = Shapes::StructureShape.new(name: 'DeleteCapacityProviderRequest')
+    DeleteCapacityProviderResponse = Shapes::StructureShape.new(name: 'DeleteCapacityProviderResponse')
     DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
     DeleteClusterResponse = Shapes::StructureShape.new(name: 'DeleteClusterResponse')
     DeleteServiceRequest = Shapes::StructureShape.new(name: 'DeleteServiceRequest')
@@ -123,6 +128,9 @@ module Aws::ECS
     EFSAuthorizationConfigIAM = Shapes::StringShape.new(name: 'EFSAuthorizationConfigIAM')
     EFSTransitEncryption = Shapes::StringShape.new(name: 'EFSTransitEncryption')
     EFSVolumeConfiguration = Shapes::StructureShape.new(name: 'EFSVolumeConfiguration')
+    EnvironmentFile = Shapes::StructureShape.new(name: 'EnvironmentFile')
+    EnvironmentFileType = Shapes::StringShape.new(name: 'EnvironmentFileType')
+    EnvironmentFiles = Shapes::ListShape.new(name: 'EnvironmentFiles')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     Failure = Shapes::StructureShape.new(name: 'Failure')
     Failures = Shapes::ListShape.new(name: 'Failures')
@@ -366,6 +374,8 @@ module Aws::ECS
     CapacityProvider.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     CapacityProvider.add_member(:status, Shapes::ShapeRef.new(shape: CapacityProviderStatus, location_name: "status"))
     CapacityProvider.add_member(:auto_scaling_group_provider, Shapes::ShapeRef.new(shape: AutoScalingGroupProvider, location_name: "autoScalingGroupProvider"))
+    CapacityProvider.add_member(:update_status, Shapes::ShapeRef.new(shape: CapacityProviderUpdateStatus, location_name: "updateStatus"))
+    CapacityProvider.add_member(:update_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "updateStatusReason"))
     CapacityProvider.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CapacityProvider.struct_class = Types::CapacityProvider
 
@@ -449,6 +459,7 @@ module Aws::ECS
     ContainerDefinition.add_member(:entry_point, Shapes::ShapeRef.new(shape: StringList, location_name: "entryPoint"))
     ContainerDefinition.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
     ContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
+    ContainerDefinition.add_member(:environment_files, Shapes::ShapeRef.new(shape: EnvironmentFiles, location_name: "environmentFiles"))
     ContainerDefinition.add_member(:mount_points, Shapes::ShapeRef.new(shape: MountPointList, location_name: "mountPoints"))
     ContainerDefinition.add_member(:volumes_from, Shapes::ShapeRef.new(shape: VolumeFromList, location_name: "volumesFrom"))
     ContainerDefinition.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: LinuxParameters, location_name: "linuxParameters"))
@@ -511,6 +522,7 @@ module Aws::ECS
     ContainerOverride.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     ContainerOverride.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
     ContainerOverride.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
+    ContainerOverride.add_member(:environment_files, Shapes::ShapeRef.new(shape: EnvironmentFiles, location_name: "environmentFiles"))
     ContainerOverride.add_member(:cpu, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "cpu"))
     ContainerOverride.add_member(:memory, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "memory"))
     ContainerOverride.add_member(:memory_reservation, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "memoryReservation"))
@@ -607,6 +619,12 @@ module Aws::ECS
 
     DeleteAttributesResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
     DeleteAttributesResponse.struct_class = Types::DeleteAttributesResponse
+
+    DeleteCapacityProviderRequest.add_member(:capacity_provider, Shapes::ShapeRef.new(shape: String, required: true, location_name: "capacityProvider"))
+    DeleteCapacityProviderRequest.struct_class = Types::DeleteCapacityProviderRequest
+
+    DeleteCapacityProviderResponse.add_member(:capacity_provider, Shapes::ShapeRef.new(shape: CapacityProvider, location_name: "capacityProvider"))
+    DeleteCapacityProviderResponse.struct_class = Types::DeleteCapacityProviderResponse
 
     DeleteClusterRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
     DeleteClusterRequest.struct_class = Types::DeleteClusterRequest
@@ -769,6 +787,12 @@ module Aws::ECS
     EFSVolumeConfiguration.add_member(:transit_encryption_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "transitEncryptionPort"))
     EFSVolumeConfiguration.add_member(:authorization_config, Shapes::ShapeRef.new(shape: EFSAuthorizationConfig, location_name: "authorizationConfig"))
     EFSVolumeConfiguration.struct_class = Types::EFSVolumeConfiguration
+
+    EnvironmentFile.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    EnvironmentFile.add_member(:type, Shapes::ShapeRef.new(shape: EnvironmentFileType, required: true, location_name: "type"))
+    EnvironmentFile.struct_class = Types::EnvironmentFile
+
+    EnvironmentFiles.member = Shapes::ShapeRef.new(shape: EnvironmentFile)
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: KeyValuePair)
 
@@ -1530,6 +1554,7 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UpdateInProgressException)
       end)
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -1596,6 +1621,17 @@ module Aws::ECS
         o.output = Shapes::ShapeRef.new(shape: DeleteAttributesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TargetNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:delete_capacity_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCapacityProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCapacityProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCapacityProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 

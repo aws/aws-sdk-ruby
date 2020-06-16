@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::MediaLive
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::MediaLive
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::MediaLive
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -1214,7 +1218,7 @@ module Aws::MediaLive
     #               filter_settings: {
     #                 temporal_filter_settings: {
     #                   post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                   strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #                   strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
     #                 },
     #               },
     #               fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
@@ -1373,6 +1377,7 @@ module Aws::MediaLive
     #             },
     #             server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #           },
+    #           smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #           source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #           video_selector: {
     #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709
@@ -1825,7 +1830,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -1927,6 +1932,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.channel.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.channel.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.channel.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709"
     #   resp.channel.input_attachments[0].input_settings.video_selector.color_space_usage #=> String, one of "FALLBACK", "FORCE"
@@ -1959,6 +1965,8 @@ module Aws::MediaLive
     # Create an input
     #
     # @option params [Array<Types::InputDestinationRequest>] :destinations
+    #
+    # @option params [Array<Types::InputDeviceSettings>] :input_devices
     #
     # @option params [Array<String>] :input_security_groups
     #
@@ -1997,6 +2005,11 @@ module Aws::MediaLive
     #         stream_name: "__string",
     #       },
     #     ],
+    #     input_devices: [
+    #       {
+    #         id: "__string",
+    #       },
+    #     ],
     #     input_security_groups: ["__string"],
     #     media_connect_flows: [
     #       {
@@ -2016,7 +2029,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string",
     #     },
-    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT
+    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE
     #     vpc: {
     #       security_group_ids: ["__string"],
     #       subnet_ids: ["__string"], # required
@@ -2036,6 +2049,8 @@ module Aws::MediaLive
     #   resp.input.destinations[0].vpc.network_interface_id #=> String
     #   resp.input.id #=> String
     #   resp.input.input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
+    #   resp.input.input_devices #=> Array
+    #   resp.input.input_devices[0].id #=> String
     #   resp.input.input_source_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.input.media_connect_flows #=> Array
     #   resp.input.media_connect_flows[0].flow_arn #=> String
@@ -2050,7 +2065,7 @@ module Aws::MediaLive
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.input.tags #=> Hash
     #   resp.input.tags["__string"] #=> String
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
     #
@@ -2722,7 +2737,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -2824,6 +2839,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709"
     #   resp.input_attachments[0].input_settings.video_selector.color_space_usage #=> String, one of "FALLBACK", "FORCE"
@@ -3567,7 +3583,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -3669,6 +3685,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709"
     #   resp.input_attachments[0].input_settings.video_selector.color_space_usage #=> String, one of "FALLBACK", "FORCE"
@@ -3717,6 +3734,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputResponse#destinations #destinations} => Array&lt;Types::InputDestination&gt;
     #   * {Types::DescribeInputResponse#id #id} => String
     #   * {Types::DescribeInputResponse#input_class #input_class} => String
+    #   * {Types::DescribeInputResponse#input_devices #input_devices} => Array&lt;Types::InputDeviceSettings&gt;
     #   * {Types::DescribeInputResponse#input_source_type #input_source_type} => String
     #   * {Types::DescribeInputResponse#media_connect_flows #media_connect_flows} => Array&lt;Types::MediaConnectFlow&gt;
     #   * {Types::DescribeInputResponse#name #name} => String
@@ -3746,6 +3764,8 @@ module Aws::MediaLive
     #   resp.destinations[0].vpc.network_interface_id #=> String
     #   resp.id #=> String
     #   resp.input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
+    #   resp.input_devices #=> Array
+    #   resp.input_devices[0].id #=> String
     #   resp.input_source_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.media_connect_flows #=> Array
     #   resp.media_connect_flows[0].flow_arn #=> String
@@ -3760,7 +3780,14 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
+    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE"
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * input_attached
+    #   * input_deleted
+    #   * input_detached
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInput AWS API Documentation
     #
@@ -3768,6 +3795,63 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def describe_input(params = {}, options = {})
       req = build_request(:describe_input, params)
+      req.send_request(options)
+    end
+
+    # Gets the details for the input device
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @return [Types::DescribeInputDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInputDeviceResponse#arn #arn} => String
+    #   * {Types::DescribeInputDeviceResponse#connection_state #connection_state} => String
+    #   * {Types::DescribeInputDeviceResponse#device_settings_sync_state #device_settings_sync_state} => String
+    #   * {Types::DescribeInputDeviceResponse#hd_device_settings #hd_device_settings} => Types::InputDeviceHdSettings
+    #   * {Types::DescribeInputDeviceResponse#id #id} => String
+    #   * {Types::DescribeInputDeviceResponse#mac_address #mac_address} => String
+    #   * {Types::DescribeInputDeviceResponse#name #name} => String
+    #   * {Types::DescribeInputDeviceResponse#network_settings #network_settings} => Types::InputDeviceNetworkSettings
+    #   * {Types::DescribeInputDeviceResponse#serial_number #serial_number} => String
+    #   * {Types::DescribeInputDeviceResponse#type #type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_input_device({
+    #     input_device_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.connection_state #=> String, one of "DISCONNECTED", "CONNECTED"
+    #   resp.device_settings_sync_state #=> String, one of "SYNCED", "SYNCING"
+    #   resp.hd_device_settings.active_input #=> String, one of "HDMI", "SDI"
+    #   resp.hd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
+    #   resp.hd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
+    #   resp.hd_device_settings.framerate #=> Float
+    #   resp.hd_device_settings.height #=> Integer
+    #   resp.hd_device_settings.max_bitrate #=> Integer
+    #   resp.hd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
+    #   resp.hd_device_settings.width #=> Integer
+    #   resp.id #=> String
+    #   resp.mac_address #=> String
+    #   resp.name #=> String
+    #   resp.network_settings.dns_addresses #=> Array
+    #   resp.network_settings.dns_addresses[0] #=> String
+    #   resp.network_settings.gateway #=> String
+    #   resp.network_settings.ip_address #=> String
+    #   resp.network_settings.ip_scheme #=> String, one of "STATIC", "DHCP"
+    #   resp.network_settings.subnet_mask #=> String
+    #   resp.serial_number #=> String
+    #   resp.type #=> String, one of "HD"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDevice AWS API Documentation
+    #
+    # @overload describe_input_device(params = {})
+    # @param [Hash] params ({})
+    def describe_input_device(params = {}, options = {})
+      req = build_request(:describe_input_device, params)
       req.send_request(options)
     end
 
@@ -4207,6 +4291,7 @@ module Aws::MediaLive
     #   resp.channels[0].input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.channels[0].input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.channels[0].input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.channels[0].input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.channels[0].input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.channels[0].input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709"
     #   resp.channels[0].input_attachments[0].input_settings.video_selector.color_space_usage #=> String, one of "FALLBACK", "FORCE"
@@ -4230,6 +4315,62 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def list_channels(params = {}, options = {})
       req = build_request(:list_channels, params)
+      req.send_request(options)
+    end
+
+    # List input devices
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListInputDevicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInputDevicesResponse#input_devices #input_devices} => Array&lt;Types::InputDeviceSummary&gt;
+    #   * {Types::ListInputDevicesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_input_devices({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.input_devices #=> Array
+    #   resp.input_devices[0].arn #=> String
+    #   resp.input_devices[0].connection_state #=> String, one of "DISCONNECTED", "CONNECTED"
+    #   resp.input_devices[0].device_settings_sync_state #=> String, one of "SYNCED", "SYNCING"
+    #   resp.input_devices[0].hd_device_settings.active_input #=> String, one of "HDMI", "SDI"
+    #   resp.input_devices[0].hd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
+    #   resp.input_devices[0].hd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
+    #   resp.input_devices[0].hd_device_settings.framerate #=> Float
+    #   resp.input_devices[0].hd_device_settings.height #=> Integer
+    #   resp.input_devices[0].hd_device_settings.max_bitrate #=> Integer
+    #   resp.input_devices[0].hd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
+    #   resp.input_devices[0].hd_device_settings.width #=> Integer
+    #   resp.input_devices[0].id #=> String
+    #   resp.input_devices[0].mac_address #=> String
+    #   resp.input_devices[0].name #=> String
+    #   resp.input_devices[0].network_settings.dns_addresses #=> Array
+    #   resp.input_devices[0].network_settings.dns_addresses[0] #=> String
+    #   resp.input_devices[0].network_settings.gateway #=> String
+    #   resp.input_devices[0].network_settings.ip_address #=> String
+    #   resp.input_devices[0].network_settings.ip_scheme #=> String, one of "STATIC", "DHCP"
+    #   resp.input_devices[0].network_settings.subnet_mask #=> String
+    #   resp.input_devices[0].serial_number #=> String
+    #   resp.input_devices[0].type #=> String, one of "HD"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputDevices AWS API Documentation
+    #
+    # @overload list_input_devices(params = {})
+    # @param [Hash] params ({})
+    def list_input_devices(params = {}, options = {})
+      req = build_request(:list_input_devices, params)
       req.send_request(options)
     end
 
@@ -4310,6 +4451,8 @@ module Aws::MediaLive
     #   resp.inputs[0].destinations[0].vpc.network_interface_id #=> String
     #   resp.inputs[0].id #=> String
     #   resp.inputs[0].input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
+    #   resp.inputs[0].input_devices #=> Array
+    #   resp.inputs[0].input_devices[0].id #=> String
     #   resp.inputs[0].input_source_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.inputs[0].media_connect_flows #=> Array
     #   resp.inputs[0].media_connect_flows[0].flow_arn #=> String
@@ -4324,7 +4467,7 @@ module Aws::MediaLive
     #   resp.inputs[0].state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.inputs[0].tags #=> Hash
     #   resp.inputs[0].tags["__string"] #=> String
-    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
+    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputs AWS API Documentation
@@ -5134,7 +5277,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -5236,6 +5379,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709"
     #   resp.input_attachments[0].input_settings.video_selector.color_space_usage #=> String, one of "FALLBACK", "FORCE"
@@ -5766,7 +5910,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -5868,6 +6012,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709"
     #   resp.input_attachments[0].input_settings.video_selector.color_space_usage #=> String, one of "FALLBACK", "FORCE"
@@ -6613,7 +6758,7 @@ module Aws::MediaLive
     #               filter_settings: {
     #                 temporal_filter_settings: {
     #                   post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
-    #                   strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #                   strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
     #                 },
     #               },
     #               fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
@@ -6772,6 +6917,7 @@ module Aws::MediaLive
     #             },
     #             server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #           },
+    #           smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #           source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #           video_selector: {
     #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709
@@ -7219,7 +7365,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -7321,6 +7467,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.channel.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.channel.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.channel.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709"
     #   resp.channel.input_attachments[0].input_settings.video_selector.color_space_usage #=> String, one of "FALLBACK", "FORCE"
@@ -7814,7 +7961,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -7916,6 +8063,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retries #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.channel.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.channel.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.channel.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709"
     #   resp.channel.input_attachments[0].input_settings.video_selector.color_space_usage #=> String, one of "FALLBACK", "FORCE"
@@ -7949,6 +8097,8 @@ module Aws::MediaLive
     #
     # @option params [Array<Types::InputDestinationRequest>] :destinations
     #
+    # @option params [Array<Types::InputDeviceRequest>] :input_devices
+    #
     # @option params [required, String] :input_id
     #
     # @option params [Array<String>] :input_security_groups
@@ -7971,6 +8121,11 @@ module Aws::MediaLive
     #     destinations: [
     #       {
     #         stream_name: "__string",
+    #       },
+    #     ],
+    #     input_devices: [
+    #       {
+    #         id: "__string",
     #       },
     #     ],
     #     input_id: "__string", # required
@@ -8004,6 +8159,8 @@ module Aws::MediaLive
     #   resp.input.destinations[0].vpc.network_interface_id #=> String
     #   resp.input.id #=> String
     #   resp.input.input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
+    #   resp.input.input_devices #=> Array
+    #   resp.input.input_devices[0].id #=> String
     #   resp.input.input_source_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.input.media_connect_flows #=> Array
     #   resp.input.media_connect_flows[0].flow_arn #=> String
@@ -8018,7 +8175,7 @@ module Aws::MediaLive
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.input.tags #=> Hash
     #   resp.input.tags["__string"] #=> String
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
     #
@@ -8026,6 +8183,73 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def update_input(params = {}, options = {})
       req = build_request(:update_input, params)
+      req.send_request(options)
+    end
+
+    # Updates the parameters for the input device.
+    #
+    # @option params [Types::InputDeviceConfigurableSettings] :hd_device_settings
+    #   Configurable settings for the input device.
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @option params [String] :name
+    #
+    # @return [Types::UpdateInputDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateInputDeviceResponse#arn #arn} => String
+    #   * {Types::UpdateInputDeviceResponse#connection_state #connection_state} => String
+    #   * {Types::UpdateInputDeviceResponse#device_settings_sync_state #device_settings_sync_state} => String
+    #   * {Types::UpdateInputDeviceResponse#hd_device_settings #hd_device_settings} => Types::InputDeviceHdSettings
+    #   * {Types::UpdateInputDeviceResponse#id #id} => String
+    #   * {Types::UpdateInputDeviceResponse#mac_address #mac_address} => String
+    #   * {Types::UpdateInputDeviceResponse#name #name} => String
+    #   * {Types::UpdateInputDeviceResponse#network_settings #network_settings} => Types::InputDeviceNetworkSettings
+    #   * {Types::UpdateInputDeviceResponse#serial_number #serial_number} => String
+    #   * {Types::UpdateInputDeviceResponse#type #type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_input_device({
+    #     hd_device_settings: {
+    #       configured_input: "AUTO", # accepts AUTO, HDMI, SDI
+    #       max_bitrate: 1,
+    #     },
+    #     input_device_id: "__string", # required
+    #     name: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.connection_state #=> String, one of "DISCONNECTED", "CONNECTED"
+    #   resp.device_settings_sync_state #=> String, one of "SYNCED", "SYNCING"
+    #   resp.hd_device_settings.active_input #=> String, one of "HDMI", "SDI"
+    #   resp.hd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
+    #   resp.hd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
+    #   resp.hd_device_settings.framerate #=> Float
+    #   resp.hd_device_settings.height #=> Integer
+    #   resp.hd_device_settings.max_bitrate #=> Integer
+    #   resp.hd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
+    #   resp.hd_device_settings.width #=> Integer
+    #   resp.id #=> String
+    #   resp.mac_address #=> String
+    #   resp.name #=> String
+    #   resp.network_settings.dns_addresses #=> Array
+    #   resp.network_settings.dns_addresses[0] #=> String
+    #   resp.network_settings.gateway #=> String
+    #   resp.network_settings.ip_address #=> String
+    #   resp.network_settings.ip_scheme #=> String, one of "STATIC", "DHCP"
+    #   resp.network_settings.subnet_mask #=> String
+    #   resp.serial_number #=> String
+    #   resp.type #=> String, one of "HD"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDevice AWS API Documentation
+    #
+    # @overload update_input_device(params = {})
+    # @param [Hash] params ({})
+    def update_input_device(params = {}, options = {})
+      req = build_request(:update_input_device, params)
       req.send_request(options)
     end
 
@@ -8271,7 +8495,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.47.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -8343,6 +8567,9 @@ module Aws::MediaLive
     # | channel_deleted   | {Client#describe_channel}   | 5        | 84            |
     # | channel_running   | {Client#describe_channel}   | 5        | 120           |
     # | channel_stopped   | {Client#describe_channel}   | 5        | 60            |
+    # | input_attached    | {Client#describe_input}     | 5        | 20            |
+    # | input_deleted     | {Client#describe_input}     | 5        | 20            |
+    # | input_detached    | {Client#describe_input}     | 5        | 84            |
     # | multiplex_created | {Client#describe_multiplex} | 3        | 5             |
     # | multiplex_deleted | {Client#describe_multiplex} | 5        | 20            |
     # | multiplex_running | {Client#describe_multiplex} | 5        | 120           |
@@ -8401,6 +8628,9 @@ module Aws::MediaLive
         channel_deleted: Waiters::ChannelDeleted,
         channel_running: Waiters::ChannelRunning,
         channel_stopped: Waiters::ChannelStopped,
+        input_attached: Waiters::InputAttached,
+        input_deleted: Waiters::InputDeleted,
+        input_detached: Waiters::InputDetached,
         multiplex_created: Waiters::MultiplexCreated,
         multiplex_deleted: Waiters::MultiplexDeleted,
         multiplex_running: Waiters::MultiplexRunning,

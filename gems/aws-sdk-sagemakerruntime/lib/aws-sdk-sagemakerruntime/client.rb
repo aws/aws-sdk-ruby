@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::SageMakerRuntime
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::SageMakerRuntime
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::SageMakerRuntime
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -355,7 +359,7 @@ module Aws::SageMakerRuntime
     #   the model.
     #
     #   For information about the format of the request body, see [Common Data
-    #   Formats—Inference][1].
+    #   Formats-Inference][1].
     #
     #
     #
@@ -384,8 +388,14 @@ module Aws::SageMakerRuntime
     #   [1]: https://tools.ietf.org/html/rfc7230#section-3.2.6
     #
     # @option params [String] :target_model
-    #   Specifies the model to be requested for an inference when invoking a
-    #   multi-model endpoint.
+    #   The model to request for inference when invoking a multi-model
+    #   endpoint.
+    #
+    # @option params [String] :target_variant
+    #   Specify the production variant to send the inference request to when
+    #   invoking an endpoint that is running two or more variants. Note that
+    #   this parameter overrides the default behavior for the endpoint, which
+    #   is to distribute the invocation traffic based on the variant weights.
     #
     # @return [Types::InvokeEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -403,6 +413,7 @@ module Aws::SageMakerRuntime
     #     accept: "Header",
     #     custom_attributes: "CustomAttributesHeader",
     #     target_model: "TargetModelHeader",
+    #     target_variant: "TargetVariantHeader",
     #   })
     #
     # @example Response structure
@@ -434,7 +445,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.23.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -114,13 +116,20 @@ module Aws::TranscribeStreamingService
     #   The word or punctuation that was recognized in the input audio.
     #   @return [String]
     #
+    # @!attribute [rw] vocabulary_filter_match
+    #   Indicates whether a word in the item matches a word in the
+    #   vocabulary filter you've chosen for your real-time stream. If
+    #   `true` then a word in the item matches your vocabulary filter.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/Item AWS API Documentation
     #
     class Item < Struct.new(
       :start_time,
       :end_time,
       :type,
-      :content)
+      :content,
+      :vocabulary_filter_match)
       include Aws::Structure
     end
 
@@ -207,6 +216,8 @@ module Aws::TranscribeStreamingService
     #         vocabulary_name: "VocabularyName",
     #         session_id: "SessionId",
     #         input_event_stream_hander: EventStreams::AudioStream.new,
+    #         vocabulary_filter_name: "VocabularyFilterName",
+    #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #       }
     #
     # @!attribute [rw] language_code
@@ -240,6 +251,21 @@ module Aws::TranscribeStreamingService
     #   HTTP2 data frame.
     #   @return [Types::AudioStream]
     #
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the vocabulary filter you've created that is unique to
+    #   your AWS accountf. Provide the name in this field to successfully
+    #   use it in a stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_method
+    #   The manner in which you use your vocabulary filter to filter words
+    #   in your transcript. `Remove` removes filtered words from your
+    #   transcription results. `Mask` masks those words with a `***` in your
+    #   transcription results. `Tag` keeps the filtered words in your
+    #   transcription results and tags them. The tag appears as
+    #   `VocabularyFilterMatch` equal to `True`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionRequest AWS API Documentation
     #
     class StartStreamTranscriptionRequest < Struct.new(
@@ -248,7 +274,9 @@ module Aws::TranscribeStreamingService
       :media_encoding,
       :vocabulary_name,
       :session_id,
-      :audio_stream)
+      :audio_stream,
+      :vocabulary_filter_name,
+      :vocabulary_filter_method)
       include Aws::Structure
     end
 
@@ -270,7 +298,7 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the vocabulary used when processing the job.
+    #   The name of the vocabulary used when processing the stream.
     #   @return [String]
     #
     # @!attribute [rw] session_id
@@ -282,6 +310,14 @@ module Aws::TranscribeStreamingService
     #   to your application.
     #   @return [Types::TranscriptResultStream]
     #
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the vocabulary filter used in your real-time stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_method
+    #   The vocabulary filtering method used in the real-time stream.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionResponse AWS API Documentation
     #
     class StartStreamTranscriptionResponse < Struct.new(
@@ -291,7 +327,9 @@ module Aws::TranscribeStreamingService
       :media_encoding,
       :vocabulary_name,
       :session_id,
-      :transcript_result_stream)
+      :transcript_result_stream,
+      :vocabulary_filter_name,
+      :vocabulary_filter_method)
       include Aws::Structure
     end
 

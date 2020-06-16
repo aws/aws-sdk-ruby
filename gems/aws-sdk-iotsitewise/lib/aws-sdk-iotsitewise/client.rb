@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::IoTSiteWise
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::IoTSiteWise
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::IoTSiteWise
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -1004,8 +1008,8 @@ module Aws::IoTSiteWise
     #     portal_contact_email: "Email", # required
     #     client_token: "ClientToken",
     #     portal_logo_image_file: {
-    #       encoded_string: "data", # required
-    #       file_type: "PNG", # required, accepts PNG
+    #       data: "data", # required
+    #       type: "PNG", # required, accepts PNG
     #     },
     #     role_arn: "ARN", # required
     #     tags: {
@@ -1089,7 +1093,7 @@ module Aws::IoTSiteWise
 
     # Deletes an access policy that grants the specified AWS Single Sign-On
     # identity access to the specified AWS IoT SiteWise Monitor resource.
-    # You can use this action to revoke access to an AWS IoT SiteWise
+    # You can use this operation to revoke access to an AWS IoT SiteWise
     # Monitor resource.
     #
     # @option params [required, String] :access_policy_id
@@ -1723,7 +1727,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribePortalResponse#portal_status #portal_status} => Types::PortalStatus
     #   * {Types::DescribePortalResponse#portal_creation_date #portal_creation_date} => Time
     #   * {Types::DescribePortalResponse#portal_last_update_date #portal_last_update_date} => Time
-    #   * {Types::DescribePortalResponse#portal_logo_image #portal_logo_image} => Types::Image
+    #   * {Types::DescribePortalResponse#portal_logo_image_location #portal_logo_image_location} => Types::ImageLocation
     #   * {Types::DescribePortalResponse#role_arn #role_arn} => String
     #
     # @example Request syntax with placeholder values
@@ -1746,8 +1750,8 @@ module Aws::IoTSiteWise
     #   resp.portal_status.error.message #=> String
     #   resp.portal_creation_date #=> Time
     #   resp.portal_last_update_date #=> Time
-    #   resp.portal_logo_image.location_url #=> String
-    #   resp.portal_logo_image.last_update_date #=> Time
+    #   resp.portal_logo_image_location.id #=> String
+    #   resp.portal_logo_image_location.url #=> String
     #   resp.role_arn #=> String
     #
     #
@@ -1920,7 +1924,7 @@ module Aws::IoTSiteWise
     #     asset_id: "ID",
     #     property_id: "ID",
     #     property_alias: "AssetPropertyAlias",
-    #     aggregate_types: ["AVERAGE"], # required, accepts AVERAGE, COUNT, MAXIMUM, MINIMUM, SUM
+    #     aggregate_types: ["AVERAGE"], # required, accepts AVERAGE, COUNT, MAXIMUM, MINIMUM, SUM, STANDARD_DEVIATION
     #     resolution: "Resolution", # required
     #     qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
     #     start_date: Time.now, # required
@@ -1940,6 +1944,7 @@ module Aws::IoTSiteWise
     #   resp.aggregated_values[0].value.maximum #=> Float
     #   resp.aggregated_values[0].value.minimum #=> Float
     #   resp.aggregated_values[0].value.sum #=> Float
+    #   resp.aggregated_values[0].value.standard_deviation #=> Float
     #   resp.next_token #=> String
     #
     # @overload get_asset_property_aggregates(params = {})
@@ -2111,16 +2116,20 @@ module Aws::IoTSiteWise
     # project).
     #
     # @option params [String] :identity_type
-    #   The type of identity (user or group).
+    #   The type of identity (user or group). This parameter is required if
+    #   you specify `identityId`.
     #
     # @option params [String] :identity_id
-    #   The ID of the identity.
+    #   The ID of the identity. This parameter is required if you specify
+    #   `identityType`.
     #
     # @option params [String] :resource_type
-    #   The type of resource (portal or project).
+    #   The type of resource (portal or project). This parameter is required
+    #   if you specify `resourceId`.
     #
     # @option params [String] :resource_id
-    #   The ID of the resource.
+    #   The ID of the resource. This parameter is required if you specify
+    #   `resourceType`.
     #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results.
@@ -2792,10 +2801,10 @@ module Aws::IoTSiteWise
     # information, see [Updating Assets and Models][1] in the *AWS IoT
     # SiteWise User Guide*.
     #
-    # This action overwrites the existing model with the provided model. To
-    # avoid deleting your asset model's properties or hierarchies, you must
-    # include their IDs and definitions in the updated asset model payload.
-    # For more information, see [DescribeAssetModel][2].
+    # This operation overwrites the existing model with the provided model.
+    # To avoid deleting your asset model's properties or hierarchies, you
+    # must include their IDs and definitions in the updated asset model
+    # payload. For more information, see [DescribeAssetModel][2].
     #
     #  If you remove a property from an asset model or update a property's
     # formula expression, AWS IoT SiteWise deletes all previous data for
@@ -3143,9 +3152,13 @@ module Aws::IoTSiteWise
     # @option params [required, String] :portal_contact_email
     #   The AWS administrator's contact email address.
     #
-    # @option params [Types::ImageFile] :portal_logo_image_file
-    #   A logo image to display in the portal. Upload a square,
-    #   high-resolution image. The image is displayed on a dark background.
+    # @option params [Types::Image] :portal_logo_image
+    #   Contains an image that is one of the following:
+    #
+    #   * An image file. Choose this option to upload a new image.
+    #
+    #   * The ID of an existing image. Choose this option to keep an existing
+    #     image.
     #
     # @option params [required, String] :role_arn
     #   The [ARN][1] of a service role that allows the portal's users to
@@ -3177,9 +3190,12 @@ module Aws::IoTSiteWise
     #     portal_name: "Name", # required
     #     portal_description: "Description",
     #     portal_contact_email: "Email", # required
-    #     portal_logo_image_file: {
-    #       encoded_string: "data", # required
-    #       file_type: "PNG", # required, accepts PNG
+    #     portal_logo_image: {
+    #       id: "ID",
+    #       file: {
+    #         data: "data", # required
+    #         type: "PNG", # required, accepts PNG
+    #       },
     #     },
     #     role_arn: "ARN", # required
     #     client_token: "ClientToken",
@@ -3248,7 +3264,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.5.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

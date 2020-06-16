@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ module Aws::SageMakerRuntime
     ServiceUnavailable = Shapes::StructureShape.new(name: 'ServiceUnavailable')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
     TargetModelHeader = Shapes::StringShape.new(name: 'TargetModelHeader')
+    TargetVariantHeader = Shapes::StringShape.new(name: 'TargetVariantHeader')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
 
     InternalFailure.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
@@ -35,6 +38,7 @@ module Aws::SageMakerRuntime
     InvokeEndpointInput.add_member(:accept, Shapes::ShapeRef.new(shape: Header, location: "header", location_name: "Accept"))
     InvokeEndpointInput.add_member(:custom_attributes, Shapes::ShapeRef.new(shape: CustomAttributesHeader, location: "header", location_name: "X-Amzn-SageMaker-Custom-Attributes"))
     InvokeEndpointInput.add_member(:target_model, Shapes::ShapeRef.new(shape: TargetModelHeader, location: "header", location_name: "X-Amzn-SageMaker-Target-Model"))
+    InvokeEndpointInput.add_member(:target_variant, Shapes::ShapeRef.new(shape: TargetVariantHeader, location: "header", location_name: "X-Amzn-SageMaker-Target-Variant"))
     InvokeEndpointInput.struct_class = Types::InvokeEndpointInput
     InvokeEndpointInput[:payload] = :body
     InvokeEndpointInput[:payload_member] = InvokeEndpointInput.member(:body)

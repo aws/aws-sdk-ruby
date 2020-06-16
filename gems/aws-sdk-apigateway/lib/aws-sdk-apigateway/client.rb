@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-apigateway/plugins/apply_content_type_header.rb'
@@ -70,6 +73,7 @@ module Aws::APIGateway
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::APIGateway::Plugins::ApplyContentTypeHeader)
@@ -163,7 +167,7 @@ module Aws::APIGateway
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -178,7 +182,7 @@ module Aws::APIGateway
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -312,7 +316,7 @@ module Aws::APIGateway
 
     # Create an ApiKey resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -407,7 +411,7 @@ module Aws::APIGateway
 
     # Adds a new Authorizer resource to an existing RestApi resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -1064,6 +1068,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.resource_methods["String"].method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.resource_methods["String"].authorization_scopes #=> Array
     #   resp.resource_methods["String"].authorization_scopes[0] #=> String
     #
@@ -1536,7 +1541,7 @@ module Aws::APIGateway
 
     # Deletes an existing Authorizer resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -2295,7 +2300,7 @@ module Aws::APIGateway
 
     # Describe an existing Authorizer resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -2352,7 +2357,7 @@ module Aws::APIGateway
 
     # Describe an existing Authorizers resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -3147,6 +3152,7 @@ module Aws::APIGateway
     #   * {Types::Integration#cache_namespace #cache_namespace} => String
     #   * {Types::Integration#cache_key_parameters #cache_key_parameters} => Array&lt;String&gt;
     #   * {Types::Integration#integration_responses #integration_responses} => Hash&lt;String,Types::IntegrationResponse&gt;
+    #   * {Types::Integration#tls_config #tls_config} => Types::TlsConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -3182,6 +3188,7 @@ module Aws::APIGateway
     #   resp.integration_responses["String"].response_templates #=> Hash
     #   resp.integration_responses["String"].response_templates["String"] #=> String
     #   resp.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.tls_config.insecure_skip_verification #=> Boolean
     #
     # @overload get_integration(params = {})
     # @param [Hash] params ({})
@@ -3316,6 +3323,7 @@ module Aws::APIGateway
     #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.authorization_scopes #=> Array
     #   resp.authorization_scopes[0] #=> String
     #
@@ -3646,6 +3654,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.resource_methods["String"].method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.resource_methods["String"].authorization_scopes #=> Array
     #   resp.resource_methods["String"].authorization_scopes[0] #=> String
     #
@@ -3742,6 +3751,7 @@ module Aws::APIGateway
     #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.items[0].resource_methods["String"].method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.items[0].resource_methods["String"].authorization_scopes #=> Array
     #   resp.items[0].resource_methods["String"].authorization_scopes[0] #=> String
     #
@@ -4636,7 +4646,7 @@ module Aws::APIGateway
     # @option params [required, String, IO] :body
     #   \[Required\] The POST request body containing external API
     #   definitions. Currently, only OpenAPI definition JSON/YAML files are
-    #   supported. The maximum size of the API definition file is 2MB.
+    #   supported. The maximum size of the API definition file is 6MB.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4874,10 +4884,15 @@ module Aws::APIGateway
     #     the same 415 response.
     #
     # @option params [String] :cache_namespace
-    #   A list of request parameters whose values are to be cached.
+    #   Specifies a group of related cached parameters. By default, API
+    #   Gateway uses the resource ID as the `cacheNamespace`. You can specify
+    #   the same `cacheNamespace` across resources to return the same cached
+    #   data for requests to different resources.
     #
     # @option params [Array<String>] :cache_key_parameters
-    #   An API-specific tag group of related cached parameters.
+    #   A list of request parameters whose values API Gateway caches. To be
+    #   valid values for `cacheKeyParameters`, these parameters must also be
+    #   specified for Method `requestParameters`.
     #
     # @option params [String] :content_handling
     #   Specifies how to handle request payload content type conversions.
@@ -4899,6 +4914,8 @@ module Aws::APIGateway
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
     #   is 29,000 milliseconds or 29 seconds.
     #
+    # @option params [Types::TlsConfig] :tls_config
+    #
     # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Integration#type #type} => String
@@ -4915,6 +4932,7 @@ module Aws::APIGateway
     #   * {Types::Integration#cache_namespace #cache_namespace} => String
     #   * {Types::Integration#cache_key_parameters #cache_key_parameters} => Array&lt;String&gt;
     #   * {Types::Integration#integration_responses #integration_responses} => Hash&lt;String,Types::IntegrationResponse&gt;
+    #   * {Types::Integration#tls_config #tls_config} => Types::TlsConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -4939,6 +4957,9 @@ module Aws::APIGateway
     #     cache_key_parameters: ["String"],
     #     content_handling: "CONVERT_TO_BINARY", # accepts CONVERT_TO_BINARY, CONVERT_TO_TEXT
     #     timeout_in_millis: 1,
+    #     tls_config: {
+    #       insecure_skip_verification: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -4967,6 +4988,7 @@ module Aws::APIGateway
     #   resp.integration_responses["String"].response_templates #=> Hash
     #   resp.integration_responses["String"].response_templates["String"] #=> String
     #   resp.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.tls_config.insecure_skip_verification #=> Boolean
     #
     # @overload put_integration(params = {})
     # @param [Hash] params ({})
@@ -5206,6 +5228,7 @@ module Aws::APIGateway
     #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.authorization_scopes #=> Array
     #   resp.authorization_scopes[0] #=> String
     #
@@ -5315,7 +5338,7 @@ module Aws::APIGateway
     # @option params [required, String, IO] :body
     #   \[Required\] The PUT request body containing external API definitions.
     #   Currently, only OpenAPI definition JSON/YAML files are supported. The
-    #   maximum size of the API definition file is 2MB.
+    #   maximum size of the API definition file is 6MB.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5403,7 +5426,7 @@ module Aws::APIGateway
     # Simulate the execution of an Authorizer in your RestApi with headers,
     # parameters, and an incoming request body.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
     # Authorizer][2]
     # </div>
@@ -5707,7 +5730,7 @@ module Aws::APIGateway
 
     # Updates an existing Authorizer resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -6194,6 +6217,7 @@ module Aws::APIGateway
     #   * {Types::Integration#cache_namespace #cache_namespace} => String
     #   * {Types::Integration#cache_key_parameters #cache_key_parameters} => Array&lt;String&gt;
     #   * {Types::Integration#integration_responses #integration_responses} => Hash&lt;String,Types::IntegrationResponse&gt;
+    #   * {Types::Integration#tls_config #tls_config} => Types::TlsConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -6237,6 +6261,7 @@ module Aws::APIGateway
     #   resp.integration_responses["String"].response_templates #=> Hash
     #   resp.integration_responses["String"].response_templates["String"] #=> String
     #   resp.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.tls_config.insecure_skip_verification #=> Boolean
     #
     # @overload update_integration(params = {})
     # @param [Hash] params ({})
@@ -6395,6 +6420,7 @@ module Aws::APIGateway
     #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.authorization_scopes #=> Array
     #   resp.authorization_scopes[0] #=> String
     #
@@ -6641,6 +6667,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.resource_methods["String"].method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.resource_methods["String"].authorization_scopes #=> Array
     #   resp.resource_methods["String"].authorization_scopes[0] #=> String
     #
@@ -6991,7 +7018,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

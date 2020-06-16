@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -1680,7 +1682,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A display name for the dataset.
+    #   A display name for the dashboard.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1932,6 +1934,11 @@ module Aws::QuickSight
     #   Source entity ARN.
     #   @return [String]
     #
+    # @!attribute [rw] data_set_arns
+    #   The Amazon Resource Numbers (ARNs) for the datasets that are
+    #   associated with a version of the dashboard.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] description
     #   Description.
     #   @return [String]
@@ -1945,6 +1952,7 @@ module Aws::QuickSight
       :status,
       :arn,
       :source_entity_arn,
+      :data_set_arns,
       :description)
       include Aws::Structure
     end
@@ -4435,9 +4443,8 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] dashboard_summary_list
-    #   A structure that contains all of the dashboards shared with the
-    #   user. This structure provides basic information about the
-    #   dashboards.
+    #   A structure that contains all of the dashboards in your AWS account.
+    #   This structure provides basic information about the dashboards.
     #   @return [Array<Types::DashboardSummary>]
     #
     # @!attribute [rw] next_token
@@ -5903,7 +5910,7 @@ module Aws::QuickSight
     #
     #
     #
-    #   [1]: https://docs.aws.example.com/cli/latest/reference/sts/assume-role.html
+    #   [1]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
@@ -6886,7 +6893,7 @@ module Aws::QuickSight
     # The template version.
     #
     # @!attribute [rw] arn
-    #   The ARN of the template version.
+    #   The Amazon Resource Name (ARN) of the template version.
     #   @return [String]
     #
     # @!attribute [rw] version_number

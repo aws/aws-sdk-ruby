@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -603,6 +605,11 @@ module Aws::LexModelBuildingService
     #   Checksum of the intent version created.
     #   @return [String]
     #
+    # @!attribute [rw] kendra_configuration
+    #   Configuration information, if any, for connectin an Amazon Kendra
+    #   index with the `AMAZON.KendraSearchIntent` intent.
+    #   @return [Types::KendraConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateIntentVersionResponse AWS API Documentation
     #
     class CreateIntentVersionResponse < Struct.new(
@@ -620,7 +627,8 @@ module Aws::LexModelBuildingService
       :last_updated_date,
       :created_date,
       :version,
-      :checksum)
+      :checksum,
+      :kendra_configuration)
       include Aws::Structure
     end
 
@@ -2053,6 +2061,11 @@ module Aws::LexModelBuildingService
     #   Checksum of the intent.
     #   @return [String]
     #
+    # @!attribute [rw] kendra_configuration
+    #   Configuration information, if any, to connect to an Amazon Kendra
+    #   index with the `AMAZON.KendraSearchIntent` intent.
+    #   @return [Types::KendraConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntentResponse AWS API Documentation
     #
     class GetIntentResponse < Struct.new(
@@ -2070,7 +2083,8 @@ module Aws::LexModelBuildingService
       :last_updated_date,
       :created_date,
       :version,
-      :checksum)
+      :checksum,
+      :kendra_configuration)
       include Aws::Structure
     end
 
@@ -2499,6 +2513,62 @@ module Aws::LexModelBuildingService
     #
     class InternalFailureException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # Provides configuration information for the AMAZON.KendraSearchIntent
+    # intent. When you use this intent, Amazon Lex searches the specified
+    # Amazon Kendra index and returns documents from the index that match
+    # the user's utterance. For more information, see [
+    # AMAZON.KendraSearchIntent][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html
+    #
+    # @note When making an API call, you may pass KendraConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         kendra_index: "KendraIndexArn", # required
+    #         query_filter_string: "QueryFilterString",
+    #         role: "roleArn", # required
+    #       }
+    #
+    # @!attribute [rw] kendra_index
+    #   The Amazon Resource Name (ARN) of the Amazon Kendra index that you
+    #   want the AMAZON.KendraSearchIntent intent to search. The index must
+    #   be in the same account and Region as the Amazon Lex bot. If the
+    #   Amazon Kendra index does not exist, you get an exception when you
+    #   call the `PutIntent` operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_filter_string
+    #   A query filter that Amazon Lex sends to Amazon Kendra to filter the
+    #   response from the query. The filter is in the format defined by
+    #   Amazon Kendra. For more information, see [Filtering queries][1].
+    #
+    #   You can override this filter string with a new filter string at
+    #   runtime.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kendra/latest/dg/filtering.html
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The Amazon Resource Name (ARN) of an IAM role that has permission to
+    #   search the Amazon Kendra index. The role must be in the same account
+    #   and Region as the Amazon Lex bot. If the role does not exist, you
+    #   get an exception when you call the `PutIntent` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/KendraConfiguration AWS API Documentation
+    #
+    class KendraConfiguration < Struct.new(
+      :kendra_index,
+      :query_filter_string,
+      :role)
       include Aws::Structure
     end
 
@@ -3388,6 +3458,11 @@ module Aws::LexModelBuildingService
     #         parent_intent_signature: "BuiltinIntentSignature",
     #         checksum: "String",
     #         create_version: false,
+    #         kendra_configuration: {
+    #           kendra_index: "KendraIndexArn", # required
+    #           query_filter_string: "QueryFilterString",
+    #           role: "roleArn", # required
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -3543,6 +3618,16 @@ module Aws::LexModelBuildingService
     #   you do not specify `createVersion`, the default is `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] kendra_configuration
+    #   Configuration information required to use the
+    #   `AMAZON.KendraSearchIntent` intent to connect to an Amazon Kendra
+    #   index. For more information, see [ AMAZON.KendraSearchIntent][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html
+    #   @return [Types::KendraConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntentRequest AWS API Documentation
     #
     class PutIntentRequest < Struct.new(
@@ -3558,7 +3643,8 @@ module Aws::LexModelBuildingService
       :fulfillment_activity,
       :parent_intent_signature,
       :checksum,
-      :create_version)
+      :create_version,
+      :kendra_configuration)
       include Aws::Structure
     end
 
@@ -3640,6 +3726,11 @@ module Aws::LexModelBuildingService
     #   `createVersion` field is set to false in the response.
     #   @return [Boolean]
     #
+    # @!attribute [rw] kendra_configuration
+    #   Configuration information, if any, required to connect to an Amazon
+    #   Kendra index and use the `AMAZON.KendraSearchIntent` intent.
+    #   @return [Types::KendraConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntentResponse AWS API Documentation
     #
     class PutIntentResponse < Struct.new(
@@ -3658,7 +3749,8 @@ module Aws::LexModelBuildingService
       :created_date,
       :version,
       :checksum,
-      :create_version)
+      :create_version,
+      :kendra_configuration)
       include Aws::Structure
     end
 
@@ -3961,12 +4053,13 @@ module Aws::LexModelBuildingService
     #   @return [Types::Prompt]
     #
     # @!attribute [rw] priority
-    #   Directs Lex the order in which to elicit this slot value from the
-    #   user. For example, if the intent has two slots with priorities 1 and
-    #   2, AWS Lex first elicits a value for the slot with priority 1.
+    #   Directs Amazon Lex the order in which to elicit this slot value from
+    #   the user. For example, if the intent has two slots with priorities 1
+    #   and 2, AWS Amazon Lex first elicits a value for the slot with
+    #   priority 1.
     #
-    #   If multiple slots share the same priority, the order in which Lex
-    #   elicits values is arbitrary.
+    #   If multiple slots share the same priority, the order in which Amazon
+    #   Lex elicits values is arbitrary.
     #   @return [Integer]
     #
     # @!attribute [rw] sample_utterances

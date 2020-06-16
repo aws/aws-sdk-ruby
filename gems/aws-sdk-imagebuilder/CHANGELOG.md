@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2020-06-11)
+------------------
+
+* Feature - EC2 Image Builder now supports specifying a custom working directory for your build and test workflows. In addition, Image Builder now supports defining tags that are applied to ephemeral resources created by EC2 Image Builder as part of the image creation workflow.
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.8.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.7.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.6.0 (2020-05-14)
 ------------------
 
@@ -35,4 +53,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-imagebuilder`.
-

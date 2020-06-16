@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -46,6 +48,6 @@ require_relative 'aws-sdk-route53/customizations'
 # @service
 module Aws::Route53
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.36.1'
 
 end

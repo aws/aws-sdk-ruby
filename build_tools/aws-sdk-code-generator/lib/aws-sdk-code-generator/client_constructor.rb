@@ -10,7 +10,7 @@ module AwsSdkCodeGenerator
           name: option.name,
           required: option.required,
           ruby_type: option.doc_type,
-          default_value: option.doc_default,
+          default_value: option.doc_default(options),
           docstring: option.docstring,
           indent: "  "
         ).to_s

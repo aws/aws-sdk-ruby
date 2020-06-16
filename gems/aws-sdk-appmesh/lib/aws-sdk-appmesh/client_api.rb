@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -610,9 +612,12 @@ module Aws::AppMesh
     MeshList.member = Shapes::ShapeRef.new(shape: MeshRef)
 
     MeshRef.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    MeshRef.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    MeshRef.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedAt"))
     MeshRef.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     MeshRef.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "meshOwner"))
     MeshRef.add_member(:resource_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "resourceOwner"))
+    MeshRef.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
     MeshRef.struct_class = Types::MeshRef
 
     MeshSpec.add_member(:egress_filter, Shapes::ShapeRef.new(shape: EgressFilter, location_name: "egressFilter"))
@@ -653,10 +658,13 @@ module Aws::AppMesh
     RouteList.member = Shapes::ShapeRef.new(shape: RouteRef)
 
     RouteRef.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    RouteRef.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    RouteRef.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedAt"))
     RouteRef.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     RouteRef.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "meshOwner"))
     RouteRef.add_member(:resource_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "resourceOwner"))
     RouteRef.add_member(:route_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "routeName"))
+    RouteRef.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
     RouteRef.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualRouterName"))
     RouteRef.struct_class = Types::RouteRef
 
@@ -793,9 +801,12 @@ module Aws::AppMesh
     VirtualNodeList.member = Shapes::ShapeRef.new(shape: VirtualNodeRef)
 
     VirtualNodeRef.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    VirtualNodeRef.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    VirtualNodeRef.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedAt"))
     VirtualNodeRef.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     VirtualNodeRef.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "meshOwner"))
     VirtualNodeRef.add_member(:resource_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "resourceOwner"))
+    VirtualNodeRef.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
     VirtualNodeRef.add_member(:virtual_node_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualNodeName"))
     VirtualNodeRef.struct_class = Types::VirtualNodeRef
 
@@ -827,9 +838,12 @@ module Aws::AppMesh
     VirtualRouterListeners.member = Shapes::ShapeRef.new(shape: VirtualRouterListener)
 
     VirtualRouterRef.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    VirtualRouterRef.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    VirtualRouterRef.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedAt"))
     VirtualRouterRef.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     VirtualRouterRef.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "meshOwner"))
     VirtualRouterRef.add_member(:resource_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "resourceOwner"))
+    VirtualRouterRef.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
     VirtualRouterRef.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualRouterName"))
     VirtualRouterRef.struct_class = Types::VirtualRouterRef
 
@@ -860,9 +874,12 @@ module Aws::AppMesh
     VirtualServiceProvider.struct_class = Types::VirtualServiceProvider
 
     VirtualServiceRef.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    VirtualServiceRef.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    VirtualServiceRef.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedAt"))
     VirtualServiceRef.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     VirtualServiceRef.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "meshOwner"))
     VirtualServiceRef.add_member(:resource_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "resourceOwner"))
+    VirtualServiceRef.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
     VirtualServiceRef.add_member(:virtual_service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "virtualServiceName"))
     VirtualServiceRef.struct_class = Types::VirtualServiceRef
 
@@ -1046,6 +1063,7 @@ module Aws::AppMesh
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)

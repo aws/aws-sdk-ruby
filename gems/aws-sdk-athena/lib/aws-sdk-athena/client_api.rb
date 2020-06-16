@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -19,16 +21,30 @@ module Aws::Athena
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BytesScannedCutoffValue = Shapes::IntegerShape.new(name: 'BytesScannedCutoffValue')
+    CatalogNameString = Shapes::StringShape.new(name: 'CatalogNameString')
+    Column = Shapes::StructureShape.new(name: 'Column')
     ColumnInfo = Shapes::StructureShape.new(name: 'ColumnInfo')
     ColumnInfoList = Shapes::ListShape.new(name: 'ColumnInfoList')
+    ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnNullable = Shapes::StringShape.new(name: 'ColumnNullable')
+    CommentString = Shapes::StringShape.new(name: 'CommentString')
+    CreateDataCatalogInput = Shapes::StructureShape.new(name: 'CreateDataCatalogInput')
+    CreateDataCatalogOutput = Shapes::StructureShape.new(name: 'CreateDataCatalogOutput')
     CreateNamedQueryInput = Shapes::StructureShape.new(name: 'CreateNamedQueryInput')
     CreateNamedQueryOutput = Shapes::StructureShape.new(name: 'CreateNamedQueryOutput')
     CreateWorkGroupInput = Shapes::StructureShape.new(name: 'CreateWorkGroupInput')
     CreateWorkGroupOutput = Shapes::StructureShape.new(name: 'CreateWorkGroupOutput')
+    DataCatalog = Shapes::StructureShape.new(name: 'DataCatalog')
+    DataCatalogSummary = Shapes::StructureShape.new(name: 'DataCatalogSummary')
+    DataCatalogSummaryList = Shapes::ListShape.new(name: 'DataCatalogSummaryList')
+    DataCatalogType = Shapes::StringShape.new(name: 'DataCatalogType')
+    Database = Shapes::StructureShape.new(name: 'Database')
+    DatabaseList = Shapes::ListShape.new(name: 'DatabaseList')
     DatabaseString = Shapes::StringShape.new(name: 'DatabaseString')
     Date = Shapes::TimestampShape.new(name: 'Date')
     Datum = Shapes::StructureShape.new(name: 'Datum')
+    DeleteDataCatalogInput = Shapes::StructureShape.new(name: 'DeleteDataCatalogInput')
+    DeleteDataCatalogOutput = Shapes::StructureShape.new(name: 'DeleteDataCatalogOutput')
     DeleteNamedQueryInput = Shapes::StructureShape.new(name: 'DeleteNamedQueryInput')
     DeleteNamedQueryOutput = Shapes::StructureShape.new(name: 'DeleteNamedQueryOutput')
     DeleteWorkGroupInput = Shapes::StructureShape.new(name: 'DeleteWorkGroupInput')
@@ -38,37 +54,57 @@ module Aws::Athena
     EncryptionOption = Shapes::StringShape.new(name: 'EncryptionOption')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExpressionString = Shapes::StringShape.new(name: 'ExpressionString')
+    GetDataCatalogInput = Shapes::StructureShape.new(name: 'GetDataCatalogInput')
+    GetDataCatalogOutput = Shapes::StructureShape.new(name: 'GetDataCatalogOutput')
+    GetDatabaseInput = Shapes::StructureShape.new(name: 'GetDatabaseInput')
+    GetDatabaseOutput = Shapes::StructureShape.new(name: 'GetDatabaseOutput')
     GetNamedQueryInput = Shapes::StructureShape.new(name: 'GetNamedQueryInput')
     GetNamedQueryOutput = Shapes::StructureShape.new(name: 'GetNamedQueryOutput')
     GetQueryExecutionInput = Shapes::StructureShape.new(name: 'GetQueryExecutionInput')
     GetQueryExecutionOutput = Shapes::StructureShape.new(name: 'GetQueryExecutionOutput')
     GetQueryResultsInput = Shapes::StructureShape.new(name: 'GetQueryResultsInput')
     GetQueryResultsOutput = Shapes::StructureShape.new(name: 'GetQueryResultsOutput')
+    GetTableMetadataInput = Shapes::StructureShape.new(name: 'GetTableMetadataInput')
+    GetTableMetadataOutput = Shapes::StructureShape.new(name: 'GetTableMetadataOutput')
     GetWorkGroupInput = Shapes::StructureShape.new(name: 'GetWorkGroupInput')
     GetWorkGroupOutput = Shapes::StructureShape.new(name: 'GetWorkGroupOutput')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    KeyString = Shapes::StringShape.new(name: 'KeyString')
+    ListDataCatalogsInput = Shapes::StructureShape.new(name: 'ListDataCatalogsInput')
+    ListDataCatalogsOutput = Shapes::StructureShape.new(name: 'ListDataCatalogsOutput')
+    ListDatabasesInput = Shapes::StructureShape.new(name: 'ListDatabasesInput')
+    ListDatabasesOutput = Shapes::StructureShape.new(name: 'ListDatabasesOutput')
     ListNamedQueriesInput = Shapes::StructureShape.new(name: 'ListNamedQueriesInput')
     ListNamedQueriesOutput = Shapes::StructureShape.new(name: 'ListNamedQueriesOutput')
     ListQueryExecutionsInput = Shapes::StructureShape.new(name: 'ListQueryExecutionsInput')
     ListQueryExecutionsOutput = Shapes::StructureShape.new(name: 'ListQueryExecutionsOutput')
+    ListTableMetadataInput = Shapes::StructureShape.new(name: 'ListTableMetadataInput')
+    ListTableMetadataOutput = Shapes::StructureShape.new(name: 'ListTableMetadataOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListWorkGroupsInput = Shapes::StructureShape.new(name: 'ListWorkGroupsInput')
     ListWorkGroupsOutput = Shapes::StructureShape.new(name: 'ListWorkGroupsOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MaxDataCatalogsCount = Shapes::IntegerShape.new(name: 'MaxDataCatalogsCount')
+    MaxDatabasesCount = Shapes::IntegerShape.new(name: 'MaxDatabasesCount')
     MaxNamedQueriesCount = Shapes::IntegerShape.new(name: 'MaxNamedQueriesCount')
     MaxQueryExecutionsCount = Shapes::IntegerShape.new(name: 'MaxQueryExecutionsCount')
     MaxQueryResults = Shapes::IntegerShape.new(name: 'MaxQueryResults')
+    MaxTableMetadataCount = Shapes::IntegerShape.new(name: 'MaxTableMetadataCount')
     MaxTagsCount = Shapes::IntegerShape.new(name: 'MaxTagsCount')
     MaxWorkGroupsCount = Shapes::IntegerShape.new(name: 'MaxWorkGroupsCount')
+    MetadataException = Shapes::StructureShape.new(name: 'MetadataException')
     NameString = Shapes::StringShape.new(name: 'NameString')
     NamedQuery = Shapes::StructureShape.new(name: 'NamedQuery')
     NamedQueryId = Shapes::StringShape.new(name: 'NamedQueryId')
     NamedQueryIdList = Shapes::ListShape.new(name: 'NamedQueryIdList')
     NamedQueryList = Shapes::ListShape.new(name: 'NamedQueryList')
+    ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
+    ParametersMapValue = Shapes::StringShape.new(name: 'ParametersMapValue')
     QueryExecution = Shapes::StructureShape.new(name: 'QueryExecution')
     QueryExecutionContext = Shapes::StructureShape.new(name: 'QueryExecutionContext')
     QueryExecutionId = Shapes::StringShape.new(name: 'QueryExecutionId')
@@ -91,6 +127,9 @@ module Aws::Athena
     StopQueryExecutionInput = Shapes::StructureShape.new(name: 'StopQueryExecutionInput')
     StopQueryExecutionOutput = Shapes::StructureShape.new(name: 'StopQueryExecutionOutput')
     String = Shapes::StringShape.new(name: 'String')
+    TableMetadata = Shapes::StructureShape.new(name: 'TableMetadata')
+    TableMetadataList = Shapes::ListShape.new(name: 'TableMetadataList')
+    TableTypeString = Shapes::StringShape.new(name: 'TableTypeString')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -99,14 +138,18 @@ module Aws::Athena
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottleReason = Shapes::StringShape.new(name: 'ThrottleReason')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    TypeString = Shapes::StringShape.new(name: 'TypeString')
     UnprocessedNamedQueryId = Shapes::StructureShape.new(name: 'UnprocessedNamedQueryId')
     UnprocessedNamedQueryIdList = Shapes::ListShape.new(name: 'UnprocessedNamedQueryIdList')
     UnprocessedQueryExecutionId = Shapes::StructureShape.new(name: 'UnprocessedQueryExecutionId')
     UnprocessedQueryExecutionIdList = Shapes::ListShape.new(name: 'UnprocessedQueryExecutionIdList')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
+    UpdateDataCatalogInput = Shapes::StructureShape.new(name: 'UpdateDataCatalogInput')
+    UpdateDataCatalogOutput = Shapes::StructureShape.new(name: 'UpdateDataCatalogOutput')
     UpdateWorkGroupInput = Shapes::StructureShape.new(name: 'UpdateWorkGroupInput')
     UpdateWorkGroupOutput = Shapes::StructureShape.new(name: 'UpdateWorkGroupOutput')
     WorkGroup = Shapes::StructureShape.new(name: 'WorkGroup')
@@ -134,6 +177,11 @@ module Aws::Athena
     BatchGetQueryExecutionOutput.add_member(:unprocessed_query_execution_ids, Shapes::ShapeRef.new(shape: UnprocessedQueryExecutionIdList, location_name: "UnprocessedQueryExecutionIds"))
     BatchGetQueryExecutionOutput.struct_class = Types::BatchGetQueryExecutionOutput
 
+    Column.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    Column.add_member(:type, Shapes::ShapeRef.new(shape: TypeString, location_name: "Type"))
+    Column.add_member(:comment, Shapes::ShapeRef.new(shape: CommentString, location_name: "Comment"))
+    Column.struct_class = Types::Column
+
     ColumnInfo.add_member(:catalog_name, Shapes::ShapeRef.new(shape: String, location_name: "CatalogName"))
     ColumnInfo.add_member(:schema_name, Shapes::ShapeRef.new(shape: String, location_name: "SchemaName"))
     ColumnInfo.add_member(:table_name, Shapes::ShapeRef.new(shape: String, location_name: "TableName"))
@@ -147,6 +195,17 @@ module Aws::Athena
     ColumnInfo.struct_class = Types::ColumnInfo
 
     ColumnInfoList.member = Shapes::ShapeRef.new(shape: ColumnInfo)
+
+    ColumnList.member = Shapes::ShapeRef.new(shape: Column)
+
+    CreateDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
+    CreateDataCatalogInput.add_member(:type, Shapes::ShapeRef.new(shape: DataCatalogType, required: true, location_name: "Type"))
+    CreateDataCatalogInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CreateDataCatalogInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
+    CreateDataCatalogInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDataCatalogInput.struct_class = Types::CreateDataCatalogInput
+
+    CreateDataCatalogOutput.struct_class = Types::CreateDataCatalogOutput
 
     CreateNamedQueryInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     CreateNamedQueryInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
@@ -167,8 +226,32 @@ module Aws::Athena
 
     CreateWorkGroupOutput.struct_class = Types::CreateWorkGroupOutput
 
+    DataCatalog.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
+    DataCatalog.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    DataCatalog.add_member(:type, Shapes::ShapeRef.new(shape: DataCatalogType, required: true, location_name: "Type"))
+    DataCatalog.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
+    DataCatalog.struct_class = Types::DataCatalog
+
+    DataCatalogSummary.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, location_name: "CatalogName"))
+    DataCatalogSummary.add_member(:type, Shapes::ShapeRef.new(shape: DataCatalogType, location_name: "Type"))
+    DataCatalogSummary.struct_class = Types::DataCatalogSummary
+
+    DataCatalogSummaryList.member = Shapes::ShapeRef.new(shape: DataCatalogSummary)
+
+    Database.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    Database.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    Database.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
+    Database.struct_class = Types::Database
+
+    DatabaseList.member = Shapes::ShapeRef.new(shape: Database)
+
     Datum.add_member(:var_char_value, Shapes::ShapeRef.new(shape: datumString, location_name: "VarCharValue"))
     Datum.struct_class = Types::Datum
+
+    DeleteDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
+    DeleteDataCatalogInput.struct_class = Types::DeleteDataCatalogInput
+
+    DeleteDataCatalogOutput.struct_class = Types::DeleteDataCatalogOutput
 
     DeleteNamedQueryInput.add_member(:named_query_id, Shapes::ShapeRef.new(shape: NamedQueryId, required: true, location_name: "NamedQueryId", metadata: {"idempotencyToken"=>true}))
     DeleteNamedQueryInput.struct_class = Types::DeleteNamedQueryInput
@@ -184,6 +267,19 @@ module Aws::Athena
     EncryptionConfiguration.add_member(:encryption_option, Shapes::ShapeRef.new(shape: EncryptionOption, required: true, location_name: "EncryptionOption"))
     EncryptionConfiguration.add_member(:kms_key, Shapes::ShapeRef.new(shape: String, location_name: "KmsKey"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
+
+    GetDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
+    GetDataCatalogInput.struct_class = Types::GetDataCatalogInput
+
+    GetDataCatalogOutput.add_member(:data_catalog, Shapes::ShapeRef.new(shape: DataCatalog, location_name: "DataCatalog"))
+    GetDataCatalogOutput.struct_class = Types::GetDataCatalogOutput
+
+    GetDatabaseInput.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "CatalogName"))
+    GetDatabaseInput.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    GetDatabaseInput.struct_class = Types::GetDatabaseInput
+
+    GetDatabaseOutput.add_member(:database, Shapes::ShapeRef.new(shape: Database, location_name: "Database"))
+    GetDatabaseOutput.struct_class = Types::GetDatabaseOutput
 
     GetNamedQueryInput.add_member(:named_query_id, Shapes::ShapeRef.new(shape: NamedQueryId, required: true, location_name: "NamedQueryId"))
     GetNamedQueryInput.struct_class = Types::GetNamedQueryInput
@@ -207,6 +303,14 @@ module Aws::Athena
     GetQueryResultsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetQueryResultsOutput.struct_class = Types::GetQueryResultsOutput
 
+    GetTableMetadataInput.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "CatalogName"))
+    GetTableMetadataInput.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    GetTableMetadataInput.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    GetTableMetadataInput.struct_class = Types::GetTableMetadataInput
+
+    GetTableMetadataOutput.add_member(:table_metadata, Shapes::ShapeRef.new(shape: TableMetadata, location_name: "TableMetadata"))
+    GetTableMetadataOutput.struct_class = Types::GetTableMetadataOutput
+
     GetWorkGroupInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     GetWorkGroupInput.struct_class = Types::GetWorkGroupInput
 
@@ -219,6 +323,23 @@ module Aws::Athena
     InvalidRequestException.add_member(:athena_error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "AthenaErrorCode"))
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    ListDataCatalogsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListDataCatalogsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxDataCatalogsCount, location_name: "MaxResults"))
+    ListDataCatalogsInput.struct_class = Types::ListDataCatalogsInput
+
+    ListDataCatalogsOutput.add_member(:data_catalogs_summary, Shapes::ShapeRef.new(shape: DataCatalogSummaryList, location_name: "DataCatalogsSummary"))
+    ListDataCatalogsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListDataCatalogsOutput.struct_class = Types::ListDataCatalogsOutput
+
+    ListDatabasesInput.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "CatalogName"))
+    ListDatabasesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListDatabasesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxDatabasesCount, location_name: "MaxResults"))
+    ListDatabasesInput.struct_class = Types::ListDatabasesInput
+
+    ListDatabasesOutput.add_member(:database_list, Shapes::ShapeRef.new(shape: DatabaseList, location_name: "DatabaseList"))
+    ListDatabasesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListDatabasesOutput.struct_class = Types::ListDatabasesOutput
 
     ListNamedQueriesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListNamedQueriesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxNamedQueriesCount, location_name: "MaxResults"))
@@ -238,6 +359,17 @@ module Aws::Athena
     ListQueryExecutionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListQueryExecutionsOutput.struct_class = Types::ListQueryExecutionsOutput
 
+    ListTableMetadataInput.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "CatalogName"))
+    ListTableMetadataInput.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    ListTableMetadataInput.add_member(:expression, Shapes::ShapeRef.new(shape: ExpressionString, location_name: "Expression"))
+    ListTableMetadataInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListTableMetadataInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxTableMetadataCount, location_name: "MaxResults"))
+    ListTableMetadataInput.struct_class = Types::ListTableMetadataInput
+
+    ListTableMetadataOutput.add_member(:table_metadata_list, Shapes::ShapeRef.new(shape: TableMetadataList, location_name: "TableMetadataList"))
+    ListTableMetadataOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListTableMetadataOutput.struct_class = Types::ListTableMetadataOutput
+
     ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
     ListTagsForResourceInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListTagsForResourceInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxTagsCount, location_name: "MaxResults"))
@@ -255,6 +387,9 @@ module Aws::Athena
     ListWorkGroupsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListWorkGroupsOutput.struct_class = Types::ListWorkGroupsOutput
 
+    MetadataException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MetadataException.struct_class = Types::MetadataException
+
     NamedQuery.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     NamedQuery.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     NamedQuery.add_member(:database, Shapes::ShapeRef.new(shape: DatabaseString, required: true, location_name: "Database"))
@@ -267,6 +402,9 @@ module Aws::Athena
 
     NamedQueryList.member = Shapes::ShapeRef.new(shape: NamedQuery)
 
+    ParametersMap.key = Shapes::ShapeRef.new(shape: KeyString)
+    ParametersMap.value = Shapes::ShapeRef.new(shape: ParametersMapValue)
+
     QueryExecution.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: QueryExecutionId, location_name: "QueryExecutionId"))
     QueryExecution.add_member(:query, Shapes::ShapeRef.new(shape: QueryString, location_name: "Query"))
     QueryExecution.add_member(:statement_type, Shapes::ShapeRef.new(shape: StatementType, location_name: "StatementType"))
@@ -278,6 +416,7 @@ module Aws::Athena
     QueryExecution.struct_class = Types::QueryExecution
 
     QueryExecutionContext.add_member(:database, Shapes::ShapeRef.new(shape: DatabaseString, location_name: "Database"))
+    QueryExecutionContext.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogNameString, location_name: "Catalog"))
     QueryExecutionContext.struct_class = Types::QueryExecutionContext
 
     QueryExecutionIdList.member = Shapes::ShapeRef.new(shape: QueryExecutionId)
@@ -340,6 +479,17 @@ module Aws::Athena
 
     StopQueryExecutionOutput.struct_class = Types::StopQueryExecutionOutput
 
+    TableMetadata.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    TableMetadata.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))
+    TableMetadata.add_member(:last_access_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastAccessTime"))
+    TableMetadata.add_member(:table_type, Shapes::ShapeRef.new(shape: TableTypeString, location_name: "TableType"))
+    TableMetadata.add_member(:columns, Shapes::ShapeRef.new(shape: ColumnList, location_name: "Columns"))
+    TableMetadata.add_member(:partition_keys, Shapes::ShapeRef.new(shape: ColumnList, location_name: "PartitionKeys"))
+    TableMetadata.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
+    TableMetadata.struct_class = Types::TableMetadata
+
+    TableMetadataList.member = Shapes::ShapeRef.new(shape: TableMetadata)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -377,6 +527,14 @@ module Aws::Athena
     UntagResourceInput.struct_class = Types::UntagResourceInput
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
+
+    UpdateDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
+    UpdateDataCatalogInput.add_member(:type, Shapes::ShapeRef.new(shape: DataCatalogType, required: true, location_name: "Type"))
+    UpdateDataCatalogInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    UpdateDataCatalogInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
+    UpdateDataCatalogInput.struct_class = Types::UpdateDataCatalogInput
+
+    UpdateDataCatalogOutput.struct_class = Types::UpdateDataCatalogOutput
 
     UpdateWorkGroupInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     UpdateWorkGroupInput.add_member(:description, Shapes::ShapeRef.new(shape: WorkGroupDescriptionString, location_name: "Description"))
@@ -456,6 +614,16 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:create_data_catalog, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataCatalog"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDataCatalogInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateDataCatalogOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
       api.add_operation(:create_named_query, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateNamedQuery"
         o.http_method = "POST"
@@ -472,6 +640,16 @@ module Aws::Athena
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateWorkGroupInput)
         o.output = Shapes::ShapeRef.new(shape: CreateWorkGroupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:delete_data_catalog, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataCatalog"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataCatalogInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDataCatalogOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
@@ -494,6 +672,27 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: DeleteWorkGroupOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:get_data_catalog, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataCatalog"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDataCatalogInput)
+        o.output = Shapes::ShapeRef.new(shape: GetDataCatalogOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:get_database, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDatabase"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDatabaseInput)
+        o.output = Shapes::ShapeRef.new(shape: GetDatabaseOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: MetadataException)
       end)
 
       api.add_operation(:get_named_query, Seahorse::Model::Operation.new.tap do |o|
@@ -532,6 +731,17 @@ module Aws::Athena
         )
       end)
 
+      api.add_operation(:get_table_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTableMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTableMetadataInput)
+        o.output = Shapes::ShapeRef.new(shape: GetTableMetadataOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: MetadataException)
+      end)
+
       api.add_operation(:get_work_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetWorkGroup"
         o.http_method = "POST"
@@ -540,6 +750,39 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: GetWorkGroupOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:list_data_catalogs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataCatalogs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDataCatalogsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListDataCatalogsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_databases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDatabases"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDatabasesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListDatabasesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: MetadataException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_named_queries, Seahorse::Model::Operation.new.tap do |o|
@@ -574,6 +817,23 @@ module Aws::Athena
         )
       end)
 
+      api.add_operation(:list_table_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTableMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTableMetadataInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTableMetadataOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: MetadataException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "POST"
@@ -583,6 +843,12 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_work_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -642,6 +908,16 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_data_catalog, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDataCatalog"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDataCatalogInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDataCatalogOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:update_work_group, Seahorse::Model::Operation.new.tap do |o|

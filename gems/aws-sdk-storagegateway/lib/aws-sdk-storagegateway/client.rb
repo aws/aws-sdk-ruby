@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::StorageGateway
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::StorageGateway
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::StorageGateway
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -323,7 +327,7 @@ module Aws::StorageGateway
     # that you want to use for storing snapshots or tapes, the time zone for
     # scheduled snapshots the gateway snapshot schedule window, an
     # activation key, and a name for your gateway. The activation process
-    # also associates your gateway with your account; for more information,
+    # also associates your gateway with your account. For more information,
     # see UpdateGatewayInformation.
     #
     # <note markdown="1"> You must turn on the gateway VM before you can activate your gateway.
@@ -340,9 +344,12 @@ module Aws::StorageGateway
     #   pass to the `ActivateGateway` API call determine the actual
     #   configuration of your gateway.
     #
-    #   For more information, see
-    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html
-    #   in the Storage Gateway User Guide.
+    #   For more information, see [Getting activation key][1] in the *AWS
+    #   Storage Gateway User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html
     #
     # @option params [required, String] :gateway_name
     #   The name you configured for your gateway.
@@ -360,34 +367,34 @@ module Aws::StorageGateway
     #   data. The gateway AWS Region specified must be the same AWS Region as
     #   the AWS Region in your `Host` header in the request. For more
     #   information about available AWS Regions and endpoints for AWS Storage
-    #   Gateway, see [Regions and Endpoints][1] in the *Amazon Web Services
-    #   Glossary*.
+    #   Gateway, see [AWS Storage Gateway endpoints and quotas][1] in the *AWS
+    #   General Reference*.
     #
-    #   Valid Values: See [AWS Storage Gateway Regions and Endpoints][1] in
-    #   the AWS General Reference.
+    #   Valid Values: See [AWS Storage Gateway endpoints and quotas][1] in the
+    #   *AWS General Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/sg.html
     #
     # @option params [String] :gateway_type
     #   A value that defines the type of gateway to activate. The type
     #   specified is critical to all later functions of the gateway and cannot
     #   be changed after activation. The default value is `CACHED`.
     #
-    #   Valid Values: "STORED", "CACHED", "VTL", "FILE\_S3"
+    #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `FILE_S3`
     #
     # @option params [String] :tape_drive_type
     #   The value that indicates the type of tape drive to use for tape
     #   gateway. This field is optional.
     #
-    #   Valid Values: "IBM-ULT3580-TD5"
+    #   Valid Values: `IBM-ULT3580-TD5`
     #
     # @option params [String] :medium_changer_type
     #   The value that indicates the type of medium changer to use for tape
     #   gateway. This field is optional.
     #
-    #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
+    #   Valid Values: `STK-L700` \| `AWS-Gateway-VTL`
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of up to 50 tags that you can assign to the gateway. Each tag
@@ -457,8 +464,8 @@ module Aws::StorageGateway
     end
 
     # Configures one or more gateway local disks as cache for a gateway.
-    # This operation is only supported in the cached volume, tape and file
-    # gateway type (see [Storage Gateway Concepts][1]).
+    # This operation is only supported in the cached volume, tape, and file
+    # gateway type (see [How AWS Storage Gateway works (architecture)][1].
     #
     # In the request, you specify the gateway Amazon Resource Name (ARN) to
     # which you want to add cache, and one or more disk IDs that you want to
@@ -737,7 +744,7 @@ module Aws::StorageGateway
     # is archived directly into the S3 storage class (S3 Glacier or S3
     # Glacier Deep Archive) that corresponds to the pool.
     #
-    # Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    # Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #
     # @option params [required, String] :tape_arn
     #   The unique Amazon Resource Name (ARN) of the virtual tape that you
@@ -750,7 +757,7 @@ module Aws::StorageGateway
     #   eject the tape, the tape is archived directly into the storage class
     #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
     #
-    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #
     # @return [Types::AssignTapePoolOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -981,7 +988,7 @@ module Aws::StorageGateway
     # @option params [String] :snapshot_id
     #   The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as
     #   the new cached volume. Specify this field if you want to create the
-    #   iSCSI storage volume from a snapshot otherwise do not include this
+    #   iSCSI storage volume from a snapshot; otherwise, do not include this
     #   field. To list snapshots for your account use [DescribeSnapshots][1]
     #   in the *Amazon Elastic Compute Cloud API Reference*.
     #
@@ -1019,13 +1026,16 @@ module Aws::StorageGateway
     #   request.
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [String] :kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway does
+    #   not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of up to 50 tags that you can assign to a cached volume. Each
@@ -1108,12 +1118,16 @@ module Aws::StorageGateway
     # activated to enable you to create a file share. Make sure AWS STS is
     # activated in the AWS Region you are creating your file gateway in. If
     # AWS STS is not activated in the AWS Region, activate it. For
-    # information about how to activate AWS STS, see Activating and
-    # Deactivating AWS STS in an AWS Region in the AWS Identity and Access
-    # Management User Guide.
+    # information about how to activate AWS STS, see [Activating and
+    # deactivating AWS STS in an AWS Region][1] in the *AWS Identity and
+    # Access Management User Guide*.
     #
     #  File gateway does not support creating hard or symbolic links on a
     # file share.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
     #
     # @option params [required, String] :client_token
     #   A unique string value that you supply that is used by file gateway to
@@ -1127,13 +1141,16 @@ module Aws::StorageGateway
     #   to create a file share.
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [String] :kms_key
-    #   The Amazon Resource Name (ARN) AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway does
+    #   not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #
     # @option params [required, String] :role
     #   The ARN of the AWS Identity and Access Management (IAM) role that a
@@ -1144,50 +1161,59 @@ module Aws::StorageGateway
     #
     # @option params [String] :default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket by
-    #   the file gateway. Possible values are `S3_STANDARD`, `S3_STANDARD_IA`,
-    #   or `S3_ONEZONE_IA`. If this field is not populated, the default value
-    #   `S3_STANDARD` is used. Optional.
+    #   the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
+    #
+    #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
+    #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
     #
     # @option params [String] :object_acl
-    #   A value that sets the access control list permission for objects in
-    #   the S3 bucket that a file gateway puts objects into. The default value
-    #   is "private".
+    #   A value that sets the access control list (ACL) permission for objects
+    #   in the S3 bucket that a file gateway puts objects into. The default
+    #   value is `private`.
     #
     # @option params [Array<String>] :client_list
     #   The list of clients that are allowed to access the file gateway. The
     #   list must contain either valid IP addresses or valid CIDR blocks.
     #
     # @option params [String] :squash
-    #   A value that maps a user to anonymous user. Valid options are the
-    #   following:
+    #   A value that maps a user to anonymous user.
     #
-    #   * `RootSquash` - Only root is mapped to anonymous user.
+    #   Valid values are the following:
     #
-    #   * `NoSquash` - No one is mapped to anonymous user
+    #   * `RootSquash`\: Only root is mapped to anonymous user.
     #
-    #   * `AllSquash` - Everyone is mapped to anonymous user.
+    #   * `NoSquash`\: No one is mapped to anonymous user.
+    #
+    #   * `AllSquash`\: Everyone is mapped to anonymous user.
     #
     # @option params [Boolean] :read_only
-    #   A value that sets the write status of a file share. This value is true
-    #   if the write status is read-only, and otherwise false.
+    #   A value that sets the write status of a file share. Set this value to
+    #   `true` to set the write status to read-only, otherwise set to `false`.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [Boolean] :guess_mime_type_enabled
     #   A value that enables guessing of the MIME type for uploaded objects
-    #   based on file extensions. Set this value to true to enable MIME type
-    #   guessing, and otherwise to false. The default value is true.
+    #   based on file extensions. Set this value to `true` to enable MIME type
+    #   guessing, otherwise set to `false`. The default value is `true`.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [Boolean] :requester_pays
     #   A value that sets who pays the cost of the request and the cost
     #   associated with data download from the S3 bucket. If this value is set
-    #   to true, the requester pays the costs. Otherwise the S3 bucket owner
-    #   pays. However, the S3 bucket owner always pays the cost of storing
-    #   data.
+    #   to `true`, the requester pays the costs; otherwise, the S3 bucket
+    #   owner pays. However, the S3 bucket owner always pays the cost of
+    #   storing data.
     #
     #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
     #   file share, so make sure that the configuration on the file share is
     #   the same as the S3 bucket configuration.
     #
     #    </note>
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of up to 50 tags that can be assigned to the NFS file share.
@@ -1258,8 +1284,8 @@ module Aws::StorageGateway
     # is activated in the AWS Region you are creating your file gateway in.
     # If AWS STS is not activated in this AWS Region, activate it. For
     # information about how to activate AWS STS, see [Activating and
-    # Deactivating AWS STS in an AWS Region][1] in the *AWS Identity and
-    # Access Management User Guide.*
+    # deactivating AWS STS in an AWS Region][1] in the *AWS Identity and
+    # Access Management User Guide*.
     #
     #  File gateways don't support creating hard or symbolic links on a
     # file
@@ -1277,13 +1303,16 @@ module Aws::StorageGateway
     #   The ARN of the file gateway on which you want to create a file share.
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [String] :kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway does
+    #   not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #
     # @option params [required, String] :role
     #   The ARN of the AWS Identity and Access Management (IAM) role that a
@@ -1294,30 +1323,36 @@ module Aws::StorageGateway
     #
     # @option params [String] :default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket by
-    #   the file gateway. Possible values are `S3_STANDARD`, `S3_STANDARD_IA`,
-    #   or `S3_ONEZONE_IA`. If this field is not populated, the default value
-    #   `S3_STANDARD` is used. Optional.
+    #   the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
+    #
+    #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
+    #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
     #
     # @option params [String] :object_acl
-    #   A value that sets the access control list permission for objects in
-    #   the S3 bucket that a file gateway puts objects into. The default value
-    #   is "private".
+    #   A value that sets the access control list (ACL) permission for objects
+    #   in the S3 bucket that a file gateway puts objects into. The default
+    #   value is `private`.
     #
     # @option params [Boolean] :read_only
-    #   A value that sets the write status of a file share. This value is true
-    #   if the write status is read-only, and otherwise false.
+    #   A value that sets the write status of a file share. Set this value to
+    #   `true` to set the write status to read-only, otherwise set to `false`.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [Boolean] :guess_mime_type_enabled
     #   A value that enables guessing of the MIME type for uploaded objects
-    #   based on file extensions. Set this value to true to enable MIME type
-    #   guessing, and otherwise to false. The default value is true.
+    #   based on file extensions. Set this value to `true` to enable MIME type
+    #   guessing, otherwise set to `false`. The default value is `true`.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [Boolean] :requester_pays
     #   A value that sets who pays the cost of the request and the cost
     #   associated with data download from the S3 bucket. If this value is set
-    #   to true, the requester pays the costs. Otherwise the S3 bucket owner
-    #   pays. However, the S3 bucket owner always pays the cost of storing
-    #   data.
+    #   to `true`, the requester pays the costs; otherwise, the S3 bucket
+    #   owner pays. However, the S3 bucket owner always pays the cost of
+    #   storing data.
     #
     #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
     #   file share, so make sure that the configuration on the file share is
@@ -1325,14 +1360,22 @@ module Aws::StorageGateway
     #
     #    </note>
     #
+    #   Valid Values: `true` \| `false`
+    #
     # @option params [Boolean] :smbacl_enabled
-    #   Set this value to "true to enable ACL (access control list) on the
-    #   SMB file share. Set it to "false" to map file and directory
+    #   Set this value to `true` to enable access control list (ACL) on the
+    #   SMB file share. Set it to `false` to map file and directory
     #   permissions to the POSIX permissions.
     #
-    #   For more information, see
-    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
-    #   in the Storage Gateway User Guide.
+    #   For more information, see [Using Microsoft Windows ACLs to control
+    #   access to an SMB file share][1] in the *AWS Storage Gateway User
+    #   Guide*.
+    #
+    #   Valid Values: `true` \| `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
     #
     # @option params [Array<String>] :admin_user_list
     #   A list of users in the Active Directory that will be granted
@@ -1345,7 +1388,7 @@ module Aws::StorageGateway
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
     #   access the file share. A group must be prefixed with the @ character.
-    #   For example `@group1`. Can only be set if Authentication is set to
+    #   For example, `@group1`. Can only be set if Authentication is set to
     #   `ActiveDirectory`.
     #
     # @option params [Array<String>] :invalid_user_list
@@ -1358,10 +1401,10 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the storage used for the audit logs.
     #
     # @option params [String] :authentication
-    #   The authentication method that users use to access the file share.
+    #   The authentication method that users use to access the file share. The
+    #   default is `ActiveDirectory`.
     #
-    #   Valid values are `ActiveDirectory` or `GuestAccess`. The default is
-    #   `ActiveDirectory`.
+    #   Valid Values: `ActiveDirectory` \| `GuestAccess`
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of up to 50 tags that can be assigned to the NFS file share.
@@ -1422,12 +1465,12 @@ module Aws::StorageGateway
     # Initiates a snapshot of a volume.
     #
     # AWS Storage Gateway provides the ability to back up point-in-time
-    # snapshots of your data to Amazon Simple Storage Service (Amazon S3)
-    # for durable off-site recovery, as well as import the data to an Amazon
+    # snapshots of your data to Amazon Simple Storage (Amazon S3) for
+    # durable off-site recovery, as well as import the data to an Amazon
     # Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud
     # (EC2). You can take snapshots of your gateway volume on a scheduled or
-    # ad hoc basis. This API enables you to take an ad hoc snapshot. For
-    # more information, see [Editing a Snapshot Schedule][1].
+    # ad hoc basis. This API enables you to take ad-hoc snapshot. For more
+    # information, see [Editing a snapshot schedule][1].
     #
     # In the CreateSnapshot request you identify the volume by providing its
     # Amazon Resource Name (ARN). You must also provide description for the
@@ -1440,19 +1483,20 @@ module Aws::StorageGateway
     # gateway type.
     #
     # <note markdown="1"> To list or delete a snapshot, you must use the Amazon EC2 API. For
-    # more information, see DescribeSnapshots or DeleteSnapshot in the [EC2
-    # API reference][2].
+    # more information, see [DescribeSnapshots][2] or [DeleteSnapshot][3] in
+    # the *Amazon Elastic Compute Cloud API Reference*.
     #
     #  </note>
     #
     # Volume and snapshot IDs are changing to a longer length ID format. For
-    # more information, see the important note on the [Welcome][3] page.
+    # more information, see the important note on the [Welcome][4] page.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Operations.html
-    # [3]: https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html
+    # [4]: https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html
     #
     # @option params [required, String] :volume_arn
     #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
@@ -1462,7 +1506,7 @@ module Aws::StorageGateway
     #   Textual description of the snapshot that appears in the Amazon EC2
     #   console, Elastic Block Store snapshots panel in the **Description**
     #   field, and in the AWS Storage Gateway snapshot **Details** pane,
-    #   **Description** field
+    #   **Description** field.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of up to 50 tags that can be assigned to a snapshot. Each tag
@@ -1541,9 +1585,15 @@ module Aws::StorageGateway
     # from a snapshot.
     #
     # <note markdown="1"> To list or delete a snapshot, you must use the Amazon EC2 API. For
-    # more information, in *Amazon Elastic Compute Cloud API Reference*.
+    # more information, see [DescribeSnapshots][1] or [DeleteSnapshot][2] in
+    # the *Amazon Elastic Compute Cloud API Reference*.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html
     #
     # @option params [required, String] :volume_arn
     #   The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
@@ -1554,7 +1604,7 @@ module Aws::StorageGateway
     #   Textual description of the snapshot that appears in the Amazon EC2
     #   console, Elastic Block Store snapshots panel in the **Description**
     #   field, and in the AWS Storage Gateway snapshot **Details** pane,
-    #   **Description** field
+    #   **Description** field.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of up to 50 tags that can be assigned to a snapshot. Each tag
@@ -1650,7 +1700,7 @@ module Aws::StorageGateway
     # @option params [String] :snapshot_id
     #   The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as
     #   the new stored volume. Specify this field if you want to create the
-    #   iSCSI storage volume from a snapshot otherwise do not include this
+    #   iSCSI storage volume from a snapshot; otherwise, do not include this
     #   field. To list snapshots for your account use [DescribeSnapshots][1]
     #   in the *Amazon Elastic Compute Cloud API Reference*.
     #
@@ -1659,11 +1709,10 @@ module Aws::StorageGateway
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html
     #
     # @option params [required, Boolean] :preserve_existing_data
-    #   Specify this field as true if you want to preserve the data on the
-    #   local disk. Otherwise, specifying this field as false creates an empty
-    #   volume.
+    #   Set to true `true` if you want to preserve the data on the local disk.
+    #   Otherwise, set to `false` to create an empty volume.
     #
-    #   Valid Values: true, false
+    #   Valid Values: `true` \| `false`
     #
     # @option params [required, String] :target_name
     #   The name of the iSCSI target used by an initiator to connect to a
@@ -1684,13 +1733,16 @@ module Aws::StorageGateway
     #   Valid Values: A valid IP address.
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [String] :kms_key
-    #   The Amazon Resource Name (ARN) of the KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway does
+    #   not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of up to 50 tags that can be assigned to a stored volume. Each
@@ -1766,7 +1818,7 @@ module Aws::StorageGateway
 
     # Creates a virtual tape by using your own barcode. You write data to
     # the virtual tape and then archive the tape. A barcode is unique and
-    # cannot be reused if it has already been used on a tape. This applies
+    # can not be reused if it has already been used on a tape. This applies
     # to barcodes used on deleted tapes. This operation is only supported in
     # the tape gateway type.
     #
@@ -1797,22 +1849,25 @@ module Aws::StorageGateway
     #    </note>
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [String] :kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway does
+    #   not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #
     # @option params [String] :pool_id
     #   The ID of the pool that you want to add your tape to for archiving.
     #   The tape in this pool is archived in the S3 storage class that is
     #   associated with the pool. When you use your backup application to
     #   eject the tape, the tape is archived directly into the storage class
-    #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
+    #   (S3 Glacier or S3 Deep Archive) that corresponds to the pool.
     #
-    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of up to 50 tags that can be assigned to a virtual tape that
@@ -1920,13 +1975,16 @@ module Aws::StorageGateway
     #    </note>
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [String] :kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway does
+    #   not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #
     # @option params [String] :pool_id
     #   The ID of the pool that you want to add your tape to for archiving.
@@ -1935,7 +1993,7 @@ module Aws::StorageGateway
     #   eject the tape, the tape is archived directly into the storage class
     #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
     #
-    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of up to 50 tags that can be assigned to a virtual tape. Each
@@ -2056,7 +2114,7 @@ module Aws::StorageGateway
     #   One of the BandwidthType values that indicates the gateway bandwidth
     #   rate limit to delete.
     #
-    #   Valid Values: `Upload`, `Download`, `All`.
+    #   Valid Values: `Upload` \| `Download` \| `All`
     #
     # @return [Types::DeleteBandwidthRateLimitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2158,11 +2216,13 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the file share to be deleted.
     #
     # @option params [Boolean] :force_delete
-    #   If this value is set to true, the operation deletes a file share
+    #   If this value is set to `true`, the operation deletes a file share
     #   immediately and aborts all data uploads to AWS. Otherwise, the file
     #   share is not deleted until all data is uploaded to AWS. This process
     #   aborts the data upload process, and the file share enters the
-    #   FORCE\_DELETING status.
+    #   `FORCE_DELETING` status.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @return [Types::DeleteFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2205,8 +2265,8 @@ module Aws::StorageGateway
     # all remaining Amazon EBS snapshots by canceling your Amazon EC2
     # subscription.  If you prefer not to cancel your Amazon EC2
     # subscription, you can delete your snapshots using the Amazon EC2
-    # console. For more information, see the [ AWS Storage Gateway Detail
-    # Page][1].
+    # console. For more information, see the [AWS Storage Gateway detail
+    # page][1].
     #
     #
     #
@@ -2258,7 +2318,7 @@ module Aws::StorageGateway
     #
     # You can take snapshots of your gateway volumes on a scheduled or ad
     # hoc basis. This API action enables you to delete a snapshot schedule
-    # for a volume. For more information, see [Working with Snapshots][1].
+    # for a volume. For more information, see [Backing up your volumes][1].
     # In the `DeleteSnapshotSchedule` request, you identify the volume by
     # providing its Amazon Resource Name (ARN). This operation is only
     # supported in stored and cached volume gateway types.
@@ -2271,7 +2331,7 @@ module Aws::StorageGateway
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/WorkingWithSnapshots.html
+    # [1]: https://docs.aws.amazon.com/storagegatewaylatest/userguide/backing-up-volumes.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html
     #
     # @option params [required, String] :volume_arn
@@ -2511,7 +2571,7 @@ module Aws::StorageGateway
     # Returns the bandwidth rate limits of a gateway. By default, these
     # limits are not set, which means no bandwidth rate limiting is in
     # effect. This operation is supported for the stored volume, cached
-    # volume and tape gateway types.'
+    # volume and tape gateway types.
     #
     # This operation only returns a value for a bandwidth rate limit only if
     # the limit is set. If no limits are set for the gateway, then this
@@ -2807,6 +2867,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeGatewayInformationOutput#vpc_endpoint #vpc_endpoint} => String
     #   * {Types::DescribeGatewayInformationOutput#cloud_watch_log_group_arn #cloud_watch_log_group_arn} => String
     #   * {Types::DescribeGatewayInformationOutput#host_environment #host_environment} => String
+    #   * {Types::DescribeGatewayInformationOutput#endpoint_type #endpoint_type} => String
     #
     #
     # @example Example: To describe metadata about the gateway
@@ -2863,6 +2924,7 @@ module Aws::StorageGateway
     #   resp.vpc_endpoint #=> String
     #   resp.cloud_watch_log_group_arn #=> String
     #   resp.host_environment #=> String, one of "VMWARE", "HYPER-V", "EC2", "KVM", "OTHER"
+    #   resp.endpoint_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformation AWS API Documentation
     #
@@ -3150,7 +3212,7 @@ module Aws::StorageGateway
 
     # Returns the description of the gateway volumes specified in the
     # request. The list of gateway volumes in the request must be from one
-    # gateway. In the response AWS Storage Gateway returns volume
+    # gateway. In the response, AWS Storage Gateway returns volume
     # information sorted by volume ARNs. This operation is only supported in
     # stored volume gateway type.
     #
@@ -3517,7 +3579,7 @@ module Aws::StorageGateway
     end
 
     # Returns information about the upload buffer of a gateway. This
-    # operation is supported for the stored volume, cached volume and tape
+    # operation is supported for the stored volume, cached volume, and tape
     # gateway types.
     #
     # The response includes disk IDs that are configured as upload buffer
@@ -3813,6 +3875,8 @@ module Aws::StorageGateway
     #   volume and detach the volume. The default is `false`. If this value is
     #   set to `false`, you must manually disconnect the iSCSI connection from
     #   the target volume.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @return [Types::DetachVolumeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4563,9 +4627,12 @@ module Aws::StorageGateway
     # as Amazon SNS or AWS Lambda function. This operation is only supported
     # for file gateways.
     #
-    # For more information, see Getting File Upload Notification in the
-    # Storage Gateway User Guide
-    # (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification).
+    # For more information, see [Getting file upload notification][1] in the
+    # *AWS Storage Gateway User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification
     #
     # @option params [required, String] :file_share_arn
     #   The Amazon Resource Name (ARN) of the file share.
@@ -4601,7 +4668,8 @@ module Aws::StorageGateway
     # results. This operation is only supported in the file gateway type.
     # You can subscribe to be notified through an Amazon CloudWatch event
     # when your RefreshCache operation completes. For more information, see
-    # [Getting Notified About File Operations][1].
+    # [Getting notified about file operations][1] in the *AWS Storage
+    # Gateway User Guide*.
     #
     # When this API is called, it only initiates the refresh operation. When
     # the API call completes and returns a success code, it doesn't
@@ -4614,16 +4682,16 @@ module Aws::StorageGateway
     # Throttle limit: This API is asynchronous so the gateway will accept no
     # more than two refreshes at any time. We recommend using the
     # refresh-complete CloudWatch event notification before issuing
-    # additional requests. For more information, see [Getting Notified About
-    # File Operations][1].
+    # additional requests. For more information, see [Getting notified about
+    # file operations][1] in the *AWS Storage Gateway User Guide*.
     #
     # If you invoke the RefreshCache API when two requests are already being
     # processed, any new request will cause an
     # `InvalidGatewayRequestException` error because too many requests were
     # sent to the server.
     #
-    # For more information, see
-    # "https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification".
+    # For more information, see [Getting notified about file operations][1]
+    # in the *AWS Storage Gateway User Guide*.
     #
     #
     #
@@ -4636,18 +4704,19 @@ module Aws::StorageGateway
     #   A comma-separated list of the paths of folders to refresh in the
     #   cache. The default is \[`"/"`\]. The default refreshes objects and
     #   folders at the root of the Amazon S3 bucket. If `Recursive` is set to
-    #   "true", the entire S3 bucket that the file share has access to is
+    #   `true`, the entire S3 bucket that the file share has access to is
     #   refreshed.
     #
     # @option params [Boolean] :recursive
     #   A value that specifies whether to recursively refresh folders in the
     #   cache. The refresh includes folders that were in the cache the last
     #   time the gateway listed the folder's contents. If this value set to
-    #   "true", each folder that is listed in `FolderList` is recursively
+    #   `true`, each folder that is listed in `FolderList` is recursively
     #   updated. Otherwise, subfolders listed in `FolderList` are not
     #   refreshed. Only objects that are in folders listed directly under
-    #   `FolderList` are found and used for the update. The default is
-    #   "true".
+    #   `FolderList` are found and used for the update. The default is `true`.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @return [Types::RefreshCacheOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4973,7 +5042,7 @@ module Aws::StorageGateway
     #   is associated with.
     #
     # @option params [required, String] :password
-    #   The password that you want to set for your SMB Server.
+    #   The password that you want to set for your SMB server.
     #
     # @return [Types::SetSMBGuestPasswordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5012,7 +5081,7 @@ module Aws::StorageGateway
     #  </note>
     #
     # After the gateway is shutdown, you cannot call any other API except
-    # StartGateway, DescribeGatewayInformation and ListGateways. For more
+    # StartGateway, DescribeGatewayInformation, and ListGateways. For more
     # information, see ActivateGateway. Your applications cannot read from
     # or write to the gateway's storage volumes, and there are no snapshots
     # taken.
@@ -5224,7 +5293,7 @@ module Aws::StorageGateway
     # the upload and download bandwidth rate limit or specify only one of
     # the two. If you don't set a bandwidth rate limit, the existing rate
     # limit remains. This operation is supported for the stored volume,
-    # cached volume and tape gateway types.'
+    # cached volume, and tape gateway types.
     #
     # By default, a gateway's bandwidth rate limits are not set. If you
     # don't set any limit, the gateway does not have any limitations on its
@@ -5393,7 +5462,7 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that
     #   you want to use to monitor and log events in the gateway.
     #
-    #   For more information, see [What Is Amazon CloudWatch Logs?][1].
+    #   For more information, see [What is Amazon CloudWatch logs?][1].
     #
     #
     #
@@ -5458,8 +5527,8 @@ module Aws::StorageGateway
     # minimize the chance of any disruption to your applications by
     # increasing your iSCSI Initiators' timeouts. For more information
     # about increasing iSCSI Initiator timeouts for Windows and Linux, see
-    # [Customizing Your Windows iSCSI Settings][1] and [Customizing Your
-    # Linux iSCSI Settings][2], respectively.
+    # [Customizing your Windows iSCSI settings][1] and [Customizing your
+    # Linux iSCSI settings][2], respectively.
     #
     #
     #
@@ -5537,10 +5606,6 @@ module Aws::StorageGateway
     #   represented as an ordinal number from 1 to 28, where 1 represents the
     #   first day of the month and 28 represents the last day of the month.
     #
-    #   <note markdown="1"> This value is only available for tape and volume gateways.
-    #
-    #    </note>
-    #
     # @return [Types::UpdateMaintenanceStartTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateMaintenanceStartTimeOutput#gateway_arn #gateway_arn} => String
@@ -5615,62 +5680,75 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the file share to be updated.
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [String] :kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway does
+    #   not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #
     # @option params [Types::NFSFileShareDefaults] :nfs_file_share_defaults
     #   The default values for the file share. Optional.
     #
     # @option params [String] :default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket by
-    #   the file gateway. Possible values are `S3_STANDARD`, `S3_STANDARD_IA`,
-    #   or `S3_ONEZONE_IA`. If this field is not populated, the default value
-    #   `S3_STANDARD` is used. Optional.
+    #   the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
+    #
+    #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
+    #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
     #
     # @option params [String] :object_acl
-    #   A value that sets the access control list permission for objects in
-    #   the S3 bucket that a file gateway puts objects into. The default value
-    #   is "private".
+    #   A value that sets the access control list (ACL) permission for objects
+    #   in the S3 bucket that a file gateway puts objects into. The default
+    #   value is `private`.
     #
     # @option params [Array<String>] :client_list
     #   The list of clients that are allowed to access the file gateway. The
     #   list must contain either valid IP addresses or valid CIDR blocks.
     #
     # @option params [String] :squash
-    #   The user mapped to anonymous user. Valid options are the following:
+    #   The user mapped to anonymous user.
     #
-    #   * `RootSquash` - Only root is mapped to anonymous user.
+    #   Valid values are the following:
     #
-    #   * `NoSquash` - No one is mapped to anonymous user
+    #   * `RootSquash`\: Only root is mapped to anonymous user.
     #
-    #   * `AllSquash` - Everyone is mapped to anonymous user.
+    #   * `NoSquash`\: No one is mapped to anonymous user.
+    #
+    #   * `AllSquash`\: Everyone is mapped to anonymous user.
     #
     # @option params [Boolean] :read_only
-    #   A value that sets the write status of a file share. This value is true
-    #   if the write status is read-only, and otherwise false.
+    #   A value that sets the write status of a file share. Set this value to
+    #   `true` to set the write status to read-only, otherwise set to `false`.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [Boolean] :guess_mime_type_enabled
     #   A value that enables guessing of the MIME type for uploaded objects
-    #   based on file extensions. Set this value to true to enable MIME type
-    #   guessing, and otherwise to false. The default value is true.
+    #   based on file extensions. Set this value to `true` to enable MIME type
+    #   guessing, otherwise set to `false`. The default value is `true`.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [Boolean] :requester_pays
     #   A value that sets who pays the cost of the request and the cost
     #   associated with data download from the S3 bucket. If this value is set
-    #   to true, the requester pays the costs. Otherwise the S3 bucket owner
-    #   pays. However, the S3 bucket owner always pays the cost of storing
-    #   data.
+    #   to `true`, the requester pays the costs; otherwise, the S3 bucket
+    #   owner pays. However, the S3 bucket owner always pays the cost of
+    #   storing data.
     #
     #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
     #   file share, so make sure that the configuration on the file share is
     #   the same as the S3 bucket configuration.
     #
     #    </note>
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @return [Types::UpdateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5722,8 +5800,8 @@ module Aws::StorageGateway
     # is activated in the AWS Region you are creating your file gateway in.
     # If AWS STS is not activated in this AWS Region, activate it. For
     # information about how to activate AWS STS, see [Activating and
-    # Deactivating AWS STS in an AWS Region][1] in the *AWS Identity and
-    # Access Management User Guide.*
+    # deactivating AWS STS in an AWS Region][1] in the *AWS Identity and
+    # Access Management User Guide*.
     #
     #  File gateways don't support creating hard or symbolic links on a
     # file
@@ -5738,40 +5816,49 @@ module Aws::StorageGateway
     #   update.
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [String] :kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway does
+    #   not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #
     # @option params [String] :default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket by
-    #   the file gateway. Possible values are `S3_STANDARD`, `S3_STANDARD_IA`,
-    #   or `S3_ONEZONE_IA`. If this field is not populated, the default value
-    #   `S3_STANDARD` is used. Optional.
+    #   the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
+    #
+    #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
+    #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
     #
     # @option params [String] :object_acl
-    #   A value that sets the access control list permission for objects in
-    #   the S3 bucket that a file gateway puts objects into. The default value
-    #   is "private".
+    #   A value that sets the access control list (ACL) permission for objects
+    #   in the S3 bucket that a file gateway puts objects into. The default
+    #   value is `private`.
     #
     # @option params [Boolean] :read_only
-    #   A value that sets the write status of a file share. This value is true
-    #   if the write status is read-only, and otherwise false.
+    #   A value that sets the write status of a file share. Set this value to
+    #   `true` to set write status to read-only, otherwise set to `false`.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [Boolean] :guess_mime_type_enabled
     #   A value that enables guessing of the MIME type for uploaded objects
-    #   based on file extensions. Set this value to true to enable MIME type
-    #   guessing, and otherwise to false. The default value is true.
+    #   based on file extensions. Set this value to `true` to enable MIME type
+    #   guessing, otherwise set to `false`. The default value is `true`.
+    #
+    #   Valid Values: `true` \| `false`
     #
     # @option params [Boolean] :requester_pays
     #   A value that sets who pays the cost of the request and the cost
     #   associated with data download from the S3 bucket. If this value is set
-    #   to true, the requester pays the costs. Otherwise the S3 bucket owner
-    #   pays. However, the S3 bucket owner always pays the cost of storing
-    #   data.
+    #   to `true`, the requester pays the costs; otherwise, the S3 bucket
+    #   owner pays. However, the S3 bucket owner always pays the cost of
+    #   storing data.
     #
     #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
     #   file share, so make sure that the configuration on the file share is
@@ -5779,25 +5866,33 @@ module Aws::StorageGateway
     #
     #    </note>
     #
+    #   Valid Values: `true` \| `false`
+    #
     # @option params [Boolean] :smbacl_enabled
-    #   Set this value to "true to enable ACL (access control list) on the
-    #   SMB file share. Set it to "false" to map file and directory
+    #   Set this value to `true` to enable access control list (ACL) on the
+    #   SMB file share. Set it to `false` to map file and directory
     #   permissions to the POSIX permissions.
     #
-    #   For more information, see
-    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.htmlin
-    #   the Storage Gateway User Guide.
+    #   For more information, see [Using Microsoft Windows ACLs to control
+    #   access to an SMB file share][1] in the *AWS Storage Gateway User
+    #   Guide*.
+    #
+    #   Valid Values: `true` \| `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
     #
     # @option params [Array<String>] :admin_user_list
     #   A list of users in the Active Directory that have administrator rights
     #   to the file share. A group must be prefixed with the @ character. For
-    #   example `@group1`. Can only be set if Authentication is set to
+    #   example, `@group1`. Can only be set if Authentication is set to
     #   `ActiveDirectory`.
     #
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
     #   access the file share. A group must be prefixed with the @ character.
-    #   For example `@group1`. Can only be set if Authentication is set to
+    #   For example, `@group1`. Can only be set if Authentication is set to
     #   `ActiveDirectory`.
     #
     # @option params [Array<String>] :invalid_user_list
@@ -6003,7 +6098,7 @@ module Aws::StorageGateway
     # @option params [required, String] :device_type
     #   The type of medium changer you want to select.
     #
-    #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
+    #   Valid Values: `STK-L700` \| `AWS-Gateway-VTL`
     #
     # @return [Types::UpdateVTLDeviceTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6057,7 +6152,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

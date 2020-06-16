@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -45,6 +47,6 @@ require_relative 'aws-sdk-personalize/customizations'
 # @service
 module Aws::Personalize
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.14.1'
 
 end

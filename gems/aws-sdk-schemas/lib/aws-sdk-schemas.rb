@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -46,6 +48,6 @@ require_relative 'aws-sdk-schemas/customizations'
 # @service
 module Aws::Schemas
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.5.1'
 
 end

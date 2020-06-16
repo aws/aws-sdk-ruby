@@ -68,6 +68,13 @@ module ApiHelper
             'EventStream' => { 'shape' => 'EventStream' }
           }
         },
+        'PayloadStructureShape' => {
+          'type' => 'structure',
+          'payload' => 'StreamingBlob',
+          'members' => {
+            'StreamingBlob' => { 'shape' => 'BlobShape', 'streaming' => 'true' }
+          }
+        },
         'EventStream' => {
           'type' => 'structure',
           'members' => {

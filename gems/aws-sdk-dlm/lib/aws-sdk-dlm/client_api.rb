@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -20,6 +22,7 @@ module Aws::DLM
     CreateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyRequest')
     CreateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyResponse')
     CreateRule = Shapes::StructureShape.new(name: 'CreateRule')
+    CronExpression = Shapes::StringShape.new(name: 'CronExpression')
     CrossRegionCopyRetainRule = Shapes::StructureShape.new(name: 'CrossRegionCopyRetainRule')
     CrossRegionCopyRule = Shapes::StructureShape.new(name: 'CrossRegionCopyRule')
     CrossRegionCopyRules = Shapes::ListShape.new(name: 'CrossRegionCopyRules')
@@ -100,9 +103,10 @@ module Aws::DLM
     CreateLifecyclePolicyResponse.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
     CreateLifecyclePolicyResponse.struct_class = Types::CreateLifecyclePolicyResponse
 
-    CreateRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, required: true, location_name: "Interval"))
-    CreateRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: IntervalUnitValues, required: true, location_name: "IntervalUnit"))
+    CreateRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
+    CreateRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: IntervalUnitValues, location_name: "IntervalUnit"))
     CreateRule.add_member(:times, Shapes::ShapeRef.new(shape: TimesList, location_name: "Times"))
+    CreateRule.add_member(:cron_expression, Shapes::ShapeRef.new(shape: CronExpression, location_name: "CronExpression"))
     CreateRule.struct_class = Types::CreateRule
 
     CrossRegionCopyRetainRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -50,6 +52,6 @@ require_relative 'aws-sdk-cloudformation/customizations'
 # @service
 module Aws::CloudFormation
 
-  GEM_VERSION = '1.35.0'
+  GEM_VERSION = '1.38.0'
 
 end

@@ -1,6 +1,27 @@
 Unreleased Changes
 ------------------
 
+1.23.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.23.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2020-06-05)
+------------------
+
+* Feature - You can now specify the production variant to send the inference request to, when invoking a SageMaker Endpoint that is running two or more variants.
+
+1.21.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.20.0 (2020-05-07)
 ------------------
 
@@ -105,4 +126,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-sagemakerruntime`.
-

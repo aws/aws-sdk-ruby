@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -66,6 +68,6 @@ require_relative 'aws-sdk-s3/event_streams'
 # @service
 module Aws::S3
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.68.1'
 
 end

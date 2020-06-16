@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -72,7 +74,7 @@ module Aws::S3
     #   bucket.
     # @return [Bucket]
     def create_bucket(options = {})
-      resp = @client.create_bucket(options)
+      @client.create_bucket(options)
       Bucket.new(
         name: options[:bucket],
         client: @client

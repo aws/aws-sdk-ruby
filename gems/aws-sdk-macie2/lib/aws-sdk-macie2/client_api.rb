@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -20,8 +22,6 @@ module Aws::Macie2
     AdminAccount = Shapes::StructureShape.new(name: 'AdminAccount')
     AdminStatus = Shapes::StringShape.new(name: 'AdminStatus')
     ApiCallDetails = Shapes::StructureShape.new(name: 'ApiCallDetails')
-    ArchiveFindingsRequest = Shapes::StructureShape.new(name: 'ArchiveFindingsRequest')
-    ArchiveFindingsResponse = Shapes::StructureShape.new(name: 'ArchiveFindingsResponse')
     AssumedRole = Shapes::StructureShape.new(name: 'AssumedRole')
     AwsAccount = Shapes::StructureShape.new(name: 'AwsAccount')
     AwsService = Shapes::StructureShape.new(name: 'AwsService')
@@ -224,8 +224,6 @@ module Aws::Macie2
     TestCustomDataIdentifierRequest = Shapes::StructureShape.new(name: 'TestCustomDataIdentifierRequest')
     TestCustomDataIdentifierResponse = Shapes::StructureShape.new(name: 'TestCustomDataIdentifierResponse')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
-    UnarchiveFindingsRequest = Shapes::StructureShape.new(name: 'UnarchiveFindingsRequest')
-    UnarchiveFindingsResponse = Shapes::StructureShape.new(name: 'UnarchiveFindingsResponse')
     Unit = Shapes::StringShape.new(name: 'Unit')
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -312,11 +310,6 @@ module Aws::Macie2
     ApiCallDetails.add_member(:first_seen, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "firstSeen"))
     ApiCallDetails.add_member(:last_seen, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastSeen"))
     ApiCallDetails.struct_class = Types::ApiCallDetails
-
-    ArchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "findingIds"))
-    ArchiveFindingsRequest.struct_class = Types::ArchiveFindingsRequest
-
-    ArchiveFindingsResponse.struct_class = Types::ArchiveFindingsResponse
 
     AssumedRole.add_member(:access_key_id, Shapes::ShapeRef.new(shape: __string, location_name: "accessKeyId"))
     AssumedRole.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
@@ -1118,11 +1111,6 @@ module Aws::Macie2
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    UnarchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "findingIds"))
-    UnarchiveFindingsRequest.struct_class = Types::UnarchiveFindingsRequest
-
-    UnarchiveFindingsResponse.struct_class = Types::UnarchiveFindingsResponse
-
     UnprocessedAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
     UnprocessedAccount.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
     UnprocessedAccount.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
@@ -1272,7 +1260,7 @@ module Aws::Macie2
         "serviceId" => "Macie2",
         "signatureVersion" => "v4",
         "signingName" => "macie2",
-        "uid" => "macie2-2020-01-01T00:00:00Z",
+        "uid" => "macie2-2020-01-01",
       }
 
       api.add_operation(:accept_invitation, Seahorse::Model::Operation.new.tap do |o|
@@ -1281,21 +1269,6 @@ module Aws::Macie2
         o.http_request_uri = "/invitations/accept"
         o.input = Shapes::ShapeRef.new(shape: AcceptInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: AcceptInvitationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-      end)
-
-      api.add_operation(:archive_findings, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ArchiveFindings"
-        o.http_method = "POST"
-        o.http_request_uri = "/findings/archive"
-        o.input = Shapes::ShapeRef.new(shape: ArchiveFindingsRequest)
-        o.output = Shapes::ShapeRef.new(shape: ArchiveFindingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1942,21 +1915,6 @@ module Aws::Macie2
         o.http_request_uri = "/custom-data-identifiers/test"
         o.input = Shapes::ShapeRef.new(shape: TestCustomDataIdentifierRequest)
         o.output = Shapes::ShapeRef.new(shape: TestCustomDataIdentifierResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-      end)
-
-      api.add_operation(:unarchive_findings, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UnarchiveFindings"
-        o.http_method = "POST"
-        o.http_request_uri = "/findings/unarchive"
-        o.input = Shapes::ShapeRef.new(shape: UnarchiveFindingsRequest)
-        o.output = Shapes::ShapeRef.new(shape: UnarchiveFindingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)

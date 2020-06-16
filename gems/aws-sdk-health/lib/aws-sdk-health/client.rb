@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::Health
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::Health
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::Health
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -346,6 +350,7 @@ module Aws::Health
     # @return [Types::DescribeAffectedAccountsForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAffectedAccountsForOrganizationResponse#affected_accounts #affected_accounts} => Array&lt;String&gt;
+    #   * {Types::DescribeAffectedAccountsForOrganizationResponse#event_scope_code #event_scope_code} => String
     #   * {Types::DescribeAffectedAccountsForOrganizationResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -362,6 +367,7 @@ module Aws::Health
     #
     #   resp.affected_accounts #=> Array
     #   resp.affected_accounts[0] #=> String
+    #   resp.event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedAccountsForOrganization AWS API Documentation
@@ -504,7 +510,7 @@ module Aws::Health
     #     organization_entity_filters: [ # required
     #       {
     #         event_arn: "eventArn", # required
-    #         aws_account_id: "accountId", # required
+    #         aws_account_id: "accountId",
     #       },
     #     ],
     #     locale: "locale",
@@ -704,6 +710,7 @@ module Aws::Health
     #   resp.successful_set[0].event.end_time #=> Time
     #   resp.successful_set[0].event.last_updated_time #=> Time
     #   resp.successful_set[0].event.status_code #=> String, one of "open", "closed", "upcoming"
+    #   resp.successful_set[0].event.event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
     #   resp.successful_set[0].event_description.latest_description #=> String
     #   resp.successful_set[0].event_metadata #=> Hash
     #   resp.successful_set[0].event_metadata["metadataKey"] #=> String
@@ -753,7 +760,7 @@ module Aws::Health
     #     organization_event_detail_filters: [ # required
     #       {
     #         event_arn: "eventArn", # required
-    #         aws_account_id: "accountId", # required
+    #         aws_account_id: "accountId",
     #       },
     #     ],
     #     locale: "locale",
@@ -773,6 +780,7 @@ module Aws::Health
     #   resp.successful_set[0].event.end_time #=> Time
     #   resp.successful_set[0].event.last_updated_time #=> Time
     #   resp.successful_set[0].event.status_code #=> String, one of "open", "closed", "upcoming"
+    #   resp.successful_set[0].event.event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
     #   resp.successful_set[0].event_description.latest_description #=> String
     #   resp.successful_set[0].event_metadata #=> Hash
     #   resp.successful_set[0].event_metadata["metadataKey"] #=> String
@@ -939,6 +947,7 @@ module Aws::Health
     #   resp.events[0].end_time #=> Time
     #   resp.events[0].last_updated_time #=> Time
     #   resp.events[0].status_code #=> String, one of "open", "closed", "upcoming"
+    #   resp.events[0].event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEvents AWS API Documentation
@@ -1030,6 +1039,7 @@ module Aws::Health
     #   resp.events[0].service #=> String
     #   resp.events[0].event_type_code #=> String
     #   resp.events[0].event_type_category #=> String, one of "issue", "accountNotification", "scheduledChange", "investigation"
+    #   resp.events[0].event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
     #   resp.events[0].region #=> String
     #   resp.events[0].start_time #=> Time
     #   resp.events[0].end_time #=> Time
@@ -1118,7 +1128,7 @@ module Aws::Health
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.26.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

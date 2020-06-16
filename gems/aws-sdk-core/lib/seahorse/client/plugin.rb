@@ -53,7 +53,7 @@ module Seahorse
           # For backwards-compat reasons, the default value can be passed as 2nd
           # positional argument (before the options hash) or as the `:default` option
           # in the options hash.
-          if Hash === default
+          if default.is_a? Hash
             options = default
           else
             options[:default] = default
@@ -123,11 +123,11 @@ module Seahorse
         attr_writer :doc_default
         attr_accessor :docstring
 
-        def doc_default
+        def doc_default(options)
           if @doc_default.nil? && !default.is_a?(Proc)
             default
           else
-            @doc_default
+            @doc_default.respond_to?(:call) ? @doc_default.call(options) : @doc_default
           end
         end
 

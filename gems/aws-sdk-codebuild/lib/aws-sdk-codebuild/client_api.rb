@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -335,6 +337,7 @@ module Aws::CodeBuild
     CreateReportGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: ReportGroupName, required: true, location_name: "name"))
     CreateReportGroupInput.add_member(:type, Shapes::ShapeRef.new(shape: ReportType, required: true, location_name: "type"))
     CreateReportGroupInput.add_member(:export_config, Shapes::ShapeRef.new(shape: ReportExportConfig, required: true, location_name: "exportConfig"))
+    CreateReportGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateReportGroupInput.struct_class = Types::CreateReportGroupInput
 
     CreateReportGroupOutput.add_member(:report_group, Shapes::ShapeRef.new(shape: ReportGroup, location_name: "reportGroup"))
@@ -698,6 +701,7 @@ module Aws::CodeBuild
     ReportGroup.add_member(:export_config, Shapes::ShapeRef.new(shape: ReportExportConfig, location_name: "exportConfig"))
     ReportGroup.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
     ReportGroup.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModified"))
+    ReportGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     ReportGroup.struct_class = Types::ReportGroup
 
     ReportGroupArns.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -832,6 +836,7 @@ module Aws::CodeBuild
 
     UpdateReportGroupInput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "arn"))
     UpdateReportGroupInput.add_member(:export_config, Shapes::ShapeRef.new(shape: ReportExportConfig, location_name: "exportConfig"))
+    UpdateReportGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     UpdateReportGroupInput.struct_class = Types::UpdateReportGroupInput
 
     UpdateReportGroupOutput.add_member(:report_group, Shapes::ShapeRef.new(shape: ReportGroup, location_name: "reportGroup"))

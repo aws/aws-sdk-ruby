@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -74,19 +76,21 @@ module Aws::AutoScaling
       data[:recurrence]
     end
 
-    # The minimum number of instances in the Auto Scaling group.
+    # The minimum size of the Auto Scaling group.
     # @return [Integer]
     def min_size
       data[:min_size]
     end
 
-    # The maximum number of instances in the Auto Scaling group.
+    # The maximum size of the Auto Scaling group.
     # @return [Integer]
     def max_size
       data[:max_size]
     end
 
-    # The number of instances you prefer to maintain in the group.
+    # The desired capacity is the initial capacity of the Auto Scaling group
+    # after the scheduled action runs and the capacity it attempts to
+    # maintain.
     # @return [Integer]
     def desired_capacity
       data[:desired_capacity]

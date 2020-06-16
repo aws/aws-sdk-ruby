@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -316,7 +318,7 @@ module Aws::CloudFormation
     #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     # @return [Stack]
     def create_stack(options = {})
-      resp = @client.create_stack(options)
+      @client.create_stack(options)
       Stack.new(
         name: options[:stack_name],
         client: @client

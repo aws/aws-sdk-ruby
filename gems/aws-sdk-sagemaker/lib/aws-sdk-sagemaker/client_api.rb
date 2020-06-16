@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -3240,6 +3242,7 @@ module Aws::SageMaker
     RenderUiTemplateRequest.add_member(:ui_template, Shapes::ShapeRef.new(shape: UiTemplate, location_name: "UiTemplate"))
     RenderUiTemplateRequest.add_member(:task, Shapes::ShapeRef.new(shape: RenderableTask, required: true, location_name: "Task"))
     RenderUiTemplateRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    RenderUiTemplateRequest.add_member(:human_task_ui_arn, Shapes::ShapeRef.new(shape: HumanTaskUiArn, location_name: "HumanTaskUiArn"))
     RenderUiTemplateRequest.struct_class = Types::RenderUiTemplateRequest
 
     RenderUiTemplateResponse.add_member(:rendered_content, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RenderedContent"))
@@ -3669,6 +3672,7 @@ module Aws::SageMaker
     USD.struct_class = Types::USD
 
     UiConfig.add_member(:ui_template_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "UiTemplateS3Uri"))
+    UiConfig.add_member(:human_task_ui_arn, Shapes::ShapeRef.new(shape: HumanTaskUiArn, location_name: "HumanTaskUiArn"))
     UiConfig.struct_class = Types::UiConfig
 
     UiTemplate.add_member(:content, Shapes::ShapeRef.new(shape: TemplateContent, required: true, location_name: "Content"))

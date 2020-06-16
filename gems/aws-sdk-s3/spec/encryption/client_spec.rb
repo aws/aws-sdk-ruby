@@ -520,6 +520,13 @@ module Aws
               client.head_object(bucket: 'bucket', key: 'key')
             end
           end
+
+          describe '#build_request' do
+            it 'delegates to S3 client' do
+              expect(client.client).to receive(:build_request)
+              client.build_request(:head_object, bucket: 'bucket', key: 'key')
+            end
+          end
         end
 
         describe 'kms_CBC' do

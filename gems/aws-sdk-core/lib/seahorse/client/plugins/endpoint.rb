@@ -9,8 +9,8 @@ module Seahorse
 Normally you should not configure the `:endpoint` option
 directly. This is normally constructed from the `:region`
 option. Configuring `:endpoint` is normally reserved for
-connecting to test endpoints. The endpoint should be a URI
-formatted like:
+connecting to test or custom endpoints. The endpoint should
+be a URI formatted like:
 
     'http://example.com'
     'https://example.com'

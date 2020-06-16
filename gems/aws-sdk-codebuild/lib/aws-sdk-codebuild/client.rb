@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::CodeBuild
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::CodeBuild
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::CodeBuild
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -908,6 +912,9 @@ module Aws::CodeBuild
     #   resp.report_groups[0].export_config.s3_destination.encryption_disabled #=> Boolean
     #   resp.report_groups[0].created #=> Time
     #   resp.report_groups[0].last_modified #=> Time
+    #   resp.report_groups[0].tags #=> Array
+    #   resp.report_groups[0].tags[0].key #=> String
+    #   resp.report_groups[0].tags[0].value #=> String
     #   resp.report_groups_not_found #=> Array
     #   resp.report_groups_not_found[0] #=> String
     #
@@ -1062,7 +1069,7 @@ module Aws::CodeBuild
     #   if available, the CMK's alias (using the format `alias/alias-name `).
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A set of tags for this build project.
+    #   A list of tag key and value pairs associated with this build project.
     #
     #   These tags are available for use by AWS services that support AWS
     #   CodeBuild build project tags.
@@ -1348,6 +1355,12 @@ module Aws::CodeBuild
     #   A `ReportExportConfig` object that contains information about where
     #   the report group test results are exported.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tag key and value pairs associated with this report group.
+    #
+    #   These tags are available for use by AWS services that support AWS
+    #   CodeBuild report group tags.
+    #
     # @return [Types::CreateReportGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateReportGroupOutput#report_group #report_group} => Types::ReportGroup
@@ -1367,6 +1380,12 @@ module Aws::CodeBuild
     #         encryption_disabled: false,
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "KeyInput",
+    #         value: "ValueInput",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1382,6 +1401,9 @@ module Aws::CodeBuild
     #   resp.report_group.export_config.s3_destination.encryption_disabled #=> Boolean
     #   resp.report_group.created #=> Time
     #   resp.report_group.last_modified #=> Time
+    #   resp.report_group.tags #=> Array
+    #   resp.report_group.tags[0].key #=> String
+    #   resp.report_group.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateReportGroup AWS API Documentation
     #
@@ -2530,7 +2552,7 @@ module Aws::CodeBuild
     # @option params [String] :idempotency_token
     #   A unique, case sensitive identifier you provide to ensure the
     #   idempotency of the StartBuild request. The token is included in the
-    #   StartBuild request and is valid for 5 minutes. If you repeat the
+    #   StartBuild request and is valid for 12 hours. If you repeat the
     #   StartBuild request with the same token, but change a parameter, AWS
     #   CodeBuild returns a parameter mismatch error.
     #
@@ -3020,7 +3042,8 @@ module Aws::CodeBuild
     #   if available, the CMK's alias (using the format `alias/alias-name `).
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The replacement set of tags for this build project.
+    #   An updated list of tag key and value pairs associated with this build
+    #   project.
     #
     #   These tags are available for use by AWS services that support AWS
     #   CodeBuild build project tags.
@@ -3304,6 +3327,13 @@ module Aws::CodeBuild
     #
     #   * `NO_EXPORT`\: The report results are not exported.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An updated list of tag key and value pairs associated with this report
+    #   group.
+    #
+    #   These tags are available for use by AWS services that support AWS
+    #   CodeBuild report group tags.
+    #
     # @return [Types::UpdateReportGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateReportGroupOutput#report_group #report_group} => Types::ReportGroup
@@ -3322,6 +3352,12 @@ module Aws::CodeBuild
     #         encryption_disabled: false,
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "KeyInput",
+    #         value: "ValueInput",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3337,6 +3373,9 @@ module Aws::CodeBuild
     #   resp.report_group.export_config.s3_destination.encryption_disabled #=> Boolean
     #   resp.report_group.created #=> Time
     #   resp.report_group.last_modified #=> Time
+    #   resp.report_group.tags #=> Array
+    #   resp.report_group.tags[0].key #=> String
+    #   resp.report_group.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateReportGroup AWS API Documentation
     #
@@ -3433,7 +3472,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.53.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

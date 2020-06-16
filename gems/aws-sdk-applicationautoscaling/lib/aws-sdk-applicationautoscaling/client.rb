@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::ApplicationAutoScaling
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::ApplicationAutoScaling
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::ApplicationAutoScaling
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -1663,6 +1667,14 @@ module Aws::ApplicationAutoScaling
     # the policy with the highest calculated capacity (200% of 10 = 20) and
     # scales out to 30.
     #
+    # We recommend caution, however, when using target tracking scaling
+    # policies with step scaling policies because conflicts between these
+    # policies can cause undesirable behavior. For example, if the step
+    # scaling policy initiates a scale-in activity before the target
+    # tracking policy is ready to scale in, the scale-in activity will not
+    # be blocked. After the scale-in activity completes, the target tracking
+    # policy could instruct the scalable target to scale out again.
+    #
     # For more information, see [Target Tracking Scaling Policies][1] and
     # [Step Scaling Policies][2] in the *Application Auto Scaling User
     # Guide*.
@@ -1803,7 +1815,7 @@ module Aws::ApplicationAutoScaling
     #   `TargetTrackingScaling`—Not supported for Amazon EMR
     #
     #   `StepScaling`—Not supported for DynamoDB, Amazon Comprehend, Lambda,
-    #   or Amazon Keyspaces for Apache Cassandra.
+    #   or Amazon Keyspaces (for Apache Cassandra).
     #
     #   For more information, see [Target Tracking Scaling Policies][1] and
     #   [Step Scaling Policies][2] in the *Application Auto Scaling User
@@ -2398,7 +2410,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.41.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

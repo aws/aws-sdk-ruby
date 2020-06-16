@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -267,7 +269,7 @@ module Aws::EC2
     # @return [Route]
     def create_route(options = {})
       options = options.merge(route_table_id: @id)
-      resp = @client.create_route(options)
+      @client.create_route(options)
       Route.new(
         route_table_id: @id,
         destination_cidr_block: options[:destination_cidr_block],

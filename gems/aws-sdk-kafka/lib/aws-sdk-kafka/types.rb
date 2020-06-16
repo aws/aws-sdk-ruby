@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -394,6 +396,10 @@ module Aws::Kafka
     #   Describes the error if the operation fails.
     #   @return [Types::ErrorInfo]
     #
+    # @!attribute [rw] operation_steps
+    #   Steps completed during the operation.
+    #   @return [Array<Types::ClusterOperationStep>]
+    #
     # @!attribute [rw] operation_arn
     #   ARN of the cluster operation.
     #   @return [String]
@@ -422,11 +428,59 @@ module Aws::Kafka
       :creation_time,
       :end_time,
       :error_info,
+      :operation_steps,
       :operation_arn,
       :operation_state,
       :operation_type,
       :source_cluster_info,
       :target_cluster_info)
+      include Aws::Structure
+    end
+
+    # Step taken during a cluster operation.
+    #
+    # @!attribute [rw] step_info
+    #   Information about the step and its status.
+    #   @return [Types::ClusterOperationStepInfo]
+    #
+    # @!attribute [rw] step_name
+    #   The name of the step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationStep AWS API Documentation
+    #
+    class ClusterOperationStep < Struct.new(
+      :step_info,
+      :step_name)
+      include Aws::Structure
+    end
+
+    # State information about the operation step.
+    #
+    # @!attribute [rw] step_status
+    #   The steps current status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationStepInfo AWS API Documentation
+    #
+    class ClusterOperationStepInfo < Struct.new(
+      :step_status)
+      include Aws::Structure
+    end
+
+    # Contains source Kafka versions and compatible target Kafka versions.
+    #
+    # @!attribute [rw] source_version
+    #   @return [String]
+    #
+    # @!attribute [rw] target_versions
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CompatibleKafkaVersion AWS API Documentation
+    #
+    class CompatibleKafkaVersion < Struct.new(
+      :source_version,
+      :target_versions)
       include Aws::Structure
     end
 
@@ -701,7 +755,7 @@ module Aws::Kafka
     #
     #       {
     #         description: "__string",
-    #         kafka_versions: ["__string"], # required
+    #         kafka_versions: ["__string"],
     #         name: "__string", # required
     #         server_properties: "data", # required
     #       }
@@ -1209,6 +1263,36 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetCompatibleKafkaVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string",
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetCompatibleKafkaVersionsRequest AWS API Documentation
+    #
+    class GetCompatibleKafkaVersionsRequest < Struct.new(
+      :cluster_arn)
+      include Aws::Structure
+    end
+
+    # Response body for GetCompatibleKafkaVersions.
+    #
+    # @!attribute [rw] compatible_kafka_versions
+    #   A list of CompatibleKafkaVersion objects.
+    #   @return [Array<Types::CompatibleKafkaVersion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetCompatibleKafkaVersionsResponse AWS API Documentation
+    #
+    class GetCompatibleKafkaVersionsResponse < Struct.new(
+      :compatible_kafka_versions)
+      include Aws::Structure
+    end
+
     # Returns information about an error.
     #
     # @!attribute [rw] invalid_parameter
@@ -1610,6 +1694,9 @@ module Aws::Kafka
     #   Amazon CloudWatch for this cluster.
     #   @return [String]
     #
+    # @!attribute [rw] kafka_version
+    #   @return [String]
+    #
     # @!attribute [rw] logging_info
     #   LoggingInfo details.
     #   @return [Types::LoggingInfo]
@@ -1622,6 +1709,7 @@ module Aws::Kafka
       :number_of_broker_nodes,
       :open_monitoring,
       :enhanced_monitoring,
+      :kafka_version,
       :logging_info)
       include Aws::Structure
     end
@@ -2000,6 +2088,64 @@ module Aws::Kafka
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateClusterConfigurationResponse AWS API Documentation
     #
     class UpdateClusterConfigurationResponse < Struct.new(
+      :cluster_arn,
+      :cluster_operation_arn)
+      include Aws::Structure
+    end
+
+    # Request body for UpdateClusterKafkaVersion.
+    #
+    # @note When making an API call, you may pass UpdateClusterKafkaVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string", # required
+    #         configuration_info: {
+    #           arn: "__string", # required
+    #           revision: 1, # required
+    #         },
+    #         current_version: "__string", # required
+    #         target_kafka_version: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_info
+    #   Specifies the configuration to use for the brokers.
+    #   @return [Types::ConfigurationInfo]
+    #
+    # @!attribute [rw] current_version
+    #   Current cluster version.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_kafka_version
+    #   Target Kafka version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateClusterKafkaVersionRequest AWS API Documentation
+    #
+    class UpdateClusterKafkaVersionRequest < Struct.new(
+      :cluster_arn,
+      :configuration_info,
+      :current_version,
+      :target_kafka_version)
+      include Aws::Structure
+    end
+
+    # Response body for UpdateClusterKafkaVersion.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_operation_arn
+    #   The Amazon Resource Name (ARN) of the cluster operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateClusterKafkaVersionResponse AWS API Documentation
+    #
+    class UpdateClusterKafkaVersionResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn)
       include Aws::Structure

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::Athena
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::Athena
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::Athena
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -398,6 +402,7 @@ module Aws::Athena
     #   resp.query_executions[0].result_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
     #   resp.query_executions[0].result_configuration.encryption_configuration.kms_key #=> String
     #   resp.query_executions[0].query_execution_context.database #=> String
+    #   resp.query_executions[0].query_execution_context.catalog #=> String
     #   resp.query_executions[0].status.state #=> String, one of "QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"
     #   resp.query_executions[0].status.state_change_reason #=> String
     #   resp.query_executions[0].status.submission_date_time #=> Time
@@ -421,6 +426,83 @@ module Aws::Athena
     # @param [Hash] params ({})
     def batch_get_query_execution(params = {}, options = {})
       req = build_request(:batch_get_query_execution, params)
+      req.send_request(options)
+    end
+
+    # Creates (registers) a data catalog with the specified name and
+    # properties. Catalogs created are visible to all users of the same AWS
+    # account.
+    #
+    # @option params [required, String] :name
+    #   The name of the data catalog to create. The catalog name must be
+    #   unique for the AWS account and can use a maximum of 128 alphanumeric,
+    #   underscore, at sign, or hyphen characters.
+    #
+    # @option params [required, String] :type
+    #   The type of data catalog to create: `LAMBDA` for a federated catalog,
+    #   `GLUE` for AWS Glue Catalog, or `HIVE` for an external hive metastore.
+    #
+    # @option params [String] :description
+    #   A description of the data catalog to be created.
+    #
+    # @option params [Hash<String,String>] :parameters
+    #   Specifies the Lambda function or functions to use for creating the
+    #   data catalog. This is a mapping whose values depend on the catalog
+    #   type.
+    #
+    #   * For the `HIVE` data catalog type, use the following syntax. The
+    #     `metadata-function` parameter is required. `The sdk-version`
+    #     parameter is optional and defaults to the currently supported
+    #     version.
+    #
+    #     `metadata-function=lambda_arn, sdk-version=version_number `
+    #
+    #   * For the `LAMBDA` data catalog type, use one of the following sets of
+    #     required parameters, but not both.
+    #
+    #     * If you have one Lambda function that processes metadata and
+    #       another for reading the actual data, use the following syntax.
+    #       Both parameters are required.
+    #
+    #       `metadata-function=lambda_arn, record-function=lambda_arn `
+    #
+    #     * If you have a composite Lambda function that processes both
+    #       metadata and data, use the following syntax to specify your Lambda
+    #       function.
+    #
+    #       `function=lambda_arn `
+    #
+    #   * The `GLUE` type has no parameters.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of comma separated tags to add to the data catalog that is
+    #   created.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_catalog({
+    #     name: "CatalogNameString", # required
+    #     type: "LAMBDA", # required, accepts LAMBDA, GLUE, HIVE
+    #     description: "DescriptionString",
+    #     parameters: {
+    #       "KeyString" => "ParametersMapValue",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateDataCatalog AWS API Documentation
+    #
+    # @overload create_data_catalog(params = {})
+    # @param [Hash] params ({})
+    def create_data_catalog(params = {}, options = {})
+      req = build_request(:create_data_catalog, params)
       req.send_request(options)
     end
 
@@ -512,8 +594,8 @@ module Aws::Athena
     #   The workgroup description.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   One or more tags, separated by commas, that you want to attach to the
-    #   workgroup as you create it.
+    #   A list of comma separated tags to add to the workgroup that is
+    #   created.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -549,6 +631,28 @@ module Aws::Athena
     # @param [Hash] params ({})
     def create_work_group(params = {}, options = {})
       req = build_request(:create_work_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a data catalog.
+    #
+    # @option params [required, String] :name
+    #   The name of the data catalog to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_catalog({
+    #     name: "CatalogNameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteDataCatalog AWS API Documentation
+    #
+    # @overload delete_data_catalog(params = {})
+    # @param [Hash] params ({})
+    def delete_data_catalog(params = {}, options = {})
+      req = build_request(:delete_data_catalog, params)
       req.send_request(options)
     end
 
@@ -613,6 +717,73 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Returns the specified data catalog.
+    #
+    # @option params [required, String] :name
+    #   The name of the data catalog to return.
+    #
+    # @return [Types::GetDataCatalogOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataCatalogOutput#data_catalog #data_catalog} => Types::DataCatalog
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_catalog({
+    #     name: "CatalogNameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_catalog.name #=> String
+    #   resp.data_catalog.description #=> String
+    #   resp.data_catalog.type #=> String, one of "LAMBDA", "GLUE", "HIVE"
+    #   resp.data_catalog.parameters #=> Hash
+    #   resp.data_catalog.parameters["KeyString"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetDataCatalog AWS API Documentation
+    #
+    # @overload get_data_catalog(params = {})
+    # @param [Hash] params ({})
+    def get_data_catalog(params = {}, options = {})
+      req = build_request(:get_data_catalog, params)
+      req.send_request(options)
+    end
+
+    # Returns a database object for the specfied database and data catalog.
+    #
+    # @option params [required, String] :catalog_name
+    #   The name of the data catalog that contains the database to return.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database to return.
+    #
+    # @return [Types::GetDatabaseOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDatabaseOutput#database #database} => Types::Database
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_database({
+    #     catalog_name: "CatalogNameString", # required
+    #     database_name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.database.name #=> String
+    #   resp.database.description #=> String
+    #   resp.database.parameters #=> Hash
+    #   resp.database.parameters["KeyString"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetDatabase AWS API Documentation
+    #
+    # @overload get_database(params = {})
+    # @param [Hash] params ({})
+    def get_database(params = {}, options = {})
+      req = build_request(:get_database, params)
+      req.send_request(options)
+    end
+
     # Returns information about a single query. Requires that you have
     # access to the workgroup in which the query was saved.
     #
@@ -674,6 +845,7 @@ module Aws::Athena
     #   resp.query_execution.result_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
     #   resp.query_execution.result_configuration.encryption_configuration.kms_key #=> String
     #   resp.query_execution.query_execution_context.database #=> String
+    #   resp.query_execution.query_execution_context.catalog #=> String
     #   resp.query_execution.status.state #=> String, one of "QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"
     #   resp.query_execution.status.state_change_reason #=> String
     #   resp.query_execution.status.submission_date_time #=> Time
@@ -720,8 +892,10 @@ module Aws::Athena
     #   The unique ID of the query execution.
     #
     # @option params [String] :next_token
-    #   The token that specifies where to start pagination if a previous
-    #   request was truncated.
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the `NextToken` from the response object of
+    #   the previous page call.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results (rows) to return in this request.
@@ -770,6 +944,56 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Returns table metadata for the specified catalog, database, and table.
+    #
+    # @option params [required, String] :catalog_name
+    #   The name of the data catalog that contains the database and table
+    #   metadata to return.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database that contains the table metadata to return.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table for which metadata is returned.
+    #
+    # @return [Types::GetTableMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTableMetadataOutput#table_metadata #table_metadata} => Types::TableMetadata
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_table_metadata({
+    #     catalog_name: "CatalogNameString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_metadata.name #=> String
+    #   resp.table_metadata.create_time #=> Time
+    #   resp.table_metadata.last_access_time #=> Time
+    #   resp.table_metadata.table_type #=> String
+    #   resp.table_metadata.columns #=> Array
+    #   resp.table_metadata.columns[0].name #=> String
+    #   resp.table_metadata.columns[0].type #=> String
+    #   resp.table_metadata.columns[0].comment #=> String
+    #   resp.table_metadata.partition_keys #=> Array
+    #   resp.table_metadata.partition_keys[0].name #=> String
+    #   resp.table_metadata.partition_keys[0].type #=> String
+    #   resp.table_metadata.partition_keys[0].comment #=> String
+    #   resp.table_metadata.parameters #=> Hash
+    #   resp.table_metadata.parameters["KeyString"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetTableMetadata AWS API Documentation
+    #
+    # @overload get_table_metadata(params = {})
+    # @param [Hash] params ({})
+    def get_table_metadata(params = {}, options = {})
+      req = build_request(:get_table_metadata, params)
+      req.send_request(options)
+    end
+
     # Returns information about the workgroup with the specified name.
     #
     # @option params [required, String] :work_group
@@ -808,10 +1032,98 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Lists the data catalogs in the current AWS account.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the NextToken from the response object of
+    #   the previous page call.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of data catalogs to return.
+    #
+    # @return [Types::ListDataCatalogsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataCatalogsOutput#data_catalogs_summary #data_catalogs_summary} => Array&lt;Types::DataCatalogSummary&gt;
+    #   * {Types::ListDataCatalogsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_catalogs({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_catalogs_summary #=> Array
+    #   resp.data_catalogs_summary[0].catalog_name #=> String
+    #   resp.data_catalogs_summary[0].type #=> String, one of "LAMBDA", "GLUE", "HIVE"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListDataCatalogs AWS API Documentation
+    #
+    # @overload list_data_catalogs(params = {})
+    # @param [Hash] params ({})
+    def list_data_catalogs(params = {}, options = {})
+      req = build_request(:list_data_catalogs, params)
+      req.send_request(options)
+    end
+
+    # Lists the databases in the specified data catalog.
+    #
+    # @option params [required, String] :catalog_name
+    #   The name of the data catalog that contains the databases to return.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the `NextToken` from the response object of
+    #   the previous page call.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of results to return.
+    #
+    # @return [Types::ListDatabasesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDatabasesOutput#database_list #database_list} => Array&lt;Types::Database&gt;
+    #   * {Types::ListDatabasesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_databases({
+    #     catalog_name: "CatalogNameString", # required
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.database_list #=> Array
+    #   resp.database_list[0].name #=> String
+    #   resp.database_list[0].description #=> String
+    #   resp.database_list[0].parameters #=> Hash
+    #   resp.database_list[0].parameters["KeyString"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListDatabases AWS API Documentation
+    #
+    # @overload list_databases(params = {})
+    # @param [Hash] params ({})
+    def list_databases(params = {}, options = {})
+      req = build_request(:list_databases, params)
+      req.send_request(options)
+    end
+
     # Provides a list of available query IDs only for queries saved in the
-    # specified workgroup. Requires that you have access to the workgroup.
-    # If a workgroup is not specified, lists the saved queries for the
-    # primary workgroup.
+    # specified workgroup. Requires that you have access to the specified
+    # workgroup. If a workgroup is not specified, lists the saved queries
+    # for the primary workgroup.
     #
     # For code samples using the AWS SDK for Java, see [Examples and Code
     # Samples][1] in the *Amazon Athena User Guide*.
@@ -821,16 +1133,18 @@ module Aws::Athena
     # [1]: http://docs.aws.amazon.com/athena/latest/ug/code-samples.html
     #
     # @option params [String] :next_token
-    #   The token that specifies where to start pagination if a previous
-    #   request was truncated.
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the `NextToken` from the response object of
+    #   the previous page call.
     #
     # @option params [Integer] :max_results
     #   The maximum number of queries to return in this request.
     #
     # @option params [String] :work_group
-    #   The name of the workgroup from which the named queries are returned.
-    #   If a workgroup is not specified, the saved queries for the primary
-    #   workgroup are returned.
+    #   The name of the workgroup from which the named queries are being
+    #   returned. If a workgroup is not specified, the saved queries for the
+    #   primary workgroup are returned.
     #
     # @return [Types::ListNamedQueriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -875,14 +1189,16 @@ module Aws::Athena
     # [1]: http://docs.aws.amazon.com/athena/latest/ug/code-samples.html
     #
     # @option params [String] :next_token
-    #   The token that specifies where to start pagination if a previous
-    #   request was truncated.
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the `NextToken` from the response object of
+    #   the previous page call.
     #
     # @option params [Integer] :max_results
     #   The maximum number of query executions to return in this request.
     #
     # @option params [String] :work_group
-    #   The name of the workgroup from which queries are returned. If a
+    #   The name of the workgroup from which queries are being returned. If a
     #   workgroup is not specified, a list of available query execution IDs
     #   for the queries in the primary workgroup is returned.
     #
@@ -916,24 +1232,95 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Lists the tags associated with this workgroup.
+    # Lists the metadata for the tables in the specified data catalog
+    # database.
+    #
+    # @option params [required, String] :catalog_name
+    #   The name of the data catalog for which table metadata should be
+    #   returned.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database for which table metadata should be returned.
+    #
+    # @option params [String] :expression
+    #   A regex filter that pattern-matches table names. If no expression is
+    #   supplied, metadata for all tables are listed.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the NextToken from the response object of
+    #   the previous page call.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of results to return.
+    #
+    # @return [Types::ListTableMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTableMetadataOutput#table_metadata_list #table_metadata_list} => Array&lt;Types::TableMetadata&gt;
+    #   * {Types::ListTableMetadataOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_table_metadata({
+    #     catalog_name: "CatalogNameString", # required
+    #     database_name: "NameString", # required
+    #     expression: "ExpressionString",
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_metadata_list #=> Array
+    #   resp.table_metadata_list[0].name #=> String
+    #   resp.table_metadata_list[0].create_time #=> Time
+    #   resp.table_metadata_list[0].last_access_time #=> Time
+    #   resp.table_metadata_list[0].table_type #=> String
+    #   resp.table_metadata_list[0].columns #=> Array
+    #   resp.table_metadata_list[0].columns[0].name #=> String
+    #   resp.table_metadata_list[0].columns[0].type #=> String
+    #   resp.table_metadata_list[0].columns[0].comment #=> String
+    #   resp.table_metadata_list[0].partition_keys #=> Array
+    #   resp.table_metadata_list[0].partition_keys[0].name #=> String
+    #   resp.table_metadata_list[0].partition_keys[0].type #=> String
+    #   resp.table_metadata_list[0].partition_keys[0].comment #=> String
+    #   resp.table_metadata_list[0].parameters #=> Hash
+    #   resp.table_metadata_list[0].parameters["KeyString"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListTableMetadata AWS API Documentation
+    #
+    # @overload list_table_metadata(params = {})
+    # @param [Hash] params ({})
+    def list_table_metadata(params = {}, options = {})
+      req = build_request(:list_table_metadata, params)
+      req.send_request(options)
+    end
+
+    # Lists the tags associated with an Athena workgroup or data catalog
+    # resource.
     #
     # @option params [required, String] :resource_arn
-    #   Lists the tags for the workgroup resource with the specified ARN.
+    #   Lists the tags for the resource with the specified ARN.
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no
     #   additional results for this request, where the request lists the tags
-    #   for the workgroup resource with the specified ARN.
+    #   for the resource with the specified ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per request that lists
-    #   the tags for the workgroup resource.
+    #   the tags for the resource.
     #
     # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -962,7 +1349,10 @@ module Aws::Athena
     # Lists available workgroups for the account.
     #
     # @option params [String] :next_token
-    #   A token to be used by the next request if this request is truncated.
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the `NextToken` from the response object of
+    #   the previous page call.
     #
     # @option params [Integer] :max_results
     #   The maximum number of workgroups to return in this request.
@@ -1000,10 +1390,10 @@ module Aws::Athena
     end
 
     # Runs the SQL query statements contained in the `Query`. Requires you
-    # to have access to the workgroup in which the query ran.
-    #
-    # For code samples using the AWS SDK for Java, see [Examples and Code
-    # Samples][1] in the *Amazon Athena User Guide*.
+    # to have access to the workgroup in which the query ran. Running
+    # queries against an external catalog requires GetDataCatalog permission
+    # to the catalog. For code samples using the AWS SDK for Java, see
+    # [Examples and Code Samples][1] in the *Amazon Athena User Guide*.
     #
     #
     #
@@ -1053,6 +1443,7 @@ module Aws::Athena
     #     client_request_token: "IdempotencyToken",
     #     query_execution_context: {
     #       database: "DatabaseString",
+    #       catalog: "CatalogNameString",
     #     },
     #     result_configuration: {
     #       output_location: "String",
@@ -1110,31 +1501,31 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Adds one or more tags to the resource, such as a workgroup. A tag is a
-    # label that you assign to an AWS Athena resource (a workgroup). Each
-    # tag consists of a key and an optional value, both of which you define.
-    # Tags enable you to categorize resources (workgroups) in Athena, for
-    # example, by purpose, owner, or environment. Use a consistent set of
-    # tag keys to make it easier to search and filter workgroups in your
-    # account. For best practices, see [AWS Tagging Strategies][1]. The key
-    # length is from 1 (minimum) to 128 (maximum) Unicode characters in
-    # UTF-8. The tag value length is from 0 (minimum) to 256 (maximum)
-    # Unicode characters in UTF-8. You can use letters and numbers
-    # representable in UTF-8, and the following characters: + - = . \_ : /
-    # @. Tag keys and values are case-sensitive. Tag keys must be unique per
-    # resource. If you specify more than one, separate them by commas.
+    # Adds one or more tags to an Athena resource. A tag is a label that you
+    # assign to a resource. In Athena, a resource can be a workgroup or data
+    # catalog. Each tag consists of a key and an optional value, both of
+    # which you define. For example, you can use tags to categorize Athena
+    # workgroups or data catalogs by purpose, owner, or environment. Use a
+    # consistent set of tag keys to make it easier to search and filter
+    # workgroups or data catalogs in your account. For best practices, see
+    # [Tagging Best Practices][1]. Tag keys can be from 1 to 128 UTF-8
+    # Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode
+    # characters. Tags can use letters and numbers representable in UTF-8,
+    # and the following characters: + - = . \_ : / @. Tag keys and values
+    # are case-sensitive. Tag keys must be unique per resource. If you
+    # specify more than one tag, separate them by commas.
     #
     #
     #
     # [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
     #
     # @option params [required, String] :resource_arn
-    #   Requests that one or more tags are added to the resource (such as a
-    #   workgroup) for the specified ARN.
+    #   Specifies the ARN of the Athena resource (workgroup or data catalog)
+    #   to which tags are to be added.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   One or more tags, separated by commas, to be added to the resource,
-    #   such as a workgroup.
+    #   A collection of one or more tags, separated by commas, to be added to
+    #   an Athena workgroup or data catalog resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1159,17 +1550,14 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Removes one or more tags from the workgroup resource. Takes as an
-    # input a list of TagKey Strings separated by commas, and removes their
-    # tags at the same time.
+    # Removes one or more tags from a data catalog or workgroup resource.
     #
     # @option params [required, String] :resource_arn
-    #   Removes one or more tags from the workgroup resource for the specified
-    #   ARN.
+    #   Specifies the ARN of the resource from which tags are to be removed.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   Removes the tags associated with one or more tag keys from the
-    #   workgroup resource.
+    #   A comma-separated list of one or more tag keys whose tags are to be
+    #   removed from the specified resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1186,6 +1574,72 @@ module Aws::Athena
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the data catalog that has the specified name.
+    #
+    # @option params [required, String] :name
+    #   The name of the data catalog to update. The catalog name must be
+    #   unique for the AWS account and can use a maximum of 128 alphanumeric,
+    #   underscore, at sign, or hyphen characters.
+    #
+    # @option params [required, String] :type
+    #   Specifies the type of data catalog to update. Specify `LAMBDA` for a
+    #   federated catalog, `GLUE` for AWS Glue Catalog, or `HIVE` for an
+    #   external hive metastore.
+    #
+    # @option params [String] :description
+    #   New or modified text that describes the data catalog.
+    #
+    # @option params [Hash<String,String>] :parameters
+    #   Specifies the Lambda function or functions to use for updating the
+    #   data catalog. This is a mapping whose values depend on the catalog
+    #   type.
+    #
+    #   * For the `HIVE` data catalog type, use the following syntax. The
+    #     `metadata-function` parameter is required. `The sdk-version`
+    #     parameter is optional and defaults to the currently supported
+    #     version.
+    #
+    #     `metadata-function=lambda_arn, sdk-version=version_number `
+    #
+    #   * For the `LAMBDA` data catalog type, use one of the following sets of
+    #     required parameters, but not both.
+    #
+    #     * If you have one Lambda function that processes metadata and
+    #       another for reading the actual data, use the following syntax.
+    #       Both parameters are required.
+    #
+    #       `metadata-function=lambda_arn, record-function=lambda_arn `
+    #
+    #     * If you have a composite Lambda function that processes both
+    #       metadata and data, use the following syntax to specify your Lambda
+    #       function.
+    #
+    #       `function=lambda_arn `
+    #
+    #   * The `GLUE` type has no parameters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_catalog({
+    #     name: "CatalogNameString", # required
+    #     type: "LAMBDA", # required, accepts LAMBDA, GLUE, HIVE
+    #     description: "DescriptionString",
+    #     parameters: {
+    #       "KeyString" => "ParametersMapValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateDataCatalog AWS API Documentation
+    #
+    # @overload update_data_catalog(params = {})
+    # @param [Hash] params ({})
+    def update_data_catalog(params = {}, options = {})
+      req = build_request(:update_data_catalog, params)
       req.send_request(options)
     end
 
@@ -1253,7 +1707,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.28.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

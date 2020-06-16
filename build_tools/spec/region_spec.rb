@@ -8,13 +8,13 @@ end
 def whitelist
   {
     'core' => {
-      'errors.rb' => 240,
+      'errors.rb' => 'SKIP_FILE',
       'signature_v4.rb' => 35,
       'stub_responses.rb' => 19
     },
     's3' => {
       'location_constraint.rb' => 12,
-      'bucket.rb' => 143,
+      'bucket.rb' => 145,
       'presigned_post.rb' => 587,
       'iad_regional_endpoint.rb' => 'SKIP_FILE'
     },

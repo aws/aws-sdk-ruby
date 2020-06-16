@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -91,6 +93,7 @@ module Aws::QuickSight
     DashboardVersionSummary = Shapes::StructureShape.new(name: 'DashboardVersionSummary')
     DashboardVersionSummaryList = Shapes::ListShape.new(name: 'DashboardVersionSummaryList')
     DataSet = Shapes::StructureShape.new(name: 'DataSet')
+    DataSetArnsList = Shapes::ListShape.new(name: 'DataSetArnsList')
     DataSetConfiguration = Shapes::StructureShape.new(name: 'DataSetConfiguration')
     DataSetConfigurationList = Shapes::ListShape.new(name: 'DataSetConfigurationList')
     DataSetImportMode = Shapes::StringShape.new(name: 'DataSetImportMode')
@@ -693,6 +696,7 @@ module Aws::QuickSight
     DashboardVersion.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "Status"))
     DashboardVersion.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DashboardVersion.add_member(:source_entity_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SourceEntityArn"))
+    DashboardVersion.add_member(:data_set_arns, Shapes::ShapeRef.new(shape: DataSetArnsList, location_name: "DataSetArns"))
     DashboardVersion.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "Description"))
     DashboardVersion.struct_class = Types::DashboardVersion
 
@@ -719,6 +723,8 @@ module Aws::QuickSight
     DataSet.add_member(:column_groups, Shapes::ShapeRef.new(shape: ColumnGroupList, location_name: "ColumnGroups"))
     DataSet.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
     DataSet.struct_class = Types::DataSet
+
+    DataSetArnsList.member = Shapes::ShapeRef.new(shape: Arn)
 
     DataSetConfiguration.add_member(:placeholder, Shapes::ShapeRef.new(shape: String, location_name: "Placeholder"))
     DataSetConfiguration.add_member(:data_set_schema, Shapes::ShapeRef.new(shape: DataSetSchema, location_name: "DataSetSchema"))

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -46,6 +48,6 @@ require_relative 'aws-sdk-elasticloadbalancing/customizations'
 # @service
 module Aws::ElasticLoadBalancing
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.23.1'
 
 end

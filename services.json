@@ -118,6 +118,9 @@
   "CloudWatchLogs": {
     "models": "logs/2014-03-28"
   },
+  "CodeArtifact": {
+    "models": "codeartifact/2018-09-22"
+  },
   "CodeBuild": {
     "models": "codebuild/2016-10-06"
   },

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::SecurityHub
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::SecurityHub
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::SecurityHub
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -493,6 +497,7 @@ module Aws::SecurityHub
     #           product: 1.0,
     #           label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
     #           normalized: 1,
+    #           original: "NonEmptyString",
     #         },
     #         confidence: 1,
     #         criticality: 1,
@@ -943,6 +948,12 @@ module Aws::SecurityHub
     #         compliance: {
     #           status: "PASSED", # accepts PASSED, WARNING, FAILED, NOT_AVAILABLE
     #           related_requirements: ["NonEmptyString"],
+    #           status_reasons: [
+    #             {
+    #               reason_code: "NonEmptyString", # required
+    #               description: "NonEmptyString",
+    #             },
+    #           ],
     #         },
     #         verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
     #         workflow_state: "NEW", # accepts NEW, ASSIGNED, IN_PROGRESS, DEFERRED, RESOLVED
@@ -1800,7 +1811,7 @@ module Aws::SecurityHub
     # Security Hub.
     #
     # If the account owner accepts the invitation, the account becomes a
-    # member account in Security Hub, and a permission policy is added that
+    # member account in Security Hub. A permissions policy is added that
     # permits the master account to view the findings generated in the
     # member account. When Security Hub is enabled in the invited account,
     # findings start to be sent to both the member and master accounts.
@@ -2335,8 +2346,8 @@ module Aws::SecurityHub
     # Enables the integration of a partner product with Security Hub.
     # Integrated products send findings to Security Hub.
     #
-    # When you enable a product integration, a permission policy that grants
-    # permission for the product to send findings to Security Hub is
+    # When you enable a product integration, a permissions policy that
+    # grants permission for the product to send findings to Security Hub is
     # applied.
     #
     # @option params [required, String] :product_arn
@@ -2373,9 +2384,16 @@ module Aws::SecurityHub
     # integrated with Security Hub.
     #
     # When you use the `EnableSecurityHub` operation to enable Security Hub,
-    # you also automatically enable the CIS AWS Foundations standard. You do
-    # not enable the Payment Card Industry Data Security Standard (PCI DSS)
-    # standard. To not enable the CIS AWS Foundations standard, set
+    # you also automatically enable the following standards.
+    #
+    # * CIS AWS Foundations
+    #
+    # * AWS Foundational Security Best Practices
+    #
+    # You do not enable the Payment Card Industry Data Security Standard
+    # (PCI DSS) standard.
+    #
+    # To not enable the automatically enabled standards, set
     # `EnableDefaultStandards` to `false`.
     #
     # After you enable Security Hub, to enable a standard, use the `
@@ -2390,7 +2408,7 @@ module Aws::SecurityHub
     # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to add to the Hub resource when you enable Security Hub.
+    #   The tags to add to the hub resource when you enable Security Hub.
     #
     # @option params [Boolean] :enable_default_standards
     #   Whether to enable the security standards that Security Hub has
@@ -3083,6 +3101,7 @@ module Aws::SecurityHub
     #   resp.findings[0].severity.product #=> Float
     #   resp.findings[0].severity.label #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
     #   resp.findings[0].severity.normalized #=> Integer
+    #   resp.findings[0].severity.original #=> String
     #   resp.findings[0].confidence #=> Integer
     #   resp.findings[0].criticality #=> Integer
     #   resp.findings[0].title #=> String
@@ -3374,6 +3393,9 @@ module Aws::SecurityHub
     #   resp.findings[0].compliance.status #=> String, one of "PASSED", "WARNING", "FAILED", "NOT_AVAILABLE"
     #   resp.findings[0].compliance.related_requirements #=> Array
     #   resp.findings[0].compliance.related_requirements[0] #=> String
+    #   resp.findings[0].compliance.status_reasons #=> Array
+    #   resp.findings[0].compliance.status_reasons[0].reason_code #=> String
+    #   resp.findings[0].compliance.status_reasons[0].description #=> String
     #   resp.findings[0].verification_state #=> String, one of "UNKNOWN", "TRUE_POSITIVE", "FALSE_POSITIVE", "BENIGN_POSITIVE"
     #   resp.findings[0].workflow_state #=> String, one of "NEW", "ASSIGNED", "IN_PROGRESS", "DEFERRED", "RESOLVED"
     #   resp.findings[0].workflow.status #=> String, one of "NEW", "NOTIFIED", "RESOLVED", "SUPPRESSED"
@@ -5374,7 +5396,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.27.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

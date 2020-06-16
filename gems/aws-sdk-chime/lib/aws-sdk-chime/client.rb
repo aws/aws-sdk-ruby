@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::Chime
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::Chime
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::Chime
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -931,13 +935,15 @@ module Aws::Chime
     end
 
     # Creates a new Amazon Chime SDK meeting in the specified media Region
-    # with no initial attendees. For more information about the Amazon Chime
-    # SDK, see [Using the Amazon Chime SDK][1] in the *Amazon Chime
-    # Developer Guide*.
+    # with no initial attendees. For more information about specifying media
+    # Regions, see [Amazon Chime SDK Media Regions][1] in the *Amazon Chime
+    # Developer Guide*. For more information about the Amazon Chime SDK, see
+    # [Using the Amazon Chime SDK][2] in the *Amazon Chime Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html
+    # [2]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :client_request_token
     #   The unique identifier for the client request. Use a different token
@@ -953,10 +959,12 @@ module Aws::Chime
     #   Reserved.
     #
     # @option params [String] :media_region
-    #   The Region in which to create the meeting. Available values:
-    #   `ap-northeast-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`,
-    #   `eu-central-1`, `eu-north-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`,
-    #   `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`.
+    #   The Region in which to create the meeting. Default: `us-east-1`.
+    #
+    #   Available values: `ap-northeast-1`, `ap-southeast-1`,
+    #   `ap-southeast-2`, `ca-central-1`, `eu-central-1`, `eu-north-1`,
+    #   `eu-west-1`, `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`,
+    #   `us-east-2`, `us-west-1`, `us-west-2`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tag key-value pairs.
@@ -1007,6 +1015,116 @@ module Aws::Chime
     # @param [Hash] params ({})
     def create_meeting(params = {}, options = {})
       req = build_request(:create_meeting, params)
+      req.send_request(options)
+    end
+
+    # Creates a new Amazon Chime SDK meeting in the specified media Region,
+    # with attendees. For more information about specifying media Regions,
+    # see [Amazon Chime SDK Media Regions][1] in the *Amazon Chime Developer
+    # Guide*. For more information about the Amazon Chime SDK, see [Using
+    # the Amazon Chime SDK][2] in the *Amazon Chime Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html
+    # [2]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    #
+    # @option params [required, String] :client_request_token
+    #   The unique identifier for the client request. Use a different token
+    #   for different meetings.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :external_meeting_id
+    #   The external meeting ID.
+    #
+    # @option params [String] :meeting_host_id
+    #   Reserved.
+    #
+    # @option params [String] :media_region
+    #   The Region in which to create the meeting. Default: `us-east-1`.
+    #
+    #   Available values: `ap-northeast-1`, `ap-southeast-1`,
+    #   `ap-southeast-2`, `ca-central-1`, `eu-central-1`, `eu-north-1`,
+    #   `eu-west-1`, `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`,
+    #   `us-east-2`, `us-west-1`, `us-west-2`.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag key-value pairs.
+    #
+    # @option params [Types::MeetingNotificationConfiguration] :notifications_configuration
+    #   The configuration for resource targets to receive notifications when
+    #   Amazon Chime SDK meeting and attendee events occur. The Amazon Chime
+    #   SDK supports resource targets located in the US East (N. Virginia) AWS
+    #   Region (`us-east-1`).
+    #
+    # @option params [Array<Types::CreateAttendeeRequestItem>] :attendees
+    #   The request containing the attendees to create.
+    #
+    # @return [Types::CreateMeetingWithAttendeesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMeetingWithAttendeesResponse#meeting #meeting} => Types::Meeting
+    #   * {Types::CreateMeetingWithAttendeesResponse#attendees #attendees} => Array&lt;Types::Attendee&gt;
+    #   * {Types::CreateMeetingWithAttendeesResponse#errors #errors} => Array&lt;Types::CreateAttendeeError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_meeting_with_attendees({
+    #     client_request_token: "ClientRequestToken", # required
+    #     external_meeting_id: "ExternalMeetingIdType",
+    #     meeting_host_id: "ExternalUserIdType",
+    #     media_region: "String",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     notifications_configuration: {
+    #       sns_topic_arn: "Arn",
+    #       sqs_queue_arn: "Arn",
+    #     },
+    #     attendees: [
+    #       {
+    #         external_user_id: "ExternalUserIdType", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.meeting.meeting_id #=> String
+    #   resp.meeting.external_meeting_id #=> String
+    #   resp.meeting.media_placement.audio_host_url #=> String
+    #   resp.meeting.media_placement.audio_fallback_url #=> String
+    #   resp.meeting.media_placement.screen_data_url #=> String
+    #   resp.meeting.media_placement.screen_sharing_url #=> String
+    #   resp.meeting.media_placement.screen_viewing_url #=> String
+    #   resp.meeting.media_placement.signaling_url #=> String
+    #   resp.meeting.media_placement.turn_control_url #=> String
+    #   resp.meeting.media_region #=> String
+    #   resp.attendees #=> Array
+    #   resp.attendees[0].external_user_id #=> String
+    #   resp.attendees[0].attendee_id #=> String
+    #   resp.attendees[0].join_token #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].external_user_id #=> String
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeetingWithAttendees AWS API Documentation
+    #
+    # @overload create_meeting_with_attendees(params = {})
+    # @param [Hash] params ({})
+    def create_meeting_with_attendees(params = {}, options = {})
+      req = build_request(:create_meeting_with_attendees, params)
       req.send_request(options)
     end
 
@@ -2321,6 +2439,44 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Gets the retention settings for the specified Amazon Chime Enterprise
+    # account. For more information about retention settings, see [Managing
+    # Chat Retention Policies][1] in the *Amazon Chime Administration
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @return [Types::GetRetentionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRetentionSettingsResponse#retention_settings #retention_settings} => Types::RetentionSettings
+    #   * {Types::GetRetentionSettingsResponse#initiate_deletion_timestamp #initiate_deletion_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_retention_settings({
+    #     account_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retention_settings.room_retention_settings.retention_days #=> Integer
+    #   resp.retention_settings.conversation_retention_settings.retention_days #=> Integer
+    #   resp.initiate_deletion_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetRetentionSettings AWS API Documentation
+    #
+    # @overload get_retention_settings(params = {})
+    # @param [Hash] params ({})
+    def get_retention_settings(params = {}, options = {})
+      req = build_request(:get_retention_settings, params)
+      req.send_request(options)
+    end
+
     # Retrieves room details, such as the room name, for a room in an Amazon
     # Chime Enterprise account.
     #
@@ -2633,6 +2789,8 @@ module Aws::Chime
     #
     #   resp.streaming_configuration.data_retention_in_hours #=> Integer
     #   resp.streaming_configuration.disabled #=> Boolean
+    #   resp.streaming_configuration.streaming_notification_targets #=> Array
+    #   resp.streaming_configuration.streaming_notification_targets[0].notification_target #=> String, one of "EventBridge", "SNS", "SQS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorStreamingConfiguration AWS API Documentation
     #
@@ -3597,6 +3755,63 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Puts retention settings for the specified Amazon Chime Enterprise
+    # account. We recommend using AWS CloudTrail to monitor usage of this
+    # API for your account. For more information, see [Logging Amazon Chime
+    # API Calls with AWS CloudTrail][1] in the *Amazon Chime Administration
+    # Guide*.
+    #
+    # To turn off existing retention settings, remove the number of days
+    # from the corresponding **RetentionDays** field in the
+    # **RetentionSettings** object. For more information about retention
+    # settings, see [Managing Chat Retention Policies][2] in the *Amazon
+    # Chime Administration Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html
+    # [2]: https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, Types::RetentionSettings] :retention_settings
+    #   The retention settings.
+    #
+    # @return [Types::PutRetentionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutRetentionSettingsResponse#retention_settings #retention_settings} => Types::RetentionSettings
+    #   * {Types::PutRetentionSettingsResponse#initiate_deletion_timestamp #initiate_deletion_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_retention_settings({
+    #     account_id: "NonEmptyString", # required
+    #     retention_settings: { # required
+    #       room_retention_settings: {
+    #         retention_days: 1,
+    #       },
+    #       conversation_retention_settings: {
+    #         retention_days: 1,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retention_settings.room_retention_settings.retention_days #=> Integer
+    #   resp.retention_settings.conversation_retention_settings.retention_days #=> Integer
+    #   resp.initiate_deletion_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutRetentionSettings AWS API Documentation
+    #
+    # @overload put_retention_settings(params = {})
+    # @param [Hash] params ({})
+    def put_retention_settings(params = {}, options = {})
+      req = build_request(:put_retention_settings, params)
+      req.send_request(options)
+    end
+
     # Adds a logging configuration for the specified Amazon Chime Voice
     # Connector. The logging configuration specifies whether SIP message
     # logs are enabled for sending to Amazon CloudWatch Logs.
@@ -3755,6 +3970,11 @@ module Aws::Chime
     #     streaming_configuration: { # required
     #       data_retention_in_hours: 1, # required
     #       disabled: false,
+    #       streaming_notification_targets: [
+    #         {
+    #           notification_target: "EventBridge", # required, accepts EventBridge, SNS, SQS
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -3762,6 +3982,8 @@ module Aws::Chime
     #
     #   resp.streaming_configuration.data_retention_in_hours #=> Integer
     #   resp.streaming_configuration.disabled #=> Boolean
+    #   resp.streaming_configuration.streaming_notification_targets #=> Array
+    #   resp.streaming_configuration.streaming_notification_targets[0].notification_target #=> String, one of "EventBridge", "SNS", "SQS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorStreamingConfiguration AWS API Documentation
     #
@@ -3846,6 +4068,68 @@ module Aws::Chime
     # @param [Hash] params ({})
     def put_voice_connector_termination_credentials(params = {}, options = {})
       req = build_request(:put_voice_connector_termination_credentials, params)
+      req.send_request(options)
+    end
+
+    # Redacts the specified message from the specified Amazon Chime
+    # conversation.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :conversation_id
+    #   The conversation ID.
+    #
+    # @option params [required, String] :message_id
+    #   The message ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.redact_conversation_message({
+    #     account_id: "NonEmptyString", # required
+    #     conversation_id: "NonEmptyString", # required
+    #     message_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactConversationMessage AWS API Documentation
+    #
+    # @overload redact_conversation_message(params = {})
+    # @param [Hash] params ({})
+    def redact_conversation_message(params = {}, options = {})
+      req = build_request(:redact_conversation_message, params)
+      req.send_request(options)
+    end
+
+    # Redacts the specified message from the specified Amazon Chime chat
+    # room.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :room_id
+    #   The room ID.
+    #
+    # @option params [required, String] :message_id
+    #   The message ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.redact_room_message({
+    #     account_id: "NonEmptyString", # required
+    #     room_id: "NonEmptyString", # required
+    #     message_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactRoomMessage AWS API Documentation
+    #
+    # @overload redact_room_message(params = {})
+    # @param [Hash] params ({})
+    def redact_room_message(params = {}, options = {})
+      req = build_request(:redact_room_message, params)
       req.send_request(options)
     end
 
@@ -4817,7 +5101,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

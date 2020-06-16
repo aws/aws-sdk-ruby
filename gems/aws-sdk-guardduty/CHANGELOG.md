@@ -1,6 +1,32 @@
 Unreleased Changes
 ------------------
 
+1.35.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.35.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-06-02)
+------------------
+
+* Feature - Amazon GuardDuty findings now include S3 bucket details under the resource section if an S3 Bucket was one of the affected resources
+
+1.33.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2020-05-27)
+------------------
+
+* Feature - Documentation updates for GuardDuty
+
 1.31.0 (2020-05-08)
 ------------------
 
@@ -160,4 +186,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-guardduty`.
-

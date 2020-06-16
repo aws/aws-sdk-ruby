@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -96,6 +98,7 @@ module Aws::MarketplaceCatalog
 
     ChangeSummary.add_member(:change_type, Shapes::ShapeRef.new(shape: ChangeType, location_name: "ChangeType"))
     ChangeSummary.add_member(:entity, Shapes::ShapeRef.new(shape: Entity, location_name: "Entity"))
+    ChangeSummary.add_member(:details, Shapes::ShapeRef.new(shape: Json, location_name: "Details"))
     ChangeSummary.add_member(:error_detail_list, Shapes::ShapeRef.new(shape: ErrorDetailList, location_name: "ErrorDetailList"))
     ChangeSummary.struct_class = Types::ChangeSummary
 

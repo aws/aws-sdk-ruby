@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::Macie2
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::Macie2
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::Macie2
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -324,33 +328,12 @@ module Aws::Macie2
     #     master_account: "__string", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/AcceptInvitation AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AcceptInvitation AWS API Documentation
     #
     # @overload accept_invitation(params = {})
     # @param [Hash] params ({})
     def accept_invitation(params = {}, options = {})
       req = build_request(:accept_invitation, params)
-      req.send_request(options)
-    end
-
-    # Archives one or more findings.
-    #
-    # @option params [required, Array<String>] :finding_ids
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.archive_findings({
-    #     finding_ids: ["__string"], # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ArchiveFindings AWS API Documentation
-    #
-    # @overload archive_findings(params = {})
-    # @param [Hash] params ({})
-    def archive_findings(params = {}, options = {})
-      req = build_request(:archive_findings, params)
       req.send_request(options)
     end
 
@@ -381,7 +364,7 @@ module Aws::Macie2
     #   resp.not_found_identifier_ids #=> Array
     #   resp.not_found_identifier_ids[0] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BatchGetCustomDataIdentifiers AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BatchGetCustomDataIdentifiers AWS API Documentation
     #
     # @overload batch_get_custom_data_identifiers(params = {})
     # @param [Hash] params ({})
@@ -510,7 +493,7 @@ module Aws::Macie2
     #   resp.job_arn #=> String
     #   resp.job_id #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateClassificationJob AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateClassificationJob AWS API Documentation
     #
     # @overload create_classification_job(params = {})
     # @param [Hash] params ({})
@@ -566,7 +549,7 @@ module Aws::Macie2
     #
     #   resp.custom_data_identifier_id #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateCustomDataIdentifier AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateCustomDataIdentifier AWS API Documentation
     #
     # @overload create_custom_data_identifier(params = {})
     # @param [Hash] params ({})
@@ -636,7 +619,7 @@ module Aws::Macie2
     #   resp.arn #=> String
     #   resp.id #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateFindingsFilter AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateFindingsFilter AWS API Documentation
     #
     # @overload create_findings_filter(params = {})
     # @param [Hash] params ({})
@@ -672,7 +655,7 @@ module Aws::Macie2
     #   resp.unprocessed_accounts[0].error_code #=> String, one of "ClientError", "InternalError"
     #   resp.unprocessed_accounts[0].error_message #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateInvitations AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateInvitations AWS API Documentation
     #
     # @overload create_invitations(params = {})
     # @param [Hash] params ({})
@@ -712,7 +695,7 @@ module Aws::Macie2
     #
     #   resp.arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateMember AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateMember AWS API Documentation
     #
     # @overload create_member(params = {})
     # @param [Hash] params ({})
@@ -733,7 +716,7 @@ module Aws::Macie2
     #     finding_types: ["SensitiveData:S3Object/Multiple"], # accepts SensitiveData:S3Object/Multiple, SensitiveData:S3Object/Financial, SensitiveData:S3Object/Personal, SensitiveData:S3Object/Credentials, SensitiveData:S3Object/CustomIdentifier, Policy:IAMUser/S3BucketPublic, Policy:IAMUser/S3BucketSharedExternally, Policy:IAMUser/S3BucketReplicatedExternally, Policy:IAMUser/S3BucketEncryptionDisabled, Policy:IAMUser/S3BlockPublicAccessDisabled
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateSampleFindings AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateSampleFindings AWS API Documentation
     #
     # @overload create_sample_findings(params = {})
     # @param [Hash] params ({})
@@ -764,7 +747,7 @@ module Aws::Macie2
     #   resp.unprocessed_accounts[0].error_code #=> String, one of "ClientError", "InternalError"
     #   resp.unprocessed_accounts[0].error_message #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeclineInvitations AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeclineInvitations AWS API Documentation
     #
     # @overload decline_invitations(params = {})
     # @param [Hash] params ({})
@@ -785,7 +768,7 @@ module Aws::Macie2
     #     id: "__string", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeleteCustomDataIdentifier AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteCustomDataIdentifier AWS API Documentation
     #
     # @overload delete_custom_data_identifier(params = {})
     # @param [Hash] params ({})
@@ -806,7 +789,7 @@ module Aws::Macie2
     #     id: "__string", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeleteFindingsFilter AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteFindingsFilter AWS API Documentation
     #
     # @overload delete_findings_filter(params = {})
     # @param [Hash] params ({})
@@ -837,7 +820,7 @@ module Aws::Macie2
     #   resp.unprocessed_accounts[0].error_code #=> String, one of "ClientError", "InternalError"
     #   resp.unprocessed_accounts[0].error_message #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeleteInvitations AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteInvitations AWS API Documentation
     #
     # @overload delete_invitations(params = {})
     # @param [Hash] params ({})
@@ -859,7 +842,7 @@ module Aws::Macie2
     #     id: "__string", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeleteMember AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteMember AWS API Documentation
     #
     # @overload delete_member(params = {})
     # @param [Hash] params ({})
@@ -951,7 +934,7 @@ module Aws::Macie2
     #   resp.buckets[0].versioning #=> Boolean
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DescribeBuckets AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeBuckets AWS API Documentation
     #
     # @overload describe_buckets(params = {})
     # @param [Hash] params ({})
@@ -1038,7 +1021,7 @@ module Aws::Macie2
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DescribeClassificationJob AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeClassificationJob AWS API Documentation
     #
     # @overload describe_classification_job(params = {})
     # @param [Hash] params ({})
@@ -1060,7 +1043,7 @@ module Aws::Macie2
     #   resp.auto_enable #=> Boolean
     #   resp.max_account_limit_reached #=> Boolean
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DescribeOrganizationConfiguration AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeOrganizationConfiguration AWS API Documentation
     #
     # @overload describe_organization_configuration(params = {})
     # @param [Hash] params ({})
@@ -1074,7 +1057,7 @@ module Aws::Macie2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DisableMacie AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisableMacie AWS API Documentation
     #
     # @overload disable_macie(params = {})
     # @param [Hash] params ({})
@@ -1096,7 +1079,7 @@ module Aws::Macie2
     #     admin_account_id: "__string", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DisableOrganizationAdminAccount AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisableOrganizationAdminAccount AWS API Documentation
     #
     # @overload disable_organization_admin_account(params = {})
     # @param [Hash] params ({})
@@ -1109,7 +1092,7 @@ module Aws::Macie2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DisassociateFromMasterAccount AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisassociateFromMasterAccount AWS API Documentation
     #
     # @overload disassociate_from_master_account(params = {})
     # @param [Hash] params ({})
@@ -1130,7 +1113,7 @@ module Aws::Macie2
     #     id: "__string", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DisassociateMember AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisassociateMember AWS API Documentation
     #
     # @overload disassociate_member(params = {})
     # @param [Hash] params ({})
@@ -1164,7 +1147,7 @@ module Aws::Macie2
     #     status: "PAUSED", # accepts PAUSED, ENABLED
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/EnableMacie AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/EnableMacie AWS API Documentation
     #
     # @overload enable_macie(params = {})
     # @param [Hash] params ({})
@@ -1191,7 +1174,7 @@ module Aws::Macie2
     #     client_token: "__string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/EnableOrganizationAdminAccount AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/EnableOrganizationAdminAccount AWS API Documentation
     #
     # @overload enable_organization_admin_account(params = {})
     # @param [Hash] params ({})
@@ -1241,7 +1224,7 @@ module Aws::Macie2
     #   resp.size_in_bytes #=> Integer
     #   resp.size_in_bytes_compressed #=> Integer
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetBucketStatistics AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetBucketStatistics AWS API Documentation
     #
     # @overload get_bucket_statistics(params = {})
     # @param [Hash] params ({})
@@ -1263,7 +1246,7 @@ module Aws::Macie2
     #   resp.configuration.s3_destination.key_prefix #=> String
     #   resp.configuration.s3_destination.kms_key_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetClassificationExportConfiguration AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetClassificationExportConfiguration AWS API Documentation
     #
     # @overload get_classification_export_configuration(params = {})
     # @param [Hash] params ({})
@@ -1314,7 +1297,7 @@ module Aws::Macie2
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetCustomDataIdentifier AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetCustomDataIdentifier AWS API Documentation
     #
     # @overload get_custom_data_identifier(params = {})
     # @param [Hash] params ({})
@@ -1370,7 +1353,7 @@ module Aws::Macie2
     #   resp.counts_by_group[0].count #=> Integer
     #   resp.counts_by_group[0].group_key #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetFindingStatistics AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingStatistics AWS API Documentation
     #
     # @overload get_finding_statistics(params = {})
     # @param [Hash] params ({})
@@ -1482,7 +1465,7 @@ module Aws::Macie2
     #   resp.findings[0].region #=> String
     #   resp.findings[0].resources_affected.s3_bucket.arn #=> String
     #   resp.findings[0].resources_affected.s3_bucket.created_at #=> Time
-    #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms"
+    #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN"
     #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.kms_master_key_id #=> String
     #   resp.findings[0].resources_affected.s3_bucket.name #=> String
     #   resp.findings[0].resources_affected.s3_bucket.owner.display_name #=> String
@@ -1510,7 +1493,7 @@ module Aws::Macie2
     #   resp.findings[0].resources_affected.s3_object.last_modified #=> Time
     #   resp.findings[0].resources_affected.s3_object.path #=> String
     #   resp.findings[0].resources_affected.s3_object.public_access #=> Boolean
-    #   resp.findings[0].resources_affected.s3_object.server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms"
+    #   resp.findings[0].resources_affected.s3_object.server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN"
     #   resp.findings[0].resources_affected.s3_object.server_side_encryption.kms_master_key_id #=> String
     #   resp.findings[0].resources_affected.s3_object.size #=> Integer
     #   resp.findings[0].resources_affected.s3_object.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "ONEZONE_IA", "GLACIER"
@@ -1526,7 +1509,7 @@ module Aws::Macie2
     #   resp.findings[0].type #=> String, one of "SensitiveData:S3Object/Multiple", "SensitiveData:S3Object/Financial", "SensitiveData:S3Object/Personal", "SensitiveData:S3Object/Credentials", "SensitiveData:S3Object/CustomIdentifier", "Policy:IAMUser/S3BucketPublic", "Policy:IAMUser/S3BucketSharedExternally", "Policy:IAMUser/S3BucketReplicatedExternally", "Policy:IAMUser/S3BucketEncryptionDisabled", "Policy:IAMUser/S3BlockPublicAccessDisabled"
     #   resp.findings[0].updated_at #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetFindings AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindings AWS API Documentation
     #
     # @overload get_findings(params = {})
     # @param [Hash] params ({})
@@ -1577,7 +1560,7 @@ module Aws::Macie2
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetFindingsFilter AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingsFilter AWS API Documentation
     #
     # @overload get_findings_filter(params = {})
     # @param [Hash] params ({})
@@ -1597,7 +1580,7 @@ module Aws::Macie2
     #
     #   resp.invitations_count #=> Integer
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetInvitationsCount AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetInvitationsCount AWS API Documentation
     #
     # @overload get_invitations_count(params = {})
     # @param [Hash] params ({})
@@ -1625,7 +1608,7 @@ module Aws::Macie2
     #   resp.status #=> String, one of "PAUSED", "ENABLED"
     #   resp.updated_at #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetMacieSession AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMacieSession AWS API Documentation
     #
     # @overload get_macie_session(params = {})
     # @param [Hash] params ({})
@@ -1648,7 +1631,7 @@ module Aws::Macie2
     #   resp.master.invited_at #=> Time
     #   resp.master.relationship_status #=> String, one of "Enabled", "Paused", "Invited", "Created", "Removed", "Resigned", "EmailVerificationInProgress", "EmailVerificationFailed"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetMasterAccount AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMasterAccount AWS API Documentation
     #
     # @overload get_master_account(params = {})
     # @param [Hash] params ({})
@@ -1691,7 +1674,7 @@ module Aws::Macie2
     #   resp.tags["__string"] #=> String
     #   resp.updated_at #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetMember AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMember AWS API Documentation
     #
     # @overload get_member(params = {})
     # @param [Hash] params ({})
@@ -1749,7 +1732,7 @@ module Aws::Macie2
     #   resp.records[0].usage[0].service_limit.value #=> Integer
     #   resp.records[0].usage[0].type #=> String, one of "DATA_INVENTORY_EVALUATION", "SENSITIVE_DATA_DISCOVERY"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetUsageStatistics AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageStatistics AWS API Documentation
     #
     # @overload get_usage_statistics(params = {})
     # @param [Hash] params ({})
@@ -1771,7 +1754,7 @@ module Aws::Macie2
     #   resp.usage_totals[0].estimated_cost #=> String
     #   resp.usage_totals[0].type #=> String, one of "DATA_INVENTORY_EVALUATION", "SENSITIVE_DATA_DISCOVERY"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetUsageTotals AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageTotals AWS API Documentation
     #
     # @overload get_usage_totals(params = {})
     # @param [Hash] params ({})
@@ -1841,7 +1824,7 @@ module Aws::Macie2
     #   resp.items[0].name #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListClassificationJobs AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListClassificationJobs AWS API Documentation
     #
     # @overload list_classification_jobs(params = {})
     # @param [Hash] params ({})
@@ -1879,7 +1862,7 @@ module Aws::Macie2
     #   resp.items[0].name #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListCustomDataIdentifiers AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListCustomDataIdentifiers AWS API Documentation
     #
     # @overload list_custom_data_identifiers(params = {})
     # @param [Hash] params ({})
@@ -1936,7 +1919,7 @@ module Aws::Macie2
     #   resp.finding_ids[0] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListFindings AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListFindings AWS API Documentation
     #
     # @overload list_findings(params = {})
     # @param [Hash] params ({})
@@ -1974,7 +1957,7 @@ module Aws::Macie2
     #   resp.findings_filter_list_items[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListFindingsFilters AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListFindingsFilters AWS API Documentation
     #
     # @overload list_findings_filters(params = {})
     # @param [Hash] params ({})
@@ -2011,7 +1994,7 @@ module Aws::Macie2
     #   resp.invitations[0].relationship_status #=> String, one of "Enabled", "Paused", "Invited", "Created", "Removed", "Resigned", "EmailVerificationInProgress", "EmailVerificationFailed"
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListInvitations AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListInvitations AWS API Documentation
     #
     # @overload list_invitations(params = {})
     # @param [Hash] params ({})
@@ -2056,7 +2039,7 @@ module Aws::Macie2
     #   resp.members[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListMembers AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListMembers AWS API Documentation
     #
     # @overload list_members(params = {})
     # @param [Hash] params ({})
@@ -2091,7 +2074,7 @@ module Aws::Macie2
     #   resp.admin_accounts[0].status #=> String, one of "ENABLED", "DISABLING_IN_PROGRESS"
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListOrganizationAdminAccounts AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListOrganizationAdminAccounts AWS API Documentation
     #
     # @overload list_organization_admin_accounts(params = {})
     # @param [Hash] params ({})
@@ -2121,7 +2104,7 @@ module Aws::Macie2
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListTagsForResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -2160,7 +2143,7 @@ module Aws::Macie2
     #   resp.configuration.s3_destination.key_prefix #=> String
     #   resp.configuration.s3_destination.kms_key_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/PutClassificationExportConfiguration AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/PutClassificationExportConfiguration AWS API Documentation
     #
     # @overload put_classification_export_configuration(params = {})
     # @param [Hash] params ({})
@@ -2191,7 +2174,7 @@ module Aws::Macie2
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/TagResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/TagResource AWS API Documentation
     #
     # @overload tag_resource(params = {})
     # @param [Hash] params ({})
@@ -2230,33 +2213,12 @@ module Aws::Macie2
     #
     #   resp.match_count #=> Integer
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/TestCustomDataIdentifier AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/TestCustomDataIdentifier AWS API Documentation
     #
     # @overload test_custom_data_identifier(params = {})
     # @param [Hash] params ({})
     def test_custom_data_identifier(params = {}, options = {})
       req = build_request(:test_custom_data_identifier, params)
-      req.send_request(options)
-    end
-
-    # Reactivates (unarchives) one or more findings.
-    #
-    # @option params [required, Array<String>] :finding_ids
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.unarchive_findings({
-    #     finding_ids: ["__string"], # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UnarchiveFindings AWS API Documentation
-    #
-    # @overload unarchive_findings(params = {})
-    # @param [Hash] params ({})
-    def unarchive_findings(params = {}, options = {})
-      req = build_request(:unarchive_findings, params)
       req.send_request(options)
     end
 
@@ -2276,7 +2238,7 @@ module Aws::Macie2
     #     tag_keys: ["__string"], # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UntagResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UntagResource AWS API Documentation
     #
     # @overload untag_resource(params = {})
     # @param [Hash] params ({})
@@ -2301,7 +2263,7 @@ module Aws::Macie2
     #     job_status: "RUNNING", # required, accepts RUNNING, PAUSED, CANCELLED, COMPLETE, IDLE
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateClassificationJob AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateClassificationJob AWS API Documentation
     #
     # @overload update_classification_job(params = {})
     # @param [Hash] params ({})
@@ -2360,7 +2322,7 @@ module Aws::Macie2
     #   resp.arn #=> String
     #   resp.id #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateFindingsFilter AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateFindingsFilter AWS API Documentation
     #
     # @overload update_findings_filter(params = {})
     # @param [Hash] params ({})
@@ -2389,7 +2351,7 @@ module Aws::Macie2
     #     status: "PAUSED", # accepts PAUSED, ENABLED
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateMacieSession AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateMacieSession AWS API Documentation
     #
     # @overload update_macie_session(params = {})
     # @param [Hash] params ({})
@@ -2415,7 +2377,7 @@ module Aws::Macie2
     #     status: "PAUSED", # required, accepts PAUSED, ENABLED
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateMemberSession AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateMemberSession AWS API Documentation
     #
     # @overload update_member_session(params = {})
     # @param [Hash] params ({})
@@ -2436,7 +2398,7 @@ module Aws::Macie2
     #     auto_enable: false, # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateOrganizationConfiguration AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateOrganizationConfiguration AWS API Documentation
     #
     # @overload update_organization_configuration(params = {})
     # @param [Hash] params ({})
@@ -2458,7 +2420,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.3.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -74,6 +76,8 @@ module Aws::Backup
     DescribeProtectedResourceOutput = Shapes::StructureShape.new(name: 'DescribeProtectedResourceOutput')
     DescribeRecoveryPointInput = Shapes::StructureShape.new(name: 'DescribeRecoveryPointInput')
     DescribeRecoveryPointOutput = Shapes::StructureShape.new(name: 'DescribeRecoveryPointOutput')
+    DescribeRegionSettingsInput = Shapes::StructureShape.new(name: 'DescribeRegionSettingsInput')
+    DescribeRegionSettingsOutput = Shapes::StructureShape.new(name: 'DescribeRegionSettingsOutput')
     DescribeRestoreJobInput = Shapes::StructureShape.new(name: 'DescribeRestoreJobInput')
     DescribeRestoreJobOutput = Shapes::StructureShape.new(name: 'DescribeRestoreJobOutput')
     ExportBackupPlanTemplateInput = Shapes::StructureShape.new(name: 'ExportBackupPlanTemplateInput')
@@ -97,6 +101,7 @@ module Aws::Backup
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    IsEnabled = Shapes::BooleanShape.new(name: 'IsEnabled')
     Lifecycle = Shapes::StructureShape.new(name: 'Lifecycle')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListBackupJobsInput = Shapes::StructureShape.new(name: 'ListBackupJobsInput')
@@ -143,6 +148,7 @@ module Aws::Backup
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResourceTypeOptInPreference = Shapes::MapShape.new(name: 'ResourceTypeOptInPreference')
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
     RestoreJobId = Shapes::StringShape.new(name: 'RestoreJobId')
     RestoreJobStatus = Shapes::StringShape.new(name: 'RestoreJobStatus')
@@ -167,6 +173,7 @@ module Aws::Backup
     UpdateBackupPlanOutput = Shapes::StructureShape.new(name: 'UpdateBackupPlanOutput')
     UpdateRecoveryPointLifecycleInput = Shapes::StructureShape.new(name: 'UpdateRecoveryPointLifecycleInput')
     UpdateRecoveryPointLifecycleOutput = Shapes::StructureShape.new(name: 'UpdateRecoveryPointLifecycleOutput')
+    UpdateRegionSettingsInput = Shapes::StructureShape.new(name: 'UpdateRegionSettingsInput')
     WindowMinutes = Shapes::IntegerShape.new(name: 'WindowMinutes')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
     long = Shapes::IntegerShape.new(name: 'long')
@@ -449,6 +456,11 @@ module Aws::Backup
     DescribeRecoveryPointOutput.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
     DescribeRecoveryPointOutput.add_member(:last_restore_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastRestoreTime"))
     DescribeRecoveryPointOutput.struct_class = Types::DescribeRecoveryPointOutput
+
+    DescribeRegionSettingsInput.struct_class = Types::DescribeRegionSettingsInput
+
+    DescribeRegionSettingsOutput.add_member(:resource_type_opt_in_preference, Shapes::ShapeRef.new(shape: ResourceTypeOptInPreference, location_name: "ResourceTypeOptInPreference"))
+    DescribeRegionSettingsOutput.struct_class = Types::DescribeRegionSettingsOutput
 
     DescribeRestoreJobInput.add_member(:restore_job_id, Shapes::ShapeRef.new(shape: RestoreJobId, required: true, location: "uri", location_name: "restoreJobId"))
     DescribeRestoreJobInput.struct_class = Types::DescribeRestoreJobInput
@@ -750,6 +762,9 @@ module Aws::Backup
     ResourceNotFoundException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ResourceTypeOptInPreference.key = Shapes::ShapeRef.new(shape: ResourceType)
+    ResourceTypeOptInPreference.value = Shapes::ShapeRef.new(shape: IsEnabled)
+
     ResourceTypes.member = Shapes::ShapeRef.new(shape: ResourceType)
 
     RestoreJobsList.member = Shapes::ShapeRef.new(shape: RestoreJobsListMember)
@@ -846,6 +861,9 @@ module Aws::Backup
     UpdateRecoveryPointLifecycleOutput.add_member(:lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "Lifecycle"))
     UpdateRecoveryPointLifecycleOutput.add_member(:calculated_lifecycle, Shapes::ShapeRef.new(shape: CalculatedLifecycle, location_name: "CalculatedLifecycle"))
     UpdateRecoveryPointLifecycleOutput.struct_class = Types::UpdateRecoveryPointLifecycleOutput
+
+    UpdateRegionSettingsInput.add_member(:resource_type_opt_in_preference, Shapes::ShapeRef.new(shape: ResourceTypeOptInPreference, location_name: "ResourceTypeOptInPreference"))
+    UpdateRegionSettingsInput.struct_class = Types::UpdateRegionSettingsInput
 
 
     # @api private
@@ -1036,6 +1054,15 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:describe_region_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRegionSettings"
+        o.http_method = "GET"
+        o.http_request_uri = "/account-settings"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRegionSettingsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRegionSettingsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -1491,6 +1518,17 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:update_region_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRegionSettings"
+        o.http_method = "PUT"
+        o.http_request_uri = "/account-settings"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRegionSettingsInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,7 +26,7 @@ module Aws::Macie2
     # @!attribute [rw] master_account
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/AcceptInvitationRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AcceptInvitationRequest AWS API Documentation
     #
     class AcceptInvitationRequest < Struct.new(
       :invitation_id,
@@ -32,7 +34,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/AcceptInvitationResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AcceptInvitationResponse AWS API Documentation
     #
     class AcceptInvitationResponse < Aws::EmptyStructure; end
 
@@ -45,7 +47,7 @@ module Aws::Macie2
     # @!attribute [rw] allows_public_write_access
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/AccessControlList AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AccessControlList AWS API Documentation
     #
     class AccessControlList < Struct.new(
       :allows_public_read_access,
@@ -59,7 +61,7 @@ module Aws::Macie2
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/AccessDeniedException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AccessDeniedException AWS API Documentation
     #
     class AccessDeniedException < Struct.new(
       :message)
@@ -83,7 +85,7 @@ module Aws::Macie2
     # @!attribute [rw] email
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/AccountDetail AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AccountDetail AWS API Documentation
     #
     class AccountDetail < Struct.new(
       :account_id,
@@ -106,7 +108,7 @@ module Aws::Macie2
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
     #   @return [Types::BlockPublicAccess]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/AccountLevelPermissions AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AccountLevelPermissions AWS API Documentation
     #
     class AccountLevelPermissions < Struct.new(
       :block_public_access)
@@ -124,7 +126,7 @@ module Aws::Macie2
     #   Amazon Macie for an AWS organization.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/AdminAccount AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AdminAccount AWS API Documentation
     #
     class AdminAccount < Struct.new(
       :account_id,
@@ -157,7 +159,7 @@ module Aws::Macie2
     # @!attribute [rw] last_seen
     #   @return [Time]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ApiCallDetails AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ApiCallDetails AWS API Documentation
     #
     class ApiCallDetails < Struct.new(
       :api,
@@ -166,29 +168,6 @@ module Aws::Macie2
       :last_seen)
       include Aws::Structure
     end
-
-    # Specifies one or more findings to archive.
-    #
-    # @note When making an API call, you may pass ArchiveFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_ids: ["__string"], # required
-    #       }
-    #
-    # @!attribute [rw] finding_ids
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ArchiveFindingsRequest AWS API Documentation
-    #
-    class ArchiveFindingsRequest < Struct.new(
-      :finding_ids)
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ArchiveFindingsResponse AWS API Documentation
-    #
-    class ArchiveFindingsResponse < Aws::EmptyStructure; end
 
     # Reserved for future use.
     #
@@ -209,7 +188,7 @@ module Aws::Macie2
     #   who performed an action by using temporary security credentials.
     #   @return [Types::SessionContext]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/AssumedRole AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AssumedRole AWS API Documentation
     #
     class AssumedRole < Struct.new(
       :access_key_id,
@@ -228,7 +207,7 @@ module Aws::Macie2
     # @!attribute [rw] principal_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/AwsAccount AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AwsAccount AWS API Documentation
     #
     class AwsAccount < Struct.new(
       :account_id,
@@ -241,7 +220,7 @@ module Aws::Macie2
     # @!attribute [rw] invoked_by
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/AwsService AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AwsService AWS API Documentation
     #
     class AwsService < Struct.new(
       :invoked_by)
@@ -268,7 +247,7 @@ module Aws::Macie2
     # @!attribute [rw] name
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BatchGetCustomDataIdentifierSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BatchGetCustomDataIdentifierSummary AWS API Documentation
     #
     class BatchGetCustomDataIdentifierSummary < Struct.new(
       :arn,
@@ -293,7 +272,7 @@ module Aws::Macie2
     # @!attribute [rw] ids
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BatchGetCustomDataIdentifiersRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BatchGetCustomDataIdentifiersRequest AWS API Documentation
     #
     class BatchGetCustomDataIdentifiersRequest < Struct.new(
       :ids)
@@ -308,7 +287,7 @@ module Aws::Macie2
     # @!attribute [rw] not_found_identifier_ids
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BatchGetCustomDataIdentifiersResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BatchGetCustomDataIdentifiersResponse AWS API Documentation
     #
     class BatchGetCustomDataIdentifiersResponse < Struct.new(
       :custom_data_identifiers,
@@ -338,7 +317,7 @@ module Aws::Macie2
     # @!attribute [rw] restrict_public_buckets
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BlockPublicAccess AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BlockPublicAccess AWS API Documentation
     #
     class BlockPublicAccess < Struct.new(
       :block_public_acls,
@@ -360,7 +339,7 @@ module Aws::Macie2
     # @!attribute [rw] publicly_writable
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BucketCountByEffectivePermission AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketCountByEffectivePermission AWS API Documentation
     #
     class BucketCountByEffectivePermission < Struct.new(
       :publicly_accessible,
@@ -382,7 +361,7 @@ module Aws::Macie2
     # @!attribute [rw] unencrypted
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BucketCountByEncryptionType AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketCountByEncryptionType AWS API Documentation
     #
     class BucketCountByEncryptionType < Struct.new(
       :kms_managed,
@@ -403,7 +382,7 @@ module Aws::Macie2
     # @!attribute [rw] not_shared
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BucketCountBySharedAccessType AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketCountBySharedAccessType AWS API Documentation
     #
     class BucketCountBySharedAccessType < Struct.new(
       :external,
@@ -449,7 +428,7 @@ module Aws::Macie2
     # @!attribute [rw] prefix
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BucketCriteriaAdditionalProperties AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketCriteriaAdditionalProperties AWS API Documentation
     #
     class BucketCriteriaAdditionalProperties < Struct.new(
       :eq,
@@ -487,7 +466,7 @@ module Aws::Macie2
     #   policy for an S3 bucket.
     #   @return [Types::BucketPolicy]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BucketLevelPermissions AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketLevelPermissions AWS API Documentation
     #
     class BucketLevelPermissions < Struct.new(
       :access_control_list,
@@ -552,7 +531,7 @@ module Aws::Macie2
     # @!attribute [rw] versioning
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BucketMetadata AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketMetadata AWS API Documentation
     #
     class BucketMetadata < Struct.new(
       :account_id,
@@ -587,7 +566,7 @@ module Aws::Macie2
     #   S3 bucket.
     #   @return [Types::BucketLevelPermissions]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BucketPermissionConfiguration AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketPermissionConfiguration AWS API Documentation
     #
     class BucketPermissionConfiguration < Struct.new(
       :account_level_permissions,
@@ -604,7 +583,7 @@ module Aws::Macie2
     # @!attribute [rw] allows_public_write_access
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BucketPolicy AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketPolicy AWS API Documentation
     #
     class BucketPolicy < Struct.new(
       :allows_public_read_access,
@@ -623,7 +602,7 @@ module Aws::Macie2
     #   bucket, or the bucket that contains an object.
     #   @return [Types::BucketPermissionConfiguration]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BucketPublicAccess AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketPublicAccess AWS API Documentation
     #
     class BucketPublicAccess < Struct.new(
       :effective_permission,
@@ -648,7 +627,7 @@ module Aws::Macie2
     # @!attribute [rw] order_by
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/BucketSortCriteria AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketSortCriteria AWS API Documentation
     #
     class BucketSortCriteria < Struct.new(
       :attribute_name,
@@ -674,7 +653,7 @@ module Aws::Macie2
     #   found.
     #   @return [Types::ClassificationResult]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ClassificationDetails AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ClassificationDetails AWS API Documentation
     #
     class ClassificationDetails < Struct.new(
       :detailed_results_location,
@@ -704,7 +683,7 @@ module Aws::Macie2
     #   the encryption settings to use when storing results in that bucket.
     #   @return [Types::S3Destination]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ClassificationExportConfiguration AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ClassificationExportConfiguration AWS API Documentation
     #
     class ClassificationExportConfiguration < Struct.new(
       :s3_destination)
@@ -736,7 +715,7 @@ module Aws::Macie2
     #   Provides information about the status of a sensitive data finding.
     #   @return [Types::ClassificationResultStatus]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ClassificationResult AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ClassificationResult AWS API Documentation
     #
     class ClassificationResult < Struct.new(
       :custom_data_identifiers,
@@ -755,7 +734,7 @@ module Aws::Macie2
     # @!attribute [rw] reason
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ClassificationResultStatus AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ClassificationResultStatus AWS API Documentation
     #
     class ClassificationResultStatus < Struct.new(
       :code,
@@ -769,7 +748,7 @@ module Aws::Macie2
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ConflictException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ConflictException AWS API Documentation
     #
     class ConflictException < Struct.new(
       :message)
@@ -898,7 +877,7 @@ module Aws::Macie2
     #   findings filter, or member account.
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateClassificationJobRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateClassificationJobRequest AWS API Documentation
     #
     class CreateClassificationJobRequest < Struct.new(
       :client_token,
@@ -923,7 +902,7 @@ module Aws::Macie2
     # @!attribute [rw] job_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateClassificationJobResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateClassificationJobResponse AWS API Documentation
     #
     class CreateClassificationJobResponse < Struct.new(
       :job_arn,
@@ -979,7 +958,7 @@ module Aws::Macie2
     #   findings filter, or member account.
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateCustomDataIdentifierRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateCustomDataIdentifierRequest AWS API Documentation
     #
     class CreateCustomDataIdentifierRequest < Struct.new(
       :client_token,
@@ -999,7 +978,7 @@ module Aws::Macie2
     # @!attribute [rw] custom_data_identifier_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateCustomDataIdentifierResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateCustomDataIdentifierResponse AWS API Documentation
     #
     class CreateCustomDataIdentifierResponse < Struct.new(
       :custom_data_identifier_id)
@@ -1064,7 +1043,7 @@ module Aws::Macie2
     #   findings filter, or member account.
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateFindingsFilterRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateFindingsFilterRequest AWS API Documentation
     #
     class CreateFindingsFilterRequest < Struct.new(
       :action,
@@ -1086,7 +1065,7 @@ module Aws::Macie2
     # @!attribute [rw] id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateFindingsFilterResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateFindingsFilterResponse AWS API Documentation
     #
     class CreateFindingsFilterResponse < Struct.new(
       :arn,
@@ -1114,7 +1093,7 @@ module Aws::Macie2
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateInvitationsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateInvitationsRequest AWS API Documentation
     #
     class CreateInvitationsRequest < Struct.new(
       :account_ids,
@@ -1129,7 +1108,7 @@ module Aws::Macie2
     # @!attribute [rw] unprocessed_accounts
     #   @return [Array<Types::UnprocessedAccount>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateInvitationsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateInvitationsResponse AWS API Documentation
     #
     class CreateInvitationsResponse < Struct.new(
       :unprocessed_accounts)
@@ -1162,7 +1141,7 @@ module Aws::Macie2
     #   findings filter, or member account.
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateMemberRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateMemberRequest AWS API Documentation
     #
     class CreateMemberRequest < Struct.new(
       :account,
@@ -1176,7 +1155,7 @@ module Aws::Macie2
     # @!attribute [rw] arn
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateMemberResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateMemberResponse AWS API Documentation
     #
     class CreateMemberResponse < Struct.new(
       :arn)
@@ -1196,14 +1175,14 @@ module Aws::Macie2
     # @!attribute [rw] finding_types
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateSampleFindingsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateSampleFindingsRequest AWS API Documentation
     #
     class CreateSampleFindingsRequest < Struct.new(
       :finding_types)
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CreateSampleFindingsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateSampleFindingsResponse AWS API Documentation
     #
     class CreateSampleFindingsResponse < Aws::EmptyStructure; end
 
@@ -1240,7 +1219,7 @@ module Aws::Macie2
     # @!attribute [rw] neq
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CriterionAdditionalProperties AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CriterionAdditionalProperties AWS API Documentation
     #
     class CriterionAdditionalProperties < Struct.new(
       :eq,
@@ -1269,7 +1248,7 @@ module Aws::Macie2
     # @!attribute [rw] name
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CustomDataIdentifierSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CustomDataIdentifierSummary AWS API Documentation
     #
     class CustomDataIdentifierSummary < Struct.new(
       :arn,
@@ -1291,7 +1270,7 @@ module Aws::Macie2
     # @!attribute [rw] total_count
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CustomDataIdentifiers AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CustomDataIdentifiers AWS API Documentation
     #
     class CustomDataIdentifiers < Struct.new(
       :detections,
@@ -1312,7 +1291,7 @@ module Aws::Macie2
     # @!attribute [rw] name
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/CustomDetection AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CustomDetection AWS API Documentation
     #
     class CustomDetection < Struct.new(
       :arn,
@@ -1323,7 +1302,7 @@ module Aws::Macie2
 
     # @api private
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DailySchedule AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DailySchedule AWS API Documentation
     #
     class DailySchedule < Aws::EmptyStructure; end
 
@@ -1340,7 +1319,7 @@ module Aws::Macie2
     # @!attribute [rw] account_ids
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeclineInvitationsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeclineInvitationsRequest AWS API Documentation
     #
     class DeclineInvitationsRequest < Struct.new(
       :account_ids)
@@ -1354,7 +1333,7 @@ module Aws::Macie2
     # @!attribute [rw] unprocessed_accounts
     #   @return [Array<Types::UnprocessedAccount>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeclineInvitationsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeclineInvitationsResponse AWS API Documentation
     #
     class DeclineInvitationsResponse < Struct.new(
       :unprocessed_accounts)
@@ -1370,7 +1349,7 @@ module Aws::Macie2
     # @!attribute [rw] type
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DefaultDetection AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DefaultDetection AWS API Documentation
     #
     class DefaultDetection < Struct.new(
       :count,
@@ -1388,14 +1367,14 @@ module Aws::Macie2
     # @!attribute [rw] id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeleteCustomDataIdentifierRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteCustomDataIdentifierRequest AWS API Documentation
     #
     class DeleteCustomDataIdentifierRequest < Struct.new(
       :id)
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeleteCustomDataIdentifierResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteCustomDataIdentifierResponse AWS API Documentation
     #
     class DeleteCustomDataIdentifierResponse < Aws::EmptyStructure; end
 
@@ -1409,14 +1388,14 @@ module Aws::Macie2
     # @!attribute [rw] id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeleteFindingsFilterRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteFindingsFilterRequest AWS API Documentation
     #
     class DeleteFindingsFilterRequest < Struct.new(
       :id)
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeleteFindingsFilterResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteFindingsFilterResponse AWS API Documentation
     #
     class DeleteFindingsFilterResponse < Aws::EmptyStructure; end
 
@@ -1433,7 +1412,7 @@ module Aws::Macie2
     # @!attribute [rw] account_ids
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeleteInvitationsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteInvitationsRequest AWS API Documentation
     #
     class DeleteInvitationsRequest < Struct.new(
       :account_ids)
@@ -1446,7 +1425,7 @@ module Aws::Macie2
     # @!attribute [rw] unprocessed_accounts
     #   @return [Array<Types::UnprocessedAccount>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeleteInvitationsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteInvitationsResponse AWS API Documentation
     #
     class DeleteInvitationsResponse < Struct.new(
       :unprocessed_accounts)
@@ -1463,14 +1442,14 @@ module Aws::Macie2
     # @!attribute [rw] id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeleteMemberRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteMemberRequest AWS API Documentation
     #
     class DeleteMemberRequest < Struct.new(
       :id)
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DeleteMemberResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteMemberResponse AWS API Documentation
     #
     class DeleteMemberResponse < Aws::EmptyStructure; end
 
@@ -1516,7 +1495,7 @@ module Aws::Macie2
     #   information about S3 buckets.
     #   @return [Types::BucketSortCriteria]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DescribeBucketsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeBucketsRequest AWS API Documentation
     #
     class DescribeBucketsRequest < Struct.new(
       :criteria,
@@ -1536,7 +1515,7 @@ module Aws::Macie2
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DescribeBucketsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeBucketsResponse AWS API Documentation
     #
     class DescribeBucketsResponse < Struct.new(
       :buckets,
@@ -1554,7 +1533,7 @@ module Aws::Macie2
     # @!attribute [rw] job_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DescribeClassificationJobRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeClassificationJobRequest AWS API Documentation
     #
     class DescribeClassificationJobRequest < Struct.new(
       :job_id)
@@ -1623,7 +1602,7 @@ module Aws::Macie2
     #   findings filter, or member account.
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DescribeClassificationJobResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeClassificationJobResponse AWS API Documentation
     #
     class DescribeClassificationJobResponse < Struct.new(
       :client_token,
@@ -1647,7 +1626,7 @@ module Aws::Macie2
 
     # @api private
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DescribeOrganizationConfigurationRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeOrganizationConfigurationRequest AWS API Documentation
     #
     class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure; end
 
@@ -1660,7 +1639,7 @@ module Aws::Macie2
     # @!attribute [rw] max_account_limit_reached
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DescribeOrganizationConfigurationResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeOrganizationConfigurationResponse AWS API Documentation
     #
     class DescribeOrganizationConfigurationResponse < Struct.new(
       :auto_enable,
@@ -1670,11 +1649,11 @@ module Aws::Macie2
 
     # @api private
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DisableMacieRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisableMacieRequest AWS API Documentation
     #
     class DisableMacieRequest < Aws::EmptyStructure; end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DisableMacieResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisableMacieResponse AWS API Documentation
     #
     class DisableMacieResponse < Aws::EmptyStructure; end
 
@@ -1688,24 +1667,24 @@ module Aws::Macie2
     # @!attribute [rw] admin_account_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DisableOrganizationAdminAccountRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisableOrganizationAdminAccountRequest AWS API Documentation
     #
     class DisableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id)
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DisableOrganizationAdminAccountResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisableOrganizationAdminAccountResponse AWS API Documentation
     #
     class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
     # @api private
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DisassociateFromMasterAccountRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisassociateFromMasterAccountRequest AWS API Documentation
     #
     class DisassociateFromMasterAccountRequest < Aws::EmptyStructure; end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DisassociateFromMasterAccountResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisassociateFromMasterAccountResponse AWS API Documentation
     #
     class DisassociateFromMasterAccountResponse < Aws::EmptyStructure; end
 
@@ -1719,21 +1698,21 @@ module Aws::Macie2
     # @!attribute [rw] id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DisassociateMemberRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisassociateMemberRequest AWS API Documentation
     #
     class DisassociateMemberRequest < Struct.new(
       :id)
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DisassociateMemberResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisassociateMemberResponse AWS API Documentation
     #
     class DisassociateMemberResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] domain_name
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/DomainDetails AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DomainDetails AWS API Documentation
     #
     class DomainDetails < Struct.new(
       :domain_name)
@@ -1743,7 +1722,7 @@ module Aws::Macie2
     # The request succeeded and there isn't any content to include in the
     # body of the response (No Content).
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/Empty AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Empty AWS API Documentation
     #
     class Empty < Aws::EmptyStructure; end
 
@@ -1774,7 +1753,7 @@ module Aws::Macie2
     #   The status of an Amazon Macie account. Valid values are:
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/EnableMacieRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/EnableMacieRequest AWS API Documentation
     #
     class EnableMacieRequest < Struct.new(
       :client_token,
@@ -1783,7 +1762,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/EnableMacieResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/EnableMacieResponse AWS API Documentation
     #
     class EnableMacieResponse < Aws::EmptyStructure; end
 
@@ -1807,7 +1786,7 @@ module Aws::Macie2
     #   not need to pass this option.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/EnableOrganizationAdminAccountRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/EnableOrganizationAdminAccountRequest AWS API Documentation
     #
     class EnableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
@@ -1815,7 +1794,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/EnableOrganizationAdminAccountResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/EnableOrganizationAdminAccountResponse AWS API Documentation
     #
     class EnableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
@@ -1838,7 +1817,7 @@ module Aws::Macie2
     #   who performed an action by using temporary security credentials.
     #   @return [Types::SessionContext]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/FederatedUser AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/FederatedUser AWS API Documentation
     #
     class FederatedUser < Struct.new(
       :access_key_id,
@@ -1913,7 +1892,7 @@ module Aws::Macie2
     # @!attribute [rw] updated_at
     #   @return [Time]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/Finding AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Finding AWS API Documentation
     #
     class Finding < Struct.new(
       :account_id,
@@ -1958,7 +1937,7 @@ module Aws::Macie2
     #   All date and time values are in UTC and extended ISO 8601 format.
     #   @return [Types::ApiCallDetails]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/FindingAction AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/FindingAction AWS API Documentation
     #
     class FindingAction < Struct.new(
       :action_type,
@@ -1978,7 +1957,7 @@ module Aws::Macie2
     # @!attribute [rw] user_identity
     #   @return [Types::UserIdentity]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/FindingActor AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/FindingActor AWS API Documentation
     #
     class FindingActor < Struct.new(
       :domain_details,
@@ -2011,7 +1990,7 @@ module Aws::Macie2
     #   to use to filter the results of a query for findings.
     #   @return [Hash<String,Types::CriterionAdditionalProperties>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/FindingCriteria AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/FindingCriteria AWS API Documentation
     #
     class FindingCriteria < Struct.new(
       :criterion)
@@ -2036,7 +2015,7 @@ module Aws::Macie2
     # @!attribute [rw] order_by
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/FindingStatisticsSortCriteria AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/FindingStatisticsSortCriteria AWS API Documentation
     #
     class FindingStatisticsSortCriteria < Struct.new(
       :attribute_name,
@@ -2061,7 +2040,7 @@ module Aws::Macie2
     #   findings filter, or member account.
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/FindingsFilterListItem AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/FindingsFilterListItem AWS API Documentation
     #
     class FindingsFilterListItem < Struct.new(
       :arn,
@@ -2084,7 +2063,7 @@ module Aws::Macie2
     # @!attribute [rw] account_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetBucketStatisticsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetBucketStatisticsRequest AWS API Documentation
     #
     class GetBucketStatisticsRequest < Struct.new(
       :account_id)
@@ -2129,7 +2108,7 @@ module Aws::Macie2
     # @!attribute [rw] size_in_bytes_compressed
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetBucketStatisticsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetBucketStatisticsResponse AWS API Documentation
     #
     class GetBucketStatisticsResponse < Struct.new(
       :bucket_count,
@@ -2146,7 +2125,7 @@ module Aws::Macie2
 
     # @api private
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetClassificationExportConfigurationRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetClassificationExportConfigurationRequest AWS API Documentation
     #
     class GetClassificationExportConfigurationRequest < Aws::EmptyStructure; end
 
@@ -2160,7 +2139,7 @@ module Aws::Macie2
     #   bucket.
     #   @return [Types::ClassificationExportConfiguration]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetClassificationExportConfigurationResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetClassificationExportConfigurationResponse AWS API Documentation
     #
     class GetClassificationExportConfigurationResponse < Struct.new(
       :configuration)
@@ -2177,7 +2156,7 @@ module Aws::Macie2
     # @!attribute [rw] id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetCustomDataIdentifierRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetCustomDataIdentifierRequest AWS API Documentation
     #
     class GetCustomDataIdentifierRequest < Struct.new(
       :id)
@@ -2223,7 +2202,7 @@ module Aws::Macie2
     #   findings filter, or member account.
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetCustomDataIdentifierResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetCustomDataIdentifierResponse AWS API Documentation
     #
     class GetCustomDataIdentifierResponse < Struct.new(
       :arn,
@@ -2283,7 +2262,7 @@ module Aws::Macie2
     #   information about findings.
     #   @return [Types::FindingStatisticsSortCriteria]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetFindingStatisticsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingStatisticsRequest AWS API Documentation
     #
     class GetFindingStatisticsRequest < Struct.new(
       :finding_criteria,
@@ -2299,7 +2278,7 @@ module Aws::Macie2
     # @!attribute [rw] counts_by_group
     #   @return [Array<Types::GroupCount>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetFindingStatisticsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingStatisticsResponse AWS API Documentation
     #
     class GetFindingStatisticsResponse < Struct.new(
       :counts_by_group)
@@ -2316,7 +2295,7 @@ module Aws::Macie2
     # @!attribute [rw] id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetFindingsFilterRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingsFilterRequest AWS API Documentation
     #
     class GetFindingsFilterRequest < Struct.new(
       :id)
@@ -2356,7 +2335,7 @@ module Aws::Macie2
     #   findings filter, or member account.
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetFindingsFilterResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingsFilterResponse AWS API Documentation
     #
     class GetFindingsFilterResponse < Struct.new(
       :action,
@@ -2391,7 +2370,7 @@ module Aws::Macie2
     #   information about findings.
     #   @return [Types::SortCriteria]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetFindingsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingsRequest AWS API Documentation
     #
     class GetFindingsRequest < Struct.new(
       :finding_ids,
@@ -2405,7 +2384,7 @@ module Aws::Macie2
     # @!attribute [rw] findings
     #   @return [Array<Types::Finding>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetFindingsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingsResponse AWS API Documentation
     #
     class GetFindingsResponse < Struct.new(
       :findings)
@@ -2414,7 +2393,7 @@ module Aws::Macie2
 
     # @api private
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetInvitationsCountRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetInvitationsCountRequest AWS API Documentation
     #
     class GetInvitationsCountRequest < Aws::EmptyStructure; end
 
@@ -2425,7 +2404,7 @@ module Aws::Macie2
     # @!attribute [rw] invitations_count
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetInvitationsCountResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetInvitationsCountResponse AWS API Documentation
     #
     class GetInvitationsCountResponse < Struct.new(
       :invitations_count)
@@ -2434,7 +2413,7 @@ module Aws::Macie2
 
     # @api private
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetMacieSessionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMacieSessionRequest AWS API Documentation
     #
     class GetMacieSessionRequest < Aws::EmptyStructure; end
 
@@ -2460,7 +2439,7 @@ module Aws::Macie2
     # @!attribute [rw] updated_at
     #   @return [Time]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetMacieSessionResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMacieSessionResponse AWS API Documentation
     #
     class GetMacieSessionResponse < Struct.new(
       :created_at,
@@ -2473,7 +2452,7 @@ module Aws::Macie2
 
     # @api private
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetMasterAccountRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMasterAccountRequest AWS API Documentation
     #
     class GetMasterAccountRequest < Aws::EmptyStructure; end
 
@@ -2487,7 +2466,7 @@ module Aws::Macie2
     #   that was received by an account.
     #   @return [Types::Invitation]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetMasterAccountResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMasterAccountResponse AWS API Documentation
     #
     class GetMasterAccountResponse < Struct.new(
       :master)
@@ -2504,7 +2483,7 @@ module Aws::Macie2
     # @!attribute [rw] id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetMemberRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMemberRequest AWS API Documentation
     #
     class GetMemberRequest < Struct.new(
       :id)
@@ -2544,7 +2523,7 @@ module Aws::Macie2
     # @!attribute [rw] updated_at
     #   @return [Time]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetMemberResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMemberResponse AWS API Documentation
     #
     class GetMemberResponse < Struct.new(
       :account_id,
@@ -2594,7 +2573,7 @@ module Aws::Macie2
     #   quotas and usage data.
     #   @return [Types::UsageStatisticsSortBy]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetUsageStatisticsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageStatisticsRequest AWS API Documentation
     #
     class GetUsageStatisticsRequest < Struct.new(
       :filter_by,
@@ -2613,7 +2592,7 @@ module Aws::Macie2
     # @!attribute [rw] records
     #   @return [Array<Types::UsageRecord>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetUsageStatisticsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageStatisticsResponse AWS API Documentation
     #
     class GetUsageStatisticsResponse < Struct.new(
       :next_token,
@@ -2623,7 +2602,7 @@ module Aws::Macie2
 
     # @api private
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetUsageTotalsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageTotalsRequest AWS API Documentation
     #
     class GetUsageTotalsRequest < Aws::EmptyStructure; end
 
@@ -2633,7 +2612,7 @@ module Aws::Macie2
     # @!attribute [rw] usage_totals
     #   @return [Array<Types::UsageTotal>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GetUsageTotalsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageTotalsResponse AWS API Documentation
     #
     class GetUsageTotalsResponse < Struct.new(
       :usage_totals)
@@ -2649,7 +2628,7 @@ module Aws::Macie2
     # @!attribute [rw] group_key
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/GroupCount AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GroupCount AWS API Documentation
     #
     class GroupCount < Struct.new(
       :count,
@@ -2671,7 +2650,7 @@ module Aws::Macie2
     # @!attribute [rw] user_name
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/IamUser AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/IamUser AWS API Documentation
     #
     class IamUser < Struct.new(
       :account_id,
@@ -2687,7 +2666,7 @@ module Aws::Macie2
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/InternalServerException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/InternalServerException AWS API Documentation
     #
     class InternalServerException < Struct.new(
       :message)
@@ -2712,7 +2691,7 @@ module Aws::Macie2
     #   values are:
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/Invitation AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Invitation AWS API Documentation
     #
     class Invitation < Struct.new(
       :account_id,
@@ -2741,7 +2720,7 @@ module Aws::Macie2
     #   Reserved for future use.
     #   @return [Types::IpOwner]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/IpAddressDetails AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/IpAddressDetails AWS API Documentation
     #
     class IpAddressDetails < Struct.new(
       :ip_address_v4,
@@ -2757,7 +2736,7 @@ module Aws::Macie2
     # @!attribute [rw] name
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/IpCity AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/IpCity AWS API Documentation
     #
     class IpCity < Struct.new(
       :name)
@@ -2772,7 +2751,7 @@ module Aws::Macie2
     # @!attribute [rw] name
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/IpCountry AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/IpCountry AWS API Documentation
     #
     class IpCountry < Struct.new(
       :code,
@@ -2788,7 +2767,7 @@ module Aws::Macie2
     # @!attribute [rw] lon
     #   @return [Float]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/IpGeoLocation AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/IpGeoLocation AWS API Documentation
     #
     class IpGeoLocation < Struct.new(
       :lat,
@@ -2810,7 +2789,7 @@ module Aws::Macie2
     # @!attribute [rw] org
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/IpOwner AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/IpOwner AWS API Documentation
     #
     class IpOwner < Struct.new(
       :asn,
@@ -2847,7 +2826,7 @@ module Aws::Macie2
     # @!attribute [rw] weekly_schedule
     #   @return [Types::WeeklySchedule]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/JobScheduleFrequency AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/JobScheduleFrequency AWS API Documentation
     #
     class JobScheduleFrequency < Struct.new(
       :daily_schedule,
@@ -2891,7 +2870,7 @@ module Aws::Macie2
     #   included or excluded from a classification job.
     #   @return [Types::TagScopeTerm]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/JobScopeTerm AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/JobScopeTerm AWS API Documentation
     #
     class JobScopeTerm < Struct.new(
       :simple_scope_term,
@@ -2930,7 +2909,7 @@ module Aws::Macie2
     # @!attribute [rw] and
     #   @return [Array<Types::JobScopeTerm>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/JobScopingBlock AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/JobScopingBlock AWS API Documentation
     #
     class JobScopingBlock < Struct.new(
       :and)
@@ -2960,7 +2939,7 @@ module Aws::Macie2
     # @!attribute [rw] name
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/JobSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/JobSummary AWS API Documentation
     #
     class JobSummary < Struct.new(
       :bucket_definitions,
@@ -2982,7 +2961,7 @@ module Aws::Macie2
     # @!attribute [rw] value
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/KeyValuePair AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/KeyValuePair AWS API Documentation
     #
     class KeyValuePair < Struct.new(
       :key,
@@ -3037,7 +3016,7 @@ module Aws::Macie2
     #   information about classification jobs.
     #   @return [Types::ListJobsSortCriteria]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListClassificationJobsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListClassificationJobsRequest AWS API Documentation
     #
     class ListClassificationJobsRequest < Struct.new(
       :filter_criteria,
@@ -3056,7 +3035,7 @@ module Aws::Macie2
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListClassificationJobsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListClassificationJobsResponse AWS API Documentation
     #
     class ListClassificationJobsResponse < Struct.new(
       :items,
@@ -3081,7 +3060,7 @@ module Aws::Macie2
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListCustomDataIdentifiersRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListCustomDataIdentifiersRequest AWS API Documentation
     #
     class ListCustomDataIdentifiersRequest < Struct.new(
       :max_results,
@@ -3098,7 +3077,7 @@ module Aws::Macie2
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListCustomDataIdentifiersResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListCustomDataIdentifiersResponse AWS API Documentation
     #
     class ListCustomDataIdentifiersResponse < Struct.new(
       :items,
@@ -3120,7 +3099,7 @@ module Aws::Macie2
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListFindingsFiltersRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListFindingsFiltersRequest AWS API Documentation
     #
     class ListFindingsFiltersRequest < Struct.new(
       :max_results,
@@ -3136,7 +3115,7 @@ module Aws::Macie2
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListFindingsFiltersResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListFindingsFiltersResponse AWS API Documentation
     #
     class ListFindingsFiltersResponse < Struct.new(
       :findings_filter_list_items,
@@ -3187,7 +3166,7 @@ module Aws::Macie2
     #   information about findings.
     #   @return [Types::SortCriteria]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListFindingsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListFindingsRequest AWS API Documentation
     #
     class ListFindingsRequest < Struct.new(
       :finding_criteria,
@@ -3206,7 +3185,7 @@ module Aws::Macie2
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListFindingsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListFindingsResponse AWS API Documentation
     #
     class ListFindingsResponse < Struct.new(
       :finding_ids,
@@ -3228,7 +3207,7 @@ module Aws::Macie2
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListInvitationsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListInvitationsRequest AWS API Documentation
     #
     class ListInvitationsRequest < Struct.new(
       :max_results,
@@ -3245,7 +3224,7 @@ module Aws::Macie2
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListInvitationsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListInvitationsResponse AWS API Documentation
     #
     class ListInvitationsResponse < Struct.new(
       :invitations,
@@ -3282,7 +3261,7 @@ module Aws::Macie2
     # @!attribute [rw] includes
     #   @return [Array<Types::ListJobsFilterTerm>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListJobsFilterCriteria AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListJobsFilterCriteria AWS API Documentation
     #
     class ListJobsFilterCriteria < Struct.new(
       :excludes,
@@ -3314,7 +3293,7 @@ module Aws::Macie2
     # @!attribute [rw] values
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListJobsFilterTerm AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListJobsFilterTerm AWS API Documentation
     #
     class ListJobsFilterTerm < Struct.new(
       :comparator,
@@ -3341,7 +3320,7 @@ module Aws::Macie2
     # @!attribute [rw] order_by
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListJobsSortCriteria AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListJobsSortCriteria AWS API Documentation
     #
     class ListJobsSortCriteria < Struct.new(
       :attribute_name,
@@ -3367,7 +3346,7 @@ module Aws::Macie2
     # @!attribute [rw] only_associated
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListMembersRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListMembersRequest AWS API Documentation
     #
     class ListMembersRequest < Struct.new(
       :max_results,
@@ -3385,7 +3364,7 @@ module Aws::Macie2
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListMembersResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListMembersResponse AWS API Documentation
     #
     class ListMembersResponse < Struct.new(
       :members,
@@ -3407,7 +3386,7 @@ module Aws::Macie2
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListOrganizationAdminAccountsRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListOrganizationAdminAccountsRequest AWS API Documentation
     #
     class ListOrganizationAdminAccountsRequest < Struct.new(
       :max_results,
@@ -3424,7 +3403,7 @@ module Aws::Macie2
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListOrganizationAdminAccountsResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListOrganizationAdminAccountsResponse AWS API Documentation
     #
     class ListOrganizationAdminAccountsResponse < Struct.new(
       :admin_accounts,
@@ -3442,7 +3421,7 @@ module Aws::Macie2
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListTagsForResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListTagsForResourceRequest AWS API Documentation
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
@@ -3459,7 +3438,7 @@ module Aws::Macie2
     #   findings filter, or member account.
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ListTagsForResourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
@@ -3499,7 +3478,7 @@ module Aws::Macie2
     # @!attribute [rw] updated_at
     #   @return [Time]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/Member AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Member AWS API Documentation
     #
     class Member < Struct.new(
       :account_id,
@@ -3526,7 +3505,7 @@ module Aws::Macie2
     # @!attribute [rw] day_of_month
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/MonthlySchedule AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/MonthlySchedule AWS API Documentation
     #
     class MonthlySchedule < Struct.new(
       :day_of_month)
@@ -3545,7 +3524,7 @@ module Aws::Macie2
     # @!attribute [rw] unencrypted
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ObjectCountByEncryptionType AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ObjectCountByEncryptionType AWS API Documentation
     #
     class ObjectCountByEncryptionType < Struct.new(
       :customer_managed,
@@ -3567,7 +3546,7 @@ module Aws::Macie2
     #   produced a policy finding for a resource.
     #   @return [Types::FindingActor]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/PolicyDetails AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/PolicyDetails AWS API Documentation
     #
     class PolicyDetails < Struct.new(
       :action,
@@ -3599,7 +3578,7 @@ module Aws::Macie2
     #   bucket.
     #   @return [Types::ClassificationExportConfiguration]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/PutClassificationExportConfigurationRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/PutClassificationExportConfigurationRequest AWS API Documentation
     #
     class PutClassificationExportConfigurationRequest < Struct.new(
       :configuration)
@@ -3616,7 +3595,7 @@ module Aws::Macie2
     #   bucket.
     #   @return [Types::ClassificationExportConfiguration]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/PutClassificationExportConfigurationResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/PutClassificationExportConfigurationResponse AWS API Documentation
     #
     class PutClassificationExportConfigurationResponse < Struct.new(
       :configuration)
@@ -3636,7 +3615,7 @@ module Aws::Macie2
     # @!attribute [rw] replication_accounts
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ReplicationDetails AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ReplicationDetails AWS API Documentation
     #
     class ReplicationDetails < Struct.new(
       :replicated,
@@ -3651,7 +3630,7 @@ module Aws::Macie2
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ResourceNotFoundException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
       :message)
@@ -3668,7 +3647,7 @@ module Aws::Macie2
     #   Provides information about an S3 object that a finding applies to.
     #   @return [Types::S3Object]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ResourcesAffected AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ResourcesAffected AWS API Documentation
     #
     class ResourcesAffected < Struct.new(
       :s3_bucket,
@@ -3705,7 +3684,7 @@ module Aws::Macie2
     #   Reserved for future use.
     #   @return [Array<Types::KeyValuePair>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/S3Bucket AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/S3Bucket AWS API Documentation
     #
     class S3Bucket < Struct.new(
       :arn,
@@ -3735,7 +3714,7 @@ module Aws::Macie2
     # @!attribute [rw] buckets
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/S3BucketDefinitionForJob AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/S3BucketDefinitionForJob AWS API Documentation
     #
     class S3BucketDefinitionForJob < Struct.new(
       :account_id,
@@ -3751,7 +3730,7 @@ module Aws::Macie2
     # @!attribute [rw] id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/S3BucketOwner AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/S3BucketOwner AWS API Documentation
     #
     class S3BucketOwner < Struct.new(
       :display_name,
@@ -3780,7 +3759,7 @@ module Aws::Macie2
     # @!attribute [rw] kms_key_arn
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/S3Destination AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/S3Destination AWS API Documentation
     #
     class S3Destination < Struct.new(
       :bucket_name,
@@ -3856,7 +3835,7 @@ module Aws::Macie2
     # @!attribute [rw] scoping
     #   @return [Types::Scoping]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/S3JobDefinition AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/S3JobDefinition AWS API Documentation
     #
     class S3JobDefinition < Struct.new(
       :bucket_definitions,
@@ -3906,7 +3885,7 @@ module Aws::Macie2
     # @!attribute [rw] version_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/S3Object AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/S3Object AWS API Documentation
     #
     class S3Object < Struct.new(
       :bucket_arn,
@@ -3982,7 +3961,7 @@ module Aws::Macie2
     #   Reserved for future use.
     #   @return [Types::JobScopingBlock]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/Scoping AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Scoping AWS API Documentation
     #
     class Scoping < Struct.new(
       :excludes,
@@ -4003,7 +3982,7 @@ module Aws::Macie2
     # @!attribute [rw] total_count
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/SensitiveDataItem AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SensitiveDataItem AWS API Documentation
     #
     class SensitiveDataItem < Struct.new(
       :category,
@@ -4023,7 +4002,7 @@ module Aws::Macie2
     # @!attribute [rw] kms_master_key_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ServerSideEncryption AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ServerSideEncryption AWS API Documentation
     #
     class ServerSideEncryption < Struct.new(
       :encryption_type,
@@ -4042,7 +4021,7 @@ module Aws::Macie2
     # @!attribute [rw] value
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ServiceLimit AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ServiceLimit AWS API Documentation
     #
     class ServiceLimit < Struct.new(
       :is_service_limited,
@@ -4057,7 +4036,7 @@ module Aws::Macie2
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ServiceQuotaExceededException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ServiceQuotaExceededException AWS API Documentation
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
@@ -4077,7 +4056,7 @@ module Aws::Macie2
     #   credentials that were issued to an entity.
     #   @return [Types::SessionIssuer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/SessionContext AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SessionContext AWS API Documentation
     #
     class SessionContext < Struct.new(
       :attributes,
@@ -4094,7 +4073,7 @@ module Aws::Macie2
     # @!attribute [rw] mfa_authenticated
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/SessionContextAttributes AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SessionContextAttributes AWS API Documentation
     #
     class SessionContextAttributes < Struct.new(
       :creation_date,
@@ -4120,7 +4099,7 @@ module Aws::Macie2
     # @!attribute [rw] user_name
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/SessionIssuer AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SessionIssuer AWS API Documentation
     #
     class SessionIssuer < Struct.new(
       :account_id,
@@ -4142,7 +4121,7 @@ module Aws::Macie2
     # @!attribute [rw] score
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/Severity AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Severity AWS API Documentation
     #
     class Severity < Struct.new(
       :description,
@@ -4174,7 +4153,7 @@ module Aws::Macie2
     # @!attribute [rw] values
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/SimpleScopeTerm AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SimpleScopeTerm AWS API Documentation
     #
     class SimpleScopeTerm < Struct.new(
       :comparator,
@@ -4200,7 +4179,7 @@ module Aws::Macie2
     # @!attribute [rw] order_by
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/SortCriteria AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SortCriteria AWS API Documentation
     #
     class SortCriteria < Struct.new(
       :attribute_name,
@@ -4216,7 +4195,7 @@ module Aws::Macie2
     # @!attribute [rw] number_of_runs
     #   @return [Float]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/Statistics AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Statistics AWS API Documentation
     #
     class Statistics < Struct.new(
       :approximate_number_of_objects_to_process,
@@ -4247,7 +4226,7 @@ module Aws::Macie2
     #   findings filter, or member account.
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/TagResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/TagResourceRequest AWS API Documentation
     #
     class TagResourceRequest < Struct.new(
       :resource_arn,
@@ -4257,7 +4236,7 @@ module Aws::Macie2
 
     # The request succeeded. The specified tags were added to the resource.
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/TagResourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
@@ -4294,7 +4273,7 @@ module Aws::Macie2
     #   are:
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/TagScopeTerm AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/TagScopeTerm AWS API Documentation
     #
     class TagScopeTerm < Struct.new(
       :comparator,
@@ -4321,7 +4300,7 @@ module Aws::Macie2
     # @!attribute [rw] value
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/TagValuePair AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/TagValuePair AWS API Documentation
     #
     class TagValuePair < Struct.new(
       :key,
@@ -4357,7 +4336,7 @@ module Aws::Macie2
     # @!attribute [rw] sample_text
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/TestCustomDataIdentifierRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/TestCustomDataIdentifierRequest AWS API Documentation
     #
     class TestCustomDataIdentifierRequest < Struct.new(
       :ignore_words,
@@ -4373,7 +4352,7 @@ module Aws::Macie2
     # @!attribute [rw] match_count
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/TestCustomDataIdentifierResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/TestCustomDataIdentifierResponse AWS API Documentation
     #
     class TestCustomDataIdentifierResponse < Struct.new(
       :match_count)
@@ -4386,35 +4365,12 @@ module Aws::Macie2
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ThrottlingException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
       :message)
       include Aws::Structure
     end
-
-    # Specifies one or more findings to reactivate (unarchive).
-    #
-    # @note When making an API call, you may pass UnarchiveFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_ids: ["__string"], # required
-    #       }
-    #
-    # @!attribute [rw] finding_ids
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UnarchiveFindingsRequest AWS API Documentation
-    #
-    class UnarchiveFindingsRequest < Struct.new(
-      :finding_ids)
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UnarchiveFindingsResponse AWS API Documentation
-    #
-    class UnarchiveFindingsResponse < Aws::EmptyStructure; end
 
     # Provides information about an account-related request that hasn't
     # been processed.
@@ -4429,7 +4385,7 @@ module Aws::Macie2
     # @!attribute [rw] error_message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UnprocessedAccount AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UnprocessedAccount AWS API Documentation
     #
     class UnprocessedAccount < Struct.new(
       :account_id,
@@ -4452,7 +4408,7 @@ module Aws::Macie2
     # @!attribute [rw] tag_keys
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UntagResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UntagResourceRequest AWS API Documentation
     #
     class UntagResourceRequest < Struct.new(
       :resource_arn,
@@ -4463,7 +4419,7 @@ module Aws::Macie2
     # The request succeeded. The specified tags were removed from the
     # resource.
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UntagResourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
@@ -4484,7 +4440,7 @@ module Aws::Macie2
     #   The current status of a classification job. Valid values are:
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateClassificationJobRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateClassificationJobRequest AWS API Documentation
     #
     class UpdateClassificationJobRequest < Struct.new(
       :job_id,
@@ -4492,7 +4448,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateClassificationJobResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateClassificationJobResponse AWS API Documentation
     #
     class UpdateClassificationJobResponse < Aws::EmptyStructure; end
 
@@ -4543,7 +4499,7 @@ module Aws::Macie2
     # @!attribute [rw] position
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateFindingsFilterRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateFindingsFilterRequest AWS API Documentation
     #
     class UpdateFindingsFilterRequest < Struct.new(
       :action,
@@ -4564,7 +4520,7 @@ module Aws::Macie2
     # @!attribute [rw] id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateFindingsFilterResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateFindingsFilterResponse AWS API Documentation
     #
     class UpdateFindingsFilterResponse < Struct.new(
       :arn,
@@ -4593,7 +4549,7 @@ module Aws::Macie2
     #   The status of an Amazon Macie account. Valid values are:
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateMacieSessionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateMacieSessionRequest AWS API Documentation
     #
     class UpdateMacieSessionRequest < Struct.new(
       :finding_publishing_frequency,
@@ -4601,7 +4557,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateMacieSessionResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateMacieSessionResponse AWS API Documentation
     #
     class UpdateMacieSessionResponse < Aws::EmptyStructure; end
 
@@ -4622,7 +4578,7 @@ module Aws::Macie2
     #   The status of an Amazon Macie account. Valid values are:
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateMemberSessionRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateMemberSessionRequest AWS API Documentation
     #
     class UpdateMemberSessionRequest < Struct.new(
       :id,
@@ -4630,7 +4586,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateMemberSessionResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateMemberSessionResponse AWS API Documentation
     #
     class UpdateMemberSessionResponse < Aws::EmptyStructure; end
 
@@ -4647,14 +4603,14 @@ module Aws::Macie2
     # @!attribute [rw] auto_enable
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateOrganizationConfigurationRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateOrganizationConfigurationRequest AWS API Documentation
     #
     class UpdateOrganizationConfigurationRequest < Struct.new(
       :auto_enable)
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UpdateOrganizationConfigurationResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateOrganizationConfigurationResponse AWS API Documentation
     #
     class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure; end
 
@@ -4678,7 +4634,7 @@ module Aws::Macie2
     #   The name of a usage metric for an account. Possible values are:
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UsageByAccount AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UsageByAccount AWS API Documentation
     #
     class UsageByAccount < Struct.new(
       :currency,
@@ -4699,7 +4655,7 @@ module Aws::Macie2
     # @!attribute [rw] usage
     #   @return [Array<Types::UsageByAccount>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UsageRecord AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UsageRecord AWS API Documentation
     #
     class UsageRecord < Struct.new(
       :account_id,
@@ -4727,7 +4683,7 @@ module Aws::Macie2
     # @!attribute [rw] values
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UsageStatisticsFilter AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UsageStatisticsFilter AWS API Documentation
     #
     class UsageStatisticsFilter < Struct.new(
       :key,
@@ -4754,7 +4710,7 @@ module Aws::Macie2
     # @!attribute [rw] order_by
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UsageStatisticsSortBy AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UsageStatisticsSortBy AWS API Documentation
     #
     class UsageStatisticsSortBy < Struct.new(
       :key,
@@ -4777,7 +4733,7 @@ module Aws::Macie2
     #   The name of a usage metric for an account. Possible values are:
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UsageTotal AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UsageTotal AWS API Documentation
     #
     class UsageTotal < Struct.new(
       :currency,
@@ -4814,7 +4770,7 @@ module Aws::Macie2
     #   Reserved for future use.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UserIdentity AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UserIdentity AWS API Documentation
     #
     class UserIdentity < Struct.new(
       :assumed_role,
@@ -4838,7 +4794,7 @@ module Aws::Macie2
     # @!attribute [rw] principal_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/UserIdentityRoot AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UserIdentityRoot AWS API Documentation
     #
     class UserIdentityRoot < Struct.new(
       :account_id,
@@ -4853,7 +4809,7 @@ module Aws::Macie2
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/ValidationException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
       :message)
@@ -4870,7 +4826,7 @@ module Aws::Macie2
     # @!attribute [rw] day_of_week
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01T00:00:00Z/WeeklySchedule AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/WeeklySchedule AWS API Documentation
     #
     class WeeklySchedule < Struct.new(
       :day_of_week)

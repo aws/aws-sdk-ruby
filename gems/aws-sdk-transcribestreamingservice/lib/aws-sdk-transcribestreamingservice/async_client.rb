@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,6 +25,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
@@ -52,6 +55,7 @@ module Aws::TranscribeStreamingService
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
@@ -116,7 +120,7 @@ module Aws::TranscribeStreamingService
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Proc] :event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -252,6 +256,19 @@ module Aws::TranscribeStreamingService
     #   Amazon Transcribe will generate one for you and return it in the
     #   response.
     #
+    # @option params [String] :vocabulary_filter_name
+    #   The name of the vocabulary filter you've created that is unique to
+    #   your AWS accountf. Provide the name in this field to successfully use
+    #   it in a stream.
+    #
+    # @option params [String] :vocabulary_filter_method
+    #   The manner in which you use your vocabulary filter to filter words in
+    #   your transcript. `Remove` removes filtered words from your
+    #   transcription results. `Mask` masks those words with a `***` in your
+    #   transcription results. `Tag` keeps the filtered words in your
+    #   transcription results and tags them. The tag appears as
+    #   `VocabularyFilterMatch` equal to `True`
+    #
     # @return [Types::StartStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartStreamTranscriptionResponse#request_id #request_id} => String
@@ -261,6 +278,8 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_name #vocabulary_name} => String
     #   * {Types::StartStreamTranscriptionResponse#session_id #session_id} => String
     #   * {Types::StartStreamTranscriptionResponse#transcript_result_stream #transcript_result_stream} => Types::TranscriptResultStream
+    #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_name #vocabulary_filter_name} => String
+    #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_method #vocabulary_filter_method} => String
     #
     # @example Bi-directional EventStream Operation Example
     #
@@ -363,6 +382,8 @@ module Aws::TranscribeStreamingService
     #     vocabulary_name: "VocabularyName",
     #     session_id: "SessionId",
     #     input_event_stream_hander: EventStreams::AudioStream.new,
+    #     vocabulary_filter_name: "VocabularyFilterName",
+    #     vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #   })
     #   # => Seahorse::Client::AsyncResponse
     #   async_resp.wait
@@ -394,6 +415,7 @@ module Aws::TranscribeStreamingService
     #   event.transcript.results[0].alternatives[0].items[0].end_time #=> Float
     #   event.transcript.results[0].alternatives[0].items[0].type #=> String, one of "pronunciation", "punctuation"
     #   event.transcript.results[0].alternatives[0].items[0].content #=> String
+    #   event.transcript.results[0].alternatives[0].items[0].vocabulary_filter_match #=> Boolean
     #
     #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -409,6 +431,9 @@ module Aws::TranscribeStreamingService
     #
     #   For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
+    #
+    #   resp.vocabulary_filter_name #=> String
+    #   resp.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscription AWS API Documentation
     #
@@ -453,7 +478,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.16.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

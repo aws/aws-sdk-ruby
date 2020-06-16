@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -482,10 +484,10 @@ module Aws::SageMaker
     #   segmentation, and text classification task types, Amazon SageMaker
     #   Ground Truth provides the following Lambda functions:
     #
-    #   * *Bounding box* - Finds the most similar boxes from different
-    #     workers based on the Jaccard index of the boxes.
+    #   **Bounding box** - Finds the most similar boxes from different
+    #   workers based on the Jaccard index of the boxes.
     #
-    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox`
     #
     #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBox`
     #
@@ -509,11 +511,11 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-BoundingBox`
     #
-    #   * *Image classification* - Uses a variant of the Expectation
-    #     Maximization approach to estimate the true class of an image based
-    #     on annotations from individual workers.
+    #   **Image classification** - Uses a variant of the Expectation
+    #   Maximization approach to estimate the true class of an image based
+    #   on annotations from individual workers.
     #
-    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClass`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClass`
     #
     #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClass`
     #
@@ -537,11 +539,11 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClass`
     #
-    #   * *Multi-label image classification* - Uses a variant of the
-    #     Expectation Maximization approach to estimate the true classes of
-    #     an image based on annotations from individual workers.
+    #   **Multi-label image classification** - Uses a variant of the
+    #   Expectation Maximization approach to estimate the true classes of an
+    #   image based on annotations from individual workers.
     #
-    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClassMultiLabel`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClassMultiLabel`
     #
     #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClassMultiLabel`
     #
@@ -565,11 +567,11 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClassMultiLabel`
     #
-    #   * *Semantic segmentation* - Treats each pixel in an image as a
-    #     multi-class classification and treats pixel annotations from
-    #     workers as "votes" for the correct label.
+    #   **Semantic segmentation** - Treats each pixel in an image as a
+    #   multi-class classification and treats pixel annotations from workers
+    #   as "votes" for the correct label.
     #
-    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-SemanticSegmentation`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-SemanticSegmentation`
     #
     #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-SemanticSegmentation`
     #
@@ -593,11 +595,11 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-SemanticSegmentation`
     #
-    #   * *Text classification* - Uses a variant of the Expectation
-    #     Maximization approach to estimate the true class of text based on
-    #     annotations from individual workers.
+    #   **Text classification** - Uses a variant of the Expectation
+    #   Maximization approach to estimate the true class of text based on
+    #   annotations from individual workers.
     #
-    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass`
     #
     #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass`
     #
@@ -621,11 +623,11 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClass`
     #
-    #   * *Multi-label text classification* - Uses a variant of the
-    #     Expectation Maximization approach to estimate the true classes of
-    #     text based on annotations from individual workers.
+    #   **Multi-label text classification** - Uses a variant of the
+    #   Expectation Maximization approach to estimate the true classes of
+    #   text based on annotations from individual workers.
     #
-    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClassMultiLabel`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClassMultiLabel`
     #
     #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClassMultiLabel`
     #
@@ -649,10 +651,10 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClassMultiLabel`
     #
-    #   * *Named entity recognition* - Groups similar selections and
-    #     calculates aggregate boundaries, resolving to most-assigned label.
+    #   **Named entity recognition** - Groups similar selections and
+    #   calculates aggregate boundaries, resolving to most-assigned label.
     #
-    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition`
     #
     #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition`
     #
@@ -676,12 +678,12 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition`
     #
-    #   * *Bounding box verification* - Uses a variant of the Expectation
-    #     Maximization approach to estimate the true class of verification
-    #     judgement for bounding box labels based on annotations from
-    #     individual workers.
+    #   **Bounding box verification** - Uses a variant of the Expectation
+    #   Maximization approach to estimate the true class of verification
+    #   judgement for bounding box labels based on annotations from
+    #   individual workers.
     #
-    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBox`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBox`
     #
     #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationBoundingBox`
     #
@@ -705,12 +707,12 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox`
     #
-    #   * *Semantic segmentation verification* - Uses a variant of the
-    #     Expectation Maximization approach to estimate the true class of
-    #     verification judgment for semantic segmentation labels based on
-    #     annotations from individual workers.
+    #   **Semantic segmentation verification** - Uses a variant of the
+    #   Expectation Maximization approach to estimate the true class of
+    #   verification judgment for semantic segmentation labels based on
+    #   annotations from individual workers.
     #
-    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentation`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentation`
     #
     #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationSemanticSegmentation`
     #
@@ -734,11 +736,11 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationSemanticSegmentation`
     #
-    #   * *Bounding box adjustment* - Finds the most similar boxes from
-    #     different workers based on the Jaccard index of the adjusted
-    #     annotations.
+    #   **Bounding box adjustment** - Finds the most similar boxes from
+    #   different workers based on the Jaccard index of the adjusted
+    #   annotations.
     #
-    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentBoundingBox`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentBoundingBox`
     #
     #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentBoundingBox`
     #
@@ -762,11 +764,11 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentBoundingBox`
     #
-    #   * *Semantic segmentation adjustment* - Treats each pixel in an image
-    #     as a multi-class classification and treats pixel adjusted
-    #     annotations from workers as "votes" for the correct label.
+    #   **Semantic segmentation adjustment** - Treats each pixel in an image
+    #   as a multi-class classification and treats pixel adjusted
+    #   annotations from workers as "votes" for the correct label.
     #
-    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentation`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentation`
     #
     #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentSemanticSegmentation`
     #
@@ -2288,7 +2290,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] app_arn
-    #   The app's Amazon Resource Name (ARN).
+    #   The App's Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppResponse AWS API Documentation
@@ -2607,7 +2609,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] auth_mode
-    #   The mode of authentication that member use to access the domain.
+    #   The mode of authentication that members use to access the domain.
     #   @return [String]
     #
     # @!attribute [rw] default_user_settings
@@ -2615,17 +2617,18 @@ module Aws::SageMaker
     #   @return [Types::UserSettings]
     #
     # @!attribute [rw] subnet_ids
-    #   Security setting to limit to a set of subnets.
+    #   The VPC subnets to use for communication with the EFS volume.
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_id
-    #   Security setting to limit the domain's communication to a Amazon
-    #   Virtual Private Cloud.
+    #   The ID of the Amazon Virtual Private Cloud (VPC) to use for
+    #   communication with the EFS volume.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Each tag consists of a key and an optional value. Tag keys must be
-    #   unique per resource.
+    #   Tags to associated with the Domain. Each tag consists of a key and
+    #   an optional value. Tag keys must be unique per resource. Tags are
+    #   searchable using the Search API.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] home_efs_file_system_kms_key_id
@@ -3342,6 +3345,8 @@ module Aws::SageMaker
     #   @return [Types::HyperParameterTrainingJobDefinition]
     #
     # @!attribute [rw] training_job_definitions
+    #   A list of the HyperParameterTrainingJobDefinition objects launched
+    #   for this tuning job.
     #   @return [Array<Types::HyperParameterTrainingJobDefinition>]
     #
     # @!attribute [rw] warm_start_config
@@ -3441,6 +3446,7 @@ module Aws::SageMaker
     #           workteam_arn: "WorkteamArn", # required
     #           ui_config: { # required
     #             ui_template_s3_uri: "S3Uri",
+    #             human_task_ui_arn: "HumanTaskUiArn",
     #           },
     #           pre_human_task_lambda_arn: "LambdaFunctionArn", # required
     #           task_keywords: ["TaskKeyword"],
@@ -7067,6 +7073,8 @@ module Aws::SageMaker
     #   @return [Types::HyperParameterTrainingJobDefinition]
     #
     # @!attribute [rw] training_job_definitions
+    #   A list of the HyperParameterTrainingJobDefinition objects launched
+    #   for this tuning job.
     #   @return [Array<Types::HyperParameterTrainingJobDefinition>]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_status
@@ -8621,7 +8629,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] domain_id
-    #   The domain ID.
+    #   The ID of the domain that contains the profile.
     #   @return [String]
     #
     # @!attribute [rw] user_profile_arn
@@ -8633,7 +8641,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] home_efs_file_system_uid
-    #   The home Amazon Elastic File System (EFS) Uid.
+    #   The ID of the user's profile in the Amazon Elastic File System
+    #   (EFS) volume.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -9915,6 +9924,7 @@ module Aws::SageMaker
     #         workteam_arn: "WorkteamArn", # required
     #         ui_config: { # required
     #           ui_template_s3_uri: "S3Uri",
+    #           human_task_ui_arn: "HumanTaskUiArn",
     #         },
     #         pre_human_task_lambda_arn: "LambdaFunctionArn", # required
     #         task_keywords: ["TaskKeyword"],
@@ -9955,291 +9965,311 @@ module Aws::SageMaker
     #   segmentation, and text classification task types, Amazon SageMaker
     #   Ground Truth provides the following Lambda functions:
     #
-    #   **US East (Northern Virginia) (us-east-1):**
+    #   **Bounding box** - Finds the most similar boxes from different
+    #   workers based on the Jaccard index of the boxes.
     #
     #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-BoundingBox`
     #
-    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClass`
-    #
-    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-SemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass`
-    #
-    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-NamedEntityRecognition`
-    #
-    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationBoundingBox`
-    #
-    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationSemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentBoundingBox`
-    #
-    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentSemanticSegmentation`
-    #
-    #   **US East (Ohio) (us-east-2):**
-    #
     #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-BoundingBox`
-    #
-    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClass`
-    #
-    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-SemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass`
-    #
-    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-NamedEntityRecognition`
-    #
-    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationBoundingBox`
-    #
-    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationSemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentBoundingBox`
-    #
-    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentSemanticSegmentation`
-    #
-    #   **US West (Oregon) (us-west-2):**
     #
     #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-BoundingBox`
     #
-    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClass`
-    #
-    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-SemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClass`
-    #
-    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-NamedEntityRecognition`
-    #
-    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationBoundingBox`
-    #
-    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationSemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentBoundingBox`
-    #
-    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentSemanticSegmentation`
-    #
-    #   **Canada (Central) (ca-central-1):**
-    #
     #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-BoundingBox`
-    #
-    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClass`
-    #
-    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-SemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClass`
-    #
-    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-NamedEntityRecognition`
-    #
-    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationBoundingBox`
-    #
-    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationSemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentBoundingBox`
-    #
-    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentSemanticSegmentation`
-    #
-    #   **EU (Ireland) (eu-west-1):**
     #
     #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-BoundingBox`
     #
-    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClass`
-    #
-    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass`
-    #
-    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition`
-    #
-    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationBoundingBox`
-    #
-    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationSemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentBoundingBox`
-    #
-    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentSemanticSegmentation`
-    #
-    #   **EU (London) (eu-west-2):**
-    #
     #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-BoundingBox`
-    #
-    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClass`
-    #
-    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-SemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClass`
-    #
-    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition`
-    #
-    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationBoundingBox`
-    #
-    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationSemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentBoundingBox`
-    #
-    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentSemanticSegmentation`
-    #
-    #   **EU Frankfurt (eu-central-1):**
     #
     #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-BoundingBox`
     #
-    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClass`
-    #
-    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-SemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClass`
-    #
-    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition`
-    #
-    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationBoundingBox`
-    #
-    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationSemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentBoundingBox`
-    #
-    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentSemanticSegmentation`
-    #
-    #   **Asia Pacific (Tokyo) (ap-northeast-1):**
-    #
     #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-BoundingBox`
-    #
-    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClass`
-    #
-    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-SemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass`
-    #
-    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-NamedEntityRecognition`
-    #
-    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationBoundingBox`
-    #
-    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationSemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentBoundingBox`
-    #
-    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentSemanticSegmentation`
-    #
-    #   **Asia Pacific (Seoul) (ap-northeast-2):**
     #
     #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-BoundingBox`
     #
-    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClass`
-    #
-    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClass`
-    #
-    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-NamedEntityRecognition`
-    #
-    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationBoundingBox`
-    #
-    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationSemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentBoundingBox`
-    #
-    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentSemanticSegmentation`
-    #
-    #   **Asia Pacific (Mumbai) (ap-south-1):**
-    #
     #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-BoundingBox`
-    #
-    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClass`
-    #
-    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClass`
-    #
-    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition`
-    #
-    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationBoundingBox`
-    #
-    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationSemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentBoundingBox`
-    #
-    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentSemanticSegmentation`
-    #
-    #   **Asia Pacific (Singapore) (ap-southeast-1):**
     #
     #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-BoundingBox`
     #
-    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClass`
-    #
-    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClass`
-    #
-    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClassMultiLabel`
-    #
-    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-NamedEntityRecognition`
-    #
-    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationBoundingBox`
-    #
-    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationSemanticSegmentation`
-    #
-    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentBoundingBox`
-    #
-    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentSemanticSegmentation`
-    #
-    #   **Asia Pacific (Sydney) (ap-southeast-2):**
-    #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-BoundingBox`
+    #
+    #   **Image classification** - Uses a variant of the Expectation
+    #   Maximization approach to estimate the true class of an image based
+    #   on annotations from individual workers.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClass`
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClass`
     #
+    #   **Multi-label image classification** - Uses a variant of the
+    #   Expectation Maximization approach to estimate the true classes of an
+    #   image based on annotations from individual workers.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClassMultiLabel`
+    #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClassMultiLabel`
+    #
+    #   **Semantic segmentation** - Treats each pixel in an image as a
+    #   multi-class classification and treats pixel annotations from workers
+    #   as "votes" for the correct label.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-SemanticSegmentation`
     #
+    #   **Text classification** - Uses a variant of the Expectation
+    #   Maximization approach to estimate the true class of text based on
+    #   annotations from individual workers.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClass`
+    #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClass`
+    #
+    #   **Multi-label text classification** - Uses a variant of the
+    #   Expectation Maximization approach to estimate the true classes of
+    #   text based on annotations from individual workers.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClassMultiLabel`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClassMultiLabel`
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClassMultiLabel`
     #
+    #   **Named entity recognition** - Groups similar selections and
+    #   calculates aggregate boundaries, resolving to most-assigned label.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-NamedEntityRecognition`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-NamedEntityRecognition`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-NamedEntityRecognition`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-NamedEntityRecognition`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-NamedEntityRecognition`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-NamedEntityRecognition`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-NamedEntityRecognition`
+    #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-NamedEntityRecognition`
+    #
+    #   **Bounding box verification** - Uses a variant of the Expectation
+    #   Maximization approach to estimate the true class of verification
+    #   judgement for bounding box labels based on annotations from
+    #   individual workers.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationBoundingBox`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationBoundingBox`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationBoundingBox`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationBoundingBox`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationBoundingBox`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationBoundingBox`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationBoundingBox`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationBoundingBox`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationBoundingBox`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationBoundingBox`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationBoundingBox`
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationBoundingBox`
     #
-    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationSemanticSegmentation`
+    #   **Bounding box adjustment** - Finds the most similar boxes from
+    #   different workers based on the Jaccard index of the adjusted
+    #   annotations.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentBoundingBox`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentBoundingBox`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentBoundingBox`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentBoundingBox`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentBoundingBox`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentBoundingBox`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentBoundingBox`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentBoundingBox`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentBoundingBox`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentBoundingBox`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentBoundingBox`
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentBoundingBox`
+    #
+    #   **Semantic segmentation verification** - Uses a variant of the
+    #   Expectation Maximization approach to estimate the true class of
+    #   verification judgment for semantic segmentation labels based on
+    #   annotations from individual workers.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationSemanticSegmentation`
+    #
+    #   **Semantic segmentation adjustment** - Treats each pixel in an image
+    #   as a multi-class classification and treats pixel adjusted
+    #   annotations from workers as "votes" for the correct label.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentSemanticSegmentation`
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentSemanticSegmentation`
     #   @return [String]
@@ -14562,6 +14592,10 @@ module Aws::SageMaker
     # Provides information about the location that is configured for storing
     # model artifacts.
     #
+    # Model artifacts are the output that results from training a model, and
+    # typically consist of trained parameters, a model defintion that
+    # desribes how to compute inferences, and other metadata.
+    #
     # @!attribute [rw] s3_model_artifacts
     #   The path of the S3 object that contains the model artifacts. For
     #   example, `s3://bucket-name/keynameprefix/model.tar.gz`.
@@ -16942,6 +16976,7 @@ module Aws::SageMaker
     #           input: "TaskInput", # required
     #         },
     #         role_arn: "RoleArn", # required
+    #         human_task_ui_arn: "HumanTaskUiArn",
     #       }
     #
     # @!attribute [rw] ui_template
@@ -16958,12 +16993,19 @@ module Aws::SageMaker
     #   that are used by the template.
     #   @return [String]
     #
+    # @!attribute [rw] human_task_ui_arn
+    #   The `HumanTaskUiArn` of the worker UI that you want to render. Do
+    #   not provide a `HumanTaskUiArn` if you use the `UiTemplate`
+    #   parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderUiTemplateRequest AWS API Documentation
     #
     class RenderUiTemplateRequest < Struct.new(
       :ui_template,
       :task,
-      :role_arn)
+      :role_arn,
+      :human_task_ui_arn)
       include Aws::Structure
     end
 
@@ -17218,7 +17260,7 @@ module Aws::SageMaker
     end
 
     # The instance type and the Amazon Resource Name (ARN) of the SageMaker
-    # image created on the instance. The ARN is stored as metadata in Amazon
+    # image created on the instance. The ARN is stored as metadata in
     # SageMaker Studio notebooks.
     #
     # @note When making an API call, you may pass ResourceSpec
@@ -17794,7 +17836,10 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The sharing settings.
+    # Specifies options when sharing an Amazon SageMaker Studio notebook.
+    # These settings are specified as part of `DefaultUserSettings` when the
+    # CreateDomain API is called, and as part of `UserSettings` when the
+    # CreateUserProfile API is called.
     #
     # @note When making an API call, you may pass SharingSettings
     #   data as a hash:
@@ -17806,15 +17851,20 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] notebook_output_option
-    #   The notebook output option.
+    #   Whether to include the notebook cell output when sharing the
+    #   notebook. The default is `Disabled`.
     #   @return [String]
     #
     # @!attribute [rw] s3_output_path
-    #   The Amazon S3 output path.
+    #   When `NotebookOutputOption` is `Allowed`, the Amazon S3 bucket used
+    #   to save the notebook cell output. If `S3OutputPath` isn't
+    #   specified, a default bucket is used.
     #   @return [String]
     #
     # @!attribute [rw] s3_kms_key_id
-    #   The AWS Key Management Service encryption key ID.
+    #   When `NotebookOutputOption` is `Allowed`, the AWS Key Management
+    #   Service (KMS) encryption key ID used to encrypt the notebook cell
+    #   output in the Amazon S3 bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SharingSettings AWS API Documentation
@@ -20004,22 +20054,32 @@ module Aws::SageMaker
     #
     #       {
     #         ui_template_s3_uri: "S3Uri",
+    #         human_task_ui_arn: "HumanTaskUiArn",
     #       }
     #
     # @!attribute [rw] ui_template_s3_uri
-    #   The Amazon S3 bucket location of the UI template. For more
-    #   information about the contents of a UI template, see [ Creating Your
-    #   Custom Labeling Task Template][1].
+    #   The Amazon S3 bucket location of the UI template, or worker task
+    #   template. This is the template used to render the worker UI and
+    #   tools for labeling job tasks. For more information about the
+    #   contents of a UI template, see [ Creating Your Custom Labeling Task
+    #   Template][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step2.html
     #   @return [String]
     #
+    # @!attribute [rw] human_task_ui_arn
+    #   The ARN of the worker task template used to render the worker UI and
+    #   tools for labeling job tasks. Do not use this parameter if you use
+    #   UiTemplateS3Uri.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UiConfig AWS API Documentation
     #
     class UiConfig < Struct.new(
-      :ui_template_s3_uri)
+      :ui_template_s3_uri,
+      :human_task_ui_arn)
       include Aws::Structure
     end
 
@@ -20139,7 +20199,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] domain_id
-    #   The domain ID.
+    #   The ID of the domain to be updated.
     #   @return [String]
     #
     # @!attribute [rw] default_user_settings
@@ -20155,7 +20215,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] domain_arn
-    #   The domain Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) of the domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateDomainResponse AWS API Documentation

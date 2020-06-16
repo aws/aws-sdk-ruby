@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -333,8 +335,8 @@ module Aws::AutoScaling
     #
     #   If the lifecycle hook times out, Amazon EC2 Auto Scaling performs the
     #   action that you specified in the `DefaultResult` parameter. You can
-    #   prevent the lifecycle hook from timing out by calling
-    #   RecordLifecycleActionHeartbeat.
+    #   prevent the lifecycle hook from timing out by calling the
+    #   RecordLifecycleActionHeartbeat API.
     # @option options [String] :default_result
     #   Defines the action the Auto Scaling group should take when the
     #   lifecycle hook timeout elapses or if an unexpected failure occurs.

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::EMR
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::EMR
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::EMR
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -783,6 +787,7 @@ module Aws::EMR
     #   resp.cluster.ec2_instance_attributes.additional_slave_security_groups[0] #=> String
     #   resp.cluster.instance_collection_type #=> String, one of "INSTANCE_FLEET", "INSTANCE_GROUP"
     #   resp.cluster.log_uri #=> String
+    #   resp.cluster.log_encryption_kms_key_id #=> String
     #   resp.cluster.requested_ami_version #=> String
     #   resp.cluster.running_ami_version #=> String
     #   resp.cluster.release_label #=> String
@@ -890,6 +895,7 @@ module Aws::EMR
     #   resp.job_flows[0].job_flow_id #=> String
     #   resp.job_flows[0].name #=> String
     #   resp.job_flows[0].log_uri #=> String
+    #   resp.job_flows[0].log_encryption_kms_key_id #=> String
     #   resp.job_flows[0].ami_version #=> String
     #   resp.job_flows[0].execution_status_detail.state #=> String, one of "STARTING", "BOOTSTRAPPING", "RUNNING", "WAITING", "SHUTTING_DOWN", "TERMINATED", "COMPLETED", "FAILED"
     #   resp.job_flows[0].execution_status_detail.creation_date_time #=> Time
@@ -2035,6 +2041,12 @@ module Aws::EMR
     #   The location in Amazon S3 to write the log files of the job flow. If a
     #   value is not provided, logs are not created.
     #
+    # @option params [String] :log_encryption_kms_key_id
+    #   The AWS KMS customer master key (CMK) used for encrypting log files.
+    #   If a value is not provided, the logs will remain encrypted by AES-256.
+    #   This attribute is only available with EMR version 5.30.0 and later,
+    #   excluding EMR 6.0.0.
+    #
     # @option params [String] :additional_info
     #   A JSON string for selecting additional features.
     #
@@ -2241,6 +2253,7 @@ module Aws::EMR
     #   resp = client.run_job_flow({
     #     name: "XmlStringMaxLen256", # required
     #     log_uri: "XmlString",
+    #     log_encryption_kms_key_id: "XmlString",
     #     additional_info: "XmlString",
     #     ami_version: "XmlStringMaxLen256",
     #     release_label: "XmlStringMaxLen256",
@@ -2620,7 +2633,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.30.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

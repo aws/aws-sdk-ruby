@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -132,7 +134,7 @@ module Aws::Backup
     #   @return [Time]
     #
     # @!attribute [rw] resource_type
-    #   The type of AWS resource to be backed-up; for example, an Amazon
+    #   The type of AWS resource to be backed up; for example, an Amazon
     #   Elastic Block Store (Amazon EBS) volume or an Amazon Relational
     #   Database Service (Amazon RDS) database.
     #   @return [String]
@@ -340,15 +342,14 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] start_window_minutes
-    #   An optional value that specifies a period of time in minutes after a
-    #   backup is scheduled before a job is canceled if it doesn't start
-    #   successfully.
+    #   A value in minutes after a backup is scheduled before a job will be
+    #   canceled if it doesn't start successfully. This value is optional.
     #   @return [Integer]
     #
     # @!attribute [rw] completion_window_minutes
     #   A value in minutes after a backup job is successfully started before
-    #   it must be completed or it is canceled by AWS Backup. This value is
-    #   optional.
+    #   it must be completed or it will be canceled by AWS Backup. This
+    #   value is optional.
     #   @return [Integer]
     #
     # @!attribute [rw] lifecycle
@@ -423,7 +424,7 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] rule_name
-    #   &gt;An optional display name for a backup rule.
+    #   An optional display name for a backup rule.
     #   @return [String]
     #
     # @!attribute [rw] target_backup_vault_name
@@ -438,12 +439,14 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] start_window_minutes
-    #   The amount of time in minutes before beginning a backup.
+    #   A value in minutes after a backup is scheduled before a job will be
+    #   canceled if it doesn't start successfully. This value is optional.
     #   @return [Integer]
     #
     # @!attribute [rw] completion_window_minutes
-    #   The amount of time AWS Backup attempts a backup before canceling the
-    #   job and returning an error.
+    #   A value in minutes after a backup job is successfully started before
+    #   it must be completed or it will be canceled by AWS Backup. This
+    #   value is optional.
     #   @return [Integer]
     #
     # @!attribute [rw] lifecycle
@@ -454,9 +457,9 @@ module Aws::Backup
     #
     #   Backups transitioned to cold storage must be stored in cold storage
     #   for a minimum of 90 days. Therefore, the “expire after days” setting
-    #   must be 90 days greater than the “transition to cold after days”.
-    #   The “transition to cold after days” setting cannot be changed after
-    #   a backup has been transitioned to cold.
+    #   must be 90 days greater than the “transition to cold after days”
+    #   setting. The “transition to cold after days” setting cannot be
+    #   changed after a backup has been transitioned to cold.
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] recovery_point_tags
@@ -726,7 +729,7 @@ module Aws::Backup
     # @!attribute [rw] destination_backup_vault_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies the
     #   destination backup vault for the copied backup. For example,
-    #   arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+    #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CopyAction AWS API Documentation
@@ -740,37 +743,37 @@ module Aws::Backup
     # Contains detailed information about a copy job.
     #
     # @!attribute [rw] copy_job_id
-    #   Uniquely identifies a request to AWS Backup to copy a resource.
+    #   Uniquely identifies a copy job.
     #   @return [String]
     #
     # @!attribute [rw] source_backup_vault_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a source copy
     #   vault; for example,
-    #   arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+    #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
     #   @return [String]
     #
     # @!attribute [rw] source_recovery_point_arn
     #   An ARN that uniquely identifies a source recovery point; for
     #   example,
-    #   arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+    #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #   @return [String]
     #
     # @!attribute [rw] destination_backup_vault_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a destination
     #   copy vault; for example,
-    #   arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+    #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
     #   @return [String]
     #
     # @!attribute [rw] destination_recovery_point_arn
     #   An ARN that uniquely identifies a destination recovery point; for
     #   example,
-    #   arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+    #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The type of AWS resource to be copied; for example, an Amazon
-    #   Elastic Block Store (Amazon EBS) volume or an Amazon Relational
-    #   Database Service (Amazon RDS) database.
+    #   The AWS resource to be copied; for example, an Amazon Elastic Block
+    #   Store (Amazon EBS) volume or an Amazon Relational Database Service
+    #   (Amazon RDS) database.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -781,18 +784,18 @@ module Aws::Backup
     #   @return [Time]
     #
     # @!attribute [rw] completion_date
-    #   The date and time a job to create a copy job is completed, in Unix
-    #   format and Coordinated Universal Time (UTC). The value of
-    #   CompletionDate is accurate to milliseconds. For example, the value
-    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   The date and time a copy job is completed, in Unix format and
+    #   Coordinated Universal Time (UTC). The value of CompletionDate is
+    #   accurate to milliseconds. For example, the value 1516925490.087
+    #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
     # @!attribute [rw] state
-    #   The current state of a resource recovery point.
+    #   The current state of a copy job.
     #   @return [String]
     #
     # @!attribute [rw] status_message
-    #   A detailed message explaining the status of the job that to copy a
+    #   A detailed message explaining the status of the job to copy a
     #   resource.
     #   @return [String]
     #
@@ -802,7 +805,7 @@ module Aws::Backup
     #
     # @!attribute [rw] iam_role_arn
     #   Specifies the IAM role ARN used to copy the target recovery point;
-    #   for example, arn:aws:iam::123456789012:role/S3Access.
+    #   for example, `arn:aws:iam::123456789012:role/S3Access`.
     #   @return [String]
     #
     # @!attribute [rw] created_by
@@ -920,7 +923,7 @@ module Aws::Backup
     #
     # @!attribute [rw] version_id
     #   Unique, randomly generated, Unicode, UTF-8 encoded strings that are
-    #   at most 1024 bytes long. They cannot be edited.
+    #   at most 1,024 bytes long. They cannot be edited.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupPlanOutput AWS API Documentation
@@ -1184,7 +1187,7 @@ module Aws::Backup
     # @!attribute [rw] backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
-    #   to create them and theAWS Region where they are created. They
+    #   to create them and the AWS Region where they are created. They
     #   consist of lowercase letters, numbers, and hyphens.
     #   @return [String]
     #
@@ -1359,7 +1362,7 @@ module Aws::Backup
     #   @return [Types::RecoveryPointCreator]
     #
     # @!attribute [rw] resource_type
-    #   The type of AWS resource to be backed-up; for example, an Amazon
+    #   The type of AWS resource to be backed up; for example, an Amazon
     #   Elastic Block Store (Amazon EBS) volume or an Amazon Relational
     #   Database Service (Amazon RDS) database.
     #   @return [String]
@@ -1488,7 +1491,7 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] copy_job_id
-    #   Uniquely identifies a request to AWS Backup to copy a resource.
+    #   Uniquely identifies a copy job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeCopyJobInput AWS API Documentation
@@ -1713,6 +1716,24 @@ module Aws::Backup
       :is_encrypted,
       :storage_class,
       :last_restore_time)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRegionSettingsInput AWS API Documentation
+    #
+    class DescribeRegionSettingsInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] resource_type_opt_in_preference
+    #   Returns a list of all services along with the opt-in preferences in
+    #   the region.
+    #   @return [Hash<String,Boolean>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRegionSettingsOutput AWS API Documentation
+    #
+    class DescribeRegionSettingsOutput < Struct.new(
+      :resource_type_opt_in_preference)
       include Aws::Structure
     end
 
@@ -2741,8 +2762,6 @@ module Aws::Backup
     # @!attribute [rw] by_resource_type
     #   Returns only backup jobs for the specified resources:
     #
-    #   * `DynamoDB` for Amazon DynamoDB
-    #
     #   * `EBS` for Amazon Elastic Block Store
     #
     #   * `EFS` for Amazon Elastic File System
@@ -2755,7 +2774,7 @@ module Aws::Backup
     # @!attribute [rw] by_destination_vault_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a source
     #   backup vault to copy from; for example,
-    #   arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+    #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobsInput AWS API Documentation
@@ -3573,12 +3592,14 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] start_window_minutes
-    #   The amount of time in minutes before beginning a backup.
+    #   A value in minutes after a backup is scheduled before a job will be
+    #   canceled if it doesn't start successfully. This value is optional.
     #   @return [Integer]
     #
     # @!attribute [rw] complete_window_minutes
-    #   The amount of time AWS Backup attempts a backup before canceling the
-    #   job and returning an error.
+    #   A value in minutes after a backup job is successfully started before
+    #   it must be completed or it will be canceled by AWS Backup. This
+    #   value is optional.
     #   @return [Integer]
     #
     # @!attribute [rw] lifecycle
@@ -3663,7 +3684,7 @@ module Aws::Backup
     #   The name of a logical source container where backups are stored.
     #   Backup vaults are identified by names that are unique to the account
     #   used to create them and the AWS Region where they are created. They
-    #   consist of lowercase letters, numbers, and hyphens. &gt;
+    #   consist of lowercase letters, numbers, and hyphens.
     #   @return [String]
     #
     # @!attribute [rw] destination_backup_vault_arn
@@ -3674,7 +3695,7 @@ module Aws::Backup
     #
     # @!attribute [rw] iam_role_arn
     #   Specifies the IAM role ARN used to copy the target recovery point;
-    #   for example, arn:aws:iam::123456789012:role/S3Access.
+    #   for example, `arn:aws:iam::123456789012:role/S3Access`.
     #   @return [String]
     #
     # @!attribute [rw] idempotency_token
@@ -3708,14 +3729,14 @@ module Aws::Backup
     end
 
     # @!attribute [rw] copy_job_id
-    #   Uniquely identifies a request to AWS Backup to copy a resource.
+    #   Uniquely identifies a copy job.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date and time that a backup job is started, in Unix format and
-    #   Coordinated Universal Time (UTC). The value of CreationDate is
+    #   The date and time that a copy job is started, in Unix format and
+    #   Coordinated Universal Time (UTC). The value of `CreationDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
-    #   represents Friday, January 26, 2018 12:11:30.087 AM. &gt;
+    #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartCopyJobOutput AWS API Documentation
@@ -3749,7 +3770,7 @@ module Aws::Backup
     #   resource name, required to restore a recovery point.
     #
     #   You can get configuration metadata about a resource at the time it
-    #   was backed-up by calling `GetRecoveryPointRestoreMetadata`. However,
+    #   was backed up by calling `GetRecoveryPointRestoreMetadata`. However,
     #   values in addition to those provided by
     #   `GetRecoveryPointRestoreMetadata` might be required to restore a
     #   resource. For example, you might need to provide a new resource name
@@ -4063,6 +4084,27 @@ module Aws::Backup
       :recovery_point_arn,
       :lifecycle,
       :calculated_lifecycle)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateRegionSettingsInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type_opt_in_preference: {
+    #           "ResourceType" => false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_type_opt_in_preference
+    #   Updates the list of services along with the opt-in preferences for
+    #   the region.
+    #   @return [Hash<String,Boolean>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateRegionSettingsInput AWS API Documentation
+    #
+    class UpdateRegionSettingsInput < Struct.new(
+      :resource_type_opt_in_preference)
       include Aws::Structure
     end
 

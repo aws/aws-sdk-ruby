@@ -1,6 +1,27 @@
 Unreleased Changes
 ------------------
 
+1.22.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.22.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2020-05-26)
+------------------
+
+* Feature - Add DataSetArns to QuickSight DescribeDashboard API response.
+
 1.19.0 (2020-05-07)
 ------------------
 

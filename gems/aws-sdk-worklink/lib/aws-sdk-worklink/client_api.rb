@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -80,6 +82,8 @@ module Aws::WorkLink
     ListDomainsResponse = Shapes::StructureShape.new(name: 'ListDomainsResponse')
     ListFleetsRequest = Shapes::StructureShape.new(name: 'ListFleetsRequest')
     ListFleetsResponse = Shapes::StructureShape.new(name: 'ListFleetsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListWebsiteAuthorizationProvidersRequest = Shapes::StructureShape.new(name: 'ListWebsiteAuthorizationProvidersRequest')
     ListWebsiteAuthorizationProvidersResponse = Shapes::StructureShape.new(name: 'ListWebsiteAuthorizationProvidersResponse')
     ListWebsiteCertificateAuthoritiesRequest = Shapes::StructureShape.new(name: 'ListWebsiteCertificateAuthoritiesRequest')
@@ -99,8 +103,16 @@ module Aws::WorkLink
     SignOutUserResponse = Shapes::StructureShape.new(name: 'SignOutUserResponse')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAuditStreamConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateAuditStreamConfigurationRequest')
     UpdateAuditStreamConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateAuditStreamConfigurationResponse')
     UpdateCompanyNetworkConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateCompanyNetworkConfigurationRequest')
@@ -147,6 +159,7 @@ module Aws::WorkLink
     CreateFleetRequest.add_member(:fleet_name, Shapes::ShapeRef.new(shape: FleetName, required: true, location_name: "FleetName"))
     CreateFleetRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     CreateFleetRequest.add_member(:optimize_for_end_user_location, Shapes::ShapeRef.new(shape: Boolean, location_name: "OptimizeForEndUserLocation"))
+    CreateFleetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateFleetRequest.struct_class = Types::CreateFleetRequest
 
     CreateFleetResponse.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, location_name: "FleetArn"))
@@ -213,6 +226,7 @@ module Aws::WorkLink
     DescribeFleetMetadataResponse.add_member(:optimize_for_end_user_location, Shapes::ShapeRef.new(shape: Boolean, location_name: "OptimizeForEndUserLocation"))
     DescribeFleetMetadataResponse.add_member(:company_code, Shapes::ShapeRef.new(shape: CompanyCode, location_name: "CompanyCode"))
     DescribeFleetMetadataResponse.add_member(:fleet_status, Shapes::ShapeRef.new(shape: FleetStatus, location_name: "FleetStatus"))
+    DescribeFleetMetadataResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     DescribeFleetMetadataResponse.struct_class = Types::DescribeFleetMetadataResponse
 
     DescribeIdentityProviderConfigurationRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
@@ -271,6 +285,7 @@ module Aws::WorkLink
     FleetSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     FleetSummary.add_member(:company_code, Shapes::ShapeRef.new(shape: CompanyCode, location_name: "CompanyCode"))
     FleetSummary.add_member(:fleet_status, Shapes::ShapeRef.new(shape: FleetStatus, location_name: "FleetStatus"))
+    FleetSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     FleetSummary.struct_class = Types::FleetSummary
 
     FleetSummaryList.member = Shapes::ShapeRef.new(shape: FleetSummary)
@@ -306,6 +321,12 @@ module Aws::WorkLink
     ListFleetsResponse.add_member(:fleet_summary_list, Shapes::ShapeRef.new(shape: FleetSummaryList, location_name: "FleetSummaryList"))
     ListFleetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFleetsResponse.struct_class = Types::ListFleetsResponse
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location: "uri", location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     ListWebsiteAuthorizationProvidersRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     ListWebsiteAuthorizationProvidersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -353,11 +374,28 @@ module Aws::WorkLink
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location: "uri", location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     UnauthorizedException.struct_class = Types::UnauthorizedException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location: "uri", location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateAuditStreamConfigurationRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     UpdateAuditStreamConfigurationRequest.add_member(:audit_stream_arn, Shapes::ShapeRef.new(shape: AuditStreamArn, location_name: "AuditStreamArn"))
@@ -675,6 +713,7 @@ module Aws::WorkLink
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -700,6 +739,15 @@ module Aws::WorkLink
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:list_website_authorization_providers, Seahorse::Model::Operation.new.tap do |o|
@@ -776,6 +824,24 @@ module Aws::WorkLink
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:update_audit_stream_configuration, Seahorse::Model::Operation.new.tap do |o|

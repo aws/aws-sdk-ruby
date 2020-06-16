@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -209,7 +211,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev//cors.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html
     # @option options [String] :content_md5
     #   The base64-encoded 128-bit MD5 digest of the data. This header must be
     #   used as a message integrity check to verify that the request body was

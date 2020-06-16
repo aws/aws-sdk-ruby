@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -478,6 +480,10 @@ module Aws::ElastiCache
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the cache cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheCluster AWS API Documentation
     #
     class CacheCluster < Struct.new(
@@ -506,7 +512,8 @@ module Aws::ElastiCache
       :auth_token_enabled,
       :auth_token_last_modified_date,
       :transit_encryption_enabled,
-      :at_rest_encryption_enabled)
+      :at_rest_encryption_enabled,
+      :arn)
       include Aws::Structure
     end
 
@@ -875,13 +882,18 @@ module Aws::ElastiCache
     #   Datastore
     #   @return [Boolean]
     #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the cache parameter group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroup AWS API Documentation
     #
     class CacheParameterGroup < Struct.new(
       :cache_parameter_group_name,
       :cache_parameter_group_family,
       :description,
-      :is_global)
+      :is_global,
+      :arn)
       include Aws::Structure
     end
 
@@ -1016,13 +1028,18 @@ module Aws::ElastiCache
     #   cache security group.
     #   @return [Array<Types::EC2SecurityGroup>]
     #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the cache security group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroup AWS API Documentation
     #
     class CacheSecurityGroup < Struct.new(
       :owner_id,
       :cache_security_group_name,
       :description,
-      :ec2_security_groups)
+      :ec2_security_groups,
+      :arn)
       include Aws::Structure
     end
 
@@ -1109,13 +1126,18 @@ module Aws::ElastiCache
     #   A list of subnets associated with the cache subnet group.
     #   @return [Array<Types::Subnet>]
     #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the cache subnet group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSubnetGroup AWS API Documentation
     #
     class CacheSubnetGroup < Struct.new(
       :cache_subnet_group_name,
       :cache_subnet_group_description,
       :vpc_id,
-      :subnets)
+      :subnets,
+      :arn)
       include Aws::Structure
     end
 
@@ -1985,6 +2007,7 @@ module Aws::ElastiCache
     #         global_replication_group_id: "String",
     #         primary_cluster_id: "String",
     #         automatic_failover_enabled: false,
+    #         multi_az_enabled: false,
     #         num_cache_clusters: 1,
     #         preferred_cache_cluster_a_zs: ["String"],
     #         num_node_groups: 1,
@@ -2079,8 +2102,11 @@ module Aws::ElastiCache
     #   * Redis (cluster mode enabled): T1 node types.
     #   @return [Boolean]
     #
+    # @!attribute [rw] multi_az_enabled
+    #   @return [Boolean]
+    #
     # @!attribute [rw] num_cache_clusters
-    #   The number of clusters this replication group initially has.
+    #   The number of nodes in the cluster.
     #
     #   This parameter is not used if there is more than one node group
     #   (shard). You should use `ReplicasPerNodeGroup` instead.
@@ -2464,6 +2490,7 @@ module Aws::ElastiCache
       :global_replication_group_id,
       :primary_cluster_id,
       :automatic_failover_enabled,
+      :multi_az_enabled,
       :num_cache_clusters,
       :preferred_cache_cluster_a_zs,
       :num_node_groups,
@@ -4379,6 +4406,10 @@ module Aws::ElastiCache
     #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #   @return [Boolean]
     #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the global replication group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/GlobalReplicationGroup AWS API Documentation
     #
     class GlobalReplicationGroup < Struct.new(
@@ -4393,7 +4424,8 @@ module Aws::ElastiCache
       :global_node_groups,
       :auth_token_enabled,
       :transit_encryption_enabled,
-      :at_rest_encryption_enabled)
+      :at_rest_encryption_enabled,
+      :arn)
       include Aws::Structure
     end
 
@@ -5327,6 +5359,7 @@ module Aws::ElastiCache
     #         primary_cluster_id: "String",
     #         snapshotting_cluster_id: "String",
     #         automatic_failover_enabled: false,
+    #         multi_az_enabled: false,
     #         node_group_id: "String",
     #         cache_security_group_names: ["String"],
     #         security_group_ids: ["String"],
@@ -5380,6 +5413,9 @@ module Aws::ElastiCache
     #   * Redis (cluster mode disabled): T1 node types.
     #
     #   * Redis (cluster mode enabled): T1 node types.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multi_az_enabled
     #   @return [Boolean]
     #
     # @!attribute [rw] node_group_id
@@ -5561,6 +5597,7 @@ module Aws::ElastiCache
       :primary_cluster_id,
       :snapshotting_cluster_id,
       :automatic_failover_enabled,
+      :multi_az_enabled,
       :node_group_id,
       :cache_security_group_names,
       :security_group_ids,
@@ -6447,6 +6484,9 @@ module Aws::ElastiCache
     #   * Redis (cluster mode enabled): T1 node types.
     #   @return [String]
     #
+    # @!attribute [rw] multi_az
+    #   @return [String]
+    #
     # @!attribute [rw] configuration_endpoint
     #   The configuration endpoint for this replication group. Use the
     #   configuration endpoint to connect to this replication group.
@@ -6532,6 +6572,10 @@ module Aws::ElastiCache
     #   The ID of the KMS key used to encrypt the disk in the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the replication group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
     #
     class ReplicationGroup < Struct.new(
@@ -6544,6 +6588,7 @@ module Aws::ElastiCache
       :node_groups,
       :snapshotting_cluster_id,
       :automatic_failover,
+      :multi_az,
       :configuration_endpoint,
       :snapshot_retention_limit,
       :snapshot_window,
@@ -6553,7 +6598,8 @@ module Aws::ElastiCache
       :auth_token_last_modified_date,
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
-      :kms_key_id)
+      :kms_key_id,
+      :arn)
       include Aws::Structure
     end
 
@@ -7486,6 +7532,10 @@ module Aws::ElastiCache
     #   The ID of the KMS key used to encrypt the snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the snapshot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Snapshot AWS API Documentation
     #
     class Snapshot < Struct.new(
@@ -7513,7 +7563,8 @@ module Aws::ElastiCache
       :num_node_groups,
       :automatic_failover,
       :node_snapshots,
-      :kms_key_id)
+      :kms_key_id,
+      :arn)
       include Aws::Structure
     end
 

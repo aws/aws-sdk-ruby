@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -45,6 +47,6 @@ require_relative 'aws-sdk-applicationautoscaling/customizations'
 # @service
 module Aws::ApplicationAutoScaling
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.41.1'
 
 end

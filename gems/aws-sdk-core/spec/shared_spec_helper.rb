@@ -15,8 +15,9 @@ require 'webmock/rspec'
 #
 RSpec.configure do |config|
   config.before(:each) do
-
-    stub_const('ENV', {})
+    # Clear the current ENV to avoid loading credentials.
+    # This was previously mocked with stub_const but was provided a hash.
+    ENV.clear
 
     # disable loading credentials from shared file
     allow(Dir).to receive(:home).and_raise(ArgumentError)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -16,6 +18,10 @@ module Aws::FSx
     ActiveDirectoryError = Shapes::StructureShape.new(name: 'ActiveDirectoryError')
     ActiveDirectoryErrorType = Shapes::StringShape.new(name: 'ActiveDirectoryErrorType')
     ActiveDirectoryFullyQualifiedName = Shapes::StringShape.new(name: 'ActiveDirectoryFullyQualifiedName')
+    AdministrativeAction = Shapes::StructureShape.new(name: 'AdministrativeAction')
+    AdministrativeActionFailureDetails = Shapes::StructureShape.new(name: 'AdministrativeActionFailureDetails')
+    AdministrativeActionType = Shapes::StringShape.new(name: 'AdministrativeActionType')
+    AdministrativeActions = Shapes::ListShape.new(name: 'AdministrativeActions')
     ArchivePath = Shapes::StringShape.new(name: 'ArchivePath')
     AutomaticBackupRetentionDays = Shapes::IntegerShape.new(name: 'AutomaticBackupRetentionDays')
     Backup = Shapes::StructureShape.new(name: 'Backup')
@@ -127,6 +133,7 @@ module Aws::FSx
     ProgressPercent = Shapes::IntegerShape.new(name: 'ProgressPercent')
     ReportFormat = Shapes::StringShape.new(name: 'ReportFormat')
     ReportScope = Shapes::StringShape.new(name: 'ReportScope')
+    RequestTime = Shapes::TimestampShape.new(name: 'RequestTime')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceDoesNotSupportTagging = Shapes::StructureShape.new(name: 'ResourceDoesNotSupportTagging')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
@@ -138,6 +145,7 @@ module Aws::FSx
     ServiceLimit = Shapes::StringShape.new(name: 'ServiceLimit')
     ServiceLimitExceeded = Shapes::StructureShape.new(name: 'ServiceLimitExceeded')
     StartTime = Shapes::TimestampShape.new(name: 'StartTime')
+    Status = Shapes::StringShape.new(name: 'Status')
     StorageCapacity = Shapes::IntegerShape.new(name: 'StorageCapacity')
     StorageType = Shapes::StringShape.new(name: 'StorageType')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
@@ -173,6 +181,19 @@ module Aws::FSx
     ActiveDirectoryError.add_member(:type, Shapes::ShapeRef.new(shape: ActiveDirectoryErrorType, location_name: "Type"))
     ActiveDirectoryError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ActiveDirectoryError.struct_class = Types::ActiveDirectoryError
+
+    AdministrativeAction.add_member(:administrative_action_type, Shapes::ShapeRef.new(shape: AdministrativeActionType, location_name: "AdministrativeActionType"))
+    AdministrativeAction.add_member(:progress_percent, Shapes::ShapeRef.new(shape: ProgressPercent, location_name: "ProgressPercent"))
+    AdministrativeAction.add_member(:request_time, Shapes::ShapeRef.new(shape: RequestTime, location_name: "RequestTime"))
+    AdministrativeAction.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
+    AdministrativeAction.add_member(:target_file_system_values, Shapes::ShapeRef.new(shape: FileSystem, location_name: "TargetFileSystemValues"))
+    AdministrativeAction.add_member(:failure_details, Shapes::ShapeRef.new(shape: AdministrativeActionFailureDetails, location_name: "FailureDetails"))
+    AdministrativeAction.struct_class = Types::AdministrativeAction
+
+    AdministrativeActionFailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AdministrativeActionFailureDetails.struct_class = Types::AdministrativeActionFailureDetails
+
+    AdministrativeActions.member = Shapes::ShapeRef.new(shape: AdministrativeAction)
 
     Backup.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
     Backup.add_member(:lifecycle, Shapes::ShapeRef.new(shape: BackupLifecycle, required: true, location_name: "Lifecycle"))
@@ -409,6 +430,7 @@ module Aws::FSx
     FileSystem.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     FileSystem.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: WindowsFileSystemConfiguration, location_name: "WindowsConfiguration"))
     FileSystem.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: LustreFileSystemConfiguration, location_name: "LustreConfiguration"))
+    FileSystem.add_member(:administrative_actions, Shapes::ShapeRef.new(shape: AdministrativeActions, location_name: "AdministrativeActions"))
     FileSystem.struct_class = Types::FileSystem
 
     FileSystemFailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -543,6 +565,7 @@ module Aws::FSx
 
     UpdateFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     UpdateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateFileSystemRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
     UpdateFileSystemRequest.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
     UpdateFileSystemRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
     UpdateFileSystemRequest.struct_class = Types::UpdateFileSystemRequest
@@ -553,6 +576,7 @@ module Aws::FSx
     UpdateFileSystemWindowsConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     UpdateFileSystemWindowsConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
     UpdateFileSystemWindowsConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    UpdateFileSystemWindowsConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
     UpdateFileSystemWindowsConfiguration.add_member(:self_managed_active_directory_configuration, Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryConfigurationUpdates, location_name: "SelfManagedActiveDirectoryConfiguration"))
     UpdateFileSystemWindowsConfiguration.struct_class = Types::UpdateFileSystemWindowsConfiguration
 
@@ -797,6 +821,7 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: MissingFileSystemConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
       end)
     end
 

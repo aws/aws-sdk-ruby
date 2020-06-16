@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::SageMaker
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::SageMaker
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::SageMaker
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -648,14 +652,11 @@ module Aws::SageMaker
     end
 
     # Creates a running App for the specified UserProfile. Supported Apps
-    # are `JupyterServer`, `KernelGateway`, and `TensorBoard`. This
-    # operation is automatically invoked by Amazon SageMaker Studio upon
-    # access to the associated Studio Domain, and when new kernel
-    # configurations are selected by the user. A user may have multiple Apps
-    # active simultaneously. Apps will automatically terminate and be
-    # deleted when stopped from within Studio, or when the DeleteApp API is
-    # manually called. UserProfiles are limited to 5 concurrently running
-    # Apps at a time.
+    # are JupyterServer, KernelGateway, and TensorBoard. This operation is
+    # automatically invoked by Amazon SageMaker Studio upon access to the
+    # associated Domain, and when new kernel configurations are selected by
+    # the user. A user may have multiple Apps active simultaneously.
+    # UserProfiles are limited to 5 concurrently running Apps at a time.
     #
     # @option params [required, String] :domain_id
     #   The domain ID.
@@ -991,36 +992,47 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a Domain for Amazon SageMaker Studio, which can be accessed by
-    # end-users in a web browser. A Domain has an associated directory, list
-    # of authorized users, and a variety of security, application, policies,
-    # and Amazon Virtual Private Cloud configurations. An AWS account is
-    # limited to one Domain, per region. Users within a domain can share
-    # notebook files and other artifacts with each other. When a Domain is
-    # created, an Amazon Elastic File System (EFS) is also created for use
-    # by all of the users within the Domain. Each user receives a private
-    # home directory within the EFS for notebooks, Git repositories, and
-    # data files.
+    # Creates a `Domain` used by SageMaker Studio. A domain consists of an
+    # associated directory, a list of authorized users, and a variety of
+    # security, application, policy, and Amazon Virtual Private Cloud (VPC)
+    # configurations. An AWS account is limited to one domain per region.
+    # Users within a domain can share notebook files and other artifacts
+    # with each other.
+    #
+    # When a domain is created, an Amazon Elastic File System (EFS) volume
+    # is also created for use by all of the users within the domain. Each
+    # user receives a private home directory within the EFS for notebooks,
+    # Git repositories, and data files.
+    #
+    # All traffic between the domain and the EFS volume is communicated
+    # through the specified subnet IDs. All other traffic goes over the
+    # Internet through an Amazon SageMaker system VPC. The EFS traffic uses
+    # the NFS/TCP protocol over port 2049.
+    #
+    # NFS traffic over TCP on port 2049 needs to be allowed in both inbound
+    # and outbound rules in order to launch a SageMaker Studio app
+    # successfully.
     #
     # @option params [required, String] :domain_name
     #   A name for the domain.
     #
     # @option params [required, String] :auth_mode
-    #   The mode of authentication that member use to access the domain.
+    #   The mode of authentication that members use to access the domain.
     #
     # @option params [required, Types::UserSettings] :default_user_settings
     #   The default user settings.
     #
     # @option params [required, Array<String>] :subnet_ids
-    #   Security setting to limit to a set of subnets.
+    #   The VPC subnets to use for communication with the EFS volume.
     #
     # @option params [required, String] :vpc_id
-    #   Security setting to limit the domain's communication to a Amazon
-    #   Virtual Private Cloud.
+    #   The ID of the Amazon Virtual Private Cloud (VPC) to use for
+    #   communication with the EFS volume.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Each tag consists of a key and an optional value. Tag keys must be
-    #   unique per resource.
+    #   Tags to associated with the Domain. Each tag consists of a key and an
+    #   optional value. Tag keys must be unique per resource. Tags are
+    #   searchable using the Search API.
     #
     # @option params [String] :home_efs_file_system_kms_key_id
     #   The AWS Key Management Service (KMS) encryption key ID. Encryption
@@ -1113,6 +1125,20 @@ module Aws::SageMaker
     # launches the resources (ML compute instances), and deploys the
     # model(s) on them.
     #
+    # <note markdown="1"> When you call CreateEndpoint, a load call is made to DynamoDB to
+    # verify that your endpoint configuration exists. When you read data
+    # from a DynamoDB table supporting [ `Eventually Consistent Reads` ][2],
+    # the response might not reflect the results of a recently completed
+    # write operation. The response might include some stale data. If the
+    # dependent entities are not yet in DynamoDB, this causes a validation
+    # error. If you repeat your read request after a short time, the
+    # response should return the latest data. So retry logic is recommended
+    # to handle these possible issues. We also recommend that customers call
+    # DescribeEndpointConfig before calling CreateEndpoint to minimize the
+    # potential impact of a DynamoDB eventually consistent read.
+    #
+    #  </note>
+    #
     # When Amazon SageMaker receives the request, it sets the endpoint
     # status to `Creating`. After it creates the endpoint, it sets the
     # status to `InService`. Amazon SageMaker can then process incoming
@@ -1125,13 +1151,14 @@ module Aws::SageMaker
     # activated in your IAM user account by default. If you previously
     # deactivated AWS STS for a region, you need to reactivate AWS STS for
     # that region. For more information, see [Activating and Deactivating
-    # AWS STS in an AWS Region][2] in the *AWS Identity and Access
+    # AWS STS in an AWS Region][3] in the *AWS Identity and Access
     # Management User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint. The name must be unique within an AWS Region
@@ -1207,9 +1234,24 @@ module Aws::SageMaker
     # SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
     # Hosting Services (AWS SDK for Python (Boto 3)).][1]
     #
+    # <note markdown="1"> When you call CreateEndpoint, a load call is made to DynamoDB to
+    # verify that your endpoint configuration exists. When you read data
+    # from a DynamoDB table supporting [ `Eventually Consistent Reads` ][2],
+    # the response might not reflect the results of a recently completed
+    # write operation. The response might include some stale data. If the
+    # dependent entities are not yet in DynamoDB, this causes a validation
+    # error. If you repeat your read request after a short time, the
+    # response should return the latest data. So retry logic is recommended
+    # to handle these possible issues. We also recommend that customers call
+    # DescribeEndpointConfig before calling CreateEndpoint to minimize the
+    # potential impact of a DynamoDB eventually consistent read.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
     #
     # @option params [required, String] :endpoint_config_name
     #   The name of the endpoint configuration. You specify this name in a
@@ -1575,6 +1617,8 @@ module Aws::SageMaker
     #   resource configuration, and stopping condition.
     #
     # @option params [Array<Types::HyperParameterTrainingJobDefinition>] :training_job_definitions
+    #   A list of the HyperParameterTrainingJobDefinition objects launched for
+    #   this tuning job.
     #
     # @option params [Types::HyperParameterTuningJobWarmStartConfig] :warm_start_config
     #   Specifies the configuration for starting the hyperparameter tuning job
@@ -2043,6 +2087,7 @@ module Aws::SageMaker
     #       workteam_arn: "WorkteamArn", # required
     #       ui_config: { # required
     #         ui_template_s3_uri: "S3Uri",
+    #         human_task_ui_arn: "HumanTaskUiArn",
     #       },
     #       pre_human_task_lambda_arn: "LambdaFunctionArn", # required
     #       task_keywords: ["TaskKeyword"],
@@ -2755,8 +2800,9 @@ module Aws::SageMaker
     # Creates a URL for a specified UserProfile in a Domain. When accessed
     # in a web browser, the user will be automatically signed in to Amazon
     # SageMaker Studio, and granted access to all of the Apps and files
-    # associated with that Amazon Elastic File System (EFS). This operation
-    # can only be called when AuthMode equals IAM.
+    # associated with the Domain's Amazon Elastic File System (EFS) volume.
+    # This operation can only be called when the authentication mode equals
+    # IAM.
     #
     # @option params [required, String] :domain_id
     #   The domain ID.
@@ -2798,14 +2844,19 @@ module Aws::SageMaker
     # showing the Jupyter server home page from the notebook instance. The
     # console uses this API to get the URL and show the page.
     #
-    # IAM authorization policies for this API are also enforced for every
-    # HTTP request and WebSocket frame that attempts to connect to the
-    # notebook instance.For example, you can restrict access to this API and
-    # to the URL that it returns to a list of IP addresses that you specify.
-    # Use the `NotIpAddress` condition operator and the `aws:SourceIP`
-    # condition context key to specify the list of IP addresses that you
-    # want to have access to the notebook instance. For more information,
-    # see [Limit Access to a Notebook Instance by IP Address][1].
+    # The IAM role or user used to call this API defines the permissions to
+    # access the notebook instance. Once the presigned URL is created, no
+    # additional permission is required to access this URL. IAM
+    # authorization policies for this API are also enforced for every HTTP
+    # request and WebSocket frame that attempts to connect to the notebook
+    # instance.
+    #
+    # You can restrict access to this API and to the URL that it returns to
+    # a list of IP addresses that you specify. Use the `NotIpAddress`
+    # condition operator and the `aws:SourceIP` condition context key to
+    # specify the list of IP addresses that you want to have access to the
+    # notebook instance. For more information, see [Limit Access to a
+    # Notebook Instance by IP Address][1].
     #
     # <note markdown="1"> The URL that you get from a call to CreatePresignedNotebookInstanceUrl
     # is valid only for 5 minutes. If you try to use the URL after the
@@ -3711,15 +3762,13 @@ module Aws::SageMaker
     end
 
     # Creates a user profile. A user profile represents a single user within
-    # a Domain, and is the main way to reference a "person" for the
-    # purposes of sharing, reporting and other user-oriented features. This
-    # entity is created during on-boarding to Amazon SageMaker Studio. If an
-    # administrator invites a person by email or imports them from SSO, a
-    # UserProfile is automatically created.
-    #
-    # This entity is the primary holder of settings for an individual user
-    # and, through the domain, has a reference to the user's private Amazon
-    # Elastic File System (EFS) home directory.
+    # a domain, and is the main way to reference a "person" for the
+    # purposes of sharing, reporting, and other user-oriented features. This
+    # entity is created when a user onboards to Amazon SageMaker Studio. If
+    # an administrator invites a person by email or imports them from SSO, a
+    # user profile is automatically created. A user profile is the primary
+    # holder of settings for an individual user and has a reference to the
+    # user's private Amazon Elastic File System (EFS) home directory.
     #
     # @option params [required, String] :domain_id
     #   The ID of the associated Domain.
@@ -3964,9 +4013,10 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Used to delete a domain. Use with caution. If `RetentionPolicy` is set
-    # to `Delete`, all of the members of the domain will lose access to
-    # their EFS volume, including data, notebooks, and other artifacts.
+    # Used to delete a domain. If you onboarded with IAM mode, you will need
+    # to delete your domain to onboard again using SSO. Use with caution.
+    # All of the members of the domain will lose access to their EFS volume,
+    # including data, notebooks, and other artifacts.
     #
     # @option params [required, String] :domain_id
     #   The domain ID.
@@ -4030,6 +4080,13 @@ module Aws::SageMaker
     # Deletes an endpoint configuration. The `DeleteEndpointConfig` API
     # deletes only the specified configuration. It does not delete endpoints
     # created using the configuration.
+    #
+    # You must not delete an `EndpointConfig` in use by an endpoint that is
+    # live or while the `UpdateEndpoint` or `CreateEndpoint` operations are
+    # being performed on the endpoint. If you delete the `EndpointConfig` of
+    # an endpoint that is active or being created or updated you may lose
+    # visibility into the instance type the endpoint is using. The endpoint
+    # must be deleted in order to stop incurring charges.
     #
     # @option params [required, String] :endpoint_config_name
     #   The name of the endpoint configuration that you want to delete.
@@ -4325,7 +4382,9 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Deletes a user profile.
+    # Deletes a user profile. When a user profile is deleted, the user loses
+    # access to their EFS volume, including data, notebooks, and other
+    # artifacts.
     #
     # @option params [required, String] :domain_id
     #   The domain ID.
@@ -4784,7 +4843,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # The desciption of the domain.
+    # The description of the domain.
     #
     # @option params [required, String] :domain_id
     #   The domain ID.
@@ -5401,6 +5460,7 @@ module Aws::SageMaker
     #   resp.labeling_job_algorithms_config.labeling_job_resource_config.volume_kms_key_id #=> String
     #   resp.human_task_config.workteam_arn #=> String
     #   resp.human_task_config.ui_config.ui_template_s3_uri #=> String
+    #   resp.human_task_config.ui_config.human_task_ui_arn #=> String
     #   resp.human_task_config.pre_human_task_lambda_arn #=> String
     #   resp.human_task_config.task_keywords #=> Array
     #   resp.human_task_config.task_keywords[0] #=> String
@@ -6289,7 +6349,8 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Describes the user profile.
+    # Describes a user profile. For more information, see
+    # `CreateUserProfile`.
     #
     # @option params [required, String] :domain_id
     #   The domain ID.
@@ -8841,6 +8902,10 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) that has access to the S3 objects that
     #   are used by the template.
     #
+    # @option params [String] :human_task_ui_arn
+    #   The `HumanTaskUiArn` of the worker UI that you want to render. Do not
+    #   provide a `HumanTaskUiArn` if you use the `UiTemplate` parameter.
+    #
     # @return [Types::RenderUiTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RenderUiTemplateResponse#rendered_content #rendered_content} => String
@@ -8856,6 +8921,7 @@ module Aws::SageMaker
     #       input: "TaskInput", # required
     #     },
     #     role_arn: "RoleArn", # required
+    #     human_task_ui_arn: "HumanTaskUiArn",
     #   })
     #
     # @example Response structure
@@ -9631,10 +9697,10 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Updates a domain. Changes will impact all of the people in the domain.
+    # Updates the default settings for new user profiles in the domain.
     #
     # @option params [required, String] :domain_id
-    #   The domain ID.
+    #   The ID of the domain to be updated.
     #
     # @option params [Types::UserSettings] :default_user_settings
     #   A collection of settings.
@@ -9703,6 +9769,11 @@ module Aws::SageMaker
     # live or while the `UpdateEndpoint` or `CreateEndpoint` operations are
     # being performed on the endpoint. To update an endpoint, you must
     # create a new `EndpointConfig`.
+    #
+    #  If you delete the `EndpointConfig` of an endpoint that is active or
+    # being created or updated you may lose visibility into the instance
+    # type the endpoint is using. The endpoint must be deleted in order to
+    # stop incurring charges.
     #
     #  </note>
     #
@@ -10453,7 +10524,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.60.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

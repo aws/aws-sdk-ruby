@@ -21,6 +21,9 @@ module Seahorse
       attr_accessor :http_request_uri
 
       # @return [Boolean]
+      attr_accessor :http_checksum_required
+
+      # @return [Boolean]
       attr_accessor :deprecated
 
       # @return [Boolean]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::QLDBSession
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::QLDBSession
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::QLDBSession
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -320,6 +324,29 @@ module Aws::QLDBSession
 
     # Sends a command to an Amazon QLDB ledger.
     #
+    # <note markdown="1"> Instead of interacting directly with this API, we recommend that you
+    # use the Amazon QLDB Driver or the QLDB Shell to execute data
+    # transactions on a ledger.
+    #
+    #  * If you are working with an AWS SDK, use the QLDB Driver. The driver
+    #   provides a high-level abstraction layer above this `qldbsession`
+    #   data plane and manages `SendCommand` API calls for you. For
+    #   information and a list of supported programming languages, see
+    #   [Getting started with the driver][1] in the *Amazon QLDB Developer
+    #   Guide*.
+    #
+    # * If you are working with the AWS Command Line Interface (AWS CLI),
+    #   use the QLDB Shell. The shell is a command line interface that uses
+    #   the QLDB Driver to interact with a ledger. For information, see
+    #   [Accessing Amazon QLDB using the QLDB Shell][2].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-driver.html
+    # [2]: https://docs.aws.amazon.com/qldb/latest/developerguide/data-shell.html
+    #
     # @option params [String] :session_token
     #   Specifies the session token for the current command. A session token
     #   is constant throughout the life of the session.
@@ -430,7 +457,7 @@ module Aws::QLDBSession
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qldbsession'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

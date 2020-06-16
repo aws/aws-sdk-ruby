@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -69,6 +72,7 @@ module Aws::CloudFormation
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -161,7 +165,7 @@ module Aws::CloudFormation
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -176,7 +180,7 @@ module Aws::CloudFormation
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -4128,14 +4132,17 @@ module Aws::CloudFormation
     #   Specifies logging configuration information for a type.
     #
     # @option params [String] :execution_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM execution role to use to
-    #   register the type. If your resource type calls AWS APIs in any of its
-    #   handlers, you must create an <i> <a
+    #   The Amazon Resource Name (ARN) of the IAM role for CloudFormation to
+    #   assume when invoking the resource provider. If your resource type
+    #   calls AWS APIs in any of its handlers, you must create an <i> <a
     #   href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM
     #   execution role</a> </i> that includes the necessary permissions to
     #   call those AWS APIs, and provision that execution role in your
-    #   account. CloudFormation then assumes that execution role to provide
-    #   your resource type with the appropriate credentials.
+    #   account. When CloudFormation needs to invoke the resource provider
+    #   handler, CloudFormation assumes this execution role to create a
+    #   temporary session token, which it then passes to the resource provider
+    #   handler, thereby supplying your resource provider with the appropriate
+    #   credentials.
     #
     # @option params [String] :client_request_token
     #   A unique identifier that acts as an idempotency key for this
@@ -5298,7 +5305,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

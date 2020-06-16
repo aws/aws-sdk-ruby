@@ -1,6 +1,34 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-06-12)
+------------------
+
+* Feature - Documentation updates for Amazon API Gateway
+
+1.44.0 (2020-06-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.43.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2020-06-05)
+------------------
+
+* Feature - Amazon API Gateway now allows customers of REST APIs to skip trust chain validation for backend server certificates for HTTP and VPC Link Integration. This feature enables customers to configure their REST APIs to integrate with backends that are secured with certificates vended from private certificate authorities (CA) or certificates that are self-signed.
+
+1.41.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.40.0 (2020-05-07)
 ------------------
 
@@ -270,4 +298,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-apigateway` gem.
-
