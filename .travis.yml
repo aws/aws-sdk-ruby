@@ -1,6 +1,7 @@
 language: ruby
 
 before_install:
+  - gem install openssl
   - gem install bundler -v '< 2'
 
 dist: bionic
