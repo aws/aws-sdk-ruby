@@ -2995,6 +2995,7 @@ module Aws::CognitoIdentityProvider
         o.name = "InitiateAuth"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: InitiateAuthRequest)
         o.output = Shapes::ShapeRef.new(shape: InitiateAuthResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3215,6 +3216,7 @@ module Aws::CognitoIdentityProvider
         o.name = "RespondToAuthChallenge"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: RespondToAuthChallengeRequest)
         o.output = Shapes::ShapeRef.new(shape: RespondToAuthChallengeResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
