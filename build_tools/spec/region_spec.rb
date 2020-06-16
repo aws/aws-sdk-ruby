@@ -13,9 +13,9 @@ def whitelist
       'stub_responses.rb' => 19
     },
     's3' => {
-      'location_constraint.rb' => 12,
-      'bucket.rb' => 145,
-      'presigned_post.rb' => 587,
+      'location_constraint.rb' => 14,
+      'bucket.rb' => 147,
+      'presigned_post.rb' => 589,
       'iad_regional_endpoint.rb' => 'SKIP_FILE'
     },
     's3control' => {

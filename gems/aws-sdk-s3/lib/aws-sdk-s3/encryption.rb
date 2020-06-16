@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'aws-sdk-s3/encryption/client'
 require 'aws-sdk-s3/encryption/decrypt_handler'
 require 'aws-sdk-s3/encryption/default_cipher_provider'
