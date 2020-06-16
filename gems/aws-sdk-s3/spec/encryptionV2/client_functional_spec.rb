@@ -14,6 +14,7 @@ module Aws
             skip('Skipping CSE tests due to old version of OpenSSL')
           else
             puts "id-aes128-GCM is supported.  Running tests: #{OpenSSL::Cipher.ciphers}"
+          end
         end
 
         # Captures the data (metadata and body) put to an s3 object
