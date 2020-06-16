@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Set `Authorization` header to `nil` for `InitiateAuth` and `RespondToAuthChallenge` APIs.
+
 1.38.0 (2020-06-15)
 ------------------
 
