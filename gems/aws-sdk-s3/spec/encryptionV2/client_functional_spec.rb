@@ -8,6 +8,12 @@ module Aws
 
       describe Client do
 
+        before do
+          unless OpenSSL::Cipher.ciphers.include? 'aes-256-gcm'
+            skip('Skipping CSE tests due to old version of OpenSSL')
+          end
+        end
+
         # Captures the data (metadata and body) put to an s3 object
         def stub_put(s3_client)
           data = {}

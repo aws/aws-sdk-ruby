@@ -11,6 +11,12 @@ module Aws
       # to ensure interop between SDKs
       describe 'Client Side Encryption AES/GCM Known Answer Tests' do
 
+        before do
+          unless OpenSSL::Cipher.ciphers.include? 'aes-256-gcm'
+            skip('Skipping CSE tests due to old version of OpenSSL')
+          end
+        end
+
         def self.from_h(s)
           [s].pack('H*')
         end
@@ -56,7 +62,6 @@ module Aws
           end
         end
       end
-
     end
   end
 end
