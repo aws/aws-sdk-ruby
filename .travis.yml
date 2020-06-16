@@ -1,10 +1,10 @@
 language: ruby
 
 before_install:
-  - gem install openssl
+  - gem install openssl || echo "Using pre-installed version of openssl gem"
   - gem install bundler -v '< 2'
 
-dist: xenial
+dist: bionic
 
 rvm:
   - 1.9.3
