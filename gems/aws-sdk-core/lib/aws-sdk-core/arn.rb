@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   # Create and provide access to components of Amazon Resource Names (ARN).
   #

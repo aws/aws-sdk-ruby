@@ -9,8 +9,8 @@ def whitelist
   {
     'core' => {
       'errors.rb' => 'SKIP_FILE',
-      'signature_v4.rb' => 35,
-      'stub_responses.rb' => 19
+      'signature_v4.rb' => 37,
+      'stub_responses.rb' => 21
     },
     's3' => {
       'location_constraint.rb' => 14,

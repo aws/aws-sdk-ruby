@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   # @api private
   class SharedConfig

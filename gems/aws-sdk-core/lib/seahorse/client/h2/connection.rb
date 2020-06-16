@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 if RUBY_VERSION >= '2.1'
   begin
     require 'http/2'
