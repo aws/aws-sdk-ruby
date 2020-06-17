@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   # @api private
   # a LRU cache caching endpoints data

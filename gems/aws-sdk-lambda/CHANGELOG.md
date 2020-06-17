@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2020-06-16)
+------------------
+
+* Feature - Adds support for using Amazon Elastic File System (persistent storage) with AWS Lambda. This enables customers to share data across function invocations, read large reference data files, and write function output to a persistent and shared store.
+
 1.43.1 (2020-06-11)
 ------------------
 

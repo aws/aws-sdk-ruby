@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'ini_parser'
 
 module Aws

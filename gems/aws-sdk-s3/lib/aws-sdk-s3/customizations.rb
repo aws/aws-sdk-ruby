@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # utility classes
 require 'aws-sdk-s3/bucket_region_cache'
 require 'aws-sdk-s3/encryption'

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-06-16)
+------------------
+
+* Feature - Introducing instance refresh, a feature that helps you update all instances in an Auto Scaling group in a rolling fashion (for example, to apply a new AMI or instance type). You can control the pace of the refresh by defining the percentage of the group that must remain running/healthy during the replacement process and the time for new instances to warm up between replacements.
+
 1.38.1 (2020-06-11)
 ------------------
 

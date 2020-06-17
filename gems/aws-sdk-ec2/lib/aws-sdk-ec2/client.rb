@@ -13987,7 +13987,8 @@ module Aws::EC2
     #
     #   * `availability-zone`\: The Availability Zone of the snapshot.
     #
-    #   * `owner-id`\: The ID of the AWS account that owns the snapshot.
+    #   * `owner-id`\: The ID of the AWS account that enabled fast snapshot
+    #     restore on the snapshot.
     #
     #   * `snapshot-id`\: The ID of the snapshot.
     #
@@ -16272,6 +16273,10 @@ module Aws::EC2
     #   * `ebs-info.encryption-support` - Indicates whether EBS encryption is
     #     supported. (`supported` \| `unsupported`)
     #
+    #   * `ebs-info.nvme-support` - Indicates whether non-volatile memory
+    #     express (NVMe) is supported or required. (`required` \| `supported`
+    #     \| `unsupported`)
+    #
     #   * `free-tier-eligible` - Indicates whether the instance type is
     #     eligible to use in the free tier. (`true` \| `false`)
     #
@@ -16399,6 +16404,7 @@ module Aws::EC2
     #   resp.instance_types[0].ebs_info.ebs_optimized_info.maximum_bandwidth_in_mbps #=> Integer
     #   resp.instance_types[0].ebs_info.ebs_optimized_info.maximum_throughput_in_m_bps #=> Float
     #   resp.instance_types[0].ebs_info.ebs_optimized_info.maximum_iops #=> Integer
+    #   resp.instance_types[0].ebs_info.nvme_support #=> String, one of "unsupported", "supported", "required"
     #   resp.instance_types[0].network_info.network_performance #=> String
     #   resp.instance_types[0].network_info.maximum_network_interfaces #=> Integer
     #   resp.instance_types[0].network_info.ipv_4_addresses_per_interface #=> Integer
@@ -20930,13 +20936,13 @@ module Aws::EC2
     # account IDs (if you own the snapshots), `self` for snapshots for which
     # you own or have explicit permissions, or `all` for public snapshots.
     #
-    # If you are describing a long list of snapshots, you can paginate the
-    # output to make the list more manageable. The `MaxResults` parameter
-    # sets the maximum number of results returned in a single page. If the
-    # list of results exceeds your `MaxResults` value, then that number of
-    # results is returned along with a `NextToken` value that can be passed
-    # to a subsequent `DescribeSnapshots` request to retrieve the remaining
-    # results.
+    # If you are describing a long list of snapshots, we recommend that you
+    # paginate the output to make the list more manageable. The `MaxResults`
+    # parameter sets the maximum number of results returned in a single
+    # page. If the list of results exceeds your `MaxResults` value, then
+    # that number of results is returned along with a `NextToken` value that
+    # can be passed to a subsequent `DescribeSnapshots` request to retrieve
+    # the remaining results.
     #
     # To get the state of fast snapshot restores for a snapshot, use
     # DescribeFastSnapshotRestores.
@@ -20956,12 +20962,13 @@ module Aws::EC2
     #   * `encrypted` - Indicates whether the snapshot is encrypted (`true` \|
     #     `false`)
     #
-    #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
-    #     `self` \| `all` \| `aws-marketplace` \| `microsoft`) of snapshot
-    #     owners. Not to be confused with the user-configured AWS account
-    #     alias, which is set from the IAM console.
+    #   * `owner-alias` - The owner alias, from an Amazon-maintained list
+    #     (`amazon`). This is not the user-configured AWS account alias set
+    #     using the IAM console. We recommend that you use the related
+    #     parameter instead of this filter.
     #
-    #   * `owner-id` - The ID of the AWS account that owns the snapshot.
+    #   * `owner-id` - The AWS account ID of the owner. We recommend that you
+    #     use the related parameter instead of this filter.
     #
     #   * `progress` - The progress of the snapshot, as a percentage (for
     #     example, 80%).
@@ -21007,7 +21014,8 @@ module Aws::EC2
     #   value. This value is `null` when there are no more results to return.
     #
     # @option params [Array<String>] :owner_ids
-    #   Describes the snapshots owned by these owners.
+    #   Scopes the results to snapshots with the specified owners. You can
+    #   specify a combination of AWS account IDs, `self`, and `amazon`.
     #
     # @option params [Array<String>] :restorable_by_user_ids
     #   The IDs of the AWS accounts that can create volumes from the snapshot.
@@ -23585,13 +23593,13 @@ module Aws::EC2
 
     # Describes the specified EBS volumes or all of your EBS volumes.
     #
-    # If you are describing a long list of volumes, you can paginate the
-    # output to make the list more manageable. The `MaxResults` parameter
-    # sets the maximum number of results returned in a single page. If the
-    # list of results exceeds your `MaxResults` value, then that number of
-    # results is returned along with a `NextToken` value that can be passed
-    # to a subsequent `DescribeVolumes` request to retrieve the remaining
-    # results.
+    # If you are describing a long list of volumes, we recommend that you
+    # paginate the output to make the list more manageable. The `MaxResults`
+    # parameter sets the maximum number of results returned in a single
+    # page. If the list of results exceeds your `MaxResults` value, then
+    # that number of results is returned along with a `NextToken` value that
+    # can be passed to a subsequent `DescribeVolumes` request to retrieve
+    # the remaining results.
     #
     # For more information about EBS volumes, see [Amazon EBS Volumes][1] in
     # the *Amazon Elastic Compute Cloud User Guide*.
@@ -23832,20 +23840,17 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Reports the current modification status of EBS volumes.
+    # Describes the most recent volume modification request for the
+    # specified EBS volumes.
     #
-    # Current-generation EBS volumes support modification of attributes
-    # including type, size, and (for `io1` volumes) IOPS provisioning while
-    # either attached to or detached from an instance. Following an action
-    # from the API or the console to modify a volume, the status of the
-    # modification may be `modifying`, `optimizing`, `completed`, or
-    # `failed`. If a volume has never been modified, then certain elements
-    # of the returned `VolumeModification` objects are null.
+    # If a volume has never been modified, some information in the output
+    # will be null. If a volume has been modified more than once, the output
+    # includes only the most recent modification request.
     #
     # You can also use CloudWatch Events to check the status of a
     # modification to an EBS volume. For information about CloudWatch
     # Events, see the [Amazon CloudWatch Events User Guide][1]. For more
-    # information, see [Monitoring Volume Modifications"][2] in the *Amazon
+    # information, see [Monitoring Volume Modifications][2] in the *Amazon
     # Elastic Compute Cloud User Guide*.
     #
     #
@@ -23860,15 +23865,37 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :volume_ids
-    #   The IDs of the volumes for which in-progress modifications will be
-    #   described.
+    #   The IDs of the volumes.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters. Supported filters: `volume-id` \| `modification-state` \|
-    #   `target-size` \| `target-iops` \| `target-volume-type` \|
-    #   `original-size` \| `original-iops` \| `original-volume-type` \|
-    #   `start-time` \| `originalMultiAttachEnabled` \|
-    #   `targetMultiAttachEnabled`.
+    #   The filters.
+    #
+    #   * `modification-state` - The current modification state (modifying \|
+    #     optimizing \| completed \| failed).
+    #
+    #   * `original-iops` - The original IOPS rate of the volume.
+    #
+    #   * `original-size` - The original size of the volume, in GiB.
+    #
+    #   * `original-volume-type` - The original volume type of the volume
+    #     (standard \| io1 \| gp2 \| sc1 \| st1).
+    #
+    #   * `originalMultiAttachEnabled` - Indicates whether Multi-Attach
+    #     support was enabled (true \| false).
+    #
+    #   * `start-time` - The modification start time.
+    #
+    #   * `target-iops` - The target IOPS rate of the volume.
+    #
+    #   * `target-size` - The target size of the volume, in GiB.
+    #
+    #   * `target-volume-type` - The target volume type of the volume
+    #     (standard \| io1 \| gp2 \| sc1 \| st1).
+    #
+    #   * `targetMultiAttachEnabled` - Indicates whether Multi-Attach support
+    #     is to be enabled (true \| false).
+    #
+    #   * `volume-id` - The ID of the volume.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned by a previous paginated request.
@@ -37025,7 +37052,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.166.1'
+      context[:gem_version] = '1.167.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

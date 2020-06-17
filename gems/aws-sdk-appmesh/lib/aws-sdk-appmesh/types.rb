@@ -177,7 +177,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -188,7 +188,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the resource owner. If the account ID is
     #   not your own, then it's the ID of the mesh owner or of another
     #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with Shared Meshes][1].
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -517,7 +517,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -776,7 +776,7 @@ module Aws::AppMesh
     #   is not your own, then the account that you specify must share the
     #   mesh with your account before you can create the resource in the
     #   service mesh. For more information about mesh sharing, see [Working
-    #   with Shared Meshes][1].
+    #   with shared meshes][1].
     #
     #
     #
@@ -981,6 +981,44 @@ module Aws::AppMesh
     #               port: 1, # required
     #               protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #             },
+    #             timeout: {
+    #               grpc: {
+    #                 idle: {
+    #                   unit: "ms", # accepts ms, s
+    #                   value: 1,
+    #                 },
+    #                 per_request: {
+    #                   unit: "ms", # accepts ms, s
+    #                   value: 1,
+    #                 },
+    #               },
+    #               http: {
+    #                 idle: {
+    #                   unit: "ms", # accepts ms, s
+    #                   value: 1,
+    #                 },
+    #                 per_request: {
+    #                   unit: "ms", # accepts ms, s
+    #                   value: 1,
+    #                 },
+    #               },
+    #               http2: {
+    #                 idle: {
+    #                   unit: "ms", # accepts ms, s
+    #                   value: 1,
+    #                 },
+    #                 per_request: {
+    #                   unit: "ms", # accepts ms, s
+    #                   value: 1,
+    #                 },
+    #               },
+    #               tcp: {
+    #                 idle: {
+    #                   unit: "ms", # accepts ms, s
+    #                   value: 1,
+    #                 },
+    #               },
+    #             },
     #             tls: {
     #               certificate: { # required
     #                 acm: {
@@ -1086,6 +1124,70 @@ module Aws::AppMesh
     #
     class ConflictException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListenerTimeout
+    #   data as a hash:
+    #
+    #       {
+    #         grpc: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           per_request: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #         },
+    #         http: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           per_request: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #         },
+    #         http2: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           per_request: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #         },
+    #         tcp: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] grpc
+    #   @return [Types::GrpcTimeout]
+    #
+    # @!attribute [rw] http
+    #   @return [Types::HttpTimeout]
+    #
+    # @!attribute [rw] http2
+    #   @return [Types::HttpTimeout]
+    #
+    # @!attribute [rw] tcp
+    #   @return [Types::TcpTimeout]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListenerTimeout AWS API Documentation
+    #
+    class ListenerTimeout < Struct.new(
+      :grpc,
+      :http,
+      :http2,
+      :tcp)
       include Aws::Structure
     end
 
@@ -1206,9 +1308,13 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the resource was
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
+    #   The Unix epoch timestamp in seconds for when the resource was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] mesh_name
@@ -1219,7 +1325,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1230,7 +1336,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the resource owner. If the account ID is
     #   not your own, then it's the ID of the mesh owner or of another
     #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with Shared Meshes][1].
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -1242,6 +1348,8 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] version
+    #   The version of the resource. Resources are created at version 1, and
+    #   this version is incremented each time that they're updated.
     #   @return [Integer]
     #
     # @!attribute [rw] virtual_router_name
@@ -1280,7 +1388,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1685,6 +1793,44 @@ module Aws::AppMesh
     #                 port: 1, # required
     #                 protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #               },
+    #               timeout: {
+    #                 grpc: {
+    #                   idle: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                   per_request: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                 },
+    #                 http: {
+    #                   idle: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                   per_request: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                 },
+    #                 http2: {
+    #                   idle: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                   per_request: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                 },
+    #                 tcp: {
+    #                   idle: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                 },
+    #               },
     #               tls: {
     #                 certificate: { # required
     #                   acm: {
@@ -1749,7 +1895,7 @@ module Aws::AppMesh
     #   is not your own, then the account that you specify must share the
     #   mesh with your account before you can create the resource in the
     #   service mesh. For more information about mesh sharing, see [Working
-    #   with Shared Meshes][1].
+    #   with shared meshes][1].
     #
     #
     #
@@ -1843,6 +1989,16 @@ module Aws::AppMesh
     #             },
     #             tcp_retry_events: ["connection-error"], # accepts connection-error
     #           },
+    #           timeout: {
+    #             idle: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #             per_request: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #           },
     #         },
     #         http2_route: {
     #           action: { # required
@@ -1882,6 +2038,16 @@ module Aws::AppMesh
     #               value: 1,
     #             },
     #             tcp_retry_events: ["connection-error"], # accepts connection-error
+    #           },
+    #           timeout: {
+    #             idle: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #             per_request: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
     #           },
     #         },
     #         http_route: {
@@ -1923,6 +2089,16 @@ module Aws::AppMesh
     #             },
     #             tcp_retry_events: ["connection-error"], # accepts connection-error
     #           },
+    #           timeout: {
+    #             idle: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #             per_request: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #           },
     #         },
     #         priority: 1,
     #         tcp_route: {
@@ -1933,6 +2109,12 @@ module Aws::AppMesh
     #                 weight: 1, # required
     #               },
     #             ],
+    #           },
+    #           timeout: {
+    #             idle: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
     #           },
     #         },
     #       }
@@ -2031,6 +2213,36 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass HttpTimeout
+    #   data as a hash:
+    #
+    #       {
+    #         idle: {
+    #           unit: "ms", # accepts ms, s
+    #           value: 1,
+    #         },
+    #         per_request: {
+    #           unit: "ms", # accepts ms, s
+    #           value: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] idle
+    #   An object that represents a duration of time.
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] per_request
+    #   An object that represents a duration of time.
+    #   @return [Types::Duration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpTimeout AWS API Documentation
+    #
+    class HttpTimeout < Struct.new(
+      :idle,
+      :per_request)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteVirtualServiceInput
     #   data as a hash:
     #
@@ -2048,7 +2260,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2183,6 +2395,44 @@ module Aws::AppMesh
     #                 port: 1, # required
     #                 protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #               },
+    #               timeout: {
+    #                 grpc: {
+    #                   idle: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                   per_request: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                 },
+    #                 http: {
+    #                   idle: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                   per_request: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                 },
+    #                 http2: {
+    #                   idle: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                   per_request: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                 },
+    #                 tcp: {
+    #                   idle: {
+    #                     unit: "ms", # accepts ms, s
+    #                     value: 1,
+    #                   },
+    #                 },
+    #               },
     #               tls: {
     #                 certificate: { # required
     #                   acm: {
@@ -2240,7 +2490,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2372,7 +2622,7 @@ module Aws::AppMesh
     #   is not your own, then the account that you specify must share the
     #   mesh with your account before you can create the resource in the
     #   service mesh. For more information about mesh sharing, see [Working
-    #   with Shared Meshes][1].
+    #   with shared meshes][1].
     #
     #
     #
@@ -2444,7 +2694,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2553,7 +2803,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2591,7 +2841,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2664,7 +2914,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2758,7 +3008,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2795,9 +3045,13 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the resource was
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
+    #   The Unix epoch timestamp in seconds for when the resource was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] mesh_name
@@ -2808,7 +3062,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2819,7 +3073,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the resource owner. If the account ID is
     #   not your own, then it's the ID of the mesh owner or of another
     #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with Shared Meshes][1].
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2827,6 +3081,8 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] version
+    #   The version of the resource. Resources are created at version 1, and
+    #   this version is incremented each time that they're updated.
     #   @return [Integer]
     #
     # @!attribute [rw] virtual_service_name
@@ -2844,6 +3100,36 @@ module Aws::AppMesh
       :resource_owner,
       :version,
       :virtual_service_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GrpcTimeout
+    #   data as a hash:
+    #
+    #       {
+    #         idle: {
+    #           unit: "ms", # accepts ms, s
+    #           value: 1,
+    #         },
+    #         per_request: {
+    #           unit: "ms", # accepts ms, s
+    #           value: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] idle
+    #   An object that represents a duration of time.
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] per_request
+    #   An object that represents a duration of time.
+    #   @return [Types::Duration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcTimeout AWS API Documentation
+    #
+    class GrpcTimeout < Struct.new(
+      :idle,
+      :per_request)
       include Aws::Structure
     end
 
@@ -2868,9 +3154,13 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the resource was
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
+    #   The Unix epoch timestamp in seconds for when the resource was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] mesh_name
@@ -2881,7 +3171,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2892,7 +3182,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the resource owner. If the account ID is
     #   not your own, then it's the ID of the mesh owner or of another
     #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with Shared Meshes][1].
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -2900,6 +3190,8 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] version
+    #   The version of the resource. Resources are created at version 1, and
+    #   this version is incremented each time that they're updated.
     #   @return [Integer]
     #
     # @!attribute [rw] virtual_router_name
@@ -3004,9 +3296,13 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the resource was
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
+    #   The Unix epoch timestamp in seconds for when the resource was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] mesh_name
@@ -3017,7 +3313,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -3028,7 +3324,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the resource owner. If the account ID is
     #   not your own, then it's the ID of the mesh owner or of another
     #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with Shared Meshes][1].
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -3036,6 +3332,8 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] version
+    #   The version of the resource. Resources are created at version 1, and
+    #   this version is incremented each time that they're updated.
     #   @return [Integer]
     #
     # @!attribute [rw] virtual_node_name
@@ -3231,7 +3529,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -3353,16 +3651,26 @@ module Aws::AppMesh
     #             },
     #           ],
     #         },
+    #         timeout: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] action
     #   The action to take if a match is determined.
     #   @return [Types::TcpRouteAction]
     #
+    # @!attribute [rw] timeout
+    #   @return [Types::TcpTimeout]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TcpRoute AWS API Documentation
     #
     class TcpRoute < Struct.new(
-      :action)
+      :action,
+      :timeout)
       include Aws::Structure
     end
 
@@ -3395,7 +3703,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -3448,7 +3756,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -3524,7 +3832,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -3698,9 +4006,13 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the resource was
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
+    #   The Unix epoch timestamp in seconds for when the resource was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] mesh_name
@@ -3711,7 +4023,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -3722,7 +4034,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the resource owner. If the account ID is
     #   not your own, then it's the ID of the mesh owner or of another
     #   account that the mesh is shared with. For more information about
-    #   mesh sharing, see [Working with Shared Meshes][1].
+    #   mesh sharing, see [Working with shared meshes][1].
     #
     #
     #
@@ -3730,6 +4042,8 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] version
+    #   The version of the resource. Resources are created at version 1, and
+    #   this version is incremented each time that they're updated.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshRef AWS API Documentation
@@ -3830,7 +4144,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -3882,6 +4196,44 @@ module Aws::AppMesh
     #           port: 1, # required
     #           protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #         },
+    #         timeout: {
+    #           grpc: {
+    #             idle: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #             per_request: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #           },
+    #           http: {
+    #             idle: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #             per_request: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #           },
+    #           http2: {
+    #             idle: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #             per_request: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #           },
+    #           tcp: {
+    #             idle: {
+    #               unit: "ms", # accepts ms, s
+    #               value: 1,
+    #             },
+    #           },
+    #         },
     #         tls: {
     #           certificate: { # required
     #             acm: {
@@ -3904,6 +4256,9 @@ module Aws::AppMesh
     #   The port mapping information for the listener.
     #   @return [Types::PortMapping]
     #
+    # @!attribute [rw] timeout
+    #   @return [Types::ListenerTimeout]
+    #
     # @!attribute [rw] tls
     #   A reference to an object that represents the Transport Layer
     #   Security (TLS) properties for a listener.
@@ -3914,6 +4269,7 @@ module Aws::AppMesh
     class Listener < Struct.new(
       :health_check,
       :port_mapping,
+      :timeout,
       :tls)
       include Aws::Structure
     end
@@ -3962,6 +4318,16 @@ module Aws::AppMesh
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
     #         },
+    #         timeout: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           per_request: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] action
@@ -3978,12 +4344,16 @@ module Aws::AppMesh
     #   An object that represents a retry policy.
     #   @return [Types::GrpcRetryPolicy]
     #
+    # @!attribute [rw] timeout
+    #   @return [Types::GrpcTimeout]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcRoute AWS API Documentation
     #
     class GrpcRoute < Struct.new(
       :action,
       :match,
-      :retry_policy)
+      :retry_policy,
+      :timeout)
       include Aws::Structure
     end
 
@@ -4199,7 +4569,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -4350,6 +4720,16 @@ module Aws::AppMesh
     #               },
     #               tcp_retry_events: ["connection-error"], # accepts connection-error
     #             },
+    #             timeout: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               per_request: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #             },
     #           },
     #           http2_route: {
     #             action: { # required
@@ -4389,6 +4769,16 @@ module Aws::AppMesh
     #                 value: 1,
     #               },
     #               tcp_retry_events: ["connection-error"], # accepts connection-error
+    #             },
+    #             timeout: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               per_request: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
     #             },
     #           },
     #           http_route: {
@@ -4430,6 +4820,16 @@ module Aws::AppMesh
     #               },
     #               tcp_retry_events: ["connection-error"], # accepts connection-error
     #             },
+    #             timeout: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               per_request: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #             },
     #           },
     #           priority: 1,
     #           tcp_route: {
@@ -4440,6 +4840,12 @@ module Aws::AppMesh
     #                   weight: 1, # required
     #                 },
     #               ],
+    #             },
+    #             timeout: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
     #             },
     #           },
     #         },
@@ -4470,7 +4876,7 @@ module Aws::AppMesh
     #   is not your own, then the account that you specify must share the
     #   mesh with your account before you can create the resource in the
     #   service mesh. For more information about mesh sharing, see [Working
-    #   with Shared Meshes][1].
+    #   with shared meshes][1].
     #
     #
     #
@@ -4509,6 +4915,27 @@ module Aws::AppMesh
       :spec,
       :tags,
       :virtual_router_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TcpTimeout
+    #   data as a hash:
+    #
+    #       {
+    #         idle: {
+    #           unit: "ms", # accepts ms, s
+    #           value: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] idle
+    #   An object that represents a duration of time.
+    #   @return [Types::Duration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TcpTimeout AWS API Documentation
+    #
+    class TcpTimeout < Struct.new(
+      :idle)
       include Aws::Structure
     end
 
@@ -4560,6 +4987,16 @@ module Aws::AppMesh
     #               },
     #               tcp_retry_events: ["connection-error"], # accepts connection-error
     #             },
+    #             timeout: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               per_request: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #             },
     #           },
     #           http2_route: {
     #             action: { # required
@@ -4599,6 +5036,16 @@ module Aws::AppMesh
     #                 value: 1,
     #               },
     #               tcp_retry_events: ["connection-error"], # accepts connection-error
+    #             },
+    #             timeout: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               per_request: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
     #             },
     #           },
     #           http_route: {
@@ -4640,6 +5087,16 @@ module Aws::AppMesh
     #               },
     #               tcp_retry_events: ["connection-error"], # accepts connection-error
     #             },
+    #             timeout: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               per_request: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #             },
     #           },
     #           priority: 1,
     #           tcp_route: {
@@ -4650,6 +5107,12 @@ module Aws::AppMesh
     #                   weight: 1, # required
     #                 },
     #               ],
+    #             },
+    #             timeout: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
     #             },
     #           },
     #         },
@@ -4673,7 +5136,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -4749,6 +5212,16 @@ module Aws::AppMesh
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
     #         },
+    #         timeout: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           per_request: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] action
@@ -4765,12 +5238,16 @@ module Aws::AppMesh
     #   An object that represents a retry policy.
     #   @return [Types::HttpRetryPolicy]
     #
+    # @!attribute [rw] timeout
+    #   @return [Types::HttpTimeout]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRoute AWS API Documentation
     #
     class HttpRoute < Struct.new(
       :action,
       :match,
-      :retry_policy)
+      :retry_policy,
+      :timeout)
       include Aws::Structure
     end
 
@@ -4790,7 +5267,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID
     #   is not your own, then it's the ID of the account that shared the
     #   mesh with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #

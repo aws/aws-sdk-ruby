@@ -584,7 +584,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing
     #
     # @return [Types::AliasConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -995,6 +995,9 @@ module Aws::Lambda
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #
+    # @option params [Array<Types::FileSystemConfig>] :file_system_configs
+    #   Connection settings for an Amazon EFS file system.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -1023,6 +1026,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status #last_update_status} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
+    #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
     #
     #
     # @example Example: To create a function
@@ -1124,6 +1128,12 @@ module Aws::Lambda
     #       "TagKey" => "TagValue",
     #     },
     #     layers: ["LayerVersionArn"],
+    #     file_system_configs: [
+    #       {
+    #         arn: "FileSystemArn", # required
+    #         local_mount_path: "LocalMountPath", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1163,6 +1173,9 @@ module Aws::Lambda
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
     #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.file_system_configs #=> Array
+    #   resp.file_system_configs[0].arn #=> String
+    #   resp.file_system_configs[0].local_mount_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -1895,6 +1908,9 @@ module Aws::Lambda
     #   resp.configuration.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.configuration.last_update_status_reason #=> String
     #   resp.configuration.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.configuration.file_system_configs #=> Array
+    #   resp.configuration.file_system_configs[0].arn #=> String
+    #   resp.configuration.file_system_configs[0].local_mount_path #=> String
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.tags #=> Hash
@@ -2027,6 +2043,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status #last_update_status} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
+    #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
     #
     #
     # @example Example: To get a Lambda function's event source mapping
@@ -2111,6 +2128,9 @@ module Aws::Lambda
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
     #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.file_system_configs #=> Array
+    #   resp.file_system_configs[0].arn #=> String
+    #   resp.file_system_configs[0].local_mount_path #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2510,9 +2530,9 @@ module Aws::Lambda
     #   * {Types::GetProvisionedConcurrencyConfigResponse#last_modified #last_modified} => Time
     #
     #
-    # @example Example: To get a provisioned concurrency configuration
+    # @example Example: To view a provisioned concurrency configuration
     #
-    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -2529,9 +2549,9 @@ module Aws::Lambda
     #     status: "READY", 
     #   }
     #
-    # @example Example: To view a provisioned concurrency configuration
+    # @example Example: To get a provisioned concurrency configuration
     #
-    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -3236,6 +3256,9 @@ module Aws::Lambda
     #   resp.functions[0].last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.functions[0].last_update_status_reason #=> String
     #   resp.functions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.functions[0].file_system_configs #=> Array
+    #   resp.functions[0].file_system_configs[0].arn #=> String
+    #   resp.functions[0].file_system_configs[0].local_mount_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -3714,6 +3737,9 @@ module Aws::Lambda
     #   resp.versions[0].last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.versions[0].last_update_status_reason #=> String
     #   resp.versions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.versions[0].file_system_configs #=> Array
+    #   resp.versions[0].file_system_configs[0].arn #=> String
+    #   resp.versions[0].file_system_configs[0].local_mount_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -3929,6 +3955,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status #last_update_status} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
+    #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
     #
     #
     # @example Example: To publish a version of a Lambda function
@@ -4016,6 +4043,9 @@ module Aws::Lambda
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
     #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.file_system_configs #=> Array
+    #   resp.file_system_configs[0].arn #=> String
+    #   resp.file_system_configs[0].local_mount_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -4106,7 +4136,8 @@ module Aws::Lambda
     # version, or alias. If a configuration already exists for a function,
     # version, or alias, this operation overwrites it. If you exclude any
     # settings, they are removed. To set one option without affecting
-    # existing settings for other options, use PutFunctionEventInvokeConfig.
+    # existing settings for other options, use
+    # UpdateFunctionEventInvokeConfig.
     #
     # By default, Lambda retries an asynchronous invocation twice if the
     # function returns an error. It retains events in a queue for up to six
@@ -4555,7 +4586,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing
     #
     # @option params [String] :revision_id
     #   Only update the alias if the revision ID matches the ID that's
@@ -4881,6 +4912,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status #last_update_status} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
+    #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
     #
     #
     # @example Example: To update a Lambda function's code
@@ -4964,6 +4996,9 @@ module Aws::Lambda
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
     #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.file_system_configs #=> Array
+    #   resp.file_system_configs[0].arn #=> String
+    #   resp.file_system_configs[0].local_mount_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -5091,6 +5126,9 @@ module Aws::Lambda
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #
+    # @option params [Array<Types::FileSystemConfig>] :file_system_configs
+    #   Connection settings for an Amazon EFS file system.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -5119,6 +5157,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status #last_update_status} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
+    #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
     #
     #
     # @example Example: To update a Lambda function's configuration
@@ -5179,6 +5218,12 @@ module Aws::Lambda
     #     },
     #     revision_id: "String",
     #     layers: ["LayerVersionArn"],
+    #     file_system_configs: [
+    #       {
+    #         arn: "FileSystemArn", # required
+    #         local_mount_path: "LocalMountPath", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5218,6 +5263,9 @@ module Aws::Lambda
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
     #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.file_system_configs #=> Array
+    #   resp.file_system_configs[0].arn #=> String
+    #   resp.file_system_configs[0].local_mount_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -5362,7 +5410,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.43.1'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

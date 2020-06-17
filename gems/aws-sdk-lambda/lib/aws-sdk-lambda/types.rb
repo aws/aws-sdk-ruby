@@ -308,8 +308,8 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] additional_version_weights
-    #   The name of the second alias, and the percentage of traffic that's
-    #   routed to it.
+    #   The second version, and the percentage of traffic that's routed to
+    #   it.
     #   @return [Hash<String,Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasRoutingConfiguration AWS API Documentation
@@ -405,7 +405,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing
     #   @return [Types::AliasRoutingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAliasRequest AWS API Documentation
@@ -585,6 +585,12 @@ module Aws::Lambda
     #           "TagKey" => "TagValue",
     #         },
     #         layers: ["LayerVersionArn"],
+    #         file_system_configs: [
+    #           {
+    #             arn: "FileSystemArn", # required
+    #             local_mount_path: "LocalMountPath", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] function_name
@@ -705,6 +711,10 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] file_system_configs
+    #   Connection settings for an Amazon EFS file system.
+    #   @return [Array<Types::FileSystemConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
     #
     class CreateFunctionRequest < Struct.new(
@@ -723,7 +733,8 @@ module Aws::Lambda
       :kms_key_arn,
       :tracing_config,
       :tags,
-      :layers)
+      :layers,
+      :file_system_configs)
       include Aws::Structure
     end
 
@@ -1059,6 +1070,74 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # An error occured when reading from or writing to a connected file
+    # system.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EFSIOException AWS API Documentation
+    #
+    class EFSIOException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The function couldn't make a network connection to the configured
+    # file system.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EFSMountConnectivityException AWS API Documentation
+    #
+    class EFSMountConnectivityException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The function couldn't mount the configured file system due to a
+    # permission or configuration issue.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EFSMountFailureException AWS API Documentation
+    #
+    class EFSMountFailureException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The function was able to make a network connection to the configured
+    # file system, but the mount operation timed out.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EFSMountTimeoutException AWS API Documentation
+    #
+    class EFSMountTimeoutException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
     # AWS Lambda was not able to create an elastic network interface in the
     # VPC, specified as part of Lambda function configuration, because the
     # limit for network interfaces has been reached.
@@ -1225,6 +1304,35 @@ module Aws::Lambda
       :maximum_record_age_in_seconds,
       :bisect_batch_on_function_error,
       :maximum_retry_attempts)
+      include Aws::Structure
+    end
+
+    # Details about the connection between a Lambda function and an Amazon
+    # EFS file system.
+    #
+    # @note When making an API call, you may pass FileSystemConfig
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "FileSystemArn", # required
+    #         local_mount_path: "LocalMountPath", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Amazon EFS access point that
+    #   provides access to the file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_mount_path
+    #   The path where the function can access the file system, starting
+    #   with `/mnt/`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FileSystemConfig AWS API Documentation
+    #
+    class FileSystemConfig < Struct.new(
+      :arn,
+      :local_mount_path)
       include Aws::Structure
     end
 
@@ -1410,6 +1518,10 @@ module Aws::Lambda
     #   function.
     #   @return [String]
     #
+    # @!attribute [rw] file_system_configs
+    #   Connection settings for an Amazon EFS file system.
+    #   @return [Array<Types::FileSystemConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -1438,7 +1550,8 @@ module Aws::Lambda
       :state_reason_code,
       :last_update_status,
       :last_update_status_reason,
-      :last_update_status_reason_code)
+      :last_update_status_reason_code,
+      :file_system_configs)
       include Aws::Structure
     end
 
@@ -3932,7 +4045,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing
     #   @return [Types::AliasRoutingConfiguration]
     #
     # @!attribute [rw] revision_id
@@ -4168,6 +4281,12 @@ module Aws::Lambda
     #         },
     #         revision_id: "String",
     #         layers: ["LayerVersionArn"],
+    #         file_system_configs: [
+    #           {
+    #             arn: "FileSystemArn", # required
+    #             local_mount_path: "LocalMountPath", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] function_name
@@ -4277,6 +4396,10 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] file_system_configs
+    #   Connection settings for an Amazon EFS file system.
+    #   @return [Array<Types::FileSystemConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation
     #
     class UpdateFunctionConfigurationRequest < Struct.new(
@@ -4293,7 +4416,8 @@ module Aws::Lambda
       :kms_key_arn,
       :tracing_config,
       :revision_id,
-      :layers)
+      :layers,
+      :file_system_configs)
       include Aws::Structure
     end
 

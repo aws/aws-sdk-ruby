@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-06-17)
+------------------
+
+* Feature - Adds support for route and virtual node listener timeouts.
+
 1.25.1 (2020-06-11)
 ------------------
 

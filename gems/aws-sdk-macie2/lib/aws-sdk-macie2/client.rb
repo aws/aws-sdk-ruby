@@ -562,8 +562,9 @@ module Aws::Macie2
     # filter.
     #
     # @option params [required, String] :action
-    #   The action to perform on findings that meet the filter criteria. Valid
-    #   values are:
+    #   The action to perform on findings that meet the filter criteria. To
+    #   suppress (automatically archive) findings that meet the criteria, set
+    #   this value to ARCHIVE. Valid values are:
     #
     # @option params [String] :client_token
     #   **A suitable default value is auto-generated.** You should normally
@@ -1130,9 +1131,10 @@ module Aws::Macie2
     #   not need to pass this option.**
     #
     # @option params [String] :finding_publishing_frequency
-    #   The frequency with which Amazon Macie publishes findings for an
-    #   account. This includes adding findings to AWS Security Hub and
-    #   exporting finding events to Amazon CloudWatch. Valid values are:
+    #   The frequency with which Amazon Macie publishes updates to policy
+    #   findings for an account. This includes publishing updates to AWS
+    #   Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch
+    #   Events). Valid values are:
     #
     # @option params [String] :status
     #   The status of an Amazon Macie account. Valid values are:
@@ -1233,7 +1235,7 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves the configuration settings for exporting data classification
+    # Retrieves the configuration settings for storing data classification
     # results.
     #
     # @return [Types::GetClassificationExportConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2113,13 +2115,13 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Creates or updates the configuration settings for exporting data
+    # Creates or updates the configuration settings for storing data
     # classification results.
     #
     # @option params [required, Types::ClassificationExportConfiguration] :configuration
-    #   Specifies where to export data classification results to, and the
+    #   Specifies where to store data classification results, and the
     #   encryption settings to use when storing results in that location.
-    #   Currently, you can export classification results only to an S3 bucket.
+    #   Currently, you can store classification results only in an S3 bucket.
     #
     # @return [Types::PutClassificationExportConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2275,8 +2277,9 @@ module Aws::Macie2
     # Updates the criteria and other settings for a findings filter.
     #
     # @option params [String] :action
-    #   The action to perform on findings that meet the filter criteria. Valid
-    #   values are:
+    #   The action to perform on findings that meet the filter criteria. To
+    #   suppress (automatically archive) findings that meet the criteria, set
+    #   this value to ARCHIVE. Valid values are:
     #
     # @option params [String] :description
     #
@@ -2335,9 +2338,10 @@ module Aws::Macie2
     # configuration settings for a Macie account.
     #
     # @option params [String] :finding_publishing_frequency
-    #   The frequency with which Amazon Macie publishes findings for an
-    #   account. This includes adding findings to AWS Security Hub and
-    #   exporting finding events to Amazon CloudWatch. Valid values are:
+    #   The frequency with which Amazon Macie publishes updates to policy
+    #   findings for an account. This includes publishing updates to AWS
+    #   Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch
+    #   Events). Valid values are:
     #
     # @option params [String] :status
     #   The status of an Amazon Macie account. Valid values are:
@@ -2420,7 +2424,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.3.1'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

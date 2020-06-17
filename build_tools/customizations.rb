@@ -193,5 +193,14 @@ module BuildTools
       end
     end
 
+    api('CognitoIdentityProvider') do |api|
+      operations = %w(
+        InitiateAuth
+        RespondToAuthChallenge
+      )
+      operations.each do |operation|
+        api['operations'][operation]['authtype'] = 'none'
+      end
+    end
   end
 end

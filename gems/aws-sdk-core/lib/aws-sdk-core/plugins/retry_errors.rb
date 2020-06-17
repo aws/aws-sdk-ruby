@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'set'
 require_relative 'retries/error_inspector'
 require_relative 'retries/retry_quota'

@@ -45,6 +45,7 @@ module Aws::Snowball
     DescribeClusterResult = Shapes::StructureShape.new(name: 'DescribeClusterResult')
     DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
     DescribeJobResult = Shapes::StructureShape.new(name: 'DescribeJobResult')
+    DeviceConfiguration = Shapes::StructureShape.new(name: 'DeviceConfiguration')
     Ec2AmiResource = Shapes::StructureShape.new(name: 'Ec2AmiResource')
     Ec2AmiResourceList = Shapes::ListShape.new(name: 'Ec2AmiResourceList')
     Ec2RequestFailedException = Shapes::StructureShape.new(name: 'Ec2RequestFailedException')
@@ -101,6 +102,7 @@ module Aws::Snowball
     ShippingOption = Shapes::StringShape.new(name: 'ShippingOption')
     SnowballCapacity = Shapes::StringShape.new(name: 'SnowballCapacity')
     SnowballType = Shapes::StringShape.new(name: 'SnowballType')
+    SnowconeDeviceConfiguration = Shapes::StructureShape.new(name: 'SnowconeDeviceConfiguration')
     SnsTopicARN = Shapes::StringShape.new(name: 'SnsTopicARN')
     String = Shapes::StringShape.new(name: 'String')
     TaxDocuments = Shapes::StructureShape.new(name: 'TaxDocuments')
@@ -110,6 +112,7 @@ module Aws::Snowball
     UpdateClusterResult = Shapes::StructureShape.new(name: 'UpdateClusterResult')
     UpdateJobRequest = Shapes::StructureShape.new(name: 'UpdateJobRequest')
     UpdateJobResult = Shapes::StructureShape.new(name: 'UpdateJobResult')
+    WirelessConnection = Shapes::StructureShape.new(name: 'WirelessConnection')
 
     Address.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "AddressId"))
     Address.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -207,6 +210,7 @@ module Aws::Snowball
     CreateJobRequest.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, location_name: "SnowballType"))
     CreateJobRequest.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     CreateJobRequest.add_member(:tax_documents, Shapes::ShapeRef.new(shape: TaxDocuments, location_name: "TaxDocuments"))
+    CreateJobRequest.add_member(:device_configuration, Shapes::ShapeRef.new(shape: DeviceConfiguration, location_name: "DeviceConfiguration"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResult.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
@@ -244,6 +248,9 @@ module Aws::Snowball
     DescribeJobResult.add_member(:job_metadata, Shapes::ShapeRef.new(shape: JobMetadata, location_name: "JobMetadata"))
     DescribeJobResult.add_member(:sub_job_metadata, Shapes::ShapeRef.new(shape: JobMetadataList, location_name: "SubJobMetadata"))
     DescribeJobResult.struct_class = Types::DescribeJobResult
+
+    DeviceConfiguration.add_member(:snowcone_device_configuration, Shapes::ShapeRef.new(shape: SnowconeDeviceConfiguration, location_name: "SnowconeDeviceConfiguration"))
+    DeviceConfiguration.struct_class = Types::DeviceConfiguration
 
     Ec2AmiResource.add_member(:ami_id, Shapes::ShapeRef.new(shape: AmiId, required: true, location_name: "AmiId"))
     Ec2AmiResource.add_member(:snowball_ami_id, Shapes::ShapeRef.new(shape: String, location_name: "SnowballAmiId"))
@@ -336,6 +343,7 @@ module Aws::Snowball
     JobMetadata.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "ClusterId"))
     JobMetadata.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     JobMetadata.add_member(:tax_documents, Shapes::ShapeRef.new(shape: TaxDocuments, location_name: "TaxDocuments"))
+    JobMetadata.add_member(:device_configuration, Shapes::ShapeRef.new(shape: DeviceConfiguration, location_name: "DeviceConfiguration"))
     JobMetadata.struct_class = Types::JobMetadata
 
     JobMetadataList.member = Shapes::ShapeRef.new(shape: JobMetadata)
@@ -413,6 +421,9 @@ module Aws::Snowball
     ShippingDetails.add_member(:outbound_shipment, Shapes::ShapeRef.new(shape: Shipment, location_name: "OutboundShipment"))
     ShippingDetails.struct_class = Types::ShippingDetails
 
+    SnowconeDeviceConfiguration.add_member(:wireless_connection, Shapes::ShapeRef.new(shape: WirelessConnection, location_name: "WirelessConnection"))
+    SnowconeDeviceConfiguration.struct_class = Types::SnowconeDeviceConfiguration
+
     TaxDocuments.add_member(:ind, Shapes::ShapeRef.new(shape: INDTaxDocuments, location_name: "IND"))
     TaxDocuments.struct_class = Types::TaxDocuments
 
@@ -443,6 +454,9 @@ module Aws::Snowball
     UpdateJobRequest.struct_class = Types::UpdateJobRequest
 
     UpdateJobResult.struct_class = Types::UpdateJobResult
+
+    WirelessConnection.add_member(:is_wifi_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsWifiEnabled"))
+    WirelessConnection.struct_class = Types::WirelessConnection
 
 
     # @api private
