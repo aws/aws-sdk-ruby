@@ -25,7 +25,6 @@ module Aws
           )
           cipher = Utils.aes_encryption_cipher(:GCM)
           cipher.key = key_data.plaintext
-          cipher.auth_data = ''
           envelope = {
             'x-amz-key-v2' => encode64(key_data.ciphertext_blob),
             'x-amz-iv' => encode64(cipher.iv = cipher.random_iv),
@@ -34,6 +33,7 @@ module Aws
             'x-amz-wrap-alg' => 'kms+context',
             'x-amz-matdesc' => Json.dump(encryption_context)
           }
+          cipher.auth_data = '' # auth_data must be set after key and iv
           [envelope, cipher]
         end
 

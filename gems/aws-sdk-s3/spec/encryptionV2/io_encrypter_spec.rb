@@ -5,6 +5,15 @@ module Aws
   module S3
     module EncryptionV2
       describe IOEncrypter do
+
+        before do
+          begin
+            OpenSSL::Cipher.new('aes-256-gcm')
+          rescue RuntimeError => e
+            skip("Skipping CSE tests due to old version of OpenSSL: #{e.message}")
+          end
+        end
+
         let(:key) do
           Base64.decode64('kM5UVbhE/4rtMZJfsadYEdm2vaKFsmV2f5+URSeUCV4=')
         end
@@ -20,7 +29,7 @@ module Aws
         end
 
         let(:cipher) do
-          cipher = OpenSSL::Cipher.new('AES-256-GCM')
+          cipher = OpenSSL::Cipher.new('aes-256-gcm')
           cipher.encrypt
           cipher.key = key
           cipher.iv = iv
