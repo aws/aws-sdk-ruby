@@ -53,8 +53,7 @@ module Aws
 
         context 'when using a symmetric (AES) key' do
           let(:key) do
-            OpenSSL::Cipher::AES.new(256, :GCM).random_key
-            #Base64.decode64("xmcwx8x67G2hbjRTsalme9ddO45hRIWrATTqcvqn5xk=\n")
+            OpenSSL::Cipher.new('aes-256-gcm').random_key
           end
 
           it 'can encrypt and decrypt plain text' do
