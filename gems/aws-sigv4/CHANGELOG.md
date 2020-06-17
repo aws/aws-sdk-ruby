@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2020-06-17)
+------------------
+
 * Feature - Bump `aws-eventstream` dependency to `~> 1`.
 
 1.1.4 (2020-05-28)

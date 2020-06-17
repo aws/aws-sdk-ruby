@@ -1235,6 +1235,7 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: PublicZoneVPCAssociation)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingDomainExists)
         o.errors << Shapes::ShapeRef.new(shape: LimitsExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
       end)
 
       api.add_operation(:change_resource_record_sets, Seahorse::Model::Operation.new.tap do |o|

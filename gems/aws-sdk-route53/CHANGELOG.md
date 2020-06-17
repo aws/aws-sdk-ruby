@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-06-17)
+------------------
+
+* Feature - Add PriorRequestNotComplete exception to AssociateVPCWithHostedZone API
+
 1.36.1 (2020-06-11)
 ------------------
 

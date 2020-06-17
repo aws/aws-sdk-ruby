@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2020-06-17)
+------------------
+
+* Feature - nvmeSupport added to DescribeInstanceTypes API
+
 1.166.1 (2020-06-11)
 ------------------
 

@@ -13054,11 +13054,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The ID of the AWS account that owns the snapshot.
+    #   The ID of the AWS account that enabled fast snapshot restores on the
+    #   snapshot.
     #   @return [String]
     #
     # @!attribute [rw] owner_alias
-    #   The alias of the snapshot owner.
+    #   The AWS owner alias that enabled fast snapshot restores on the
+    #   snapshot. This is intended for future use.
     #   @return [String]
     #
     # @!attribute [rw] enabling_time
@@ -13123,7 +13125,8 @@ module Aws::EC2
     #
     #   * `availability-zone`\: The Availability Zone of the snapshot.
     #
-    #   * `owner-id`\: The ID of the AWS account that owns the snapshot.
+    #   * `owner-id`\: The ID of the AWS account that enabled fast snapshot
+    #     restore on the snapshot.
     #
     #   * `snapshot-id`\: The ID of the snapshot.
     #
@@ -14933,6 +14936,10 @@ module Aws::EC2
     #
     #   * `ebs-info.encryption-support` - Indicates whether EBS encryption
     #     is supported. (`supported` \| `unsupported`)
+    #
+    #   * `ebs-info.nvme-support` - Indicates whether non-volatile memory
+    #     express (NVMe) is supported or required. (`required` \|
+    #     `supported` \| `unsupported`)
     #
     #   * `free-tier-eligible` - Indicates whether the instance type is
     #     eligible to use in the free tier. (`true` \| `false`)
@@ -18390,12 +18397,13 @@ module Aws::EC2
     #   * `encrypted` - Indicates whether the snapshot is encrypted (`true`
     #     \| `false`)
     #
-    #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
-    #     `self` \| `all` \| `aws-marketplace` \| `microsoft`) of snapshot
-    #     owners. Not to be confused with the user-configured AWS account
-    #     alias, which is set from the IAM console.
+    #   * `owner-alias` - The owner alias, from an Amazon-maintained list
+    #     (`amazon`). This is not the user-configured AWS account alias set
+    #     using the IAM console. We recommend that you use the related
+    #     parameter instead of this filter.
     #
-    #   * `owner-id` - The ID of the AWS account that owns the snapshot.
+    #   * `owner-id` - The AWS account ID of the owner. We recommend that
+    #     you use the related parameter instead of this filter.
     #
     #   * `progress` - The progress of the snapshot, as a percentage (for
     #     example, 80%).
@@ -18446,7 +18454,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_ids
-    #   Describes the snapshots owned by these owners.
+    #   Scopes the results to snapshots with the specified owners. You can
+    #   specify a combination of AWS account IDs, `self`, and `amazon`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] restorable_by_user_ids
@@ -20306,16 +20315,38 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] volume_ids
-    #   The IDs of the volumes for which in-progress modifications will be
-    #   described.
+    #   The IDs of the volumes.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   The filters. Supported filters: `volume-id` \| `modification-state`
-    #   \| `target-size` \| `target-iops` \| `target-volume-type` \|
-    #   `original-size` \| `original-iops` \| `original-volume-type` \|
-    #   `start-time` \| `originalMultiAttachEnabled` \|
-    #   `targetMultiAttachEnabled`.
+    #   The filters.
+    #
+    #   * `modification-state` - The current modification state (modifying
+    #     \| optimizing \| completed \| failed).
+    #
+    #   * `original-iops` - The original IOPS rate of the volume.
+    #
+    #   * `original-size` - The original size of the volume, in GiB.
+    #
+    #   * `original-volume-type` - The original volume type of the volume
+    #     (standard \| io1 \| gp2 \| sc1 \| st1).
+    #
+    #   * `originalMultiAttachEnabled` - Indicates whether Multi-Attach
+    #     support was enabled (true \| false).
+    #
+    #   * `start-time` - The modification start time.
+    #
+    #   * `target-iops` - The target IOPS rate of the volume.
+    #
+    #   * `target-size` - The target size of the volume, in GiB.
+    #
+    #   * `target-volume-type` - The target volume type of the volume
+    #     (standard \| io1 \| gp2 \| sc1 \| st1).
+    #
+    #   * `targetMultiAttachEnabled` - Indicates whether Multi-Attach
+    #     support is to be enabled (true \| false).
+    #
+    #   * `volume-id` - The ID of the volume.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -22001,11 +22032,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The ID of the AWS account that owns the snapshot.
+    #   The ID of the AWS account that enabled fast snapshot restores on the
+    #   snapshot.
     #   @return [String]
     #
     # @!attribute [rw] owner_alias
-    #   The alias of the snapshot owner.
+    #   The AWS owner alias that enabled fast snapshot restores on the
+    #   snapshot. This is intended for future use.
     #   @return [String]
     #
     # @!attribute [rw] enabling_time
@@ -22915,12 +22948,17 @@ module Aws::EC2
     #   Describes the optimized EBS performance for the instance type.
     #   @return [Types::EbsOptimizedInfo]
     #
+    # @!attribute [rw] nvme_support
+    #   Indicates whether non-volatile memory express (NVMe) is supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInfo AWS API Documentation
     #
     class EbsInfo < Struct.new(
       :ebs_optimized_support,
       :encryption_support,
-      :ebs_optimized_info)
+      :ebs_optimized_info,
+      :nvme_support)
       include Aws::Structure
     end
 
@@ -23189,7 +23227,8 @@ module Aws::EC2
     #
     # @!attribute [rw] type
     #   The type of elastic inference accelerator. The possible values are
-    #   `eia1.medium`, `eia1.large`, and `eia1.xlarge`.
+    #   `eia1.medium`, `eia1.large`, `eia1.xlarge`, `eia2.medium`,
+    #   `eia2.large`, and `eia2.xlarge`.
     #   @return [String]
     #
     # @!attribute [rw] count
@@ -23352,11 +23391,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The ID of the AWS account that owns the snapshot.
+    #   The ID of the AWS account that enabled fast snapshot restores on the
+    #   snapshot.
     #   @return [String]
     #
     # @!attribute [rw] owner_alias
-    #   The alias of the snapshot owner.
+    #   The AWS owner alias that enabled fast snapshot restores on the
+    #   snapshot. This is intended for future use.
     #   @return [String]
     #
     # @!attribute [rw] enabling_time
@@ -42895,10 +42936,11 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] owner_alias
-    #   Value from an Amazon-maintained list (`amazon` \| `self` \| `all` \|
-    #   `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
-    #   confused with the user-configured AWS account alias, which is set
-    #   from the IAM console.
+    #   The AWS owner alias, as maintained by Amazon. The possible values
+    #   are: `amazon` \| `self` \| `all` \| `aws-marketplace` \|
+    #   `microsoft`. This AWS owner alias is not to be confused with the
+    #   user-configured AWS account alias, which is set from the IAM
+    #   console.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -47412,7 +47454,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] original_size
-    #   The original size of the volume.
+    #   The original size of the volume, in GiB.
     #   @return [Integer]
     #
     # @!attribute [rw] original_iops
