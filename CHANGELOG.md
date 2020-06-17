@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.530 (2020-06-17)
+------------------
+
 * Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
