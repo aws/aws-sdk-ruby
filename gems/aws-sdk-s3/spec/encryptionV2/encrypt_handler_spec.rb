@@ -7,6 +7,12 @@ module Aws
     module EncryptionV2
       describe EncryptHandler do
 
+        before do
+          if RUBY_VERSION.match(/1.9/)
+            skip('authenticated encryption not supported by OpenSSL in Ruby version ~> 1.9')
+          end
+        end
+
         let(:next_handler) { double(call: nil) }
         let(:handler) { EncryptHandler.new(next_handler) }
 
