@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Macie2 - Updated the documentation for Amazon Macie 2.
+
+* Feature - Aws::Route53 - Updated the API for Amazon Route 53.
+
+* Feature - Aws::Snowball - Updated the API, and documentation for Amazon Import/Export Snowball.
+
 2.11.529 (2020-06-16)
 ------------------
 
