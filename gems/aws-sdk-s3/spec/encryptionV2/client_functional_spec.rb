@@ -9,11 +9,10 @@ module Aws
       describe Client do
 
         before do
-          unless OpenSSL::Cipher.ciphers.include? 'id-aes128-GCM'
-            puts "SKIPPING TESTS.  Ciphers: #{OpenSSL::Cipher.ciphers}"
-            skip('Skipping CSE tests due to old version of OpenSSL')
-          else
-            puts "id-aes128-GCM is supported.  Running tests: #{OpenSSL::Cipher.ciphers}"
+          begin
+            OpenSSL::Cipher.new('aes-256-gcm')
+          rescue RuntimeError => e
+            skip("Skipping CSE tests due to old version of OpenSSL: #{e.message}")
           end
         end
 

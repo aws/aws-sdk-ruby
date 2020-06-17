@@ -14,7 +14,6 @@ module Aws
         #   envelope and encryption cipher.
         def encryption_cipher
           cipher = Utils.aes_encryption_cipher(:GCM)
-          cipher.auth_data = ''
           cek_alg = 'AES/GCM/NoPadding'
           if @key_provider.encryption_materials.key.is_a? OpenSSL::PKey::RSA
             wrap_alg = 'RSA-OAEP-SHA1'
@@ -31,6 +30,7 @@ module Aws
             'x-amz-iv' => encode64(envelope_iv(cipher)),
             'x-amz-matdesc' => materials_description,
           }
+          cipher.auth_data = '' # auth_data must be set after key and iv
           [envelope, cipher]
         end
 

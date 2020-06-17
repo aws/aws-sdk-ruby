@@ -12,8 +12,10 @@ module Aws
       describe 'Client Side Encryption AES/GCM Known Answer Tests' do
 
         before do
-          unless OpenSSL::Cipher.ciphers.include? 'aes-256-gcm'
-            skip('Skipping CSE tests due to old version of OpenSSL')
+          begin
+            OpenSSL::Cipher.new('aes-256-gcm')
+          rescue RuntimeError => e
+            skip("Skipping CSE tests due to old version of OpenSSL: #{e.message}")
           end
         end
 
