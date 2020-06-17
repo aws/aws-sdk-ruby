@@ -7,6 +7,10 @@ module Aws
       class EncryptHandler < Seahorse::Client::Handler
 
         def call(context)
+          if RUBY_VERSION.match(/1.9/)
+            raise "authenticated encryption not supported by OpenSSL in Ruby version ~> 1.9"
+            raise Aws::Errors::NonSupportedRubyVersionError, msg
+          end
           envelope, cipher = context[:encryption][:cipher_provider].encryption_cipher
           context[:encryption][:cipher] = cipher
           apply_encryption_envelope(context, envelope)

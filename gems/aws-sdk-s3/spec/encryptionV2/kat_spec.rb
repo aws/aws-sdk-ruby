@@ -12,10 +12,8 @@ module Aws
       describe 'Client Side Encryption AES/GCM Known Answer Tests' do
 
         before do
-          begin
-            OpenSSL::Cipher.new('aes-256-gcm')
-          rescue RuntimeError => e
-            skip("Skipping CSE tests due to old version of OpenSSL: #{e.message}")
+          if RUBY_VERSION.match(/1.9/)
+            skip('authenticated encryption not supported by OpenSSL in Ruby version ~> 1.9')
           end
         end
 
