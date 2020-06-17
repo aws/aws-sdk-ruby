@@ -195,7 +195,7 @@ module Aws
             client = Aws::S3::EncryptionV2::Client.new(encryption_key: key, client: s3_client)
             data = stub_put(s3_client)
             client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
-            data[:enc_body][0] = [(~data[:enc_body].unpack('C1')[0] << 1)].pack('C1')
+            data[:enc_body][0] = [(data[:enc_body].unpack('C1')[0]) ^ 1].pack('C1')
 
             stub_get(s3_client, data, true)
             expect do
