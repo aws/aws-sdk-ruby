@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@globalaccelerator") do
   @service = Aws::GlobalAccelerator::Resource.new
   @client = @service.client

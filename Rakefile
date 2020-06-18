@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $REPO_ROOT = File.dirname(__FILE__)
 $GEMS_DIR = "#{$REPO_ROOT}/gems"
 $CORE_LIB = "#{$REPO_ROOT}/gems/aws-sdk-core/lib"

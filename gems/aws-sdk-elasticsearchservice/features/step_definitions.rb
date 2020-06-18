@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@elasticsearchservice") do
   @service = Aws::ElasticsearchService::Resource.new
   @client = @service.client

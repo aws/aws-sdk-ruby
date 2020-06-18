@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@secretsmanager") do
   @service = Aws::SecretsManager::Resource.new
   @client = @service.client

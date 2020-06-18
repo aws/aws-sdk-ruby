@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@savingsplans") do
   @service = Aws::SavingsPlans::Resource.new
   @client = @service.client

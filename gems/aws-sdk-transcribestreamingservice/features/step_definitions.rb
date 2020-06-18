@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@transcribestreamingservice") do
   @service = Aws::TranscribeStreamingService::Resource.new
   @client = @service.client

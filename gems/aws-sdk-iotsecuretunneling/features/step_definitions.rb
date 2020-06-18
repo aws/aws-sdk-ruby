@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@iotsecuretunneling") do
   @service = Aws::IoTSecureTunneling::Resource.new
   @client = @service.client

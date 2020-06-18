@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../../gems/aws-sdk-core/spec/shared_spec_helper'
 
 $:.unshift(File.expand_path('../../lib', __FILE__))

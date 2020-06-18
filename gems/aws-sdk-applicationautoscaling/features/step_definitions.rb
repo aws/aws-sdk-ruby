@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@applicationautoscaling") do
   @service = Aws::ApplicationAutoScaling::Resource.new
   @client = @service.client

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@codeartifact") do
   @service = Aws::CodeArtifact::Resource.new
   @client = @service.client

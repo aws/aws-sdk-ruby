@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BuildTools
   # A utility class for managing a CHANGELOG file.
   class Changelog

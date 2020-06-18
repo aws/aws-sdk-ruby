@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Note: these specs check all source code for hard-coded regions.
 def gem_lib_paths
   gems_dir = File.expand_path('../../../gems/', __FILE__)
@@ -19,7 +21,7 @@ def whitelist
       'iad_regional_endpoint.rb' => 'SKIP_FILE'
     },
     's3control' => {
-      's3_signer.rb' => 72
+      's3_signer.rb' => 74
     }
   }
 end

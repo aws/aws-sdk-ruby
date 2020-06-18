@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@macie") do
   @service = Aws::Macie::Resource.new
   @client = @service.client

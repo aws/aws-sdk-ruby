@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@marketplacemetering") do
   @service = Aws::MarketplaceMetering::Resource.new
   @client = @service.client

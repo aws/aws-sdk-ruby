@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@forecastservice") do
   @service = Aws::ForecastService::Resource.new
   @client = @service.client
