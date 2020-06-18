@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::S3
+
   class MultipartUploadPart
 
     extend Aws::Deprecations
@@ -30,6 +33,7 @@ module Aws::S3
       @part_number = extract_part_number(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -107,7 +111,8 @@ module Aws::S3
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -120,13 +125,15 @@ module Aws::S3
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -157,17 +164,16 @@ module Aws::S3
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -234,26 +240,26 @@ module Aws::S3
     #   The range of bytes to copy from the source object. The range value
     #   must use the form bytes=first-last, where the first and last are the
     #   zero-based byte offsets to copy. For example, bytes=0-9 indicates that
-    #   you want to copy the first ten bytes of the source. You can copy a
-    #   range only if the source object is greater than 5 GB.
+    #   you want to copy the first 10 bytes of the source. You can copy a
+    #   range only if the source object is greater than 5 MB.
     # @option options [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     # @option options [String] :sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use in
     #   encrypting data. This value is used to store the object and then it is
-    #   discarded; Amazon does not store the encryption key. The key must be
-    #   appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header. This must be
-    #   the same encryption key specified in the initiate multipart upload
+    #   discarded; Amazon S3 does not store the encryption key. The key must
+    #   be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header. This must
+    #   be the same encryption key specified in the initiate multipart upload
     #   request.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
-    #   ensure the encryption key was transmitted without error.
+    #   ensure that the encryption key was transmitted without error.
     # @option options [String] :copy_source_sse_customer_algorithm
-    #   Specifies the algorithm to use when decrypting the source object
-    #   (e.g., AES256).
+    #   Specifies the algorithm to use when decrypting the source object (for
+    #   example, AES256).
     # @option options [String] :copy_source_sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use to
     #   decrypt the source object. The encryption key provided in this header
@@ -261,13 +267,17 @@ module Aws::S3
     # @option options [String] :copy_source_sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
-    #   ensure the encryption key was transmitted without error.
+    #   ensure that the encryption key was transmitted without error.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @return [Types::UploadPartCopyOutput]
     def copy_from(options = {})
       options = options.merge(
@@ -298,28 +308,34 @@ module Aws::S3
     #   Size of the body in bytes. This parameter is useful when the size of
     #   the body cannot be determined automatically.
     # @option options [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the part data.
+    #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
+    #   is auto-populated when using the command from the CLI. This parameter
+    #   is required if object lock parameters are specified.
     # @option options [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     # @option options [String] :sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use in
     #   encrypting data. This value is used to store the object and then it is
-    #   discarded; Amazon does not store the encryption key. The key must be
-    #   appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header. This must be
-    #   the same encryption key specified in the initiate multipart upload
+    #   discarded; Amazon S3 does not store the encryption key. The key must
+    #   be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm header`. This must
+    #   be the same encryption key specified in the initiate multipart upload
     #   request.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
-    #   ensure the encryption key was transmitted without error.
+    #   ensure that the encryption key was transmitted without error.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @return [Types::UploadPartOutput]
     def upload(options = {})
       options = options.merge(

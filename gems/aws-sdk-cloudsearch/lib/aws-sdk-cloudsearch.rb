@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-cloudsearch/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     cloud_search = Aws::CloudSearch::Client.new
+#     resp = cloud_search.build_suggesters(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon CloudSearch all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon CloudSearch are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CloudSearch::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon CloudSearch API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-cloudsearch/customizations'
 # @service
 module Aws::CloudSearch
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.21.1'
 
 end

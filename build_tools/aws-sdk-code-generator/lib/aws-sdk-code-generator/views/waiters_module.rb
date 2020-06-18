@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AwsSdkCodeGenerator
   module Views
     class WaitersModule < View
@@ -18,6 +20,16 @@ module AwsSdkCodeGenerator
       def generated_src_warning
         return if @custom
         GENERATED_SRC_WARNING
+      end
+
+      # @return [Boolean]
+      def waiters?
+        waiters.size > 0
+      end
+
+      # @return [String<Markdown>]
+      def waiters_markdown_table
+        Waiter.markdown_table(@waiters)
       end
 
     end

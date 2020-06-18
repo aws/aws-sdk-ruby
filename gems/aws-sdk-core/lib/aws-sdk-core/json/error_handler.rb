@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module Json
     class ErrorHandler < Xml::ErrorHandler
@@ -17,9 +19,10 @@ module Aws
         json = Json.load(body)
         code = error_code(json, context)
         message = error_message(code, json)
-        [code, message]
+        data = parse_error_data(context, code)
+        [code, message, data]
       rescue Json::ParseError
-        [http_status_error_code(context), '']
+        [http_status_error_code(context), '', EmptyStructure.new]
       end
 
       def error_code(json, context)
@@ -39,6 +42,22 @@ module Aws
         else
           json['message'] || json['Message'] || ''
         end
+      end
+
+      def parse_error_data(context, code)
+        data = EmptyStructure.new
+        if error_rules = context.operation.errors
+          error_rules.each do |rule|
+            # match modeled shape name with the type(code) only
+            # some type(code) might contains invalid characters
+            # such as ':' (efs) etc
+            match = rule.shape.name == code.gsub(/[^^a-zA-Z0-9]/, '')
+            if match && rule.shape.members.any?
+              data = Parser.new(rule).parse(context.http_response.body_contents)
+            end
+          end
+        end
+        data
       end
 
     end

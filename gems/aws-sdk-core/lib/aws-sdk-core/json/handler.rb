@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module Json
     class Handler < Seahorse::Client::Handler
@@ -40,7 +42,25 @@ module Aws
           Json.load(context.http_response.body_contents)
         elsif rules = context.operation.output
           json = context.http_response.body_contents
-          Parser.new(rules).parse(json == '' ? '{}' : json)
+          if json.is_a?(Array)
+            # an array of emitted events
+            if json[0].respond_to?(:response)
+              # initial response exists
+              # it must be the first event arrived
+              resp_struct = json.shift.response
+            else
+              resp_struct = context.operation.output.shape.struct_class.new
+            end
+
+            rules.shape.members.each do |name, ref|
+              if ref.eventstream
+                resp_struct.send("#{name}=", json.to_enum)
+              end
+            end
+            resp_struct
+          else
+            Parser.new(rules).parse(json == '' ? '{}' : json)
+          end
         else
           EmptyStructure.new
         end

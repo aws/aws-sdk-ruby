@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -7,6 +9,19 @@
 
 module Aws::LexModelBuildingService
   module Types
+
+    # The request is not well formed. For example, a value is invalid or a
+    # required field is missing. Check the field values, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # Provides information about a bot alias.
     #
@@ -39,6 +54,11 @@ module Aws::LexModelBuildingService
     #   Checksum of the bot alias.
     #   @return [String]
     #
+    # @!attribute [rw] conversation_logs
+    #   Settings that determine how Amazon Lex uses conversation logs for
+    #   the alias.
+    #   @return [Types::ConversationLogsResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BotAliasMetadata AWS API Documentation
     #
     class BotAliasMetadata < Struct.new(
@@ -48,7 +68,8 @@ module Aws::LexModelBuildingService
       :bot_name,
       :last_updated_date,
       :created_date,
-      :checksum)
+      :checksum,
+      :conversation_logs)
       include Aws::Structure
     end
 
@@ -256,6 +277,81 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
+    # There was a conflict processing the request. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Provides the settings needed for conversation logs.
+    #
+    # @note When making an API call, you may pass ConversationLogsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_settings: [ # required
+    #           {
+    #             log_type: "AUDIO", # required, accepts AUDIO, TEXT
+    #             destination: "CLOUDWATCH_LOGS", # required, accepts CLOUDWATCH_LOGS, S3
+    #             kms_key_arn: "KmsKeyArn",
+    #             resource_arn: "ResourceArn", # required
+    #           },
+    #         ],
+    #         iam_role_arn: "IamRoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] log_settings
+    #   The settings for your conversation logs. You can log the
+    #   conversation text, conversation audio, or both.
+    #   @return [Array<Types::LogSettingsRequest>]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role with permission to
+    #   write to your CloudWatch Logs for text logs and your S3 bucket for
+    #   audio logs. If audio encryption is enabled, this role also provides
+    #   access permission for the AWS KMS key used for encrypting audio
+    #   logs. For more information, see [Creating an IAM Role and Policy for
+    #   Conversation Logs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/conversation-logs-role-and-policy.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ConversationLogsRequest AWS API Documentation
+    #
+    class ConversationLogsRequest < Struct.new(
+      :log_settings,
+      :iam_role_arn)
+      include Aws::Structure
+    end
+
+    # Contains information about conversation log settings.
+    #
+    # @!attribute [rw] log_settings
+    #   The settings for your conversation logs. You can log text, audio, or
+    #   both.
+    #   @return [Array<Types::LogSettingsResponse>]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role used to write your
+    #   logs to CloudWatch Logs or an S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ConversationLogsResponse AWS API Documentation
+    #
+    class ConversationLogsResponse < Struct.new(
+      :log_settings,
+      :iam_role_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateBotVersionRequest
     #   data as a hash:
     #
@@ -384,6 +480,11 @@ module Aws::LexModelBuildingService
     #   [1]: https://aws.amazon.com/lex/faqs#data-security
     #   @return [Boolean]
     #
+    # @!attribute [rw] detect_sentiment
+    #   Indicates whether utterances entered by the user should be sent to
+    #   Amazon Comprehend for sentiment analysis.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateBotVersionResponse AWS API Documentation
     #
     class CreateBotVersionResponse < Struct.new(
@@ -401,7 +502,8 @@ module Aws::LexModelBuildingService
       :checksum,
       :version,
       :locale,
-      :child_directed)
+      :child_directed,
+      :detect_sentiment)
       include Aws::Structure
     end
 
@@ -503,6 +605,11 @@ module Aws::LexModelBuildingService
     #   Checksum of the intent version created.
     #   @return [String]
     #
+    # @!attribute [rw] kendra_configuration
+    #   Configuration information, if any, for connectin an Amazon Kendra
+    #   index with the `AMAZON.KendraSearchIntent` intent.
+    #   @return [Types::KendraConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateIntentVersionResponse AWS API Documentation
     #
     class CreateIntentVersionResponse < Struct.new(
@@ -520,7 +627,8 @@ module Aws::LexModelBuildingService
       :last_updated_date,
       :created_date,
       :version,
-      :checksum)
+      :checksum,
+      :kendra_configuration)
       include Aws::Structure
     end
 
@@ -589,6 +697,15 @@ module Aws::LexModelBuildingService
     #   slot. For more information, see PutSlotType.
     #   @return [String]
     #
+    # @!attribute [rw] parent_slot_type_signature
+    #   The built-in slot type used a the parent of the slot type.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_type_configurations
+    #   Configuration information that extends the parent built-in slot
+    #   type.
+    #   @return [Array<Types::SlotTypeConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateSlotTypeVersionResponse AWS API Documentation
     #
     class CreateSlotTypeVersionResponse < Struct.new(
@@ -599,7 +716,9 @@ module Aws::LexModelBuildingService
       :created_date,
       :version,
       :checksum,
-      :value_selection_strategy)
+      :value_selection_strategy,
+      :parent_slot_type_signature,
+      :slot_type_configurations)
       include Aws::Structure
     end
 
@@ -1009,6 +1128,11 @@ module Aws::LexModelBuildingService
     #   Checksum of the bot alias.
     #   @return [String]
     #
+    # @!attribute [rw] conversation_logs
+    #   The settings that determine how Amazon Lex uses conversation logs
+    #   for the alias.
+    #   @return [Types::ConversationLogsResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAliasResponse AWS API Documentation
     #
     class GetBotAliasResponse < Struct.new(
@@ -1018,7 +1142,8 @@ module Aws::LexModelBuildingService
       :bot_name,
       :last_updated_date,
       :created_date,
-      :checksum)
+      :checksum,
+      :conversation_logs)
       include Aws::Structure
     end
 
@@ -1298,10 +1423,19 @@ module Aws::LexModelBuildingService
     #   @return [Types::Statement]
     #
     # @!attribute [rw] status
-    #   The status of the bot. If the bot is ready to run, the status is
-    #   `READY`. If there was a problem with building the bot, the status is
-    #   `FAILED` and the `failureReason` explains why the bot did not build.
-    #   If the bot was saved but not built, the status is `NOT BUILT`.
+    #   The status of the bot.
+    #
+    #   When the status is `BUILDING` Amazon Lex is building the bot for
+    #   testing and use.
+    #
+    #   If the status of the bot is `READY_BASIC_TESTING`, you can test the
+    #   bot using the exact utterances specified in the bot's intents. When
+    #   the bot is ready for full testing or to run, the status is `READY`.
+    #
+    #   If there was a problem with building the bot, the status is `FAILED`
+    #   and the `failureReason` field explains why the bot did not build.
+    #
+    #   If the bot was saved but not built, the status is `NOT_BUILT`.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -1375,6 +1509,11 @@ module Aws::LexModelBuildingService
     #   [1]: https://aws.amazon.com/lex/faqs#data-security
     #   @return [Boolean]
     #
+    # @!attribute [rw] detect_sentiment
+    #   Indicates whether user utterances should be sent to Amazon
+    #   Comprehend for sentiment analysis.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotResponse AWS API Documentation
     #
     class GetBotResponse < Struct.new(
@@ -1392,7 +1531,8 @@ module Aws::LexModelBuildingService
       :checksum,
       :version,
       :locale,
-      :child_directed)
+      :child_directed,
+      :detect_sentiment)
       include Aws::Structure
     end
 
@@ -1921,6 +2061,11 @@ module Aws::LexModelBuildingService
     #   Checksum of the intent.
     #   @return [String]
     #
+    # @!attribute [rw] kendra_configuration
+    #   Configuration information, if any, to connect to an Amazon Kendra
+    #   index with the `AMAZON.KendraSearchIntent` intent.
+    #   @return [Types::KendraConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntentResponse AWS API Documentation
     #
     class GetIntentResponse < Struct.new(
@@ -1938,7 +2083,8 @@ module Aws::LexModelBuildingService
       :last_updated_date,
       :created_date,
       :version,
-      :checksum)
+      :checksum,
+      :kendra_configuration)
       include Aws::Structure
     end
 
@@ -2109,6 +2255,15 @@ module Aws::LexModelBuildingService
     #   slot. For more information, see PutSlotType.
     #   @return [String]
     #
+    # @!attribute [rw] parent_slot_type_signature
+    #   The built-in slot type used as a parent for the slot type.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_type_configurations
+    #   Configuration information that extends the parent built-in slot
+    #   type.
+    #   @return [Array<Types::SlotTypeConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypeResponse AWS API Documentation
     #
     class GetSlotTypeResponse < Struct.new(
@@ -2119,7 +2274,9 @@ module Aws::LexModelBuildingService
       :created_date,
       :version,
       :checksum,
-      :value_selection_strategy)
+      :value_selection_strategy,
+      :parent_slot_type_signature,
+      :slot_type_configurations)
       include Aws::Structure
     end
 
@@ -2253,8 +2410,8 @@ module Aws::LexModelBuildingService
     #   @return [Array<String>]
     #
     # @!attribute [rw] status_type
-    #   To return utterances that were recognized and handled,
-    #   use`Detected`. To return utterances that were not recognized, use
+    #   To return utterances that were recognized and handled, use
+    #   `Detected`. To return utterances that were not recognized, use
     #   `Missed`.
     #   @return [String]
     #
@@ -2275,7 +2432,8 @@ module Aws::LexModelBuildingService
     #   An array of UtteranceList objects, each containing a list of
     #   UtteranceData objects describing the utterances that were processed
     #   by your bot. The response contains a maximum of 100 `UtteranceData`
-    #   objects for each version.
+    #   objects for each version. Amazon Lex returns the most frequent
+    #   utterances received by the bot in the last 15 days.
     #   @return [Array<Types::UtteranceList>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetUtterancesViewResponse AWS API Documentation
@@ -2346,6 +2504,202 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
+    # An internal Amazon Lex error occurred. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Provides configuration information for the AMAZON.KendraSearchIntent
+    # intent. When you use this intent, Amazon Lex searches the specified
+    # Amazon Kendra index and returns documents from the index that match
+    # the user's utterance. For more information, see [
+    # AMAZON.KendraSearchIntent][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html
+    #
+    # @note When making an API call, you may pass KendraConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         kendra_index: "KendraIndexArn", # required
+    #         query_filter_string: "QueryFilterString",
+    #         role: "roleArn", # required
+    #       }
+    #
+    # @!attribute [rw] kendra_index
+    #   The Amazon Resource Name (ARN) of the Amazon Kendra index that you
+    #   want the AMAZON.KendraSearchIntent intent to search. The index must
+    #   be in the same account and Region as the Amazon Lex bot. If the
+    #   Amazon Kendra index does not exist, you get an exception when you
+    #   call the `PutIntent` operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_filter_string
+    #   A query filter that Amazon Lex sends to Amazon Kendra to filter the
+    #   response from the query. The filter is in the format defined by
+    #   Amazon Kendra. For more information, see [Filtering queries][1].
+    #
+    #   You can override this filter string with a new filter string at
+    #   runtime.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kendra/latest/dg/filtering.html
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The Amazon Resource Name (ARN) of an IAM role that has permission to
+    #   search the Amazon Kendra index. The role must be in the same account
+    #   and Region as the Amazon Lex bot. If the role does not exist, you
+    #   get an exception when you call the `PutIntent` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/KendraConfiguration AWS API Documentation
+    #
+    class KendraConfiguration < Struct.new(
+      :kendra_index,
+      :query_filter_string,
+      :role)
+      include Aws::Structure
+    end
+
+    # The request exceeded a limit. Try your request again.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to get a list of tags
+    #   for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags associated with a resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
+    # Settings used to configure delivery mode and destination for
+    # conversation logs.
+    #
+    # @note When making an API call, you may pass LogSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_type: "AUDIO", # required, accepts AUDIO, TEXT
+    #         destination: "CLOUDWATCH_LOGS", # required, accepts CLOUDWATCH_LOGS, S3
+    #         kms_key_arn: "KmsKeyArn",
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] log_type
+    #   The type of logging to enable. Text logs are delivered to a
+    #   CloudWatch Logs log group. Audio logs are delivered to an S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   Where the logs will be delivered. Text logs are delivered to a
+    #   CloudWatch Logs log group. Audio logs are delivered to an S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS KMS customer managed key
+    #   for encrypting audio logs delivered to an S3 bucket. The key does
+    #   not apply to CloudWatch Logs and is optional for S3 buckets.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the CloudWatch Logs log group or
+    #   S3 bucket where the logs should be delivered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/LogSettingsRequest AWS API Documentation
+    #
+    class LogSettingsRequest < Struct.new(
+      :log_type,
+      :destination,
+      :kms_key_arn,
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # The settings for conversation logs.
+    #
+    # @!attribute [rw] log_type
+    #   The type of logging that is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination where logs are delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the key used to encrypt audio logs
+    #   in an S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the CloudWatch Logs log group or
+    #   S3 bucket where the logs are delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_prefix
+    #   The resource prefix is the first part of the S3 object key within
+    #   the S3 bucket that you specified to contain audio logs. For
+    #   CloudWatch Logs it is the prefix of the log stream name within the
+    #   log group that you specified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/LogSettingsResponse AWS API Documentation
+    #
+    class LogSettingsResponse < Struct.new(
+      :log_type,
+      :destination,
+      :kms_key_arn,
+      :resource_arn,
+      :resource_prefix)
+      include Aws::Structure
+    end
+
     # The message object that provides the message text and its type.
     #
     # @note When making an API call, you may pass Message
@@ -2377,6 +2731,33 @@ module Aws::LexModelBuildingService
       :content_type,
       :content,
       :group_number)
+      include Aws::Structure
+    end
+
+    # The resource specified in the request was not found. Check the
+    # resource and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The checksum of the resource that you are trying to change does not
+    # match the checksum in the request. Check the resource's checksum and
+    # try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PreconditionFailedException AWS API Documentation
+    #
+    class PreconditionFailedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2436,6 +2817,23 @@ module Aws::LexModelBuildingService
     #         bot_version: "Version", # required
     #         bot_name: "BotName", # required
     #         checksum: "String",
+    #         conversation_logs: {
+    #           log_settings: [ # required
+    #             {
+    #               log_type: "AUDIO", # required, accepts AUDIO, TEXT
+    #               destination: "CLOUDWATCH_LOGS", # required, accepts CLOUDWATCH_LOGS, S3
+    #               kms_key_arn: "KmsKeyArn",
+    #               resource_arn: "ResourceArn", # required
+    #             },
+    #           ],
+    #           iam_role_arn: "IamRoleArn", # required
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -2467,6 +2865,17 @@ module Aws::LexModelBuildingService
     #   `PreconditionFailedException` exception.
     #   @return [String]
     #
+    # @!attribute [rw] conversation_logs
+    #   Settings for conversation logs for the alias.
+    #   @return [Types::ConversationLogsRequest]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to add to the bot alias. You can only add tags when
+    #   you create an alias, you can't use the `PutBotAlias` operation to
+    #   update the tags on a bot alias. To update tags, use the
+    #   `TagResource` operation.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAliasRequest AWS API Documentation
     #
     class PutBotAliasRequest < Struct.new(
@@ -2474,7 +2883,9 @@ module Aws::LexModelBuildingService
       :description,
       :bot_version,
       :bot_name,
-      :checksum)
+      :checksum,
+      :conversation_logs,
+      :tags)
       include Aws::Structure
     end
 
@@ -2507,6 +2918,15 @@ module Aws::LexModelBuildingService
     #   The checksum for the current version of the alias.
     #   @return [String]
     #
+    # @!attribute [rw] conversation_logs
+    #   The settings that determine how Amazon Lex uses conversation logs
+    #   for the alias.
+    #   @return [Types::ConversationLogsResponse]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags associated with a bot.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAliasResponse AWS API Documentation
     #
     class PutBotAliasResponse < Struct.new(
@@ -2516,7 +2936,9 @@ module Aws::LexModelBuildingService
       :bot_name,
       :last_updated_date,
       :created_date,
-      :checksum)
+      :checksum,
+      :conversation_logs,
+      :tags)
       include Aws::Structure
     end
 
@@ -2559,7 +2981,14 @@ module Aws::LexModelBuildingService
     #         process_behavior: "SAVE", # accepts SAVE, BUILD
     #         locale: "en-US", # required, accepts en-US, en-GB, de-DE
     #         child_directed: false, # required
+    #         detect_sentiment: false,
     #         create_version: false,
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -2579,15 +3008,44 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] clarification_prompt
     #   When Amazon Lex doesn't understand the user's intent, it uses this
     #   message to get clarification. To specify how many times Amazon Lex
-    #   should repeate the clarification prompt, use the `maxAttempts`
-    #   field. If Amazon Lex still doesn't understand, it sends the message
-    #   in the `abortStatement` field.
+    #   should repeat the clarification prompt, use the `maxAttempts` field.
+    #   If Amazon Lex still doesn't understand, it sends the message in the
+    #   `abortStatement` field.
     #
     #   When you create a clarification prompt, make sure that it suggests
     #   the correct response from the user. for example, for a bot that
     #   orders pizza and drinks, you might create this clarification prompt:
     #   "What would you like to do? You can say 'Order a pizza' or
     #   'Order a drink.'"
+    #
+    #   If you have defined a fallback intent, it will be invoked if the
+    #   clarification prompt is repeated the number of times defined in the
+    #   `maxAttempts` field. For more information, see [
+    #   AMAZON.FallbackIntent][1].
+    #
+    #   If you don't define a clarification prompt, at runtime Amazon Lex
+    #   will return a 400 Bad Request exception in three cases:
+    #
+    #   * Follow-up prompt - When the user responds to a follow-up prompt
+    #     but does not provide an intent. For example, in response to a
+    #     follow-up prompt that says "Would you like anything else today?"
+    #     the user says "Yes." Amazon Lex will return a 400 Bad Request
+    #     exception because it does not have a clarification prompt to send
+    #     to the user to get an intent.
+    #
+    #   * Lambda function - When using a Lambda function, you return an
+    #     `ElicitIntent` dialog type. Since Amazon Lex does not have a
+    #     clarification prompt to get an intent from the user, it returns a
+    #     400 Bad Request exception.
+    #
+    #   * PutSession operation - When using the `PutSession` operation, you
+    #     send an `ElicitIntent` dialog type. Since Amazon Lex does not have
+    #     a clarification prompt to get an intent from the user, it returns
+    #     a 400 Bad Request exception.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html
     #   @return [Types::Prompt]
     #
     # @!attribute [rw] abort_statement
@@ -2607,6 +3065,14 @@ module Aws::LexModelBuildingService
     #   one of the intents. This intent might require the `CrustType` slot.
     #   You specify the `valueElicitationPrompt` field when you create the
     #   `CrustType` slot.
+    #
+    #   If you have defined a fallback intent the abort statement will not
+    #   be sent to the user, the fallback intent is used instead. For more
+    #   information, see [ AMAZON.FallbackIntent][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html
     #   @return [Types::Statement]
     #
     # @!attribute [rw] idle_session_ttl_in_seconds
@@ -2633,12 +3099,12 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] voice_id
     #   The Amazon Polly voice ID that you want Amazon Lex to use for voice
     #   interactions with the user. The locale configured for the voice must
-    #   match the locale of the bot. For more information, see [Available
-    #   Voices][1] in the *Amazon Polly Developer Guide*.
+    #   match the locale of the bot. For more information, see [Voices in
+    #   Amazon Polly][1] in the *Amazon Polly Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/voicelist.html
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/voicelist.html
     #   @return [String]
     #
     # @!attribute [rw] checksum
@@ -2702,8 +3168,23 @@ module Aws::LexModelBuildingService
     #   [1]: https://aws.amazon.com/lex/faqs#data-security
     #   @return [Boolean]
     #
-    # @!attribute [rw] create_version
+    # @!attribute [rw] detect_sentiment
+    #   When set to `true` user utterances are sent to Amazon Comprehend for
+    #   sentiment analysis. If you don't specify `detectSentiment`, the
+    #   default is `false`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] create_version
+    #   When set to `true` a new numbered version of the bot is created.
+    #   This is the same as calling the `CreateBotVersion` operation. If you
+    #   don't specify `createVersion`, the default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to add to the bot. You can only add tags when you
+    #   create a bot, you can't use the `PutBot` operation to update the
+    #   tags on a bot. To update tags, use the `TagResource` operation.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotRequest AWS API Documentation
     #
@@ -2719,7 +3200,9 @@ module Aws::LexModelBuildingService
       :process_behavior,
       :locale,
       :child_directed,
-      :create_version)
+      :detect_sentiment,
+      :create_version,
+      :tags)
       include Aws::Structure
     end
 
@@ -2748,13 +3231,21 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] status
     #   When you send a request to create a bot with `processBehavior` set
     #   to `BUILD`, Amazon Lex sets the `status` response element to
-    #   `BUILDING`. After Amazon Lex builds the bot, it sets `status` to
-    #   `READY`. If Amazon Lex can't build the bot, Amazon Lex sets
-    #   `status` to `FAILED`. Amazon Lex returns the reason for the failure
-    #   in the `failureReason` response element.
+    #   `BUILDING`.
     #
-    #   When you set `processBehavior`to `SAVE`, Amazon Lex sets the status
+    #   In the `READY_BASIC_TESTING` state you can test the bot with user
+    #   inputs that exactly match the utterances configured for the bot's
+    #   intents and values in the slot types.
+    #
+    #   If Amazon Lex can't build the bot, Amazon Lex sets `status` to
+    #   `FAILED`. Amazon Lex returns the reason for the failure in the
+    #   `failureReason` response element.
+    #
+    #   When you set `processBehavior` to `SAVE`, Amazon Lex sets the status
     #   code to `NOT BUILT`.
+    #
+    #   When the bot is in the `READY` state you can test and publish the
+    #   bot.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -2828,7 +3319,21 @@ module Aws::LexModelBuildingService
     #   @return [Boolean]
     #
     # @!attribute [rw] create_version
+    #   `True` if a new version of the bot was created. If the
+    #   `createVersion` field was not specified in the request, the
+    #   `createVersion` field is set to false in the response.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] detect_sentiment
+    #   `true` if the bot is configured to send user utterances to Amazon
+    #   Comprehend for sentiment analysis. If the `detectSentiment` field
+    #   was not specified in the request, the `detectSentiment` field is
+    #   `false` in the response.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags associated with the bot.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotResponse AWS API Documentation
     #
@@ -2848,7 +3353,9 @@ module Aws::LexModelBuildingService
       :version,
       :locale,
       :child_directed,
-      :create_version)
+      :create_version,
+      :detect_sentiment,
+      :tags)
       include Aws::Structure
     end
 
@@ -2879,6 +3386,7 @@ module Aws::LexModelBuildingService
     #             priority: 1,
     #             sample_utterances: ["Utterance"],
     #             response_card: "ResponseCard",
+    #             obfuscation_setting: "NONE", # accepts NONE, DEFAULT_OBFUSCATION
     #           },
     #         ],
     #         sample_utterances: ["Utterance"],
@@ -2950,6 +3458,11 @@ module Aws::LexModelBuildingService
     #         parent_intent_signature: "BuiltinIntentSignature",
     #         checksum: "String",
     #         create_version: false,
+    #         kendra_configuration: {
+    #           kendra_index: "KendraIndexArn", # required
+    #           query_filter_string: "QueryFilterString",
+    #           role: "roleArn", # required
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -3100,7 +3613,20 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] create_version
+    #   When set to `true` a new numbered version of the intent is created.
+    #   This is the same as calling the `CreateIntentVersion` operation. If
+    #   you do not specify `createVersion`, the default is `false`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] kendra_configuration
+    #   Configuration information required to use the
+    #   `AMAZON.KendraSearchIntent` intent to connect to an Amazon Kendra
+    #   index. For more information, see [ AMAZON.KendraSearchIntent][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html
+    #   @return [Types::KendraConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntentRequest AWS API Documentation
     #
@@ -3117,7 +3643,8 @@ module Aws::LexModelBuildingService
       :fulfillment_activity,
       :parent_intent_signature,
       :checksum,
-      :create_version)
+      :create_version,
+      :kendra_configuration)
       include Aws::Structure
     end
 
@@ -3194,7 +3721,15 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] create_version
+    #   `True` if a new version of the intent was created. If the
+    #   `createVersion` field was not specified in the request, the
+    #   `createVersion` field is set to false in the response.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] kendra_configuration
+    #   Configuration information, if any, required to connect to an Amazon
+    #   Kendra index and use the `AMAZON.KendraSearchIntent` intent.
+    #   @return [Types::KendraConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntentResponse AWS API Documentation
     #
@@ -3214,7 +3749,8 @@ module Aws::LexModelBuildingService
       :created_date,
       :version,
       :checksum,
-      :create_version)
+      :create_version,
+      :kendra_configuration)
       include Aws::Structure
     end
 
@@ -3233,6 +3769,14 @@ module Aws::LexModelBuildingService
     #         checksum: "String",
     #         value_selection_strategy: "ORIGINAL_VALUE", # accepts ORIGINAL_VALUE, TOP_RESOLUTION
     #         create_version: false,
+    #         parent_slot_type_signature: "CustomOrBuiltinSlotTypeName",
+    #         slot_type_configurations: [
+    #           {
+    #             regex_configuration: {
+    #               pattern: "RegexPattern", # required
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -3300,7 +3844,25 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] create_version
+    #   When set to `true` a new numbered version of the slot type is
+    #   created. This is the same as calling the `CreateSlotTypeVersion`
+    #   operation. If you do not specify `createVersion`, the default is
+    #   `false`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] parent_slot_type_signature
+    #   The built-in slot type used as the parent of the slot type. When you
+    #   define a parent slot type, the new slot type has all of the same
+    #   configuration as the parent.
+    #
+    #   Only `AMAZON.AlphaNumeric` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_type_configurations
+    #   Configuration information that extends the parent built-in slot
+    #   type. The configuration is added to the settings for the parent slot
+    #   type.
+    #   @return [Array<Types::SlotTypeConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotTypeRequest AWS API Documentation
     #
@@ -3310,7 +3872,9 @@ module Aws::LexModelBuildingService
       :enumeration_values,
       :checksum,
       :value_selection_strategy,
-      :create_version)
+      :create_version,
+      :parent_slot_type_signature,
+      :slot_type_configurations)
       include Aws::Structure
     end
 
@@ -3351,7 +3915,19 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] create_version
+    #   `True` if a new version of the slot type was created. If the
+    #   `createVersion` field was not specified in the request, the
+    #   `createVersion` field is set to false in the response.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] parent_slot_type_signature
+    #   The built-in slot type used as the parent of the slot type.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_type_configurations
+    #   Configuration information that extends the parent built-in slot
+    #   type.
+    #   @return [Array<Types::SlotTypeConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotTypeResponse AWS API Documentation
     #
@@ -3364,7 +3940,39 @@ module Aws::LexModelBuildingService
       :version,
       :checksum,
       :value_selection_strategy,
-      :create_version)
+      :create_version,
+      :parent_slot_type_signature,
+      :slot_type_configurations)
+      include Aws::Structure
+    end
+
+    # The resource that you are attempting to delete is referred to by
+    # another resource. Use this information to remove references to the
+    # resource that you are trying to delete.
+    #
+    # The body of the exception contains a JSON object that describes the
+    # resource.
+    #
+    # `\{ "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,`
+    #
+    # `"resourceReference": \{`
+    #
+    # `"name": string, "version": string \} \}`
+    #
+    # @!attribute [rw] reference_type
+    #   @return [String]
+    #
+    # @!attribute [rw] example_reference
+    #   Describes the resource that refers to the resource that you are
+    #   attempting to delete. This object is returned as part of the
+    #   `ResourceInUseException` exception.
+    #   @return [Types::ResourceReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :reference_type,
+      :example_reference)
       include Aws::Structure
     end
 
@@ -3415,6 +4023,7 @@ module Aws::LexModelBuildingService
     #         priority: 1,
     #         sample_utterances: ["Utterance"],
     #         response_card: "ResponseCard",
+    #         obfuscation_setting: "NONE", # accepts NONE, DEFAULT_OBFUSCATION
     #       }
     #
     # @!attribute [rw] name
@@ -3444,12 +4053,13 @@ module Aws::LexModelBuildingService
     #   @return [Types::Prompt]
     #
     # @!attribute [rw] priority
-    #   Directs Lex the order in which to elicit this slot value from the
-    #   user. For example, if the intent has two slots with priorities 1 and
-    #   2, AWS Lex first elicits a value for the slot with priority 1.
+    #   Directs Amazon Lex the order in which to elicit this slot value from
+    #   the user. For example, if the intent has two slots with priorities 1
+    #   and 2, AWS Amazon Lex first elicits a value for the slot with
+    #   priority 1.
     #
-    #   If multiple slots share the same priority, the order in which Lex
-    #   elicits values is arbitrary.
+    #   If multiple slots share the same priority, the order in which Amazon
+    #   Lex elicits values is arbitrary.
     #   @return [Integer]
     #
     # @!attribute [rw] sample_utterances
@@ -3465,6 +4075,19 @@ module Aws::LexModelBuildingService
     #   using text to reply.
     #   @return [String]
     #
+    # @!attribute [rw] obfuscation_setting
+    #   Determines whether a slot is obfuscated in conversation logs and
+    #   stored utterances. When you obfuscate a slot, the value is replaced
+    #   by the slot name in curly braces (\\\{\\}). For example, if the slot
+    #   name is "full\_name", obfuscated values are replaced with
+    #   "\\\{full\_name\\}". For more information, see [ Slot Obfuscation
+    #   ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/how-obfuscate.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/Slot AWS API Documentation
     #
     class Slot < Struct.new(
@@ -3476,7 +4099,30 @@ module Aws::LexModelBuildingService
       :value_elicitation_prompt,
       :priority,
       :sample_utterances,
-      :response_card)
+      :response_card,
+      :obfuscation_setting)
+      include Aws::Structure
+    end
+
+    # Provides configuration information for a slot type.
+    #
+    # @note When making an API call, you may pass SlotTypeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         regex_configuration: {
+    #           pattern: "RegexPattern", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] regex_configuration
+    #   A regular expression used to validate the value of a slot.
+    #   @return [Types::SlotTypeRegexConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/SlotTypeConfiguration AWS API Documentation
+    #
+    class SlotTypeConfiguration < Struct.new(
+      :regex_configuration)
       include Aws::Structure
     end
 
@@ -3514,6 +4160,44 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
+    # Provides a regular expression used to validate the value of a slot.
+    #
+    # @note When making an API call, you may pass SlotTypeRegexConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         pattern: "RegexPattern", # required
+    #       }
+    #
+    # @!attribute [rw] pattern
+    #   A regular expression used to validate the value of a slot.
+    #
+    #   Use a standard regular expression. Amazon Lex supports the following
+    #   characters in the regular expression:
+    #
+    #   * A-Z, a-z
+    #
+    #   * 0-9
+    #
+    #   * Unicode characters ("\\ u&lt;Unicode&gt;")
+    #
+    #   Represent Unicode characters with four digits, for example
+    #   "\\u0041" or "\\u005A".
+    #
+    #   The following regular expression operators are not supported:
+    #
+    #   * Infinite repeaters: *, +, or \\\{x,\\} with no upper bound.
+    #
+    #   * Wild card (.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/SlotTypeRegexConfiguration AWS API Documentation
+    #
+    class SlotTypeRegexConfiguration < Struct.new(
+      :pattern)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartImportRequest
     #   data as a hash:
     #
@@ -3521,6 +4205,12 @@ module Aws::LexModelBuildingService
     #         payload: "data", # required
     #         resource_type: "BOT", # required, accepts BOT, INTENT, SLOT_TYPE
     #         merge_strategy: "OVERWRITE_LATEST", # required, accepts OVERWRITE_LATEST, FAIL_ON_CONFLICT
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] payload
@@ -3554,12 +4244,19 @@ module Aws::LexModelBuildingService
     #     file.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to add to the imported bot. You can only add tags
+    #   when you import a bot, you can't add tags to an intent or slot
+    #   type.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartImportRequest AWS API Documentation
     #
     class StartImportRequest < Struct.new(
       :payload,
       :resource_type,
-      :merge_strategy)
+      :merge_strategy,
+      :tags)
       include Aws::Structure
     end
 
@@ -3584,6 +4281,10 @@ module Aws::LexModelBuildingService
     #   the reason for the failure using the `GetImport` operation.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags added to the imported bot.
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] created_date
     #   A timestamp for the date and time that the import job was requested.
     #   @return [Time]
@@ -3596,6 +4297,7 @@ module Aws::LexModelBuildingService
       :merge_strategy,
       :import_id,
       :import_status,
+      :tags,
       :created_date)
       include Aws::Structure
     end
@@ -3639,6 +4341,100 @@ module Aws::LexModelBuildingService
       :response_card)
       include Aws::Structure
     end
+
+    # A list of key/value pairs that identify a bot, bot alias, or bot
+    # channel. Tag keys and values can consist of Unicode letters, digits,
+    # white space, and any of the following symbols: \_ . : / = + - @.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key for the tag. Keys are not case-sensitive and must be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value associated with a key. The value may be an empty string
+    #   but it can't be null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel
+    #   to tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tag keys to add to the resource. If a tag key already
+    #   exists, the existing value is replaced with the new value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to remove the tags
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of tag keys to remove from the resource. If a tag key does
+    #   not exist on the resource, it is ignored.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Provides information about a single utterance that was made to your
     # bot.

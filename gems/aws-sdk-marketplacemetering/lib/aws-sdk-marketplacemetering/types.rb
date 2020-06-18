@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -20,7 +22,7 @@ module Aws::MarketplaceMetering
     #             timestamp: Time.now, # required
     #             customer_identifier: "CustomerIdentifier", # required
     #             dimension: "UsageDimension", # required
-    #             quantity: 1, # required
+    #             quantity: 1,
     #           },
     #         ],
     #         product_code: "ProductCode", # required
@@ -69,6 +71,165 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
+    # Exception thrown when the customer does not have a valid subscription
+    # for the product.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/CustomerNotEntitledException AWS API Documentation
+    #
+    class CustomerNotEntitledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The API is disabled in the Region.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/DisabledApiException AWS API Documentation
+    #
+    class DisabledApiException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A metering record has already been emitted by the same EC2 instance,
+    # ECS task, or EKS pod for the given \\\{usageDimension, timestamp\\}
+    # with a different usageQuantity.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/DuplicateRequestException AWS API Documentation
+    #
+    class DuplicateRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The submitted registration token has expired. This can happen if the
+    # buyer's browser takes too long to redirect to your page, the buyer
+    # has resubmitted the registration token, or your application has held
+    # on to the registration token for too long. Your SaaS registration
+    # website should redeem this token as soon as it is submitted by the
+    # buyer's browser.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ExpiredTokenException AWS API Documentation
+    #
+    class ExpiredTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An internal error has occurred. Retry your request. If the problem
+    # persists, post a message with details on the AWS forums.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/InternalServiceErrorException AWS API Documentation
+    #
+    class InternalServiceErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You have metered usage for a CustomerIdentifier that does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/InvalidCustomerIdentifierException AWS API Documentation
+    #
+    class InvalidCustomerIdentifierException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The endpoint being called is in a AWS Region different from your EC2
+    # instance, ECS task, or EKS pod. The Region of the Metering Service
+    # endpoint and the AWS Region of the resource must match.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/InvalidEndpointRegionException AWS API Documentation
+    #
+    class InvalidEndpointRegionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The product code passed does not match the product code used for
+    # publishing the product.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/InvalidProductCodeException AWS API Documentation
+    #
+    class InvalidProductCodeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Public Key version is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/InvalidPublicKeyVersionException AWS API Documentation
+    #
+    class InvalidPublicKeyVersionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # RegisterUsage must be called in the same AWS Region the ECS task was
+    # launched in. This prevents a container from hardcoding a Region (e.g.
+    # withRegion(“us-east-1”) when calling RegisterUsage.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/InvalidRegionException AWS API Documentation
+    #
+    class InvalidRegionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Registration token is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/InvalidTokenException AWS API Documentation
+    #
+    class InvalidTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The usage dimension does not match one of the UsageDimensions
+    # associated with products.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/InvalidUsageDimensionException AWS API Documentation
+    #
+    class InvalidUsageDimensionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass MeterUsageRequest
     #   data as a hash:
     #
@@ -76,8 +237,8 @@ module Aws::MarketplaceMetering
     #         product_code: "ProductCode", # required
     #         timestamp: Time.now, # required
     #         usage_dimension: "UsageDimension", # required
-    #         usage_quantity: 1, # required
-    #         dry_run: false, # required
+    #         usage_quantity: 1,
+    #         dry_run: false,
     #       }
     #
     # @!attribute [rw] product_code
@@ -87,8 +248,10 @@ module Aws::MarketplaceMetering
     #   @return [String]
     #
     # @!attribute [rw] timestamp
-    #   Timestamp of the hour, recorded in UTC. The seconds and milliseconds
-    #   portions of the timestamp will be ignored.
+    #   Timestamp, in UTC, for which the usage is being reported. Your
+    #   application can meter usage for up to one hour in the past. Make
+    #   sure the timestamp value is not before the start of the software
+    #   usage.
     #   @return [Time]
     #
     # @!attribute [rw] usage_dimension
@@ -97,14 +260,14 @@ module Aws::MarketplaceMetering
     #   @return [String]
     #
     # @!attribute [rw] usage_quantity
-    #   Consumption value for the hour.
+    #   Consumption value for the hour. Defaults to `0` if not specified.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the permissions required for the action, but
     #   does not make the request. If you have the permissions, the request
     #   returns DryRunOperation; otherwise, it returns
-    #   UnauthorizedException.
+    #   UnauthorizedException. Defaults to `false` if not specified.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsageRequest AWS API Documentation
@@ -126,6 +289,20 @@ module Aws::MarketplaceMetering
     #
     class MeterUsageResult < Struct.new(
       :metering_record_id)
+      include Aws::Structure
+    end
+
+    # AWS Marketplace does not support metering usage from the underlying
+    # platform. Currently, Amazon ECS, Amazon EKS, and AWS Fargate are
+    # supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/PlatformNotSupportedException AWS API Documentation
+    #
+    class PlatformNotSupportedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -224,6 +401,31 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
+    # The calls to the API are throttled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The timestamp value passed in the meterUsage() is out of allowed
+    # range.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/TimestampOutOfBoundsException AWS API Documentation
+    #
+    class TimestampOutOfBoundsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A UsageRecord indicates a quantity of usage for a given product,
     # customer, dimension and time.
     #
@@ -237,14 +439,15 @@ module Aws::MarketplaceMetering
     #         timestamp: Time.now, # required
     #         customer_identifier: "CustomerIdentifier", # required
     #         dimension: "UsageDimension", # required
-    #         quantity: 1, # required
+    #         quantity: 1,
     #       }
     #
     # @!attribute [rw] timestamp
-    #   Timestamp of the hour, recorded in UTC. The seconds and milliseconds
-    #   portions of the timestamp will be ignored.
+    #   Timestamp, in UTC, for which the usage is being reported.
     #
     #   Your application can meter usage for up to one hour in the past.
+    #   Make sure the timestamp value is not before the start of the
+    #   software usage.
     #   @return [Time]
     #
     # @!attribute [rw] customer_identifier
@@ -260,7 +463,7 @@ module Aws::MarketplaceMetering
     #
     # @!attribute [rw] quantity
     #   The quantity of usage consumed by the customer for the given
-    #   dimension and time.
+    #   dimension and time. Defaults to `0` if not specified.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/UsageRecord AWS API Documentation

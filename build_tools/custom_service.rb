@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'cgi'
 
@@ -54,12 +56,12 @@ module BuildTools
 
     def model_path(model_dir)
       path = File.expand_path("#{model_dir}/service-2.json", __FILE__)
-      File.exists?(path) ? path : nil
+      File.exist?(path) ? path : nil
     end
 
     def gem_dependencies
       {
-        'aws-sdk-core' => '>= 3.12\', \'< 4.0',
+        'aws-sdk-core' => '>= 3.46.1\', \'< 4.0',
         'aws-sigv4' => '~> 1.0'
       }
     end

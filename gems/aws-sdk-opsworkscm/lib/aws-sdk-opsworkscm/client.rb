@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:opsworkscm)
 
 module Aws::OpsWorksCM
+  # An API client for OpsWorksCM.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::OpsWorksCM::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::OpsWorksCM
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +109,7 @@ module Aws::OpsWorksCM
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::OpsWorksCM
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::OpsWorksCM
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::OpsWorksCM
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::OpsWorksCM
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::OpsWorksCM
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::OpsWorksCM
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::OpsWorksCM
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -208,6 +273,48 @@ module Aws::OpsWorksCM
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -318,6 +425,26 @@ module Aws::OpsWorksCM
     # @option params [String] :description
     #   A user-defined description of the backup.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A map that contains tag keys and tag values to attach to an AWS
+    #   OpsWorks-CM server backup.
+    #
+    #   * The key cannot be empty.
+    #
+    #   * The key can be a maximum of 127 characters, and can contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * The value can be a maximum 255 characters, and contain only Unicode
+    #     letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * Leading and trailing white spaces are trimmed from both the key and
+    #     value.
+    #
+    #   * A maximum of 50 user-applied tags is allowed for tag-supported AWS
+    #     OpsWorks-CM resources.
+    #
     # @return [Types::CreateBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBackupResponse#backup #backup} => Types::Backup
@@ -327,6 +454,12 @@ module Aws::OpsWorksCM
     #   resp = client.create_backup({
     #     server_name: "ServerName", # required
     #     description: "String",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -400,9 +533,52 @@ module Aws::OpsWorksCM
     # group rules, open Security Groups in the navigation pane of the EC2
     # management console.
     #
+    # To specify your own domain for a server, and provide your own
+    # self-signed or CA-signed certificate and private key, specify values
+    # for `CustomDomain`, `CustomCertificate`, and `CustomPrivateKey`.
+    #
     # @option params [Boolean] :associate_public_ip_address
     #   Associate a public IP address with a server that you are launching.
     #   Valid values are `true` or `false`. The default value is `true`.
+    #
+    # @option params [String] :custom_domain
+    #   An optional public endpoint of a server, such as
+    #   `https://aws.my-company.com`. To access the server, create a CNAME DNS
+    #   record in your preferred DNS service that points the custom domain to
+    #   the endpoint that is generated when the server is created (the value
+    #   of the CreateServer Endpoint attribute). You cannot access the server
+    #   by using the generated `Endpoint` value if the server is using a
+    #   custom domain. If you specify a custom domain, you must also specify
+    #   values for `CustomCertificate` and `CustomPrivateKey`.
+    #
+    # @option params [String] :custom_certificate
+    #   A PEM-formatted HTTPS certificate. The value can be be a single,
+    #   self-signed certificate, or a certificate chain. If you specify a
+    #   custom certificate, you must also specify values for `CustomDomain`
+    #   and `CustomPrivateKey`. The following are requirements for the
+    #   `CustomCertificate` value:
+    #
+    #   * You can provide either a self-signed, custom certificate, or the
+    #     full certificate chain.
+    #
+    #   * The certificate must be a valid X509 certificate, or a certificate
+    #     chain in PEM format.
+    #
+    #   * The certificate must be valid at the time of upload. A certificate
+    #     can't be used before its validity period begins (the certificate's
+    #     `NotBefore` date), or after it expires (the certificate's
+    #     `NotAfter` date).
+    #
+    #   * The certificate’s common name or subject alternative names (SANs),
+    #     if present, must match the value of `CustomDomain`.
+    #
+    #   * The certificate must match the value of `CustomPrivateKey`.
+    #
+    # @option params [String] :custom_private_key
+    #   A private key in PEM format for connecting to the server by using
+    #   HTTPS. The private key must not be encrypted; it cannot be protected
+    #   by a password or passphrase. If you specify a custom private key, you
+    #   must also specify values for `CustomDomain` and `CustomCertificate`.
     #
     # @option params [Boolean] :disable_automated_backup
     #   Enable or disable scheduled backups. Valid values are `true` or
@@ -410,7 +586,7 @@ module Aws::OpsWorksCM
     #
     # @option params [String] :engine
     #   The configuration management engine to use. Valid values include
-    #   `Chef` and `Puppet`.
+    #   `ChefAutomate` and `Puppet`.
     #
     # @option params [String] :engine_model
     #   The engine model of the server. Valid values in this release include
@@ -426,26 +602,33 @@ module Aws::OpsWorksCM
     #
     #   **Attributes accepted in a Chef createServer request:**
     #
-    #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is not
-    #     stored by AWS OpsWorks for Chef Automate. This private key is
-    #     required to access the Chef API. When no CHEF\_PIVOTAL\_KEY is set,
-    #     one is generated and returned in the response.
+    #   * `CHEF_AUTOMATE_PIVOTAL_KEY`\: A base64-encoded RSA public key. The
+    #     corresponding private key is required to access the Chef API. When
+    #     no CHEF\_AUTOMATE\_PIVOTAL\_KEY is set, a private key is generated
+    #     and returned in the response.
     #
-    #   * `CHEF_DELIVERY_ADMIN_PASSWORD`\: The password for the administrative
-    #     user in the Chef Automate GUI. The password length is a minimum of
-    #     eight characters, and a maximum of 32. The password can contain
-    #     letters, numbers, and special characters (!/@#$%^&amp;+=\_). The
-    #     password must contain at least one lower case letter, one upper case
-    #     letter, one number, and one special character. When no
-    #     CHEF\_DELIVERY\_ADMIN\_PASSWORD is set, one is generated and
-    #     returned in the response.
+    #   * `CHEF_AUTOMATE_ADMIN_PASSWORD`\: The password for the administrative
+    #     user in the Chef Automate web-based dashboard. The password length
+    #     is a minimum of eight characters, and a maximum of 32. The password
+    #     can contain letters, numbers, and special characters
+    #     (!/@#$%^&amp;+=\_). The password must contain at least one lower
+    #     case letter, one upper case letter, one number, and one special
+    #     character. When no CHEF\_AUTOMATE\_ADMIN\_PASSWORD is set, one is
+    #     generated and returned in the response.
     #
     #   **Attributes accepted in a Puppet createServer request:**
     #
     #   * `PUPPET_ADMIN_PASSWORD`\: To work with the Puppet Enterprise
     #     console, a password must use ASCII characters.
     #
-    #   ^
+    #   * `PUPPET_R10K_REMOTE`\: The r10k remote is the URL of your control
+    #     repository (for example,
+    #     ssh://git@your.git-repo.com:user/control-repo.git). Specifying an
+    #     r10k remote opens TCP port 8170.
+    #
+    #   * `PUPPET_R10K_PRIVATE_KEY`\: If you are using a private Git
+    #     repository, add PUPPET\_R10K\_PRIVATE\_KEY to specify a PEM-encoded
+    #     private SSH key.
     #
     # @option params [Integer] :backup_retention_count
     #   The number of automated backups that you want to keep. Whenever a new
@@ -468,9 +651,7 @@ module Aws::OpsWorksCM
     #   instance profile you need.
     #
     # @option params [required, String] :instance_type
-    #   The Amazon EC2 instance type to use. For example, `m4.large`.
-    #   Recommended instance types include `t2.medium` and greater, `m4.*`, or
-    #   `c4.xlarge` and greater.
+    #   The Amazon EC2 instance type to use. For example, `m5.large`.
     #
     # @option params [String] :key_pair
     #   The Amazon EC2 key pair to set for the instance. This parameter is
@@ -542,7 +723,28 @@ module Aws::OpsWorksCM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A map that contains tag keys and tag values to attach to an AWS
+    #   OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise
+    #   server.
+    #
+    #   * The key cannot be empty.
+    #
+    #   * The key can be a maximum of 127 characters, and can contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : / @`
+    #
+    #   * The value can be a maximum 255 characters, and contain only Unicode
+    #     letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : / @`
+    #
+    #   * Leading and trailing white spaces are trimmed from both the key and
+    #     value.
+    #
+    #   * A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM
+    #     server.
     #
     # @option params [String] :backup_id
     #   If you specify this field, AWS OpsWorks CM creates the server by using
@@ -556,6 +758,9 @@ module Aws::OpsWorksCM
     #
     #   resp = client.create_server({
     #     associate_public_ip_address: false,
+    #     custom_domain: "CustomDomain",
+    #     custom_certificate: "CustomCertificate",
+    #     custom_private_key: "CustomPrivateKey",
     #     disable_automated_backup: false,
     #     engine: "String",
     #     engine_model: "String",
@@ -576,6 +781,12 @@ module Aws::OpsWorksCM
     #     security_group_ids: ["String"],
     #     service_role_arn: "ServiceRoleArn", # required
     #     subnet_ids: ["String"],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #     backup_id: "BackupId",
     #   })
     #
@@ -586,6 +797,7 @@ module Aws::OpsWorksCM
     #   resp.server.server_name #=> String
     #   resp.server.created_at #=> Time
     #   resp.server.cloud_formation_stack_arn #=> String
+    #   resp.server.custom_domain #=> String
     #   resp.server.disable_automated_backup #=> Boolean
     #   resp.server.endpoint #=> String
     #   resp.server.engine #=> String
@@ -681,8 +893,7 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Describes your account attributes, and creates requests to increase
-    # limits before they are reached or exceeded.
+    # Describes your OpsWorks-CM account attributes.
     #
     # This operation is synchronous.
     #
@@ -732,6 +943,8 @@ module Aws::OpsWorksCM
     #
     #   * {Types::DescribeBackupsResponse#backups #backups} => Array&lt;Types::Backup&gt;
     #   * {Types::DescribeBackupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -816,6 +1029,8 @@ module Aws::OpsWorksCM
     #   * {Types::DescribeEventsResponse#server_events #server_events} => Array&lt;Types::ServerEvent&gt;
     #   * {Types::DescribeEventsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_events({
@@ -876,6 +1091,11 @@ module Aws::OpsWorksCM
     #   resp.engine_attributes[0].name #=> String
     #   resp.engine_attributes[0].value #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * node_associated
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatus AWS API Documentation
     #
     # @overload describe_node_association_status(params = {})
@@ -909,6 +1129,8 @@ module Aws::OpsWorksCM
     #   * {Types::DescribeServersResponse#servers #servers} => Array&lt;Types::Server&gt;
     #   * {Types::DescribeServersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_servers({
@@ -925,6 +1147,7 @@ module Aws::OpsWorksCM
     #   resp.servers[0].server_name #=> String
     #   resp.servers[0].created_at #=> Time
     #   resp.servers[0].cloud_formation_stack_arn #=> String
+    #   resp.servers[0].custom_domain #=> String
     #   resp.servers[0].disable_automated_backup #=> Boolean
     #   resp.servers[0].endpoint #=> String
     #   resp.servers[0].engine #=> String
@@ -1031,27 +1254,34 @@ module Aws::OpsWorksCM
     # DELETING.
     #
     # @option params [required, String] :export_attribute_name
-    #   The name of the export attribute. Currently supported export attribute
-    #   is "Userdata" which exports a userdata script filled out with
-    #   parameters provided in the `InputAttributes` list.
+    #   The name of the export attribute. Currently, the supported export
+    #   attribute is `Userdata`. This exports a user data script that includes
+    #   parameters and values provided in the `InputAttributes` list.
     #
     # @option params [required, String] :server_name
-    #   The name of the Server to which the attribute is being exported from
+    #   The name of the server from which you are exporting the attribute.
     #
     # @option params [Array<Types::EngineAttribute>] :input_attributes
-    #   The list of engine attributes. The list type is `EngineAttribute`.
-    #   `EngineAttribute` is a pair of attribute name and value. For
-    #   `ExportAttributeName` "Userdata", currently supported input
-    #   attribute names are: - "RunList": For Chef, an ordered list of roles
-    #   and/or recipes that are run in the exact order. For Puppet, this
-    #   parameter is ignored. - "OrganizationName": For Chef, an
-    #   organization name. AWS OpsWorks for Chef Server always creates the
-    #   organization "default". For Puppet, this parameter is ignored. -
-    #   "NodeEnvironment": For Chef, a node environment (eg. development,
-    #   staging, onebox). For Puppet, this parameter is ignored. -
-    #   "NodeClientVersion": For Chef, version of Chef Engine (3 numbers
-    #   separated by dots, eg. "13.8.5"). If empty, it uses the latest one.
-    #   For Puppet, this parameter is ignored.
+    #   The list of engine attributes. The list type is `EngineAttribute`. An
+    #   `EngineAttribute` list item is a pair that includes an attribute name
+    #   and its value. For the `Userdata` ExportAttributeName, the following
+    #   are supported engine attribute names.
+    #
+    #   * **RunList** In Chef, a list of roles or recipes that are run in the
+    #     specified order. In Puppet, this parameter is ignored.
+    #
+    #   * **OrganizationName** In Chef, an organization name. AWS OpsWorks for
+    #     Chef Automate always creates the organization `default`. In Puppet,
+    #     this parameter is ignored.
+    #
+    #   * **NodeEnvironment** In Chef, a node environment (for example,
+    #     development, staging, or one-box). In Puppet, this parameter is
+    #     ignored.
+    #
+    #   * **NodeClientVersion** In Chef, the version of the Chef engine (three
+    #     numbers separated by dots, such as 13.8.5). If this attribute is
+    #     empty, OpsWorks for Chef Automate uses the most current version. In
+    #     Puppet, this parameter is ignored.
     #
     # @return [Types::ExportServerEngineAttributeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1086,12 +1316,77 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
+    # Returns a list of tags that are applied to the specified AWS OpsWorks
+    # for Chef Automate or AWS OpsWorks for Puppet Enterprise servers or
+    # backups.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Number (ARN) of an AWS OpsWorks for Chef Automate
+    #   or AWS OpsWorks for Puppet Enterprise server for which you want to
+    #   show applied tags. For example,
+    #   `arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE`.
+    #
+    # @option params [String] :next_token
+    #   NextToken is a string that is returned in some command responses. It
+    #   indicates that not all entries have been returned, and that you must
+    #   run at least one more request to get remaining items. To get remaining
+    #   results, call `ListTagsForResource` again, and assign the token from
+    #   the previous results as the value of the `nextToken` parameter. If
+    #   there are no more results, the response object's `nextToken`
+    #   parameter value is `null`. Setting a `nextToken` value that was not
+    #   returned in your previous results causes an
+    #   `InvalidNextTokenException` to occur.
+    #
+    # @option params [Integer] :max_results
+    #   To receive a paginated response, use this parameter to specify the
+    #   maximum number of results to be returned with a single call. If the
+    #   number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AWSOpsWorksCMResourceArn", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Restores a backup to a server that is in a `CONNECTION_LOST`,
     # `HEALTHY`, `RUNNING`, `UNHEALTHY`, or `TERMINATED` state. When you run
     # RestoreServer, the server's EC2 instance is deleted, and a new EC2
     # instance is configured. RestoreServer maintains the existing server
     # endpoint, so configuration management of the server's client devices
     # (nodes) should continue to work.
+    #
+    # Restoring from a backup is performed by creating a new EC2 instance.
+    # If restoration is successful, and the server is in a `HEALTHY` state,
+    # AWS OpsWorks CM switches traffic over to the new instance. After
+    # restoration is finished, the old EC2 instance is maintained in a
+    # `Running` or `Stopped` state, but is eventually terminated.
     #
     # This operation is asynchronous.
     #
@@ -1107,11 +1402,11 @@ module Aws::OpsWorksCM
     #   The name of the server that you want to restore.
     #
     # @option params [String] :instance_type
-    #   The type of the instance to create. Valid values must be specified in
-    #   the following format: `^([cm][34]|t2).*` For example, `m4.large`.
-    #   Valid values are `t2.medium`, `m4.large`, and `m4.2xlarge`. If you do
-    #   not specify this parameter, RestoreServer uses the instance type from
-    #   the specified backup.
+    #   The type of instance to restore. Valid values must be specified in the
+    #   following format: `^([cm][34]|t2).*` For example, `m5.large`. Valid
+    #   values are `m5.large`, `r5.xlarge`, and `r5.2xlarge`. If you do not
+    #   specify this parameter, RestoreServer uses the instance type from the
+    #   specified backup.
     #
     # @option params [String] :key_pair
     #   The name of the key pair to set on the new EC2 instance. This can be
@@ -1155,6 +1450,20 @@ module Aws::OpsWorksCM
     #   Engine attributes that are specific to the server on which you want to
     #   run maintenance.
     #
+    #   **Attributes accepted in a StartMaintenance request for Chef**
+    #
+    #   * `CHEF_MAJOR_UPGRADE`\: If a Chef Automate server is eligible for
+    #     upgrade to Chef Automate 2, add this engine attribute to a
+    #     `StartMaintenance` request and set the value to `true` to upgrade
+    #     the server to Chef Automate 2. For more information, see [Upgrade an
+    #     AWS OpsWorks for Chef Automate Server to Chef Automate 2][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html
+    #
     # @return [Types::StartMaintenanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartMaintenanceResponse#server #server} => Types::Server
@@ -1178,6 +1487,7 @@ module Aws::OpsWorksCM
     #   resp.server.server_name #=> String
     #   resp.server.created_at #=> Time
     #   resp.server.cloud_formation_stack_arn #=> String
+    #   resp.server.custom_domain #=> String
     #   resp.server.disable_automated_backup #=> Boolean
     #   resp.server.endpoint #=> String
     #   resp.server.engine #=> String
@@ -1207,6 +1517,85 @@ module Aws::OpsWorksCM
     # @param [Hash] params ({})
     def start_maintenance(params = {}, options = {})
       req = build_request(:start_maintenance, params)
+      req.send_request(options)
+    end
+
+    # Applies tags to an AWS OpsWorks for Chef Automate or AWS OpsWorks for
+    # Puppet Enterprise server, or to server backups.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Number (ARN) of a resource to which you want to
+    #   apply tags. For example,
+    #   `arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE`.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   A map that contains tag keys and tag values to attach to AWS
+    #   OpsWorks-CM servers or backups.
+    #
+    #   * The key cannot be empty.
+    #
+    #   * The key can be a maximum of 127 characters, and can contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * The value can be a maximum 255 characters, and contain only Unicode
+    #     letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * Leading and trailing white spaces are trimmed from both the key and
+    #     value.
+    #
+    #   * A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM
+    #     server or backup.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AWSOpsWorksCMResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes specified tags from an AWS OpsWorks-CM server or backup.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Number (ARN) of a resource from which you want to
+    #   remove tags. For example,
+    #   `arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE`.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of tags that you want to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AWSOpsWorksCMResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1259,6 +1648,7 @@ module Aws::OpsWorksCM
     #   resp.server.server_name #=> String
     #   resp.server.created_at #=> Time
     #   resp.server.cloud_formation_stack_arn #=> String
+    #   resp.server.custom_domain #=> String
     #   resp.server.disable_automated_backup #=> Boolean
     #   resp.server.endpoint #=> String
     #   resp.server.engine #=> String
@@ -1294,8 +1684,7 @@ module Aws::OpsWorksCM
     # Updates engine-specific attributes on a specified server. The server
     # enters the `MODIFYING` state when this operation is in progress. Only
     # one update can occur at a time. You can use this command to reset a
-    # Chef server's private key (`CHEF_PIVOTAL_KEY`), a Chef server's
-    # admin password (`CHEF_DELIVERY_ADMIN_PASSWORD`), or a Puppet server's
+    # Chef server's public key (`CHEF_PIVOTAL_KEY`) or a Puppet server's
     # admin password (`PUPPET_ADMIN_PASSWORD`).
     #
     # This operation is asynchronous.
@@ -1334,6 +1723,7 @@ module Aws::OpsWorksCM
     #   resp.server.server_name #=> String
     #   resp.server.created_at #=> Time
     #   resp.server.cloud_formation_stack_arn #=> String
+    #   resp.server.custom_domain #=> String
     #   resp.server.disable_automated_backup #=> Boolean
     #   resp.server.endpoint #=> String
     #   resp.server.engine #=> String
@@ -1379,7 +1769,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.35.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -1396,7 +1786,7 @@ module Aws::OpsWorksCM
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #
@@ -1445,9 +1835,9 @@ module Aws::OpsWorksCM
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name     | params                              | :delay   | :max_attempts |
-    # | --------------- | ----------------------------------- | -------- | ------------- |
-    # | node_associated | {#describe_node_association_status} | 15       | 15            |
+    # | waiter_name     | params                                    | :delay   | :max_attempts |
+    # | --------------- | ----------------------------------------- | -------- | ------------- |
+    # | node_associated | {Client#describe_node_association_status} | 15       | 15            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

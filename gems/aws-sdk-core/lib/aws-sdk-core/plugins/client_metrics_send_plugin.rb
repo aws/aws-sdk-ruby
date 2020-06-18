@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'date'
 
 module Aws
@@ -7,7 +9,8 @@ module Aws
       def add_handlers(handlers, config)
         if config.client_side_monitoring && config.client_side_monitoring_port
           # AttemptHandler comes just before we would retry an error.
-          handlers.add(AttemptHandler, step: :sign, priority: 95)
+          # Or before we would follow redirects.
+          handlers.add(AttemptHandler, step: :sign, priority: 39)
           # LatencyHandler is as close to sending as possible.
           handlers.add(LatencyHandler, step: :sign, priority: 0)
         end
@@ -45,6 +48,9 @@ module Aws
           context.metadata[:current_call_attempt] = call_attempt
 
           resp = @handler.call(context)
+          if context.metadata[:redirect_region]
+            call_attempt.region = context.metadata[:redirect_region]
+          end
           headers = context.http_response.headers
           if headers.include?("x-amz-id-2")
             call_attempt.x_amz_id_2 = headers["x-amz-id-2"]

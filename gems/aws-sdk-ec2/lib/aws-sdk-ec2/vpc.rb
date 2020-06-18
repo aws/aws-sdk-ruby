@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2
+
   class Vpc
 
     extend Aws::Deprecations
@@ -21,6 +24,7 @@ module Aws::EC2
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -141,10 +145,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Vpc]
-    def wait_until_available(options = {})
+    def wait_until_available(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::VpcAvailable.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(vpc_ids: [@id]))
       Vpc.new({
         id: @id,
@@ -158,10 +162,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Vpc]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::VpcExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(vpc_ids: [@id]))
       Vpc.new({
         id: @id,
@@ -174,7 +178,8 @@ module Aws::EC2
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -187,13 +192,15 @@ module Aws::EC2
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -224,17 +231,16 @@ module Aws::EC2
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -269,7 +275,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpc.associate_dhcp_options({
-    #     dhcp_options_id: "String", # required
+    #     dhcp_options_id: "DefaultingDhcpOptionsId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -293,7 +299,7 @@ module Aws::EC2
     #   vpc.attach_classic_link_instance({
     #     dry_run: false,
     #     groups: ["String"], # required
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -318,7 +324,7 @@ module Aws::EC2
     #
     #   vpc.attach_internet_gateway({
     #     dry_run: false,
-    #     internet_gateway_id: "String", # required
+    #     internet_gateway_id: "InternetGatewayId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -427,23 +433,40 @@ module Aws::EC2
     #     availability_zone_id: "String",
     #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
+    #     outpost_arn: "String",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :availability_zone
-    #   The Availability Zone for the subnet.
+    #   The Availability Zone or Local Zone for the subnet.
     #
     #   Default: AWS selects one for you. If you create more than one subnet
-    #   in your VPC, we may not necessarily select a different zone for each
+    #   in your VPC, we do not necessarily select a different zone for each
     #   subnet.
+    #
+    #   To create a subnet in a Local Zone, set this value to the Local Zone
+    #   ID, for example `us-west-2-lax-1a`. For information about the Regions
+    #   that support Local Zones, see [Available Regions][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #   To create a subnet in an Outpost, set this value to the Availability
+    #   Zone for the Outpost and specify the Outpost ARN.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
     # @option options [String] :availability_zone_id
-    #   The AZ ID of the subnet.
+    #   The AZ ID or the Local Zone ID of the subnet.
     # @option options [required, String] :cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For example,
     #   `10.0.0.0/24`.
     # @option options [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
+    # @option options [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost. If you specify an
+    #   Outpost ARN, you must also specify the Availability Zone of the
+    #   Outpost subnet.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -478,14 +501,57 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
       resp = @client.create_tags(options)
+      options[:tags].each do |t|
+        batch << Tag.new(
+          resource_id: @id,
+          key: t[:key],
+          value: t[:value],
+          client: @client
+        )
+      end
+      Tag::Collection.new([batch], size: batch.size)
+    end
+
+    # @example Request syntax with placeholder values
+    #
+    #   tag = vpc.delete_tags({
+    #     dry_run: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<Types::Tag>] :tags
+    #   The tags to delete. Specify a tag key and an optional tag value to
+    #   delete specific tags. If you specify a tag key without a tag value, we
+    #   delete any tag with this key regardless of its value. If you specify a
+    #   tag key with an empty string as the tag value, we delete the tag only
+    #   if its value is an empty string.
+    #
+    #   If you omit this parameter, we delete all user-defined tags for the
+    #   specified resources. We do not delete AWS-generated tags (tags that
+    #   have the `aws:` prefix).
+    # @return [Tag::Collection]
+    def delete_tags(options = {})
+      batch = []
+      options = Aws::Util.deep_merge(options, resources: [@id])
+      resp = @client.delete_tags(options)
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -540,7 +606,7 @@ module Aws::EC2
     #
     #   vpc.detach_classic_link_instance({
     #     dry_run: false,
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -561,7 +627,7 @@ module Aws::EC2
     #
     #   vpc.detach_internet_gateway({
     #     dry_run: false,
-    #     internet_gateway_id: "String", # required
+    #     internet_gateway_id: "InternetGatewayId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -672,10 +738,10 @@ module Aws::EC2
     #   The ID of the VPC with which you are creating the VPC peering
     #   connection. You must specify this parameter in the request.
     # @option options [String] :peer_region
-    #   The region code for the accepter VPC, if the accepter VPC is located
-    #   in a region other than the region in which you make the request.
+    #   The Region code for the accepter VPC, if the accepter VPC is located
+    #   in a Region other than the Region in which you make the request.
     #
-    #   Default: The region in which you make the request.
+    #   Default: The Region in which you make the request.
     # @return [VpcPeeringConnection]
     def request_vpc_peering_connection(options = {})
       options = options.merge(vpc_id: @id)
@@ -699,7 +765,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     vpc_peering_connection_ids: ["String"],
+    #     vpc_peering_connection_ids: ["VpcPeeringConnectionId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -754,20 +820,22 @@ module Aws::EC2
     # @return [VpcPeeringConnection::Collection]
     def accepted_vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "accepter-vpc-info.vpc-id",
           values: [@id]
         }])
         resp = @client.describe_vpc_peering_connections(options)
-        resp.data.vpc_peering_connections.each do |v|
-          batch << VpcPeeringConnection.new(
-            id: v.vpc_peering_connection_id,
-            data: v,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.vpc_peering_connections.each do |v|
+            batch << VpcPeeringConnection.new(
+              id: v.vpc_peering_connection_id,
+              data: v,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       VpcPeeringConnection::Collection.new(batches)
     end
@@ -793,17 +861,18 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     instance_ids: ["String"],
+    #     instance_ids: ["InstanceId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `affinity` - The affinity setting for an instance running on a
     #     Dedicated Host (`default` \| `host`).
     #
-    #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The instance architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
@@ -841,6 +910,7 @@ module Aws::EC2
     #     running, if applicable.
     #
     #   * `hypervisor` - The hypervisor type of the instance (`ovm` \| `xen`).
+    #     The value `xen` is used for both Xen and Nitro hypervisors.
     #
     #   * `iam-instance-profile.arn` - The instance profile associated with
     #     the instance. Specified as an ARN.
@@ -881,6 +951,16 @@ module Aws::EC2
     #     and so on).
     #
     #   * `launch-time` - The time when the instance was launched.
+    #
+    #   * `metadata-options.http-tokens` - The metadata request authorization
+    #     state (`optional` \| `required`)
+    #
+    #   * `metadata-options.http-put-response-hop-limit` - The http metadata
+    #     request put response hop limit (integer, possible values `1` to
+    #     `64`)
+    #
+    #   * `metadata-options.http-endpoint` - Enable or disable metadata access
+    #     on http endpoint (`enabled` \| `disabled`)
     #
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).
@@ -987,8 +1067,11 @@ module Aws::EC2
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
     #
-    #   * `platform` - The platform. Use `windows` if you have Windows
-    #     instances; otherwise, leave blank.
+    #   * `placement-partition-number` - The partition in which the instance
+    #     is located.
+    #
+    #   * `platform` - The platform. To list only Windows instances, use
+    #     `windows`.
     #
     #   * `private-dns-name` - The private IPv4 DNS name of the instance.
     #
@@ -1057,7 +1140,7 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
     # @option options [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     # @option options [Boolean] :dry_run
@@ -1100,7 +1183,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     internet_gateway_ids: ["String"],
+    #     internet_gateway_ids: ["InternetGatewayId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -1138,20 +1221,22 @@ module Aws::EC2
     # @return [InternetGateway::Collection]
     def internet_gateways(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "attachment.vpc-id",
           values: [@id]
         }])
         resp = @client.describe_internet_gateways(options)
-        resp.data.internet_gateways.each do |i|
-          batch << InternetGateway.new(
-            id: i.internet_gateway_id,
-            data: i,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.internet_gateways.each do |i|
+            batch << InternetGateway.new(
+              id: i.internet_gateway_id,
+              data: i,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       InternetGateway::Collection.new(batches)
     end
@@ -1166,7 +1251,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     network_acl_ids: ["String"],
+    #     network_acl_ids: ["NetworkAclId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -1234,20 +1319,22 @@ module Aws::EC2
     # @return [NetworkAcl::Collection]
     def network_acls(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_network_acls(options)
-        resp.data.network_acls.each do |n|
-          batch << NetworkAcl.new(
-            id: n.network_acl_id,
-            data: n,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.network_acls.each do |n|
+            batch << NetworkAcl.new(
+              id: n.network_acl_id,
+              data: n,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       NetworkAcl::Collection.new(batches)
     end
@@ -1262,7 +1349,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     network_interface_ids: ["String"],
+    #     network_interface_ids: ["NetworkInterfaceId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -1298,7 +1385,7 @@ module Aws::EC2
     #
     #   * `attachment.attachment-id` - The ID of the interface attachment.
     #
-    #   * `attachment.attach.time` - The time that the network interface was
+    #   * `attachment.attach-time` - The time that the network interface was
     #     attached to an instance.
     #
     #   * `attachment.delete-on-termination` - Indicates whether the
@@ -1353,7 +1440,7 @@ module Aws::EC2
     #     being managed by an AWS service (for example, AWS Management
     #     Console, Auto Scaling, and so on).
     #
-    #   * `source-desk-check` - Indicates whether the network interface
+    #   * `source-dest-check` - Indicates whether the network interface
     #     performs source/destination checking. A value of `true` means
     #     checking is enabled, and `false` means checking is disabled. The
     #     value must be `false` for the network interface to perform network
@@ -1419,7 +1506,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     vpc_peering_connection_ids: ["String"],
+    #     vpc_peering_connection_ids: ["VpcPeeringConnectionId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -1474,20 +1561,22 @@ module Aws::EC2
     # @return [VpcPeeringConnection::Collection]
     def requested_vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "requester-vpc-info.vpc-id",
           values: [@id]
         }])
         resp = @client.describe_vpc_peering_connections(options)
-        resp.data.vpc_peering_connections.each do |v|
-          batch << VpcPeeringConnection.new(
-            id: v.vpc_peering_connection_id,
-            data: v,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.vpc_peering_connections.each do |v|
+            batch << VpcPeeringConnection.new(
+              id: v.vpc_peering_connection_id,
+              data: v,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       VpcPeeringConnection::Collection.new(batches)
     end
@@ -1502,7 +1591,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     route_table_ids: ["String"],
+    #     route_table_ids: ["RouteTableId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -1618,14 +1707,14 @@ module Aws::EC2
     #       },
     #     ],
     #     group_ids: ["String"],
-    #     group_names: ["String"],
+    #     group_names: ["SecurityGroupName"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters. If using multiple filters for rules, the results
-    #   include security groups for which any combination of rules - not
-    #   necessarily a single rule - match all filters.
+    #   The filters. If using multiple filters for rules, the results include
+    #   security groups for which any combination of rules - not necessarily a
+    #   single rule - match all filters.
     #
     #   * `description` - The description of the security group.
     #
@@ -1702,12 +1791,12 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC specified when the security group was
     #     created.
     # @option options [Array<String>] :group_ids
-    #   One or more security group IDs. Required for security groups in a
+    #   The IDs of the security groups. Required for security groups in a
     #   nondefault VPC.
     #
     #   Default: Describes all your security groups.
     # @option options [Array<String>] :group_names
-    #   \[EC2-Classic and default VPC only\] One or more security group names.
+    #   \[EC2-Classic and default VPC only\] The names of the security groups.
     #   You can specify either the security group name or the security group
     #   ID. For security groups in a nondefault VPC, use the `group-name`
     #   filter to describe security groups by name.
@@ -1750,7 +1839,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     subnet_ids: ["String"],
+    #     subnet_ids: ["SubnetId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -1815,20 +1904,22 @@ module Aws::EC2
     # @return [Subnet::Collection]
     def subnets(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_subnets(options)
-        resp.data.subnets.each do |s|
-          batch << Subnet.new(
-            id: s.subnet_id,
-            data: s,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.subnets.each do |s|
+            batch << Subnet.new(
+              id: s.subnet_id,
+              data: s,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       Subnet::Collection.new(batches)
     end
@@ -1855,8 +1946,8 @@ module Aws::EC2
 
     def yield_waiter_and_warn(waiter, &block)
       if !@waiter_block_warned
-        msg = "pass options to configure the waiter; "
-        msg << "yielding the waiter is deprecated"
+        msg = "pass options to configure the waiter; "\
+              "yielding the waiter is deprecated"
         warn(msg)
         @waiter_block_warned = true
       end
@@ -1864,7 +1955,9 @@ module Aws::EC2
     end
 
     def separate_params_and_options(options)
-      opts = Set.new([:client, :max_attempts, :delay, :before_attempt, :before_wait])
+      opts = Set.new(
+        [:client, :max_attempts, :delay, :before_attempt, :before_wait]
+      )
       waiter_opts = {}
       waiter_params = {}
       options.each_pair do |key, value|

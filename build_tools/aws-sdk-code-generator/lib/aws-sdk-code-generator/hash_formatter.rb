@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AwsSdkCodeGenerator
   class HashFormatter
 
@@ -35,7 +37,7 @@ module AwsSdkCodeGenerator
       when Array then array(obj, i:i)
       when String then @quote_strings ? obj.inspect : obj
       when Symbol then obj.inspect
-      when Fixnum, true, false then obj.inspect
+      when Integer, true, false then obj.inspect
       else raise ArgumentError, "unsupported value `#{obj.class}'"
       end
     end

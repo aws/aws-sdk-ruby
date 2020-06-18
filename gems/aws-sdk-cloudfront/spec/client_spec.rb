@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'spec_helper'
 
 module Aws
@@ -32,6 +34,25 @@ module Aws
         })
         expect {
           client.list_distributions(max_items: 1)
+        }.not_to raise_error
+      end
+
+      it 'supports incomplete stubs for paginators' do
+        client = Client.new(:stub_responses => true)
+        expect {
+          client.stub_data(
+            :list_cloud_front_origin_access_identities,
+            {
+              cloud_front_origin_access_identity_list: {
+                items: [
+                  {
+                    id: "foo",
+                    s3_canonical_user_id: "bar"
+                  }
+                ]
+              }
+            }
+          )
         }.not_to raise_error
       end
 

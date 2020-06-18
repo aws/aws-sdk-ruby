@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -7,6 +9,306 @@
 
 module Aws::Lightsail
   module Types
+
+    # Lightsail throws this exception when the user cannot be authenticated
+    # or uses invalid credentials to access a resource.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      include Aws::Structure
+    end
+
+    # Lightsail throws this exception when an account is still in the setup
+    # in progress state.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AccountSetupInProgressException AWS API Documentation
+    #
+    class AccountSetupInProgressException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      include Aws::Structure
+    end
+
+    # Describes an add-on that is enabled for an Amazon Lightsail resource.
+    #
+    # @!attribute [rw] name
+    #   The name of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_time_of_day
+    #   The daily time when an automatic snapshot is created.
+    #
+    #   The time shown is in `HH:00` format, and in Coordinated Universal
+    #   Time (UTC).
+    #
+    #   The snapshot is automatically created between the time shown and up
+    #   to 45 minutes after.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_snapshot_time_of_day
+    #   The next daily time an automatic snapshot will be created.
+    #
+    #   The time shown is in `HH:00` format, and in Coordinated Universal
+    #   Time (UTC).
+    #
+    #   The snapshot is automatically created between the time shown and up
+    #   to 45 minutes after.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AddOn AWS API Documentation
+    #
+    class AddOn < Struct.new(
+      :name,
+      :status,
+      :snapshot_time_of_day,
+      :next_snapshot_time_of_day)
+      include Aws::Structure
+    end
+
+    # Describes a request to enable, modify, or disable an add-on for an
+    # Amazon Lightsail resource.
+    #
+    # <note markdown="1"> An additional cost may be associated with enabling add-ons. For more
+    # information, see the [Lightsail pricing page][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/lightsail/pricing/
+    #
+    # @note When making an API call, you may pass AddOnRequest
+    #   data as a hash:
+    #
+    #       {
+    #         add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #         auto_snapshot_add_on_request: {
+    #           snapshot_time_of_day: "TimeOfDay",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] add_on_type
+    #   The add-on type.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_snapshot_add_on_request
+    #   An object that represents additional parameters when enabling or
+    #   modifying the automatic snapshot add-on.
+    #   @return [Types::AutoSnapshotAddOnRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AddOnRequest AWS API Documentation
+    #
+    class AddOnRequest < Struct.new(
+      :add_on_type,
+      :auto_snapshot_add_on_request)
+      include Aws::Structure
+    end
+
+    # Describes an alarm.
+    #
+    # An alarm is a way to monitor your Amazon Lightsail resource metrics.
+    # For more information, see [Alarms in Amazon Lightsail][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms
+    #
+    # @!attribute [rw] name
+    #   The name of the alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the alarm was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] location
+    #   An object that lists information about the location of the alarm.
+    #   @return [Types::ResourceLocation]
+    #
+    # @!attribute [rw] resource_type
+    #   The Lightsail resource type (e.g., `Alarm`).
+    #   @return [String]
+    #
+    # @!attribute [rw] support_code
+    #   The support code. Include this code in your email to support when
+    #   you have questions about your Lightsail alarm. This code enables our
+    #   support team to look up your Lightsail information more easily.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitored_resource_info
+    #   An object that lists information about the resource monitored by the
+    #   alarm.
+    #   @return [Types::MonitoredResourceInfo]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The arithmetic operation used when comparing the specified statistic
+    #   and threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_periods
+    #   The number of periods over which data is compared to the specified
+    #   threshold.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] period
+    #   The period, in seconds, over which the statistic is applied.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threshold
+    #   The value against which the specified statistic is compared.
+    #   @return [Float]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   The number of data points that must not within the specified
+    #   threshold to trigger the alarm.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] treat_missing_data
+    #   Specifies how the alarm handles missing data points.
+    #
+    #   An alarm can treat missing data in the following ways:
+    #
+    #   * `breaching` - Assume the missing data is not within the threshold.
+    #     Missing data counts towards the number of times the metric is not
+    #     within the threshold.
+    #
+    #   * `notBreaching` - Assume the missing data is within the threshold.
+    #     Missing data does not count towards the number of times the metric
+    #     is not within the threshold.
+    #
+    #   * `ignore` - Ignore the missing data. Maintains the current alarm
+    #     state.
+    #
+    #   * `missing` - Missing data is treated as missing.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic for the metric associated with the alarm.
+    #
+    #   The following statistics are available:
+    #
+    #   * `Minimum` - The lowest value observed during the specified period.
+    #     Use this value to determine low volumes of activity for your
+    #     application.
+    #
+    #   * `Maximum` - The highest value observed during the specified
+    #     period. Use this value to determine high volumes of activity for
+    #     your application.
+    #
+    #   * `Sum` - All values submitted for the matching metric added
+    #     together. You can use this statistic to determine the total volume
+    #     of a metric.
+    #
+    #   * `Average` - The value of Sum / SampleCount during the specified
+    #     period. By comparing this statistic with the Minimum and Maximum
+    #     values, you can determine the full scope of a metric and how close
+    #     the average use is to the Minimum and Maximum values. This
+    #     comparison helps you to know when to increase or decrease your
+    #     resources.
+    #
+    #   * `SampleCount` - The count, or number, of data points used for the
+    #     statistical calculation.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric associated with the alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the alarm.
+    #
+    #   An alarm has the following possible states:
+    #
+    #   * `ALARM` - The metric is outside of the defined threshold.
+    #
+    #   * `INSUFFICIENT_DATA` - The alarm has just started, the metric is
+    #     not available, or not enough data is available for the metric to
+    #     determine the alarm state.
+    #
+    #   * `OK` - The metric is within the defined threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The unit of the metric associated with the alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_protocols
+    #   The contact protocols for the alarm, such as `Email`, `SMS` (text
+    #   messaging), or both.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] notification_triggers
+    #   The alarm states that trigger a notification.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] notification_enabled
+    #   Indicates whether the alarm is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Alarm AWS API Documentation
+    #
+    class Alarm < Struct.new(
+      :name,
+      :arn,
+      :created_at,
+      :location,
+      :resource_type,
+      :support_code,
+      :monitored_resource_info,
+      :comparison_operator,
+      :evaluation_periods,
+      :period,
+      :threshold,
+      :datapoints_to_alarm,
+      :treat_missing_data,
+      :statistic,
+      :metric_name,
+      :state,
+      :unit,
+      :contact_protocols,
+      :notification_triggers,
+      :notification_enabled)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass AllocateStaticIpRequest
     #   data as a hash:
@@ -27,8 +329,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the static
-    #   IP address you allocated.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AllocateStaticIpResult AWS API Documentation
@@ -70,7 +373,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachDiskResult AWS API Documentation
@@ -113,7 +418,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object representing the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachInstancesToLoadBalancerResult AWS API Documentation
@@ -149,7 +456,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object representing the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #
     #   These SSL/TLS certificates are only usable by Lightsail load
     #   balancers. You can't get the certificate and use it for another
@@ -188,14 +497,125 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about your API
-    #   operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachStaticIpResult AWS API Documentation
     #
     class AttachStaticIpResult < Struct.new(
       :operations)
+      include Aws::Structure
+    end
+
+    # Describes a block storage disk that is attached to an instance, and is
+    # included in an automatic snapshot.
+    #
+    # @!attribute [rw] path
+    #   The path of the disk (e.g., `/dev/xvdf`).
+    #   @return [String]
+    #
+    # @!attribute [rw] size_in_gb
+    #   The size of the disk in GB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachedDisk AWS API Documentation
+    #
+    class AttachedDisk < Struct.new(
+      :path,
+      :size_in_gb)
+      include Aws::Structure
+    end
+
+    # Describes a request to enable or modify the automatic snapshot add-on
+    # for an Amazon Lightsail instance or disk.
+    #
+    # When you modify the automatic snapshot time for a resource, it is
+    # typically effective immediately except under the following conditions:
+    #
+    # * If an automatic snapshot has been created for the current day, and
+    #   you change the snapshot time to a later time of day, then the new
+    #   snapshot time will be effective the following day. This ensures that
+    #   two snapshots are not created for the current day.
+    #
+    # * If an automatic snapshot has not yet been created for the current
+    #   day, and you change the snapshot time to an earlier time of day,
+    #   then the new snapshot time will be effective the following day and a
+    #   snapshot is automatically created at the previously set time for the
+    #   current day. This ensures that a snapshot is created for the current
+    #   day.
+    #
+    # * If an automatic snapshot has not yet been created for the current
+    #   day, and you change the snapshot time to a time that is within 30
+    #   minutes from your current time, then the new snapshot time will be
+    #   effective the following day and a snapshot is automatically created
+    #   at the previously set time for the current day. This ensures that a
+    #   snapshot is created for the current day, because 30 minutes is
+    #   required between your current time and the new snapshot time that
+    #   you specify.
+    #
+    # * If an automatic snapshot is scheduled to be created within 30
+    #   minutes from your current time and you change the snapshot time,
+    #   then the new snapshot time will be effective the following day and a
+    #   snapshot is automatically created at the previously set time for the
+    #   current day. This ensures that a snapshot is created for the current
+    #   day, because 30 minutes is required between your current time and
+    #   the new snapshot time that you specify.
+    #
+    # @note When making an API call, you may pass AutoSnapshotAddOnRequest
+    #   data as a hash:
+    #
+    #       {
+    #         snapshot_time_of_day: "TimeOfDay",
+    #       }
+    #
+    # @!attribute [rw] snapshot_time_of_day
+    #   The daily time when an automatic snapshot will be created.
+    #
+    #   Constraints:
+    #
+    #   * Must be in `HH:00` format, and in an hourly increment.
+    #
+    #   * Specified in Coordinated Universal Time (UTC).
+    #
+    #   * The snapshot will be automatically created between the time
+    #     specified and up to 45 minutes after.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AutoSnapshotAddOnRequest AWS API Documentation
+    #
+    class AutoSnapshotAddOnRequest < Struct.new(
+      :snapshot_time_of_day)
+      include Aws::Structure
+    end
+
+    # Describes an automatic snapshot.
+    #
+    # @!attribute [rw] date
+    #   The date of the automatic snapshot in `YYYY-MM-DD` format.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the automatic snapshot was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the automatic snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_attached_disks
+    #   An array of objects that describe the block storage disks attached
+    #   to the instance when the automatic snapshot was created.
+    #   @return [Array<Types::AttachedDisk>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AutoSnapshotDetails AWS API Documentation
+    #
+    class AutoSnapshotDetails < Struct.new(
+      :date,
+      :created_at,
+      :status,
+      :from_attached_disks)
       include Aws::Structure
     end
 
@@ -300,7 +720,7 @@ module Aws::Lightsail
     # private server (or *instance*).
     #
     # @!attribute [rw] price
-    #   The price in US dollars (e.g., `5.0`).
+    #   The price in US dollars (e.g., `5.0`) of the bundle.
     #   @return [Float]
     #
     # @!attribute [rw] cpu_count
@@ -375,18 +795,19 @@ module Aws::Lightsail
     #         port_info: { # required
     #           from_port: 1,
     #           to_port: 1,
-    #           protocol: "tcp", # accepts tcp, all, udp
+    #           protocol: "tcp", # accepts tcp, all, udp, icmp
+    #           cidrs: ["string"],
+    #           cidr_list_aliases: ["string"],
     #         },
     #         instance_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] port_info
-    #   Information about the public port you are trying to close.
+    #   An object to describe the ports to close for the specified instance.
     #   @return [Types::PortInfo]
     #
     # @!attribute [rw] instance_name
-    #   The name of the instance on which you're attempting to close the
-    #   public ports.
+    #   The name of the instance for which to close ports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloseInstancePublicPortsRequest AWS API Documentation
@@ -398,8 +819,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operation
-    #   An array of key-value pairs that contains information about the
-    #   operation.
+    #   An object that describes the result of the action, such as the
+    #   status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloseInstancePublicPortsResult AWS API Documentation
@@ -491,39 +913,188 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes a contact method.
+    #
+    # A contact method is a way to send you notifications. For more
+    # information, see [Notifications in Amazon Lightsail][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications
+    #
+    # @!attribute [rw] contact_endpoint
+    #   The destination of the contact method, such as an email address or a
+    #   mobile phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the contact method.
+    #
+    #   A contact method has the following possible status:
+    #
+    #   * `PendingVerification` - The contact method has not yet been
+    #     verified, and the verification has not yet expired.
+    #
+    #   * `Valid` - The contact method has been verified.
+    #
+    #   * `InValid` - An attempt was made to verify the contact method, but
+    #     the verification has expired.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol of the contact method, such as email or SMS (text
+    #   messaging).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact method.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the contact method.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the contact method was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] location
+    #   Describes the resource location.
+    #   @return [Types::ResourceLocation]
+    #
+    # @!attribute [rw] resource_type
+    #   The Lightsail resource type (e.g., `ContactMethod`).
+    #   @return [String]
+    #
+    # @!attribute [rw] support_code
+    #   The support code. Include this code in your email to support when
+    #   you have questions about your Lightsail contact method. This code
+    #   enables our support team to look up your Lightsail information more
+    #   easily.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContactMethod AWS API Documentation
+    #
+    class ContactMethod < Struct.new(
+      :contact_endpoint,
+      :status,
+      :protocol,
+      :name,
+      :arn,
+      :created_at,
+      :location,
+      :resource_type,
+      :support_code)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CopySnapshotRequest
     #   data as a hash:
     #
     #       {
-    #         source_snapshot_name: "ResourceName", # required
+    #         source_snapshot_name: "ResourceName",
+    #         source_resource_name: "string",
+    #         restore_date: "string",
+    #         use_latest_restorable_auto_snapshot: false,
     #         target_snapshot_name: "ResourceName", # required
     #         source_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2
     #       }
     #
     # @!attribute [rw] source_snapshot_name
-    #   The name of the source instance or disk snapshot to be copied.
+    #   The name of the source manual snapshot to copy.
+    #
+    #   Constraint:
+    #
+    #   * Define this parameter only when copying a manual snapshot as
+    #     another manual snapshot.
+    #
+    #   ^
     #   @return [String]
     #
+    # @!attribute [rw] source_resource_name
+    #   The name of the source instance or disk from which the source
+    #   automatic snapshot was created.
+    #
+    #   Constraint:
+    #
+    #   * Define this parameter only when copying an automatic snapshot as a
+    #     manual snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_date
+    #   The date of the source automatic snapshot to copy. Use the `get auto
+    #   snapshots` operation to identify the dates of the available
+    #   automatic snapshots.
+    #
+    #   Constraints:
+    #
+    #   * Must be specified in `YYYY-MM-DD` format.
+    #
+    #   * This parameter cannot be defined together with the `use latest
+    #     restorable auto snapshot` parameter. The `restore date` and `use
+    #     latest restorable auto snapshot` parameters are mutually
+    #     exclusive.
+    #
+    #   * Define this parameter only when copying an automatic snapshot as a
+    #     manual snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots
+    #   @return [String]
+    #
+    # @!attribute [rw] use_latest_restorable_auto_snapshot
+    #   A Boolean value to indicate whether to use the latest available
+    #   automatic snapshot of the specified source instance or disk.
+    #
+    #   Constraints:
+    #
+    #   * This parameter cannot be defined together with the `restore date`
+    #     parameter. The `use latest restorable auto snapshot` and `restore
+    #     date` parameters are mutually exclusive.
+    #
+    #   * Define this parameter only when copying an automatic snapshot as a
+    #     manual snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots
+    #   @return [Boolean]
+    #
     # @!attribute [rw] target_snapshot_name
-    #   The name of the new instance or disk snapshot to be created as a
-    #   copy.
+    #   The name of the new manual snapshot to be created as a copy.
     #   @return [String]
     #
     # @!attribute [rw] source_region
-    #   The AWS Region where the source snapshot is located.
+    #   The AWS Region where the source manual or automatic snapshot is
+    #   located.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CopySnapshotRequest AWS API Documentation
     #
     class CopySnapshotRequest < Struct.new(
       :source_snapshot_name,
+      :source_resource_name,
+      :restore_date,
+      :use_latest_restorable_auto_snapshot,
       :target_snapshot_name,
       :source_region)
       include Aws::Structure
     end
 
     # @!attribute [rw] operations
-    #   A list of objects describing the API operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CopySnapshotResult AWS API Documentation
@@ -541,7 +1112,7 @@ module Aws::Lightsail
     #           {
     #             source_name: "ResourceName", # required
     #             instance_type: "NonEmptyString", # required
-    #             port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE
+    #             port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE, CLOSED
     #             user_data: "string",
     #             availability_zone: "string", # required
     #           },
@@ -563,7 +1134,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   A list of objects describing the API operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateCloudFormationStackResult AWS API Documentation
@@ -573,12 +1146,90 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateContactMethodRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protocol: "Email", # required, accepts Email, SMS
+    #         contact_endpoint: "StringMax256", # required
+    #       }
+    #
+    # @!attribute [rw] protocol
+    #   The protocol of the contact method, such as `Email` or `SMS` (text
+    #   messaging).
+    #
+    #   The `SMS` protocol is supported only in the following AWS Regions.
+    #
+    #   * US East (N. Virginia) (`us-east-1`)
+    #
+    #   * US West (Oregon) (`us-west-2`)
+    #
+    #   * Europe (Ireland) (`eu-west-1`)
+    #
+    #   * Asia Pacific (Tokyo) (`ap-northeast-1`)
+    #
+    #   * Asia Pacific (Singapore) (`ap-southeast-1`)
+    #
+    #   * Asia Pacific (Sydney) (`ap-southeast-2`)
+    #
+    #   For a list of countries/regions where SMS text messages can be sent,
+    #   and the latest AWS Regions where SMS text messaging is supported,
+    #   see [Supported Regions and Countries][1] in the *Amazon SNS
+    #   Developer Guide*.
+    #
+    #   For more information about notifications in Amazon Lightsail, see
+    #   [Notifications in Amazon Lightsail][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-supported-regions-countries.html
+    #   [2]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_endpoint
+    #   The destination of the contact method, such as an email address or a
+    #   mobile phone number.
+    #
+    #   Use the E.164 format when specifying a mobile phone number. E.164 is
+    #   a standard for the phone number structure used for international
+    #   telecommunication. Phone numbers that follow this format can have a
+    #   maximum of 15 digits, and they are prefixed with the plus character
+    #   (+) and the country code. For example, a U.S. phone number in E.164
+    #   format would be specified as +1XXX5550100. For more information, see
+    #   [E.164][1] on *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/E.164
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContactMethodRequest AWS API Documentation
+    #
+    class CreateContactMethodRequest < Struct.new(
+      :protocol,
+      :contact_endpoint)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContactMethodResult AWS API Documentation
+    #
+    class CreateContactMethodResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDiskFromSnapshotRequest
     #   data as a hash:
     #
     #       {
     #         disk_name: "ResourceName", # required
-    #         disk_snapshot_name: "ResourceName", # required
+    #         disk_snapshot_name: "ResourceName",
     #         availability_zone: "NonEmptyString", # required
     #         size_in_gb: 1, # required
     #         tags: [
@@ -587,6 +1238,17 @@ module Aws::Lightsail
     #             value: "TagValue",
     #           },
     #         ],
+    #         add_ons: [
+    #           {
+    #             add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #             auto_snapshot_add_on_request: {
+    #               snapshot_time_of_day: "TimeOfDay",
+    #             },
+    #           },
+    #         ],
+    #         source_disk_name: "string",
+    #         restore_date: "string",
+    #         use_latest_restorable_auto_snapshot: false,
     #       }
     #
     # @!attribute [rw] disk_name
@@ -596,6 +1258,14 @@ module Aws::Lightsail
     # @!attribute [rw] disk_snapshot_name
     #   The name of the disk snapshot (e.g., `my-snapshot`) from which to
     #   create the new storage disk.
+    #
+    #   Constraint:
+    #
+    #   * This parameter cannot be defined together with the `source disk
+    #     name` parameter. The `disk snapshot name` and `source disk name`
+    #     parameters are mutually exclusive.
+    #
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -619,6 +1289,72 @@ module Aws::Lightsail
     #   operation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] add_ons
+    #   An array of objects that represent the add-ons to enable for the new
+    #   disk.
+    #   @return [Array<Types::AddOnRequest>]
+    #
+    # @!attribute [rw] source_disk_name
+    #   The name of the source disk from which the source automatic snapshot
+    #   was created.
+    #
+    #   Constraints:
+    #
+    #   * This parameter cannot be defined together with the `disk snapshot
+    #     name` parameter. The `source disk name` and `disk snapshot name`
+    #     parameters are mutually exclusive.
+    #
+    #   * Define this parameter only when creating a new disk from an
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_date
+    #   The date of the automatic snapshot to use for the new disk. Use the
+    #   `get auto snapshots` operation to identify the dates of the
+    #   available automatic snapshots.
+    #
+    #   Constraints:
+    #
+    #   * Must be specified in `YYYY-MM-DD` format.
+    #
+    #   * This parameter cannot be defined together with the `use latest
+    #     restorable auto snapshot` parameter. The `restore date` and `use
+    #     latest restorable auto snapshot` parameters are mutually
+    #     exclusive.
+    #
+    #   * Define this parameter only when creating a new disk from an
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [String]
+    #
+    # @!attribute [rw] use_latest_restorable_auto_snapshot
+    #   A Boolean value to indicate whether to use the latest available
+    #   automatic snapshot.
+    #
+    #   Constraints:
+    #
+    #   * This parameter cannot be defined together with the `restore date`
+    #     parameter. The `use latest restorable auto snapshot` and `restore
+    #     date` parameters are mutually exclusive.
+    #
+    #   * Define this parameter only when creating a new disk from an
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskFromSnapshotRequest AWS API Documentation
     #
     class CreateDiskFromSnapshotRequest < Struct.new(
@@ -626,12 +1362,18 @@ module Aws::Lightsail
       :disk_snapshot_name,
       :availability_zone,
       :size_in_gb,
-      :tags)
+      :tags,
+      :add_ons,
+      :source_disk_name,
+      :restore_date,
+      :use_latest_restorable_auto_snapshot)
       include Aws::Structure
     end
 
     # @!attribute [rw] operations
-    #   An object describing the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskFromSnapshotResult AWS API Documentation
@@ -654,6 +1396,14 @@ module Aws::Lightsail
     #             value: "TagValue",
     #           },
     #         ],
+    #         add_ons: [
+    #           {
+    #             add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #             auto_snapshot_add_on_request: {
+    #               snapshot_time_of_day: "TimeOfDay",
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] disk_name
@@ -662,10 +1412,10 @@ module Aws::Lightsail
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone where you want to create the disk (e.g.,
-    #   `us-east-2a`). Choose the same Availability Zone as the Lightsail
-    #   instance where you want to create the disk.
+    #   `us-east-2a`). Use the same Availability Zone as the Lightsail
+    #   instance to which you want to attach the disk.
     #
-    #   Use the GetRegions operation to list the Availability Zones where
+    #   Use the `get regions` operation to list the Availability Zones where
     #   Lightsail is currently available.
     #   @return [String]
     #
@@ -681,18 +1431,26 @@ module Aws::Lightsail
     #   operation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] add_ons
+    #   An array of objects that represent the add-ons to enable for the new
+    #   disk.
+    #   @return [Array<Types::AddOnRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskRequest AWS API Documentation
     #
     class CreateDiskRequest < Struct.new(
       :disk_name,
       :availability_zone,
       :size_in_gb,
-      :tags)
+      :tags,
+      :add_ons)
       include Aws::Structure
     end
 
     # @!attribute [rw] operations
-    #   An object describing the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskResult AWS API Documentation
@@ -706,8 +1464,9 @@ module Aws::Lightsail
     #   data as a hash:
     #
     #       {
-    #         disk_name: "ResourceName", # required
+    #         disk_name: "ResourceName",
     #         disk_snapshot_name: "ResourceName", # required
+    #         instance_name: "ResourceName",
     #         tags: [
     #           {
     #             key: "TagKey",
@@ -717,12 +1476,30 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] disk_name
-    #   The unique name of the source disk (e.g., `my-source-disk`).
+    #   The unique name of the source disk (e.g., `Disk-Virginia-1`).
+    #
+    #   <note markdown="1"> This parameter cannot be defined together with the `instance name`
+    #   parameter. The `disk name` and `instance name` parameters are
+    #   mutually exclusive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] disk_snapshot_name
     #   The name of the destination disk snapshot (e.g., `my-disk-snapshot`)
     #   based on the source disk.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_name
+    #   The unique name of the source instance (e.g.,
+    #   `Amazon_Linux-512MB-Virginia-1`). When this is defined, a snapshot
+    #   of the instance's system volume is created.
+    #
+    #   <note markdown="1"> This parameter cannot be defined together with the `disk name`
+    #   parameter. The `instance name` and `disk name` parameters are
+    #   mutually exclusive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -738,12 +1515,15 @@ module Aws::Lightsail
     class CreateDiskSnapshotRequest < Struct.new(
       :disk_name,
       :disk_snapshot_name,
+      :instance_name,
       :tags)
       include Aws::Structure
     end
 
     # @!attribute [rw] operations
-    #   An object describing the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskSnapshotResult AWS API Documentation
@@ -789,8 +1569,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operation
-    #   An array of key-value pairs containing information about the
-    #   operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomainEntryResult AWS API Documentation
@@ -842,8 +1623,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operation
-    #   An array of key-value pairs containing information about the domain
-    #   resource you created.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomainResult AWS API Documentation
@@ -893,8 +1675,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the results
-    #   of your create instances snapshot request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstanceSnapshotResult AWS API Documentation
@@ -918,7 +1701,7 @@ module Aws::Lightsail
     #           ],
     #         },
     #         availability_zone: "string", # required
-    #         instance_snapshot_name: "ResourceName", # required
+    #         instance_snapshot_name: "ResourceName",
     #         bundle_id: "NonEmptyString", # required
     #         user_data: "string",
     #         key_pair_name: "ResourceName",
@@ -928,6 +1711,17 @@ module Aws::Lightsail
     #             value: "TagValue",
     #           },
     #         ],
+    #         add_ons: [
+    #           {
+    #             add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #             auto_snapshot_add_on_request: {
+    #               snapshot_time_of_day: "TimeOfDay",
+    #             },
+    #           },
+    #         ],
+    #         source_instance_name: "string",
+    #         restore_date: "string",
+    #         use_latest_restorable_auto_snapshot: false,
     #       }
     #
     # @!attribute [rw] instance_names
@@ -954,6 +1748,14 @@ module Aws::Lightsail
     #   The name of the instance snapshot on which you are basing your new
     #   instances. Use the get instance snapshots operation to return
     #   information about your existing snapshots.
+    #
+    #   Constraint:
+    #
+    #   * This parameter cannot be defined together with the `source
+    #     instance name` parameter. The `instance snapshot name` and `source
+    #     instance name` parameters are mutually exclusive.
+    #
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
@@ -990,6 +1792,72 @@ module Aws::Lightsail
     #   operation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] add_ons
+    #   An array of objects representing the add-ons to enable for the new
+    #   instance.
+    #   @return [Array<Types::AddOnRequest>]
+    #
+    # @!attribute [rw] source_instance_name
+    #   The name of the source instance from which the source automatic
+    #   snapshot was created.
+    #
+    #   Constraints:
+    #
+    #   * This parameter cannot be defined together with the `instance
+    #     snapshot name` parameter. The `source instance name` and `instance
+    #     snapshot name` parameters are mutually exclusive.
+    #
+    #   * Define this parameter only when creating a new instance from an
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_date
+    #   The date of the automatic snapshot to use for the new instance. Use
+    #   the `get auto snapshots` operation to identify the dates of the
+    #   available automatic snapshots.
+    #
+    #   Constraints:
+    #
+    #   * Must be specified in `YYYY-MM-DD` format.
+    #
+    #   * This parameter cannot be defined together with the `use latest
+    #     restorable auto snapshot` parameter. The `restore date` and `use
+    #     latest restorable auto snapshot` parameters are mutually
+    #     exclusive.
+    #
+    #   * Define this parameter only when creating a new instance from an
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [String]
+    #
+    # @!attribute [rw] use_latest_restorable_auto_snapshot
+    #   A Boolean value to indicate whether to use the latest available
+    #   automatic snapshot.
+    #
+    #   Constraints:
+    #
+    #   * This parameter cannot be defined together with the `restore date`
+    #     parameter. The `use latest restorable auto snapshot` and `restore
+    #     date` parameters are mutually exclusive.
+    #
+    #   * Define this parameter only when creating a new instance from an
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesFromSnapshotRequest AWS API Documentation
     #
     class CreateInstancesFromSnapshotRequest < Struct.new(
@@ -1000,13 +1868,18 @@ module Aws::Lightsail
       :bundle_id,
       :user_data,
       :key_pair_name,
-      :tags)
+      :tags,
+      :add_ons,
+      :source_instance_name,
+      :restore_date,
+      :use_latest_restorable_auto_snapshot)
       include Aws::Structure
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the results
-    #   of your create instances from snapshot request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesFromSnapshotResult AWS API Documentation
@@ -1031,6 +1904,14 @@ module Aws::Lightsail
     #           {
     #             key: "TagKey",
     #             value: "TagValue",
+    #           },
+    #         ],
+    #         add_ons: [
+    #           {
+    #             add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #             auto_snapshot_add_on_request: {
+    #               snapshot_time_of_day: "TimeOfDay",
+    #             },
     #           },
     #         ],
     #       }
@@ -1064,8 +1945,16 @@ module Aws::Lightsail
     #
     # @!attribute [rw] blueprint_id
     #   The ID for a virtual private server image (e.g., `app_wordpress_4_4`
-    #   or `app_lamp_7_0`). Use the get blueprints operation to return a
+    #   or `app_lamp_7_0`). Use the `get blueprints` operation to return a
     #   list of available images (or *blueprints*).
+    #
+    #   <note markdown="1"> Use active blueprints when creating new instances. Inactive
+    #   blueprints are listed to support customers with existing instances
+    #   and are not necessarily available to create new instances.
+    #   Blueprints are marked inactive when they become outdated due to
+    #   operating system updates or new application releases.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
@@ -1103,6 +1992,11 @@ module Aws::Lightsail
     #   operation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] add_ons
+    #   An array of objects representing the add-ons to enable for the new
+    #   instance.
+    #   @return [Array<Types::AddOnRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesRequest AWS API Documentation
     #
     class CreateInstancesRequest < Struct.new(
@@ -1113,13 +2007,15 @@ module Aws::Lightsail
       :bundle_id,
       :user_data,
       :key_pair_name,
-      :tags)
+      :tags,
+      :add_ons)
       include Aws::Structure
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the results
-    #   of your create instances request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesResult AWS API Documentation
@@ -1176,8 +2072,9 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] operation
-    #   An array of key-value pairs containing information about the results
-    #   of your create key pair request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateKeyPairResult AWS API Documentation
@@ -1269,7 +2166,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object containing information about the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancerResult AWS API Documentation
@@ -1346,7 +2245,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object containing information about the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancerTlsCertificateResult AWS API Documentation
@@ -1433,7 +2334,7 @@ module Aws::Lightsail
     #   * Cannot be specified if the `use latest restorable time` parameter
     #     is `true`.
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Specified in the Unix time format.
     #
@@ -1475,8 +2376,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the result of your create relational database
-    #   from snapshot request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseFromSnapshotResult AWS API Documentation
@@ -1601,7 +2503,7 @@ module Aws::Lightsail
     #
     #     Example: `16:00-16:30`
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Must not conflict with the preferred maintenance window.
     #
@@ -1628,7 +2530,7 @@ module Aws::Lightsail
     #
     #   * Must be at least 30 minutes.
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Example: `Tue:17:00-Tue:17:30`
     #   @return [String]
@@ -1667,8 +2569,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the result of your create relational database
-    #   request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseResult AWS API Documentation
@@ -1724,8 +2627,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the result of your create relational database
-    #   snapshot request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseSnapshotResult AWS API Documentation
@@ -1735,26 +2639,144 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteAlarmRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alarm_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] alarm_name
+    #   The name of the alarm to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteAlarmRequest AWS API Documentation
+    #
+    class DeleteAlarmRequest < Struct.new(
+      :alarm_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteAlarmResult AWS API Documentation
+    #
+    class DeleteAlarmResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAutoSnapshotRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_name: "ResourceName", # required
+    #         date: "AutoSnapshotDate", # required
+    #       }
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the source instance or disk from which to delete the
+    #   automatic snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] date
+    #   The date of the automatic snapshot to delete in `YYYY-MM-DD` format.
+    #   Use the `get auto snapshots` operation to get the available
+    #   automatic snapshots for a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteAutoSnapshotRequest AWS API Documentation
+    #
+    class DeleteAutoSnapshotRequest < Struct.new(
+      :resource_name,
+      :date)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteAutoSnapshotResult AWS API Documentation
+    #
+    class DeleteAutoSnapshotResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteContactMethodRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protocol: "Email", # required, accepts Email, SMS
+    #       }
+    #
+    # @!attribute [rw] protocol
+    #   The protocol that will be deleted, such as `Email` or `SMS` (text
+    #   messaging).
+    #
+    #   <note markdown="1"> To delete an `Email` and an `SMS` contact method if you added both,
+    #   you must run separate `DeleteContactMethod` actions to delete each
+    #   protocol.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteContactMethodRequest AWS API Documentation
+    #
+    class DeleteContactMethodRequest < Struct.new(
+      :protocol)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteContactMethodResult AWS API Documentation
+    #
+    class DeleteContactMethodResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDiskRequest
     #   data as a hash:
     #
     #       {
     #         disk_name: "ResourceName", # required
+    #         force_delete_add_ons: false,
     #       }
     #
     # @!attribute [rw] disk_name
     #   The unique name of the disk you want to delete (e.g., `my-disk`).
     #   @return [String]
     #
+    # @!attribute [rw] force_delete_add_ons
+    #   A Boolean value to indicate whether to delete the enabled add-ons
+    #   for the disk.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDiskRequest AWS API Documentation
     #
     class DeleteDiskRequest < Struct.new(
-      :disk_name)
+      :disk_name,
+      :force_delete_add_ons)
       include Aws::Structure
     end
 
     # @!attribute [rw] operations
-    #   An object describing the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDiskResult AWS API Documentation
@@ -1784,7 +2806,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDiskSnapshotResult AWS API Documentation
@@ -1829,8 +2853,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operation
-    #   An array of key-value pairs containing information about the results
-    #   of your delete domain entry request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomainEntryResult AWS API Documentation
@@ -1859,8 +2884,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operation
-    #   An array of key-value pairs containing information about the results
-    #   of your delete domain request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomainResult AWS API Documentation
@@ -1875,22 +2901,30 @@ module Aws::Lightsail
     #
     #       {
     #         instance_name: "ResourceName", # required
+    #         force_delete_add_ons: false,
     #       }
     #
     # @!attribute [rw] instance_name
     #   The name of the instance to delete.
     #   @return [String]
     #
+    # @!attribute [rw] force_delete_add_ons
+    #   A Boolean value to indicate whether to delete the enabled add-ons
+    #   for the disk.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstanceRequest AWS API Documentation
     #
     class DeleteInstanceRequest < Struct.new(
-      :instance_name)
+      :instance_name,
+      :force_delete_add_ons)
       include Aws::Structure
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the results
-    #   of your delete instance request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstanceResult AWS API Documentation
@@ -1919,8 +2953,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the results
-    #   of your delete instance snapshot request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstanceSnapshotResult AWS API Documentation
@@ -1949,14 +2984,47 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operation
-    #   An array of key-value pairs containing information about the results
-    #   of your delete key pair request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKeyPairResult AWS API Documentation
     #
     class DeleteKeyPairResult < Struct.new(
       :operation)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteKnownHostKeysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] instance_name
+    #   The name of the instance for which you want to reset the host key or
+    #   certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKnownHostKeysRequest AWS API Documentation
+    #
+    class DeleteKnownHostKeysRequest < Struct.new(
+      :instance_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKnownHostKeysResult AWS API Documentation
+    #
+    class DeleteKnownHostKeysResult < Struct.new(
+      :operations)
       include Aws::Structure
     end
 
@@ -1979,7 +3047,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteLoadBalancerResult AWS API Documentation
@@ -2025,7 +3095,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteLoadBalancerTlsCertificateResult AWS API Documentation
@@ -2086,8 +3158,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the result of your delete relational database
-    #   request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteRelationalDatabaseResult AWS API Documentation
@@ -2116,8 +3189,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the result of your delete relational database
-    #   snapshot request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteRelationalDatabaseSnapshotResult AWS API Documentation
@@ -2165,7 +3239,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachDiskResult AWS API Documentation
@@ -2201,7 +3277,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachInstancesFromLoadBalancerResult AWS API Documentation
@@ -2230,8 +3308,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the results
-    #   of your detach static IP request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachStaticIpResult AWS API Documentation
@@ -2241,7 +3320,44 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes a system disk or an block storage disk.
+    # @note When making an API call, you may pass DisableAddOnRequest
+    #   data as a hash:
+    #
+    #       {
+    #         add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #         resource_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] add_on_type
+    #   The add-on type to disable.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the source resource for which to disable the add-on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DisableAddOnRequest AWS API Documentation
+    #
+    class DisableAddOnRequest < Struct.new(
+      :add_on_type,
+      :resource_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DisableAddOnResult AWS API Documentation
+    #
+    class DisableAddOnResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # Describes a system disk or a block storage disk.
     #
     # @!attribute [rw] name
     #   The unique name of the disk.
@@ -2279,6 +3395,10 @@ module Aws::Lightsail
     #
     #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] add_ons
+    #   An array of objects representing the add-ons enabled on the disk.
+    #   @return [Array<Types::AddOn>]
     #
     # @!attribute [rw] size_in_gb
     #   The size of the disk in GB.
@@ -2339,6 +3459,7 @@ module Aws::Lightsail
       :location,
       :resource_type,
       :tags,
+      :add_ons,
       :size_in_gb,
       :is_system_disk,
       :iops,
@@ -2460,14 +3581,29 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] from_disk_name
-    #   The unique name of the source disk from which you are creating the
-    #   disk snapshot.
+    #   The unique name of the source disk from which the disk snapshot was
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] from_disk_arn
-    #   The Amazon Resource Name (ARN) of the source disk from which you are
-    #   creating the disk snapshot.
+    #   The Amazon Resource Name (ARN) of the source disk from which the
+    #   disk snapshot was created.
     #   @return [String]
+    #
+    # @!attribute [rw] from_instance_name
+    #   The unique name of the source instance from which the disk (system
+    #   volume) snapshot was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_instance_arn
+    #   The Amazon Resource Name (ARN) of the source instance from which the
+    #   disk (system volume) snapshot was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_from_auto_snapshot
+    #   A Boolean value indicating whether the snapshot was created from an
+    #   automatic snapshot.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DiskSnapshot AWS API Documentation
     #
@@ -2483,7 +3619,10 @@ module Aws::Lightsail
       :state,
       :progress,
       :from_disk_name,
-      :from_disk_arn)
+      :from_disk_arn,
+      :from_instance_name,
+      :from_instance_arn,
+      :is_from_auto_snapshot)
       include Aws::Structure
     end
 
@@ -2601,7 +3740,25 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of domain entry (e.g., `SOA` or `NS`).
+    #   The type of domain entry, such as address (A), canonical name
+    #   (CNAME), mail exchanger (MX), name server (NS), start of authority
+    #   (SOA), service locator (SRV), or text (TXT).
+    #
+    #   The following domain entry types can be used:
+    #
+    #   * `A`
+    #
+    #   * `CNAME`
+    #
+    #   * `MX`
+    #
+    #   * `NS`
+    #
+    #   * `SOA`
+    #
+    #   * `SRV`
+    #
+    #   * `TXT`
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -2644,6 +3801,49 @@ module Aws::Lightsail
     class DownloadDefaultKeyPairResult < Struct.new(
       :public_key_base_64,
       :private_key_base_64)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableAddOnRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_name: "ResourceName", # required
+    #         add_on_request: { # required
+    #           add_on_type: "AutoSnapshot", # required, accepts AutoSnapshot
+    #           auto_snapshot_add_on_request: {
+    #             snapshot_time_of_day: "TimeOfDay",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the source resource for which to enable or modify the
+    #   add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_on_request
+    #   An array of strings representing the add-on to enable or modify.
+    #   @return [Types::AddOnRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/EnableAddOnRequest AWS API Documentation
+    #
+    class EnableAddOnRequest < Struct.new(
+      :resource_name,
+      :add_on_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/EnableAddOnResult AWS API Documentation
+    #
+    class EnableAddOnResult < Struct.new(
+      :operations)
       include Aws::Structure
     end
 
@@ -2769,7 +3969,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   A list of objects describing the API operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ExportSnapshotResult AWS API Documentation
@@ -2787,7 +3989,11 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for paginating results from your get active names
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetActiveNames` request. If
+    #   your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
     #   request.
     #   @return [String]
     #
@@ -2803,8 +4009,14 @@ module Aws::Lightsail
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your get
-    #   active names request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetActiveNames`
+    #   request and specify the next page token using the `pageToken`
+    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetActiveNamesResult AWS API Documentation
@@ -2812,6 +4024,108 @@ module Aws::Lightsail
     class GetActiveNamesResult < Struct.new(
       :active_names,
       :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAlarmsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alarm_name: "ResourceName",
+    #         page_token: "string",
+    #         monitored_resource_name: "ResourceName",
+    #       }
+    #
+    # @!attribute [rw] alarm_name
+    #   The name of the alarm.
+    #
+    #   Specify an alarm name to return information about a specific alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetAlarms` request. If your
+    #   results are paginated, the response will return a next page token
+    #   that you can specify as the page token in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitored_resource_name
+    #   The name of the Lightsail resource being monitored by the alarm.
+    #
+    #   Specify a monitored resource name to return information about all
+    #   alarms for a specific resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetAlarmsRequest AWS API Documentation
+    #
+    class GetAlarmsRequest < Struct.new(
+      :alarm_name,
+      :page_token,
+      :monitored_resource_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alarms
+    #   An array of objects that describe the alarms.
+    #   @return [Array<Types::Alarm>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetAlarms` request
+    #   and specify the next page token using the `pageToken` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetAlarmsResult AWS API Documentation
+    #
+    class GetAlarmsResult < Struct.new(
+      :alarms,
+      :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAutoSnapshotsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the source instance or disk from which to get automatic
+    #   snapshot information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetAutoSnapshotsRequest AWS API Documentation
+    #
+    class GetAutoSnapshotsRequest < Struct.new(
+      :resource_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_name
+    #   The name of the source instance or disk for the automatic snapshots.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type (e.g., `Instance` or `Disk`).
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_snapshots
+    #   An array of objects that describe the automatic snapshots that are
+    #   available for the specified source instance or disk.
+    #   @return [Array<Types::AutoSnapshotDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetAutoSnapshotsResult AWS API Documentation
+    #
+    class GetAutoSnapshotsResult < Struct.new(
+      :resource_name,
+      :resource_type,
+      :auto_snapshots)
       include Aws::Structure
     end
 
@@ -2829,8 +4143,12 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to the next page of results from your get
-    #   blueprints request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetBlueprints` request. If
+    #   your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBlueprintsRequest AWS API Documentation
@@ -2847,8 +4165,14 @@ module Aws::Lightsail
     #   @return [Array<Types::Blueprint>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your get
-    #   blueprints request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetBlueprints`
+    #   request and specify the next page token using the `pageToken`
+    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBlueprintsResult AWS API Documentation
@@ -2873,8 +4197,12 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to the next page of results from your get
-    #   bundles request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetBundles` request. If
+    #   your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundlesRequest AWS API Documentation
@@ -2891,8 +4219,14 @@ module Aws::Lightsail
     #   @return [Array<Types::Bundle>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your get
-    #   active names request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetBundles`
+    #   request and specify the next page token using the `pageToken`
+    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundlesResult AWS API Documentation
@@ -2911,8 +4245,12 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to a specific page of results for your
-    #   `get cloud formation stack records` request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial
+    #   `GetClouFormationStackRecords` request. If your results are
+    #   paginated, the response will return a next page token that you can
+    #   specify as the page token in a subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCloudFormationStackRecordsRequest AWS API Documentation
@@ -2927,8 +4265,14 @@ module Aws::Lightsail
     #   @return [Array<Types::CloudFormationStackRecord>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results of your get
-    #   relational database bundles request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another
+    #   `GetCloudFormationStackRecords` request and specify the next page
+    #   token using the `pageToken` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCloudFormationStackRecordsResult AWS API Documentation
@@ -2936,6 +4280,39 @@ module Aws::Lightsail
     class GetCloudFormationStackRecordsResult < Struct.new(
       :cloud_formation_stack_records,
       :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContactMethodsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protocols: ["Email"], # accepts Email, SMS
+    #       }
+    #
+    # @!attribute [rw] protocols
+    #   The protocols used to send notifications, such as `Email`, or `SMS`
+    #   (text messaging).
+    #
+    #   Specify a protocol in your request to return information about a
+    #   specific contact method protocol.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContactMethodsRequest AWS API Documentation
+    #
+    class GetContactMethodsRequest < Struct.new(
+      :protocols)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_methods
+    #   An array of objects that describe the contact methods.
+    #   @return [Array<Types::ContactMethod>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContactMethodsResult AWS API Documentation
+    #
+    class GetContactMethodsResult < Struct.new(
+      :contact_methods)
       include Aws::Structure
     end
 
@@ -3005,8 +4382,12 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to the next page of results from your
-    #   GetDiskSnapshots request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetDiskSnapshots` request.
+    #   If your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskSnapshotsRequest AWS API Documentation
@@ -3022,8 +4403,14 @@ module Aws::Lightsail
     #   @return [Array<Types::DiskSnapshot>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your
-    #   GetDiskSnapshots request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetDiskSnapshots`
+    #   request and specify the next page token using the `pageToken`
+    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskSnapshotsResult AWS API Documentation
@@ -3042,8 +4429,11 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to the next page of results from your
-    #   GetDisks request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetDisks` request. If your
+    #   results are paginated, the response will return a next page token
+    #   that you can specify as the page token in a subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDisksRequest AWS API Documentation
@@ -3059,8 +4449,13 @@ module Aws::Lightsail
     #   @return [Array<Types::Disk>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your
-    #   GetDisks request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetDisks` request
+    #   and specify the next page token using the `pageToken` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDisksResult AWS API Documentation
@@ -3109,8 +4504,12 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to the next page of results from your get
-    #   domains request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetDomains` request. If
+    #   your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomainsRequest AWS API Documentation
@@ -3126,8 +4525,14 @@ module Aws::Lightsail
     #   @return [Array<Types::Domain>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your get
-    #   active names request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetDomains`
+    #   request and specify the next page token using the `pageToken`
+    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomainsResult AWS API Documentation
@@ -3146,8 +4551,12 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to a specific page of results for your
-    #   `get export snapshot records` request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetExportSnapshotRecords`
+    #   request. If your results are paginated, the response will return a
+    #   next page token that you can specify as the page token in a
+    #   subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetExportSnapshotRecordsRequest AWS API Documentation
@@ -3162,8 +4571,14 @@ module Aws::Lightsail
     #   @return [Array<Types::ExportSnapshotRecord>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results of your get
-    #   relational database bundles request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another
+    #   `GetExportSnapshotRecords` request and specify the next page token
+    #   using the `pageToken` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetExportSnapshotRecordsResult AWS API Documentation
@@ -3215,7 +4630,7 @@ module Aws::Lightsail
     #
     #       {
     #         instance_name: "ResourceName", # required
-    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System
+    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, BurstCapacityTime, BurstCapacityPercentage
     #         period: 1, # required
     #         start_time: Time.now, # required
     #         end_time: Time.now, # required
@@ -3228,11 +4643,118 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] metric_name
-    #   The metric name to get data about.
+    #   The metric for which you want to return information.
+    #
+    #   Valid instance metric names are listed below, along with the most
+    #   useful `statistics` to include in your request, and the published
+    #   `unit` value.
+    #
+    #   * <b> <code>BurstCapacityPercentage</code> </b> - The percentage of
+    #     CPU performance available for your instance to burst above its
+    #     baseline. Your instance continuously accrues and consumes burst
+    #     capacity. Burst capacity stops accruing when your instance's
+    #     `BurstCapacityPercentage` reaches 100%. For more information, see
+    #     [Viewing instance burst capacity in Amazon Lightsail][1].
+    #
+    #     `Statistics`\: The most useful statistics are `Maximum` and
+    #     `Average`.
+    #
+    #     `Unit`\: The published unit is `Percent`.
+    #
+    #   * <b> <code>BurstCapacityTime</code> </b> - The available amount of
+    #     time for your instance to burst at 100% CPU utilization. Your
+    #     instance continuously accrues and consumes burst capacity. Burst
+    #     capacity time stops accruing when your instance's
+    #     `BurstCapacityPercentage` metric reaches 100%.
+    #
+    #     Burst capacity time is consumed at the full rate only when your
+    #     instance operates at 100% CPU utilization. For example, if your
+    #     instance operates at 50% CPU utilization in the burstable zone for
+    #     a 5-minute period, then it consumes CPU burst capacity minutes at
+    #     a 50% rate in that period. Your instance consumed 2 minutes and 30
+    #     seconds of CPU burst capacity minutes in the 5-minute period. For
+    #     more information, see [Viewing instance burst capacity in Amazon
+    #     Lightsail][1].
+    #
+    #     `Statistics`\: The most useful statistics are `Maximum` and
+    #     `Average`.
+    #
+    #     `Unit`\: The published unit is `Seconds`.
+    #
+    #   * <b> <code>CPUUtilization</code> </b> - The percentage of allocated
+    #     compute units that are currently in use on the instance. This
+    #     metric identifies the processing power to run the applications on
+    #     the instance. Tools in your operating system can show a lower
+    #     percentage than Lightsail when the instance is not allocated a
+    #     full processor core.
+    #
+    #     `Statistics`\: The most useful statistics are `Maximum` and
+    #     `Average`.
+    #
+    #     `Unit`\: The published unit is `Percent`.
+    #
+    #   * <b> <code>NetworkIn</code> </b> - The number of bytes received on
+    #     all network interfaces by the instance. This metric identifies the
+    #     volume of incoming network traffic to the instance. The number
+    #     reported is the number of bytes received during the period.
+    #     Because this metric is reported in 5-minute intervals, divide the
+    #     reported number by 300 to find Bytes/second.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #     `Unit`\: The published unit is `Bytes`.
+    #
+    #   * <b> <code>NetworkOut</code> </b> - The number of bytes sent out on
+    #     all network interfaces by the instance. This metric identifies the
+    #     volume of outgoing network traffic from the instance. The number
+    #     reported is the number of bytes sent during the period. Because
+    #     this metric is reported in 5-minute intervals, divide the reported
+    #     number by 300 to find Bytes/second.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #     `Unit`\: The published unit is `Bytes`.
+    #
+    #   * <b> <code>StatusCheckFailed</code> </b> - Reports whether the
+    #     instance passed or failed both the instance status check and the
+    #     system status check. This metric can be either 0 (passed) or 1
+    #     (failed). This metric data is available in 1-minute (60 seconds)
+    #     granularity.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #     `Unit`\: The published unit is `Count`.
+    #
+    #   * <b> <code>StatusCheckFailed_Instance</code> </b> - Reports whether
+    #     the instance passed or failed the instance status check. This
+    #     metric can be either 0 (passed) or 1 (failed). This metric data is
+    #     available in 1-minute (60 seconds) granularity.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #     `Unit`\: The published unit is `Count`.
+    #
+    #   * <b> <code>StatusCheckFailed_System</code> </b> - Reports whether
+    #     the instance passed or failed the system status check. This metric
+    #     can be either 0 (passed) or 1 (failed). This metric data is
+    #     available in 1-minute (60 seconds) granularity.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #     `Unit`\: The published unit is `Count`.
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-viewing-instance-burst-capacity
     #   @return [String]
     #
     # @!attribute [rw] period
     #   The granularity, in seconds, of the returned data points.
+    #
+    #   The `StatusCheckFailed`, `StatusCheckFailed_Instance`, and
+    #   `StatusCheckFailed_System` instance metric data is available in
+    #   1-minute (60 seconds) granularity. All other instance metric data is
+    #   available in 5-minute (300 seconds) granularity.
     #   @return [Integer]
     #
     # @!attribute [rw] start_time
@@ -3244,11 +4766,37 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] unit
-    #   The unit. The list of valid values is below.
+    #   The unit for the metric data request. Valid units depend on the
+    #   metric data being requested. For the valid units to specify with
+    #   each available metric, see the `metricName` parameter.
     #   @return [String]
     #
     # @!attribute [rw] statistics
-    #   The instance statistics.
+    #   The statistic for the metric.
+    #
+    #   The following statistics are available:
+    #
+    #   * `Minimum` - The lowest value observed during the specified period.
+    #     Use this value to determine low volumes of activity for your
+    #     application.
+    #
+    #   * `Maximum` - The highest value observed during the specified
+    #     period. Use this value to determine high volumes of activity for
+    #     your application.
+    #
+    #   * `Sum` - All values submitted for the matching metric added
+    #     together. You can use this statistic to determine the total volume
+    #     of a metric.
+    #
+    #   * `Average` - The value of Sum / SampleCount during the specified
+    #     period. By comparing this statistic with the Minimum and Maximum
+    #     values, you can determine the full scope of a metric and how close
+    #     the average use is to the Minimum and Maximum values. This
+    #     comparison helps you to know when to increase or decrease your
+    #     resources.
+    #
+    #   * `SampleCount` - The count, or number, of data points used for the
+    #     statistical calculation.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceMetricDataRequest AWS API Documentation
@@ -3265,12 +4813,11 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] metric_name
-    #   The metric name to return data for.
+    #   The name of the metric returned.
     #   @return [String]
     #
     # @!attribute [rw] metric_data
-    #   An array of key-value pairs containing information about the results
-    #   of your get instance metric data request.
+    #   An array of objects that describe the metric data returned.
     #   @return [Array<Types::MetricDatapoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceMetricDataResult AWS API Documentation
@@ -3289,7 +4836,7 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] instance_name
-    #   The name of the instance.
+    #   The name of the instance for which to return firewall port states.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancePortStatesRequest AWS API Documentation
@@ -3300,7 +4847,8 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] port_states
-    #   Information about the port states resulting from your request.
+    #   An array of objects that describe the firewall port states for the
+    #   specified instance.
     #   @return [Array<Types::InstancePortState>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancePortStatesResult AWS API Documentation
@@ -3378,8 +4926,12 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to the next page of results from your get
-    #   instance snapshots request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetInstanceSnapshots`
+    #   request. If your results are paginated, the response will return a
+    #   next page token that you can specify as the page token in a
+    #   subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshotsRequest AWS API Documentation
@@ -3395,8 +4947,14 @@ module Aws::Lightsail
     #   @return [Array<Types::InstanceSnapshot>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your get
-    #   instance snapshots request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another
+    #   `GetInstanceSnapshots` request and specify the next page token using
+    #   the `pageToken` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshotsResult AWS API Documentation
@@ -3444,8 +5002,12 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to the next page of results from your get
-    #   instances request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetInstances` request. If
+    #   your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancesRequest AWS API Documentation
@@ -3461,8 +5023,14 @@ module Aws::Lightsail
     #   @return [Array<Types::Instance>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your get
-    #   instances request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetInstances`
+    #   request and specify the next page token using the `pageToken`
+    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancesResult AWS API Documentation
@@ -3511,8 +5079,12 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to the next page of results from your get
-    #   key pairs request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetKeyPairs` request. If
+    #   your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPairsRequest AWS API Documentation
@@ -3528,8 +5100,14 @@ module Aws::Lightsail
     #   @return [Array<Types::KeyPair>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your get
-    #   key pairs request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetKeyPairs`
+    #   request and specify the next page token using the `pageToken`
+    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPairsResult AWS API Documentation
@@ -3558,16 +5136,21 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] metric_name
-    #   The metric about which you want to return information. Valid values
-    #   are listed below, along with the most useful `statistics` to include
-    #   in your request.
+    #   The metric for which you want to return information.
+    #
+    #   Valid load balancer metric names are listed below, along with the
+    #   most useful `statistics` to include in your request, and the
+    #   published `unit` value.
     #
     #   * <b> <code>ClientTLSNegotiationErrorCount</code> </b> - The number
     #     of TLS connections initiated by the client that did not establish
-    #     a session with the load balancer. Possible causes include a
-    #     mismatch of ciphers or protocols.
+    #     a session with the load balancer due to a TLS error generated by
+    #     the load balancer. Possible causes include a mismatch of ciphers
+    #     or protocols.
     #
     #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #     `Unit`\: The published unit is `Count`.
     #
     #   * <b> <code>HealthyHostCount</code> </b> - The number of target
     #     instances that are considered healthy.
@@ -3575,58 +5158,72 @@ module Aws::Lightsail
     #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
     #     and `Maximum`.
     #
-    #   * <b> <code>UnhealthyHostCount</code> </b> - The number of target
-    #     instances that are considered unhealthy.
-    #
-    #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
-    #     and `Maximum`.
-    #
-    #   * <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP
-    #     4XX client error codes that originate from the load balancer.
-    #     Client errors are generated when requests are malformed or
-    #     incomplete. These requests have not been received by the target
-    #     instance. This count does not include any response codes generated
-    #     by the target instances.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
-    #
-    #   * <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP
-    #     5XX server error codes that originate from the load balancer. This
-    #     count does not include any response codes generated by the target
-    #     instances.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #     `Unit`\: The published unit is `Count`.
     #
     #   * <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of
-    #     HTTP response codes generated by the target instances. This does
-    #     not include any response codes generated by the load balancer.
+    #     HTTP 2XX response codes generated by the target instances. This
+    #     does not include any response codes generated by the load
+    #     balancer.
     #
     #     `Statistics`\: The most useful statistic is `Sum`. Note that
     #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #     `Unit`\: The published unit is `Count`.
     #
     #   * <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of
-    #     HTTP response codes generated by the target instances. This does
-    #     not include any response codes generated by the load balancer.
+    #     HTTP 3XX response codes generated by the target instances. This
+    #     does not include any response codes generated by the load
+    #     balancer.
     #
     #     `Statistics`\: The most useful statistic is `Sum`. Note that
     #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #     `Unit`\: The published unit is `Count`.
     #
     #   * <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of
-    #     HTTP response codes generated by the target instances. This does
-    #     not include any response codes generated by the load balancer.
+    #     HTTP 4XX response codes generated by the target instances. This
+    #     does not include any response codes generated by the load
+    #     balancer.
     #
     #     `Statistics`\: The most useful statistic is `Sum`. Note that
     #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #     `Unit`\: The published unit is `Count`.
     #
     #   * <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of
-    #     HTTP response codes generated by the target instances. This does
-    #     not include any response codes generated by the load balancer.
+    #     HTTP 5XX response codes generated by the target instances. This
+    #     does not include any response codes generated by the load
+    #     balancer.
     #
     #     `Statistics`\: The most useful statistic is `Sum`. Note that
     #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #     `Unit`\: The published unit is `Count`.
+    #
+    #   * <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP
+    #     4XX client error codes that originated from the load balancer.
+    #     Client errors are generated when requests are malformed or
+    #     incomplete. These requests were not received by the target
+    #     instance. This count does not include response codes generated by
+    #     the target instances.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #     `Unit`\: The published unit is `Count`.
+    #
+    #   * <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP
+    #     5XX server error codes that originated from the load balancer.
+    #     This does not include any response codes generated by the target
+    #     instance. This metric is reported if there are no healthy
+    #     instances attached to the load balancer, or if the request rate
+    #     exceeds the capacity of the instances (spillover) or the load
+    #     balancer.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #     `Unit`\: The published unit is `Count`.
     #
     #   * <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in
     #     seconds, after the request leaves the load balancer until a
@@ -3634,11 +5231,15 @@ module Aws::Lightsail
     #
     #     `Statistics`\: The most useful statistic is `Average`.
     #
+    #     `Unit`\: The published unit is `Seconds`.
+    #
     #   * <b> <code>RejectedConnectionCount</code> </b> - The number of
     #     connections that were rejected because the load balancer had
     #     reached its maximum number of connections.
     #
     #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #     `Unit`\: The published unit is `Count`.
     #
     #   * <b> <code>RequestCount</code> </b> - The number of requests
     #     processed over IPv4. This count includes only the requests with a
@@ -3646,6 +5247,16 @@ module Aws::Lightsail
     #
     #     `Statistics`\: The most useful statistic is `Sum`. Note that
     #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #     `Unit`\: The published unit is `Count`.
+    #
+    #   * <b> <code>UnhealthyHostCount</code> </b> - The number of target
+    #     instances that are considered unhealthy.
+    #
+    #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
+    #     and `Maximum`.
+    #
+    #     `Unit`\: The published unit is `Count`.
     #   @return [String]
     #
     # @!attribute [rw] period
@@ -3661,34 +5272,37 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] unit
-    #   The unit for the time period request. Valid values are listed below.
+    #   The unit for the metric data request. Valid units depend on the
+    #   metric data being requested. For the valid units with each available
+    #   metric, see the `metricName` parameter.
     #   @return [String]
     #
     # @!attribute [rw] statistics
-    #   An array of statistics that you want to request metrics for. Valid
-    #   values are listed below.
+    #   The statistic for the metric.
     #
-    #   * <b> <code>SampleCount</code> </b> - The count (number) of data
-    #     points used for the statistical calculation.
+    #   The following statistics are available:
     #
-    #   * <b> <code>Average</code> </b> - The value of Sum / SampleCount
-    #     during the specified period. By comparing this statistic with the
-    #     Minimum and Maximum, you can determine the full scope of a metric
-    #     and how close the average use is to the Minimum and Maximum. This
+    #   * `Minimum` - The lowest value observed during the specified period.
+    #     Use this value to determine low volumes of activity for your
+    #     application.
+    #
+    #   * `Maximum` - The highest value observed during the specified
+    #     period. Use this value to determine high volumes of activity for
+    #     your application.
+    #
+    #   * `Sum` - All values submitted for the matching metric added
+    #     together. You can use this statistic to determine the total volume
+    #     of a metric.
+    #
+    #   * `Average` - The value of Sum / SampleCount during the specified
+    #     period. By comparing this statistic with the Minimum and Maximum
+    #     values, you can determine the full scope of a metric and how close
+    #     the average use is to the Minimum and Maximum values. This
     #     comparison helps you to know when to increase or decrease your
-    #     resources as needed.
+    #     resources.
     #
-    #   * <b> <code>Sum</code> </b> - All values submitted for the matching
-    #     metric added together. This statistic can be useful for
-    #     determining the total volume of a metric.
-    #
-    #   * <b> <code>Minimum</code> </b> - The lowest value observed during
-    #     the specified period. You can use this value to determine low
-    #     volumes of activity for your application.
-    #
-    #   * <b> <code>Maximum</code> </b> - The highest value observed during
-    #     the specified period. You can use this value to determine high
-    #     volumes of activity for your application.
+    #   * `SampleCount` - The count, or number, of data points used for the
+    #     statistical calculation.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerMetricDataRequest AWS API Documentation
@@ -3705,98 +5319,11 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] metric_name
-    #   The metric about which you are receiving information. Valid values
-    #   are listed below, along with the most useful `statistics` to include
-    #   in your request.
-    #
-    #   * <b> <code>ClientTLSNegotiationErrorCount</code> </b> - The number
-    #     of TLS connections initiated by the client that did not establish
-    #     a session with the load balancer. Possible causes include a
-    #     mismatch of ciphers or protocols.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`.
-    #
-    #   * <b> <code>HealthyHostCount</code> </b> - The number of target
-    #     instances that are considered healthy.
-    #
-    #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
-    #     and `Maximum`.
-    #
-    #   * <b> <code>UnhealthyHostCount</code> </b> - The number of target
-    #     instances that are considered unhealthy.
-    #
-    #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
-    #     and `Maximum`.
-    #
-    #   * <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP
-    #     4XX client error codes that originate from the load balancer.
-    #     Client errors are generated when requests are malformed or
-    #     incomplete. These requests have not been received by the target
-    #     instance. This count does not include any response codes generated
-    #     by the target instances.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
-    #
-    #   * <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP
-    #     5XX server error codes that originate from the load balancer. This
-    #     count does not include any response codes generated by the target
-    #     instances.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
-    #
-    #   * <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of
-    #     HTTP response codes generated by the target instances. This does
-    #     not include any response codes generated by the load balancer.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
-    #
-    #   * <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of
-    #     HTTP response codes generated by the target instances. This does
-    #     not include any response codes generated by the load balancer.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
-    #
-    #   * <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of
-    #     HTTP response codes generated by the target instances. This does
-    #     not include any response codes generated by the load balancer.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
-    #
-    #   * <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of
-    #     HTTP response codes generated by the target instances. This does
-    #     not include any response codes generated by the load balancer.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
-    #
-    #   * <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in
-    #     seconds, after the request leaves the load balancer until a
-    #     response from the target instance is received.
-    #
-    #     `Statistics`\: The most useful statistic is `Average`.
-    #
-    #   * <b> <code>RejectedConnectionCount</code> </b> - The number of
-    #     connections that were rejected because the load balancer had
-    #     reached its maximum number of connections.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`.
-    #
-    #   * <b> <code>RequestCount</code> </b> - The number of requests
-    #     processed over IPv4. This count includes only the requests with a
-    #     response generated by a target instance of the load balancer.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #   The name of the metric returned.
     #   @return [String]
     #
     # @!attribute [rw] metric_data
-    #   An array of metric datapoint objects.
+    #   An array of objects that describe the metric data returned.
     #   @return [Array<Types::MetricDatapoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerMetricDataResult AWS API Documentation
@@ -3875,7 +5402,11 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for paginating the results from your GetLoadBalancers
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetLoadBalancers` request.
+    #   If your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
     #   request.
     #   @return [String]
     #
@@ -3891,8 +5422,14 @@ module Aws::Lightsail
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your
-    #   GetLoadBalancers request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetLoadBalancers`
+    #   request and specify the next page token using the `pageToken`
+    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancersResult AWS API Documentation
@@ -3922,8 +5459,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operation
-    #   An array of key-value pairs containing information about the results
-    #   of your get operation request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationResult AWS API Documentation
@@ -3946,8 +5484,12 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to the next page of results from your get
-    #   operations for resource request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetOperationsForResource`
+    #   request. If your results are paginated, the response will return a
+    #   next page token that you can specify as the page token in a
+    #   subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsForResourceRequest AWS API Documentation
@@ -3959,8 +5501,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the results
-    #   of your get operations for resource request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @!attribute [rw] next_page_count
@@ -3974,9 +5517,14 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] next_page_token
-    #   An identifier that was returned from the previous call to this
-    #   operation, which can be used to return the next set of items in the
-    #   list.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another
+    #   `GetOperationsForResource` request and specify the next page token
+    #   using the `pageToken` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsForResourceResult AWS API Documentation
@@ -3996,8 +5544,12 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to the next page of results from your get
-    #   operations request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetOperations` request. If
+    #   your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsRequest AWS API Documentation
@@ -4008,13 +5560,20 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the results
-    #   of your get operations request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your get
-    #   operations request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetOperations`
+    #   request and specify the next page token using the `pageToken`
+    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsResult AWS API Documentation
@@ -4073,8 +5632,12 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to a specific page of results for your
-    #   `get relational database blueprints` request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial
+    #   `GetRelationalDatabaseBlueprints` request. If your results are
+    #   paginated, the response will return a next page token that you can
+    #   specify as the page token in a subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBlueprintsRequest AWS API Documentation
@@ -4090,8 +5653,14 @@ module Aws::Lightsail
     #   @return [Array<Types::RelationalDatabaseBlueprint>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results of your get
-    #   relational database blueprints request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another
+    #   `GetRelationalDatabaseBlueprints` request and specify the next page
+    #   token using the `pageToken` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBlueprintsResult AWS API Documentation
@@ -4110,8 +5679,12 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to a specific page of results for your
-    #   `get relational database bundles` request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial
+    #   `GetRelationalDatabaseBundles` request. If your results are
+    #   paginated, the response will return a next page token that you can
+    #   specify as the page token in a subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBundlesRequest AWS API Documentation
@@ -4127,8 +5700,14 @@ module Aws::Lightsail
     #   @return [Array<Types::RelationalDatabaseBundle>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results of your get
-    #   relational database bundles request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another
+    #   `GetRelationalDatabaseBundles` request and specify the next page
+    #   token using the `pageToken` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBundlesResult AWS API Documentation
@@ -4162,8 +5741,12 @@ module Aws::Lightsail
     #   @return [Integer]
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to a specific page of results from for
-    #   get relational database events request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial
+    #   `GetRelationalDatabaseEvents` request. If your results are
+    #   paginated, the response will return a next page token that you can
+    #   specify as the page token in a subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseEventsRequest AWS API Documentation
@@ -4181,8 +5764,14 @@ module Aws::Lightsail
     #   @return [Array<Types::RelationalDatabaseEvent>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your get
-    #   relational database events request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another
+    #   `GetRelationalDatabaseEvents` request and specify the next page
+    #   token using the `pageToken` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseEventsResult AWS API Documentation
@@ -4221,7 +5810,7 @@ module Aws::Lightsail
     #
     #   Constraints:
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Specified in the Unix time format.
     #
@@ -4234,7 +5823,7 @@ module Aws::Lightsail
     #
     #   Constraints:
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Specified in the Unix time format.
     #
@@ -4248,12 +5837,21 @@ module Aws::Lightsail
     #   If `false` is specified, the log event starts from the tail of the
     #   log.
     #
-    #   Default: `false`
+    #   <note markdown="1"> For PostgreSQL, the default value of `false` is the only option
+    #   available.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to a specific page of results for your
-    #   `get relational database log events` request.
+    #   The token to advance to the next or previous page of results from
+    #   your request.
+    #
+    #   To get a page token, perform an initial
+    #   `GetRelationalDatabaseLogEvents` request. If your results are
+    #   paginated, the response will return a next forward token and/or next
+    #   backward token that you can specify as the page token in a
+    #   subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseLogEventsRequest AWS API Documentation
@@ -4389,11 +5987,66 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] metric_name
-    #   The name of the metric data to return.
+    #   The metric for which you want to return information.
+    #
+    #   Valid relational database metric names are listed below, along with
+    #   the most useful `statistics` to include in your request, and the
+    #   published `unit` value. All relational database metric data is
+    #   available in 1-minute (60 seconds) granularity.
+    #
+    #   * <b> <code>CPUUtilization</code> </b> - The percentage of CPU
+    #     utilization currently in use on the database.
+    #
+    #     `Statistics`\: The most useful statistics are `Maximum` and
+    #     `Average`.
+    #
+    #     `Unit`\: The published unit is `Percent`.
+    #
+    #   * <b> <code>DatabaseConnections</code> </b> - The number of database
+    #     connections in use.
+    #
+    #     `Statistics`\: The most useful statistics are `Maximum` and `Sum`.
+    #
+    #     `Unit`\: The published unit is `Count`.
+    #
+    #   * <b> <code>DiskQueueDepth</code> </b> - The number of outstanding
+    #     IOs (read/write requests) that are waiting to access the disk.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #     `Unit`\: The published unit is `Count`.
+    #
+    #   * <b> <code>FreeStorageSpace</code> </b> - The amount of available
+    #     storage space.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #     `Unit`\: The published unit is `Bytes`.
+    #
+    #   * <b> <code>NetworkReceiveThroughput</code> </b> - The incoming
+    #     (Receive) network traffic on the database, including both customer
+    #     database traffic and AWS traffic used for monitoring and
+    #     replication.
+    #
+    #     `Statistics`\: The most useful statistic is `Average`.
+    #
+    #     `Unit`\: The published unit is `Bytes/Second`.
+    #
+    #   * <b> <code>NetworkTransmitThroughput</code> </b> - The outgoing
+    #     (Transmit) network traffic on the database, including both
+    #     customer database traffic and AWS traffic used for monitoring and
+    #     replication.
+    #
+    #     `Statistics`\: The most useful statistic is `Average`.
+    #
+    #     `Unit`\: The published unit is `Bytes/Second`.
     #   @return [String]
     #
     # @!attribute [rw] period
     #   The granularity, in seconds, of the returned data points.
+    #
+    #   All relational database metric data is available in 1-minute (60
+    #   seconds) granularity.
     #   @return [Integer]
     #
     # @!attribute [rw] start_time
@@ -4401,7 +6054,7 @@ module Aws::Lightsail
     #
     #   Constraints:
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Specified in the Unix time format.
     #
@@ -4414,7 +6067,7 @@ module Aws::Lightsail
     #
     #   Constraints:
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Specified in the Unix time format.
     #
@@ -4423,11 +6076,37 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] unit
-    #   The unit for the metric data request.
+    #   The unit for the metric data request. Valid units depend on the
+    #   metric data being requested. For the valid units with each available
+    #   metric, see the `metricName` parameter.
     #   @return [String]
     #
     # @!attribute [rw] statistics
-    #   The array of statistics for your metric data request.
+    #   The statistic for the metric.
+    #
+    #   The following statistics are available:
+    #
+    #   * `Minimum` - The lowest value observed during the specified period.
+    #     Use this value to determine low volumes of activity for your
+    #     application.
+    #
+    #   * `Maximum` - The highest value observed during the specified
+    #     period. Use this value to determine high volumes of activity for
+    #     your application.
+    #
+    #   * `Sum` - All values submitted for the matching metric added
+    #     together. You can use this statistic to determine the total volume
+    #     of a metric.
+    #
+    #   * `Average` - The value of Sum / SampleCount during the specified
+    #     period. By comparing this statistic with the Minimum and Maximum
+    #     values, you can determine the full scope of a metric and how close
+    #     the average use is to the Minimum and Maximum values. This
+    #     comparison helps you to know when to increase or decrease your
+    #     resources.
+    #
+    #   * `SampleCount` - The count, or number, of data points used for the
+    #     statistical calculation.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMetricDataRequest AWS API Documentation
@@ -4444,12 +6123,11 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] metric_name
-    #   The name of the metric.
+    #   The name of the metric returned.
     #   @return [String]
     #
     # @!attribute [rw] metric_data
-    #   An object describing the result of your get relational database
-    #   metric data request.
+    #   An array of objects that describe the metric data returned.
     #   @return [Array<Types::MetricDatapoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMetricDataResult AWS API Documentation
@@ -4473,8 +6151,12 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to a specific page of results for your
-    #   `get relational database parameters` request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial
+    #   `GetRelationalDatabaseParameters` request. If your results are
+    #   paginated, the response will return a next page token that you can
+    #   specify as the page token in a subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseParametersRequest AWS API Documentation
@@ -4491,8 +6173,14 @@ module Aws::Lightsail
     #   @return [Array<Types::RelationalDatabaseParameter>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your get
-    #   static IPs request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another
+    #   `GetRelationalDatabaseParameters` request and specify the next page
+    #   token using the `pageToken` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseParametersResult AWS API Documentation
@@ -4569,8 +6257,12 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to a specific page of results for your
-    #   `get relational database snapshots` request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial
+    #   `GetRelationalDatabaseSnapshots` request. If your results are
+    #   paginated, the response will return a next page token that you can
+    #   specify as the page token in a subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseSnapshotsRequest AWS API Documentation
@@ -4586,8 +6278,14 @@ module Aws::Lightsail
     #   @return [Array<Types::RelationalDatabaseSnapshot>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your get
-    #   relational database snapshots request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another
+    #   `GetRelationalDatabaseSnapshots` request and specify the next page
+    #   token using the `pageToken` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseSnapshotsResult AWS API Documentation
@@ -4606,8 +6304,12 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to a specific page of results for your
-    #   `get relational database` request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetRelationalDatabases`
+    #   request. If your results are paginated, the response will return a
+    #   next page token that you can specify as the page token in a
+    #   subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabasesRequest AWS API Documentation
@@ -4623,8 +6325,14 @@ module Aws::Lightsail
     #   @return [Array<Types::RelationalDatabase>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your get
-    #   relational databases request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another
+    #   `GetRelationalDatabases` request and specify the next page token
+    #   using the `pageToken` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabasesResult AWS API Documentation
@@ -4673,8 +6381,12 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] page_token
-    #   A token used for advancing to the next page of results from your get
-    #   static IPs request.
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetStaticIps` request. If
+    #   your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIpsRequest AWS API Documentation
@@ -4690,8 +6402,14 @@ module Aws::Lightsail
     #   @return [Array<Types::StaticIp>]
     #
     # @!attribute [rw] next_page_token
-    #   A token used for advancing to the next page of results from your get
-    #   static IPs request.
+    #   The token to advance to the next page of resutls from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetStaticIps`
+    #   request and specify the next page token using the `pageToken`
+    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIpsResult AWS API Documentation
@@ -4699,6 +6417,76 @@ module Aws::Lightsail
     class GetStaticIpsResult < Struct.new(
       :static_ips,
       :next_page_token)
+      include Aws::Structure
+    end
+
+    # Describes the public SSH host keys or the RDP certificate.
+    #
+    # @!attribute [rw] algorithm
+    #   The SSH host key algorithm or the RDP certificate format.
+    #
+    #   For SSH host keys, the algorithm may be `ssh-rsa`,
+    #   `ecdsa-sha2-nistp256`, `ssh-ed25519`, etc. For RDP certificates, the
+    #   algorithm is always `x509-cert`.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key
+    #   The public SSH host key or the RDP certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] witnessed_at
+    #   The time that the SSH host key or RDP certificate was recorded by
+    #   Lightsail.
+    #   @return [Time]
+    #
+    # @!attribute [rw] fingerprint_sha1
+    #   The SHA-1 fingerprint of the returned SSH host key or RDP
+    #   certificate.
+    #
+    #   * Example of an SHA-1 SSH fingerprint:
+    #
+    #     `SHA1:1CHH6FaAaXjtFOsR/t83vf91SR0`
+    #
+    #   * Example of an SHA-1 RDP fingerprint:
+    #
+    #     `af:34:51:fe:09:f0:e0:da:b8:4e:56:ca:60:c2:10:ff:38:06:db:45`
+    #   @return [String]
+    #
+    # @!attribute [rw] fingerprint_sha256
+    #   The SHA-256 fingerprint of the returned SSH host key or RDP
+    #   certificate.
+    #
+    #   * Example of an SHA-256 SSH fingerprint:
+    #
+    #     `SHA256:KTsMnRBh1IhD17HpdfsbzeGA4jOijm5tyXsMjKVbB8o`
+    #
+    #   * Example of an SHA-256 RDP fingerprint:
+    #
+    #     `03:9b:36:9f:4b:de:4e:61:70:fc:7c:c9:78:e7:d2:1a:1c:25:a8:0c:91:f6:7c:e4:d6:a0:85:c8:b4:53:99:68`
+    #   @return [String]
+    #
+    # @!attribute [rw] not_valid_before
+    #   The returned RDP certificate is valid after this point in time.
+    #
+    #   This value is listed only for RDP certificates.
+    #   @return [Time]
+    #
+    # @!attribute [rw] not_valid_after
+    #   The returned RDP certificate is not valid after this point in time.
+    #
+    #   This value is listed only for RDP certificates.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/HostKeyAttributes AWS API Documentation
+    #
+    class HostKeyAttributes < Struct.new(
+      :algorithm,
+      :public_key,
+      :witnessed_at,
+      :fingerprint_sha1,
+      :fingerprint_sha256,
+      :not_valid_before,
+      :not_valid_after)
       include Aws::Structure
     end
 
@@ -4728,8 +6516,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operation
-    #   An array of key-value pairs containing information about the request
-    #   operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ImportKeyPairResult AWS API Documentation
@@ -4792,6 +6581,11 @@ module Aws::Lightsail
     #   The bundle for the instance (e.g., `micro_1_0`).
     #   @return [String]
     #
+    # @!attribute [rw] add_ons
+    #   An array of objects representing the add-ons enabled on the
+    #   instance.
+    #   @return [Array<Types::AddOn>]
+    #
     # @!attribute [rw] is_static_ip
     #   A Boolean value indicating whether this instance has a static IP
     #   assigned to it.
@@ -4844,6 +6638,7 @@ module Aws::Lightsail
       :blueprint_id,
       :blueprint_name,
       :bundle_id,
+      :add_ons,
       :is_static_ip,
       :private_ip_address,
       :public_ip_address,
@@ -4917,6 +6712,10 @@ module Aws::Lightsail
     #   instance.
     #   @return [String]
     #
+    # @!attribute [rw] host_keys
+    #   Describes the public SSH host keys or the RDP certificate.
+    #   @return [Array<Types::HostKeyAttributes>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceAccessDetails AWS API Documentation
     #
     class InstanceAccessDetails < Struct.new(
@@ -4928,7 +6727,8 @@ module Aws::Lightsail
       :private_key,
       :protocol,
       :instance_name,
-      :username)
+      :username,
+      :host_keys)
       include Aws::Structure
     end
 
@@ -4942,7 +6742,7 @@ module Aws::Lightsail
     #       {
     #         source_name: "ResourceName", # required
     #         instance_type: "NonEmptyString", # required
-    #         port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE
+    #         port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE, CLOSED
     #         user_data: "string",
     #         availability_zone: "string", # required
     #       }
@@ -4967,12 +6767,22 @@ module Aws::Lightsail
     #
     #   The following configuration options are available:
     #
-    #   * DEFAULT — Use the default firewall settings from the image.
+    #   * `DEFAULT` - Use the default firewall settings from the Lightsail
+    #     instance blueprint.
     #
-    #   * INSTANCE — Use the firewall settings from the source Lightsail
-    #     instance.
+    #   * `INSTANCE` - Use the configured firewall settings from the source
+    #     Lightsail instance.
     #
-    #   * NONE — Default to Amazon EC2.
+    #   * `NONE` - Use the default Amazon EC2 security group.
+    #
+    #   * `CLOSED` - All ports closed.
+    #
+    #   <note markdown="1"> If you configured `lightsail-connect` as a `cidrListAliases` on your
+    #   instance, or if you chose to allow the Lightsail browser-based SSH
+    #   or RDP clients to connect to your instance, that configuration is
+    #   not carried over to your new Amazon EC2 instance.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -5127,18 +6937,46 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes information about the instance ports.
+    # Describes information about ports for an Amazon Lightsail instance.
     #
     # @!attribute [rw] from_port
-    #   The first port in the range.
+    #   The first port in a range of open ports on an instance.
+    #
+    #   Allowed ports:
+    #
+    #   * TCP and UDP - `0` to `65535`
+    #
+    #   * ICMP - The ICMP type. For example, specify `8` as the `fromPort`
+    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
+    #     Ping. For more information, see [Control Messages][1] on
+    #     *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
-    #   The last port in the range.
+    #   The last port in a range of open ports on an instance.
+    #
+    #   Allowed ports:
+    #
+    #   * TCP and UDP - `0` to `65535`
+    #
+    #   * ICMP - The ICMP code. For example, specify `8` as the `fromPort`
+    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
+    #     Ping. For more information, see [Control Messages][1] on
+    #     *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
-    #   The protocol being used. Can be one of the following.
+    #   The IP protocol name.
+    #
+    #   The name can be one of the following:
     #
     #   * `tcp` - Transmission Control Protocol (TCP) provides reliable,
     #     ordered, and error-checked delivery of streamed data between
@@ -5147,7 +6985,7 @@ module Aws::Lightsail
     #     service, use UDP instead.
     #
     #   * `all` - All transport layer protocol types. For more general
-    #     information, see [Transport layer][1] on Wikipedia.
+    #     information, see [Transport layer][1] on *Wikipedia*.
     #
     #   * `udp` - With User Datagram Protocol (UDP), computer applications
     #     can send messages (or datagrams) to other hosts on an Internet
@@ -5158,14 +6996,23 @@ module Aws::Lightsail
     #     latency over reliability. If you do require reliable data stream
     #     service, use TCP instead.
     #
+    #   * `icmp` - Internet Control Message Protocol (ICMP) is used to send
+    #     error messages and operational information indicating success or
+    #     failure when communicating with an instance. For example, an error
+    #     is indicated when an instance could not be reached. When you
+    #     specify `icmp` as the `protocol`, you must specify the ICMP type
+    #     using the `fromPort` parameter, and ICMP code using the `toPort`
+    #     parameter.
+    #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Transport_layer
     #   @return [String]
     #
     # @!attribute [rw] access_from
-    #   The location from which access is allowed (e.g., `Anywhere
-    #   (0.0.0.0/0)`).
+    #   The location from which access is allowed. For example, `Anywhere
+    #   (0.0.0.0/0)`, or `Custom` if a specific IP address or range of IP
+    #   addresses is allowed.
     #   @return [String]
     #
     # @!attribute [rw] access_type
@@ -5173,12 +7020,38 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] common_name
-    #   The common name.
+    #   The common name of the port information.
     #   @return [String]
     #
     # @!attribute [rw] access_direction
     #   The access direction (`inbound` or `outbound`).
+    #
+    #   <note markdown="1"> Lightsail currently supports only `inbound` access direction.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] cidrs
+    #   The IP address, or range of IP addresses in CIDR notation, that are
+    #   allowed to connect to an instance through the ports, and the
+    #   protocol. Lightsail supports IPv4 addresses.
+    #
+    #   For more information about CIDR block notation, see [Classless
+    #   Inter-Domain Routing][1] on *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cidr_list_aliases
+    #   An alias that defines access for a preconfigured range of IP
+    #   addresses.
+    #
+    #   The only alias currently supported is `lightsail-connect`, which
+    #   allows IP addresses of the browser-based RDP/SSH client in the
+    #   Lightsail console to connect to your instance.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstancePortInfo AWS API Documentation
     #
@@ -5189,22 +7062,53 @@ module Aws::Lightsail
       :access_from,
       :access_type,
       :common_name,
-      :access_direction)
+      :access_direction,
+      :cidrs,
+      :cidr_list_aliases)
       include Aws::Structure
     end
 
-    # Describes the port state.
+    # Describes open ports on an instance, the IP addresses allowed to
+    # connect to the instance through the ports, and the protocol.
     #
     # @!attribute [rw] from_port
-    #   The first port in the range.
+    #   The first port in a range of open ports on an instance.
+    #
+    #   Allowed ports:
+    #
+    #   * TCP and UDP - `0` to `65535`
+    #
+    #   * ICMP - The ICMP type. For example, specify `8` as the `fromPort`
+    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
+    #     Ping. For more information, see [Control Messages][1] on
+    #     *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
-    #   The last port in the range.
+    #   The last port in a range of open ports on an instance.
+    #
+    #   Allowed ports:
+    #
+    #   * TCP and UDP - `0` to `65535`
+    #
+    #   * ICMP - The ICMP code. For example, specify `8` as the `fromPort`
+    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
+    #     Ping. For more information, see [Control Messages][1] on
+    #     *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
-    #   The protocol being used. Can be one of the following.
+    #   The IP protocol name.
+    #
+    #   The name can be one of the following:
     #
     #   * `tcp` - Transmission Control Protocol (TCP) provides reliable,
     #     ordered, and error-checked delivery of streamed data between
@@ -5213,7 +7117,7 @@ module Aws::Lightsail
     #     service, use UDP instead.
     #
     #   * `all` - All transport layer protocol types. For more general
-    #     information, see [Transport layer][1] on Wikipedia.
+    #     information, see [Transport layer][1] on *Wikipedia*.
     #
     #   * `udp` - With User Datagram Protocol (UDP), computer applications
     #     can send messages (or datagrams) to other hosts on an Internet
@@ -5224,6 +7128,14 @@ module Aws::Lightsail
     #     latency over reliability. If you do require reliable data stream
     #     service, use TCP instead.
     #
+    #   * `icmp` - Internet Control Message Protocol (ICMP) is used to send
+    #     error messages and operational information indicating success or
+    #     failure when communicating with an instance. For example, an error
+    #     is indicated when an instance could not be reached. When you
+    #     specify `icmp` as the `protocol`, you must specify the ICMP type
+    #     using the `fromPort` parameter, and ICMP code using the `toPort`
+    #     parameter.
+    #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Transport_layer
@@ -5231,7 +7143,33 @@ module Aws::Lightsail
     #
     # @!attribute [rw] state
     #   Specifies whether the instance port is `open` or `closed`.
+    #
+    #   <note markdown="1"> The port state for Lightsail instances is always `open`.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] cidrs
+    #   The IP address, or range of IP addresses in CIDR notation, that are
+    #   allowed to connect to an instance through the ports, and the
+    #   protocol. Lightsail supports IPv4 addresses.
+    #
+    #   For more information about CIDR block notation, see [Classless
+    #   Inter-Domain Routing][1] on *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cidr_list_aliases
+    #   An alias that defines access for a preconfigured range of IP
+    #   addresses.
+    #
+    #   The only alias currently supported is `lightsail-connect`, which
+    #   allows IP addresses of the browser-based RDP/SSH client in the
+    #   Lightsail console to connect to your instance.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstancePortState AWS API Documentation
     #
@@ -5239,11 +7177,13 @@ module Aws::Lightsail
       :from_port,
       :to_port,
       :protocol,
-      :state)
+      :state,
+      :cidrs,
+      :cidr_list_aliases)
       include Aws::Structure
     end
 
-    # Describes the snapshot of the virtual private server, or *instance*.
+    # Describes an instance snapshot.
     #
     # @!attribute [rw] name
     #   The name of the snapshot.
@@ -5319,6 +7259,11 @@ module Aws::Lightsail
     #   `micro_1_0`).
     #   @return [String]
     #
+    # @!attribute [rw] is_from_auto_snapshot
+    #   A Boolean value indicating whether the snapshot was created from an
+    #   automatic snapshot.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] size_in_gb
     #   The size in GB of the SSD.
     #   @return [Integer]
@@ -5340,6 +7285,7 @@ module Aws::Lightsail
       :from_instance_arn,
       :from_blueprint_id,
       :from_bundle_id,
+      :is_from_auto_snapshot,
       :size_in_gb)
       include Aws::Structure
     end
@@ -5385,6 +7331,37 @@ module Aws::Lightsail
     class InstanceState < Struct.new(
       :code,
       :name)
+      include Aws::Structure
+    end
+
+    # Lightsail throws this exception when user input does not conform to
+    # the validation rules of an input field.
+    #
+    # <note markdown="1"> Domain-related APIs are only available in the N. Virginia (us-east-1)
+    # Region. Please set your AWS Region configuration to us-east-1 to
+    # create, view, or edit these resources.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
       include Aws::Structure
     end
 
@@ -5653,7 +7630,8 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] status
-    #   The status of the SSL/TLS certificate. Valid values are below.
+    #   The validation status of the SSL/TLS certificate. Valid values are
+    #   below.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -5915,6 +7893,39 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes resource being monitored by an alarm.
+    #
+    # An alarm is a way to monitor your Amazon Lightsail resource metrics.
+    # For more information, see [Alarms in Amazon Lightsail][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource being monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Lightsail resource being monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The Lightsail resource type of the resource being monitored.
+    #
+    #   Instances, load balancers, and relational databases are the only
+    #   Lightsail resources that can currently be monitored by alarms.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/MonitoredResourceInfo AWS API Documentation
+    #
+    class MonitoredResourceInfo < Struct.new(
+      :arn,
+      :name,
+      :resource_type)
+      include Aws::Structure
+    end
+
     # Describes the monthly data transfer in and out of your virtual private
     # server (or *instance*).
     #
@@ -5929,6 +7940,30 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Lightsail throws this exception when it cannot find a resource.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass OpenInstancePublicPortsRequest
     #   data as a hash:
     #
@@ -5936,19 +7971,19 @@ module Aws::Lightsail
     #         port_info: { # required
     #           from_port: 1,
     #           to_port: 1,
-    #           protocol: "tcp", # accepts tcp, all, udp
+    #           protocol: "tcp", # accepts tcp, all, udp, icmp
+    #           cidrs: ["string"],
+    #           cidr_list_aliases: ["string"],
     #         },
     #         instance_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] port_info
-    #   An array of key-value pairs containing information about the port
-    #   mappings.
+    #   An object to describe the ports to open for the specified instance.
     #   @return [Types::PortInfo]
     #
     # @!attribute [rw] instance_name
-    #   The name of the instance for which you want to open the public
-    #   ports.
+    #   The name of the instance for which to open ports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/OpenInstancePublicPortsRequest AWS API Documentation
@@ -5960,8 +7995,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operation
-    #   An array of key-value pairs containing information about the request
-    #   operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/OpenInstancePublicPortsResult AWS API Documentation
@@ -5991,7 +8027,7 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] location
-    #   The region and Availability Zone.
+    #   The AWS Region and Availability Zone.
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] is_terminal
@@ -6037,6 +8073,30 @@ module Aws::Lightsail
       :status_changed_at,
       :error_code,
       :error_details)
+      include Aws::Structure
+    end
+
+    # Lightsail throws this exception when an operation fails to execute.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/OperationFailureException AWS API Documentation
+    #
+    class OperationFailureException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
       include Aws::Structure
     end
 
@@ -6088,8 +8148,9 @@ module Aws::Lightsail
     class PeerVpcRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] operation
-    #   An array of key-value pairs containing information about the request
-    #   operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PeerVpcResult AWS API Documentation
@@ -6146,8 +8207,8 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes information about the ports on your virtual private server
-    # (or *instance*).
+    # Describes ports to open on an instance, the IP addresses allowed to
+    # connect to the instance through the ports, and the protocol.
     #
     # @note When making an API call, you may pass PortInfo
     #   data as a hash:
@@ -6155,27 +8216,318 @@ module Aws::Lightsail
     #       {
     #         from_port: 1,
     #         to_port: 1,
-    #         protocol: "tcp", # accepts tcp, all, udp
+    #         protocol: "tcp", # accepts tcp, all, udp, icmp
+    #         cidrs: ["string"],
+    #         cidr_list_aliases: ["string"],
     #       }
     #
     # @!attribute [rw] from_port
-    #   The first port in the range.
+    #   The first port in a range of open ports on an instance.
+    #
+    #   Allowed ports:
+    #
+    #   * TCP and UDP - `0` to `65535`
+    #
+    #   * ICMP - The ICMP type. For example, specify `8` as the `fromPort`
+    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
+    #     Ping. For more information, see [Control Messages][1] on
+    #     *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
-    #   The last port in the range.
+    #   The last port in a range of open ports on an instance.
+    #
+    #   Allowed ports:
+    #
+    #   * TCP and UDP - `0` to `65535`
+    #
+    #   * ICMP - The ICMP code. For example, specify `8` as the `fromPort`
+    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
+    #     Ping. For more information, see [Control Messages][1] on
+    #     *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
-    #   The protocol.
+    #   The IP protocol name.
+    #
+    #   The name can be one of the following:
+    #
+    #   * `tcp` - Transmission Control Protocol (TCP) provides reliable,
+    #     ordered, and error-checked delivery of streamed data between
+    #     applications running on hosts communicating by an IP network. If
+    #     you have an application that doesn't require reliable data stream
+    #     service, use UDP instead.
+    #
+    #   * `all` - All transport layer protocol types. For more general
+    #     information, see [Transport layer][1] on *Wikipedia*.
+    #
+    #   * `udp` - With User Datagram Protocol (UDP), computer applications
+    #     can send messages (or datagrams) to other hosts on an Internet
+    #     Protocol (IP) network. Prior communications are not required to
+    #     set up transmission channels or data paths. Applications that
+    #     don't require reliable data stream service can use UDP, which
+    #     provides a connectionless datagram service that emphasizes reduced
+    #     latency over reliability. If you do require reliable data stream
+    #     service, use TCP instead.
+    #
+    #   * `icmp` - Internet Control Message Protocol (ICMP) is used to send
+    #     error messages and operational information indicating success or
+    #     failure when communicating with an instance. For example, an error
+    #     is indicated when an instance could not be reached. When you
+    #     specify `icmp` as the `protocol`, you must specify the ICMP type
+    #     using the `fromPort` parameter, and ICMP code using the `toPort`
+    #     parameter.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Transport_layer
     #   @return [String]
+    #
+    # @!attribute [rw] cidrs
+    #   The IP address, or range of IP addresses in CIDR notation, that are
+    #   allowed to connect to an instance through the ports, and the
+    #   protocol. Lightsail supports IPv4 addresses.
+    #
+    #   Examples:
+    #
+    #   * To allow the IP address `192.0.2.44`, specify `192.0.2.44` or
+    #     `192.0.2.44/32`.
+    #
+    #   * To allow the IP addresses `192.0.2.0` to `192.0.2.255`, specify
+    #     `192.0.2.0/24`.
+    #
+    #   For more information about CIDR block notation, see [Classless
+    #   Inter-Domain Routing][1] on *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cidr_list_aliases
+    #   An alias that defines access for a preconfigured range of IP
+    #   addresses.
+    #
+    #   The only alias currently supported is `lightsail-connect`, which
+    #   allows IP addresses of the browser-based RDP/SSH client in the
+    #   Lightsail console to connect to your instance.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PortInfo AWS API Documentation
     #
     class PortInfo < Struct.new(
       :from_port,
       :to_port,
-      :protocol)
+      :protocol,
+      :cidrs,
+      :cidr_list_aliases)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutAlarmRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alarm_name: "ResourceName", # required
+    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, ClientTLSNegotiationErrorCount, HealthyHostCount, UnhealthyHostCount, HTTPCode_LB_4XX_Count, HTTPCode_LB_5XX_Count, HTTPCode_Instance_2XX_Count, HTTPCode_Instance_3XX_Count, HTTPCode_Instance_4XX_Count, HTTPCode_Instance_5XX_Count, InstanceResponseTime, RejectedConnectionCount, RequestCount, DatabaseConnections, DiskQueueDepth, FreeStorageSpace, NetworkReceiveThroughput, NetworkTransmitThroughput, BurstCapacityTime, BurstCapacityPercentage
+    #         monitored_resource_name: "ResourceName", # required
+    #         comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
+    #         threshold: 1.0, # required
+    #         evaluation_periods: 1, # required
+    #         datapoints_to_alarm: 1,
+    #         treat_missing_data: "breaching", # accepts breaching, notBreaching, ignore, missing
+    #         contact_protocols: ["Email"], # accepts Email, SMS
+    #         notification_triggers: ["OK"], # accepts OK, ALARM, INSUFFICIENT_DATA
+    #         notification_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] alarm_name
+    #   The name for the alarm. Specify the name of an existing alarm to
+    #   update, and overwrite the previous configuration of the alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric to associate with the alarm.
+    #
+    #   You can configure up to two alarms per metric.
+    #
+    #   The following metrics are available for each resource type:
+    #
+    #   * **Instances**\: `BurstCapacityPercentage`, `BurstCapacityTime`,
+    #     `CPUUtilization`, `NetworkIn`, `NetworkOut`, `StatusCheckFailed`,
+    #     `StatusCheckFailed_Instance`, and `StatusCheckFailed_System`.
+    #
+    #   * **Load balancers**\: `ClientTLSNegotiationErrorCount`,
+    #     `HealthyHostCount`, `UnhealthyHostCount`, `HTTPCode_LB_4XX_Count`,
+    #     `HTTPCode_LB_5XX_Count`, `HTTPCode_Instance_2XX_Count`,
+    #     `HTTPCode_Instance_3XX_Count`, `HTTPCode_Instance_4XX_Count`,
+    #     `HTTPCode_Instance_5XX_Count`, `InstanceResponseTime`,
+    #     `RejectedConnectionCount`, and `RequestCount`.
+    #
+    #   * **Relational databases**\: `CPUUtilization`,
+    #     `DatabaseConnections`, `DiskQueueDepth`, `FreeStorageSpace`,
+    #     `NetworkReceiveThroughput`, and `NetworkTransmitThroughput`.
+    #
+    #   For more information about these metrics, see [Metrics available in
+    #   Lightsail][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-resource-health-metrics#available-metrics
+    #   @return [String]
+    #
+    # @!attribute [rw] monitored_resource_name
+    #   The name of the Lightsail resource that will be monitored.
+    #
+    #   Instances, load balancers, and relational databases are the only
+    #   Lightsail resources that can currently be monitored by alarms.
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The arithmetic operation to use when comparing the specified
+    #   statistic to the threshold. The specified statistic value is used as
+    #   the first operand.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   The value against which the specified statistic is compared.
+    #   @return [Float]
+    #
+    # @!attribute [rw] evaluation_periods
+    #   The number of most recent periods over which data is compared to the
+    #   specified threshold. If you are setting an "M out of N" alarm,
+    #   this value (`evaluationPeriods`) is the N.
+    #
+    #   If you are setting an alarm that requires that a number of
+    #   consecutive data points be breaching to trigger the alarm, this
+    #   value specifies the rolling period of time in which data points are
+    #   evaluated.
+    #
+    #   Each evaluation period is five minutes long. For example, specify an
+    #   evaluation period of 24 to evaluate a metric over a rolling period
+    #   of two hours.
+    #
+    #   You can specify a minimum valuation period of 1 (5 minutes), and a
+    #   maximum evaluation period of 288 (24 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   The number of data points that must be not within the specified
+    #   threshold to trigger the alarm. If you are setting an "M out of N"
+    #   alarm, this value (`datapointsToAlarm`) is the M.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] treat_missing_data
+    #   Sets how this alarm will handle missing data points.
+    #
+    #   An alarm can treat missing data in the following ways:
+    #
+    #   * `breaching` - Assume the missing data is not within the threshold.
+    #     Missing data counts towards the number of times the metric is not
+    #     within the threshold.
+    #
+    #   * `notBreaching` - Assume the missing data is within the threshold.
+    #     Missing data does not count towards the number of times the metric
+    #     is not within the threshold.
+    #
+    #   * `ignore` - Ignore the missing data. Maintains the current alarm
+    #     state.
+    #
+    #   * `missing` - Missing data is treated as missing.
+    #
+    #   If `treatMissingData` is not specified, the default behavior of
+    #   `missing` is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_protocols
+    #   The contact protocols to use for the alarm, such as `Email`, `SMS`
+    #   (text messaging), or both.
+    #
+    #   A notification is sent via the specified contact protocol if
+    #   notifications are enabled for the alarm, and when the alarm is
+    #   triggered.
+    #
+    #   A notification is not sent if a contact protocol is not specified,
+    #   if the specified contact protocol is not configured in the AWS
+    #   Region, or if notifications are not enabled for the alarm using the
+    #   `notificationEnabled` paramater.
+    #
+    #   Use the `CreateContactMethod` action to configure a contact protocol
+    #   in an AWS Region.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] notification_triggers
+    #   The alarm states that trigger a notification.
+    #
+    #   An alarm has the following possible states:
+    #
+    #   * `ALARM` - The metric is outside of the defined threshold.
+    #
+    #   * `INSUFFICIENT_DATA` - The alarm has just started, the metric is
+    #     not available, or not enough data is available for the metric to
+    #     determine the alarm state.
+    #
+    #   * `OK` - The metric is within the defined threshold.
+    #
+    #   When you specify a notification trigger, the `ALARM` state must be
+    #   specified. The `INSUFFICIENT_DATA` and `OK` states can be specified
+    #   in addition to the `ALARM` state.
+    #
+    #   * If you specify `OK` as an alarm trigger, a notification is sent
+    #     when the alarm switches from an `ALARM` or `INSUFFICIENT_DATA`
+    #     alarm state to an `OK` state. This can be thought of as an *all
+    #     clear* alarm notification.
+    #
+    #   * If you specify `INSUFFICIENT_DATA` as the alarm trigger, a
+    #     notification is sent when the alarm switches from an `OK` or
+    #     `ALARM` alarm state to an `INSUFFICIENT_DATA` state.
+    #
+    #   The notification trigger defaults to `ALARM` if you don't specify
+    #   this parameter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] notification_enabled
+    #   Indicates whether the alarm is enabled.
+    #
+    #   Notifications are enabled by default if you don't specify this
+    #   parameter.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PutAlarmRequest AWS API Documentation
+    #
+    class PutAlarmRequest < Struct.new(
+      :alarm_name,
+      :metric_name,
+      :monitored_resource_name,
+      :comparison_operator,
+      :threshold,
+      :evaluation_periods,
+      :datapoints_to_alarm,
+      :treat_missing_data,
+      :contact_protocols,
+      :notification_triggers,
+      :notification_enabled)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PutAlarmResult AWS API Documentation
+    #
+    class PutAlarmResult < Struct.new(
+      :operations)
       include Aws::Structure
     end
 
@@ -6187,18 +8539,21 @@ module Aws::Lightsail
     #           {
     #             from_port: 1,
     #             to_port: 1,
-    #             protocol: "tcp", # accepts tcp, all, udp
+    #             protocol: "tcp", # accepts tcp, all, udp, icmp
+    #             cidrs: ["string"],
+    #             cidr_list_aliases: ["string"],
     #           },
     #         ],
     #         instance_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] port_infos
-    #   Specifies information about the public port(s).
+    #   An array of objects to describe the ports to open for the specified
+    #   instance.
     #   @return [Array<Types::PortInfo>]
     #
     # @!attribute [rw] instance_name
-    #   The Lightsail instance name of the public port(s) you are setting.
+    #   The name of the instance for which to open ports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PutInstancePublicPortsRequest AWS API Documentation
@@ -6210,7 +8565,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operation
-    #   Describes metadata about the operation you just executed.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PutInstancePublicPortsResult AWS API Documentation
@@ -6239,8 +8596,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the request
-    #   operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootInstanceResult AWS API Documentation
@@ -6269,8 +8627,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the result of your reboot relational database
-    #   request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootRelationalDatabaseResult AWS API Documentation
@@ -6448,6 +8807,10 @@ module Aws::Lightsail
     #   Describes the pending maintenance actions for the database.
     #   @return [Array<Types::PendingMaintenanceAction>]
     #
+    # @!attribute [rw] ca_certificate_identifier
+    #   The certificate associated with the database.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabase AWS API Documentation
     #
     class RelationalDatabase < Struct.new(
@@ -6475,7 +8838,8 @@ module Aws::Lightsail
       :preferred_maintenance_window,
       :publicly_accessible,
       :master_endpoint,
-      :pending_maintenance_actions)
+      :pending_maintenance_actions,
+      :ca_certificate_identifier)
       include Aws::Structure
     end
 
@@ -6829,8 +9193,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the request
-    #   operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ReleaseStaticIpResult AWS API Documentation
@@ -6859,6 +9224,61 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SendContactMethodVerificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protocol: "Email", # required, accepts Email
+    #       }
+    #
+    # @!attribute [rw] protocol
+    #   The protocol to verify, such as `Email` or `SMS` (text messaging).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SendContactMethodVerificationRequest AWS API Documentation
+    #
+    class SendContactMethodVerificationRequest < Struct.new(
+      :protocol)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SendContactMethodVerificationResult AWS API Documentation
+    #
+    class SendContactMethodVerificationResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # A general service exception.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ServiceException AWS API Documentation
+    #
+    class ServiceException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartInstanceRequest
     #   data as a hash:
     #
@@ -6878,8 +9298,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the request
-    #   operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartInstanceResult AWS API Documentation
@@ -6908,8 +9329,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the result of your start relational database
-    #   request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartRelationalDatabaseResult AWS API Documentation
@@ -7008,8 +9430,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the request
-    #   operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopInstanceResult AWS API Documentation
@@ -7045,8 +9468,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the result of your stop relational database
-    #   request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopRelationalDatabaseResult AWS API Documentation
@@ -7101,6 +9525,7 @@ module Aws::Lightsail
     #
     #       {
     #         resource_name: "ResourceName", # required
+    #         resource_arn: "ResourceArn",
     #         tags: [ # required
     #           {
     #             key: "TagKey",
@@ -7113,6 +9538,11 @@ module Aws::Lightsail
     #   The name of the resource to which you are adding tags.
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   add a tag.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tag key and optional value.
     #   @return [Array<Types::Tag>]
@@ -7121,18 +9551,93 @@ module Aws::Lightsail
     #
     class TagResourceRequest < Struct.new(
       :resource_name,
+      :resource_arn,
       :tags)
       include Aws::Structure
     end
 
     # @!attribute [rw] operations
-    #   A list of objects describing the API operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/TagResourceResult AWS API Documentation
     #
     class TagResourceResult < Struct.new(
       :operations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TestAlarmRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alarm_name: "ResourceName", # required
+    #         state: "OK", # required, accepts OK, ALARM, INSUFFICIENT_DATA
+    #       }
+    #
+    # @!attribute [rw] alarm_name
+    #   The name of the alarm to test.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The alarm state to test.
+    #
+    #   An alarm has the following possible states that can be tested:
+    #
+    #   * `ALARM` - The metric is outside of the defined threshold.
+    #
+    #   * `INSUFFICIENT_DATA` - The alarm has just started, the metric is
+    #     not available, or not enough data is available for the metric to
+    #     determine the alarm state.
+    #
+    #   * `OK` - The metric is within the defined threshold.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/TestAlarmRequest AWS API Documentation
+    #
+    class TestAlarmRequest < Struct.new(
+      :alarm_name,
+      :state)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/TestAlarmResult AWS API Documentation
+    #
+    class TestAlarmResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # Lightsail throws this exception when the user has not been
+    # authenticated.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnauthenticatedException AWS API Documentation
+    #
+    class UnauthenticatedException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
       include Aws::Structure
     end
 
@@ -7143,8 +9648,9 @@ module Aws::Lightsail
     class UnpeerVpcRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] operation
-    #   An array of key-value pairs containing information about the request
-    #   operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnpeerVpcResult AWS API Documentation
@@ -7159,11 +9665,17 @@ module Aws::Lightsail
     #
     #       {
     #         resource_name: "ResourceName", # required
+    #         resource_arn: "ResourceArn",
     #         tag_keys: ["TagKey"], # required
     #       }
     #
     # @!attribute [rw] resource_name
     #   The name of the resource from which you are removing a tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which you want
+    #   to remove a tag.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -7174,12 +9686,15 @@ module Aws::Lightsail
     #
     class UntagResourceRequest < Struct.new(
       :resource_name,
+      :resource_arn,
       :tag_keys)
       include Aws::Structure
     end
 
     # @!attribute [rw] operations
-    #   A list of objects describing the API operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UntagResourceResult AWS API Documentation
@@ -7224,8 +9739,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An array of key-value pairs containing information about the request
-    #   operation.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDomainEntryResult AWS API Documentation
@@ -7268,7 +9784,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the API operations.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateLoadBalancerAttributeResult AWS API Documentation
@@ -7314,8 +9832,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the result of your update relational database
-    #   parameters request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseParametersResult AWS API Documentation
@@ -7338,6 +9857,7 @@ module Aws::Lightsail
     #         disable_backup_retention: false,
     #         publicly_accessible: false,
     #         apply_immediately: false,
+    #         ca_certificate_identifier: "string",
     #       }
     #
     # @!attribute [rw] relational_database_name
@@ -7370,7 +9890,7 @@ module Aws::Lightsail
     #
     #     Example: `16:00-16:30`
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Must not conflict with the preferred maintenance window.
     #
@@ -7393,7 +9913,7 @@ module Aws::Lightsail
     #
     #   * Must be at least 30 minutes.
     #
-    #   * Specified in Universal Coordinated Time (UTC).
+    #   * Specified in Coordinated Universal Time (UTC).
     #
     #   * Example: `Tue:17:00-Tue:17:30`
     #   @return [String]
@@ -7432,6 +9952,11 @@ module Aws::Lightsail
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] ca_certificate_identifier
+    #   Indicates the certificate that needs to be associated with the
+    #   database.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseRequest AWS API Documentation
     #
     class UpdateRelationalDatabaseRequest < Struct.new(
@@ -7443,13 +9968,15 @@ module Aws::Lightsail
       :enable_backup_retention,
       :disable_backup_retention,
       :publicly_accessible,
-      :apply_immediately)
+      :apply_immediately,
+      :ca_certificate_identifier)
       include Aws::Structure
     end
 
     # @!attribute [rw] operations
-    #   An object describing the result of your update relational database
-    #   request.
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseResult AWS API Documentation

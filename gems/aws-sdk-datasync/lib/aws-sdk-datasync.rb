@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-datasync/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     data_sync = Aws::DataSync::Client.new
+#     resp = data_sync.cancel_task_execution(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS DataSync all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS DataSync are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::DataSync::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS DataSync API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-datasync/customizations'
 # @service
 module Aws::DataSync
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.21.1'
 
 end

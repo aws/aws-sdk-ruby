@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -97,6 +99,9 @@ module Aws::CognitoSync
     UpdateRecordsRequest = Shapes::StructureShape.new(name: 'UpdateRecordsRequest')
     UpdateRecordsResponse = Shapes::StructureShape.new(name: 'UpdateRecordsResponse')
 
+    AlreadyStreamedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
+    AlreadyStreamedException.struct_class = Types::AlreadyStreamedException
+
     ApplicationArnList.member = Shapes::ShapeRef.new(shape: ApplicationArn)
 
     BulkPublishRequest.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location: "uri", location_name: "IdentityPoolId"))
@@ -109,6 +114,9 @@ module Aws::CognitoSync
     CognitoStreams.add_member(:role_arn, Shapes::ShapeRef.new(shape: AssumeRoleArn, location_name: "RoleArn"))
     CognitoStreams.add_member(:streaming_status, Shapes::ShapeRef.new(shape: StreamingStatus, location_name: "StreamingStatus"))
     CognitoStreams.struct_class = Types::CognitoStreams
+
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
 
     Dataset.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, location_name: "IdentityId"))
     Dataset.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, location_name: "DatasetName"))
@@ -149,6 +157,9 @@ module Aws::CognitoSync
 
     DescribeIdentityUsageResponse.add_member(:identity_usage, Shapes::ShapeRef.new(shape: IdentityUsage, location_name: "IdentityUsage"))
     DescribeIdentityUsageResponse.struct_class = Types::DescribeIdentityUsageResponse
+
+    DuplicateRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
+    DuplicateRequestException.struct_class = Types::DuplicateRequestException
 
     Events.key = Shapes::ShapeRef.new(shape: CognitoEventType)
     Events.value = Shapes::ShapeRef.new(shape: LambdaFunctionArn)
@@ -191,6 +202,24 @@ module Aws::CognitoSync
     IdentityUsage.add_member(:dataset_count, Shapes::ShapeRef.new(shape: Integer, location_name: "DatasetCount"))
     IdentityUsage.add_member(:data_storage, Shapes::ShapeRef.new(shape: Long, location_name: "DataStorage"))
     IdentityUsage.struct_class = Types::IdentityUsage
+
+    InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
+    InternalErrorException.struct_class = Types::InternalErrorException
+
+    InvalidConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
+    InvalidConfigurationException.struct_class = Types::InvalidConfigurationException
+
+    InvalidLambdaFunctionOutputException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
+    InvalidLambdaFunctionOutputException.struct_class = Types::InvalidLambdaFunctionOutputException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    LambdaThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
+    LambdaThrottledException.struct_class = Types::LambdaThrottledException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListDatasetsRequest.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location: "uri", location_name: "IdentityPoolId"))
     ListDatasetsRequest.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, required: true, location: "uri", location_name: "IdentityId"))
@@ -235,6 +264,9 @@ module Aws::CognitoSync
 
     MergedDatasetNameList.member = Shapes::ShapeRef.new(shape: String)
 
+    NotAuthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
+    NotAuthorizedException.struct_class = Types::NotAuthorizedException
+
     PushSync.add_member(:application_arns, Shapes::ShapeRef.new(shape: ApplicationArnList, location_name: "ApplicationArns"))
     PushSync.add_member(:role_arn, Shapes::ShapeRef.new(shape: AssumeRoleArn, location_name: "RoleArn"))
     PushSync.struct_class = Types::PushSync
@@ -267,6 +299,12 @@ module Aws::CognitoSync
     RegisterDeviceResponse.add_member(:device_id, Shapes::ShapeRef.new(shape: DeviceId, location_name: "DeviceId"))
     RegisterDeviceResponse.struct_class = Types::RegisterDeviceResponse
 
+    ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
+    ResourceConflictException.struct_class = Types::ResourceConflictException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     SetCognitoEventsRequest.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location: "uri", location_name: "IdentityPoolId"))
     SetCognitoEventsRequest.add_member(:events, Shapes::ShapeRef.new(shape: Events, required: true, location_name: "Events"))
     SetCognitoEventsRequest.struct_class = Types::SetCognitoEventsRequest
@@ -288,6 +326,9 @@ module Aws::CognitoSync
     SubscribeToDatasetRequest.struct_class = Types::SubscribeToDatasetRequest
 
     SubscribeToDatasetResponse.struct_class = Types::SubscribeToDatasetResponse
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     UnsubscribeFromDatasetRequest.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location: "uri", location_name: "IdentityPoolId"))
     UnsubscribeFromDatasetRequest.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, required: true, location: "uri", location_name: "IdentityId"))

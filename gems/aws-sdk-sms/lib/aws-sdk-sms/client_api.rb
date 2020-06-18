@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -355,6 +357,12 @@ module Aws::SMS
 
     ImportServerCatalogResponse.struct_class = Types::ImportServerCatalogResponse
 
+    InternalError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalError.struct_class = Types::InternalError
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
     LaunchAppRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, location_name: "appId"))
     LaunchAppRequest.struct_class = Types::LaunchAppRequest
 
@@ -373,6 +381,15 @@ module Aws::SMS
     ListAppsResponse.add_member(:apps, Shapes::ShapeRef.new(shape: Apps, location_name: "apps"))
     ListAppsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAppsResponse.struct_class = Types::ListAppsResponse
+
+    MissingRequiredParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MissingRequiredParameterException.struct_class = Types::MissingRequiredParameterException
+
+    NoConnectorsAvailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoConnectorsAvailableException.struct_class = Types::NoConnectorsAvailableException
+
+    OperationNotPermittedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    OperationNotPermittedException.struct_class = Types::OperationNotPermittedException
 
     PutAppLaunchConfigurationRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, location_name: "appId"))
     PutAppLaunchConfigurationRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: RoleName, location_name: "roleName"))
@@ -407,7 +424,13 @@ module Aws::SMS
     ReplicationJob.add_member(:replication_run_list, Shapes::ShapeRef.new(shape: ReplicationRunList, location_name: "replicationRunList"))
     ReplicationJob.struct_class = Types::ReplicationJob
 
+    ReplicationJobAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ReplicationJobAlreadyExistsException.struct_class = Types::ReplicationJobAlreadyExistsException
+
     ReplicationJobList.member = Shapes::ShapeRef.new(shape: ReplicationJob)
+
+    ReplicationJobNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ReplicationJobNotFoundException.struct_class = Types::ReplicationJobNotFoundException
 
     ReplicationRun.add_member(:replication_run_id, Shapes::ShapeRef.new(shape: ReplicationRunId, location_name: "replicationRunId"))
     ReplicationRun.add_member(:state, Shapes::ShapeRef.new(shape: ReplicationRunState, location_name: "state"))
@@ -421,6 +444,9 @@ module Aws::SMS
     ReplicationRun.add_member(:encrypted, Shapes::ShapeRef.new(shape: Encrypted, location_name: "encrypted"))
     ReplicationRun.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     ReplicationRun.struct_class = Types::ReplicationRun
+
+    ReplicationRunLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ReplicationRunLimitExceededException.struct_class = Types::ReplicationRunLimitExceededException
 
     ReplicationRunList.member = Shapes::ShapeRef.new(shape: ReplicationRun)
 
@@ -438,6 +464,9 @@ module Aws::SMS
     Server.add_member(:replication_job_id, Shapes::ShapeRef.new(shape: ReplicationJobId, location_name: "replicationJobId"))
     Server.add_member(:replication_job_terminated, Shapes::ShapeRef.new(shape: ReplicationJobTerminated, location_name: "replicationJobTerminated"))
     Server.struct_class = Types::Server
+
+    ServerCannotBeReplicatedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ServerCannotBeReplicatedException.struct_class = Types::ServerCannotBeReplicatedException
 
     ServerGroup.add_member(:server_group_id, Shapes::ShapeRef.new(shape: ServerGroupId, location_name: "serverGroupId"))
     ServerGroup.add_member(:name, Shapes::ShapeRef.new(shape: ServerGroupName, location_name: "name"))
@@ -512,10 +541,15 @@ module Aws::SMS
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
+    TemporarilyUnavailableException.struct_class = Types::TemporarilyUnavailableException
+
     TerminateAppRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, location_name: "appId"))
     TerminateAppRequest.struct_class = Types::TerminateAppRequest
 
     TerminateAppResponse.struct_class = Types::TerminateAppResponse
+
+    UnauthorizedOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnauthorizedOperationException.struct_class = Types::UnauthorizedOperationException
 
     UpdateAppRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, location_name: "appId"))
     UpdateAppRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppName, location_name: "name"))

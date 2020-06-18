@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'uri'
 
 module Aws
@@ -35,10 +37,15 @@ module Aws
         end
 
         def param_value_for_placeholder(placeholder, params)
-          value = params[param_name(placeholder)].to_s
-          placeholder.include?('+') ?
-            value.gsub(/[^\/]+/) { |v| escape(v) } :
+          name = param_name(placeholder)
+          value = params[name].to_s
+          raise ArgumentError, ":#{name} must not be blank" if value.empty?
+
+          if placeholder.include?('+')
+            value.gsub(/[^\/]+/) { |v| escape(v) }
+          else
             escape(value)
+          end
         end
 
         def param_name(placeholder)

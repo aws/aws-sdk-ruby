@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-mediastore/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     media_store = Aws::MediaStore::Client.new
+#     resp = media_store.create_container(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Elemental MediaStore all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Elemental MediaStore are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::MediaStore::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Elemental MediaStore API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-mediastore/customizations'
 # @service
 module Aws::MediaStore
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.26.1'
 
 end

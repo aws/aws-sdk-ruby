@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SNS
+
   class PlatformEndpoint
 
     extend Aws::Deprecations
@@ -21,6 +24,7 @@ module Aws::SNS
       @arn = extract_arn(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -45,6 +49,10 @@ module Aws::SNS
     #   an app and mobile device. This is returned from the notification
     #   service when an app and mobile device are registered with the
     #   notification service.
+    #
+    #   <note markdown="1"> The device token for the iOS platform is returned in lowercase.
+    #
+    #    </note>
     # @return [Hash<String,String>]
     def attributes
       data[:attributes]
@@ -129,10 +137,6 @@ module Aws::SNS
     # @option options [required, String] :message
     #   The message you want to send.
     #
-    #   The `Message` parameter is always a string. If you set
-    #   `MessageStructure` to `json`, you must string-encode the `Message`
-    #   parameter.
-    #
     #   If you are publishing to a topic and you want to send the same message
     #   to all transport protocols, include the text of the message as a
     #   String value. If you want to send different messages for each
@@ -208,16 +212,7 @@ module Aws::SNS
     #   You can define other top-level keys that define the message you want
     #   to send to a specific transport protocol (e.g., "http").
     #
-    #   For information about sending different messages for each protocol
-    #   using the AWS Management Console, go to [Create Different Messages for
-    #   Each Protocol][1] in the *Amazon Simple Notification Service Getting
-    #   Started Guide*.
-    #
     #   Valid value: `json`
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol
     # @option options [Hash<String,Types::MessageAttributeValue>] :message_attributes
     #   Message attributes for Publish action.
     # @return [Types::PublishResponse]

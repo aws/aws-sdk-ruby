@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@codedeploy") do
   @service = Aws::CodeDeploy::Resource.new
   @client = @service.client

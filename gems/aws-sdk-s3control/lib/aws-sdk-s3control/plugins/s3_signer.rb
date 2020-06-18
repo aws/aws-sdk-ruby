@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'aws-sigv4'
 
 module Aws
@@ -15,6 +17,8 @@ module Aws
         end
 
         option(:sigv4_region) do |cfg|
+          raise Aws::Errors::MissingRegionError if cfg.region.nil?
+
           Aws::Partitions::EndpointProvider.signing_region(cfg.region, 's3')
         end
 

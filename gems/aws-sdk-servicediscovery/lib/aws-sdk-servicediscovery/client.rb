@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:servicediscovery)
 
 module Aws::ServiceDiscovery
+  # An API client for ServiceDiscovery.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::ServiceDiscovery::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::ServiceDiscovery
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +109,7 @@ module Aws::ServiceDiscovery
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::ServiceDiscovery
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::ServiceDiscovery
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::ServiceDiscovery
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::ServiceDiscovery
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::ServiceDiscovery
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::ServiceDiscovery
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::ServiceDiscovery
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,6 +274,48 @@ module Aws::ServiceDiscovery
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -225,7 +332,7 @@ module Aws::ServiceDiscovery
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html
+    # [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html
     #
     # @option params [required, String] :name
     #   The name that you want to assign to this namespace.
@@ -242,9 +349,31 @@ module Aws::ServiceDiscovery
     # @option params [String] :description
     #   A description for the namespace.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the namespace. Each tag consists of a key and an
+    #   optional value, both of which you define. Tag keys can have a maximum
+    #   character length of 128 characters, and tag values can have a maximum
+    #   length of 256 characters.
+    #
     # @return [Types::CreateHttpNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateHttpNamespaceResponse#operation_id #operation_id} => String
+    #
+    #
+    # @example Example: CreateHttpNamespace example
+    #
+    #   # This example creates an HTTP namespace.
+    #
+    #   resp = client.create_http_namespace({
+    #     creator_request_id: "example-creator-request-id-0001", 
+    #     description: "Example.com AWS Cloud Map HTTP Namespace", 
+    #     name: "example-http.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     operation_id: "httpvoqozuhfet5kzxoxg-a-response-example", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -252,6 +381,12 @@ module Aws::ServiceDiscovery
     #     name: "NamespaceName", # required
     #     creator_request_id: "ResourceId",
     #     description: "ResourceDescription",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -277,7 +412,7 @@ module Aws::ServiceDiscovery
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html
+    # [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html
     #
     # @option params [required, String] :name
     #   The name that you want to assign to this namespace. When you create a
@@ -300,9 +435,31 @@ module Aws::ServiceDiscovery
     #   The ID of the Amazon VPC that you want to associate the namespace
     #   with.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the namespace. Each tag consists of a key and an
+    #   optional value, both of which you define. Tag keys can have a maximum
+    #   character length of 128 characters, and tag values can have a maximum
+    #   length of 256 characters.
+    #
     # @return [Types::CreatePrivateDnsNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePrivateDnsNamespaceResponse#operation_id #operation_id} => String
+    #
+    #
+    # @example Example: Example: Create private DNS namespace
+    #
+    #   # Example: Create private DNS namespace
+    #
+    #   resp = client.create_private_dns_namespace({
+    #     creator_request_id: "eedd6892-50f3-41b2-8af9-611d6e1d1a8c", 
+    #     name: "example.com", 
+    #     vpc: "vpc-1c56417b", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     operation_id: "gv4g5meo7ndmeh4fqskygvk23d2fijwa-k9302yzd", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -311,6 +468,12 @@ module Aws::ServiceDiscovery
     #     creator_request_id: "ResourceId",
     #     description: "ResourceDescription",
     #     vpc: "ResourceId", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -336,7 +499,7 @@ module Aws::ServiceDiscovery
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html
+    # [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html
     #
     # @option params [required, String] :name
     #   The name that you want to assign to this namespace.
@@ -353,9 +516,31 @@ module Aws::ServiceDiscovery
     # @option params [String] :description
     #   A description for the namespace.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the namespace. Each tag consists of a key and an
+    #   optional value, both of which you define. Tag keys can have a maximum
+    #   character length of 128 characters, and tag values can have a maximum
+    #   length of 256 characters.
+    #
     # @return [Types::CreatePublicDnsNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePublicDnsNamespaceResponse#operation_id #operation_id} => String
+    #
+    #
+    # @example Example: CreatePublicDnsNamespace example
+    #
+    #   # This example creates a public namespace based on DNS.
+    #
+    #   resp = client.create_public_dns_namespace({
+    #     creator_request_id: "example-creator-request-id-0003", 
+    #     description: "Example.com AWS Cloud Map Public DNS Namespace", 
+    #     name: "example-public-dns.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     operation_id: "dns2voqozuhfet5kzxoxg-a-response-example", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -363,6 +548,12 @@ module Aws::ServiceDiscovery
     #     name: "NamespaceName", # required
     #     creator_request_id: "ResourceId",
     #     description: "ResourceDescription",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -396,20 +587,39 @@ module Aws::ServiceDiscovery
     #
     # * Optionally, a health check
     #
-    # After you create the service, you can submit a RegisterInstance
+    # After you create the service, you can submit a [RegisterInstance][1]
     # request, and AWS Cloud Map uses the values in the configuration to
     # create the specified entities.
     #
     # For the current limit on the number of instances that you can register
     # using the same namespace and using the same service, see [AWS Cloud
-    # Map Limits][1] in the *AWS Cloud Map Developer Guide*.
+    # Map Limits][2] in the *AWS Cloud Map Developer Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html
+    # [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html
+    # [2]: https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html
     #
     # @option params [required, String] :name
     #   The name that you want to assign to the service.
+    #
+    #   If you want AWS Cloud Map to create an SRV record when you register an
+    #   instance, and if you're using a system that requires a specific SRV
+    #   format, such as [HAProxy][1], specify the following for `Name`\:
+    #
+    #   * Start the name with an underscore (\_), such as `_exampleservice`
+    #
+    #   * End the name with *.\_protocol*, such as `._tcp`
+    #
+    #   When you register an instance, AWS Cloud Map creates an SRV record and
+    #   assigns a name to the record by concatenating the service name and the
+    #   namespace name, for example:
+    #
+    #   `_exampleservice._tcp.example.com`
+    #
+    #
+    #
+    #   [1]: http://www.haproxy.org/
     #
     # @option params [String] :namespace_id
     #   The ID of the namespace that you want to use to create the service.
@@ -432,10 +642,10 @@ module Aws::ServiceDiscovery
     #   instance.
     #
     # @option params [Types::HealthCheckConfig] :health_check_config
-    #   *Public DNS namespaces only.* A complex type that contains settings
-    #   for an optional Route 53 health check. If you specify settings for a
-    #   health check, AWS Cloud Map associates the health check with all the
-    #   Route 53 DNS records that you specify in `DnsConfig`.
+    #   *Public DNS and HTTP namespaces only.* A complex type that contains
+    #   settings for an optional Route 53 health check. If you specify
+    #   settings for a health check, AWS Cloud Map associates the health check
+    #   with all the Route 53 DNS records that you specify in `DnsConfig`.
     #
     #   If you specify a health check configuration, you can specify either
     #   `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
@@ -454,9 +664,61 @@ module Aws::ServiceDiscovery
     #   If you specify a health check configuration, you can specify either
     #   `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
     #
+    #   You can't add, update, or delete a `HealthCheckCustomConfig`
+    #   configuration from an existing service.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the service. Each tag consists of a key and an
+    #   optional value, both of which you define. Tag keys can have a maximum
+    #   character length of 128 characters, and tag values can have a maximum
+    #   length of 256 characters.
+    #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServiceResponse#service #service} => Types::Service
+    #
+    #
+    # @example Example: Example: Create service
+    #
+    #   # Example: Create service
+    #
+    #   resp = client.create_service({
+    #     creator_request_id: "567c1193-6b00-4308-bd57-ad38a8822d25", 
+    #     dns_config: {
+    #       dns_records: [
+    #         {
+    #           ttl: 60, 
+    #           type: "A", 
+    #         }, 
+    #       ], 
+    #       namespace_id: "ns-ylexjili4cdxy3xm", 
+    #       routing_policy: "MULTIVALUE", 
+    #     }, 
+    #     name: "myservice", 
+    #     namespace_id: "ns-ylexjili4cdxy3xm", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     service: {
+    #       arn: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-p5zdwlg5uvvzjita", 
+    #       create_date: Time.parse(1587081768.334), 
+    #       creator_request_id: "567c1193-6b00-4308-bd57-ad38a8822d25", 
+    #       dns_config: {
+    #         dns_records: [
+    #           {
+    #             ttl: 60, 
+    #             type: "A", 
+    #           }, 
+    #         ], 
+    #         namespace_id: "ns-ylexjili4cdxy3xm", 
+    #         routing_policy: "MULTIVALUE", 
+    #       }, 
+    #       id: "srv-p5zdwlg5uvvzjita", 
+    #       name: "myservice", 
+    #       namespace_id: "ns-ylexjili4cdxy3xm", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -483,6 +745,12 @@ module Aws::ServiceDiscovery
     #     health_check_custom_config: {
     #       failure_threshold: 1,
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -524,6 +792,20 @@ module Aws::ServiceDiscovery
     #
     #   * {Types::DeleteNamespaceResponse#operation_id #operation_id} => String
     #
+    #
+    # @example Example: Example: Delete namespace
+    #
+    #   # Example: Delete namespace
+    #
+    #   resp = client.delete_namespace({
+    #     id: "ns-ylexjili4cdxy3xm", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     operation_id: "gv4g5meo7ndmeh4fqskygvk23d2fijwa-k98y6drk", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_namespace({
@@ -551,6 +833,19 @@ module Aws::ServiceDiscovery
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Example: Delete service
+    #
+    #   # Example: Delete service
+    #
+    #   resp = client.delete_service({
+    #     id: "srv-p5zdwlg5uvvzjita", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_service({
@@ -573,11 +868,31 @@ module Aws::ServiceDiscovery
     #   The ID of the service that the instance is associated with.
     #
     # @option params [required, String] :instance_id
-    #   The value that you specified for `Id` in the RegisterInstance request.
+    #   The value that you specified for `Id` in the [RegisterInstance][1]
+    #   request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html
     #
     # @return [Types::DeregisterInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeregisterInstanceResponse#operation_id #operation_id} => String
+    #
+    #
+    # @example Example: Example: Deregister a service instance
+    #
+    #   # Example: Deregister a service instance
+    #
+    #   resp = client.deregister_instance({
+    #     instance_id: "myservice-53", 
+    #     service_id: "srv-p5zdwlg5uvvzjita", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     operation_id: "4yejorelbukcjzpnr6tlmrghsjwpngf4-k98rnaiq", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -600,6 +915,9 @@ module Aws::ServiceDiscovery
     end
 
     # Discovers registered instances for a specified namespace and service.
+    # You can use `DiscoverInstances` to discover instances for any type of
+    # namespace. For public and private DNS namespaces, you can also use DNS
+    # queries to discover instances.
     #
     # @option params [required, String] :namespace_name
     #   The name of the namespace that you specified when you registered the
@@ -610,9 +928,10 @@ module Aws::ServiceDiscovery
     #   instance.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of instances that you want Cloud Map to return in
-    #   the response to a `DiscoverInstances` request. If you don't specify a
-    #   value for `MaxResults`, Cloud Map returns up to 100 instances.
+    #   The maximum number of instances that you want AWS Cloud Map to return
+    #   in the response to a `DiscoverInstances` request. If you don't
+    #   specify a value for `MaxResults`, AWS Cloud Map returns up to 100
+    #   instances.
     #
     # @option params [Hash<String,String>] :query_parameters
     #   A string map that contains attributes with values that you can use to
@@ -626,6 +945,34 @@ module Aws::ServiceDiscovery
     # @return [Types::DiscoverInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DiscoverInstancesResponse#instances #instances} => Array&lt;Types::HttpInstanceSummary&gt;
+    #
+    #
+    # @example Example: Example: Discover registered instances
+    #
+    #   # Example: Discover registered instances
+    #
+    #   resp = client.discover_instances({
+    #     health_status: "ALL", 
+    #     max_results: 10, 
+    #     namespace_name: "example.com", 
+    #     service_name: "myservice", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instances: [
+    #       {
+    #         attributes: {
+    #           "AWS_INSTANCE_IPV4" => "172.2.1.3", 
+    #           "AWS_INSTANCE_PORT" => "808", 
+    #         }, 
+    #         health_status: "UNKNOWN", 
+    #         instance_id: "myservice-53", 
+    #         namespace_name: "example.com", 
+    #         service_name: "myservice", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -670,6 +1017,30 @@ module Aws::ServiceDiscovery
     #
     #   * {Types::GetInstanceResponse#instance #instance} => Types::Instance
     #
+    #
+    # @example Example: GetInstance example
+    #
+    #   # This example gets information about a specified instance.
+    #
+    #   resp = client.get_instance({
+    #     instance_id: "i-abcd1234", 
+    #     service_id: "srv-e4anhexample0004", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance: {
+    #       attributes: {
+    #         "AWS_INSTANCE_IPV4" => "192.0.2.44", 
+    #         "AWS_INSTANCE_PORT" => "80", 
+    #         "color" => "green", 
+    #         "region" => "us-west-2", 
+    #         "stage" => "beta", 
+    #       }, 
+    #       id: "i-abcd1234", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_instance({
@@ -712,9 +1083,13 @@ module Aws::ServiceDiscovery
     #   all the instances that are associated with the specified service.
     #
     #   <note markdown="1"> To get the IDs for the instances that you've registered by using a
-    #   specified service, submit a ListInstances request.
+    #   specified service, submit a [ListInstances][1] request.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_ListInstances.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of instances that you want AWS Cloud Map to return
@@ -734,6 +1109,25 @@ module Aws::ServiceDiscovery
     #
     #   * {Types::GetInstancesHealthStatusResponse#status #status} => Hash&lt;String,String&gt;
     #   * {Types::GetInstancesHealthStatusResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: GetInstancesHealthStatus example
+    #
+    #   # This example gets the current health status of one or more instances that are associate with a specified service.
+    #
+    #   resp = client.get_instances_health_status({
+    #     service_id: "srv-e4anhexample0004", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     status: {
+    #       "i-abcd1234" => "HEALTHY", 
+    #       "i-abcd1235" => "UNHEALTHY", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -768,6 +1162,35 @@ module Aws::ServiceDiscovery
     #
     #   * {Types::GetNamespaceResponse#namespace #namespace} => Types::Namespace
     #
+    #
+    # @example Example: GetNamespace example
+    #
+    #   # This example gets information about a specified namespace.
+    #
+    #   resp = client.get_namespace({
+    #     id: "ns-e4anhexample0004", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     namespace: {
+    #       arn: "arn:aws:servicediscovery:us-west-2: 123456789120:namespace/ns-e1tpmexample0001", 
+    #       create_date: Time.parse("20181118T211712Z"), 
+    #       creator_request_id: "example-creator-request-id-0001", 
+    #       description: "Example.com AWS Cloud Map HTTP Namespace", 
+    #       id: "ns-e1tpmexample0001", 
+    #       name: "example-http.com", 
+    #       properties: {
+    #         dns_properties: {
+    #         }, 
+    #         http_properties: {
+    #           http_name: "example-http.com", 
+    #         }, 
+    #       }, 
+    #       type: "HTTP", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_namespace({
@@ -800,9 +1223,13 @@ module Aws::ServiceDiscovery
     # the response, such as a `CreateService` request.
     #
     # <note markdown="1"> To get a list of operations that match specified criteria, see
-    # ListOperations.
+    # [ListOperations][1].
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_ListOperations.html
     #
     # @option params [required, String] :operation_id
     #   The ID of the operation that you want to get more information about.
@@ -810,6 +1237,29 @@ module Aws::ServiceDiscovery
     # @return [Types::GetOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetOperationResponse#operation #operation} => Types::Operation
+    #
+    #
+    # @example Example: Example: Get operation result
+    #
+    #   # Example: Get operation result
+    #
+    #   resp = client.get_operation({
+    #     operation_id: "gv4g5meo7ndmeh4fqskygvk23d2fijwa-k9302yzd", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     operation: {
+    #       create_date: Time.parse(1587055860.121), 
+    #       id: "gv4g5meo7ndmeh4fqskygvk23d2fijwa-k9302yzd", 
+    #       status: "SUCCESS", 
+    #       targets: {
+    #         "NAMESPACE" => "ns-ylexjili4cdxy3xm", 
+    #       }, 
+    #       type: "CREATE_NAMESPACE", 
+    #       update_date: Time.parse(1587055900.469), 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -846,6 +1296,33 @@ module Aws::ServiceDiscovery
     # @return [Types::GetServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetServiceResponse#service #service} => Types::Service
+    #
+    #
+    # @example Example: GetService Example
+    #
+    #   # This example gets the settings for a specified service.
+    #
+    #   resp = client.get_service({
+    #     id: "srv-e4anhexample0004", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     service: {
+    #       arn: "arn:aws:servicediscovery:us-west-2:123456789120:service/srv-e4anhexample0004", 
+    #       create_date: Time.parse("20181118T211707Z"), 
+    #       creator_request_id: "example-creator-request-id-0004", 
+    #       description: "Example.com AWS Cloud Map HTTP Service", 
+    #       health_check_config: {
+    #         failure_threshold: 3, 
+    #         resource_path: "/", 
+    #         type: "HTTPS", 
+    #       }, 
+    #       id: "srv-e4anhexample0004", 
+    #       name: "example-http-service", 
+    #       namespace_id: "ns-e4anhexample0004", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -906,6 +1383,30 @@ module Aws::ServiceDiscovery
     #   * {Types::ListInstancesResponse#instances #instances} => Array&lt;Types::InstanceSummary&gt;
     #   * {Types::ListInstancesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Example: List service instances
+    #
+    #   # Example: List service instances
+    #
+    #   resp = client.list_instances({
+    #     service_id: "srv-qzpwvt2tfqcegapy", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instances: [
+    #       {
+    #         attributes: {
+    #           "AWS_INSTANCE_IPV4" => "172.2.1.3", 
+    #           "AWS_INSTANCE_PORT" => "808", 
+    #         }, 
+    #         id: "i-06bdabbae60f65a4e", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_instances({
@@ -965,6 +1466,67 @@ module Aws::ServiceDiscovery
     #
     #   * {Types::ListNamespacesResponse#namespaces #namespaces} => Array&lt;Types::NamespaceSummary&gt;
     #   * {Types::ListNamespacesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Example: List namespaces
+    #
+    #   # Example: List namespaces
+    #
+    #   resp = client.list_namespaces({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     namespaces: [
+    #       {
+    #         arn: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-a3ccy2e7e3a7rile", 
+    #         create_date: Time.parse(1585354387.357), 
+    #         id: "ns-a3ccy2e7e3a7rile", 
+    #         name: "local", 
+    #         properties: {
+    #           dns_properties: {
+    #             hosted_zone_id: "Z06752353VBUDTC32S84S", 
+    #           }, 
+    #           http_properties: {
+    #             http_name: "local", 
+    #           }, 
+    #         }, 
+    #         type: "DNS_PRIVATE", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-pocfyjtrsmwtvcxx", 
+    #         create_date: Time.parse(1586468974.698), 
+    #         description: "My second namespace", 
+    #         id: "ns-pocfyjtrsmwtvcxx", 
+    #         name: "My-second-namespace", 
+    #         properties: {
+    #           dns_properties: {
+    #           }, 
+    #           http_properties: {
+    #             http_name: "My-second-namespace", 
+    #           }, 
+    #         }, 
+    #         type: "HTTP", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-ylexjili4cdxy3xm", 
+    #         create_date: Time.parse(1587055896.798), 
+    #         id: "ns-ylexjili4cdxy3xm", 
+    #         name: "example.com", 
+    #         properties: {
+    #           dns_properties: {
+    #             hosted_zone_id: "Z09983722P0QME1B3KC8I", 
+    #           }, 
+    #           http_properties: {
+    #             http_name: "example.com", 
+    #           }, 
+    #         }, 
+    #         type: "DNS_PRIVATE", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1038,6 +1600,44 @@ module Aws::ServiceDiscovery
     #   * {Types::ListOperationsResponse#operations #operations} => Array&lt;Types::OperationSummary&gt;
     #   * {Types::ListOperationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: ListOperations Example
+    #
+    #   # This example gets the operations that have a STATUS of either PENDING or SUCCESS.
+    #
+    #   resp = client.list_operations({
+    #     filters: [
+    #       {
+    #         condition: "IN", 
+    #         name: "STATUS", 
+    #         values: [
+    #           "PENDING", 
+    #           "SUCCESS", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     operations: [
+    #       {
+    #         id: "76yy8ovhpdz0plmjzbsnqgnrqvpv2qdt-kexample", 
+    #         status: "SUCCESS", 
+    #       }, 
+    #       {
+    #         id: "prysnyzpji3u2ciy45nke83x2zanl7yk-dexample", 
+    #         status: "SUCCESS", 
+    #       }, 
+    #       {
+    #         id: "ko4ekftir7kzlbechsh7xvcdgcpk66gh-7example", 
+    #         status: "PENDING", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_operations({
@@ -1103,6 +1703,37 @@ module Aws::ServiceDiscovery
     #   * {Types::ListServicesResponse#services #services} => Array&lt;Types::ServiceSummary&gt;
     #   * {Types::ListServicesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Example: List services
+    #
+    #   # Example: List services
+    #
+    #   resp = client.list_services({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     services: [
+    #       {
+    #         arn: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-p5zdwlg5uvvzjita", 
+    #         create_date: Time.parse(1587081768.334), 
+    #         dns_config: {
+    #           dns_records: [
+    #             {
+    #               ttl: 60, 
+    #               type: "A", 
+    #             }, 
+    #           ], 
+    #           routing_policy: "MULTIVALUE", 
+    #         }, 
+    #         id: "srv-p5zdwlg5uvvzjita", 
+    #         name: "myservice", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_services({
@@ -1146,6 +1777,60 @@ module Aws::ServiceDiscovery
       req.send_request(options)
     end
 
+    # Lists tags for the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   retrieve tags for.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    #
+    # @example Example: ListTagsForResource example
+    #
+    #   # This example lists the tags of a resource.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:servicediscovery:us-east-1:123456789012:namespace/ns-ylexjili4cdxy3xm", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: [
+    #       {
+    #         key: "Project", 
+    #         value: "Zeta", 
+    #       }, 
+    #       {
+    #         key: "Department", 
+    #         value: "Engineering", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Creates or updates one or more records and, optionally, creates a
     # health check based on the settings in a specified service. When you
     # submit a `RegisterInstance` request, the following occurs:
@@ -1163,7 +1848,7 @@ module Aws::ServiceDiscovery
     # One `RegisterInstance` request must complete before you can submit
     # another request and specify the same service ID and instance ID.
     #
-    # For more information, see CreateService.
+    # For more information, see [CreateService][1].
     #
     # When AWS Cloud Map receives a DNS query for the specified DNS name, it
     # returns the applicable value:
@@ -1178,11 +1863,12 @@ module Aws::ServiceDiscovery
     #
     # For the current limit on the number of instances that you can register
     # using the same namespace and using the same service, see [AWS Cloud
-    # Map Limits][1] in the *AWS Cloud Map Developer Guide*.
+    # Map Limits][2] in the *AWS Cloud Map Developer Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html
+    # [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html
+    # [2]: https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html
     #
     # @option params [required, String] :service_id
     #   The ID of the service that you want to use for settings for the
@@ -1195,7 +1881,7 @@ module Aws::ServiceDiscovery
     #   * If the service that is specified by `ServiceId` includes settings
     #     for an SRV record, the value of `InstanceId` is automatically
     #     included as part of the value for the SRV record. For more
-    #     information, see DnsRecord$Type.
+    #     information, see [DnsRecord &gt; Type][1].
     #
     #   * You can use this value to update an existing instance.
     #
@@ -1211,6 +1897,10 @@ module Aws::ServiceDiscovery
     #     for a while if you submit a `ListHealthChecks` request, for example.
     #
     #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type
     #
     # @option params [String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
@@ -1311,22 +2001,44 @@ module Aws::ServiceDiscovery
     #   If the service includes `HealthCheckConfig`, the port on the endpoint
     #   that you want Route 53 to send requests to.
     #
-    #   This value is required if you specified settings for an SRV record
-    #   when you created the service.
+    #   This value is required if you specified settings for an SRV record or
+    #   a Route 53 health check when you created the service.
     #
     #   **Custom attributes**
     #
     #   You can add up to 30 custom attributes. For each key-value pair, the
     #   maximum length of the attribute name is 255 characters, and the
-    #   maximum length of the attribute value is 1,024 characters.
+    #   maximum length of the attribute value is 1,024 characters. Total size
+    #   of all provided attributes (sum of all keys and values) must not
+    #   exceed 5,000 characters.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html
     #
     # @return [Types::RegisterInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterInstanceResponse#operation_id #operation_id} => String
+    #
+    #
+    # @example Example: Example: Register Instance
+    #
+    #   # Example: Register Instance
+    #
+    #   resp = client.register_instance({
+    #     attributes: {
+    #       "AWS_INSTANCE_IPV4" => "172.2.1.3", 
+    #       "AWS_INSTANCE_PORT" => "808", 
+    #     }, 
+    #     creator_request_id: "7a48a98a-72e6-4849-bfa7-1a458e030d7b", 
+    #     instance_id: "myservice-53", 
+    #     service_id: "srv-p5zdwlg5uvvzjita", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     operation_id: "4yejorelbukcjzpnr6tlmrghsjwpngf4-k95yg2u7", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1352,6 +2064,107 @@ module Aws::ServiceDiscovery
       req.send_request(options)
     end
 
+    # Adds one or more tags to the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   retrieve tags for.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags to add to the specified resource. Specifying the tag key is
+    #   required. You can set the value of a tag to an empty string, but you
+    #   can't set the value of a tag to null.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: TagResource example
+    #
+    #   # This example adds "Department" and "Project" tags to a resource.
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:servicediscovery:us-east-1:123456789012:namespace/ns-ylexjili4cdxy3xm", 
+    #     tags: [
+    #       {
+    #         key: "Department", 
+    #         value: "Engineering", 
+    #       }, 
+    #       {
+    #         key: "Project", 
+    #         value: "Zeta", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   retrieve tags for.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys to remove from the specified resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: UntagResource example
+    #
+    #   # This example removes the "Department" and "Project" tags from a resource.
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:servicediscovery:us-east-1:123456789012:namespace/ns-ylexjili4cdxy3xm", 
+    #     tag_keys: [
+    #       "Project", 
+    #       "Department", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Submits a request to change the health status of a custom health check
     # to healthy or unhealthy.
     #
@@ -1361,7 +2174,11 @@ module Aws::ServiceDiscovery
     # to change the status for Route 53 health checks, which you define
     # using `HealthCheckConfig`.
     #
-    # For more information, see HealthCheckCustomConfig.
+    # For more information, see [HealthCheckCustomConfig][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_HealthCheckCustomConfig.html
     #
     # @option params [required, String] :service_id
     #   The ID of the service that includes the configuration for the custom
@@ -1374,6 +2191,18 @@ module Aws::ServiceDiscovery
     #   The new status of the instance, `HEALTHY` or `UNHEALTHY`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: UpdateInstanceCustomHealthStatus Example
+    #
+    #   # This example submits a request to change the health status of an instance associated with a service with a custom health
+    #   # check to HEALTHY.
+    #
+    #   resp = client.update_instance_custom_health_status({
+    #     instance_id: "i-abcd1234", 
+    #     service_id: "srv-e4anhexample0004", 
+    #     status: "HEALTHY", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1394,21 +2223,28 @@ module Aws::ServiceDiscovery
 
     # Submits a request to perform the following operations:
     #
-    # * Add or delete `DnsRecords` configurations
-    #
     # * Update the TTL setting for existing `DnsRecords` configurations
     #
     # * Add, update, or delete `HealthCheckConfig` for a specified service
     #
-    # For public and private DNS namespaces, you must specify all
-    # `DnsRecords` configurations (and, optionally, `HealthCheckConfig`)
-    # that you want to appear in the updated service. Any current
-    # configurations that don't appear in an `UpdateService` request are
-    # deleted.
+    #   <note markdown="1"> You can't add, update, or delete a `HealthCheckCustomConfig`
+    #   configuration.
     #
-    # When you update the TTL setting for a service, AWS Cloud Map also
-    # updates the corresponding settings in all the records and health
-    # checks that were created by using the specified service.
+    #    </note>
+    #
+    # For public and private DNS namespaces, note the following:
+    #
+    # * If you omit any existing `DnsRecords` or `HealthCheckConfig`
+    #   configurations from an `UpdateService` request, the configurations
+    #   are deleted from the service.
+    #
+    # * If you omit an existing `HealthCheckCustomConfig` configuration from
+    #   an `UpdateService` request, the configuration is not deleted from
+    #   the service.
+    #
+    # When you update settings for a service, AWS Cloud Map also updates the
+    # corresponding settings in all the records and health checks that were
+    # created by using the specified service.
     #
     # @option params [required, String] :id
     #   The ID of the service that you want to update.
@@ -1420,13 +2256,42 @@ module Aws::ServiceDiscovery
     #
     #   * {Types::UpdateServiceResponse#operation_id #operation_id} => String
     #
+    #
+    # @example Example: UpdateService Example
+    #
+    #   # This example submits a request to replace the DnsConfig and HealthCheckConfig settings of a specified service.
+    #
+    #   resp = client.update_service({
+    #     id: "srv-e4anhexample0004", 
+    #     service: {
+    #       dns_config: {
+    #         dns_records: [
+    #           {
+    #             ttl: 60, 
+    #             type: "A", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       health_check_config: {
+    #         failure_threshold: 2, 
+    #         resource_path: "/", 
+    #         type: "HTTP", 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     operation_id: "m35hsdrkxwjffm3xef4bxyy6vc3ewakx-jdn3y5g5", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_service({
     #     id: "ResourceId", # required
     #     service: { # required
     #       description: "ResourceDescription",
-    #       dns_config: { # required
+    #       dns_config: {
     #         dns_records: [ # required
     #           {
     #             type: "SRV", # required, accepts SRV, A, AAAA, CNAME
@@ -1468,7 +2333,7 @@ module Aws::ServiceDiscovery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicediscovery'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.25.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

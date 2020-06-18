@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'cgi'
 
 module Aws
@@ -50,6 +52,10 @@ module Aws
         else
           DateTime.now.strftime('%Q').to_i
         end
+      end
+
+      def monotonic_seconds
+        monotonic_milliseconds / 1000.0
       end
 
       def str_2_bool(str)

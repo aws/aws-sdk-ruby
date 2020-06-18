@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AwsSdkCodeGenerator
   class PluginList
 
@@ -17,7 +19,7 @@ module AwsSdkCodeGenerator
 
     def compute_plugins(options)
       plugins = {}
-      plugins.update(default_plugins)
+      plugins.update(options[:async_client] ? default_async_plugins : default_plugins)
       plugins.update(signature_plugins(options.fetch(:signature_version)))
       plugins.update(protocol_plugins(options.fetch(:protocol)))
       plugins.update(options.fetch(:add_plugins))
@@ -27,6 +29,7 @@ module AwsSdkCodeGenerator
       plugins.map do |class_name, path|
         path = "./#{path}" unless path[0] == '/'
         Kernel.require(path)
+
         Plugin.new(
           class_name: class_name,
           options: const_get(class_name).options,
@@ -54,7 +57,21 @@ module AwsSdkCodeGenerator
         'Aws::Plugins::JsonvalueConverter' => "#{core_plugins}/jsonvalue_converter.rb",
         'Aws::Plugins::ClientMetricsPlugin' => "#{core_plugins}/client_metrics_plugin.rb",
         'Aws::Plugins::ClientMetricsSendPlugin' => "#{core_plugins}/client_metrics_send_plugin.rb",
+        'Aws::Plugins::TransferEncoding' => "#{core_plugins}/transfer_encoding.rb",
+        'Aws::Plugins::HttpChecksum' => "#{core_plugins}/http_checksum.rb"
       }
+    end
+
+    def default_async_plugins
+      plugins = default_plugins.dup
+      plugins.delete('Aws::Plugins::ResponsePaging')
+      plugins.delete('Aws::Plugins::EndpointDiscovery')
+      plugins.delete('Aws::Plugins::EndpointPattern')
+      plugins.delete('Aws::Plugins::ClientMetricsPlugin')
+      plugins.delete('Aws::Plugins::ClientMetricsSendPlugin')
+      plugins.delete('Aws::Plugins::TransferEncoding')
+      plugins['Aws::Plugins::InvocationId'] = "#{core_plugins}/invocation_id.rb"
+      plugins
     end
 
     def protocol_plugins(protocol)

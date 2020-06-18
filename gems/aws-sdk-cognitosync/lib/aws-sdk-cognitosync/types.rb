@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -7,6 +9,21 @@
 
 module Aws::CognitoSync
   module Types
+
+    # An exception thrown when a bulk publish operation is requested less
+    # than 24 hours after a previous bulk publish operation completed
+    # successfully.
+    #
+    # @!attribute [rw] message
+    #   The message associated with the AlreadyStreamedException exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/AlreadyStreamedException AWS API Documentation
+    #
+    class AlreadyStreamedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # The input for the BulkPublish operation.
     #
@@ -81,6 +98,19 @@ module Aws::CognitoSync
       :stream_name,
       :role_arn,
       :streaming_status)
+      include Aws::Structure
+    end
+
+    # Thrown if there are parallel requests to modify a resource.
+    #
+    # @!attribute [rw] message
+    #   The message returned by a ConcurrentModicationException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -323,6 +353,20 @@ module Aws::CognitoSync
       include Aws::Structure
     end
 
+    # An exception thrown when there is an IN\_PROGRESS bulk publish
+    # operation for the given identity pool.
+    #
+    # @!attribute [rw] message
+    #   The message associated with the DuplicateRequestException exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DuplicateRequestException AWS API Documentation
+    #
+    class DuplicateRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The input for the GetBulkPublishDetails operation.
     #
     # @note When making an API call, you may pass GetBulkPublishDetailsRequest
@@ -536,6 +580,85 @@ module Aws::CognitoSync
       :last_modified_date,
       :dataset_count,
       :data_storage)
+      include Aws::Structure
+    end
+
+    # Indicates an internal service error.
+    #
+    # @!attribute [rw] message
+    #   Message returned by InternalErrorException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/InternalErrorException AWS API Documentation
+    #
+    class InternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   Message returned by InvalidConfigurationException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/InvalidConfigurationException AWS API Documentation
+    #
+    class InvalidConfigurationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The AWS Lambda function returned invalid output or an exception.
+    #
+    # @!attribute [rw] message
+    #   A message returned when an InvalidLambdaFunctionOutputException
+    #   occurs
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/InvalidLambdaFunctionOutputException AWS API Documentation
+    #
+    class InvalidLambdaFunctionOutputException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Thrown when a request parameter does not comply with the associated
+    # constraints.
+    #
+    # @!attribute [rw] message
+    #   Message returned by InvalidParameterException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # AWS Lambda throttled your account, please contact AWS Support
+    #
+    # @!attribute [rw] message
+    #   A message returned when an LambdaThrottledException is thrown
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/LambdaThrottledException AWS API Documentation
+    #
+    class LambdaThrottledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Thrown when the limit on the number of objects or operations has been
+    # exceeded.
+    #
+    # @!attribute [rw] message
+    #   Message returned by LimitExceededException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -772,6 +895,19 @@ module Aws::CognitoSync
       include Aws::Structure
     end
 
+    # Thrown when a user is not authorized to access the requested resource.
+    #
+    # @!attribute [rw] message
+    #   The message returned by a NotAuthorizedException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/NotAuthorizedException AWS API Documentation
+    #
+    class NotAuthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Configuration options to be applied to the identity pool.
     #
     # @note When making an API call, you may pass PushSync
@@ -934,6 +1070,33 @@ module Aws::CognitoSync
       include Aws::Structure
     end
 
+    # Thrown if an update can't be applied because the resource was changed
+    # by another call and this would result in a conflict.
+    #
+    # @!attribute [rw] message
+    #   The message returned by a ResourceConflictException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ResourceConflictException AWS API Documentation
+    #
+    class ResourceConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Thrown if the resource doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   Message returned by a ResourceNotFoundException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A request to configure Cognito Events"
     #
     # "
@@ -1075,6 +1238,19 @@ module Aws::CognitoSync
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SubscribeToDatasetResponse AWS API Documentation
     #
     class SubscribeToDatasetResponse < Aws::EmptyStructure; end
+
+    # Thrown if the request is throttled.
+    #
+    # @!attribute [rw] message
+    #   Message returned by a TooManyRequestsException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # A request to UnsubscribeFromDataset.
     #

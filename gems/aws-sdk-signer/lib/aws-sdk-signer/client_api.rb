@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -12,6 +14,7 @@ module Aws::Signer
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     CancelSigningProfileRequest = Shapes::StructureShape.new(name: 'CancelSigningProfileRequest')
     Category = Shapes::StringShape.new(name: 'Category')
@@ -45,9 +48,12 @@ module Aws::Signer
     ListSigningPlatformsResponse = Shapes::StructureShape.new(name: 'ListSigningPlatformsResponse')
     ListSigningProfilesRequest = Shapes::StructureShape.new(name: 'ListSigningProfilesRequest')
     ListSigningProfilesResponse = Shapes::StructureShape.new(name: 'ListSigningProfilesResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxSizeInMB = Shapes::IntegerShape.new(name: 'MaxSizeInMB')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     PlatformId = Shapes::StringShape.new(name: 'PlatformId')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
     ProfileName = Shapes::StringShape.new(name: 'ProfileName')
@@ -80,12 +86,26 @@ module Aws::Signer
     StartSigningJobResponse = Shapes::StructureShape.new(name: 'StartSigningJobResponse')
     StatusReason = Shapes::StringShape.new(name: 'StatusReason')
     String = Shapes::StringShape.new(name: 'String')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Version = Shapes::StringShape.new(name: 'Version')
     bool = Shapes::BooleanShape.new(name: 'bool')
     key = Shapes::StringShape.new(name: 'key')
     string = Shapes::StringShape.new(name: 'string')
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
 
     CancelSigningProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location: "uri", location_name: "profileName"))
     CancelSigningProfileRequest.struct_class = Types::CancelSigningProfileRequest
@@ -139,6 +159,8 @@ module Aws::Signer
     GetSigningProfileResponse.add_member(:overrides, Shapes::ShapeRef.new(shape: SigningPlatformOverrides, location_name: "overrides"))
     GetSigningProfileResponse.add_member(:signing_parameters, Shapes::ShapeRef.new(shape: SigningParameters, location_name: "signingParameters"))
     GetSigningProfileResponse.add_member(:status, Shapes::ShapeRef.new(shape: SigningProfileStatus, location_name: "status"))
+    GetSigningProfileResponse.add_member(:arn, Shapes::ShapeRef.new(shape: string, location_name: "arn"))
+    GetSigningProfileResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetSigningProfileResponse.struct_class = Types::GetSigningProfileResponse
 
     HashAlgorithmOptions.add_member(:allowed_values, Shapes::ShapeRef.new(shape: HashAlgorithms, required: true, location_name: "allowedValues"))
@@ -148,6 +170,9 @@ module Aws::Signer
     HashAlgorithms.member = Shapes::ShapeRef.new(shape: HashAlgorithm)
 
     ImageFormats.member = Shapes::ShapeRef.new(shape: ImageFormat)
+
+    InternalServiceErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalServiceErrorException.struct_class = Types::InternalServiceErrorException
 
     ListSigningJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: SigningStatus, location: "querystring", location_name: "status"))
     ListSigningJobsRequest.add_member(:platform_id, Shapes::ShapeRef.new(shape: PlatformId, location: "querystring", location_name: "platformId"))
@@ -180,15 +205,28 @@ module Aws::Signer
     ListSigningProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListSigningProfilesResponse.struct_class = Types::ListSigningProfilesResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     PutSigningProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location: "uri", location_name: "profileName"))
     PutSigningProfileRequest.add_member(:signing_material, Shapes::ShapeRef.new(shape: SigningMaterial, required: true, location_name: "signingMaterial"))
     PutSigningProfileRequest.add_member(:platform_id, Shapes::ShapeRef.new(shape: PlatformId, required: true, location_name: "platformId"))
     PutSigningProfileRequest.add_member(:overrides, Shapes::ShapeRef.new(shape: SigningPlatformOverrides, location_name: "overrides"))
     PutSigningProfileRequest.add_member(:signing_parameters, Shapes::ShapeRef.new(shape: SigningParameters, location_name: "signingParameters"))
+    PutSigningProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     PutSigningProfileRequest.struct_class = Types::PutSigningProfileRequest
 
     PutSigningProfileResponse.add_member(:arn, Shapes::ShapeRef.new(shape: string, location_name: "arn"))
     PutSigningProfileResponse.struct_class = Types::PutSigningProfileResponse
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     S3Destination.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "bucketName"))
     S3Destination.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "prefix"))
@@ -245,6 +283,7 @@ module Aws::Signer
     SigningPlatform.struct_class = Types::SigningPlatform
 
     SigningPlatformOverrides.add_member(:signing_configuration, Shapes::ShapeRef.new(shape: SigningConfigurationOverrides, location_name: "signingConfiguration"))
+    SigningPlatformOverrides.add_member(:signing_image_format, Shapes::ShapeRef.new(shape: ImageFormat, location_name: "signingImageFormat"))
     SigningPlatformOverrides.struct_class = Types::SigningPlatformOverrides
 
     SigningPlatforms.member = Shapes::ShapeRef.new(shape: SigningPlatform)
@@ -254,6 +293,8 @@ module Aws::Signer
     SigningProfile.add_member(:platform_id, Shapes::ShapeRef.new(shape: PlatformId, location_name: "platformId"))
     SigningProfile.add_member(:signing_parameters, Shapes::ShapeRef.new(shape: SigningParameters, location_name: "signingParameters"))
     SigningProfile.add_member(:status, Shapes::ShapeRef.new(shape: SigningProfileStatus, location_name: "status"))
+    SigningProfile.add_member(:arn, Shapes::ShapeRef.new(shape: string, location_name: "arn"))
+    SigningProfile.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     SigningProfile.struct_class = Types::SigningProfile
 
     SigningProfiles.member = Shapes::ShapeRef.new(shape: SigningProfile)
@@ -269,6 +310,29 @@ module Aws::Signer
 
     StartSigningJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
     StartSigningJobResponse.struct_class = Types::StartSigningJobResponse
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ValidationException.struct_class = Types::ValidationException
 
 
     # @api private
@@ -388,6 +452,17 @@ module Aws::Signer
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:put_signing_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutSigningProfile"
         o.http_method = "PUT"
@@ -412,6 +487,28 @@ module Aws::Signer
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
     end
 

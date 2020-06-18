@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -25,17 +27,20 @@ require_relative 'aws-sdk-elasticache/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     elasticache = Aws::ElastiCache::Client.new
+#     resp = elasticache.add_tags_to_resource(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon ElastiCache all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon ElastiCache are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ElastiCache::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon ElastiCache API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +48,6 @@ require_relative 'aws-sdk-elasticache/customizations'
 # @service
 module Aws::ElastiCache
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.37.1'
 
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-s3control/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     s3_control = Aws::S3Control::Client.new
+#     resp = s3_control.create_access_point(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS S3 Control all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS S3 Control are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::S3Control::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS S3 Control API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-s3control/customizations'
 # @service
 module Aws::S3Control
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.20.1'
 
 end

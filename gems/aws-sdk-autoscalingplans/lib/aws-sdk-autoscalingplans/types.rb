@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -36,6 +38,19 @@ module Aws::AutoScalingPlans
     class ApplicationSource < Struct.new(
       :cloud_formation_stack_arn,
       :tag_filters)
+      include Aws::Structure
+    end
+
+    # Concurrent updates caused an exception, for example, if you request an
+    # update to a scaling plan that already has a pending update.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ConcurrentUpdateException AWS API Documentation
+    #
+    class ConcurrentUpdateException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -154,8 +169,7 @@ module Aws::AutoScalingPlans
     # specification, AWS Auto Scaling needs access to the `Sum` and
     # `Average` statistics that CloudWatch computes from metric data.
     # Statistics are calculations used to aggregate data over specified time
-    # periods. For more information, see the [Amazon CloudWatch User
-    # Guide][1].
+    # periods.
     #
     # When you choose a load metric, make sure that the required `Sum` and
     # `Average` statistics for your metric are available in CloudWatch and
@@ -168,13 +182,13 @@ module Aws::AutoScalingPlans
     # then the `Average` statistic for the specified metric must represent
     # the average request count processed by each instance of the group.
     #
-    # For information about terminology, see [Amazon CloudWatch
-    # Concepts][2].
+    # For information about terminology, available metrics, or how to
+    # publish new metrics, see [Amazon CloudWatch Concepts][1] in the
+    # *Amazon CloudWatch User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html
-    # [2]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
     #
     # @note When making an API call, you may pass CustomizedLoadMetricSpecification
     #   data as a hash:
@@ -202,6 +216,10 @@ module Aws::AutoScalingPlans
     #
     # @!attribute [rw] dimensions
     #   The dimensions of the metric.
+    #
+    #   Conditional: If you published your metric with dimensions, you must
+    #   specify the same dimensions in your customized load metric
+    #   specification.
     #   @return [Array<Types::MetricDimension>]
     #
     # @!attribute [rw] statistic
@@ -227,12 +245,26 @@ module Aws::AutoScalingPlans
     # Represents a CloudWatch metric of your choosing that can be used for
     # dynamic scaling as part of a target tracking scaling policy.
     #
-    # For information about terminology, see [Amazon CloudWatch
-    # Concepts][1].
+    # To create your customized scaling metric specification:
+    #
+    # * Add values for each required parameter from CloudWatch. You can use
+    #   an existing metric, or a new metric that you create. To use your own
+    #   metric, you must first publish the metric to CloudWatch. For more
+    #   information, see [Publish Custom Metrics][1] in the *Amazon
+    #   CloudWatch User Guide*.
+    #
+    # * Choose a metric that changes proportionally with capacity. The value
+    #   of the metric should increase or decrease in inverse proportion to
+    #   the number of capacity units. That is, the value of the metric
+    #   should decrease when capacity increases.
+    #
+    # For more information about CloudWatch, see [Amazon CloudWatch
+    # Concepts][2].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
     #
     # @note When making an API call, you may pass CustomizedScalingMetricSpecification
     #   data as a hash:
@@ -260,6 +292,10 @@ module Aws::AutoScalingPlans
     #
     # @!attribute [rw] dimensions
     #   The dimensions of the metric.
+    #
+    #   Conditional: If you published your metric with dimensions, you must
+    #   specify the same dimensions in your customized scaling metric
+    #   specification.
     #   @return [Array<Types::MetricDimension>]
     #
     # @!attribute [rw] statistic
@@ -572,6 +608,43 @@ module Aws::AutoScalingPlans
       include Aws::Structure
     end
 
+    # The service encountered an internal error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The token provided is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Your account exceeded a limit. This exception is thrown when a
+    # per-account resource limit is exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents a dimension for a customized metric.
     #
     # @note When making an API call, you may pass MetricDimension
@@ -595,6 +668,18 @@ module Aws::AutoScalingPlans
     class MetricDimension < Struct.new(
       :name,
       :value)
+      include Aws::Structure
+    end
+
+    # The specified object could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ObjectNotFoundException AWS API Documentation
+    #
+    class ObjectNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -702,11 +787,15 @@ module Aws::AutoScalingPlans
     # ahead and schedules scaling actions that proactively add and remove
     # resource capacity to match the forecast.
     #
-    # For more information, see the [AWS Auto Scaling User Guide][1].
+    # We recommend waiting a minimum of 24 hours after creating an Auto
+    # Scaling group to configure predictive scaling. At minimum, there must
+    # be 24 hours of historical data to generate a forecast.
+    #
+    # For more information, see [Getting Started with AWS Auto Scaling][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/autoscaling/plans/userguide/what-is-aws-auto-scaling.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/plans/userguide/auto-scaling-getting-started.html
     #
     # @note When making an API call, you may pass ScalingInstruction
     #   data as a hash:
@@ -823,7 +912,7 @@ module Aws::AutoScalingPlans
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -1103,7 +1192,7 @@ module Aws::AutoScalingPlans
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #   @return [String]
     #
     # @!attribute [rw] scaling_policies
@@ -1154,7 +1243,8 @@ module Aws::AutoScalingPlans
     #   @return [String]
     #
     # @!attribute [rw] target_tracking_configuration
-    #   The target tracking scaling policy.
+    #   The target tracking scaling policy. Includes support for predefined
+    #   or customized metrics.
     #   @return [Types::TargetTrackingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ScalingPolicy AWS API Documentation
@@ -1192,8 +1282,8 @@ module Aws::AutoScalingPlans
       include Aws::Structure
     end
 
-    # Describes a target tracking configuration. Used with
-    # ScalingInstruction and ScalingPolicy.
+    # Describes a target tracking configuration to use with AWS Auto
+    # Scaling. Used with ScalingInstruction and ScalingPolicy.
     #
     # @note When making an API call, you may pass TargetTrackingConfiguration
     #   data as a hash:
@@ -1223,11 +1313,13 @@ module Aws::AutoScalingPlans
     #       }
     #
     # @!attribute [rw] predefined_scaling_metric_specification
-    #   A predefined metric.
+    #   A predefined metric. You can specify either a predefined metric or a
+    #   customized metric.
     #   @return [Types::PredefinedScalingMetricSpecification]
     #
     # @!attribute [rw] customized_scaling_metric_specification
-    #   A customized metric.
+    #   A customized metric. You can specify either a predefined metric or a
+    #   customized metric.
     #   @return [Types::CustomizedScalingMetricSpecification]
     #
     # @!attribute [rw] target_value
@@ -1391,6 +1483,19 @@ module Aws::AutoScalingPlans
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/UpdateScalingPlanResponse AWS API Documentation
     #
     class UpdateScalingPlanResponse < Aws::EmptyStructure; end
+
+    # An exception was thrown for a validation issue. Review the parameters
+    # provided.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
   end
 end

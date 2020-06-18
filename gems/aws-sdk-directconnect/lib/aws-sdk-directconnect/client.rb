@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:directconnect)
 
 module Aws::DirectConnect
+  # An API client for DirectConnect.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::DirectConnect::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::DirectConnect
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +109,7 @@ module Aws::DirectConnect
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::DirectConnect
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::DirectConnect
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::DirectConnect
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::DirectConnect
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::DirectConnect
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::DirectConnect
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::DirectConnect
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,11 +274,120 @@ module Aws::DirectConnect
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
+
+    # Accepts a proposal request to attach a virtual private gateway or
+    # transit gateway to a Direct Connect gateway.
+    #
+    # @option params [required, String] :direct_connect_gateway_id
+    #   The ID of the Direct Connect gateway.
+    #
+    # @option params [required, String] :proposal_id
+    #   The ID of the request proposal.
+    #
+    # @option params [required, String] :associated_gateway_owner_account
+    #   The ID of the AWS account that owns the virtual private gateway or
+    #   transit gateway.
+    #
+    # @option params [Array<Types::RouteFilterPrefix>] :override_allowed_prefixes_to_direct_connect_gateway
+    #   Overrides the Amazon VPC prefixes advertised to the Direct Connect
+    #   gateway.
+    #
+    #   For information about how to set the prefixes, see [Allowed
+    #   Prefixes][1] in the *AWS Direct Connect User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes
+    #
+    # @return [Types::AcceptDirectConnectGatewayAssociationProposalResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptDirectConnectGatewayAssociationProposalResult#direct_connect_gateway_association #direct_connect_gateway_association} => Types::DirectConnectGatewayAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_direct_connect_gateway_association_proposal({
+    #     direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #     proposal_id: "DirectConnectGatewayAssociationProposalId", # required
+    #     associated_gateway_owner_account: "OwnerAccount", # required
+    #     override_allowed_prefixes_to_direct_connect_gateway: [
+    #       {
+    #         cidr: "CIDR",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.direct_connect_gateway_association.direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway_association.direct_connect_gateway_owner_account #=> String
+    #   resp.direct_connect_gateway_association.association_state #=> String, one of "associating", "associated", "disassociating", "disassociated", "updating"
+    #   resp.direct_connect_gateway_association.state_change_error #=> String
+    #   resp.direct_connect_gateway_association.associated_gateway.id #=> String
+    #   resp.direct_connect_gateway_association.associated_gateway.type #=> String, one of "virtualPrivateGateway", "transitGateway"
+    #   resp.direct_connect_gateway_association.associated_gateway.owner_account #=> String
+    #   resp.direct_connect_gateway_association.associated_gateway.region #=> String
+    #   resp.direct_connect_gateway_association.association_id #=> String
+    #   resp.direct_connect_gateway_association.allowed_prefixes_to_direct_connect_gateway #=> Array
+    #   resp.direct_connect_gateway_association.allowed_prefixes_to_direct_connect_gateway[0].cidr #=> String
+    #   resp.direct_connect_gateway_association.virtual_gateway_id #=> String
+    #   resp.direct_connect_gateway_association.virtual_gateway_region #=> String
+    #   resp.direct_connect_gateway_association.virtual_gateway_owner_account #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AcceptDirectConnectGatewayAssociationProposal AWS API Documentation
+    #
+    # @overload accept_direct_connect_gateway_association_proposal(params = {})
+    # @param [Hash] params ({})
+    def accept_direct_connect_gateway_association_proposal(params = {}, options = {})
+      req = build_request(:accept_direct_connect_gateway_association_proposal, params)
+      req.send_request(options)
+    end
 
     # Deprecated. Use AllocateHostedConnection instead.
     #
@@ -222,13 +396,16 @@ module Aws::DirectConnect
     # Allocates a VLAN number and a specified amount of bandwidth for use by
     # a hosted connection on the specified interconnect.
     #
-    # <note markdown="1"> Intended for use by AWS Direct Connect partners only.
+    # <note markdown="1"> Intended for use by AWS Direct Connect Partners only.
     #
     #  </note>
     #
     # @option params [required, String] :bandwidth
-    #   The bandwidth of the connection, in Mbps. The possible values are
-    #   50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, and 500Mbps.
+    #   The bandwidth of the connection. The possible values are 50Mbps,
+    #   100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and
+    #   10Gbps. Note that only those AWS Direct Connect Partners who have met
+    #   specific requirements are allowed to create a 1Gbps, 2Gbps, 5Gbps or
+    #   10Gbps hosted connection.
     #
     # @option params [required, String] :connection_name
     #   The name of the provisioned connection.
@@ -239,7 +416,7 @@ module Aws::DirectConnect
     #
     # @option params [required, String] :interconnect_id
     #   The ID of the interconnect on which the connection will be
-    #   provisioned. For example, dxcon-456abc78.
+    #   provisioned.
     #
     # @option params [required, Integer] :vlan
     #   The dedicated VLAN provisioned to the connection.
@@ -261,6 +438,8 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -277,7 +456,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -289,6 +468,10 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect AWS API Documentation
     #
@@ -300,12 +483,15 @@ module Aws::DirectConnect
     end
 
     # Creates a hosted connection on the specified interconnect or a link
-    # aggregation group (LAG).
+    # aggregation group (LAG) of interconnects.
     #
-    # Allocates a VLAN number and a specified amount of bandwidth for use by
-    # a hosted connection on the specified interconnect or LAG.
+    # Allocates a VLAN number and a specified amount of capacity (bandwidth)
+    # for use by a hosted connection on the specified interconnect or LAG of
+    # interconnects. AWS polices the hosted connection for the specified
+    # capacity and the AWS Direct Connect Partner must also police the
+    # hosted connection for the specified capacity.
     #
-    # <note markdown="1"> Intended for use by AWS Direct Connect partners only.
+    # <note markdown="1"> Intended for use by AWS Direct Connect Partners only.
     #
     #  </note>
     #
@@ -316,14 +502,20 @@ module Aws::DirectConnect
     #   The ID of the AWS account ID of the customer for the connection.
     #
     # @option params [required, String] :bandwidth
-    #   The bandwidth of the hosted connection, in Mbps. The possible values
-    #   are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, and 500Mbps.
+    #   The bandwidth of the connection. The possible values are 50Mbps,
+    #   100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and
+    #   10Gbps. Note that only those AWS Direct Connect Partners who have met
+    #   specific requirements are allowed to create a 1Gbps, 2Gbps, 5Gbps or
+    #   10Gbps hosted connection.
     #
     # @option params [required, String] :connection_name
     #   The name of the hosted connection.
     #
     # @option params [required, Integer] :vlan
     #   The dedicated VLAN provisioned to the hosted connection.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags associated with the connection.
     #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -342,6 +534,8 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -351,6 +545,12 @@ module Aws::DirectConnect
     #     bandwidth: "Bandwidth", # required
     #     connection_name: "ConnectionName", # required
     #     vlan: 1, # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -358,7 +558,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -370,6 +570,10 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnection AWS API Documentation
     #
@@ -423,6 +627,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #   * {Types::VirtualInterface#region #region} => String
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -438,6 +643,12 @@ module Aws::DirectConnect
     #       amazon_address: "AmazonAddress",
     #       address_family: "ipv4", # accepts ipv4, ipv6
     #       customer_address: "CustomerAddress",
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -456,7 +667,7 @@ module Aws::DirectConnect
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
     #   resp.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.customer_router_config #=> String
     #   resp.mtu #=> Integer
     #   resp.jumbo_frame_capable #=> Boolean
@@ -472,10 +683,13 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].amazon_address #=> String
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePrivateVirtualInterface AWS API Documentation
     #
@@ -537,6 +751,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #   * {Types::VirtualInterface#region #region} => String
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -554,6 +769,12 @@ module Aws::DirectConnect
     #       route_filter_prefixes: [
     #         {
     #           cidr: "CIDR",
+    #         },
+    #       ],
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
     #         },
     #       ],
     #     },
@@ -574,7 +795,7 @@ module Aws::DirectConnect
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
     #   resp.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.customer_router_config #=> String
     #   resp.mtu #=> Integer
     #   resp.jumbo_frame_capable #=> Boolean
@@ -590,10 +811,13 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].amazon_address #=> String
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePublicVirtualInterface AWS API Documentation
     #
@@ -601,6 +825,103 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def allocate_public_virtual_interface(params = {}, options = {})
       req = build_request(:allocate_public_virtual_interface, params)
+      req.send_request(options)
+    end
+
+    # Provisions a transit virtual interface to be owned by the specified
+    # AWS account. Use this type of interface to connect a transit gateway
+    # to your Direct Connect gateway.
+    #
+    # The owner of a connection provisions a transit virtual interface to be
+    # owned by the specified AWS account.
+    #
+    # After you create a transit virtual interface, it must be confirmed by
+    # the owner using ConfirmTransitVirtualInterface. Until this step has
+    # been completed, the transit virtual interface is in the `requested`
+    # state and is not available to handle traffic.
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the connection on which the transit virtual interface is
+    #   provisioned.
+    #
+    # @option params [required, String] :owner_account
+    #   The ID of the AWS account that owns the transit virtual interface.
+    #
+    # @option params [required, Types::NewTransitVirtualInterfaceAllocation] :new_transit_virtual_interface_allocation
+    #   Information about the transit virtual interface.
+    #
+    # @return [Types::AllocateTransitVirtualInterfaceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AllocateTransitVirtualInterfaceResult#virtual_interface #virtual_interface} => Types::VirtualInterface
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.allocate_transit_virtual_interface({
+    #     connection_id: "ConnectionId", # required
+    #     owner_account: "OwnerAccount", # required
+    #     new_transit_virtual_interface_allocation: { # required
+    #       virtual_interface_name: "VirtualInterfaceName",
+    #       vlan: 1,
+    #       asn: 1,
+    #       mtu: 1,
+    #       auth_key: "BGPAuthKey",
+    #       amazon_address: "AmazonAddress",
+    #       customer_address: "CustomerAddress",
+    #       address_family: "ipv4", # accepts ipv4, ipv6
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_interface.owner_account #=> String
+    #   resp.virtual_interface.virtual_interface_id #=> String
+    #   resp.virtual_interface.location #=> String
+    #   resp.virtual_interface.connection_id #=> String
+    #   resp.virtual_interface.virtual_interface_type #=> String
+    #   resp.virtual_interface.virtual_interface_name #=> String
+    #   resp.virtual_interface.vlan #=> Integer
+    #   resp.virtual_interface.asn #=> Integer
+    #   resp.virtual_interface.amazon_side_asn #=> Integer
+    #   resp.virtual_interface.auth_key #=> String
+    #   resp.virtual_interface.amazon_address #=> String
+    #   resp.virtual_interface.customer_address #=> String
+    #   resp.virtual_interface.address_family #=> String, one of "ipv4", "ipv6"
+    #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
+    #   resp.virtual_interface.customer_router_config #=> String
+    #   resp.virtual_interface.mtu #=> Integer
+    #   resp.virtual_interface.jumbo_frame_capable #=> Boolean
+    #   resp.virtual_interface.virtual_gateway_id #=> String
+    #   resp.virtual_interface.direct_connect_gateway_id #=> String
+    #   resp.virtual_interface.route_filter_prefixes #=> Array
+    #   resp.virtual_interface.route_filter_prefixes[0].cidr #=> String
+    #   resp.virtual_interface.bgp_peers #=> Array
+    #   resp.virtual_interface.bgp_peers[0].bgp_peer_id #=> String
+    #   resp.virtual_interface.bgp_peers[0].asn #=> Integer
+    #   resp.virtual_interface.bgp_peers[0].auth_key #=> String
+    #   resp.virtual_interface.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
+    #   resp.virtual_interface.bgp_peers[0].amazon_address #=> String
+    #   resp.virtual_interface.bgp_peers[0].customer_address #=> String
+    #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
+    #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
+    #   resp.virtual_interface.bgp_peers[0].aws_device_v2 #=> String
+    #   resp.virtual_interface.region #=> String
+    #   resp.virtual_interface.aws_device_v2 #=> String
+    #   resp.virtual_interface.tags #=> Array
+    #   resp.virtual_interface.tags[0].key #=> String
+    #   resp.virtual_interface.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateTransitVirtualInterface AWS API Documentation
+    #
+    # @overload allocate_transit_virtual_interface(params = {})
+    # @param [Hash] params ({})
+    def allocate_transit_virtual_interface(params = {}, options = {})
+      req = build_request(:allocate_transit_virtual_interface, params)
       req.send_request(options)
     end
 
@@ -625,11 +946,10 @@ module Aws::DirectConnect
     # associated with the original LAG.
     #
     # @option params [required, String] :connection_id
-    #   The ID of the connection. For example, dxcon-abc123.
+    #   The ID of the connection.
     #
     # @option params [required, String] :lag_id
-    #   The ID of the LAG with which to associate the connection. For example,
-    #   dxlag-abc123.
+    #   The ID of the LAG with which to associate the connection.
     #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -648,6 +968,8 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -661,7 +983,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -673,6 +995,10 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLag AWS API Documentation
     #
@@ -689,7 +1015,7 @@ module Aws::DirectConnect
     # or IP address, the operation fails. This action temporarily interrupts
     # the hosted connection's connectivity to AWS as it is being migrated.
     #
-    # <note markdown="1"> Intended for use by AWS Direct Connect partners only.
+    # <note markdown="1"> Intended for use by AWS Direct Connect Partners only.
     #
     #  </note>
     #
@@ -716,6 +1042,8 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -729,7 +1057,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -741,6 +1069,10 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnection AWS API Documentation
     #
@@ -798,6 +1130,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #   * {Types::VirtualInterface#region #region} => String
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -821,7 +1154,7 @@ module Aws::DirectConnect
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
     #   resp.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.customer_router_config #=> String
     #   resp.mtu #=> Integer
     #   resp.jumbo_frame_capable #=> Boolean
@@ -837,10 +1170,13 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].amazon_address #=> String
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateVirtualInterface AWS API Documentation
     #
@@ -873,7 +1209,7 @@ module Aws::DirectConnect
     #
     # @example Response structure
     #
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnection AWS API Documentation
     #
@@ -915,7 +1251,7 @@ module Aws::DirectConnect
     #
     # @example Response structure
     #
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterface AWS API Documentation
     #
@@ -947,7 +1283,7 @@ module Aws::DirectConnect
     #
     # @example Response structure
     #
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterface AWS API Documentation
     #
@@ -955,6 +1291,43 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def confirm_public_virtual_interface(params = {}, options = {})
       req = build_request(:confirm_public_virtual_interface, params)
+      req.send_request(options)
+    end
+
+    # Accepts ownership of a transit virtual interface created by another
+    # AWS account.
+    #
+    # After the owner of the transit virtual interface makes this call, the
+    # specified transit virtual interface is created and made available to
+    # handle traffic.
+    #
+    # @option params [required, String] :virtual_interface_id
+    #   The ID of the virtual interface.
+    #
+    # @option params [required, String] :direct_connect_gateway_id
+    #   The ID of the Direct Connect gateway.
+    #
+    # @return [Types::ConfirmTransitVirtualInterfaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ConfirmTransitVirtualInterfaceResponse#virtual_interface_state #virtual_interface_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.confirm_transit_virtual_interface({
+    #     virtual_interface_id: "VirtualInterfaceId", # required
+    #     direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmTransitVirtualInterface AWS API Documentation
+    #
+    # @overload confirm_transit_virtual_interface(params = {})
+    # @param [Hash] params ({})
+    def confirm_transit_virtual_interface(params = {}, options = {})
+      req = build_request(:confirm_transit_virtual_interface, params)
       req.send_request(options)
     end
 
@@ -1013,7 +1386,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.amazon_address #=> String
     #   resp.virtual_interface.customer_address #=> String
     #   resp.virtual_interface.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.virtual_interface.customer_router_config #=> String
     #   resp.virtual_interface.mtu #=> Integer
     #   resp.virtual_interface.jumbo_frame_capable #=> Boolean
@@ -1029,10 +1402,13 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers[0].amazon_address #=> String
     #   resp.virtual_interface.bgp_peers[0].customer_address #=> String
     #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.virtual_interface.bgp_peers[0].aws_device_v2 #=> String
     #   resp.virtual_interface.region #=> String
     #   resp.virtual_interface.aws_device_v2 #=> String
+    #   resp.virtual_interface.tags #=> Array
+    #   resp.virtual_interface.tags[0].key #=> String
+    #   resp.virtual_interface.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeer AWS API Documentation
     #
@@ -1071,6 +1447,13 @@ module Aws::DirectConnect
     # @option params [String] :lag_id
     #   The ID of the LAG.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to associate with the lag.
+    #
+    # @option params [String] :provider_name
+    #   The name of the service provider associated with the requested
+    #   connection.
+    #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Connection#owner_account #owner_account} => String
@@ -1088,6 +1471,8 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1096,6 +1481,13 @@ module Aws::DirectConnect
     #     bandwidth: "Bandwidth", # required
     #     connection_name: "ConnectionName", # required
     #     lag_id: "LagId",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     provider_name: "ProviderName",
     #   })
     #
     # @example Response structure
@@ -1103,7 +1495,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -1115,6 +1507,10 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection AWS API Documentation
     #
@@ -1179,7 +1575,23 @@ module Aws::DirectConnect
     # @option params [required, String] :direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
     #
-    # @option params [required, String] :virtual_gateway_id
+    # @option params [String] :gateway_id
+    #   The ID of the virtual private gateway or transit gateway.
+    #
+    # @option params [Array<Types::RouteFilterPrefix>] :add_allowed_prefixes_to_direct_connect_gateway
+    #   The Amazon VPC prefixes to advertise to the Direct Connect gateway
+    #
+    #   This parameter is required when you create an association to a transit
+    #   gateway.
+    #
+    #   For information about how to set the prefixes, see [Allowed
+    #   Prefixes][1] in the *AWS Direct Connect User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes
+    #
+    # @option params [String] :virtual_gateway_id
     #   The ID of the virtual private gateway.
     #
     # @return [Types::CreateDirectConnectGatewayAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1190,17 +1602,31 @@ module Aws::DirectConnect
     #
     #   resp = client.create_direct_connect_gateway_association({
     #     direct_connect_gateway_id: "DirectConnectGatewayId", # required
-    #     virtual_gateway_id: "VirtualGatewayId", # required
+    #     gateway_id: "GatewayIdToAssociate",
+    #     add_allowed_prefixes_to_direct_connect_gateway: [
+    #       {
+    #         cidr: "CIDR",
+    #       },
+    #     ],
+    #     virtual_gateway_id: "VirtualGatewayId",
     #   })
     #
     # @example Response structure
     #
     #   resp.direct_connect_gateway_association.direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway_association.direct_connect_gateway_owner_account #=> String
+    #   resp.direct_connect_gateway_association.association_state #=> String, one of "associating", "associated", "disassociating", "disassociated", "updating"
+    #   resp.direct_connect_gateway_association.state_change_error #=> String
+    #   resp.direct_connect_gateway_association.associated_gateway.id #=> String
+    #   resp.direct_connect_gateway_association.associated_gateway.type #=> String, one of "virtualPrivateGateway", "transitGateway"
+    #   resp.direct_connect_gateway_association.associated_gateway.owner_account #=> String
+    #   resp.direct_connect_gateway_association.associated_gateway.region #=> String
+    #   resp.direct_connect_gateway_association.association_id #=> String
+    #   resp.direct_connect_gateway_association.allowed_prefixes_to_direct_connect_gateway #=> Array
+    #   resp.direct_connect_gateway_association.allowed_prefixes_to_direct_connect_gateway[0].cidr #=> String
     #   resp.direct_connect_gateway_association.virtual_gateway_id #=> String
     #   resp.direct_connect_gateway_association.virtual_gateway_region #=> String
     #   resp.direct_connect_gateway_association.virtual_gateway_owner_account #=> String
-    #   resp.direct_connect_gateway_association.association_state #=> String, one of "associating", "associated", "disassociating", "disassociated"
-    #   resp.direct_connect_gateway_association.state_change_error #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayAssociation AWS API Documentation
     #
@@ -1211,16 +1637,87 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
-    # Creates an interconnect between an AWS Direct Connect partner's
+    # Creates a proposal to associate the specified virtual private gateway
+    # or transit gateway with the specified Direct Connect gateway.
+    #
+    # You can only associate a Direct Connect gateway and virtual private
+    # gateway or transit gateway when the account that owns the Direct
+    # Connect gateway and the account that owns the virtual private gateway
+    # or transit gateway have the same AWS Payer ID.
+    #
+    # @option params [required, String] :direct_connect_gateway_id
+    #   The ID of the Direct Connect gateway.
+    #
+    # @option params [required, String] :direct_connect_gateway_owner_account
+    #   The ID of the AWS account that owns the Direct Connect gateway.
+    #
+    # @option params [required, String] :gateway_id
+    #   The ID of the virtual private gateway or transit gateway.
+    #
+    # @option params [Array<Types::RouteFilterPrefix>] :add_allowed_prefixes_to_direct_connect_gateway
+    #   The Amazon VPC prefixes to advertise to the Direct Connect gateway.
+    #
+    # @option params [Array<Types::RouteFilterPrefix>] :remove_allowed_prefixes_to_direct_connect_gateway
+    #   The Amazon VPC prefixes to no longer advertise to the Direct Connect
+    #   gateway.
+    #
+    # @return [Types::CreateDirectConnectGatewayAssociationProposalResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDirectConnectGatewayAssociationProposalResult#direct_connect_gateway_association_proposal #direct_connect_gateway_association_proposal} => Types::DirectConnectGatewayAssociationProposal
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_direct_connect_gateway_association_proposal({
+    #     direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #     direct_connect_gateway_owner_account: "OwnerAccount", # required
+    #     gateway_id: "GatewayIdToAssociate", # required
+    #     add_allowed_prefixes_to_direct_connect_gateway: [
+    #       {
+    #         cidr: "CIDR",
+    #       },
+    #     ],
+    #     remove_allowed_prefixes_to_direct_connect_gateway: [
+    #       {
+    #         cidr: "CIDR",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.direct_connect_gateway_association_proposal.proposal_id #=> String
+    #   resp.direct_connect_gateway_association_proposal.direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway_association_proposal.direct_connect_gateway_owner_account #=> String
+    #   resp.direct_connect_gateway_association_proposal.proposal_state #=> String, one of "requested", "accepted", "deleted"
+    #   resp.direct_connect_gateway_association_proposal.associated_gateway.id #=> String
+    #   resp.direct_connect_gateway_association_proposal.associated_gateway.type #=> String, one of "virtualPrivateGateway", "transitGateway"
+    #   resp.direct_connect_gateway_association_proposal.associated_gateway.owner_account #=> String
+    #   resp.direct_connect_gateway_association_proposal.associated_gateway.region #=> String
+    #   resp.direct_connect_gateway_association_proposal.existing_allowed_prefixes_to_direct_connect_gateway #=> Array
+    #   resp.direct_connect_gateway_association_proposal.existing_allowed_prefixes_to_direct_connect_gateway[0].cidr #=> String
+    #   resp.direct_connect_gateway_association_proposal.requested_allowed_prefixes_to_direct_connect_gateway #=> Array
+    #   resp.direct_connect_gateway_association_proposal.requested_allowed_prefixes_to_direct_connect_gateway[0].cidr #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayAssociationProposal AWS API Documentation
+    #
+    # @overload create_direct_connect_gateway_association_proposal(params = {})
+    # @param [Hash] params ({})
+    def create_direct_connect_gateway_association_proposal(params = {}, options = {})
+      req = build_request(:create_direct_connect_gateway_association_proposal, params)
+      req.send_request(options)
+    end
+
+    # Creates an interconnect between an AWS Direct Connect Partner's
     # network and a specific AWS Direct Connect location.
     #
-    # An interconnect is a connection which is capable of hosting other
-    # connections. The partner can use an interconnect to provide sub-1Gbps
-    # AWS Direct Connect service to tier 2 customers who do not have their
-    # own connections. Like a standard connection, an interconnect links the
-    # partner's network to an AWS Direct Connect location over a standard
-    # Ethernet fiber-optic cable. One end is connected to the partner's
-    # router, the other to an AWS Direct Connect router.
+    # An interconnect is a connection that is capable of hosting other
+    # connections. The AWS Direct Connect partner can use an interconnect to
+    # provide AWS Direct Connect hosted connections to customers through
+    # their own network services. Like a standard connection, an
+    # interconnect links the partner's network to an AWS Direct Connect
+    # location over a standard Ethernet fiber-optic cable. One end is
+    # connected to the partner's router, the other to an AWS Direct Connect
+    # router.
     #
     # You can automatically add the new interconnect to a link aggregation
     # group (LAG) by specifying a LAG ID in the request. This ensures that
@@ -1228,13 +1725,13 @@ module Aws::DirectConnect
     # endpoint that hosts the specified LAG. If there are no available ports
     # on the endpoint, the request fails and no interconnect is created.
     #
-    # For each end customer, the AWS Direct Connect partner provisions a
-    # connection on their interconnect by calling
-    # AllocateConnectionOnInterconnect. The end customer can then connect to
-    # AWS resources by creating a virtual interface on their connection,
-    # using the VLAN assigned to them by the partner.
+    # For each end customer, the AWS Direct Connect Partner provisions a
+    # connection on their interconnect by calling AllocateHostedConnection.
+    # The end customer can then connect to AWS resources by creating a
+    # virtual interface on their connection, using the VLAN assigned to them
+    # by the AWS Direct Connect Partner.
     #
-    # <note markdown="1"> Intended for use by AWS Direct Connect partners only.
+    # <note markdown="1"> Intended for use by AWS Direct Connect Partners only.
     #
     #  </note>
     #
@@ -1250,6 +1747,12 @@ module Aws::DirectConnect
     # @option params [String] :lag_id
     #   The ID of the LAG.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to associate with the interconnect.
+    #
+    # @option params [String] :provider_name
+    #   The name of the service provider associated with the interconnect.
+    #
     # @return [Types::Interconnect] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Interconnect#interconnect_id #interconnect_id} => String
@@ -1264,6 +1767,8 @@ module Aws::DirectConnect
     #   * {Types::Interconnect#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Interconnect#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Interconnect#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Interconnect#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Interconnect#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1272,13 +1777,20 @@ module Aws::DirectConnect
     #     bandwidth: "Bandwidth", # required
     #     location: "LocationCode", # required
     #     lag_id: "LagId",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     provider_name: "ProviderName",
     #   })
     #
     # @example Response structure
     #
     #   resp.interconnect_id #=> String
     #   resp.interconnect_name #=> String
-    #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -1288,6 +1800,10 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnect AWS API Documentation
     #
@@ -1321,7 +1837,7 @@ module Aws::DirectConnect
     # with the LAG. The connection ID does not change.
     #
     # If the AWS account used to create a LAG is a registered AWS Direct
-    # Connect partner, the LAG is automatically enabled to host
+    # Connect Partner, the LAG is automatically enabled to host
     # sub-connections. For a LAG owned by a partner, any associated virtual
     # interfaces cannot be directly configured.
     #
@@ -1334,13 +1850,23 @@ module Aws::DirectConnect
     #
     # @option params [required, String] :connections_bandwidth
     #   The bandwidth of the individual physical connections bundled by the
-    #   LAG. The possible values are 1Gbps and 10Gbps.
+    #   LAG. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps,
+    #   400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps.
     #
     # @option params [required, String] :lag_name
     #   The name of the LAG.
     #
     # @option params [String] :connection_id
     #   The ID of an existing connection to migrate to the LAG.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to associate with the LAG.
+    #
+    # @option params [Array<Types::Tag>] :child_connection_tags
+    #   The tags to associate with the automtically created LAGs.
+    #
+    # @option params [String] :provider_name
+    #   The name of the service provider associated with the LAG.
     #
     # @return [Types::Lag] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1359,6 +1885,8 @@ module Aws::DirectConnect
     #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
     #   * {Types::Lag#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Lag#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Lag#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1368,6 +1896,19 @@ module Aws::DirectConnect
     #     connections_bandwidth: "Bandwidth", # required
     #     lag_name: "LagName", # required
     #     connection_id: "ConnectionId",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     child_connection_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     provider_name: "ProviderName",
     #   })
     #
     # @example Response structure
@@ -1377,7 +1918,7 @@ module Aws::DirectConnect
     #   resp.lag_id #=> String
     #   resp.owner_account #=> String
     #   resp.lag_name #=> String
-    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #   resp.location #=> String
     #   resp.region #=> String
     #   resp.minimum_links #=> Integer
@@ -1387,7 +1928,7 @@ module Aws::DirectConnect
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
     #   resp.connections[0].connection_name #=> String
-    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.connections[0].region #=> String
     #   resp.connections[0].location #=> String
     #   resp.connections[0].bandwidth #=> String
@@ -1399,9 +1940,17 @@ module Aws::DirectConnect
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
     #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
+    #   resp.connections[0].provider_name #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLag AWS API Documentation
     #
@@ -1420,6 +1969,15 @@ module Aws::DirectConnect
     # connecting to multiple VPCs, including VPCs in different AWS Regions.
     # Connecting the private virtual interface to a VGW only provides access
     # to a single VPC within the same Region.
+    #
+    # Setting the MTU of a virtual interface to 9001 (jumbo frames) can
+    # cause an update to the underlying physical connection if it wasn't
+    # updated to support jumbo frames. Updating the connection disrupts
+    # network connectivity for all virtual interfaces associated with the
+    # connection for up to 30 seconds. To check whether your connection
+    # supports jumbo frames, call DescribeConnections. To check whether your
+    # virtual interface supports jumbo frames, call
+    # DescribeVirtualInterfaces.
     #
     # @option params [required, String] :connection_id
     #   The ID of the connection.
@@ -1452,6 +2010,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #   * {Types::VirtualInterface#region #region} => String
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1468,6 +2027,12 @@ module Aws::DirectConnect
     #       address_family: "ipv4", # accepts ipv4, ipv6
     #       virtual_gateway_id: "VirtualGatewayId",
     #       direct_connect_gateway_id: "DirectConnectGatewayId",
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1486,7 +2051,7 @@ module Aws::DirectConnect
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
     #   resp.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.customer_router_config #=> String
     #   resp.mtu #=> Integer
     #   resp.jumbo_frame_capable #=> Boolean
@@ -1502,10 +2067,13 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].amazon_address #=> String
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterface AWS API Documentation
     #
@@ -1555,6 +2123,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #   * {Types::VirtualInterface#region #region} => String
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1571,6 +2140,12 @@ module Aws::DirectConnect
     #       route_filter_prefixes: [
     #         {
     #           cidr: "CIDR",
+    #         },
+    #       ],
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
     #         },
     #       ],
     #     },
@@ -1591,7 +2166,7 @@ module Aws::DirectConnect
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
     #   resp.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.customer_router_config #=> String
     #   resp.mtu #=> Integer
     #   resp.jumbo_frame_capable #=> Boolean
@@ -1607,10 +2182,13 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].amazon_address #=> String
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePublicVirtualInterface AWS API Documentation
     #
@@ -1618,6 +2196,108 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def create_public_virtual_interface(params = {}, options = {})
       req = build_request(:create_public_virtual_interface, params)
+      req.send_request(options)
+    end
+
+    # Creates a transit virtual interface. A transit virtual interface
+    # should be used to access one or more transit gateways associated with
+    # Direct Connect gateways. A transit virtual interface enables the
+    # connection of multiple VPCs attached to a transit gateway to a Direct
+    # Connect gateway.
+    #
+    # If you associate your transit gateway with one or more Direct Connect
+    # gateways, the Autonomous System Number (ASN) used by the transit
+    # gateway and the Direct Connect gateway must be different. For example,
+    # if you use the default ASN 64512 for both your the transit gateway and
+    # Direct Connect gateway, the association request fails.
+    #
+    # Setting the MTU of a virtual interface to 8500 (jumbo frames) can
+    # cause an update to the underlying physical connection if it wasn't
+    # updated to support jumbo frames. Updating the connection disrupts
+    # network connectivity for all virtual interfaces associated with the
+    # connection for up to 30 seconds. To check whether your connection
+    # supports jumbo frames, call DescribeConnections. To check whether your
+    # virtual interface supports jumbo frames, call
+    # DescribeVirtualInterfaces.
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the connection.
+    #
+    # @option params [required, Types::NewTransitVirtualInterface] :new_transit_virtual_interface
+    #   Information about the transit virtual interface.
+    #
+    # @return [Types::CreateTransitVirtualInterfaceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTransitVirtualInterfaceResult#virtual_interface #virtual_interface} => Types::VirtualInterface
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_transit_virtual_interface({
+    #     connection_id: "ConnectionId", # required
+    #     new_transit_virtual_interface: { # required
+    #       virtual_interface_name: "VirtualInterfaceName",
+    #       vlan: 1,
+    #       asn: 1,
+    #       mtu: 1,
+    #       auth_key: "BGPAuthKey",
+    #       amazon_address: "AmazonAddress",
+    #       customer_address: "CustomerAddress",
+    #       address_family: "ipv4", # accepts ipv4, ipv6
+    #       direct_connect_gateway_id: "DirectConnectGatewayId",
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_interface.owner_account #=> String
+    #   resp.virtual_interface.virtual_interface_id #=> String
+    #   resp.virtual_interface.location #=> String
+    #   resp.virtual_interface.connection_id #=> String
+    #   resp.virtual_interface.virtual_interface_type #=> String
+    #   resp.virtual_interface.virtual_interface_name #=> String
+    #   resp.virtual_interface.vlan #=> Integer
+    #   resp.virtual_interface.asn #=> Integer
+    #   resp.virtual_interface.amazon_side_asn #=> Integer
+    #   resp.virtual_interface.auth_key #=> String
+    #   resp.virtual_interface.amazon_address #=> String
+    #   resp.virtual_interface.customer_address #=> String
+    #   resp.virtual_interface.address_family #=> String, one of "ipv4", "ipv6"
+    #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
+    #   resp.virtual_interface.customer_router_config #=> String
+    #   resp.virtual_interface.mtu #=> Integer
+    #   resp.virtual_interface.jumbo_frame_capable #=> Boolean
+    #   resp.virtual_interface.virtual_gateway_id #=> String
+    #   resp.virtual_interface.direct_connect_gateway_id #=> String
+    #   resp.virtual_interface.route_filter_prefixes #=> Array
+    #   resp.virtual_interface.route_filter_prefixes[0].cidr #=> String
+    #   resp.virtual_interface.bgp_peers #=> Array
+    #   resp.virtual_interface.bgp_peers[0].bgp_peer_id #=> String
+    #   resp.virtual_interface.bgp_peers[0].asn #=> Integer
+    #   resp.virtual_interface.bgp_peers[0].auth_key #=> String
+    #   resp.virtual_interface.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
+    #   resp.virtual_interface.bgp_peers[0].amazon_address #=> String
+    #   resp.virtual_interface.bgp_peers[0].customer_address #=> String
+    #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
+    #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
+    #   resp.virtual_interface.bgp_peers[0].aws_device_v2 #=> String
+    #   resp.virtual_interface.region #=> String
+    #   resp.virtual_interface.aws_device_v2 #=> String
+    #   resp.virtual_interface.tags #=> Array
+    #   resp.virtual_interface.tags[0].key #=> String
+    #   resp.virtual_interface.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateTransitVirtualInterface AWS API Documentation
+    #
+    # @overload create_transit_virtual_interface(params = {})
+    # @param [Hash] params ({})
+    def create_transit_virtual_interface(params = {}, options = {})
+      req = build_request(:create_transit_virtual_interface, params)
       req.send_request(options)
     end
 
@@ -1667,7 +2347,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.amazon_address #=> String
     #   resp.virtual_interface.customer_address #=> String
     #   resp.virtual_interface.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.virtual_interface.customer_router_config #=> String
     #   resp.virtual_interface.mtu #=> Integer
     #   resp.virtual_interface.jumbo_frame_capable #=> Boolean
@@ -1683,10 +2363,13 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers[0].amazon_address #=> String
     #   resp.virtual_interface.bgp_peers[0].customer_address #=> String
     #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.virtual_interface.bgp_peers[0].aws_device_v2 #=> String
     #   resp.virtual_interface.region #=> String
     #   resp.virtual_interface.aws_device_v2 #=> String
+    #   resp.virtual_interface.tags #=> Array
+    #   resp.virtual_interface.tags[0].key #=> String
+    #   resp.virtual_interface.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeer AWS API Documentation
     #
@@ -1724,6 +2407,8 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1736,7 +2421,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -1748,6 +2433,10 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnection AWS API Documentation
     #
@@ -1760,8 +2449,8 @@ module Aws::DirectConnect
 
     # Deletes the specified Direct Connect gateway. You must first delete
     # all virtual interfaces that are attached to the Direct Connect gateway
-    # and disassociate all virtual private gateways that are associated with
-    # the Direct Connect gateway.
+    # and disassociate all virtual private gateways associated with the
+    # Direct Connect gateway.
     #
     # @option params [required, String] :direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
@@ -1797,10 +2486,18 @@ module Aws::DirectConnect
     # Deletes the association between the specified Direct Connect gateway
     # and virtual private gateway.
     #
-    # @option params [required, String] :direct_connect_gateway_id
+    # We recommend that you specify the `associationID` to delete the
+    # association. Alternatively, if you own virtual gateway and a Direct
+    # Connect gateway association, you can specify the `virtualGatewayId`
+    # and `directConnectGatewayId` to delete an association.
+    #
+    # @option params [String] :association_id
+    #   The ID of the Direct Connect gateway association.
+    #
+    # @option params [String] :direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
     #
-    # @option params [required, String] :virtual_gateway_id
+    # @option params [String] :virtual_gateway_id
     #   The ID of the virtual private gateway.
     #
     # @return [Types::DeleteDirectConnectGatewayAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1810,18 +2507,27 @@ module Aws::DirectConnect
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_direct_connect_gateway_association({
-    #     direct_connect_gateway_id: "DirectConnectGatewayId", # required
-    #     virtual_gateway_id: "VirtualGatewayId", # required
+    #     association_id: "DirectConnectGatewayAssociationId",
+    #     direct_connect_gateway_id: "DirectConnectGatewayId",
+    #     virtual_gateway_id: "VirtualGatewayId",
     #   })
     #
     # @example Response structure
     #
     #   resp.direct_connect_gateway_association.direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway_association.direct_connect_gateway_owner_account #=> String
+    #   resp.direct_connect_gateway_association.association_state #=> String, one of "associating", "associated", "disassociating", "disassociated", "updating"
+    #   resp.direct_connect_gateway_association.state_change_error #=> String
+    #   resp.direct_connect_gateway_association.associated_gateway.id #=> String
+    #   resp.direct_connect_gateway_association.associated_gateway.type #=> String, one of "virtualPrivateGateway", "transitGateway"
+    #   resp.direct_connect_gateway_association.associated_gateway.owner_account #=> String
+    #   resp.direct_connect_gateway_association.associated_gateway.region #=> String
+    #   resp.direct_connect_gateway_association.association_id #=> String
+    #   resp.direct_connect_gateway_association.allowed_prefixes_to_direct_connect_gateway #=> Array
+    #   resp.direct_connect_gateway_association.allowed_prefixes_to_direct_connect_gateway[0].cidr #=> String
     #   resp.direct_connect_gateway_association.virtual_gateway_id #=> String
     #   resp.direct_connect_gateway_association.virtual_gateway_region #=> String
     #   resp.direct_connect_gateway_association.virtual_gateway_owner_account #=> String
-    #   resp.direct_connect_gateway_association.association_state #=> String, one of "associating", "associated", "disassociating", "disassociated"
-    #   resp.direct_connect_gateway_association.state_change_error #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociation AWS API Documentation
     #
@@ -1832,9 +2538,49 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Deletes the association proposal request between the specified Direct
+    # Connect gateway and virtual private gateway or transit gateway.
+    #
+    # @option params [required, String] :proposal_id
+    #   The ID of the proposal.
+    #
+    # @return [Types::DeleteDirectConnectGatewayAssociationProposalResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDirectConnectGatewayAssociationProposalResult#direct_connect_gateway_association_proposal #direct_connect_gateway_association_proposal} => Types::DirectConnectGatewayAssociationProposal
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_direct_connect_gateway_association_proposal({
+    #     proposal_id: "DirectConnectGatewayAssociationProposalId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.direct_connect_gateway_association_proposal.proposal_id #=> String
+    #   resp.direct_connect_gateway_association_proposal.direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway_association_proposal.direct_connect_gateway_owner_account #=> String
+    #   resp.direct_connect_gateway_association_proposal.proposal_state #=> String, one of "requested", "accepted", "deleted"
+    #   resp.direct_connect_gateway_association_proposal.associated_gateway.id #=> String
+    #   resp.direct_connect_gateway_association_proposal.associated_gateway.type #=> String, one of "virtualPrivateGateway", "transitGateway"
+    #   resp.direct_connect_gateway_association_proposal.associated_gateway.owner_account #=> String
+    #   resp.direct_connect_gateway_association_proposal.associated_gateway.region #=> String
+    #   resp.direct_connect_gateway_association_proposal.existing_allowed_prefixes_to_direct_connect_gateway #=> Array
+    #   resp.direct_connect_gateway_association_proposal.existing_allowed_prefixes_to_direct_connect_gateway[0].cidr #=> String
+    #   resp.direct_connect_gateway_association_proposal.requested_allowed_prefixes_to_direct_connect_gateway #=> Array
+    #   resp.direct_connect_gateway_association_proposal.requested_allowed_prefixes_to_direct_connect_gateway[0].cidr #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociationProposal AWS API Documentation
+    #
+    # @overload delete_direct_connect_gateway_association_proposal(params = {})
+    # @param [Hash] params ({})
+    def delete_direct_connect_gateway_association_proposal(params = {}, options = {})
+      req = build_request(:delete_direct_connect_gateway_association_proposal, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified interconnect.
     #
-    # <note markdown="1"> Intended for use by AWS Direct Connect partners only.
+    # <note markdown="1"> Intended for use by AWS Direct Connect Partners only.
     #
     #  </note>
     #
@@ -1853,7 +2599,7 @@ module Aws::DirectConnect
     #
     # @example Response structure
     #
-    #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteInterconnect AWS API Documentation
     #
@@ -1887,6 +2633,8 @@ module Aws::DirectConnect
     #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
     #   * {Types::Lag#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Lag#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Lag#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1901,7 +2649,7 @@ module Aws::DirectConnect
     #   resp.lag_id #=> String
     #   resp.owner_account #=> String
     #   resp.lag_name #=> String
-    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #   resp.location #=> String
     #   resp.region #=> String
     #   resp.minimum_links #=> Integer
@@ -1911,7 +2659,7 @@ module Aws::DirectConnect
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
     #   resp.connections[0].connection_name #=> String
-    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.connections[0].region #=> String
     #   resp.connections[0].location #=> String
     #   resp.connections[0].bandwidth #=> String
@@ -1923,9 +2671,17 @@ module Aws::DirectConnect
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
     #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
+    #   resp.connections[0].provider_name #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLag AWS API Documentation
     #
@@ -1953,7 +2709,7 @@ module Aws::DirectConnect
     #
     # @example Response structure
     #
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterface AWS API Documentation
     #
@@ -1976,7 +2732,7 @@ module Aws::DirectConnect
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
+    # [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
     #
     # @option params [required, String] :connection_id
     #   The ID of the connection.
@@ -2038,7 +2794,7 @@ module Aws::DirectConnect
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
     #   resp.connections[0].connection_name #=> String
-    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.connections[0].region #=> String
     #   resp.connections[0].location #=> String
     #   resp.connections[0].bandwidth #=> String
@@ -2050,6 +2806,10 @@ module Aws::DirectConnect
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
     #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
+    #   resp.connections[0].provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections AWS API Documentation
     #
@@ -2065,7 +2825,7 @@ module Aws::DirectConnect
     # Lists the connections that have been provisioned on the specified
     # interconnect.
     #
-    # <note markdown="1"> Intended for use by AWS Direct Connect partners only.
+    # <note markdown="1"> Intended for use by AWS Direct Connect Partners only.
     #
     #  </note>
     #
@@ -2088,7 +2848,7 @@ module Aws::DirectConnect
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
     #   resp.connections[0].connection_name #=> String
-    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.connections[0].region #=> String
     #   resp.connections[0].location #=> String
     #   resp.connections[0].bandwidth #=> String
@@ -2100,6 +2860,10 @@ module Aws::DirectConnect
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
     #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
+    #   resp.connections[0].provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect AWS API Documentation
     #
@@ -2107,6 +2871,71 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def describe_connections_on_interconnect(params = {}, options = {})
       req = build_request(:describe_connections_on_interconnect, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more association proposals for connection between a
+    # virtual private gateway or transit gateway and a Direct Connect
+    # gateway.
+    #
+    # @option params [String] :direct_connect_gateway_id
+    #   The ID of the Direct Connect gateway.
+    #
+    # @option params [String] :proposal_id
+    #   The ID of the proposal.
+    #
+    # @option params [String] :associated_gateway_id
+    #   The ID of the associated gateway.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::DescribeDirectConnectGatewayAssociationProposalsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDirectConnectGatewayAssociationProposalsResult#direct_connect_gateway_association_proposals #direct_connect_gateway_association_proposals} => Array&lt;Types::DirectConnectGatewayAssociationProposal&gt;
+    #   * {Types::DescribeDirectConnectGatewayAssociationProposalsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_direct_connect_gateway_association_proposals({
+    #     direct_connect_gateway_id: "DirectConnectGatewayId",
+    #     proposal_id: "DirectConnectGatewayAssociationProposalId",
+    #     associated_gateway_id: "AssociatedGatewayId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.direct_connect_gateway_association_proposals #=> Array
+    #   resp.direct_connect_gateway_association_proposals[0].proposal_id #=> String
+    #   resp.direct_connect_gateway_association_proposals[0].direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway_association_proposals[0].direct_connect_gateway_owner_account #=> String
+    #   resp.direct_connect_gateway_association_proposals[0].proposal_state #=> String, one of "requested", "accepted", "deleted"
+    #   resp.direct_connect_gateway_association_proposals[0].associated_gateway.id #=> String
+    #   resp.direct_connect_gateway_association_proposals[0].associated_gateway.type #=> String, one of "virtualPrivateGateway", "transitGateway"
+    #   resp.direct_connect_gateway_association_proposals[0].associated_gateway.owner_account #=> String
+    #   resp.direct_connect_gateway_association_proposals[0].associated_gateway.region #=> String
+    #   resp.direct_connect_gateway_association_proposals[0].existing_allowed_prefixes_to_direct_connect_gateway #=> Array
+    #   resp.direct_connect_gateway_association_proposals[0].existing_allowed_prefixes_to_direct_connect_gateway[0].cidr #=> String
+    #   resp.direct_connect_gateway_association_proposals[0].requested_allowed_prefixes_to_direct_connect_gateway #=> Array
+    #   resp.direct_connect_gateway_association_proposals[0].requested_allowed_prefixes_to_direct_connect_gateway[0].cidr #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAssociationProposals AWS API Documentation
+    #
+    # @overload describe_direct_connect_gateway_association_proposals(params = {})
+    # @param [Hash] params ({})
+    def describe_direct_connect_gateway_association_proposals(params = {}, options = {})
+      req = build_request(:describe_direct_connect_gateway_association_proposals, params)
       req.send_request(options)
     end
 
@@ -2120,17 +2949,28 @@ module Aws::DirectConnect
     # contains the association between the Direct Connect gateway and the
     # virtual private gateway.
     #
+    # @option params [String] :association_id
+    #   The ID of the Direct Connect gateway association.
+    #
+    # @option params [String] :associated_gateway_id
+    #   The ID of the associated gateway.
+    #
     # @option params [String] :direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
     #
-    # @option params [String] :virtual_gateway_id
-    #   The ID of the virtual private gateway.
-    #
     # @option params [Integer] :max_results
-    #   The maximum number of associations to return per page.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
     #
     # @option params [String] :next_token
     #   The token provided in the previous call to retrieve the next page.
+    #
+    # @option params [String] :virtual_gateway_id
+    #   The ID of the virtual private gateway.
     #
     # @return [Types::DescribeDirectConnectGatewayAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2140,21 +2980,31 @@ module Aws::DirectConnect
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_direct_connect_gateway_associations({
+    #     association_id: "DirectConnectGatewayAssociationId",
+    #     associated_gateway_id: "AssociatedGatewayId",
     #     direct_connect_gateway_id: "DirectConnectGatewayId",
-    #     virtual_gateway_id: "VirtualGatewayId",
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     virtual_gateway_id: "VirtualGatewayId",
     #   })
     #
     # @example Response structure
     #
     #   resp.direct_connect_gateway_associations #=> Array
     #   resp.direct_connect_gateway_associations[0].direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway_associations[0].direct_connect_gateway_owner_account #=> String
+    #   resp.direct_connect_gateway_associations[0].association_state #=> String, one of "associating", "associated", "disassociating", "disassociated", "updating"
+    #   resp.direct_connect_gateway_associations[0].state_change_error #=> String
+    #   resp.direct_connect_gateway_associations[0].associated_gateway.id #=> String
+    #   resp.direct_connect_gateway_associations[0].associated_gateway.type #=> String, one of "virtualPrivateGateway", "transitGateway"
+    #   resp.direct_connect_gateway_associations[0].associated_gateway.owner_account #=> String
+    #   resp.direct_connect_gateway_associations[0].associated_gateway.region #=> String
+    #   resp.direct_connect_gateway_associations[0].association_id #=> String
+    #   resp.direct_connect_gateway_associations[0].allowed_prefixes_to_direct_connect_gateway #=> Array
+    #   resp.direct_connect_gateway_associations[0].allowed_prefixes_to_direct_connect_gateway[0].cidr #=> String
     #   resp.direct_connect_gateway_associations[0].virtual_gateway_id #=> String
     #   resp.direct_connect_gateway_associations[0].virtual_gateway_region #=> String
     #   resp.direct_connect_gateway_associations[0].virtual_gateway_owner_account #=> String
-    #   resp.direct_connect_gateway_associations[0].association_state #=> String, one of "associating", "associated", "disassociating", "disassociated"
-    #   resp.direct_connect_gateway_associations[0].state_change_error #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAssociations AWS API Documentation
@@ -2182,7 +3032,12 @@ module Aws::DirectConnect
     #   The ID of the virtual interface.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of attachments to return per page.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
     #
     # @option params [String] :next_token
     #   The token provided in the previous call to retrieve the next page.
@@ -2209,6 +3064,7 @@ module Aws::DirectConnect
     #   resp.direct_connect_gateway_attachments[0].virtual_interface_region #=> String
     #   resp.direct_connect_gateway_attachments[0].virtual_interface_owner_account #=> String
     #   resp.direct_connect_gateway_attachments[0].attachment_state #=> String, one of "attaching", "attached", "detaching", "detached"
+    #   resp.direct_connect_gateway_attachments[0].attachment_type #=> String, one of "TransitVirtualInterface", "PrivateVirtualInterface"
     #   resp.direct_connect_gateway_attachments[0].state_change_error #=> String
     #   resp.next_token #=> String
     #
@@ -2228,7 +3084,12 @@ module Aws::DirectConnect
     #   The ID of the Direct Connect gateway.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of Direct Connect gateways to return per page.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
     #
     # @option params [String] :next_token
     #   The token provided in the previous call to retrieve the next page.
@@ -2269,7 +3130,7 @@ module Aws::DirectConnect
     # Lists the hosted connections that have been provisioned on the
     # specified interconnect or link aggregation group (LAG).
     #
-    # <note markdown="1"> Intended for use by AWS Direct Connect partners only.
+    # <note markdown="1"> Intended for use by AWS Direct Connect Partners only.
     #
     #  </note>
     #
@@ -2292,7 +3153,7 @@ module Aws::DirectConnect
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
     #   resp.connections[0].connection_name #=> String
-    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.connections[0].region #=> String
     #   resp.connections[0].location #=> String
     #   resp.connections[0].bandwidth #=> String
@@ -2304,6 +3165,10 @@ module Aws::DirectConnect
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
     #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
+    #   resp.connections[0].provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections AWS API Documentation
     #
@@ -2326,7 +3191,7 @@ module Aws::DirectConnect
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
+    # [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
     #
     # @option params [required, String] :interconnect_id
     #   The ID of the interconnect.
@@ -2388,7 +3253,7 @@ module Aws::DirectConnect
     #   resp.interconnects #=> Array
     #   resp.interconnects[0].interconnect_id #=> String
     #   resp.interconnects[0].interconnect_name #=> String
-    #   resp.interconnects[0].interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.interconnects[0].interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #   resp.interconnects[0].region #=> String
     #   resp.interconnects[0].location #=> String
     #   resp.interconnects[0].bandwidth #=> String
@@ -2398,6 +3263,10 @@ module Aws::DirectConnect
     #   resp.interconnects[0].jumbo_frame_capable #=> Boolean
     #   resp.interconnects[0].aws_device_v2 #=> String
     #   resp.interconnects[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.interconnects[0].tags #=> Array
+    #   resp.interconnects[0].tags[0].key #=> String
+    #   resp.interconnects[0].tags[0].value #=> String
+    #   resp.interconnects[0].provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnects AWS API Documentation
     #
@@ -2431,7 +3300,7 @@ module Aws::DirectConnect
     #   resp.lags[0].lag_id #=> String
     #   resp.lags[0].owner_account #=> String
     #   resp.lags[0].lag_name #=> String
-    #   resp.lags[0].lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.lags[0].lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #   resp.lags[0].location #=> String
     #   resp.lags[0].region #=> String
     #   resp.lags[0].minimum_links #=> Integer
@@ -2441,7 +3310,7 @@ module Aws::DirectConnect
     #   resp.lags[0].connections[0].owner_account #=> String
     #   resp.lags[0].connections[0].connection_id #=> String
     #   resp.lags[0].connections[0].connection_name #=> String
-    #   resp.lags[0].connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.lags[0].connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.lags[0].connections[0].region #=> String
     #   resp.lags[0].connections[0].location #=> String
     #   resp.lags[0].connections[0].bandwidth #=> String
@@ -2453,9 +3322,17 @@ module Aws::DirectConnect
     #   resp.lags[0].connections[0].jumbo_frame_capable #=> Boolean
     #   resp.lags[0].connections[0].aws_device_v2 #=> String
     #   resp.lags[0].connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.lags[0].connections[0].tags #=> Array
+    #   resp.lags[0].connections[0].tags[0].key #=> String
+    #   resp.lags[0].connections[0].tags[0].value #=> String
+    #   resp.lags[0].connections[0].provider_name #=> String
     #   resp.lags[0].allows_hosted_connections #=> Boolean
     #   resp.lags[0].jumbo_frame_capable #=> Boolean
     #   resp.lags[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.lags[0].tags #=> Array
+    #   resp.lags[0].tags[0].key #=> String
+    #   resp.lags[0].tags[0].value #=> String
+    #   resp.lags[0].provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLags AWS API Documentation
     #
@@ -2477,7 +3354,7 @@ module Aws::DirectConnect
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
+    # [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
     #
     # @option params [required, String] :connection_id
     #   The ID of a connection, LAG, or interconnect.
@@ -2533,6 +3410,10 @@ module Aws::DirectConnect
     #   resp.locations[0].location_code #=> String
     #   resp.locations[0].location_name #=> String
     #   resp.locations[0].region #=> String
+    #   resp.locations[0].available_port_speeds #=> Array
+    #   resp.locations[0].available_port_speeds[0] #=> String
+    #   resp.locations[0].available_providers #=> Array
+    #   resp.locations[0].available_providers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLocations AWS API Documentation
     #
@@ -2642,7 +3523,7 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].amazon_address #=> String
     #   resp.virtual_interfaces[0].customer_address #=> String
     #   resp.virtual_interfaces[0].address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interfaces[0].virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interfaces[0].virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.virtual_interfaces[0].customer_router_config #=> String
     #   resp.virtual_interfaces[0].mtu #=> Integer
     #   resp.virtual_interfaces[0].jumbo_frame_capable #=> Boolean
@@ -2658,10 +3539,13 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].bgp_peers[0].amazon_address #=> String
     #   resp.virtual_interfaces[0].bgp_peers[0].customer_address #=> String
     #   resp.virtual_interfaces[0].bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.virtual_interfaces[0].bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.virtual_interfaces[0].bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.virtual_interfaces[0].bgp_peers[0].aws_device_v2 #=> String
     #   resp.virtual_interfaces[0].region #=> String
     #   resp.virtual_interfaces[0].aws_device_v2 #=> String
+    #   resp.virtual_interfaces[0].tags #=> Array
+    #   resp.virtual_interfaces[0].tags[0].key #=> String
+    #   resp.virtual_interfaces[0].tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfaces AWS API Documentation
     #
@@ -2677,7 +3561,7 @@ module Aws::DirectConnect
     # connection (the connection is not deleted; to delete the connection,
     # use the DeleteConnection request). If the LAG has associated virtual
     # interfaces or hosted connections, they remain associated with the LAG.
-    # A disassociated connection owned by an AWS Direct Connect partner is
+    # A disassociated connection owned by an AWS Direct Connect Partner is
     # automatically converted to an interconnect.
     #
     # If disassociating the connection would cause the LAG to fall below its
@@ -2687,10 +3571,10 @@ module Aws::DirectConnect
     # LAG with no physical connections.
     #
     # @option params [required, String] :connection_id
-    #   The ID of the connection. For example, dxcon-abc123.
+    #   The ID of the connection.
     #
     # @option params [required, String] :lag_id
-    #   The ID of the LAG. For example, dxlag-abc123.
+    #   The ID of the LAG.
     #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2709,6 +3593,8 @@ module Aws::DirectConnect
     #   * {Types::Connection#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Connection#aws_device_v2 #aws_device_v2} => String
     #   * {Types::Connection#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Connection#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Connection#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2722,7 +3608,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -2734,6 +3620,10 @@ module Aws::DirectConnect
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.aws_device_v2 #=> String
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLag AWS API Documentation
     #
@@ -2741,6 +3631,173 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def disassociate_connection_from_lag(params = {}, options = {})
       req = build_request(:disassociate_connection_from_lag, params)
+      req.send_request(options)
+    end
+
+    # Lists the virtual interface failover test history.
+    #
+    # @option params [String] :test_id
+    #   The ID of the virtual interface failover test.
+    #
+    # @option params [String] :virtual_interface_id
+    #   The ID of the virtual interface that was tested.
+    #
+    # @option params [Array<String>] :bgp_peers
+    #   The BGP peers that were placed in the DOWN state during the virtual
+    #   interface failover test.
+    #
+    # @option params [String] :status
+    #   The status of the virtual interface failover test.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListVirtualInterfaceTestHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVirtualInterfaceTestHistoryResponse#virtual_interface_test_history #virtual_interface_test_history} => Array&lt;Types::VirtualInterfaceTestHistory&gt;
+    #   * {Types::ListVirtualInterfaceTestHistoryResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_virtual_interface_test_history({
+    #     test_id: "TestId",
+    #     virtual_interface_id: "VirtualInterfaceId",
+    #     bgp_peers: ["BGPPeerId"],
+    #     status: "FailureTestHistoryStatus",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_interface_test_history #=> Array
+    #   resp.virtual_interface_test_history[0].test_id #=> String
+    #   resp.virtual_interface_test_history[0].virtual_interface_id #=> String
+    #   resp.virtual_interface_test_history[0].bgp_peers #=> Array
+    #   resp.virtual_interface_test_history[0].bgp_peers[0] #=> String
+    #   resp.virtual_interface_test_history[0].status #=> String
+    #   resp.virtual_interface_test_history[0].owner_account #=> String
+    #   resp.virtual_interface_test_history[0].test_duration_in_minutes #=> Integer
+    #   resp.virtual_interface_test_history[0].start_time #=> Time
+    #   resp.virtual_interface_test_history[0].end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListVirtualInterfaceTestHistory AWS API Documentation
+    #
+    # @overload list_virtual_interface_test_history(params = {})
+    # @param [Hash] params ({})
+    def list_virtual_interface_test_history(params = {}, options = {})
+      req = build_request(:list_virtual_interface_test_history, params)
+      req.send_request(options)
+    end
+
+    # Starts the virtual interface failover test that verifies your
+    # configuration meets your resiliency requirements by placing the BGP
+    # peering session in the DOWN state. You can then send traffic to verify
+    # that there are no outages.
+    #
+    # You can run the test on public, private, transit, and hosted virtual
+    # interfaces.
+    #
+    # You can use [ListVirtualInterfaceTestHistory][1] to view the virtual
+    # interface test history.
+    #
+    # If you need to stop the test before the test interval completes, use
+    # [StopBgpFailoverTest][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_ListVirtualInterfaceTestHistory.html
+    # [2]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_StopBgpFailoverTest.html
+    #
+    # @option params [required, String] :virtual_interface_id
+    #   The ID of the virtual interface you want to test.
+    #
+    # @option params [Array<String>] :bgp_peers
+    #   The BGP peers to place in the DOWN state.
+    #
+    # @option params [Integer] :test_duration_in_minutes
+    #   The time in minutes that the virtual interface failover test will
+    #   last.
+    #
+    #   Maximum value: 180 minutes (3 hours).
+    #
+    #   Default: 180 minutes (3 hours).
+    #
+    # @return [Types::StartBgpFailoverTestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartBgpFailoverTestResponse#virtual_interface_test #virtual_interface_test} => Types::VirtualInterfaceTestHistory
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_bgp_failover_test({
+    #     virtual_interface_id: "VirtualInterfaceId", # required
+    #     bgp_peers: ["BGPPeerId"],
+    #     test_duration_in_minutes: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_interface_test.test_id #=> String
+    #   resp.virtual_interface_test.virtual_interface_id #=> String
+    #   resp.virtual_interface_test.bgp_peers #=> Array
+    #   resp.virtual_interface_test.bgp_peers[0] #=> String
+    #   resp.virtual_interface_test.status #=> String
+    #   resp.virtual_interface_test.owner_account #=> String
+    #   resp.virtual_interface_test.test_duration_in_minutes #=> Integer
+    #   resp.virtual_interface_test.start_time #=> Time
+    #   resp.virtual_interface_test.end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/StartBgpFailoverTest AWS API Documentation
+    #
+    # @overload start_bgp_failover_test(params = {})
+    # @param [Hash] params ({})
+    def start_bgp_failover_test(params = {}, options = {})
+      req = build_request(:start_bgp_failover_test, params)
+      req.send_request(options)
+    end
+
+    # Stops the virtual interface failover test.
+    #
+    # @option params [required, String] :virtual_interface_id
+    #   The ID of the virtual interface you no longer want to test.
+    #
+    # @return [Types::StopBgpFailoverTestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopBgpFailoverTestResponse#virtual_interface_test #virtual_interface_test} => Types::VirtualInterfaceTestHistory
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_bgp_failover_test({
+    #     virtual_interface_id: "VirtualInterfaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_interface_test.test_id #=> String
+    #   resp.virtual_interface_test.virtual_interface_id #=> String
+    #   resp.virtual_interface_test.bgp_peers #=> Array
+    #   resp.virtual_interface_test.bgp_peers[0] #=> String
+    #   resp.virtual_interface_test.status #=> String
+    #   resp.virtual_interface_test.owner_account #=> String
+    #   resp.virtual_interface_test.test_duration_in_minutes #=> Integer
+    #   resp.virtual_interface_test.start_time #=> Time
+    #   resp.virtual_interface_test.end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/StopBgpFailoverTest AWS API Documentation
+    #
+    # @overload stop_bgp_failover_test(params = {})
+    # @param [Hash] params ({})
+    def stop_bgp_failover_test(params = {}, options = {})
+      req = build_request(:stop_bgp_failover_test, params)
       req.send_request(options)
     end
 
@@ -2807,6 +3864,67 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Updates the specified attributes of the Direct Connect gateway
+    # association.
+    #
+    # Add or remove prefixes from the association.
+    #
+    # @option params [String] :association_id
+    #   The ID of the Direct Connect gateway association.
+    #
+    # @option params [Array<Types::RouteFilterPrefix>] :add_allowed_prefixes_to_direct_connect_gateway
+    #   The Amazon VPC prefixes to advertise to the Direct Connect gateway.
+    #
+    # @option params [Array<Types::RouteFilterPrefix>] :remove_allowed_prefixes_to_direct_connect_gateway
+    #   The Amazon VPC prefixes to no longer advertise to the Direct Connect
+    #   gateway.
+    #
+    # @return [Types::UpdateDirectConnectGatewayAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDirectConnectGatewayAssociationResult#direct_connect_gateway_association #direct_connect_gateway_association} => Types::DirectConnectGatewayAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_direct_connect_gateway_association({
+    #     association_id: "DirectConnectGatewayAssociationId",
+    #     add_allowed_prefixes_to_direct_connect_gateway: [
+    #       {
+    #         cidr: "CIDR",
+    #       },
+    #     ],
+    #     remove_allowed_prefixes_to_direct_connect_gateway: [
+    #       {
+    #         cidr: "CIDR",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.direct_connect_gateway_association.direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway_association.direct_connect_gateway_owner_account #=> String
+    #   resp.direct_connect_gateway_association.association_state #=> String, one of "associating", "associated", "disassociating", "disassociated", "updating"
+    #   resp.direct_connect_gateway_association.state_change_error #=> String
+    #   resp.direct_connect_gateway_association.associated_gateway.id #=> String
+    #   resp.direct_connect_gateway_association.associated_gateway.type #=> String, one of "virtualPrivateGateway", "transitGateway"
+    #   resp.direct_connect_gateway_association.associated_gateway.owner_account #=> String
+    #   resp.direct_connect_gateway_association.associated_gateway.region #=> String
+    #   resp.direct_connect_gateway_association.association_id #=> String
+    #   resp.direct_connect_gateway_association.allowed_prefixes_to_direct_connect_gateway #=> Array
+    #   resp.direct_connect_gateway_association.allowed_prefixes_to_direct_connect_gateway[0].cidr #=> String
+    #   resp.direct_connect_gateway_association.virtual_gateway_id #=> String
+    #   resp.direct_connect_gateway_association.virtual_gateway_region #=> String
+    #   resp.direct_connect_gateway_association.virtual_gateway_owner_account #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateDirectConnectGatewayAssociation AWS API Documentation
+    #
+    # @overload update_direct_connect_gateway_association(params = {})
+    # @param [Hash] params ({})
+    def update_direct_connect_gateway_association(params = {}, options = {})
+      req = build_request(:update_direct_connect_gateway_association, params)
+      req.send_request(options)
+    end
+
     # Updates the attributes of the specified link aggregation group (LAG).
     #
     # You can update the following attributes:
@@ -2851,6 +3969,8 @@ module Aws::DirectConnect
     #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
     #   * {Types::Lag#jumbo_frame_capable #jumbo_frame_capable} => Boolean
     #   * {Types::Lag#has_logical_redundancy #has_logical_redundancy} => String
+    #   * {Types::Lag#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Lag#provider_name #provider_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2867,7 +3987,7 @@ module Aws::DirectConnect
     #   resp.lag_id #=> String
     #   resp.owner_account #=> String
     #   resp.lag_name #=> String
-    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #   resp.location #=> String
     #   resp.region #=> String
     #   resp.minimum_links #=> Integer
@@ -2877,7 +3997,7 @@ module Aws::DirectConnect
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
     #   resp.connections[0].connection_name #=> String
-    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.connections[0].region #=> String
     #   resp.connections[0].location #=> String
     #   resp.connections[0].bandwidth #=> String
@@ -2889,9 +4009,17 @@ module Aws::DirectConnect
     #   resp.connections[0].jumbo_frame_capable #=> Boolean
     #   resp.connections[0].aws_device_v2 #=> String
     #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
+    #   resp.connections[0].provider_name #=> String
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLag AWS API Documentation
     #
@@ -2911,7 +4039,7 @@ module Aws::DirectConnect
     # network connectivity for all virtual interfaces associated with the
     # connection for up to 30 seconds. To check whether your connection
     # supports jumbo frames, call DescribeConnections. To check whether your
-    # virtual interface supports jumbo frames, call
+    # virtual q interface supports jumbo frames, call
     # DescribeVirtualInterfaces.
     #
     # @option params [required, String] :virtual_interface_id
@@ -2946,6 +4074,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #   * {Types::VirtualInterface#region #region} => String
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
+    #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2969,7 +4098,7 @@ module Aws::DirectConnect
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
     #   resp.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.customer_router_config #=> String
     #   resp.mtu #=> Integer
     #   resp.jumbo_frame_capable #=> Boolean
@@ -2985,10 +4114,13 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].amazon_address #=> String
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateVirtualInterfaceAttributes AWS API Documentation
     #
@@ -3012,7 +4144,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.31.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

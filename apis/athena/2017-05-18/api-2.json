@@ -38,6 +38,19 @@
         {"shape":"InvalidRequestException"}
       ]
     },
+    "CreateDataCatalog":{
+      "name":"CreateDataCatalog",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateDataCatalogInput"},
+      "output":{"shape":"CreateDataCatalogOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ]
+    },
     "CreateNamedQuery":{
       "name":"CreateNamedQuery",
       "http":{
@@ -52,6 +65,32 @@
       ],
       "idempotent":true
     },
+    "CreateWorkGroup":{
+      "name":"CreateWorkGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateWorkGroupInput"},
+      "output":{"shape":"CreateWorkGroupOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ]
+    },
+    "DeleteDataCatalog":{
+      "name":"DeleteDataCatalog",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteDataCatalogInput"},
+      "output":{"shape":"DeleteDataCatalogOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ]
+    },
     "DeleteNamedQuery":{
       "name":"DeleteNamedQuery",
       "http":{
@@ -65,6 +104,47 @@
         {"shape":"InvalidRequestException"}
       ],
       "idempotent":true
+    },
+    "DeleteWorkGroup":{
+      "name":"DeleteWorkGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteWorkGroupInput"},
+      "output":{"shape":"DeleteWorkGroupOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ],
+      "idempotent":true
+    },
+    "GetDataCatalog":{
+      "name":"GetDataCatalog",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDataCatalogInput"},
+      "output":{"shape":"GetDataCatalogOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ]
+    },
+    "GetDatabase":{
+      "name":"GetDatabase",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDatabaseInput"},
+      "output":{"shape":"GetDatabaseOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"MetadataException"}
+      ]
     },
     "GetNamedQuery":{
       "name":"GetNamedQuery",
@@ -105,6 +185,60 @@
         {"shape":"InvalidRequestException"}
       ]
     },
+    "GetTableMetadata":{
+      "name":"GetTableMetadata",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetTableMetadataInput"},
+      "output":{"shape":"GetTableMetadataOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"MetadataException"}
+      ]
+    },
+    "GetWorkGroup":{
+      "name":"GetWorkGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetWorkGroupInput"},
+      "output":{"shape":"GetWorkGroupOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ]
+    },
+    "ListDataCatalogs":{
+      "name":"ListDataCatalogs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListDataCatalogsInput"},
+      "output":{"shape":"ListDataCatalogsOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ]
+    },
+    "ListDatabases":{
+      "name":"ListDatabases",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListDatabasesInput"},
+      "output":{"shape":"ListDatabasesOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"MetadataException"}
+      ]
+    },
     "ListNamedQueries":{
       "name":"ListNamedQueries",
       "http":{
@@ -126,6 +260,47 @@
       },
       "input":{"shape":"ListQueryExecutionsInput"},
       "output":{"shape":"ListQueryExecutionsOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ]
+    },
+    "ListTableMetadata":{
+      "name":"ListTableMetadata",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTableMetadataInput"},
+      "output":{"shape":"ListTableMetadataOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"MetadataException"}
+      ]
+    },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForResourceInput"},
+      "output":{"shape":"ListTagsForResourceOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "ListWorkGroups":{
+      "name":"ListWorkGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListWorkGroupsInput"},
+      "output":{"shape":"ListWorkGroupsOutput"},
       "errors":[
         {"shape":"InternalServerException"},
         {"shape":"InvalidRequestException"}
@@ -159,9 +334,68 @@
         {"shape":"InvalidRequestException"}
       ],
       "idempotent":true
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagResourceInput"},
+      "output":{"shape":"TagResourceOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagResourceInput"},
+      "output":{"shape":"UntagResourceOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "UpdateDataCatalog":{
+      "name":"UpdateDataCatalog",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateDataCatalogInput"},
+      "output":{"shape":"UpdateDataCatalogOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ]
+    },
+    "UpdateWorkGroup":{
+      "name":"UpdateWorkGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateWorkGroupInput"},
+      "output":{"shape":"UpdateWorkGroupOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"InvalidRequestException"}
+      ]
     }
   },
   "shapes":{
+    "AmazonResourceName":{
+      "type":"string",
+      "max":1011,
+      "min":1
+    },
     "BatchGetNamedQueryInput":{
       "type":"structure",
       "required":["NamedQueryIds"],
@@ -191,6 +425,26 @@
       }
     },
     "Boolean":{"type":"boolean"},
+    "BoxedBoolean":{"type":"boolean"},
+    "BytesScannedCutoffValue":{
+      "type":"long",
+      "min":10000000
+    },
+    "CatalogNameString":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "Column":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"NameString"},
+        "Type":{"shape":"TypeString"},
+        "Comment":{"shape":"CommentString"}
+      }
+    },
     "ColumnInfo":{
       "type":"structure",
       "required":[
@@ -214,6 +468,10 @@
       "type":"list",
       "member":{"shape":"ColumnInfo"}
     },
+    "ColumnList":{
+      "type":"list",
+      "member":{"shape":"Column"}
+    },
     "ColumnNullable":{
       "type":"string",
       "enum":[
@@ -221,6 +479,31 @@
         "NULLABLE",
         "UNKNOWN"
       ]
+    },
+    "CommentString":{
+      "type":"string",
+      "max":255,
+      "min":0,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "CreateDataCatalogInput":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Type"
+      ],
+      "members":{
+        "Name":{"shape":"CatalogNameString"},
+        "Type":{"shape":"DataCatalogType"},
+        "Description":{"shape":"DescriptionString"},
+        "Parameters":{"shape":"ParametersMap"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "CreateDataCatalogOutput":{
+      "type":"structure",
+      "members":{
+      }
     },
     "CreateNamedQueryInput":{
       "type":"structure",
@@ -237,7 +520,8 @@
         "ClientRequestToken":{
           "shape":"IdempotencyToken",
           "idempotencyToken":true
-        }
+        },
+        "WorkGroup":{"shape":"WorkGroupName"}
       }
     },
     "CreateNamedQueryOutput":{
@@ -246,9 +530,69 @@
         "NamedQueryId":{"shape":"NamedQueryId"}
       }
     },
+    "CreateWorkGroupInput":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"WorkGroupName"},
+        "Configuration":{"shape":"WorkGroupConfiguration"},
+        "Description":{"shape":"WorkGroupDescriptionString"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "CreateWorkGroupOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DataCatalog":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Type"
+      ],
+      "members":{
+        "Name":{"shape":"CatalogNameString"},
+        "Description":{"shape":"DescriptionString"},
+        "Type":{"shape":"DataCatalogType"},
+        "Parameters":{"shape":"ParametersMap"}
+      }
+    },
+    "DataCatalogSummary":{
+      "type":"structure",
+      "members":{
+        "CatalogName":{"shape":"CatalogNameString"},
+        "Type":{"shape":"DataCatalogType"}
+      }
+    },
+    "DataCatalogSummaryList":{
+      "type":"list",
+      "member":{"shape":"DataCatalogSummary"}
+    },
+    "DataCatalogType":{
+      "type":"string",
+      "enum":[
+        "LAMBDA",
+        "GLUE",
+        "HIVE"
+      ]
+    },
+    "Database":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"NameString"},
+        "Description":{"shape":"DescriptionString"},
+        "Parameters":{"shape":"ParametersMap"}
+      }
+    },
+    "DatabaseList":{
+      "type":"list",
+      "member":{"shape":"Database"}
+    },
     "DatabaseString":{
       "type":"string",
-      "max":32,
+      "max":255,
       "min":1
     },
     "Date":{"type":"timestamp"},
@@ -256,6 +600,18 @@
       "type":"structure",
       "members":{
         "VarCharValue":{"shape":"datumString"}
+      }
+    },
+    "DeleteDataCatalogInput":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"CatalogNameString"}
+      }
+    },
+    "DeleteDataCatalogOutput":{
+      "type":"structure",
+      "members":{
       }
     },
     "DeleteNamedQueryInput":{
@@ -269,6 +625,19 @@
       }
     },
     "DeleteNamedQueryOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteWorkGroupInput":{
+      "type":"structure",
+      "required":["WorkGroup"],
+      "members":{
+        "WorkGroup":{"shape":"WorkGroupName"},
+        "RecursiveDeleteOption":{"shape":"BoxedBoolean"}
+      }
+    },
+    "DeleteWorkGroupOutput":{
       "type":"structure",
       "members":{
       }
@@ -300,6 +669,41 @@
       "min":1
     },
     "ErrorMessage":{"type":"string"},
+    "ExpressionString":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
+    "GetDataCatalogInput":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"CatalogNameString"}
+      }
+    },
+    "GetDataCatalogOutput":{
+      "type":"structure",
+      "members":{
+        "DataCatalog":{"shape":"DataCatalog"}
+      }
+    },
+    "GetDatabaseInput":{
+      "type":"structure",
+      "required":[
+        "CatalogName",
+        "DatabaseName"
+      ],
+      "members":{
+        "CatalogName":{"shape":"CatalogNameString"},
+        "DatabaseName":{"shape":"NameString"}
+      }
+    },
+    "GetDatabaseOutput":{
+      "type":"structure",
+      "members":{
+        "Database":{"shape":"Database"}
+      }
+    },
     "GetNamedQueryInput":{
       "type":"structure",
       "required":["NamedQueryId"],
@@ -343,6 +747,38 @@
         "NextToken":{"shape":"Token"}
       }
     },
+    "GetTableMetadataInput":{
+      "type":"structure",
+      "required":[
+        "CatalogName",
+        "DatabaseName",
+        "TableName"
+      ],
+      "members":{
+        "CatalogName":{"shape":"CatalogNameString"},
+        "DatabaseName":{"shape":"NameString"},
+        "TableName":{"shape":"NameString"}
+      }
+    },
+    "GetTableMetadataOutput":{
+      "type":"structure",
+      "members":{
+        "TableMetadata":{"shape":"TableMetadata"}
+      }
+    },
+    "GetWorkGroupInput":{
+      "type":"structure",
+      "required":["WorkGroup"],
+      "members":{
+        "WorkGroup":{"shape":"WorkGroupName"}
+      }
+    },
+    "GetWorkGroupOutput":{
+      "type":"structure",
+      "members":{
+        "WorkGroup":{"shape":"WorkGroup"}
+      }
+    },
     "IdempotencyToken":{
       "type":"string",
       "max":128,
@@ -365,11 +801,48 @@
       },
       "exception":true
     },
+    "KeyString":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "ListDataCatalogsInput":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"Token"},
+        "MaxResults":{"shape":"MaxDataCatalogsCount"}
+      }
+    },
+    "ListDataCatalogsOutput":{
+      "type":"structure",
+      "members":{
+        "DataCatalogsSummary":{"shape":"DataCatalogSummaryList"},
+        "NextToken":{"shape":"Token"}
+      }
+    },
+    "ListDatabasesInput":{
+      "type":"structure",
+      "required":["CatalogName"],
+      "members":{
+        "CatalogName":{"shape":"CatalogNameString"},
+        "NextToken":{"shape":"Token"},
+        "MaxResults":{"shape":"MaxDatabasesCount"}
+      }
+    },
+    "ListDatabasesOutput":{
+      "type":"structure",
+      "members":{
+        "DatabaseList":{"shape":"DatabaseList"},
+        "NextToken":{"shape":"Token"}
+      }
+    },
     "ListNamedQueriesInput":{
       "type":"structure",
       "members":{
         "NextToken":{"shape":"Token"},
-        "MaxResults":{"shape":"MaxNamedQueriesCount"}
+        "MaxResults":{"shape":"MaxNamedQueriesCount"},
+        "WorkGroup":{"shape":"WorkGroupName"}
       }
     },
     "ListNamedQueriesOutput":{
@@ -383,7 +856,8 @@
       "type":"structure",
       "members":{
         "NextToken":{"shape":"Token"},
-        "MaxResults":{"shape":"MaxQueryExecutionsCount"}
+        "MaxResults":{"shape":"MaxQueryExecutionsCount"},
+        "WorkGroup":{"shape":"WorkGroupName"}
       }
     },
     "ListQueryExecutionsOutput":{
@@ -393,7 +867,70 @@
         "NextToken":{"shape":"Token"}
       }
     },
+    "ListTableMetadataInput":{
+      "type":"structure",
+      "required":[
+        "CatalogName",
+        "DatabaseName"
+      ],
+      "members":{
+        "CatalogName":{"shape":"CatalogNameString"},
+        "DatabaseName":{"shape":"NameString"},
+        "Expression":{"shape":"ExpressionString"},
+        "NextToken":{"shape":"Token"},
+        "MaxResults":{"shape":"MaxTableMetadataCount"}
+      }
+    },
+    "ListTableMetadataOutput":{
+      "type":"structure",
+      "members":{
+        "TableMetadataList":{"shape":"TableMetadataList"},
+        "NextToken":{"shape":"Token"}
+      }
+    },
+    "ListTagsForResourceInput":{
+      "type":"structure",
+      "required":["ResourceARN"],
+      "members":{
+        "ResourceARN":{"shape":"AmazonResourceName"},
+        "NextToken":{"shape":"Token"},
+        "MaxResults":{"shape":"MaxTagsCount"}
+      }
+    },
+    "ListTagsForResourceOutput":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"TagList"},
+        "NextToken":{"shape":"Token"}
+      }
+    },
+    "ListWorkGroupsInput":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"Token"},
+        "MaxResults":{"shape":"MaxWorkGroupsCount"}
+      }
+    },
+    "ListWorkGroupsOutput":{
+      "type":"structure",
+      "members":{
+        "WorkGroups":{"shape":"WorkGroupsList"},
+        "NextToken":{"shape":"Token"}
+      }
+    },
     "Long":{"type":"long"},
+    "MaxDataCatalogsCount":{
+      "type":"integer",
+      "box":true,
+      "max":50,
+      "min":2
+    },
+    "MaxDatabasesCount":{
+      "type":"integer",
+      "box":true,
+      "max":50,
+      "min":1
+    },
     "MaxNamedQueriesCount":{
       "type":"integer",
       "box":true,
@@ -410,7 +947,31 @@
       "type":"integer",
       "box":true,
       "max":1000,
-      "min":0
+      "min":1
+    },
+    "MaxTableMetadataCount":{
+      "type":"integer",
+      "box":true,
+      "max":50,
+      "min":1
+    },
+    "MaxTagsCount":{
+      "type":"integer",
+      "box":true,
+      "min":75
+    },
+    "MaxWorkGroupsCount":{
+      "type":"integer",
+      "box":true,
+      "max":50,
+      "min":1
+    },
+    "MetadataException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
     },
     "NameString":{
       "type":"string",
@@ -429,7 +990,8 @@
         "Description":{"shape":"DescriptionString"},
         "Database":{"shape":"DatabaseString"},
         "QueryString":{"shape":"QueryString"},
-        "NamedQueryId":{"shape":"NamedQueryId"}
+        "NamedQueryId":{"shape":"NamedQueryId"},
+        "WorkGroup":{"shape":"WorkGroupName"}
       }
     },
     "NamedQueryId":{"type":"string"},
@@ -443,6 +1005,15 @@
       "type":"list",
       "member":{"shape":"NamedQuery"}
     },
+    "ParametersMap":{
+      "type":"map",
+      "key":{"shape":"KeyString"},
+      "value":{"shape":"ParametersMapValue"}
+    },
+    "ParametersMapValue":{
+      "type":"string",
+      "max":51200
+    },
     "QueryExecution":{
       "type":"structure",
       "members":{
@@ -452,13 +1023,15 @@
         "ResultConfiguration":{"shape":"ResultConfiguration"},
         "QueryExecutionContext":{"shape":"QueryExecutionContext"},
         "Status":{"shape":"QueryExecutionStatus"},
-        "Statistics":{"shape":"QueryExecutionStatistics"}
+        "Statistics":{"shape":"QueryExecutionStatistics"},
+        "WorkGroup":{"shape":"WorkGroupName"}
       }
     },
     "QueryExecutionContext":{
       "type":"structure",
       "members":{
-        "Database":{"shape":"DatabaseString"}
+        "Database":{"shape":"DatabaseString"},
+        "Catalog":{"shape":"CatalogNameString"}
       }
     },
     "QueryExecutionId":{"type":"string"},
@@ -486,7 +1059,12 @@
       "type":"structure",
       "members":{
         "EngineExecutionTimeInMillis":{"shape":"Long"},
-        "DataScannedInBytes":{"shape":"Long"}
+        "DataScannedInBytes":{"shape":"Long"},
+        "DataManifestLocation":{"shape":"String"},
+        "TotalExecutionTimeInMillis":{"shape":"Long"},
+        "QueryQueueTimeInMillis":{"shape":"Long"},
+        "QueryPlanningTimeInMillis":{"shape":"Long"},
+        "ServiceProcessingTimeInMillis":{"shape":"Long"}
       }
     },
     "QueryExecutionStatus":{
@@ -503,12 +1081,28 @@
       "max":262144,
       "min":1
     },
+    "ResourceNotFoundException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"},
+        "ResourceName":{"shape":"AmazonResourceName"}
+      },
+      "exception":true
+    },
     "ResultConfiguration":{
       "type":"structure",
-      "required":["OutputLocation"],
       "members":{
         "OutputLocation":{"shape":"String"},
         "EncryptionConfiguration":{"shape":"EncryptionConfiguration"}
+      }
+    },
+    "ResultConfigurationUpdates":{
+      "type":"structure",
+      "members":{
+        "OutputLocation":{"shape":"String"},
+        "RemoveOutputLocation":{"shape":"BoxedBoolean"},
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
+        "RemoveEncryptionConfiguration":{"shape":"BoxedBoolean"}
       }
     },
     "ResultSet":{
@@ -536,10 +1130,7 @@
     },
     "StartQueryExecutionInput":{
       "type":"structure",
-      "required":[
-        "QueryString",
-        "ResultConfiguration"
-      ],
+      "required":["QueryString"],
       "members":{
         "QueryString":{"shape":"QueryString"},
         "ClientRequestToken":{
@@ -547,7 +1138,8 @@
           "idempotencyToken":true
         },
         "QueryExecutionContext":{"shape":"QueryExecutionContext"},
-        "ResultConfiguration":{"shape":"ResultConfiguration"}
+        "ResultConfiguration":{"shape":"ResultConfiguration"},
+        "WorkGroup":{"shape":"WorkGroupName"}
       }
     },
     "StartQueryExecutionOutput":{
@@ -580,11 +1172,78 @@
       }
     },
     "String":{"type":"string"},
+    "TableMetadata":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"NameString"},
+        "CreateTime":{"shape":"Timestamp"},
+        "LastAccessTime":{"shape":"Timestamp"},
+        "TableType":{"shape":"TableTypeString"},
+        "Columns":{"shape":"ColumnList"},
+        "PartitionKeys":{"shape":"ColumnList"},
+        "Parameters":{"shape":"ParametersMap"}
+      }
+    },
+    "TableMetadataList":{
+      "type":"list",
+      "member":{"shape":"TableMetadata"}
+    },
+    "TableTypeString":{
+      "type":"string",
+      "max":255
+    },
+    "Tag":{
+      "type":"structure",
+      "members":{
+        "Key":{"shape":"TagKey"},
+        "Value":{"shape":"TagValue"}
+      }
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"}
+    },
+    "TagResourceInput":{
+      "type":"structure",
+      "required":[
+        "ResourceARN",
+        "Tags"
+      ],
+      "members":{
+        "ResourceARN":{"shape":"AmazonResourceName"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "TagResourceOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
     "ThrottleReason":{
       "type":"string",
       "enum":["CONCURRENT_QUERY_LIMIT_EXCEEDED"]
     },
-    "Token":{"type":"string"},
+    "Timestamp":{"type":"timestamp"},
+    "Token":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
     "TooManyRequestsException":{
       "type":"structure",
       "members":{
@@ -592,6 +1251,12 @@
         "Reason":{"shape":"ThrottleReason"}
       },
       "exception":true
+    },
+    "TypeString":{
+      "type":"string",
+      "max":4096,
+      "min":0,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
     },
     "UnprocessedNamedQueryId":{
       "type":"structure",
@@ -616,6 +1281,118 @@
     "UnprocessedQueryExecutionIdList":{
       "type":"list",
       "member":{"shape":"UnprocessedQueryExecutionId"}
+    },
+    "UntagResourceInput":{
+      "type":"structure",
+      "required":[
+        "ResourceARN",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceARN":{"shape":"AmazonResourceName"},
+        "TagKeys":{"shape":"TagKeyList"}
+      }
+    },
+    "UntagResourceOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateDataCatalogInput":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Type"
+      ],
+      "members":{
+        "Name":{"shape":"CatalogNameString"},
+        "Type":{"shape":"DataCatalogType"},
+        "Description":{"shape":"DescriptionString"},
+        "Parameters":{"shape":"ParametersMap"}
+      }
+    },
+    "UpdateDataCatalogOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateWorkGroupInput":{
+      "type":"structure",
+      "required":["WorkGroup"],
+      "members":{
+        "WorkGroup":{"shape":"WorkGroupName"},
+        "Description":{"shape":"WorkGroupDescriptionString"},
+        "ConfigurationUpdates":{"shape":"WorkGroupConfigurationUpdates"},
+        "State":{"shape":"WorkGroupState"}
+      }
+    },
+    "UpdateWorkGroupOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "WorkGroup":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"WorkGroupName"},
+        "State":{"shape":"WorkGroupState"},
+        "Configuration":{"shape":"WorkGroupConfiguration"},
+        "Description":{"shape":"WorkGroupDescriptionString"},
+        "CreationTime":{"shape":"Date"}
+      }
+    },
+    "WorkGroupConfiguration":{
+      "type":"structure",
+      "members":{
+        "ResultConfiguration":{"shape":"ResultConfiguration"},
+        "EnforceWorkGroupConfiguration":{"shape":"BoxedBoolean"},
+        "PublishCloudWatchMetricsEnabled":{"shape":"BoxedBoolean"},
+        "BytesScannedCutoffPerQuery":{"shape":"BytesScannedCutoffValue"},
+        "RequesterPaysEnabled":{"shape":"BoxedBoolean"}
+      }
+    },
+    "WorkGroupConfigurationUpdates":{
+      "type":"structure",
+      "members":{
+        "EnforceWorkGroupConfiguration":{"shape":"BoxedBoolean"},
+        "ResultConfigurationUpdates":{"shape":"ResultConfigurationUpdates"},
+        "PublishCloudWatchMetricsEnabled":{"shape":"BoxedBoolean"},
+        "BytesScannedCutoffPerQuery":{"shape":"BytesScannedCutoffValue"},
+        "RemoveBytesScannedCutoffPerQuery":{"shape":"BoxedBoolean"},
+        "RequesterPaysEnabled":{"shape":"BoxedBoolean"}
+      }
+    },
+    "WorkGroupDescriptionString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "WorkGroupName":{
+      "type":"string",
+      "pattern":"[a-zA-Z0-9._-]{1,128}"
+    },
+    "WorkGroupState":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "WorkGroupSummary":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"WorkGroupName"},
+        "State":{"shape":"WorkGroupState"},
+        "Description":{"shape":"WorkGroupDescriptionString"},
+        "CreationTime":{"shape":"Date"}
+      }
+    },
+    "WorkGroupsList":{
+      "type":"list",
+      "member":{"shape":"WorkGroupSummary"},
+      "max":50,
+      "min":0
     },
     "datumList":{
       "type":"list",

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -7,6 +9,19 @@
 
 module Aws::ResourceGroups
   module Types
+
+    # The request does not comply with validation rules that are defined for
+    # the request parameters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass CreateGroupInput
     #   data as a hash:
@@ -110,6 +125,18 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # The caller is not authorized to make the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetGroupInput
     #   data as a hash:
     #
@@ -176,7 +203,7 @@ module Aws::ResourceGroups
     #       }
     #
     # @!attribute [rw] arn
-    #   The ARN of the resource for which you want a list of tags. The
+    #   The ARN of the resource group for which you want a list of tags. The
     #   resource must exist within the account you are using.
     #   @return [String]
     #
@@ -188,11 +215,11 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the tagged resource.
+    #   The ARN of the tagged resource group.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags associated with the specified resource.
+    #   The tags associated with the specified resource group.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetTagsOutput AWS API Documentation
@@ -290,6 +317,18 @@ module Aws::ResourceGroups
     class GroupQuery < Struct.new(
       :group_name,
       :resource_query)
+      include Aws::Structure
+    end
+
+    # An internal error occurred while processing the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -440,6 +479,31 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # The request uses an HTTP method which is not allowed for the specified
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/MethodNotAllowedException AWS API Documentation
+    #
+    class MethodNotAllowedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more resources specified in the request do not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A two-part error structure that can occur in `ListGroupResources` or
     # `SearchResources` operations on CloudFormation stack-based queries.
     # The error occurs if the CloudFormation stack on which the query is
@@ -545,12 +609,12 @@ module Aws::ResourceGroups
     #   The results of this query might include the following.
     #
     #   * An EC2 instance that has the following two tags:
-    #     `\{"Key":"Stage","Values":["Deploy"]\}`, and
-    #     `\{"Key":"Version","Values":["2"]\}`
+    #     `\{"Key":"Stage","Value":"Deploy"\}`, and
+    #     `\{"Key":"Version","Value":"2"\}`
     #
     #   * An S3 bucket that has the following two tags:
-    #     \\\{"Key":"Stage","Values":\["Test","Deploy"\]\\}, and
-    #     \\\{"Key":"Version","Values":\["1"\]\\}
+    #     \\\{"Key":"Stage","Value":"Test"\\}, and
+    #     \\\{"Key":"Version","Value":"1"\\}
     #
     #   The query would not return the following results, however. The
     #   following EC2 instance does not have all tag keys specified in the
@@ -559,11 +623,11 @@ module Aws::ResourceGroups
     #   values in the filter.
     #
     #   * An EC2 instance that has only the following tag:
-    #     `\{"Key":"Stage","Values":["Deploy"]\}`.
+    #     `\{"Key":"Stage","Value":"Deploy"\}`.
     #
     #   * An RDS database that has the following two tags:
-    #     `\{"Key":"Stage","Values":["Archived"]\}`, and
-    #     `\{"Key":"Version","Values":["4"]\}`
+    #     `\{"Key":"Stage","Value":"Archived"\}`, and
+    #     `\{"Key":"Version","Value":"4"\}`
     #
     #   <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that
     #   lets you specify a CloudFormation stack ARN.
@@ -692,6 +756,31 @@ module Aws::ResourceGroups
     class TagOutput < Struct.new(
       :arn,
       :tags)
+      include Aws::Structure
+    end
+
+    # The caller has exceeded throttling limits.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request has not been applied because it lacks valid authentication
+    # credentials for the target resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

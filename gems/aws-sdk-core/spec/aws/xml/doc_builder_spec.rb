@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../spec_helper'
 require 'ostruct'
 
@@ -5,7 +7,7 @@ module Aws
   module Xml
     describe DocBuilder do
 
-      let(:result) { '' }
+      let(:result) { String.new }
 
       let(:options) { { target: result, indent: '' } }
 

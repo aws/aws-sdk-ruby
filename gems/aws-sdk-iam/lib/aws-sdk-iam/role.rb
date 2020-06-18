@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IAM
+
   class Role
 
     extend Aws::Deprecations
@@ -21,6 +24,7 @@ module Aws::IAM
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -32,23 +36,23 @@ module Aws::IAM
     alias :role_name :name
 
     # The path to the role. For more information about paths, see [IAM
-    # Identifiers][1] in the *Using IAM* guide.
+    # Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
     end
 
     # The stable and unique string identifying the role. For more
-    # information about IDs, see [IAM Identifiers][1] in the *Using IAM*
-    # guide.
+    # information about IDs, see [IAM Identifiers][1] in the *IAM User
+    # Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def role_id
       data[:role_id]
@@ -60,7 +64,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def arn
       data[:arn]
@@ -89,20 +93,8 @@ module Aws::IAM
       data[:description]
     end
 
-    # A list of tags that are attached to the specified role. For more
-    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
-    # User Guide*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
-    # @return [Array<Types::Tag>]
-    def tags
-      data[:tags]
-    end
-
     # The maximum session duration (in seconds) for the specified role.
-    # Anyone who uses the AWS CLI or API to assume the role can specify the
+    # Anyone who uses the AWS CLI, or API to assume the role can specify the
     # duration using the optional `DurationSeconds` API parameter or
     # `duration-seconds` CLI parameter.
     # @return [Integer]
@@ -122,6 +114,34 @@ module Aws::IAM
     # @return [Types::AttachedPermissionsBoundary]
     def permissions_boundary
       data[:permissions_boundary]
+    end
+
+    # A list of tags that are attached to the specified role. For more
+    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
+    end
+
+    # Contains information about the last time that an IAM role was used.
+    # This includes the date and time and the Region in which the role was
+    # last used. Activity is only reported for the trailing 400 days. This
+    # period can be shorter if your Region began supporting these features
+    # within the last year. The role might have been used more than 400 days
+    # ago. For more information, see [Regions Where Data Is Tracked][1] in
+    # the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period
+    # @return [Types::RoleLastUsed]
+    def role_last_used
+      data[:role_last_used]
     end
 
     # @!endgroup
@@ -164,7 +184,8 @@ module Aws::IAM
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -177,13 +198,15 @@ module Aws::IAM
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -214,17 +237,16 @@ module Aws::IAM
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -270,7 +292,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def attach_policy(options = {})
       options = options.merge(role_name: @name)
@@ -303,7 +325,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def detach_policy(options = {})
       options = options.merge(role_name: @name)
@@ -332,11 +354,11 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   policies.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-secretsmanager/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     secrets_manager = Aws::SecretsManager::Client.new
+#     resp = secrets_manager.cancel_rotate_secret(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Secrets Manager all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Secrets Manager are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::SecretsManager::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Secrets Manager API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-secretsmanager/customizations'
 # @service
 module Aws::SecretsManager
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.37.1'
 
 end

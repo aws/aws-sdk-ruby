@@ -1,415 +1,424 @@
+# frozen_string_literal: true
+
 require_relative '../../spec_helper'
+require_relative '../../support/retry_errors_helper'
 
 module Aws
   module Plugins
     describe RetryErrors do
-
-      RetryErrorsSvc = ApiHelper.sample_service
-
       let(:client) { RetryErrorsSvc::Client.new(stub_responses: true) }
 
-      it 'defaults config.retry_limit to 3' do
-        expect(client.config.retry_limit).to eq(3)
+      it 'can configure retry_mode with shared config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:retry_mode).and_return('standard')
+        expect(client.config.retry_mode).to eq('standard')
       end
 
-      it 'defaults config.retry_max_delay to 0' do
-        config = Seahorse::Client::Configuration.new
-        RetryErrors.new.add_options(config)
-        config = config.build!
-        expect(config.retry_max_delay).to eq(0)
-      end
-      
-      it 'defaults config.retry_base_delay to 0.3' do
-        config = Seahorse::Client::Configuration.new
-        RetryErrors.new.add_options(config)
-        config = config.build!
-        expect(config.retry_base_delay).to eq(0.3)
-      end
-      
-      it 'defaults config.retry_jitter to :none' do
-        config = Seahorse::Client::Configuration.new
-        RetryErrors.new.add_options(config)
-        config = config.build!
-        expect(config.retry_jitter).to eq(:none)
+      it 'can configure retry_mode using ENV with precedence over config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:retry_mode).and_return('standard')
+        ENV['AWS_RETRY_MODE'] = 'adaptive'
+        expect(client.config.retry_mode).to eq('adaptive')
       end
 
-      describe 'ErrorInspector' do
-
-        def inspector(error, http_status_code = 404)
-          RetryErrors::ErrorInspector.new(error, http_status_code)
-        end
-
-        describe '#expired_credentials?' do
-
-          it 'returns true if the error code is InvalidClientTokenId' do
-            error = RetryErrorsSvc::Errors::InvalidClientTokenId.new(nil,nil)
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          it 'returns true if the error code is UnrecognizedClientException' do
-            error = RetryErrorsSvc::Errors::UnrecognizedClientException.new(nil,nil)
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          it 'returns true if the error code is InvalidAccessKeyId' do
-            error = RetryErrorsSvc::Errors::InvalidAccessKeyId.new(nil,nil)
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          it 'returns true if the error code is AuthFailure' do
-            error = RetryErrorsSvc::Errors::AuthFailure.new(nil,nil)
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          it 'returns true if the error code matches /expired/' do
-            error = RetryErrorsSvc::Errors::SomethingExpiredError.new(nil,nil)
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          it 'returns false for other errors' do
-            error = RetryErrorsSvc::Errors::SomeRandomError.new(nil,nil)
-            expect(inspector(error).expired_credentials?).to be(false)
-          end
-
-        end
-
-        describe '#throttling_error?' do
-
-          it 'returns true for Throttling' do
-            error = RetryErrorsSvc::Errors::Throttling.new(nil,nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for response status code 429' do
-            error = RetryErrorsSvc::Errors::SomeRandomError.new(nil,nil)
-            expect(inspector(error, 429).throttling_error?).to be(true)
-          end
-
-          it 'returns true for ThrottlingException' do
-            error = RetryErrorsSvc::Errors::ThrottlingException.new(nil,nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for RequestThrottled' do
-            error = RetryErrorsSvc::Errors::RequestThrottled.new(nil,nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for ProvisionedThroughputExceededException' do
-            error = RetryErrorsSvc::Errors::ProvisionedThroughputExceededException.new(nil,nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for RequestLimitExceeded' do
-            error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for BandwidthLimitExceeded' do
-            error = RetryErrorsSvc::Errors::BandwidthLimitExceeded.new(nil,nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for LimitExceededException' do
-            error = RetryErrorsSvc::Errors::LimitExceededException.new(nil,nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for error codes that match /throttl/' do
-            error = RetryErrorsSvc::Errors::Throttled.new(nil,nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns false for other errors' do
-            error = RetryErrorsSvc::Errors::SomeRandomError.new(nil,nil)
-            expect(inspector(error).throttling_error?).to be(false)
-          end
-
-        end
-
-        describe '#checksum?' do
-
-          it 'returns true if the error extends Errors::ChecksumError' do
-            error = Errors::ChecksumError.new
-            expect(inspector(error).checksum?).to be(true)
-          end
-
-          it 'returns true if the error is a crc32 error' do
-            error = RetryErrorsSvc::Errors::CRC32CheckFailed.new(nil,nil)
-            expect(inspector(error).checksum?).to be(true)
-          end
-
-          it 'returns false if the error does not exend ChecksumError' do
-            error = double('error')
-            expect(inspector(error).checksum?).to be(false)
-          end
-
-        end
-
-        describe '#server?' do
-
-          it 'returns true if the error is a 500 level error' do
-            error = RetryErrorsSvc::Errors::RandomError.new(nil,nil)
-            expect(inspector(error, 500).server?).to be(true)
-          end
-
-          it 'returns false if the error is not a 500 level error' do
-            error = RetryErrorsSvc::Errors::RandomError.new(nil,nil)
-            expect(inspector(error, 404).server?).to be(false)
-          end
-
-        end
-
-        describe '#networking?' do
-
-          it 'returns true if the error code is RequestTimeout' do
-            error = RetryErrorsSvc::Errors::RequestTimeout.new(nil,nil)
-            expect(inspector(error).networking?).to be(true)
-          end
-
-          it 'does not assume a networking error for 0 status code' do
-            error = double('error')
-            expect(inspector(error, 0).networking?).to be(false)
-          end
-
-          it 'returns false if the http status code is not 0' do
-            error = double('error')
-            expect(inspector(error, 307).networking?).to be(false)
-          end
-
-          it 'returns true if the error is wrapped in a NetworkingError' do
-            error = StandardError.new('oops')
-            error = Seahorse::Client::NetworkingError.new(error)
-            expect(inspector(error, 200).networking?).to be(true)
-          end
-
-        end
-
+      it 'raises when retry_mode is not legacy, standard, or adaptive' do
+        ENV['AWS_RETRY_MODE'] = 'peccy'
+        expect { client }.to raise_error(ArgumentError)
       end
 
-      describe 'Handler' do
+      it 'uses the handler when retry_mode is standard' do
+        client = RetryErrorsSvc::Client.new(
+          retry_mode: 'standard', region: 'us-west-2'
+        )
+        expect(client.handlers.entries.map(&:handler_class)).
+          to include(RetryErrors::Handler)
+      end
 
-        let(:credentials) { Credentials.new('akid', 'secret') }
+      it 'uses the handler when retry_mode is adaptive' do
+        client = RetryErrorsSvc::Client.new(
+          retry_mode: 'adaptive', region: 'us-west-2'
+        )
+        expect(client.handlers.entries.map(&:handler_class))
+          .to include(RetryErrors::Handler)
+      end
 
-        let(:cache) { EndpointCache.new }
+      it 'defaults config.max_attempts to 3' do
+        expect(client.config.max_attempts).to eq(3)
+      end
 
-        let(:api) { Seahorse::Model::Api.new }
+      it 'can configure max_attempts with shared config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:max_attempts).and_return(5)
+        expect(client.config.max_attempts).to eq(5)
+      end
 
-        let(:config) {
-          cfg = Seahorse::Client::Configuration.new
-          cfg.add_option(:credentials, credentials)
-          cfg.add_option(:endpoint_cache, cache)
-          cfg.add_option(:api, api)
-          RetryErrors.new.add_options(cfg)
-          cfg.build!
-        }
+      it 'can configure max_attempts using ENV with precedence over config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:max_attempts).and_return(3)
+        ENV['AWS_MAX_ATTEMPTS'] = '1'
+        expect(client.config.max_attempts).to eq(1)
+      end
 
-        let(:operation) { Seahorse::Model::Operation.new }
+      it 'raises when max_attempts is not an integer' do
+        ENV['AWS_MAX_ATTEMPTS'] = 'string'
+        expect { client }.to raise_error(ArgumentError)
+      end
 
-        let(:resp) { Seahorse::Client::Response.new }
+      it 'raises when max_attempts is not >= 0' do
+        ENV['AWS_MAX_ATTEMPTS'] = '-1'
+        expect { client }.to raise_error(ArgumentError)
+      end
 
-        let(:handler) { RetryErrors::Handler.new }
+      it 'defaults config.adaptive_retry_wait_to_fill to true' do
+        expect(client.config.adaptive_retry_wait_to_fill).to eq(true)
+      end
 
+      it 'can configure adaptive_retry_wait_to_fill using ENV with precedence over config' do
+        ENV['AWS_ADAPTIVE_RETRY_WAIT_TO_FILL'] = 'false'
+        expect(client.config.adaptive_retry_wait_to_fill).to eq(false)
+      end
+
+      it 'can configure adaptive_retry_wait_to_fill with shared config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:adaptive_retry_wait_to_fill).and_return('false')
+        expect(client.config.adaptive_retry_wait_to_fill).to eq(false)
+      end
+
+      it 'defaults config.correct_clock_skew to true' do
+        expect(client.config.correct_clock_skew).to eq(true)
+      end
+
+      it 'can configure correct_clock_skew using ENV with precedence over config' do
+        ENV['AWS_CORRECT_CLOCK_SKEW'] = 'true'
+        expect(client.config.correct_clock_skew).to eq(true)
+      end
+
+      it 'can configure correct_clock_skew with shared config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:correct_clock_skew).and_return('true')
+        expect(client.config.correct_clock_skew).to eq(true)
+      end
+    end
+
+    describe RetryErrors::Handler do
+      let(:credentials) { Credentials.new('akid', 'secret') }
+
+      let(:cache) { EndpointCache.new }
+
+      let(:api) { Seahorse::Model::Api.new }
+
+      let(:config) do
+        cfg = Seahorse::Client::Configuration.new
+        cfg.add_option(:credentials, credentials)
+        cfg.add_option(:endpoint_cache, cache)
+        cfg.add_option(:api, api)
+        cfg.add_option(:profile, nil)
+        RetryErrors.new.add_options(cfg)
+        cfg.build!
+      end
+
+      let(:operation) { Seahorse::Model::Operation.new }
+
+      let(:resp) { Seahorse::Client::Response.new }
+
+      let(:handler) { RetryErrors::Handler.new }
+
+      let(:service_error) { RetryErrorsSvc::Errors::ServiceError.new(nil, nil) }
+
+      let(:endpoint) { 'http://example.com' }
+
+      before(:each) do
+        resp.context.config = config
+        operation.endpoint_discovery = {}
+        resp.context.operation = operation
+        resp.context.client =  Seahorse::Client::Base.new(
+          endpoint: endpoint
+        )
+      end
+
+      context 'standard mode' do
         before(:each) do
-          resp.context.config = config
-          operation.endpoint_discovery = {}
-          resp.context.operation = operation
-          resp.context.http_response.status_code = 400
+          config.retry_mode = 'standard'
+          allow(Kernel).to receive(:rand).and_return(1)
         end
 
-        def handle(send_handler = nil, &block)
-          allow(Kernel).to receive(:sleep)
-          handler.handler = send_handler || block
-          handler.call(resp.context)
+        it 'retry eventually succeeds' do
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 495, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 490, retries: 2, delay: 2 }
+            },
+            {
+              response: { status_code: 200, error: nil },
+              expect: { available_capacity: 495, retries: 2 }
+            } # success
+          ]
+
+          handle_with_retry(test_case_def)
         end
 
-        it 'does not retry responses that have no error' do
-          resp.error = nil
-          send_handler = double('send-handler')
-          expect(send_handler).to receive(:call).once.and_return(resp)
-          handle(send_handler)
+        it 'fails due to max attempts reached' do
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 495, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 490, retries: 2, delay: 2 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 490, retries: 2 }
+            } # failure
+          ]
+
+          handle_with_retry(test_case_def)
         end
 
-        it 'retries 3 times for a total of 4 attemps' do
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          send_handler = double('send-handler')
-          expect(send_handler).to receive(:call).
-            exactly(4).times.
-            with(resp.context).
-            and_return(resp)
-          handle(send_handler)
+        it 'fails due to retry quota reached after a single retry' do
+          config.retry_quota.instance_variable_set(:@available_capacity, 5)
+
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 0, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 0, retries: 1 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
         end
 
-        it 'backs off according to custom retry_backoff proc'  do
-          config.retry_backoff = lambda { |c| Kernel.sleep([0.4, 0.2, 1.7][c.retries]) }
-          expect(Kernel).to receive(:sleep).with(0.4).ordered
-          expect(Kernel).to receive(:sleep).with(0.2).ordered
-          expect(Kernel).to receive(:sleep).with(1.7).ordered
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          handle { |context| resp }
+        it 'does not retry if the retry quota is 0' do
+          config.retry_quota.instance_variable_set(:@available_capacity, 0)
+
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 0, retries: 0 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
         end
 
-        it 'backs off exponentially between each retry attempt' do
-          expect(Kernel).to receive(:sleep).with(0.3).ordered
-          expect(Kernel).to receive(:sleep).with(0.6).ordered
-          expect(Kernel).to receive(:sleep).with(1.2).ordered
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          handle { |context| resp }
+        it 'uses exponential backoff timing' do
+          config.max_attempts = 5
+
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 495, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 490, retries: 2, delay: 2 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 485, retries: 3, delay: 4 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 480, retries: 4, delay: 8 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 480, retries: 4 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
         end
 
-        it 'backs off exponentially between each retry attempt with custom :retry_base_delay' do
-          config.retry_base_delay = 1.0
-          expect(Kernel).to receive(:sleep).with(1.0).ordered
-          expect(Kernel).to receive(:sleep).with(2.0).ordered
-          expect(Kernel).to receive(:sleep).with(4.0).ordered
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          handle { |context| resp }
+        it 'does not exceed the max backoff time' do
+          config.max_attempts = 5
+          stub_const('Aws::Plugins::RetryErrors::Handler::MAX_BACKOFF', 3)
+
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 495, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 490, retries: 2, delay: 2 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 485, retries: 3, delay: 3 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 480, retries: 4, delay: 3 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 480, retries: 4 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
         end
 
-        it 'caps backoff delay to :retry_max_delay 'do
-          config.retry_max_delay = 4.0
-          config.retry_limit = 6
-          expect(Kernel).to receive(:sleep).with(0.3).ordered
-          expect(Kernel).to receive(:sleep).with(0.6).ordered
-          expect(Kernel).to receive(:sleep).with(1.2).ordered
-          expect(Kernel).to receive(:sleep).with(2.4).ordered
-          expect(Kernel).to receive(:sleep).with(4.0).ordered
-          expect(Kernel).to receive(:sleep).with(4.0).ordered
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          handle { |context| resp }
+        it 'corrects and retries clock skew errors' do
+          clock_skew_error = RetryErrorsSvc::Errors::RequestTimeTooSkewed
+                               .new(nil, nil)
+          test_case_def = [
+            {
+              response: { status_code: 500, error: clock_skew_error,
+                          clock_skew: 1000 },
+              expect: { retries: 1 }
+            },
+            {
+              response: { status_code: 200, error: nil },
+              expect: { retries: 1, clock_correction: 1000 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
         end
 
-        it 'randomises the backoff delay with :retry_jitter set to :full' do
-          config.retry_jitter = :full
-          config.retry_max_delay = 2.0
-          config.retry_limit = 4
+        it 'deletes endpoints from the endpoint cache and retries endpoint discovery errors' do
+          endpoint_error = Errors::EndpointDiscoveryError.new(nil, nil)
 
-          expect(Kernel).to receive(:rand).with(0..0.3).ordered.and_return(1)
-          expect(Kernel).to receive(:sleep).with(1).ordered
+          test_case_def = [
+            {
+              response: { status_code: 421, error: endpoint_error, endpoint_discovery: true },
+              expect: { retries: 1 }
+            },
+            {
+              response: { status_code: 200, error: nil },
+              expect: { retries: 1 }
+            }
+          ]
 
-          expect(Kernel).to receive(:rand).with(0..0.6).ordered.and_return(2)
-          expect(Kernel).to receive(:sleep).with(2).ordered
-
-          expect(Kernel).to receive(:rand).with(0..1.2).ordered.and_return(3)
-          expect(Kernel).to receive(:sleep).with(3).ordered
-
-          expect(Kernel).to receive(:rand).with(0..2.0).ordered.and_return(4)
-          expect(Kernel).to receive(:sleep).with(4).ordered
-
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          handle { |context| resp }
+          expect(resp.context.config.endpoint_cache).to receive(:extract_key).and_return('key')
+          expect(resp.context.config.endpoint_cache).to receive(:delete).with('key')
+          handle_with_retry(test_case_def)
         end
 
-        it 'randomises the backoff delay with :retry_jitter set to :equal'  do
-          config.retry_jitter = :equal
-          config.retry_max_delay = 2.0
-          config.retry_limit = 4
+        it 'correctly sets the TTL value on the retry header' do
+          allow(config).to receive(:http_read_timeout).and_return(60)
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error,
+                          clock_skew: 100 },
+              expect: { retries: 1, ttl: false }
+            },
+            {
+              response: { status_code: 200, error: nil },
+              expect: { retries: 1, ttl: 100 + 60 }
+            }
+          ]
 
-          expect(Kernel).to receive(:rand).with(0..0.3/2).ordered.and_return(1)
-          expect(Kernel).to receive(:sleep).with(1 + 0.3/2).ordered
-
-          expect(Kernel).to receive(:rand).with(0..0.6/2).ordered.and_return(2)
-          expect(Kernel).to receive(:sleep).with(2 + 0.6/2).ordered
-
-          expect(Kernel).to receive(:rand).with(0..1.2/2).ordered.and_return(3)
-          expect(Kernel).to receive(:sleep).with(3 + 1.2/2).ordered
-
-          expect(Kernel).to receive(:rand).with(0..2.0/2).ordered.and_return(4)
-          expect(Kernel).to receive(:sleep).with(4 + 2.0/2).ordered
-
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          handle { |context| resp }
+          handle_with_retry(test_case_def)
         end
 
-        it 'raises KeyError with invalid jitter function' do
-          config.retry_jitter = :unknown
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          expect(-> { handle { |context| resp } }).to raise_error(KeyError)
+      end
+
+      context 'adaptive mode' do
+        before(:each) do
+          config.retry_mode = 'adaptive'
+
+          client_rate_limiter = config.client_rate_limiter
+          client_rate_limiter.instance_variable_set(:@last_throttle_time, 5)
+          # Needs to be smaller than 't' in the iterations
+          client_rate_limiter.instance_variable_set(:@last_tx_rate_bucket, 4.5)
+          client_rate_limiter.instance_variable_set(:@last_max_rate, 10)
         end
 
-        it 'adjusts delay with custom jitter'  do
-          config.retry_jitter = lambda { |delay| delay * 2}
+        it 'verifies cubic calculations for successes' do
+          successes = [
+            {
+              response: { status_code: 200, error: nil, timestamp: 5 },
+              expect: { calculated_rate: 7.0 }
+            },
+            {
+              response: { status_code: 200, error: nil, timestamp: 6 },
+              expect: { calculated_rate: 9.6 }
+            },
+            {
+              response: { status_code: 200, error: nil, timestamp: 7 },
+              expect: { calculated_rate: 10.0 }
+            },
+            {
+              response: { status_code: 200, error: nil, timestamp: 8 },
+              expect: { calculated_rate: 10.45 }
+            },
+            {
+              response: { status_code: 200, error: nil, timestamp: 9 },
+              expect: { calculated_rate: 13.4 }
+            },
+            {
+              response: { status_code: 200, error: nil, timestamp: 10 },
+              expect: { calculated_rate: 21.2 }
+            },
+            {
+              response: { status_code: 200, error: nil, timestamp: 11 },
+              expect: { calculated_rate: 36.4 }
+            }
+          ]
 
-          expect(Kernel).to receive(:sleep).with(0.6).ordered
-          expect(Kernel).to receive(:sleep).with(1.2).ordered
-          expect(Kernel).to receive(:sleep).with(2.4).ordered
-
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          handle { |context| resp }
+          # Have to run the method each time because there are no failures
+          successes.each { |success| handle_with_retry([success]) }
         end
 
-        it 'increments the retry count on the context' do
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          handle { |context| resp }
-          expect(resp.context.retries).to eq(3)
-        end
+        it 'verifies success and throttling behavior' do
+          client_rate_limiter = config.client_rate_limiter
+          client_rate_limiter.instance_variable_set(:@last_throttle_time, 0)
+          # Needs to be smaller than 't' in the iterations
+          client_rate_limiter.instance_variable_set(:@last_tx_rate_bucket, 0)
+          client_rate_limiter.instance_variable_set(:@last_max_rate, 0)
 
-        it 'rewinds the request body before each retry attempt' do
-          body = resp.context.http_request.body
-          expect(body).to receive(:rewind).exactly(3).times
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          handle { |context| resp }
-        end
 
-        it 'truncates the response body before each retry attempt' do
-          body = double('truncatable-body', pos: 100, truncate: 0)
-          resp.context.http_response.body = body
-          expect(body).to receive(:truncate).with(0).exactly(3).times
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          handle { |context| resp }
-        end
-
-        it 'skips retry if un-truncatable response body has received data' do
-          resp.context.http_response.body = double('write-once-body', pos: 100)
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
-          handle { |context| resp }
-          expect(resp.context.retries).to eq(0)
-        end
-
-        it 'retries if creds expire and are refreshable' do
-          expect(credentials).to receive(:refresh!).exactly(3).times
-          resp.error = RetryErrorsSvc::Errors::AuthFailure.new(nil,nil)
-          handle { |context| resp }
-          expect(resp.context.retries).to eq(3)
-        end
-
-        it 'retries if endpoint discovery error is detected' do
-          config.api.endpoint_operation = :describe_endpoints
-          DescribeEndpointsRequest = Seahorse::Model::Shapes::StructureShape.new(
-            name:'DescribeEndpointsRequest')
-          config.api.add_operation(:describe_endpoints, Seahorse::Model::Operation.new.tap do |o|
-            o.endpoint_operation = true
-            o.input = Seahorse::Model::Shapes::ShapeRef.new(shape: DescribeEndpointsRequest)
-          end)
-          resp.error = Errors::EndpointDiscoveryError.new
-
-          handle { |context| resp }
-          expect(resp.context.retries).to eq(3)
-        end
-
-        it 'skips retry if creds expire and are not refreshable' do
-          resp.error = RetryErrorsSvc::Errors::AuthFailure.new(nil,nil)
-          handle { |context| resp }
-          expect(resp.context.retries).to eq(0)
-        end
-
-        it 'retries 500 level errors' do
-          error = RuntimeError.new('random-runtime-error')
-          handle do |context|
-            context.http_response.signal_headers(500, {})
-            context.http_response.signal_error(error)
-            resp
+          def success(timestamp, measured_tx_rate, fill_rate)
+            [{
+              response: { status_code: 200, error: nil, timestamp: timestamp },
+              expect: { fill_rate: fill_rate, measured_tx_rate: measured_tx_rate }
+            }]
           end
-          expect(resp.context.retries).to eq(3)
-        end
 
-        it 'retries Seahorse::Client::NetworkingErrors' do
-          error = RuntimeError.new('random-runtime-error')
-          resp.error = Seahorse::Client::NetworkingError.new(error)
-          handle { |context| resp }
-          expect(resp.context.retries).to eq(3)
-        end
+          def throttle(timestamp, measured_tx_rate, fill_rate)
+            [{
+               response: { status_code: 429, error: service_error, timestamp: timestamp },
+               expect: { fill_rate: fill_rate, measured_tx_rate: measured_tx_rate }
+             }]
+          end
 
+          handle_with_retry success(0.2, 0.0, 0.5)
+          handle_with_retry success(0.4, 0.0, 0.5)
+          handle_with_retry success(0.6, 4.8, 0.5)
+          handle_with_retry success(0.8, 4.8, 0.5)
+          handle_with_retry success(1.0, 4.16, 0.5)
+          handle_with_retry success(1.2, 4.16, 0.69)
+          handle_with_retry success(1.4, 4.16, 1.10)
+          handle_with_retry success(1.6, 5.63, 1.63)
+          handle_with_retry success(1.8, 5.63, 2.33)
+
+          handle_with_retry throttle(2.0, 4.32, 3.02) +
+                            success(2.2, 4.32, 3.48)
+
+          handle_with_retry success(2.4, 4.32, 3.82)
+
+          # the token bucket need additional capacity to fulfill this request
+          client_rate_limiter.instance_variable_set(:@current_capacity, 10)
+          handle_with_retry success(2.6, 5.66, 4.05)
+
+          handle_with_retry success(2.8, 5.66, 4.20)
+          handle_with_retry success(3.0, 4.33, 4.28)
+
+          handle_with_retry throttle(3.2, 4.33, 2.99) +
+                            success(3.4, 4.32, 3.45)
+        end
       end
     end
   end

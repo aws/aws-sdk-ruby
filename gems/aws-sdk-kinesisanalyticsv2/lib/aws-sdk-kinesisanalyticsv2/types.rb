@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -301,7 +303,7 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
     #   @return [Array<Types::OutputDescription>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationOutputResponse AWS API Documentation
@@ -398,6 +400,66 @@ module Aws::KinesisAnalyticsV2
       :application_arn,
       :application_version_id,
       :reference_data_source_descriptions)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AddApplicationVpcConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "ApplicationName", # required
+    #         current_application_version_id: 1, # required
+    #         vpc_configuration: { # required
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The name of an existing application.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_application_version_id
+    #   The version of the application to which you want to add the input
+    #   processing configuration. You can use the DescribeApplication
+    #   operation to get the current application version. If the version
+    #   specified is not the current version, the
+    #   `ConcurrentModificationException` is returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Description of the VPC to add to the application.
+    #   @return [Types::VpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationVpcConfigurationRequest AWS API Documentation
+    #
+    class AddApplicationVpcConfigurationRequest < Struct.new(
+      :application_name,
+      :current_application_version_id,
+      :vpc_configuration)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_arn
+    #   The ARN of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_version_id
+    #   Provides the current application version. Kinesis Data Analytics
+    #   updates the ApplicationVersionId each time you update the
+    #   application.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vpc_configuration_description
+    #   The parameters of the new VPC configuration.
+    #   @return [Types::VpcConfigurationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationVpcConfigurationResponse AWS API Documentation
+    #
+    class AddApplicationVpcConfigurationResponse < Struct.new(
+      :application_arn,
+      :application_version_id,
+      :vpc_configuration_description)
       include Aws::Structure
     end
 
@@ -633,6 +695,12 @@ module Aws::KinesisAnalyticsV2
     #         application_snapshot_configuration: {
     #           snapshots_enabled: false, # required
     #         },
+    #         vpc_configurations: [
+    #           {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["SecurityGroupId"], # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] sql_application_configuration
@@ -660,6 +728,11 @@ module Aws::KinesisAnalyticsV2
     #   Data Analytics application.
     #   @return [Types::ApplicationSnapshotConfiguration]
     #
+    # @!attribute [rw] vpc_configurations
+    #   The array of descriptions of VPC configurations available to the
+    #   application.
+    #   @return [Array<Types::VpcConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationConfiguration AWS API Documentation
     #
     class ApplicationConfiguration < Struct.new(
@@ -667,7 +740,8 @@ module Aws::KinesisAnalyticsV2
       :flink_application_configuration,
       :environment_properties,
       :application_code_configuration,
-      :application_snapshot_configuration)
+      :application_snapshot_configuration,
+      :vpc_configurations)
       include Aws::Structure
     end
 
@@ -703,6 +777,11 @@ module Aws::KinesisAnalyticsV2
     #   Data Analytics application.
     #   @return [Types::ApplicationSnapshotConfigurationDescription]
     #
+    # @!attribute [rw] vpc_configuration_descriptions
+    #   The array of descriptions of VPC configurations available to the
+    #   application.
+    #   @return [Array<Types::VpcConfigurationDescription>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationConfigurationDescription AWS API Documentation
     #
     class ApplicationConfigurationDescription < Struct.new(
@@ -711,7 +790,8 @@ module Aws::KinesisAnalyticsV2
       :run_configuration_description,
       :flink_application_configuration_description,
       :environment_property_descriptions,
-      :application_snapshot_configuration_description)
+      :application_snapshot_configuration_description,
+      :vpc_configuration_descriptions)
       include Aws::Structure
     end
 
@@ -859,6 +939,13 @@ module Aws::KinesisAnalyticsV2
     #         application_snapshot_configuration_update: {
     #           snapshots_enabled_update: false, # required
     #         },
+    #         vpc_configuration_updates: [
+    #           {
+    #             vpc_configuration_id: "Id", # required
+    #             subnet_id_updates: ["SubnetId"],
+    #             security_group_id_updates: ["SecurityGroupId"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] sql_application_configuration_update
@@ -886,6 +973,11 @@ module Aws::KinesisAnalyticsV2
     #   Data Analytics application.
     #   @return [Types::ApplicationSnapshotConfigurationUpdate]
     #
+    # @!attribute [rw] vpc_configuration_updates
+    #   Updates to the array of descriptions of VPC configurations available
+    #   to the application.
+    #   @return [Array<Types::VpcConfigurationUpdate>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationConfigurationUpdate AWS API Documentation
     #
     class ApplicationConfigurationUpdate < Struct.new(
@@ -893,7 +985,8 @@ module Aws::KinesisAnalyticsV2
       :application_code_configuration_update,
       :flink_application_configuration_update,
       :environment_property_updates,
-      :application_snapshot_configuration_update)
+      :application_snapshot_configuration_update,
+      :vpc_configuration_updates)
       include Aws::Structure
     end
 
@@ -915,7 +1008,7 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] runtime_environment
     #   The runtime environment for the application (`SQL-1.0` or
-    #   `JAVA-8-FLINK-1.5`).
+    #   `FLINK-1_6`).
     #   @return [String]
     #
     # @!attribute [rw] service_execution_role
@@ -1077,7 +1170,7 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] runtime_environment
     #   The runtime environment for the application (`SQL-1.0` or
-    #   `JAVA-8-FLINK-1.5`).
+    #   `FLINK-1_6`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationSummary AWS API Documentation
@@ -1149,17 +1242,45 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] configuration_type
     #   Describes whether the application uses Amazon Kinesis Data
-    #   Analytics' default checkpointing behavior.
+    #   Analytics' default checkpointing behavior. You must set this
+    #   property to `CUSTOM` in order to set the `CheckpointingEnabled`,
+    #   `CheckpointInterval`, or `MinPauseBetweenCheckpoints` parameters.
+    #
+    #   <note markdown="1"> If this value is set to `DEFAULT`, the application will use the
+    #   following values, even if they are set to other values using APIs or
+    #   application code:
+    #
+    #    * **CheckpointingEnabled:** true
+    #
+    #   * **CheckpointInterval:** 60000
+    #
+    #   * **MinPauseBetweenCheckpoints:** 5000
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] checkpointing_enabled
     #   Describes whether checkpointing is enabled for a Java-based Kinesis
     #   Data Analytics application.
+    #
+    #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
+    #   application will use a `CheckpointingEnabled` value of `true`, even
+    #   if this value is set to another value using this API or in
+    #   application code.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] checkpoint_interval
     #   Describes the interval in milliseconds between checkpoint
     #   operations.
+    #
+    #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
+    #   application will use a `CheckpointInterval` vaue of 60000, even if
+    #   this value is set to another value using this API or in application
+    #   code.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] min_pause_between_checkpoints
@@ -1169,6 +1290,12 @@ module Aws::KinesisAnalyticsV2
     #   application otherwise performs continual checkpoint operations. For
     #   more information, see [ Tuning Checkpointing][1] in the [Apache
     #   Flink Documentation][2].
+    #
+    #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
+    #   application will use a `MinPauseBetweenCheckpoints` value of 5000,
+    #   even if this value is set using this API or in application code.
+    #
+    #    </note>
     #
     #
     #
@@ -1192,21 +1319,53 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] configuration_type
     #   Describes whether the application uses the default checkpointing
     #   behavior in Kinesis Data Analytics.
+    #
+    #   <note markdown="1"> If this value is set to `DEFAULT`, the application will use the
+    #   following values, even if they are set to other values using APIs or
+    #   application code:
+    #
+    #    * **CheckpointingEnabled:** true
+    #
+    #   * **CheckpointInterval:** 60000
+    #
+    #   * **MinPauseBetweenCheckpoints:** 5000
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] checkpointing_enabled
     #   Describes whether checkpointing is enabled for a Java-based Kinesis
     #   Data Analytics application.
+    #
+    #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
+    #   application will use a `CheckpointingEnabled` value of `true`, even
+    #   if this value is set to another value using this API or in
+    #   application code.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] checkpoint_interval
     #   Describes the interval in milliseconds between checkpoint
     #   operations.
+    #
+    #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
+    #   application will use a `CheckpointInterval` vaue of 60000, even if
+    #   this value is set to another value using this API or in application
+    #   code.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] min_pause_between_checkpoints
     #   Describes the minimum time in milliseconds after a checkpoint
     #   operation completes that a new checkpoint operation can start.
+    #
+    #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
+    #   application will use a `MinPauseBetweenCheckpoints` value of 5000,
+    #   even if this value is set using this API or in application code.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CheckpointConfigurationDescription AWS API Documentation
@@ -1234,23 +1393,57 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] configuration_type_update
     #   Describes updates to whether the application uses the default
-    #   checkpointing behavior of Kinesis Data Analytics.
+    #   checkpointing behavior of Kinesis Data Analytics. You must set this
+    #   property to `CUSTOM` in order to set the `CheckpointingEnabled`,
+    #   `CheckpointInterval`, or `MinPauseBetweenCheckpoints` parameters.
+    #
+    #   <note markdown="1"> If this value is set to `DEFAULT`, the application will use the
+    #   following values, even if they are set to other values using APIs or
+    #   application code:
+    #
+    #    * **CheckpointingEnabled:** true
+    #
+    #   * **CheckpointInterval:** 60000
+    #
+    #   * **MinPauseBetweenCheckpoints:** 5000
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] checkpointing_enabled_update
     #   Describes updates to whether checkpointing is enabled for an
     #   application.
+    #
+    #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
+    #   application will use a `CheckpointingEnabled` value of `true`, even
+    #   if this value is set to another value using this API or in
+    #   application code.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] checkpoint_interval_update
     #   Describes updates to the interval in milliseconds between checkpoint
     #   operations.
+    #
+    #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
+    #   application will use a `CheckpointInterval` vaue of 60000, even if
+    #   this value is set to another value using this API or in application
+    #   code.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] min_pause_between_checkpoints_update
     #   Describes updates to the minimum time in milliseconds after a
     #   checkpoint operation completes that a new checkpoint operation can
     #   start.
+    #
+    #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
+    #   application will use a `MinPauseBetweenCheckpoints` value of 5000,
+    #   even if this value is set using this API or in application code.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CheckpointConfigurationUpdate AWS API Documentation
@@ -1450,13 +1643,40 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # The user-provided application code (query) is not valid. This can be a
+    # simple syntax error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CodeValidationException AWS API Documentation
+    #
+    class CodeValidationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception thrown as a result of concurrent modifications to an
+    # application. This error can be the result of attempting to modify an
+    # application without using the current application ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateApplicationRequest
     #   data as a hash:
     #
     #       {
     #         application_name: "ApplicationName", # required
     #         application_description: "ApplicationDescription",
-    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6
+    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8
     #         service_execution_role: "RoleARN", # required
     #         application_configuration: {
     #           sql_application_configuration: {
@@ -1594,10 +1814,22 @@ module Aws::KinesisAnalyticsV2
     #           application_snapshot_configuration: {
     #             snapshots_enabled: false, # required
     #           },
+    #           vpc_configurations: [
+    #             {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["SecurityGroupId"], # required
+    #             },
+    #           ],
     #         },
     #         cloud_watch_logging_options: [
     #           {
     #             log_stream_arn: "LogStreamARN", # required
+    #           },
+    #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
     #           },
     #         ],
     #       }
@@ -1612,7 +1844,7 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] runtime_environment
     #   The runtime environment for the application (`SQL-1.0` or
-    #   `JAVA-8-FLINK-1.5`).
+    #   `FLINK-1_6`).
     #   @return [String]
     #
     # @!attribute [rw] service_execution_role
@@ -1630,6 +1862,18 @@ module Aws::KinesisAnalyticsV2
     #   monitor application configuration errors.
     #   @return [Array<Types::CloudWatchLoggingOption>]
     #
+    # @!attribute [rw] tags
+    #   A list of one or more tags to assign to the application. A tag is a
+    #   key-value pair that identifies an application. Note that the maximum
+    #   number of application tags includes system tags. The maximum number
+    #   of user-defined application tags is 50. For more information, see
+    #   [Using Tagging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -1638,7 +1882,8 @@ module Aws::KinesisAnalyticsV2
       :runtime_environment,
       :service_execution_role,
       :application_configuration,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :tags)
       include Aws::Structure
     end
 
@@ -1961,6 +2206,53 @@ module Aws::KinesisAnalyticsV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationSnapshotResponse AWS API Documentation
     #
     class DeleteApplicationSnapshotResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteApplicationVpcConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "ApplicationName", # required
+    #         current_application_version_id: 1, # required
+    #         vpc_configuration_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The name of an existing application.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_application_version_id
+    #   The current application version ID. You can retrieve the application
+    #   version ID using DescribeApplication.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vpc_configuration_id
+    #   The ID of the VPC configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationVpcConfigurationRequest AWS API Documentation
+    #
+    class DeleteApplicationVpcConfigurationRequest < Struct.new(
+      :application_name,
+      :current_application_version_id,
+      :vpc_configuration_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_arn
+    #   The ARN of the Kinesis Data Analytics application.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_version_id
+    #   The updated version ID of the application.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationVpcConfigurationResponse AWS API Documentation
+    #
+    class DeleteApplicationVpcConfigurationResponse < Struct.new(
+      :application_arn,
+      :application_version_id)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DescribeApplicationRequest
     #   data as a hash:
@@ -2362,6 +2654,38 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # Describes the starting parameters for an Apache Flink-based Kinesis
+    # Data Analytics application.
+    #
+    # @note When making an API call, you may pass FlinkRunConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         allow_non_restored_state: false,
+    #       }
+    #
+    # @!attribute [rw] allow_non_restored_state
+    #   When restoring from a savepoint, specifies whether the runtime is
+    #   allowed to skip a state that cannot be mapped to the new program.
+    #   This will happen if the program is updated between savepoints to
+    #   remove stateful parameters, and state data in the savepoint no
+    #   longer corresponds to valid application data. For more information,
+    #   see [ Allowing Non-Restored State][1] in the [Apache Flink
+    #   documentation][2].
+    #
+    #
+    #
+    #   [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/state/savepoints.html#allowing-non-restored-state
+    #   [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/FlinkRunConfiguration AWS API Documentation
+    #
+    class FlinkRunConfiguration < Struct.new(
+      :allow_non_restored_state)
+      include Aws::Structure
+    end
+
     # When you configure the application input for an SQL-based Amazon
     # Kinesis Data Analytics application, you specify the streaming source,
     # the in-application stream name that is created, and the mapping
@@ -2538,6 +2862,13 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] resource_arn
     #   The ARN of the AWS Lambda function that operates on records in the
     #   stream.
+    #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/InputLambdaProcessor AWS API Documentation
@@ -2554,6 +2885,13 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] resource_arn
     #   The ARN of the AWS Lambda function that is used to preprocess the
     #   records in the stream.
+    #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -2589,6 +2927,13 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] resource_arn_update
     #   The Amazon Resource Name (ARN) of the new AWS Lambda function that
     #   is used to preprocess the records in the stream.
+    #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/InputLambdaProcessorUpdate AWS API Documentation
@@ -2894,6 +3239,42 @@ module Aws::KinesisAnalyticsV2
       :kinesis_firehose_input_update,
       :input_schema_update,
       :input_parallelism_update)
+      include Aws::Structure
+    end
+
+    # The user-provided application configuration is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/InvalidApplicationConfigurationException AWS API Documentation
+    #
+    class InvalidApplicationConfigurationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified input parameter value is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request JSON is not valid for the operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3222,6 +3603,13 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the destination Lambda function to
     #   write to.
+    #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/LambdaOutput AWS API Documentation
@@ -3273,12 +3661,31 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] resource_arn_update
     #   The Amazon Resource Name (ARN) of the destination AWS Lambda
     #   function.
+    #
+    #   <note markdown="1"> To specify an earlier version of the Lambda function than the
+    #   latest, include the Lambda function version in the Lambda function
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
+    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/LambdaOutputUpdate AWS API Documentation
     #
     class LambdaOutputUpdate < Struct.new(
       :resource_arn_update)
+      include Aws::Structure
+    end
+
+    # The number of allowed resources has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3388,6 +3795,35 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "KinesisAnalyticsARN", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the application for which to retrieve tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The key-value tags assigned to the application.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # When you configure an SQL-based Amazon Kinesis Data Analytics
     # application's input at the time of creating or updating an
     # application, provides additional mapping information specific to the
@@ -3431,7 +3867,7 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/Java/monitoring-overview.html
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html
     #
     # @note When making an API call, you may pass MonitoringConfiguration
     #   data as a hash:
@@ -3444,7 +3880,9 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] configuration_type
     #   Describes whether to use the default CloudWatch logging
-    #   configuration for an application.
+    #   configuration for an application. You must set this property to
+    #   `CUSTOM` in order to set the `LogLevel` or `MetricsLevel`
+    #   parameters.
     #   @return [String]
     #
     # @!attribute [rw] metrics_level
@@ -3503,7 +3941,9 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] configuration_type_update
     #   Describes updates to whether to use the default CloudWatch logging
-    #   configuration for an application.
+    #   configuration for an application. You must set this property to
+    #   `CUSTOM` in order to set the `LogLevel` or `MetricsLevel`
+    #   parameters.
     #   @return [String]
     #
     # @!attribute [rw] metrics_level_update
@@ -3714,14 +4154,24 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] configuration_type
     #   Describes whether the application uses the default parallelism for
-    #   the Kinesis Data Analytics service.
+    #   the Kinesis Data Analytics service. You must set this property to
+    #   `CUSTOM` in order to change your application's
+    #   `AutoScalingEnabled`, `Parallelism`, or `ParallelismPerKPU`
+    #   properties.
     #   @return [String]
     #
     # @!attribute [rw] parallelism
     #   Describes the initial number of parallel tasks that a Java-based
-    #   Kinesis Data Analytics application can perform. The Kinesis Data
-    #   Analytics service can increase this number automatically if
-    #   ParallelismConfiguration$AutoScalingEnabled is set to `true`.
+    #   Kinesis Data Analytics application can perform. If
+    #   `AutoScalingEnabled` is set to True, Kinesis Data Analytics
+    #   increases the `CurrentParallelism` value in response to application
+    #   load. The service can increase the `CurrentParallelism` value up to
+    #   the maximum parallelism, which is `ParalellismPerKPU` times the
+    #   maximum KPUs for the application. The maximum KPUs for an
+    #   application is 32 by default, and can be increased by requesting a
+    #   limit increase. If application load is reduced, the service can
+    #   reduce the `CurrentParallelism` value down to the `Parallelism`
+    #   setting.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelism_per_kpu
@@ -3761,7 +4211,15 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] parallelism
     #   Describes the initial number of parallel tasks that a Java-based
-    #   Kinesis Data Analytics application can perform.
+    #   Kinesis Data Analytics application can perform. If
+    #   `AutoScalingEnabled` is set to True, then Kinesis Data Analytics can
+    #   increase the `CurrentParallelism` value in response to application
+    #   load. The service can increase `CurrentParallelism` up to the
+    #   maximum parallelism, which is `ParalellismPerKPU` times the maximum
+    #   KPUs for the application. The maximum KPUs for an application is 32
+    #   by default, and can be increased by requesting a limit increase. If
+    #   application load is reduced, the service can reduce the
+    #   `CurrentParallelism` value down to the `Parallelism` setting.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelism_per_kpu
@@ -3772,7 +4230,15 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] current_parallelism
     #   Describes the current number of parallel tasks that a Java-based
-    #   Kinesis Data Analytics application can perform.
+    #   Kinesis Data Analytics application can perform. If
+    #   `AutoScalingEnabled` is set to True, Kinesis Data Analytics can
+    #   increase this value in response to application load. The service can
+    #   increase this value up to the maximum parallelism, which is
+    #   `ParalellismPerKPU` times the maximum KPUs for the application. The
+    #   maximum KPUs for an application is 32 by default, and can be
+    #   increased by requesting a limit increase. If application load is
+    #   reduced, the service can reduce the `CurrentParallelism` value down
+    #   to the `Parallelism` setting.
     #   @return [Integer]
     #
     # @!attribute [rw] auto_scaling_enabled
@@ -3808,12 +4274,22 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] configuration_type_update
     #   Describes updates to whether the application uses the default
     #   parallelism for the Kinesis Data Analytics service, or if a custom
-    #   parallelism is used.
+    #   parallelism is used. You must set this property to `CUSTOM` in order
+    #   to change your application's `AutoScalingEnabled`, `Parallelism`,
+    #   or `ParallelismPerKPU` properties.
     #   @return [String]
     #
     # @!attribute [rw] parallelism_update
     #   Describes updates to the initial number of parallel tasks an
-    #   application can perform.
+    #   application can perform. If `AutoScalingEnabled` is set to True,
+    #   then Kinesis Data Analytics can increase the `CurrentParallelism`
+    #   value in response to application load. The service can increase
+    #   `CurrentParallelism` up to the maximum parallelism, which is
+    #   `ParalellismPerKPU` times the maximum KPUs for the application. The
+    #   maximum KPUs for an application is 32 by default, and can be
+    #   increased by requesting a limit increase. If application load is
+    #   reduced, the service will reduce `CurrentParallelism` down to the
+    #   `Parallelism` setting.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelism_per_kpu_update
@@ -3889,7 +4365,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] mapping
-    #   A reference to the data element in the streaming input of the
+    #   A reference to the data element in the streaming input or the
     #   reference data source.
     #   @return [String]
     #
@@ -4119,6 +4595,49 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # The application is not available for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Specified application can't be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Discovery failed to get a record from the streaming source because of
+    # the Amazon Kinesis Streams `ProvisionedThroughputExceededException`.
+    # For more information, see [GetRecords][1] in the Amazon Kinesis
+    # Streams API Reference.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ResourceProvisionedThroughputExceededException AWS API Documentation
+    #
+    class ResourceProvisionedThroughputExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the starting parameters for an Amazon Kinesis Data Analytics
     # application.
     #
@@ -4126,6 +4645,9 @@ module Aws::KinesisAnalyticsV2
     #   data as a hash:
     #
     #       {
+    #         flink_run_configuration: {
+    #           allow_non_restored_state: false,
+    #         },
     #         sql_run_configurations: [
     #           {
     #             input_id: "Id", # required
@@ -4140,6 +4662,11 @@ module Aws::KinesisAnalyticsV2
     #         },
     #       }
     #
+    # @!attribute [rw] flink_run_configuration
+    #   Describes the starting parameters for an Apache Flink-based Kinesis
+    #   Data Analytics application.
+    #   @return [Types::FlinkRunConfiguration]
+    #
     # @!attribute [rw] sql_run_configurations
     #   Describes the starting parameters for an SQL-based Kinesis Data
     #   Analytics application.
@@ -4152,6 +4679,7 @@ module Aws::KinesisAnalyticsV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/RunConfiguration AWS API Documentation
     #
     class RunConfiguration < Struct.new(
+      :flink_run_configuration,
       :sql_run_configurations,
       :application_restore_configuration)
       include Aws::Structure
@@ -4178,11 +4706,19 @@ module Aws::KinesisAnalyticsV2
     #   data as a hash:
     #
     #       {
+    #         flink_run_configuration: {
+    #           allow_non_restored_state: false,
+    #         },
     #         application_restore_configuration: {
     #           application_restore_type: "SKIP_RESTORE_FROM_SNAPSHOT", # required, accepts SKIP_RESTORE_FROM_SNAPSHOT, RESTORE_FROM_LATEST_SNAPSHOT, RESTORE_FROM_CUSTOM_SNAPSHOT
     #           snapshot_name: "SnapshotName",
     #         },
     #       }
+    #
+    # @!attribute [rw] flink_run_configuration
+    #   Describes the starting parameters for an Apache Flink-based Kinesis
+    #   Data Analytics application.
+    #   @return [Types::FlinkRunConfiguration]
     #
     # @!attribute [rw] application_restore_configuration
     #   Describes updates to the restore behavior of a restarting
@@ -4192,6 +4728,7 @@ module Aws::KinesisAnalyticsV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/RunConfigurationUpdate AWS API Documentation
     #
     class RunConfigurationUpdate < Struct.new(
+      :flink_run_configuration,
       :application_restore_configuration)
       include Aws::Structure
     end
@@ -4409,6 +4946,18 @@ module Aws::KinesisAnalyticsV2
     class S3ReferenceDataSourceUpdate < Struct.new(
       :bucket_arn_update,
       :file_key_update)
+      include Aws::Structure
+    end
+
+    # The service cannot complete the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4805,6 +5354,9 @@ module Aws::KinesisAnalyticsV2
     #       {
     #         application_name: "ApplicationName", # required
     #         run_configuration: { # required
+    #           flink_run_configuration: {
+    #             allow_non_restored_state: false,
+    #           },
     #           sql_run_configurations: [
     #             {
     #               input_id: "Id", # required
@@ -4862,6 +5414,155 @@ module Aws::KinesisAnalyticsV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StopApplicationResponse AWS API Documentation
     #
     class StopApplicationResponse < Aws::EmptyStructure; end
+
+    # A key-value pair (the value is optional) that you can define and
+    # assign to AWS resources. If you specify a tag that already exists, the
+    # tag value is replaced with the value that you specify in the request.
+    # Note that the maximum number of application tags includes system tags.
+    # The maximum number of user-defined application tags is 50. For more
+    # information, see [Using Tagging][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of the key-value tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the key-value tag. The value is optional.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "KinesisAnalyticsARN", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the application to assign the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value tags to assign to the application.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Application created with too many tags, or too many tags added to an
+    # application. Note that the maximum number of application tags includes
+    # system tags. The maximum number of user-defined application tags is
+    # 50.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The data format is not valid. Amazon Kinesis Data Analytics cannot
+    # detect the schema for the given streaming source.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_input_records
+    #   Raw stream data that was sampled to infer the schema.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] processed_input_records
+    #   Stream data that was modified by the processor specified in the
+    #   `InputProcessingConfiguration` parameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UnableToDetectSchemaException AWS API Documentation
+    #
+    class UnableToDetectSchemaException < Struct.new(
+      :message,
+      :raw_input_records,
+      :processed_input_records)
+      include Aws::Structure
+    end
+
+    # The request was rejected because a specified parameter is not
+    # supported or a specified resource is not valid for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UnsupportedOperationException AWS API Documentation
+    #
+    class UnsupportedOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "KinesisAnalyticsARN", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the Kinesis Analytics application from which to remove
+    #   the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of keys of tags to remove from the specified application.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateApplicationRequest
     #   data as a hash:
@@ -5008,9 +5709,19 @@ module Aws::KinesisAnalyticsV2
     #           application_snapshot_configuration_update: {
     #             snapshots_enabled_update: false, # required
     #           },
+    #           vpc_configuration_updates: [
+    #             {
+    #               vpc_configuration_id: "Id", # required
+    #               subnet_id_updates: ["SubnetId"],
+    #               security_group_id_updates: ["SecurityGroupId"],
+    #             },
+    #           ],
     #         },
     #         service_execution_role_update: "RoleARN",
     #         run_configuration_update: {
+    #           flink_run_configuration: {
+    #             allow_non_restored_state: false,
+    #           },
     #           application_restore_configuration: {
     #             application_restore_type: "SKIP_RESTORE_FROM_SNAPSHOT", # required, accepts SKIP_RESTORE_FROM_SNAPSHOT, RESTORE_FROM_LATEST_SNAPSHOT, RESTORE_FROM_CUSTOM_SNAPSHOT
     #             snapshot_name: "SnapshotName",
@@ -5072,6 +5783,118 @@ module Aws::KinesisAnalyticsV2
     #
     class UpdateApplicationResponse < Struct.new(
       :application_detail)
+      include Aws::Structure
+    end
+
+    # Describes the parameters of a VPC used by the application.
+    #
+    # @note When making an API call, you may pass VpcConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         subnet_ids: ["SubnetId"], # required
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #       }
+    #
+    # @!attribute [rw] subnet_ids
+    #   The array of [Subnet][1] IDs used by the VPC configuration.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The array of [SecurityGroup][1] IDs used by the VPC configuration.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/VpcConfiguration AWS API Documentation
+    #
+    class VpcConfiguration < Struct.new(
+      :subnet_ids,
+      :security_group_ids)
+      include Aws::Structure
+    end
+
+    # Describes the parameters of a VPC used by the application.
+    #
+    # @!attribute [rw] vpc_configuration_id
+    #   The ID of the VPC configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the associated VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The array of [Subnet][1] IDs used by the VPC configuration.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The array of [SecurityGroup][1] IDs used by the VPC configuration.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/VpcConfigurationDescription AWS API Documentation
+    #
+    class VpcConfigurationDescription < Struct.new(
+      :vpc_configuration_id,
+      :vpc_id,
+      :subnet_ids,
+      :security_group_ids)
+      include Aws::Structure
+    end
+
+    # Describes updates to the VPC configuration used by the application.
+    #
+    # @note When making an API call, you may pass VpcConfigurationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_configuration_id: "Id", # required
+    #         subnet_id_updates: ["SubnetId"],
+    #         security_group_id_updates: ["SecurityGroupId"],
+    #       }
+    #
+    # @!attribute [rw] vpc_configuration_id
+    #   Describes an update to the ID of the VPC configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id_updates
+    #   Describes updates to the array of [Subnet][1] IDs used by the VPC
+    #   configuration.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_id_updates
+    #   Describes updates to the array of [SecurityGroup][1] IDs used by the
+    #   VPC configuration.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/VpcConfigurationUpdate AWS API Documentation
+    #
+    class VpcConfigurationUpdate < Struct.new(
+      :vpc_configuration_id,
+      :subnet_id_updates,
+      :security_group_id_updates)
       include Aws::Structure
     end
 

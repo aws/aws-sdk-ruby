@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -8,7 +10,21 @@
 module Aws::MediaConnect
   module Types
 
-    # Adds outputs to an existing flow. You can create up to 20 outputs per
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowOutputs420Exception AWS API Documentation
+    #
+    class AddFlowOutputs420Exception < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Adds outputs to an existing flow. You can create up to 50 outputs per
     # flow.
     #
     # @note When making an API call, you may pass AddFlowOutputsRequest
@@ -18,20 +34,30 @@ module Aws::MediaConnect
     #         flow_arn: "__string", # required
     #         outputs: [ # required
     #           {
+    #             cidr_allow_list: ["__string"],
     #             description: "__string",
-    #             destination: "__string", # required
+    #             destination: "__string",
     #             encryption: {
     #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #               key_type: "static-key", # accepts static-key
+    #               constant_initialization_vector: "__string",
+    #               device_id: "__string",
+    #               key_type: "speke", # accepts speke, static-key
+    #               region: "__string",
+    #               resource_id: "__string",
     #               role_arn: "__string", # required
-    #               secret_arn: "__string", # required
+    #               secret_arn: "__string",
+    #               url: "__string",
     #             },
     #             max_latency: 1,
     #             name: "__string",
-    #             port: 1, # required
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp
+    #             port: 1,
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #             remote_id: "__string",
     #             smoothing_latency: 1,
     #             stream_id: "__string",
+    #             vpc_interface_attachment: {
+    #               vpc_interface_name: "__string",
+    #             },
     #           },
     #         ],
     #       }
@@ -70,27 +96,163 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Adds sources to an existing flow.
+    #
+    # @note When making an API call, you may pass AddFlowSourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string", # required
+    #         sources: [ # required
+    #           {
+    #             decryption: {
+    #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #               constant_initialization_vector: "__string",
+    #               device_id: "__string",
+    #               key_type: "speke", # accepts speke, static-key
+    #               region: "__string",
+    #               resource_id: "__string",
+    #               role_arn: "__string", # required
+    #               secret_arn: "__string",
+    #               url: "__string",
+    #             },
+    #             description: "__string",
+    #             entitlement_arn: "__string",
+    #             ingest_port: 1,
+    #             max_bitrate: 1,
+    #             max_latency: 1,
+    #             name: "__string",
+    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #             stream_id: "__string",
+    #             vpc_interface_name: "__string",
+    #             whitelist_cidr: "__string",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   A list of sources that you want to add.
+    #   @return [Array<Types::SetSourceRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowSourcesRequest AWS API Documentation
+    #
+    class AddFlowSourcesRequest < Struct.new(
+      :flow_arn,
+      :sources)
+      include Aws::Structure
+    end
+
+    # The result of a successful AddFlowSources request. The response
+    # includes the details of the newly added sources.
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the flow that these sources were added to.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   The details of the newly added sources.
+    #   @return [Array<Types::Source>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowSourcesResponse AWS API Documentation
+    #
+    class AddFlowSourcesResponse < Struct.new(
+      :flow_arn,
+      :sources)
+      include Aws::Structure
+    end
+
+    # Adds VPC interfaces to an existing flow.
+    #
+    # @note When making an API call, you may pass AddFlowVpcInterfacesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string", # required
+    #         vpc_interfaces: [ # required
+    #           {
+    #             name: "__string", # required
+    #             role_arn: "__string", # required
+    #             security_group_ids: ["__string"], # required
+    #             subnet_id: "__string", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_interfaces
+    #   A list of VPC interfaces that you want to add.
+    #   @return [Array<Types::VpcInterfaceRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowVpcInterfacesRequest AWS API Documentation
+    #
+    class AddFlowVpcInterfacesRequest < Struct.new(
+      :flow_arn,
+      :vpc_interfaces)
+      include Aws::Structure
+    end
+
+    # The result of a successful AddFlowVpcInterfaces request. The response
+    # includes the details of the newly added VPC interfaces.
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the flow that these VPC interfaces were added to.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_interfaces
+    #   The details of the newly added VPC interfaces.
+    #   @return [Array<Types::VpcInterface>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowVpcInterfacesResponse AWS API Documentation
+    #
+    class AddFlowVpcInterfacesResponse < Struct.new(
+      :flow_arn,
+      :vpc_interfaces)
+      include Aws::Structure
+    end
+
     # The output that you want to add to this flow.
     #
     # @note When making an API call, you may pass AddOutputRequest
     #   data as a hash:
     #
     #       {
+    #         cidr_allow_list: ["__string"],
     #         description: "__string",
-    #         destination: "__string", # required
+    #         destination: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         max_latency: 1,
     #         name: "__string",
-    #         port: 1, # required
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp
+    #         port: 1,
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
+    #         vpc_interface_attachment: {
+    #           vpc_interface_name: "__string",
+    #         },
     #       }
+    #
+    # @!attribute [rw] cidr_allow_list
+    #   The range of IP addresses that should be allowed to initiate output
+    #   requests to this flow. These IP addresses should be in the form of a
+    #   Classless Inter-Domain Routing (CIDR) block; for example,
+    #   10.0.0.0/16.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] description
     #   A description of the output. This description appears only on the
@@ -124,8 +286,13 @@ module Aws::MediaConnect
     #   The protocol to use for the output.
     #   @return [String]
     #
+    # @!attribute [rw] remote_id
+    #   The remote ID for the Zixi-pull output stream.
+    #   @return [String]
+    #
     # @!attribute [rw] smoothing_latency
-    #   The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+    #   The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC
+    #   streams.
     #   @return [Integer]
     #
     # @!attribute [rw] stream_id
@@ -133,9 +300,14 @@ module Aws::MediaConnect
     #   parameter applies only to Zixi-based streams.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_interface_attachment
+    #   The name of the VPC interface attachment to use for this output.
+    #   @return [Types::VpcInterfaceAttachment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddOutputRequest AWS API Documentation
     #
     class AddOutputRequest < Struct.new(
+      :cidr_allow_list,
       :description,
       :destination,
       :encryption,
@@ -143,13 +315,43 @@ module Aws::MediaConnect
       :name,
       :port,
       :protocol,
+      :remote_id,
       :smoothing_latency,
-      :stream_id)
+      :stream_id,
+      :vpc_interface_attachment)
+      include Aws::Structure
+    end
+
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlow420Exception AWS API Documentation
+    #
+    class CreateFlow420Exception < Struct.new(
+      :message)
       include Aws::Structure
     end
 
     # Creates a new flow. The request must include one source. The request
-    # optionally can include outputs (up to 20) and one entitlement.
+    # optionally can include outputs (up to 50) and one entitlement.
     #
     # @note When making an API call, you may pass CreateFlowRequest
     #   data as a hash:
@@ -158,12 +360,18 @@ module Aws::MediaConnect
     #         availability_zone: "__string",
     #         entitlements: [
     #           {
+    #             data_transfer_subscriber_fee_percent: 1,
     #             description: "__string",
     #             encryption: {
     #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #               key_type: "static-key", # accepts static-key
+    #               constant_initialization_vector: "__string",
+    #               device_id: "__string",
+    #               key_type: "speke", # accepts speke, static-key
+    #               region: "__string",
+    #               resource_id: "__string",
     #               role_arn: "__string", # required
-    #               secret_arn: "__string", # required
+    #               secret_arn: "__string",
+    #               url: "__string",
     #             },
     #             name: "__string",
     #             subscribers: ["__string"], # required
@@ -172,28 +380,43 @@ module Aws::MediaConnect
     #         name: "__string", # required
     #         outputs: [
     #           {
+    #             cidr_allow_list: ["__string"],
     #             description: "__string",
-    #             destination: "__string", # required
+    #             destination: "__string",
     #             encryption: {
     #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #               key_type: "static-key", # accepts static-key
+    #               constant_initialization_vector: "__string",
+    #               device_id: "__string",
+    #               key_type: "speke", # accepts speke, static-key
+    #               region: "__string",
+    #               resource_id: "__string",
     #               role_arn: "__string", # required
-    #               secret_arn: "__string", # required
+    #               secret_arn: "__string",
+    #               url: "__string",
     #             },
     #             max_latency: 1,
     #             name: "__string",
-    #             port: 1, # required
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp
+    #             port: 1,
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #             remote_id: "__string",
     #             smoothing_latency: 1,
     #             stream_id: "__string",
+    #             vpc_interface_attachment: {
+    #               vpc_interface_name: "__string",
+    #             },
     #           },
     #         ],
-    #         source: { # required
+    #         source: {
     #           decryption: {
     #             algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #             key_type: "static-key", # accepts static-key
+    #             constant_initialization_vector: "__string",
+    #             device_id: "__string",
+    #             key_type: "speke", # accepts speke, static-key
+    #             region: "__string",
+    #             resource_id: "__string",
     #             role_arn: "__string", # required
-    #             secret_arn: "__string", # required
+    #             secret_arn: "__string",
+    #             url: "__string",
     #           },
     #           description: "__string",
     #           entitlement_arn: "__string",
@@ -201,10 +424,48 @@ module Aws::MediaConnect
     #           max_bitrate: 1,
     #           max_latency: 1,
     #           name: "__string",
-    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #           stream_id: "__string",
+    #           vpc_interface_name: "__string",
     #           whitelist_cidr: "__string",
     #         },
+    #         source_failover_config: {
+    #           recovery_window: 1,
+    #           state: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         sources: [
+    #           {
+    #             decryption: {
+    #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #               constant_initialization_vector: "__string",
+    #               device_id: "__string",
+    #               key_type: "speke", # accepts speke, static-key
+    #               region: "__string",
+    #               resource_id: "__string",
+    #               role_arn: "__string", # required
+    #               secret_arn: "__string",
+    #               url: "__string",
+    #             },
+    #             description: "__string",
+    #             entitlement_arn: "__string",
+    #             ingest_port: 1,
+    #             max_bitrate: 1,
+    #             max_latency: 1,
+    #             name: "__string",
+    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #             stream_id: "__string",
+    #             vpc_interface_name: "__string",
+    #             whitelist_cidr: "__string",
+    #           },
+    #         ],
+    #         vpc_interfaces: [
+    #           {
+    #             name: "__string", # required
+    #             role_arn: "__string", # required
+    #             security_group_ids: ["__string"], # required
+    #             subnet_id: "__string", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] availability_zone
@@ -229,6 +490,17 @@ module Aws::MediaConnect
     #   The settings for the source of the flow.
     #   @return [Types::SetSourceRequest]
     #
+    # @!attribute [rw] source_failover_config
+    #   The settings for source failover
+    #   @return [Types::FailoverConfig]
+    #
+    # @!attribute [rw] sources
+    #   @return [Array<Types::SetSourceRequest>]
+    #
+    # @!attribute [rw] vpc_interfaces
+    #   The VPC interfaces you want on the flow.
+    #   @return [Array<Types::VpcInterfaceRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlowRequest AWS API Documentation
     #
     class CreateFlowRequest < Struct.new(
@@ -236,7 +508,10 @@ module Aws::MediaConnect
       :entitlements,
       :name,
       :outputs,
-      :source)
+      :source,
+      :source_failover_config,
+      :sources,
+      :vpc_interfaces)
       include Aws::Structure
     end
 
@@ -332,9 +607,14 @@ module Aws::MediaConnect
     #
     #       {
     #         algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #         key_type: "static-key", # accepts static-key
+    #         constant_initialization_vector: "__string",
+    #         device_id: "__string",
+    #         key_type: "speke", # accepts speke, static-key
+    #         region: "__string",
+    #         resource_id: "__string",
     #         role_arn: "__string", # required
-    #         secret_arn: "__string", # required
+    #         secret_arn: "__string",
+    #         url: "__string",
     #       }
     #
     # @!attribute [rw] algorithm
@@ -342,9 +622,35 @@ module Aws::MediaConnect
     #   aes128, aes192, or aes256).
     #   @return [String]
     #
+    # @!attribute [rw] constant_initialization_vector
+    #   A 128-bit, 16-byte hex value represented by a 32-character string,
+    #   to be used with the key for encrypting content. This parameter is
+    #   not valid for static key encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The value of one of the devices that you configured with your
+    #   digital rights management (DRM) platform key provider. This
+    #   parameter is required for SPEKE encryption and is not valid for
+    #   static key encryption.
+    #   @return [String]
+    #
     # @!attribute [rw] key_type
     #   The type of key that is used for the encryption. If no keyType is
     #   provided, the service will use the default setting (static-key).
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region that the API Gateway proxy endpoint was created in.
+    #   This parameter is required for SPEKE encryption and is not valid for
+    #   static key encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   An identifier for the content. The service sends this value to the
+    #   key server to identify the current endpoint. The resource ID is also
+    #   known as the content ID. This parameter is required for SPEKE
+    #   encryption and is not valid for static key encryption.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -353,21 +659,38 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The ARN that was assigned to the secret that you created in AWS
-    #   Secrets Manager to store the encryption key.
+    #   The ARN of the secret that you created in AWS Secrets Manager to
+    #   store the encryption key. This parameter is required for static key
+    #   encryption and is not valid for SPEKE encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL from the API Gateway proxy that you set up to talk to your
+    #   key server. This parameter is required for SPEKE encryption and is
+    #   not valid for static key encryption.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Encryption AWS API Documentation
     #
     class Encryption < Struct.new(
       :algorithm,
+      :constant_initialization_vector,
+      :device_id,
       :key_type,
+      :region,
+      :resource_id,
       :role_arn,
-      :secret_arn)
+      :secret_arn,
+      :url)
       include Aws::Structure
     end
 
     # The settings for a flow entitlement.
+    #
+    # @!attribute [rw] data_transfer_subscriber_fee_percent
+    #   Percentage from 0-100 of the data transfer cost to be billed to the
+    #   subscriber.
+    #   @return [Integer]
     #
     # @!attribute [rw] description
     #   A description of the entitlement.
@@ -395,11 +718,37 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Entitlement AWS API Documentation
     #
     class Entitlement < Struct.new(
+      :data_transfer_subscriber_fee_percent,
       :description,
       :encryption,
       :entitlement_arn,
       :name,
       :subscribers)
+      include Aws::Structure
+    end
+
+    # The settings for source failover
+    #
+    # @note When making an API call, you may pass FailoverConfig
+    #   data as a hash:
+    #
+    #       {
+    #         recovery_window: 1,
+    #         state: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] recovery_window
+    #   Search window time to look for dash-7 packets
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/FailoverConfig AWS API Documentation
+    #
+    class FailoverConfig < Struct.new(
+      :recovery_window,
+      :state)
       include Aws::Structure
     end
 
@@ -442,9 +791,20 @@ module Aws::MediaConnect
     #   The settings for the source of the flow.
     #   @return [Types::Source]
     #
+    # @!attribute [rw] source_failover_config
+    #   The settings for source failover
+    #   @return [Types::FailoverConfig]
+    #
+    # @!attribute [rw] sources
+    #   @return [Array<Types::Source>]
+    #
     # @!attribute [rw] status
     #   The current status of the flow.
     #   @return [String]
+    #
+    # @!attribute [rw] vpc_interfaces
+    #   The VPC Interfaces for this flow.
+    #   @return [Array<Types::VpcInterface>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Flow AWS API Documentation
     #
@@ -457,7 +817,24 @@ module Aws::MediaConnect
       :name,
       :outputs,
       :source,
-      :status)
+      :source_failover_config,
+      :sources,
+      :status,
+      :vpc_interfaces)
+      include Aws::Structure
+    end
+
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -467,16 +844,27 @@ module Aws::MediaConnect
     #   data as a hash:
     #
     #       {
+    #         data_transfer_subscriber_fee_percent: 1,
     #         description: "__string",
     #         encryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         name: "__string",
     #         subscribers: ["__string"], # required
     #       }
+    #
+    # @!attribute [rw] data_transfer_subscriber_fee_percent
+    #   Percentage from 0-100 of the data transfer cost to be billed to the
+    #   subscriber.
+    #   @return [Integer]
     #
     # @!attribute [rw] description
     #   A description of the entitlement. This description appears only on
@@ -503,10 +891,25 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GrantEntitlementRequest AWS API Documentation
     #
     class GrantEntitlementRequest < Struct.new(
+      :data_transfer_subscriber_fee_percent,
       :description,
       :encryption,
       :name,
       :subscribers)
+      include Aws::Structure
+    end
+
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GrantFlowEntitlements420Exception AWS API Documentation
+    #
+    class GrantFlowEntitlements420Exception < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -518,12 +921,18 @@ module Aws::MediaConnect
     #       {
     #         entitlements: [ # required
     #           {
+    #             data_transfer_subscriber_fee_percent: 1,
     #             description: "__string",
     #             encryption: {
     #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #               key_type: "static-key", # accepts static-key
+    #               constant_initialization_vector: "__string",
+    #               device_id: "__string",
+    #               key_type: "speke", # accepts speke, static-key
+    #               region: "__string",
+    #               resource_id: "__string",
     #               role_arn: "__string", # required
-    #               secret_arn: "__string", # required
+    #               secret_arn: "__string",
+    #               url: "__string",
     #             },
     #             name: "__string",
     #             subscribers: ["__string"], # required
@@ -562,6 +971,20 @@ module Aws::MediaConnect
     class GrantFlowEntitlementsResponse < Struct.new(
       :entitlements,
       :flow_arn)
+      include Aws::Structure
+    end
+
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -659,7 +1082,44 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # The tags for the resource.
+    #
+    # @!attribute [rw] tags
+    #   A map from tag keys to values. Tag keys can have a maximum character
+    #   length of 128 characters, and tag values can have a maximum length
+    #   of 256 characters.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # An entitlement that has been granted to you from other AWS accounts.
+    #
+    # @!attribute [rw] data_transfer_subscriber_fee_percent
+    #   Percentage from 0-100 of the data transfer cost to be billed to the
+    #   subscriber.
+    #   @return [Integer]
     #
     # @!attribute [rw] entitlement_arn
     #   The ARN of the entitlement.
@@ -672,6 +1132,7 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListedEntitlement AWS API Documentation
     #
     class ListedEntitlement < Struct.new(
+      :data_transfer_subscriber_fee_percent,
       :entitlement_arn,
       :entitlement_name)
       include Aws::Structure
@@ -733,7 +1194,26 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The settings for an output.
+    #
+    # @!attribute [rw] data_transfer_subscriber_fee_percent
+    #   Percentage from 0-100 of the data transfer cost to be billed to the
+    #   subscriber.
+    #   @return [Integer]
     #
     # @!attribute [rw] description
     #   A description of the output.
@@ -777,9 +1257,14 @@ module Aws::MediaConnect
     #   output.
     #   @return [Types::Transport]
     #
+    # @!attribute [rw] vpc_interface_attachment
+    #   The name of the VPC interface attachment to use for this output.
+    #   @return [Types::VpcInterfaceAttachment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Output AWS API Documentation
     #
     class Output < Struct.new(
+      :data_transfer_subscriber_fee_percent,
       :description,
       :destination,
       :encryption,
@@ -788,7 +1273,8 @@ module Aws::MediaConnect
       :name,
       :output_arn,
       :port,
-      :transport)
+      :transport,
+      :vpc_interface_attachment)
       include Aws::Structure
     end
 
@@ -830,6 +1316,95 @@ module Aws::MediaConnect
     class RemoveFlowOutputResponse < Struct.new(
       :flow_arn,
       :output_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemoveFlowSourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string", # required
+    #         source_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowSourceRequest AWS API Documentation
+    #
+    class RemoveFlowSourceRequest < Struct.new(
+      :flow_arn,
+      :source_arn)
+      include Aws::Structure
+    end
+
+    # The result of a successful RemoveFlowSource request including the flow
+    # ARN and the source ARN that was removed.
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the flow that is associated with the source you removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   The ARN of the source that was removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowSourceResponse AWS API Documentation
+    #
+    class RemoveFlowSourceResponse < Struct.new(
+      :flow_arn,
+      :source_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemoveFlowVpcInterfaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string", # required
+    #         vpc_interface_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_interface_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowVpcInterfaceRequest AWS API Documentation
+    #
+    class RemoveFlowVpcInterfaceRequest < Struct.new(
+      :flow_arn,
+      :vpc_interface_name)
+      include Aws::Structure
+    end
+
+    # The result of a successful RemoveFlowVpcInterface request including
+    # the flow ARN and the VPC interface name that was removed.
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the flow that is associated with the VPC interface you
+    #   removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] non_deleted_network_interface_ids
+    #   IDs of network interfaces associated with the removed VPC interface
+    #   that Media Connect was unable to remove.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_interface_name
+    #   The name of the VPC interface that was removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowVpcInterfaceResponse AWS API Documentation
+    #
+    class RemoveFlowVpcInterfaceResponse < Struct.new(
+      :flow_arn,
+      :non_deleted_network_interface_ids,
+      :vpc_interface_name)
       include Aws::Structure
     end
 
@@ -890,6 +1465,20 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The settings for the source of the flow.
     #
     # @note When making an API call, you may pass SetSourceRequest
@@ -898,9 +1487,14 @@ module Aws::MediaConnect
     #       {
     #         decryption: {
     #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string", # required
-    #           secret_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         description: "__string",
     #         entitlement_arn: "__string",
@@ -908,8 +1502,9 @@ module Aws::MediaConnect
     #         max_bitrate: 1,
     #         max_latency: 1,
     #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #         stream_id: "__string",
+    #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
     #       }
     #
@@ -934,11 +1529,12 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] max_bitrate
-    #   The smoothing max bitrate for RTP and RTP-FEC streams.
+    #   The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
     #   @return [Integer]
     #
     # @!attribute [rw] max_latency
-    #   The maximum latency in milliseconds for Zixi-based streams.
+    #   The maximum latency in milliseconds. This parameter applies only to
+    #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -954,10 +1550,14 @@ module Aws::MediaConnect
     #   parameter applies only to Zixi-based streams.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_interface_name
+    #   The name of the VPC interface to use for this source.
+    #   @return [String]
+    #
     # @!attribute [rw] whitelist_cidr
     #   The range of IP addresses that should be allowed to contribute
-    #   content to your source. These IP addresses should in the form of a
-    #   Classless Inter-Domain Routing (CIDR) block; for example,
+    #   content to your source. These IP addresses should be in the form of
+    #   a Classless Inter-Domain Routing (CIDR) block; for example,
     #   10.0.0.0/16.
     #   @return [String]
     #
@@ -973,11 +1573,17 @@ module Aws::MediaConnect
       :name,
       :protocol,
       :stream_id,
+      :vpc_interface_name,
       :whitelist_cidr)
       include Aws::Structure
     end
 
     # The settings for the source of the flow.
+    #
+    # @!attribute [rw] data_transfer_subscriber_fee_percent
+    #   Percentage from 0-100 of the data transfer cost to be billed to the
+    #   subscriber.
+    #   @return [Integer]
     #
     # @!attribute [rw] decryption
     #   The type of encryption that is used on the content ingested from
@@ -1018,16 +1624,21 @@ module Aws::MediaConnect
     #   source.
     #   @return [Types::Transport]
     #
+    # @!attribute [rw] vpc_interface_name
+    #   The name of the VPC Interface this Source is configured with.
+    #   @return [String]
+    #
     # @!attribute [rw] whitelist_cidr
     #   The range of IP addresses that should be allowed to contribute
-    #   content to your source. These IP addresses should in the form of a
-    #   Classless Inter-Domain Routing (CIDR) block; for example,
+    #   content to your source. These IP addresses should be in the form of
+    #   a Classless Inter-Domain Routing (CIDR) block; for example,
     #   10.0.0.0/16.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Source AWS API Documentation
     #
     class Source < Struct.new(
+      :data_transfer_subscriber_fee_percent,
       :decryption,
       :description,
       :entitlement_arn,
@@ -1036,6 +1647,7 @@ module Aws::MediaConnect
       :name,
       :source_arn,
       :transport,
+      :vpc_interface_name,
       :whitelist_cidr)
       include Aws::Structure
     end
@@ -1110,23 +1722,81 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The tags to add to the resource. Tag keys can have a maximum character
+    # length of 128 characters, and tag values can have a maximum length of
+    # 256 characters.
+    #
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tags: { # required
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map from tag keys to values. Tag keys can have a maximum character
+    #   length of 128 characters, and tag values can have a maximum length
+    #   of 256 characters.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Exception raised by AWS Elemental MediaConnect. See the error message
+    # and documentation for the operation for more information on the cause
+    # of this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Attributes related to the transport stream that are used in a source
     # or output.
     #
+    # @!attribute [rw] cidr_allow_list
+    #   The range of IP addresses that should be allowed to initiate output
+    #   requests to this flow. These IP addresses should be in the form of a
+    #   Classless Inter-Domain Routing (CIDR) block; for example,
+    #   10.0.0.0/16.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] max_bitrate
-    #   The smoothing max bitrate for RTP and RTP-FEC streams.
+    #   The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
     #   @return [Integer]
     #
     # @!attribute [rw] max_latency
-    #   The maximum latency in milliseconds for Zixi-based streams.
+    #   The maximum latency in milliseconds. This parameter applies only to
+    #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
     #   The protocol that is used by the source or output.
     #   @return [String]
     #
+    # @!attribute [rw] remote_id
+    #   The remote ID for the Zixi-pull stream.
+    #   @return [String]
+    #
     # @!attribute [rw] smoothing_latency
-    #   The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+    #   The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC
+    #   streams.
     #   @return [Integer]
     #
     # @!attribute [rw] stream_id
@@ -1137,11 +1807,35 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Transport AWS API Documentation
     #
     class Transport < Struct.new(
+      :cidr_allow_list,
       :max_bitrate,
       :max_latency,
       :protocol,
+      :remote_id,
       :smoothing_latency,
       :stream_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 
@@ -1152,9 +1846,14 @@ module Aws::MediaConnect
     #
     #       {
     #         algorithm: "aes128", # accepts aes128, aes192, aes256
-    #         key_type: "static-key", # accepts static-key
+    #         constant_initialization_vector: "__string",
+    #         device_id: "__string",
+    #         key_type: "speke", # accepts speke, static-key
+    #         region: "__string",
+    #         resource_id: "__string",
     #         role_arn: "__string",
     #         secret_arn: "__string",
+    #         url: "__string",
     #       }
     #
     # @!attribute [rw] algorithm
@@ -1162,9 +1861,35 @@ module Aws::MediaConnect
     #   aes128, aes192, or aes256).
     #   @return [String]
     #
+    # @!attribute [rw] constant_initialization_vector
+    #   A 128-bit, 16-byte hex value represented by a 32-character string,
+    #   to be used with the key for encrypting content. This parameter is
+    #   not valid for static key encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The value of one of the devices that you configured with your
+    #   digital rights management (DRM) platform key provider. This
+    #   parameter is required for SPEKE encryption and is not valid for
+    #   static key encryption.
+    #   @return [String]
+    #
     # @!attribute [rw] key_type
     #   The type of key that is used for the encryption. If no keyType is
     #   provided, the service will use the default setting (static-key).
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region that the API Gateway proxy endpoint was created in.
+    #   This parameter is required for SPEKE encryption and is not valid for
+    #   static key encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   An identifier for the content. The service sends this value to the
+    #   key server to identify the current endpoint. The resource ID is also
+    #   known as the content ID. This parameter is required for SPEKE
+    #   encryption and is not valid for static key encryption.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -1173,17 +1898,54 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The ARN that was assigned to the secret that you created in AWS
-    #   Secrets Manager to store the encryption key.
+    #   The ARN of the secret that you created in AWS Secrets Manager to
+    #   store the encryption key. This parameter is required for static key
+    #   encryption and is not valid for SPEKE encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL from the API Gateway proxy that you set up to talk to your
+    #   key server. This parameter is required for SPEKE encryption and is
+    #   not valid for static key encryption.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateEncryption AWS API Documentation
     #
     class UpdateEncryption < Struct.new(
       :algorithm,
+      :constant_initialization_vector,
+      :device_id,
       :key_type,
+      :region,
+      :resource_id,
       :role_arn,
-      :secret_arn)
+      :secret_arn,
+      :url)
+      include Aws::Structure
+    end
+
+    # The settings for source failover
+    #
+    # @note When making an API call, you may pass UpdateFailoverConfig
+    #   data as a hash:
+    #
+    #       {
+    #         recovery_window: 1,
+    #         state: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] recovery_window
+    #   Recovery window time to look for dash-7 packets
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFailoverConfig AWS API Documentation
+    #
+    class UpdateFailoverConfig < Struct.new(
+      :recovery_window,
+      :state)
       include Aws::Structure
     end
 
@@ -1196,9 +1958,14 @@ module Aws::MediaConnect
     #         description: "__string",
     #         encryption: {
     #           algorithm: "aes128", # accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string",
     #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         entitlement_arn: "__string", # required
     #         flow_arn: "__string", # required
@@ -1266,22 +2033,39 @@ module Aws::MediaConnect
     #   data as a hash:
     #
     #       {
+    #         cidr_allow_list: ["__string"],
     #         description: "__string",
     #         destination: "__string",
     #         encryption: {
     #           algorithm: "aes128", # accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string",
     #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         flow_arn: "__string", # required
     #         max_latency: 1,
     #         output_arn: "__string", # required
     #         port: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
+    #         vpc_interface_attachment: {
+    #           vpc_interface_name: "__string",
+    #         },
     #       }
+    #
+    # @!attribute [rw] cidr_allow_list
+    #   The range of IP addresses that should be allowed to initiate output
+    #   requests to this flow. These IP addresses should be in the form of a
+    #   Classless Inter-Domain Routing (CIDR) block; for example,
+    #   10.0.0.0/16.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] description
     #   A description of the output. This description appears only on the
@@ -1316,8 +2100,13 @@ module Aws::MediaConnect
     #   The protocol to use for the output.
     #   @return [String]
     #
+    # @!attribute [rw] remote_id
+    #   The remote ID for the Zixi-pull stream.
+    #   @return [String]
+    #
     # @!attribute [rw] smoothing_latency
-    #   The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+    #   The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC
+    #   streams.
     #   @return [Integer]
     #
     # @!attribute [rw] stream_id
@@ -1325,9 +2114,14 @@ module Aws::MediaConnect
     #   parameter applies only to Zixi-based streams.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_interface_attachment
+    #   The name of the VPC interface attachment to use for this output.
+    #   @return [Types::VpcInterfaceAttachment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutputRequest AWS API Documentation
     #
     class UpdateFlowOutputRequest < Struct.new(
+      :cidr_allow_list,
       :description,
       :destination,
       :encryption,
@@ -1336,8 +2130,10 @@ module Aws::MediaConnect
       :output_arn,
       :port,
       :protocol,
+      :remote_id,
       :smoothing_latency,
-      :stream_id)
+      :stream_id,
+      :vpc_interface_attachment)
       include Aws::Structure
     end
 
@@ -1360,6 +2156,48 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Updates an existing flow.
+    #
+    # @note When making an API call, you may pass UpdateFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string", # required
+    #         source_failover_config: {
+    #           recovery_window: 1,
+    #           state: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] source_failover_config
+    #   The settings for source failover
+    #   @return [Types::UpdateFailoverConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowRequest AWS API Documentation
+    #
+    class UpdateFlowRequest < Struct.new(
+      :flow_arn,
+      :source_failover_config)
+      include Aws::Structure
+    end
+
+    # Updates an existing flow.
+    #
+    # @!attribute [rw] flow
+    #   The settings for a flow, including its source, outputs, and
+    #   entitlements.
+    #   @return [Types::Flow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowResponse AWS API Documentation
+    #
+    class UpdateFlowResponse < Struct.new(
+      :flow)
+      include Aws::Structure
+    end
+
     # The settings for the updated source of the flow.
     #
     # @note When making an API call, you may pass UpdateFlowSourceRequest
@@ -1368,9 +2206,14 @@ module Aws::MediaConnect
     #       {
     #         decryption: {
     #           algorithm: "aes128", # accepts aes128, aes192, aes256
-    #           key_type: "static-key", # accepts static-key
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
     #           role_arn: "__string",
     #           secret_arn: "__string",
+    #           url: "__string",
     #         },
     #         description: "__string",
     #         entitlement_arn: "__string",
@@ -1378,9 +2221,10 @@ module Aws::MediaConnect
     #         ingest_port: 1,
     #         max_bitrate: 1,
     #         max_latency: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #         source_arn: "__string", # required
     #         stream_id: "__string",
+    #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
     #       }
     #
@@ -1408,11 +2252,12 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] max_bitrate
-    #   The smoothing max bitrate for RTP and RTP-FEC streams.
+    #   The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
     #   @return [Integer]
     #
     # @!attribute [rw] max_latency
-    #   The maximum latency in milliseconds for Zixi-based streams.
+    #   The maximum latency in milliseconds. This parameter applies only to
+    #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
@@ -1427,10 +2272,14 @@ module Aws::MediaConnect
     #   parameter applies only to Zixi-based streams.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_interface_name
+    #   The name of the VPC Interface to configure this Source with.
+    #   @return [String]
+    #
     # @!attribute [rw] whitelist_cidr
     #   The range of IP addresses that should be allowed to contribute
-    #   content to your source. These IP addresses should in the form of a
-    #   Classless Inter-Domain Routing (CIDR) block; for example,
+    #   content to your source. These IP addresses should be in the form of
+    #   a Classless Inter-Domain Routing (CIDR) block; for example,
     #   10.0.0.0/16.
     #   @return [String]
     #
@@ -1447,6 +2296,7 @@ module Aws::MediaConnect
       :protocol,
       :source_arn,
       :stream_id,
+      :vpc_interface_name,
       :whitelist_cidr)
       include Aws::Structure
     end
@@ -1468,6 +2318,102 @@ module Aws::MediaConnect
     class UpdateFlowSourceResponse < Struct.new(
       :flow_arn,
       :source)
+      include Aws::Structure
+    end
+
+    # The settings for a VPC Source.
+    #
+    # @!attribute [rw] name
+    #   Immutable and has to be a unique against other VpcInterfaces in this
+    #   Flow
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_ids
+    #   IDs of the network interfaces created in customer's account by
+    #   MediaConnect.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_arn
+    #   Role Arn MediaConnect can assumes to create ENIs in customer's
+    #   account
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   Security Group IDs to be used on ENI.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_id
+    #   Subnet must be in the AZ of the Flow
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/VpcInterface AWS API Documentation
+    #
+    class VpcInterface < Struct.new(
+      :name,
+      :network_interface_ids,
+      :role_arn,
+      :security_group_ids,
+      :subnet_id)
+      include Aws::Structure
+    end
+
+    # The settings for attaching a VPC interface to an output.
+    #
+    # @note When making an API call, you may pass VpcInterfaceAttachment
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_interface_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] vpc_interface_name
+    #   The name of the VPC interface to use for this output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/VpcInterfaceAttachment AWS API Documentation
+    #
+    class VpcInterfaceAttachment < Struct.new(
+      :vpc_interface_name)
+      include Aws::Structure
+    end
+
+    # Desired VPC Interface for a Flow
+    #
+    # @note When making an API call, you may pass VpcInterfaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "__string", # required
+    #         role_arn: "__string", # required
+    #         security_group_ids: ["__string"], # required
+    #         subnet_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the VPC Interface. This value must be unique within the
+    #   current flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   Role Arn MediaConnect can assumes to create ENIs in customer's
+    #   account
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   Security Group IDs to be used on ENI.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_id
+    #   Subnet must be in the AZ of the Flow
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/VpcInterfaceRequest AWS API Documentation
+    #
+    class VpcInterfaceRequest < Struct.new(
+      :name,
+      :role_arn,
+      :security_group_ids,
+      :subnet_id)
       include Aws::Structure
     end
 

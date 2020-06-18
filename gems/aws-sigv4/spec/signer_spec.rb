@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require_relative 'spec_helper'
 
 require 'tempfile'
+require 'base64'
 
 module Aws
   module Sigv4
@@ -114,32 +117,97 @@ module Aws
           expect(creds.session_token).to eq('token')
         end
 
+        it 'accepts empty credentials' do
+          signer = Signer.new(options.merge(
+            access_key_id: '',
+            secret_access_key: ''
+          ))
+          creds = signer.credentials_provider.credentials
+          expect(creds.access_key_id).to eq('')
+          expect(creds.secret_access_key).to eq('')
+        end
+
       end
 
       context '#sign_request' do
 
-        it 'populates the Host header' do
-          signature = Signer.new(options).sign_request(
+        let(:request) do
+          {
             http_method: 'GET',
             url: 'http://domain.com'
-          )
+          }
+        end
+
+        it 'populates the Host header' do
+          signature = Signer.new(options).sign_request(request)
+
           expect(signature.headers['host']).to eq('domain.com')
         end
 
-        it 'includes HTTP port in Host when not 80' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'http://domain.com:123'
-          )
-          expect(signature.headers['host']).to eq('domain.com:123')
+        context 'when credentials are not set' do
+          let(:creds) do
+            Credentials.new(access_key_id: '', secret_access_key: '')
+          end
+
+          it 'raises a MissingCredentialsError' do
+            signer = Signer.new(
+              options.merge(
+                credentials_provider: StaticCredentialsProvider.new(
+                  credentials: creds
+                )
+              ))
+            expect { signer.sign_request(request) }
+              .to raise_error(Errors::MissingCredentialsError)
+          end
         end
 
-        it 'includes HTTPS port in Host when not 443' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com:123'
-          )
-          expect(signature.headers['host']).to eq('domain.com:123')
+        context 'when URI schema is known' do
+
+          it 'omits port in Host when port not provided' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'https://domain.com'
+            )
+            expect(signature.headers['host']).to eq('domain.com')
+          end
+
+          it 'omits port in Host when default port and uri port are the same' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'https://domain.com:443'
+            )
+            expect(signature.headers['host']).to eq('domain.com')
+          end
+
+          it 'includes port in Host when default port and uri port are different' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'https://domain.com:123'
+            )
+            expect(signature.headers['host']).to eq('domain.com:123')
+          end
+
+        end
+
+        context 'when URI schema is unknown' do
+
+          it 'omits port in Host when uri port not provided' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'abcd://domain.com'
+            )
+            expect(signature.headers['host']).to eq('domain.com')
+
+          end
+
+          it 'includes port in Host when uri port provided' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'abcd://domain.com:123'
+            )
+            expect(signature.headers['host']).to eq('domain.com:123')
+          end
+
         end
 
         it 'sets the X-Amz-Date header' do
@@ -268,6 +336,29 @@ module Aws
           expect(signature.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/REGION/SERVICE/aws4_request, SignedHeaders=bar;bar2;foo;host;x-amz-content-sha256;x-amz-date, Signature=4a7d3e06d1950eb64a3daa1becaa8ba030d9099858516cb2fa4533fab4e8937d')
         end
 
+      end
+
+      context '#sign_event' do
+
+        before(:each) do
+          allow(Time).to receive(:now).and_return(now)
+          allow(now).to receive(:utc).and_return(utc)
+          allow(now).to receive(:to_i).and_return(time_i)
+          allow(utc).to receive(:strftime).and_return(datetime)
+        end
+
+        let(:now) { double('now') }
+        let(:utc) { double('utc-time') }
+        let(:time_i) { 1546045446 }
+        let(:datetime) { '20130524T000000Z' }
+
+        it 'support event signning' do
+          headers, signature = Signer.new(options).sign_event(
+            '', 'foo', Aws::EventStream::Encoder.new)
+          expect(headers[":date"].value).to eq(1546045446000)
+          expect(Base64.strict_encode64(headers[":chunk-signature"].value)).to eq("IEu14nE+lTVGgOlSKYbTrAMErq/TM5fznmVAylH/4iY=")
+          expect(signature).to eq("204bb5e2713e95354680e9522986d3ac0304aeafd33397f39e6540ca51ffe226")
+        end
       end
 
       context ':canonical_request' do

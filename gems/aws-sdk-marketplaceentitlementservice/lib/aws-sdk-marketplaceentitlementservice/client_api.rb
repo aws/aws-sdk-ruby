@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -61,6 +63,15 @@ module Aws::MarketplaceEntitlementService
     GetEntitlementsResult.add_member(:entitlements, Shapes::ShapeRef.new(shape: EntitlementList, location_name: "Entitlements"))
     GetEntitlementsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextToken"))
     GetEntitlementsResult.struct_class = Types::GetEntitlementsResult
+
+    InternalServiceErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalServiceErrorException.struct_class = Types::InternalServiceErrorException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
 
     # @api private

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -263,6 +265,12 @@ module Aws::WorkDocs
     CommentMetadata.add_member(:recipient_id, Shapes::ShapeRef.new(shape: IdType, location_name: "RecipientId"))
     CommentMetadata.struct_class = Types::CommentMetadata
 
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    ConflictingOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    ConflictingOperationException.struct_class = Types::ConflictingOperationException
+
     CreateCommentRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
     CreateCommentRequest.add_member(:document_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "DocumentId"))
     CreateCommentRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: DocumentVersionIdType, required: true, location: "uri", location_name: "VersionId"))
@@ -324,12 +332,17 @@ module Aws::WorkDocs
 
     CustomMetadataKeyList.member = Shapes::ShapeRef.new(shape: CustomMetadataKeyType)
 
+    CustomMetadataLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    CustomMetadataLimitExceededException.struct_class = Types::CustomMetadataLimitExceededException
+
     CustomMetadataMap.key = Shapes::ShapeRef.new(shape: CustomMetadataKeyType)
     CustomMetadataMap.value = Shapes::ShapeRef.new(shape: CustomMetadataValueType)
 
     DeactivateUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "UserId"))
     DeactivateUserRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
     DeactivateUserRequest.struct_class = Types::DeactivateUserRequest
+
+    DeactivatingLastSystemUserException.struct_class = Types::DeactivatingLastSystemUserException
 
     DeleteCommentRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
     DeleteCommentRequest.add_member(:document_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "DocumentId"))
@@ -485,6 +498,9 @@ module Aws::WorkDocs
     DescribeUsersResponse.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarkerType, location_name: "Marker"))
     DescribeUsersResponse.struct_class = Types::DescribeUsersResponse
 
+    DocumentLockedForCommentsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    DocumentLockedForCommentsException.struct_class = Types::DocumentLockedForCommentsException
+
     DocumentMetadata.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdType, location_name: "Id"))
     DocumentMetadata.add_member(:creator_id, Shapes::ShapeRef.new(shape: IdType, location_name: "CreatorId"))
     DocumentMetadata.add_member(:parent_folder_id, Shapes::ShapeRef.new(shape: ResourceIdType, location_name: "ParentFolderId"))
@@ -520,7 +536,20 @@ module Aws::WorkDocs
 
     DocumentVersionMetadataList.member = Shapes::ShapeRef.new(shape: DocumentVersionMetadata)
 
+    DraftUploadOutOfSyncException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    DraftUploadOutOfSyncException.struct_class = Types::DraftUploadOutOfSyncException
+
+    EntityAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    EntityAlreadyExistsException.struct_class = Types::EntityAlreadyExistsException
+
     EntityIdList.member = Shapes::ShapeRef.new(shape: IdType)
+
+    EntityNotExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    EntityNotExistsException.add_member(:entity_ids, Shapes::ShapeRef.new(shape: EntityIdList, location_name: "EntityIds"))
+    EntityNotExistsException.struct_class = Types::EntityNotExistsException
+
+    FailedDependencyException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    FailedDependencyException.struct_class = Types::FailedDependencyException
 
     FolderMetadata.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdType, location_name: "Id"))
     FolderMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameType, location_name: "Name"))
@@ -610,6 +639,9 @@ module Aws::WorkDocs
 
     GroupMetadataList.member = Shapes::ShapeRef.new(shape: GroupMetadata)
 
+    IllegalUserStateException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    IllegalUserStateException.struct_class = Types::IllegalUserStateException
+
     InitiateDocumentVersionUploadRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
     InitiateDocumentVersionUploadRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdType, location_name: "Id"))
     InitiateDocumentVersionUploadRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameType, location_name: "Name"))
@@ -623,6 +655,21 @@ module Aws::WorkDocs
     InitiateDocumentVersionUploadResponse.add_member(:metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "Metadata"))
     InitiateDocumentVersionUploadResponse.add_member(:upload_metadata, Shapes::ShapeRef.new(shape: UploadMetadata, location_name: "UploadMetadata"))
     InitiateDocumentVersionUploadResponse.struct_class = Types::InitiateDocumentVersionUploadResponse
+
+    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    InvalidArgumentException.struct_class = Types::InvalidArgumentException
+
+    InvalidCommentOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    InvalidCommentOperationException.struct_class = Types::InvalidCommentOperationException
+
+    InvalidOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    InvalidOperationException.struct_class = Types::InvalidOperationException
+
+    InvalidPasswordException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    InvalidPasswordException.struct_class = Types::InvalidPasswordException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     NotificationOptions.add_member(:send_email, Shapes::ShapeRef.new(shape: BooleanType, location_name: "SendEmail"))
     NotificationOptions.add_member(:email_message, Shapes::ShapeRef.new(shape: MessageType, location_name: "EmailMessage"))
@@ -647,6 +694,9 @@ module Aws::WorkDocs
 
     PrincipalList.member = Shapes::ShapeRef.new(shape: Principal)
 
+    ProhibitedStateException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    ProhibitedStateException.struct_class = Types::ProhibitedStateException
+
     RemoveAllResourcePermissionsRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
     RemoveAllResourcePermissionsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "ResourceId"))
     RemoveAllResourcePermissionsRequest.struct_class = Types::RemoveAllResourcePermissionsRequest
@@ -656,6 +706,12 @@ module Aws::WorkDocs
     RemoveResourcePermissionRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "PrincipalId"))
     RemoveResourcePermissionRequest.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location: "querystring", location_name: "type"))
     RemoveResourcePermissionRequest.struct_class = Types::RemoveResourcePermissionRequest
+
+    RequestedEntityTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    RequestedEntityTooLargeException.struct_class = Types::RequestedEntityTooLargeException
+
+    ResourceAlreadyCheckedOutException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    ResourceAlreadyCheckedOutException.struct_class = Types::ResourceAlreadyCheckedOutException
 
     ResourceMetadata.add_member(:type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "Type"))
     ResourceMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameType, location_name: "Name"))
@@ -674,6 +730,9 @@ module Aws::WorkDocs
     ResourcePathComponent.struct_class = Types::ResourcePathComponent
 
     ResourcePathComponentList.member = Shapes::ShapeRef.new(shape: ResourcePathComponent)
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     SharePrincipal.add_member(:id, Shapes::ShapeRef.new(shape: IdType, required: true, location_name: "Id"))
     SharePrincipal.add_member(:type, Shapes::ShapeRef.new(shape: PrincipalType, required: true, location_name: "Type"))
@@ -697,6 +756,12 @@ module Aws::WorkDocs
     SignedHeaderMap.key = Shapes::ShapeRef.new(shape: HeaderNameType)
     SignedHeaderMap.value = Shapes::ShapeRef.new(shape: HeaderValueType)
 
+    StorageLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    StorageLimitExceededException.struct_class = Types::StorageLimitExceededException
+
+    StorageLimitWillExceedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    StorageLimitWillExceedException.struct_class = Types::StorageLimitWillExceedException
+
     StorageRuleType.add_member(:storage_allocated_in_bytes, Shapes::ShapeRef.new(shape: PositiveSizeType, location_name: "StorageAllocatedInBytes"))
     StorageRuleType.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
     StorageRuleType.struct_class = Types::StorageRuleType
@@ -707,6 +772,17 @@ module Aws::WorkDocs
     Subscription.struct_class = Types::Subscription
 
     SubscriptionList.member = Shapes::ShapeRef.new(shape: Subscription)
+
+    TooManyLabelsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    TooManyLabelsException.struct_class = Types::TooManyLabelsException
+
+    TooManySubscriptionsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    TooManySubscriptionsException.struct_class = Types::TooManySubscriptionsException
+
+    UnauthorizedOperationException.struct_class = Types::UnauthorizedOperationException
+
+    UnauthorizedResourceAccessException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
+    UnauthorizedResourceAccessException.struct_class = Types::UnauthorizedResourceAccessException
 
     UpdateDocumentRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
     UpdateDocumentRequest.add_member(:document_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "DocumentId"))

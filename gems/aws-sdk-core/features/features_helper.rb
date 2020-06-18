@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $LOAD_PATH.unshift(File.expand_path('../../lib',  __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../aws-sigv4/lib',  __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../aws-eventstream/lib',  __FILE__))
@@ -71,7 +73,7 @@ class IntegrationTestConfig
     end
 
     def load!
-      @cfg = new(File.exists?(path) ? Aws::Json.load_file(path) : {})
+      @cfg = new(File.exist?(path) ? Aws::Json.load_file(path) : {})
     end
 
     private

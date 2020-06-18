@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-mturk/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     m_turk = Aws::MTurk::Client.new
+#     resp = m_turk.accept_qualification_request(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Mechanical Turk all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Mechanical Turk are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::MTurk::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Mechanical Turk API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-mturk/customizations'
 # @service
 module Aws::MTurk
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.23.1'
 
 end

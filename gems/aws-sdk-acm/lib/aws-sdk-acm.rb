@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -25,17 +27,20 @@ require_relative 'aws-sdk-acm/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     acm = Aws::ACM::Client.new
+#     resp = acm.add_tags_to_certificate(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Certificate Manager all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Certificate Manager are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ACM::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Certificate Manager API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +48,6 @@ require_relative 'aws-sdk-acm/customizations'
 # @service
 module Aws::ACM
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.32.1'
 
 end

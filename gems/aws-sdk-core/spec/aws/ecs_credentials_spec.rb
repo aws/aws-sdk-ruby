@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 module Aws
@@ -106,7 +108,10 @@ module Aws
           to_return(:status => 200, :body => ' ')
         expect {
           ECSCredentials.new(backoff:0)
-        }.to raise_error(JSON::ParserError)
+        }.to raise_error(
+          Aws::Errors::MetadataParserError,
+          'Failed to parse metadata service response.'
+        )
       end
 
       it 'retries errors parsing expiration time 3 times' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -199,6 +201,8 @@ module Aws::ElasticLoadBalancing
     AccessLog.add_member(:s3_bucket_prefix, Shapes::ShapeRef.new(shape: AccessLogPrefix, location_name: "S3BucketPrefix"))
     AccessLog.struct_class = Types::AccessLog
 
+    AccessPointNotFoundException.struct_class = Types::AccessPointNotFoundException
+
     AddAvailabilityZonesInput.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location_name: "LoadBalancerName"))
     AddAvailabilityZonesInput.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, required: true, location_name: "AvailabilityZones"))
     AddAvailabilityZonesInput.struct_class = Types::AddAvailabilityZonesInput
@@ -245,6 +249,8 @@ module Aws::ElasticLoadBalancing
     BackendServerDescription.struct_class = Types::BackendServerDescription
 
     BackendServerDescriptions.member = Shapes::ShapeRef.new(shape: BackendServerDescription)
+
+    CertificateNotFoundException.struct_class = Types::CertificateNotFoundException
 
     ConfigureHealthCheckInput.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location_name: "LoadBalancerName"))
     ConfigureHealthCheckInput.add_member(:health_check, Shapes::ShapeRef.new(shape: HealthCheck, required: true, location_name: "HealthCheck"))
@@ -320,6 +326,8 @@ module Aws::ElasticLoadBalancing
 
     DeleteLoadBalancerPolicyOutput.struct_class = Types::DeleteLoadBalancerPolicyOutput
 
+    DependencyThrottleException.struct_class = Types::DependencyThrottleException
+
     DeregisterEndPointsInput.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location_name: "LoadBalancerName"))
     DeregisterEndPointsInput.add_member(:instances, Shapes::ShapeRef.new(shape: Instances, required: true, location_name: "Instances"))
     DeregisterEndPointsInput.struct_class = Types::DeregisterEndPointsInput
@@ -383,6 +391,14 @@ module Aws::ElasticLoadBalancing
     DetachLoadBalancerFromSubnetsOutput.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, location_name: "Subnets"))
     DetachLoadBalancerFromSubnetsOutput.struct_class = Types::DetachLoadBalancerFromSubnetsOutput
 
+    DuplicateAccessPointNameException.struct_class = Types::DuplicateAccessPointNameException
+
+    DuplicateListenerException.struct_class = Types::DuplicateListenerException
+
+    DuplicatePolicyNameException.struct_class = Types::DuplicatePolicyNameException
+
+    DuplicateTagKeysException.struct_class = Types::DuplicateTagKeysException
+
     HealthCheck.add_member(:target, Shapes::ShapeRef.new(shape: HealthCheckTarget, required: true, location_name: "Target"))
     HealthCheck.add_member(:interval, Shapes::ShapeRef.new(shape: HealthCheckInterval, required: true, location_name: "Interval"))
     HealthCheck.add_member(:timeout, Shapes::ShapeRef.new(shape: HealthCheckTimeout, required: true, location_name: "Timeout"))
@@ -402,6 +418,16 @@ module Aws::ElasticLoadBalancing
     InstanceStates.member = Shapes::ShapeRef.new(shape: InstanceState)
 
     Instances.member = Shapes::ShapeRef.new(shape: Instance)
+
+    InvalidConfigurationRequestException.struct_class = Types::InvalidConfigurationRequestException
+
+    InvalidEndPointException.struct_class = Types::InvalidEndPointException
+
+    InvalidSchemeException.struct_class = Types::InvalidSchemeException
+
+    InvalidSecurityGroupException.struct_class = Types::InvalidSecurityGroupException
+
+    InvalidSubnetException.struct_class = Types::InvalidSubnetException
 
     LBCookieStickinessPolicies.member = Shapes::ShapeRef.new(shape: LBCookieStickinessPolicy)
 
@@ -428,7 +454,11 @@ module Aws::ElasticLoadBalancing
 
     ListenerDescriptions.member = Shapes::ShapeRef.new(shape: ListenerDescription)
 
+    ListenerNotFoundException.struct_class = Types::ListenerNotFoundException
+
     Listeners.member = Shapes::ShapeRef.new(shape: Listener)
+
+    LoadBalancerAttributeNotFoundException.struct_class = Types::LoadBalancerAttributeNotFoundException
 
     LoadBalancerAttributes.add_member(:cross_zone_load_balancing, Shapes::ShapeRef.new(shape: CrossZoneLoadBalancing, location_name: "CrossZoneLoadBalancing"))
     LoadBalancerAttributes.add_member(:access_log, Shapes::ShapeRef.new(shape: AccessLog, location_name: "AccessLog"))
@@ -469,6 +499,8 @@ module Aws::ElasticLoadBalancing
     ModifyLoadBalancerAttributesOutput.add_member(:load_balancer_attributes, Shapes::ShapeRef.new(shape: LoadBalancerAttributes, location_name: "LoadBalancerAttributes"))
     ModifyLoadBalancerAttributesOutput.struct_class = Types::ModifyLoadBalancerAttributesOutput
 
+    OperationNotPermittedException.struct_class = Types::OperationNotPermittedException
+
     Policies.add_member(:app_cookie_stickiness_policies, Shapes::ShapeRef.new(shape: AppCookieStickinessPolicies, location_name: "AppCookieStickinessPolicies"))
     Policies.add_member(:lb_cookie_stickiness_policies, Shapes::ShapeRef.new(shape: LBCookieStickinessPolicies, location_name: "LBCookieStickinessPolicies"))
     Policies.add_member(:other_policies, Shapes::ShapeRef.new(shape: PolicyNames, location_name: "OtherPolicies"))
@@ -504,6 +536,8 @@ module Aws::ElasticLoadBalancing
 
     PolicyNames.member = Shapes::ShapeRef.new(shape: PolicyName)
 
+    PolicyNotFoundException.struct_class = Types::PolicyNotFoundException
+
     PolicyTypeDescription.add_member(:policy_type_name, Shapes::ShapeRef.new(shape: PolicyTypeName, location_name: "PolicyTypeName"))
     PolicyTypeDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     PolicyTypeDescription.add_member(:policy_attribute_type_descriptions, Shapes::ShapeRef.new(shape: PolicyAttributeTypeDescriptions, location_name: "PolicyAttributeTypeDescriptions"))
@@ -512,6 +546,8 @@ module Aws::ElasticLoadBalancing
     PolicyTypeDescriptions.member = Shapes::ShapeRef.new(shape: PolicyTypeDescription)
 
     PolicyTypeNames.member = Shapes::ShapeRef.new(shape: PolicyTypeName)
+
+    PolicyTypeNotFoundException.struct_class = Types::PolicyTypeNotFoundException
 
     Ports.member = Shapes::ShapeRef.new(shape: AccessPointPort)
 
@@ -562,6 +598,8 @@ module Aws::ElasticLoadBalancing
     SourceSecurityGroup.add_member(:group_name, Shapes::ShapeRef.new(shape: SecurityGroupName, location_name: "GroupName"))
     SourceSecurityGroup.struct_class = Types::SourceSecurityGroup
 
+    SubnetNotFoundException.struct_class = Types::SubnetNotFoundException
+
     Subnets.member = Shapes::ShapeRef.new(shape: SubnetId)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
@@ -580,6 +618,14 @@ module Aws::ElasticLoadBalancing
     TagKeyOnly.struct_class = Types::TagKeyOnly
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TooManyAccessPointsException.struct_class = Types::TooManyAccessPointsException
+
+    TooManyPoliciesException.struct_class = Types::TooManyPoliciesException
+
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    UnsupportedProtocolException.struct_class = Types::UnsupportedProtocolException
 
 
     # @api private

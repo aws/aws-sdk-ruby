@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-workspaces/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     work_spaces = Aws::WorkSpaces::Client.new
+#     resp = work_spaces.associate_ip_groups(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon WorkSpaces all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon WorkSpaces are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::WorkSpaces::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon WorkSpaces API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-workspaces/customizations'
 # @service
 module Aws::WorkSpaces
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.38.1'
 
 end

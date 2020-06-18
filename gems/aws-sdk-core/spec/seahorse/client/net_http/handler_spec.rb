@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'ostruct'
 require 'stringio'
@@ -31,7 +33,7 @@ module Seahorse
         describe '#session_for' do
 
           it 're-uses session for endpoints that share port, scheme and host' do
-            session = double('http-session', last_used: Time.now).as_null_object
+            session = double('http-session', last_used: Aws::Util.monotonic_milliseconds).as_null_object
             pool = ConnectionPool.for({})
             expect(pool).to receive(:start_session).
               exactly(1).times.
@@ -45,6 +47,20 @@ module Seahorse
             pool.session_for(endpoint2) { |https| sessions << https }
             pool.session_for(endpoint3) { |https| sessions << https }
             expect(sessions).to eq([session, session, session])
+          end
+
+          it 're-uses session for slow request that are taking more time than the configured idle timeout' do
+            session = double('http-session').as_null_object
+            allow(session).to receive(:request) { sleep 2 }
+            pool = ConnectionPool.for(http_idle_timeout: 1)
+            expect(pool).to receive(:start_session).
+              exactly(1).times.
+              and_return(ConnectionPool::ExtendedSession.new(session))
+            endpoint = URI.parse('http://foo.com')
+            sessions = []
+            pool.session_for(endpoint) { |http| http.request; sessions << http }
+            pool.session_for(endpoint) { |http| http.request; sessions << http }
+            expect(sessions).to eq([session, session])
           end
 
         end
@@ -80,6 +96,14 @@ module Seahorse
           it 'configures the pool#http_idle_timeout' do
             config.http_idle_timeout = 123
             expect(handler_pool.http_idle_timeout).to eq(123)
+          end
+
+          it 'configures the Net::HTTP#keep_alive_timeout' do
+            config.http_idle_timeout = 123
+            handler_pool.session_for(URI.parse('http://foo.com')) do |http|
+              skip 'not supported' unless http.respond_to?(:keep_alive_timeout)
+              expect(http.keep_alive_timeout).to eq(123)
+            end
           end
 
           it 'configures the pool#http_wire_trace' do

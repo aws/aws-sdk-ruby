@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AutoScaling
+
   class LaunchConfiguration
 
     extend Aws::Deprecations
@@ -21,6 +24,7 @@ module Aws::AutoScaling
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -37,58 +41,101 @@ module Aws::AutoScaling
       data[:launch_configuration_arn]
     end
 
-    # The ID of the Amazon Machine Image (AMI).
+    # The ID of the Amazon Machine Image (AMI) to use to launch your EC2
+    # instances.
+    #
+    # For more information, see [Finding an AMI][1] in the *Amazon EC2 User
+    # Guide for Linux Instances*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
     # @return [String]
     def image_id
       data[:image_id]
     end
 
     # The name of the key pair.
+    #
+    # For more information, see [Amazon EC2 Key Pairs][1] in the *Amazon EC2
+    # User Guide for Linux Instances*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
     # @return [String]
     def key_name
       data[:key_name]
     end
 
-    # The security groups to associate with the instances.
+    # A list that contains the security groups to assign to the instances in
+    # the Auto Scaling group.
+    #
+    # For more information, see [Security Groups for Your VPC][1] in the
+    # *Amazon Virtual Private Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
     # @return [Array<String>]
     def security_groups
       data[:security_groups]
     end
 
     # The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances
-    # to. This parameter can only be used if you are launching EC2-Classic
-    # instances. For more information, see [ClassicLink][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # to.
+    #
+    # For more information, see [ClassicLink][1] in the *Amazon EC2 User
+    # Guide for Linux Instances* and [Linking EC2-Classic Instances to a
+    # VPC][2] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink
     # @return [String]
     def classic_link_vpc_id
       data[:classic_link_vpc_id]
     end
 
     # The IDs of one or more security groups for the VPC specified in
-    # `ClassicLinkVPCId`. This parameter is required if you specify a
-    # ClassicLink-enabled VPC, and cannot be used otherwise. For more
-    # information, see [ClassicLink][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # `ClassicLinkVPCId`.
+    #
+    # For more information, see [ClassicLink][1] in the *Amazon EC2 User
+    # Guide for Linux Instances* and [Linking EC2-Classic Instances to a
+    # VPC][2] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink
     # @return [Array<String>]
     def classic_link_vpc_security_groups
       data[:classic_link_vpc_security_groups]
     end
 
-    # The user data available to the instances.
+    # The Base64-encoded user data to make available to the launched EC2
+    # instances.
+    #
+    # For more information, see [Instance Metadata and User Data][1] in the
+    # *Amazon EC2 User Guide for Linux Instances*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     # @return [String]
     def user_data
       data[:user_data]
     end
 
     # The instance type for the instances.
+    #
+    # For information about available instance types, see [Available
+    # Instance Types][1] in the *Amazon EC2 User Guide for Linux Instances.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes
     # @return [String]
     def instance_type
       data[:instance_type]
@@ -108,6 +155,13 @@ module Aws::AutoScaling
 
     # A block device mapping, which specifies the block devices for the
     # instance.
+    #
+    # For more information, see [Block Device Mapping][1] in the *Amazon EC2
+    # User Guide for Linux Instances*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
     # @return [Array<Types::BlockDeviceMapping>]
     def block_device_mappings
       data[:block_device_mappings]
@@ -115,19 +169,43 @@ module Aws::AutoScaling
 
     # Controls whether instances in this group are launched with detailed
     # (`true`) or basic (`false`) monitoring.
+    #
+    # For more information, see [Configure Monitoring for Auto Scaling
+    # Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-as-instance-metrics
     # @return [Types::InstanceMonitoring]
     def instance_monitoring
       data[:instance_monitoring]
     end
 
-    # The price to bid when launching Spot Instances.
+    # The maximum hourly price to be paid for any Spot Instance launched to
+    # fulfill the request. Spot Instances are launched when the price you
+    # specify exceeds the current Spot price.
+    #
+    # For more information, see [Launching Spot Instances in Your Auto
+    # Scaling Group][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-spot-instances.html
     # @return [String]
     def spot_price
       data[:spot_price]
     end
 
-    # The name or Amazon Resource Name (ARN) of the instance profile
-    # associated with the IAM role for the instance.
+    # The name or the Amazon Resource Name (ARN) of the instance profile
+    # associated with the IAM role for the instance. The instance profile
+    # contains the IAM role.
+    #
+    # For more information, see [IAM Role for Applications That Run on
+    # Amazon EC2 Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/us-iam-role.html
     # @return [String]
     def iam_instance_profile
       data[:iam_instance_profile]
@@ -139,23 +217,44 @@ module Aws::AutoScaling
       data[:created_time]
     end
 
-    # Controls whether the instance is optimized for EBS I/O (`true`) or not
-    # (`false`).
+    # Specifies whether the launch configuration is optimized for EBS I/O
+    # (`true`) or not (`false`).
+    #
+    # For more information, see [Amazon EBS-Optimized Instances][1] in the
+    # *Amazon EC2 User Guide for Linux Instances*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html
     # @return [Boolean]
     def ebs_optimized
       data[:ebs_optimized]
     end
 
-    # \[EC2-VPC\] Indicates whether to assign a public IP address to each
-    # instance.
+    # For Auto Scaling groups that are running in a VPC, specifies whether
+    # to assign a public IP address to the group's instances.
+    #
+    # For more information, see [Launching Auto Scaling Instances in a
+    # VPC][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html
     # @return [Boolean]
     def associate_public_ip_address
       data[:associate_public_ip_address]
     end
 
     # The tenancy of the instance, either `default` or `dedicated`. An
-    # instance with `dedicated` tenancy runs in an isolated, single-tenant
+    # instance with `dedicated` tenancy runs on isolated, single-tenant
     # hardware and can only be launched into a VPC.
+    #
+    # For more information, see [Instance Placement Tenancy][1] in the
+    # *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy
     # @return [String]
     def placement_tenancy
       data[:placement_tenancy]
@@ -201,7 +300,8 @@ module Aws::AutoScaling
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -214,13 +314,15 @@ module Aws::AutoScaling
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -251,17 +353,16 @@ module Aws::AutoScaling
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #

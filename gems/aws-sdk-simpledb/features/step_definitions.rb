@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@simpledb") do
   @service = Aws::SimpleDB::Resource.new
   @client = @service.client

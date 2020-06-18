@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::S3
+
   class BucketNotification
 
     extend Aws::Deprecations
@@ -21,6 +24,7 @@ module Aws::S3
       @bucket_name = extract_bucket_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -30,16 +34,22 @@ module Aws::S3
       @bucket_name
     end
 
+    # The topic to which notifications are sent and the events for which
+    # notifications are generated.
     # @return [Array<Types::TopicConfiguration>]
     def topic_configurations
       data[:topic_configurations]
     end
 
+    # The Amazon Simple Queue Service queues to publish messages to and the
+    # events for which to publish messages.
     # @return [Array<Types::QueueConfiguration>]
     def queue_configurations
       data[:queue_configurations]
     end
 
+    # Describes the AWS Lambda functions to invoke and the events for which
+    # to invoke them.
     # @return [Array<Types::LambdaFunctionConfiguration>]
     def lambda_function_configurations
       data[:lambda_function_configurations]
@@ -85,7 +95,8 @@ module Aws::S3
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -98,13 +109,15 @@ module Aws::S3
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -135,17 +148,16 @@ module Aws::S3
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -185,7 +197,7 @@ module Aws::S3
     #         {
     #           id: "NotificationId",
     #           topic_arn: "TopicArn", # required
-    #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:Post, s3:ObjectRestore:Completed
+    #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:*, s3:ObjectRestore:Post, s3:ObjectRestore:Completed, s3:Replication:*, s3:Replication:OperationFailedReplication, s3:Replication:OperationNotTracked, s3:Replication:OperationMissedThreshold, s3:Replication:OperationReplicatedAfterThreshold
     #           filter: {
     #             key: {
     #               filter_rules: [
@@ -202,7 +214,7 @@ module Aws::S3
     #         {
     #           id: "NotificationId",
     #           queue_arn: "QueueArn", # required
-    #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:Post, s3:ObjectRestore:Completed
+    #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:*, s3:ObjectRestore:Post, s3:ObjectRestore:Completed, s3:Replication:*, s3:Replication:OperationFailedReplication, s3:Replication:OperationNotTracked, s3:Replication:OperationMissedThreshold, s3:Replication:OperationReplicatedAfterThreshold
     #           filter: {
     #             key: {
     #               filter_rules: [
@@ -219,7 +231,7 @@ module Aws::S3
     #         {
     #           id: "NotificationId",
     #           lambda_function_arn: "LambdaFunctionArn", # required
-    #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:Post, s3:ObjectRestore:Completed
+    #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated, s3:ObjectRestore:*, s3:ObjectRestore:Post, s3:ObjectRestore:Completed, s3:Replication:*, s3:Replication:OperationFailedReplication, s3:Replication:OperationNotTracked, s3:Replication:OperationMissedThreshold, s3:Replication:OperationReplicatedAfterThreshold
     #           filter: {
     #             key: {
     #               filter_rules: [

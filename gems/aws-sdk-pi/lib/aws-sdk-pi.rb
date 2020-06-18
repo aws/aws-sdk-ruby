@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-pi/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     pi = Aws::PI::Client.new
+#     resp = pi.describe_dimension_keys(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Performance Insights all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Performance Insights are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::PI::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Performance Insights API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-pi/customizations'
 # @service
 module Aws::PI
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.20.1'
 
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-polly/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     polly = Aws::Polly::Client.new
+#     resp = polly.delete_lexicon(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Polly all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Polly are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Polly::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Polly API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-polly/customizations'
 # @service
 module Aws::Polly
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.32.0'
 
 end

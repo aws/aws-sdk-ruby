@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AwsSdkCodeGenerator
   module Views
     class ClientClass < View
@@ -10,6 +12,7 @@ module AwsSdkCodeGenerator
       # @option options [required, String] :aws_sdk_core_lib_path
       # @option options [required, String] :protocol
       # @option options [required, String] :signature_version
+      # @option options [required, Boolean] :endpoint_discovery_required
       # @option options [required, Hash] :add_plugins
       # @option options [required, Array] :remove_plugins
       # @option options [required, Hash] :api
@@ -22,7 +25,7 @@ module AwsSdkCodeGenerator
         @gem_name = options.fetch(:gem_name)
         @gem_version = options.fetch(:gem_version)
         @plugins = PluginList.new(options)
-        @client_constructor = ClientConstructor.new(plugins: @plugins)
+        @client_constructor = ClientConstructor.new(options.merge(plugins: @plugins))
         @operations = ClientOperationList.new(options).to_a
         @waiters = Waiter.build_list(options[:waiters])
         @custom = options.fetch(:custom)

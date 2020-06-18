@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -29,8 +31,14 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] attachments
-    #   One or more attachments to add to the set. The limit is 3
-    #   attachments per set, and the size limit is 5 MB per attachment.
+    #   One or more attachments to add to the set. You can add up to three
+    #   attachments per set. The size limit is 5 MB per attachment.
+    #
+    #   In the `Attachment` object, use the `data` parameter to specify the
+    #   contents of the attachment file. In the previous request syntax, the
+    #   value for `data` appear as `blob`, which is represented as a
+    #   base64-encoded string. The value for `fileName` is the name of the
+    #   attachment, such as `troubleshoot-screenshot.png`.
     #   @return [Array<Types::Attachment>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddAttachmentsToSetRequest AWS API Documentation
@@ -63,8 +71,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # To be written.
-    #
     # @note When making an API call, you may pass AddCommunicationToCaseRequest
     #   data as a hash:
     #
@@ -166,8 +172,93 @@ module Aws::Support
       include Aws::Structure
     end
 
+    # An attachment with the specified ID could not be found.
+    #
+    # @!attribute [rw] message
+    #   An attachment with the specified ID could not be found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentIdNotFound AWS API Documentation
+    #
+    class AttachmentIdNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The limit for the number of attachment sets created in a short period
+    # of time has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   The limit for the number of attachment sets created in a short
+    #   period of time has been exceeded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentLimitExceeded AWS API Documentation
+    #
+    class AttachmentLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The expiration time of the attachment set has passed. The set expires
+    # 1 hour after it is created.
+    #
+    # @!attribute [rw] message
+    #   The expiration time of the attachment set has passed. The set
+    #   expires one hour after it is created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentSetExpired AWS API Documentation
+    #
+    class AttachmentSetExpired < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An attachment set with the specified ID could not be found.
+    #
+    # @!attribute [rw] message
+    #   An attachment set with the specified ID could not be found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentSetIdNotFound AWS API Documentation
+    #
+    class AttachmentSetIdNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A limit for the size of an attachment set has been exceeded. The
+    # limits are three attachments and 5 MB per attachment.
+    #
+    # @!attribute [rw] message
+    #   A limit for the size of an attachment set has been exceeded. The
+    #   limits are three attachments and 5 MB per attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentSetSizeLimitExceeded AWS API Documentation
+    #
+    class AttachmentSetSizeLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The case creation limit for the account has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   An error message that indicates that you have exceeded the number of
+    #   cases you can have open.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CaseCreationLimitExceeded AWS API Documentation
+    #
+    class CaseCreationLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A JSON-formatted object that contains the metadata for a support case.
-    # It is contained the response from a DescribeCases request.
+    # It is contained in the response from a DescribeCases request.
     # **CaseDetails** contains the following fields:
     #
     # * **caseId.** The AWS Support case ID requested or returned in the
@@ -186,20 +277,34 @@ module Aws::Support
     #   and Japanese ("ja"). Language parameters must be passed explicitly
     #   for operations that take them.
     #
+    # * **nextToken.** A resumption point for pagination.
+    #
     # * **recentCommunications.** One or more Communication objects. Fields
     #   of these objects are `attachments`, `body`, `caseId`, `submittedBy`,
     #   and `timeCreated`.
     #
-    # * **nextToken.** A resumption point for pagination.
-    #
     # * **serviceCode.** The identifier for the AWS service that corresponds
     #   to the service code defined in the call to DescribeServices.
     #
-    # * <b>severityCode. </b>The severity code assigned to the case.
-    #   Contains one of the values returned by the call to
-    #   DescribeSeverityLevels.
+    # * **severityCode.** The severity code assigned to the case. Contains
+    #   one of the values returned by the call to DescribeSeverityLevels.
+    #   The possible values are: `low`, `normal`, `high`, `urgent`, and
+    #   `critical`.
     #
-    # * **status.** The status of the case in the AWS Support Center.
+    # * **status.** The status of the case in the AWS Support Center. Valid
+    #   values:
+    #
+    #   * `opened`
+    #
+    #   * `pending-customer-action`
+    #
+    #   * `reopened`
+    #
+    #   * `resolved`
+    #
+    #   * `unassigned`
+    #
+    #   * `work-in-progress`
     #
     # * **subject.** The subject line of the case.
     #
@@ -225,11 +330,25 @@ module Aws::Support
     #
     # @!attribute [rw] status
     #   The status of the case.
+    #
+    #   Valid values:
+    #
+    #   * `opened`
+    #
+    #   * `pending-customer-action`
+    #
+    #   * `reopened`
+    #
+    #   * `resolved`
+    #
+    #   * `unassigned`
+    #
+    #   * `work-in-progress`
     #   @return [String]
     #
     # @!attribute [rw] service_code
-    #   The code for the AWS service returned by the call to
-    #   DescribeServices.
+    #   The code for the AWS service. You can get a list of codes and the
+    #   corresponding service names by calling DescribeServices.
     #   @return [String]
     #
     # @!attribute [rw] category_code
@@ -246,7 +365,7 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] time_created
-    #   The time that the case was case created in the AWS Support Center.
+    #   The time that the case was created in the AWS Support Center.
     #   @return [String]
     #
     # @!attribute [rw] recent_communications
@@ -286,6 +405,19 @@ module Aws::Support
       include Aws::Structure
     end
 
+    # The requested `caseId` could not be located.
+    #
+    # @!attribute [rw] message
+    #   The requested `CaseId` could not be located.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CaseIdNotFound AWS API Documentation
+    #
+    class CaseIdNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A JSON-formatted name/value pair that represents the category name and
     # category code of the problem, selected from the DescribeServices
     # response for each AWS service.
@@ -308,7 +440,8 @@ module Aws::Support
 
     # A communication associated with an AWS Support case. The communication
     # consists of the case ID, the message body, attachment information, the
-    # account email address, and the date and time of the communication.
+    # submitter of the communication, and the date and time of the
+    # communication.
     #
     # @!attribute [rw] case_id
     #   The AWS Support case ID requested or returned in the call. The case
@@ -321,8 +454,11 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] submitted_by
-    #   The email address of the account that submitted the AWS Support
-    #   case.
+    #   The identity of the account that submitted, or responded to, the
+    #   support case. Customer entries include the role or IAM user as well
+    #   as the email address. For example, "AdminRole (Role)
+    #   &lt;someone@example.com&gt;. Entries from the AWS Support team
+    #   display "Amazon Web Services," and do not show an email address.
     #   @return [String]
     #
     # @!attribute [rw] time_created
@@ -360,55 +496,81 @@ module Aws::Support
     #       }
     #
     # @!attribute [rw] subject
-    #   The title of the AWS Support case.
+    #   The title of the AWS Support case. The title appears in the
+    #   **Subject** field on the AWS Support Center [Create Case][1] page.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/support/home#/case/create
     #   @return [String]
     #
     # @!attribute [rw] service_code
-    #   The code for the AWS service returned by the call to
-    #   DescribeServices.
+    #   The code for the AWS service. You can use the DescribeServices
+    #   operation to get the possible `serviceCode` values.
     #   @return [String]
     #
     # @!attribute [rw] severity_code
-    #   The code for the severity level returned by the call to
-    #   DescribeSeverityLevels.
+    #   A value that indicates the urgency of the case. This value
+    #   determines the response time according to your service level
+    #   agreement with AWS Support. You can use the DescribeSeverityLevels
+    #   operation to get the possible values for `severityCode`.
     #
-    #   <note markdown="1"> The availability of severity levels depends on each customer's
-    #   support subscription. In other words, your subscription may not
-    #   necessarily require the urgent level of response time.
+    #   For more information, see SeverityLevel and [Choosing a Severity][1]
+    #   in the *AWS Support User Guide*.
+    #
+    #   <note markdown="1"> The availability of severity levels depends on the support plan for
+    #   the AWS account.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity
     #   @return [String]
     #
     # @!attribute [rw] category_code
-    #   The category of problem for the AWS Support case.
+    #   The category of problem for the AWS Support case. You also use the
+    #   DescribeServices operation to get the category code for a service.
+    #   Each AWS service defines its own set of category codes.
     #   @return [String]
     #
     # @!attribute [rw] communication_body
-    #   The communication body text when you create an AWS Support case by
-    #   calling CreateCase.
+    #   The communication body text that describes the issue. This text
+    #   appears in the **Description** field on the AWS Support Center
+    #   [Create Case][1] page.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/support/home#/case/create
     #   @return [String]
     #
     # @!attribute [rw] cc_email_addresses
     #   A list of email addresses that AWS Support copies on case
-    #   correspondence.
+    #   correspondence. AWS Support identifies the account that creates the
+    #   case when you specify your AWS credentials in an HTTP POST method or
+    #   use the [AWS SDKs][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/tools/
     #   @return [Array<String>]
     #
     # @!attribute [rw] language
-    #   The ISO 639-1 code for the language in which AWS provides support.
-    #   AWS Support currently supports English ("en") and Japanese
-    #   ("ja"). Language parameters must be passed explicitly for
-    #   operations that take them.
+    #   The language in which AWS Support handles the case. You must specify
+    #   the ISO 639-1 code for the `language` parameter if you want support
+    #   in that language. Currently, English ("en") and Japanese ("ja")
+    #   are supported.
     #   @return [String]
     #
     # @!attribute [rw] issue_type
-    #   The type of issue for the case. You can specify either
-    #   "customer-service" or "technical." If you do not indicate a
-    #   value, the default is "technical."
+    #   The type of issue for the case. You can specify `customer-service`
+    #   or `technical`. If you don't specify a value, the default is
+    #   `technical`.
     #   @return [String]
     #
     # @!attribute [rw] attachment_set_id
     #   The ID of a set of one or more attachments for the case. Create the
-    #   set by using AddAttachmentsToSet.
+    #   set by using the AddAttachmentsToSet operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCaseRequest AWS API Documentation
@@ -431,7 +593,7 @@ module Aws::Support
     #
     # @!attribute [rw] case_id
     #   The AWS Support case ID requested or returned in the call. The case
-    #   ID is an alphanumeric string formatted as shown in this example:
+    #   ID is an alphanumeric string in the following format:
     #   case-*12345678910-2013-c4c1d2bf33c5cf47*
     #   @return [String]
     #
@@ -439,6 +601,21 @@ module Aws::Support
     #
     class CreateCaseResponse < Struct.new(
       :case_id)
+      include Aws::Structure
+    end
+
+    # The limit for the number of DescribeAttachment requests in a short
+    # period of time has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   The limit for the number of DescribeAttachment requests in a short
+    #   period of time has been exceeded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachmentLimitExceeded AWS API Documentation
+    #
+    class DescribeAttachmentLimitExceeded < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -465,7 +642,12 @@ module Aws::Support
     # DescribeAttachment operation.
     #
     # @!attribute [rw] attachment
-    #   The attachment content and file name.
+    #   This object includes the attachment content and file name.
+    #
+    #   In the previous response syntax, the value for the `data` parameter
+    #   appears as `blob`, which is represented as a base64-encoded string.
+    #   The value for `fileName` is the name of the attachment, such as
+    #   `troubleshoot-screenshot.png`.
     #   @return [Types::Attachment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachmentResponse AWS API Documentation
@@ -513,8 +695,9 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] include_resolved_cases
-    #   Specifies whether resolved support cases should be included in the
-    #   DescribeCases results. The default is *false*.
+    #   Specifies whether to include resolved support cases in the
+    #   `DescribeCases` response. By default, resolved cases aren't
+    #   included.
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
@@ -533,8 +716,8 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] include_communications
-    #   Specifies whether communications should be included in the
-    #   DescribeCases results. The default is *true*.
+    #   Specifies whether to include communications in the `DescribeCases`
+    #   response. By default, communications are incuded.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCasesRequest AWS API Documentation
@@ -552,8 +735,12 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # Returns an array of CaseDetails objects and a `nextToken` that defines
-    # a point for pagination in the result set.
+    # Returns an array of [CaseDetails][1] objects and a `nextToken` that
+    # defines a point for pagination in the result set.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html
     #
     # @!attribute [rw] cases
     #   The details for the cases that match the request.
@@ -723,8 +910,11 @@ module Aws::Support
     #
     # @!attribute [rw] check_ids
     #   The IDs of the Trusted Advisor checks to get the status of.
-    #   **Note:** Specifying the check ID of a check that is automatically
-    #   refreshed causes an `InvalidParameterValue` error.
+    #
+    #   <note markdown="1"> If you specify the check ID of a check that is automatically
+    #   refreshed, you might see an `InvalidParameterValue` error.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckRefreshStatusesRequest AWS API Documentation
@@ -856,6 +1046,19 @@ module Aws::Support
       include Aws::Structure
     end
 
+    # An internal server error occurred.
+    #
+    # @!attribute [rw] message
+    #   An internal server error occurred.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The five most recent communications associated with the case.
     #
     # @!attribute [rw] communications
@@ -976,18 +1179,49 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # A code and name pair that represent a severity level that can be
-    # applied to a support case.
+    # A code and name pair that represents the severity level of a support
+    # case. The available values depend on the support plan for the account.
+    # For more information, see [Choosing a severity][1] in the *AWS Support
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity
     #
     # @!attribute [rw] code
-    #   One of four values: "low," "medium," "high," and "urgent".
-    #   These values correspond to response times returned to the caller in
-    #   `severityLevel.name`.
+    #   The code for case severity level.
+    #
+    #   Valid values: `low` \| `normal` \| `high` \| `urgent` \| `critical`
     #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the severity level that corresponds to the severity
     #   level code.
+    #
+    #   <note markdown="1"> The values returned by the API differ from the values that are
+    #   displayed in the AWS Support Center. For example, for the code
+    #   "low", the API name is "Low", but the name in the Support Center
+    #   is "General guidance". These are the Support Center code/name
+    #   mappings:
+    #
+    #    * `low`\: General guidance
+    #
+    #   * `normal`\: System impaired
+    #
+    #   * `high`\: Production system impaired
+    #
+    #   * `urgent`\: Production system down
+    #
+    #   * `critical`\: Business-critical system down
+    #
+    #    </note>
+    #
+    #   For more information, see [Choosing a severity][1] in the *AWS
+    #   Support User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/SeverityLevel AWS API Documentation
@@ -1025,7 +1259,7 @@ module Aws::Support
     #
     # @!attribute [rw] description
     #   The description of the Trusted Advisor check, which includes the
-    #   alert criteria and recommended actions (contains HTML markup).
+    #   alert criteria and recommended operations (contains HTML markup).
     #   @return [String]
     #
     # @!attribute [rw] category
@@ -1060,8 +1294,20 @@ module Aws::Support
     #
     # @!attribute [rw] status
     #   The status of the Trusted Advisor check for which a refresh has been
-    #   requested: "none", "enqueued", "processing", "success", or
-    #   "abandoned".
+    #   requested:
+    #
+    #   * `none:` The check is not refreshed or the non-success status
+    #     exceeds the timeout
+    #
+    #   * `enqueued:` The check refresh requests has entered the refresh
+    #     queue
+    #
+    #   * `processing:` The check refresh request is picked up by the rule
+    #     processing engine
+    #
+    #   * `success:` The check is successfully refreshed
+    #
+    #   * `abandoned:` The check refresh has failed
     #   @return [String]
     #
     # @!attribute [rw] millis_until_next_refreshable
@@ -1163,16 +1409,16 @@ module Aws::Support
     end
 
     # The estimated cost savings that might be realized if the recommended
-    # actions are taken.
+    # operations are taken.
     #
     # @!attribute [rw] estimated_monthly_savings
     #   The estimated monthly savings that might be realized if the
-    #   recommended actions are taken.
+    #   recommended operations are taken.
     #   @return [Float]
     #
     # @!attribute [rw] estimated_percent_monthly_savings
     #   The estimated percentage of savings that might be realized if the
-    #   recommended actions are taken.
+    #   recommended operations are taken.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCostOptimizingSummary AWS API Documentation

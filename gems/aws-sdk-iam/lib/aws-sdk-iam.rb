@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -46,17 +48,20 @@ require_relative 'aws-sdk-iam/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     iam = Aws::IAM::Client.new
+#     resp = iam.add_client_id_to_open_id_connect_provider(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Identity and Access Management all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Identity and Access Management are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::IAM::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Identity and Access Management API errors
 #     end
 #
 # See {Errors} for more information.
@@ -64,6 +69,6 @@ require_relative 'aws-sdk-iam/customizations'
 # @service
 module Aws::IAM
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.40.1'
 
 end

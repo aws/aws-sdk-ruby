@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -61,6 +63,8 @@ module Aws::ServerlessApplicationRepository
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TemplateDetails = Shapes::StructureShape.new(name: 'TemplateDetails')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    UnshareApplicationInput = Shapes::StructureShape.new(name: 'UnshareApplicationInput')
+    UnshareApplicationRequest = Shapes::StructureShape.new(name: 'UnshareApplicationRequest')
     UpdateApplicationInput = Shapes::StructureShape.new(name: 'UpdateApplicationInput')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
@@ -87,11 +91,13 @@ module Aws::ServerlessApplicationRepository
     Application.add_member(:creation_time, Shapes::ShapeRef.new(shape: __string, location_name: "creationTime"))
     Application.add_member(:description, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "description"))
     Application.add_member(:home_page_url, Shapes::ShapeRef.new(shape: __string, location_name: "homePageUrl"))
+    Application.add_member(:is_verified_author, Shapes::ShapeRef.new(shape: __boolean, location_name: "isVerifiedAuthor"))
     Application.add_member(:labels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "labels"))
     Application.add_member(:license_url, Shapes::ShapeRef.new(shape: __string, location_name: "licenseUrl"))
     Application.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     Application.add_member(:readme_url, Shapes::ShapeRef.new(shape: __string, location_name: "readmeUrl"))
     Application.add_member(:spdx_license_id, Shapes::ShapeRef.new(shape: __string, location_name: "spdxLicenseId"))
+    Application.add_member(:verified_author_url, Shapes::ShapeRef.new(shape: __string, location_name: "verifiedAuthorUrl"))
     Application.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     Application.struct_class = Types::Application
 
@@ -111,6 +117,7 @@ module Aws::ServerlessApplicationRepository
     ApplicationPolicy.struct_class = Types::ApplicationPolicy
 
     ApplicationPolicyStatement.add_member(:actions, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "actions"))
+    ApplicationPolicyStatement.add_member(:principal_org_i_ds, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "principalOrgIDs"))
     ApplicationPolicyStatement.add_member(:principals, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "principals"))
     ApplicationPolicyStatement.add_member(:statement_id, Shapes::ShapeRef.new(shape: __string, location_name: "statementId"))
     ApplicationPolicyStatement.struct_class = Types::ApplicationPolicyStatement
@@ -129,11 +136,19 @@ module Aws::ServerlessApplicationRepository
     ApplicationVersionPage.add_member(:versions, Shapes::ShapeRef.new(shape: __listOfVersionSummary, required: true, location_name: "versions"))
     ApplicationVersionPage.struct_class = Types::ApplicationVersionPage
 
+    BadRequestException.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     ChangeSetDetails.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "applicationId"))
     ChangeSetDetails.add_member(:change_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "changeSetId"))
     ChangeSetDetails.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "semanticVersion"))
     ChangeSetDetails.add_member(:stack_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "stackId"))
     ChangeSetDetails.struct_class = Types::ChangeSetDetails
+
+    ConflictException.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
 
     CreateApplicationInput.add_member(:author, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "author"))
     CreateApplicationInput.add_member(:description, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "description"))
@@ -145,6 +160,7 @@ module Aws::ServerlessApplicationRepository
     CreateApplicationInput.add_member(:readme_body, Shapes::ShapeRef.new(shape: __string, location_name: "readmeBody"))
     CreateApplicationInput.add_member(:readme_url, Shapes::ShapeRef.new(shape: __string, location_name: "readmeUrl"))
     CreateApplicationInput.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, location_name: "semanticVersion"))
+    CreateApplicationInput.add_member(:source_code_archive_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeArchiveUrl"))
     CreateApplicationInput.add_member(:source_code_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeUrl"))
     CreateApplicationInput.add_member(:spdx_license_id, Shapes::ShapeRef.new(shape: __string, location_name: "spdxLicenseId"))
     CreateApplicationInput.add_member(:template_body, Shapes::ShapeRef.new(shape: __string, location_name: "templateBody"))
@@ -161,6 +177,7 @@ module Aws::ServerlessApplicationRepository
     CreateApplicationRequest.add_member(:readme_body, Shapes::ShapeRef.new(shape: __string, location_name: "readmeBody"))
     CreateApplicationRequest.add_member(:readme_url, Shapes::ShapeRef.new(shape: __string, location_name: "readmeUrl"))
     CreateApplicationRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, location_name: "semanticVersion"))
+    CreateApplicationRequest.add_member(:source_code_archive_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeArchiveUrl"))
     CreateApplicationRequest.add_member(:source_code_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeUrl"))
     CreateApplicationRequest.add_member(:spdx_license_id, Shapes::ShapeRef.new(shape: __string, location_name: "spdxLicenseId"))
     CreateApplicationRequest.add_member(:template_body, Shapes::ShapeRef.new(shape: __string, location_name: "templateBody"))
@@ -172,14 +189,17 @@ module Aws::ServerlessApplicationRepository
     CreateApplicationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __string, location_name: "creationTime"))
     CreateApplicationResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateApplicationResponse.add_member(:home_page_url, Shapes::ShapeRef.new(shape: __string, location_name: "homePageUrl"))
+    CreateApplicationResponse.add_member(:is_verified_author, Shapes::ShapeRef.new(shape: __boolean, location_name: "isVerifiedAuthor"))
     CreateApplicationResponse.add_member(:labels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "labels"))
     CreateApplicationResponse.add_member(:license_url, Shapes::ShapeRef.new(shape: __string, location_name: "licenseUrl"))
     CreateApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateApplicationResponse.add_member(:readme_url, Shapes::ShapeRef.new(shape: __string, location_name: "readmeUrl"))
     CreateApplicationResponse.add_member(:spdx_license_id, Shapes::ShapeRef.new(shape: __string, location_name: "spdxLicenseId"))
+    CreateApplicationResponse.add_member(:verified_author_url, Shapes::ShapeRef.new(shape: __string, location_name: "verifiedAuthorUrl"))
     CreateApplicationResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     CreateApplicationResponse.struct_class = Types::CreateApplicationResponse
 
+    CreateApplicationVersionInput.add_member(:source_code_archive_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeArchiveUrl"))
     CreateApplicationVersionInput.add_member(:source_code_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeUrl"))
     CreateApplicationVersionInput.add_member(:template_body, Shapes::ShapeRef.new(shape: __string, location_name: "templateBody"))
     CreateApplicationVersionInput.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, location_name: "templateUrl"))
@@ -187,6 +207,7 @@ module Aws::ServerlessApplicationRepository
 
     CreateApplicationVersionRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
     CreateApplicationVersionRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "semanticVersion"))
+    CreateApplicationVersionRequest.add_member(:source_code_archive_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeArchiveUrl"))
     CreateApplicationVersionRequest.add_member(:source_code_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeUrl"))
     CreateApplicationVersionRequest.add_member(:template_body, Shapes::ShapeRef.new(shape: __string, location_name: "templateBody"))
     CreateApplicationVersionRequest.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, location_name: "templateUrl"))
@@ -198,6 +219,7 @@ module Aws::ServerlessApplicationRepository
     CreateApplicationVersionResponse.add_member(:required_capabilities, Shapes::ShapeRef.new(shape: __listOfCapability, location_name: "requiredCapabilities"))
     CreateApplicationVersionResponse.add_member(:resources_supported, Shapes::ShapeRef.new(shape: __boolean, location_name: "resourcesSupported"))
     CreateApplicationVersionResponse.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, location_name: "semanticVersion"))
+    CreateApplicationVersionResponse.add_member(:source_code_archive_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeArchiveUrl"))
     CreateApplicationVersionResponse.add_member(:source_code_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeUrl"))
     CreateApplicationVersionResponse.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, location_name: "templateUrl"))
     CreateApplicationVersionResponse.struct_class = Types::CreateApplicationVersionResponse
@@ -253,6 +275,10 @@ module Aws::ServerlessApplicationRepository
     DeleteApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
     DeleteApplicationRequest.struct_class = Types::DeleteApplicationRequest
 
+    ForbiddenException.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
+    ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ForbiddenException.struct_class = Types::ForbiddenException
+
     GetApplicationPolicyRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
     GetApplicationPolicyRequest.struct_class = Types::GetApplicationPolicyRequest
 
@@ -268,11 +294,13 @@ module Aws::ServerlessApplicationRepository
     GetApplicationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __string, location_name: "creationTime"))
     GetApplicationResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     GetApplicationResponse.add_member(:home_page_url, Shapes::ShapeRef.new(shape: __string, location_name: "homePageUrl"))
+    GetApplicationResponse.add_member(:is_verified_author, Shapes::ShapeRef.new(shape: __boolean, location_name: "isVerifiedAuthor"))
     GetApplicationResponse.add_member(:labels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "labels"))
     GetApplicationResponse.add_member(:license_url, Shapes::ShapeRef.new(shape: __string, location_name: "licenseUrl"))
     GetApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     GetApplicationResponse.add_member(:readme_url, Shapes::ShapeRef.new(shape: __string, location_name: "readmeUrl"))
     GetApplicationResponse.add_member(:spdx_license_id, Shapes::ShapeRef.new(shape: __string, location_name: "spdxLicenseId"))
+    GetApplicationResponse.add_member(:verified_author_url, Shapes::ShapeRef.new(shape: __string, location_name: "verifiedAuthorUrl"))
     GetApplicationResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     GetApplicationResponse.struct_class = Types::GetApplicationResponse
 
@@ -288,6 +316,10 @@ module Aws::ServerlessApplicationRepository
     GetCloudFormationTemplateResponse.add_member(:template_id, Shapes::ShapeRef.new(shape: __string, location_name: "templateId"))
     GetCloudFormationTemplateResponse.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, location_name: "templateUrl"))
     GetCloudFormationTemplateResponse.struct_class = Types::GetCloudFormationTemplateResponse
+
+    InternalServerErrorException.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
+    InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
 
     ListApplicationDependenciesRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
     ListApplicationDependenciesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "maxItems"))
@@ -315,6 +347,10 @@ module Aws::ServerlessApplicationRepository
     ListApplicationsResponse.add_member(:applications, Shapes::ShapeRef.new(shape: __listOfApplicationSummary, location_name: "applications"))
     ListApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListApplicationsResponse.struct_class = Types::ListApplicationsResponse
+
+    NotFoundException.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     ParameterDefinition.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: __string, location_name: "allowedPattern"))
     ParameterDefinition.add_member(:allowed_values, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "allowedValues"))
@@ -363,6 +399,17 @@ module Aws::ServerlessApplicationRepository
     TemplateDetails.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "templateUrl"))
     TemplateDetails.struct_class = Types::TemplateDetails
 
+    TooManyRequestsException.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    UnshareApplicationInput.add_member(:organization_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "organizationId"))
+    UnshareApplicationInput.struct_class = Types::UnshareApplicationInput
+
+    UnshareApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
+    UnshareApplicationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "organizationId"))
+    UnshareApplicationRequest.struct_class = Types::UnshareApplicationRequest
+
     UpdateApplicationInput.add_member(:author, Shapes::ShapeRef.new(shape: __string, location_name: "author"))
     UpdateApplicationInput.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateApplicationInput.add_member(:home_page_url, Shapes::ShapeRef.new(shape: __string, location_name: "homePageUrl"))
@@ -385,11 +432,13 @@ module Aws::ServerlessApplicationRepository
     UpdateApplicationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __string, location_name: "creationTime"))
     UpdateApplicationResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateApplicationResponse.add_member(:home_page_url, Shapes::ShapeRef.new(shape: __string, location_name: "homePageUrl"))
+    UpdateApplicationResponse.add_member(:is_verified_author, Shapes::ShapeRef.new(shape: __boolean, location_name: "isVerifiedAuthor"))
     UpdateApplicationResponse.add_member(:labels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "labels"))
     UpdateApplicationResponse.add_member(:license_url, Shapes::ShapeRef.new(shape: __string, location_name: "licenseUrl"))
     UpdateApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateApplicationResponse.add_member(:readme_url, Shapes::ShapeRef.new(shape: __string, location_name: "readmeUrl"))
     UpdateApplicationResponse.add_member(:spdx_license_id, Shapes::ShapeRef.new(shape: __string, location_name: "spdxLicenseId"))
+    UpdateApplicationResponse.add_member(:verified_author_url, Shapes::ShapeRef.new(shape: __string, location_name: "verifiedAuthorUrl"))
     UpdateApplicationResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
 
@@ -399,6 +448,7 @@ module Aws::ServerlessApplicationRepository
     Version.add_member(:required_capabilities, Shapes::ShapeRef.new(shape: __listOfCapability, required: true, location_name: "requiredCapabilities"))
     Version.add_member(:resources_supported, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "resourcesSupported"))
     Version.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "semanticVersion"))
+    Version.add_member(:source_code_archive_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeArchiveUrl"))
     Version.add_member(:source_code_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeUrl"))
     Version.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "templateUrl"))
     Version.struct_class = Types::Version
@@ -613,6 +663,19 @@ module Aws::ServerlessApplicationRepository
         o.http_request_uri = "/applications/{applicationId}/policy"
         o.input = Shapes::ShapeRef.new(shape: PutApplicationPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: PutApplicationPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:unshare_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UnshareApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/applications/{applicationId}/unshare"
+        o.input = Shapes::ShapeRef.new(shape: UnshareApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)

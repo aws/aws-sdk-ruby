@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -59,15 +61,54 @@ module Aws::MarketplaceMetering
     BatchMeterUsageResult.add_member(:unprocessed_records, Shapes::ShapeRef.new(shape: UsageRecordList, location_name: "UnprocessedRecords"))
     BatchMeterUsageResult.struct_class = Types::BatchMeterUsageResult
 
+    CustomerNotEntitledException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    CustomerNotEntitledException.struct_class = Types::CustomerNotEntitledException
+
+    DisabledApiException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    DisabledApiException.struct_class = Types::DisabledApiException
+
+    DuplicateRequestException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    DuplicateRequestException.struct_class = Types::DuplicateRequestException
+
+    ExpiredTokenException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ExpiredTokenException.struct_class = Types::ExpiredTokenException
+
+    InternalServiceErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InternalServiceErrorException.struct_class = Types::InternalServiceErrorException
+
+    InvalidCustomerIdentifierException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidCustomerIdentifierException.struct_class = Types::InvalidCustomerIdentifierException
+
+    InvalidEndpointRegionException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidEndpointRegionException.struct_class = Types::InvalidEndpointRegionException
+
+    InvalidProductCodeException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidProductCodeException.struct_class = Types::InvalidProductCodeException
+
+    InvalidPublicKeyVersionException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidPublicKeyVersionException.struct_class = Types::InvalidPublicKeyVersionException
+
+    InvalidRegionException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidRegionException.struct_class = Types::InvalidRegionException
+
+    InvalidTokenException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidTokenException.struct_class = Types::InvalidTokenException
+
+    InvalidUsageDimensionException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidUsageDimensionException.struct_class = Types::InvalidUsageDimensionException
+
     MeterUsageRequest.add_member(:product_code, Shapes::ShapeRef.new(shape: ProductCode, required: true, location_name: "ProductCode"))
     MeterUsageRequest.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     MeterUsageRequest.add_member(:usage_dimension, Shapes::ShapeRef.new(shape: UsageDimension, required: true, location_name: "UsageDimension"))
-    MeterUsageRequest.add_member(:usage_quantity, Shapes::ShapeRef.new(shape: UsageQuantity, required: true, location_name: "UsageQuantity"))
-    MeterUsageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "DryRun"))
+    MeterUsageRequest.add_member(:usage_quantity, Shapes::ShapeRef.new(shape: UsageQuantity, location_name: "UsageQuantity"))
+    MeterUsageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     MeterUsageRequest.struct_class = Types::MeterUsageRequest
 
     MeterUsageResult.add_member(:metering_record_id, Shapes::ShapeRef.new(shape: String, location_name: "MeteringRecordId"))
     MeterUsageResult.struct_class = Types::MeterUsageResult
+
+    PlatformNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    PlatformNotSupportedException.struct_class = Types::PlatformNotSupportedException
 
     RegisterUsageRequest.add_member(:product_code, Shapes::ShapeRef.new(shape: ProductCode, required: true, location_name: "ProductCode"))
     RegisterUsageRequest.add_member(:public_key_version, Shapes::ShapeRef.new(shape: VersionInteger, required: true, location_name: "PublicKeyVersion"))
@@ -85,10 +126,16 @@ module Aws::MarketplaceMetering
     ResolveCustomerResult.add_member(:product_code, Shapes::ShapeRef.new(shape: ProductCode, location_name: "ProductCode"))
     ResolveCustomerResult.struct_class = Types::ResolveCustomerResult
 
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
+    TimestampOutOfBoundsException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    TimestampOutOfBoundsException.struct_class = Types::TimestampOutOfBoundsException
+
     UsageRecord.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     UsageRecord.add_member(:customer_identifier, Shapes::ShapeRef.new(shape: CustomerIdentifier, required: true, location_name: "CustomerIdentifier"))
     UsageRecord.add_member(:dimension, Shapes::ShapeRef.new(shape: UsageDimension, required: true, location_name: "Dimension"))
-    UsageRecord.add_member(:quantity, Shapes::ShapeRef.new(shape: UsageQuantity, required: true, location_name: "Quantity"))
+    UsageRecord.add_member(:quantity, Shapes::ShapeRef.new(shape: UsageQuantity, location_name: "Quantity"))
     UsageRecord.struct_class = Types::UsageRecord
 
     UsageRecordList.member = Shapes::ShapeRef.new(shape: UsageRecord)
@@ -147,6 +194,7 @@ module Aws::MarketplaceMetering
         o.errors << Shapes::ShapeRef.new(shape: TimestampOutOfBoundsException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomerNotEntitledException)
       end)
 
       api.add_operation(:register_usage, Seahorse::Model::Operation.new.tap do |o|

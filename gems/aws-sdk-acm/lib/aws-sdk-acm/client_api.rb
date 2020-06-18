@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -49,8 +51,10 @@ module Aws::ACM
     ImportCertificateRequest = Shapes::StructureShape.new(name: 'ImportCertificateRequest')
     ImportCertificateResponse = Shapes::StructureShape.new(name: 'ImportCertificateResponse')
     InUseList = Shapes::ListShape.new(name: 'InUseList')
+    InvalidArgsException = Shapes::StructureShape.new(name: 'InvalidArgsException')
     InvalidArnException = Shapes::StructureShape.new(name: 'InvalidArnException')
     InvalidDomainValidationOptionsException = Shapes::StructureShape.new(name: 'InvalidDomainValidationOptionsException')
+    InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     InvalidTagException = Shapes::StructureShape.new(name: 'InvalidTagException')
     KeyAlgorithm = Shapes::StringShape.new(name: 'KeyAlgorithm')
@@ -71,6 +75,7 @@ module Aws::ACM
     PrivateKeyBlob = Shapes::BlobShape.new(name: 'PrivateKeyBlob')
     RecordType = Shapes::StringShape.new(name: 'RecordType')
     RemoveTagsFromCertificateRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromCertificateRequest')
+    RenewCertificateRequest = Shapes::StructureShape.new(name: 'RenewCertificateRequest')
     RenewalEligibility = Shapes::StringShape.new(name: 'RenewalEligibility')
     RenewalStatus = Shapes::StringShape.new(name: 'RenewalStatus')
     RenewalSummary = Shapes::StructureShape.new(name: 'RenewalSummary')
@@ -87,6 +92,7 @@ module Aws::ACM
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagList = Shapes::ListShape.new(name: 'TagList')
+    TagPolicyException = Shapes::StructureShape.new(name: 'TagPolicyException')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UpdateCertificateOptionsRequest = Shapes::StructureShape.new(name: 'UpdateCertificateOptionsRequest')
@@ -196,12 +202,31 @@ module Aws::ACM
     ImportCertificateRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: CertificateBodyBlob, required: true, location_name: "Certificate"))
     ImportCertificateRequest.add_member(:private_key, Shapes::ShapeRef.new(shape: PrivateKeyBlob, required: true, location_name: "PrivateKey"))
     ImportCertificateRequest.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: CertificateChainBlob, location_name: "CertificateChain"))
+    ImportCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ImportCertificateRequest.struct_class = Types::ImportCertificateRequest
 
     ImportCertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
     ImportCertificateResponse.struct_class = Types::ImportCertificateResponse
 
     InUseList.member = Shapes::ShapeRef.new(shape: String)
+
+    InvalidArgsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidArgsException.struct_class = Types::InvalidArgsException
+
+    InvalidArnException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidArnException.struct_class = Types::InvalidArnException
+
+    InvalidDomainValidationOptionsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidDomainValidationOptionsException.struct_class = Types::InvalidDomainValidationOptionsException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidStateException.struct_class = Types::InvalidStateException
+
+    InvalidTagException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidTagException.struct_class = Types::InvalidTagException
 
     KeyAlgorithmList.member = Shapes::ShapeRef.new(shape: KeyAlgorithm)
 
@@ -211,6 +236,9 @@ module Aws::ACM
     KeyUsageFilterList.member = Shapes::ShapeRef.new(shape: KeyUsageName)
 
     KeyUsageList.member = Shapes::ShapeRef.new(shape: KeyUsage)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListCertificatesRequest.add_member(:certificate_statuses, Shapes::ShapeRef.new(shape: CertificateStatuses, location_name: "CertificateStatuses"))
     ListCertificatesRequest.add_member(:includes, Shapes::ShapeRef.new(shape: Filters, location_name: "Includes"))
@@ -232,8 +260,13 @@ module Aws::ACM
     RemoveTagsFromCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     RemoveTagsFromCertificateRequest.struct_class = Types::RemoveTagsFromCertificateRequest
 
+    RenewCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
+    RenewCertificateRequest.struct_class = Types::RenewCertificateRequest
+
     RenewalSummary.add_member(:renewal_status, Shapes::ShapeRef.new(shape: RenewalStatus, required: true, location_name: "RenewalStatus"))
     RenewalSummary.add_member(:domain_validation_options, Shapes::ShapeRef.new(shape: DomainValidationList, required: true, location_name: "DomainValidationOptions"))
+    RenewalSummary.add_member(:renewal_status_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "RenewalStatusReason"))
+    RenewalSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: TStamp, required: true, location_name: "UpdatedAt"))
     RenewalSummary.struct_class = Types::RenewalSummary
 
     RequestCertificateRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "DomainName"))
@@ -243,15 +276,25 @@ module Aws::ACM
     RequestCertificateRequest.add_member(:domain_validation_options, Shapes::ShapeRef.new(shape: DomainValidationOptionList, location_name: "DomainValidationOptions"))
     RequestCertificateRequest.add_member(:options, Shapes::ShapeRef.new(shape: CertificateOptions, location_name: "Options"))
     RequestCertificateRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
+    RequestCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     RequestCertificateRequest.struct_class = Types::RequestCertificateRequest
 
     RequestCertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
     RequestCertificateResponse.struct_class = Types::RequestCertificateResponse
 
+    RequestInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    RequestInProgressException.struct_class = Types::RequestInProgressException
+
     ResendValidationEmailRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     ResendValidationEmailRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "Domain"))
     ResendValidationEmailRequest.add_member(:validation_domain, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "ValidationDomain"))
     ResendValidationEmailRequest.struct_class = Types::ResendValidationEmailRequest
+
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResourceRecord.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     ResourceRecord.add_member(:type, Shapes::ShapeRef.new(shape: RecordType, required: true, location_name: "Type"))
@@ -263,6 +306,12 @@ module Aws::ACM
     Tag.struct_class = Types::Tag
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TagPolicyException.struct_class = Types::TagPolicyException
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
 
     UpdateCertificateOptionsRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     UpdateCertificateOptionsRequest.add_member(:options, Shapes::ShapeRef.new(shape: CertificateOptions, required: true, location_name: "Options"))
@@ -299,6 +348,8 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:delete_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -352,6 +403,10 @@ module Aws::ACM
         o.output = Shapes::ShapeRef.new(shape: ImportCertificateResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:list_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -360,6 +415,7 @@ module Aws::ACM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListCertificatesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCertificatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -387,6 +443,18 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:renew_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RenewCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RenewCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
       end)
 
       api.add_operation(:request_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -398,6 +466,10 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDomainValidationOptionsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:resend_validation_email, Seahorse::Model::Operation.new.tap do |o|

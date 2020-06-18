@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'aws-eventstream'
 
 module Aws
@@ -43,7 +45,7 @@ module Aws
         def build_body(api, operation, data)
           rules = operation.output
           if head_operation(operation)
-            ""
+            ''
           elsif streaming?(rules)
             data[rules[:payload]]
           elsif rules[:payload]
@@ -73,7 +75,7 @@ module Aws
         end
 
         def head_operation(operation)
-          operation.http_method == "HEAD"
+          operation.http_method == 'HEAD'
         end
 
         def eventstream?(rules)
@@ -94,9 +96,9 @@ module Aws
               # Pending
               raise 'Stubbing :exception event is not supported'
             end
-            stream << Aws::EventStream::Encoder.new.encode(
-              Aws::EventStream::Message.new(opts))
-            stream
+            [stream, Aws::EventStream::Encoder.new.encode(
+              Aws::EventStream::Message.new(opts)
+            )].pack('a*a*')
           end
         end
 
@@ -116,8 +118,41 @@ module Aws
           opts
         end
 
-        def encode_event(opts, rules, event_data, builder)
-          event_ref = rules.shape.member(event_data.delete(:event_type))
+        def encode_unknown_event(opts, event_type, event_data)
+          # right now h2 events are only rest_json
+          opts[:payload] = StringIO.new(JSON.dump(event_data))
+          opts[:headers][':event-type'] = Aws::EventStream::HeaderValue.new(
+            value: event_type.to_s,
+            type: 'string'
+          )
+          opts[:headers][':message-type'] = Aws::EventStream::HeaderValue.new(
+            value: 'event',
+            type: 'string'
+          )
+          opts
+        end
+
+        def encode_modeled_event(opts, rules, event_type, event_data, builder)
+          event_ref = rules.shape.member(event_type)
+          explicit_payload = false
+          implicit_payload_members = {}
+          event_ref.shape.members.each do |name, ref|
+            if ref.eventpayload
+              explicit_payload = true
+            else
+              implicit_payload_members[name] = ref
+            end
+          end
+
+          if !explicit_payload && !implicit_payload_members.empty?
+            unless implicit_payload_members.size > 1
+              m_name, _ = implicit_payload_members.first
+              value = {}
+              value[m_name] = event_data[m_name]
+              opts[:payload] = StringIO.new(builder.new(event_ref).serialize(value))
+            end
+          end
+
           event_data.each do |k, v|
             member_ref = event_ref.shape.member(k)
             if member_ref.eventheader
@@ -145,6 +180,16 @@ module Aws
             type: 'string'
           )
           opts
+        end
+
+        def encode_event(opts, rules, event_data, builder)
+          event_type = event_data.delete(:event_type)
+
+          if rules.shape.member?(event_type)
+            encode_modeled_event(opts, rules, event_type, event_data, builder)
+          else
+            encode_unknown_event(opts, event_type, event_data)
+          end
         end
 
       end

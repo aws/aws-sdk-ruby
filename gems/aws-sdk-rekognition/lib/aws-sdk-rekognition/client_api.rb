@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -13,11 +15,15 @@ module Aws::Rekognition
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AgeRange = Shapes::StructureShape.new(name: 'AgeRange')
+    Asset = Shapes::StructureShape.new(name: 'Asset')
+    Assets = Shapes::ListShape.new(name: 'Assets')
     Attribute = Shapes::StringShape.new(name: 'Attribute')
     Attributes = Shapes::ListShape.new(name: 'Attributes')
     Beard = Shapes::StructureShape.new(name: 'Beard')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundingBox = Shapes::StructureShape.new(name: 'BoundingBox')
+    BoundingBoxHeight = Shapes::FloatShape.new(name: 'BoundingBoxHeight')
+    BoundingBoxWidth = Shapes::FloatShape.new(name: 'BoundingBoxWidth')
     Celebrity = Shapes::StructureShape.new(name: 'Celebrity')
     CelebrityDetail = Shapes::StructureShape.new(name: 'CelebrityDetail')
     CelebrityList = Shapes::ListShape.new(name: 'CelebrityList')
@@ -35,36 +41,58 @@ module Aws::Rekognition
     ComparedFace = Shapes::StructureShape.new(name: 'ComparedFace')
     ComparedFaceList = Shapes::ListShape.new(name: 'ComparedFaceList')
     ComparedSourceImageFace = Shapes::StructureShape.new(name: 'ComparedSourceImageFace')
+    ContentClassifier = Shapes::StringShape.new(name: 'ContentClassifier')
+    ContentClassifiers = Shapes::ListShape.new(name: 'ContentClassifiers')
     ContentModerationDetection = Shapes::StructureShape.new(name: 'ContentModerationDetection')
     ContentModerationDetections = Shapes::ListShape.new(name: 'ContentModerationDetections')
     ContentModerationSortBy = Shapes::StringShape.new(name: 'ContentModerationSortBy')
     CreateCollectionRequest = Shapes::StructureShape.new(name: 'CreateCollectionRequest')
     CreateCollectionResponse = Shapes::StructureShape.new(name: 'CreateCollectionResponse')
+    CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
+    CreateProjectResponse = Shapes::StructureShape.new(name: 'CreateProjectResponse')
+    CreateProjectVersionRequest = Shapes::StructureShape.new(name: 'CreateProjectVersionRequest')
+    CreateProjectVersionResponse = Shapes::StructureShape.new(name: 'CreateProjectVersionResponse')
     CreateStreamProcessorRequest = Shapes::StructureShape.new(name: 'CreateStreamProcessorRequest')
     CreateStreamProcessorResponse = Shapes::StructureShape.new(name: 'CreateStreamProcessorResponse')
+    CustomLabel = Shapes::StructureShape.new(name: 'CustomLabel')
+    CustomLabels = Shapes::ListShape.new(name: 'CustomLabels')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     Degree = Shapes::FloatShape.new(name: 'Degree')
     DeleteCollectionRequest = Shapes::StructureShape.new(name: 'DeleteCollectionRequest')
     DeleteCollectionResponse = Shapes::StructureShape.new(name: 'DeleteCollectionResponse')
     DeleteFacesRequest = Shapes::StructureShape.new(name: 'DeleteFacesRequest')
     DeleteFacesResponse = Shapes::StructureShape.new(name: 'DeleteFacesResponse')
+    DeleteProjectRequest = Shapes::StructureShape.new(name: 'DeleteProjectRequest')
+    DeleteProjectResponse = Shapes::StructureShape.new(name: 'DeleteProjectResponse')
+    DeleteProjectVersionRequest = Shapes::StructureShape.new(name: 'DeleteProjectVersionRequest')
+    DeleteProjectVersionResponse = Shapes::StructureShape.new(name: 'DeleteProjectVersionResponse')
     DeleteStreamProcessorRequest = Shapes::StructureShape.new(name: 'DeleteStreamProcessorRequest')
     DeleteStreamProcessorResponse = Shapes::StructureShape.new(name: 'DeleteStreamProcessorResponse')
     DescribeCollectionRequest = Shapes::StructureShape.new(name: 'DescribeCollectionRequest')
     DescribeCollectionResponse = Shapes::StructureShape.new(name: 'DescribeCollectionResponse')
+    DescribeProjectVersionsRequest = Shapes::StructureShape.new(name: 'DescribeProjectVersionsRequest')
+    DescribeProjectVersionsResponse = Shapes::StructureShape.new(name: 'DescribeProjectVersionsResponse')
+    DescribeProjectsRequest = Shapes::StructureShape.new(name: 'DescribeProjectsRequest')
+    DescribeProjectsResponse = Shapes::StructureShape.new(name: 'DescribeProjectsResponse')
     DescribeStreamProcessorRequest = Shapes::StructureShape.new(name: 'DescribeStreamProcessorRequest')
     DescribeStreamProcessorResponse = Shapes::StructureShape.new(name: 'DescribeStreamProcessorResponse')
+    DetectCustomLabelsRequest = Shapes::StructureShape.new(name: 'DetectCustomLabelsRequest')
+    DetectCustomLabelsResponse = Shapes::StructureShape.new(name: 'DetectCustomLabelsResponse')
     DetectFacesRequest = Shapes::StructureShape.new(name: 'DetectFacesRequest')
     DetectFacesResponse = Shapes::StructureShape.new(name: 'DetectFacesResponse')
     DetectLabelsRequest = Shapes::StructureShape.new(name: 'DetectLabelsRequest')
     DetectLabelsResponse = Shapes::StructureShape.new(name: 'DetectLabelsResponse')
     DetectModerationLabelsRequest = Shapes::StructureShape.new(name: 'DetectModerationLabelsRequest')
     DetectModerationLabelsResponse = Shapes::StructureShape.new(name: 'DetectModerationLabelsResponse')
+    DetectTextFilters = Shapes::StructureShape.new(name: 'DetectTextFilters')
     DetectTextRequest = Shapes::StructureShape.new(name: 'DetectTextRequest')
     DetectTextResponse = Shapes::StructureShape.new(name: 'DetectTextResponse')
+    DetectionFilter = Shapes::StructureShape.new(name: 'DetectionFilter')
     Emotion = Shapes::StructureShape.new(name: 'Emotion')
     EmotionName = Shapes::StringShape.new(name: 'EmotionName')
     Emotions = Shapes::ListShape.new(name: 'Emotions')
+    EvaluationResult = Shapes::StructureShape.new(name: 'EvaluationResult')
+    ExtendedPaginationToken = Shapes::StringShape.new(name: 'ExtendedPaginationToken')
     ExternalImageId = Shapes::StringShape.new(name: 'ExternalImageId')
     EyeOpen = Shapes::StructureShape.new(name: 'EyeOpen')
     Eyeglasses = Shapes::StructureShape.new(name: 'Eyeglasses')
@@ -85,6 +113,7 @@ module Aws::Rekognition
     FaceSearchSettings = Shapes::StructureShape.new(name: 'FaceSearchSettings')
     FaceSearchSortBy = Shapes::StringShape.new(name: 'FaceSearchSortBy')
     Float = Shapes::FloatShape.new(name: 'Float')
+    FlowDefinitionArn = Shapes::StringShape.new(name: 'FlowDefinitionArn')
     Gender = Shapes::StructureShape.new(name: 'Gender')
     GenderType = Shapes::StringShape.new(name: 'GenderType')
     Geometry = Shapes::StructureShape.new(name: 'Geometry')
@@ -102,6 +131,18 @@ module Aws::Rekognition
     GetLabelDetectionResponse = Shapes::StructureShape.new(name: 'GetLabelDetectionResponse')
     GetPersonTrackingRequest = Shapes::StructureShape.new(name: 'GetPersonTrackingRequest')
     GetPersonTrackingResponse = Shapes::StructureShape.new(name: 'GetPersonTrackingResponse')
+    GetTextDetectionRequest = Shapes::StructureShape.new(name: 'GetTextDetectionRequest')
+    GetTextDetectionResponse = Shapes::StructureShape.new(name: 'GetTextDetectionResponse')
+    GroundTruthManifest = Shapes::StructureShape.new(name: 'GroundTruthManifest')
+    HumanLoopActivationConditionsEvaluationResults = Shapes::StringShape.new(name: 'HumanLoopActivationConditionsEvaluationResults')
+    HumanLoopActivationOutput = Shapes::StructureShape.new(name: 'HumanLoopActivationOutput')
+    HumanLoopActivationReason = Shapes::StringShape.new(name: 'HumanLoopActivationReason')
+    HumanLoopActivationReasons = Shapes::ListShape.new(name: 'HumanLoopActivationReasons')
+    HumanLoopArn = Shapes::StringShape.new(name: 'HumanLoopArn')
+    HumanLoopConfig = Shapes::StructureShape.new(name: 'HumanLoopConfig')
+    HumanLoopDataAttributes = Shapes::StructureShape.new(name: 'HumanLoopDataAttributes')
+    HumanLoopName = Shapes::StringShape.new(name: 'HumanLoopName')
+    HumanLoopQuotaExceededException = Shapes::StructureShape.new(name: 'HumanLoopQuotaExceededException')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageBlob = Shapes::BlobShape.new(name: 'ImageBlob')
@@ -110,6 +151,7 @@ module Aws::Rekognition
     ImageTooLargeException = Shapes::StructureShape.new(name: 'ImageTooLargeException')
     IndexFacesRequest = Shapes::StructureShape.new(name: 'IndexFacesRequest')
     IndexFacesResponse = Shapes::StructureShape.new(name: 'IndexFacesResponse')
+    InferenceUnits = Shapes::IntegerShape.new(name: 'InferenceUnits')
     Instance = Shapes::StructureShape.new(name: 'Instance')
     Instances = Shapes::ListShape.new(name: 'Instances')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
@@ -147,6 +189,7 @@ module Aws::Rekognition
     Mustache = Shapes::StructureShape.new(name: 'Mustache')
     NotificationChannel = Shapes::StructureShape.new(name: 'NotificationChannel')
     OrientationCorrection = Shapes::StringShape.new(name: 'OrientationCorrection')
+    OutputConfig = Shapes::StructureShape.new(name: 'OutputConfig')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Parent = Shapes::StructureShape.new(name: 'Parent')
@@ -162,18 +205,33 @@ module Aws::Rekognition
     Point = Shapes::StructureShape.new(name: 'Point')
     Polygon = Shapes::ListShape.new(name: 'Polygon')
     Pose = Shapes::StructureShape.new(name: 'Pose')
+    ProjectArn = Shapes::StringShape.new(name: 'ProjectArn')
+    ProjectDescription = Shapes::StructureShape.new(name: 'ProjectDescription')
+    ProjectDescriptions = Shapes::ListShape.new(name: 'ProjectDescriptions')
+    ProjectName = Shapes::StringShape.new(name: 'ProjectName')
+    ProjectStatus = Shapes::StringShape.new(name: 'ProjectStatus')
+    ProjectVersionArn = Shapes::StringShape.new(name: 'ProjectVersionArn')
+    ProjectVersionDescription = Shapes::StructureShape.new(name: 'ProjectVersionDescription')
+    ProjectVersionDescriptions = Shapes::ListShape.new(name: 'ProjectVersionDescriptions')
+    ProjectVersionStatus = Shapes::StringShape.new(name: 'ProjectVersionStatus')
+    ProjectVersionsPageSize = Shapes::IntegerShape.new(name: 'ProjectVersionsPageSize')
+    ProjectsPageSize = Shapes::IntegerShape.new(name: 'ProjectsPageSize')
     ProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ProvisionedThroughputExceededException')
     QualityFilter = Shapes::StringShape.new(name: 'QualityFilter')
     Reason = Shapes::StringShape.new(name: 'Reason')
     Reasons = Shapes::ListShape.new(name: 'Reasons')
     RecognizeCelebritiesRequest = Shapes::StructureShape.new(name: 'RecognizeCelebritiesRequest')
     RecognizeCelebritiesResponse = Shapes::StructureShape.new(name: 'RecognizeCelebritiesResponse')
+    RegionOfInterest = Shapes::StructureShape.new(name: 'RegionOfInterest')
+    RegionsOfInterest = Shapes::ListShape.new(name: 'RegionsOfInterest')
     RekognitionUniqueId = Shapes::StringShape.new(name: 'RekognitionUniqueId')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
+    S3KeyPrefix = Shapes::StringShape.new(name: 'S3KeyPrefix')
     S3Object = Shapes::StructureShape.new(name: 'S3Object')
     S3ObjectName = Shapes::StringShape.new(name: 'S3ObjectName')
     S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
@@ -195,9 +253,16 @@ module Aws::Rekognition
     StartLabelDetectionResponse = Shapes::StructureShape.new(name: 'StartLabelDetectionResponse')
     StartPersonTrackingRequest = Shapes::StructureShape.new(name: 'StartPersonTrackingRequest')
     StartPersonTrackingResponse = Shapes::StructureShape.new(name: 'StartPersonTrackingResponse')
+    StartProjectVersionRequest = Shapes::StructureShape.new(name: 'StartProjectVersionRequest')
+    StartProjectVersionResponse = Shapes::StructureShape.new(name: 'StartProjectVersionResponse')
     StartStreamProcessorRequest = Shapes::StructureShape.new(name: 'StartStreamProcessorRequest')
     StartStreamProcessorResponse = Shapes::StructureShape.new(name: 'StartStreamProcessorResponse')
+    StartTextDetectionFilters = Shapes::StructureShape.new(name: 'StartTextDetectionFilters')
+    StartTextDetectionRequest = Shapes::StructureShape.new(name: 'StartTextDetectionRequest')
+    StartTextDetectionResponse = Shapes::StructureShape.new(name: 'StartTextDetectionResponse')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
+    StopProjectVersionRequest = Shapes::StructureShape.new(name: 'StopProjectVersionRequest')
+    StopProjectVersionResponse = Shapes::StructureShape.new(name: 'StopProjectVersionResponse')
     StopStreamProcessorRequest = Shapes::StructureShape.new(name: 'StopStreamProcessorRequest')
     StopStreamProcessorResponse = Shapes::StructureShape.new(name: 'StopStreamProcessorResponse')
     StreamProcessor = Shapes::StructureShape.new(name: 'StreamProcessor')
@@ -209,26 +274,42 @@ module Aws::Rekognition
     StreamProcessorSettings = Shapes::StructureShape.new(name: 'StreamProcessorSettings')
     StreamProcessorStatus = Shapes::StringShape.new(name: 'StreamProcessorStatus')
     String = Shapes::StringShape.new(name: 'String')
+    Summary = Shapes::StructureShape.new(name: 'Summary')
     Sunglasses = Shapes::StructureShape.new(name: 'Sunglasses')
+    TestingData = Shapes::StructureShape.new(name: 'TestingData')
+    TestingDataResult = Shapes::StructureShape.new(name: 'TestingDataResult')
     TextDetection = Shapes::StructureShape.new(name: 'TextDetection')
     TextDetectionList = Shapes::ListShape.new(name: 'TextDetectionList')
+    TextDetectionResult = Shapes::StructureShape.new(name: 'TextDetectionResult')
+    TextDetectionResults = Shapes::ListShape.new(name: 'TextDetectionResults')
     TextTypes = Shapes::StringShape.new(name: 'TextTypes')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::IntegerShape.new(name: 'Timestamp')
+    TrainingData = Shapes::StructureShape.new(name: 'TrainingData')
+    TrainingDataResult = Shapes::StructureShape.new(name: 'TrainingDataResult')
     UInteger = Shapes::IntegerShape.new(name: 'UInteger')
     ULong = Shapes::IntegerShape.new(name: 'ULong')
     UnindexedFace = Shapes::StructureShape.new(name: 'UnindexedFace')
     UnindexedFaces = Shapes::ListShape.new(name: 'UnindexedFaces')
     Url = Shapes::StringShape.new(name: 'Url')
     Urls = Shapes::ListShape.new(name: 'Urls')
+    VersionName = Shapes::StringShape.new(name: 'VersionName')
+    VersionNames = Shapes::ListShape.new(name: 'VersionNames')
     Video = Shapes::StructureShape.new(name: 'Video')
     VideoJobStatus = Shapes::StringShape.new(name: 'VideoJobStatus')
     VideoMetadata = Shapes::StructureShape.new(name: 'VideoMetadata')
     VideoTooLargeException = Shapes::StructureShape.new(name: 'VideoTooLargeException')
 
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AgeRange.add_member(:low, Shapes::ShapeRef.new(shape: UInteger, location_name: "Low"))
     AgeRange.add_member(:high, Shapes::ShapeRef.new(shape: UInteger, location_name: "High"))
     AgeRange.struct_class = Types::AgeRange
+
+    Asset.add_member(:ground_truth_manifest, Shapes::ShapeRef.new(shape: GroundTruthManifest, location_name: "GroundTruthManifest"))
+    Asset.struct_class = Types::Asset
+
+    Assets.member = Shapes::ShapeRef.new(shape: Asset)
 
     Attributes.member = Shapes::ShapeRef.new(shape: Attribute)
 
@@ -276,6 +357,7 @@ module Aws::Rekognition
     CompareFacesRequest.add_member(:source_image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "SourceImage"))
     CompareFacesRequest.add_member(:target_image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "TargetImage"))
     CompareFacesRequest.add_member(:similarity_threshold, Shapes::ShapeRef.new(shape: Percent, location_name: "SimilarityThreshold"))
+    CompareFacesRequest.add_member(:quality_filter, Shapes::ShapeRef.new(shape: QualityFilter, location_name: "QualityFilter"))
     CompareFacesRequest.struct_class = Types::CompareFacesRequest
 
     CompareFacesResponse.add_member(:source_image_face, Shapes::ShapeRef.new(shape: ComparedSourceImageFace, location_name: "SourceImageFace"))
@@ -300,6 +382,8 @@ module Aws::Rekognition
     ComparedSourceImageFace.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     ComparedSourceImageFace.struct_class = Types::ComparedSourceImageFace
 
+    ContentClassifiers.member = Shapes::ShapeRef.new(shape: ContentClassifier)
+
     ContentModerationDetection.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     ContentModerationDetection.add_member(:moderation_label, Shapes::ShapeRef.new(shape: ModerationLabel, location_name: "ModerationLabel"))
     ContentModerationDetection.struct_class = Types::ContentModerationDetection
@@ -314,6 +398,22 @@ module Aws::Rekognition
     CreateCollectionResponse.add_member(:face_model_version, Shapes::ShapeRef.new(shape: String, location_name: "FaceModelVersion"))
     CreateCollectionResponse.struct_class = Types::CreateCollectionResponse
 
+    CreateProjectRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "ProjectName"))
+    CreateProjectRequest.struct_class = Types::CreateProjectRequest
+
+    CreateProjectResponse.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "ProjectArn"))
+    CreateProjectResponse.struct_class = Types::CreateProjectResponse
+
+    CreateProjectVersionRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    CreateProjectVersionRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location_name: "VersionName"))
+    CreateProjectVersionRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, required: true, location_name: "OutputConfig"))
+    CreateProjectVersionRequest.add_member(:training_data, Shapes::ShapeRef.new(shape: TrainingData, required: true, location_name: "TrainingData"))
+    CreateProjectVersionRequest.add_member(:testing_data, Shapes::ShapeRef.new(shape: TestingData, required: true, location_name: "TestingData"))
+    CreateProjectVersionRequest.struct_class = Types::CreateProjectVersionRequest
+
+    CreateProjectVersionResponse.add_member(:project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, location_name: "ProjectVersionArn"))
+    CreateProjectVersionResponse.struct_class = Types::CreateProjectVersionResponse
+
     CreateStreamProcessorRequest.add_member(:input, Shapes::ShapeRef.new(shape: StreamProcessorInput, required: true, location_name: "Input"))
     CreateStreamProcessorRequest.add_member(:output, Shapes::ShapeRef.new(shape: StreamProcessorOutput, required: true, location_name: "Output"))
     CreateStreamProcessorRequest.add_member(:name, Shapes::ShapeRef.new(shape: StreamProcessorName, required: true, location_name: "Name"))
@@ -323,6 +423,13 @@ module Aws::Rekognition
 
     CreateStreamProcessorResponse.add_member(:stream_processor_arn, Shapes::ShapeRef.new(shape: StreamProcessorArn, location_name: "StreamProcessorArn"))
     CreateStreamProcessorResponse.struct_class = Types::CreateStreamProcessorResponse
+
+    CustomLabel.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    CustomLabel.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    CustomLabel.add_member(:geometry, Shapes::ShapeRef.new(shape: Geometry, location_name: "Geometry"))
+    CustomLabel.struct_class = Types::CustomLabel
+
+    CustomLabels.member = Shapes::ShapeRef.new(shape: CustomLabel)
 
     DeleteCollectionRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
     DeleteCollectionRequest.struct_class = Types::DeleteCollectionRequest
@@ -336,6 +443,18 @@ module Aws::Rekognition
 
     DeleteFacesResponse.add_member(:deleted_faces, Shapes::ShapeRef.new(shape: FaceIdList, location_name: "DeletedFaces"))
     DeleteFacesResponse.struct_class = Types::DeleteFacesResponse
+
+    DeleteProjectRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    DeleteProjectRequest.struct_class = Types::DeleteProjectRequest
+
+    DeleteProjectResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "Status"))
+    DeleteProjectResponse.struct_class = Types::DeleteProjectResponse
+
+    DeleteProjectVersionRequest.add_member(:project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, required: true, location_name: "ProjectVersionArn"))
+    DeleteProjectVersionRequest.struct_class = Types::DeleteProjectVersionRequest
+
+    DeleteProjectVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectVersionStatus, location_name: "Status"))
+    DeleteProjectVersionResponse.struct_class = Types::DeleteProjectVersionResponse
 
     DeleteStreamProcessorRequest.add_member(:name, Shapes::ShapeRef.new(shape: StreamProcessorName, required: true, location_name: "Name"))
     DeleteStreamProcessorRequest.struct_class = Types::DeleteStreamProcessorRequest
@@ -351,6 +470,24 @@ module Aws::Rekognition
     DescribeCollectionResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTimestamp"))
     DescribeCollectionResponse.struct_class = Types::DescribeCollectionResponse
 
+    DescribeProjectVersionsRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    DescribeProjectVersionsRequest.add_member(:version_names, Shapes::ShapeRef.new(shape: VersionNames, location_name: "VersionNames"))
+    DescribeProjectVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ExtendedPaginationToken, location_name: "NextToken"))
+    DescribeProjectVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ProjectVersionsPageSize, location_name: "MaxResults"))
+    DescribeProjectVersionsRequest.struct_class = Types::DescribeProjectVersionsRequest
+
+    DescribeProjectVersionsResponse.add_member(:project_version_descriptions, Shapes::ShapeRef.new(shape: ProjectVersionDescriptions, location_name: "ProjectVersionDescriptions"))
+    DescribeProjectVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ExtendedPaginationToken, location_name: "NextToken"))
+    DescribeProjectVersionsResponse.struct_class = Types::DescribeProjectVersionsResponse
+
+    DescribeProjectsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ExtendedPaginationToken, location_name: "NextToken"))
+    DescribeProjectsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ProjectsPageSize, location_name: "MaxResults"))
+    DescribeProjectsRequest.struct_class = Types::DescribeProjectsRequest
+
+    DescribeProjectsResponse.add_member(:project_descriptions, Shapes::ShapeRef.new(shape: ProjectDescriptions, location_name: "ProjectDescriptions"))
+    DescribeProjectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ExtendedPaginationToken, location_name: "NextToken"))
+    DescribeProjectsResponse.struct_class = Types::DescribeProjectsResponse
+
     DescribeStreamProcessorRequest.add_member(:name, Shapes::ShapeRef.new(shape: StreamProcessorName, required: true, location_name: "Name"))
     DescribeStreamProcessorRequest.struct_class = Types::DescribeStreamProcessorRequest
 
@@ -365,6 +502,15 @@ module Aws::Rekognition
     DescribeStreamProcessorResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribeStreamProcessorResponse.add_member(:settings, Shapes::ShapeRef.new(shape: StreamProcessorSettings, location_name: "Settings"))
     DescribeStreamProcessorResponse.struct_class = Types::DescribeStreamProcessorResponse
+
+    DetectCustomLabelsRequest.add_member(:project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, required: true, location_name: "ProjectVersionArn"))
+    DetectCustomLabelsRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
+    DetectCustomLabelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: UInteger, location_name: "MaxResults"))
+    DetectCustomLabelsRequest.add_member(:min_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MinConfidence"))
+    DetectCustomLabelsRequest.struct_class = Types::DetectCustomLabelsRequest
+
+    DetectCustomLabelsResponse.add_member(:custom_labels, Shapes::ShapeRef.new(shape: CustomLabels, location_name: "CustomLabels"))
+    DetectCustomLabelsResponse.struct_class = Types::DetectCustomLabelsResponse
 
     DetectFacesRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
     DetectFacesRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
@@ -386,22 +532,40 @@ module Aws::Rekognition
 
     DetectModerationLabelsRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
     DetectModerationLabelsRequest.add_member(:min_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MinConfidence"))
+    DetectModerationLabelsRequest.add_member(:human_loop_config, Shapes::ShapeRef.new(shape: HumanLoopConfig, location_name: "HumanLoopConfig"))
     DetectModerationLabelsRequest.struct_class = Types::DetectModerationLabelsRequest
 
     DetectModerationLabelsResponse.add_member(:moderation_labels, Shapes::ShapeRef.new(shape: ModerationLabels, location_name: "ModerationLabels"))
+    DetectModerationLabelsResponse.add_member(:moderation_model_version, Shapes::ShapeRef.new(shape: String, location_name: "ModerationModelVersion"))
+    DetectModerationLabelsResponse.add_member(:human_loop_activation_output, Shapes::ShapeRef.new(shape: HumanLoopActivationOutput, location_name: "HumanLoopActivationOutput"))
     DetectModerationLabelsResponse.struct_class = Types::DetectModerationLabelsResponse
 
+    DetectTextFilters.add_member(:word_filter, Shapes::ShapeRef.new(shape: DetectionFilter, location_name: "WordFilter"))
+    DetectTextFilters.add_member(:regions_of_interest, Shapes::ShapeRef.new(shape: RegionsOfInterest, location_name: "RegionsOfInterest"))
+    DetectTextFilters.struct_class = Types::DetectTextFilters
+
     DetectTextRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
+    DetectTextRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DetectTextFilters, location_name: "Filters"))
     DetectTextRequest.struct_class = Types::DetectTextRequest
 
     DetectTextResponse.add_member(:text_detections, Shapes::ShapeRef.new(shape: TextDetectionList, location_name: "TextDetections"))
+    DetectTextResponse.add_member(:text_model_version, Shapes::ShapeRef.new(shape: String, location_name: "TextModelVersion"))
     DetectTextResponse.struct_class = Types::DetectTextResponse
+
+    DetectionFilter.add_member(:min_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MinConfidence"))
+    DetectionFilter.add_member(:min_bounding_box_height, Shapes::ShapeRef.new(shape: BoundingBoxHeight, location_name: "MinBoundingBoxHeight"))
+    DetectionFilter.add_member(:min_bounding_box_width, Shapes::ShapeRef.new(shape: BoundingBoxWidth, location_name: "MinBoundingBoxWidth"))
+    DetectionFilter.struct_class = Types::DetectionFilter
 
     Emotion.add_member(:type, Shapes::ShapeRef.new(shape: EmotionName, location_name: "Type"))
     Emotion.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Emotion.struct_class = Types::Emotion
 
     Emotions.member = Shapes::ShapeRef.new(shape: Emotion)
+
+    EvaluationResult.add_member(:f1_score, Shapes::ShapeRef.new(shape: Float, location_name: "F1Score"))
+    EvaluationResult.add_member(:summary, Shapes::ShapeRef.new(shape: Summary, location_name: "Summary"))
+    EvaluationResult.struct_class = Types::EvaluationResult
 
     EyeOpen.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     EyeOpen.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -504,6 +668,7 @@ module Aws::Rekognition
     GetContentModerationResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetContentModerationResponse.add_member(:moderation_labels, Shapes::ShapeRef.new(shape: ContentModerationDetections, location_name: "ModerationLabels"))
     GetContentModerationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetContentModerationResponse.add_member(:moderation_model_version, Shapes::ShapeRef.new(shape: String, location_name: "ModerationModelVersion"))
     GetContentModerationResponse.struct_class = Types::GetContentModerationResponse
 
     GetFaceDetectionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -542,6 +707,7 @@ module Aws::Rekognition
     GetLabelDetectionResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetLabelDetectionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetLabelDetectionResponse.add_member(:labels, Shapes::ShapeRef.new(shape: LabelDetections, location_name: "Labels"))
+    GetLabelDetectionResponse.add_member(:label_model_version, Shapes::ShapeRef.new(shape: String, location_name: "LabelModelVersion"))
     GetLabelDetectionResponse.struct_class = Types::GetLabelDetectionResponse
 
     GetPersonTrackingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -557,6 +723,44 @@ module Aws::Rekognition
     GetPersonTrackingResponse.add_member(:persons, Shapes::ShapeRef.new(shape: PersonDetections, location_name: "Persons"))
     GetPersonTrackingResponse.struct_class = Types::GetPersonTrackingResponse
 
+    GetTextDetectionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    GetTextDetectionRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetTextDetectionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetTextDetectionRequest.struct_class = Types::GetTextDetectionRequest
+
+    GetTextDetectionResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: VideoJobStatus, location_name: "JobStatus"))
+    GetTextDetectionResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
+    GetTextDetectionResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
+    GetTextDetectionResponse.add_member(:text_detections, Shapes::ShapeRef.new(shape: TextDetectionResults, location_name: "TextDetections"))
+    GetTextDetectionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetTextDetectionResponse.add_member(:text_model_version, Shapes::ShapeRef.new(shape: String, location_name: "TextModelVersion"))
+    GetTextDetectionResponse.struct_class = Types::GetTextDetectionResponse
+
+    GroundTruthManifest.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
+    GroundTruthManifest.struct_class = Types::GroundTruthManifest
+
+    HumanLoopActivationOutput.add_member(:human_loop_arn, Shapes::ShapeRef.new(shape: HumanLoopArn, location_name: "HumanLoopArn"))
+    HumanLoopActivationOutput.add_member(:human_loop_activation_reasons, Shapes::ShapeRef.new(shape: HumanLoopActivationReasons, location_name: "HumanLoopActivationReasons"))
+    HumanLoopActivationOutput.add_member(:human_loop_activation_conditions_evaluation_results, Shapes::ShapeRef.new(shape: HumanLoopActivationConditionsEvaluationResults, location_name: "HumanLoopActivationConditionsEvaluationResults", metadata: {"jsonvalue"=>true}))
+    HumanLoopActivationOutput.struct_class = Types::HumanLoopActivationOutput
+
+    HumanLoopActivationReasons.member = Shapes::ShapeRef.new(shape: HumanLoopActivationReason)
+
+    HumanLoopConfig.add_member(:human_loop_name, Shapes::ShapeRef.new(shape: HumanLoopName, required: true, location_name: "HumanLoopName"))
+    HumanLoopConfig.add_member(:flow_definition_arn, Shapes::ShapeRef.new(shape: FlowDefinitionArn, required: true, location_name: "FlowDefinitionArn"))
+    HumanLoopConfig.add_member(:data_attributes, Shapes::ShapeRef.new(shape: HumanLoopDataAttributes, location_name: "DataAttributes"))
+    HumanLoopConfig.struct_class = Types::HumanLoopConfig
+
+    HumanLoopDataAttributes.add_member(:content_classifiers, Shapes::ShapeRef.new(shape: ContentClassifiers, location_name: "ContentClassifiers"))
+    HumanLoopDataAttributes.struct_class = Types::HumanLoopDataAttributes
+
+    HumanLoopQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    HumanLoopQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "QuotaCode"))
+    HumanLoopQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode"))
+    HumanLoopQuotaExceededException.struct_class = Types::HumanLoopQuotaExceededException
+
+    IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
+
     Image.add_member(:bytes, Shapes::ShapeRef.new(shape: ImageBlob, location_name: "Bytes"))
     Image.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
     Image.struct_class = Types::Image
@@ -564,6 +768,8 @@ module Aws::Rekognition
     ImageQuality.add_member(:brightness, Shapes::ShapeRef.new(shape: Float, location_name: "Brightness"))
     ImageQuality.add_member(:sharpness, Shapes::ShapeRef.new(shape: Float, location_name: "Sharpness"))
     ImageQuality.struct_class = Types::ImageQuality
+
+    ImageTooLargeException.struct_class = Types::ImageTooLargeException
 
     IndexFacesRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
     IndexFacesRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
@@ -584,6 +790,16 @@ module Aws::Rekognition
     Instance.struct_class = Types::Instance
 
     Instances.member = Shapes::ShapeRef.new(shape: Instance)
+
+    InternalServerError.struct_class = Types::InternalServerError
+
+    InvalidImageFormatException.struct_class = Types::InvalidImageFormatException
+
+    InvalidPaginationTokenException.struct_class = Types::InvalidPaginationTokenException
+
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidS3ObjectException.struct_class = Types::InvalidS3ObjectException
 
     KinesisDataStream.add_member(:arn, Shapes::ShapeRef.new(shape: KinesisDataArn, location_name: "Arn"))
     KinesisDataStream.struct_class = Types::KinesisDataStream
@@ -611,6 +827,8 @@ module Aws::Rekognition
     Landmark.struct_class = Types::Landmark
 
     Landmarks.member = Shapes::ShapeRef.new(shape: Landmark)
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListCollectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListCollectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
@@ -658,6 +876,10 @@ module Aws::Rekognition
     NotificationChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     NotificationChannel.struct_class = Types::NotificationChannel
 
+    OutputConfig.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket"))
+    OutputConfig.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "S3KeyPrefix"))
+    OutputConfig.struct_class = Types::OutputConfig
+
     Parent.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Parent.struct_class = Types::Parent
 
@@ -692,6 +914,30 @@ module Aws::Rekognition
     Pose.add_member(:pitch, Shapes::ShapeRef.new(shape: Degree, location_name: "Pitch"))
     Pose.struct_class = Types::Pose
 
+    ProjectDescription.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "ProjectArn"))
+    ProjectDescription.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTimestamp"))
+    ProjectDescription.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "Status"))
+    ProjectDescription.struct_class = Types::ProjectDescription
+
+    ProjectDescriptions.member = Shapes::ShapeRef.new(shape: ProjectDescription)
+
+    ProjectVersionDescription.add_member(:project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, location_name: "ProjectVersionArn"))
+    ProjectVersionDescription.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTimestamp"))
+    ProjectVersionDescription.add_member(:min_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, location_name: "MinInferenceUnits"))
+    ProjectVersionDescription.add_member(:status, Shapes::ShapeRef.new(shape: ProjectVersionStatus, location_name: "Status"))
+    ProjectVersionDescription.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
+    ProjectVersionDescription.add_member(:billable_training_time_in_seconds, Shapes::ShapeRef.new(shape: ULong, location_name: "BillableTrainingTimeInSeconds"))
+    ProjectVersionDescription.add_member(:training_end_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "TrainingEndTimestamp"))
+    ProjectVersionDescription.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "OutputConfig"))
+    ProjectVersionDescription.add_member(:training_data_result, Shapes::ShapeRef.new(shape: TrainingDataResult, location_name: "TrainingDataResult"))
+    ProjectVersionDescription.add_member(:testing_data_result, Shapes::ShapeRef.new(shape: TestingDataResult, location_name: "TestingDataResult"))
+    ProjectVersionDescription.add_member(:evaluation_result, Shapes::ShapeRef.new(shape: EvaluationResult, location_name: "EvaluationResult"))
+    ProjectVersionDescription.struct_class = Types::ProjectVersionDescription
+
+    ProjectVersionDescriptions.member = Shapes::ShapeRef.new(shape: ProjectVersionDescription)
+
+    ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
+
     Reasons.member = Shapes::ShapeRef.new(shape: Reason)
 
     RecognizeCelebritiesRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
@@ -702,6 +948,19 @@ module Aws::Rekognition
     RecognizeCelebritiesResponse.add_member(:orientation_correction, Shapes::ShapeRef.new(shape: OrientationCorrection, location_name: "OrientationCorrection"))
     RecognizeCelebritiesResponse.struct_class = Types::RecognizeCelebritiesResponse
 
+    RegionOfInterest.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
+    RegionOfInterest.struct_class = Types::RegionOfInterest
+
+    RegionsOfInterest.member = Shapes::ShapeRef.new(shape: RegionOfInterest)
+
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
+
     S3Object.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "Bucket"))
     S3Object.add_member(:name, Shapes::ShapeRef.new(shape: S3ObjectName, location_name: "Name"))
     S3Object.add_member(:version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "Version"))
@@ -711,6 +970,7 @@ module Aws::Rekognition
     SearchFacesByImageRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
     SearchFacesByImageRequest.add_member(:max_faces, Shapes::ShapeRef.new(shape: MaxFaces, location_name: "MaxFaces"))
     SearchFacesByImageRequest.add_member(:face_match_threshold, Shapes::ShapeRef.new(shape: Percent, location_name: "FaceMatchThreshold"))
+    SearchFacesByImageRequest.add_member(:quality_filter, Shapes::ShapeRef.new(shape: QualityFilter, location_name: "QualityFilter"))
     SearchFacesByImageRequest.struct_class = Types::SearchFacesByImageRequest
 
     SearchFacesByImageResponse.add_member(:searched_face_bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "SearchedFaceBoundingBox"))
@@ -793,10 +1053,37 @@ module Aws::Rekognition
     StartPersonTrackingResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StartPersonTrackingResponse.struct_class = Types::StartPersonTrackingResponse
 
+    StartProjectVersionRequest.add_member(:project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, required: true, location_name: "ProjectVersionArn"))
+    StartProjectVersionRequest.add_member(:min_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, required: true, location_name: "MinInferenceUnits"))
+    StartProjectVersionRequest.struct_class = Types::StartProjectVersionRequest
+
+    StartProjectVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectVersionStatus, location_name: "Status"))
+    StartProjectVersionResponse.struct_class = Types::StartProjectVersionResponse
+
     StartStreamProcessorRequest.add_member(:name, Shapes::ShapeRef.new(shape: StreamProcessorName, required: true, location_name: "Name"))
     StartStreamProcessorRequest.struct_class = Types::StartStreamProcessorRequest
 
     StartStreamProcessorResponse.struct_class = Types::StartStreamProcessorResponse
+
+    StartTextDetectionFilters.add_member(:word_filter, Shapes::ShapeRef.new(shape: DetectionFilter, location_name: "WordFilter"))
+    StartTextDetectionFilters.add_member(:regions_of_interest, Shapes::ShapeRef.new(shape: RegionsOfInterest, location_name: "RegionsOfInterest"))
+    StartTextDetectionFilters.struct_class = Types::StartTextDetectionFilters
+
+    StartTextDetectionRequest.add_member(:video, Shapes::ShapeRef.new(shape: Video, required: true, location_name: "Video"))
+    StartTextDetectionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    StartTextDetectionRequest.add_member(:notification_channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "NotificationChannel"))
+    StartTextDetectionRequest.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
+    StartTextDetectionRequest.add_member(:filters, Shapes::ShapeRef.new(shape: StartTextDetectionFilters, location_name: "Filters"))
+    StartTextDetectionRequest.struct_class = Types::StartTextDetectionRequest
+
+    StartTextDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartTextDetectionResponse.struct_class = Types::StartTextDetectionResponse
+
+    StopProjectVersionRequest.add_member(:project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, required: true, location_name: "ProjectVersionArn"))
+    StopProjectVersionRequest.struct_class = Types::StopProjectVersionRequest
+
+    StopProjectVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectVersionStatus, location_name: "Status"))
+    StopProjectVersionResponse.struct_class = Types::StopProjectVersionResponse
 
     StopStreamProcessorRequest.add_member(:name, Shapes::ShapeRef.new(shape: StreamProcessorName, required: true, location_name: "Name"))
     StopStreamProcessorRequest.struct_class = Types::StopStreamProcessorRequest
@@ -818,9 +1105,20 @@ module Aws::Rekognition
     StreamProcessorSettings.add_member(:face_search, Shapes::ShapeRef.new(shape: FaceSearchSettings, location_name: "FaceSearch"))
     StreamProcessorSettings.struct_class = Types::StreamProcessorSettings
 
+    Summary.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
+    Summary.struct_class = Types::Summary
+
     Sunglasses.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     Sunglasses.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Sunglasses.struct_class = Types::Sunglasses
+
+    TestingData.add_member(:assets, Shapes::ShapeRef.new(shape: Assets, location_name: "Assets"))
+    TestingData.add_member(:auto_create, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoCreate"))
+    TestingData.struct_class = Types::TestingData
+
+    TestingDataResult.add_member(:input, Shapes::ShapeRef.new(shape: TestingData, location_name: "Input"))
+    TestingDataResult.add_member(:output, Shapes::ShapeRef.new(shape: TestingData, location_name: "Output"))
+    TestingDataResult.struct_class = Types::TestingDataResult
 
     TextDetection.add_member(:detected_text, Shapes::ShapeRef.new(shape: String, location_name: "DetectedText"))
     TextDetection.add_member(:type, Shapes::ShapeRef.new(shape: TextTypes, location_name: "Type"))
@@ -832,6 +1130,21 @@ module Aws::Rekognition
 
     TextDetectionList.member = Shapes::ShapeRef.new(shape: TextDetection)
 
+    TextDetectionResult.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    TextDetectionResult.add_member(:text_detection, Shapes::ShapeRef.new(shape: TextDetection, location_name: "TextDetection"))
+    TextDetectionResult.struct_class = Types::TextDetectionResult
+
+    TextDetectionResults.member = Shapes::ShapeRef.new(shape: TextDetectionResult)
+
+    ThrottlingException.struct_class = Types::ThrottlingException
+
+    TrainingData.add_member(:assets, Shapes::ShapeRef.new(shape: Assets, location_name: "Assets"))
+    TrainingData.struct_class = Types::TrainingData
+
+    TrainingDataResult.add_member(:input, Shapes::ShapeRef.new(shape: TrainingData, location_name: "Input"))
+    TrainingDataResult.add_member(:output, Shapes::ShapeRef.new(shape: TrainingData, location_name: "Output"))
+    TrainingDataResult.struct_class = Types::TrainingDataResult
+
     UnindexedFace.add_member(:reasons, Shapes::ShapeRef.new(shape: Reasons, location_name: "Reasons"))
     UnindexedFace.add_member(:face_detail, Shapes::ShapeRef.new(shape: FaceDetail, location_name: "FaceDetail"))
     UnindexedFace.struct_class = Types::UnindexedFace
@@ -839,6 +1152,8 @@ module Aws::Rekognition
     UnindexedFaces.member = Shapes::ShapeRef.new(shape: UnindexedFace)
 
     Urls.member = Shapes::ShapeRef.new(shape: Url)
+
+    VersionNames.member = Shapes::ShapeRef.new(shape: VersionName)
 
     Video.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
     Video.struct_class = Types::Video
@@ -850,6 +1165,8 @@ module Aws::Rekognition
     VideoMetadata.add_member(:frame_height, Shapes::ShapeRef.new(shape: ULong, location_name: "FrameHeight"))
     VideoMetadata.add_member(:frame_width, Shapes::ShapeRef.new(shape: ULong, location_name: "FrameWidth"))
     VideoMetadata.struct_class = Types::VideoMetadata
+
+    VideoTooLargeException.struct_class = Types::VideoTooLargeException
 
 
     # @api private
@@ -899,6 +1216,37 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
       end)
 
+      api.add_operation(:create_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+      end)
+
+      api.add_operation(:create_project_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateProjectVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateProjectVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateProjectVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+      end)
+
       api.add_operation(:create_stream_processor, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateStreamProcessor"
         o.http_method = "POST"
@@ -942,6 +1290,36 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:delete_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+      end)
+
+      api.add_operation(:delete_project_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProjectVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProjectVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProjectVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+      end)
+
       api.add_operation(:delete_stream_processor, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteStreamProcessor"
         o.http_method = "POST"
@@ -971,6 +1349,47 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_project_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeProjectVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeProjectVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeProjectVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_projects, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeProjects"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeProjectsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeProjectsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_stream_processor, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeStreamProcessor"
         o.http_method = "POST"
@@ -983,6 +1402,25 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+      end)
+
+      api.add_operation(:detect_custom_labels, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetectCustomLabels"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetectCustomLabelsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetectCustomLabelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidImageFormatException)
       end)
 
       api.add_operation(:detect_faces, Seahorse::Model::Operation.new.tap do |o|
@@ -1031,6 +1469,7 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidImageFormatException)
+        o.errors << Shapes::ShapeRef.new(shape: HumanLoopQuotaExceededException)
       end)
 
       api.add_operation(:detect_text, Seahorse::Model::Operation.new.tap do |o|
@@ -1174,6 +1613,27 @@ module Aws::Rekognition
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetPersonTrackingRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPersonTrackingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_text_detection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTextDetection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTextDetectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTextDetectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -1419,6 +1879,22 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:start_project_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartProjectVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartProjectVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartProjectVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+      end)
+
       api.add_operation(:start_stream_processor, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartStreamProcessor"
         o.http_method = "POST"
@@ -1431,6 +1907,38 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+      end)
+
+      api.add_operation(:start_text_detection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartTextDetection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartTextDetectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartTextDetectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: VideoTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:stop_project_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopProjectVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopProjectVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopProjectVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
       end)
 

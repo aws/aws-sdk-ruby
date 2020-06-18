@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:ram)
 
 module Aws::RAM
+  # An API client for RAM.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::RAM::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::RAM
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -91,7 +109,7 @@ module Aws::RAM
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::RAM
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::RAM
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::RAM
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::RAM
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::RAM
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::RAM
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::RAM
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -198,6 +263,48 @@ module Aws::RAM
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -237,6 +344,7 @@ module Aws::RAM
     #   resp.resource_share_invitation.status #=> String, one of "PENDING", "ACCEPTED", "REJECTED", "EXPIRED"
     #   resp.resource_share_invitation.resource_share_associations #=> Array
     #   resp.resource_share_invitation.resource_share_associations[0].resource_share_arn #=> String
+    #   resp.resource_share_invitation.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].associated_entity #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
     #   resp.resource_share_invitation.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
@@ -289,6 +397,7 @@ module Aws::RAM
     #
     #   resp.resource_share_associations #=> Array
     #   resp.resource_share_associations[0].resource_share_arn #=> String
+    #   resp.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_associations[0].associated_entity #=> String
     #   resp.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
     #   resp.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
@@ -304,6 +413,53 @@ module Aws::RAM
     # @param [Hash] params ({})
     def associate_resource_share(params = {}, options = {})
       req = build_request(:associate_resource_share, params)
+      req.send_request(options)
+    end
+
+    # Associates a permission with a resource share.
+    #
+    # @option params [required, String] :resource_share_arn
+    #   The Amazon Resource Name (ARN) of the resource share.
+    #
+    # @option params [required, String] :permission_arn
+    #   The ARN of the AWS RAM permission to associate with the resource
+    #   share.
+    #
+    # @option params [Boolean] :replace
+    #   Indicates whether the permission should replace the permissions that
+    #   are currently associated with the resource share. Use `true` to
+    #   replace the current permissions. Use `false` to add the permission to
+    #   the current permission.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @return [Types::AssociateResourceSharePermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateResourceSharePermissionResponse#return_value #return_value} => Boolean
+    #   * {Types::AssociateResourceSharePermissionResponse#client_token #client_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_resource_share_permission({
+    #     resource_share_arn: "String", # required
+    #     permission_arn: "String", # required
+    #     replace: false,
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return_value #=> Boolean
+    #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceSharePermission AWS API Documentation
+    #
+    # @overload associate_resource_share_permission(params = {})
+    # @param [Hash] params ({})
+    def associate_resource_share_permission(params = {}, options = {})
+      req = build_request(:associate_resource_share_permission, params)
       req.send_request(options)
     end
 
@@ -325,12 +481,17 @@ module Aws::RAM
     #   One or more tags.
     #
     # @option params [Boolean] :allow_external_principals
-    #   Indicates whether principals outside your organization can be
+    #   Indicates whether principals outside your AWS organization can be
     #   associated with a resource share.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
+    #
+    # @option params [Array<String>] :permission_arns
+    #   The ARNs of the permissions to associate with the resource share. If
+    #   you do not specify an ARN for the permission, AWS RAM automatically
+    #   attaches the default version of the permission for each resource type.
     #
     # @return [Types::CreateResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -351,6 +512,7 @@ module Aws::RAM
     #     ],
     #     allow_external_principals: false,
     #     client_token: "String",
+    #     permission_arns: ["String"],
     #   })
     #
     # @example Response structure
@@ -366,6 +528,7 @@ module Aws::RAM
     #   resp.resource_share.tags[0].value #=> String
     #   resp.resource_share.creation_time #=> Time
     #   resp.resource_share.last_updated_time #=> Time
+    #   resp.resource_share.feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreateResourceShare AWS API Documentation
@@ -419,7 +582,7 @@ module Aws::RAM
     #   The Amazon Resource Name (ARN) of the resource share.
     #
     # @option params [Array<String>] :resource_arns
-    #   The Amazon Resource Names (ARN) of the resources.
+    #   The Amazon Resource Names (ARNs) of the resources.
     #
     # @option params [Array<String>] :principals
     #   The principals.
@@ -446,6 +609,7 @@ module Aws::RAM
     #
     #   resp.resource_share_associations #=> Array
     #   resp.resource_share_associations[0].resource_share_arn #=> String
+    #   resp.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_associations[0].associated_entity #=> String
     #   resp.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
     #   resp.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
@@ -464,7 +628,48 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Enables resource sharing within your organization.
+    # Disassociates an AWS RAM permission from a resource share.
+    #
+    # @option params [required, String] :resource_share_arn
+    #   The Amazon Resource Name (ARN) of the resource share.
+    #
+    # @option params [required, String] :permission_arn
+    #   The ARN of the permission to disassociate from the resource share.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @return [Types::DisassociateResourceSharePermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateResourceSharePermissionResponse#return_value #return_value} => Boolean
+    #   * {Types::DisassociateResourceSharePermissionResponse#client_token #client_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_resource_share_permission({
+    #     resource_share_arn: "String", # required
+    #     permission_arn: "String", # required
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return_value #=> Boolean
+    #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DisassociateResourceSharePermission AWS API Documentation
+    #
+    # @overload disassociate_resource_share_permission(params = {})
+    # @param [Hash] params ({})
+    def disassociate_resource_share_permission(params = {}, options = {})
+      req = build_request(:disassociate_resource_share_permission, params)
+      req.send_request(options)
+    end
+
+    # Enables resource sharing within your AWS Organization.
+    #
+    # The caller must be the master account for the AWS Organization.
     #
     # @return [Types::EnableSharingWithAwsOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -483,7 +688,47 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the policies for the specifies resources.
+    # Gets the contents of an AWS RAM permission in JSON format.
+    #
+    # @option params [required, String] :permission_arn
+    #   The ARN of the permission.
+    #
+    # @option params [Integer] :permission_version
+    #   The identifier for the version of the permission.
+    #
+    # @return [Types::GetPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPermissionResponse#permission #permission} => Types::ResourceSharePermissionDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_permission({
+    #     permission_arn: "String", # required
+    #     permission_version: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permission.arn #=> String
+    #   resp.permission.version #=> String
+    #   resp.permission.default_version #=> Boolean
+    #   resp.permission.name #=> String
+    #   resp.permission.resource_type #=> String
+    #   resp.permission.permission #=> String
+    #   resp.permission.creation_time #=> Time
+    #   resp.permission.last_updated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetPermission AWS API Documentation
+    #
+    # @overload get_permission(params = {})
+    # @param [Hash] params ({})
+    def get_permission(params = {}, options = {})
+      req = build_request(:get_permission, params)
+      req.send_request(options)
+    end
+
+    # Gets the policies for the specified resources that you own and have
+    # shared.
     #
     # @option params [required, Array<String>] :resource_arns
     #   The Amazon Resource Names (ARN) of the resources.
@@ -503,6 +748,8 @@ module Aws::RAM
     #
     #   * {Types::GetResourcePoliciesResponse#policies #policies} => Array&lt;String&gt;
     #   * {Types::GetResourcePoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -528,22 +775,27 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the associations for the specified resource share.
+    # Gets the resources or principals for the resource shares that you own.
     #
     # @option params [required, String] :association_type
-    #   The association type.
+    #   The association type. Specify `PRINCIPAL` to list the principals that
+    #   are associated with the specified resource share. Specify `RESOURCE`
+    #   to list the resources that are associated with the specified resource
+    #   share.
     #
     # @option params [Array<String>] :resource_share_arns
     #   The Amazon Resource Names (ARN) of the resource shares.
     #
     # @option params [String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource.
+    #   The Amazon Resource Name (ARN) of the resource. You cannot specify
+    #   this parameter if the association type is `PRINCIPAL`.
     #
     # @option params [String] :principal
-    #   The principal.
+    #   The principal. You cannot specify this parameter if the association
+    #   type is `RESOURCE`.
     #
     # @option params [String] :association_status
-    #   The status of the association.
+    #   The association status.
     #
     # @option params [String] :next_token
     #   The token for the next page of results.
@@ -557,6 +809,8 @@ module Aws::RAM
     #
     #   * {Types::GetResourceShareAssociationsResponse#resource_share_associations #resource_share_associations} => Array&lt;Types::ResourceShareAssociation&gt;
     #   * {Types::GetResourceShareAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -574,6 +828,7 @@ module Aws::RAM
     #
     #   resp.resource_share_associations #=> Array
     #   resp.resource_share_associations[0].resource_share_arn #=> String
+    #   resp.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_associations[0].associated_entity #=> String
     #   resp.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
     #   resp.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
@@ -592,7 +847,7 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the specified invitations for resource sharing.
+    # Gets the invitations for resource sharing that you've received.
     #
     # @option params [Array<String>] :resource_share_invitation_arns
     #   The Amazon Resource Names (ARN) of the invitations.
@@ -612,6 +867,8 @@ module Aws::RAM
     #
     #   * {Types::GetResourceShareInvitationsResponse#resource_share_invitations #resource_share_invitations} => Array&lt;Types::ResourceShareInvitation&gt;
     #   * {Types::GetResourceShareInvitationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -634,6 +891,7 @@ module Aws::RAM
     #   resp.resource_share_invitations[0].status #=> String, one of "PENDING", "ACCEPTED", "REJECTED", "EXPIRED"
     #   resp.resource_share_invitations[0].resource_share_associations #=> Array
     #   resp.resource_share_invitations[0].resource_share_associations[0].resource_share_arn #=> String
+    #   resp.resource_share_invitations[0].resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_invitations[0].resource_share_associations[0].associated_entity #=> String
     #   resp.resource_share_invitations[0].resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
     #   resp.resource_share_invitations[0].resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
@@ -652,7 +910,8 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the specified resource shares or all of your resource shares.
+    # Gets the resource shares that you own or the resource shares that are
+    # shared with you.
     #
     # @option params [Array<String>] :resource_share_arns
     #   The Amazon Resource Names (ARN) of the resource shares.
@@ -681,6 +940,8 @@ module Aws::RAM
     #
     #   * {Types::GetResourceSharesResponse#resource_shares #resource_shares} => Array&lt;Types::ResourceShare&gt;
     #   * {Types::GetResourceSharesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -713,6 +974,7 @@ module Aws::RAM
     #   resp.resource_shares[0].tags[0].value #=> String
     #   resp.resource_shares[0].creation_time #=> Time
     #   resp.resource_shares[0].last_updated_time #=> Time
+    #   resp.resource_shares[0].feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShares AWS API Documentation
@@ -724,7 +986,109 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Lists the principals with access to the specified resource.
+    # Lists the resources in a resource share that is shared with you but
+    # that the invitation is still pending for.
+    #
+    # @option params [required, String] :resource_share_invitation_arn
+    #   The Amazon Resource Name (ARN) of the invitation.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @return [Types::ListPendingInvitationResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPendingInvitationResourcesResponse#resources #resources} => Array&lt;Types::Resource&gt;
+    #   * {Types::ListPendingInvitationResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_pending_invitation_resources({
+    #     resource_share_invitation_arn: "String", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resources #=> Array
+    #   resp.resources[0].arn #=> String
+    #   resp.resources[0].type #=> String
+    #   resp.resources[0].resource_share_arn #=> String
+    #   resp.resources[0].resource_group_arn #=> String
+    #   resp.resources[0].status #=> String, one of "AVAILABLE", "ZONAL_RESOURCE_INACCESSIBLE", "LIMIT_EXCEEDED", "UNAVAILABLE", "PENDING"
+    #   resp.resources[0].status_message #=> String
+    #   resp.resources[0].creation_time #=> Time
+    #   resp.resources[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPendingInvitationResources AWS API Documentation
+    #
+    # @overload list_pending_invitation_resources(params = {})
+    # @param [Hash] params ({})
+    def list_pending_invitation_resources(params = {}, options = {})
+      req = build_request(:list_pending_invitation_resources, params)
+      req.send_request(options)
+    end
+
+    # Lists the AWS RAM permissions.
+    #
+    # @option params [String] :resource_type
+    #   Specifies the resource type for which to list permissions. For
+    #   example, to list only permissions that apply to EC2 subnets, specify
+    #   `ec2:Subnet`.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @return [Types::ListPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPermissionsResponse#permissions #permissions} => Array&lt;Types::ResourceSharePermissionSummary&gt;
+    #   * {Types::ListPermissionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_permissions({
+    #     resource_type: "String",
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permissions #=> Array
+    #   resp.permissions[0].arn #=> String
+    #   resp.permissions[0].version #=> String
+    #   resp.permissions[0].default_version #=> Boolean
+    #   resp.permissions[0].name #=> String
+    #   resp.permissions[0].resource_type #=> String
+    #   resp.permissions[0].status #=> String
+    #   resp.permissions[0].creation_time #=> Time
+    #   resp.permissions[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPermissions AWS API Documentation
+    #
+    # @overload list_permissions(params = {})
+    # @param [Hash] params ({})
+    def list_permissions(params = {}, options = {})
+      req = build_request(:list_permissions, params)
+      req.send_request(options)
+    end
+
+    # Lists the principals that you have shared resources with or that have
+    # shared resources with you.
     #
     # @option params [required, String] :resource_owner
     #   The type of owner.
@@ -737,6 +1101,14 @@ module Aws::RAM
     #
     # @option params [String] :resource_type
     #   The resource type.
+    #
+    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
+    #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
+    #   `imagebuilder:Component` \| `imagebuilder:Image` \|
+    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration` I
+    #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:ResolverRule`
     #
     # @option params [Array<String>] :resource_share_arns
     #   The Amazon Resource Names (ARN) of the resource shares.
@@ -753,6 +1125,8 @@ module Aws::RAM
     #
     #   * {Types::ListPrincipalsResponse#principals #principals} => Array&lt;Types::Principal&gt;
     #   * {Types::ListPrincipalsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -785,7 +1159,95 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Lists the resources that the specified principal can access.
+    # Lists the AWS RAM permissions that are associated with a resource
+    # share.
+    #
+    # @option params [required, String] :resource_share_arn
+    #   The Amazon Resource Name (ARN) of the resource share.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @return [Types::ListResourceSharePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceSharePermissionsResponse#permissions #permissions} => Array&lt;Types::ResourceSharePermissionSummary&gt;
+    #   * {Types::ListResourceSharePermissionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_share_permissions({
+    #     resource_share_arn: "String", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permissions #=> Array
+    #   resp.permissions[0].arn #=> String
+    #   resp.permissions[0].version #=> String
+    #   resp.permissions[0].default_version #=> Boolean
+    #   resp.permissions[0].name #=> String
+    #   resp.permissions[0].resource_type #=> String
+    #   resp.permissions[0].status #=> String
+    #   resp.permissions[0].creation_time #=> Time
+    #   resp.permissions[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceSharePermissions AWS API Documentation
+    #
+    # @overload list_resource_share_permissions(params = {})
+    # @param [Hash] params ({})
+    def list_resource_share_permissions(params = {}, options = {})
+      req = build_request(:list_resource_share_permissions, params)
+      req.send_request(options)
+    end
+
+    # Lists the shareable resource types supported by AWS RAM.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @return [Types::ListResourceTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceTypesResponse#resource_types #resource_types} => Array&lt;Types::ServiceNameAndResourceType&gt;
+    #   * {Types::ListResourceTypesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_types({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_types #=> Array
+    #   resp.resource_types[0].resource_type #=> String
+    #   resp.resource_types[0].service_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceTypes AWS API Documentation
+    #
+    # @overload list_resource_types(params = {})
+    # @param [Hash] params ({})
+    def list_resource_types(params = {}, options = {})
+      req = build_request(:list_resource_types, params)
+      req.send_request(options)
+    end
+
+    # Lists the resources that you added to a resource shares or the
+    # resources that are shared with you.
     #
     # @option params [required, String] :resource_owner
     #   The type of owner.
@@ -795,6 +1257,14 @@ module Aws::RAM
     #
     # @option params [String] :resource_type
     #   The resource type.
+    #
+    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
+    #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
+    #   `imagebuilder:Component` \| `imagebuilder:Image` \|
+    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration` I
+    #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:ResolverRule`
     #
     # @option params [Array<String>] :resource_arns
     #   The Amazon Resource Names (ARN) of the resources.
@@ -815,6 +1285,8 @@ module Aws::RAM
     #   * {Types::ListResourcesResponse#resources #resources} => Array&lt;Types::Resource&gt;
     #   * {Types::ListResourcesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_resources({
@@ -833,7 +1305,8 @@ module Aws::RAM
     #   resp.resources[0].arn #=> String
     #   resp.resources[0].type #=> String
     #   resp.resources[0].resource_share_arn #=> String
-    #   resp.resources[0].status #=> String, one of "AVAILABLE", "ZONAL_RESOURCE_INACCESSIBLE", "LIMIT_EXCEEDED", "UNAVAILABLE"
+    #   resp.resources[0].resource_group_arn #=> String
+    #   resp.resources[0].status #=> String, one of "AVAILABLE", "ZONAL_RESOURCE_INACCESSIBLE", "LIMIT_EXCEEDED", "UNAVAILABLE", "PENDING"
     #   resp.resources[0].status_message #=> String
     #   resp.resources[0].creation_time #=> Time
     #   resp.resources[0].last_updated_time #=> Time
@@ -845,6 +1318,43 @@ module Aws::RAM
     # @param [Hash] params ({})
     def list_resources(params = {}, options = {})
       req = build_request(:list_resources, params)
+      req.send_request(options)
+    end
+
+    # Resource shares that were created by attaching a policy to a resource
+    # are visible only to the resource share owner, and the resource share
+    # cannot be modified in AWS RAM.
+    #
+    # Use this API action to promote the resource share. When you promote
+    # the resource share, it becomes:
+    #
+    # * Visible to all principals that it is shared with.
+    #
+    # * Modifiable in AWS RAM.
+    #
+    # @option params [required, String] :resource_share_arn
+    #   The ARN of the resource share to promote.
+    #
+    # @return [Types::PromoteResourceShareCreatedFromPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PromoteResourceShareCreatedFromPolicyResponse#return_value #return_value} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.promote_resource_share_created_from_policy({
+    #     resource_share_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return_value #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PromoteResourceShareCreatedFromPolicy AWS API Documentation
+    #
+    # @overload promote_resource_share_created_from_policy(params = {})
+    # @param [Hash] params ({})
+    def promote_resource_share_created_from_policy(params = {}, options = {})
+      req = build_request(:promote_resource_share_created_from_policy, params)
       req.send_request(options)
     end
 
@@ -880,6 +1390,7 @@ module Aws::RAM
     #   resp.resource_share_invitation.status #=> String, one of "PENDING", "ACCEPTED", "REJECTED", "EXPIRED"
     #   resp.resource_share_invitation.resource_share_associations #=> Array
     #   resp.resource_share_invitation.resource_share_associations[0].resource_share_arn #=> String
+    #   resp.resource_share_invitation.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].associated_entity #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
     #   resp.resource_share_invitation.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
@@ -898,7 +1409,7 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Adds the specified tags to the specified resource share.
+    # Adds the specified tags to the specified resource share that you own.
     #
     # @option params [required, String] :resource_share_arn
     #   The Amazon Resource Name (ARN) of the resource share.
@@ -929,7 +1440,8 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Removes the specified tags from the specified resource share.
+    # Removes the specified tags from the specified resource share that you
+    # own.
     #
     # @option params [required, String] :resource_share_arn
     #   The Amazon Resource Name (ARN) of the resource share.
@@ -955,7 +1467,7 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Updates the specified resource share.
+    # Updates the specified resource share that you own.
     #
     # @option params [required, String] :resource_share_arn
     #   The Amazon Resource Name (ARN) of the resource share.
@@ -964,7 +1476,7 @@ module Aws::RAM
     #   The name of the resource share.
     #
     # @option params [Boolean] :allow_external_principals
-    #   Indicates whether principals outside your organization can be
+    #   Indicates whether principals outside your AWS organization can be
     #   associated with a resource share.
     #
     # @option params [String] :client_token
@@ -998,6 +1510,7 @@ module Aws::RAM
     #   resp.resource_share.tags[0].value #=> String
     #   resp.resource_share.creation_time #=> Time
     #   resp.resource_share.last_updated_time #=> Time
+    #   resp.resource_share.feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UpdateResourceShare AWS API Documentation
@@ -1022,7 +1535,7 @@ module Aws::RAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.18.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

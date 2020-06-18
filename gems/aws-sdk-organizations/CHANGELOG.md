@@ -1,6 +1,142 @@
 Unreleased Changes
 ------------------
 
+1.42.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.42.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2020-03-31)
+------------------
+
+* Feature - Documentation updates for AWS Organizations
+
+1.38.0 (2020-03-24)
+------------------
+
+* Feature - Introduces actions for giving a member account administrative Organizations permissions for an AWS service. You can run this action only for AWS services that support this feature.
+
+1.37.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2020-01-15)
+------------------
+
+* Feature - Updated description for PolicyID parameter and ConstraintViolationException.
+
+1.35.0 (2019-11-26)
+------------------
+
+* Feature - Introduces the DescribeEffectivePolicy action, which returns the contents of the policy that's in effect for the account.
+
+1.34.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2019-10-08)
+------------------
+
+* Feature - Documentation updates for organizations
+
+1.32.0 (2019-08-27)
+------------------
+
+* Feature - Documentation updates for organizations
+
+1.31.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2019-07-01)
+------------------
+
+* Feature - Specifying the tag key and tag value is required for tagging requests.
+
+1.29.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2019-06-06)
+------------------
+
+* Feature - You can tag and untag accounts in your organization and view tags on an account in your organization.
+
+1.27.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.26.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.25.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.24.0 (2019-04-18)
+------------------
+
+* Feature - API update.
+
+1.23.0 (2019-04-16)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2019-02-26)
+------------------
+
+* Feature - API update.
+
+1.18.0 (2019-02-21)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2018-12-13)
+------------------
+
+* Feature - API update.
+
 1.16.0 (2018-11-20)
 ------------------
 
@@ -145,4 +281,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-organizations`.
-

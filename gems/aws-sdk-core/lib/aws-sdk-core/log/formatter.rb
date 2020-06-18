@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pathname'
 
 module Aws
@@ -171,7 +173,13 @@ module Aws
       end
 
       def _http_response_body(response)
-        @param_formatter.summarize(response.context.http_response.body_contents)
+        if response.context.http_response.body.respond_to?(:rewind)
+          @param_formatter.summarize(
+            response.context.http_response.body_contents
+          )
+        else
+          ''
+        end
       end
 
       def _error_class(response)

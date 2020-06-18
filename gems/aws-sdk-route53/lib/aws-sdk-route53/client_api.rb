@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -11,6 +13,7 @@ module Aws::Route53
 
     include Seahorse::Model
 
+    AWSAccountID = Shapes::StringShape.new(name: 'AWSAccountID')
     AccountLimit = Shapes::StructureShape.new(name: 'AccountLimit')
     AccountLimitType = Shapes::StringShape.new(name: 'AccountLimitType')
     AlarmIdentifier = Shapes::StructureShape.new(name: 'AlarmIdentifier')
@@ -160,7 +163,11 @@ module Aws::Route53
     HostedZoneNotEmpty = Shapes::StructureShape.new(name: 'HostedZoneNotEmpty')
     HostedZoneNotFound = Shapes::StructureShape.new(name: 'HostedZoneNotFound')
     HostedZoneNotPrivate = Shapes::StructureShape.new(name: 'HostedZoneNotPrivate')
+    HostedZoneOwner = Shapes::StructureShape.new(name: 'HostedZoneOwner')
+    HostedZoneOwningService = Shapes::StringShape.new(name: 'HostedZoneOwningService')
     HostedZoneRRSetCount = Shapes::IntegerShape.new(name: 'HostedZoneRRSetCount')
+    HostedZoneSummaries = Shapes::ListShape.new(name: 'HostedZoneSummaries')
+    HostedZoneSummary = Shapes::StructureShape.new(name: 'HostedZoneSummary')
     HostedZones = Shapes::ListShape.new(name: 'HostedZones')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
     IPAddressCidr = Shapes::StringShape.new(name: 'IPAddressCidr')
@@ -186,6 +193,8 @@ module Aws::Route53
     ListHealthChecksResponse = Shapes::StructureShape.new(name: 'ListHealthChecksResponse')
     ListHostedZonesByNameRequest = Shapes::StructureShape.new(name: 'ListHostedZonesByNameRequest')
     ListHostedZonesByNameResponse = Shapes::StructureShape.new(name: 'ListHostedZonesByNameResponse')
+    ListHostedZonesByVPCRequest = Shapes::StructureShape.new(name: 'ListHostedZonesByVPCRequest')
+    ListHostedZonesByVPCResponse = Shapes::StructureShape.new(name: 'ListHostedZonesByVPCResponse')
     ListHostedZonesRequest = Shapes::StructureShape.new(name: 'ListHostedZonesRequest')
     ListHostedZonesResponse = Shapes::StructureShape.new(name: 'ListHostedZonesResponse')
     ListQueryLoggingConfigsRequest = Shapes::StructureShape.new(name: 'ListQueryLoggingConfigsRequest')
@@ -390,6 +399,15 @@ module Aws::Route53
     CloudWatchAlarmConfiguration.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionList, location_name: "Dimensions"))
     CloudWatchAlarmConfiguration.struct_class = Types::CloudWatchAlarmConfiguration
 
+    ConcurrentModification.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConcurrentModification.struct_class = Types::ConcurrentModification
+
+    ConflictingDomainExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConflictingDomainExists.struct_class = Types::ConflictingDomainExists
+
+    ConflictingTypes.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConflictingTypes.struct_class = Types::ConflictingTypes
+
     CreateHealthCheckRequest.add_member(:caller_reference, Shapes::ShapeRef.new(shape: HealthCheckNonce, required: true, location_name: "CallerReference"))
     CreateHealthCheckRequest.add_member(:health_check_config, Shapes::ShapeRef.new(shape: HealthCheckConfig, required: true, location_name: "HealthCheckConfig"))
     CreateHealthCheckRequest.struct_class = Types::CreateHealthCheckRequest
@@ -470,7 +488,22 @@ module Aws::Route53
     DelegationSet.add_member(:name_servers, Shapes::ShapeRef.new(shape: DelegationSetNameServers, required: true, location_name: "NameServers"))
     DelegationSet.struct_class = Types::DelegationSet
 
+    DelegationSetAlreadyCreated.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DelegationSetAlreadyCreated.struct_class = Types::DelegationSetAlreadyCreated
+
+    DelegationSetAlreadyReusable.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DelegationSetAlreadyReusable.struct_class = Types::DelegationSetAlreadyReusable
+
+    DelegationSetInUse.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DelegationSetInUse.struct_class = Types::DelegationSetInUse
+
     DelegationSetNameServers.member = Shapes::ShapeRef.new(shape: DNSName, location_name: "NameServer")
+
+    DelegationSetNotAvailable.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DelegationSetNotAvailable.struct_class = Types::DelegationSetNotAvailable
+
+    DelegationSetNotReusable.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DelegationSetNotReusable.struct_class = Types::DelegationSetNotReusable
 
     DelegationSets.member = Shapes::ShapeRef.new(shape: DelegationSet, location_name: "DelegationSet")
 
@@ -659,6 +692,9 @@ module Aws::Route53
     HealthCheck.add_member(:cloud_watch_alarm_configuration, Shapes::ShapeRef.new(shape: CloudWatchAlarmConfiguration, location_name: "CloudWatchAlarmConfiguration"))
     HealthCheck.struct_class = Types::HealthCheck
 
+    HealthCheckAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    HealthCheckAlreadyExists.struct_class = Types::HealthCheckAlreadyExists
+
     HealthCheckConfig.add_member(:ip_address, Shapes::ShapeRef.new(shape: IPAddress, location_name: "IPAddress"))
     HealthCheckConfig.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "Port"))
     HealthCheckConfig.add_member(:type, Shapes::ShapeRef.new(shape: HealthCheckType, required: true, location_name: "Type"))
@@ -678,6 +714,9 @@ module Aws::Route53
     HealthCheckConfig.add_member(:insufficient_data_health_status, Shapes::ShapeRef.new(shape: InsufficientDataHealthStatus, location_name: "InsufficientDataHealthStatus"))
     HealthCheckConfig.struct_class = Types::HealthCheckConfig
 
+    HealthCheckInUse.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    HealthCheckInUse.struct_class = Types::HealthCheckInUse
+
     HealthCheckObservation.add_member(:region, Shapes::ShapeRef.new(shape: HealthCheckRegion, location_name: "Region"))
     HealthCheckObservation.add_member(:ip_address, Shapes::ShapeRef.new(shape: IPAddress, location_name: "IPAddress"))
     HealthCheckObservation.add_member(:status_report, Shapes::ShapeRef.new(shape: StatusReport, location_name: "StatusReport"))
@@ -686,6 +725,9 @@ module Aws::Route53
     HealthCheckObservations.member = Shapes::ShapeRef.new(shape: HealthCheckObservation, location_name: "HealthCheckObservation")
 
     HealthCheckRegionList.member = Shapes::ShapeRef.new(shape: HealthCheckRegion, location_name: "Region")
+
+    HealthCheckVersionMismatch.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    HealthCheckVersionMismatch.struct_class = Types::HealthCheckVersionMismatch
 
     HealthChecks.member = Shapes::ShapeRef.new(shape: HealthCheck, location_name: "HealthCheck")
 
@@ -697,6 +739,9 @@ module Aws::Route53
     HostedZone.add_member(:linked_service, Shapes::ShapeRef.new(shape: LinkedService, location_name: "LinkedService"))
     HostedZone.struct_class = Types::HostedZone
 
+    HostedZoneAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    HostedZoneAlreadyExists.struct_class = Types::HostedZoneAlreadyExists
+
     HostedZoneConfig.add_member(:comment, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Comment"))
     HostedZoneConfig.add_member(:private_zone, Shapes::ShapeRef.new(shape: IsPrivateZone, location_name: "PrivateZone"))
     HostedZoneConfig.struct_class = Types::HostedZoneConfig
@@ -705,7 +750,61 @@ module Aws::Route53
     HostedZoneLimit.add_member(:value, Shapes::ShapeRef.new(shape: LimitValue, required: true, location_name: "Value"))
     HostedZoneLimit.struct_class = Types::HostedZoneLimit
 
+    HostedZoneNotEmpty.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    HostedZoneNotEmpty.struct_class = Types::HostedZoneNotEmpty
+
+    HostedZoneNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    HostedZoneNotFound.struct_class = Types::HostedZoneNotFound
+
+    HostedZoneNotPrivate.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    HostedZoneNotPrivate.struct_class = Types::HostedZoneNotPrivate
+
+    HostedZoneOwner.add_member(:owning_account, Shapes::ShapeRef.new(shape: AWSAccountID, location_name: "OwningAccount"))
+    HostedZoneOwner.add_member(:owning_service, Shapes::ShapeRef.new(shape: HostedZoneOwningService, location_name: "OwningService"))
+    HostedZoneOwner.struct_class = Types::HostedZoneOwner
+
+    HostedZoneSummaries.member = Shapes::ShapeRef.new(shape: HostedZoneSummary, location_name: "HostedZoneSummary")
+
+    HostedZoneSummary.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "HostedZoneId"))
+    HostedZoneSummary.add_member(:name, Shapes::ShapeRef.new(shape: DNSName, required: true, location_name: "Name"))
+    HostedZoneSummary.add_member(:owner, Shapes::ShapeRef.new(shape: HostedZoneOwner, required: true, location_name: "Owner"))
+    HostedZoneSummary.struct_class = Types::HostedZoneSummary
+
     HostedZones.member = Shapes::ShapeRef.new(shape: HostedZone, location_name: "HostedZone")
+
+    IncompatibleVersion.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    IncompatibleVersion.struct_class = Types::IncompatibleVersion
+
+    InsufficientCloudWatchLogsResourcePolicy.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InsufficientCloudWatchLogsResourcePolicy.struct_class = Types::InsufficientCloudWatchLogsResourcePolicy
+
+    InvalidArgument.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidArgument.struct_class = Types::InvalidArgument
+
+    InvalidChangeBatch.add_member(:messages, Shapes::ShapeRef.new(shape: ErrorMessages, location_name: "messages"))
+    InvalidChangeBatch.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidChangeBatch.struct_class = Types::InvalidChangeBatch
+
+    InvalidDomainName.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidDomainName.struct_class = Types::InvalidDomainName
+
+    InvalidInput.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidInput.struct_class = Types::InvalidInput
+
+    InvalidPaginationToken.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidPaginationToken.struct_class = Types::InvalidPaginationToken
+
+    InvalidTrafficPolicyDocument.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidTrafficPolicyDocument.struct_class = Types::InvalidTrafficPolicyDocument
+
+    InvalidVPCId.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidVPCId.struct_class = Types::InvalidVPCId
+
+    LastVPCAssociation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LastVPCAssociation.struct_class = Types::LastVPCAssociation
+
+    LimitsExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitsExceeded.struct_class = Types::LimitsExceeded
 
     LinkedService.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "ServicePrincipal"))
     LinkedService.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
@@ -749,6 +848,17 @@ module Aws::Route53
     ListHostedZonesByNameResponse.add_member(:next_hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "NextHostedZoneId"))
     ListHostedZonesByNameResponse.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, required: true, location_name: "MaxItems"))
     ListHostedZonesByNameResponse.struct_class = Types::ListHostedZonesByNameResponse
+
+    ListHostedZonesByVPCRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VPCId, required: true, location: "querystring", location_name: "vpcid"))
+    ListHostedZonesByVPCRequest.add_member(:vpc_region, Shapes::ShapeRef.new(shape: VPCRegion, required: true, location: "querystring", location_name: "vpcregion"))
+    ListHostedZonesByVPCRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location: "querystring", location_name: "maxitems"))
+    ListHostedZonesByVPCRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nexttoken"))
+    ListHostedZonesByVPCRequest.struct_class = Types::ListHostedZonesByVPCRequest
+
+    ListHostedZonesByVPCResponse.add_member(:hosted_zone_summaries, Shapes::ShapeRef.new(shape: HostedZoneSummaries, required: true, location_name: "HostedZoneSummaries"))
+    ListHostedZonesByVPCResponse.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, required: true, location_name: "MaxItems"))
+    ListHostedZonesByVPCResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListHostedZonesByVPCResponse.struct_class = Types::ListHostedZonesByVPCResponse
 
     ListHostedZonesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location: "querystring", location_name: "marker"))
     ListHostedZonesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location: "querystring", location_name: "maxitems"))
@@ -885,10 +995,49 @@ module Aws::Route53
     ListVPCAssociationAuthorizationsResponse.add_member(:vp_cs, Shapes::ShapeRef.new(shape: VPCs, required: true, location_name: "VPCs"))
     ListVPCAssociationAuthorizationsResponse.struct_class = Types::ListVPCAssociationAuthorizationsResponse
 
+    NoSuchChange.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchChange.struct_class = Types::NoSuchChange
+
+    NoSuchCloudWatchLogsLogGroup.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchCloudWatchLogsLogGroup.struct_class = Types::NoSuchCloudWatchLogsLogGroup
+
+    NoSuchDelegationSet.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchDelegationSet.struct_class = Types::NoSuchDelegationSet
+
+    NoSuchGeoLocation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchGeoLocation.struct_class = Types::NoSuchGeoLocation
+
+    NoSuchHealthCheck.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchHealthCheck.struct_class = Types::NoSuchHealthCheck
+
+    NoSuchHostedZone.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchHostedZone.struct_class = Types::NoSuchHostedZone
+
+    NoSuchQueryLoggingConfig.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchQueryLoggingConfig.struct_class = Types::NoSuchQueryLoggingConfig
+
+    NoSuchTrafficPolicy.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchTrafficPolicy.struct_class = Types::NoSuchTrafficPolicy
+
+    NoSuchTrafficPolicyInstance.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchTrafficPolicyInstance.struct_class = Types::NoSuchTrafficPolicyInstance
+
+    NotAuthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NotAuthorizedException.struct_class = Types::NotAuthorizedException
+
+    PriorRequestNotComplete.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    PriorRequestNotComplete.struct_class = Types::PriorRequestNotComplete
+
+    PublicZoneVPCAssociation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    PublicZoneVPCAssociation.struct_class = Types::PublicZoneVPCAssociation
+
     QueryLoggingConfig.add_member(:id, Shapes::ShapeRef.new(shape: QueryLoggingConfigId, required: true, location_name: "Id"))
     QueryLoggingConfig.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "HostedZoneId"))
     QueryLoggingConfig.add_member(:cloud_watch_logs_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogsLogGroupArn, required: true, location_name: "CloudWatchLogsLogGroupArn"))
     QueryLoggingConfig.struct_class = Types::QueryLoggingConfig
+
+    QueryLoggingConfigAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    QueryLoggingConfigAlreadyExists.struct_class = Types::QueryLoggingConfigAlreadyExists
 
     QueryLoggingConfigs.member = Shapes::ShapeRef.new(shape: QueryLoggingConfig, location_name: "QueryLoggingConfig")
 
@@ -959,6 +1108,27 @@ module Aws::Route53
     TestDNSAnswerResponse.add_member(:protocol, Shapes::ShapeRef.new(shape: TransportProtocol, required: true, location_name: "Protocol"))
     TestDNSAnswerResponse.struct_class = Types::TestDNSAnswerResponse
 
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
+    TooManyHealthChecks.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyHealthChecks.struct_class = Types::TooManyHealthChecks
+
+    TooManyHostedZones.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyHostedZones.struct_class = Types::TooManyHostedZones
+
+    TooManyTrafficPolicies.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyTrafficPolicies.struct_class = Types::TooManyTrafficPolicies
+
+    TooManyTrafficPolicyInstances.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyTrafficPolicyInstances.struct_class = Types::TooManyTrafficPolicyInstances
+
+    TooManyTrafficPolicyVersionsForCurrentPolicy.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyTrafficPolicyVersionsForCurrentPolicy.struct_class = Types::TooManyTrafficPolicyVersionsForCurrentPolicy
+
+    TooManyVPCAssociationAuthorizations.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyVPCAssociationAuthorizations.struct_class = Types::TooManyVPCAssociationAuthorizations
+
     TrafficPolicies.member = Shapes::ShapeRef.new(shape: TrafficPolicy, location_name: "TrafficPolicy")
 
     TrafficPolicy.add_member(:id, Shapes::ShapeRef.new(shape: TrafficPolicyId, required: true, location_name: "Id"))
@@ -968,6 +1138,12 @@ module Aws::Route53
     TrafficPolicy.add_member(:document, Shapes::ShapeRef.new(shape: TrafficPolicyDocument, required: true, location_name: "Document"))
     TrafficPolicy.add_member(:comment, Shapes::ShapeRef.new(shape: TrafficPolicyComment, location_name: "Comment"))
     TrafficPolicy.struct_class = Types::TrafficPolicy
+
+    TrafficPolicyAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TrafficPolicyAlreadyExists.struct_class = Types::TrafficPolicyAlreadyExists
+
+    TrafficPolicyInUse.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TrafficPolicyInUse.struct_class = Types::TrafficPolicyInUse
 
     TrafficPolicyInstance.add_member(:id, Shapes::ShapeRef.new(shape: TrafficPolicyInstanceId, required: true, location_name: "Id"))
     TrafficPolicyInstance.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "HostedZoneId"))
@@ -979,6 +1155,9 @@ module Aws::Route53
     TrafficPolicyInstance.add_member(:traffic_policy_version, Shapes::ShapeRef.new(shape: TrafficPolicyVersion, required: true, location_name: "TrafficPolicyVersion"))
     TrafficPolicyInstance.add_member(:traffic_policy_type, Shapes::ShapeRef.new(shape: RRType, required: true, location_name: "TrafficPolicyType"))
     TrafficPolicyInstance.struct_class = Types::TrafficPolicyInstance
+
+    TrafficPolicyInstanceAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TrafficPolicyInstanceAlreadyExists.struct_class = Types::TrafficPolicyInstanceAlreadyExists
 
     TrafficPolicyInstances.member = Shapes::ShapeRef.new(shape: TrafficPolicyInstance, location_name: "TrafficPolicyInstance")
 
@@ -1041,6 +1220,12 @@ module Aws::Route53
     VPC.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VPCId, location_name: "VPCId"))
     VPC.struct_class = Types::VPC
 
+    VPCAssociationAuthorizationNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    VPCAssociationAuthorizationNotFound.struct_class = Types::VPCAssociationAuthorizationNotFound
+
+    VPCAssociationNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    VPCAssociationNotFound.struct_class = Types::VPCAssociationNotFound
+
     VPCs.member = Shapes::ShapeRef.new(shape: VPC, location_name: "VPC")
 
 
@@ -1079,6 +1264,7 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: PublicZoneVPCAssociation)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingDomainExists)
         o.errors << Shapes::ShapeRef.new(shape: LimitsExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
       end)
 
       api.add_operation(:change_resource_record_sets, Seahorse::Model::Operation.new.tap do |o|
@@ -1590,6 +1776,16 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidDomainName)
       end)
 
+      api.add_operation(:list_hosted_zones_by_vpc, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListHostedZonesByVPC"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/hostedzonesbyvpc"
+        o.input = Shapes::ShapeRef.new(shape: ListHostedZonesByVPCRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListHostedZonesByVPCResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
+      end)
+
       api.add_operation(:list_query_logging_configs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListQueryLoggingConfigs"
         o.http_method = "GET"
@@ -1599,6 +1795,12 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_resource_record_sets, Seahorse::Model::Operation.new.tap do |o|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SNS
+
   class Subscription
 
     extend Aws::Deprecations
@@ -21,6 +24,7 @@ module Aws::SNS
       @arn = extract_arn(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -55,6 +59,13 @@ module Aws::SNS
     # * `RawMessageDelivery` – `true` if raw message delivery is enabled for
     #   the subscription. Raw messages are free of JSON formatting and can
     #   be sent to HTTP/S and Amazon SQS endpoints.
+    #
+    # * `RedrivePolicy` – When specified, sends undeliverable messages to
+    #   the specified Amazon SQS dead-letter queue. Messages that can't be
+    #   delivered due to client errors (for example, when the subscribed
+    #   endpoint is unreachable) or server errors (for example, when the
+    #   service that powers the subscribed endpoint becomes unavailable) are
+    #   held in the dead-letter queue for further analysis or reprocessing.
     #
     # * `SubscriptionArn` – The subscription's ARN.
     #
@@ -136,6 +147,13 @@ module Aws::SNS
     #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
     #     for the endpoints to process JSON formatting, which is otherwise
     #     created for Amazon SNS metadata.
+    #
+    #   * `RedrivePolicy` – When specified, sends undeliverable messages to
+    #     the specified Amazon SQS dead-letter queue. Messages that can't be
+    #     delivered due to client errors (for example, when the subscribed
+    #     endpoint is unreachable) or server errors (for example, when the
+    #     service that powers the subscribed endpoint becomes unavailable) are
+    #     held in the dead-letter queue for further analysis or reprocessing.
     # @option options [String] :attribute_value
     #   The new value for the attribute in JSON format.
     # @return [EmptyStructure]

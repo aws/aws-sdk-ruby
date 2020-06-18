@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../spec_helper'
 require 'tempfile'
 require 'pathname'
@@ -122,7 +124,7 @@ module Seahorse
         describe 'IO object target' do
 
           it 'writes to the given object' do
-            buffer = StringIO.new('')
+            buffer = StringIO.new(String.new)
             request.send_request(target: buffer)
             expect(buffer.string).to eq("part1part2part3")
           end

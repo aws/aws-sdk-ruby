@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'thread'
 require 'set'
 require 'tempfile'
@@ -60,12 +62,21 @@ module Aws
 
       def upload_parts(upload_id, options, &block)
         completed = Queue.new
-        errors = IO.pipe do |read_pipe, write_pipe|
-          threads = upload_in_threads(read_pipe, completed, upload_part_opts(options).merge(upload_id: upload_id))
-          block.call(write_pipe)
-          write_pipe.close
-          threads.map(&:value).compact
+        errors = begin
+          IO.pipe do |read_pipe, write_pipe|
+            threads = upload_in_threads(read_pipe, completed, upload_part_opts(options).merge(upload_id: upload_id))
+            begin
+              block.call(write_pipe)
+            ensure
+              # Ensure the pipe is closed to avoid https://github.com/jruby/jruby/issues/6111
+              write_pipe.close
+            end
+            threads.map(&:value).compact
+          end
+        rescue => e
+          [e]
         end
+
         if errors.empty?
           Array.new(completed.size) { completed.pop }.sort_by { |part| part[:part_number] }
         else
@@ -104,7 +115,7 @@ module Aws
 
       def read_to_part_body(read_pipe)
         return if read_pipe.closed?
-        temp_io = @tempfile ? Tempfile.new(TEMPFILE_PREIX) : StringIO.new
+        temp_io = @tempfile ? Tempfile.new(TEMPFILE_PREIX) : StringIO.new(String.new)
         temp_io.binmode
         bytes_copied = IO.copy_stream(read_pipe, temp_io, @part_size)
         temp_io.rewind
@@ -141,13 +152,15 @@ module Aws
                   if Tempfile === body
                     body.close
                     body.unlink
+                  elsif StringIO === body
+                    body.string.clear
                   end
                 end
               end
               nil
             rescue => error
               # keep other threads from uploading other parts
-              mutex.synchronize { read_pipe.close_read }
+              mutex.synchronize { read_pipe.close_read unless read_pipe.closed? }
               error
             end
           end

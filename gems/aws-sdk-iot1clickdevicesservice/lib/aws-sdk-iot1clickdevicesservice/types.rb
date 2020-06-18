@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -107,6 +109,10 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The ARN of the device.
+    #   @return [String]
+    #
     # @!attribute [rw] attributes
     #   An array of zero or more elements of DeviceAttribute objects
     #   providing user specified device attributes.
@@ -129,14 +135,19 @@ module Aws::IoT1ClickDevicesService
     #   The type of the device, such as "button".
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/DeviceDescription AWS API Documentation
     #
     class DeviceDescription < Struct.new(
+      :arn,
       :attributes,
       :device_id,
       :enabled,
       :remaining_life,
-      :type)
+      :type,
+      :tags)
       include Aws::Structure
     end
 
@@ -209,15 +220,22 @@ module Aws::IoT1ClickDevicesService
     #
     #       {
     #         device_id: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] device_id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/FinalizeDeviceClaimRequest AWS API Documentation
     #
     class FinalizeDeviceClaimRequest < Struct.new(
-      :device_id)
+      :device_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -228,6 +246,22 @@ module Aws::IoT1ClickDevicesService
     #
     class FinalizeDeviceClaimResponse < Struct.new(
       :state)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   403
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The 403 error message returned by the web server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -283,6 +317,38 @@ module Aws::IoT1ClickDevicesService
     #
     class InitiateDeviceClaimResponse < Struct.new(
       :state)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   500
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The 500 error message returned by the web server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   400
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The 400 error message returned by the web server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -424,6 +490,122 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   412
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An error message explaining the error or its remedy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/PreconditionFailedException AWS API Documentation
+    #
+    class PreconditionFailedException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   416
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The requested number of results specified by nextToken cannot be
+    #   satisfied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/RangeNotSatisfiableException AWS API Documentation
+    #
+    class RangeNotSatisfiableException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   409
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An error message explaining the error or its remedy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ResourceConflictException AWS API Documentation
+    #
+    class ResourceConflictException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   404
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The requested device could not be found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tags: { # required
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UnclaimDeviceRequest
     #   data as a hash:
     #
@@ -448,6 +630,28 @@ module Aws::IoT1ClickDevicesService
     #
     class UnclaimDeviceResponse < Struct.new(
       :state)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:wafregional)
 
 module Aws::WAFRegional
+  # An API client for WAFRegional.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::WAFRegional::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::WAFRegional
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +109,7 @@ module Aws::WAFRegional
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::WAFRegional
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::WAFRegional
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::WAFRegional
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::WAFRegional
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::WAFRegional
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::WAFRegional
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::WAFRegional
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,19 +274,86 @@ module Aws::WAFRegional
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
 
-    # Associates a web ACL with a resource.
+    # <note markdown="1"> This is **AWS WAF Classic Regional** documentation. For more
+    # information, see [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
+    # Associates a web ACL with a resource, either an application load
+    # balancer or Amazon API Gateway stage.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :web_acl_id
     #   A unique identifier (ID) for the web ACL.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN (Amazon Resource Name) of the resource to be protected.
+    #   The ARN (Amazon Resource Name) of the resource to be protected, either
+    #   an application load balancer or Amazon API Gateway stage.
+    #
+    #   The ARN should be in one of the following formats:
+    #
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
+    #
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -241,6 +373,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Creates a `ByteMatchSet`. You then use UpdateByteMatchSet to identify
     # the part of a web request that you want AWS WAF to inspect, such as
     # the values of the `User-Agent` header or the query string. For
@@ -263,11 +404,13 @@ module Aws::WAFRegional
     #     or the URI) and the value that you want AWS WAF to watch for.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the ByteMatchSet. You can't change
@@ -309,6 +452,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Creates an GeoMatchSet, which you use to specify which web requests
     # you want to allow or block based on the country that the requests
     # originate from. For example, if you're receiving a lot of requests
@@ -330,11 +482,13 @@ module Aws::WAFRegional
     #     that you want AWS WAF to watch for.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the GeoMatchSet. You can't change
@@ -373,8 +527,17 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
-    # Creates an IPSet, which you use to specify which web requests you want
-    # to allow or block based on the IP addresses that the requests
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
+    # Creates an IPSet, which you use to specify which web requests that you
+    # want to allow or block based on the IP addresses that the requests
     # originate from. For example, if you're receiving a lot of requests
     # from one or more individual IP addresses or one or more ranges of IP
     # addresses and you want to block the requests, you can create an
@@ -395,11 +558,13 @@ module Aws::WAFRegional
     #     you want AWS WAF to watch for.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the IPSet. You can't change `Name`
@@ -463,6 +628,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Creates a RateBasedRule. The `RateBasedRule` contains a `RateLimit`,
     # which specifies the maximum number of requests that AWS WAF allows
     # from a specified IP address in a five-minute period. The
@@ -472,23 +646,23 @@ module Aws::WAFRegional
     #
     # If you add more than one predicate to a `RateBasedRule`, a request not
     # only must exceed the `RateLimit`, but it also must match all the
-    # specifications to be counted or blocked. For example, suppose you add
-    # the following to a `RateBasedRule`\:
+    # conditions to be counted or blocked. For example, suppose you add the
+    # following to a `RateBasedRule`\:
     #
     # * An `IPSet` that matches the IP address `192.0.2.44/32`
     #
     # * A `ByteMatchSet` that matches `BadBot` in the `User-Agent` header
     #
-    # Further, you specify a `RateLimit` of 15,000.
+    # Further, you specify a `RateLimit` of 1,000.
     #
     # You then add the `RateBasedRule` to a `WebACL` and specify that you
     # want to block requests that meet the conditions in the rule. For a
     # request to be blocked, it must come from the IP address 192.0.2.44
     # *and* the `User-Agent` header in the request must contain the value
     # `BadBot`. Further, requests that match these two conditions must be
-    # received at a rate of more than 15,000 requests every five minutes. If
+    # received at a rate of more than 1,000 requests every five minutes. If
     # both conditions are met and the rate is exceeded, AWS WAF blocks the
-    # requests. If the rate drops below 15,000 for a five-minute period, AWS
+    # requests. If the rate drops below 1,000 for a five-minute period, AWS
     # WAF no longer blocks the requests.
     #
     # As a second example, suppose you want to limit requests to a
@@ -501,7 +675,7 @@ module Aws::WAFRegional
     #
     # * A `TargetString` of `login`
     #
-    # Further, you specify a `RateLimit` of 15,000.
+    # Further, you specify a `RateLimit` of 1,000.
     #
     # By adding this `RateBasedRule` to a `WebACL`, you could limit requests
     # to your login page without affecting the rest of your site.
@@ -528,11 +702,13 @@ module Aws::WAFRegional
     #     For more information, see CreateWebACL.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the RateBasedRule. You can't change
@@ -541,8 +717,10 @@ module Aws::WAFRegional
     # @option params [required, String] :metric_name
     #   A friendly name or description for the metrics for this
     #   `RateBasedRule`. The name can contain only alphanumeric characters
-    #   (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change
-    #   the name of the metric after you create the `RateBasedRule`.
+    #   (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It
+    #   can't contain whitespace or metric names reserved for AWS WAF,
+    #   including "All" and "Default\_Action." You can't change the name
+    #   of the metric after you create the `RateBasedRule`.
     #
     # @option params [required, String] :rate_key
     #   The field that AWS WAF uses to determine if requests are likely
@@ -563,6 +741,8 @@ module Aws::WAFRegional
     #   request. You can also use this value to query the status of the
     #   request. For more information, see GetChangeTokenStatus.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #
     # @return [Types::CreateRateBasedRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRateBasedRuleResponse#rule #rule} => Types::RateBasedRule
@@ -576,6 +756,12 @@ module Aws::WAFRegional
     #     rate_key: "IP", # required, accepts IP
     #     rate_limit: 1, # required
     #     change_token: "ChangeToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -600,6 +786,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Creates a RegexMatchSet. You then use UpdateRegexMatchSet to identify
     # the part of a web request that you want AWS WAF to inspect, such as
     # the values of the `User-Agent` header or the query string. For
@@ -625,11 +820,13 @@ module Aws::WAFRegional
     #     want AWS WAF to watch for.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the RegexMatchSet. You can't change
@@ -670,6 +867,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Creates a `RegexPatternSet`. You then use UpdateRegexPatternSet to
     # specify the regular expression (regex) pattern that you want AWS WAF
     # to search for, such as `B[a@]dB[o0]t`. You can then configure AWS WAF
@@ -690,11 +896,13 @@ module Aws::WAFRegional
     #     you want AWS WAF to watch for.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the RegexPatternSet. You can't
@@ -732,11 +940,20 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Creates a `Rule`, which contains the `IPSet` objects, `ByteMatchSet`
     # objects, and other predicates that identify the requests that you want
     # to block. If you add more than one predicate to a `Rule`, a request
     # must match all of the specifications to be allowed or blocked. For
-    # example, suppose you add the following to a `Rule`\:
+    # example, suppose that you add the following to a `Rule`\:
     #
     # * An `IPSet` that matches the IP address `192.0.2.44/32`
     #
@@ -768,11 +985,13 @@ module Aws::WAFRegional
     #     information, see CreateWebACL.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the Rule. You can't change the name
@@ -780,12 +999,16 @@ module Aws::WAFRegional
     #
     # @option params [required, String] :metric_name
     #   A friendly name or description for the metrics for this `Rule`. The
-    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change the name of the
-    #   metric after you create the `Rule`.
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All" and
+    #   "Default\_Action." You can't change the name of the metric after
+    #   you create the `Rule`.
     #
     # @option params [required, String] :change_token
     #   The value returned by the most recent call to GetChangeToken.
+    #
+    # @option params [Array<Types::Tag>] :tags
     #
     # @return [Types::CreateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -826,6 +1049,12 @@ module Aws::WAFRegional
     #     name: "ResourceName", # required
     #     metric_name: "MetricName", # required
     #     change_token: "ChangeToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -848,6 +1077,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Creates a `RuleGroup`. A rule group is a collection of predefined
     # rules that you add to a web ACL. You use UpdateRuleGroup to add rules
     # to the rule group.
@@ -862,11 +1100,13 @@ module Aws::WAFRegional
     # * Ten rules per rule group.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the RuleGroup. You can't change
@@ -874,12 +1114,16 @@ module Aws::WAFRegional
     #
     # @option params [required, String] :metric_name
     #   A friendly name or description for the metrics for this `RuleGroup`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change the name of the
-    #   metric after you create the `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All" and
+    #   "Default\_Action." You can't change the name of the metric after
+    #   you create the `RuleGroup`.
     #
     # @option params [required, String] :change_token
     #   The value returned by the most recent call to GetChangeToken.
+    #
+    # @option params [Array<Types::Tag>] :tags
     #
     # @return [Types::CreateRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -892,6 +1136,12 @@ module Aws::WAFRegional
     #     name: "ResourceName", # required
     #     metric_name: "MetricName", # required
     #     change_token: "ChangeToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -910,6 +1160,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Creates a `SizeConstraintSet`. You then use UpdateSizeConstraintSet to
     # identify the part of a web request that you want AWS WAF to check for
     # length, such as the length of the `User-Agent` header or the length of
@@ -935,11 +1194,13 @@ module Aws::WAFRegional
     #     for.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the SizeConstraintSet. You can't
@@ -1010,6 +1271,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Creates a SqlInjectionMatchSet, which you use to allow, block, or
     # count requests that contain snippets of SQL code in a specified part
     # of web requests. AWS WAF searches for character sequences that are
@@ -1032,11 +1302,13 @@ module Aws::WAFRegional
     #     malicious SQL code.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description for the SqlInjectionMatchSet that
@@ -1104,6 +1376,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Creates a `WebACL`, which contains the `Rules` that identify the
     # CloudFront web requests that you want to allow, block, or count. AWS
     # WAF evaluates `Rules` in order based on the value of `Priority` for
@@ -1136,21 +1417,25 @@ module Aws::WAFRegional
     #     and to associate the `WebACL` with a CloudFront distribution.
     #
     # For more information about how to use the AWS WAF API, see the [AWS
-    # WAF Developer Guide][1].
+    # WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the WebACL. You can't change `Name`
     #   after you create the `WebACL`.
     #
     # @option params [required, String] :metric_name
-    #   A friendly name or description for the metrics for this `WebACL`. The
-    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change `MetricName` after
-    #   you create the `WebACL`.
+    #   A friendly name or description for the metrics for this `WebACL`.The
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All" and
+    #   "Default\_Action." You can't change `MetricName` after you create
+    #   the `WebACL`.
     #
     # @option params [required, Types::WafAction] :default_action
     #   The action that you want AWS WAF to take when a request doesn't match
@@ -1159,6 +1444,8 @@ module Aws::WAFRegional
     #
     # @option params [required, String] :change_token
     #   The value returned by the most recent call to GetChangeToken.
+    #
+    # @option params [Array<Types::Tag>] :tags
     #
     # @return [Types::CreateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1210,6 +1497,12 @@ module Aws::WAFRegional
     #       type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #     },
     #     change_token: "ChangeToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1224,6 +1517,8 @@ module Aws::WAFRegional
     #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
     #   resp.web_acl.rules[0].override_action.type #=> String, one of "NONE", "COUNT"
     #   resp.web_acl.rules[0].type #=> String, one of "REGULAR", "RATE_BASED", "GROUP"
+    #   resp.web_acl.rules[0].excluded_rules #=> Array
+    #   resp.web_acl.rules[0].excluded_rules[0].rule_id #=> String
     #   resp.web_acl.web_acl_arn #=> String
     #   resp.change_token #=> String
     #
@@ -1236,6 +1531,82 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # Creates an AWS CloudFormation WAFV2 template for the specified web ACL
+    # in the specified Amazon S3 bucket. Then, in CloudFormation, you create
+    # a stack from the template, to create the web ACL and its resources in
+    # AWS WAFV2. Use this to migrate your AWS WAF Classic web ACL to the
+    # latest version of AWS WAF.
+    #
+    # This is part of a larger migration procedure for web ACLs from AWS WAF
+    # Classic to the latest version of AWS WAF. For the full procedure,
+    # including caveats and manual steps to complete the migration and
+    # switch over to the new web ACL, see [Migrating your AWS WAF Classic
+    # resources to AWS WAF][1] in the [AWS WAF Developer Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-migrating-from-classic.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #
+    # @option params [required, String] :web_acl_id
+    #   The UUID of the WAF Classic web ACL that you want to migrate to WAF
+    #   v2.
+    #
+    # @option params [required, String] :s3_bucket_name
+    #   The name of the Amazon S3 bucket to store the CloudFormation template
+    #   in. The S3 bucket must be configured as follows for the migration:
+    #
+    #   * The bucket name must start with `aws-waf-migration-`. For example,
+    #     `aws-waf-migration-my-web-acl`.
+    #
+    #   * The bucket must be in the Region where you are deploying the
+    #     template. For example, for a web ACL in us-west-2, you must use an
+    #     Amazon S3 bucket in us-west-2 and you must deploy the template stack
+    #     to us-west-2.
+    #
+    #   * The bucket policies must permit the migration process to write data.
+    #     For listings of the bucket policies, see the Examples section.
+    #
+    # @option params [required, Boolean] :ignore_unsupported_type
+    #   Indicates whether to exclude entities that can't be migrated or to
+    #   stop the migration. Set this to true to ignore unsupported entities in
+    #   the web ACL during the migration. Otherwise, if AWS WAF encounters
+    #   unsupported entities, it stops the process and throws an exception.
+    #
+    # @return [Types::CreateWebACLMigrationStackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWebACLMigrationStackResponse#s3_object_url #s3_object_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_web_acl_migration_stack({
+    #     web_acl_id: "ResourceId", # required
+    #     s3_bucket_name: "S3BucketName", # required
+    #     ignore_unsupported_type: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.s3_object_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateWebACLMigrationStack AWS API Documentation
+    #
+    # @overload create_web_acl_migration_stack(params = {})
+    # @param [Hash] params ({})
+    def create_web_acl_migration_stack(params = {}, options = {})
+      req = build_request(:create_web_acl_migration_stack, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Creates an XssMatchSet, which you use to allow, block, or count
     # requests that contain cross-site scripting attacks in the specified
     # part of web requests. AWS WAF searches for character sequences that
@@ -1256,11 +1627,13 @@ module Aws::WAFRegional
     #     scripting attacks.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description for the XssMatchSet that you're
@@ -1327,6 +1700,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes a ByteMatchSet. You can't delete a `ByteMatchSet`
     # if it's still used in any `Rules` or if it still includes any
     # ByteMatchTuple objects (any filters).
@@ -1343,6 +1725,11 @@ module Aws::WAFRegional
     #     `ChangeToken` parameter of a `DeleteByteMatchSet` request.
     #
     # 3.  Submit a `DeleteByteMatchSet` request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :byte_match_set_id
     #   The `ByteMatchSetId` of the ByteMatchSet that you want to delete.
@@ -1391,6 +1778,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes a GeoMatchSet. You can't delete a `GeoMatchSet`
     # if it's still used in any `Rules` or if it still includes any
     # countries.
@@ -1408,6 +1804,11 @@ module Aws::WAFRegional
     #     `ChangeToken` parameter of a `DeleteGeoMatchSet` request.
     #
     # 3.  Submit a `DeleteGeoMatchSet` request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :geo_match_set_id
     #   The `GeoMatchSetID` of the GeoMatchSet that you want to delete.
@@ -1441,6 +1842,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes an IPSet. You can't delete an `IPSet` if it's
     # still used in any `Rules` or if it still includes any IP addresses.
     #
@@ -1456,6 +1866,11 @@ module Aws::WAFRegional
     #     `ChangeToken` parameter of a `DeleteIPSet` request.
     #
     # 3.  Submit a `DeleteIPSet` request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :ip_set_id
     #   The `IPSetId` of the IPSet that you want to delete. `IPSetId` is
@@ -1503,8 +1918,22 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes the LoggingConfiguration from the specified web
     # ACL.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the web ACL from which you want to
@@ -1527,9 +1956,23 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes an IAM policy from the specified RuleGroup.
     #
     # The user making the request must be the owner of the RuleGroup.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the RuleGroup from which you want to
@@ -1554,6 +1997,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes a RateBasedRule. You can't delete a rule if it's
     # still used in any `WebACL` objects or if it still includes any
     # predicates, such as `ByteMatchSet` objects.
@@ -1570,6 +2022,11 @@ module Aws::WAFRegional
     #     `ChangeToken` parameter of a `DeleteRateBasedRule` request.
     #
     # 3.  Submit a `DeleteRateBasedRule` request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :rule_id
     #   The `RuleId` of the RateBasedRule that you want to delete. `RuleId` is
@@ -1602,6 +2059,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes a RegexMatchSet. You can't delete a
     # `RegexMatchSet` if it's still used in any `Rules` or if it still
     # includes any `RegexMatchTuples` objects (any filters).
@@ -1618,6 +2084,11 @@ module Aws::WAFRegional
     #     `ChangeToken` parameter of a `DeleteRegexMatchSet` request.
     #
     # 3.  Submit a `DeleteRegexMatchSet` request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :regex_match_set_id
     #   The `RegexMatchSetId` of the RegexMatchSet that you want to delete.
@@ -1651,9 +2122,23 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes a RegexPatternSet. You can't delete a
     # `RegexPatternSet` if it's still used in any `RegexMatchSet` or if the
     # `RegexPatternSet` is not empty.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :regex_pattern_set_id
     #   The `RegexPatternSetId` of the RegexPatternSet that you want to
@@ -1687,6 +2172,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes a Rule. You can't delete a `Rule` if it's still
     # used in any `WebACL` objects or if it still includes any predicates,
     # such as `ByteMatchSet` objects.
@@ -1703,6 +2197,11 @@ module Aws::WAFRegional
     #     `ChangeToken` parameter of a `DeleteRule` request.
     #
     # 3.  Submit a `DeleteRule` request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :rule_id
     #   The `RuleId` of the Rule that you want to delete. `RuleId` is returned
@@ -1750,6 +2249,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes a RuleGroup. You can't delete a `RuleGroup` if
     # it's still used in any `WebACL` objects or if it still includes any
     # rules.
@@ -1767,6 +2275,11 @@ module Aws::WAFRegional
     #     `ChangeToken` parameter of a `DeleteRuleGroup` request.
     #
     # 3.  Submit a `DeleteRuleGroup` request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :rule_group_id
     #   The `RuleGroupId` of the RuleGroup that you want to delete.
@@ -1799,6 +2312,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes a SizeConstraintSet. You can't delete a
     # `SizeConstraintSet` if it's still used in any `Rules` or if it still
     # includes any SizeConstraint objects (any filters).
@@ -1816,6 +2338,11 @@ module Aws::WAFRegional
     #     `ChangeToken` parameter of a `DeleteSizeConstraintSet` request.
     #
     # 3.  Submit a `DeleteSizeConstraintSet` request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :size_constraint_set_id
     #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
@@ -1864,6 +2391,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes a SqlInjectionMatchSet. You can't delete a
     # `SqlInjectionMatchSet` if it's still used in any `Rules` or if it
     # still contains any SqlInjectionMatchTuple objects.
@@ -1881,6 +2417,11 @@ module Aws::WAFRegional
     #     `ChangeToken` parameter of a `DeleteSqlInjectionMatchSet` request.
     #
     # 3.  Submit a `DeleteSqlInjectionMatchSet` request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :sql_injection_match_set_id
     #   The `SqlInjectionMatchSetId` of the SqlInjectionMatchSet that you want
@@ -1929,6 +2470,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes a WebACL. You can't delete a `WebACL` if it still
     # contains any `Rules`.
     #
@@ -1941,6 +2491,11 @@ module Aws::WAFRegional
     #     `ChangeToken` parameter of a `DeleteWebACL` request.
     #
     # 3.  Submit a `DeleteWebACL` request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :web_acl_id
     #   The `WebACLId` of the WebACL that you want to delete. `WebACLId` is
@@ -1988,6 +2543,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Permanently deletes an XssMatchSet. You can't delete an `XssMatchSet`
     # if it's still used in any `Rules` or if it still contains any
     # XssMatchTuple objects.
@@ -2005,6 +2569,11 @@ module Aws::WAFRegional
     #     `ChangeToken` parameter of a `DeleteXssMatchSet` request.
     #
     # 3.  Submit a `DeleteXssMatchSet` request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :xss_match_set_id
     #   The `XssMatchSetId` of the XssMatchSet that you want to delete.
@@ -2053,11 +2622,36 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
-    # Removes a web ACL from the specified resource.
+    # <note markdown="1"> This is **AWS WAF Classic Regional** documentation. For more
+    # information, see [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
+    # Removes a web ACL from the specified resource, either an application
+    # load balancer or Amazon API Gateway stage.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :resource_arn
     #   The ARN (Amazon Resource Name) of the resource from which the web ACL
-    #   is being removed.
+    #   is being removed, either an application load balancer or Amazon API
+    #   Gateway stage.
+    #
+    #   The ARN should be in one of the following formats:
+    #
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
+    #
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2076,7 +2670,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the ByteMatchSet specified by `ByteMatchSetId`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :byte_match_set_id
     #   The `ByteMatchSetId` of the ByteMatchSet that you want to get.
@@ -2141,6 +2749,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # When you want to create, update, or delete AWS WAF objects, get a
     # change token and include the change token in the create, update, or
     # delete request. Change tokens ensure that your application doesn't
@@ -2156,6 +2773,11 @@ module Aws::WAFRegional
     # the status of the change token changes to `PENDING`, which indicates
     # that AWS WAF is propagating the change to all AWS WAF servers. Use
     # `GetChangeTokenStatus` to determine the status of your change token.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @return [Types::GetChangeTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2187,6 +2809,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the status of a `ChangeToken` that you got by calling
     # GetChangeToken. `ChangeTokenStatus` is one of the following values:
     #
@@ -2197,7 +2828,12 @@ module Aws::WAFRegional
     # * `PENDING`\: AWS WAF is propagating the create, update, or delete
     #   request to all AWS WAF servers.
     #
-    # * `IN_SYNC`\: Propagation is complete.
+    # * `INSYNC`\: Propagation is complete.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :change_token
     #   The change token for which you want to get the status. This change
@@ -2240,7 +2876,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the GeoMatchSet that is specified by `GeoMatchSetId`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :geo_match_set_id
     #   The `GeoMatchSetId` of the GeoMatchSet that you want to get.
@@ -2274,7 +2924,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the IPSet that is specified by `IPSetId`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :ip_set_id
     #   The `IPSetId` of the IPSet that you want to get. `IPSetId` is returned
@@ -2330,7 +2994,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the LoggingConfiguration for the specified web ACL.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the web ACL for which you want to
@@ -2364,7 +3042,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the IAM policy attached to the RuleGroup.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the RuleGroup for which you want to
@@ -2393,8 +3085,22 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the RateBasedRule that is specified by the `RuleId` that you
     # included in the `GetRateBasedRule` request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :rule_id
     #   The `RuleId` of the RateBasedRule that you want to get. `RuleId` is
@@ -2431,11 +3137,25 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of IP addresses currently being blocked by the
     # RateBasedRule that is specified by the `RuleId`. The maximum number of
     # managed keys that will be blocked is 10,000. If more than 10,000
     # addresses exceed the rate limit, the 10,000 addresses with the highest
     # rates will be blocked.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :rule_id
     #   The `RuleId` of the RateBasedRule for which you want to get a list of
@@ -2473,7 +3193,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the RegexMatchSet specified by `RegexMatchSetId`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :regex_match_set_id
     #   The `RegexMatchSetId` of the RegexMatchSet that you want to get.
@@ -2509,7 +3243,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the RegexPatternSet specified by `RegexPatternSetId`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :regex_pattern_set_id
     #   The `RegexPatternSetId` of the RegexPatternSet that you want to get.
@@ -2542,8 +3290,22 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the Rule that is specified by the `RuleId` that you included
     # in the `GetRule` request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :rule_id
     #   The `RuleId` of the Rule that you want to get. `RuleId` is returned by
@@ -2603,10 +3365,24 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the RuleGroup that is specified by the `RuleGroupId` that you
     # included in the `GetRuleGroup` request.
     #
     # To view the rules in a rule group, use ListActivatedRulesInRuleGroup.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :rule_group_id
     #   The `RuleGroupId` of the RuleGroup that you want to get. `RuleGroupId`
@@ -2637,6 +3413,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Gets detailed information about a specified number of requests--a
     # sample--that AWS WAF randomly selects from among the first 5,000
     # requests that your AWS resource received during a time range that you
@@ -2649,6 +3434,11 @@ module Aws::WAFRegional
     # time range elapsed, `GetSampledRequests` returns an updated time
     # range. This new time range indicates the actual period during which
     # AWS WAF selected the requests in the sample.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :web_acl_id
     #   The `WebACLId` of the `WebACL` for which you want `GetSampledRequests`
@@ -2668,7 +3458,8 @@ module Aws::WAFRegional
     # @option params [required, Types::TimeWindow] :time_window
     #   The start date and time and the end date and time of the range for
     #   which you want `GetSampledRequests` to return a sample of requests.
-    #   Specify the date and time in the following format:
+    #   You must specify the times in Coordinated Universal Time (UTC) format.
+    #   UTC format includes the special designator, `Z`. For example,
     #   `"2016-09-27T14:50Z"`. You can specify any time range in the previous
     #   three hours.
     #
@@ -2770,7 +3561,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the SizeConstraintSet specified by `SizeConstraintSetId`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :size_constraint_set_id
     #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
@@ -2835,8 +3640,22 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the SqlInjectionMatchSet that is specified by
     # `SqlInjectionMatchSetId`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :sql_injection_match_set_id
     #   The `SqlInjectionMatchSetId` of the SqlInjectionMatchSet that you want
@@ -2897,7 +3716,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the WebACL that is specified by `WebACLId`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :web_acl_id
     #   The `WebACLId` of the WebACL that you want to get. `WebACLId` is
@@ -2955,6 +3788,8 @@ module Aws::WAFRegional
     #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
     #   resp.web_acl.rules[0].override_action.type #=> String, one of "NONE", "COUNT"
     #   resp.web_acl.rules[0].type #=> String, one of "REGULAR", "RATE_BASED", "GROUP"
+    #   resp.web_acl.rules[0].excluded_rules #=> Array
+    #   resp.web_acl.rules[0].excluded_rules[0].rule_id #=> String
     #   resp.web_acl.web_acl_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACL AWS API Documentation
@@ -2966,11 +3801,36 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
-    # Returns the web ACL for the specified resource.
+    # <note markdown="1"> This is **AWS WAF Classic Regional** documentation. For more
+    # information, see [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
+    # Returns the web ACL for the specified resource, either an application
+    # load balancer or Amazon API Gateway stage.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :resource_arn
     #   The ARN (Amazon Resource Name) of the resource for which to get the
-    #   web ACL.
+    #   web ACL, either an application load balancer or Amazon API Gateway
+    #   stage.
+    #
+    #   The ARN should be in one of the following formats:
+    #
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
+    #
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #
     # @return [Types::GetWebACLForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2996,7 +3856,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns the XssMatchSet that is specified by `XssMatchSetId`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :xss_match_set_id
     #   The `XssMatchSetId` of the XssMatchSet that you want to get.
@@ -3056,7 +3930,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of ActivatedRule objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :rule_group_id
     #   The `RuleGroupId` of the RuleGroup for which you want to get a list of
@@ -3099,6 +3987,8 @@ module Aws::WAFRegional
     #   resp.activated_rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
     #   resp.activated_rules[0].override_action.type #=> String, one of "NONE", "COUNT"
     #   resp.activated_rules[0].type #=> String, one of "REGULAR", "RATE_BASED", "GROUP"
+    #   resp.activated_rules[0].excluded_rules #=> Array
+    #   resp.activated_rules[0].excluded_rules[0].rule_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListActivatedRulesInRuleGroup AWS API Documentation
     #
@@ -3109,7 +3999,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of ByteMatchSetSummary objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :next_marker
     #   If you specify a value for `Limit` and you have more `ByteMatchSets`
@@ -3154,7 +4058,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of GeoMatchSetSummary objects in the response.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :next_marker
     #   If you specify a value for `Limit` and you have more `GeoMatchSet`s
@@ -3199,15 +4117,27 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of IPSetSummary objects in the response.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #
     # @option params [String] :next_marker
-    #   If you specify a value for `Limit` and you have more `IPSets` than the
-    #   value of `Limit`, AWS WAF returns a `NextMarker` value in the response
-    #   that allows you to list another group of `IPSets`. For the second and
-    #   subsequent `ListIPSets` requests, specify the value of `NextMarker`
-    #   from the previous response to get information about another batch of
-    #   `IPSets`.
+    #   AWS WAF returns a `NextMarker` value in the response that allows you
+    #   to list another group of `IPSets`. For the second and subsequent
+    #   `ListIPSets` requests, specify the value of `NextMarker` from the
+    #   previous response to get information about another batch of `IPSets`.
     #
     # @option params [Integer] :limit
     #   Specifies the number of `IPSet` objects that you want AWS WAF to
@@ -3262,7 +4192,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of LoggingConfiguration objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :next_marker
     #   If you specify a value for `Limit` and you have more
@@ -3312,7 +4256,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of RuleSummary objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :next_marker
     #   If you specify a value for `Limit` and you have more `Rules` than the
@@ -3356,7 +4314,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of RegexMatchSetSummary objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :next_marker
     #   If you specify a value for `Limit` and you have more `RegexMatchSet`
@@ -3401,7 +4373,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of RegexPatternSetSummary objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :next_marker
     #   If you specify a value for `Limit` and you have more `RegexPatternSet`
@@ -3447,14 +4433,28 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic Regional** documentation. For more
+    # information, see [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of resources associated with the specified web ACL.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :web_acl_id
     #   The unique identifier (ID) of the web ACL for which to list the
     #   associated resources.
     #
     # @option params [String] :resource_type
-    #   The type of resource to list, either and application load balancer or
+    #   The type of resource to list, either an application load balancer or
     #   Amazon API Gateway.
     #
     # @return [Types::ListResourcesForWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3482,7 +4482,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of RuleGroup objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :next_marker
     #   If you specify a value for `Limit` and you have more `RuleGroups` than
@@ -3526,7 +4540,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of RuleSummary objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :next_marker
     #   If you specify a value for `Limit` and you have more `Rules` than the
@@ -3589,7 +4617,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of SizeConstraintSetSummary objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :next_marker
     #   If you specify a value for `Limit` and you have more
@@ -3654,7 +4696,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of SqlInjectionMatchSet objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :next_marker
     #   If you specify a value for `Limit` and you have more
@@ -3719,7 +4775,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of RuleGroup objects that you are subscribed to.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :next_marker
     #   If you specify a value for `Limit` and you have more
@@ -3765,7 +4835,83 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
+    # Retrieves the tags associated with the specified AWS resource. Tags
+    # are key:value pairs that you can use to categorize and manage your
+    # resources, for purposes like billing. For example, you might set the
+    # tag key to "customer" and the value to the customer name or ID. You
+    # can specify one or more tags to add to each AWS resource, up to 50
+    # tags for a resource.
+    #
+    # Tagging is only available through the API, SDKs, and CLI. You can't
+    # manage or view tags through the AWS WAF Classic console. You can tag
+    # the AWS resources that you manage through AWS WAF Classic: web ACLs,
+    # rule groups, and rules.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #
+    # @option params [String] :next_marker
+    #
+    # @option params [Integer] :limit
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#next_marker #next_marker} => String
+    #   * {Types::ListTagsForResourceResponse#tag_info_for_resource #tag_info_for_resource} => Types::TagInfoForResource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     next_marker: "NextMarker",
+    #     limit: 1,
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.tag_info_for_resource.resource_arn #=> String
+    #   resp.tag_info_for_resource.tag_list #=> Array
+    #   resp.tag_info_for_resource.tag_list[0].key #=> String
+    #   resp.tag_info_for_resource.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of WebACLSummary objects in the response.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :next_marker
     #   If you specify a value for `Limit` and you have more `WebACL` objects
@@ -3829,7 +4975,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returns an array of XssMatchSet objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [String] :next_marker
     #   If you specify a value for `Limit` and you have more XssMatchSet
@@ -3892,12 +5052,30 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Associates a LoggingConfiguration with a specified web ACL.
     #
     # You can access information about all traffic that AWS WAF inspects
     # using the following steps:
     #
-    # 1.  Create an Amazon Kinesis Data Firehose .
+    # 1.  Create an Amazon Kinesis Data Firehose.
+    #
+    #     Create the data firehose with a PUT source and in the region that
+    #     you are operating. However, if you are capturing logs for Amazon
+    #     CloudFront, always create the firehose in US East (N. Virginia).
+    #
+    #     <note markdown="1"> Do not create the data firehose using a `Kinesis stream` as your
+    #     source.
+    #
+    #      </note>
     #
     # 2.  Associate that firehose to your web ACL using a
     #     `PutLoggingConfiguration` request.
@@ -3905,17 +5083,24 @@ module Aws::WAFRegional
     # When you successfully enable logging using a `PutLoggingConfiguration`
     # request, AWS WAF will create a service linked role with the necessary
     # permissions to write logs to the Amazon Kinesis Data Firehose. For
-    # more information, see [Logging Web ACL Traffic Information][1] in the
+    # more information, see [Logging Web ACL Traffic Information][3] in the
     # *AWS WAF Developer Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
     #
     # @option params [required, Types::LoggingConfiguration] :logging_configuration
     #   The Amazon Kinesis Data Firehose that contains the inspected traffic
     #   information, the redacted fields details, and the Amazon Resource Name
     #   (ARN) of the web ACL to monitor.
+    #
+    #   <note markdown="1"> When specifying `Type` in `RedactedFields`, you must use one of the
+    #   following values: `URI`, `QUERY_STRING`, `HEADER`, or `METHOD`.
+    #
+    #    </note>
     #
     # @return [Types::PutLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3954,7 +5139,16 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
-    # Attaches a IAM policy to the specified resource. The only supported
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
+    # Attaches an IAM policy to the specified resource. The only supported
     # use for this action is to share a RuleGroup across accounts.
     #
     # The `PutPermissionPolicy` is subject to the following restrictions:
@@ -3980,14 +5174,16 @@ module Aws::WAFRegional
     #
     # * Your policy must be composed using IAM Policy version 2012-10-17.
     #
-    # For more information, see [IAM Policies][1].
+    # For more information, see [IAM Policies][3].
     #
     # An example of a valid policy parameter is shown in the Examples
     # section below.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the RuleGroup to which you want to
@@ -4014,6 +5210,106 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
+    # Associates tags with the specified AWS resource. Tags are key:value
+    # pairs that you can use to categorize and manage your resources, for
+    # purposes like billing. For example, you might set the tag key to
+    # "customer" and the value to the customer name or ID. You can specify
+    # one or more tags to add to each AWS resource, up to 50 tags for a
+    # resource.
+    #
+    # Tagging is only available through the API, SDKs, and CLI. You can't
+    # manage or view tags through the AWS WAF Classic console. You can use
+    # this action to tag the AWS resources that you manage through AWS WAF
+    # Classic: web ACLs, rule groups, and rules.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
+    #
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Inserts or deletes ByteMatchTuple objects (filters) in a ByteMatchSet.
     # For each `ByteMatchTuple` object, you specify the following values:
     #
@@ -4053,11 +5349,13 @@ module Aws::WAFRegional
     #     or the URI) and the value that you want AWS WAF to watch for.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :byte_match_set_id
     #   The `ByteMatchSetId` of the ByteMatchSet that you want to update.
@@ -4147,6 +5445,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Inserts or deletes GeoMatchConstraint objects in an `GeoMatchSet`. For
     # each `GeoMatchConstraint` object, you specify the following values:
     #
@@ -4175,11 +5482,13 @@ module Aws::WAFRegional
     # change a country, you delete the existing country and add the new one.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :geo_match_set_id
     #   The `GeoMatchSetId` of the GeoMatchSet that you want to update.
@@ -4235,6 +5544,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Inserts or deletes IPSetDescriptor objects in an `IPSet`. For each
     # `IPSetDescriptor` object, you specify the following values:
     #
@@ -4249,9 +5567,9 @@ module Aws::WAFRegional
     #   `192.0.2.44/32` (for the individual IP address `192.0.2.44`).
     #
     # AWS WAF supports IPv4 address ranges: /8 and any range between /16
-    # through /32. AWS WAF supports IPv6 address ranges: /16, /24, /32, /48,
-    # /56, /64, and /128. For more information about CIDR notation, see the
-    # Wikipedia entry [Classless Inter-Domain Routing][1].
+    # through /32. AWS WAF supports IPv6 address ranges: /24, /32, /48, /56,
+    # /64, and /128. For more information about CIDR notation, see the
+    # Wikipedia entry [Classless Inter-Domain Routing][3].
     #
     # IPv6 addresses can be represented using any of the following formats:
     #
@@ -4288,12 +5606,14 @@ module Aws::WAFRegional
     # You can insert a maximum of 1000 addresses in a single request.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][2].
+    # block HTTP requests, see the [AWS WAF Developer Guide][4].
     #
     #
     #
-    # [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
-    # [2]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
+    # [4]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :ip_set_id
     #   The `IPSetId` of the IPSet that you want to update. `IPSetId` is
@@ -4371,6 +5691,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Inserts or deletes Predicate objects in a rule and updates the
     # `RateLimit` in the rule.
     #
@@ -4388,14 +5717,14 @@ module Aws::WAFRegional
     #
     # * A `ByteMatchSet` that matches `BadBot` in the `User-Agent` header
     #
-    # Further, you specify a `RateLimit` of 15,000.
+    # Further, you specify a `RateLimit` of 1,000.
     #
     # You then add the `RateBasedRule` to a `WebACL` and specify that you
     # want to block requests that satisfy the rule. For a request to be
     # blocked, it must come from the IP address 192.0.2.44 *and* the
     # `User-Agent` header in the request must contain the value `BadBot`.
     # Further, requests that match these two conditions much be received at
-    # a rate of more than 15,000 every five minutes. If the rate drops below
+    # a rate of more than 1,000 every five minutes. If the rate drops below
     # this limit, AWS WAF no longer blocks the requests.
     #
     # As a second example, suppose you want to limit requests to a
@@ -4408,10 +5737,15 @@ module Aws::WAFRegional
     #
     # * A `TargetString` of `login`
     #
-    # Further, you specify a `RateLimit` of 15,000.
+    # Further, you specify a `RateLimit` of 1,000.
     #
     # By adding this `RateBasedRule` to a `WebACL`, you could limit requests
     # to your login page without affecting the rest of your site.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :rule_id
     #   The `RuleId` of the `RateBasedRule` that you want to update. `RuleId`
@@ -4466,6 +5800,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Inserts or deletes RegexMatchTuple objects (filters) in a
     # RegexMatchSet. For each `RegexMatchSetUpdate` object, you specify the
     # following values:
@@ -4505,11 +5848,13 @@ module Aws::WAFRegional
     #     for.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :regex_match_set_id
     #   The `RegexMatchSetId` of the RegexMatchSet that you want to update.
@@ -4561,6 +5906,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Inserts or deletes `RegexPatternString` objects in a RegexPatternSet.
     # For each `RegexPatternString` object, you specify the following
     # values:
@@ -4594,11 +5948,13 @@ module Aws::WAFRegional
     #     expression pattern that you want AWS WAF to watch for.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :regex_pattern_set_id
     #   The `RegexPatternSetId` of the RegexPatternSet that you want to
@@ -4642,12 +5998,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Inserts or deletes Predicate objects in a `Rule`. Each `Predicate`
     # object identifies a predicate, such as a ByteMatchSet or an IPSet,
     # that specifies the web requests that you want to allow, block, or
     # count. If you add more than one predicate to a `Rule`, a request must
     # match all of the specifications to be allowed, blocked, or counted.
-    # For example, suppose you add the following to a `Rule`\:
+    # For example, suppose that you add the following to a `Rule`\:
     #
     # * A `ByteMatchSet` that matches the value `BadBot` in the `User-Agent`
     #   header
@@ -4678,11 +6043,13 @@ module Aws::WAFRegional
     # delete the existing one and add the new one.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :rule_id
     #   The `RuleId` of the `Rule` that you want to update. `RuleId` is
@@ -4761,6 +6128,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Inserts or deletes ActivatedRule objects in a `RuleGroup`.
     #
     # You can only insert `REGULAR` rules into a rule group.
@@ -4785,11 +6161,13 @@ module Aws::WAFRegional
     # existing one and add the new one.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :rule_group_id
     #   The `RuleGroupId` of the RuleGroup that you want to update.
@@ -4831,6 +6209,11 @@ module Aws::WAFRegional
     #             type: "NONE", # required, accepts NONE, COUNT
     #           },
     #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #           excluded_rules: [
+    #             {
+    #               rule_id: "ResourceId", # required
+    #             },
+    #           ],
     #         },
     #       },
     #     ],
@@ -4850,6 +6233,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Inserts or deletes SizeConstraint objects (filters) in a
     # SizeConstraintSet. For each `SizeConstraint` object, you specify the
     # following values:
@@ -4898,11 +6290,13 @@ module Aws::WAFRegional
     #     for.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :size_constraint_set_id
     #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
@@ -4991,6 +6385,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Inserts or deletes SqlInjectionMatchTuple objects (filters) in a
     # SqlInjectionMatchSet. For each `SqlInjectionMatchTuple` object, you
     # specify the following values:
@@ -5010,9 +6413,9 @@ module Aws::WAFRegional
     #   You can only specify a single type of TextTransformation.
     #
     # You use `SqlInjectionMatchSet` objects to specify which CloudFront
-    # requests you want to allow, block, or count. For example, if you're
-    # receiving requests that contain snippets of SQL code in the query
-    # string and you want to block the requests, you can create a
+    # requests that you want to allow, block, or count. For example, if
+    # you're receiving requests that contain snippets of SQL code in the
+    # query string and you want to block the requests, you can create a
     # `SqlInjectionMatchSet` with the applicable settings, and then
     # configure AWS WAF to block the requests.
     #
@@ -5029,11 +6432,13 @@ module Aws::WAFRegional
     #     snippets of SQL code.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :sql_injection_match_set_id
     #   The `SqlInjectionMatchSetId` of the `SqlInjectionMatchSet` that you
@@ -5119,6 +6524,15 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Inserts or deletes ActivatedRule objects in a `WebACL`. Each `Rule`
     # identifies web requests that you want to allow, block, or count. When
     # you update a `WebACL`, you specify the following values:
@@ -5127,9 +6541,9 @@ module Aws::WAFRegional
     #   WAF performs the default action if a request doesn't match the
     #   criteria in any of the `Rules` in a `WebACL`.
     #
-    # * The `Rules` that you want to add and/or delete. If you want to
-    #   replace one `Rule` with another, you delete the existing `Rule` and
-    #   add the new one.
+    # * The `Rules` that you want to add or delete. If you want to replace
+    #   one `Rule` with another, you delete the existing `Rule` and add the
+    #   new one.
     #
     # * For each `Rule`, whether you want AWS WAF to allow requests, block
     #   requests, or count requests that match the conditions in the `Rule`.
@@ -5138,11 +6552,11 @@ module Aws::WAFRegional
     #   `WebACL`. If you add more than one `Rule` to a `WebACL`, AWS WAF
     #   evaluates each request against the `Rules` in order based on the
     #   value of `Priority`. (The `Rule` that has the lowest value for
-    #   `Priority` is evaluated first.) When a web request matches all of
-    #   the predicates (such as `ByteMatchSets` and `IPSets`) in a `Rule`,
-    #   AWS WAF immediately takes the corresponding action, allow or block,
-    #   and doesn't evaluate the request against the remaining `Rules` in
-    #   the `WebACL`, if any.
+    #   `Priority` is evaluated first.) When a web request matches all the
+    #   predicates (such as `ByteMatchSets` and `IPSets`) in a `Rule`, AWS
+    #   WAF immediately takes the corresponding action, allow or block, and
+    #   doesn't evaluate the request against the remaining `Rules` in the
+    #   `WebACL`, if any.
     #
     # To create and configure a `WebACL`, perform the following steps:
     #
@@ -5163,6 +6577,16 @@ module Aws::WAFRegional
     #     want to include in the `WebACL`, to specify the default action,
     #     and to associate the `WebACL` with a CloudFront distribution.
     #
+    #     The `ActivatedRule` can be a rule group. If you specify a rule
+    #     group as your `ActivatedRule` , you can exclude specific rules
+    #     from that rule group.
+    #
+    #     If you already have a rule group associated with a web ACL and
+    #     want to submit an `UpdateWebACL` request to exclude certain rules
+    #     from that rule group, you must first remove the rule group from
+    #     the web ACL, the re-insert it again, specifying the excluded
+    #     rules. For details, see ActivatedRule$ExcludedRules .
+    #
     # Be aware that if you try to add a RATE\_BASED rule to a web ACL
     # without setting the rule type when first creating the rule, the
     # UpdateWebACL request will fail because the request tries to add a
@@ -5170,11 +6594,13 @@ module Aws::WAFRegional
     # not exist.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :web_acl_id
     #   The `WebACLId` of the WebACL that you want to update. `WebACLId` is
@@ -5194,7 +6620,7 @@ module Aws::WAFRegional
     #
     #   * ActivatedRule: Contains `Action`, `OverrideAction`, `Priority`,
     #     `RuleId`, and `Type`. `ActivatedRule|OverrideAction` applies only
-    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case
+    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case,
     #     you do not use `ActivatedRule|Action`. For all other update
     #     requests, `ActivatedRule|Action` is used instead of
     #     `ActivatedRule|OverrideAction`.
@@ -5258,6 +6684,11 @@ module Aws::WAFRegional
     #             type: "NONE", # required, accepts NONE, COUNT
     #           },
     #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #           excluded_rules: [
+    #             {
+    #               rule_id: "ResourceId", # required
+    #             },
+    #           ],
     #         },
     #       },
     #     ],
@@ -5279,12 +6710,21 @@ module Aws::WAFRegional
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Inserts or deletes XssMatchTuple objects (filters) in an XssMatchSet.
     # For each `XssMatchTuple` object, you specify the following values:
     #
     # * `Action`\: Whether to insert the object into or delete the object
-    #   from the array. To change a `XssMatchTuple`, you delete the existing
-    #   object and add a new one.
+    #   from the array. To change an `XssMatchTuple`, you delete the
+    #   existing object and add a new one.
     #
     # * `FieldToMatch`\: The part of web requests that you want AWS WAF to
     #   inspect and, if you want AWS WAF to inspect a header or custom query
@@ -5296,12 +6736,12 @@ module Aws::WAFRegional
     #
     #   You can only specify a single type of TextTransformation.
     #
-    # You use `XssMatchSet` objects to specify which CloudFront requests you
-    # want to allow, block, or count. For example, if you're receiving
-    # requests that contain cross-site scripting attacks in the request body
-    # and you want to block the requests, you can create an `XssMatchSet`
-    # with the applicable settings, and then configure AWS WAF to block the
-    # requests.
+    # You use `XssMatchSet` objects to specify which CloudFront requests
+    # that you want to allow, block, or count. For example, if you're
+    # receiving requests that contain cross-site scripting attacks in the
+    # request body and you want to block the requests, you can create an
+    # `XssMatchSet` with the applicable settings, and then configure AWS WAF
+    # to block the requests.
     #
     # To create and configure an `XssMatchSet`, perform the following steps:
     #
@@ -5315,11 +6755,13 @@ module Aws::WAFRegional
     #     attacks.
     #
     # For more information about how to use the AWS WAF API to allow or
-    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    # block HTTP requests, see the [AWS WAF Developer Guide][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :xss_match_set_id
     #   The `XssMatchSetId` of the `XssMatchSet` that you want to update.
@@ -5331,8 +6773,8 @@ module Aws::WAFRegional
     #
     # @option params [required, Array<Types::XssMatchSetUpdate>] :updates
     #   An array of `XssMatchSetUpdate` objects that you want to insert into
-    #   or delete from a XssMatchSet. For more information, see the applicable
-    #   data types:
+    #   or delete from an XssMatchSet. For more information, see the
+    #   applicable data types:
     #
     #   * XssMatchSetUpdate: Contains `Action` and `XssMatchTuple`
     #
@@ -5416,7 +6858,7 @@ module Aws::WAFRegional
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafregional'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.32.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

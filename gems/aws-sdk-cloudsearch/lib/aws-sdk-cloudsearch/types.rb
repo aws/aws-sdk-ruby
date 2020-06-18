@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -187,6 +189,22 @@ module Aws::CloudSearch
     class AvailabilityOptionsStatus < Struct.new(
       :options,
       :status)
+      include Aws::Structure
+    end
+
+    # An error occurred while processing the request.
+    #
+    # @!attribute [rw] code
+    #   A machine-parsable string error or warning code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable string error or warning message.
+    #   @return [String]
+    #
+    class BaseException < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -937,6 +955,47 @@ module Aws::CloudSearch
       include Aws::Structure
     end
 
+    # Container for the parameters to the `DescribeDomainEndpointOptions`
+    # operation. Specify the name of the domain you want to describe. To
+    # show the active configuration and exclude any pending changes, set the
+    # Deployed option to `true`.
+    #
+    # @note When making an API call, you may pass DescribeDomainEndpointOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         deployed: false,
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   A string that represents the name of a domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployed
+    #   Whether to retrieve the latest configuration (which might be in a
+    #   Processing state) or the current, active configuration. Defaults to
+    #   `false`.
+    #   @return [Boolean]
+    #
+    class DescribeDomainEndpointOptionsRequest < Struct.new(
+      :domain_name,
+      :deployed)
+      include Aws::Structure
+    end
+
+    # The result of a `DescribeDomainEndpointOptions` request. Contains the
+    # status and configuration of a search domain's endpoint options.
+    #
+    # @!attribute [rw] domain_endpoint_options
+    #   The status and configuration of a search domain's endpoint options.
+    #   @return [Types::DomainEndpointOptionsStatus]
+    #
+    class DescribeDomainEndpointOptionsResponse < Struct.new(
+      :domain_endpoint_options)
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `DescribeDomains` operation. By
     # default shows the status of all domains. To restrict the response to
     # particular domains, specify the names of the domains you want to
@@ -1186,6 +1245,11 @@ module Aws::CloudSearch
       include Aws::Structure
     end
 
+    # The request was rejected because it attempted an operation which is
+    # not enabled.
+    #
+    class DisabledOperationException < Aws::EmptyStructure; end
+
     # Options for a search suggester.
     #
     # @note When making an API call, you may pass DocumentSuggesterOptions
@@ -1224,6 +1288,46 @@ module Aws::CloudSearch
       :source_field,
       :fuzzy_matching,
       :sort_expression)
+      include Aws::Structure
+    end
+
+    # The domain's endpoint options.
+    #
+    # @note When making an API call, you may pass DomainEndpointOptions
+    #   data as a hash:
+    #
+    #       {
+    #         enforce_https: false,
+    #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #       }
+    #
+    # @!attribute [rw] enforce_https
+    #   Whether the domain is HTTPS only enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tls_security_policy
+    #   The minimum required TLS version
+    #   @return [String]
+    #
+    class DomainEndpointOptions < Struct.new(
+      :enforce_https,
+      :tls_security_policy)
+      include Aws::Structure
+    end
+
+    # The configuration and status of the domain's endpoint options.
+    #
+    # @!attribute [rw] options
+    #   The domain endpoint options configured for the domain.
+    #   @return [Types::DomainEndpointOptions]
+    #
+    # @!attribute [rw] status
+    #   The status of the configured domain endpoint options.
+    #   @return [Types::OptionStatus]
+    #
+    class DomainEndpointOptionsStatus < Struct.new(
+      :options,
+      :status)
       include Aws::Structure
     end
 
@@ -1829,6 +1933,21 @@ module Aws::CloudSearch
       include Aws::Structure
     end
 
+    # An internal error occurred while processing the request. If this
+    # problem persists, report an issue from the [Service Health
+    # Dashboard][1].
+    #
+    #
+    #
+    # [1]: http://status.aws.amazon.com/
+    #
+    class InternalException < Aws::EmptyStructure; end
+
+    # The request was rejected because it specified an invalid type
+    # definition.
+    #
+    class InvalidTypeException < Aws::EmptyStructure; end
+
     # Options for a latlon field. A latlon field contains a location stored
     # as a latitude and longitude value pair. Present if `IndexFieldType`
     # specifies the field is of type `latlon`. All options are enabled by
@@ -1896,6 +2015,11 @@ module Aws::CloudSearch
       :sort_enabled)
       include Aws::Structure
     end
+
+    # The request was rejected because a resource limit has already been
+    # met.
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # @!attribute [rw] maximum_replication_count
     #   @return [Integer]
@@ -2075,6 +2199,11 @@ module Aws::CloudSearch
       :pending_deletion)
       include Aws::Structure
     end
+
+    # The request was rejected because it attempted to reference a resource
+    # that does not exist.
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
 
     # The desired instance type and desired number of replicas of each index
     # partition.
@@ -2353,6 +2482,50 @@ module Aws::CloudSearch
       include Aws::Structure
     end
 
+    # Container for the parameters to the `UpdateDomainEndpointOptions`
+    # operation. Specifies the name of the domain you want to update and the
+    # domain endpoint options.
+    #
+    # @note When making an API call, you may pass UpdateDomainEndpointOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         domain_endpoint_options: { # required
+    #           enforce_https: false,
+    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #         },
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   A string that represents the name of a domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_endpoint_options
+    #   Whether to require that all requests to the domain arrive over
+    #   HTTPS. We recommend Policy-Min-TLS-1-2-2019-07 for
+    #   TLSSecurityPolicy. For compatibility with older clients, the default
+    #   is Policy-Min-TLS-1-0-2019-07.
+    #   @return [Types::DomainEndpointOptions]
+    #
+    class UpdateDomainEndpointOptionsRequest < Struct.new(
+      :domain_name,
+      :domain_endpoint_options)
+      include Aws::Structure
+    end
+
+    # The result of a `UpdateDomainEndpointOptions` request. Contains the
+    # configuration and status of the domain's endpoint options.
+    #
+    # @!attribute [rw] domain_endpoint_options
+    #   The newly-configured domain endpoint options.
+    #   @return [Types::DomainEndpointOptionsStatus]
+    #
+    class UpdateDomainEndpointOptionsResponse < Struct.new(
+      :domain_endpoint_options)
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `UpdateScalingParameters`
     # operation. Specifies the name of the domain you want to update and the
     # scaling parameters you want to configure.
@@ -2441,6 +2614,10 @@ module Aws::CloudSearch
       :access_policies)
       include Aws::Structure
     end
+
+    # The request was rejected because it has invalid parameters.
+    #
+    class ValidationException < Aws::EmptyStructure; end
 
   end
 end

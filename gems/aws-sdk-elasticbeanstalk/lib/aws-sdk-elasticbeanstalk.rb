@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-elasticbeanstalk/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     elastic_beanstalk = Aws::ElasticBeanstalk::Client.new
+#     resp = elastic_beanstalk.abort_environment_update(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Elastic Beanstalk all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Elastic Beanstalk are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ElasticBeanstalk::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Elastic Beanstalk API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-elasticbeanstalk/customizations'
 # @service
 module Aws::ElasticBeanstalk
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.32.1'
 
 end

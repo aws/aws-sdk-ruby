@@ -1,6 +1,117 @@
 Unreleased Changes
 ------------------
 
+1.32.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.32.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2020-01-21)
+------------------
+
+* Feature - AWS CodePipeline enables an ability to stop pipeline executions.
+
+1.27.0 (2019-11-12)
+------------------
+
+* Feature - AWS CodePipeline now supports the use of variables in action configuration.
+
+1.26.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2019-09-26)
+------------------
+
+* Feature - Documentation updates for CodePipeline
+
+1.24.0 (2019-08-29)
+------------------
+
+* Feature - Introducing pipeline execution trigger details in ListPipelineExecutions API.
+
+1.23.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.18.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2019-05-06)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2019-04-30)
+------------------
+
+* Feature - API update.
+
+1.15.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.14.0 (2019-03-20)
+------------------
+
+* Feature - API update.
+
+1.13.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.12.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
 1.11.0 (2018-11-20)
 ------------------
 
@@ -125,4 +236,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-codepipeline` gem.
-

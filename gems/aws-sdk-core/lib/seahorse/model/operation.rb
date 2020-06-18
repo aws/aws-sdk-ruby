@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Seahorse
   module Model
     class Operation
@@ -8,6 +10,7 @@ module Seahorse
         @deprecated = false
         @errors = []
         @metadata = {}
+        @async = false
       end
 
       # @return [String, nil]
@@ -18,6 +21,9 @@ module Seahorse
 
       # @return [String]
       attr_accessor :http_request_uri
+
+      # @return [Boolean]
+      attr_accessor :http_checksum_required
 
       # @return [Boolean]
       attr_accessor :deprecated
@@ -49,6 +55,9 @@ module Seahorse
       # APIG only
       # @return [Boolean]
       attr_accessor :require_apikey
+
+      # @return [Boolean]
+      attr_accessor :async
 
       def [](key)
         @metadata[key.to_s]

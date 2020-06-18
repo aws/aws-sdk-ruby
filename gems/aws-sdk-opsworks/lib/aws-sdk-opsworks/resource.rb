@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,18 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::OpsWorks
+
+  # This class provides a resource oriented interface for OpsWorks.
+  # To create a resource object:
+  #
+  #     resource = Aws::OpsWorks::Resource.new(region: 'us-west-2')
+  #
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass `:client`, a default client will be constructed.
+  #
+  #     client = Aws::OpsWorks::Client.new(region: 'us-west-2')
+  #     resource = Aws::OpsWorks::Resource.new(client: client)
+  #
   class Resource
 
     # @param options ({})
@@ -88,7 +102,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     # @option options [String] :vpc_id
     #   The ID of the VPC that the stack is to be launched into. The VPC must
     #   be in the stack's region. All instances are launched into this VPC.
@@ -120,8 +134,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     # @option options [Hash<String,String>] :attributes
     #   One or more user-defined key-value pairs to be added to the stack
     #   attributes.
@@ -134,7 +148,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @option options [required, String] :default_instance_profile_arn
     #   The Amazon Resource Name (ARN) of an IAM profile that is the default
     #   profile for all of the stack's EC2 instances. For more information
@@ -142,16 +156,16 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @option options [String] :default_os
     #   The stack's default operating system, which is installed on every
     #   instance unless you specify a different operating system when you
     #   create the instance. You can specify one of the following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
-    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon
-    #     Linux 2015.03`.
+    #     `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
+    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
+    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -176,8 +190,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
     # @option options [String] :hostname_theme
     #   The stack's host name theme, with spaces replaced by underscores. The
     #   theme is used to generate host names for the stack's instances. By
@@ -193,7 +207,7 @@ module Aws::OpsWorks
     #
     #   * `Fruits`
     #
-    #   * `Greek_Deities`
+    #   * `Greek_Deities_and_Titans`
     #
     #   * `Legendary_creatures_from_Japan`
     #
@@ -218,7 +232,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     # @option options [String] :default_subnet_id
     #   The stack's default VPC subnet ID. This parameter is required if you
     #   specify a value for the `VpcId` parameter. All instances are launched
@@ -240,7 +254,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
     # @option options [Types::StackConfigurationManager] :configuration_manager
     #   The configuration manager. When you create a stack we recommend that
     #   you use the configuration manager to specify the Chef version: 12,
@@ -253,7 +267,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     # @option options [Boolean] :use_custom_cookbooks
     #   Whether the stack uses custom cookbooks.
     # @option options [Boolean] :use_opsworks_security_groups
@@ -282,16 +296,16 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     # @option options [Types::Source] :custom_cookbooks_source
     #   Contains the information required to retrieve an app or cookbook from
-    #   a repository. For more information, see [Creating Apps][1] or [Custom
-    #   Recipes and Cookbooks][2].
+    #   a repository. For more information, see [Adding Apps][1] or [Cookbooks
+    #   and Recipes][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
     # @option options [String] :default_ssh_key_name
     #   A default Amazon EC2 key pair name. The default value is none. If you
     #   specify a key pair name, AWS OpsWorks installs the public key on the
@@ -303,9 +317,9 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
-    #   [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
+    #   [3]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
     # @option options [String] :default_root_device_type
     #   The default root device type. This value is the default for all
     #   instances in the stack, but you can override it when you create an
@@ -314,7 +328,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     # @option options [String] :agent_version
     #   The default AWS OpsWorks Stacks agent version. You have the following
     #   options:

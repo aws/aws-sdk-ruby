@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::S3
+
   class MultipartUpload
 
     extend Aws::Deprecations
@@ -27,6 +30,7 @@ module Aws::S3
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -70,6 +74,8 @@ module Aws::S3
       data[:storage_class]
     end
 
+    # Specifies the owner of the object that is part of the multipart
+    # upload.
     # @return [Types::Owner]
     def owner
       data[:owner]
@@ -116,7 +122,8 @@ module Aws::S3
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -129,13 +136,15 @@ module Aws::S3
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -166,17 +175,16 @@ module Aws::S3
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -215,11 +223,15 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @return [Types::AbortMultipartUploadOutput]
     def abort(options = {})
       options = options.merge(
@@ -246,12 +258,17 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [Types::CompletedMultipartUpload] :multipart_upload
+    #   The container for the multipart upload request information.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @return [Object]
     def complete(options = {})
       options = options.merge(
@@ -259,7 +276,7 @@ module Aws::S3
         key: @object_key,
         upload_id: @id
       )
-      resp = @client.complete_multipart_upload(options)
+      @client.complete_multipart_upload(options)
       Object.new(
         bucket_name: @bucket_name,
         key: @object_key,
@@ -297,11 +314,15 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @return [MultipartUploadPart::Collection]
     def parts(options = {})
       batches = Enumerator.new do |y|

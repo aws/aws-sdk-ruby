@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module Sigv4
     # Users that wish to configure static credentials can use the
@@ -28,11 +30,14 @@ module Aws
       # @return [String, nil]
       attr_reader :session_token
 
-      # @return [Boolean]
+      # @return [Boolean] Returns `true` if the access key id and secret
+      #   access key are both set.
       def set?
-        !!(access_key_id && secret_access_key)
+        !access_key_id.nil? &&
+          !access_key_id.empty? &&
+          !secret_access_key.nil? &&
+          !secret_access_key.empty?
       end
-
     end
 
     # Users that wish to configure static credentials can use the
@@ -53,6 +58,10 @@ module Aws
       # @return [Credentials]
       attr_reader :credentials
 
+      # @return [Boolean]
+      def set?
+        !!credentials && credentials.set?
+      end
     end
 
   end

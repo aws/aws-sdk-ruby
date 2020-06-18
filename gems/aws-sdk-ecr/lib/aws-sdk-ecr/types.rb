@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -7,6 +9,24 @@
 
 module Aws::ECR
   module Types
+
+    # This data type is used in the ImageScanFinding data type.
+    #
+    # @!attribute [rw] key
+    #   The attribute key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value assigned to the attribute key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Attribute AWS API Documentation
+    #
+    class Attribute < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
 
     # An object representing authorization data for an Amazon ECR registry.
     #
@@ -282,6 +302,16 @@ module Aws::ECR
     #
     #       {
     #         repository_name: "RepositoryName", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         image_tag_mutability: "MUTABLE", # accepts MUTABLE, IMMUTABLE
+    #         image_scanning_configuration: {
+    #           scan_on_push: false,
+    #         },
     #       }
     #
     # @!attribute [rw] repository_name
@@ -291,10 +321,35 @@ module Aws::ECR
     #   (such as `project-a/nginx-web-app`).
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the repository to help you categorize
+    #   and organize them. Each tag consists of a key and an optional value,
+    #   both of which you define. Tag keys can have a maximum character
+    #   length of 128 characters, and tag values can have a maximum length
+    #   of 256 characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] image_tag_mutability
+    #   The tag mutability setting for the repository. If this parameter is
+    #   omitted, the default setting of `MUTABLE` will be used which will
+    #   allow image tags to be overwritten. If `IMMUTABLE` is specified, all
+    #   image tags within the repository will be immutable which will
+    #   prevent them from being overwritten.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_scanning_configuration
+    #   The image scanning configuration for the repository. This setting
+    #   determines whether images are scanned for known vulnerabilities
+    #   after being pushed to the repository.
+    #   @return [Types::ImageScanningConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryRequest AWS API Documentation
     #
     class CreateRepositoryRequest < Struct.new(
-      :repository_name)
+      :repository_name,
+      :tags,
+      :image_tag_mutability,
+      :image_scanning_configuration)
       include Aws::Structure
     end
 
@@ -452,13 +507,114 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeImageScanFindingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #         image_id: { # required
+    #           image_digest: "ImageDigest",
+    #           image_tag: "ImageTag",
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to describe the image scan findings for. If you
+    #   do not specify a registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository for the image for which to describe the scan
+    #   findings.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   An object with identifying information for an Amazon ECR image.
+    #   @return [Types::ImageIdentifier]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeImageScanFindings` request where `maxResults` was used and
+    #   the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous results that returned the
+    #   `nextToken` value. This value is null when there are no more results
+    #   to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of image scan results returned by
+    #   `DescribeImageScanFindings` in paginated output. When this parameter
+    #   is used, `DescribeImageScanFindings` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `DescribeImageScanFindings` request with the returned
+    #   `nextToken` value. This value can be between 1 and 1000. If this
+    #   parameter is not used, then `DescribeImageScanFindings` returns up
+    #   to 100 results and a `nextToken` value, if applicable.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImageScanFindingsRequest AWS API Documentation
+    #
+    class DescribeImageScanFindingsRequest < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   An object with identifying information for an Amazon ECR image.
+    #   @return [Types::ImageIdentifier]
+    #
+    # @!attribute [rw] image_scan_status
+    #   The current state of the scan.
+    #   @return [Types::ImageScanStatus]
+    #
+    # @!attribute [rw] image_scan_findings
+    #   The information contained in the image scan findings.
+    #   @return [Types::ImageScanFindings]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future
+    #   `DescribeImageScanFindings` request. When the results of a
+    #   `DescribeImageScanFindings` request exceed `maxResults`, this value
+    #   can be used to retrieve the next page of results. This value is null
+    #   when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImageScanFindingsResponse AWS API Documentation
+    #
+    class DescribeImageScanFindingsResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_id,
+      :image_scan_status,
+      :image_scan_findings,
+      :next_token)
+      include Aws::Structure
+    end
+
     # An object representing a filter on a DescribeImages operation.
     #
     # @note When making an API call, you may pass DescribeImagesFilter
     #   data as a hash:
     #
     #       {
-    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #       }
     #
     # @!attribute [rw] tag_status
@@ -488,7 +644,7 @@ module Aws::ECR
     #         next_token: "NextToken",
     #         max_results: 1,
     #         filter: {
-    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #         },
     #       }
     #
@@ -499,8 +655,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   A list of repositories to describe. If this parameter is omitted,
-    #   then all repositories in a registry are described.
+    #   The repository that contains the images to describe.
     #   @return [String]
     #
     # @!attribute [rw] image_ids
@@ -523,7 +678,7 @@ module Aws::ECR
     #   along with a `nextToken` response element. The remaining results of
     #   the initial request can be seen by sending another `DescribeImages`
     #   request with the returned `nextToken` value. This value can be
-    #   between 1 and 100. If this parameter is not used, then
+    #   between 1 and 1000. If this parameter is not used, then
     #   `DescribeImages` returns up to 100 results and a `nextToken` value,
     #   if applicable. This option cannot be used when you specify images
     #   with `imageIds`.
@@ -610,7 +765,7 @@ module Aws::ECR
     #   single page along with a `nextToken` response element. The remaining
     #   results of the initial request can be seen by sending another
     #   `DescribeRepositories` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If this parameter is not used,
+    #   This value can be between 1 and 1000. If this parameter is not used,
     #   then `DescribeRepositories` returns up to 100 results and a
     #   `nextToken` value, if applicable. This option cannot be used when
     #   you specify repositories with `repositoryNames`.
@@ -646,6 +801,19 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The specified layer upload does not contain any layer parts.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/EmptyUploadException AWS API Documentation
+    #
+    class EmptyUploadException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAuthorizationTokenRequest
     #   data as a hash:
     #
@@ -655,7 +823,7 @@ module Aws::ECR
     #
     # @!attribute [rw] registry_ids
     #   A list of AWS account IDs that are associated with the registries
-    #   for which to get authorization tokens. If you do not specify a
+    #   for which to get AuthorizationData objects. If you do not specify a
     #   registry, the default registry is assumed.
     #   @return [Array<String>]
     #
@@ -742,7 +910,7 @@ module Aws::ECR
     #         next_token: "NextToken",
     #         max_results: 1,
     #         filter: {
-    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #         },
     #       }
     #
@@ -778,7 +946,7 @@ module Aws::ECR
     #   response element. The remaining results of the initial request can
     #   be seen by sending  another `GetLifecyclePolicyPreviewRequest`
     #   request with the returned `nextToken`  value. This value can be
-    #   between 1 and 100. If this  parameter is not used, then
+    #   between 1 and 1000. If this  parameter is not used, then
     #   `GetLifecyclePolicyPreviewRequest` returns up to  100 results and a
     #   `nextToken` value, if  applicable. This option cannot be used when
     #   you specify images with `imageIds`.
@@ -965,13 +1133,32 @@ module Aws::ECR
     #   The image manifest associated with the image.
     #   @return [String]
     #
+    # @!attribute [rw] image_manifest_media_type
+    #   The media type associated with the image manifest.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Image AWS API Documentation
     #
     class Image < Struct.new(
       :registry_id,
       :repository_name,
       :image_id,
-      :image_manifest)
+      :image_manifest,
+      :image_manifest_media_type)
+      include Aws::Structure
+    end
+
+    # The specified image has already been pushed, and there were no changes
+    # to the manifest or image tag after the last push.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageAlreadyExistsException AWS API Documentation
+    #
+    class ImageAlreadyExistsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -998,6 +1185,9 @@ module Aws::ECR
     # @!attribute [rw] image_size_in_bytes
     #   The size, in bytes, of the image in the repository.
     #
+    #   If the image is a manifest list, this will be the max size of all
+    #   manifests in the list.
+    #
     #   <note markdown="1"> Beginning with Docker version 1.9, the Docker client compresses
     #   image layers before pushing them to a V2 Docker registry. The output
     #   of the `docker images` command shows the uncompressed image size, so
@@ -1012,6 +1202,14 @@ module Aws::ECR
     #   which the current image was pushed to the repository.
     #   @return [Time]
     #
+    # @!attribute [rw] image_scan_status
+    #   The current state of the scan.
+    #   @return [Types::ImageScanStatus]
+    #
+    # @!attribute [rw] image_scan_findings_summary
+    #   A summary of the last completed image scan.
+    #   @return [Types::ImageScanFindingsSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageDetail AWS API Documentation
     #
     class ImageDetail < Struct.new(
@@ -1020,7 +1218,9 @@ module Aws::ECR
       :image_digest,
       :image_tags,
       :image_size_in_bytes,
-      :image_pushed_at)
+      :image_pushed_at,
+      :image_scan_status,
+      :image_scan_findings_summary)
       include Aws::Structure
     end
 
@@ -1073,6 +1273,159 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The image requested does not exist in the specified repository.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageNotFoundException AWS API Documentation
+    #
+    class ImageNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Contains information about an image scan finding.
+    #
+    # @!attribute [rw] name
+    #   The name associated with the finding, usually a CVE number.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri
+    #   A link containing additional details about the security
+    #   vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The finding severity.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   A collection of attributes of the host from which the finding is
+    #   generated.
+    #   @return [Array<Types::Attribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageScanFinding AWS API Documentation
+    #
+    class ImageScanFinding < Struct.new(
+      :name,
+      :description,
+      :uri,
+      :severity,
+      :attributes)
+      include Aws::Structure
+    end
+
+    # The details of an image scan.
+    #
+    # @!attribute [rw] image_scan_completed_at
+    #   The time of the last completed image scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vulnerability_source_updated_at
+    #   The time when the vulnerability data was last scanned.
+    #   @return [Time]
+    #
+    # @!attribute [rw] findings
+    #   The findings from the image scan.
+    #   @return [Array<Types::ImageScanFinding>]
+    #
+    # @!attribute [rw] finding_severity_counts
+    #   The image vulnerability counts, sorted by severity.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageScanFindings AWS API Documentation
+    #
+    class ImageScanFindings < Struct.new(
+      :image_scan_completed_at,
+      :vulnerability_source_updated_at,
+      :findings,
+      :finding_severity_counts)
+      include Aws::Structure
+    end
+
+    # A summary of the last completed image scan.
+    #
+    # @!attribute [rw] image_scan_completed_at
+    #   The time of the last completed image scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vulnerability_source_updated_at
+    #   The time when the vulnerability data was last scanned.
+    #   @return [Time]
+    #
+    # @!attribute [rw] finding_severity_counts
+    #   The image vulnerability counts, sorted by severity.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageScanFindingsSummary AWS API Documentation
+    #
+    class ImageScanFindingsSummary < Struct.new(
+      :image_scan_completed_at,
+      :vulnerability_source_updated_at,
+      :finding_severity_counts)
+      include Aws::Structure
+    end
+
+    # The current status of an image scan.
+    #
+    # @!attribute [rw] status
+    #   The current state of an image scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the image scan status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageScanStatus AWS API Documentation
+    #
+    class ImageScanStatus < Struct.new(
+      :status,
+      :description)
+      include Aws::Structure
+    end
+
+    # The image scanning configuration for a repository.
+    #
+    # @note When making an API call, you may pass ImageScanningConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         scan_on_push: false,
+    #       }
+    #
+    # @!attribute [rw] scan_on_push
+    #   The setting that determines whether images are scanned after being
+    #   pushed to a repository. If set to `true`, images will be scanned
+    #   after being pushed. If this parameter is not specified, it will
+    #   default to `false` and images will not be scanned unless a scan is
+    #   manually started with the StartImageScan API.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageScanningConfiguration AWS API Documentation
+    #
+    class ImageScanningConfiguration < Struct.new(
+      :scan_on_push)
+      include Aws::Structure
+    end
+
+    # The specified image is tagged with a tag that already exists. The
+    # repository is configured for tag immutability.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageTagAlreadyExistsException AWS API Documentation
+    #
+    class ImageTagAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass InitiateLayerUploadRequest
     #   data as a hash:
     #
@@ -1117,6 +1470,83 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The layer digest calculation performed by Amazon ECR upon receipt of
+    # the image layer does not match the digest specified.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InvalidLayerException AWS API Documentation
+    #
+    class InvalidLayerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The layer part size is not valid, or the first byte specified is not
+    # consecutive to the last byte of a previous layer part upload.
+    #
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] upload_id
+    #   The upload ID associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_valid_byte_received
+    #   The last valid byte received from the layer part upload that is
+    #   associated with the exception.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InvalidLayerPartException AWS API Documentation
+    #
+    class InvalidLayerPartException < Struct.new(
+      :registry_id,
+      :repository_name,
+      :upload_id,
+      :last_valid_byte_received,
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified parameter is invalid. Review the available parameters
+    # for the API request.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An invalid parameter has been specified. Tag keys can have a maximum
+    # character length of 128 characters, and tag values can have a maximum
+    # length of 256 characters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InvalidTagParameterException AWS API Documentation
+    #
+    class InvalidTagParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing an Amazon ECR image layer.
     #
     # @!attribute [rw] layer_digest
@@ -1147,6 +1577,19 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The image layer already exists in the associated repository.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LayerAlreadyExistsException AWS API Documentation
+    #
+    class LayerAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing an Amazon ECR image layer failure.
     #
     # @!attribute [rw] layer_digest
@@ -1170,13 +1613,67 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The specified layer is not available because it is not associated with
+    # an image. Unassociated image layers may be cleaned up at any time.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LayerInaccessibleException AWS API Documentation
+    #
+    class LayerInaccessibleException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Layer parts must be at least 5 MiB in size.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LayerPartTooSmallException AWS API Documentation
+    #
+    class LayerPartTooSmallException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified layers could not be found, or the specified layer is not
+    # valid for this repository.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LayersNotFoundException AWS API Documentation
+    #
+    class LayersNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The lifecycle policy could not be found, and no policy is set to the
+    # repository.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyNotFoundException AWS API Documentation
+    #
+    class LifecyclePolicyNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The filter for the lifecycle policy preview.
     #
     # @note When making an API call, you may pass LifecyclePolicyPreviewFilter
     #   data as a hash:
     #
     #       {
-    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #       }
     #
     # @!attribute [rw] tag_status
@@ -1187,6 +1684,31 @@ module Aws::ECR
     #
     class LifecyclePolicyPreviewFilter < Struct.new(
       :tag_status)
+      include Aws::Structure
+    end
+
+    # The previous lifecycle policy preview request has not completed.
+    # Please try again later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyPreviewInProgressException AWS API Documentation
+    #
+    class LifecyclePolicyPreviewInProgressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # There is no dry run for this repository.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyPreviewNotFoundException AWS API Documentation
+    #
+    class LifecyclePolicyPreviewNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1250,13 +1772,32 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The operation did not succeed because it would have exceeded a service
+    # limit for your account. For more information, see [Amazon ECR Service
+    # Quotas][1] in the Amazon Elastic Container Registry User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing a filter on a ListImages operation.
     #
     # @note When making an API call, you may pass ListImagesFilter
     #   data as a hash:
     #
     #       {
-    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #       }
     #
     # @!attribute [rw] tag_status
@@ -1280,7 +1821,7 @@ module Aws::ECR
     #         next_token: "NextToken",
     #         max_results: 1,
     #         filter: {
-    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #         },
     #       }
     #
@@ -1314,7 +1855,7 @@ module Aws::ECR
     #   returns `maxResults` results in a single page along with a
     #   `nextToken` response element. The remaining results of the initial
     #   request can be seen by sending another `ListImages` request with the
-    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   returned `nextToken` value. This value can be between 1 and 1000. If
     #   this parameter is not used, then `ListImages` returns up to 100
     #   results and a `nextToken` value, if applicable.
     #   @return [Integer]
@@ -1354,6 +1895,37 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the only supported resource is an
+    #   Amazon ECR repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutImageRequest
     #   data as a hash:
     #
@@ -1361,6 +1933,7 @@ module Aws::ECR
     #         registry_id: "RegistryId",
     #         repository_name: "RepositoryName", # required
     #         image_manifest: "ImageManifest", # required
+    #         image_manifest_media_type: "MediaType",
     #         image_tag: "ImageTag",
     #       }
     #
@@ -1378,6 +1951,12 @@ module Aws::ECR
     #   The image manifest corresponding to the image to be uploaded.
     #   @return [String]
     #
+    # @!attribute [rw] image_manifest_media_type
+    #   The media type of the image manifest. If you push an image manifest
+    #   that does not contain the `mediaType` field, you must specify the
+    #   `imageManifestMediaType` in the request.
+    #   @return [String]
+    #
     # @!attribute [rw] image_tag
     #   The tag to associate with the image. This parameter is required for
     #   images that use the Docker Image Manifest V2 Schema 2 or OCI
@@ -1390,6 +1969,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :image_manifest,
+      :image_manifest_media_type,
       :image_tag)
       include Aws::Structure
     end
@@ -1402,6 +1982,122 @@ module Aws::ECR
     #
     class PutImageResponse < Struct.new(
       :image)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutImageScanningConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #         image_scanning_configuration: { # required
+    #           scan_on_push: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to update the image scanning configuration
+    #   setting. If you do not specify a registry, the default registry is
+    #   assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository in which to update the image scanning
+    #   configuration setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_scanning_configuration
+    #   The image scanning configuration for the repository. This setting
+    #   determines whether images are scanned for known vulnerabilities
+    #   after being pushed to the repository.
+    #   @return [Types::ImageScanningConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageScanningConfigurationRequest AWS API Documentation
+    #
+    class PutImageScanningConfigurationRequest < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_scanning_configuration)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_scanning_configuration
+    #   The image scanning configuration setting for the repository.
+    #   @return [Types::ImageScanningConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageScanningConfigurationResponse AWS API Documentation
+    #
+    class PutImageScanningConfigurationResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_scanning_configuration)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutImageTagMutabilityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #         image_tag_mutability: "MUTABLE", # required, accepts MUTABLE, IMMUTABLE
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to update the image tag mutability settings. If
+    #   you do not specify a registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository in which to update the image tag
+    #   mutability settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_tag_mutability
+    #   The tag mutability setting for the repository. If `MUTABLE` is
+    #   specified, image tags can be overwritten. If `IMMUTABLE` is
+    #   specified, all image tags within the repository will be immutable
+    #   which will prevent them from being overwritten.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageTagMutabilityRequest AWS API Documentation
+    #
+    class PutImageTagMutabilityRequest < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_tag_mutability)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_tag_mutability
+    #   The image tag mutability setting for the repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageTagMutabilityResponse AWS API Documentation
+    #
+    class PutImageTagMutabilityResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_tag_mutability)
       include Aws::Structure
     end
 
@@ -1458,6 +2154,18 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The manifest list is referencing an image that does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReferencedImagesNotFoundException AWS API Documentation
+    #
+    class ReferencedImagesNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing a repository.
     #
     # @!attribute [rw] repository_arn
@@ -1487,6 +2195,14 @@ module Aws::ECR
     #   was created.
     #   @return [Time]
     #
+    # @!attribute [rw] image_tag_mutability
+    #   The tag mutability setting for the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_scanning_configuration
+    #   The image scanning configuration for a repository.
+    #   @return [Types::ImageScanningConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Repository AWS API Documentation
     #
     class Repository < Struct.new(
@@ -1494,7 +2210,92 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :repository_uri,
-      :created_at)
+      :created_at,
+      :image_tag_mutability,
+      :image_scanning_configuration)
+      include Aws::Structure
+    end
+
+    # The specified repository already exists in the specified registry.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/RepositoryAlreadyExistsException AWS API Documentation
+    #
+    class RepositoryAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified repository contains images. To delete a repository that
+    # contains images, you must force the deletion with the `force`
+    # parameter.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/RepositoryNotEmptyException AWS API Documentation
+    #
+    class RepositoryNotEmptyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified repository could not be found. Check the spelling of the
+    # specified repository and ensure that you are performing operations on
+    # the correct registry.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/RepositoryNotFoundException AWS API Documentation
+    #
+    class RepositoryNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified repository and registry combination does not have an
+    # associated repository policy.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/RepositoryPolicyNotFoundException AWS API Documentation
+    #
+    class RepositoryPolicyNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified image scan could not be found. Ensure that image
+    # scanning is enabled on the repository and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ScanNotFoundException AWS API Documentation
+    #
+    class ScanNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # These errors are usually caused by a server-side issue.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ServerException AWS API Documentation
+    #
+    class ServerException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1519,7 +2320,13 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] policy_text
-    #   The JSON repository policy text to apply to the repository.
+    #   The JSON repository policy text to apply to the repository. For more
+    #   information, see [Amazon ECR Repository Policies][1] in the *Amazon
+    #   Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html
     #   @return [String]
     #
     # @!attribute [rw] force
@@ -1557,6 +2364,67 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :policy_text)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartImageScanRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #         image_id: { # required
+    #           image_digest: "ImageDigest",
+    #           image_tag: "ImageTag",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to start an image scan request. If you do not
+    #   specify a registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the images to scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   An object with identifying information for an Amazon ECR image.
+    #   @return [Types::ImageIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartImageScanRequest AWS API Documentation
+    #
+    class StartImageScanRequest < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   An object with identifying information for an Amazon ECR image.
+    #   @return [Types::ImageIdentifier]
+    #
+    # @!attribute [rw] image_scan_status
+    #   The current state of the scan.
+    #   @return [Types::ImageScanStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartImageScanResponse AWS API Documentation
+    #
+    class StartImageScanResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_id,
+      :image_scan_status)
       include Aws::Structure
     end
 
@@ -1619,6 +2487,132 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The metadata that you apply to a resource to help you categorize and
+    # organize them. Each tag consists of a key and an optional value, both
+    # of which you define. Tag keys can have a maximum character length of
+    # 128 characters, and tag values can have a maximum length of 256
+    # characters.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that make up a tag. A `key` is a
+    #   general label that acts like a category for more specific tag
+    #   values.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional part of a key-value pair that make up a tag. A `value`
+    #   acts as a descriptor within a tag category (key).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the the resource to which to add
+    #   tags. Currently, the only supported resource is an Amazon ECR
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is an array of key-value
+    #   pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The list of tags on the repository is over the limit. The maximum
+    # number of tags that can be applied to a repository is 50.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The image is of a type that cannot be scanned.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UnsupportedImageTypeException AWS API Documentation
+    #
+    class UnsupportedImageTypeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags. Currently, the only supported resource is an Amazon ECR
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UploadLayerPartRequest
     #   data as a hash:
     #
@@ -1647,11 +2641,13 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] part_first_byte
-    #   The integer value of the first byte of the layer part.
+    #   The position of the first byte of the layer part witin the overall
+    #   image layer.
     #   @return [Integer]
     #
     # @!attribute [rw] part_last_byte
-    #   The integer value of the last byte of the layer part.
+    #   The position of the last byte of the layer part within the overall
+    #   image layer.
     #   @return [Integer]
     #
     # @!attribute [rw] layer_part_blob
@@ -1693,6 +2689,20 @@ module Aws::ECR
       :repository_name,
       :upload_id,
       :last_byte_received)
+      include Aws::Structure
+    end
+
+    # The upload could not be found, or the specified upload id is not valid
+    # for this repository.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UploadNotFoundException AWS API Documentation
+    #
+    class UploadNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

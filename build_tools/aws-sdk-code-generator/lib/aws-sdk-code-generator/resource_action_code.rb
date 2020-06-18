@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AwsSdkCodeGenerator
   class ResourceActionCode
 
@@ -16,7 +18,9 @@ module AwsSdkCodeGenerator
         parts << ResourceBatchBuilder.new(resource: @resource).build
         parts << "#{resource_type}::Collection.new([batch], size: batch.size)"
       elsif resource_action?
-        parts << client_request
+        parts << client_request(
+          @resource['identifiers'].any? { |i| i['source'] == 'response' } || @resource['path']
+        )
         parts << ResourceBuilder.new(resource: @resource, request_made: true).build
       else
         parts << client_request
@@ -27,8 +31,8 @@ module AwsSdkCodeGenerator
 
     private
 
-    def client_request
-      ResourceClientRequest.build(request: @request, resp: true, streaming: @streaming)
+    def client_request(resp = true)
+      ResourceClientRequest.build(request: @request, resp: resp, streaming: @streaming)
     end
 
     def resource_type

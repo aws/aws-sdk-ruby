@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'thread'
 
 module Aws
 
   # Base class used credential classes that can be refreshed. This
-  # provides basic refresh logic in a thread-safe manor. Classes mixing in
+  # provides basic refresh logic in a thread-safe manner. Classes mixing in
   # this module are expected to implement a #refresh method that populates
   # the following instance variables:
   #

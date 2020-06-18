@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -17,6 +19,7 @@ module Aws::CognitoIdentity
     AmbiguousRoleResolutionType = Shapes::StringShape.new(name: 'AmbiguousRoleResolutionType')
     ClaimName = Shapes::StringShape.new(name: 'ClaimName')
     ClaimValue = Shapes::StringShape.new(name: 'ClaimValue')
+    ClassicFlow = Shapes::BooleanShape.new(name: 'ClassicFlow')
     CognitoIdentityProvider = Shapes::StructureShape.new(name: 'CognitoIdentityProvider')
     CognitoIdentityProviderClientId = Shapes::StringShape.new(name: 'CognitoIdentityProviderClientId')
     CognitoIdentityProviderList = Shapes::ListShape.new(name: 'CognitoIdentityProviderList')
@@ -56,6 +59,8 @@ module Aws::CognitoIdentity
     IdentityPoolId = Shapes::StringShape.new(name: 'IdentityPoolId')
     IdentityPoolName = Shapes::StringShape.new(name: 'IdentityPoolName')
     IdentityPoolShortDescription = Shapes::StructureShape.new(name: 'IdentityPoolShortDescription')
+    IdentityPoolTagsListType = Shapes::ListShape.new(name: 'IdentityPoolTagsListType')
+    IdentityPoolTagsType = Shapes::MapShape.new(name: 'IdentityPoolTagsType')
     IdentityPoolUnauthenticated = Shapes::BooleanShape.new(name: 'IdentityPoolUnauthenticated')
     IdentityPoolsList = Shapes::ListShape.new(name: 'IdentityPoolsList')
     IdentityProviderId = Shapes::StringShape.new(name: 'IdentityProviderId')
@@ -70,6 +75,8 @@ module Aws::CognitoIdentity
     ListIdentitiesResponse = Shapes::StructureShape.new(name: 'ListIdentitiesResponse')
     ListIdentityPoolsInput = Shapes::StructureShape.new(name: 'ListIdentityPoolsInput')
     ListIdentityPoolsResponse = Shapes::StructureShape.new(name: 'ListIdentityPoolsResponse')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LoginsList = Shapes::ListShape.new(name: 'LoginsList')
     LoginsMap = Shapes::MapShape.new(name: 'LoginsMap')
     LookupDeveloperIdentityInput = Shapes::StructureShape.new(name: 'LookupDeveloperIdentityInput')
@@ -97,12 +104,18 @@ module Aws::CognitoIdentity
     SessionTokenString = Shapes::StringShape.new(name: 'SessionTokenString')
     SetIdentityPoolRolesInput = Shapes::StructureShape.new(name: 'SetIdentityPoolRolesInput')
     String = Shapes::StringShape.new(name: 'String')
+    TagKeysType = Shapes::StringShape.new(name: 'TagKeysType')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValueType = Shapes::StringShape.new(name: 'TagValueType')
     TokenDuration = Shapes::IntegerShape.new(name: 'TokenDuration')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnlinkDeveloperIdentityInput = Shapes::StructureShape.new(name: 'UnlinkDeveloperIdentityInput')
     UnlinkIdentityInput = Shapes::StructureShape.new(name: 'UnlinkIdentityInput')
     UnprocessedIdentityId = Shapes::StructureShape.new(name: 'UnprocessedIdentityId')
     UnprocessedIdentityIdList = Shapes::ListShape.new(name: 'UnprocessedIdentityIdList')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
 
     CognitoIdentityProvider.add_member(:provider_name, Shapes::ShapeRef.new(shape: CognitoIdentityProviderName, location_name: "ProviderName"))
     CognitoIdentityProvider.add_member(:client_id, Shapes::ShapeRef.new(shape: CognitoIdentityProviderClientId, location_name: "ClientId"))
@@ -111,13 +124,18 @@ module Aws::CognitoIdentity
 
     CognitoIdentityProviderList.member = Shapes::ShapeRef.new(shape: CognitoIdentityProvider)
 
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
     CreateIdentityPoolInput.add_member(:identity_pool_name, Shapes::ShapeRef.new(shape: IdentityPoolName, required: true, location_name: "IdentityPoolName"))
     CreateIdentityPoolInput.add_member(:allow_unauthenticated_identities, Shapes::ShapeRef.new(shape: IdentityPoolUnauthenticated, required: true, location_name: "AllowUnauthenticatedIdentities"))
+    CreateIdentityPoolInput.add_member(:allow_classic_flow, Shapes::ShapeRef.new(shape: ClassicFlow, location_name: "AllowClassicFlow"))
     CreateIdentityPoolInput.add_member(:supported_login_providers, Shapes::ShapeRef.new(shape: IdentityProviders, location_name: "SupportedLoginProviders"))
     CreateIdentityPoolInput.add_member(:developer_provider_name, Shapes::ShapeRef.new(shape: DeveloperProviderName, location_name: "DeveloperProviderName"))
     CreateIdentityPoolInput.add_member(:open_id_connect_provider_arns, Shapes::ShapeRef.new(shape: OIDCProviderList, location_name: "OpenIdConnectProviderARNs"))
     CreateIdentityPoolInput.add_member(:cognito_identity_providers, Shapes::ShapeRef.new(shape: CognitoIdentityProviderList, location_name: "CognitoIdentityProviders"))
     CreateIdentityPoolInput.add_member(:saml_provider_arns, Shapes::ShapeRef.new(shape: SAMLProviderList, location_name: "SamlProviderARNs"))
+    CreateIdentityPoolInput.add_member(:identity_pool_tags, Shapes::ShapeRef.new(shape: IdentityPoolTagsType, location_name: "IdentityPoolTags"))
     CreateIdentityPoolInput.struct_class = Types::CreateIdentityPoolInput
 
     Credentials.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyString, location_name: "AccessKeyId"))
@@ -141,7 +159,13 @@ module Aws::CognitoIdentity
     DescribeIdentityPoolInput.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))
     DescribeIdentityPoolInput.struct_class = Types::DescribeIdentityPoolInput
 
+    DeveloperUserAlreadyRegisteredException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    DeveloperUserAlreadyRegisteredException.struct_class = Types::DeveloperUserAlreadyRegisteredException
+
     DeveloperUserIdentifierList.member = Shapes::ShapeRef.new(shape: DeveloperUserIdentifier)
+
+    ExternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ExternalServiceException.struct_class = Types::ExternalServiceException
 
     GetCredentialsForIdentityInput.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, required: true, location_name: "IdentityId"))
     GetCredentialsForIdentityInput.add_member(:logins, Shapes::ShapeRef.new(shape: LoginsMap, location_name: "Logins"))
@@ -199,21 +223,40 @@ module Aws::CognitoIdentity
     IdentityPool.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))
     IdentityPool.add_member(:identity_pool_name, Shapes::ShapeRef.new(shape: IdentityPoolName, required: true, location_name: "IdentityPoolName"))
     IdentityPool.add_member(:allow_unauthenticated_identities, Shapes::ShapeRef.new(shape: IdentityPoolUnauthenticated, required: true, location_name: "AllowUnauthenticatedIdentities"))
+    IdentityPool.add_member(:allow_classic_flow, Shapes::ShapeRef.new(shape: ClassicFlow, location_name: "AllowClassicFlow"))
     IdentityPool.add_member(:supported_login_providers, Shapes::ShapeRef.new(shape: IdentityProviders, location_name: "SupportedLoginProviders"))
     IdentityPool.add_member(:developer_provider_name, Shapes::ShapeRef.new(shape: DeveloperProviderName, location_name: "DeveloperProviderName"))
     IdentityPool.add_member(:open_id_connect_provider_arns, Shapes::ShapeRef.new(shape: OIDCProviderList, location_name: "OpenIdConnectProviderARNs"))
     IdentityPool.add_member(:cognito_identity_providers, Shapes::ShapeRef.new(shape: CognitoIdentityProviderList, location_name: "CognitoIdentityProviders"))
     IdentityPool.add_member(:saml_provider_arns, Shapes::ShapeRef.new(shape: SAMLProviderList, location_name: "SamlProviderARNs"))
+    IdentityPool.add_member(:identity_pool_tags, Shapes::ShapeRef.new(shape: IdentityPoolTagsType, location_name: "IdentityPoolTags"))
     IdentityPool.struct_class = Types::IdentityPool
 
     IdentityPoolShortDescription.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, location_name: "IdentityPoolId"))
     IdentityPoolShortDescription.add_member(:identity_pool_name, Shapes::ShapeRef.new(shape: IdentityPoolName, location_name: "IdentityPoolName"))
     IdentityPoolShortDescription.struct_class = Types::IdentityPoolShortDescription
 
+    IdentityPoolTagsListType.member = Shapes::ShapeRef.new(shape: TagKeysType)
+
+    IdentityPoolTagsType.key = Shapes::ShapeRef.new(shape: TagKeysType)
+    IdentityPoolTagsType.value = Shapes::ShapeRef.new(shape: TagValueType)
+
     IdentityPoolsList.member = Shapes::ShapeRef.new(shape: IdentityPoolShortDescription)
 
     IdentityProviders.key = Shapes::ShapeRef.new(shape: IdentityProviderName)
     IdentityProviders.value = Shapes::ShapeRef.new(shape: IdentityProviderId)
+
+    InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InternalErrorException.struct_class = Types::InternalErrorException
+
+    InvalidIdentityPoolConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidIdentityPoolConfigurationException.struct_class = Types::InvalidIdentityPoolConfigurationException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListIdentitiesInput.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))
     ListIdentitiesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: QueryLimit, required: true, location_name: "MaxResults"))
@@ -233,6 +276,12 @@ module Aws::CognitoIdentity
     ListIdentityPoolsResponse.add_member(:identity_pools, Shapes::ShapeRef.new(shape: IdentityPoolsList, location_name: "IdentityPools"))
     ListIdentityPoolsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
     ListIdentityPoolsResponse.struct_class = Types::ListIdentityPoolsResponse
+
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARNString, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: IdentityPoolTagsType, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     LoginsList.member = Shapes::ShapeRef.new(shape: IdentityProviderName)
 
@@ -268,7 +317,16 @@ module Aws::CognitoIdentity
     MergeDeveloperIdentitiesResponse.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, location_name: "IdentityId"))
     MergeDeveloperIdentitiesResponse.struct_class = Types::MergeDeveloperIdentitiesResponse
 
+    NotAuthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    NotAuthorizedException.struct_class = Types::NotAuthorizedException
+
     OIDCProviderList.member = Shapes::ShapeRef.new(shape: ARNString)
+
+    ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceConflictException.struct_class = Types::ResourceConflictException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RoleMapping.add_member(:type, Shapes::ShapeRef.new(shape: RoleMappingType, required: true, location_name: "Type"))
     RoleMapping.add_member(:ambiguous_role_resolution, Shapes::ShapeRef.new(shape: AmbiguousRoleResolutionType, location_name: "AmbiguousRoleResolution"))
@@ -291,6 +349,15 @@ module Aws::CognitoIdentity
     SetIdentityPoolRolesInput.add_member(:role_mappings, Shapes::ShapeRef.new(shape: RoleMappingMap, location_name: "RoleMappings"))
     SetIdentityPoolRolesInput.struct_class = Types::SetIdentityPoolRolesInput
 
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARNString, required: true, location_name: "ResourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: IdentityPoolTagsType, required: true, location_name: "Tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
     UnlinkDeveloperIdentityInput.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, required: true, location_name: "IdentityId"))
     UnlinkDeveloperIdentityInput.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))
     UnlinkDeveloperIdentityInput.add_member(:developer_provider_name, Shapes::ShapeRef.new(shape: DeveloperProviderName, required: true, location_name: "DeveloperProviderName"))
@@ -308,6 +375,12 @@ module Aws::CognitoIdentity
 
     UnprocessedIdentityIdList.member = Shapes::ShapeRef.new(shape: UnprocessedIdentityId)
 
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARNString, required: true, location_name: "ResourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: IdentityPoolTagsListType, required: true, location_name: "TagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -320,6 +393,7 @@ module Aws::CognitoIdentity
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Cognito Identity",
+        "serviceId" => "Cognito Identity",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSCognitoIdentityService",
         "uid" => "cognito-identity-2014-06-30",
@@ -490,6 +564,20 @@ module Aws::CognitoIdentity
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
@@ -536,6 +624,19 @@ module Aws::CognitoIdentity
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:unlink_developer_identity, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UnlinkDeveloperIdentity"
         o.http_method = "POST"
@@ -564,6 +665,19 @@ module Aws::CognitoIdentity
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ExternalServiceException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
       api.add_operation(:update_identity_pool, Seahorse::Model::Operation.new.tap do |o|

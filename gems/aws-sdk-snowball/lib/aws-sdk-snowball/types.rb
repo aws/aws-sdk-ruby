@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -163,6 +165,21 @@ module Aws::Snowball
     #
     class CancelJobResult < Aws::EmptyStructure; end
 
+    # Job creation failed. Currently, clusters support five nodes. If you
+    # have less than five nodes for your cluster and you have more nodes to
+    # create for this cluster, try again and create jobs until your cluster
+    # has exactly five notes.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ClusterLimitExceededException AWS API Documentation
+    #
+    class ClusterLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains a cluster's state, a cluster's ID, and other important
     # information.
     #
@@ -212,7 +229,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -222,7 +239,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] cluster_state
@@ -235,9 +252,12 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this cluster. The only
-    #   supported device types for cluster jobs are `EDGE`, `EDGE_C`, and
-    #   `EDGE_CG`.
+    #   The type of AWS Snowball device to use for this cluster.
+    #
+    #   <note markdown="1"> For cluster jobs, AWS Snowball currently supports only the `EDGE`
+    #   device type.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -255,19 +275,20 @@ module Aws::Snowball
     #
     # @!attribute [rw] shipping_option
     #   The shipping speed for each node in this cluster. This speed
-    #   doesn't dictate how soon you'll get each device, rather it
-    #   represents how quickly each device moves to its destination while in
-    #   transit. Regional shipping speeds are as follows:
+    #   doesn't dictate how soon you'll get each Snowball Edge device,
+    #   rather it represents how quickly each device moves to its
+    #   destination while in transit. Regional shipping speeds are as
+    #   follows:
     #
     #   * In Australia, you have access to express shipping. Typically,
     #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
-    #     Typically, devices shipped express are delivered in about a day.
-    #     In addition, most countries in the EU have access to standard
+    #     Typically, Snowball Edges shipped express are delivered in about a
+    #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, devices are delivered in one to seven days.
+    #   * In India, Snowball Edges are delivered in one to seven days.
     #
     #   * In the US, you have access to one-day shipping and two-day
     #     shipping.
@@ -284,6 +305,10 @@ module Aws::Snowball
     #   in most regions.
     #   @return [String]
     #
+    # @!attribute [rw] tax_documents
+    #   The tax documents required in your AWS Region.
+    #   @return [Types::TaxDocuments]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ClusterMetadata AWS API Documentation
     #
     class ClusterMetadata < Struct.new(
@@ -299,18 +324,15 @@ module Aws::Snowball
       :address_id,
       :shipping_option,
       :notification,
-      :forwarding_address_id)
+      :forwarding_address_id,
+      :tax_documents)
       include Aws::Structure
     end
 
     # A JSON-formatted object that describes a compatible Amazon Machine
-    # Image (AMI). For more information on compatible AMIs, see [Using
-    # Amazon EC2 Compute Instances][1] in the *AWS Snowball Developer
-    # Guide*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html
+    # Image (AMI), including the ID and name for a Snowball Edge AMI. This
+    # AMI is compatible with the device's physical hardware requirements,
+    # and it should be able to be run in an SBE1 instance on the device.
     #
     # @!attribute [rw] ami_id
     #   The unique identifier for an individual Snowball Edge AMI.
@@ -410,7 +432,7 @@ module Aws::Snowball
     #         address_id: "AddressId", # required
     #         kms_key_arn: "KmsKeyARN",
     #         role_arn: "RoleARN", # required
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG
+    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD
     #         shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
@@ -418,6 +440,11 @@ module Aws::Snowball
     #           notify_all: false,
     #         },
     #         forwarding_address_id: "AddressId",
+    #         tax_documents: {
+    #           ind: {
+    #             gstin: "GSTIN",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] job_type
@@ -447,7 +474,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -457,13 +484,16 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this cluster. The only
-    #   supported device types for cluster jobs are `EDGE`, `EDGE_C`, and
-    #   `EDGE_CG`.
+    #   The type of AWS Snowball device to use for this cluster.
+    #
+    #   <note markdown="1"> For cluster jobs, AWS Snowball currently supports only the `EDGE`
+    #   device type.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] shipping_option
@@ -474,6 +504,20 @@ module Aws::Snowball
     #   follows:
     #
     #   * In Australia, you have access to express shipping. Typically,
+    #     Snowballs shipped express are delivered in about a day.
+    #
+    #   * In the European Union (EU), you have access to express shipping.
+    #     Typically, Snowballs shipped express are delivered in about a day.
+    #     In addition, most countries in the EU have access to standard
+    #     shipping, which typically takes less than a week, one way.
+    #
+    #   * In India, Snowballs are delivered in one to seven days.
+    #
+    #   * In the United States of America (US), you have access to one-day
+    #     shipping and two-day shipping.
+    #   ^
+    #
+    #   * In Australia, you have access to express shipping. Typically,
     #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
@@ -481,7 +525,7 @@ module Aws::Snowball
     #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, devices are delivered in one to seven days.
+    #   * In India, Snowball Edges are delivered in one to seven days.
     #
     #   * In the US, you have access to one-day shipping and two-day
     #     shipping.
@@ -497,6 +541,10 @@ module Aws::Snowball
     #   in most regions.
     #   @return [String]
     #
+    # @!attribute [rw] tax_documents
+    #   The tax documents required in your AWS Region.
+    #   @return [Types::TaxDocuments]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -509,7 +557,8 @@ module Aws::Snowball
       :snowball_type,
       :shipping_option,
       :notification,
-      :forwarding_address_id)
+      :forwarding_address_id,
+      :tax_documents)
       include Aws::Structure
     end
 
@@ -560,7 +609,7 @@ module Aws::Snowball
     #         address_id: "AddressId",
     #         kms_key_arn: "KmsKeyARN",
     #         role_arn: "RoleARN",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, NoPreference
+    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, NoPreference
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
@@ -568,8 +617,20 @@ module Aws::Snowball
     #           notify_all: false,
     #         },
     #         cluster_id: "ClusterId",
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG
+    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD
     #         forwarding_address_id: "AddressId",
+    #         tax_documents: {
+    #           ind: {
+    #             gstin: "GSTIN",
+    #           },
+    #         },
+    #         device_configuration: {
+    #           snowcone_device_configuration: {
+    #             wireless_connection: {
+    #               is_wifi_enabled: false,
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] job_type
@@ -606,7 +667,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -616,7 +677,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] snowball_capacity_preference
@@ -657,15 +718,36 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this job. The only
-    #   supported device types for cluster jobs are `EDGE`, `EDGE_C`, and
-    #   `EDGE_CG`.
+    #   The type of AWS Snowball device to use for this job.
+    #
+    #   <note markdown="1"> For cluster jobs, AWS Snowball currently supports only the `EDGE`
+    #   device type.
+    #
+    #    </note>
+    #
+    #   The type of AWS Snowball device to use for this job. Currently, the
+    #   only supported device type for cluster jobs is `EDGE`.
+    #
+    #   For more information, see [Snowball Edge Device Options][1] in the
+    #   Snowball Edge Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html
     #   @return [String]
     #
     # @!attribute [rw] forwarding_address_id
     #   The forwarding address ID for a job. This field is not supported in
     #   most regions.
     #   @return [String]
+    #
+    # @!attribute [rw] tax_documents
+    #   The tax documents required in your AWS Region.
+    #   @return [Types::TaxDocuments]
+    #
+    # @!attribute [rw] device_configuration
+    #   Defines the device configuration for an AWS Snowcone job.
+    #   @return [Types::DeviceConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateJobRequest AWS API Documentation
     #
@@ -681,7 +763,9 @@ module Aws::Snowball
       :notification,
       :cluster_id,
       :snowball_type,
-      :forwarding_address_id)
+      :forwarding_address_id,
+      :tax_documents,
+      :device_configuration)
       include Aws::Structure
     end
 
@@ -874,6 +958,31 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # The container for `SnowconeDeviceConfiguration`.
+    #
+    # @note When making an API call, you may pass DeviceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         snowcone_device_configuration: {
+    #           wireless_connection: {
+    #             is_wifi_enabled: false,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] snowcone_device_configuration
+    #   Returns information about the device configuration for an AWS
+    #   Snowcone job.
+    #   @return [Types::SnowconeDeviceConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DeviceConfiguration AWS API Documentation
+    #
+    class DeviceConfiguration < Struct.new(
+      :snowcone_device_configuration)
+      include Aws::Structure
+    end
+
     # A JSON-formatted object that contains the IDs for an Amazon Machine
     # Image (AMI), including the Amazon EC2 AMI ID and the Snowball Edge AMI
     # ID. Each AMI has these two IDs to simplify identifying the AMI in both
@@ -892,7 +1001,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_ami_id
-    #   The ID of the AMI on the supported device.
+    #   The ID of the AMI on the Snowball Edge device.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Ec2AmiResource AWS API Documentation
@@ -900,6 +1009,19 @@ module Aws::Snowball
     class Ec2AmiResource < Struct.new(
       :ami_id,
       :snowball_ami_id)
+      include Aws::Structure
+    end
+
+    # Your IAM user lacks the necessary Amazon EC2 permissions to perform
+    # the attempted action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Ec2RequestFailedException AWS API Documentation
+    #
+    class Ec2RequestFailedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1006,6 +1128,133 @@ module Aws::Snowball
     class GetSnowballUsageResult < Struct.new(
       :snowball_limit,
       :snowballs_in_use)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSoftwareUpdatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID for a job that you want to get the software update file for,
+    #   for example `JID123e4567-e89b-12d3-a456-426655440000`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSoftwareUpdatesRequest AWS API Documentation
+    #
+    class GetSoftwareUpdatesRequest < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] updates_uri
+    #   The Amazon S3 presigned URL for the update file associated with the
+    #   specified `JobId` value. The software update will be available for 2
+    #   days after this request is made. To access an update after the 2
+    #   days have passed, you'll have to make another call to
+    #   `GetSoftwareUpdates`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSoftwareUpdatesResult AWS API Documentation
+    #
+    class GetSoftwareUpdatesResult < Struct.new(
+      :updates_uri)
+      include Aws::Structure
+    end
+
+    # The tax documents required in AWS Regions in India.
+    #
+    # @note When making an API call, you may pass INDTaxDocuments
+    #   data as a hash:
+    #
+    #       {
+    #         gstin: "GSTIN",
+    #       }
+    #
+    # @!attribute [rw] gstin
+    #   The Goods and Services Tax (GST) documents required in AWS Regions
+    #   in India.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/INDTaxDocuments AWS API Documentation
+    #
+    class INDTaxDocuments < Struct.new(
+      :gstin)
+      include Aws::Structure
+    end
+
+    # The address provided was invalid. Check the address with your
+    # region's carrier, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidAddressException AWS API Documentation
+    #
+    class InvalidAddressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Job or cluster creation failed. One or more inputs were invalid.
+    # Confirm that the CreateClusterRequest$SnowballType value supports your
+    # CreateJobRequest$JobType, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidInputCombinationException AWS API Documentation
+    #
+    class InvalidInputCombinationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The action can't be performed because the job's current state
+    # doesn't allow that action to be performed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidJobStateException AWS API Documentation
+    #
+    class InvalidJobStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The `NextToken` string was altered unexpectedly, and the operation has
+    # stopped. Run the operation without changing the `NextToken` string,
+    # and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource can't be found. Check the information you
+    # provided in your last request, and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The provided resource value is invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/InvalidResourceException AWS API Documentation
+    #
+    class InvalidResourceException < Struct.new(
+      :message,
+      :resource_type)
       include Aws::Structure
     end
 
@@ -1152,7 +1401,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -1162,7 +1411,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] address_id
@@ -1213,6 +1462,15 @@ module Aws::Snowball
     #   most regions.
     #   @return [String]
     #
+    # @!attribute [rw] tax_documents
+    #   The metadata associated with the tax documents required in your AWS
+    #   Region.
+    #   @return [Types::TaxDocuments]
+    #
+    # @!attribute [rw] device_configuration
+    #   The container for `SnowconeDeviceConfiguration`.
+    #   @return [Types::DeviceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobMetadata AWS API Documentation
     #
     class JobMetadata < Struct.new(
@@ -1232,7 +1490,9 @@ module Aws::Snowball
       :data_transfer_progress,
       :job_log_info,
       :cluster_id,
-      :forwarding_address_id)
+      :forwarding_address_id,
+      :tax_documents,
+      :device_configuration)
       include Aws::Structure
     end
 
@@ -1289,6 +1549,19 @@ module Aws::Snowball
       :s3_resources,
       :lambda_resources,
       :ec2_ami_resources)
+      include Aws::Structure
+    end
+
+    # The provided AWS Key Management Service key lacks the permissions to
+    # perform the specified CreateJob or UpdateJob action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/KMSRequestFailedException AWS API Documentation
+    #
+    class KMSRequestFailedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1464,7 +1737,7 @@ module Aws::Snowball
     #
     # @!attribute [rw] max_results
     #   The maximum number of results for the list of compatible images.
-    #   Currently, each supported device can store 10 AMIs.
+    #   Currently, a Snowball Edge device can store 10 AMIs.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1482,7 +1755,8 @@ module Aws::Snowball
     end
 
     # @!attribute [rw] compatible_images
-    #   A JSON-formatted object that describes a compatible AMI.
+    #   A JSON-formatted object that describes a compatible AMI, including
+    #   the ID and name for a Snowball Edge AMI.
     #   @return [Array<Types::CompatibleImage>]
     #
     # @!attribute [rw] next_token
@@ -1575,8 +1849,8 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html
-    #   [2]: http://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html
     #   @return [String]
     #
     # @!attribute [rw] job_states_to_notify
@@ -1700,6 +1974,64 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # Specifies the device configuration for an AWS Snowcone job.
+    #
+    # @note When making an API call, you may pass SnowconeDeviceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         wireless_connection: {
+    #           is_wifi_enabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] wireless_connection
+    #   Configures the wireless connection for the AWS Snowcone device.
+    #   @return [Types::WirelessConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/SnowconeDeviceConfiguration AWS API Documentation
+    #
+    class SnowconeDeviceConfiguration < Struct.new(
+      :wireless_connection)
+      include Aws::Structure
+    end
+
+    # The tax documents required in your AWS Region.
+    #
+    # @note When making an API call, you may pass TaxDocuments
+    #   data as a hash:
+    #
+    #       {
+    #         ind: {
+    #           gstin: "GSTIN",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ind
+    #   The tax documents required in AWS Regions in India.
+    #   @return [Types::INDTaxDocuments]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/TaxDocuments AWS API Documentation
+    #
+    class TaxDocuments < Struct.new(
+      :ind)
+      include Aws::Structure
+    end
+
+    # The address is either outside the serviceable area for your region, or
+    # an error occurred. Check the address with your region's carrier and
+    # try again. If the issue persists, contact AWS Support.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UnsupportedAddressException AWS API Documentation
+    #
+    class UnsupportedAddressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateClusterRequest
     #   data as a hash:
     #
@@ -1756,7 +2088,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1845,7 +2177,7 @@ module Aws::Snowball
     #         address_id: "AddressId",
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         description: "String",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, NoPreference
+    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, NoPreference
     #         forwarding_address_id: "AddressId",
     #       }
     #
@@ -1861,7 +2193,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] notification
@@ -1913,6 +2245,26 @@ module Aws::Snowball
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobResult AWS API Documentation
     #
     class UpdateJobResult < Aws::EmptyStructure; end
+
+    # Configures the wireless connection on an AWS Snowcone device.
+    #
+    # @note When making an API call, you may pass WirelessConnection
+    #   data as a hash:
+    #
+    #       {
+    #         is_wifi_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] is_wifi_enabled
+    #   Enables the Wi-Fi adapter on an AWS Snowcone device.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/WirelessConnection AWS API Documentation
+    #
+    class WirelessConnection < Struct.new(
+      :is_wifi_enabled)
+      include Aws::Structure
+    end
 
   end
 end

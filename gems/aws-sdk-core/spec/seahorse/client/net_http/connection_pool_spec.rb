@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../../spec_helper'
 
 module Seahorse
@@ -21,6 +23,14 @@ module Seahorse
             http_proxy = URI.parse('http://%3A%40%2Fusername:password%3A%40%2F@proxy.com:8080')
             pool = described_class.new(:http_proxy => http_proxy)
             expect(pool.send(:http_proxy_parts)).to eq ["proxy.com", 8080, ":@/username", "password:@/"]
+          end
+        end
+
+        describe ".for" do
+          it "returns the same connection pool" do
+            first_pool = described_class.for(:http_wire_trace => true)
+            second_pool = described_class.for(:http_wire_trace => true)
+            expect(first_pool).to eq second_pool
           end
         end
       end

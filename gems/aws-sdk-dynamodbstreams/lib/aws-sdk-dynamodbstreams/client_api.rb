@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -91,6 +93,9 @@ module Aws::DynamoDBStreams
     DescribeStreamOutput.add_member(:stream_description, Shapes::ShapeRef.new(shape: StreamDescription, location_name: "StreamDescription"))
     DescribeStreamOutput.struct_class = Types::DescribeStreamOutput
 
+    ExpiredIteratorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ExpiredIteratorException.struct_class = Types::ExpiredIteratorException
+
     GetRecordsInput.add_member(:shard_iterator, Shapes::ShapeRef.new(shape: ShardIterator, required: true, location_name: "ShardIterator"))
     GetRecordsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "Limit"))
     GetRecordsInput.struct_class = Types::GetRecordsInput
@@ -112,11 +117,17 @@ module Aws::DynamoDBStreams
     Identity.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     Identity.struct_class = Types::Identity
 
+    InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalServerError.struct_class = Types::InternalServerError
+
     KeySchema.member = Shapes::ShapeRef.new(shape: KeySchemaElement)
 
     KeySchemaElement.add_member(:attribute_name, Shapes::ShapeRef.new(shape: KeySchemaAttributeName, required: true, location_name: "AttributeName"))
     KeySchemaElement.add_member(:key_type, Shapes::ShapeRef.new(shape: KeyType, required: true, location_name: "KeyType"))
     KeySchemaElement.struct_class = Types::KeySchemaElement
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListAttributeValue.member = Shapes::ShapeRef.new(shape: AttributeValue)
 
@@ -144,6 +155,9 @@ module Aws::DynamoDBStreams
     Record.struct_class = Types::Record
 
     RecordList.member = Shapes::ShapeRef.new(shape: Record)
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     SequenceNumberRange.add_member(:starting_sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "StartingSequenceNumber"))
     SequenceNumberRange.add_member(:ending_sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "EndingSequenceNumber"))
@@ -184,6 +198,9 @@ module Aws::DynamoDBStreams
     StreamRecord.struct_class = Types::StreamRecord
 
     StringSetAttributeValue.member = Shapes::ShapeRef.new(shape: StringAttributeValue)
+
+    TrimmedDataAccessException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TrimmedDataAccessException.struct_class = Types::TrimmedDataAccessException
 
 
     # @api private

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 {{#generated_src_warning}}
 {{generated_src_warning}}
 {{/generated_src_warning}}
@@ -8,6 +10,18 @@ require '{{.}}'
 Aws::Plugins::GlobalConfiguration.add_identifier(:{{service_identifier}})
 
 module {{module_name}}
+  # An API client for {{service_name}}.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = {{module_name}}::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -24,6 +38,48 @@ module {{module_name}}
     # @overload initialize(options)
     #   @param [Hash] options
     {{>documentation}}
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     {{/client_constructor}}
     def initialize(*args)
       super
@@ -41,13 +97,13 @@ module {{module_name}}
       {{#eventstream_output}}
       params = params.dup
       event_stream_handler = case handler = params.delete(:event_stream_handler)
-        when EventStreams::{{eventstream_member}} then handler
-        when Proc then EventStreams::{{eventstream_member}}.new.tap(&handler)
-        when nil then EventStreams::{{eventstream_member}}.new
+        when EventStreams::{{output_eventstream_member}} then handler
+        when Proc then EventStreams::{{output_eventstream_member}}.new.tap(&handler)
+        when nil then EventStreams::{{output_eventstream_member}}.new
         else
           msg = "expected :event_stream_handler to be a block or "\
-            "instance of {{module_name}}::EventStreams::{{eventstream_member}}"\
-            ", got `#{handler.inspect}` instead"
+                "instance of {{module_name}}::EventStreams::{{output_eventstream_member}}"\
+                ", got `#{handler.inspect}` instead"
           raise ArgumentError, msg
         end
 
@@ -106,7 +162,7 @@ module {{module_name}}
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

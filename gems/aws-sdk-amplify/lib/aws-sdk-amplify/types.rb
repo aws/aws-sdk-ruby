@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -83,6 +85,18 @@ module Aws::Amplify
     #   BuildSpec content for Amplify App.
     #   @return [String]
     #
+    # @!attribute [rw] enable_auto_branch_creation
+    #   Enables automated branch creation for the Amplify App.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] auto_branch_creation_patterns
+    #   Automated branch creation glob patterns for the Amplify App.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_branch_creation_config
+    #   Automated branch creation config for the Amplify App.
+    #   @return [Types::AutoBranchCreationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/App AWS API Documentation
     #
     class App < Struct.new(
@@ -103,7 +117,150 @@ module Aws::Amplify
       :basic_auth_credentials,
       :custom_rules,
       :production_branch,
-      :build_spec)
+      :build_spec,
+      :enable_auto_branch_creation,
+      :auto_branch_creation_patterns,
+      :auto_branch_creation_config)
+      include Aws::Structure
+    end
+
+    # Structure for artifact.
+    #
+    # @!attribute [rw] artifact_file_name
+    #   File name for the artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_id
+    #   Unique Id for a artifact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Artifact AWS API Documentation
+    #
+    class Artifact < Struct.new(
+      :artifact_file_name,
+      :artifact_id)
+      include Aws::Structure
+    end
+
+    # Structure with auto branch creation config.
+    #
+    # @note When making an API call, you may pass AutoBranchCreationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
+    #         framework: "Framework",
+    #         enable_auto_build: false,
+    #         environment_variables: {
+    #           "EnvKey" => "EnvValue",
+    #         },
+    #         basic_auth_credentials: "BasicAuthCredentials",
+    #         enable_basic_auth: false,
+    #         build_spec: "BuildSpec",
+    #         enable_pull_request_preview: false,
+    #         pull_request_environment_name: "PullRequestEnvironmentName",
+    #       }
+    #
+    # @!attribute [rw] stage
+    #   Stage for the auto created branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] framework
+    #   Framework for the auto created branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_auto_build
+    #   Enables auto building for the auto created branch.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] environment_variables
+    #   Environment Variables for the auto created branch.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] basic_auth_credentials
+    #   Basic Authorization credentials for the auto created branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_basic_auth
+    #   Enables Basic Auth for the auto created branch.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] build_spec
+    #   BuildSpec for the auto created branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_pull_request_preview
+    #   Enables Pull Request Preview for auto created branch.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] pull_request_environment_name
+    #   The Amplify Environment name for the pull request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/AutoBranchCreationConfig AWS API Documentation
+    #
+    class AutoBranchCreationConfig < Struct.new(
+      :stage,
+      :framework,
+      :enable_auto_build,
+      :environment_variables,
+      :basic_auth_credentials,
+      :enable_basic_auth,
+      :build_spec,
+      :enable_pull_request_preview,
+      :pull_request_environment_name)
+      include Aws::Structure
+    end
+
+    # Backend environment for an Amplify App.
+    #
+    # @!attribute [rw] backend_environment_arn
+    #   Arn for a backend environment, part of an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   Name for a backend environment, part of an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_name
+    #   CloudFormation stack name of backend environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_artifacts
+    #   Name of deployment artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   Creation date and time for a backend environment, part of an Amplify
+    #   App.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   Last updated date and time for a backend environment, part of an
+    #   Amplify App.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/BackendEnvironment AWS API Documentation
+    #
+    class BackendEnvironment < Struct.new(
+      :backend_environment_arn,
+      :environment_name,
+      :stack_name,
+      :deployment_artifacts,
+      :create_time,
+      :update_time)
+      include Aws::Structure
+    end
+
+    # Exception thrown when a request contains unexpected data.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -131,7 +288,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   Display name for a branch, part of an Amplify App.
+    #   Display name for a branch, will use as the default domain prefix.
     #   @return [String]
     #
     # @!attribute [rw] enable_notification
@@ -175,7 +332,7 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] thumbnail_url
-    #   Thumbnail Url for the branch.
+    #   Thumbnail URL for the branch.
     #   @return [String]
     #
     # @!attribute [rw] basic_auth_credentials
@@ -189,6 +346,30 @@ module Aws::Amplify
     #
     # @!attribute [rw] ttl
     #   The content TTL for the website in seconds.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_resources
+    #   List of custom resources that are linked to this branch.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] enable_pull_request_preview
+    #   Enables Pull Request Preview for this branch.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] pull_request_environment_name
+    #   The Amplify Environment name for the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_branch
+    #   The destination branch if the branch is a pull request branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_branch
+    #   The source branch if the branch is a pull request branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_arn
+    #   ARN for a Backend Environment, part of an Amplify App.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Branch AWS API Documentation
@@ -213,7 +394,13 @@ module Aws::Amplify
       :thumbnail_url,
       :basic_auth_credentials,
       :build_spec,
-      :ttl)
+      :ttl,
+      :associated_resources,
+      :enable_pull_request_preview,
+      :pull_request_environment_name,
+      :destination_branch,
+      :source_branch,
+      :backend_environment_arn)
       include Aws::Structure
     end
 
@@ -225,10 +412,11 @@ module Aws::Amplify
     #       {
     #         name: "Name", # required
     #         description: "Description",
-    #         repository: "Repository", # required
-    #         platform: "IOS", # required, accepts IOS, ANDROID, WEB, REACT_NATIVE
+    #         repository: "Repository",
+    #         platform: "WEB", # accepts WEB
     #         iam_service_role_arn: "ServiceRoleArn",
-    #         oauth_token: "OauthToken", # required
+    #         oauth_token: "OauthToken",
+    #         access_token: "AccessToken",
     #         environment_variables: {
     #           "EnvKey" => "EnvValue",
     #         },
@@ -247,6 +435,21 @@ module Aws::Amplify
     #           "TagKey" => "TagValue",
     #         },
     #         build_spec: "BuildSpec",
+    #         enable_auto_branch_creation: false,
+    #         auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
+    #         auto_branch_creation_config: {
+    #           stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
+    #           framework: "Framework",
+    #           enable_auto_build: false,
+    #           environment_variables: {
+    #             "EnvKey" => "EnvValue",
+    #           },
+    #           basic_auth_credentials: "BasicAuthCredentials",
+    #           enable_basic_auth: false,
+    #           build_spec: "BuildSpec",
+    #           enable_pull_request_preview: false,
+    #           pull_request_environment_name: "PullRequestEnvironmentName",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -273,6 +476,12 @@ module Aws::Amplify
     #   OAuth token for 3rd party source control system for an Amplify App,
     #   used to create webhook and read-only deploy key. OAuth token is not
     #   stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_token
+    #   Personal Access token for 3rd party source control system for an
+    #   Amplify App, used to create webhook and read-only deploy key. Token
+    #   is not stored.
     #   @return [String]
     #
     # @!attribute [rw] environment_variables
@@ -304,6 +513,18 @@ module Aws::Amplify
     #   BuildSpec for an Amplify App
     #   @return [String]
     #
+    # @!attribute [rw] enable_auto_branch_creation
+    #   Enables automated branch creation for the Amplify App.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] auto_branch_creation_patterns
+    #   Automated branch creation glob patterns for the Amplify App.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_branch_creation_config
+    #   Automated branch creation config for the Amplify App.
+    #   @return [Types::AutoBranchCreationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateAppRequest AWS API Documentation
     #
     class CreateAppRequest < Struct.new(
@@ -313,13 +534,17 @@ module Aws::Amplify
       :platform,
       :iam_service_role_arn,
       :oauth_token,
+      :access_token,
       :environment_variables,
       :enable_branch_auto_build,
       :enable_basic_auth,
       :basic_auth_credentials,
       :custom_rules,
       :tags,
-      :build_spec)
+      :build_spec,
+      :enable_auto_branch_creation,
+      :auto_branch_creation_patterns,
+      :auto_branch_creation_config)
       include Aws::Structure
     end
 
@@ -335,6 +560,57 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Request structure for a backend environment create request.
+    #
+    # @note When making an API call, you may pass CreateBackendEnvironmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         environment_name: "EnvironmentName", # required
+    #         stack_name: "StackName",
+    #         deployment_artifacts: "DeploymentArtifacts",
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   Name for the backend environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_name
+    #   CloudFormation stack name of backend environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_artifacts
+    #   Name of deployment artifacts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBackendEnvironmentRequest AWS API Documentation
+    #
+    class CreateBackendEnvironmentRequest < Struct.new(
+      :app_id,
+      :environment_name,
+      :stack_name,
+      :deployment_artifacts)
+      include Aws::Structure
+    end
+
+    # Result structure for create backend environment.
+    #
+    # @!attribute [rw] backend_environment
+    #   Backend environment structure for an amplify App.
+    #   @return [Types::BackendEnvironment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBackendEnvironmentResult AWS API Documentation
+    #
+    class CreateBackendEnvironmentResult < Struct.new(
+      :backend_environment)
+      include Aws::Structure
+    end
+
     # Request structure for a branch create request.
     #
     # @note When making an API call, you may pass CreateBranchRequest
@@ -344,7 +620,7 @@ module Aws::Amplify
     #         app_id: "AppId", # required
     #         branch_name: "BranchName", # required
     #         description: "Description",
-    #         stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL
+    #         stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
     #         framework: "Framework",
     #         enable_notification: false,
     #         enable_auto_build: false,
@@ -358,6 +634,10 @@ module Aws::Amplify
     #         },
     #         build_spec: "BuildSpec",
     #         ttl: "TTL",
+    #         display_name: "DisplayName",
+    #         enable_pull_request_preview: false,
+    #         pull_request_environment_name: "PullRequestEnvironmentName",
+    #         backend_environment_arn: "BackendEnvironmentArn",
     #       }
     #
     # @!attribute [rw] app_id
@@ -412,6 +692,22 @@ module Aws::Amplify
     #   The content TTL for the website in seconds.
     #   @return [String]
     #
+    # @!attribute [rw] display_name
+    #   Display name for a branch, will use as the default domain prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_pull_request_preview
+    #   Enables Pull Request Preview for this branch.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] pull_request_environment_name
+    #   The Amplify Environment name for the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_arn
+    #   ARN for a Backend Environment, part of an Amplify App.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranchRequest AWS API Documentation
     #
     class CreateBranchRequest < Struct.new(
@@ -427,7 +723,11 @@ module Aws::Amplify
       :enable_basic_auth,
       :tags,
       :build_spec,
-      :ttl)
+      :ttl,
+      :display_name,
+      :enable_pull_request_preview,
+      :pull_request_environment_name,
+      :backend_environment_arn)
       include Aws::Structure
     end
 
@@ -441,6 +741,68 @@ module Aws::Amplify
     #
     class CreateBranchResult < Struct.new(
       :branch)
+      include Aws::Structure
+    end
+
+    # Request structure for create a new deployment.
+    #
+    # @note When making an API call, you may pass CreateDeploymentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         branch_name: "BranchName", # required
+    #         file_map: {
+    #           "FileName" => "MD5Hash",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   Name for the branch, for the Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_map
+    #   Optional file map that contains file name as the key and file
+    #   content md5 hash as the value. If this argument is provided, the
+    #   service will generate different upload url per file. Otherwise, the
+    #   service will only generate a single upload url for the zipped files.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDeploymentRequest AWS API Documentation
+    #
+    class CreateDeploymentRequest < Struct.new(
+      :app_id,
+      :branch_name,
+      :file_map)
+      include Aws::Structure
+    end
+
+    # Result structure for create a new deployment.
+    #
+    # @!attribute [rw] job_id
+    #   The jobId for this deployment, will supply to start deployment api.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_upload_urls
+    #   When the fileMap argument is provided in the request, the
+    #   fileUploadUrls will contain a map of file names to upload url.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] zip_upload_url
+    #   When the fileMap argument is NOT provided. This zipUploadUrl will be
+    #   returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDeploymentResult AWS API Documentation
+    #
+    class CreateDeploymentResult < Struct.new(
+      :job_id,
+      :file_upload_urls,
+      :zip_upload_url)
       include Aws::Structure
     end
 
@@ -470,7 +832,8 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] enable_auto_sub_domain
-    #   Enables automated creation of Subdomains for branches.
+    #   Enables automated creation of Subdomains for branches. (Currently
+    #   not supported)
     #   @return [Boolean]
     #
     # @!attribute [rw] sub_domain_settings
@@ -497,6 +860,51 @@ module Aws::Amplify
     #
     class CreateDomainAssociationResult < Struct.new(
       :domain_association)
+      include Aws::Structure
+    end
+
+    # Request structure for create webhook request.
+    #
+    # @note When making an API call, you may pass CreateWebhookRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         branch_name: "BranchName", # required
+    #         description: "Description",
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   Name for a branch, part of an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description for a webhook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateWebhookRequest AWS API Documentation
+    #
+    class CreateWebhookRequest < Struct.new(
+      :app_id,
+      :branch_name,
+      :description)
+      include Aws::Structure
+    end
+
+    # Result structure for the create webhook request.
+    #
+    # @!attribute [rw] webhook
+    #   Webhook structure.
+    #   @return [Types::Webhook]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateWebhookResult AWS API Documentation
+    #
+    class CreateWebhookResult < Struct.new(
+      :webhook)
       include Aws::Structure
     end
 
@@ -569,6 +977,45 @@ module Aws::Amplify
     #
     class DeleteAppResult < Struct.new(
       :app)
+      include Aws::Structure
+    end
+
+    # Request structure for delete backend environment request.
+    #
+    # @note When making an API call, you may pass DeleteBackendEnvironmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         environment_name: "EnvironmentName", # required
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id of an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   Name of a backend environment of an Amplify App.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBackendEnvironmentRequest AWS API Documentation
+    #
+    class DeleteBackendEnvironmentRequest < Struct.new(
+      :app_id,
+      :environment_name)
+      include Aws::Structure
+    end
+
+    # Result structure of a delete backend environment result.
+    #
+    # @!attribute [rw] backend_environment
+    #   Backend environment structure for an Amplify App.
+    #   @return [Types::BackendEnvironment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBackendEnvironmentResult AWS API Documentation
+    #
+    class DeleteBackendEnvironmentResult < Struct.new(
+      :backend_environment)
       include Aws::Structure
     end
 
@@ -694,6 +1141,52 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Request structure for the delete webhook request.
+    #
+    # @note When making an API call, you may pass DeleteWebhookRequest
+    #   data as a hash:
+    #
+    #       {
+    #         webhook_id: "WebhookId", # required
+    #       }
+    #
+    # @!attribute [rw] webhook_id
+    #   Unique Id for a webhook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteWebhookRequest AWS API Documentation
+    #
+    class DeleteWebhookRequest < Struct.new(
+      :webhook_id)
+      include Aws::Structure
+    end
+
+    # Result structure for the delete webhook request.
+    #
+    # @!attribute [rw] webhook
+    #   Webhook structure.
+    #   @return [Types::Webhook]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteWebhookResult AWS API Documentation
+    #
+    class DeleteWebhookResult < Struct.new(
+      :webhook)
+      include Aws::Structure
+    end
+
+    # Exception thrown when an operation fails due to a dependent service
+    # throwing an exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DependentServiceFailureException AWS API Documentation
+    #
+    class DependentServiceFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Structure for Domain Association, which associates a custom domain
     # with an Amplify App.
     #
@@ -706,7 +1199,8 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] enable_auto_sub_domain
-    #   Enables automated creation of Subdomains for branches.
+    #   Enables automated creation of Subdomains for branches. (Currently
+    #   not supported)
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_status
@@ -735,6 +1229,57 @@ module Aws::Amplify
       :status_reason,
       :certificate_verification_dns_record,
       :sub_domains)
+      include Aws::Structure
+    end
+
+    # Request structure for the generate access logs request.
+    #
+    # @note When making an API call, you may pass GenerateAccessLogsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         domain_name: "DomainName", # required
+    #         app_id: "AppId", # required
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   The time at which the logs should start, inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time at which the logs should end, inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] domain_name
+    #   Name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an Amplify App.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GenerateAccessLogsRequest AWS API Documentation
+    #
+    class GenerateAccessLogsRequest < Struct.new(
+      :start_time,
+      :end_time,
+      :domain_name,
+      :app_id)
+      include Aws::Structure
+    end
+
+    # Result structure for the generate access logs request.
+    #
+    # @!attribute [rw] log_url
+    #   Pre-signed URL for the requested access logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GenerateAccessLogsResult AWS API Documentation
+    #
+    class GenerateAccessLogsResult < Struct.new(
+      :log_url)
       include Aws::Structure
     end
 
@@ -770,7 +1315,84 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for get branch request.
+    # Request structure for the get artifact request.
+    #
+    # @note When making an API call, you may pass GetArtifactUrlRequest
+    #   data as a hash:
+    #
+    #       {
+    #         artifact_id: "ArtifactId", # required
+    #       }
+    #
+    # @!attribute [rw] artifact_id
+    #   Unique Id for a artifact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetArtifactUrlRequest AWS API Documentation
+    #
+    class GetArtifactUrlRequest < Struct.new(
+      :artifact_id)
+      include Aws::Structure
+    end
+
+    # Result structure for the get artifact request.
+    #
+    # @!attribute [rw] artifact_id
+    #   Unique Id for a artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_url
+    #   Presigned url for the artifact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetArtifactUrlResult AWS API Documentation
+    #
+    class GetArtifactUrlResult < Struct.new(
+      :artifact_id,
+      :artifact_url)
+      include Aws::Structure
+    end
+
+    # Request structure for get backend environment request.
+    #
+    # @note When making an API call, you may pass GetBackendEnvironmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         environment_name: "EnvironmentName", # required
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   Name for the backend environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBackendEnvironmentRequest AWS API Documentation
+    #
+    class GetBackendEnvironmentRequest < Struct.new(
+      :app_id,
+      :environment_name)
+      include Aws::Structure
+    end
+
+    # Result structure for get backend environment result.
+    #
+    # @!attribute [rw] backend_environment
+    #   Backend environment structure for an an Amplify App.
+    #   @return [Types::BackendEnvironment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBackendEnvironmentResult AWS API Documentation
+    #
+    class GetBackendEnvironmentResult < Struct.new(
+      :backend_environment)
+      include Aws::Structure
+    end
+
+    # Request structure for get branch request.
     #
     # @note When making an API call, you may pass GetBranchRequest
     #   data as a hash:
@@ -890,6 +1512,52 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Request structure for the get webhook request.
+    #
+    # @note When making an API call, you may pass GetWebhookRequest
+    #   data as a hash:
+    #
+    #       {
+    #         webhook_id: "WebhookId", # required
+    #       }
+    #
+    # @!attribute [rw] webhook_id
+    #   Unique Id for a webhook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetWebhookRequest AWS API Documentation
+    #
+    class GetWebhookRequest < Struct.new(
+      :webhook_id)
+      include Aws::Structure
+    end
+
+    # Result structure for the get webhook request.
+    #
+    # @!attribute [rw] webhook
+    #   Webhook structure.
+    #   @return [Types::Webhook]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetWebhookResult AWS API Documentation
+    #
+    class GetWebhookResult < Struct.new(
+      :webhook)
+      include Aws::Structure
+    end
+
+    # Exception thrown when the service fails to perform an operation due to
+    # an internal issue.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Structure for an execution job for an Amplify App.
     #
     # @!attribute [rw] summary
@@ -943,7 +1611,9 @@ module Aws::Amplify
     #   @return [Time]
     #
     # @!attribute [rw] job_type
-    #   Type for the Job.
+    #   Type for the Job. \\n "RELEASE": Manually released from source by
+    #   using StartJob API. "RETRY": Manually retried by using StartJob
+    #   API. "WEB\_HOOK": Automatically triggered by WebHooks.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/JobSummary AWS API Documentation
@@ -958,6 +1628,19 @@ module Aws::Amplify
       :status,
       :end_time,
       :job_type)
+      include Aws::Structure
+    end
+
+    # Exception thrown when a resource could not be created because of
+    # service limits.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1005,6 +1688,132 @@ module Aws::Amplify
     #
     class ListAppsResult < Struct.new(
       :apps,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Request structure for the list artifacts request.
+    #
+    # @note When making an API call, you may pass ListArtifactsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         branch_name: "BranchName", # required
+    #         job_id: "JobId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   Name for a branch, part of an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   Unique Id for an Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Set to null to start listing artifacts from start.
+    #   If non-null pagination token is returned in a result, then pass its
+    #   value in here to list more artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of records to list in a single response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListArtifactsRequest AWS API Documentation
+    #
+    class ListArtifactsRequest < Struct.new(
+      :app_id,
+      :branch_name,
+      :job_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # Result structure for the list artifacts request.
+    #
+    # @!attribute [rw] artifacts
+    #   List of artifacts.
+    #   @return [Array<Types::Artifact>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. If non-null pagination token is returned in a
+    #   result, then pass its value in another request to fetch more
+    #   entries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListArtifactsResult AWS API Documentation
+    #
+    class ListArtifactsResult < Struct.new(
+      :artifacts,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Request structure for list backend environments request.
+    #
+    # @note When making an API call, you may pass ListBackendEnvironmentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         environment_name: "EnvironmentName",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   Name of the backend environment
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Set to null to start listing backen environments
+    #   from start. If a non-null pagination token is returned in a result,
+    #   then pass its value in here to list more backend environments.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of records to list in a single response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBackendEnvironmentsRequest AWS API Documentation
+    #
+    class ListBackendEnvironmentsRequest < Struct.new(
+      :app_id,
+      :environment_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # Result structure for list backend environments result.
+    #
+    # @!attribute [rw] backend_environments
+    #   List of backend environments for an Amplify App.
+    #   @return [Array<Types::BackendEnvironment>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. If non-null pagination token is returned in a
+    #   result, then pass its value in another request to fetch more
+    #   entries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBackendEnvironmentsResult AWS API Documentation
+    #
+    class ListBackendEnvironmentsResult < Struct.new(
+      :backend_environments,
       :next_token)
       include Aws::Structure
     end
@@ -1177,6 +1986,106 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Request structure used to list tags for resource.
+    #
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Resource arn used to list tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # Response for list tags.
+    #
+    # @!attribute [rw] tags
+    #   Tags result for response.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
+    # Request structure for the list webhooks request.
+    #
+    # @note When making an API call, you may pass ListWebhooksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Set to null to start listing webhooks from start.
+    #   If non-null pagination token is returned in a result, then pass its
+    #   value in here to list more webhooks.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of records to list in a single response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListWebhooksRequest AWS API Documentation
+    #
+    class ListWebhooksRequest < Struct.new(
+      :app_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # Result structure for the list webhooks request.
+    #
+    # @!attribute [rw] webhooks
+    #   List of webhooks.
+    #   @return [Array<Types::Webhook>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. If non-null pagination token is returned in a
+    #   result, then pass its value in another request to fetch more
+    #   entries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListWebhooksResult AWS API Documentation
+    #
+    class ListWebhooksResult < Struct.new(
+      :webhooks,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Exception thrown when an entity has not been found during an
+    # operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Structure with Production Branch information.
     #
     # @!attribute [rw] last_deploy_time
@@ -1188,7 +2097,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] thumbnail_url
-    #   Thumbnail Url for Production Branch.
+    #   Thumbnail URL for Production Branch.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
@@ -1205,6 +2114,76 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Exception thrown when an operation fails due to non-existent resource.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Request structure for start a deployment.
+    #
+    # @note When making an API call, you may pass StartDeploymentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "AppId", # required
+    #         branch_name: "BranchName", # required
+    #         job_id: "JobId",
+    #         source_url: "SourceUrl",
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   Unique Id for an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   Name for the branch, for the Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The job id for this deployment, generated by create deployment
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_url
+    #   The sourceUrl for this deployment, used when calling start
+    #   deployment without create deployment. SourceUrl can be any HTTP GET
+    #   url that is public accessible and downloads a single zip.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StartDeploymentRequest AWS API Documentation
+    #
+    class StartDeploymentRequest < Struct.new(
+      :app_id,
+      :branch_name,
+      :job_id,
+      :source_url)
+      include Aws::Structure
+    end
+
+    # Result structure for start a deployment.
+    #
+    # @!attribute [rw] job_summary
+    #   Summary for the Job.
+    #   @return [Types::JobSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StartDeploymentResult AWS API Documentation
+    #
+    class StartDeploymentResult < Struct.new(
+      :job_summary)
+      include Aws::Structure
+    end
+
     # Request structure for Start job request.
     #
     # @note When making an API call, you may pass StartJobRequest
@@ -1214,7 +2193,7 @@ module Aws::Amplify
     #         app_id: "AppId", # required
     #         branch_name: "BranchName", # required
     #         job_id: "JobId",
-    #         job_type: "RELEASE", # required, accepts RELEASE, RETRY, WEB_HOOK
+    #         job_type: "RELEASE", # required, accepts RELEASE, RETRY, MANUAL, WEB_HOOK
     #         job_reason: "JobReason",
     #         commit_id: "CommitId",
     #         commit_message: "CommitMessage",
@@ -1230,15 +2209,18 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   Unique Id for the Job.
+    #   Unique Id for an existing job. Required for "RETRY" JobType.
     #   @return [String]
     #
     # @!attribute [rw] job_type
-    #   Type for the Job.
+    #   Type for the Job. Available JobTypes are: \\n "RELEASE": Start a
+    #   new job with the latest change from the specified branch. Only
+    #   available for apps that have connected to a repository. "RETRY":
+    #   Retry an existing job. JobId is required for this type of job.
     #   @return [String]
     #
     # @!attribute [rw] job_reason
-    #   Reason for the Job.
+    #   Descriptive reason for starting this job.
     #   @return [String]
     #
     # @!attribute [rw] commit_id
@@ -1300,16 +2282,33 @@ module Aws::Amplify
     #   @return [Time]
     #
     # @!attribute [rw] log_url
-    #   Url to the logs for the execution step.
+    #   URL to the logs for the execution step.
     #   @return [String]
     #
     # @!attribute [rw] artifacts_url
-    #   Url to teh artifact for the execution step.
+    #   URL to the artifact for the execution step.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_artifacts_url
+    #   URL to the test artifact for the execution step.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_config_url
+    #   URL to the test config for the execution step.
     #   @return [String]
     #
     # @!attribute [rw] screenshots
-    #   List of screenshot Urls for the execution step, if relevant.
+    #   List of screenshot URLs for the execution step, if relevant.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for current step status.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   The context for current step, will include build image if step is
+    #   build.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Step AWS API Documentation
     #
@@ -1320,7 +2319,11 @@ module Aws::Amplify
       :end_time,
       :log_url,
       :artifacts_url,
-      :screenshots)
+      :test_artifacts_url,
+      :test_config_url,
+      :screenshots,
+      :status_reason,
+      :context)
       include Aws::Structure
     end
 
@@ -1418,6 +2421,84 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Request structure used to tag resource.
+    #
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Resource arn used to tag resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags used to tag resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Response for tag resource.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Exception thrown when an operation fails due to a lack of access.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Request structure used to untag resource.
+    #
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Resource arn used to untag resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   Tag keys used to untag resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # Response for untag resource.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # Request structure for update App request.
     #
     # @note When making an API call, you may pass UpdateAppRequest
@@ -1427,7 +2508,7 @@ module Aws::Amplify
     #         app_id: "AppId", # required
     #         name: "Name",
     #         description: "Description",
-    #         platform: "IOS", # accepts IOS, ANDROID, WEB, REACT_NATIVE
+    #         platform: "WEB", # accepts WEB
     #         iam_service_role_arn: "ServiceRoleArn",
     #         environment_variables: {
     #           "EnvKey" => "EnvValue",
@@ -1444,6 +2525,24 @@ module Aws::Amplify
     #           },
     #         ],
     #         build_spec: "BuildSpec",
+    #         enable_auto_branch_creation: false,
+    #         auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
+    #         auto_branch_creation_config: {
+    #           stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
+    #           framework: "Framework",
+    #           enable_auto_build: false,
+    #           environment_variables: {
+    #             "EnvKey" => "EnvValue",
+    #           },
+    #           basic_auth_credentials: "BasicAuthCredentials",
+    #           enable_basic_auth: false,
+    #           build_spec: "BuildSpec",
+    #           enable_pull_request_preview: false,
+    #           pull_request_environment_name: "PullRequestEnvironmentName",
+    #         },
+    #         repository: "Repository",
+    #         oauth_token: "OauthToken",
+    #         access_token: "AccessToken",
     #       }
     #
     # @!attribute [rw] app_id
@@ -1490,6 +2589,34 @@ module Aws::Amplify
     #   BuildSpec for an Amplify App.
     #   @return [String]
     #
+    # @!attribute [rw] enable_auto_branch_creation
+    #   Enables automated branch creation for the Amplify App.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] auto_branch_creation_patterns
+    #   Automated branch creation glob patterns for the Amplify App.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_branch_creation_config
+    #   Automated branch creation branchConfig for the Amplify App.
+    #   @return [Types::AutoBranchCreationConfig]
+    #
+    # @!attribute [rw] repository
+    #   Repository for an Amplify App
+    #   @return [String]
+    #
+    # @!attribute [rw] oauth_token
+    #   OAuth token for 3rd party source control system for an Amplify App,
+    #   used to create webhook and read-only deploy key. OAuth token is not
+    #   stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_token
+    #   Personal Access token for 3rd party source control system for an
+    #   Amplify App, used to create webhook and read-only deploy key. Token
+    #   is not stored.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateAppRequest AWS API Documentation
     #
     class UpdateAppRequest < Struct.new(
@@ -1503,7 +2630,13 @@ module Aws::Amplify
       :enable_basic_auth,
       :basic_auth_credentials,
       :custom_rules,
-      :build_spec)
+      :build_spec,
+      :enable_auto_branch_creation,
+      :auto_branch_creation_patterns,
+      :auto_branch_creation_config,
+      :repository,
+      :oauth_token,
+      :access_token)
       include Aws::Structure
     end
 
@@ -1530,7 +2663,7 @@ module Aws::Amplify
     #         branch_name: "BranchName", # required
     #         description: "Description",
     #         framework: "Framework",
-    #         stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL
+    #         stage: "PRODUCTION", # accepts PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST
     #         enable_notification: false,
     #         enable_auto_build: false,
     #         environment_variables: {
@@ -1540,6 +2673,10 @@ module Aws::Amplify
     #         enable_basic_auth: false,
     #         build_spec: "BuildSpec",
     #         ttl: "TTL",
+    #         display_name: "DisplayName",
+    #         enable_pull_request_preview: false,
+    #         pull_request_environment_name: "PullRequestEnvironmentName",
+    #         backend_environment_arn: "BackendEnvironmentArn",
     #       }
     #
     # @!attribute [rw] app_id
@@ -1590,6 +2727,22 @@ module Aws::Amplify
     #   The content TTL for the website in seconds.
     #   @return [String]
     #
+    # @!attribute [rw] display_name
+    #   Display name for a branch, will use as the default domain prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_pull_request_preview
+    #   Enables Pull Request Preview for this branch.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] pull_request_environment_name
+    #   The Amplify Environment name for the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_arn
+    #   ARN for a Backend Environment, part of an Amplify App.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranchRequest AWS API Documentation
     #
     class UpdateBranchRequest < Struct.new(
@@ -1604,7 +2757,11 @@ module Aws::Amplify
       :basic_auth_credentials,
       :enable_basic_auth,
       :build_spec,
-      :ttl)
+      :ttl,
+      :display_name,
+      :enable_pull_request_preview,
+      :pull_request_environment_name,
+      :backend_environment_arn)
       include Aws::Structure
     end
 
@@ -1647,7 +2804,8 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] enable_auto_sub_domain
-    #   Enables automated creation of Subdomains for branches.
+    #   Enables automated creation of Subdomains for branches. (Currently
+    #   not supported)
     #   @return [Boolean]
     #
     # @!attribute [rw] sub_domain_settings
@@ -1674,6 +2832,94 @@ module Aws::Amplify
     #
     class UpdateDomainAssociationResult < Struct.new(
       :domain_association)
+      include Aws::Structure
+    end
+
+    # Request structure for update webhook request.
+    #
+    # @note When making an API call, you may pass UpdateWebhookRequest
+    #   data as a hash:
+    #
+    #       {
+    #         webhook_id: "WebhookId", # required
+    #         branch_name: "BranchName",
+    #         description: "Description",
+    #       }
+    #
+    # @!attribute [rw] webhook_id
+    #   Unique Id for a webhook.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   Name for a branch, part of an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description for a webhook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateWebhookRequest AWS API Documentation
+    #
+    class UpdateWebhookRequest < Struct.new(
+      :webhook_id,
+      :branch_name,
+      :description)
+      include Aws::Structure
+    end
+
+    # Result structure for the update webhook request.
+    #
+    # @!attribute [rw] webhook
+    #   Webhook structure.
+    #   @return [Types::Webhook]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateWebhookResult AWS API Documentation
+    #
+    class UpdateWebhookResult < Struct.new(
+      :webhook)
+      include Aws::Structure
+    end
+
+    # Structure for webhook, which associates a webhook with an Amplify App.
+    #
+    # @!attribute [rw] webhook_arn
+    #   ARN for the webhook.
+    #   @return [String]
+    #
+    # @!attribute [rw] webhook_id
+    #   Id of the webhook.
+    #   @return [String]
+    #
+    # @!attribute [rw] webhook_url
+    #   Url of the webhook.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   Name for a branch, part of an Amplify App.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description for a webhook.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   Create date / time for a webhook.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   Update date / time for a webhook.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Webhook AWS API Documentation
+    #
+    class Webhook < Struct.new(
+      :webhook_arn,
+      :webhook_id,
+      :webhook_url,
+      :branch_name,
+      :description,
+      :create_time,
+      :update_time)
       include Aws::Structure
     end
 

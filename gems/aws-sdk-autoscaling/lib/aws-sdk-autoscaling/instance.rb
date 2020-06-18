@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AutoScaling
+
   class Instance
 
     extend Aws::Deprecations
@@ -24,6 +27,7 @@ module Aws::AutoScaling
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -40,18 +44,19 @@ module Aws::AutoScaling
     end
     alias :instance_id :id
 
+    # The instance type of the EC2 instance.
+    # @return [String]
+    def instance_type
+      data[:instance_type]
+    end
+
     # The Availability Zone for the instance.
     # @return [String]
     def availability_zone
       data[:availability_zone]
     end
 
-    # The lifecycle state for the instance. For more information, see [Auto
-    # Scaling Lifecycle][1] in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html
+    # The lifecycle state for the instance.
     # @return [String]
     def lifecycle_state
       data[:lifecycle_state]
@@ -84,6 +89,15 @@ module Aws::AutoScaling
     # @return [Boolean]
     def protected_from_scale_in
       data[:protected_from_scale_in]
+    end
+
+    # The number of capacity units contributed by the instance based on its
+    # instance type.
+    #
+    # Valid Range: Minimum value of 1. Maximum value of 999.
+    # @return [String]
+    def weighted_capacity
+      data[:weighted_capacity]
     end
 
     # @!endgroup
@@ -126,7 +140,8 @@ module Aws::AutoScaling
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -139,13 +154,15 @@ module Aws::AutoScaling
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -176,17 +193,16 @@ module Aws::AutoScaling
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -327,7 +343,12 @@ module Aws::AutoScaling
     #   not respect the grace period associated with the group.
     #
     #   For more information about the health check grace period, see
-    #   CreateAutoScalingGroup.
+    #   [CreateAutoScalingGroup][1] in the *Amazon EC2 Auto Scaling API
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html
     # @return [EmptyStructure]
     def set_health(options = {})
       options = options.merge(instance_id: @id)

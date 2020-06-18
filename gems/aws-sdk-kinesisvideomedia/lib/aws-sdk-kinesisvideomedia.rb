@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-kinesisvideomedia/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     kinesis_video_media = Aws::KinesisVideoMedia::Client.new
+#     resp = kinesis_video_media.get_media(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Kinesis Video Streams Media all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Kinesis Video Streams Media are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::KinesisVideoMedia::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Kinesis Video Streams Media API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-kinesisvideomedia/customizations'
 # @service
 module Aws::KinesisVideoMedia
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.22.1'
 
 end

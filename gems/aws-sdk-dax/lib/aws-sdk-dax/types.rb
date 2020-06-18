@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -116,6 +118,25 @@ module Aws::DAX
       include Aws::Structure
     end
 
+    # You already have a DAX cluster with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ClusterAlreadyExistsFault AWS API Documentation
+    #
+    class ClusterAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The requested cluster ID does not refer to an existing DAX cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ClusterNotFoundFault AWS API Documentation
+    #
+    class ClusterNotFoundFault < Aws::EmptyStructure; end
+
+    # You have attempted to exceed the maximum number of DAX clusters for
+    # your AWS account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ClusterQuotaForCustomerExceededFault AWS API Documentation
+    #
+    class ClusterQuotaForCustomerExceededFault < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CreateClusterRequest
     #   data as a hash:
     #
@@ -169,8 +190,11 @@ module Aws::DAX
     #   The number of nodes in the DAX cluster. A replication factor of 1
     #   will create a single-node cluster, without any read replicas. For
     #   additional fault tolerance, you can create a multiple node cluster
-    #   with one or more read replicas. To do this, set *ReplicationFactor*
-    #   to 2 or more.
+    #   with one or more read replicas. To do this, set `ReplicationFactor`
+    #   to a number between 3 (one primary and two read replicas) and 10
+    #   (one primary and nine read replicas). `If the AvailabilityZones`
+    #   parameter is provided, its length must equal the
+    #   `ReplicationFactor`.
     #
     #   <note markdown="1"> AWS recommends that you have at least two read replicas per cluster.
     #
@@ -178,10 +202,11 @@ module Aws::DAX
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zones
-    #   The Availability Zones (AZs) in which the cluster nodes will be
-    #   created. All nodes belonging to the cluster are placed in these
-    #   Availability Zones. Use this parameter if you want to distribute the
-    #   nodes across multiple AZs.
+    #   The Availability Zones (AZs) in which the cluster nodes will reside
+    #   after the cluster has been created or updated. If provided, the
+    #   length of this list must equal the `ReplicationFactor` parameter. If
+    #   you omit this parameter, DAX will spread the nodes across
+    #   Availability Zones for the highest availability.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_group_name
@@ -958,6 +983,67 @@ module Aws::DAX
       include Aws::Structure
     end
 
+    # There are not enough system resources to create the cluster you
+    # requested (or to resize an already-existing cluster).
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/InsufficientClusterCapacityFault AWS API Documentation
+    #
+    class InsufficientClusterCapacityFault < Aws::EmptyStructure; end
+
+    # The Amazon Resource Name (ARN) supplied in the request is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/InvalidARNFault AWS API Documentation
+    #
+    class InvalidARNFault < Aws::EmptyStructure; end
+
+    # The requested DAX cluster is not in the *available* state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/InvalidClusterStateFault AWS API Documentation
+    #
+    class InvalidClusterStateFault < Aws::EmptyStructure; end
+
+    # Two or more incompatible parameters were specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/InvalidParameterCombinationException AWS API Documentation
+    #
+    class InvalidParameterCombinationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more parameters in a parameter group are in an invalid state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/InvalidParameterGroupStateFault AWS API Documentation
+    #
+    class InvalidParameterGroupStateFault < Aws::EmptyStructure; end
+
+    # The value for a parameter is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An invalid subnet identifier was specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/InvalidSubnet AWS API Documentation
+    #
+    class InvalidSubnet < Aws::EmptyStructure; end
+
+    # The VPC network is in an invalid state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/InvalidVPCNetworkStateFault AWS API Documentation
+    #
+    class InvalidVPCNetworkStateFault < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass ListTagsRequest
     #   data as a hash:
     #
@@ -1044,6 +1130,26 @@ module Aws::DAX
       :parameter_group_status)
       include Aws::Structure
     end
+
+    # None of the nodes in the cluster have the given node ID.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/NodeNotFoundFault AWS API Documentation
+    #
+    class NodeNotFoundFault < Aws::EmptyStructure; end
+
+    # You have attempted to exceed the maximum number of nodes for a DAX
+    # cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/NodeQuotaForClusterExceededFault AWS API Documentation
+    #
+    class NodeQuotaForClusterExceededFault < Aws::EmptyStructure; end
+
+    # You have attempted to exceed the maximum number of nodes for your AWS
+    # account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/NodeQuotaForCustomerExceededFault AWS API Documentation
+    #
+    class NodeQuotaForCustomerExceededFault < Aws::EmptyStructure; end
 
     # Represents a parameter value that is applicable to a particular node
     # type.
@@ -1165,6 +1271,24 @@ module Aws::DAX
       :description)
       include Aws::Structure
     end
+
+    # The specified parameter group already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ParameterGroupAlreadyExistsFault AWS API Documentation
+    #
+    class ParameterGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified parameter group does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ParameterGroupNotFoundFault AWS API Documentation
+    #
+    class ParameterGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # You have attempted to exceed the maximum number of parameter groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ParameterGroupQuotaExceededFault AWS API Documentation
+    #
+    class ParameterGroupQuotaExceededFault < Aws::EmptyStructure; end
 
     # The status of a parameter group.
     #
@@ -1311,6 +1435,12 @@ module Aws::DAX
       include Aws::Structure
     end
 
+    # The specified service linked role (SLR) was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ServiceLinkedRoleNotFoundFault AWS API Documentation
+    #
+    class ServiceLinkedRoleNotFoundFault < Aws::EmptyStructure; end
+
     # Represents the subnet associated with a DAX cluster. This parameter
     # refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC)
     # and used with DAX.
@@ -1320,7 +1450,7 @@ module Aws::DAX
     #   @return [String]
     #
     # @!attribute [rw] subnet_availability_zone
-    #   The Availability Zone (AZ) for subnet subnet.
+    #   The Availability Zone (AZ) for the subnet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Subnet AWS API Documentation
@@ -1364,6 +1494,45 @@ module Aws::DAX
       include Aws::Structure
     end
 
+    # The specified subnet group already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SubnetGroupAlreadyExistsFault AWS API Documentation
+    #
+    class SubnetGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified subnet group is currently in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SubnetGroupInUseFault AWS API Documentation
+    #
+    class SubnetGroupInUseFault < Aws::EmptyStructure; end
+
+    # The requested subnet group name does not refer to an existing subnet
+    # group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SubnetGroupNotFoundFault AWS API Documentation
+    #
+    class SubnetGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The request cannot be processed because it would exceed the allowed
+    # number of subnets in a subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SubnetGroupQuotaExceededFault AWS API Documentation
+    #
+    class SubnetGroupQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The requested subnet is being used by another subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SubnetInUse AWS API Documentation
+    #
+    class SubnetInUse < Aws::EmptyStructure; end
+
+    # The request cannot be processed because it would exceed the allowed
+    # number of subnets in a subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SubnetQuotaExceededFault AWS API Documentation
+    #
+    class SubnetQuotaExceededFault < Aws::EmptyStructure; end
+
     # A description of a tag. Every tag is a key-value pair. You can add up
     # to 50 tags to a single DAX cluster.
     #
@@ -1400,6 +1569,18 @@ module Aws::DAX
       :value)
       include Aws::Structure
     end
+
+    # The tag does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/TagNotFoundFault AWS API Documentation
+    #
+    class TagNotFoundFault < Aws::EmptyStructure; end
+
+    # You have exceeded the maximum number of tags for this DAX cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/TagQuotaPerResourceExceeded AWS API Documentation
+    #
+    class TagQuotaPerResourceExceeded < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:

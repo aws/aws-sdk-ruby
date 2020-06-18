@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -13,10 +15,12 @@ module Aws::SNS
 
     ActionsList = Shapes::ListShape.new(name: 'ActionsList')
     AddPermissionInput = Shapes::StructureShape.new(name: 'AddPermissionInput')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AuthorizationErrorException = Shapes::StructureShape.new(name: 'AuthorizationErrorException')
     Binary = Shapes::BlobShape.new(name: 'Binary')
     CheckIfPhoneNumberIsOptedOutInput = Shapes::StructureShape.new(name: 'CheckIfPhoneNumberIsOptedOutInput')
     CheckIfPhoneNumberIsOptedOutResponse = Shapes::StructureShape.new(name: 'CheckIfPhoneNumberIsOptedOutResponse')
+    ConcurrentAccessException = Shapes::StructureShape.new(name: 'ConcurrentAccessException')
     ConfirmSubscriptionInput = Shapes::StructureShape.new(name: 'ConfirmSubscriptionInput')
     ConfirmSubscriptionResponse = Shapes::StructureShape.new(name: 'ConfirmSubscriptionResponse')
     CreateEndpointResponse = Shapes::StructureShape.new(name: 'CreateEndpointResponse')
@@ -65,6 +69,8 @@ module Aws::SNS
     ListSubscriptionsByTopicResponse = Shapes::StructureShape.new(name: 'ListSubscriptionsByTopicResponse')
     ListSubscriptionsInput = Shapes::StructureShape.new(name: 'ListSubscriptionsInput')
     ListSubscriptionsResponse = Shapes::StructureShape.new(name: 'ListSubscriptionsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTopicsInput = Shapes::StructureShape.new(name: 'ListTopicsInput')
     ListTopicsResponse = Shapes::StructureShape.new(name: 'ListTopicsResponse')
     MapStringToString = Shapes::MapShape.new(name: 'MapStringToString')
@@ -80,12 +86,14 @@ module Aws::SNS
     PublishInput = Shapes::StructureShape.new(name: 'PublishInput')
     PublishResponse = Shapes::StructureShape.new(name: 'PublishResponse')
     RemovePermissionInput = Shapes::StructureShape.new(name: 'RemovePermissionInput')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     SetEndpointAttributesInput = Shapes::StructureShape.new(name: 'SetEndpointAttributesInput')
     SetPlatformApplicationAttributesInput = Shapes::StructureShape.new(name: 'SetPlatformApplicationAttributesInput')
     SetSMSAttributesInput = Shapes::StructureShape.new(name: 'SetSMSAttributesInput')
     SetSMSAttributesResponse = Shapes::StructureShape.new(name: 'SetSMSAttributesResponse')
     SetSubscriptionAttributesInput = Shapes::StructureShape.new(name: 'SetSubscriptionAttributesInput')
     SetTopicAttributesInput = Shapes::StructureShape.new(name: 'SetTopicAttributesInput')
+    StaleTagException = Shapes::StructureShape.new(name: 'StaleTagException')
     String = Shapes::StringShape.new(name: 'String')
     SubscribeInput = Shapes::StructureShape.new(name: 'SubscribeInput')
     SubscribeResponse = Shapes::StructureShape.new(name: 'SubscribeResponse')
@@ -93,12 +101,23 @@ module Aws::SNS
     SubscriptionAttributesMap = Shapes::MapShape.new(name: 'SubscriptionAttributesMap')
     SubscriptionLimitExceededException = Shapes::StructureShape.new(name: 'SubscriptionLimitExceededException')
     SubscriptionsList = Shapes::ListShape.new(name: 'SubscriptionsList')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagLimitExceededException = Shapes::StructureShape.new(name: 'TagLimitExceededException')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagPolicyException = Shapes::StructureShape.new(name: 'TagPolicyException')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottledException = Shapes::StructureShape.new(name: 'ThrottledException')
     Topic = Shapes::StructureShape.new(name: 'Topic')
     TopicAttributesMap = Shapes::MapShape.new(name: 'TopicAttributesMap')
     TopicLimitExceededException = Shapes::StructureShape.new(name: 'TopicLimitExceededException')
     TopicsList = Shapes::ListShape.new(name: 'TopicsList')
     UnsubscribeInput = Shapes::StructureShape.new(name: 'UnsubscribeInput')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     account = Shapes::StringShape.new(name: 'account')
     action = Shapes::StringShape.new(name: 'action')
     attributeName = Shapes::StringShape.new(name: 'attributeName')
@@ -128,11 +147,17 @@ module Aws::SNS
     AddPermissionInput.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionsList, required: true, location_name: "ActionName"))
     AddPermissionInput.struct_class = Types::AddPermissionInput
 
+    AuthorizationErrorException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    AuthorizationErrorException.struct_class = Types::AuthorizationErrorException
+
     CheckIfPhoneNumberIsOptedOutInput.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "phoneNumber"))
     CheckIfPhoneNumberIsOptedOutInput.struct_class = Types::CheckIfPhoneNumberIsOptedOutInput
 
     CheckIfPhoneNumberIsOptedOutResponse.add_member(:is_opted_out, Shapes::ShapeRef.new(shape: boolean, location_name: "isOptedOut"))
     CheckIfPhoneNumberIsOptedOutResponse.struct_class = Types::CheckIfPhoneNumberIsOptedOutResponse
+
+    ConcurrentAccessException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ConcurrentAccessException.struct_class = Types::ConcurrentAccessException
 
     ConfirmSubscriptionInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))
     ConfirmSubscriptionInput.add_member(:token, Shapes::ShapeRef.new(shape: token, required: true, location_name: "Token"))
@@ -161,6 +186,7 @@ module Aws::SNS
 
     CreateTopicInput.add_member(:name, Shapes::ShapeRef.new(shape: topicName, required: true, location_name: "Name"))
     CreateTopicInput.add_member(:attributes, Shapes::ShapeRef.new(shape: TopicAttributesMap, location_name: "Attributes"))
+    CreateTopicInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTopicInput.struct_class = Types::CreateTopicInput
 
     CreateTopicResponse.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, location_name: "TopicArn"))
@@ -180,6 +206,12 @@ module Aws::SNS
     Endpoint.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, location_name: "EndpointArn"))
     Endpoint.add_member(:attributes, Shapes::ShapeRef.new(shape: MapStringToString, location_name: "Attributes"))
     Endpoint.struct_class = Types::Endpoint
+
+    EndpointDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    EndpointDisabledException.struct_class = Types::EndpointDisabledException
+
+    FilterPolicyLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    FilterPolicyLimitExceededException.struct_class = Types::FilterPolicyLimitExceededException
 
     GetEndpointAttributesInput.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
     GetEndpointAttributesInput.struct_class = Types::GetEndpointAttributesInput
@@ -210,6 +242,36 @@ module Aws::SNS
 
     GetTopicAttributesResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: TopicAttributesMap, location_name: "Attributes"))
     GetTopicAttributesResponse.struct_class = Types::GetTopicAttributesResponse
+
+    InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InternalErrorException.struct_class = Types::InternalErrorException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    InvalidSecurityException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidSecurityException.struct_class = Types::InvalidSecurityException
+
+    KMSAccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    KMSAccessDeniedException.struct_class = Types::KMSAccessDeniedException
+
+    KMSDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    KMSDisabledException.struct_class = Types::KMSDisabledException
+
+    KMSInvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    KMSInvalidStateException.struct_class = Types::KMSInvalidStateException
+
+    KMSNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    KMSNotFoundException.struct_class = Types::KMSNotFoundException
+
+    KMSOptInRequired.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    KMSOptInRequired.struct_class = Types::KMSOptInRequired
+
+    KMSThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    KMSThrottlingException.struct_class = Types::KMSThrottlingException
 
     ListEndpointsByPlatformApplicationInput.add_member(:platform_application_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PlatformApplicationArn"))
     ListEndpointsByPlatformApplicationInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -254,6 +316,12 @@ module Aws::SNS
     ListSubscriptionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "NextToken"))
     ListSubscriptionsResponse.struct_class = Types::ListSubscriptionsResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ListTopicsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "NextToken"))
     ListTopicsInput.struct_class = Types::ListTopicsInput
 
@@ -272,6 +340,9 @@ module Aws::SNS
     MessageAttributeValue.add_member(:binary_value, Shapes::ShapeRef.new(shape: Binary, location_name: "BinaryValue"))
     MessageAttributeValue.struct_class = Types::MessageAttributeValue
 
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     OptInPhoneNumberInput.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "phoneNumber"))
     OptInPhoneNumberInput.struct_class = Types::OptInPhoneNumberInput
 
@@ -282,6 +353,9 @@ module Aws::SNS
     PlatformApplication.add_member(:platform_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "PlatformApplicationArn"))
     PlatformApplication.add_member(:attributes, Shapes::ShapeRef.new(shape: MapStringToString, location_name: "Attributes"))
     PlatformApplication.struct_class = Types::PlatformApplication
+
+    PlatformApplicationDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    PlatformApplicationDisabledException.struct_class = Types::PlatformApplicationDisabledException
 
     PublishInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, location_name: "TopicArn"))
     PublishInput.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, location_name: "TargetArn"))
@@ -298,6 +372,9 @@ module Aws::SNS
     RemovePermissionInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))
     RemovePermissionInput.add_member(:label, Shapes::ShapeRef.new(shape: label, required: true, location_name: "Label"))
     RemovePermissionInput.struct_class = Types::RemovePermissionInput
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     SetEndpointAttributesInput.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
     SetEndpointAttributesInput.add_member(:attributes, Shapes::ShapeRef.new(shape: MapStringToString, required: true, location_name: "Attributes"))
@@ -322,6 +399,9 @@ module Aws::SNS
     SetTopicAttributesInput.add_member(:attribute_value, Shapes::ShapeRef.new(shape: attributeValue, location_name: "AttributeValue"))
     SetTopicAttributesInput.struct_class = Types::SetTopicAttributesInput
 
+    StaleTagException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    StaleTagException.struct_class = Types::StaleTagException
+
     SubscribeInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))
     SubscribeInput.add_member(:protocol, Shapes::ShapeRef.new(shape: protocol, required: true, location_name: "Protocol"))
     SubscribeInput.add_member(:endpoint, Shapes::ShapeRef.new(shape: endpoint, location_name: "Endpoint"))
@@ -342,7 +422,33 @@ module Aws::SNS
     SubscriptionAttributesMap.key = Shapes::ShapeRef.new(shape: attributeName)
     SubscriptionAttributesMap.value = Shapes::ShapeRef.new(shape: attributeValue)
 
+    SubscriptionLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    SubscriptionLimitExceededException.struct_class = Types::SubscriptionLimitExceededException
+
     SubscriptionsList.member = Shapes::ShapeRef.new(shape: Subscription)
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    TagLimitExceededException.struct_class = Types::TagLimitExceededException
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    TagPolicyException.struct_class = Types::TagPolicyException
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    ThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ThrottledException.struct_class = Types::ThrottledException
 
     Topic.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, location_name: "TopicArn"))
     Topic.struct_class = Types::Topic
@@ -350,10 +456,19 @@ module Aws::SNS
     TopicAttributesMap.key = Shapes::ShapeRef.new(shape: attributeName)
     TopicAttributesMap.value = Shapes::ShapeRef.new(shape: attributeValue)
 
+    TopicLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    TopicLimitExceededException.struct_class = Types::TopicLimitExceededException
+
     TopicsList.member = Shapes::ShapeRef.new(shape: Topic)
 
     UnsubscribeInput.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: subscriptionARN, required: true, location_name: "SubscriptionArn"))
     UnsubscribeInput.struct_class = Types::UnsubscribeInput
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
 
     # @api private
@@ -408,6 +523,7 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: FilterPolicyLimitExceededException)
       end)
 
       api.add_operation(:create_platform_application, Seahorse::Model::Operation.new.tap do |o|
@@ -444,6 +560,10 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
+        o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: StaleTagException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentAccessException)
       end)
 
       api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -478,6 +598,9 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: StaleTagException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentAccessException)
       end)
 
       api.add_operation(:get_endpoint_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -619,6 +742,19 @@ module Aws::SNS
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentAccessException)
+      end)
+
       api.add_operation(:list_topics, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTopics"
         o.http_method = "POST"
@@ -758,6 +894,21 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
       end)
 
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: StaleTagException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentAccessException)
+      end)
+
       api.add_operation(:unsubscribe, Seahorse::Model::Operation.new.tap do |o|
         o.name = "Unsubscribe"
         o.http_method = "POST"
@@ -769,6 +920,21 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: StaleTagException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentAccessException)
       end)
     end
 

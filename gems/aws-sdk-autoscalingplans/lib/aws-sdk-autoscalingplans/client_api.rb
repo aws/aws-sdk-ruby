@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -95,6 +97,9 @@ module Aws::AutoScalingPlans
 
     ApplicationSources.member = Shapes::ShapeRef.new(shape: ApplicationSource)
 
+    ConcurrentUpdateException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConcurrentUpdateException.struct_class = Types::ConcurrentUpdateException
+
     CreateScalingPlanRequest.add_member(:scaling_plan_name, Shapes::ShapeRef.new(shape: ScalingPlanName, required: true, location_name: "ScalingPlanName"))
     CreateScalingPlanRequest.add_member(:application_source, Shapes::ShapeRef.new(shape: ApplicationSource, required: true, location_name: "ApplicationSource"))
     CreateScalingPlanRequest.add_member(:scaling_instructions, Shapes::ShapeRef.new(shape: ScalingInstructions, required: true, location_name: "ScalingInstructions"))
@@ -163,11 +168,23 @@ module Aws::AutoScalingPlans
     GetScalingPlanResourceForecastDataResponse.add_member(:datapoints, Shapes::ShapeRef.new(shape: Datapoints, required: true, location_name: "Datapoints"))
     GetScalingPlanResourceForecastDataResponse.struct_class = Types::GetScalingPlanResourceForecastDataResponse
 
+    InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServiceException.struct_class = Types::InternalServiceException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     MetricDimension.add_member(:name, Shapes::ShapeRef.new(shape: MetricDimensionName, required: true, location_name: "Name"))
     MetricDimension.add_member(:value, Shapes::ShapeRef.new(shape: MetricDimensionValue, required: true, location_name: "Value"))
     MetricDimension.struct_class = Types::MetricDimension
 
     MetricDimensions.member = Shapes::ShapeRef.new(shape: MetricDimension)
+
+    ObjectNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ObjectNotFoundException.struct_class = Types::ObjectNotFoundException
 
     PredefinedLoadMetricSpecification.add_member(:predefined_load_metric_type, Shapes::ShapeRef.new(shape: LoadMetricType, required: true, location_name: "PredefinedLoadMetricType"))
     PredefinedLoadMetricSpecification.add_member(:resource_label, Shapes::ShapeRef.new(shape: ResourceLabel, location_name: "ResourceLabel"))
@@ -255,6 +272,9 @@ module Aws::AutoScalingPlans
 
     UpdateScalingPlanResponse.struct_class = Types::UpdateScalingPlanResponse
 
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ValidationException.struct_class = Types::ValidationException
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -263,7 +283,7 @@ module Aws::AutoScalingPlans
 
       api.metadata = {
         "apiVersion" => "2018-01-06",
-        "endpointPrefix" => "autoscaling",
+        "endpointPrefix" => "autoscaling-plans",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Auto Scaling Plans",

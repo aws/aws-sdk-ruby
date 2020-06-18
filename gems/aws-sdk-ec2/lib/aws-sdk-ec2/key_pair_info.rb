@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2
+
   class KeyPairInfo
 
     extend Aws::Deprecations
@@ -21,6 +24,7 @@ module Aws::EC2
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -31,6 +35,12 @@ module Aws::EC2
     end
     alias :key_name :name
 
+    # The ID of the key pair.
+    # @return [String]
+    def key_pair_id
+      data[:key_pair_id]
+    end
+
     # If you used CreateKeyPair to create the key pair, this is the SHA-1
     # digest of the DER encoded private key. If you used ImportKeyPair to
     # provide AWS the public key, this is the MD5 public key fingerprint as
@@ -38,6 +48,12 @@ module Aws::EC2
     # @return [String]
     def key_fingerprint
       data[:key_fingerprint]
+    end
+
+    # Any tags applied to the key pair.
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
     end
 
     # @!endgroup
@@ -80,7 +96,8 @@ module Aws::EC2
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -93,13 +110,15 @@ module Aws::EC2
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -130,17 +149,16 @@ module Aws::EC2
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -175,9 +193,12 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   key_pair_info.delete({
+    #     key_pair_id: "KeyPairId",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :key_pair_id
+    #   The ID of the key pair.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

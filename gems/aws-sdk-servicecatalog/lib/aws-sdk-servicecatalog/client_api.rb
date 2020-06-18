@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,8 @@ module Aws::ServiceCatalog
     AllowedValue = Shapes::StringShape.new(name: 'AllowedValue')
     AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
     ApproximateCount = Shapes::IntegerShape.new(name: 'ApproximateCount')
+    AssociateBudgetWithResourceInput = Shapes::StructureShape.new(name: 'AssociateBudgetWithResourceInput')
+    AssociateBudgetWithResourceOutput = Shapes::StructureShape.new(name: 'AssociateBudgetWithResourceOutput')
     AssociatePrincipalWithPortfolioInput = Shapes::StructureShape.new(name: 'AssociatePrincipalWithPortfolioInput')
     AssociatePrincipalWithPortfolioOutput = Shapes::StructureShape.new(name: 'AssociatePrincipalWithPortfolioOutput')
     AssociateProductWithPortfolioInput = Shapes::StructureShape.new(name: 'AssociateProductWithPortfolioInput')
@@ -37,6 +41,9 @@ module Aws::ServiceCatalog
     BatchAssociateServiceActionWithProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'BatchAssociateServiceActionWithProvisioningArtifactOutput')
     BatchDisassociateServiceActionFromProvisioningArtifactInput = Shapes::StructureShape.new(name: 'BatchDisassociateServiceActionFromProvisioningArtifactInput')
     BatchDisassociateServiceActionFromProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'BatchDisassociateServiceActionFromProvisioningArtifactOutput')
+    BudgetDetail = Shapes::StructureShape.new(name: 'BudgetDetail')
+    BudgetName = Shapes::StringShape.new(name: 'BudgetName')
+    Budgets = Shapes::ListShape.new(name: 'Budgets')
     CausingEntity = Shapes::StringShape.new(name: 'CausingEntity')
     ChangeAction = Shapes::StringShape.new(name: 'ChangeAction')
     CloudWatchDashboard = Shapes::StructureShape.new(name: 'CloudWatchDashboard')
@@ -113,6 +120,8 @@ module Aws::ServiceCatalog
     DescribeProvisioningParametersOutput = Shapes::StructureShape.new(name: 'DescribeProvisioningParametersOutput')
     DescribeRecordInput = Shapes::StructureShape.new(name: 'DescribeRecordInput')
     DescribeRecordOutput = Shapes::StructureShape.new(name: 'DescribeRecordOutput')
+    DescribeServiceActionExecutionParametersInput = Shapes::StructureShape.new(name: 'DescribeServiceActionExecutionParametersInput')
+    DescribeServiceActionExecutionParametersOutput = Shapes::StructureShape.new(name: 'DescribeServiceActionExecutionParametersOutput')
     DescribeServiceActionInput = Shapes::StructureShape.new(name: 'DescribeServiceActionInput')
     DescribeServiceActionOutput = Shapes::StructureShape.new(name: 'DescribeServiceActionOutput')
     DescribeTagOptionInput = Shapes::StructureShape.new(name: 'DescribeTagOptionInput')
@@ -120,6 +129,9 @@ module Aws::ServiceCatalog
     Description = Shapes::StringShape.new(name: 'Description')
     DisableAWSOrganizationsAccessInput = Shapes::StructureShape.new(name: 'DisableAWSOrganizationsAccessInput')
     DisableAWSOrganizationsAccessOutput = Shapes::StructureShape.new(name: 'DisableAWSOrganizationsAccessOutput')
+    DisableTemplateValidation = Shapes::BooleanShape.new(name: 'DisableTemplateValidation')
+    DisassociateBudgetFromResourceInput = Shapes::StructureShape.new(name: 'DisassociateBudgetFromResourceInput')
+    DisassociateBudgetFromResourceOutput = Shapes::StructureShape.new(name: 'DisassociateBudgetFromResourceOutput')
     DisassociatePrincipalFromPortfolioInput = Shapes::StructureShape.new(name: 'DisassociatePrincipalFromPortfolioInput')
     DisassociatePrincipalFromPortfolioOutput = Shapes::StructureShape.new(name: 'DisassociatePrincipalFromPortfolioOutput')
     DisassociateProductFromPortfolioInput = Shapes::StructureShape.new(name: 'DisassociateProductFromPortfolioInput')
@@ -139,6 +151,13 @@ module Aws::ServiceCatalog
     ExecuteProvisionedProductPlanOutput = Shapes::StructureShape.new(name: 'ExecuteProvisionedProductPlanOutput')
     ExecuteProvisionedProductServiceActionInput = Shapes::StructureShape.new(name: 'ExecuteProvisionedProductServiceActionInput')
     ExecuteProvisionedProductServiceActionOutput = Shapes::StructureShape.new(name: 'ExecuteProvisionedProductServiceActionOutput')
+    ExecutionParameter = Shapes::StructureShape.new(name: 'ExecutionParameter')
+    ExecutionParameterKey = Shapes::StringShape.new(name: 'ExecutionParameterKey')
+    ExecutionParameterMap = Shapes::MapShape.new(name: 'ExecutionParameterMap')
+    ExecutionParameterType = Shapes::StringShape.new(name: 'ExecutionParameterType')
+    ExecutionParameterValue = Shapes::StringShape.new(name: 'ExecutionParameterValue')
+    ExecutionParameterValueList = Shapes::ListShape.new(name: 'ExecutionParameterValueList')
+    ExecutionParameters = Shapes::ListShape.new(name: 'ExecutionParameters')
     FailedServiceActionAssociation = Shapes::StructureShape.new(name: 'FailedServiceActionAssociation')
     FailedServiceActionAssociations = Shapes::ListShape.new(name: 'FailedServiceActionAssociations')
     GetAWSOrganizationsAccessStatusInput = Shapes::StructureShape.new(name: 'GetAWSOrganizationsAccessStatusInput')
@@ -152,11 +171,15 @@ module Aws::ServiceCatalog
     InvalidParametersException = Shapes::StructureShape.new(name: 'InvalidParametersException')
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     LastRequestId = Shapes::StringShape.new(name: 'LastRequestId')
+    LaunchPath = Shapes::StructureShape.new(name: 'LaunchPath')
     LaunchPathSummaries = Shapes::ListShape.new(name: 'LaunchPathSummaries')
     LaunchPathSummary = Shapes::StructureShape.new(name: 'LaunchPathSummary')
+    LaunchPaths = Shapes::ListShape.new(name: 'LaunchPaths')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAcceptedPortfolioSharesInput = Shapes::StructureShape.new(name: 'ListAcceptedPortfolioSharesInput')
     ListAcceptedPortfolioSharesOutput = Shapes::StructureShape.new(name: 'ListAcceptedPortfolioSharesOutput')
+    ListBudgetsForResourceInput = Shapes::StructureShape.new(name: 'ListBudgetsForResourceInput')
+    ListBudgetsForResourceOutput = Shapes::StructureShape.new(name: 'ListBudgetsForResourceOutput')
     ListConstraintsForPortfolioInput = Shapes::StructureShape.new(name: 'ListConstraintsForPortfolioInput')
     ListConstraintsForPortfolioOutput = Shapes::StructureShape.new(name: 'ListConstraintsForPortfolioOutput')
     ListLaunchPathsInput = Shapes::StructureShape.new(name: 'ListLaunchPathsInput')
@@ -186,6 +209,8 @@ module Aws::ServiceCatalog
     ListServiceActionsForProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'ListServiceActionsForProvisioningArtifactOutput')
     ListServiceActionsInput = Shapes::StructureShape.new(name: 'ListServiceActionsInput')
     ListServiceActionsOutput = Shapes::StructureShape.new(name: 'ListServiceActionsOutput')
+    ListStackInstancesForProvisionedProductInput = Shapes::StructureShape.new(name: 'ListStackInstancesForProvisionedProductInput')
+    ListStackInstancesForProvisionedProductOutput = Shapes::StructureShape.new(name: 'ListStackInstancesForProvisionedProductOutput')
     ListTagOptionsFilters = Shapes::StructureShape.new(name: 'ListTagOptionsFilters')
     ListTagOptionsInput = Shapes::StructureShape.new(name: 'ListTagOptionsInput')
     ListTagOptionsOutput = Shapes::StructureShape.new(name: 'ListTagOptionsOutput')
@@ -216,7 +241,6 @@ module Aws::ServiceCatalog
     PortfolioDetails = Shapes::ListShape.new(name: 'PortfolioDetails')
     PortfolioDisplayName = Shapes::StringShape.new(name: 'PortfolioDisplayName')
     PortfolioName = Shapes::StringShape.new(name: 'PortfolioName')
-    PortfolioShareToken = Shapes::StringShape.new(name: 'PortfolioShareToken')
     PortfolioShareType = Shapes::StringShape.new(name: 'PortfolioShareType')
     Principal = Shapes::StructureShape.new(name: 'Principal')
     PrincipalARN = Shapes::StringShape.new(name: 'PrincipalARN')
@@ -242,7 +266,9 @@ module Aws::ServiceCatalog
     ProductViewSortBy = Shapes::StringShape.new(name: 'ProductViewSortBy')
     ProductViewSummaries = Shapes::ListShape.new(name: 'ProductViewSummaries')
     ProductViewSummary = Shapes::StructureShape.new(name: 'ProductViewSummary')
+    PropertyKey = Shapes::StringShape.new(name: 'PropertyKey')
     PropertyName = Shapes::StringShape.new(name: 'PropertyName')
+    PropertyValue = Shapes::StringShape.new(name: 'PropertyValue')
     ProviderName = Shapes::StringShape.new(name: 'ProviderName')
     ProvisionProductInput = Shapes::StructureShape.new(name: 'ProvisionProductInput')
     ProvisionProductOutput = Shapes::StructureShape.new(name: 'ProvisionProductOutput')
@@ -260,6 +286,7 @@ module Aws::ServiceCatalog
     ProvisionedProductPlanSummary = Shapes::StructureShape.new(name: 'ProvisionedProductPlanSummary')
     ProvisionedProductPlanType = Shapes::StringShape.new(name: 'ProvisionedProductPlanType')
     ProvisionedProductPlans = Shapes::ListShape.new(name: 'ProvisionedProductPlans')
+    ProvisionedProductProperties = Shapes::MapShape.new(name: 'ProvisionedProductProperties')
     ProvisionedProductStatus = Shapes::StringShape.new(name: 'ProvisionedProductStatus')
     ProvisionedProductStatusMessage = Shapes::StringShape.new(name: 'ProvisionedProductStatusMessage')
     ProvisionedProductType = Shapes::StringShape.new(name: 'ProvisionedProductType')
@@ -272,6 +299,7 @@ module Aws::ServiceCatalog
     ProvisioningArtifactDescription = Shapes::StringShape.new(name: 'ProvisioningArtifactDescription')
     ProvisioningArtifactDetail = Shapes::StructureShape.new(name: 'ProvisioningArtifactDetail')
     ProvisioningArtifactDetails = Shapes::ListShape.new(name: 'ProvisioningArtifactDetails')
+    ProvisioningArtifactGuidance = Shapes::StringShape.new(name: 'ProvisioningArtifactGuidance')
     ProvisioningArtifactInfo = Shapes::MapShape.new(name: 'ProvisioningArtifactInfo')
     ProvisioningArtifactInfoKey = Shapes::StringShape.new(name: 'ProvisioningArtifactInfoKey')
     ProvisioningArtifactInfoValue = Shapes::StringShape.new(name: 'ProvisioningArtifactInfoValue')
@@ -359,6 +387,9 @@ module Aws::ServiceCatalog
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     SourceProvisioningArtifactProperties = Shapes::ListShape.new(name: 'SourceProvisioningArtifactProperties')
     SourceProvisioningArtifactPropertiesMap = Shapes::MapShape.new(name: 'SourceProvisioningArtifactPropertiesMap')
+    StackInstance = Shapes::StructureShape.new(name: 'StackInstance')
+    StackInstanceStatus = Shapes::StringShape.new(name: 'StackInstanceStatus')
+    StackInstances = Shapes::ListShape.new(name: 'StackInstances')
     StackSetAccounts = Shapes::ListShape.new(name: 'StackSetAccounts')
     StackSetFailureToleranceCount = Shapes::IntegerShape.new(name: 'StackSetFailureToleranceCount')
     StackSetFailureTolerancePercentage = Shapes::IntegerShape.new(name: 'StackSetFailureTolerancePercentage')
@@ -399,6 +430,8 @@ module Aws::ServiceCatalog
     UpdateProductOutput = Shapes::StructureShape.new(name: 'UpdateProductOutput')
     UpdateProvisionedProductInput = Shapes::StructureShape.new(name: 'UpdateProvisionedProductInput')
     UpdateProvisionedProductOutput = Shapes::StructureShape.new(name: 'UpdateProvisionedProductOutput')
+    UpdateProvisionedProductPropertiesInput = Shapes::StructureShape.new(name: 'UpdateProvisionedProductPropertiesInput')
+    UpdateProvisionedProductPropertiesOutput = Shapes::StructureShape.new(name: 'UpdateProvisionedProductPropertiesOutput')
     UpdateProvisioningArtifactInput = Shapes::StructureShape.new(name: 'UpdateProvisioningArtifactInput')
     UpdateProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'UpdateProvisioningArtifactOutput')
     UpdateProvisioningParameter = Shapes::StructureShape.new(name: 'UpdateProvisioningParameter')
@@ -432,6 +465,12 @@ module Aws::ServiceCatalog
     AddTags.member = Shapes::ShapeRef.new(shape: Tag)
 
     AllowedValues.member = Shapes::ShapeRef.new(shape: AllowedValue)
+
+    AssociateBudgetWithResourceInput.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    AssociateBudgetWithResourceInput.add_member(:resource_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ResourceId"))
+    AssociateBudgetWithResourceInput.struct_class = Types::AssociateBudgetWithResourceInput
+
+    AssociateBudgetWithResourceOutput.struct_class = Types::AssociateBudgetWithResourceOutput
 
     AssociatePrincipalWithPortfolioInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     AssociatePrincipalWithPortfolioInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
@@ -477,6 +516,11 @@ module Aws::ServiceCatalog
     BatchDisassociateServiceActionFromProvisioningArtifactOutput.add_member(:failed_service_action_associations, Shapes::ShapeRef.new(shape: FailedServiceActionAssociations, location_name: "FailedServiceActionAssociations"))
     BatchDisassociateServiceActionFromProvisioningArtifactOutput.struct_class = Types::BatchDisassociateServiceActionFromProvisioningArtifactOutput
 
+    BudgetDetail.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, location_name: "BudgetName"))
+    BudgetDetail.struct_class = Types::BudgetDetail
+
+    Budgets.member = Shapes::ShapeRef.new(shape: BudgetDetail)
+
     CloudWatchDashboard.add_member(:name, Shapes::ShapeRef.new(shape: CloudWatchDashboardName, location_name: "Name"))
     CloudWatchDashboard.struct_class = Types::CloudWatchDashboard
 
@@ -486,6 +530,8 @@ module Aws::ServiceCatalog
     ConstraintDetail.add_member(:type, Shapes::ShapeRef.new(shape: ConstraintType, location_name: "Type"))
     ConstraintDetail.add_member(:description, Shapes::ShapeRef.new(shape: ConstraintDescription, location_name: "Description"))
     ConstraintDetail.add_member(:owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "Owner"))
+    ConstraintDetail.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProductId"))
+    ConstraintDetail.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioId"))
     ConstraintDetail.struct_class = Types::ConstraintDetail
 
     ConstraintDetails.member = Shapes::ShapeRef.new(shape: ConstraintDetail)
@@ -542,7 +588,7 @@ module Aws::ServiceCatalog
     CreatePortfolioShareInput.add_member(:organization_node, Shapes::ShapeRef.new(shape: OrganizationNode, location_name: "OrganizationNode"))
     CreatePortfolioShareInput.struct_class = Types::CreatePortfolioShareInput
 
-    CreatePortfolioShareOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: PortfolioShareToken, location_name: "PortfolioShareToken"))
+    CreatePortfolioShareOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioShareToken"))
     CreatePortfolioShareOutput.struct_class = Types::CreatePortfolioShareOutput
 
     CreateProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
@@ -631,7 +677,7 @@ module Aws::ServiceCatalog
     DeletePortfolioShareInput.add_member(:organization_node, Shapes::ShapeRef.new(shape: OrganizationNode, location_name: "OrganizationNode"))
     DeletePortfolioShareInput.struct_class = Types::DeletePortfolioShareInput
 
-    DeletePortfolioShareOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: PortfolioShareToken, location_name: "PortfolioShareToken"))
+    DeletePortfolioShareOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioShareToken"))
     DeletePortfolioShareOutput.struct_class = Types::DeletePortfolioShareOutput
 
     DeleteProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
@@ -690,12 +736,13 @@ module Aws::ServiceCatalog
     DescribePortfolioOutput.add_member(:portfolio_detail, Shapes::ShapeRef.new(shape: PortfolioDetail, location_name: "PortfolioDetail"))
     DescribePortfolioOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribePortfolioOutput.add_member(:tag_options, Shapes::ShapeRef.new(shape: TagOptionDetails, location_name: "TagOptions"))
+    DescribePortfolioOutput.add_member(:budgets, Shapes::ShapeRef.new(shape: Budgets, location_name: "Budgets"))
     DescribePortfolioOutput.struct_class = Types::DescribePortfolioOutput
 
-    DescribePortfolioShareStatusInput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: PortfolioShareToken, required: true, location_name: "PortfolioShareToken"))
+    DescribePortfolioShareStatusInput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioShareToken"))
     DescribePortfolioShareStatusInput.struct_class = Types::DescribePortfolioShareStatusInput
 
-    DescribePortfolioShareStatusOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: PortfolioShareToken, location_name: "PortfolioShareToken"))
+    DescribePortfolioShareStatusOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioShareToken"))
     DescribePortfolioShareStatusOutput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioId"))
     DescribePortfolioShareStatusOutput.add_member(:organization_node_value, Shapes::ShapeRef.new(shape: OrganizationNodeValue, location_name: "OrganizationNodeValue"))
     DescribePortfolioShareStatusOutput.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "Status"))
@@ -703,21 +750,26 @@ module Aws::ServiceCatalog
     DescribePortfolioShareStatusOutput.struct_class = Types::DescribePortfolioShareStatusOutput
 
     DescribeProductAsAdminInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
-    DescribeProductAsAdminInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    DescribeProductAsAdminInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    DescribeProductAsAdminInput.add_member(:name, Shapes::ShapeRef.new(shape: ProductViewName, location_name: "Name"))
     DescribeProductAsAdminInput.struct_class = Types::DescribeProductAsAdminInput
 
     DescribeProductAsAdminOutput.add_member(:product_view_detail, Shapes::ShapeRef.new(shape: ProductViewDetail, location_name: "ProductViewDetail"))
     DescribeProductAsAdminOutput.add_member(:provisioning_artifact_summaries, Shapes::ShapeRef.new(shape: ProvisioningArtifactSummaries, location_name: "ProvisioningArtifactSummaries"))
     DescribeProductAsAdminOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeProductAsAdminOutput.add_member(:tag_options, Shapes::ShapeRef.new(shape: TagOptionDetails, location_name: "TagOptions"))
+    DescribeProductAsAdminOutput.add_member(:budgets, Shapes::ShapeRef.new(shape: Budgets, location_name: "Budgets"))
     DescribeProductAsAdminOutput.struct_class = Types::DescribeProductAsAdminOutput
 
     DescribeProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
-    DescribeProductInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    DescribeProductInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    DescribeProductInput.add_member(:name, Shapes::ShapeRef.new(shape: ProductViewName, location_name: "Name"))
     DescribeProductInput.struct_class = Types::DescribeProductInput
 
     DescribeProductOutput.add_member(:product_view_summary, Shapes::ShapeRef.new(shape: ProductViewSummary, location_name: "ProductViewSummary"))
     DescribeProductOutput.add_member(:provisioning_artifacts, Shapes::ShapeRef.new(shape: ProvisioningArtifacts, location_name: "ProvisioningArtifacts"))
+    DescribeProductOutput.add_member(:budgets, Shapes::ShapeRef.new(shape: Budgets, location_name: "Budgets"))
+    DescribeProductOutput.add_member(:launch_paths, Shapes::ShapeRef.new(shape: LaunchPaths, location_name: "LaunchPaths"))
     DescribeProductOutput.struct_class = Types::DescribeProductOutput
 
     DescribeProductViewInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
@@ -748,8 +800,10 @@ module Aws::ServiceCatalog
     DescribeProvisionedProductPlanOutput.struct_class = Types::DescribeProvisionedProductPlanOutput
 
     DescribeProvisioningArtifactInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
-    DescribeProvisioningArtifactInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisioningArtifactId"))
-    DescribeProvisioningArtifactInput.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProductId"))
+    DescribeProvisioningArtifactInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProvisioningArtifactId"))
+    DescribeProvisioningArtifactInput.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProductId"))
+    DescribeProvisioningArtifactInput.add_member(:provisioning_artifact_name, Shapes::ShapeRef.new(shape: ProvisioningArtifactName, location_name: "ProvisioningArtifactName"))
+    DescribeProvisioningArtifactInput.add_member(:product_name, Shapes::ShapeRef.new(shape: ProductViewName, location_name: "ProductName"))
     DescribeProvisioningArtifactInput.add_member(:verbose, Shapes::ShapeRef.new(shape: Verbose, location_name: "Verbose"))
     DescribeProvisioningArtifactInput.struct_class = Types::DescribeProvisioningArtifactInput
 
@@ -782,6 +836,14 @@ module Aws::ServiceCatalog
     DescribeRecordOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
     DescribeRecordOutput.struct_class = Types::DescribeRecordOutput
 
+    DescribeServiceActionExecutionParametersInput.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisionedProductId"))
+    DescribeServiceActionExecutionParametersInput.add_member(:service_action_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ServiceActionId"))
+    DescribeServiceActionExecutionParametersInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    DescribeServiceActionExecutionParametersInput.struct_class = Types::DescribeServiceActionExecutionParametersInput
+
+    DescribeServiceActionExecutionParametersOutput.add_member(:service_action_parameters, Shapes::ShapeRef.new(shape: ExecutionParameters, location_name: "ServiceActionParameters"))
+    DescribeServiceActionExecutionParametersOutput.struct_class = Types::DescribeServiceActionExecutionParametersOutput
+
     DescribeServiceActionInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
     DescribeServiceActionInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     DescribeServiceActionInput.struct_class = Types::DescribeServiceActionInput
@@ -798,6 +860,12 @@ module Aws::ServiceCatalog
     DisableAWSOrganizationsAccessInput.struct_class = Types::DisableAWSOrganizationsAccessInput
 
     DisableAWSOrganizationsAccessOutput.struct_class = Types::DisableAWSOrganizationsAccessOutput
+
+    DisassociateBudgetFromResourceInput.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    DisassociateBudgetFromResourceInput.add_member(:resource_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ResourceId"))
+    DisassociateBudgetFromResourceInput.struct_class = Types::DisassociateBudgetFromResourceInput
+
+    DisassociateBudgetFromResourceOutput.struct_class = Types::DisassociateBudgetFromResourceOutput
 
     DisassociatePrincipalFromPortfolioInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     DisassociatePrincipalFromPortfolioInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
@@ -827,6 +895,8 @@ module Aws::ServiceCatalog
 
     DisassociateTagOptionFromResourceOutput.struct_class = Types::DisassociateTagOptionFromResourceOutput
 
+    DuplicateResourceException.struct_class = Types::DuplicateResourceException
+
     EnableAWSOrganizationsAccessInput.struct_class = Types::EnableAWSOrganizationsAccessInput
 
     EnableAWSOrganizationsAccessOutput.struct_class = Types::EnableAWSOrganizationsAccessOutput
@@ -843,10 +913,23 @@ module Aws::ServiceCatalog
     ExecuteProvisionedProductServiceActionInput.add_member(:service_action_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ServiceActionId"))
     ExecuteProvisionedProductServiceActionInput.add_member(:execute_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ExecuteToken", metadata: {"idempotencyToken"=>true}))
     ExecuteProvisionedProductServiceActionInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    ExecuteProvisionedProductServiceActionInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ExecutionParameterMap, location_name: "Parameters"))
     ExecuteProvisionedProductServiceActionInput.struct_class = Types::ExecuteProvisionedProductServiceActionInput
 
     ExecuteProvisionedProductServiceActionOutput.add_member(:record_detail, Shapes::ShapeRef.new(shape: RecordDetail, location_name: "RecordDetail"))
     ExecuteProvisionedProductServiceActionOutput.struct_class = Types::ExecuteProvisionedProductServiceActionOutput
+
+    ExecutionParameter.add_member(:name, Shapes::ShapeRef.new(shape: ExecutionParameterKey, location_name: "Name"))
+    ExecutionParameter.add_member(:type, Shapes::ShapeRef.new(shape: ExecutionParameterType, location_name: "Type"))
+    ExecutionParameter.add_member(:default_values, Shapes::ShapeRef.new(shape: ExecutionParameterValueList, location_name: "DefaultValues"))
+    ExecutionParameter.struct_class = Types::ExecutionParameter
+
+    ExecutionParameterMap.key = Shapes::ShapeRef.new(shape: ExecutionParameterKey)
+    ExecutionParameterMap.value = Shapes::ShapeRef.new(shape: ExecutionParameterValueList)
+
+    ExecutionParameterValueList.member = Shapes::ShapeRef.new(shape: ExecutionParameterValue)
+
+    ExecutionParameters.member = Shapes::ShapeRef.new(shape: ExecutionParameter)
 
     FailedServiceActionAssociation.add_member(:service_action_id, Shapes::ShapeRef.new(shape: Id, location_name: "ServiceActionId"))
     FailedServiceActionAssociation.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProductId"))
@@ -862,6 +945,14 @@ module Aws::ServiceCatalog
     GetAWSOrganizationsAccessStatusOutput.add_member(:access_status, Shapes::ShapeRef.new(shape: AccessStatus, location_name: "AccessStatus"))
     GetAWSOrganizationsAccessStatusOutput.struct_class = Types::GetAWSOrganizationsAccessStatusOutput
 
+    InvalidParametersException.struct_class = Types::InvalidParametersException
+
+    InvalidStateException.struct_class = Types::InvalidStateException
+
+    LaunchPath.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    LaunchPath.add_member(:name, Shapes::ShapeRef.new(shape: PortfolioName, location_name: "Name"))
+    LaunchPath.struct_class = Types::LaunchPath
+
     LaunchPathSummaries.member = Shapes::ShapeRef.new(shape: LaunchPathSummary)
 
     LaunchPathSummary.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
@@ -869,6 +960,10 @@ module Aws::ServiceCatalog
     LaunchPathSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     LaunchPathSummary.add_member(:name, Shapes::ShapeRef.new(shape: PortfolioName, location_name: "Name"))
     LaunchPathSummary.struct_class = Types::LaunchPathSummary
+
+    LaunchPaths.member = Shapes::ShapeRef.new(shape: LaunchPath)
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListAcceptedPortfolioSharesInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListAcceptedPortfolioSharesInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
@@ -879,6 +974,16 @@ module Aws::ServiceCatalog
     ListAcceptedPortfolioSharesOutput.add_member(:portfolio_details, Shapes::ShapeRef.new(shape: PortfolioDetails, location_name: "PortfolioDetails"))
     ListAcceptedPortfolioSharesOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
     ListAcceptedPortfolioSharesOutput.struct_class = Types::ListAcceptedPortfolioSharesOutput
+
+    ListBudgetsForResourceInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    ListBudgetsForResourceInput.add_member(:resource_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ResourceId"))
+    ListBudgetsForResourceInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListBudgetsForResourceInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
+    ListBudgetsForResourceInput.struct_class = Types::ListBudgetsForResourceInput
+
+    ListBudgetsForResourceOutput.add_member(:budgets, Shapes::ShapeRef.new(shape: Budgets, location_name: "Budgets"))
+    ListBudgetsForResourceOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
+    ListBudgetsForResourceOutput.struct_class = Types::ListBudgetsForResourceOutput
 
     ListConstraintsForPortfolioInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListConstraintsForPortfolioInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
@@ -914,6 +1019,9 @@ module Aws::ServiceCatalog
 
     ListPortfolioAccessInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListPortfolioAccessInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
+    ListPortfolioAccessInput.add_member(:organization_parent_id, Shapes::ShapeRef.new(shape: Id, location_name: "OrganizationParentId"))
+    ListPortfolioAccessInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
+    ListPortfolioAccessInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
     ListPortfolioAccessInput.struct_class = Types::ListPortfolioAccessInput
 
     ListPortfolioAccessOutput.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "AccountIds"))
@@ -1023,6 +1131,16 @@ module Aws::ServiceCatalog
     ListServiceActionsOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
     ListServiceActionsOutput.struct_class = Types::ListServiceActionsOutput
 
+    ListStackInstancesForProvisionedProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    ListStackInstancesForProvisionedProductInput.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisionedProductId"))
+    ListStackInstancesForProvisionedProductInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
+    ListStackInstancesForProvisionedProductInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListStackInstancesForProvisionedProductInput.struct_class = Types::ListStackInstancesForProvisionedProductInput
+
+    ListStackInstancesForProvisionedProductOutput.add_member(:stack_instances, Shapes::ShapeRef.new(shape: StackInstances, location_name: "StackInstances"))
+    ListStackInstancesForProvisionedProductOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
+    ListStackInstancesForProvisionedProductOutput.struct_class = Types::ListStackInstancesForProvisionedProductOutput
+
     ListTagOptionsFilters.add_member(:key, Shapes::ShapeRef.new(shape: TagOptionKey, location_name: "Key"))
     ListTagOptionsFilters.add_member(:value, Shapes::ShapeRef.new(shape: TagOptionValue, location_name: "Value"))
     ListTagOptionsFilters.add_member(:active, Shapes::ShapeRef.new(shape: TagOptionActive, location_name: "Active"))
@@ -1040,6 +1158,8 @@ module Aws::ServiceCatalog
     Namespaces.member = Shapes::ShapeRef.new(shape: AccountId)
 
     NotificationArns.member = Shapes::ShapeRef.new(shape: NotificationArn)
+
+    OperationNotSupportedException.struct_class = Types::OperationNotSupportedException
 
     OrganizationNode.add_member(:type, Shapes::ShapeRef.new(shape: OrganizationNodeType, location_name: "Type"))
     OrganizationNode.add_member(:value, Shapes::ShapeRef.new(shape: OrganizationNodeValue, location_name: "Value"))
@@ -1182,12 +1302,16 @@ module Aws::ServiceCatalog
 
     ProvisionedProductPlans.member = Shapes::ShapeRef.new(shape: ProvisionedProductPlanSummary)
 
+    ProvisionedProductProperties.key = Shapes::ShapeRef.new(shape: PropertyKey)
+    ProvisionedProductProperties.value = Shapes::ShapeRef.new(shape: PropertyValue)
+
     ProvisionedProductViewFilterValues.member = Shapes::ShapeRef.new(shape: ProvisionedProductViewFilterValue)
 
     ProvisioningArtifact.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
     ProvisioningArtifact.add_member(:name, Shapes::ShapeRef.new(shape: ProvisioningArtifactName, location_name: "Name"))
     ProvisioningArtifact.add_member(:description, Shapes::ShapeRef.new(shape: ProvisioningArtifactDescription, location_name: "Description"))
     ProvisioningArtifact.add_member(:created_time, Shapes::ShapeRef.new(shape: ProvisioningArtifactCreatedTime, location_name: "CreatedTime"))
+    ProvisioningArtifact.add_member(:guidance, Shapes::ShapeRef.new(shape: ProvisioningArtifactGuidance, location_name: "Guidance"))
     ProvisioningArtifact.struct_class = Types::ProvisioningArtifact
 
     ProvisioningArtifactDetail.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
@@ -1196,6 +1320,7 @@ module Aws::ServiceCatalog
     ProvisioningArtifactDetail.add_member(:type, Shapes::ShapeRef.new(shape: ProvisioningArtifactType, location_name: "Type"))
     ProvisioningArtifactDetail.add_member(:created_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreatedTime"))
     ProvisioningArtifactDetail.add_member(:active, Shapes::ShapeRef.new(shape: ProvisioningArtifactActive, location_name: "Active"))
+    ProvisioningArtifactDetail.add_member(:guidance, Shapes::ShapeRef.new(shape: ProvisioningArtifactGuidance, location_name: "Guidance"))
     ProvisioningArtifactDetail.struct_class = Types::ProvisioningArtifactDetail
 
     ProvisioningArtifactDetails.member = Shapes::ShapeRef.new(shape: ProvisioningArtifactDetail)
@@ -1221,6 +1346,7 @@ module Aws::ServiceCatalog
     ProvisioningArtifactProperties.add_member(:description, Shapes::ShapeRef.new(shape: ProvisioningArtifactDescription, location_name: "Description"))
     ProvisioningArtifactProperties.add_member(:info, Shapes::ShapeRef.new(shape: ProvisioningArtifactInfo, required: true, location_name: "Info"))
     ProvisioningArtifactProperties.add_member(:type, Shapes::ShapeRef.new(shape: ProvisioningArtifactType, location_name: "Type"))
+    ProvisioningArtifactProperties.add_member(:disable_template_validation, Shapes::ShapeRef.new(shape: DisableTemplateValidation, location_name: "DisableTemplateValidation"))
     ProvisioningArtifactProperties.struct_class = Types::ProvisioningArtifactProperties
 
     ProvisioningArtifactSummaries.member = Shapes::ShapeRef.new(shape: ProvisioningArtifactSummary)
@@ -1324,6 +1450,10 @@ module Aws::ServiceCatalog
 
     ResourceDetails.member = Shapes::ShapeRef.new(shape: ResourceDetail)
 
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     ResourceTargetDefinition.add_member(:attribute, Shapes::ShapeRef.new(shape: ResourceAttribute, location_name: "Attribute"))
     ResourceTargetDefinition.add_member(:name, Shapes::ShapeRef.new(shape: PropertyName, location_name: "Name"))
     ResourceTargetDefinition.add_member(:requires_recreation, Shapes::ShapeRef.new(shape: RequiresRecreation, location_name: "RequiresRecreation"))
@@ -1420,6 +1550,13 @@ module Aws::ServiceCatalog
     SourceProvisioningArtifactPropertiesMap.key = Shapes::ShapeRef.new(shape: ProvisioningArtifactPropertyName)
     SourceProvisioningArtifactPropertiesMap.value = Shapes::ShapeRef.new(shape: ProvisioningArtifactPropertyValue)
 
+    StackInstance.add_member(:account, Shapes::ShapeRef.new(shape: AccountId, location_name: "Account"))
+    StackInstance.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
+    StackInstance.add_member(:stack_instance_status, Shapes::ShapeRef.new(shape: StackInstanceStatus, location_name: "StackInstanceStatus"))
+    StackInstance.struct_class = Types::StackInstance
+
+    StackInstances.member = Shapes::ShapeRef.new(shape: StackInstance)
+
     StackSetAccounts.member = Shapes::ShapeRef.new(shape: AccountId)
 
     StackSetRegions.member = Shapes::ShapeRef.new(shape: Region)
@@ -1439,6 +1576,8 @@ module Aws::ServiceCatalog
     TagOptionDetail.struct_class = Types::TagOptionDetail
 
     TagOptionDetails.member = Shapes::ShapeRef.new(shape: TagOptionDetail)
+
+    TagOptionNotMigratedException.struct_class = Types::TagOptionNotMigratedException
 
     TagOptionSummaries.member = Shapes::ShapeRef.new(shape: TagOptionSummary)
 
@@ -1463,6 +1602,7 @@ module Aws::ServiceCatalog
     UpdateConstraintInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     UpdateConstraintInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
     UpdateConstraintInput.add_member(:description, Shapes::ShapeRef.new(shape: ConstraintDescription, location_name: "Description"))
+    UpdateConstraintInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ConstraintParameters, location_name: "Parameters"))
     UpdateConstraintInput.struct_class = Types::UpdateConstraintInput
 
     UpdateConstraintOutput.add_member(:constraint_detail, Shapes::ShapeRef.new(shape: ConstraintDetail, location_name: "ConstraintDetail"))
@@ -1508,11 +1648,24 @@ module Aws::ServiceCatalog
     UpdateProvisionedProductInput.add_member(:path_id, Shapes::ShapeRef.new(shape: Id, location_name: "PathId"))
     UpdateProvisionedProductInput.add_member(:provisioning_parameters, Shapes::ShapeRef.new(shape: UpdateProvisioningParameters, location_name: "ProvisioningParameters"))
     UpdateProvisionedProductInput.add_member(:provisioning_preferences, Shapes::ShapeRef.new(shape: UpdateProvisioningPreferences, location_name: "ProvisioningPreferences"))
+    UpdateProvisionedProductInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     UpdateProvisionedProductInput.add_member(:update_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "UpdateToken", metadata: {"idempotencyToken"=>true}))
     UpdateProvisionedProductInput.struct_class = Types::UpdateProvisionedProductInput
 
     UpdateProvisionedProductOutput.add_member(:record_detail, Shapes::ShapeRef.new(shape: RecordDetail, location_name: "RecordDetail"))
     UpdateProvisionedProductOutput.struct_class = Types::UpdateProvisionedProductOutput
+
+    UpdateProvisionedProductPropertiesInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    UpdateProvisionedProductPropertiesInput.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisionedProductId"))
+    UpdateProvisionedProductPropertiesInput.add_member(:provisioned_product_properties, Shapes::ShapeRef.new(shape: ProvisionedProductProperties, required: true, location_name: "ProvisionedProductProperties"))
+    UpdateProvisionedProductPropertiesInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    UpdateProvisionedProductPropertiesInput.struct_class = Types::UpdateProvisionedProductPropertiesInput
+
+    UpdateProvisionedProductPropertiesOutput.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProvisionedProductId"))
+    UpdateProvisionedProductPropertiesOutput.add_member(:provisioned_product_properties, Shapes::ShapeRef.new(shape: ProvisionedProductProperties, location_name: "ProvisionedProductProperties"))
+    UpdateProvisionedProductPropertiesOutput.add_member(:record_id, Shapes::ShapeRef.new(shape: Id, location_name: "RecordId"))
+    UpdateProvisionedProductPropertiesOutput.add_member(:status, Shapes::ShapeRef.new(shape: RecordStatus, location_name: "Status"))
+    UpdateProvisionedProductPropertiesOutput.struct_class = Types::UpdateProvisionedProductPropertiesOutput
 
     UpdateProvisioningArtifactInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     UpdateProvisioningArtifactInput.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProductId"))
@@ -1520,6 +1673,7 @@ module Aws::ServiceCatalog
     UpdateProvisioningArtifactInput.add_member(:name, Shapes::ShapeRef.new(shape: ProvisioningArtifactName, location_name: "Name"))
     UpdateProvisioningArtifactInput.add_member(:description, Shapes::ShapeRef.new(shape: ProvisioningArtifactDescription, location_name: "Description"))
     UpdateProvisioningArtifactInput.add_member(:active, Shapes::ShapeRef.new(shape: ProvisioningArtifactActive, location_name: "Active"))
+    UpdateProvisioningArtifactInput.add_member(:guidance, Shapes::ShapeRef.new(shape: ProvisioningArtifactGuidance, location_name: "Guidance"))
     UpdateProvisioningArtifactInput.struct_class = Types::UpdateProvisioningArtifactInput
 
     UpdateProvisioningArtifactOutput.add_member(:provisioning_artifact_detail, Shapes::ShapeRef.new(shape: ProvisioningArtifactDetail, location_name: "ProvisioningArtifactDetail"))
@@ -1594,6 +1748,18 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:associate_budget_with_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateBudgetWithResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateBudgetWithResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: AssociateBudgetWithResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:associate_principal_with_portfolio, Seahorse::Model::Operation.new.tap do |o|
@@ -1704,6 +1870,7 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
       api.add_operation(:create_product, Seahorse::Model::Operation.new.tap do |o|
@@ -1791,6 +1958,7 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
       api.add_operation(:delete_product, Seahorse::Model::Operation.new.tap do |o|
@@ -1902,6 +2070,7 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: DescribeProductAsAdminInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeProductAsAdminOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
       end)
 
       api.add_operation(:describe_product_view, Seahorse::Model::Operation.new.tap do |o|
@@ -1940,6 +2109,7 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: DescribeProvisioningArtifactInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeProvisioningArtifactOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
       end)
 
       api.add_operation(:describe_provisioning_parameters, Seahorse::Model::Operation.new.tap do |o|
@@ -1970,6 +2140,16 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_service_action_execution_parameters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeServiceActionExecutionParameters"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeServiceActionExecutionParametersInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeServiceActionExecutionParametersOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_tag_option, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeTagOption"
         o.http_method = "POST"
@@ -1989,6 +2169,15 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+      end)
+
+      api.add_operation(:disassociate_budget_from_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateBudgetFromResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateBudgetFromResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateBudgetFromResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:disassociate_principal_from_portfolio, Seahorse::Model::Operation.new.tap do |o|
@@ -2090,6 +2279,22 @@ module Aws::ServiceCatalog
         )
       end)
 
+      api.add_operation(:list_budgets_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBudgetsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListBudgetsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListBudgetsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_constraints_for_portfolio, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListConstraintsForPortfolio"
         o.http_method = "POST"
@@ -2146,6 +2351,13 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: ListPortfolioAccessInput)
         o.output = Shapes::ShapeRef.new(shape: ListPortfolioAccessOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_portfolios, Seahorse::Model::Operation.new.tap do |o|
@@ -2286,6 +2498,16 @@ module Aws::ServiceCatalog
             "next_page_token" => "page_token"
           }
         )
+      end)
+
+      api.add_operation(:list_stack_instances_for_provisioned_product, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStackInstancesForProvisionedProduct"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStackInstancesForProvisionedProductInput)
+        o.output = Shapes::ShapeRef.new(shape: ListStackInstancesForProvisionedProductOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_tag_options, Seahorse::Model::Operation.new.tap do |o|
@@ -2429,6 +2651,17 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: UpdateProvisionedProductOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_provisioned_product_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProvisionedProductProperties"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProvisionedProductPropertiesInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProvisionedProductPropertiesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
       api.add_operation(:update_provisioning_artifact, Seahorse::Model::Operation.new.tap do |o|

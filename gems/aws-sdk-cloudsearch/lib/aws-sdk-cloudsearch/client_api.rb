@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -51,6 +53,8 @@ module Aws::CloudSearch
     DescribeAnalysisSchemesResponse = Shapes::StructureShape.new(name: 'DescribeAnalysisSchemesResponse')
     DescribeAvailabilityOptionsRequest = Shapes::StructureShape.new(name: 'DescribeAvailabilityOptionsRequest')
     DescribeAvailabilityOptionsResponse = Shapes::StructureShape.new(name: 'DescribeAvailabilityOptionsResponse')
+    DescribeDomainEndpointOptionsRequest = Shapes::StructureShape.new(name: 'DescribeDomainEndpointOptionsRequest')
+    DescribeDomainEndpointOptionsResponse = Shapes::StructureShape.new(name: 'DescribeDomainEndpointOptionsResponse')
     DescribeDomainsRequest = Shapes::StructureShape.new(name: 'DescribeDomainsRequest')
     DescribeDomainsResponse = Shapes::StructureShape.new(name: 'DescribeDomainsResponse')
     DescribeExpressionsRequest = Shapes::StructureShape.new(name: 'DescribeExpressionsRequest')
@@ -65,6 +69,8 @@ module Aws::CloudSearch
     DescribeSuggestersResponse = Shapes::StructureShape.new(name: 'DescribeSuggestersResponse')
     DisabledOperationException = Shapes::StructureShape.new(name: 'DisabledOperationException')
     DocumentSuggesterOptions = Shapes::StructureShape.new(name: 'DocumentSuggesterOptions')
+    DomainEndpointOptions = Shapes::StructureShape.new(name: 'DomainEndpointOptions')
+    DomainEndpointOptionsStatus = Shapes::StructureShape.new(name: 'DomainEndpointOptionsStatus')
     DomainId = Shapes::StringShape.new(name: 'DomainId')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     DomainNameList = Shapes::ListShape.new(name: 'DomainNameList')
@@ -125,16 +131,20 @@ module Aws::CloudSearch
     SuggesterFuzzyMatching = Shapes::StringShape.new(name: 'SuggesterFuzzyMatching')
     SuggesterStatus = Shapes::StructureShape.new(name: 'SuggesterStatus')
     SuggesterStatusList = Shapes::ListShape.new(name: 'SuggesterStatusList')
+    TLSSecurityPolicy = Shapes::StringShape.new(name: 'TLSSecurityPolicy')
     TextArrayOptions = Shapes::StructureShape.new(name: 'TextArrayOptions')
     TextOptions = Shapes::StructureShape.new(name: 'TextOptions')
     UIntValue = Shapes::IntegerShape.new(name: 'UIntValue')
     UpdateAvailabilityOptionsRequest = Shapes::StructureShape.new(name: 'UpdateAvailabilityOptionsRequest')
     UpdateAvailabilityOptionsResponse = Shapes::StructureShape.new(name: 'UpdateAvailabilityOptionsResponse')
+    UpdateDomainEndpointOptionsRequest = Shapes::StructureShape.new(name: 'UpdateDomainEndpointOptionsRequest')
+    UpdateDomainEndpointOptionsResponse = Shapes::StructureShape.new(name: 'UpdateDomainEndpointOptionsResponse')
     UpdateScalingParametersRequest = Shapes::StructureShape.new(name: 'UpdateScalingParametersRequest')
     UpdateScalingParametersResponse = Shapes::StructureShape.new(name: 'UpdateScalingParametersResponse')
     UpdateServiceAccessPoliciesRequest = Shapes::StructureShape.new(name: 'UpdateServiceAccessPoliciesRequest')
     UpdateServiceAccessPoliciesResponse = Shapes::StructureShape.new(name: 'UpdateServiceAccessPoliciesResponse')
     UpdateTimestamp = Shapes::TimestampShape.new(name: 'UpdateTimestamp')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Word = Shapes::StringShape.new(name: 'Word')
 
     AccessPoliciesStatus.add_member(:options, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "Options"))
@@ -162,6 +172,10 @@ module Aws::CloudSearch
     AvailabilityOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: MultiAZ, required: true, location_name: "Options"))
     AvailabilityOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     AvailabilityOptionsStatus.struct_class = Types::AvailabilityOptionsStatus
+
+    BaseException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    BaseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BaseException.struct_class = Types::BaseException
 
     BuildSuggestersRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     BuildSuggestersRequest.struct_class = Types::BuildSuggestersRequest
@@ -267,6 +281,13 @@ module Aws::CloudSearch
     DescribeAvailabilityOptionsResponse.add_member(:availability_options, Shapes::ShapeRef.new(shape: AvailabilityOptionsStatus, location_name: "AvailabilityOptions"))
     DescribeAvailabilityOptionsResponse.struct_class = Types::DescribeAvailabilityOptionsResponse
 
+    DescribeDomainEndpointOptionsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    DescribeDomainEndpointOptionsRequest.add_member(:deployed, Shapes::ShapeRef.new(shape: Boolean, location_name: "Deployed"))
+    DescribeDomainEndpointOptionsRequest.struct_class = Types::DescribeDomainEndpointOptionsRequest
+
+    DescribeDomainEndpointOptionsResponse.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptionsStatus, location_name: "DomainEndpointOptions"))
+    DescribeDomainEndpointOptionsResponse.struct_class = Types::DescribeDomainEndpointOptionsResponse
+
     DescribeDomainsRequest.add_member(:domain_names, Shapes::ShapeRef.new(shape: DomainNameList, location_name: "DomainNames"))
     DescribeDomainsRequest.struct_class = Types::DescribeDomainsRequest
 
@@ -310,10 +331,20 @@ module Aws::CloudSearch
     DescribeSuggestersResponse.add_member(:suggesters, Shapes::ShapeRef.new(shape: SuggesterStatusList, required: true, location_name: "Suggesters"))
     DescribeSuggestersResponse.struct_class = Types::DescribeSuggestersResponse
 
+    DisabledOperationException.struct_class = Types::DisabledOperationException
+
     DocumentSuggesterOptions.add_member(:source_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "SourceField"))
     DocumentSuggesterOptions.add_member(:fuzzy_matching, Shapes::ShapeRef.new(shape: SuggesterFuzzyMatching, location_name: "FuzzyMatching"))
     DocumentSuggesterOptions.add_member(:sort_expression, Shapes::ShapeRef.new(shape: String, location_name: "SortExpression"))
     DocumentSuggesterOptions.struct_class = Types::DocumentSuggesterOptions
+
+    DomainEndpointOptions.add_member(:enforce_https, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnforceHTTPS"))
+    DomainEndpointOptions.add_member(:tls_security_policy, Shapes::ShapeRef.new(shape: TLSSecurityPolicy, location_name: "TLSSecurityPolicy"))
+    DomainEndpointOptions.struct_class = Types::DomainEndpointOptions
+
+    DomainEndpointOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, required: true, location_name: "Options"))
+    DomainEndpointOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
+    DomainEndpointOptionsStatus.struct_class = Types::DomainEndpointOptionsStatus
 
     DomainNameList.member = Shapes::ShapeRef.new(shape: DomainName)
 
@@ -408,6 +439,10 @@ module Aws::CloudSearch
     IntOptions.add_member(:sort_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SortEnabled"))
     IntOptions.struct_class = Types::IntOptions
 
+    InternalException.struct_class = Types::InternalException
+
+    InvalidTypeException.struct_class = Types::InvalidTypeException
+
     LatLonOptions.add_member(:default_value, Shapes::ShapeRef.new(shape: FieldValue, location_name: "DefaultValue"))
     LatLonOptions.add_member(:source_field, Shapes::ShapeRef.new(shape: FieldName, location_name: "SourceField"))
     LatLonOptions.add_member(:facet_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "FacetEnabled"))
@@ -415,6 +450,8 @@ module Aws::CloudSearch
     LatLonOptions.add_member(:return_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReturnEnabled"))
     LatLonOptions.add_member(:sort_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SortEnabled"))
     LatLonOptions.struct_class = Types::LatLonOptions
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     Limits.add_member(:maximum_replication_count, Shapes::ShapeRef.new(shape: MaximumReplicationCount, required: true, location_name: "MaximumReplicationCount"))
     Limits.add_member(:maximum_partition_count, Shapes::ShapeRef.new(shape: MaximumPartitionCount, required: true, location_name: "MaximumPartitionCount"))
@@ -444,6 +481,8 @@ module Aws::CloudSearch
     OptionStatus.add_member(:state, Shapes::ShapeRef.new(shape: OptionState, required: true, location_name: "State"))
     OptionStatus.add_member(:pending_deletion, Shapes::ShapeRef.new(shape: Boolean, location_name: "PendingDeletion"))
     OptionStatus.struct_class = Types::OptionStatus
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ScalingParameters.add_member(:desired_instance_type, Shapes::ShapeRef.new(shape: PartitionInstanceType, location_name: "DesiredInstanceType"))
     ScalingParameters.add_member(:desired_replication_count, Shapes::ShapeRef.new(shape: UIntValue, location_name: "DesiredReplicationCount"))
@@ -491,6 +530,13 @@ module Aws::CloudSearch
     UpdateAvailabilityOptionsResponse.add_member(:availability_options, Shapes::ShapeRef.new(shape: AvailabilityOptionsStatus, location_name: "AvailabilityOptions"))
     UpdateAvailabilityOptionsResponse.struct_class = Types::UpdateAvailabilityOptionsResponse
 
+    UpdateDomainEndpointOptionsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    UpdateDomainEndpointOptionsRequest.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, required: true, location_name: "DomainEndpointOptions"))
+    UpdateDomainEndpointOptionsRequest.struct_class = Types::UpdateDomainEndpointOptionsRequest
+
+    UpdateDomainEndpointOptionsResponse.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptionsStatus, location_name: "DomainEndpointOptions"))
+    UpdateDomainEndpointOptionsResponse.struct_class = Types::UpdateDomainEndpointOptionsResponse
+
     UpdateScalingParametersRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     UpdateScalingParametersRequest.add_member(:scaling_parameters, Shapes::ShapeRef.new(shape: ScalingParameters, required: true, location_name: "ScalingParameters"))
     UpdateScalingParametersRequest.struct_class = Types::UpdateScalingParametersRequest
@@ -505,6 +551,8 @@ module Aws::CloudSearch
     UpdateServiceAccessPoliciesResponse.add_member(:access_policies, Shapes::ShapeRef.new(shape: AccessPoliciesStatus, required: true, location_name: "AccessPolicies"))
     UpdateServiceAccessPoliciesResponse.struct_class = Types::UpdateServiceAccessPoliciesResponse
 
+    ValidationException.struct_class = Types::ValidationException
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -516,6 +564,7 @@ module Aws::CloudSearch
         "endpointPrefix" => "cloudsearch",
         "protocol" => "query",
         "serviceFullName" => "Amazon CloudSearch",
+        "serviceId" => "CloudSearch",
         "signatureVersion" => "v4",
         "uid" => "cloudsearch-2013-01-01",
         "xmlNamespace" => "http://cloudsearch.amazonaws.com/doc/2013-01-01/",
@@ -678,6 +727,19 @@ module Aws::CloudSearch
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
+      api.add_operation(:describe_domain_endpoint_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDomainEndpointOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDomainEndpointOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDomainEndpointOptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
       api.add_operation(:describe_domains, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDomains"
         o.http_method = "POST"
@@ -775,6 +837,22 @@ module Aws::CloudSearch
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_domain_endpoint_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDomainEndpointOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDomainEndpointOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDomainEndpointOptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:update_scaling_parameters, Seahorse::Model::Operation.new.tap do |o|

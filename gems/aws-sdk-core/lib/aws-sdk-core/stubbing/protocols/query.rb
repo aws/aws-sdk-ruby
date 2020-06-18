@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module Stubbing
     module Protocols
@@ -23,9 +25,9 @@ module Aws
           xml = []
           builder = Aws::Xml::DocBuilder.new(target: xml, indent: '  ')
           builder.node(operation.name + 'Response', xmlns: xmlns(api)) do
-            if rules = operation.output
+            if (rules = operation.output)
               rules.location_name = operation.name + 'Result'
-              Xml::Builder.new(rules, target:xml, pad:'  ').to_xml(data)
+              Xml::Builder.new(rules, target: xml, pad:'  ').to_xml(data)
             end
             builder.node('ResponseMetadata') do
               builder.node('RequestId', 'stubbed-request-id')

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'thread'
 require 'socket'
 
@@ -6,8 +8,10 @@ module Aws
     # @api private
     class Publisher
       attr_reader :agent_port
+      attr_reader :agent_host
 
       def initialize(opts = {})
+        @agent_host = opts[:agent_host] || "127.0.0.1"
         @agent_port = opts[:agent_port]
         @mutex = Mutex.new
       end
@@ -15,6 +19,12 @@ module Aws
       def agent_port=(value)
         @mutex.synchronize do
           @agent_port = value
+        end
+      end
+
+      def agent_host=(value)
+        @mutex.synchronize do
+          @agent_host = value
         end
       end
 
@@ -29,7 +39,7 @@ module Aws
         if @agent_port
           socket = UDPSocket.new
           begin
-            socket.connect("127.0.0.1", @agent_port)
+            socket.connect(@agent_host, @agent_port)
             socket.send(msg, 0)
           rescue Errno::ECONNREFUSED
             # Drop on the floor

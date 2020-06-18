@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -32,7 +34,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -57,7 +59,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -152,7 +154,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -166,8 +168,8 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
-    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
     #   @return [String]
     #
     # @!attribute [rw] renewal_summary
@@ -177,7 +179,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #   @return [Types::RenewalSummary]
     #
     # @!attribute [rw] key_usages
@@ -202,7 +204,9 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] renewal_eligibility
-    #   Specifies whether the certificate is eligible for renewal.
+    #   Specifies whether the certificate is eligible for renewal. At this
+    #   time, only exported private certificates can be renewed with the
+    #   RenewCertificate command.
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -257,7 +261,7 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
     #
     # @note When making an API call, you may pass CertificateOptions
     #   data as a hash:
@@ -291,7 +295,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -325,7 +329,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteCertificateRequest AWS API Documentation
@@ -353,7 +357,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificateRequest AWS API Documentation
@@ -407,9 +411,15 @@ module Aws::ACM
     #   domain validation. For more information, see [Use DNS to Validate
     #   Domain Ownership][1].
     #
+    #   Note: The CNAME information that you need does not include the name
+    #   of your domain. If you include  your domain name in the DNS database
+    #   CNAME record, validation fails.  For example, if the name is
+    #   "\_a79865eb4cd1a6ab990a45779b4e0b96.yourdomain.com", only
+    #   "\_a79865eb4cd1a6ab990a45779b4e0b96" must be used.
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
     #   @return [Types::ResourceRecord]
     #
     # @!attribute [rw] validation_method
@@ -513,8 +523,9 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] private_key
-    #   The PEM-encoded private key associated with the public key in the
-    #   certificate.
+    #   The encrypted private key associated with the public key in the
+    #   certificate. The key is output in PKCS #8 format and is base64
+    #   PEM-encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificateResponse AWS API Documentation
@@ -589,6 +600,12 @@ module Aws::ACM
     # @!attribute [rw] key_types
     #   Specify one or more algorithms that can be used to generate key
     #   pairs.
+    #
+    #   Default filtering returns only `RSA_2048` certificates. To return
+    #   other certificate types, provide the desired type signatures in a
+    #   comma-separated list. For example, `"keyTypes":
+    #   ["RSA_2048,RSA_4096"]` returns both `RSA_2048` and `RSA_4096`
+    #   certificates.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/Filters AWS API Documentation
@@ -617,7 +634,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificateRequest AWS API Documentation
@@ -628,13 +645,14 @@ module Aws::ACM
     end
 
     # @!attribute [rw] certificate
-    #   String that contains the ACM certificate represented by the ARN
-    #   specified at input.
+    #   The ACM-issued certificate corresponding to the ARN specified as
+    #   input.
     #   @return [String]
     #
     # @!attribute [rw] certificate_chain
-    #   The certificate chain that contains the root certificate issued by
-    #   the certificate authority (CA).
+    #   Certificates forming the requested certificate's chain of trust.
+    #   The chain consists of the certificate of the issuing CA and the
+    #   intermediate certificates of any other subordinate CAs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificateResponse AWS API Documentation
@@ -653,6 +671,12 @@ module Aws::ACM
     #         certificate: "data", # required
     #         private_key: "data", # required
     #         certificate_chain: "data",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] certificate_arn
@@ -661,7 +685,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] certificate
@@ -676,13 +700,21 @@ module Aws::ACM
     #   The PEM encoded certificate chain.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   One or more resource tags to associate with the imported
+    #   certificate.
+    #
+    #   Note: You cannot apply tags when reimporting a certificate.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificateRequest AWS API Documentation
     #
     class ImportCertificateRequest < Struct.new(
       :certificate_arn,
       :certificate,
       :private_key,
-      :certificate_chain)
+      :certificate_chain,
+      :tags)
       include Aws::Structure
     end
 
@@ -691,13 +723,89 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificateResponse AWS API Documentation
     #
     class ImportCertificateResponse < Struct.new(
       :certificate_arn)
+      include Aws::Structure
+    end
+
+    # One or more of of request parameters specified is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InvalidArgsException AWS API Documentation
+    #
+    class InvalidArgsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested Amazon Resource Name (ARN) does not refer to an existing
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InvalidArnException AWS API Documentation
+    #
+    class InvalidArnException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more values in the DomainValidationOption structure is
+    # incorrect.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InvalidDomainValidationOptionsException AWS API Documentation
+    #
+    class InvalidDomainValidationOptionsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An input parameter was invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Processing has reached an invalid state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or both of the values that make up the key-value pair is not
+    # valid. For example, you cannot specify a tag value that begins with
+    # `aws:`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InvalidTagException AWS API Documentation
+    #
+    class InvalidTagException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -712,6 +820,18 @@ module Aws::ACM
     #
     class KeyUsage < Struct.new(
       :name)
+      include Aws::Structure
+    end
+
+    # An ACM quota has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -799,7 +919,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificateRequest AWS API Documentation
@@ -844,7 +964,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -859,20 +979,48 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RenewCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   String that contains the ARN of the ACM certificate to be renewed.
+    #   This must be of the form:
+    #
+    #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
+    #
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
+    #   and AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewCertificateRequest AWS API Documentation
+    #
+    class RenewCertificateRequest < Struct.new(
+      :certificate_arn)
+      include Aws::Structure
+    end
+
     # Contains information about the status of ACM's [managed renewal][1]
     # for the certificate. This structure exists only when the certificate
     # type is `AMAZON_ISSUED`.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #
     # @!attribute [rw] renewal_status
     #   The status of ACM's [managed renewal][1] of the certificate.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #   @return [String]
     #
     # @!attribute [rw] domain_validation_options
@@ -884,14 +1032,24 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #   @return [Array<Types::DomainValidation>]
+    #
+    # @!attribute [rw] renewal_status_reason
+    #   The reason that a renewal request was unsuccessful.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the renewal summary was last updated.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewalSummary AWS API Documentation
     #
     class RenewalSummary < Struct.new(
       :renewal_status,
-      :domain_validation_options)
+      :domain_validation_options,
+      :renewal_status_reason,
+      :updated_at)
       include Aws::Structure
     end
 
@@ -913,6 +1071,12 @@ module Aws::ACM
     #           certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         certificate_authority_arn: "Arn",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] domain_name
@@ -922,7 +1086,7 @@ module Aws::ACM
     #   same domain. For example, *.example.com protects www.example.com,
     #   site.example.com, and images.example.com.
     #
-    #   The first domain name you enter cannot exceed 63 octets, including
+    #   The first domain name you enter cannot exceed 64 octets, including
     #   periods. Each subsequent Subject Alternative Name (SAN), however,
     #   can be up to 253 octets in length.
     #   @return [String]
@@ -935,8 +1099,8 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
-    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
     #   @return [String]
     #
     # @!attribute [rw] subject_alternative_names
@@ -945,9 +1109,9 @@ module Aws::ACM
     #   www.example.net to a certificate for which the `DomainName` field is
     #   www.example.com if users can reach your site by using either name.
     #   The maximum number of domain names that you can add to an ACM
-    #   certificate is 100. However, the initial limit is 10 domain names.
-    #   If you need more than 10 names, you must request a limit increase.
-    #   For more information, see [Limits][1].
+    #   certificate is 100. However, the initial quota is 10 domain names.
+    #   If you need more than 10 names, you must request a quota increase.
+    #   For more information, see [Quotas][1].
     #
     #   The maximum length of a SAN DNS name is 253 octets. The name is made
     #   up of multiple labels separated by periods. No label can be longer
@@ -967,7 +1131,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] idempotency_token
@@ -996,7 +1160,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
     #   @return [Types::CertificateOptions]
     #
     # @!attribute [rw] certificate_authority_arn
@@ -1012,8 +1176,12 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more resource tags to associate with the certificate.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation
     #
@@ -1024,7 +1192,8 @@ module Aws::ACM
       :idempotency_token,
       :domain_validation_options,
       :options,
-      :certificate_authority_arn)
+      :certificate_authority_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -1039,6 +1208,19 @@ module Aws::ACM
     #
     class RequestCertificateResponse < Struct.new(
       :certificate_arn)
+      include Aws::Structure
+    end
+
+    # The certificate request is in process and the certificate in your
+    # account has not yet been issued.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestInProgressException AWS API Documentation
+    #
+    class RequestInProgressException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1096,6 +1278,32 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # The certificate is in use by another AWS service in the caller's
+    # account. Remove the association and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified certificate cannot be found in the caller's account or
+    # the caller's account cannot be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains a DNS record value that you can use to can use to validate
     # ownership or control of a domain. This is used by the
     # DescribeCertificate action.
@@ -1147,6 +1355,32 @@ module Aws::ACM
     class Tag < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # A specified tag did not comply with an existing tag policy and was
+    # rejected.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/TagPolicyException AWS API Documentation
+    #
+    class TagPolicyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request contains too many tags. Try the request again with fewer
+    # tags.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

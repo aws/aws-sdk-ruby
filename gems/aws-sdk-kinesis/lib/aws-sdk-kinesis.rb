@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -15,6 +17,8 @@ require_relative 'aws-sdk-kinesis/errors'
 require_relative 'aws-sdk-kinesis/waiters'
 require_relative 'aws-sdk-kinesis/resource'
 require_relative 'aws-sdk-kinesis/customizations'
+require_relative 'aws-sdk-kinesis/async_client'
+require_relative 'aws-sdk-kinesis/event_streams'
 
 # This module provides support for Amazon Kinesis. This module is available in the
 # `aws-sdk-kinesis` gem.
@@ -25,17 +29,20 @@ require_relative 'aws-sdk-kinesis/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     kinesis = Aws::Kinesis::Client.new
+#     resp = kinesis.add_tags_to_stream(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Kinesis all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Kinesis are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Kinesis::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Kinesis API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +50,6 @@ require_relative 'aws-sdk-kinesis/customizations'
 # @service
 module Aws::Kinesis
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.24.1'
 
 end

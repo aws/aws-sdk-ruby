@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-cloudwatchevents/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     cloud_watch_events = Aws::CloudWatchEvents::Client.new
+#     resp = cloud_watch_events.activate_event_source(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon CloudWatch Events all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon CloudWatch Events are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CloudWatchEvents::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon CloudWatch Events API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-cloudwatchevents/customizations'
 # @service
 module Aws::CloudWatchEvents
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.30.1'
 
 end

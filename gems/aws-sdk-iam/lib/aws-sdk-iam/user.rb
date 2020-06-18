@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IAM
+
   class User
 
     extend Aws::Deprecations
@@ -21,6 +24,7 @@ module Aws::IAM
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -32,23 +36,23 @@ module Aws::IAM
     alias :user_name :name
 
     # The path to the user. For more information about paths, see [IAM
-    # Identifiers][1] in the *Using IAM* guide.
+    # Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
     end
 
     # The stable and unique string identifying the user. For more
-    # information about IDs, see [IAM Identifiers][1] in the *Using IAM*
-    # guide.
+    # information about IDs, see [IAM Identifiers][1] in the *IAM User
+    # Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def user_id
       data[:user_id]
@@ -56,11 +60,11 @@ module Aws::IAM
 
     # The Amazon Resource Name (ARN) that identifies the user. For more
     # information about ARNs and how to use ARNs in policies, see [IAM
-    # Identifiers][1] in the *Using IAM* guide.
+    # Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def arn
       data[:arn]
@@ -80,42 +84,30 @@ module Aws::IAM
     # The date and time, in [ISO 8601 date-time format][1], when the user's
     # password was last used to sign in to an AWS website. For a list of AWS
     # websites that capture a user's last sign-in time, see the [Credential
-    # Reports][2] topic in the *Using IAM* guide. If a password is used more
+    # Reports][2] topic in the *IAM User Guide*. If a password is used more
     # than once in a five-minute span, only the first use is returned in
-    # this field. If the field is null (no value) then it indicates that
+    # this field. If the field is null (no value), then it indicates that
     # they never signed in with a password. This can be because:
     #
     # * The user never had a password.
     #
     # * A password exists but has not been used since IAM started tracking
-    #   this information on October 20th, 2014.
+    #   this information on October 20, 2014.
     #
-    # A null does not mean that the user *never* had a password. Also, if
-    # the user does not currently have a password, but had one in the past,
-    # then this field contains the date and time the most recent password
-    # was used.
+    # A null value does not mean that the user *never* had a password. Also,
+    # if the user does not currently have a password but had one in the
+    # past, then this field contains the date and time the most recent
+    # password was used.
     #
     # This value is returned only in the GetUser and ListUsers operations.
     #
     #
     #
     # [1]: http://www.iso.org/iso/iso8601
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
     # @return [Time]
     def password_last_used
       data[:password_last_used]
-    end
-
-    # A list of tags that are associated with the specified user. For more
-    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
-    # User Guide*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
-    # @return [Array<Types::Tag>]
-    def tags
-      data[:tags]
     end
 
     # The ARN of the policy used to set the permissions boundary for the
@@ -130,6 +122,18 @@ module Aws::IAM
     # @return [Types::AttachedPermissionsBoundary]
     def permissions_boundary
       data[:permissions_boundary]
+    end
+
+    # A list of tags that are associated with the specified user. For more
+    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
     end
 
     # @!endgroup
@@ -187,10 +191,10 @@ module Aws::IAM
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [User]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::UserExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(user_name: @name))
       User.new({
         name: @name,
@@ -203,7 +207,8 @@ module Aws::IAM
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -216,13 +221,15 @@ module Aws::IAM
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -253,17 +260,16 @@ module Aws::IAM
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -304,7 +310,7 @@ module Aws::IAM
     # @option options [required, String] :group_name
     #   The name of the group to update.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -333,7 +339,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def attach_policy(options = {})
       options = options.merge(user_name: @name)
@@ -345,13 +351,13 @@ module Aws::IAM
     #
     #   user = user.create({
     #     path: "pathType",
+    #     permissions_boundary: "arnType",
     #     tags: [
     #       {
     #         key: "tagKeyType", # required
     #         value: "tagValueType", # required
     #       },
     #     ],
-    #     permissions_boundary: "arnType",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path
@@ -361,17 +367,20 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
+    # @option options [String] :permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary for
+    #   the user.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags that you want to attach to the newly created user. Each
     #   tag consists of a key name and an associated value. For more
@@ -386,10 +395,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
-    # @option options [String] :permissions_boundary
-    #   The ARN of the policy that is used to set the permissions boundary for
-    #   the user.
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [User]
     def create(options = {})
       options = options.merge(user_name: @name)
@@ -430,12 +436,12 @@ module Aws::IAM
     #
     #   The [regex pattern][1] that is used to validate this parameter is a
     #   string of characters. That string can include almost any printable
-    #   ASCII character from the space (\\u0020) through the end of the ASCII
-    #   character range (\\u00FF). You can also include the tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D) characters. Any of
-    #   these characters are valid in a password. However, many tools, such as
-    #   the AWS Management Console, might restrict the ability to type certain
-    #   characters because they have special meaning within that tool.
+    #   ASCII character from the space (`\u0020`) through the end of the ASCII
+    #   character range (`\u00FF`). You can also include the tab (`\u0009`),
+    #   line feed (`\u000A`), and carriage return (`\u000D`) characters. Any
+    #   of these characters are valid in a password. However, many tools, such
+    #   as the AWS Management Console, might restrict the ability to type
+    #   certain characters because they have special meaning within that tool.
     #
     #
     #
@@ -464,7 +470,7 @@ module Aws::IAM
     # @option options [required, String] :policy_name
     #   The name of the policy document.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -475,17 +481,22 @@ module Aws::IAM
     # @option options [required, String] :policy_document
     #   The policy document.
     #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the policy
+    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
+    #   policy to JSON format before submitting it to IAM.
+    #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -493,7 +504,7 @@ module Aws::IAM
     # @return [UserPolicy]
     def create_policy(options = {})
       options = options.merge(user_name: @name)
-      resp = @client.put_user_policy(options)
+      @client.put_user_policy(options)
       UserPolicy.new(
         user_name: @name,
         name: options[:policy_name],
@@ -526,7 +537,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def detach_policy(options = {})
       options = options.merge(user_name: @name)
@@ -546,7 +557,7 @@ module Aws::IAM
     #   The serial number that uniquely identifies the MFA device. For virtual
     #   MFA devices, the serial number is the device ARN.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   =,.@:/-
@@ -568,7 +579,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     # @option options [required, String] :authentication_code_2
     #   A subsequent authentication code emitted by the device.
     #
@@ -583,11 +594,11 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     # @return [MfaDevice]
     def enable_mfa(options = {})
       options = options.merge(user_name: @name)
-      resp = @client.enable_mfa_device(options)
+      @client.enable_mfa_device(options)
       MfaDevice.new(
         user_name: @name,
         serial_number: options[:serial_number],
@@ -604,7 +615,7 @@ module Aws::IAM
     # @option options [required, String] :group_name
     #   The name of the group to update.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -630,11 +641,11 @@ module Aws::IAM
     #   New path for the IAM user. Include this parameter only if you're
     #   changing the user's path.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -644,18 +655,13 @@ module Aws::IAM
     #   New name for the user. Include this parameter only if you're changing
     #   the user's name.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following characters:
-    #   \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you cannot
+    #   create resources named both "MyResource" and "myresource".
     # @return [User]
     def update(options = {})
       options = options.merge(user_name: @name)
-      resp = @client.update_user(options)
+      @client.update_user(options)
       User.new(
         name: options[:new_user_name],
         client: @client
@@ -710,11 +716,11 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   policies.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -897,8 +903,8 @@ module Aws::IAM
 
     def yield_waiter_and_warn(waiter, &block)
       if !@waiter_block_warned
-        msg = "pass options to configure the waiter; "
-        msg << "yielding the waiter is deprecated"
+        msg = "pass options to configure the waiter; "\
+              "yielding the waiter is deprecated"
         warn(msg)
         @waiter_block_warned = true
       end
@@ -906,7 +912,9 @@ module Aws::IAM
     end
 
     def separate_params_and_options(options)
-      opts = Set.new([:client, :max_attempts, :delay, :before_attempt, :before_wait])
+      opts = Set.new(
+        [:client, :max_attempts, :delay, :before_attempt, :before_wait]
+      )
       waiter_opts = {}
       waiter_params = {}
       options.each_pair do |key, value|

@@ -1,8 +1,8 @@
-module Aws
+# frozen_string_literal: true
 
+module Aws
   # @api private
   class SharedConfig
-
     # @return [String]
     attr_reader :credentials_path
 
@@ -48,7 +48,7 @@ module Aws
       @profile_name = determine_profile(options)
       @config_enabled = options[:config_enabled]
       @credentials_path = options[:credentials_path] ||
-        determine_credentials_path
+                          determine_credentials_path
       @parsed_credentials = {}
       load_credentials_file if loadable?(@credentials_path)
       if @config_enabled
@@ -67,7 +67,7 @@ module Aws
       @config_enabled = options[:config_enabled] ? true : false
       @profile_name = determine_profile(options)
       @credentials_path = options[:credentials_path] ||
-        determine_credentials_path
+                          determine_credentials_path
       load_credentials_file if loadable?(@credentials_path)
       if @config_enabled
         @config_path = options[:config_path] || determine_config_path
@@ -99,12 +99,10 @@ module Aws
     def credentials(opts = {})
       p = opts[:profile] || @profile_name
       validate_profile_exists(p) if credentials_present?
-      if credentials = credentials_from_shared(p, opts)
+      if (credentials = credentials_from_shared(p, opts))
         credentials
-      elsif credentials = credentials_from_config(p, opts)
+      elsif (credentials = credentials_from_config(p, opts))
         credentials
-      else
-        nil
       end
     end
 
@@ -121,79 +119,61 @@ module Aws
       credentials
     end
 
-    def region(opts = {})
-      p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          region = @parsed_credentials.fetch(p, {})["region"]
-        end
-        if @parsed_config
-          region ||= @parsed_config.fetch(p, {})["region"]
-        end
-        region
-      else
-        nil
-      end
-    end
-
-    def endpoint_discovery(opts = {})
+    def assume_role_web_identity_credentials_from_config(opts = {})
       p = opts[:profile] || @profile_name
       if @config_enabled && @parsed_config
-        @parsed_config.fetch(p, {})["endpoint_discovery_enabled"]
+        entry = @parsed_config.fetch(p, {})
+        if entry['web_identity_token_file'] && entry['role_arn']
+          cfg = {
+            role_arn: entry['role_arn'],
+            web_identity_token_file: entry['web_identity_token_file'],
+            role_session_name: entry['role_session_name']
+          }
+          cfg[:region] = opts[:region] if opts[:region]
+          AssumeRoleWebIdentityCredentials.new(cfg)
+        end
       end
     end
 
-    def credentials_process(profile)
-      validate_profile_exists(profile)
-      @parsed_config[profile]['credential_process']
-    end
-
-    def csm_enabled(opts = {})
-      p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          value = @parsed_credentials.fetch(p, {})["csm_enabled"]
-        end
-        if @parsed_config
-          value ||= @parsed_config.fetch(p, {})["csm_enabled"]
-        end
-        value
-      else
-        nil
+    # Add an accessor method (similar to attr_reader) to return a configuration value
+    # Uses the get_config_value below to control where
+    # values are loaded from
+    def self.config_reader(*attrs)
+      attrs.each do |attr|
+        define_method(attr) { |opts = {}| get_config_value(attr.to_s, opts) }
       end
     end
 
-    def csm_client_id(opts = {})
-      p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          value = @parsed_credentials.fetch(p, {})["csm_client_id"]
-        end
-        if @parsed_config
-          value ||= @parsed_config.fetch(p, {})["csm_client_id"]
-        end
-        value
-      else
-        nil
-      end
-    end
-
-    def csm_port(opts = {})
-      p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          value = @parsed_credentials.fetch(p, {})["csm_port"]
-        end
-        if @parsed_config
-          value ||= @parsed_config.fetch(p, {})["csm_port"]
-        end
-        value
-      else
-        nil
-      end
-    end
+    config_reader(
+      :region,
+      :credential_process,
+      :endpoint_discovery_enabled,
+      :max_attempts,
+      :retry_mode,
+      :adaptive_retry_wait_to_fill,
+      :correct_clock_skew,
+      :csm_client_id,
+      :csm_enabled,
+      :csm_host,
+      :csm_port,
+      :sts_regional_endpoints,
+      :s3_use_arn_region,
+      :s3_us_east_1_regional_endpoint
+    )
 
     private
+
+    # Get a config value from from shared credential/config files.
+    # Only loads a value when config_enabled is true
+    # Return a value from credentials preferentially over config
+    def get_config_value(key, opts)
+      p = opts[:profile] || @profile_name
+
+      value = @parsed_credentials.fetch(p, {})[key] if @parsed_credentials
+      value ||= @parsed_config.fetch(p, {})[key] if @config_enabled && @parsed_config
+      value
+    end
+
     def credentials_present?
       (@parsed_credentials && !@parsed_credentials.empty?) ||
         (@parsed_config && !@parsed_config.empty?)
@@ -201,30 +181,29 @@ module Aws
 
     def assume_role_from_profile(cfg, profile, opts, chain_config)
       if cfg && prof_cfg = cfg[profile]
-        opts[:source_profile] ||= prof_cfg["source_profile"]
+        opts[:source_profile] ||= prof_cfg['source_profile']
         credential_source = opts.delete(:credential_source)
-        credential_source ||= prof_cfg["credential_source"]
+        credential_source ||= prof_cfg['credential_source']
         if opts[:source_profile] && credential_source
-          raise Errors::CredentialSourceConflictError.new(
+          raise Errors::CredentialSourceConflictError,
             "Profile #{profile} has a source_profile, and "\
-              "a credential_source. For assume role credentials, must "\
-              "provide only source_profile or credential_source, not both."
-          )
+            'a credential_source. For assume role credentials, must '\
+            'provide only source_profile or credential_source, not both.'
         elsif opts[:source_profile]
-          opts[:credentials] = credentials(profile: opts[:source_profile])
+          opts[:credentials] = resolve_source_profile(opts[:source_profile], opts)
           if opts[:credentials]
-            opts[:role_session_name] ||= prof_cfg["role_session_name"]
-            opts[:role_session_name] ||= "default_session"
-            opts[:role_arn] ||= prof_cfg["role_arn"]
-            opts[:external_id] ||= prof_cfg["external_id"]
-            opts[:serial_number] ||= prof_cfg["mfa_serial"]
+            opts[:role_session_name] ||= prof_cfg['role_session_name']
+            opts[:role_session_name] ||= 'default_session'
+            opts[:role_arn] ||= prof_cfg['role_arn']
+            opts[:duration_seconds] ||= prof_cfg['duration_seconds']
+            opts[:external_id] ||= prof_cfg['external_id']
+            opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts[:profile] = opts.delete(:source_profile)
             AssumeRoleCredentials.new(opts)
           else
-            raise Errors::NoSourceProfileError.new(
+            raise Errors::NoSourceProfileError,
               "Profile #{profile} has a role_arn, and source_profile, but the"\
-                " source_profile does not have credentials."
-            )
+              ' source_profile does not have credentials.'
           end
         elsif credential_source
           opts[:credentials] = credentials_from_source(
@@ -232,61 +211,65 @@ module Aws
             chain_config
           )
           if opts[:credentials]
-            opts[:role_session_name] ||= prof_cfg["role_session_name"]
-            opts[:role_session_name] ||= "default_session"
-            opts[:role_arn] ||= prof_cfg["role_arn"]
-            opts[:external_id] ||= prof_cfg["external_id"]
-            opts[:serial_number] ||= prof_cfg["mfa_serial"]
+            opts[:role_session_name] ||= prof_cfg['role_session_name']
+            opts[:role_session_name] ||= 'default_session'
+            opts[:role_arn] ||= prof_cfg['role_arn']
+            opts[:duration_seconds] ||= prof_cfg['duration_seconds']
+            opts[:external_id] ||= prof_cfg['external_id']
+            opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts.delete(:source_profile) # Cleanup
             AssumeRoleCredentials.new(opts)
           else
-            raise Errors::NoSourceCredentials.new(
+            raise Errors::NoSourceCredentials,
               "Profile #{profile} could not get source credentials from"\
-                " provider #{credential_source}"
-            )
+              " provider #{credential_source}"
           end
-        elsif prof_cfg["role_arn"]
-          raise Errors::NoSourceProfileError.new(
-            "Profile #{profile} has a role_arn, but no source_profile."
-          )
-        else
-          nil
+        elsif prof_cfg['role_arn']
+          raise Errors::NoSourceProfileError, "Profile #{profile} has a role_arn, but no source_profile."
         end
-      else
-        nil
+      end
+    end
+
+    def resolve_source_profile(profile, opts = {})
+      if (creds = credentials(profile: profile))
+        creds # static credentials
+      elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
+        provider.credentials if provider.credentials.set?
+      elsif (provider = assume_role_process_credentials_from_config(profile))
+        provider.credentials if provider.credentials.set?
       end
     end
 
     def credentials_from_source(credential_source, config)
       case credential_source
-      when "Ec2InstanceMetadata"
+      when 'Ec2InstanceMetadata'
         InstanceProfileCredentials.new(
           retries: config ? config.instance_profile_credentials_retries : 0,
           http_open_timeout: config ? config.instance_profile_credentials_timeout : 1,
           http_read_timeout: config ? config.instance_profile_credentials_timeout : 1
         )
-      when "EcsContainer"
+      when 'EcsContainer'
         ECSCredentials.new
       else
-        raise Errors::InvalidCredentialSourceError.new(
-          "Unsupported credential_source: #{credential_source}"
-        )
+        raise Errors::InvalidCredentialSourceError, "Unsupported credential_source: #{credential_source}"
       end
     end
 
-    def credentials_from_shared(profile, opts)
+    def assume_role_process_credentials_from_config(profile)
+      validate_profile_exists(profile)
+      credential_process = @parsed_config[profile]['credential_process']
+      ProcessCredentials.new(credential_process) if credential_process
+    end
+
+    def credentials_from_shared(profile, _opts)
       if @parsed_credentials && prof_config = @parsed_credentials[profile]
         credentials_from_profile(prof_config)
-      else
-        nil
       end
     end
 
-    def credentials_from_config(profile, opts)
+    def credentials_from_config(profile, _opts)
       if @parsed_config && prof_config = @parsed_config[profile]
         credentials_from_profile(prof_config)
-      else
-        nil
       end
     end
 
@@ -296,15 +279,7 @@ module Aws
         prof_config['aws_secret_access_key'],
         prof_config['aws_session_token']
       )
-      if credentials_complete(creds)
-        creds
-      else
-        nil
-      end
-    end
-
-    def credentials_complete(creds)
-      creds.set?
+      creds if creds.set?
     end
 
     def load_credentials_file
@@ -334,19 +309,18 @@ module Aws
 
     def validate_profile_exists(profile)
       unless (@parsed_credentials && @parsed_credentials[profile]) ||
-          (@parsed_config && @parsed_config[profile])
-        msg = "Profile `#{profile}' not found in #{@credentials_path}"
-        msg << " or #{@config_path}" if @config_path
-        raise Errors::NoSuchProfileError.new(msg)
+             (@parsed_config && @parsed_config[profile])
+        msg = "Profile `#{profile}' not found in #{@credentials_path}"\
+              "#{" or #{@config_path}" if @config_path}"
+        raise Errors::NoSuchProfileError, msg
       end
     end
 
     def determine_profile(options)
       ret = options[:profile_name]
-      ret ||= ENV["AWS_PROFILE"]
-      ret ||= "default"
+      ret ||= ENV['AWS_PROFILE']
+      ret ||= 'default'
       ret
     end
-
   end
 end

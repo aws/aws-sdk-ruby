@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-translate/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     translate = Aws::Translate::Client.new
+#     resp = translate.delete_terminology(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Translate all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Translate are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Translate::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Translate API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-translate/customizations'
 # @service
 module Aws::Translate
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.23.1'
 
 end

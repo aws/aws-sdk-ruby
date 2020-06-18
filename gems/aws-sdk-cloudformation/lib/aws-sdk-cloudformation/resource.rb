@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,18 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudFormation
+
+  # This class provides a resource oriented interface for CloudFormation.
+  # To create a resource object:
+  #
+  #     resource = Aws::CloudFormation::Resource.new(region: 'us-west-2')
+  #
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass `:client`, a default client will be constructed.
+  #
+  #     client = Aws::CloudFormation::Client.new(region: 'us-west-2')
+  #     resource = Aws::CloudFormation::Resource.new(client: client)
+  #
   class Resource
 
     # @param options ({})
@@ -65,7 +79,7 @@ module Aws::CloudFormation
     # @param [Hash] options ({})
     # @option options [required, String] :stack_name
     #   The name that is associated with the stack. The name must be unique in
-    #   the region in which you are creating the stack.
+    #   the Region in which you are creating the stack.
     #
     #   <note markdown="1"> A stack name can contain only alphanumeric characters (case sensitive)
     #   and hyphens. It must start with an alphabetic character and cannot be
@@ -82,7 +96,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     # @option options [String] :template_url
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that is located in an Amazon S3
@@ -94,14 +108,14 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     # @option options [Array<Types::Parameter>] :parameters
     #   A list of `Parameter` structures that specify input parameters for the
     #   stack. For more information, see the [Parameter][1] data type.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
     # @option options [Boolean] :disable_rollback
     #   Set to `true` to disable rollback of the stack if stack creation
     #   failed. You can specify either `DisableRollback` or `OnFailure`, but
@@ -121,9 +135,9 @@ module Aws::CloudFormation
     #   related events. You can find your SNS topic ARNs using the SNS console
     #   or your Command Line Interface (CLI).
     # @option options [Array<String>] :capabilities
-    #   In some cases, you must explicity acknowledge that your stack template
-    #   contains certain capabilities in order for AWS CloudFormation to
-    #   create the stack.
+    #   In some cases, you must explicitly acknowledge that your stack
+    #   template contains certain capabilities in order for AWS CloudFormation
+    #   to create the stack.
     #
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
@@ -198,17 +212,17 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
-    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
-    #   [3]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
-    #   [5]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [6]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
-    #   [7]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
-    #   [9]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
-    #   [10]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
-    #   [11]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+    #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [9]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
+    #   [10]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
+    #   [11]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
     # @option options [Array<String>] :resource_types
     #   The template resource types that you have permissions to work with for
     #   this create stack action, such as `AWS::EC2::Instance`, `AWS::EC2::*`,
@@ -228,7 +242,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
     # @option options [String] :role_arn
     #   The Amazon Resource Name (ARN) of an AWS Identity and Access
     #   Management (IAM) role that AWS CloudFormation assumes to create the
@@ -257,11 +271,11 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
     # @option options [String] :stack_policy_url
     #   Location of a file containing the stack policy. The URL must point to
     #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
-    #   region as the stack. You can specify either the `StackPolicyBody` or
+    #   Region as the stack. You can specify either the `StackPolicyBody` or
     #   the `StackPolicyURL` parameter, but not both.
     # @option options [Array<Types::Tag>] :tags
     #   Key-value pairs to associate with this stack. AWS CloudFormation also
@@ -304,7 +318,7 @@ module Aws::CloudFormation
     #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     # @return [Stack]
     def create_stack(options = {})
-      resp = @client.create_stack(options)
+      @client.create_stack(options)
       Stack.new(
         name: options[:stack_name],
         client: @client

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-lex/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     lex = Aws::Lex::Client.new
+#     resp = lex.delete_session(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Lex Runtime Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Lex Runtime Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Lex::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Lex Runtime Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-lex/customizations'
 # @service
 module Aws::Lex
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.27.1'
 
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -562,6 +564,31 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # The provided iterator exceeds the maximum age allowed.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ExpiredIteratorException AWS API Documentation
+    #
+    class ExpiredIteratorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The pagination token passed to the operation is expired.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ExpiredNextTokenException AWS API Documentation
+    #
+    class ExpiredNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the input for GetRecords.
     #
     # @note When making an API call, you may pass GetRecordsInput
@@ -752,6 +779,146 @@ module Aws::Kinesis
     class IncreaseStreamRetentionPeriodInput < Struct.new(
       :stream_name,
       :retention_period_hours)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # A specified parameter exceeds its restrictions, is not supported, or
+    # can't be used. For more information, see the returned message.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The ciphertext references a key that doesn't exist or that you don't
+    # have access to.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/KMSAccessDeniedException AWS API Documentation
+    #
+    class KMSAccessDeniedException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified customer master key
+    # (CMK) isn't enabled.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/KMSDisabledException AWS API Documentation
+    #
+    class KMSDisabledException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the state of the specified resource
+    # isn't valid for this request. For more information, see [How Key
+    # State Affects Use of a Customer Master Key][1] in the *AWS Key
+    # Management Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/KMSInvalidStateException AWS API Documentation
+    #
+    class KMSInvalidStateException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified entity or resource
+    # can't be found.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/KMSNotFoundException AWS API Documentation
+    #
+    class KMSNotFoundException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The AWS access key ID needs a subscription for the service.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/KMSOptInRequired AWS API Documentation
+    #
+    class KMSOptInRequired < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The request was denied due to request throttling. For more information
+    # about throttling, see [Limits][1] in the *AWS Key Management Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/KMSThrottlingException AWS API Documentation
+    #
+    class KMSThrottlingException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The requested resource exceeds the maximum number allowed, or the
+    # number of concurrent stream requests exceeds the maximum number
+    # allowed.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1118,6 +1285,28 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # The request rate for the stream is too high, or the requested data is
+    # too large for the available throughput. Reduce the frequency or size
+    # of your requests. For more information, see [Streams Limits][1] in the
+    # *Amazon Kinesis Data Streams Developer Guide*, and [Error Retries and
+    # Exponential Backoff in AWS][2] in the *AWS General Reference*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
+    # [2]: http://docs.aws.amazon.com/general/latest/gr/api-retries.html
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ProvisionedThroughputExceededException AWS API Documentation
+    #
+    class ProvisionedThroughputExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the input for `PutRecord`.
     #
     # @note When making an API call, you may pass PutRecordInput
@@ -1475,6 +1664,36 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # The resource is not available for this operation. For successful
+    # operation, the resource must be in the `ACTIVE` state.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The requested resource could not be found. The stream might not be
+    # specified correctly.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
     # The range of possible sequence numbers for the shard.
     #
     # @!attribute [rw] starting_sequence_number
@@ -1614,6 +1833,15 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartingPosition
+    #   data as a hash:
+    #
+    #       {
+    #         type: "AT_SEQUENCE_NUMBER", # required, accepts AT_SEQUENCE_NUMBER, AFTER_SEQUENCE_NUMBER, TRIM_HORIZON, LATEST, AT_TIMESTAMP
+    #         sequence_number: "SequenceNumber",
+    #         timestamp: Time.now,
+    #       }
+    #
     # @!attribute [rw] type
     #   @return [String]
     #
@@ -1897,6 +2125,53 @@ module Aws::Kinesis
       :continuation_sequence_number,
       :millis_behind_latest,
       :event_type)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SubscribeToShardInput
+    #   data as a hash:
+    #
+    #       {
+    #         consumer_arn: "ConsumerARN", # required
+    #         shard_id: "ShardId", # required
+    #         starting_position: { # required
+    #           type: "AT_SEQUENCE_NUMBER", # required, accepts AT_SEQUENCE_NUMBER, AFTER_SEQUENCE_NUMBER, TRIM_HORIZON, LATEST, AT_TIMESTAMP
+    #           sequence_number: "SequenceNumber",
+    #           timestamp: Time.now,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] consumer_arn
+    #   For this parameter, use the value you obtained when you called
+    #   RegisterStreamConsumer.
+    #   @return [String]
+    #
+    # @!attribute [rw] shard_id
+    #   The ID of the shard you want to subscribe to. To see a list of all
+    #   the shards for a given stream, use ListShards.
+    #   @return [String]
+    #
+    # @!attribute [rw] starting_position
+    #   @return [Types::StartingPosition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SubscribeToShardInput AWS API Documentation
+    #
+    class SubscribeToShardInput < Struct.new(
+      :consumer_arn,
+      :shard_id,
+      :starting_position)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_stream
+    #   The event stream that your consumer can use to read records from the
+    #   shard.
+    #   @return [Types::SubscribeToShardEventStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SubscribeToShardOutput AWS API Documentation
+    #
+    class SubscribeToShardOutput < Struct.new(
+      :event_stream)
       include Aws::Structure
     end
 

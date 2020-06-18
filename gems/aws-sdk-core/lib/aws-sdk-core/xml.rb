@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'xml/builder'
 require_relative 'xml/default_list'
 require_relative 'xml/default_map'

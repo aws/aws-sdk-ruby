@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:licensemanager)
 
 module Aws::LicenseManager
+  # An API client for LicenseManager.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::LicenseManager::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::LicenseManager
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +109,7 @@ module Aws::LicenseManager
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::LicenseManager
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::LicenseManager
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::LicenseManager
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::LicenseManager
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::LicenseManager
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::LicenseManager
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::LicenseManager
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,45 +274,102 @@ module Aws::LicenseManager
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
 
-    # Creates a new license configuration object. A license configuration is
-    # an abstraction of a customer license agreement that can be consumed
-    # and enforced by License Manager. Components include specifications for
-    # the license type (licensing by instance, socket, CPU, or VCPU),
-    # tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon EC2
-    # Dedicated Host, or any of these), host affinity (how long a VM must be
-    # associated with a host), the number of licenses purchased and used.
+    # Creates a license configuration.
+    #
+    # A license configuration is an abstraction of a customer license
+    # agreement that can be consumed and enforced by License Manager.
+    # Components include specifications for the license type (licensing by
+    # instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy,
+    # Dedicated Instance, Dedicated Host, or all of these), host affinity
+    # (how long a VM must be associated with a host), and the number of
+    # licenses purchased and used.
     #
     # @option params [required, String] :name
     #   Name of the license configuration.
     #
     # @option params [String] :description
-    #   Human-friendly description of the license configuration.
+    #   Description of the license configuration.
     #
     # @option params [required, String] :license_counting_type
-    #   Dimension to use to track the license inventory.
+    #   Dimension used to track the license inventory.
     #
     # @option params [Integer] :license_count
     #   Number of licenses managed by the license configuration.
     #
     # @option params [Boolean] :license_count_hard_limit
-    #   Flag indicating whether hard or soft license enforcement is used.
-    #   Exceeding a hard limit results in the blocked deployment of new
-    #   instances.
+    #   Indicates whether hard or soft license enforcement is used. Exceeding
+    #   a hard limit blocks the launch of new instances.
     #
     # @option params [Array<String>] :license_rules
-    #   Array of configured License Manager rules.
+    #   License rules. The syntax is #name=value (for example,
+    #   #allowedTenancy=EC2-DedicatedHost). Available rules vary by dimension.
+    #
+    #   * `Cores` dimension: `allowedTenancy` \| `maximumCores` \|
+    #     `minimumCores`
+    #
+    #   * `Instances` dimension: `allowedTenancy` \| `maximumCores` \|
+    #     `minimumCores` \| `maximumSockets` \| `minimumSockets` \|
+    #     `maximumVcpus` \| `minimumVcpus`
+    #
+    #   * `Sockets` dimension: `allowedTenancy` \| `maximumSockets` \|
+    #     `minimumSockets`
+    #
+    #   * `vCPUs` dimension: `allowedTenancy` \| `honorVcpuOptimization` \|
+    #     `maximumVcpus` \| `minimumVcpus`
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to apply to the resources during launch. You can only tag
-    #   instances and volumes on launch. The specified tags are applied to all
-    #   instances or volumes that are created during launch. To tag a resource
-    #   after it has been created, see CreateTags .
+    #   Tags to add to the license configuration.
+    #
+    # @option params [Array<Types::ProductInformation>] :product_information_list
+    #   Product information.
     #
     # @return [Types::CreateLicenseConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -268,6 +390,18 @@ module Aws::LicenseManager
     #         value: "String",
     #       },
     #     ],
+    #     product_information_list: [
+    #       {
+    #         resource_type: "String", # required
+    #         product_information_filter_list: [ # required
+    #           {
+    #             product_information_filter_name: "String", # required
+    #             product_information_filter_value: ["String"], # required
+    #             product_information_filter_comparator: "String", # required
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -283,11 +417,12 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Deletes an existing license configuration. This action fails if the
-    # configuration is in use.
+    # Deletes the specified license configuration.
+    #
+    # You cannot delete a license configuration that is in use.
     #
     # @option params [required, String] :license_configuration_arn
-    #   Unique ID of the configuration object to delete.
+    #   ID of the license configuration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -306,10 +441,10 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Returns a detailed description of a license configuration.
+    # Gets detailed information about the specified license configuration.
     #
     # @option params [required, String] :license_configuration_arn
-    #   ARN of the license configuration being requested.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #
     # @return [Types::GetLicenseConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -327,6 +462,8 @@ module Aws::LicenseManager
     #   * {Types::GetLicenseConfigurationResponse#consumed_license_summary_list #consumed_license_summary_list} => Array&lt;Types::ConsumedLicenseSummary&gt;
     #   * {Types::GetLicenseConfigurationResponse#managed_resource_summary_list #managed_resource_summary_list} => Array&lt;Types::ManagedResourceSummary&gt;
     #   * {Types::GetLicenseConfigurationResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::GetLicenseConfigurationResponse#product_information_list #product_information_list} => Array&lt;Types::ProductInformation&gt;
+    #   * {Types::GetLicenseConfigurationResponse#automated_discovery_information #automated_discovery_information} => Types::AutomatedDiscoveryInformation
     #
     # @example Request syntax with placeholder values
     #
@@ -349,14 +486,22 @@ module Aws::LicenseManager
     #   resp.status #=> String
     #   resp.owner_account_id #=> String
     #   resp.consumed_license_summary_list #=> Array
-    #   resp.consumed_license_summary_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI"
+    #   resp.consumed_license_summary_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI", "RDS", "SYSTEMS_MANAGER_MANAGED_INSTANCE"
     #   resp.consumed_license_summary_list[0].consumed_licenses #=> Integer
     #   resp.managed_resource_summary_list #=> Array
-    #   resp.managed_resource_summary_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI"
+    #   resp.managed_resource_summary_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI", "RDS", "SYSTEMS_MANAGER_MANAGED_INSTANCE"
     #   resp.managed_resource_summary_list[0].association_count #=> Integer
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.product_information_list #=> Array
+    #   resp.product_information_list[0].resource_type #=> String
+    #   resp.product_information_list[0].product_information_filter_list #=> Array
+    #   resp.product_information_list[0].product_information_filter_list[0].product_information_filter_name #=> String
+    #   resp.product_information_list[0].product_information_filter_list[0].product_information_filter_value #=> Array
+    #   resp.product_information_list[0].product_information_filter_list[0].product_information_filter_value[0] #=> String
+    #   resp.product_information_list[0].product_information_filter_list[0].product_information_filter_comparator #=> String
+    #   resp.automated_discovery_information.last_run_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetLicenseConfiguration AWS API Documentation
     #
@@ -367,8 +512,7 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Gets License Manager settings for a region. Exposes the configured S3
-    # bucket, SNS topic, etc., for inspection.
+    # Gets the License Manager settings for the current Region.
     #
     # @return [Types::GetServiceSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -376,6 +520,7 @@ module Aws::LicenseManager
     #   * {Types::GetServiceSettingsResponse#sns_topic_arn #sns_topic_arn} => String
     #   * {Types::GetServiceSettingsResponse#organization_configuration #organization_configuration} => Types::OrganizationConfiguration
     #   * {Types::GetServiceSettingsResponse#enable_cross_accounts_discovery #enable_cross_accounts_discovery} => Boolean
+    #   * {Types::GetServiceSettingsResponse#license_manager_resource_share_arn #license_manager_resource_share_arn} => String
     #
     # @example Response structure
     #
@@ -383,6 +528,7 @@ module Aws::LicenseManager
     #   resp.sns_topic_arn #=> String
     #   resp.organization_configuration.enable_integration #=> Boolean
     #   resp.enable_cross_accounts_discovery #=> Boolean
+    #   resp.license_manager_resource_share_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetServiceSettings AWS API Documentation
     #
@@ -393,19 +539,18 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Lists the resource associations for a license configuration. Resource
-    # associations need not consume licenses from a license configuration.
-    # For example, an AMI or a stopped instance may not consume a license
-    # (depending on the license rules). Use this operation to find all
-    # resources associated with a license configuration.
+    # Lists the resource associations for the specified license
+    # configuration.
+    #
+    # Resource associations need not consume licenses from a license
+    # configuration. For example, an AMI or a stopped instance might not
+    # consume a license (depending on the license rules).
     #
     # @option params [required, String] :license_configuration_arn
-    #   ARN of a `LicenseConfiguration` object.
+    #   Amazon Resource Name (ARN) of a license configuration.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return in a single call. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   Maximum number of results to return in a single call.
     #
     # @option params [String] :next_token
     #   Token for the next set of results.
@@ -427,7 +572,7 @@ module Aws::LicenseManager
     #
     #   resp.license_configuration_associations #=> Array
     #   resp.license_configuration_associations[0].resource_arn #=> String
-    #   resp.license_configuration_associations[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI"
+    #   resp.license_configuration_associations[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI", "RDS", "SYSTEMS_MANAGER_MANAGED_INSTANCE"
     #   resp.license_configuration_associations[0].resource_owner_id #=> String
     #   resp.license_configuration_associations[0].association_time #=> Time
     #   resp.next_token #=> String
@@ -441,23 +586,79 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Lists license configuration objects for an account, each containing
-    # the name, description, license type, and other license terms modeled
-    # from a license agreement.
+    # Lists the license configuration operations that failed.
     #
-    # @option params [Array<String>] :license_configuration_arns
-    #   An array of ARNs for the calling account’s license configurations.
+    # @option params [required, String] :license_configuration_arn
+    #   Amazon Resource Name of the license configuration.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return in a single call. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   Maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   Token for the next set of results.
+    #
+    # @return [Types::ListFailuresForLicenseConfigurationOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFailuresForLicenseConfigurationOperationsResponse#license_operation_failure_list #license_operation_failure_list} => Array&lt;Types::LicenseOperationFailure&gt;
+    #   * {Types::ListFailuresForLicenseConfigurationOperationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_failures_for_license_configuration_operations({
+    #     license_configuration_arn: "String", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_operation_failure_list #=> Array
+    #   resp.license_operation_failure_list[0].resource_arn #=> String
+    #   resp.license_operation_failure_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI", "RDS", "SYSTEMS_MANAGER_MANAGED_INSTANCE"
+    #   resp.license_operation_failure_list[0].error_message #=> String
+    #   resp.license_operation_failure_list[0].failure_time #=> Time
+    #   resp.license_operation_failure_list[0].operation_name #=> String
+    #   resp.license_operation_failure_list[0].resource_owner_id #=> String
+    #   resp.license_operation_failure_list[0].operation_requested_by #=> String
+    #   resp.license_operation_failure_list[0].metadata_list #=> Array
+    #   resp.license_operation_failure_list[0].metadata_list[0].name #=> String
+    #   resp.license_operation_failure_list[0].metadata_list[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListFailuresForLicenseConfigurationOperations AWS API Documentation
+    #
+    # @overload list_failures_for_license_configuration_operations(params = {})
+    # @param [Hash] params ({})
+    def list_failures_for_license_configuration_operations(params = {}, options = {})
+      req = build_request(:list_failures_for_license_configuration_operations, params)
+      req.send_request(options)
+    end
+
+    # Lists the license configurations for your account.
+    #
+    # @option params [Array<String>] :license_configuration_arns
+    #   Amazon Resource Names (ARN) of the license configurations.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a single call.
     #
     # @option params [String] :next_token
     #   Token for the next set of results.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   Filters to scope the results. The following filters and logical
+    #   operators are supported:
+    #
+    #   * `licenseCountingType` - The dimension on which licenses are counted
+    #     (vCPU). Logical operators are `EQUALS` \| `NOT_EQUALS`.
+    #
+    #   * `enforceLicenseCount` - A Boolean value that indicates whether hard
+    #     license enforcement is used. Logical operators are `EQUALS` \|
+    #     `NOT_EQUALS`.
+    #
+    #   * `usagelimitExceeded` - A Boolean value that indicates whether the
+    #     available licenses have been exceeded. Logical operators are
+    #     `EQUALS` \| `NOT_EQUALS`.
     #
     # @return [Types::ListLicenseConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -494,11 +695,19 @@ module Aws::LicenseManager
     #   resp.license_configurations[0].status #=> String
     #   resp.license_configurations[0].owner_account_id #=> String
     #   resp.license_configurations[0].consumed_license_summary_list #=> Array
-    #   resp.license_configurations[0].consumed_license_summary_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI"
+    #   resp.license_configurations[0].consumed_license_summary_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI", "RDS", "SYSTEMS_MANAGER_MANAGED_INSTANCE"
     #   resp.license_configurations[0].consumed_license_summary_list[0].consumed_licenses #=> Integer
     #   resp.license_configurations[0].managed_resource_summary_list #=> Array
-    #   resp.license_configurations[0].managed_resource_summary_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI"
+    #   resp.license_configurations[0].managed_resource_summary_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI", "RDS", "SYSTEMS_MANAGER_MANAGED_INSTANCE"
     #   resp.license_configurations[0].managed_resource_summary_list[0].association_count #=> Integer
+    #   resp.license_configurations[0].product_information_list #=> Array
+    #   resp.license_configurations[0].product_information_list[0].resource_type #=> String
+    #   resp.license_configurations[0].product_information_list[0].product_information_filter_list #=> Array
+    #   resp.license_configurations[0].product_information_list[0].product_information_filter_list[0].product_information_filter_name #=> String
+    #   resp.license_configurations[0].product_information_list[0].product_information_filter_list[0].product_information_filter_value #=> Array
+    #   resp.license_configurations[0].product_information_list[0].product_information_filter_list[0].product_information_filter_value[0] #=> String
+    #   resp.license_configurations[0].product_information_list[0].product_information_filter_list[0].product_information_filter_comparator #=> String
+    #   resp.license_configurations[0].automated_discovery_information.last_run_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseConfigurations AWS API Documentation
@@ -510,16 +719,14 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Returns the license configuration for a resource.
+    # Describes the license configurations for the specified resource.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of an AMI or Amazon EC2 instance that has an associated license
-    #   configuration.
+    #   Amazon Resource Name (ARN) of a resource that has an associated
+    #   license configuration.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return in a single call. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   Maximum number of results to return in a single call.
     #
     # @option params [String] :next_token
     #   Token for the next set of results.
@@ -552,18 +759,34 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Returns a detailed list of resources.
+    # Lists resources managed using Systems Manager inventory.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return in a single call. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   Maximum number of results to return in a single call.
     #
     # @option params [String] :next_token
     #   Token for the next set of results.
     #
     # @option params [Array<Types::InventoryFilter>] :filters
-    #   One or more filters.
+    #   Filters to scope the results. The following filters and logical
+    #   operators are supported:
+    #
+    #   * `account_id` - The ID of the AWS account that owns the resource.
+    #     Logical operators are `EQUALS` \| `NOT_EQUALS`.
+    #
+    #   * `application_name` - The name of the application. Logical operators
+    #     are `EQUALS` \| `BEGINS_WITH`.
+    #
+    #   * `license_included` - The type of license included. Logical operators
+    #     are `EQUALS` \| `NOT_EQUALS`. Possible values are
+    #     `sql-server-enterprise` \| `sql-server-standard` \| `sql-server-web`
+    #     \| `windows-server-datacenter`.
+    #
+    #   * `platform` - The platform of the resource. Logical operators are
+    #     `EQUALS` \| `BEGINS_WITH`.
+    #
+    #   * `resource_id` - The ID of the resource. Logical operators are
+    #     `EQUALS` \| `NOT_EQUALS`.
     #
     # @return [Types::ListResourceInventoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -588,7 +811,7 @@ module Aws::LicenseManager
     #
     #   resp.resource_inventory_list #=> Array
     #   resp.resource_inventory_list[0].resource_id #=> String
-    #   resp.resource_inventory_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI"
+    #   resp.resource_inventory_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI", "RDS", "SYSTEMS_MANAGER_MANAGED_INSTANCE"
     #   resp.resource_inventory_list[0].resource_arn #=> String
     #   resp.resource_inventory_list[0].platform #=> String
     #   resp.resource_inventory_list[0].platform_version #=> String
@@ -604,10 +827,10 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Lists tags attached to a resource.
+    # Lists the tags for the specified license configuration.
     #
     # @option params [required, String] :resource_arn
-    #   ARN for the resource.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -640,18 +863,27 @@ module Aws::LicenseManager
     # any license inventory and configuration.
     #
     # @option params [required, String] :license_configuration_arn
-    #   ARN of the targeted `LicenseConfiguration` object.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return in a single call. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
+    #   Maximum number of results to return in a single call.
     #
     # @option params [String] :next_token
     #   Token for the next set of results.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   List of filters to apply.
+    #   Filters to scope the results. The following filters and logical
+    #   operators are supported:
+    #
+    #   * `resourceArn` - The ARN of the license configuration resource.
+    #     Logical operators are `EQUALS` \| `NOT_EQUALS`.
+    #
+    #   * `resourceType` - The resource type (EC2\_INSTANCE \| EC2\_HOST \|
+    #     EC2\_AMI \| SYSTEMS\_MANAGER\_MANAGED\_INSTANCE). Logical operators
+    #     are `EQUALS` \| `NOT_EQUALS`.
+    #
+    #   * `resourceAccount` - The ID of the account that owns the resource.
+    #     Logical operators are `EQUALS` \| `NOT_EQUALS`.
     #
     # @return [Types::ListUsageForLicenseConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -676,7 +908,7 @@ module Aws::LicenseManager
     #
     #   resp.license_configuration_usage_list #=> Array
     #   resp.license_configuration_usage_list[0].resource_arn #=> String
-    #   resp.license_configuration_usage_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI"
+    #   resp.license_configuration_usage_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI", "RDS", "SYSTEMS_MANAGER_MANAGED_INSTANCE"
     #   resp.license_configuration_usage_list[0].resource_status #=> String
     #   resp.license_configuration_usage_list[0].resource_owner_id #=> String
     #   resp.license_configuration_usage_list[0].association_time #=> Time
@@ -692,13 +924,13 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Attach one of more tags to any resource.
+    # Adds the specified tags to the specified license configuration.
     #
     # @option params [required, String] :resource_arn
-    #   Resource of the ARN to be tagged.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   Names of the tags to attach to the resource.
+    #   One or more tags.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -723,13 +955,13 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Remove tags from a resource.
+    # Removes the specified tags from the specified license configuration.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of the resource.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   List keys identifying tags to remove.
+    #   Keys identifying the tags to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -749,34 +981,39 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Modifies the attributes of an existing license configuration object. A
-    # license configuration is an abstraction of a customer license
+    # Modifies the attributes of an existing license configuration.
+    #
+    # A license configuration is an abstraction of a customer license
     # agreement that can be consumed and enforced by License Manager.
-    # Components include specifications for the license type (Instances,
-    # cores, sockets, VCPUs), tenancy (shared or Dedicated Host), host
-    # affinity (how long a VM is associated with a host), the number of
+    # Components include specifications for the license type (licensing by
+    # instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy,
+    # Dedicated Instance, Dedicated Host, or all of these), host affinity
+    # (how long a VM must be associated with a host), and the number of
     # licenses purchased and used.
     #
     # @option params [required, String] :license_configuration_arn
-    #   ARN for a license configuration.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #
     # @option params [String] :license_configuration_status
-    #   New status of the license configuration (`ACTIVE` or `INACTIVE`).
+    #   New status of the license configuration.
     #
     # @option params [Array<String>] :license_rules
-    #   List of flexible text strings designating license rules.
+    #   New license rules.
     #
     # @option params [Integer] :license_count
     #   New number of licenses managed by the license configuration.
     #
     # @option params [Boolean] :license_count_hard_limit
-    #   Sets the number of available licenses as a hard limit.
+    #   New hard limit of the number of available licenses.
     #
     # @option params [String] :name
     #   New name of the license configuration.
     #
     # @option params [String] :description
-    #   New human-friendly description of the license configuration.
+    #   New description of the license configuration.
+    #
+    # @option params [Array<Types::ProductInformation>] :product_information_list
+    #   New product information.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -790,6 +1027,18 @@ module Aws::LicenseManager
     #     license_count_hard_limit: false,
     #     name: "String",
     #     description: "String",
+    #     product_information_list: [
+    #       {
+    #         resource_type: "String", # required
+    #         product_information_filter_list: [ # required
+    #           {
+    #             product_information_filter_name: "String", # required
+    #             product_information_filter_value: ["String"], # required
+    #             product_information_filter_comparator: "String", # required
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseConfiguration AWS API Documentation
@@ -801,21 +1050,22 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Adds or removes license configurations for a specified AWS resource.
-    # This operation currently supports updating the license specifications
-    # of AMIs, instances, and hosts. Launch templates and AWS CloudFormation
-    # templates are not managed from this operation as those resources send
-    # the license configurations directly to a resource creation operation,
-    # such as `RunInstances`.
+    # Adds or removes the specified license configurations for the specified
+    # AWS resource.
+    #
+    # You can update the license specifications of AMIs, instances, and
+    # hosts. You cannot update the license specifications for launch
+    # templates and AWS CloudFormation templates, as they send license
+    # configurations to the operation that creates the resource.
     #
     # @option params [required, String] :resource_arn
-    #   ARN for an AWS server resource.
+    #   Amazon Resource Name (ARN) of the AWS resource.
     #
     # @option params [Array<Types::LicenseSpecification>] :add_license_specifications
-    #   License configuration ARNs to be added to a resource.
+    #   ARNs of the license configurations to add.
     #
     # @option params [Array<Types::LicenseSpecification>] :remove_license_specifications
-    #   License configuration ARNs to be removed from a resource.
+    #   ARNs of the license configurations to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -844,17 +1094,18 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Updates License Manager service settings.
+    # Updates License Manager settings for the current Region.
     #
     # @option params [String] :s3_bucket_arn
-    #   ARN of the Amazon S3 bucket where License Manager information is
-    #   stored.
+    #   Amazon Resource Name (ARN) of the Amazon S3 bucket where the License
+    #   Manager information is stored.
     #
     # @option params [String] :sns_topic_arn
-    #   ARN of the Amazon SNS topic used for License Manager alerts.
+    #   Amazon Resource Name (ARN) of the Amazon SNS topic used for License
+    #   Manager alerts.
     #
     # @option params [Types::OrganizationConfiguration] :organization_configuration
-    #   Integrates AWS Organizations with License Manager for cross-account
+    #   Enables integration with AWS Organizations for cross-account
     #   discovery.
     #
     # @option params [Boolean] :enable_cross_accounts_discovery
@@ -895,7 +1146,7 @@ module Aws::LicenseManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.15.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -140,9 +142,27 @@ module Aws::Support
     AttachmentDetails.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, location_name: "fileName"))
     AttachmentDetails.struct_class = Types::AttachmentDetails
 
+    AttachmentIdNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AttachmentIdNotFound.struct_class = Types::AttachmentIdNotFound
+
+    AttachmentLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AttachmentLimitExceeded.struct_class = Types::AttachmentLimitExceeded
+
     AttachmentSet.member = Shapes::ShapeRef.new(shape: AttachmentDetails)
 
+    AttachmentSetExpired.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AttachmentSetExpired.struct_class = Types::AttachmentSetExpired
+
+    AttachmentSetIdNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AttachmentSetIdNotFound.struct_class = Types::AttachmentSetIdNotFound
+
+    AttachmentSetSizeLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AttachmentSetSizeLimitExceeded.struct_class = Types::AttachmentSetSizeLimitExceeded
+
     Attachments.member = Shapes::ShapeRef.new(shape: Attachment)
+
+    CaseCreationLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    CaseCreationLimitExceeded.struct_class = Types::CaseCreationLimitExceeded
 
     CaseDetails.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "caseId"))
     CaseDetails.add_member(:display_id, Shapes::ShapeRef.new(shape: DisplayId, location_name: "displayId"))
@@ -159,6 +179,9 @@ module Aws::Support
     CaseDetails.struct_class = Types::CaseDetails
 
     CaseIdList.member = Shapes::ShapeRef.new(shape: CaseId)
+
+    CaseIdNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    CaseIdNotFound.struct_class = Types::CaseIdNotFound
 
     CaseList.member = Shapes::ShapeRef.new(shape: CaseDetails)
 
@@ -192,6 +215,9 @@ module Aws::Support
 
     CreateCaseResponse.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "caseId"))
     CreateCaseResponse.struct_class = Types::CreateCaseResponse
+
+    DescribeAttachmentLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DescribeAttachmentLimitExceeded.struct_class = Types::DescribeAttachmentLimitExceeded
 
     DescribeAttachmentRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, required: true, location_name: "attachmentId"))
     DescribeAttachmentRequest.struct_class = Types::DescribeAttachmentRequest
@@ -262,6 +288,9 @@ module Aws::Support
 
     DescribeTrustedAdvisorChecksResponse.add_member(:checks, Shapes::ShapeRef.new(shape: TrustedAdvisorCheckList, required: true, location_name: "checks"))
     DescribeTrustedAdvisorChecksResponse.struct_class = Types::DescribeTrustedAdvisorChecksResponse
+
+    InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalServerError.struct_class = Types::InternalServerError
 
     RecentCaseCommunications.add_member(:communications, Shapes::ShapeRef.new(shape: CommunicationList, location_name: "communications"))
     RecentCaseCommunications.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -365,6 +394,7 @@ module Aws::Support
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Support",
+        "serviceId" => "Support",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSSupport_20130415",
         "uid" => "support-2013-04-15",

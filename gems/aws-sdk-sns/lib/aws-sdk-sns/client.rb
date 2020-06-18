@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:sns)
 
 module Aws::SNS
+  # An API client for SNS.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::SNS::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::SNS
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -91,7 +109,7 @@ module Aws::SNS
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::SNS
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::SNS
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::SNS
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::SNS
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::SNS
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::SNS
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::SNS
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -198,6 +263,48 @@ module Aws::SNS
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -222,7 +329,7 @@ module Aws::SNS
     # @option params [required, Array<String>] :action_name
     #   The action you want to allow for the specified principal(s).
     #
-    #   Valid values: any Amazon SNS action name.
+    #   Valid values: Any Amazon SNS action name, for example `Publish`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -322,12 +429,12 @@ module Aws::SNS
     end
 
     # Creates a platform application object for one of the supported push
-    # notification services, such as APNS and GCM, to which devices and
+    # notification services, such as APNS and FCM, to which devices and
     # mobile apps may register. You must specify PlatformPrincipal and
     # PlatformCredential attributes when using the
     # `CreatePlatformApplication` action. The PlatformPrincipal is received
     # from the notification service. For APNS/APNS\_SANDBOX,
-    # PlatformPrincipal is "SSL certificate". For GCM, PlatformPrincipal
+    # PlatformPrincipal is "SSL certificate". For FCM, PlatformPrincipal
     # is not applicable. For ADM, PlatformPrincipal is "client id". The
     # PlatformCredential is also received from the notification service. For
     # WNS, PlatformPrincipal is "Package Security Identifier". For MPNS,
@@ -335,30 +442,12 @@ module Aws::SNS
     # is "API key".
     #
     # For APNS/APNS\_SANDBOX, PlatformCredential is "private key". For
-    # GCM, PlatformCredential is "API key". For ADM, PlatformCredential is
+    # FCM, PlatformCredential is "API key". For ADM, PlatformCredential is
     # "client secret". For WNS, PlatformCredential is "secret key". For
     # MPNS, PlatformCredential is "private key". For Baidu,
     # PlatformCredential is "secret key". The PlatformApplicationArn that
     # is returned when using `CreatePlatformApplication` is then used as an
-    # attribute for the `CreatePlatformEndpoint` action. For more
-    # information, see [Using Amazon SNS Mobile Push Notifications][1]. For
-    # more information about obtaining the PlatformPrincipal and
-    # PlatformCredential for each of the supported push notification
-    # services, see [Getting Started with Apple Push Notification
-    # Service][2], [Getting Started with Amazon Device Messaging][3],
-    # [Getting Started with Baidu Cloud Push][4], [Getting Started with
-    # Google Cloud Messaging for Android][5], [Getting Started with
-    # MPNS][6], or [Getting Started with WNS][7].
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
-    # [2]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-apns.html
-    # [3]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-adm.html
-    # [4]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-baidu.html
-    # [5]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-gcm.html
-    # [6]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-mpns.html
-    # [7]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-wns.html
+    # attribute for the `CreatePlatformEndpoint` action.
     #
     # @option params [required, String] :name
     #   Application names must be made up of only uppercase and lowercase
@@ -367,15 +456,15 @@ module Aws::SNS
     #
     # @option params [required, String] :platform
     #   The following platforms are supported: ADM (Amazon Device Messaging),
-    #   APNS (Apple Push Notification Service), APNS\_SANDBOX, and GCM (Google
-    #   Cloud Messaging).
+    #   APNS (Apple Push Notification Service), APNS\_SANDBOX, and FCM
+    #   (Firebase Cloud Messaging).
     #
     # @option params [required, Hash<String,String>] :attributes
     #   For a list of attributes, see [SetPlatformApplicationAttributes][1]
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
     #
     # @return [Types::CreatePlatformApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -405,7 +494,7 @@ module Aws::SNS
     end
 
     # Creates an endpoint for a device and mobile app on one of the
-    # supported push notification services, such as GCM and APNS.
+    # supported push notification services, such as FCM and APNS.
     # `CreatePlatformEndpoint` requires the PlatformApplicationArn that is
     # returned from `CreatePlatformApplication`. The EndpointArn that is
     # returned when using `CreatePlatformEndpoint` can then be used by the
@@ -423,8 +512,8 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
-    # [2]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [2]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html
     #
     # @option params [required, String] :platform_application_arn
     #   PlatformApplicationArn returned from CreatePlatformApplication is used
@@ -435,7 +524,7 @@ module Aws::SNS
     #   device. The specific name for Token will vary, depending on which
     #   notification service is being used. For example, when using APNS as
     #   the notification service, you need the device token. Alternatively,
-    #   when using GCM or ADM, the device token equivalent is called the
+    #   when using FCM or ADM, the device token equivalent is called the
     #   registration ID.
     #
     # @option params [String] :custom_user_data
@@ -447,7 +536,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html
     #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -479,7 +568,7 @@ module Aws::SNS
 
     # Creates a topic to which notifications can be published. Users can
     # create at most 100,000 topics. For more information, see
-    # [http://aws.amazon.com/sns][1]. This action is idempotent, so if the
+    # [https://aws.amazon.com/sns][1]. This action is idempotent, so if the
     # requester already owns a topic with the specified name, that topic's
     # ARN is returned without creating a new topic.
     #
@@ -509,6 +598,29 @@ module Aws::SNS
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
     #
+    #   The following attribute applies only to [server-side-encryption][1]\:
+    #
+    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
+    #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
+    #     Management Service API Reference*.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The list of tags to add to a new topic.
+    #
+    #   <note markdown="1"> To be able to tag a topic on creation, you must have the
+    #   `sns:CreateTopic` and `sns:TagResource` permissions.
+    #
+    #    </note>
+    #
     # @return [Types::CreateTopicResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTopicResponse#topic_arn #topic_arn} => String
@@ -520,6 +632,12 @@ module Aws::SNS
     #     attributes: {
     #       "attributeName" => "attributeValue",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -544,7 +662,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :endpoint_arn
     #   EndpointArn of endpoint to delete.
@@ -567,12 +685,12 @@ module Aws::SNS
     end
 
     # Deletes a platform application object for one of the supported push
-    # notification services, such as APNS and GCM. For more information, see
+    # notification services, such as APNS and FCM. For more information, see
     # [Using Amazon SNS Mobile Push Notifications][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :platform_application_arn
     #   PlatformApplicationArn of platform application object to delete.
@@ -620,12 +738,12 @@ module Aws::SNS
     end
 
     # Retrieves the endpoint attributes for a device on one of the supported
-    # push notification services, such as GCM and APNS. For more
+    # push notification services, such as FCM and APNS. For more
     # information, see [Using Amazon SNS Mobile Push Notifications][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :endpoint_arn
     #   EndpointArn for GetEndpointAttributes input.
@@ -655,12 +773,12 @@ module Aws::SNS
     end
 
     # Retrieves the attributes of the platform application object for the
-    # supported push notification services, such as APNS and GCM. For more
+    # supported push notification services, such as APNS and FCM. For more
     # information, see [Using Amazon SNS Mobile Push Notifications][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :platform_application_arn
     #   PlatformApplicationArn for GetPlatformApplicationAttributesInput.
@@ -704,7 +822,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html
     #
     # @return [Types::GetSMSAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -790,7 +908,7 @@ module Aws::SNS
     end
 
     # Lists the endpoints and endpoint attributes for devices in a supported
-    # push notification service, such as GCM and APNS. The results for
+    # push notification service, such as FCM and APNS. The results for
     # `ListEndpointsByPlatformApplication` are paginated and return a
     # limited list of endpoints, up to 100. If additional records are
     # available after the first page results, then a NextToken string will
@@ -804,7 +922,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :platform_application_arn
     #   PlatformApplicationArn for ListEndpointsByPlatformApplicationInput
@@ -819,6 +937,8 @@ module Aws::SNS
     #
     #   * {Types::ListEndpointsByPlatformApplicationResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
     #   * {Types::ListEndpointsByPlatformApplicationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -887,7 +1007,7 @@ module Aws::SNS
     end
 
     # Lists the platform application objects for the supported push
-    # notification services, such as APNS and GCM. The results for
+    # notification services, such as APNS and FCM. The results for
     # `ListPlatformApplications` are paginated and return a limited list of
     # applications, up to 100. If additional records are available after the
     # first page results, then a NextToken string will be returned. To
@@ -900,7 +1020,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [String] :next_token
     #   NextToken string is used when calling ListPlatformApplications action
@@ -911,6 +1031,8 @@ module Aws::SNS
     #
     #   * {Types::ListPlatformApplicationsResponse#platform_applications #platform_applications} => Array&lt;Types::PlatformApplication&gt;
     #   * {Types::ListPlatformApplicationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -949,6 +1071,8 @@ module Aws::SNS
     #
     #   * {Types::ListSubscriptionsResponse#subscriptions #subscriptions} => Array&lt;Types::Subscription&gt;
     #   * {Types::ListSubscriptionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -994,6 +1118,8 @@ module Aws::SNS
     #   * {Types::ListSubscriptionsByTopicResponse#subscriptions #subscriptions} => Array&lt;Types::Subscription&gt;
     #   * {Types::ListSubscriptionsByTopicResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_subscriptions_by_topic({
@@ -1020,6 +1146,42 @@ module Aws::SNS
       req.send_request(options)
     end
 
+    # List all tags added to the specified Amazon SNS topic. For an
+    # overview, see [Amazon SNS Tags][1] in the *Amazon Simple Notification
+    # Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the topic for which to list tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the requester's topics. Each call returns a limited
     # list of topics, up to 100. If there are more topics, a `NextToken` is
     # also returned. Use the `NextToken` parameter in a new `ListTopics`
@@ -1034,6 +1196,8 @@ module Aws::SNS
     #
     #   * {Types::ListTopicsResponse#topics #topics} => Array&lt;Types::Topic&gt;
     #   * {Types::ListTopicsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1103,7 +1267,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html
     #
     # @option params [String] :topic_arn
     #   The topic you want to publish to.
@@ -1112,8 +1276,6 @@ module Aws::SNS
     #   specify a value for the `PhoneNumber` or `TargetArn` parameters.
     #
     # @option params [String] :target_arn
-    #   Either TopicArn or EndpointArn, but not both.
-    #
     #   If you don't specify a value for the `TargetArn` parameter, you must
     #   specify a value for the `PhoneNumber` or `TopicArn` parameters.
     #
@@ -1126,10 +1288,6 @@ module Aws::SNS
     #
     # @option params [required, String] :message
     #   The message you want to send.
-    #
-    #   The `Message` parameter is always a string. If you set
-    #   `MessageStructure` to `json`, you must string-encode the `Message`
-    #   parameter.
     #
     #   If you are publishing to a topic and you want to send the same message
     #   to all transport protocols, include the text of the message as a
@@ -1208,16 +1366,7 @@ module Aws::SNS
     #   You can define other top-level keys that define the message you want
     #   to send to a specific transport protocol (e.g., "http").
     #
-    #   For information about sending different messages for each protocol
-    #   using the AWS Management Console, go to [Create Different Messages for
-    #   Each Protocol][1] in the *Amazon Simple Notification Service Getting
-    #   Started Guide*.
-    #
     #   Valid value: `json`
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol
     #
     # @option params [Hash<String,Types::MessageAttributeValue>] :message_attributes
     #   Message attributes for Publish action.
@@ -1284,12 +1433,12 @@ module Aws::SNS
     end
 
     # Sets the attributes for an endpoint for a device on one of the
-    # supported push notification services, such as GCM and APNS. For more
+    # supported push notification services, such as FCM and APNS. For more
     # information, see [Using Amazon SNS Mobile Push Notifications][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :endpoint_arn
     #   EndpointArn used for SetEndpointAttributes action.
@@ -1333,7 +1482,7 @@ module Aws::SNS
     end
 
     # Sets the attributes of the platform application object for the
-    # supported push notification services, such as APNS and GCM. For more
+    # supported push notification services, such as APNS and FCM. For more
     # information, see [Using Amazon SNS Mobile Push Notifications][1]. For
     # information on configuring attributes for message delivery status, see
     # [Using Amazon SNS Application Attributes for Message Delivery
@@ -1341,8 +1490,8 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
-    # [2]: http://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+    # [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html
     #
     # @option params [required, String] :platform_application_arn
     #   PlatformApplicationArn for SetPlatformApplicationAttributes action.
@@ -1353,12 +1502,12 @@ module Aws::SNS
     #
     #   * `PlatformCredential` – The credential received from the notification
     #     service. For APNS/APNS\_SANDBOX, PlatformCredential is private key.
-    #     For GCM, PlatformCredential is "API key". For ADM,
+    #     For FCM, PlatformCredential is "API key". For ADM,
     #     PlatformCredential is "client secret".
     #
     #   * `PlatformPrincipal` – The principal received from the notification
     #     service. For APNS/APNS\_SANDBOX, PlatformPrincipal is SSL
-    #     certificate. For GCM, PlatformPrincipal is not applicable. For ADM,
+    #     certificate. For FCM, PlatformPrincipal is not applicable. For ADM,
     #     PlatformPrincipal is "client id".
     #
     #   * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
@@ -1413,7 +1562,7 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html
     #
     # @option params [required, Hash<String,String>] :attributes
     #   The default settings for sending SMS messages from your account. You
@@ -1497,7 +1646,7 @@ module Aws::SNS
     #
     #
     #   [1]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-sns
-    #   [2]: http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1542,6 +1691,13 @@ module Aws::SNS
     #     for the endpoints to process JSON formatting, which is otherwise
     #     created for Amazon SNS metadata.
     #
+    #   * `RedrivePolicy` – When specified, sends undeliverable messages to
+    #     the specified Amazon SQS dead-letter queue. Messages that can't be
+    #     delivered due to client errors (for example, when the subscribed
+    #     endpoint is unreachable) or server errors (for example, when the
+    #     service that powers the subscribed endpoint becomes unavailable) are
+    #     held in the dead-letter queue for further analysis or reprocessing.
+    #
     # @option params [String] :attribute_value
     #   The new value for the attribute in JSON format.
     #
@@ -1583,6 +1739,21 @@ module Aws::SNS
     #
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
+    #
+    #   The following attribute applies only to [server-side-encryption][1]\:
+    #
+    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
+    #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
+    #     Management Service API Reference*.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     #
     # @option params [String] :attribute_value
     #   The new value for the attribute.
@@ -1635,7 +1806,7 @@ module Aws::SNS
     #   * `application` – delivery of JSON-encoded message to an EndpointArn
     #     for a mobile app and device.
     #
-    #   * `lambda` – delivery of JSON-encoded message to an AWS Lambda
+    #   * `lambda` – delivery of JSON-encoded message to an Amazon Lambda
     #     function.
     #
     # @option params [String] :endpoint
@@ -1643,10 +1814,10 @@ module Aws::SNS
     #   protocol:
     #
     #   * For the `http` protocol, the endpoint is an URL beginning with
-    #     "http://"
+    #     `http://`
     #
     #   * For the `https` protocol, the endpoint is a URL beginning with
-    #     "https://"
+    #     `https://`
     #
     #   * For the `email` protocol, the endpoint is an email address
     #
@@ -1661,8 +1832,8 @@ module Aws::SNS
     #   * For the `application` protocol, the endpoint is the EndpointArn of a
     #     mobile app and device.
     #
-    #   * For the `lambda` protocol, the endpoint is the ARN of an AWS Lambda
-    #     function.
+    #   * For the `lambda` protocol, the endpoint is the ARN of an Amazon
+    #     Lambda function.
     #
     # @option params [Hash<String,String>] :attributes
     #   A map of attributes with their corresponding values.
@@ -1682,18 +1853,27 @@ module Aws::SNS
     #     for the endpoints to process JSON formatting, which is otherwise
     #     created for Amazon SNS metadata.
     #
+    #   * `RedrivePolicy` – When specified, sends undeliverable messages to
+    #     the specified Amazon SQS dead-letter queue. Messages that can't be
+    #     delivered due to client errors (for example, when the subscribed
+    #     endpoint is unreachable) or server errors (for example, when the
+    #     service that powers the subscribed endpoint becomes unavailable) are
+    #     held in the dead-letter queue for further analysis or reprocessing.
+    #
     # @option params [Boolean] :return_subscription_arn
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.
     #
-    #   If you set this parameter to `false`, the response includes the ARN
-    #   for confirmed subscriptions, but it includes an ARN value of "pending
-    #   subscription" for subscriptions that are not yet confirmed. A
-    #   subscription becomes confirmed when the subscriber calls the
-    #   `ConfirmSubscription` action with a confirmation token.
+    #   * If you have the subscription ARN returned, the response includes the
+    #     ARN in all cases, even if the subscription is not yet confirmed.
     #
-    #   If you set this parameter to `true`, the response includes the ARN in
-    #   all cases, even if the subscription is not yet confirmed.
+    #   * If you don't have the subscription ARN returned, in addition to the
+    #     ARN for confirmed subscriptions, the response also includes the
+    #     `pending subscription` ARN value for subscriptions that aren't yet
+    #     confirmed. A subscription becomes confirmed when the subscriber
+    #     calls the `ConfirmSubscription` action with a confirmation token.
+    #
+    #   If you set this parameter to `true`, .
     #
     #   The default value is `false`.
     #
@@ -1723,6 +1903,60 @@ module Aws::SNS
     # @param [Hash] params ({})
     def subscribe(params = {}, options = {})
       req = build_request(:subscribe, params)
+      req.send_request(options)
+    end
+
+    # Add tags to the specified Amazon SNS topic. For an overview, see
+    # [Amazon SNS Tags][1] in the *Amazon SNS Developer Guide*.
+    #
+    # When you use topic tags, keep the following guidelines in mind:
+    #
+    # * Adding more than 50 tags to a topic isn't recommended.
+    #
+    # * Tags don't have any semantic meaning. Amazon SNS interprets tags as
+    #   character strings.
+    #
+    # * Tags are case-sensitive.
+    #
+    # * A new tag with a key identical to that of an existing tag overwrites
+    #   the existing tag.
+    #
+    # * Tagging actions are limited to 10 TPS per AWS account, per AWS
+    #   region. If your application requires a higher throughput, file a
+    #   [technical support request][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html
+    # [2]: https://console.aws.amazon.com/support/home#/case/create?issueType=technical
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the topic to which to add tags.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags to be added to the specified topic. A tag consists of a
+    #   required key and an optional value.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
       req.send_request(options)
     end
 
@@ -1756,6 +1990,37 @@ module Aws::SNS
       req.send_request(options)
     end
 
+    # Remove tags from the specified Amazon SNS topic. For an overview, see
+    # [Amazon SNS Tags][1] in the *Amazon SNS Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the topic from which to remove tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tag keys to remove from the specified topic.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1769,7 +2034,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.25.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

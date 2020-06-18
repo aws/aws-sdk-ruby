@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'spec_helper'
 require 'bigdecimal'
 require 'set'
@@ -42,9 +44,9 @@ module Aws
           expect(formatted).to eq(ss: %w(abc mno))
         end
 
-        it 'converts empty sets to :es (empty set)' do
+        it 'converts empty sets to :ss (string set)' do
           formatted = value.marshal(Set.new)
-          expect(formatted).to eq(es: [])
+          expect(formatted).to eq(ss: [])
         end
 
         it 'converts objects sets responding to #to_str to :ss (string set)' do
@@ -79,7 +81,7 @@ module Aws
 
           # Ruby 2.4 changed the casing of BigDecimal's to_s value.
           # We need to check in a case insensitive manner
-          big_decimal_value = value.marshal(BigDecimal.new("0.1E125"))
+          big_decimal_value = value.marshal(BigDecimal("0.1E125"))
           expect(big_decimal_value.keys).to eq([:n])
           expect(big_decimal_value[:n]).to match(/0.1E125/i)
         end
@@ -95,6 +97,15 @@ module Aws
         it 'converts objects responding to #to_str to :s' do
           obj = Class.new { def to_str; 'abc' end }.new
           expect(value.marshal(obj)).to eq(s: 'abc')
+        end
+
+        it 'converts objects responding to #to_h to :m (map)' do
+          obj = Class.new { def to_h; { foo: 'bar', abc: 'mno' } end }.new
+          formatted = value.marshal(obj)
+          expect(formatted).to eq(m: {
+            "foo" => { s: 'bar' },
+            "abc" => { s: 'mno' },
+          })
         end
 
         it 'converts booleans :bool' do
@@ -201,7 +212,7 @@ module Aws
 
         it 'converts :ns to a set of big decimals (to preserve precision)' do
           expect(value.unmarshal(ns: %w(123 456))).to eq(
-            Set.new([BigDecimal.new('123'), BigDecimal.new('456')]))
+            Set.new([BigDecimal('123'), BigDecimal('456')]))
         end
 
         it 'converts :bs to a set of binary values' do
@@ -211,15 +222,11 @@ module Aws
           expect(simple.first.string).to eq('data')
         end
 
-        it 'converts :es to an empty set' do
-          expect(value.unmarshal(es: [])).to eq(Set.new)
-        end
-
         it 'converts :n to big decimals' do
           # supports integers, floats, and big decimals
-          expect(value.unmarshal(n: '123')).to eq(BigDecimal.new('123'))
-          expect(value.unmarshal(n: '12.34')).to eq(BigDecimal.new('12.34'))
-          expect(value.unmarshal(n: '0.1E125')).to eq(BigDecimal.new('0.1E125'))
+          expect(value.unmarshal(n: '123')).to eq(BigDecimal('123'))
+          expect(value.unmarshal(n: '12.34')).to eq(BigDecimal('12.34'))
+          expect(value.unmarshal(n: '0.1E125')).to eq(BigDecimal('0.1E125'))
         end
 
         it 'converts :s to a string' do
@@ -297,9 +304,9 @@ module Aws
               },
             ],
             'scores' => [
-              BigDecimal.new('4.5'),
-              BigDecimal.new('5'),
-              BigDecimal.new('3.9'),
+              BigDecimal('4.5'),
+              BigDecimal('5'),
+              BigDecimal('3.9'),
               nil,
               'perfect'
             ]

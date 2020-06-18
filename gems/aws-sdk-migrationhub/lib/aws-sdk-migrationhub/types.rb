@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -7,6 +9,44 @@
 
 module Aws::MigrationHub
   module Types
+
+    # You do not have sufficient access to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The state of an application discovered through Migration Hub import,
+    # the AWS Agentless Discovery Connector, or the AWS Application
+    # Discovery Agent.
+    #
+    # @!attribute [rw] application_id
+    #   The configurationId from the Application Discovery Service that
+    #   uniquely identifies an application.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_status
+    #   The current status of an application.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the application status was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ApplicationState AWS API Documentation
+    #
+    class ApplicationState < Struct.new(
+      :application_id,
+      :application_status,
+      :last_updated_time)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass AssociateCreatedArtifactRequest
     #   data as a hash:
@@ -26,7 +66,8 @@ module Aws::MigrationHub
     #   @return [String]
     #
     # @!attribute [rw] migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #   @return [String]
     #
     # @!attribute [rw] created_artifact
@@ -71,7 +112,8 @@ module Aws::MigrationHub
     #   @return [String]
     #
     # @!attribute [rw] migration_task_name
-    #   The identifier given to the MigrationTask.
+    #   The identifier given to the MigrationTask. *Do not store personal
+    #   data in this field.*
     #   @return [String]
     #
     # @!attribute [rw] discovered_resource
@@ -106,7 +148,8 @@ module Aws::MigrationHub
     #       }
     #
     # @!attribute [rw] progress_update_stream_name
-    #   The name of the ProgressUpdateStream.
+    #   The name of the ProgressUpdateStream. *Do not store personal data in
+    #   this field.*
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -163,7 +206,8 @@ module Aws::MigrationHub
     #       }
     #
     # @!attribute [rw] progress_update_stream_name
-    #   The name of the ProgressUpdateStream.
+    #   The name of the ProgressUpdateStream. *Do not store personal data in
+    #   this field.*
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -191,8 +235,8 @@ module Aws::MigrationHub
     #       }
     #
     # @!attribute [rw] application_id
-    #   The configurationId in ADS that uniquely identifies the grouped
-    #   application.
+    #   The configurationId in Application Discovery Service that uniquely
+    #   identifies the grouped application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationStateRequest AWS API Documentation
@@ -231,7 +275,8 @@ module Aws::MigrationHub
     #   @return [String]
     #
     # @!attribute [rw] migration_task_name
-    #   The identifier given to the MigrationTask.
+    #   The identifier given to the MigrationTask. *Do not store personal
+    #   data in this field.*
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTaskRequest AWS API Documentation
@@ -269,7 +314,8 @@ module Aws::MigrationHub
     #
     # @!attribute [rw] migration_task_name
     #   Unique identifier that references the migration task to be
-    #   disassociated with the artifact.
+    #   disassociated with the artifact. *Do not store personal data in this
+    #   field.*
     #   @return [String]
     #
     # @!attribute [rw] created_artifact_name
@@ -311,11 +357,13 @@ module Aws::MigrationHub
     #   @return [String]
     #
     # @!attribute [rw] migration_task_name
-    #   The identifier given to the MigrationTask.
+    #   The identifier given to the MigrationTask. *Do not store personal
+    #   data in this field.*
     #   @return [String]
     #
     # @!attribute [rw] configuration_id
-    #   ConfigurationId of the ADS resource to be disassociated.
+    #   ConfigurationId of the Application Discovery Service resource to be
+    #   disassociated.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -348,8 +396,8 @@ module Aws::MigrationHub
     #       }
     #
     # @!attribute [rw] configuration_id
-    #   The configurationId in ADS that uniquely identifies the on-premise
-    #   resource.
+    #   The configurationId in Application Discovery Service that uniquely
+    #   identifies the on-premise resource.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -365,6 +413,31 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
+    # Exception raised to indicate a successfully authorized action when the
+    # `DryRun` flag is set to "true".
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DryRunOperation AWS API Documentation
+    #
+    class DryRunOperation < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The home region is not set. Set the home region to continue.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/HomeRegionNotSetException AWS API Documentation
+    #
+    class HomeRegionNotSetException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ImportMigrationTaskRequest
     #   data as a hash:
     #
@@ -375,11 +448,12 @@ module Aws::MigrationHub
     #       }
     #
     # @!attribute [rw] progress_update_stream
-    #   The name of the ProgressUpdateStream.
+    #   The name of the ProgressUpdateStream. &gt;
     #   @return [String]
     #
     # @!attribute [rw] migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -400,6 +474,83 @@ module Aws::MigrationHub
     #
     class ImportMigrationTaskResult < Aws::EmptyStructure; end
 
+    # Exception raised when an internal, configuration, or dependency error
+    # is encountered.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception raised when the provided input violates a policy constraint
+    # or is entered in the wrong format or data type.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListApplicationStatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_ids: ["ApplicationId"],
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] application_ids
+    #   The configurationIds from the Application Discovery Service that
+    #   uniquely identifies your applications.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If a `NextToken` was returned by a previous call, there are more
+    #   results available. To retrieve the next page of results, make the
+    #   call again using the returned token in `NextToken`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to be returned per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListApplicationStatesRequest AWS API Documentation
+    #
+    class ListApplicationStatesRequest < Struct.new(
+      :application_ids,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_state_list
+    #   A list of Applications that exist in Application Discovery Service.
+    #   @return [Array<Types::ApplicationState>]
+    #
+    # @!attribute [rw] next_token
+    #   If a `NextToken` was returned by a previous call, there are more
+    #   results available. To retrieve the next page of results, make the
+    #   call again using the returned token in `NextToken`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListApplicationStatesResult AWS API Documentation
+    #
+    class ListApplicationStatesResult < Struct.new(
+      :application_state_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListCreatedArtifactsRequest
     #   data as a hash:
     #
@@ -415,7 +566,8 @@ module Aws::MigrationHub
     #   @return [String]
     #
     # @!attribute [rw] migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -472,7 +624,8 @@ module Aws::MigrationHub
     #   @return [String]
     #
     # @!attribute [rw] migration_task_name
-    #   The name of the MigrationTask.
+    #   The name of the MigrationTask. *Do not store personal data in this
+    #   field.*
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -618,7 +771,8 @@ module Aws::MigrationHub
     #   @return [String]
     #
     # @!attribute [rw] migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #   @return [String]
     #
     # @!attribute [rw] task
@@ -630,6 +784,9 @@ module Aws::MigrationHub
     #   @return [Time]
     #
     # @!attribute [rw] resource_attribute_list
+    #   Information about the resource that is being migrated. This data
+    #   will be used to map the task to a resource in the Application
+    #   Discovery Service repository.
     #   @return [Array<Types::ResourceAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/MigrationTask AWS API Documentation
@@ -652,7 +809,8 @@ module Aws::MigrationHub
     #   @return [String]
     #
     # @!attribute [rw] migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -660,6 +818,7 @@ module Aws::MigrationHub
     #   @return [String]
     #
     # @!attribute [rw] progress_percent
+    #   Indication of the percentage completion of the task.
     #   @return [Integer]
     #
     # @!attribute [rw] status_detail
@@ -689,17 +848,22 @@ module Aws::MigrationHub
     #       {
     #         application_id: "ApplicationId", # required
     #         status: "NOT_STARTED", # required, accepts NOT_STARTED, IN_PROGRESS, COMPLETED
+    #         update_date_time: Time.now,
     #         dry_run: false,
     #       }
     #
     # @!attribute [rw] application_id
-    #   The configurationId in ADS that uniquely identifies the grouped
-    #   application.
+    #   The configurationId in Application Discovery Service that uniquely
+    #   identifies the grouped application.
     #   @return [String]
     #
     # @!attribute [rw] status
     #   Status of the application - Not Started, In-Progress, Complete.
     #   @return [String]
+    #
+    # @!attribute [rw] update_date_time
+    #   The timestamp when the application state changed.
+    #   @return [Time]
     #
     # @!attribute [rw] dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -711,6 +875,7 @@ module Aws::MigrationHub
     class NotifyApplicationStateRequest < Struct.new(
       :application_id,
       :status,
+      :update_date_time,
       :dry_run)
       include Aws::Structure
     end
@@ -740,7 +905,8 @@ module Aws::MigrationHub
     #   @return [String]
     #
     # @!attribute [rw] migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #   @return [String]
     #
     # @!attribute [rw] task
@@ -779,11 +945,27 @@ module Aws::MigrationHub
     #
     class NotifyMigrationTaskStateResult < Aws::EmptyStructure; end
 
+    # Exception raised when there are problems accessing Application
+    # Discovery Service (Application Discovery Service); most likely due to
+    # a misconfigured policy or the `migrationhub-discovery` role is missing
+    # or not configured correctly.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PolicyErrorException AWS API Documentation
+    #
+    class PolicyErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Summary of the AWS resource used for access control that is implicitly
     # linked to your AWS account.
     #
     # @!attribute [rw] progress_update_stream_name
-    #   The name of the ProgressUpdateStream.
+    #   The name of the ProgressUpdateStream. *Do not store personal data in
+    #   this field.*
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ProgressUpdateStreamSummary AWS API Documentation
@@ -813,13 +995,14 @@ module Aws::MigrationHub
     #   @return [String]
     #
     # @!attribute [rw] migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #   @return [String]
     #
     # @!attribute [rw] resource_attribute_list
     #   Information about the resource that is being migrated. This data
     #   will be used to map the task to a resource in the Application
-    #   Discovery Service (ADS)'s repository.
+    #   Discovery Service repository.
     #
     #   <note markdown="1"> Takes the object array of `ResourceAttribute` where the `Type` field
     #   is reserved for the following values: `IPV4_ADDRESS | IPV6_ADDRESS |
@@ -834,8 +1017,8 @@ module Aws::MigrationHub
     #     always set. If `VM_MANAGER_ID` is not set, then all "VM" fields
     #     will be discarded and "VM" fields will not be used for matching
     #     the migration task to a server in Application Discovery Service
-    #     (ADS)'s repository. See the [Example][1] section below for a use
-    #     case of specifying "VM" related values.
+    #     repository. See the [Example][1] section below for a use case of
+    #     specifying "VM" related values.
     #
     #   * If a server you are trying to match has multiple IP or MAC
     #     addresses, you should provide as many as you know in separate
@@ -914,6 +1097,34 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
+    # Exception raised when the request references a resource (Application
+    # Discovery Service configuration, update stream, migration task, etc.)
+    # that does not exist in Application Discovery Service (Application
+    # Discovery Service) or in Migration Hub's repository.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception raised when there is an internal, configuration, or
+    # dependency error encountered.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Task object encapsulating task information.
     #
     # @note When making an API call, you may pass Task
@@ -945,6 +1156,37 @@ module Aws::MigrationHub
       :status,
       :status_detail,
       :progress_percent)
+      include Aws::Structure
+    end
+
+    # The request was denied due to request throttling.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The number of seconds the caller should wait before retrying.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message,
+      :retry_after_seconds)
+      include Aws::Structure
+    end
+
+    # Exception raised to indicate a request was not authorized when the
+    # `DryRun` flag is set to "true".
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/UnauthorizedOperation AWS API Documentation
+    #
+    class UnauthorizedOperation < Struct.new(
+      :message)
       include Aws::Structure
     end
 

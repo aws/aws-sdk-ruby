@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -215,6 +217,25 @@ module Aws::Route53Resolver
     GetResolverRuleResponse.add_member(:resolver_rule, Shapes::ShapeRef.new(shape: ResolverRule, location_name: "ResolverRule"))
     GetResolverRuleResponse.struct_class = Types::GetResolverRuleResponse
 
+    InternalServiceErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InternalServiceErrorException.struct_class = Types::InternalServiceErrorException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "Message"))
+    InvalidParameterException.add_member(:field_name, Shapes::ShapeRef.new(shape: String, location_name: "FieldName"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidPolicyDocument.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidPolicyDocument.struct_class = Types::InvalidPolicyDocument
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    InvalidTagException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidTagException.struct_class = Types::InvalidTagException
+
     IpAddressRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
     IpAddressRequest.add_member(:ip, Shapes::ShapeRef.new(shape: Ip, location_name: "Ip", metadata: {"box"=>true}))
     IpAddressRequest.struct_class = Types::IpAddressRequest
@@ -236,6 +257,10 @@ module Aws::Route53Resolver
     IpAddressesRequest.member = Shapes::ShapeRef.new(shape: IpAddressRequest)
 
     IpAddressesResponse.member = Shapes::ShapeRef.new(shape: IpAddressResponse)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    LimitExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListResolverEndpointIpAddressesRequest.add_member(:resolver_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResolverEndpointId"))
     ListResolverEndpointIpAddressesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -340,6 +365,22 @@ module Aws::Route53Resolver
 
     ResolverRules.member = Shapes::ShapeRef.new(shape: ResolverRule)
 
+    ResourceExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceExistsException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    ResourceExistsException.struct_class = Types::ResourceExistsException
+
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceInUseException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceUnavailableException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    ResourceUnavailableException.struct_class = Types::ResourceUnavailableException
+
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: ResourceId)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
@@ -361,6 +402,12 @@ module Aws::Route53Resolver
     TargetAddress.struct_class = Types::TargetAddress
 
     TargetList.member = Shapes::ShapeRef.new(shape: TargetAddress)
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
+    UnknownResourceException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    UnknownResourceException.struct_class = Types::UnknownResourceException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module Resources
     class Collection
@@ -39,7 +41,7 @@ module Aws
         if @size
           @batches[0][index]
         else
-          raise "unabled to index into a lazy loaded collection"
+          raise "unable to index into a lazy loaded collection"
         end
       end
       deprecated :[]

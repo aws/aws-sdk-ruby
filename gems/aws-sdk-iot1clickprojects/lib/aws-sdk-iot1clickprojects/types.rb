@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -99,6 +101,9 @@ module Aws::IoT1ClickProjects
     #             },
     #           },
     #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] project_name
@@ -117,10 +122,21 @@ module Aws::IoT1ClickProjects
     #   templates using the `UpdateProject` API.
     #   @return [Types::PlacementTemplate]
     #
+    # @!attribute [rw] tags
+    #   Optional tags (metadata key/value pairs) to be associated with the
+    #   project. For example, `\{ \{"key1": "value1", "key2": "value2"\}
+    #   \}`. For more information, see [AWS Tagging Strategies][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+    #   @return [Hash<String,String>]
+    #
     class CreateProjectRequest < Struct.new(
       :project_name,
       :description,
-      :placement_template)
+      :placement_template,
+      :tags)
       include Aws::Structure
     end
 
@@ -314,6 +330,30 @@ module Aws::IoT1ClickProjects
       include Aws::Structure
     end
 
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InternalFailureException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InvalidRequestException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPlacementsRequest
     #   data as a hash:
     #
@@ -393,6 +433,32 @@ module Aws::IoT1ClickProjects
     class ListProjectsResponse < Struct.new(
       :projects,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ProjectArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource whose tags you want to list.
+    #   @return [String]
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags (metadata key/value pairs) which you have assigned to the
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -497,6 +563,10 @@ module Aws::IoT1ClickProjects
     # An object providing detailed information for a particular project
     # associated with an AWS account and region.
     #
+    # @!attribute [rw] arn
+    #   The ARN of the project.
+    #   @return [String]
+    #
     # @!attribute [rw] project_name
     #   The name of the project for which to obtain information from.
     #   @return [String]
@@ -520,17 +590,27 @@ module Aws::IoT1ClickProjects
     #   An object describing the project's placement specifications.
     #   @return [Types::PlacementTemplate]
     #
+    # @!attribute [rw] tags
+    #   The tags (metadata key/value pairs) associated with the project.
+    #   @return [Hash<String,String>]
+    #
     class ProjectDescription < Struct.new(
+      :arn,
       :project_name,
       :description,
       :created_date,
       :updated_date,
-      :placement_template)
+      :placement_template,
+      :tags)
       include Aws::Structure
     end
 
     # An object providing summary information for a particular project for
     # an associated AWS account and region.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the project.
+    #   @return [String]
     #
     # @!attribute [rw] project_name
     #   The name of the project being summarized.
@@ -547,12 +627,110 @@ module Aws::IoT1ClickProjects
     #   `updatedDate` are the same.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   The tags (metadata key/value pairs) associated with the project.
+    #   @return [Hash<String,String>]
+    #
     class ProjectSummary < Struct.new(
+      :arn,
       :project_name,
       :created_date,
-      :updated_date)
+      :updated_date,
+      :tags)
       include Aws::Structure
     end
+
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ResourceConflictException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ResourceNotFoundException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ProjectArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resouce for which tag(s) should be added or modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The new or modifying tag(s) for the resource. See [AWS IoT 1-Click
+    #   Service Limits][1] for the maximum number of tags allowed per
+    #   resource.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits
+    #   @return [Hash<String,String>]
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TooManyRequestsException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ProjectArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource whose tag you want to remove.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of those tags which you want to remove.
+    #   @return [Array<String>]
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdatePlacementRequest
     #   data as a hash:

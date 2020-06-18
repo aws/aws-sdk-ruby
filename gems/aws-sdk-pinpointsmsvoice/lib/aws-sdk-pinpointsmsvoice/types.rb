@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -7,6 +9,30 @@
 
 module Aws::PinpointSMSVoice
   module Types
+
+    # The resource specified in your request already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The input you provided is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # An object that defines a message that contains text formatted using
     # Amazon Pinpoint Voice Instructions markup.
@@ -30,7 +56,7 @@ module Aws::PinpointSMSVoice
       include Aws::Structure
     end
 
-    # An object that contains information about a event destination that
+    # An object that contains information about an event destination that
     # sends data to Amazon CloudWatch Logs.
     #
     # @note When making an API call, you may pass CloudWatchLogsDestination
@@ -78,6 +104,9 @@ module Aws::PinpointSMSVoice
     #             iam_role_arn: "String",
     #           },
     #           matching_event_types: ["INITIATED_CALL"], # accepts INITIATED_CALL, RINGING, ANSWERED, COMPLETED_CALL, BUSY, FAILED, NO_ANSWER
+    #           sns_destination: {
+    #             topic_arn: "String",
+    #           },
     #         },
     #         event_destination_name: "NonEmptyString",
     #       }
@@ -192,7 +221,7 @@ module Aws::PinpointSMSVoice
     # An object that defines an event destination.
     #
     # @!attribute [rw] cloud_watch_logs_destination
-    #   An object that contains information about a event destination that
+    #   An object that contains information about an event destination that
     #   sends data to Amazon CloudWatch Logs.
     #   @return [Types::CloudWatchLogsDestination]
     #
@@ -203,7 +232,7 @@ module Aws::PinpointSMSVoice
     #   @return [Boolean]
     #
     # @!attribute [rw] kinesis_firehose_destination
-    #   An object that contains information about a event destination that
+    #   An object that contains information about an event destination that
     #   sends data to Amazon Kinesis Data Firehose.
     #   @return [Types::KinesisFirehoseDestination]
     #
@@ -217,6 +246,11 @@ module Aws::PinpointSMSVoice
     #   A name that identifies the event destination configuration.
     #   @return [String]
     #
+    # @!attribute [rw] sns_destination
+    #   An object that contains information about an event destination that
+    #   sends data to Amazon SNS.
+    #   @return [Types::SnsDestination]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/EventDestination AWS API Documentation
     #
     class EventDestination < Struct.new(
@@ -224,7 +258,8 @@ module Aws::PinpointSMSVoice
       :enabled,
       :kinesis_firehose_destination,
       :matching_event_types,
-      :name)
+      :name,
+      :sns_destination)
       include Aws::Structure
     end
 
@@ -244,10 +279,13 @@ module Aws::PinpointSMSVoice
     #           iam_role_arn: "String",
     #         },
     #         matching_event_types: ["INITIATED_CALL"], # accepts INITIATED_CALL, RINGING, ANSWERED, COMPLETED_CALL, BUSY, FAILED, NO_ANSWER
+    #         sns_destination: {
+    #           topic_arn: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] cloud_watch_logs_destination
-    #   An object that contains information about a event destination that
+    #   An object that contains information about an event destination that
     #   sends data to Amazon CloudWatch Logs.
     #   @return [Types::CloudWatchLogsDestination]
     #
@@ -258,7 +296,7 @@ module Aws::PinpointSMSVoice
     #   @return [Boolean]
     #
     # @!attribute [rw] kinesis_firehose_destination
-    #   An object that contains information about a event destination that
+    #   An object that contains information about an event destination that
     #   sends data to Amazon Kinesis Data Firehose.
     #   @return [Types::KinesisFirehoseDestination]
     #
@@ -268,13 +306,19 @@ module Aws::PinpointSMSVoice
     #   destination.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] sns_destination
+    #   An object that contains information about an event destination that
+    #   sends data to Amazon SNS.
+    #   @return [Types::SnsDestination]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/EventDestinationDefinition AWS API Documentation
     #
     class EventDestinationDefinition < Struct.new(
       :cloud_watch_logs_destination,
       :enabled,
       :kinesis_firehose_destination,
-      :matching_event_types)
+      :matching_event_types,
+      :sns_destination)
       include Aws::Structure
     end
 
@@ -310,7 +354,21 @@ module Aws::PinpointSMSVoice
       include Aws::Structure
     end
 
-    # An object that contains information about a event destination that
+    # The API encountered an unexpected error and couldn't complete the
+    # request. You might be able to successfully issue the request again in
+    # the future.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/InternalServiceErrorException AWS API Documentation
+    #
+    class InternalServiceErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An object that contains information about an event destination that
     # sends data to Amazon Kinesis Data Firehose.
     #
     # @note When making an API call, you may pass KinesisFirehoseDestination
@@ -339,6 +397,73 @@ module Aws::PinpointSMSVoice
       include Aws::Structure
     end
 
+    # There are too many instances of the specified resource type.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListConfigurationSetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "__string",
+    #         page_size: "__string",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSetsRequest AWS API Documentation
+    #
+    class ListConfigurationSetsRequest < Struct.new(
+      :next_token,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # An object that contains information about the configuration sets for
+    # your account in the current region.
+    #
+    # @!attribute [rw] configuration_sets
+    #   An object that contains a list of configuration sets for your
+    #   account in the current region.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a previous call to ListConfigurationSets to
+    #   indicate the position in the list of configuration sets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSetsResponse AWS API Documentation
+    #
+    class ListConfigurationSetsResponse < Struct.new(
+      :configuration_sets,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # The resource you attempted to access doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object that defines a message that contains unformatted text.
     #
     # @note When making an API call, you may pass PlainTextMessageType
@@ -360,6 +485,9 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     #
     # @!attribute [rw] voice_id
+    #   The name of the voice that you want to use to deliver the message.
+    #   For a complete list of supported voices, see the Amazon Polly
+    #   Developer Guide.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/PlainTextMessageType AWS API Documentation
@@ -484,6 +612,41 @@ module Aws::PinpointSMSVoice
       include Aws::Structure
     end
 
+    # An object that contains information about an event destination that
+    # sends data to Amazon SNS.
+    #
+    # @note When making an API call, you may pass SnsDestination
+    #   data as a hash:
+    #
+    #       {
+    #         topic_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of the Amazon SNS topic that you want
+    #   to publish events to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/SnsDestination AWS API Documentation
+    #
+    class SnsDestination < Struct.new(
+      :topic_arn)
+      include Aws::Structure
+    end
+
+    # You've issued too many requests to the resource. Wait a few minutes,
+    # and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object that defines a request to update an existing event
     # destination.
     #
@@ -503,6 +666,9 @@ module Aws::PinpointSMSVoice
     #             iam_role_arn: "String",
     #           },
     #           matching_event_types: ["INITIATED_CALL"], # accepts INITIATED_CALL, RINGING, ANSWERED, COMPLETED_CALL, BUSY, FAILED, NO_ANSWER
+    #           sns_destination: {
+    #             topic_arn: "String",
+    #           },
     #         },
     #         event_destination_name: "__string", # required
     #       }

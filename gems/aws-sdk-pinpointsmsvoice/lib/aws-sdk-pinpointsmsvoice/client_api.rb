@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -16,6 +18,7 @@ module Aws::PinpointSMSVoice
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CallInstructionsMessageType = Shapes::StructureShape.new(name: 'CallInstructionsMessageType')
     CloudWatchLogsDestination = Shapes::StructureShape.new(name: 'CloudWatchLogsDestination')
+    ConfigurationSets = Shapes::ListShape.new(name: 'ConfigurationSets')
     CreateConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'CreateConfigurationSetEventDestinationRequest')
     CreateConfigurationSetEventDestinationResponse = Shapes::StructureShape.new(name: 'CreateConfigurationSetEventDestinationResponse')
     CreateConfigurationSetRequest = Shapes::StructureShape.new(name: 'CreateConfigurationSetRequest')
@@ -34,12 +37,16 @@ module Aws::PinpointSMSVoice
     InternalServiceErrorException = Shapes::StructureShape.new(name: 'InternalServiceErrorException')
     KinesisFirehoseDestination = Shapes::StructureShape.new(name: 'KinesisFirehoseDestination')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListConfigurationSetsRequest = Shapes::StructureShape.new(name: 'ListConfigurationSetsRequest')
+    ListConfigurationSetsResponse = Shapes::StructureShape.new(name: 'ListConfigurationSetsResponse')
+    NextTokenString = Shapes::StringShape.new(name: 'NextTokenString')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     PlainTextMessageType = Shapes::StructureShape.new(name: 'PlainTextMessageType')
     SSMLMessageType = Shapes::StructureShape.new(name: 'SSMLMessageType')
     SendVoiceMessageRequest = Shapes::StructureShape.new(name: 'SendVoiceMessageRequest')
     SendVoiceMessageResponse = Shapes::StructureShape.new(name: 'SendVoiceMessageResponse')
+    SnsDestination = Shapes::StructureShape.new(name: 'SnsDestination')
     String = Shapes::StringShape.new(name: 'String')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UpdateConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetEventDestinationRequest')
@@ -54,12 +61,20 @@ module Aws::PinpointSMSVoice
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
+    AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    AlreadyExistsException.struct_class = Types::AlreadyExistsException
+
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    BadRequestException.struct_class = Types::BadRequestException
+
     CallInstructionsMessageType.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Text"))
     CallInstructionsMessageType.struct_class = Types::CallInstructionsMessageType
 
     CloudWatchLogsDestination.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "IamRoleArn"))
     CloudWatchLogsDestination.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "LogGroupArn"))
     CloudWatchLogsDestination.struct_class = Types::CloudWatchLogsDestination
+
+    ConfigurationSets.member = Shapes::ShapeRef.new(shape: WordCharactersWithDelimiters)
 
     CreateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ConfigurationSetName"))
     CreateConfigurationSetEventDestinationRequest.add_member(:event_destination, Shapes::ShapeRef.new(shape: EventDestinationDefinition, location_name: "EventDestination"))
@@ -89,12 +104,14 @@ module Aws::PinpointSMSVoice
     EventDestination.add_member(:kinesis_firehose_destination, Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
     EventDestination.add_member(:matching_event_types, Shapes::ShapeRef.new(shape: EventTypes, location_name: "MatchingEventTypes"))
     EventDestination.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    EventDestination.add_member(:sns_destination, Shapes::ShapeRef.new(shape: SnsDestination, location_name: "SnsDestination"))
     EventDestination.struct_class = Types::EventDestination
 
     EventDestinationDefinition.add_member(:cloud_watch_logs_destination, Shapes::ShapeRef.new(shape: CloudWatchLogsDestination, location_name: "CloudWatchLogsDestination"))
     EventDestinationDefinition.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     EventDestinationDefinition.add_member(:kinesis_firehose_destination, Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
     EventDestinationDefinition.add_member(:matching_event_types, Shapes::ShapeRef.new(shape: EventTypes, location_name: "MatchingEventTypes"))
+    EventDestinationDefinition.add_member(:sns_destination, Shapes::ShapeRef.new(shape: SnsDestination, location_name: "SnsDestination"))
     EventDestinationDefinition.struct_class = Types::EventDestinationDefinition
 
     EventDestinations.member = Shapes::ShapeRef.new(shape: EventDestination)
@@ -107,9 +124,26 @@ module Aws::PinpointSMSVoice
     GetConfigurationSetEventDestinationsResponse.add_member(:event_destinations, Shapes::ShapeRef.new(shape: EventDestinations, location_name: "EventDestinations"))
     GetConfigurationSetEventDestinationsResponse.struct_class = Types::GetConfigurationSetEventDestinationsResponse
 
+    InternalServiceErrorException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InternalServiceErrorException.struct_class = Types::InternalServiceErrorException
+
     KinesisFirehoseDestination.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: String, location_name: "DeliveryStreamArn"))
     KinesisFirehoseDestination.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "IamRoleArn"))
     KinesisFirehoseDestination.struct_class = Types::KinesisFirehoseDestination
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListConfigurationSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
+    ListConfigurationSetsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "PageSize"))
+    ListConfigurationSetsRequest.struct_class = Types::ListConfigurationSetsRequest
+
+    ListConfigurationSetsResponse.add_member(:configuration_sets, Shapes::ShapeRef.new(shape: ConfigurationSets, location_name: "ConfigurationSets"))
+    ListConfigurationSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
+    ListConfigurationSetsResponse.struct_class = Types::ListConfigurationSetsResponse
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    NotFoundException.struct_class = Types::NotFoundException
 
     PlainTextMessageType.add_member(:language_code, Shapes::ShapeRef.new(shape: String, location_name: "LanguageCode"))
     PlainTextMessageType.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Text"))
@@ -130,6 +164,12 @@ module Aws::PinpointSMSVoice
 
     SendVoiceMessageResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageId"))
     SendVoiceMessageResponse.struct_class = Types::SendVoiceMessageResponse
+
+    SnsDestination.add_member(:topic_arn, Shapes::ShapeRef.new(shape: String, location_name: "TopicArn"))
+    SnsDestination.struct_class = Types::SnsDestination
+
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     UpdateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ConfigurationSetName"))
     UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination, Shapes::ShapeRef.new(shape: EventDestinationDefinition, location_name: "EventDestination"))
@@ -220,6 +260,17 @@ module Aws::PinpointSMSVoice
         o.input = Shapes::ShapeRef.new(shape: GetConfigurationSetEventDestinationsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetConfigurationSetEventDestinationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:list_configuration_sets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConfigurationSets"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/sms-voice/configuration-sets"
+        o.input = Shapes::ShapeRef.new(shape: ListConfigurationSetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListConfigurationSetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)

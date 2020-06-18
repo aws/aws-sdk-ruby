@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-importexport/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     import_export = Aws::ImportExport::Client.new
+#     resp = import_export.cancel_job(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Import/Export all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Import/Export are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ImportExport::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Import/Export API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-importexport/customizations'
 # @service
 module Aws::ImportExport
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.20.1'
 
 end

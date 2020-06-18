@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Support for encryption context
+* Issue - add support for user provided encryption contexct to `EncryptionV2::Client`
 
 1.30.0 (2018-12-04)
 ------------------
@@ -291,4 +291,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-s3` gem.
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-shield/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     shield = Aws::Shield::Client.new
+#     resp = shield.associate_drt_log_bucket(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Shield all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Shield are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Shield::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Shield API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-shield/customizations'
 # @service
 module Aws::Shield
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.27.1'
 
 end

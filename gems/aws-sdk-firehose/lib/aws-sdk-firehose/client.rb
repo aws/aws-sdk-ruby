@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:firehose)
 
 module Aws::Firehose
+  # An API client for Firehose.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::Firehose::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::Firehose
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +109,7 @@ module Aws::Firehose
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::Firehose
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::Firehose
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::Firehose
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::Firehose
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::Firehose
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::Firehose
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::Firehose
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,6 +274,48 @@ module Aws::Firehose
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -222,9 +329,15 @@ module Aws::Firehose
     # This is an asynchronous operation that immediately returns. The
     # initial status of the delivery stream is `CREATING`. After the
     # delivery stream is created, its status is `ACTIVE` and it now accepts
-    # data. Attempts to send data to a delivery stream that is not in the
-    # `ACTIVE` state cause an exception. To check the state of a delivery
-    # stream, use DescribeDeliveryStream.
+    # data. If the delivery stream creation fails, the status transitions to
+    # `CREATING_FAILED`. Attempts to send data to a delivery stream that is
+    # not in the `ACTIVE` state cause an exception. To check the state of a
+    # delivery stream, use DescribeDeliveryStream.
+    #
+    # If the status of a delivery stream is `CREATING_FAILED`, this status
+    # doesn't change, and you can't invoke `CreateDeliveryStream` again on
+    # it. However, you can invoke the DeleteDeliveryStream operation to
+    # delete it.
     #
     # A Kinesis Data Firehose delivery stream can be configured to receive
     # records directly from providers using PutRecord or PutRecordBatch, or
@@ -234,26 +347,31 @@ module Aws::Firehose
     # the Kinesis stream Amazon Resource Name (ARN) and role ARN in the
     # `KinesisStreamSourceConfiguration` parameter.
     #
+    # To create a delivery stream with server-side encryption (SSE) enabled,
+    # include DeliveryStreamEncryptionConfigurationInput in your request.
+    # This is optional. You can also invoke StartDeliveryStreamEncryption to
+    # turn on SSE for an existing delivery stream that doesn't have SSE
+    # enabled.
+    #
     # A delivery stream is configured with a single destination: Amazon S3,
     # Amazon ES, Amazon Redshift, or Splunk. You must specify only one of
     # the following destination configuration parameters:
-    # **ExtendedS3DestinationConfiguration**,
-    # **S3DestinationConfiguration**,
-    # **ElasticsearchDestinationConfiguration**,
-    # **RedshiftDestinationConfiguration**, or
-    # **SplunkDestinationConfiguration**.
+    # `ExtendedS3DestinationConfiguration`, `S3DestinationConfiguration`,
+    # `ElasticsearchDestinationConfiguration`,
+    # `RedshiftDestinationConfiguration`, or
+    # `SplunkDestinationConfiguration`.
     #
-    # When you specify **S3DestinationConfiguration**, you can also provide
-    # the following optional values: **BufferingHints**,
-    # **EncryptionConfiguration**, and **CompressionFormat**. By default, if
-    # no **BufferingHints** value is provided, Kinesis Data Firehose buffers
-    # data up to 5 MB or for 5 minutes, whichever condition is satisfied
-    # first. **BufferingHints** is a hint, so there are some cases where the
-    # service cannot adhere to these conditions strictly. For example,
-    # record boundaries might be such that the size is a little over or
-    # under the configured buffering size. By default, no encryption is
-    # performed. We strongly recommend that you enable encryption to ensure
-    # secure data storage in Amazon S3.
+    # When you specify `S3DestinationConfiguration`, you can also provide
+    # the following optional values: BufferingHints,
+    # `EncryptionConfiguration`, and `CompressionFormat`. By default, if no
+    # `BufferingHints` value is provided, Kinesis Data Firehose buffers data
+    # up to 5 MB or for 5 minutes, whichever condition is satisfied first.
+    # `BufferingHints` is a hint, so there are some cases where the service
+    # cannot adhere to these conditions strictly. For example, record
+    # boundaries might be such that the size is a little over or under the
+    # configured buffering size. By default, no encryption is performed. We
+    # strongly recommend that you enable encryption to ensure secure data
+    # storage in Amazon S3.
     #
     # A few notes about Amazon Redshift as a destination:
     #
@@ -261,7 +379,7 @@ module Aws::Firehose
     #   location. Kinesis Data Firehose first delivers data to Amazon S3 and
     #   then uses `COPY` syntax to load data into an Amazon Redshift table.
     #   This is specified in the
-    #   **RedshiftDestinationConfiguration.S3Configuration** parameter.
+    #   `RedshiftDestinationConfiguration.S3Configuration` parameter.
     #
     # * The compression formats `SNAPPY` or `ZIP` cannot be specified in
     #   `RedshiftDestinationConfiguration.S3Configuration` because the
@@ -282,7 +400,7 @@ module Aws::Firehose
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream. This name must be unique per AWS
@@ -305,6 +423,10 @@ module Aws::Firehose
     #   stream, a KinesisStreamSourceConfiguration containing the Kinesis data
     #   stream Amazon Resource Name (ARN) and the role ARN for the source
     #   stream.
+    #
+    # @option params [Types::DeliveryStreamEncryptionConfigurationInput] :delivery_stream_encryption_configuration_input
+    #   Used to specify the type and Amazon Resource Name (ARN) of the KMS key
+    #   needed for Server-Side Encryption (SSE).
     #
     # @option params [Types::S3DestinationConfiguration] :s3_destination_configuration
     #   \[Deprecated\] The destination in Amazon S3. You can specify only one
@@ -350,15 +472,20 @@ module Aws::Firehose
     #       kinesis_stream_arn: "KinesisStreamARN", # required
     #       role_arn: "RoleARN", # required
     #     },
+    #     delivery_stream_encryption_configuration_input: {
+    #       key_arn: "AWSKMSKeyARN",
+    #       key_type: "AWS_OWNED_CMK", # required, accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
+    #     },
     #     s3_destination_configuration: {
     #       role_arn: "RoleARN", # required
     #       bucket_arn: "BucketARN", # required
     #       prefix: "Prefix",
+    #       error_output_prefix: "ErrorOutputPrefix",
     #       buffering_hints: {
     #         size_in_m_bs: 1,
     #         interval_in_seconds: 1,
     #       },
-    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #       encryption_configuration: {
     #         no_encryption_config: "NoEncryption", # accepts NoEncryption
     #         kms_encryption_config: {
@@ -375,11 +502,12 @@ module Aws::Firehose
     #       role_arn: "RoleARN", # required
     #       bucket_arn: "BucketARN", # required
     #       prefix: "Prefix",
+    #       error_output_prefix: "ErrorOutputPrefix",
     #       buffering_hints: {
     #         size_in_m_bs: 1,
     #         interval_in_seconds: 1,
     #       },
-    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #       encryption_configuration: {
     #         no_encryption_config: "NoEncryption", # accepts NoEncryption
     #         kms_encryption_config: {
@@ -410,11 +538,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN", # required
     #         bucket_arn: "BucketARN", # required
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -494,11 +623,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN", # required
     #         bucket_arn: "BucketARN", # required
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -530,11 +660,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN", # required
     #         bucket_arn: "BucketARN", # required
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -555,9 +686,10 @@ module Aws::Firehose
     #     },
     #     elasticsearch_destination_configuration: {
     #       role_arn: "RoleARN", # required
-    #       domain_arn: "ElasticsearchDomainARN", # required
+    #       domain_arn: "ElasticsearchDomainARN",
+    #       cluster_endpoint: "ElasticsearchClusterEndpoint",
     #       index_name: "ElasticsearchIndexName", # required
-    #       type_name: "ElasticsearchTypeName", # required
+    #       type_name: "ElasticsearchTypeName",
     #       index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
     #       buffering_hints: {
     #         interval_in_seconds: 1,
@@ -571,11 +703,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN", # required
     #         bucket_arn: "BucketARN", # required
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -607,6 +740,11 @@ module Aws::Firehose
     #         log_group_name: "LogGroupName",
     #         log_stream_name: "LogStreamName",
     #       },
+    #       vpc_configuration: {
+    #         subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #         role_arn: "RoleARN", # required
+    #         security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #       },
     #     },
     #     splunk_destination_configuration: {
     #       hec_endpoint: "HECEndpoint", # required
@@ -621,11 +759,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN", # required
     #         bucket_arn: "BucketARN", # required
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -681,20 +820,37 @@ module Aws::Firehose
 
     # Deletes a delivery stream and its data.
     #
-    # You can delete a delivery stream only if it is in `ACTIVE` or
-    # `DELETING` state, and not in the `CREATING` state. While the deletion
-    # request is in process, the delivery stream is in the `DELETING` state.
-    #
     # To check the state of a delivery stream, use DescribeDeliveryStream.
+    # You can delete a delivery stream only if it is in one of the following
+    # states: `ACTIVE`, `DELETING`, `CREATING_FAILED`, or `DELETING_FAILED`.
+    # You can't delete a delivery stream that is in the `CREATING` state.
+    # While the deletion request is in process, the delivery stream is in
+    # the `DELETING` state.
     #
-    # While the delivery stream is `DELETING` state, the service might
-    # continue to accept the records, but it doesn't make any guarantees
+    # While the delivery stream is in the `DELETING` state, the service
+    # might continue to accept records, but it doesn't make any guarantees
     # with respect to delivering the data. Therefore, as a best practice,
-    # you should first stop any applications that are sending records before
-    # deleting a delivery stream.
+    # first stop any applications that are sending records before you delete
+    # a delivery stream.
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream.
+    #
+    # @option params [Boolean] :allow_force_delete
+    #   Set this to true if you want to delete the delivery stream even if
+    #   Kinesis Data Firehose is unable to retire the grant for the CMK.
+    #   Kinesis Data Firehose might be unable to retire the grant due to a
+    #   customer error, such as when the CMK or the grant are in an invalid
+    #   state. If you force deletion, you can then use the [RevokeGrant][1]
+    #   operation to revoke the grant you gave to Kinesis Data Firehose. If a
+    #   failure to retire the grant happens due to an AWS KMS issue, Kinesis
+    #   Data Firehose keeps retrying the delete operation.
+    #
+    #   The default value is false.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -702,6 +858,7 @@ module Aws::Firehose
     #
     #   resp = client.delete_delivery_stream({
     #     delivery_stream_name: "DeliveryStreamName", # required
+    #     allow_force_delete: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStream AWS API Documentation
@@ -713,10 +870,17 @@ module Aws::Firehose
       req.send_request(options)
     end
 
-    # Describes the specified delivery stream and gets the status. For
-    # example, after your delivery stream is created, call
-    # `DescribeDeliveryStream` to see whether the delivery stream is
-    # `ACTIVE` and therefore ready for data to be sent to it.
+    # Describes the specified delivery stream and its status. For example,
+    # after your delivery stream is created, call `DescribeDeliveryStream`
+    # to see whether the delivery stream is `ACTIVE` and therefore ready for
+    # data to be sent to it.
+    #
+    # If the status of a delivery stream is `CREATING_FAILED`, this status
+    # doesn't change, and you can't invoke CreateDeliveryStream again on
+    # it. However, you can invoke the DeleteDeliveryStream operation to
+    # delete it. If the status is `DELETING_FAILED`, you can force deletion
+    # by invoking DeleteDeliveryStream again but with
+    # DeleteDeliveryStreamInput$AllowForceDelete set to true.
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream.
@@ -746,8 +910,14 @@ module Aws::Firehose
     #
     #   resp.delivery_stream_description.delivery_stream_name #=> String
     #   resp.delivery_stream_description.delivery_stream_arn #=> String
-    #   resp.delivery_stream_description.delivery_stream_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
-    #   resp.delivery_stream_description.delivery_stream_encryption_configuration.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
+    #   resp.delivery_stream_description.delivery_stream_status #=> String, one of "CREATING", "CREATING_FAILED", "DELETING", "DELETING_FAILED", "ACTIVE"
+    #   resp.delivery_stream_description.failure_description.type #=> String, one of "RETIRE_KMS_GRANT_FAILED", "CREATE_KMS_GRANT_FAILED", "KMS_ACCESS_DENIED", "DISABLED_KMS_KEY", "INVALID_KMS_KEY", "KMS_KEY_NOT_FOUND", "KMS_OPT_IN_REQUIRED", "CREATE_ENI_FAILED", "DELETE_ENI_FAILED", "SUBNET_NOT_FOUND", "SECURITY_GROUP_NOT_FOUND", "ENI_ACCESS_DENIED", "SUBNET_ACCESS_DENIED", "SECURITY_GROUP_ACCESS_DENIED", "UNKNOWN_ERROR"
+    #   resp.delivery_stream_description.failure_description.details #=> String
+    #   resp.delivery_stream_description.delivery_stream_encryption_configuration.key_arn #=> String
+    #   resp.delivery_stream_description.delivery_stream_encryption_configuration.key_type #=> String, one of "AWS_OWNED_CMK", "CUSTOMER_MANAGED_CMK"
+    #   resp.delivery_stream_description.delivery_stream_encryption_configuration.status #=> String, one of "ENABLED", "ENABLING", "ENABLING_FAILED", "DISABLED", "DISABLING", "DISABLING_FAILED"
+    #   resp.delivery_stream_description.delivery_stream_encryption_configuration.failure_description.type #=> String, one of "RETIRE_KMS_GRANT_FAILED", "CREATE_KMS_GRANT_FAILED", "KMS_ACCESS_DENIED", "DISABLED_KMS_KEY", "INVALID_KMS_KEY", "KMS_KEY_NOT_FOUND", "KMS_OPT_IN_REQUIRED", "CREATE_ENI_FAILED", "DELETE_ENI_FAILED", "SUBNET_NOT_FOUND", "SECURITY_GROUP_NOT_FOUND", "ENI_ACCESS_DENIED", "SUBNET_ACCESS_DENIED", "SECURITY_GROUP_ACCESS_DENIED", "UNKNOWN_ERROR"
+    #   resp.delivery_stream_description.delivery_stream_encryption_configuration.failure_description.details #=> String
     #   resp.delivery_stream_description.delivery_stream_type #=> String, one of "DirectPut", "KinesisStreamAsSource"
     #   resp.delivery_stream_description.version_id #=> String
     #   resp.delivery_stream_description.create_timestamp #=> Time
@@ -760,9 +930,10 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.bucket_arn #=> String
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].s3_destination_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -771,9 +942,10 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.bucket_arn #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -789,9 +961,10 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.bucket_arn #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -837,9 +1010,10 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.bucket_arn #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -855,9 +1029,10 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.bucket_arn #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -868,6 +1043,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.domain_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cluster_endpoint #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.index_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.type_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.index_rotation_period #=> String, one of "NoRotation", "OneHour", "OneDay", "OneWeek", "OneMonth"
@@ -878,9 +1054,10 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.bucket_arn #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -895,6 +1072,12 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.log_group_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.subnet_ids #=> Array
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.subnet_ids[0] #=> String
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.security_group_ids #=> Array
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.security_group_ids[0] #=> String
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.vpc_id #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.hec_endpoint #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.hec_endpoint_type #=> String, one of "Raw", "Event"
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.hec_token #=> String
@@ -904,9 +1087,10 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.bucket_arn #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -936,7 +1120,7 @@ module Aws::Firehose
     #
     # The number of delivery streams might be too large to return using a
     # single call to `ListDeliveryStreams`. You can limit the number of
-    # delivery streams returned, using the **Limit** parameter. To determine
+    # delivery streams returned, using the `Limit` parameter. To determine
     # whether there are more delivery streams to list, check the value of
     # `HasMoreDeliveryStreams` in the output. If there are more delivery
     # streams to list, you can request them by calling this operation again
@@ -1083,7 +1267,7 @@ module Aws::Firehose
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/firehose/latest/dev/limits.html
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/limits.html
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream.
@@ -1150,35 +1334,34 @@ module Aws::Firehose
     # data from the destination.
     #
     # The PutRecordBatch response includes a count of failed records,
-    # **FailedPutCount**, and an array of responses, **RequestResponses**.
-    # Even if the PutRecordBatch call succeeds, the value of
-    # **FailedPutCount** may be greater than 0, indicating that there are
-    # records for which the operation didn't succeed. Each entry in the
-    # **RequestResponses** array provides additional information about the
-    # processed record. It directly correlates with a record in the request
-    # array using the same ordering, from the top to the bottom. The
-    # response array always includes the same number of records as the
-    # request array. **RequestResponses** includes both successfully and
-    # unsuccessfully processed records. Kinesis Data Firehose tries to
-    # process all records in each PutRecordBatch request. A single record
-    # failure does not stop the processing of subsequent records.
+    # `FailedPutCount`, and an array of responses, `RequestResponses`. Even
+    # if the PutRecordBatch call succeeds, the value of `FailedPutCount` may
+    # be greater than 0, indicating that there are records for which the
+    # operation didn't succeed. Each entry in the `RequestResponses` array
+    # provides additional information about the processed record. It
+    # directly correlates with a record in the request array using the same
+    # ordering, from the top to the bottom. The response array always
+    # includes the same number of records as the request array.
+    # `RequestResponses` includes both successfully and unsuccessfully
+    # processed records. Kinesis Data Firehose tries to process all records
+    # in each PutRecordBatch request. A single record failure does not stop
+    # the processing of subsequent records.
     #
-    # A successfully processed record includes a **RecordId** value, which
-    # is unique for the record. An unsuccessfully processed record includes
-    # **ErrorCode** and **ErrorMessage** values. **ErrorCode** reflects the
-    # type of error, and is one of the following values:
-    # `ServiceUnavailableException` or `InternalFailure`. **ErrorMessage**
+    # A successfully processed record includes a `RecordId` value, which is
+    # unique for the record. An unsuccessfully processed record includes
+    # `ErrorCode` and `ErrorMessage` values. `ErrorCode` reflects the type
+    # of error, and is one of the following values:
+    # `ServiceUnavailableException` or `InternalFailure`. `ErrorMessage`
     # provides more detailed information about the error.
     #
     # If there is an internal server error or a timeout, the write might
-    # have completed or it might have failed. If **FailedPutCount** is
-    # greater than 0, retry the request, resending only those records that
-    # might have failed processing. This minimizes the possible duplicate
-    # records and also reduces the total bytes sent (and corresponding
-    # charges). We recommend that you handle any duplicates at the
-    # destination.
+    # have completed or it might have failed. If `FailedPutCount` is greater
+    # than 0, retry the request, resending only those records that might
+    # have failed processing. This minimizes the possible duplicate records
+    # and also reduces the total bytes sent (and corresponding charges). We
+    # recommend that you handle any duplicates at the destination.
     #
-    # If PutRecordBatch throws **ServiceUnavailableException**, back off and
+    # If PutRecordBatch throws `ServiceUnavailableException`, back off and
     # retry. If the exception persists, it is possible that the throughput
     # limits have been exceeded for the delivery stream.
     #
@@ -1193,7 +1376,7 @@ module Aws::Firehose
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/firehose/latest/dev/limits.html
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/limits.html
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream.
@@ -1236,31 +1419,62 @@ module Aws::Firehose
       req.send_request(options)
     end
 
-    # Enables server-side encryption (SSE) for the delivery stream. This
-    # operation is asynchronous. It returns immediately. When you invoke it,
-    # Kinesis Firehose first sets the status of the stream to `ENABLING`
-    # then to `ENABLED`. You can continue to read and write data to your
-    # stream while its status is `ENABLING` but they won't get encrypted.
-    # It can take up to 5 seconds after the encryption status changes to
-    # `ENABLED` before all records written to the delivery stream are
-    # encrypted.
+    # Enables server-side encryption (SSE) for the delivery stream.
     #
-    # To check the encryption state of a delivery stream, use
+    # This operation is asynchronous. It returns immediately. When you
+    # invoke it, Kinesis Data Firehose first sets the encryption status of
+    # the stream to `ENABLING`, and then to `ENABLED`. The encryption status
+    # of a delivery stream is the `Status` property in
+    # DeliveryStreamEncryptionConfiguration. If the operation fails, the
+    # encryption status changes to `ENABLING_FAILED`. You can continue to
+    # read and write data to your delivery stream while the encryption
+    # status is `ENABLING`, but the data is not encrypted. It can take up to
+    # 5 seconds after the encryption status changes to `ENABLED` before all
+    # records written to the delivery stream are encrypted. To find out
+    # whether a record or a batch of records was encrypted, check the
+    # response elements PutRecordOutput$Encrypted and
+    # PutRecordBatchOutput$Encrypted, respectively.
+    #
+    # To check the encryption status of a delivery stream, use
     # DescribeDeliveryStream.
     #
-    # You can only enable SSE for a delivery stream that uses `DirectPut` as
-    # its source.
+    # Even if encryption is currently enabled for a delivery stream, you can
+    # still invoke this operation on it to change the ARN of the CMK or both
+    # its type and ARN. If you invoke this method to change the CMK, and the
+    # old CMK is of type `CUSTOMER_MANAGED_CMK`, Kinesis Data Firehose
+    # schedules the grant it had on the old CMK for retirement. If the new
+    # CMK is of type `CUSTOMER_MANAGED_CMK`, Kinesis Data Firehose creates a
+    # grant that enables it to use the new CMK to encrypt and decrypt data
+    # and to manage the grant.
+    #
+    # If a delivery stream already has encryption enabled and then you
+    # invoke this operation to change the ARN of the CMK or both its type
+    # and ARN and you get `ENABLING_FAILED`, this only means that the
+    # attempt to change the CMK failed. In this case, encryption remains
+    # enabled with the old CMK.
+    #
+    # If the encryption status of your delivery stream is `ENABLING_FAILED`,
+    # you can invoke this operation again with a valid CMK. The CMK must be
+    # enabled and the key policy mustn't explicitly deny the permission for
+    # Kinesis Data Firehose to invoke KMS encrypt and decrypt operations.
+    #
+    # You can enable SSE for a delivery stream only if it's a delivery
+    # stream that uses `DirectPut` as its source.
     #
     # The `StartDeliveryStreamEncryption` and `StopDeliveryStreamEncryption`
     # operations have a combined limit of 25 calls per delivery stream per
     # 24 hours. For example, you reach the limit if you call
-    # `StartDeliveryStreamEncryption` thirteen times and
-    # `StopDeliveryStreamEncryption` twelve times for the same stream in a
-    # 24-hour period.
+    # `StartDeliveryStreamEncryption` 13 times and
+    # `StopDeliveryStreamEncryption` 12 times for the same delivery stream
+    # in a 24-hour period.
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream for which you want to enable
     #   server-side encryption (SSE).
+    #
+    # @option params [Types::DeliveryStreamEncryptionConfigurationInput] :delivery_stream_encryption_configuration_input
+    #   Used to specify the type and Amazon Resource Name (ARN) of the KMS key
+    #   needed for Server-Side Encryption (SSE).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1268,6 +1482,10 @@ module Aws::Firehose
     #
     #   resp = client.start_delivery_stream_encryption({
     #     delivery_stream_name: "DeliveryStreamName", # required
+    #     delivery_stream_encryption_configuration_input: {
+    #       key_arn: "AWSKMSKeyARN",
+    #       key_type: "AWS_OWNED_CMK", # required, accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/StartDeliveryStreamEncryption AWS API Documentation
@@ -1279,23 +1497,33 @@ module Aws::Firehose
       req.send_request(options)
     end
 
-    # Disables server-side encryption (SSE) for the delivery stream. This
-    # operation is asynchronous. It returns immediately. When you invoke it,
-    # Kinesis Firehose first sets the status of the stream to `DISABLING`
-    # then to `DISABLED`. You can continue to read and write data to your
-    # stream while its status is `DISABLING`. It can take up to 5 seconds
-    # after the encryption status changes to `DISABLED` before all records
-    # written to the delivery stream are no longer subject to encryption.
+    # Disables server-side encryption (SSE) for the delivery stream.
+    #
+    # This operation is asynchronous. It returns immediately. When you
+    # invoke it, Kinesis Data Firehose first sets the encryption status of
+    # the stream to `DISABLING`, and then to `DISABLED`. You can continue to
+    # read and write data to your stream while its status is `DISABLING`. It
+    # can take up to 5 seconds after the encryption status changes to
+    # `DISABLED` before all records written to the delivery stream are no
+    # longer subject to encryption. To find out whether a record or a batch
+    # of records was encrypted, check the response elements
+    # PutRecordOutput$Encrypted and PutRecordBatchOutput$Encrypted,
+    # respectively.
     #
     # To check the encryption state of a delivery stream, use
     # DescribeDeliveryStream.
     #
+    # If SSE is enabled using a customer managed CMK and then you invoke
+    # `StopDeliveryStreamEncryption`, Kinesis Data Firehose schedules the
+    # related KMS grant for retirement and then retires it after it ensures
+    # that it is finished delivering records to the destination.
+    #
     # The `StartDeliveryStreamEncryption` and `StopDeliveryStreamEncryption`
     # operations have a combined limit of 25 calls per delivery stream per
     # 24 hours. For example, you reach the limit if you call
-    # `StartDeliveryStreamEncryption` thirteen times and
-    # `StopDeliveryStreamEncryption` twelve times for the same stream in a
-    # 24-hour period.
+    # `StartDeliveryStreamEncryption` 13 times and
+    # `StopDeliveryStreamEncryption` 12 times for the same delivery stream
+    # in a 24-hour period.
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream for which you want to disable
@@ -1319,14 +1547,13 @@ module Aws::Firehose
     end
 
     # Adds or updates tags for the specified delivery stream. A tag is a
-    # key-value pair (the value is optional) that you can define and assign
-    # to AWS resources. If you specify a tag that already exists, the tag
-    # value is replaced with the value that you specify in the request. Tags
-    # are metadata. For example, you can add friendly names and descriptions
-    # or other types of information that can help you distinguish the
-    # delivery stream. For more information about tags, see [Using Cost
-    # Allocation Tags][1] in the *AWS Billing and Cost Management User
-    # Guide*.
+    # key-value pair that you can define and assign to AWS resources. If you
+    # specify a tag that already exists, the tag value is replaced with the
+    # value that you specify in the request. Tags are metadata. For example,
+    # you can add friendly names and descriptions or other types of
+    # information that can help you distinguish the delivery stream. For
+    # more information about tags, see [Using Cost Allocation Tags][1] in
+    # the *AWS Billing and Cost Management User Guide*.
     #
     # Each delivery stream can have up to 50 tags.
     #
@@ -1428,19 +1655,19 @@ module Aws::Firehose
     # does not merge any parameters. In this case, all parameters must be
     # specified.
     #
-    # Kinesis Data Firehose uses **CurrentDeliveryStreamVersionId** to avoid
+    # Kinesis Data Firehose uses `CurrentDeliveryStreamVersionId` to avoid
     # race conditions and conflicting merges. This is a required field, and
     # the service updates the configuration only if the existing
     # configuration has a version ID that matches. After the update is
     # applied successfully, the version ID is updated, and can be retrieved
     # using DescribeDeliveryStream. Use the new version ID to set
-    # **CurrentDeliveryStreamVersionId** in the next call.
+    # `CurrentDeliveryStreamVersionId` in the next call.
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream.
     #
     # @option params [required, String] :current_delivery_stream_version_id
-    #   Obtain this value from the **VersionId** result of
+    #   Obtain this value from the `VersionId` result of
     #   DeliveryStreamDescription. This value is required, and helps the
     #   service perform conditional operations. For example, if there is an
     #   interleaving update and this value is null, then the update
@@ -1478,11 +1705,12 @@ module Aws::Firehose
     #       role_arn: "RoleARN",
     #       bucket_arn: "BucketARN",
     #       prefix: "Prefix",
+    #       error_output_prefix: "ErrorOutputPrefix",
     #       buffering_hints: {
     #         size_in_m_bs: 1,
     #         interval_in_seconds: 1,
     #       },
-    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #       encryption_configuration: {
     #         no_encryption_config: "NoEncryption", # accepts NoEncryption
     #         kms_encryption_config: {
@@ -1499,11 +1727,12 @@ module Aws::Firehose
     #       role_arn: "RoleARN",
     #       bucket_arn: "BucketARN",
     #       prefix: "Prefix",
+    #       error_output_prefix: "ErrorOutputPrefix",
     #       buffering_hints: {
     #         size_in_m_bs: 1,
     #         interval_in_seconds: 1,
     #       },
-    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #       encryption_configuration: {
     #         no_encryption_config: "NoEncryption", # accepts NoEncryption
     #         kms_encryption_config: {
@@ -1534,11 +1763,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN",
     #         bucket_arn: "BucketARN",
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -1618,11 +1848,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN",
     #         bucket_arn: "BucketARN",
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -1654,11 +1885,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN",
     #         bucket_arn: "BucketARN",
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -1680,6 +1912,7 @@ module Aws::Firehose
     #     elasticsearch_destination_update: {
     #       role_arn: "RoleARN",
     #       domain_arn: "ElasticsearchDomainARN",
+    #       cluster_endpoint: "ElasticsearchClusterEndpoint",
     #       index_name: "ElasticsearchIndexName",
     #       type_name: "ElasticsearchTypeName",
     #       index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
@@ -1694,11 +1927,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN",
     #         bucket_arn: "BucketARN",
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -1744,11 +1978,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN",
     #         bucket_arn: "BucketARN",
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -1805,7 +2040,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.29.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

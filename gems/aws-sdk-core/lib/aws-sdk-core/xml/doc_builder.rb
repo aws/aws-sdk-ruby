@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module Xml
     class DocBuilder
@@ -6,7 +8,11 @@ module Aws
       # @option options [String] :pad ('')
       # @option options [String] :indent ('')
       def initialize(options = {})
-        @target = options[:target] || ''
+        @target = options[:target] || (
+          # The String has to be mutable
+          # because @target implements `<<` method.
+          String.new
+        )
         @indent = options[:indent] || ''
         @pad = options[:pad] || ''
         @end_of_line = @indent == '' ? '' : "\n"
@@ -32,7 +38,7 @@ module Aws
         if block_given?
           @target << open_el(name, attrs)
           @target << @end_of_line
-          increase_pad { yield }
+          increase_pad(&block)
           @target << @pad
           @target << close_el(name)
         elsif args.empty?
@@ -77,7 +83,7 @@ module Aws
       def increase_pad(&block)
         pre_increase = @pad
         @pad = @pad + @indent
-        yield
+        block.call
         @pad = pre_increase
       end
 

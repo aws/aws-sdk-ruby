@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -94,6 +96,34 @@ module Aws::ServiceCatalog
       :value)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass AssociateBudgetWithResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         budget_name: "BudgetName", # required
+    #         resource_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] budget_name
+    #   The name of the budget you want to associate.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource identifier. Either a portfolio-id or a product-id.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateBudgetWithResourceInput AWS API Documentation
+    #
+    class AssociateBudgetWithResourceInput < Struct.new(
+      :budget_name,
+      :resource_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateBudgetWithResourceOutput AWS API Documentation
+    #
+    class AssociateBudgetWithResourceOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass AssociatePrincipalWithPortfolioInput
     #   data as a hash:
@@ -361,6 +391,19 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # Information about a budget.
+    #
+    # @!attribute [rw] budget_name
+    #   Name of the associated budget.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BudgetDetail AWS API Documentation
+    #
+    class BudgetDetail < Struct.new(
+      :budget_name)
+      include Aws::Structure
+    end
+
     # Information about a CloudWatch dashboard.
     #
     # @!attribute [rw] name
@@ -387,6 +430,8 @@ module Aws::ServiceCatalog
     #
     #   * `NOTIFICATION`
     #
+    #   * STACKSET
+    #
     #   * `TEMPLATE`
     #   @return [String]
     #
@@ -398,13 +443,27 @@ module Aws::ServiceCatalog
     #   The owner of the constraint.
     #   @return [String]
     #
+    # @!attribute [rw] product_id
+    #   The identifier of the product the constraint applies to. Note that a
+    #   constraint applies to a specific instance of a product within a
+    #   certain portfolio.
+    #   @return [String]
+    #
+    # @!attribute [rw] portfolio_id
+    #   The identifier of the portfolio the product resides in. The
+    #   constraint applies only to the instance of the product that lives
+    #   within this portfolio.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ConstraintDetail AWS API Documentation
     #
     class ConstraintDetail < Struct.new(
       :constraint_id,
       :type,
       :description,
-      :owner)
+      :owner,
+      :product_id,
+      :portfolio_id)
       include Aws::Structure
     end
 
@@ -416,6 +475,8 @@ module Aws::ServiceCatalog
     #   * `LAUNCH`
     #
     #   * `NOTIFICATION`
+    #
+    #   * STACKSET
     #
     #   * `TEMPLATE`
     #   @return [String]
@@ -554,9 +615,28 @@ module Aws::ServiceCatalog
     #
     #   LAUNCH
     #
-    #   : Specify the `RoleArn` property as follows:
+    #   : You are required to specify either the `RoleArn` or the
+    #     `LocalRoleName` but can't use both.
+    #
+    #     Specify the `RoleArn` property as follows:
     #
     #     `\{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"\}`
+    #
+    #     Specify the `LocalRoleName` property as follows:
+    #
+    #     `\{"LocalRoleName": "SCBasicLaunchRole"\}`
+    #
+    #     If you specify the `LocalRoleName` property, when an account uses
+    #     the launch constraint, the IAM role with that name in the account
+    #     will be used. This allows launch-role constraints to be
+    #     account-agnostic so the administrator can create fewer resources
+    #     per shared account.
+    #
+    #     <note markdown="1"> The given role name must exist in the account used to create the
+    #     launch constraint and the account of the user who launches a
+    #     product with this launch constraint.
+    #
+    #      </note>
     #
     #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
     #
@@ -569,6 +649,15 @@ module Aws::ServiceCatalog
     #
     #     `\{"NotificationArns" :
     #     ["arn:aws:sns:us-east-1:123456789012:Topic"]\}`
+    #
+    #   RESOURCE\_UPDATE
+    #
+    #   : Specify the `TagUpdatesOnProvisionedProduct` property as follows:
+    #
+    #     `\{"Version":"2.0","Properties":\{"TagUpdateOnProvisionedProduct":"String"\}\}`
+    #
+    #     The `TagUpdatesOnProvisionedProduct` property accepts a string
+    #     value of `ALLOWED` or `NOT_ALLOWED`.
     #
     #   STACKSET
     #
@@ -602,6 +691,8 @@ module Aws::ServiceCatalog
     #   * `LAUNCH`
     #
     #   * `NOTIFICATION`
+    #
+    #   * `RESOURCE_UPDATE`
     #
     #   * `STACKSET`
     #
@@ -823,6 +914,7 @@ module Aws::ServiceCatalog
     #             "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #           },
     #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
+    #           disable_template_validation: false,
     #         },
     #         idempotency_token: "IdempotencyToken", # required
     #       }
@@ -1012,6 +1104,11 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] tags
     #   One or more tags.
+    #
+    #   If the plan is for an existing provisioned product, the product must
+    #   have a `RESOURCE_UPDATE` constraint with
+    #   `TagUpdatesOnProvisionedProduct` set to `ALLOWED` to allow tag
+    #   updates.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisionedProductPlanInput AWS API Documentation
@@ -1075,6 +1172,7 @@ module Aws::ServiceCatalog
     #             "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #           },
     #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
+    #           disable_template_validation: false,
     #         },
     #         idempotency_token: "IdempotencyToken", # required
     #       }
@@ -1164,8 +1262,11 @@ module Aws::ServiceCatalog
     #
     #   Name
     #
-    #   : The name of the AWS Systems Manager Document. For example,
-    #     `AWS-RestartEC2Instance`.
+    #   : The name of the AWS Systems Manager document (SSM document). For
+    #     example, `AWS-RestartEC2Instance`.
+    #
+    #     If you are using a shared SSM document, you must provide the ARN
+    #     instead of the name.
     #
     #   Version
     #
@@ -1185,7 +1286,8 @@ module Aws::ServiceCatalog
     #
     #   : The list of parameters in JSON format.
     #
-    #     For example: `[\{"Name":"InstanceId","Type":"TARGET"\}]`.
+    #     For example: `[\{"Name":"InstanceId","Type":"TARGET"\}]`
+    #     or `[\{"Name":"InstanceId","Type":"TEXT_VALUE"\}]`.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] description
@@ -1712,12 +1814,17 @@ module Aws::ServiceCatalog
     #   Information about the TagOptions associated with the portfolio.
     #   @return [Array<Types::TagOptionDetail>]
     #
+    # @!attribute [rw] budgets
+    #   Information about the associated budgets.
+    #   @return [Array<Types::BudgetDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioOutput AWS API Documentation
     #
     class DescribePortfolioOutput < Struct.new(
       :portfolio_detail,
       :tags,
-      :tag_options)
+      :tag_options,
+      :budgets)
       include Aws::Structure
     end
 
@@ -1725,7 +1832,7 @@ module Aws::ServiceCatalog
     #   data as a hash:
     #
     #       {
-    #         portfolio_share_token: "PortfolioShareToken", # required
+    #         portfolio_share_token: "Id", # required
     #       }
     #
     # @!attribute [rw] portfolio_share_token
@@ -1778,7 +1885,8 @@ module Aws::ServiceCatalog
     #
     #       {
     #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
+    #         id: "Id",
+    #         name: "ProductViewName",
     #       }
     #
     # @!attribute [rw] accept_language
@@ -1795,11 +1903,16 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The product name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdminInput AWS API Documentation
     #
     class DescribeProductAsAdminInput < Struct.new(
       :accept_language,
-      :id)
+      :id,
+      :name)
       include Aws::Structure
     end
 
@@ -1820,13 +1933,18 @@ module Aws::ServiceCatalog
     #   Information about the TagOptions associated with the product.
     #   @return [Array<Types::TagOptionDetail>]
     #
+    # @!attribute [rw] budgets
+    #   Information about the associated budgets.
+    #   @return [Array<Types::BudgetDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdminOutput AWS API Documentation
     #
     class DescribeProductAsAdminOutput < Struct.new(
       :product_view_detail,
       :provisioning_artifact_summaries,
       :tags,
-      :tag_options)
+      :tag_options,
+      :budgets)
       include Aws::Structure
     end
 
@@ -1835,7 +1953,8 @@ module Aws::ServiceCatalog
     #
     #       {
     #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
+    #         id: "Id",
+    #         name: "ProductViewName",
     #       }
     #
     # @!attribute [rw] accept_language
@@ -1852,11 +1971,16 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The product name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductInput AWS API Documentation
     #
     class DescribeProductInput < Struct.new(
       :accept_language,
-      :id)
+      :id,
+      :name)
       include Aws::Structure
     end
 
@@ -1869,11 +1993,21 @@ module Aws::ServiceCatalog
     #   product.
     #   @return [Array<Types::ProvisioningArtifact>]
     #
+    # @!attribute [rw] budgets
+    #   Information about the associated budgets.
+    #   @return [Array<Types::BudgetDetail>]
+    #
+    # @!attribute [rw] launch_paths
+    #   Information about the associated launch paths.
+    #   @return [Array<Types::LaunchPath>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductOutput AWS API Documentation
     #
     class DescribeProductOutput < Struct.new(
       :product_view_summary,
-      :provisioning_artifacts)
+      :provisioning_artifacts,
+      :budgets,
+      :launch_paths)
       include Aws::Structure
     end
 
@@ -2041,8 +2175,10 @@ module Aws::ServiceCatalog
     #
     #       {
     #         accept_language: "AcceptLanguage",
-    #         provisioning_artifact_id: "Id", # required
-    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id",
+    #         product_id: "Id",
+    #         provisioning_artifact_name: "ProvisioningArtifactName",
+    #         product_name: "ProductViewName",
     #         verbose: false,
     #       }
     #
@@ -2064,6 +2200,14 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #   @return [String]
     #
+    # @!attribute [rw] provisioning_artifact_name
+    #   The provisioning artifact name.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_name
+    #   The product name.
+    #   @return [String]
+    #
     # @!attribute [rw] verbose
     #   Indicates whether a verbose level of detail is enabled.
     #   @return [Boolean]
@@ -2074,6 +2218,8 @@ module Aws::ServiceCatalog
       :accept_language,
       :provisioning_artifact_id,
       :product_id,
+      :provisioning_artifact_name,
+      :product_name,
       :verbose)
       include Aws::Structure
     end
@@ -2245,6 +2391,53 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeServiceActionExecutionParametersInput
+    #   data as a hash:
+    #
+    #       {
+    #         provisioned_product_id: "Id", # required
+    #         service_action_id: "Id", # required
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] provisioned_product_id
+    #   The identifier of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_action_id
+    #   The self-service action identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceActionExecutionParametersInput AWS API Documentation
+    #
+    class DescribeServiceActionExecutionParametersInput < Struct.new(
+      :provisioned_product_id,
+      :service_action_id,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_action_parameters
+    #   The parameters of the self-service action.
+    #   @return [Array<Types::ExecutionParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceActionExecutionParametersOutput AWS API Documentation
+    #
+    class DescribeServiceActionExecutionParametersOutput < Struct.new(
+      :service_action_parameters)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeServiceActionInput
     #   data as a hash:
     #
@@ -2324,6 +2517,35 @@ module Aws::ServiceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisableAWSOrganizationsAccessOutput AWS API Documentation
     #
     class DisableAWSOrganizationsAccessOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DisassociateBudgetFromResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         budget_name: "BudgetName", # required
+    #         resource_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] budget_name
+    #   The name of the budget you want to disassociate.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource identifier you want to disassociate from. Either a
+    #   portfolio-id or a product-id.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateBudgetFromResourceInput AWS API Documentation
+    #
+    class DisassociateBudgetFromResourceInput < Struct.new(
+      :budget_name,
+      :resource_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateBudgetFromResourceOutput AWS API Documentation
+    #
+    class DisassociateBudgetFromResourceOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DisassociatePrincipalFromPortfolioInput
     #   data as a hash:
@@ -2481,6 +2703,12 @@ module Aws::ServiceCatalog
     #
     class DisassociateTagOptionFromResourceOutput < Aws::EmptyStructure; end
 
+    # The specified resource is a duplicate.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DuplicateResourceException AWS API Documentation
+    #
+    class DuplicateResourceException < Aws::EmptyStructure; end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/EnableAWSOrganizationsAccessInput AWS API Documentation
@@ -2551,6 +2779,9 @@ module Aws::ServiceCatalog
     #         service_action_id: "Id", # required
     #         execute_token: "IdempotencyToken", # required
     #         accept_language: "AcceptLanguage",
+    #         parameters: {
+    #           "ExecutionParameterKey" => ["ExecutionParameterValue"],
+    #         },
     #       }
     #
     # @!attribute [rw] provisioned_product_id
@@ -2579,13 +2810,23 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   A map of all self-service action parameters and their values. If a
+    #   provided parameter is of a special type, such as `TARGET`, the
+    #   provided value will override the default value generated by AWS
+    #   Service Catalog. If the parameters field is not provided, no
+    #   additional parameters are passed and default values will be used for
+    #   any special parameters such as `TARGET`.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductServiceActionInput AWS API Documentation
     #
     class ExecuteProvisionedProductServiceActionInput < Struct.new(
       :provisioned_product_id,
       :service_action_id,
       :execute_token,
-      :accept_language)
+      :accept_language,
+      :parameters)
       include Aws::Structure
     end
 
@@ -2598,6 +2839,30 @@ module Aws::ServiceCatalog
     #
     class ExecuteProvisionedProductServiceActionOutput < Struct.new(
       :record_detail)
+      include Aws::Structure
+    end
+
+    # Details of an execution parameter value that is passed to a
+    # self-service action when executed on a provisioned product.
+    #
+    # @!attribute [rw] name
+    #   The name of the execution parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The execution parameter type.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_values
+    #   The default values for the execution parameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecutionParameter AWS API Documentation
+    #
+    class ExecutionParameter < Struct.new(
+      :name,
+      :type,
+      :default_values)
       include Aws::Structure
     end
 
@@ -2655,6 +2920,38 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # One or more parameters provided to the operation are not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/InvalidParametersException AWS API Documentation
+    #
+    class InvalidParametersException < Aws::EmptyStructure; end
+
+    # An attempt was made to modify a resource that is in a state that is
+    # not valid. Check your resources to ensure that they are in valid
+    # states before retrying the operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Aws::EmptyStructure; end
+
+    # A launch path object.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the launch path.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the launch path.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/LaunchPath AWS API Documentation
+    #
+    class LaunchPath < Struct.new(
+      :id,
+      :name)
+      include Aws::Structure
+    end
+
     # Summary information about a product path for a user.
     #
     # @!attribute [rw] id
@@ -2682,6 +2979,14 @@ module Aws::ServiceCatalog
       :name)
       include Aws::Structure
     end
+
+    # The current limits of the service would have been exceeded by this
+    # operation. Decrease your resource use or increase your service limits
+    # and retry the operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListAcceptedPortfolioSharesInput
     #   data as a hash:
@@ -2747,6 +3052,66 @@ module Aws::ServiceCatalog
     #
     class ListAcceptedPortfolioSharesOutput < Struct.new(
       :portfolio_details,
+      :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListBudgetsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         resource_id: "Id", # required
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListBudgetsForResourceInput AWS API Documentation
+    #
+    class ListBudgetsForResourceInput < Struct.new(
+      :accept_language,
+      :resource_id,
+      :page_size,
+      :page_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] budgets
+    #   Information about the associated budgets.
+    #   @return [Array<Types::BudgetDetail>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListBudgetsForResourceOutput AWS API Documentation
+    #
+    class ListBudgetsForResourceOutput < Struct.new(
+      :budgets,
       :next_page_token)
       include Aws::Structure
     end
@@ -2957,6 +3322,9 @@ module Aws::ServiceCatalog
     #       {
     #         accept_language: "AcceptLanguage",
     #         portfolio_id: "Id", # required
+    #         organization_parent_id: "Id",
+    #         page_token: "PageToken",
+    #         page_size: 1,
     #       }
     #
     # @!attribute [rw] accept_language
@@ -2973,11 +3341,29 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #   @return [String]
     #
+    # @!attribute [rw] organization_parent_id
+    #   The ID of an organization node the portfolio is shared with. All
+    #   children of this node with an inherited portfolio share will be
+    #   returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolioAccessInput AWS API Documentation
     #
     class ListPortfolioAccessInput < Struct.new(
       :accept_language,
-      :portfolio_id)
+      :portfolio_id,
+      :organization_parent_id,
+      :page_token,
+      :page_size)
       include Aws::Structure
     end
 
@@ -3635,6 +4021,66 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListStackInstancesForProvisionedProductInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         provisioned_product_id: "Id", # required
+    #         page_token: "PageToken",
+    #         page_size: 1,
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_id
+    #   The identifier of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListStackInstancesForProvisionedProductInput AWS API Documentation
+    #
+    class ListStackInstancesForProvisionedProductInput < Struct.new(
+      :accept_language,
+      :provisioned_product_id,
+      :page_token,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_instances
+    #   List of stack instances.
+    #   @return [Array<Types::StackInstance>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListStackInstancesForProvisionedProductOutput AWS API Documentation
+    #
+    class ListStackInstancesForProvisionedProductOutput < Struct.new(
+      :stack_instances,
+      :next_page_token)
+      include Aws::Structure
+    end
+
     # Filters to use when listing TagOptions.
     #
     # @note When making an API call, you may pass ListTagOptionsFilters
@@ -3720,6 +4166,14 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # The operation is not supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/OperationNotSupportedException AWS API Documentation
+    #
+    class OperationNotSupportedException < Aws::EmptyStructure; end
+
+    # Information about the organization node.
+    #
     # @note When making an API call, you may pass OrganizationNode
     #   data as a hash:
     #
@@ -3729,9 +4183,11 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] type
+    #   The organization node type.
     #   @return [String]
     #
     # @!attribute [rw] value
+    #   The identifier of the organization node.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/OrganizationNode AWS API Documentation
@@ -4078,7 +4534,7 @@ module Aws::ServiceCatalog
     #   * `AVAILABLE` - Stable state, ready to perform any operation. The
     #     most recent operation succeeded and completed.
     #
-    #   * `UNDER_CHANGE` - Transitive state, operations performed might not
+    #   * `UNDER_CHANGE` - Transitive state. Operations performed might not
     #     have valid results. Wait for an `AVAILABLE` status before
     #     performing operations.
     #
@@ -4087,10 +4543,16 @@ module Aws::ServiceCatalog
     #     what was requested. For example, a request to update to a new
     #     version failed and the stack rolled back to the current version.
     #
-    #   * `ERROR` - An unexpected error occurred, the provisioned product
+    #   * `ERROR` - An unexpected error occurred. The provisioned product
     #     exists but the stack is not running. For example, CloudFormation
     #     received a parameter value that was not valid and could not launch
     #     the stack.
+    #
+    #   * `PLAN_IN_PROGRESS` - Transitive state. The plan operations were
+    #     performed to provision a new product, but resources have not yet
+    #     been created. After reviewing the list of resources to be created,
+    #     execute the plan. Wait for an `AVAILABLE` status before performing
+    #     operations.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -4184,7 +4646,7 @@ module Aws::ServiceCatalog
     #   * `AVAILABLE` - Stable state, ready to perform any operation. The
     #     most recent operation succeeded and completed.
     #
-    #   * `UNDER_CHANGE` - Transitive state, operations performed might not
+    #   * `UNDER_CHANGE` - Transitive state. Operations performed might not
     #     have valid results. Wait for an `AVAILABLE` status before
     #     performing operations.
     #
@@ -4193,10 +4655,16 @@ module Aws::ServiceCatalog
     #     what was requested. For example, a request to update to a new
     #     version failed and the stack rolled back to the current version.
     #
-    #   * `ERROR` - An unexpected error occurred, the provisioned product
+    #   * `ERROR` - An unexpected error occurred. The provisioned product
     #     exists but the stack is not running. For example, CloudFormation
     #     received a parameter value that was not valid and could not launch
     #     the stack.
+    #
+    #   * `PLAN_IN_PROGRESS` - Transitive state. The plan operations were
+    #     performed to provision a new product, but resources have not yet
+    #     been created. After reviewing the list of resources to be created,
+    #     execute the plan. Wait for an `AVAILABLE` status before performing
+    #     operations.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -4388,13 +4856,19 @@ module Aws::ServiceCatalog
     #   The UTC time stamp of the creation time.
     #   @return [Time]
     #
+    # @!attribute [rw] guidance
+    #   Information set by the administrator to provide guidance to end
+    #   users about which provisioning artifacts to use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifact AWS API Documentation
     #
     class ProvisioningArtifact < Struct.new(
       :id,
       :name,
       :description,
-      :created_time)
+      :created_time,
+      :guidance)
       include Aws::Structure
     end
 
@@ -4431,6 +4905,11 @@ module Aws::ServiceCatalog
     #   Indicates whether the product version is active.
     #   @return [Boolean]
     #
+    # @!attribute [rw] guidance
+    #   Information set by the administrator to provide guidance to end
+    #   users about which provisioning artifacts to use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactDetail AWS API Documentation
     #
     class ProvisioningArtifactDetail < Struct.new(
@@ -4439,7 +4918,8 @@ module Aws::ServiceCatalog
       :description,
       :type,
       :created_time,
-      :active)
+      :active,
+      :guidance)
       include Aws::Structure
     end
 
@@ -4534,6 +5014,7 @@ module Aws::ServiceCatalog
     #           "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #         },
     #         type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
+    #         disable_template_validation: false,
     #       }
     #
     # @!attribute [rw] name
@@ -4564,13 +5045,19 @@ module Aws::ServiceCatalog
     #   * `MARKETPLACE_CAR` - AWS Marketplace Clusters and AWS Resources
     #   @return [String]
     #
+    # @!attribute [rw] disable_template_validation
+    #   If set to true, AWS Service Catalog stops validating the specified
+    #   provisioning artifact even if it is invalid.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactProperties AWS API Documentation
     #
     class ProvisioningArtifactProperties < Struct.new(
       :name,
       :description,
       :info,
-      :type)
+      :type,
+      :disable_template_validation)
       include Aws::Structure
     end
 
@@ -5092,6 +5579,19 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # A resource that is currently in use. Ensure that the resource is not
+    # in use and retry the operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Aws::EmptyStructure; end
+
+    # The specified resource was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
     # Information about a change to a resource attribute.
     #
     # @!attribute [rw] attribute
@@ -5573,6 +6073,54 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # An AWS CloudFormation stack, in a specific account and region, that's
+    # part of a stack set operation. A stack instance is a reference to an
+    # attempted or actual stack in a given account within a given region. A
+    # stack instance can exist without a stack—for example, if the stack
+    # couldn't be created for some reason. A stack instance is associated
+    # with only one stack set. Each stack instance contains the ID of its
+    # associated stack set, as well as the ID of the actual stack and the
+    # stack status.
+    #
+    # @!attribute [rw] account
+    #   The name of the AWS account that the stack instance is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The name of the AWS region that the stack instance is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_instance_status
+    #   The status of the stack instance, in terms of its synchronization
+    #   with its associated stack set.
+    #
+    #   * `INOPERABLE`\: A `DeleteStackInstances` operation has failed and
+    #     left the stack in an unstable state. Stacks in this state are
+    #     excluded from further `UpdateStackSet` operations. You might need
+    #     to perform a `DeleteStackInstances` operation, with `RetainStacks`
+    #     set to true, to delete the stack instance, and then delete the
+    #     stack manually.
+    #
+    #   * `OUTDATED`\: The stack isn't currently up to date with the stack
+    #     set because either the associated stack failed during a
+    #     `CreateStackSet` or `UpdateStackSet` operation, or the stack was
+    #     part of a `CreateStackSet` or `UpdateStackSet` operation that
+    #     failed or was stopped before the stack was created or updated.
+    #
+    #   * `CURRENT`\: The stack is currently up to date with the stack set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/StackInstance AWS API Documentation
+    #
+    class StackInstance < Struct.new(
+      :account,
+      :region,
+      :stack_instance_status)
+      include Aws::Structure
+    end
+
     # Information about a tag. A tag is a key-value pair. Tags are
     # propagated to the resources created when provisioning a product.
     #
@@ -5627,6 +6175,15 @@ module Aws::ServiceCatalog
       :id)
       include Aws::Structure
     end
+
+    # An operation requiring TagOptions failed because the TagOptions
+    # migration process has not been performed for this account. Please use
+    # the AWS console to perform the migration process before retrying the
+    # operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionNotMigratedException AWS API Documentation
+    #
+    class TagOptionNotMigratedException < Aws::EmptyStructure; end
 
     # Summary information about a TagOption.
     #
@@ -5723,6 +6280,7 @@ module Aws::ServiceCatalog
     #         accept_language: "AcceptLanguage",
     #         id: "Id", # required
     #         description: "ConstraintDescription",
+    #         parameters: "ConstraintParameters",
     #       }
     #
     # @!attribute [rw] accept_language
@@ -5743,12 +6301,89 @@ module Aws::ServiceCatalog
     #   The updated description of the constraint.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   The constraint parameters, in JSON format. The syntax depends on the
+    #   constraint type as follows:
+    #
+    #   LAUNCH
+    #
+    #   : You are required to specify either the `RoleArn` or the
+    #     `LocalRoleName` but can't use both.
+    #
+    #     Specify the `RoleArn` property as follows:
+    #
+    #     `\{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"\}`
+    #
+    #     Specify the `LocalRoleName` property as follows:
+    #
+    #     `\{"LocalRoleName": "SCBasicLaunchRole"\}`
+    #
+    #     If you specify the `LocalRoleName` property, when an account uses
+    #     the launch constraint, the IAM role with that name in the account
+    #     will be used. This allows launch-role constraints to be
+    #     account-agnostic so the administrator can create fewer resources
+    #     per shared account.
+    #
+    #     <note markdown="1"> The given role name must exist in the account used to create the
+    #     launch constraint and the account of the user who launches a
+    #     product with this launch constraint.
+    #
+    #      </note>
+    #
+    #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
+    #
+    #     You also cannot have more than one `LAUNCH` constraint on a
+    #     product and portfolio.
+    #
+    #   NOTIFICATION
+    #
+    #   : Specify the `NotificationArns` property as follows:
+    #
+    #     `\{"NotificationArns" :
+    #     ["arn:aws:sns:us-east-1:123456789012:Topic"]\}`
+    #
+    #   RESOURCE\_UPDATE
+    #
+    #   : Specify the `TagUpdatesOnProvisionedProduct` property as follows:
+    #
+    #     `\{"Version":"2.0","Properties":\{"TagUpdateOnProvisionedProduct":"String"\}\}`
+    #
+    #     The `TagUpdatesOnProvisionedProduct` property accepts a string
+    #     value of `ALLOWED` or `NOT_ALLOWED`.
+    #
+    #   STACKSET
+    #
+    #   : Specify the `Parameters` property as follows:
+    #
+    #     `\{"Version": "String", "Properties": \{"AccountList": [ "String"
+    #     ], "RegionList": [ "String" ], "AdminRole": "String",
+    #     "ExecutionRole": "String"\}\}`
+    #
+    #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
+    #
+    #     You also cannot have more than one `STACKSET` constraint on a
+    #     product and portfolio.
+    #
+    #     Products with a `STACKSET` constraint will launch an AWS
+    #     CloudFormation stack set.
+    #
+    #   TEMPLATE
+    #
+    #   : Specify the `Rules` property. For more information, see [Template
+    #     Constraint Rules][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateConstraintInput AWS API Documentation
     #
     class UpdateConstraintInput < Struct.new(
       :accept_language,
       :id,
-      :description)
+      :description,
+      :parameters)
       include Aws::Structure
     end
 
@@ -5985,6 +6620,12 @@ module Aws::ServiceCatalog
     #           stack_set_max_concurrency_percentage: 1,
     #           stack_set_operation_type: "CREATE", # accepts CREATE, UPDATE, DELETE
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #         update_token: "IdempotencyToken", # required
     #       }
     #
@@ -5999,7 +6640,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_name
-    #   The updated name of the provisioned product. You cannot specify both
+    #   The name of the provisioned product. You cannot specify both
     #   `ProvisionedProductName` and `ProvisionedProductId`.
     #   @return [String]
     #
@@ -6030,6 +6671,12 @@ module Aws::ServiceCatalog
     #   preferences for a stack set.
     #   @return [Types::UpdateProvisioningPreferences]
     #
+    # @!attribute [rw] tags
+    #   One or more tags. Requires the product to have `RESOURCE_UPDATE`
+    #   constraint with `TagUpdatesOnProvisionedProduct` set to `ALLOWED` to
+    #   allow tag updates.
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] update_token
     #   The idempotency token that uniquely identifies the provisioning
     #   update request.
@@ -6049,6 +6696,7 @@ module Aws::ServiceCatalog
       :path_id,
       :provisioning_parameters,
       :provisioning_preferences,
+      :tags,
       :update_token)
       include Aws::Structure
     end
@@ -6064,6 +6712,102 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateProvisionedProductPropertiesInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         provisioned_product_id: "Id", # required
+    #         provisioned_product_properties: { # required
+    #           "OWNER" => "PropertyValue",
+    #         },
+    #         idempotency_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_id
+    #   The identifier of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_properties
+    #   A map that contains the provisioned product properties to be
+    #   updated.
+    #
+    #   The `OWNER` key accepts user ARNs and role ARNs. The owner is the
+    #   user that is allowed to see, update, terminate, and execute service
+    #   actions in the provisioned product.
+    #
+    #   The administrator can change the owner of a provisioned product to
+    #   another IAM user within the same account. Both end user owners and
+    #   administrators can see ownership history of the provisioned product
+    #   using the `ListRecordHistory` API. The new owner can describe all
+    #   past records for the provisioned product using the `DescribeRecord`
+    #   API. The previous owner can no longer use `DescribeRecord`, but can
+    #   still see the product's history from when he was an owner using
+    #   `ListRecordHistory`.
+    #
+    #   If a provisioned product ownership is assigned to an end user, they
+    #   can see and perform any action through the API or Service Catalog
+    #   console such as update, terminate, and execute service actions. If
+    #   an end user provisions a product and the owner is updated to someone
+    #   else, they will no longer be able to see or perform any actions
+    #   through API or the Service Catalog console on that provisioned
+    #   product.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] idempotency_token
+    #   The idempotency token that uniquely identifies the provisioning
+    #   product update request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProductPropertiesInput AWS API Documentation
+    #
+    class UpdateProvisionedProductPropertiesInput < Struct.new(
+      :accept_language,
+      :provisioned_product_id,
+      :provisioned_product_properties,
+      :idempotency_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] provisioned_product_id
+    #   The provisioned product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_properties
+    #   A map that contains the properties updated.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] record_id
+    #   The identifier of the record.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProductPropertiesOutput AWS API Documentation
+    #
+    class UpdateProvisionedProductPropertiesOutput < Struct.new(
+      :provisioned_product_id,
+      :provisioned_product_properties,
+      :record_id,
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateProvisioningArtifactInput
     #   data as a hash:
     #
@@ -6074,6 +6818,7 @@ module Aws::ServiceCatalog
     #         name: "ProvisioningArtifactName",
     #         description: "ProvisioningArtifactDescription",
     #         active: false,
+    #         guidance: "DEFAULT", # accepts DEFAULT, DEPRECATED
     #       }
     #
     # @!attribute [rw] accept_language
@@ -6104,7 +6849,23 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] active
     #   Indicates whether the product version is active.
+    #
+    #   Inactive provisioning artifacts are invisible to end users. End
+    #   users cannot launch or update a provisioned product from an inactive
+    #   provisioning artifact.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] guidance
+    #   Information set by the administrator to provide guidance to end
+    #   users about which provisioning artifacts to use.
+    #
+    #   The `DEFAULT` value indicates that the product version is active.
+    #
+    #   The administrator can set the guidance to `DEPRECATED` to inform
+    #   users that the product version is deprecated. Users are able to make
+    #   updates to a provisioned product of a deprecated version but cannot
+    #   launch new provisioned products using a deprecated version.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifactInput AWS API Documentation
     #
@@ -6114,7 +6875,8 @@ module Aws::ServiceCatalog
       :provisioning_artifact_id,
       :name,
       :description,
-      :active)
+      :active,
+      :guidance)
       include Aws::Structure
     end
 

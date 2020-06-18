@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:states)
 
 module Aws::States
+  # An API client for States.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::States::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::States
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +109,7 @@ module Aws::States
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::States
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::States
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::States
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::States
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::States
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::States
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::States
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,6 +274,48 @@ module Aws::States
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -223,6 +330,21 @@ module Aws::States
     # activity and returns an identifier for use in a state machine and when
     # polling from the activity.
     #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> `CreateActivity` is an idempotent API. Subsequent requests won’t
+    # create a duplicate resource if it was already created.
+    # `CreateActivity`'s idempotency check is based on the activity `name`.
+    # If a following request has different `tags` values, Step Functions
+    # will ignore these differences and treat it as an idempotent request of
+    # the previous. In this case, `tags` will not be updated, even if they
+    # are different.
+    #
+    #  </note>
+    #
     # @option params [required, String] :name
     #   The name of the activity to create. This name must be unique for your
     #   AWS account and region for 90 days. For more information, see [ Limits
@@ -231,7 +353,7 @@ module Aws::States
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -241,9 +363,27 @@ module Aws::States
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
     #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The list of tags to add to a resource.
+    #
+    #   An array of key-value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*, and [Controlling Access Using IAM Tags][2].
+    #
+    #   Tags may only contain Unicode letters, digits, white space, or these
+    #   symbols: `_ . : / = + - @`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #
     # @return [Types::CreateActivityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -254,6 +394,12 @@ module Aws::States
     #
     #   resp = client.create_activity({
     #     name: "Name", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -274,14 +420,35 @@ module Aws::States
     # states that can do work (`Task` states), determine to which states to
     # transition next (`Choice` states), stop an execution with an error
     # (`Fail` states), and so on. State machines are specified using a
-    # JSON-based, structured language.
+    # JSON-based, structured language. For more information, see [Amazon
+    # States Language][1] in the AWS Step Functions User Guide.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> `CreateStateMachine` is an idempotent API. Subsequent requests won’t
+    # create a duplicate resource if it was already created.
+    # `CreateStateMachine`'s idempotency check is based on the state
+    # machine `name`, `definition`, `type`, and `LoggingConfiguration`. If a
+    # following request has a different `roleArn` or `tags`, Step Functions
+    # will ignore these differences and treat it as an idempotent request of
+    # the previous. In this case, `roleArn` and `tags` will not be updated,
+    # even if they are different.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #
     # @option params [required, String] :name
     #   The name of the state machine.
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -291,17 +458,53 @@ module Aws::States
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
     #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
+    #
     # @option params [required, String] :definition
     #   The Amazon States Language definition of the state machine. See
     #   [Amazon States Language][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to use for this state
     #   machine.
+    #
+    # @option params [String] :type
+    #   Determines whether a Standard or Express state machine is created. The
+    #   default is `STANDARD`. You cannot update the `type` of a state machine
+    #   once it has been created.
+    #
+    # @option params [Types::LoggingConfiguration] :logging_configuration
+    #   Defines what execution history events are logged and where they are
+    #   logged.
+    #
+    #   <note markdown="1"> By default, the `level` is set to `OFF`. For more information see [Log
+    #   Levels][1] in the AWS Step Functions User Guide.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be added when creating a state machine.
+    #
+    #   An array of key-value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*, and [Controlling Access Using IAM Tags][2].
+    #
+    #   Tags may only contain Unicode letters, digits, white space, or these
+    #   symbols: `_ . : / = + - @`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #
     # @return [Types::CreateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -314,6 +517,24 @@ module Aws::States
     #     name: "Name", # required
     #     definition: "Definition", # required
     #     role_arn: "Arn", # required
+    #     type: "STANDARD", # accepts STANDARD, EXPRESS
+    #     logging_configuration: {
+    #       level: "ALL", # accepts ALL, ERROR, FATAL, OFF
+    #       include_execution_data: false,
+    #       destinations: [
+    #         {
+    #           cloud_watch_logs_log_group: {
+    #             log_group_arn: "Arn",
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -354,11 +575,11 @@ module Aws::States
 
     # Deletes a state machine. This is an asynchronous operation: It sets
     # the state machine's status to `DELETING` and begins the deletion
-    # process. Each state machine execution is deleted the next time it
-    # makes a state transition.
+    # process.
     #
-    # <note markdown="1"> The state machine itself is deleted after all executions are completed
-    # or deleted.
+    # <note markdown="1"> For `EXPRESS`state machines, the deletion will happen eventually
+    # (usually less than a minute). Running executions may emit logs after
+    # `DeleteStateMachine` API is called.
     #
     #  </note>
     #
@@ -426,6 +647,8 @@ module Aws::States
     #
     #  </note>
     #
+    # This API action is not supported by `EXPRESS` state machines.
+    #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution to describe.
     #
@@ -483,7 +706,9 @@ module Aws::States
     #   * {Types::DescribeStateMachineOutput#status #status} => String
     #   * {Types::DescribeStateMachineOutput#definition #definition} => String
     #   * {Types::DescribeStateMachineOutput#role_arn #role_arn} => String
+    #   * {Types::DescribeStateMachineOutput#type #type} => String
     #   * {Types::DescribeStateMachineOutput#creation_date #creation_date} => Time
+    #   * {Types::DescribeStateMachineOutput#logging_configuration #logging_configuration} => Types::LoggingConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -498,7 +723,12 @@ module Aws::States
     #   resp.status #=> String, one of "ACTIVE", "DELETING"
     #   resp.definition #=> String
     #   resp.role_arn #=> String
+    #   resp.type #=> String, one of "STANDARD", "EXPRESS"
     #   resp.creation_date #=> Time
+    #   resp.logging_configuration.level #=> String, one of "ALL", "ERROR", "FATAL", "OFF"
+    #   resp.logging_configuration.include_execution_data #=> Boolean
+    #   resp.logging_configuration.destinations #=> Array
+    #   resp.logging_configuration.destinations[0].cloud_watch_logs_log_group.log_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachine AWS API Documentation
     #
@@ -516,6 +746,8 @@ module Aws::States
     #
     #  </note>
     #
+    # This API action is not supported by `EXPRESS` state machines.
+    #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution you want state machine
     #   information for.
@@ -527,6 +759,7 @@ module Aws::States
     #   * {Types::DescribeStateMachineForExecutionOutput#definition #definition} => String
     #   * {Types::DescribeStateMachineForExecutionOutput#role_arn #role_arn} => String
     #   * {Types::DescribeStateMachineForExecutionOutput#update_date #update_date} => Time
+    #   * {Types::DescribeStateMachineForExecutionOutput#logging_configuration #logging_configuration} => Types::LoggingConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -541,6 +774,10 @@ module Aws::States
     #   resp.definition #=> String
     #   resp.role_arn #=> String
     #   resp.update_date #=> Time
+    #   resp.logging_configuration.level #=> String, one of "ALL", "ERROR", "FATAL", "OFF"
+    #   resp.logging_configuration.include_execution_data #=> Boolean
+    #   resp.logging_configuration.destinations #=> Array
+    #   resp.logging_configuration.destinations[0].cloud_watch_logs_log_group.log_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecution AWS API Documentation
     #
@@ -570,7 +807,7 @@ module Aws::States
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html
     #
     # @option params [required, String] :activity_arn
     #   The Amazon Resource Name (ARN) of the activity to retrieve tasks from
@@ -616,8 +853,10 @@ module Aws::States
     # value of `nextToken` is a unique pagination token for each page. Make
     # the call again using the returned token to retrieve the next page.
     # Keep all other arguments unchanged. Each pagination token expires
-    # after 60 seconds. Using an expired pagination token will return an
-    # *HTTP 400 InvalidToken* error.
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
+    #
+    # This API action is not supported by `EXPRESS` state machines.
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution.
@@ -638,13 +877,15 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page. Make
     #   the call again using the returned token to retrieve the next page.
     #   Keep all other arguments unchanged. Each pagination token expires
-    #   after 60 seconds. Using an expired pagination token will return an
-    #   *HTTP 400 InvalidToken* error.
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
     #
     # @return [Types::GetExecutionHistoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetExecutionHistoryOutput#events #events} => Array&lt;Types::HistoryEvent&gt;
     #   * {Types::GetExecutionHistoryOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -659,7 +900,7 @@ module Aws::States
     #
     #   resp.events #=> Array
     #   resp.events[0].timestamp #=> Time
-    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduleFailed", "ActivityScheduled", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "TaskFailed", "TaskScheduled", "TaskStartFailed", "TaskStarted", "TaskSubmitFailed", "TaskSubmitted", "TaskSucceeded", "TaskTimedOut", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionAborted", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduleFailed", "LambdaFunctionScheduled", "LambdaFunctionStartFailed", "LambdaFunctionStarted", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "SucceedStateEntered", "SucceedStateExited", "TaskStateAborted", "TaskStateEntered", "TaskStateExited", "PassStateEntered", "PassStateExited", "ParallelStateAborted", "ParallelStateEntered", "ParallelStateExited", "ParallelStateFailed", "ParallelStateStarted", "ParallelStateSucceeded", "WaitStateAborted", "WaitStateEntered", "WaitStateExited"
+    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduled", "ActivityScheduleFailed", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "ExecutionAborted", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduled", "LambdaFunctionScheduleFailed", "LambdaFunctionStarted", "LambdaFunctionStartFailed", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "MapIterationAborted", "MapIterationFailed", "MapIterationStarted", "MapIterationSucceeded", "MapStateAborted", "MapStateEntered", "MapStateExited", "MapStateFailed", "MapStateStarted", "MapStateSucceeded", "ParallelStateAborted", "ParallelStateEntered", "ParallelStateExited", "ParallelStateFailed", "ParallelStateStarted", "ParallelStateSucceeded", "PassStateEntered", "PassStateExited", "SucceedStateEntered", "SucceedStateExited", "TaskFailed", "TaskScheduled", "TaskStarted", "TaskStartFailed", "TaskStateAborted", "TaskStateEntered", "TaskStateExited", "TaskSubmitFailed", "TaskSubmitted", "TaskSucceeded", "TaskTimedOut", "WaitStateAborted", "WaitStateEntered", "WaitStateExited"
     #   resp.events[0].id #=> Integer
     #   resp.events[0].previous_event_id #=> Integer
     #   resp.events[0].activity_failed_event_details.error #=> String
@@ -712,6 +953,15 @@ module Aws::States
     #   resp.events[0].execution_aborted_event_details.cause #=> String
     #   resp.events[0].execution_timed_out_event_details.error #=> String
     #   resp.events[0].execution_timed_out_event_details.cause #=> String
+    #   resp.events[0].map_state_started_event_details.length #=> Integer
+    #   resp.events[0].map_iteration_started_event_details.name #=> String
+    #   resp.events[0].map_iteration_started_event_details.index #=> Integer
+    #   resp.events[0].map_iteration_succeeded_event_details.name #=> String
+    #   resp.events[0].map_iteration_succeeded_event_details.index #=> Integer
+    #   resp.events[0].map_iteration_failed_event_details.name #=> String
+    #   resp.events[0].map_iteration_failed_event_details.index #=> Integer
+    #   resp.events[0].map_iteration_aborted_event_details.name #=> String
+    #   resp.events[0].map_iteration_aborted_event_details.index #=> Integer
     #   resp.events[0].lambda_function_failed_event_details.error #=> String
     #   resp.events[0].lambda_function_failed_event_details.cause #=> String
     #   resp.events[0].lambda_function_schedule_failed_event_details.error #=> String
@@ -745,8 +995,8 @@ module Aws::States
     # value of `nextToken` is a unique pagination token for each page. Make
     # the call again using the returned token to retrieve the next page.
     # Keep all other arguments unchanged. Each pagination token expires
-    # after 60 seconds. Using an expired pagination token will return an
-    # *HTTP 400 InvalidToken* error.
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
@@ -766,13 +1016,15 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page. Make
     #   the call again using the returned token to retrieve the next page.
     #   Keep all other arguments unchanged. Each pagination token expires
-    #   after 60 seconds. Using an expired pagination token will return an
-    #   *HTTP 400 InvalidToken* error.
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
     #
     # @return [Types::ListActivitiesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListActivitiesOutput#activities #activities} => Array&lt;Types::ActivityListItem&gt;
     #   * {Types::ListActivitiesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -806,13 +1058,15 @@ module Aws::States
     # value of `nextToken` is a unique pagination token for each page. Make
     # the call again using the returned token to retrieve the next page.
     # Keep all other arguments unchanged. Each pagination token expires
-    # after 60 seconds. Using an expired pagination token will return an
-    # *HTTP 400 InvalidToken* error.
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
     #
     #  </note>
+    #
+    # This API action is not supported by `EXPRESS` state machines.
     #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine whose executions
@@ -835,13 +1089,15 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page. Make
     #   the call again using the returned token to retrieve the next page.
     #   Keep all other arguments unchanged. Each pagination token expires
-    #   after 60 seconds. Using an expired pagination token will return an
-    #   *HTTP 400 InvalidToken* error.
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
     #
     # @return [Types::ListExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListExecutionsOutput#executions #executions} => Array&lt;Types::ExecutionListItem&gt;
     #   * {Types::ListExecutionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -849,7 +1105,7 @@ module Aws::States
     #     state_machine_arn: "Arn", # required
     #     status_filter: "RUNNING", # accepts RUNNING, SUCCEEDED, FAILED, TIMED_OUT, ABORTED
     #     max_results: 1,
-    #     next_token: "PageToken",
+    #     next_token: "ListExecutionsPageToken",
     #   })
     #
     # @example Response structure
@@ -878,8 +1134,8 @@ module Aws::States
     # value of `nextToken` is a unique pagination token for each page. Make
     # the call again using the returned token to retrieve the next page.
     # Keep all other arguments unchanged. Each pagination token expires
-    # after 60 seconds. Using an expired pagination token will return an
-    # *HTTP 400 InvalidToken* error.
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
@@ -899,13 +1155,15 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page. Make
     #   the call again using the returned token to retrieve the next page.
     #   Keep all other arguments unchanged. Each pagination token expires
-    #   after 60 seconds. Using an expired pagination token will return an
-    #   *HTTP 400 InvalidToken* error.
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
     #
     # @return [Types::ListStateMachinesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListStateMachinesOutput#state_machines #state_machines} => Array&lt;Types::StateMachineListItem&gt;
     #   * {Types::ListStateMachinesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -919,6 +1177,7 @@ module Aws::States
     #   resp.state_machines #=> Array
     #   resp.state_machines[0].state_machine_arn #=> String
     #   resp.state_machines[0].name #=> String
+    #   resp.state_machines[0].type #=> String, one of "STANDARD", "EXPRESS"
     #   resp.state_machines[0].creation_date #=> Time
     #   resp.next_token #=> String
     #
@@ -931,13 +1190,56 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Used by workers to report that the task identified by the `taskToken`
-    # failed.
+    # List tags for a given resource.
+    #
+    # Tags may only contain Unicode letters, digits, white space, or these
+    # symbols: `_ . : / = + - @`.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the Step Functions state machine or
+    #   activity.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Used by activity workers and task states using the [callback][1]
+    # pattern to report that the task identified by the `taskToken` failed.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token
     #
     # @option params [required, String] :task_token
-    #   The token that represents this task. Task tokens are generated by the
-    #   service when the tasks are assigned to a worker (see
-    #   GetActivityTask::taskToken).
+    #   The token that represents this task. Task tokens are generated by Step
+    #   Functions when tasks are assigned to a worker, or in the [context
+    #   object][1] when a workflow enters a task state. See
+    #   GetActivityTaskOutput$taskToken.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
     #
     # @option params [String] :error
     #   The error code of the failure.
@@ -964,29 +1266,38 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Used by workers to report to the service that the task represented by
-    # the specified `taskToken` is still making progress. This action resets
-    # the `Heartbeat` clock. The `Heartbeat` threshold is specified in the
-    # state machine's Amazon States Language definition. This action does
-    # not in itself create an event in the execution history. However, if
-    # the task times out, the execution history contains an
-    # `ActivityTimedOut` event.
+    # Used by activity workers and task states using the [callback][1]
+    # pattern to report to Step Functions that the task represented by the
+    # specified `taskToken` is still making progress. This action resets the
+    # `Heartbeat` clock. The `Heartbeat` threshold is specified in the state
+    # machine's Amazon States Language definition (`HeartbeatSeconds`).
+    # This action does not in itself create an event in the execution
+    # history. However, if the task times out, the execution history
+    # contains an `ActivityTimedOut` entry for activities, or a
+    # `TaskTimedOut` entry for for tasks using the [job run][2] or
+    # [callback][1] pattern.
     #
     # <note markdown="1"> The `Timeout` of a task, defined in the state machine's Amazon States
     # Language definition, is its maximum allowed duration, regardless of
-    # the number of SendTaskHeartbeat requests received.
+    # the number of SendTaskHeartbeat requests received. Use
+    # `HeartbeatSeconds` to configure the timeout interval for heartbeats.
     #
     #  </note>
     #
-    # <note markdown="1"> This operation is only useful for long-lived tasks to report the
-    # liveliness of the task.
     #
-    #  </note>
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync
     #
     # @option params [required, String] :task_token
-    #   The token that represents this task. Task tokens are generated by the
-    #   service when the tasks are assigned to a worker (see
-    #   GetActivityTaskOutput$taskToken).
+    #   The token that represents this task. Task tokens are generated by Step
+    #   Functions when tasks are assigned to a worker, or in the [context
+    #   object][1] when a workflow enters a task state. See
+    #   GetActivityTaskOutput$taskToken.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1005,13 +1316,23 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Used by workers to report that the task identified by the `taskToken`
+    # Used by activity workers and task states using the [callback][1]
+    # pattern to report that the task identified by the `taskToken`
     # completed successfully.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token
+    #
     # @option params [required, String] :task_token
-    #   The token that represents this task. Task tokens are generated by the
-    #   service when the tasks are assigned to a worker (see
-    #   GetActivityTaskOutput$taskToken).
+    #   The token that represents this task. Task tokens are generated by Step
+    #   Functions when tasks are assigned to a worker, or in the [context
+    #   object][1] when a workflow enters a task state. See
+    #   GetActivityTaskOutput$taskToken.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
     #
     # @option params [required, String] :output
     #   The JSON output of the task.
@@ -1049,13 +1370,13 @@ module Aws::States
     #
     # @option params [String] :name
     #   The name of the execution. This name must be unique for your AWS
-    #   account and region for 90 days. For more information, see [ Limits
-    #   Related to State Machine Executions][1] in the *AWS Step Functions
-    #   Developer Guide*.
+    #   account, region, and state machine for 90 days. For more information,
+    #   see [ Limits Related to State Machine Executions][1] in the *AWS Step
+    #   Functions Developer Guide*.
     #
     #   A name must *not* contain:
     #
-    #   * whitespace
+    #   * white space
     #
     #   * brackets `< > \{ \} [ ]`
     #
@@ -1065,9 +1386,12 @@ module Aws::States
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
     #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
     #
     # @option params [String] :input
     #   The string that contains the JSON input data for the execution, for
@@ -1109,6 +1433,8 @@ module Aws::States
 
     # Stops an execution.
     #
+    # This API action is not supported by `EXPRESS` state machines.
+    #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution to stop.
     #
@@ -1143,10 +1469,84 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Updates an existing state machine by modifying its `definition` and/or
-    # `roleArn`. Running executions will continue to use the previous
-    # `definition` and `roleArn`. You must include at least one of
-    # `definition` or `roleArn` or you will receive a
+    # Add a tag to a Step Functions resource.
+    #
+    # An array of key-value pairs. For more information, see [Using Cost
+    # Allocation Tags][1] in the *AWS Billing and Cost Management User
+    # Guide*, and [Controlling Access Using IAM Tags][2].
+    #
+    # Tags may only contain Unicode letters, digits, white space, or these
+    # symbols: `_ . : / = + - @`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the Step Functions state machine or
+    #   activity.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The list of tags to add to a resource.
+    #
+    #   Tags may only contain Unicode letters, digits, white space, or these
+    #   symbols: `_ . : / = + - @`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Remove a tag from a Step Functions resource
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the Step Functions state machine or
+    #   activity.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tags to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing state machine by modifying its `definition`,
+    # `roleArn`, or `loggingConfiguration`. Running executions will continue
+    # to use the previous `definition` and `roleArn`. You must include at
+    # least one of `definition` or `roleArn` or you will receive a
     # `MissingRequiredParameter` error.
     #
     # <note markdown="1"> All `StartExecution` calls within a few seconds will use the updated
@@ -1165,10 +1565,14 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role of the state machine.
+    #
+    # @option params [Types::LoggingConfiguration] :logging_configuration
+    #   The `LoggingConfiguration` data type is used to set CloudWatch Logs
+    #   options.
     #
     # @return [Types::UpdateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1180,6 +1584,17 @@ module Aws::States
     #     state_machine_arn: "Arn", # required
     #     definition: "Definition",
     #     role_arn: "Arn",
+    #     logging_configuration: {
+    #       level: "ALL", # accepts ALL, ERROR, FATAL, OFF
+    #       include_execution_data: false,
+    #       destinations: [
+    #         {
+    #           cloud_watch_logs_log_group: {
+    #             log_group_arn: "Arn",
+    #           },
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1208,7 +1623,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.29.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

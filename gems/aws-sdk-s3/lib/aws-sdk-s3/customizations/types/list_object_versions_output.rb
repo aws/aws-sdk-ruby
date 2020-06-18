@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Aws::S3::Types::ListObjectVersionsOutput
 
   # TODO : Remove this customization once the resource code

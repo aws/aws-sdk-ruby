@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-cloudsearchdomain/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     cloud_search_domain = Aws::CloudSearchDomain::Client.new
+#     resp = cloud_search_domain.search(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon CloudSearch Domain all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon CloudSearch Domain are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CloudSearchDomain::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon CloudSearch Domain API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-cloudsearchdomain/customizations'
 # @service
 module Aws::CloudSearchDomain
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.18.1'
 
 end

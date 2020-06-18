@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -118,6 +120,8 @@ module Aws::SWF
     ListClosedWorkflowExecutionsInput = Shapes::StructureShape.new(name: 'ListClosedWorkflowExecutionsInput')
     ListDomainsInput = Shapes::StructureShape.new(name: 'ListDomainsInput')
     ListOpenWorkflowExecutionsInput = Shapes::StructureShape.new(name: 'ListOpenWorkflowExecutionsInput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListWorkflowTypesInput = Shapes::StructureShape.new(name: 'ListWorkflowTypesInput')
     MarkerName = Shapes::StringShape.new(name: 'MarkerName')
     MarkerRecordedEventAttributes = Shapes::StructureShape.new(name: 'MarkerRecordedEventAttributes')
@@ -145,6 +149,11 @@ module Aws::SWF
     RequestCancelExternalWorkflowExecutionFailedEventAttributes = Shapes::StructureShape.new(name: 'RequestCancelExternalWorkflowExecutionFailedEventAttributes')
     RequestCancelExternalWorkflowExecutionInitiatedEventAttributes = Shapes::StructureShape.new(name: 'RequestCancelExternalWorkflowExecutionInitiatedEventAttributes')
     RequestCancelWorkflowExecutionInput = Shapes::StructureShape.new(name: 'RequestCancelWorkflowExecutionInput')
+    ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
+    ResourceTagKey = Shapes::StringShape.new(name: 'ResourceTagKey')
+    ResourceTagKeyList = Shapes::ListShape.new(name: 'ResourceTagKeyList')
+    ResourceTagList = Shapes::ListShape.new(name: 'ResourceTagList')
+    ResourceTagValue = Shapes::StringShape.new(name: 'ResourceTagValue')
     RespondActivityTaskCanceledInput = Shapes::StructureShape.new(name: 'RespondActivityTaskCanceledInput')
     RespondActivityTaskCompletedInput = Shapes::StructureShape.new(name: 'RespondActivityTaskCompletedInput')
     RespondActivityTaskFailedInput = Shapes::StructureShape.new(name: 'RespondActivityTaskFailedInput')
@@ -176,6 +185,7 @@ module Aws::SWF
     Tag = Shapes::StringShape.new(name: 'Tag')
     TagFilter = Shapes::StructureShape.new(name: 'TagFilter')
     TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TaskList = Shapes::StructureShape.new(name: 'TaskList')
     TaskPriority = Shapes::StringShape.new(name: 'TaskPriority')
     TaskToken = Shapes::StringShape.new(name: 'TaskToken')
@@ -186,10 +196,15 @@ module Aws::SWF
     TimerId = Shapes::StringShape.new(name: 'TimerId')
     TimerStartedEventAttributes = Shapes::StructureShape.new(name: 'TimerStartedEventAttributes')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TooManyTagsFault = Shapes::StructureShape.new(name: 'TooManyTagsFault')
     Truncated = Shapes::BooleanShape.new(name: 'Truncated')
     TypeAlreadyExistsFault = Shapes::StructureShape.new(name: 'TypeAlreadyExistsFault')
     TypeDeprecatedFault = Shapes::StructureShape.new(name: 'TypeDeprecatedFault')
+    UndeprecateActivityTypeInput = Shapes::StructureShape.new(name: 'UndeprecateActivityTypeInput')
+    UndeprecateDomainInput = Shapes::StructureShape.new(name: 'UndeprecateDomainInput')
+    UndeprecateWorkflowTypeInput = Shapes::StructureShape.new(name: 'UndeprecateWorkflowTypeInput')
     UnknownResourceFault = Shapes::StructureShape.new(name: 'UnknownResourceFault')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     Version = Shapes::StringShape.new(name: 'Version')
     VersionOptional = Shapes::StringShape.new(name: 'VersionOptional')
     WorkflowExecution = Shapes::StructureShape.new(name: 'WorkflowExecution')
@@ -459,6 +474,9 @@ module Aws::SWF
     DecisionTaskTimedOutEventAttributes.add_member(:started_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "startedEventId"))
     DecisionTaskTimedOutEventAttributes.struct_class = Types::DecisionTaskTimedOutEventAttributes
 
+    DefaultUndefinedFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DefaultUndefinedFault.struct_class = Types::DefaultUndefinedFault
+
     DeprecateActivityTypeInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
     DeprecateActivityTypeInput.add_member(:activity_type, Shapes::ShapeRef.new(shape: ActivityType, required: true, location_name: "activityType"))
     DeprecateActivityTypeInput.struct_class = Types::DeprecateActivityTypeInput
@@ -485,8 +503,14 @@ module Aws::SWF
     DescribeWorkflowTypeInput.add_member(:workflow_type, Shapes::ShapeRef.new(shape: WorkflowType, required: true, location_name: "workflowType"))
     DescribeWorkflowTypeInput.struct_class = Types::DescribeWorkflowTypeInput
 
+    DomainAlreadyExistsFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DomainAlreadyExistsFault.struct_class = Types::DomainAlreadyExistsFault
+
     DomainConfiguration.add_member(:workflow_execution_retention_period_in_days, Shapes::ShapeRef.new(shape: DurationInDays, required: true, location_name: "workflowExecutionRetentionPeriodInDays"))
     DomainConfiguration.struct_class = Types::DomainConfiguration
+
+    DomainDeprecatedFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DomainDeprecatedFault.struct_class = Types::DomainDeprecatedFault
 
     DomainDetail.add_member(:domain_info, Shapes::ShapeRef.new(shape: DomainInfo, required: true, location_name: "domainInfo"))
     DomainDetail.add_member(:configuration, Shapes::ShapeRef.new(shape: DomainConfiguration, required: true, location_name: "configuration"))
@@ -495,6 +519,7 @@ module Aws::SWF
     DomainInfo.add_member(:name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "name"))
     DomainInfo.add_member(:status, Shapes::ShapeRef.new(shape: RegistrationStatus, required: true, location_name: "status"))
     DomainInfo.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    DomainInfo.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     DomainInfo.struct_class = Types::DomainInfo
 
     DomainInfoList.member = Shapes::ShapeRef.new(shape: DomainInfo)
@@ -622,6 +647,9 @@ module Aws::SWF
     LambdaFunctionTimedOutEventAttributes.add_member(:timeout_type, Shapes::ShapeRef.new(shape: LambdaFunctionTimeoutType, location_name: "timeoutType"))
     LambdaFunctionTimedOutEventAttributes.struct_class = Types::LambdaFunctionTimedOutEventAttributes
 
+    LimitExceededFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededFault.struct_class = Types::LimitExceededFault
+
     ListActivityTypesInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
     ListActivityTypesInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     ListActivityTypesInput.add_member(:registration_status, Shapes::ShapeRef.new(shape: RegistrationStatus, required: true, location_name: "registrationStatus"))
@@ -658,6 +686,12 @@ module Aws::SWF
     ListOpenWorkflowExecutionsInput.add_member(:execution_filter, Shapes::ShapeRef.new(shape: WorkflowExecutionFilter, location_name: "executionFilter"))
     ListOpenWorkflowExecutionsInput.struct_class = Types::ListOpenWorkflowExecutionsInput
 
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
     ListWorkflowTypesInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
     ListWorkflowTypesInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     ListWorkflowTypesInput.add_member(:registration_status, Shapes::ShapeRef.new(shape: RegistrationStatus, required: true, location_name: "registrationStatus"))
@@ -670,6 +704,9 @@ module Aws::SWF
     MarkerRecordedEventAttributes.add_member(:details, Shapes::ShapeRef.new(shape: Data, location_name: "details"))
     MarkerRecordedEventAttributes.add_member(:decision_task_completed_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "decisionTaskCompletedEventId"))
     MarkerRecordedEventAttributes.struct_class = Types::MarkerRecordedEventAttributes
+
+    OperationNotPermittedFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    OperationNotPermittedFault.struct_class = Types::OperationNotPermittedFault
 
     PendingTaskCount.add_member(:count, Shapes::ShapeRef.new(shape: Count, required: true, location_name: "count"))
     PendingTaskCount.add_member(:truncated, Shapes::ShapeRef.new(shape: Truncated, location_name: "truncated"))
@@ -716,6 +753,7 @@ module Aws::SWF
     RegisterDomainInput.add_member(:name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "name"))
     RegisterDomainInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     RegisterDomainInput.add_member(:workflow_execution_retention_period_in_days, Shapes::ShapeRef.new(shape: DurationInDays, required: true, location_name: "workflowExecutionRetentionPeriodInDays"))
+    RegisterDomainInput.add_member(:tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "tags"))
     RegisterDomainInput.struct_class = Types::RegisterDomainInput
 
     RegisterWorkflowTypeInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
@@ -761,6 +799,14 @@ module Aws::SWF
     RequestCancelWorkflowExecutionInput.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "workflowId"))
     RequestCancelWorkflowExecutionInput.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunIdOptional, location_name: "runId"))
     RequestCancelWorkflowExecutionInput.struct_class = Types::RequestCancelWorkflowExecutionInput
+
+    ResourceTag.add_member(:key, Shapes::ShapeRef.new(shape: ResourceTagKey, required: true, location_name: "key"))
+    ResourceTag.add_member(:value, Shapes::ShapeRef.new(shape: ResourceTagValue, location_name: "value"))
+    ResourceTag.struct_class = Types::ResourceTag
+
+    ResourceTagKeyList.member = Shapes::ShapeRef.new(shape: ResourceTagKey)
+
+    ResourceTagList.member = Shapes::ShapeRef.new(shape: ResourceTag)
 
     RespondActivityTaskCanceledInput.add_member(:task_token, Shapes::ShapeRef.new(shape: TaskToken, required: true, location_name: "taskToken"))
     RespondActivityTaskCanceledInput.add_member(:details, Shapes::ShapeRef.new(shape: Data, location_name: "details"))
@@ -912,6 +958,10 @@ module Aws::SWF
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: ResourceTagList, required: true, location_name: "tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
     TaskList.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     TaskList.struct_class = Types::TaskList
 
@@ -938,9 +988,39 @@ module Aws::SWF
     TimerStartedEventAttributes.add_member(:decision_task_completed_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "decisionTaskCompletedEventId"))
     TimerStartedEventAttributes.struct_class = Types::TimerStartedEventAttributes
 
+    TooManyTagsFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyTagsFault.struct_class = Types::TooManyTagsFault
+
+    TypeAlreadyExistsFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TypeAlreadyExistsFault.struct_class = Types::TypeAlreadyExistsFault
+
+    TypeDeprecatedFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TypeDeprecatedFault.struct_class = Types::TypeDeprecatedFault
+
+    UndeprecateActivityTypeInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
+    UndeprecateActivityTypeInput.add_member(:activity_type, Shapes::ShapeRef.new(shape: ActivityType, required: true, location_name: "activityType"))
+    UndeprecateActivityTypeInput.struct_class = Types::UndeprecateActivityTypeInput
+
+    UndeprecateDomainInput.add_member(:name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "name"))
+    UndeprecateDomainInput.struct_class = Types::UndeprecateDomainInput
+
+    UndeprecateWorkflowTypeInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
+    UndeprecateWorkflowTypeInput.add_member(:workflow_type, Shapes::ShapeRef.new(shape: WorkflowType, required: true, location_name: "workflowType"))
+    UndeprecateWorkflowTypeInput.struct_class = Types::UndeprecateWorkflowTypeInput
+
+    UnknownResourceFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnknownResourceFault.struct_class = Types::UnknownResourceFault
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: ResourceTagKeyList, required: true, location_name: "tagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
     WorkflowExecution.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "workflowId"))
     WorkflowExecution.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunId, required: true, location_name: "runId"))
     WorkflowExecution.struct_class = Types::WorkflowExecution
+
+    WorkflowExecutionAlreadyStartedFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    WorkflowExecutionAlreadyStartedFault.struct_class = Types::WorkflowExecutionAlreadyStartedFault
 
     WorkflowExecutionCancelRequestedEventAttributes.add_member(:external_workflow_execution, Shapes::ShapeRef.new(shape: WorkflowExecution, location_name: "externalWorkflowExecution"))
     WorkflowExecutionCancelRequestedEventAttributes.add_member(:external_initiated_event_id, Shapes::ShapeRef.new(shape: EventId, location_name: "externalInitiatedEventId"))
@@ -1095,9 +1175,9 @@ module Aws::SWF
         "protocol" => "json",
         "serviceAbbreviation" => "Amazon SWF",
         "serviceFullName" => "Amazon Simple Workflow Service",
+        "serviceId" => "SWF",
         "signatureVersion" => "v4",
         "targetPrefix" => "SimpleWorkflowService",
-        "timestampFormat" => "unixTimestamp",
         "uid" => "swf-2012-01-25",
       }
 
@@ -1293,6 +1373,17 @@ module Aws::SWF
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceFault)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedFault)
+      end)
+
       api.add_operation(:list_workflow_types, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListWorkflowTypes"
         o.http_method = "POST"
@@ -1368,6 +1459,7 @@ module Aws::SWF
         o.errors << Shapes::ShapeRef.new(shape: DomainAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedFault)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsFault)
       end)
 
       api.add_operation(:register_workflow_type, Seahorse::Model::Operation.new.tap do |o|
@@ -1456,6 +1548,18 @@ module Aws::SWF
         o.errors << Shapes::ShapeRef.new(shape: DefaultUndefinedFault)
       end)
 
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceFault)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsFault)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedFault)
+      end)
+
       api.add_operation(:terminate_workflow_execution, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TerminateWorkflowExecution"
         o.http_method = "POST"
@@ -1463,6 +1567,50 @@ module Aws::SWF
         o.input = Shapes::ShapeRef.new(shape: TerminateWorkflowExecutionInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnknownResourceFault)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedFault)
+      end)
+
+      api.add_operation(:undeprecate_activity_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UndeprecateActivityType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UndeprecateActivityTypeInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceFault)
+        o.errors << Shapes::ShapeRef.new(shape: TypeAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedFault)
+      end)
+
+      api.add_operation(:undeprecate_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UndeprecateDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UndeprecateDomainInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceFault)
+        o.errors << Shapes::ShapeRef.new(shape: DomainAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedFault)
+      end)
+
+      api.add_operation(:undeprecate_workflow_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UndeprecateWorkflowType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UndeprecateWorkflowTypeInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceFault)
+        o.errors << Shapes::ShapeRef.new(shape: TypeAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedFault)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceFault)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedFault)
       end)
     end

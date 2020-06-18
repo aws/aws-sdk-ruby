@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "endpointPrefix": "svcname",
+    "serviceId": "sample_query_svc",
+    "protocol": "query"
+  },
+  "operations": {
+    "EmptyResponse": {
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": { "shape": "EmptyResponseRequest" }
+    }
+  },
+  "shapes": {
+    "EmptyResponseRequest": {
+      "type": "structure",
+      "members": {}
+    }
+  }
+}

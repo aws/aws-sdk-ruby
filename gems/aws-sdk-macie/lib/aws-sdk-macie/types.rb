@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -8,6 +10,23 @@
 module Aws::Macie
   module Types
 
+    # You do not have required permissions to access the requested resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type that caused the exception
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message,
+      :resource_type)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateMemberAccountRequest
     #   data as a hash:
     #
@@ -17,7 +36,7 @@ module Aws::Macie
     #
     # @!attribute [rw] member_account_id
     #   The ID of the AWS account that you want to associate with Amazon
-    #   Macie as a member account.
+    #   Macie Classic as a member account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AssociateMemberAccountRequest AWS API Documentation
@@ -45,13 +64,13 @@ module Aws::Macie
     #       }
     #
     # @!attribute [rw] member_account_id
-    #   The ID of the Amazon Macie member account whose resources you want
-    #   to associate with Macie.
+    #   The ID of the Amazon Macie Classic member account whose resources
+    #   you want to associate with Macie Classic.
     #   @return [String]
     #
     # @!attribute [rw] s3_resources
-    #   The S3 resources that you want to associate with Amazon Macie for
-    #   monitoring and data classification.
+    #   The S3 resources that you want to associate with Amazon Macie
+    #   Classic for monitoring and data classification.
     #   @return [Array<Types::S3ResourceClassification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AssociateS3ResourcesRequest AWS API Documentation
@@ -63,8 +82,9 @@ module Aws::Macie
     end
 
     # @!attribute [rw] failed_s3_resources
-    #   S3 resources that couldn't be associated with Amazon Macie. An
-    #   error code and an error message are provided for each failed item.
+    #   S3 resources that couldn't be associated with Amazon Macie Classic.
+    #   An error code and an error message are provided for each failed
+    #   item.
     #   @return [Array<Types::FailedS3Resource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AssociateS3ResourcesResult AWS API Documentation
@@ -74,8 +94,8 @@ module Aws::Macie
       include Aws::Structure
     end
 
-    # The classification type that Amazon Macie applies to the associated S3
-    # resources.
+    # The classification type that Amazon Macie Classic applies to the
+    # associated S3 resources.
     #
     # @note When making an API call, you may pass ClassificationType
     #   data as a hash:
@@ -92,9 +112,9 @@ module Aws::Macie
     #
     # @!attribute [rw] continuous
     #   A continuous classification of the objects that are added to a
-    #   specified S3 bucket. Amazon Macie begins performing continuous
-    #   classification after a bucket is successfully associated with Amazon
-    #   Macie.
+    #   specified S3 bucket. Amazon Macie Classic begins performing
+    #   continuous classification after a bucket is successfully associated
+    #   with Amazon Macie Classic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ClassificationType AWS API Documentation
@@ -105,9 +125,9 @@ module Aws::Macie
       include Aws::Structure
     end
 
-    # The classification type that Amazon Macie applies to the associated S3
-    # resources. At least one of the classification types (oneTime or
-    # continuous) must be specified.
+    # The classification type that Amazon Macie Classic applies to the
+    # associated S3 resources. At least one of the classification types
+    # (oneTime or continuous) must be specified.
     #
     # @note When making an API call, you may pass ClassificationTypeUpdate
     #   data as a hash:
@@ -124,9 +144,9 @@ module Aws::Macie
     #
     # @!attribute [rw] continuous
     #   A continuous classification of the objects that are added to a
-    #   specified S3 bucket. Amazon Macie begins performing continuous
-    #   classification after a bucket is successfully associated with Amazon
-    #   Macie.
+    #   specified S3 bucket. Amazon Macie Classic begins performing
+    #   continuous classification after a bucket is successfully associated
+    #   with Amazon Macie Classic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ClassificationTypeUpdate AWS API Documentation
@@ -146,7 +166,7 @@ module Aws::Macie
     #
     # @!attribute [rw] member_account_id
     #   The ID of the member account that you want to remove from Amazon
-    #   Macie.
+    #   Macie Classic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/DisassociateMemberAccountRequest AWS API Documentation
@@ -170,13 +190,13 @@ module Aws::Macie
     #       }
     #
     # @!attribute [rw] member_account_id
-    #   The ID of the Amazon Macie member account whose resources you want
-    #   to remove from being monitored by Amazon Macie.
+    #   The ID of the Amazon Macie Classic member account whose resources
+    #   you want to remove from being monitored by Amazon Macie Classic.
     #   @return [String]
     #
     # @!attribute [rw] associated_s3_resources
     #   The S3 resources (buckets or prefixes) that you want to remove from
-    #   being monitored and classified by Amazon Macie.
+    #   being monitored and classified by Amazon Macie Classic.
     #   @return [Array<Types::S3Resource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/DisassociateS3ResourcesRequest AWS API Documentation
@@ -189,8 +209,8 @@ module Aws::Macie
 
     # @!attribute [rw] failed_s3_resources
     #   S3 resources that couldn't be removed from being monitored and
-    #   classified by Amazon Macie. An error code and an error message are
-    #   provided for each failed item.
+    #   classified by Amazon Macie Classic. An error code and an error
+    #   message are provided for each failed item.
     #   @return [Array<Types::FailedS3Resource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/DisassociateS3ResourcesResult AWS API Documentation
@@ -220,6 +240,70 @@ module Aws::Macie
       :failed_item,
       :error_code,
       :error_message)
+      include Aws::Structure
+    end
+
+    # Internal server error.
+    #
+    # @!attribute [rw] error_code
+    #   Error code for the exception
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/InternalException AWS API Documentation
+    #
+    class InternalException < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because an invalid or out-of-range value was
+    # supplied for an input parameter.
+    #
+    # @!attribute [rw] error_code
+    #   Error code for the exception
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] field_name
+    #   Field that has invalid input
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :error_code,
+      :message,
+      :field_name)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to create resources
+    # beyond the current AWS account limits. The error code describes the
+    # limit exceeded.
+    #
+    # @!attribute [rw] error_code
+    #   Error code for the exception
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type that caused the exception
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :error_code,
+      :message,
+      :resource_type)
       include Aws::Structure
     end
 
@@ -253,8 +337,8 @@ module Aws::Macie
     end
 
     # @!attribute [rw] member_accounts
-    #   A list of the Amazon Macie member accounts returned by the action.
-    #   The current master account is also included in this list.
+    #   A list of the Amazon Macie Classic member accounts returned by the
+    #   action. The current master account is also included in this list.
     #   @return [Array<Types::MemberAccount>]
     #
     # @!attribute [rw] next_token
@@ -283,8 +367,8 @@ module Aws::Macie
     #       }
     #
     # @!attribute [rw] member_account_id
-    #   The Amazon Macie member account ID whose associated S3 resources you
-    #   want to list.
+    #   The Amazon Macie Classic member account ID whose associated S3
+    #   resources you want to list.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -328,10 +412,10 @@ module Aws::Macie
       include Aws::Structure
     end
 
-    # Contains information about the Amazon Macie member account.
+    # Contains information about the Amazon Macie Classic member account.
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the Amazon Macie member account.
+    #   The AWS account ID of the Amazon Macie Classic member account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/MemberAccount AWS API Documentation
@@ -370,8 +454,8 @@ module Aws::Macie
       include Aws::Structure
     end
 
-    # The S3 resources that you want to associate with Amazon Macie for
-    # monitoring and data classification. This data type is used as a
+    # The S3 resources that you want to associate with Amazon Macie Classic
+    # for monitoring and data classification. This data type is used as a
     # request parameter in the AssociateS3Resources action and a response
     # parameter in the ListS3Resources action.
     #
@@ -389,17 +473,17 @@ module Aws::Macie
     #
     # @!attribute [rw] bucket_name
     #   The name of the S3 bucket that you want to associate with Amazon
-    #   Macie.
+    #   Macie Classic.
     #   @return [String]
     #
     # @!attribute [rw] prefix
     #   The prefix of the S3 bucket that you want to associate with Amazon
-    #   Macie.
+    #   Macie Classic.
     #   @return [String]
     #
     # @!attribute [rw] classification_type
     #   The classification type that you want to specify for the resource
-    #   associated with Amazon Macie.
+    #   associated with Amazon Macie Classic.
     #   @return [Types::ClassificationType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/S3ResourceClassification AWS API Documentation
@@ -439,7 +523,7 @@ module Aws::Macie
     #
     # @!attribute [rw] classification_type_update
     #   The classification type that you want to update for the resource
-    #   associated with Amazon Macie.
+    #   associated with Amazon Macie Classic.
     #   @return [Types::ClassificationTypeUpdate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/S3ResourceClassificationUpdate AWS API Documentation
@@ -469,8 +553,8 @@ module Aws::Macie
     #       }
     #
     # @!attribute [rw] member_account_id
-    #   The AWS ID of the Amazon Macie member account whose S3 resources'
-    #   classification types you want to update.
+    #   The AWS ID of the Amazon Macie Classic member account whose S3
+    #   resources' classification types you want to update.
     #   @return [String]
     #
     # @!attribute [rw] s3_resources_update

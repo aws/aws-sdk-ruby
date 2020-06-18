@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-devicefarm/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     device_farm = Aws::DeviceFarm::Client.new
+#     resp = device_farm.create_device_pool(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Device Farm all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Device Farm are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::DeviceFarm::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Device Farm API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-devicefarm/customizations'
 # @service
 module Aws::DeviceFarm
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.34.1'
 
 end

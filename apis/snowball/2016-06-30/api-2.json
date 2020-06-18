@@ -169,6 +169,19 @@
       "input":{"shape":"GetSnowballUsageRequest"},
       "output":{"shape":"GetSnowballUsageResult"}
     },
+    "GetSoftwareUpdates":{
+      "name":"GetSoftwareUpdates",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetSoftwareUpdatesRequest"},
+      "output":{"shape":"GetSoftwareUpdatesResult"},
+      "errors":[
+        {"shape":"InvalidResourceException"},
+        {"shape":"InvalidJobStateException"}
+      ]
+    },
     "ListClusterJobs":{
       "name":"ListClusterJobs",
       "http":{
@@ -355,7 +368,8 @@
         "AddressId":{"shape":"AddressId"},
         "ShippingOption":{"shape":"ShippingOption"},
         "Notification":{"shape":"Notification"},
-        "ForwardingAddressId":{"shape":"AddressId"}
+        "ForwardingAddressId":{"shape":"AddressId"},
+        "TaxDocuments":{"shape":"TaxDocuments"}
       }
     },
     "ClusterState":{
@@ -411,7 +425,8 @@
         "SnowballType":{"shape":"SnowballType"},
         "ShippingOption":{"shape":"ShippingOption"},
         "Notification":{"shape":"Notification"},
-        "ForwardingAddressId":{"shape":"AddressId"}
+        "ForwardingAddressId":{"shape":"AddressId"},
+        "TaxDocuments":{"shape":"TaxDocuments"}
       }
     },
     "CreateClusterResult":{
@@ -434,7 +449,9 @@
         "Notification":{"shape":"Notification"},
         "ClusterId":{"shape":"ClusterId"},
         "SnowballType":{"shape":"SnowballType"},
-        "ForwardingAddressId":{"shape":"AddressId"}
+        "ForwardingAddressId":{"shape":"AddressId"},
+        "TaxDocuments":{"shape":"TaxDocuments"},
+        "DeviceConfiguration":{"shape":"DeviceConfiguration"}
       }
     },
     "CreateJobResult":{
@@ -506,6 +523,12 @@
         "SubJobMetadata":{"shape":"JobMetadataList"}
       }
     },
+    "DeviceConfiguration":{
+      "type":"structure",
+      "members":{
+        "SnowconeDeviceConfiguration":{"shape":"SnowconeDeviceConfiguration"}
+      }
+    },
     "Ec2AmiResource":{
       "type":"structure",
       "required":["AmiId"],
@@ -534,6 +557,10 @@
     "EventTriggerDefinitionList":{
       "type":"list",
       "member":{"shape":"EventTriggerDefinition"}
+    },
+    "GSTIN":{
+      "type":"string",
+      "pattern":"\\d{2}[A-Z]{5}\\d{4}[A-Z]{1}[A-Z\\d]{1}[Z]{1}[A-Z\\d]{1}"
     },
     "GetJobManifestRequest":{
       "type":"structure",
@@ -571,6 +598,25 @@
       "members":{
         "SnowballLimit":{"shape":"Integer"},
         "SnowballsInUse":{"shape":"Integer"}
+      }
+    },
+    "GetSoftwareUpdatesRequest":{
+      "type":"structure",
+      "required":["JobId"],
+      "members":{
+        "JobId":{"shape":"JobId"}
+      }
+    },
+    "GetSoftwareUpdatesResult":{
+      "type":"structure",
+      "members":{
+        "UpdatesURI":{"shape":"String"}
+      }
+    },
+    "INDTaxDocuments":{
+      "type":"structure",
+      "members":{
+        "GSTIN":{"shape":"GSTIN"}
       }
     },
     "Integer":{"type":"integer"},
@@ -659,7 +705,9 @@
         "DataTransferProgress":{"shape":"DataTransfer"},
         "JobLogInfo":{"shape":"JobLogs"},
         "ClusterId":{"shape":"String"},
-        "ForwardingAddressId":{"shape":"AddressId"}
+        "ForwardingAddressId":{"shape":"AddressId"},
+        "TaxDocuments":{"shape":"TaxDocuments"},
+        "DeviceConfiguration":{"shape":"DeviceConfiguration"}
       }
     },
     "JobMetadataList":{
@@ -857,6 +905,8 @@
         "T80",
         "T100",
         "T42",
+        "T98",
+        "T8",
         "NoPreference"
       ]
     },
@@ -866,8 +916,16 @@
         "STANDARD",
         "EDGE",
         "EDGE_C",
-        "EDGE_CG"
+        "EDGE_CG",
+        "EDGE_S",
+        "SNC1_HDD"
       ]
+    },
+    "SnowconeDeviceConfiguration":{
+      "type":"structure",
+      "members":{
+        "WirelessConnection":{"shape":"WirelessConnection"}
+      }
     },
     "SnsTopicARN":{
       "type":"string",
@@ -877,6 +935,12 @@
     "String":{
       "type":"string",
       "min":1
+    },
+    "TaxDocuments":{
+      "type":"structure",
+      "members":{
+        "IND":{"shape":"INDTaxDocuments"}
+      }
     },
     "Timestamp":{"type":"timestamp"},
     "UnsupportedAddressException":{
@@ -923,6 +987,12 @@
     "UpdateJobResult":{
       "type":"structure",
       "members":{
+      }
+    },
+    "WirelessConnection":{
+      "type":"structure",
+      "members":{
+        "IsWifiEnabled":{"shape":"Boolean"}
       }
     }
   }

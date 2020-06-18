@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../../gems/aws-sdk-core/spec/shared_spec_helper'
 
 $:.unshift(File.expand_path('../../lib', __FILE__))
@@ -138,7 +140,7 @@ module SpecHelper
 
     def model_path(model, models_dir)
       path = "#{models_dir}/#{model}.json"
-      File.exists?(path) ? path : nil
+      File.exist?(path) ? path : nil
     end
   end
 end

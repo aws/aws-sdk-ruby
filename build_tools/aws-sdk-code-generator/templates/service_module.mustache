@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 {{#generated_src_warning}}
 {{generated_src_warning}}
 {{/generated_src_warning}}
@@ -27,13 +29,13 @@ require_relative '{{.}}'
 #
 # # Errors
 #
-# Errors returned from {{full_name}} all
-# extend {Errors::ServiceError}.
+# Errors returned from {{full_name}} are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue {{module_name}}::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all {{full_name}} API errors
 #     end
 #
 # See {Errors} for more information.

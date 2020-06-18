@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-workdocs/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     work_docs = Aws::WorkDocs::Client.new
+#     resp = work_docs.abort_document_version_upload(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon WorkDocs all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon WorkDocs are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::WorkDocs::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon WorkDocs API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-workdocs/customizations'
 # @service
 module Aws::WorkDocs
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.24.1'
 
 end

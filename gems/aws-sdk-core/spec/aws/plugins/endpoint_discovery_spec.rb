@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../spec_helper'
 
 module Aws
@@ -122,13 +124,18 @@ module Aws
       it 'does nothing when :endpoint is specified' do
         stub_request(:post, "https://foo.com/")
           .to_return(:status => 200, :body => "", :headers => {})
-        c = EndpointDiscoveryClient.new(credentials: creds, endpoint: 'https://foo.com', region: 'us-east-1')
+        c = EndpointDiscoveryClient.new(
+          credentials: creds, endpoint: 'https://foo.com', region: 'us-east-1'
+        )
         resp = c.operation_required(resource_name: 'foo', resource_id: '123')
         expect(resp.context.http_request.headers['user-agent']).not_to include('endpoint-discovery')
       end
 
       it 'fetches endpoint from cache when available' do
-        c = EndpointDiscoveryClient.new(credentials: creds, region: 'us-east-1', endpoint_discovery: true, stub_responses: true)
+        c = EndpointDiscoveryClient.new(
+          credentials: creds, region: 'us-east-1', endpoint_discovery: true,
+          stub_responses: true
+        )
         c.config.endpoint_cache['akid_operation_not_required'] = {:address => "https://bar.com/foo", :cache_period_in_minutes => 20}
         c.config.endpoint_cache['akid_operation_required_123_foo'] = {:address => "https://bar.com/foo", :cache_period_in_minutes => 20}
 
@@ -150,7 +157,9 @@ module Aws
       end
 
       it 'caches endpoint when request endpoint succeed' do
-        c = EndpointDiscoveryClient.new(credentials: creds, region: 'us-east-1', stub_responses: true)
+        c = EndpointDiscoveryClient.new(
+          credentials: creds, region: 'us-east-1', stub_responses: true
+        )
         c.stub_responses(
           :describe_endpoints,
           {
@@ -165,8 +174,11 @@ module Aws
         expect(c.api_requests.size).to eq(3)
       end
 
-      it 'makes requests to fetch endpoints when required' do
-        c = EndpointDiscoveryClient.new(credentials: creds, region: 'us-east-1', stub_responses: true)
+      it 'makes requests to fetch endpoints when required and enabled' do
+        c = EndpointDiscoveryClient.new(
+          credentials: creds, region: 'us-east-1', endpoint_discovery: true,
+          stub_responses: true
+        )
         c.stub_responses(
           :describe_endpoints,
           {
@@ -179,8 +191,22 @@ module Aws
         expect(c.api_requests.size).to eq(2)
       end
 
+      it 'raises an exception when required and disabled' do
+        c = EndpointDiscoveryClient.new(
+          credentials: creds, region: 'us-east-1',
+          endpoint_discovery: false,
+          stub_responses: true
+        )
+        expect do
+          c.operation_required(resource_name: 'foo', resource_id: '123')
+        end.to raise_exception(ArgumentError)
+      end
+
       it 'fails when fetching endpoint failed but required' do
-        c = EndpointDiscoveryClient.new(credentials: creds, region: 'us-east-1', stub_responses: true)
+        c = EndpointDiscoveryClient.new(
+          credentials: creds, region: 'us-east-1',
+          stub_responses: true
+        )
         c.stub_responses(
           :describe_endpoints,
           'ServiceUnavaiable'
@@ -191,7 +217,10 @@ module Aws
       end
 
       it 'makes requests to fetch endpoints when enabled but not required' do
-        c = EndpointDiscoveryClient.new(credentials: creds, region: 'us-east-1', endpoint_discovery: true, stub_responses: true)
+        c = EndpointDiscoveryClient.new(
+          credentials: creds, region: 'us-east-1',endpoint_discovery: true,
+          stub_responses: true
+        )
         c.stub_responses(
           :describe_endpoints,
           {
@@ -205,7 +234,10 @@ module Aws
       end
 
       it 'does not fail when fetching endpoint failed when enabled but not required' do
-        c = EndpointDiscoveryClient.new(credentials: creds, region: 'us-east-1', endpoint_discovery: true, stub_responses: true)
+        c = EndpointDiscoveryClient.new(
+          credentials: creds, region: 'us-east-1', endpoint_discovery: true,
+          stub_responses: true
+        )
         c.stub_responses(
           :describe_endpoints,
           'ServiceUnavaiable'
@@ -217,7 +249,10 @@ module Aws
       end
 
       it 'does nothing when disabled and not required' do
-        c = EndpointDiscoveryClient.new(credentials: creds, region: 'us-east-1', stub_responses: true)
+        c = EndpointDiscoveryClient.new(
+          credentials: creds, region: 'us-east-1', stub_responses: true,
+          endpoint_discovery: false
+        )
         c.operation_not_required(foo: 'foo')
         expect(c.api_requests.size).to eq(1)
       end
@@ -228,7 +263,7 @@ module Aws
           region: 'us-east-1',
           endpoint_discovery: true,
           active_endpoint_cache: true,
-          endpoint_cache_poll_interval: 1,
+          endpoint_cache_poll_interval: 0.01,
           stub_responses: true
         )
         c.stub_responses(
@@ -241,7 +276,7 @@ module Aws
           }
         )
         c.operation_not_required(foo: 'foo')
-        sleep(5)
+        sleep(0.1)
         expect(c.api_requests.size).to eq(3)
         c.operation_not_required(foo: 'foo')
         expect(c.api_requests.size).to eq(4)

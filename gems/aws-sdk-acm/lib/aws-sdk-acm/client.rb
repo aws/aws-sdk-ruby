@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:acm)
 
 module Aws::ACM
+  # An API client for ACM.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::ACM::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::ACM
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +109,7 @@ module Aws::ACM
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::ACM
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::ACM
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::ACM
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::ACM
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::ACM
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::ACM
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::ACM
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -208,6 +273,48 @@ module Aws::ACM
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -237,7 +344,7 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/tags.html
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/tags.html
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the ACM certificate to which the tag
@@ -250,7 +357,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The key-value pair that defines the tag. The tag value is optional.
@@ -301,7 +408,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -333,7 +440,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Types::DescribeCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -376,7 +483,7 @@ module Aws::ACM
     #   resp.certificate.signature_algorithm #=> String
     #   resp.certificate.in_use_by #=> Array
     #   resp.certificate.in_use_by[0] #=> String
-    #   resp.certificate.failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "CAA_ERROR", "PCA_LIMIT_EXCEEDED", "PCA_INVALID_ARN", "PCA_INVALID_STATE", "PCA_REQUEST_FAILED", "PCA_RESOURCE_NOT_FOUND", "PCA_INVALID_ARGS", "OTHER"
+    #   resp.certificate.failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "DOMAIN_VALIDATION_DENIED", "CAA_ERROR", "PCA_LIMIT_EXCEEDED", "PCA_INVALID_ARN", "PCA_INVALID_STATE", "PCA_REQUEST_FAILED", "PCA_NAME_CONSTRAINTS_VALIDATION", "PCA_RESOURCE_NOT_FOUND", "PCA_INVALID_ARGS", "PCA_INVALID_DURATION", "PCA_ACCESS_DENIED", "OTHER"
     #   resp.certificate.type #=> String, one of "IMPORTED", "AMAZON_ISSUED", "PRIVATE"
     #   resp.certificate.renewal_summary.renewal_status #=> String, one of "PENDING_AUTO_RENEWAL", "PENDING_VALIDATION", "SUCCESS", "FAILED"
     #   resp.certificate.renewal_summary.domain_validation_options #=> Array
@@ -389,6 +496,8 @@ module Aws::ACM
     #   resp.certificate.renewal_summary.domain_validation_options[0].resource_record.type #=> String, one of "CNAME"
     #   resp.certificate.renewal_summary.domain_validation_options[0].resource_record.value #=> String
     #   resp.certificate.renewal_summary.domain_validation_options[0].validation_method #=> String, one of "EMAIL", "DNS"
+    #   resp.certificate.renewal_summary.renewal_status_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "DOMAIN_VALIDATION_DENIED", "CAA_ERROR", "PCA_LIMIT_EXCEEDED", "PCA_INVALID_ARN", "PCA_INVALID_STATE", "PCA_REQUEST_FAILED", "PCA_NAME_CONSTRAINTS_VALIDATION", "PCA_RESOURCE_NOT_FOUND", "PCA_INVALID_ARGS", "PCA_INVALID_DURATION", "PCA_ACCESS_DENIED", "OTHER"
+    #   resp.certificate.renewal_summary.updated_at #=> Time
     #   resp.certificate.key_usages #=> Array
     #   resp.certificate.key_usages[0].name #=> String, one of "DIGITAL_SIGNATURE", "NON_REPUDIATION", "KEY_ENCIPHERMENT", "DATA_ENCIPHERMENT", "KEY_AGREEMENT", "CERTIFICATE_SIGNING", "CRL_SIGNING", "ENCIPHER_ONLY", "DECIPHER_ONLY", "ANY", "CUSTOM"
     #   resp.certificate.extended_key_usages #=> Array
@@ -397,6 +506,11 @@ module Aws::ACM
     #   resp.certificate.certificate_authority_arn #=> String
     #   resp.certificate.renewal_eligibility #=> String, one of "ELIGIBLE", "INELIGIBLE"
     #   resp.certificate.options.certificate_transparency_logging_preference #=> String, one of "ENABLED", "DISABLED"
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * certificate_validated
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificate AWS API Documentation
     #
@@ -408,15 +522,18 @@ module Aws::ACM
     end
 
     # Exports a private certificate issued by a private certificate
-    # authority (CA) for use anywhere. You can export the certificate, the
-    # certificate chain, and the encrypted private key associated with the
-    # public key embedded in the certificate. You must store the private key
-    # securely. The private key is a 2048 bit RSA key. You must provide a
-    # passphrase for the private key when exporting it. You can use the
-    # following OpenSSL command to decrypt it later. Provide the passphrase
-    # when prompted.
+    # authority (CA) for use anywhere. The exported file contains the
+    # certificate, the certificate chain, and the encrypted private 2048-bit
+    # RSA key associated with the public key that is embedded in the
+    # certificate. For security, you must assign a passphrase for the
+    # private key when exporting it.
     #
-    # `openssl rsa -in encrypted_key.pem -out decrypted_key.pem`
+    # For information about exporting and formatting a certificate using the
+    # ACM console or CLI, see [Export a Private Certificate][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-export-private.html
     #
     # @option params [required, String] :certificate_arn
     #   An Amazon Resource Name (ARN) of the issued certificate. This must be
@@ -460,12 +577,15 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Retrieves a certificate specified by an ARN and its certificate chain
-    # . The chain is an ordered list of certificates that contains the end
-    # entity certificate, intermediate certificates of subordinate CAs, and
-    # the root certificate in that order. The certificate and certificate
-    # chain are base64 encoded. If you want to decode the certificate to see
-    # the individual fields, you can use OpenSSL.
+    # Retrieves an Amazon-issued certificate and its certificate chain. The
+    # chain consists of the certificate of the issuing CA and the
+    # intermediate certificates of any other subordinate CAs. All of the
+    # certificates are base64 encoded. You can use [OpenSSL][1] to decode
+    # the certificates and inspect individual fields.
+    #
+    #
+    #
+    # [1]: https://wiki.openssl.org/index.php/Command_Line_Utilities
     #
     # @option params [required, String] :certificate_arn
     #   String that contains a certificate ARN in the following format:
@@ -477,7 +597,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Types::GetCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -544,7 +664,7 @@ module Aws::ACM
     #
     # * To import a new certificate, omit the `CertificateArn` argument.
     #   Include this argument only when you want to replace a previously
-    #   imported certificate.
+    #   imported certifica
     #
     # * When you import a certificate by using the CLI, you must specify the
     #   certificate, the certificate chain, and the private key by their
@@ -557,15 +677,19 @@ module Aws::ACM
     #   certificate, the certificate chain, and the private key files in the
     #   manner required by the programming language you're using.
     #
+    # * The cryptographic algorithm of an imported certificate must match
+    #   the algorithm of the signing CA. For example, if the signing CA key
+    #   type is RSA, then the certificate key type must also be RSA.
+    #
     # This operation returns the [Amazon Resource Name (ARN)][4] of the
     # imported certificate.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-services.html
-    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
-    # [3]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
-    # [4]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-services.html
+    # [2]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    # [3]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    # [4]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :certificate_arn
     #   The [Amazon Resource Name (ARN)][1] of an imported certificate to
@@ -573,7 +697,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, String, IO] :certificate
     #   The certificate to import.
@@ -583,6 +707,11 @@ module Aws::ACM
     #
     # @option params [String, IO] :certificate_chain
     #   The PEM encoded certificate chain.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more resource tags to associate with the imported certificate.
+    #
+    #   Note: You cannot apply tags when reimporting a certificate.
     #
     # @return [Types::ImportCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -595,6 +724,12 @@ module Aws::ACM
     #     certificate: "data", # required
     #     private_key: "data", # required
     #     certificate_chain: "data",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -612,7 +747,9 @@ module Aws::ACM
 
     # Retrieves a list of certificate ARNs and domain names. You can request
     # that only certificates that match a specific status be listed. You can
-    # also filter by specific attributes of the certificate.
+    # also filter by specific attributes of the certificate. Default
+    # filtering returns only `RSA_2048` certificates. For more information,
+    # see Filters.
     #
     # @option params [Array<String>] :certificate_statuses
     #   Filter the certificate list by status value.
@@ -638,6 +775,8 @@ module Aws::ACM
     #
     #   * {Types::ListCertificatesResponse#next_token #next_token} => String
     #   * {Types::ListCertificatesResponse#certificate_summary_list #certificate_summary_list} => Array&lt;Types::CertificateSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -684,7 +823,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Types::ListTagsForCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -732,7 +871,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The key-value pair that defines the tag to remove.
@@ -760,6 +899,47 @@ module Aws::ACM
       req.send_request(options)
     end
 
+    # Renews an eligable ACM certificate. At this time, only exported
+    # private certificates can be renewed with this operation. In order to
+    # renew your ACM PCA certificates with ACM, you must first [grant the
+    # ACM service principal permission to do so][1]. For more information,
+    # see [Testing Managed Renewal][2] in the ACM User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaPermissions.html
+    # [2]: https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html
+    #
+    # @option params [required, String] :certificate_arn
+    #   String that contains the ARN of the ACM certificate to be renewed.
+    #   This must be of the form:
+    #
+    #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
+    #
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
+    #   AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.renew_certificate({
+    #     certificate_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewCertificate AWS API Documentation
+    #
+    # @overload renew_certificate(params = {})
+    # @param [Hash] params ({})
+    def renew_certificate(params = {}, options = {})
+      req = build_request(:renew_certificate, params)
+      req.send_request(options)
+    end
+
     # Requests an ACM certificate for use with other AWS services. To
     # request an ACM certificate, you must specify a fully qualified domain
     # name (FQDN) in the `DomainName` parameter. You can also specify
@@ -774,8 +954,8 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
-    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    # [2]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
     #
     # @option params [required, String] :domain_name
     #   Fully qualified domain name (FQDN), such as www.example.com, that you
@@ -784,7 +964,7 @@ module Aws::ACM
     #   For example, *.example.com protects www.example.com,
     #   site.example.com, and images.example.com.
     #
-    #   The first domain name you enter cannot exceed 63 octets, including
+    #   The first domain name you enter cannot exceed 64 octets, including
     #   periods. Each subsequent Subject Alternative Name (SAN), however, can
     #   be up to 253 octets in length.
     #
@@ -796,8 +976,8 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
-    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
     #
     # @option params [Array<String>] :subject_alternative_names
     #   Additional FQDNs to be included in the Subject Alternative Name
@@ -805,9 +985,9 @@ module Aws::ACM
     #   www.example.net to a certificate for which the `DomainName` field is
     #   www.example.com if users can reach your site by using either name. The
     #   maximum number of domain names that you can add to an ACM certificate
-    #   is 100. However, the initial limit is 10 domain names. If you need
-    #   more than 10 names, you must request a limit increase. For more
-    #   information, see [Limits][1].
+    #   is 100. However, the initial quota is 10 domain names. If you need
+    #   more than 10 names, you must request a quota increase. For more
+    #   information, see [Quotas][1].
     #
     #   The maximum length of a SAN DNS name is 253 octets. The name is made
     #   up of multiple labels separated by periods. No label can be longer
@@ -827,7 +1007,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
     #
     # @option params [String] :idempotency_token
     #   Customer chosen string that can be used to distinguish between calls
@@ -852,7 +1032,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
     #
     # @option params [String] :certificate_authority_arn
     #   The Amazon Resource Name (ARN) of the private certificate authority
@@ -866,7 +1046,10 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more resource tags to associate with the certificate.
     #
     # @return [Types::RequestCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -889,6 +1072,12 @@ module Aws::ACM
     #       certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     certificate_authority_arn: "Arn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -919,7 +1108,7 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/setup-email.html
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the requested certificate. The
@@ -980,7 +1169,7 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
     #
     # @option params [required, String] :certificate_arn
     #   ARN of the requested certificate to update. This must be of the form:
@@ -1029,7 +1218,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.32.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -1046,7 +1235,7 @@ module Aws::ACM
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #
@@ -1095,9 +1284,9 @@ module Aws::ACM
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name           | params                  | :delay   | :max_attempts |
-    # | --------------------- | ----------------------- | -------- | ------------- |
-    # | certificate_validated | {#describe_certificate} | 60       | 40            |
+    # | waiter_name           | params                        | :delay   | :max_attempts |
+    # | --------------------- | ----------------------------- | -------- | ------------- |
+    # | certificate_validated | {Client#describe_certificate} | 60       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

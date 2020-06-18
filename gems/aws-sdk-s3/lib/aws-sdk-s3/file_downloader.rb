@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pathname'
 require 'thread'
 require 'set'
@@ -21,7 +23,7 @@ module Aws
 
       def download(destination, options = {})
         @path = destination
-        @mode = options[:mode] || "auto"
+        @mode = options[:mode] || 'auto'
         @thread_count = options[:thread_count] || THREAD_COUNT
         @chunk_size = options[:chunk_size]
         @params = {
@@ -31,19 +33,19 @@ module Aws
         @params[:version_id] = options[:version_id] if options[:version_id]
 
         case @mode
-        when "auto" then multipart_download
-        when "single_request" then single_request
-        when "get_range"
+        when 'auto' then multipart_download
+        when 'single_request' then single_request
+        when 'get_range'
           if @chunk_size
             resp = @client.head_object(@params)
             multithreaded_get_by_ranges(construct_chunks(resp.content_length))
           else
-            msg = "In :get_range mode, :chunk_size must be provided"
+            msg = 'In :get_range mode, :chunk_size must be provided'
             raise ArgumentError, msg
           end
         else
           msg = "Invalid mode #{@mode} provided, "\
-            "mode should be :single_request, :get_range or :auto"
+                'mode should be :single_request, :get_range or :auto'
           raise ArgumentError, msg
         end
       end
@@ -125,8 +127,8 @@ module Aws
       end
 
       def write(resp)
-        range, _ = resp.content_range.split(" ").last.split("/")
-        head, _ = range.split("-").map {|s| s.to_i}
+        range, _ = resp.content_range.split(' ').last.split('/')
+        head, _ = range.split('-').map {|s| s.to_i}
         IO.write(@path, resp.body.read, head)
       end
 

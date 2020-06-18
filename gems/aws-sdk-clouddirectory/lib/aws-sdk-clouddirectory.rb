@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-clouddirectory/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     cloud_directory = Aws::CloudDirectory::Client.new
+#     resp = cloud_directory.add_facet_to_object(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon CloudDirectory all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon CloudDirectory are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CloudDirectory::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon CloudDirectory API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-clouddirectory/customizations'
 # @service
 module Aws::CloudDirectory
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.25.1'
 
 end

@@ -1,6 +1,122 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-06-16)
+------------------
+
+* Feature - Documentation updates for CloudFront
+
+1.30.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.30.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2020-06-05)
+------------------
+
+* Feature - Amazon CloudFront adds support for configurable origin connection attempts and origin connection timeout.
+
+1.28.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.1 (2020-05-18)
+------------------
+
+* Issue - Split on first instance of `://` in `Aws::CloudFront::Signer` to handle 3rd party s3:// urls.
+
+1.27.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2020-02-04)
+------------------
+
+* Feature - Documentation updates for CloudFront
+
+1.24.0 (2019-12-18)
+------------------
+
+* Feature - Documentation updates for CloudFront
+
+1.23.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.1 (2019-09-19)
+------------------
+
+* Issue - Fix url argument of #signed_cookie.
+
+1.22.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2019-06-14)
+------------------
+
+* Feature - A new datatype in the CloudFront API, AliasICPRecordal, provides the ICP recordal status for CNAMEs associated with distributions. AWS services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content publicly on an alternate domain name, also known as a CNAME, that they have added to CloudFront. The status value is returned in the CloudFront response; you cannot configure it yourself. The status is set to APPROVED for all CNAMEs (aliases) in regions outside of China.
+
+1.18.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.15.0 (2019-03-22)
+------------------
+
+* Feature - API update.
+
+1.14.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.13.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.12.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
 1.11.0 (2018-11-20)
 ------------------
 
@@ -125,4 +241,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-cloudfront` gem.
-

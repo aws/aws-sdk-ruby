@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:translate)
 
 module Aws::Translate
+  # An API client for Translate.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::Translate::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::Translate
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +109,7 @@ module Aws::Translate
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::Translate
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::Translate
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::Translate
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::Translate
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::Translate
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::Translate
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::Translate
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,6 +274,48 @@ module Aws::Translate
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -234,6 +341,55 @@ module Aws::Translate
     # @param [Hash] params ({})
     def delete_terminology(params = {}, options = {})
       req = build_request(:delete_terminology, params)
+      req.send_request(options)
+    end
+
+    # Gets the properties associated with an asycnhronous batch translation
+    # job including name, ID, status, source and target languages,
+    # input/output S3 buckets, and so on.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier that Amazon Translate generated for the job. The
+    #   StartTextTranslationJob operation returns this identifier in its
+    #   response.
+    #
+    # @return [Types::DescribeTextTranslationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTextTranslationJobResponse#text_translation_job_properties #text_translation_job_properties} => Types::TextTranslationJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_text_translation_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.text_translation_job_properties.job_id #=> String
+    #   resp.text_translation_job_properties.job_name #=> String
+    #   resp.text_translation_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERROR", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.text_translation_job_properties.job_details.translated_documents_count #=> Integer
+    #   resp.text_translation_job_properties.job_details.documents_with_errors_count #=> Integer
+    #   resp.text_translation_job_properties.job_details.input_documents_count #=> Integer
+    #   resp.text_translation_job_properties.source_language_code #=> String
+    #   resp.text_translation_job_properties.target_language_codes #=> Array
+    #   resp.text_translation_job_properties.target_language_codes[0] #=> String
+    #   resp.text_translation_job_properties.terminology_names #=> Array
+    #   resp.text_translation_job_properties.terminology_names[0] #=> String
+    #   resp.text_translation_job_properties.message #=> String
+    #   resp.text_translation_job_properties.submitted_time #=> Time
+    #   resp.text_translation_job_properties.end_time #=> Time
+    #   resp.text_translation_job_properties.input_data_config.s3_uri #=> String
+    #   resp.text_translation_job_properties.input_data_config.content_type #=> String
+    #   resp.text_translation_job_properties.output_data_config.s3_uri #=> String
+    #   resp.text_translation_job_properties.data_access_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DescribeTextTranslationJob AWS API Documentation
+    #
+    # @overload describe_text_translation_job(params = {})
+    # @param [Hash] params ({})
+    def describe_text_translation_job(params = {}, options = {})
+      req = build_request(:describe_text_translation_job, params)
       req.send_request(options)
     end
 
@@ -372,6 +528,8 @@ module Aws::Translate
     #   * {Types::ListTerminologiesResponse#terminology_properties_list #terminology_properties_list} => Array&lt;Types::TerminologyProperties&gt;
     #   * {Types::ListTerminologiesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_terminologies({
@@ -405,62 +563,208 @@ module Aws::Translate
       req.send_request(options)
     end
 
+    # Gets a list of the batch translation jobs that you have submitted.
+    #
+    # @option params [Types::TextTranslationJobFilter] :filter
+    #   The parameters that specify which batch translation jobs to retrieve.
+    #   Filters include job name, job status, and submission time. You can
+    #   only set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page. The default
+    #   value is 100.
+    #
+    # @return [Types::ListTextTranslationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTextTranslationJobsResponse#text_translation_job_properties_list #text_translation_job_properties_list} => Array&lt;Types::TextTranslationJobProperties&gt;
+    #   * {Types::ListTextTranslationJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_text_translation_jobs({
+    #     filter: {
+    #       job_name: "JobName",
+    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, COMPLETED_WITH_ERROR, FAILED, STOP_REQUESTED, STOPPED
+    #       submitted_before_time: Time.now,
+    #       submitted_after_time: Time.now,
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.text_translation_job_properties_list #=> Array
+    #   resp.text_translation_job_properties_list[0].job_id #=> String
+    #   resp.text_translation_job_properties_list[0].job_name #=> String
+    #   resp.text_translation_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERROR", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.text_translation_job_properties_list[0].job_details.translated_documents_count #=> Integer
+    #   resp.text_translation_job_properties_list[0].job_details.documents_with_errors_count #=> Integer
+    #   resp.text_translation_job_properties_list[0].job_details.input_documents_count #=> Integer
+    #   resp.text_translation_job_properties_list[0].source_language_code #=> String
+    #   resp.text_translation_job_properties_list[0].target_language_codes #=> Array
+    #   resp.text_translation_job_properties_list[0].target_language_codes[0] #=> String
+    #   resp.text_translation_job_properties_list[0].terminology_names #=> Array
+    #   resp.text_translation_job_properties_list[0].terminology_names[0] #=> String
+    #   resp.text_translation_job_properties_list[0].message #=> String
+    #   resp.text_translation_job_properties_list[0].submitted_time #=> Time
+    #   resp.text_translation_job_properties_list[0].end_time #=> Time
+    #   resp.text_translation_job_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.text_translation_job_properties_list[0].input_data_config.content_type #=> String
+    #   resp.text_translation_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.text_translation_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTextTranslationJobs AWS API Documentation
+    #
+    # @overload list_text_translation_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_text_translation_jobs(params = {}, options = {})
+      req = build_request(:list_text_translation_jobs, params)
+      req.send_request(options)
+    end
+
+    # Starts an asynchronous batch translation job. Batch translation jobs
+    # can be used to translate large volumes of text across multiple
+    # documents at once. For more information, see async.
+    #
+    # Batch translation jobs can be described with the
+    # DescribeTextTranslationJob operation, listed with the
+    # ListTextTranslationJobs operation, and stopped with the
+    # StopTextTranslationJob operation.
+    #
+    # <note markdown="1"> Amazon Translate does not support batch translation of multiple source
+    # languages at once.
+    #
+    #  </note>
+    #
+    # @option params [String] :job_name
+    #   The name of the batch translation job to be performed.
+    #
+    # @option params [required, Types::InputDataConfig] :input_data_config
+    #   Specifies the format and S3 location of the input documents for the
+    #   translation job.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   Specifies the S3 folder to which your job output will be saved.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of an AWS Identity Access and
+    #   Management (IAM) role that grants Amazon Translate read access to your
+    #   input data. For more nformation, see identity-and-access-management.
+    #
+    # @option params [required, String] :source_language_code
+    #   The language code of the input language. For a list of language codes,
+    #   see what-is-languages.
+    #
+    #   Amazon Translate does not automatically detect a source language
+    #   during batch translation jobs.
+    #
+    # @option params [required, Array<String>] :target_language_codes
+    #   The language code of the output language.
+    #
+    # @option params [Array<String>] :terminology_names
+    #   The name of the terminology to use in the batch translation job. For a
+    #   list of available terminologies, use the ListTerminologies operation.
+    #
+    # @option params [required, String] :client_token
+    #   The client token of the EC2 instance calling the request. This token
+    #   is auto-generated when using the Amazon Translate SDK. Otherwise, use
+    #   the
+    #   [DescribeInstances](docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
+    #   EC2 operation to retreive an instance's client token. For more
+    #   information, see [Client
+    #   Tokens](docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html#client-tokens)
+    #   in the EC2 User Guide.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartTextTranslationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTextTranslationJobResponse#job_id #job_id} => String
+    #   * {Types::StartTextTranslationJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_text_translation_job({
+    #     job_name: "JobName",
+    #     input_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       content_type: "ContentType", # required
+    #     },
+    #     output_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     source_language_code: "LanguageCodeString", # required
+    #     target_language_codes: ["LanguageCodeString"], # required
+    #     terminology_names: ["ResourceName"],
+    #     client_token: "ClientTokenString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERROR", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/StartTextTranslationJob AWS API Documentation
+    #
+    # @overload start_text_translation_job(params = {})
+    # @param [Hash] params ({})
+    def start_text_translation_job(params = {}, options = {})
+      req = build_request(:start_text_translation_job, params)
+      req.send_request(options)
+    end
+
+    # Stops an asynchronous batch translation job that is in progress.
+    #
+    # If the job's state is `IN_PROGRESS`, the job will be marked for
+    # termination and put into the `STOP_REQUESTED` state. If the job
+    # completes before it can be stopped, it is put into the `COMPLETED`
+    # state. Otherwise, the job is put into the `STOPPED` state.
+    #
+    # Asynchronous batch translation jobs are started with the
+    # StartTextTranslationJob operation. You can use the
+    # DescribeTextTranslationJob or ListTextTranslationJobs operations to
+    # get a batch translation job's `JobId`.
+    #
+    # @option params [required, String] :job_id
+    #   The job ID of the job to be stopped.
+    #
+    # @return [Types::StopTextTranslationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopTextTranslationJobResponse#job_id #job_id} => String
+    #   * {Types::StopTextTranslationJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_text_translation_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERROR", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/StopTextTranslationJob AWS API Documentation
+    #
+    # @overload stop_text_translation_job(params = {})
+    # @param [Hash] params ({})
+    def stop_text_translation_job(params = {}, options = {})
+      req = build_request(:stop_text_translation_job, params)
+      req.send_request(options)
+    end
+
     # Translates input text from the source language to the target language.
-    # It is not necessary to use English (en) as either the source or the
-    # target language but not all language combinations are supported by
-    # Amazon Translate. For more information, see [Supported Language
-    # Pairs][1].
-    #
-    # * Arabic (ar)
-    #
-    # * Chinese (Simplified) (zh)
-    #
-    # * Chinese (Traditional) (zh-TW)
-    #
-    # * Czech (cs)
-    #
-    # * Danish (da)
-    #
-    # * Dutch (nl)
-    #
-    # * English (en)
-    #
-    # * Finnish (fi)
-    #
-    # * French (fr)
-    #
-    # * German (de)
-    #
-    # * Hebrew (he)
-    #
-    # * Indonesian (id)
-    #
-    # * Italian (it)
-    #
-    # * Japanese (ja)
-    #
-    # * Korean (ko)
-    #
-    # * Polish (pl)
-    #
-    # * Portuguese (pt)
-    #
-    # * Russian (ru)
-    #
-    # * Spanish (es)
-    #
-    # * Swedish (sv)
-    #
-    # * Turkish (tr)
-    #
-    # To have Amazon Translate determine the source language of your text,
-    # you can specify `auto` in the `SourceLanguageCode` field. If you
-    # specify `auto`, Amazon Translate will call Amazon Comprehend to
-    # determine the source language.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/translate/latest/dg/pairs.html
+    # For a list of available languages and language codes, see
+    # what-is-languages.
     #
     # @option params [required, String] :text
     #   The text to translate. The text string can be a maximum of 5,000 bytes
@@ -468,17 +772,23 @@ module Aws::Translate
     #   characters.
     #
     # @option params [Array<String>] :terminology_names
-    #   The TerminologyNames list that is taken as input to the TranslateText
-    #   request. This has a minimum length of 0 and a maximum length of 1.
+    #   The name of the terminology list file to be used in the TranslateText
+    #   request. You can use 1 terminology list at most in a `TranslateText`
+    #   request. Terminology lists can contain a maximum of 256 terms.
     #
     # @option params [required, String] :source_language_code
     #   The language code for the language of the source text. The language
-    #   must be a language supported by Amazon Translate.
+    #   must be a language supported by Amazon Translate. For a list of
+    #   language codes, see what-is-languages.
     #
     #   To have Amazon Translate determine the source language of your text,
     #   you can specify `auto` in the `SourceLanguageCode` field. If you
-    #   specify `auto`, Amazon Translate will call Amazon Comprehend to
+    #   specify `auto`, Amazon Translate will call [Amazon Comprehend][1] to
     #   determine the source language.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html
     #
     # @option params [required, String] :target_language_code
     #   The language code requested for the language of the target text. The
@@ -533,7 +843,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.23.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'set'
 
 module Aws
@@ -35,7 +37,7 @@ module Aws
 
       # Returns `false` if the service operates with a single global
       # endpoint for the current partition, returns `true` if the service
-      # is available in mutliple regions.
+      # is available in multiple regions.
       #
       # Some services have both a partition endpoint and regional endpoints.
       #

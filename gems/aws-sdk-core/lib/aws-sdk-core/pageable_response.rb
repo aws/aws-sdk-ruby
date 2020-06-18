@@ -1,32 +1,48 @@
+# frozen_string_literal: true
+
 module Aws
 
-  # Decorates a {Seahorse::Client::Response} with paging methods:
+  # Decorates a {Seahorse::Client::Response} with paging convenience methods.
+  # Some AWS calls provide paged responses to limit the amount of data returned
+  # with each response.  To optimize for latency, some APIs may return an
+  # inconsistent number of responses per page.  You should rely on the values of
+  # the `next_page?` method or using enumerable methods such as `each`
+  # rather than the number of items returned to iterate through results.
+  # See below for examples.
   #
-  #     resp = s3.list_objects(params)
-  #     resp.last_page?
-  #     #=> false
+  # # Paged Responses Are Enumerable
+  # The simplest way to handle paged response data is to use the built-in
+  # enumerator in the response object, as shown in the following example.
   #
-  #     # sends a request to receive the next response page
-  #     resp = resp.next_page
-  #     resp.last_page?
-  #     #=> true
+  #     s3 = Aws::S3::Client.new
   #
-  #     resp.next_page
-  #     #=> raises PageableResponse::LastPageError
-  #
-  # You can enumerate all response pages with a block
-  #
-  #     ec2.describe_instances(params).each do |page|
-  #       # yields once per page
-  #       page.reservations.each do |r|
-  #         # ...
-  #       end
+  #     s3.list_objects(bucket:'aws-sdk').each do |response|
+  #       puts response.contents.map(&:key)
   #     end
   #
-  # Or using {#next_page} and {#last_page?}:
+  # This yields one response object per API call made, and enumerates objects
+  # in the named bucket. The SDK retrieves additional pages of data to
+  # complete the request.
   #
-  #     resp.last_page?
-  #     resp = resp.next_page until resp.last_page?
+  # # Handling Paged Responses Manually
+  # To handle paging yourself, use the response’s `next_page?` method to verify
+  # there are more pages to retrieve, or use the last_page? method to verify
+  # there are no more pages to retrieve.
+  #
+  # If there are more pages, use the `next_page` method to retrieve the
+  # next page of results, as shown in the following example.
+  #
+  #     s3 = Aws::S3::Client.new
+  #
+  #     # Get the first page of data
+  #     response = s3.list_objects(bucket:'aws-sdk')
+  #
+  #     # Get additional pages
+  #     while response.next_page? do
+  #       response = response.next_page
+  #       # Use the response data here...
+  #       puts response.contents.map(&:key)
+  #     end
   #
   module PageableResponse
 

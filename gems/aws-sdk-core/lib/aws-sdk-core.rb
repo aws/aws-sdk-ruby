@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'aws-partitions'
 require 'seahorse'
 require 'jmespath'
@@ -9,6 +11,7 @@ require_relative 'aws-sdk-core/deprecations'
 require_relative 'aws-sdk-core/credential_provider'
 require_relative 'aws-sdk-core/refreshing_credentials'
 require_relative 'aws-sdk-core/assume_role_credentials'
+require_relative 'aws-sdk-core/assume_role_web_identity_credentials'
 require_relative 'aws-sdk-core/credentials'
 require_relative 'aws-sdk-core/credential_provider_chain'
 require_relative 'aws-sdk-core/ecs_credentials'
@@ -19,6 +22,7 @@ require_relative 'aws-sdk-core/process_credentials'
 # client modules
 
 require_relative 'aws-sdk-core/client_stubs'
+require_relative 'aws-sdk-core/async_client_stubs'
 require_relative 'aws-sdk-core/eager_loader'
 require_relative 'aws-sdk-core/errors'
 require_relative 'aws-sdk-core/pageable_response'
@@ -76,6 +80,11 @@ require_relative 'aws-sdk-core/endpoint_cache'
 
 require_relative 'aws-sdk-core/client_side_monitoring/request_metrics'
 require_relative 'aws-sdk-core/client_side_monitoring/publisher'
+
+# arn
+
+require_relative 'aws-sdk-core/arn'
+require_relative 'aws-sdk-core/arn_parser'
 
 # aws-sdk-sts is vendored to support Aws::AssumeRoleCredentials
 
@@ -160,8 +169,8 @@ module Aws
 
     # @api private
     def eager_autoload!(*args)
-      msg = 'Aws.eager_autoload is no longer needed, usage of '
-      msg << 'autoload has been replaced with require statements'
+      msg = 'Aws.eager_autoload is no longer needed, usage of '\
+            'autoload has been replaced with require statements'
       warn(msg)
     end
 

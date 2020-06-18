@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -33,6 +35,24 @@ module Aws::CloudSearchDomain
     #
     class BucketInfo < Struct.new(
       :buckets)
+      include Aws::Structure
+    end
+
+    # Information about any problems encountered while processing an upload
+    # request.
+    #
+    # @!attribute [rw] status
+    #   The return status of a document upload request, `error` or
+    #   `success`.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The description of the errors returned by the document service.
+    #   @return [String]
+    #
+    class DocumentServiceException < Struct.new(
+      :status,
+      :message)
       include Aws::Structure
     end
 
@@ -184,6 +204,18 @@ module Aws::CloudSearchDomain
       :start,
       :cursor,
       :hit)
+      include Aws::Structure
+    end
+
+    # Information about any problems encountered while processing a search
+    # request.
+    #
+    # @!attribute [rw] message
+    #   A description of the error returned by the search service.
+    #   @return [String]
+    #
+    class SearchException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

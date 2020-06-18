@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2
+
   class SecurityGroup
 
     extend Aws::Deprecations
@@ -21,6 +24,7 @@ module Aws::EC2
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -43,7 +47,7 @@ module Aws::EC2
       data[:group_name]
     end
 
-    # One or more inbound rules associated with the security group.
+    # The inbound rules associated with the security group.
     # @return [Array<Types::IpPermission>]
     def ip_permissions
       data[:ip_permissions]
@@ -55,8 +59,7 @@ module Aws::EC2
       data[:owner_id]
     end
 
-    # \[EC2-VPC\] One or more outbound rules associated with the security
-    # group.
+    # \[VPC only\] The outbound rules associated with the security group.
     # @return [Array<Types::IpPermission>]
     def ip_permissions_egress
       data[:ip_permissions_egress]
@@ -68,7 +71,7 @@ module Aws::EC2
       data[:tags]
     end
 
-    # \[EC2-VPC\] The ID of the VPC for the security group.
+    # \[VPC only\] The ID of the VPC for the security group.
     # @return [String]
     def vpc_id
       data[:vpc_id]
@@ -114,7 +117,8 @@ module Aws::EC2
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -127,13 +131,15 @@ module Aws::EC2
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -164,17 +170,16 @@ module Aws::EC2
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -260,9 +265,8 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. You can't specify a destination
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The sets of IP permissions. You can't specify a destination security
+    #   group and a CIDR IP address range in the same set of permissions.
     # @option options [String] :cidr_ip
     #   Not supported. Use a set of IP permissions to specify the CIDR.
     # @option options [Integer] :from_port
@@ -290,7 +294,7 @@ module Aws::EC2
     #   security_group.authorize_ingress({
     #     cidr_ip: "String",
     #     from_port: 1,
-    #     group_name: "String",
+    #     group_name: "SecurityGroupName",
     #     ip_permissions: [
     #       {
     #         from_port: 1,
@@ -335,28 +339,35 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [String] :cidr_ip
-    #   The CIDR IPv4 address range. You can't specify this parameter when
-    #   specifying a source security group.
+    #   The IPv4 address range, in CIDR format. You can't specify this
+    #   parameter when specifying a source security group. To specify an IPv6
+    #   address range, use a set of IP permissions.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     # @option options [Integer] :from_port
-    #   The start of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1` to
-    #   specify all types. If you specify all ICMP/ICMPv6 types, you must
-    #   specify all codes.
+    #   The start of port range for the TCP and UDP protocols, or an ICMP type
+    #   number. For the ICMP type number, use `-1` to specify all types. If
+    #   you specify all ICMP types, you must specify all codes.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     # @option options [String] :group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You must
     #   specify either the security group ID or the security group name in the
     #   request.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. Can be used to specify multiple
-    #   rules in a single command.
+    #   The sets of IP permissions.
     # @option options [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]). (VPC only) Use `-1` to specify all protocols. If you
-    #   specify `-1`, or a protocol number other than `tcp`, `udp`, `icmp`, or
-    #   `58` (ICMPv6), traffic on all ports is allowed, regardless of any
-    #   ports you specify. For `tcp`, `udp`, and `icmp`, you must specify a
-    #   port range. For protocol `58` (ICMPv6), you can optionally specify a
-    #   port range; if you don't, traffic for all types and codes is allowed.
+    #   Numbers][1]). To specify `icmpv6`, use a set of IP permissions.
+    #
+    #   \[VPC only\] Use `-1` to specify all protocols. If you specify `-1` or
+    #   a protocol other than `tcp`, `udp`, or `icmp`, traffic on all ports is
+    #   allowed, regardless of any ports you specify.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #
     #
     #
@@ -370,18 +381,20 @@ module Aws::EC2
     #   IP protocol and port range, use a set of IP permissions instead. For
     #   EC2-VPC, the source security group must be in the same VPC.
     # @option options [String] :source_security_group_owner_id
-    #   \[EC2-Classic\] The AWS account ID for the source security group, if
-    #   the source security group is in a different account. You can't
+    #   \[nondefault VPC\] The AWS account ID for the source security group,
+    #   if the source security group is in a different account. You can't
     #   specify this parameter in combination with the following parameters:
     #   the CIDR IP address range, the IP protocol, the start of the port
     #   range, and the end of the port range. Creates rules that grant full
     #   ICMP, UDP, and TCP access. To create a rule with a specific IP
     #   protocol and port range, use a set of IP permissions instead.
     # @option options [Integer] :to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6
-    #   code number. For the ICMP/ICMPv6 code number, use `-1` to specify all
-    #   codes. If you specify all ICMP/ICMPv6 types, you must specify all
-    #   codes.
+    #   The end of port range for the TCP and UDP protocols, or an ICMP code
+    #   number. For the ICMP code number, use `-1` to specify all codes. If
+    #   you specify all ICMP types, you must specify all codes.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -412,9 +425,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []
@@ -433,8 +446,51 @@ module Aws::EC2
 
     # @example Request syntax with placeholder values
     #
+    #   tag = security_group.delete_tags({
+    #     dry_run: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<Types::Tag>] :tags
+    #   The tags to delete. Specify a tag key and an optional tag value to
+    #   delete specific tags. If you specify a tag key without a tag value, we
+    #   delete any tag with this key regardless of its value. If you specify a
+    #   tag key with an empty string as the tag value, we delete the tag only
+    #   if its value is an empty string.
+    #
+    #   If you omit this parameter, we delete all user-defined tags for the
+    #   specified resources. We do not delete AWS-generated tags (tags that
+    #   have the `aws:` prefix).
+    # @return [Tag::Collection]
+    def delete_tags(options = {})
+      batch = []
+      options = Aws::Util.deep_merge(options, resources: [@id])
+      resp = @client.delete_tags(options)
+      options[:tags].each do |t|
+        batch << Tag.new(
+          resource_id: @id,
+          key: t[:key],
+          value: t[:value],
+          client: @client
+        )
+      end
+      Tag::Collection.new([batch], size: batch.size)
+    end
+
+    # @example Request syntax with placeholder values
+    #
     #   security_group.delete({
-    #     group_name: "String",
+    #     group_name: "SecurityGroupName",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -507,9 +563,8 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. You can't specify a destination
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The sets of IP permissions. You can't specify a destination security
+    #   group and a CIDR IP address range in the same set of permissions.
     # @option options [String] :cidr_ip
     #   Not supported. Use a set of IP permissions to specify the CIDR.
     # @option options [Integer] :from_port
@@ -537,7 +592,7 @@ module Aws::EC2
     #   security_group.revoke_ingress({
     #     cidr_ip: "String",
     #     from_port: 1,
-    #     group_name: "String",
+    #     group_name: "SecurityGroupName",
     #     ip_permissions: [
     #       {
     #         from_port: 1,
@@ -592,9 +647,8 @@ module Aws::EC2
     #   specify either the security group ID or the security group name in the
     #   request.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. You can't specify a source
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The sets of IP permissions. You can't specify a source security group
+    #   and a CIDR IP address range in the same set of permissions.
     # @option options [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
     #   Numbers][1]). Use `-1` to specify all.

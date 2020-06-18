@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -215,7 +217,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -267,7 +269,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/CreateSecretRequest AWS API Documentation
@@ -312,6 +314,19 @@ module Aws::SecretsManager
       :arn,
       :name,
       :version_id)
+      include Aws::Structure
+    end
+
+    # Secrets Manager can't decrypt the protected secret text using the
+    # provided KMS key.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DecryptionFailure AWS API Documentation
+    #
+    class DecryptionFailure < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -579,6 +594,10 @@ module Aws::SecretsManager
     #    </note>
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] owning_service
+    #   Returns the name of the service that created this secret.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DescribeSecretResponse AWS API Documentation
     #
     class DescribeSecretResponse < Struct.new(
@@ -594,7 +613,27 @@ module Aws::SecretsManager
       :last_accessed_date,
       :deleted_date,
       :tags,
-      :version_ids_to_stages)
+      :version_ids_to_stages,
+      :owning_service)
+      include Aws::Structure
+    end
+
+    # Secrets Manager can't encrypt the protected secret text using the
+    # provided KMS key. Check that the customer master key (CMK) is
+    # available, enabled, and not in an invalid state. For more information,
+    # see [How Key State Affects Use of a Customer Master Key][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/EncryptionFailure AWS API Documentation
+    #
+    class EncryptionFailure < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -896,6 +935,77 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
+    # An error occurred on the server side.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/InternalServiceError AWS API Documentation
+    #
+    class InternalServiceError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You provided an invalid `NextToken` value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You provided an invalid value for a parameter.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You provided a parameter value that is not valid for the current state
+    # of the resource.
+    #
+    # Possible causes:
+    #
+    # * You tried to perform the operation on a secret that's currently
+    #   marked deleted.
+    #
+    # * You tried to enable rotation on a secret that doesn't already have
+    #   a Lambda function ARN configured and you didn't include such an ARN
+    #   as a parameter in this call.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request failed because it would exceed one of the Secrets Manager
+    # internal limits.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSecretVersionIdsRequest
     #   data as a hash:
     #
@@ -1067,6 +1177,31 @@ module Aws::SecretsManager
     class ListSecretsResponse < Struct.new(
       :secret_list,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The policy document that you provided isn't valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/MalformedPolicyDocumentException AWS API Documentation
+    #
+    class MalformedPolicyDocumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request failed because you did not complete all the prerequisite
+    # steps.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PreconditionNotMetException AWS API Documentation
+    #
+    class PreconditionNotMetException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1257,7 +1392,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [String]
     #
     # @!attribute [rw] version_stages
@@ -1316,6 +1451,30 @@ module Aws::SecretsManager
       :name,
       :version_id,
       :version_stages)
+      include Aws::Structure
+    end
+
+    # A resource with the ID you requested already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ResourceExistsException AWS API Documentation
+    #
+    class ResourceExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # We can't find the resource that you asked for.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1516,7 +1675,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#iam-resources
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#iam-resources
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1539,7 +1698,7 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] rotation_enabled
-    #   Indicated whether automatic, scheduled rotation is enabled for this
+    #   Indicates whether automatic, scheduled rotation is enabled for this
     #   secret.
     #   @return [Boolean]
     #
@@ -1594,6 +1753,10 @@ module Aws::SecretsManager
     #    </note>
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] owning_service
+    #   Returns the name of the service that created the secret.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/SecretListEntry AWS API Documentation
     #
     class SecretListEntry < Struct.new(
@@ -1609,7 +1772,8 @@ module Aws::SecretsManager
       :last_accessed_date,
       :deleted_date,
       :tags,
-      :secret_versions_to_stages)
+      :secret_versions_to_stages,
+      :owning_service)
       include Aws::Structure
     end
 
@@ -1718,7 +1882,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/TagResourceRequest AWS API Documentation
@@ -1771,7 +1935,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UntagResourceRequest AWS API Documentation
@@ -1922,7 +2086,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UpdateSecretRequest AWS API Documentation

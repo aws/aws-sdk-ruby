@@ -1,15 +1,20 @@
+# frozen_string_literal: true
+
 module Aws
   module S3
 
-    # A utility class that provides an IO-like interface to a portion of
-    # a file on disk.
+    # A utility class that provides an IO-like interface to a portion of a file
+    # on disk.
     # @api private
     class FilePart
 
-      # @option options [required,String,Pathname,File,Tempfile] :source
-      # @option options [required,Integer] :offset The file part will read
+      # @option options [required, String, Pathname, File, Tempfile] :source
+      #   The file to upload.
+      #
+      # @option options [required, Integer] :offset The file part will read
       #   starting at this byte offset.
-      # @option options [required,Integer] :size The maximum number of bytes to
+      #
+      # @option options [required, Integer] :size The maximum number of bytes to
       #   read from the `:offset`.
       def initialize(options = {})
         @source = options[:source]
@@ -19,7 +24,7 @@ module Aws
         @file = nil
       end
 
-      # @return [String,Pathname,File,Tempfile]
+      # @return [String, Pathname, File, Tempfile]
       attr_reader :source
 
       # @return [Integer]

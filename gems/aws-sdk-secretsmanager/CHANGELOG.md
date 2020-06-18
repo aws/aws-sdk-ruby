@@ -1,6 +1,97 @@
 Unreleased Changes
 ------------------
 
+1.37.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.37.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2020-02-25)
+------------------
+
+* Feature - This release increases the maximum allowed size of SecretString or SecretBinary from 10KB to 64KB in the CreateSecret, UpdateSecret, PutSecretValue and GetSecretValue APIs.
+
+1.32.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2019-07-23)
+------------------
+
+* Feature - This release increases the maximum allowed size of SecretString or SecretBinary from 7KB to 10KB in the CreateSecret, UpdateSecret, PutSecretValue and GetSecretValue APIs. This release also increases the maximum allowed size of ResourcePolicy from 4KB to 20KB in the GetResourcePolicy and PutResourcePolicy APIs.
+
+1.29.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.26.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.25.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.24.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.23.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-02-18)
+------------------
+
+* Feature - API update.
+
 1.20.0 (2018-11-20)
 ------------------
 
@@ -105,4 +196,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-secretsmanager`.
-

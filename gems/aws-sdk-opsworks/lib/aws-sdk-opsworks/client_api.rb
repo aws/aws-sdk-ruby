@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -976,6 +978,9 @@ module Aws::OpsWorks
     ReportedOs.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
     ReportedOs.struct_class = Types::ReportedOs
 
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     SelfUserProfile.add_member(:iam_user_arn, Shapes::ShapeRef.new(shape: String, location_name: "IamUserArn"))
     SelfUserProfile.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     SelfUserProfile.add_member(:ssh_username, Shapes::ShapeRef.new(shape: String, location_name: "SshUsername"))
@@ -1210,6 +1215,9 @@ module Aws::OpsWorks
     UserProfile.struct_class = Types::UserProfile
 
     UserProfiles.member = Shapes::ShapeRef.new(shape: UserProfile)
+
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ValidationException.struct_class = Types::ValidationException
 
     Volume.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "VolumeId"))
     Volume.add_member(:ec2_volume_id, Shapes::ShapeRef.new(shape: String, location_name: "Ec2VolumeId"))

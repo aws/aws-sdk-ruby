@@ -271,6 +271,7 @@
         {"shape":"NotAuthorizedException"},
         {"shape":"UserNotFoundException"},
         {"shape":"AliasExistsException"},
+        {"shape":"LimitExceededException"},
         {"shape":"InternalErrorException"}
       ]
     },
@@ -415,6 +416,24 @@
         {"shape":"InternalErrorException"}
       ]
     },
+    "AdminSetUserPassword":{
+      "name":"AdminSetUserPassword",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminSetUserPasswordRequest"},
+      "output":{"shape":"AdminSetUserPasswordResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidPasswordException"}
+      ]
+    },
     "AdminSetUserSettings":{
       "name":"AdminSetUserSettings",
       "http":{
@@ -485,7 +504,10 @@
         {"shape":"TooManyRequestsException"},
         {"shape":"NotAuthorizedException"},
         {"shape":"UserNotFoundException"},
-        {"shape":"InternalErrorException"}
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidSmsRoleAccessPolicyException"},
+        {"shape":"InvalidEmailRoleAccessPolicyException"},
+        {"shape":"InvalidSmsRoleTrustRelationshipException"}
       ]
     },
     "AdminUserGlobalSignOut":{
@@ -1113,6 +1135,7 @@
       "output":{"shape":"GetSigningCertificateResponse"},
       "errors":[
         {"shape":"InternalErrorException"},
+        {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"}
       ]
     },
@@ -1234,7 +1257,9 @@
         {"shape":"PasswordResetRequiredException"},
         {"shape":"UserNotFoundException"},
         {"shape":"UserNotConfirmedException"},
-        {"shape":"InternalErrorException"}
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidSmsRoleAccessPolicyException"},
+        {"shape":"InvalidSmsRoleTrustRelationshipException"}
       ]
     },
     "ListDevices":{
@@ -1302,6 +1327,22 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"NotAuthorizedException"},
         {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ]
+    },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForResourceRequest"},
+      "output":{"shape":"ListTagsForResourceResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InvalidParameterException"},
         {"shape":"InternalErrorException"}
       ]
     },
@@ -1591,6 +1632,38 @@
         {"shape":"NotAuthorizedException"}
       ]
     },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagResourceRequest"},
+      "output":{"shape":"TagResourceResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InternalErrorException"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagResourceRequest"},
+      "output":{"shape":"UntagResourceResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InternalErrorException"}
+      ]
+    },
     "UpdateAuthEventFeedback":{
       "name":"UpdateAuthEventFeedback",
       "http":{
@@ -1749,6 +1822,22 @@
         {"shape":"InternalErrorException"}
       ]
     },
+    "UpdateUserPoolDomain":{
+      "name":"UpdateUserPoolDomain",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateUserPoolDomainRequest"},
+      "output":{"shape":"UpdateUserPoolDomainResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ]
+    },
     "VerifySoftwareToken":{
       "name":"VerifySoftwareToken",
       "http":{
@@ -1799,6 +1888,12 @@
   },
   "shapes":{
     "AWSAccountIdType":{"type":"string"},
+    "AccountRecoverySettingType":{
+      "type":"structure",
+      "members":{
+        "RecoveryMechanisms":{"shape":"RecoveryMechanismsType"}
+      }
+    },
     "AccountTakeoverActionNotifyType":{"type":"boolean"},
     "AccountTakeoverActionType":{
       "type":"structure",
@@ -1873,7 +1968,8 @@
       ],
       "members":{
         "UserPoolId":{"shape":"UserPoolIdType"},
-        "Username":{"shape":"UsernameType"}
+        "Username":{"shape":"UsernameType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
       }
     },
     "AdminConfirmSignUpResponse":{
@@ -1903,7 +1999,8 @@
         "TemporaryPassword":{"shape":"PasswordType"},
         "ForceAliasCreation":{"shape":"ForceAliasCreation"},
         "MessageAction":{"shape":"MessageActionType"},
-        "DesiredDeliveryMediums":{"shape":"DeliveryMediumListType"}
+        "DesiredDeliveryMediums":{"shape":"DeliveryMediumListType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
       }
     },
     "AdminCreateUserResponse":{
@@ -2178,7 +2275,8 @@
       ],
       "members":{
         "UserPoolId":{"shape":"UserPoolIdType"},
-        "Username":{"shape":"UsernameType"}
+        "Username":{"shape":"UsernameType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
       }
     },
     "AdminResetUserPasswordResponse":{
@@ -2200,7 +2298,8 @@
         "ChallengeResponses":{"shape":"ChallengeResponsesType"},
         "Session":{"shape":"SessionType"},
         "AnalyticsMetadata":{"shape":"AnalyticsMetadataType"},
-        "ContextData":{"shape":"ContextDataType"}
+        "ContextData":{"shape":"ContextDataType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
       }
     },
     "AdminRespondToAuthChallengeResponse":{
@@ -2226,6 +2325,25 @@
       }
     },
     "AdminSetUserMFAPreferenceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "AdminSetUserPasswordRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Username",
+        "Password"
+      ],
+      "members":{
+        "UserPoolId":{"shape":"UserPoolIdType"},
+        "Username":{"shape":"UsernameType"},
+        "Password":{"shape":"PasswordType"},
+        "Permanent":{"shape":"BooleanType"}
+      }
+    },
+    "AdminSetUserPasswordResponse":{
       "type":"structure",
       "members":{
       }
@@ -2297,7 +2415,8 @@
       "members":{
         "UserPoolId":{"shape":"UserPoolIdType"},
         "Username":{"shape":"UsernameType"},
-        "UserAttributes":{"shape":"AttributeListType"}
+        "UserAttributes":{"shape":"AttributeListType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
       }
     },
     "AdminUpdateUserAttributesResponse":{
@@ -2459,13 +2578,15 @@
         "REFRESH_TOKEN",
         "CUSTOM_AUTH",
         "ADMIN_NO_SRP_AUTH",
-        "USER_PASSWORD_AUTH"
+        "USER_PASSWORD_AUTH",
+        "ADMIN_USER_PASSWORD_AUTH"
       ]
     },
     "AuthParametersType":{
       "type":"map",
       "key":{"shape":"StringType"},
-      "value":{"shape":"StringType"}
+      "value":{"shape":"StringType"},
+      "sensitive":true
     },
     "AuthenticationResultType":{
       "type":"structure",
@@ -2689,7 +2810,8 @@
         "ConfirmationCode":{"shape":"ConfirmationCodeType"},
         "Password":{"shape":"PasswordType"},
         "AnalyticsMetadata":{"shape":"AnalyticsMetadataType"},
-        "UserContextData":{"shape":"UserContextDataType"}
+        "UserContextData":{"shape":"UserContextDataType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
       }
     },
     "ConfirmForgotPasswordResponse":{
@@ -2711,7 +2833,8 @@
         "ConfirmationCode":{"shape":"ConfirmationCodeType"},
         "ForceAliasCreation":{"shape":"ForceAliasCreation"},
         "AnalyticsMetadata":{"shape":"AnalyticsMetadataType"},
-        "UserContextData":{"shape":"UserContextDataType"}
+        "UserContextData":{"shape":"UserContextDataType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
       }
     },
     "ConfirmSignUpResponse":{
@@ -2846,7 +2969,8 @@
         "AllowedOAuthFlows":{"shape":"OAuthFlowsType"},
         "AllowedOAuthScopes":{"shape":"ScopeListType"},
         "AllowedOAuthFlowsUserPoolClient":{"shape":"BooleanType"},
-        "AnalyticsConfiguration":{"shape":"AnalyticsConfigurationType"}
+        "AnalyticsConfiguration":{"shape":"AnalyticsConfigurationType"},
+        "PreventUserExistenceErrors":{"shape":"PreventUserExistenceErrorTypes"}
       }
     },
     "CreateUserPoolClientResponse":{
@@ -2895,7 +3019,9 @@
         "UserPoolTags":{"shape":"UserPoolTagsType"},
         "AdminCreateUserConfig":{"shape":"AdminCreateUserConfigType"},
         "Schema":{"shape":"SchemaAttributesListType"},
-        "UserPoolAddOns":{"shape":"UserPoolAddOnsType"}
+        "UserPoolAddOns":{"shape":"UserPoolAddOnsType"},
+        "UsernameConfiguration":{"shape":"UsernameConfigurationType"},
+        "AccountRecoverySetting":{"shape":"AccountRecoverySettingType"}
       }
     },
     "CreateUserPoolResponse":{
@@ -3242,7 +3368,10 @@
       "type":"structure",
       "members":{
         "SourceArn":{"shape":"ArnType"},
-        "ReplyToEmailAddress":{"shape":"EmailAddressType"}
+        "ReplyToEmailAddress":{"shape":"EmailAddressType"},
+        "EmailSendingAccount":{"shape":"EmailSendingAccountType"},
+        "From":{"shape":"StringType"},
+        "ConfigurationSet":{"shape":"SESConfigurationSet"}
       }
     },
     "EmailNotificationBodyType":{
@@ -3256,6 +3385,13 @@
       "max":140,
       "min":1,
       "pattern":"[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s]+"
+    },
+    "EmailSendingAccountType":{
+      "type":"string",
+      "enum":[
+        "COGNITO_DEFAULT",
+        "DEVELOPER"
+      ]
     },
     "EmailVerificationMessageByLinkType":{
       "type":"string",
@@ -3339,7 +3475,8 @@
       "type":"structure",
       "members":{
         "RiskDecision":{"shape":"RiskDecisionType"},
-        "RiskLevel":{"shape":"RiskLevelType"}
+        "RiskLevel":{"shape":"RiskLevelType"},
+        "CompromisedCredentialsDetected":{"shape":"WrappedBooleanType"}
       }
     },
     "EventType":{
@@ -3366,7 +3503,12 @@
       "enum":[
         "ADMIN_NO_SRP_AUTH",
         "CUSTOM_AUTH_FLOW_ONLY",
-        "USER_PASSWORD_AUTH"
+        "USER_PASSWORD_AUTH",
+        "ALLOW_ADMIN_USER_PASSWORD_AUTH",
+        "ALLOW_CUSTOM_AUTH",
+        "ALLOW_USER_PASSWORD_AUTH",
+        "ALLOW_USER_SRP_AUTH",
+        "ALLOW_REFRESH_TOKEN_AUTH"
       ]
     },
     "FeedbackValueType":{
@@ -3396,7 +3538,8 @@
         "SecretHash":{"shape":"SecretHashType"},
         "UserContextData":{"shape":"UserContextDataType"},
         "Username":{"shape":"UsernameType"},
-        "AnalyticsMetadata":{"shape":"AnalyticsMetadataType"}
+        "AnalyticsMetadata":{"shape":"AnalyticsMetadataType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
       }
     },
     "ForgotPasswordResponse":{
@@ -3506,7 +3649,8 @@
       ],
       "members":{
         "AccessToken":{"shape":"TokenModelType"},
-        "AttributeName":{"shape":"AttributeNameType"}
+        "AttributeName":{"shape":"AttributeNameType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
       }
     },
     "GetUserAttributeVerificationCodeResponse":{
@@ -3627,6 +3771,7 @@
         "Facebook",
         "Google",
         "LoginWithAmazon",
+        "SignInWithApple",
         "OIDC"
       ]
     },
@@ -3811,7 +3956,7 @@
     "ListProvidersLimitType":{
       "type":"integer",
       "max":60,
-      "min":1
+      "min":0
     },
     "ListResourceServersLimitType":{
       "type":"integer",
@@ -3833,6 +3978,19 @@
       "members":{
         "ResourceServers":{"shape":"ResourceServersListType"},
         "NextToken":{"shape":"PaginationKeyType"}
+      }
+    },
+    "ListTagsForResourceRequest":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{"shape":"ArnType"}
+      }
+    },
+    "ListTagsForResourceResponse":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"UserPoolTagsType"}
       }
     },
     "ListUserImportJobsRequest":{
@@ -4042,7 +4200,8 @@
         "RequireUppercase":{"shape":"BooleanType"},
         "RequireLowercase":{"shape":"BooleanType"},
         "RequireNumbers":{"shape":"BooleanType"},
-        "RequireSymbols":{"shape":"BooleanType"}
+        "RequireSymbols":{"shape":"BooleanType"},
+        "TemporaryPasswordValidityDays":{"shape":"TemporaryPasswordValidityDaysType"}
       }
     },
     "PasswordResetRequiredException":{
@@ -4079,6 +4238,18 @@
         "message":{"shape":"MessageType"}
       },
       "exception":true
+    },
+    "PreventUserExistenceErrorTypes":{
+      "type":"string",
+      "enum":[
+        "LEGACY",
+        "ENABLED"
+      ]
+    },
+    "PriorityType":{
+      "type":"integer",
+      "max":2,
+      "min":1
     },
     "ProviderDescription":{
       "type":"structure",
@@ -4130,6 +4301,31 @@
       "max":60,
       "min":0
     },
+    "RecoveryMechanismsType":{
+      "type":"list",
+      "member":{"shape":"RecoveryOptionType"},
+      "max":2,
+      "min":1
+    },
+    "RecoveryOptionNameType":{
+      "type":"string",
+      "enum":[
+        "verified_email",
+        "verified_phone_number",
+        "admin_only"
+      ]
+    },
+    "RecoveryOptionType":{
+      "type":"structure",
+      "required":[
+        "Priority",
+        "Name"
+      ],
+      "members":{
+        "Priority":{"shape":"PriorityType"},
+        "Name":{"shape":"RecoveryOptionNameType"}
+      }
+    },
     "RedirectUrlType":{
       "type":"string",
       "max":1024,
@@ -4152,7 +4348,8 @@
         "SecretHash":{"shape":"SecretHashType"},
         "UserContextData":{"shape":"UserContextDataType"},
         "Username":{"shape":"UsernameType"},
-        "AnalyticsMetadata":{"shape":"AnalyticsMetadataType"}
+        "AnalyticsMetadata":{"shape":"AnalyticsMetadataType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
       }
     },
     "ResendConfirmationCodeResponse":{
@@ -4188,7 +4385,7 @@
     "ResourceServerScopeListType":{
       "type":"list",
       "member":{"shape":"ResourceServerScopeType"},
-      "max":25
+      "max":100
     },
     "ResourceServerScopeNameType":{
       "type":"string",
@@ -4232,7 +4429,8 @@
         "Session":{"shape":"SessionType"},
         "ChallengeResponses":{"shape":"ChallengeResponsesType"},
         "AnalyticsMetadata":{"shape":"AnalyticsMetadataType"},
-        "UserContextData":{"shape":"UserContextDataType"}
+        "UserContextData":{"shape":"UserContextDataType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
       }
     },
     "RespondToAuthChallengeResponse":{
@@ -4284,6 +4482,12 @@
       "min":3,
       "pattern":"^[0-9A-Za-z\\.\\-_]*(?<!\\.)$"
     },
+    "SESConfigurationSet":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9_-]+$"
+    },
     "SMSMfaSettingsType":{
       "type":"structure",
       "members":{
@@ -4328,7 +4532,7 @@
     "ScopeListType":{
       "type":"list",
       "member":{"shape":"ScopeType"},
-      "max":25
+      "max":50
     },
     "ScopeType":{
       "type":"string",
@@ -4461,7 +4665,8 @@
         "UserAttributes":{"shape":"AttributeListType"},
         "ValidationData":{"shape":"AttributeListType"},
         "AnalyticsMetadata":{"shape":"AnalyticsMetadataType"},
-        "UserContextData":{"shape":"UserContextDataType"}
+        "UserContextData":{"shape":"UserContextDataType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
       }
     },
     "SignUpResponse":{
@@ -4581,6 +4786,37 @@
       "type":"list",
       "member":{"shape":"ProviderNameType"}
     },
+    "TagKeysType":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "TagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "Tags"
+      ],
+      "members":{
+        "ResourceArn":{"shape":"ArnType"},
+        "Tags":{"shape":"UserPoolTagsType"}
+      }
+    },
+    "TagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValueType":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
+    "TemporaryPasswordValidityDaysType":{
+      "type":"integer",
+      "max":365,
+      "min":0
+    },
     "TokenModelType":{
       "type":"string",
       "pattern":"[A-Za-z0-9-_=.]+",
@@ -4632,6 +4868,22 @@
         "message":{"shape":"MessageType"}
       },
       "exception":true
+    },
+    "UntagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceArn":{"shape":"ArnType"},
+        "TagKeys":{"shape":"UserPoolTagsListType"}
+      }
+    },
+    "UntagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "UpdateAuthEventFeedbackRequest":{
       "type":"structure",
@@ -4742,7 +4994,8 @@
       ],
       "members":{
         "UserAttributes":{"shape":"AttributeListType"},
-        "AccessToken":{"shape":"TokenModelType"}
+        "AccessToken":{"shape":"TokenModelType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
       }
     },
     "UpdateUserAttributesResponse":{
@@ -4772,13 +5025,33 @@
         "AllowedOAuthFlows":{"shape":"OAuthFlowsType"},
         "AllowedOAuthScopes":{"shape":"ScopeListType"},
         "AllowedOAuthFlowsUserPoolClient":{"shape":"BooleanType"},
-        "AnalyticsConfiguration":{"shape":"AnalyticsConfigurationType"}
+        "AnalyticsConfiguration":{"shape":"AnalyticsConfigurationType"},
+        "PreventUserExistenceErrors":{"shape":"PreventUserExistenceErrorTypes"}
       }
     },
     "UpdateUserPoolClientResponse":{
       "type":"structure",
       "members":{
         "UserPoolClient":{"shape":"UserPoolClientType"}
+      }
+    },
+    "UpdateUserPoolDomainRequest":{
+      "type":"structure",
+      "required":[
+        "Domain",
+        "UserPoolId",
+        "CustomDomainConfig"
+      ],
+      "members":{
+        "Domain":{"shape":"DomainType"},
+        "UserPoolId":{"shape":"UserPoolIdType"},
+        "CustomDomainConfig":{"shape":"CustomDomainConfigType"}
+      }
+    },
+    "UpdateUserPoolDomainResponse":{
+      "type":"structure",
+      "members":{
+        "CloudFrontDomain":{"shape":"DomainType"}
       }
     },
     "UpdateUserPoolRequest":{
@@ -4800,7 +5073,8 @@
         "SmsConfiguration":{"shape":"SmsConfigurationType"},
         "UserPoolTags":{"shape":"UserPoolTagsType"},
         "AdminCreateUserConfig":{"shape":"AdminCreateUserConfigType"},
-        "UserPoolAddOns":{"shape":"UserPoolAddOnsType"}
+        "UserPoolAddOns":{"shape":"UserPoolAddOnsType"},
+        "AccountRecoverySetting":{"shape":"AccountRecoverySettingType"}
       }
     },
     "UpdateUserPoolResponse":{
@@ -4948,7 +5222,8 @@
           "shape":"BooleanType",
           "box":true
         },
-        "AnalyticsConfiguration":{"shape":"AnalyticsConfigurationType"}
+        "AnalyticsConfiguration":{"shape":"AnalyticsConfigurationType"},
+        "PreventUserExistenceErrors":{"shape":"PreventUserExistenceErrorTypes"}
       }
     },
     "UserPoolDescriptionType":{
@@ -4999,10 +5274,14 @@
       },
       "exception":true
     },
+    "UserPoolTagsListType":{
+      "type":"list",
+      "member":{"shape":"TagKeysType"}
+    },
     "UserPoolTagsType":{
       "type":"map",
-      "key":{"shape":"StringType"},
-      "value":{"shape":"StringType"}
+      "key":{"shape":"TagKeysType"},
+      "value":{"shape":"TagValueType"}
     },
     "UserPoolType":{
       "type":"structure",
@@ -5035,7 +5314,9 @@
         "CustomDomain":{"shape":"DomainType"},
         "AdminCreateUserConfig":{"shape":"AdminCreateUserConfigType"},
         "UserPoolAddOns":{"shape":"UserPoolAddOnsType"},
-        "Arn":{"shape":"ArnType"}
+        "UsernameConfiguration":{"shape":"UsernameConfigurationType"},
+        "Arn":{"shape":"ArnType"},
+        "AccountRecoverySetting":{"shape":"AccountRecoverySettingType"}
       }
     },
     "UserStatusType":{
@@ -5072,6 +5353,13 @@
     "UsernameAttributesListType":{
       "type":"list",
       "member":{"shape":"UsernameAttributeType"}
+    },
+    "UsernameConfigurationType":{
+      "type":"structure",
+      "required":["CaseSensitive"],
+      "members":{
+        "CaseSensitive":{"shape":"WrappedBooleanType"}
+      }
     },
     "UsernameExistsException":{
       "type":"structure",
@@ -5154,6 +5442,7 @@
       "type":"structure",
       "members":{
       }
-    }
+    },
+    "WrappedBooleanType":{"type":"boolean"}
   }
 }

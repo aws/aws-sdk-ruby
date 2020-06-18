@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'stringio'
 require 'uri'
 
@@ -34,8 +36,8 @@ module Seahorse
           if endpoint.nil? or URI::HTTP === endpoint or URI::HTTPS === endpoint
             @endpoint = endpoint
           else
-            msg = "invalid endpoint, expected URI::HTTP, URI::HTTPS, or nil, "
-            msg << "got #{endpoint.inspect}"
+            msg = 'invalid endpoint, expected URI::HTTP, URI::HTTPS, or nil, '\
+                  "got #{endpoint.inspect}"
             raise ArgumentError, msg
           end
         end
@@ -55,7 +57,7 @@ module Seahorse
 
         # @param [#read, #size, #rewind] io
         def body=(io)
-          @body =case io
+          @body = case io
             when nil then StringIO.new('')
             when String then StringIO.new(io)
             else io

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-configservice/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     config_service = Aws::ConfigService::Client.new
+#     resp = config_service.batch_get_aggregate_resource_config(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Config all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Config are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ConfigService::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Config API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-configservice/customizations'
 # @service
 module Aws::ConfigService
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.46.1'
 
 end

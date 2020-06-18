@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -12,6 +14,7 @@ require_relative 'aws-sdk-lambda/types'
 require_relative 'aws-sdk-lambda/client_api'
 require_relative 'aws-sdk-lambda/client'
 require_relative 'aws-sdk-lambda/errors'
+require_relative 'aws-sdk-lambda/waiters'
 require_relative 'aws-sdk-lambda/resource'
 require_relative 'aws-sdk-lambda/customizations'
 
@@ -24,17 +27,20 @@ require_relative 'aws-sdk-lambda/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     lambda = Aws::Lambda::Client.new
+#     resp = lambda.add_layer_version_permission(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Lambda all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Lambda are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Lambda::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Lambda API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +48,6 @@ require_relative 'aws-sdk-lambda/customizations'
 # @service
 module Aws::Lambda
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.44.0'
 
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -11,7 +13,9 @@ module Aws::Firehose
     # Describes hints for the buffering to perform before delivering data to
     # the destination. These options are treated as hints, and therefore
     # Kinesis Data Firehose might choose to use different values when it is
-    # optimal.
+    # optimal. The `SizeInMBs` and `IntervalInSeconds` parameters are
+    # optional. However, if specify a value for one of them, you must also
+    # provide a value for the other.
     #
     # @note When making an API call, you may pass BufferingHints
     #   data as a hash:
@@ -22,18 +26,22 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] size_in_m_bs
-    #   Buffer incoming data to the specified size, in MBs, before
-    #   delivering it to the destination. The default value is 5.
+    #   Buffer incoming data to the specified size, in MiBs, before
+    #   delivering it to the destination. The default value is 5. This
+    #   parameter is optional but if you specify a value for it, you must
+    #   also specify a value for `IntervalInSeconds`, and vice versa.
     #
     #   We recommend setting this parameter to a value greater than the
     #   amount of data you typically ingest into the delivery stream in 10
-    #   seconds. For example, if you typically ingest data at 1 MB/sec, the
-    #   value should be 10 MB or higher.
+    #   seconds. For example, if you typically ingest data at 1 MiB/sec, the
+    #   value should be 10 MiB or higher.
     #   @return [Integer]
     #
     # @!attribute [rw] interval_in_seconds
     #   Buffer incoming data for the specified period of time, in seconds,
     #   before delivering it to the destination. The default value is 300.
+    #   This parameter is optional but if you specify a value for it, you
+    #   must also specify a value for `SizeInMBs`, and vice versa.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/BufferingHints AWS API Documentation
@@ -76,6 +84,20 @@ module Aws::Firehose
       :enabled,
       :log_group_name,
       :log_stream_name)
+      include Aws::Structure
+    end
+
+    # Another modification has already happened. Fetch `VersionId` again and
+    # use it to update the destination.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -125,8 +147,8 @@ module Aws::Firehose
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html
-    #   [2]: http://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html
+    #   [2]: https://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CopyCommand AWS API Documentation
@@ -148,15 +170,20 @@ module Aws::Firehose
     #           kinesis_stream_arn: "KinesisStreamARN", # required
     #           role_arn: "RoleARN", # required
     #         },
+    #         delivery_stream_encryption_configuration_input: {
+    #           key_arn: "AWSKMSKeyARN",
+    #           key_type: "AWS_OWNED_CMK", # required, accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
+    #         },
     #         s3_destination_configuration: {
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -173,11 +200,12 @@ module Aws::Firehose
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -208,11 +236,12 @@ module Aws::Firehose
     #             role_arn: "RoleARN", # required
     #             bucket_arn: "BucketARN", # required
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -292,11 +321,12 @@ module Aws::Firehose
     #             role_arn: "RoleARN", # required
     #             bucket_arn: "BucketARN", # required
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -328,11 +358,12 @@ module Aws::Firehose
     #             role_arn: "RoleARN", # required
     #             bucket_arn: "BucketARN", # required
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -353,9 +384,10 @@ module Aws::Firehose
     #         },
     #         elasticsearch_destination_configuration: {
     #           role_arn: "RoleARN", # required
-    #           domain_arn: "ElasticsearchDomainARN", # required
+    #           domain_arn: "ElasticsearchDomainARN",
+    #           cluster_endpoint: "ElasticsearchClusterEndpoint",
     #           index_name: "ElasticsearchIndexName", # required
-    #           type_name: "ElasticsearchTypeName", # required
+    #           type_name: "ElasticsearchTypeName",
     #           index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
     #           buffering_hints: {
     #             interval_in_seconds: 1,
@@ -369,11 +401,12 @@ module Aws::Firehose
     #             role_arn: "RoleARN", # required
     #             bucket_arn: "BucketARN", # required
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -405,6 +438,11 @@ module Aws::Firehose
     #             log_group_name: "LogGroupName",
     #             log_stream_name: "LogStreamName",
     #           },
+    #           vpc_configuration: {
+    #             subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #             role_arn: "RoleARN", # required
+    #             security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #           },
     #         },
     #         splunk_destination_configuration: {
     #           hec_endpoint: "HECEndpoint", # required
@@ -419,11 +457,12 @@ module Aws::Firehose
     #             role_arn: "RoleARN", # required
     #             bucket_arn: "BucketARN", # required
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -489,6 +528,11 @@ module Aws::Firehose
     #   source stream.
     #   @return [Types::KinesisStreamSourceConfiguration]
     #
+    # @!attribute [rw] delivery_stream_encryption_configuration_input
+    #   Used to specify the type and Amazon Resource Name (ARN) of the KMS
+    #   key needed for Server-Side Encryption (SSE).
+    #   @return [Types::DeliveryStreamEncryptionConfigurationInput]
+    #
     # @!attribute [rw] s3_destination_configuration
     #   \[Deprecated\] The destination in Amazon S3. You can specify only
     #   one destination.
@@ -533,6 +577,7 @@ module Aws::Firehose
       :delivery_stream_name,
       :delivery_stream_type,
       :kinesis_stream_source_configuration,
+      :delivery_stream_encryption_configuration_input,
       :s3_destination_configuration,
       :extended_s3_destination_configuration,
       :redshift_destination_configuration,
@@ -620,17 +665,19 @@ module Aws::Firehose
     #
     # @!attribute [rw] schema_configuration
     #   Specifies the AWS Glue Data Catalog table that contains the column
-    #   information.
+    #   information. This parameter is required if `Enabled` is set to true.
     #   @return [Types::SchemaConfiguration]
     #
     # @!attribute [rw] input_format_configuration
     #   Specifies the deserializer that you want Kinesis Data Firehose to
-    #   use to convert the format of your data from JSON.
+    #   use to convert the format of your data from JSON. This parameter is
+    #   required if `Enabled` is set to true.
     #   @return [Types::InputFormatConfiguration]
     #
     # @!attribute [rw] output_format_configuration
     #   Specifies the serializer that you want Kinesis Data Firehose to use
     #   to convert the format of your data to the Parquet or ORC format.
+    #   This parameter is required if `Enabled` is set to true.
     #   @return [Types::OutputFormatConfiguration]
     #
     # @!attribute [rw] enabled
@@ -653,16 +700,35 @@ module Aws::Firehose
     #
     #       {
     #         delivery_stream_name: "DeliveryStreamName", # required
+    #         allow_force_delete: false,
     #       }
     #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream.
     #   @return [String]
     #
+    # @!attribute [rw] allow_force_delete
+    #   Set this to true if you want to delete the delivery stream even if
+    #   Kinesis Data Firehose is unable to retire the grant for the CMK.
+    #   Kinesis Data Firehose might be unable to retire the grant due to a
+    #   customer error, such as when the CMK or the grant are in an invalid
+    #   state. If you force deletion, you can then use the [RevokeGrant][1]
+    #   operation to revoke the grant you gave to Kinesis Data Firehose. If
+    #   a failure to retire the grant happens due to an AWS KMS issue,
+    #   Kinesis Data Firehose keeps retrying the delete operation.
+    #
+    #   The default value is false.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStreamInput AWS API Documentation
     #
     class DeleteDeliveryStreamInput < Struct.new(
-      :delivery_stream_name)
+      :delivery_stream_name,
+      :allow_force_delete)
       include Aws::Structure
     end
 
@@ -687,8 +753,18 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] delivery_stream_status
-    #   The status of the delivery stream.
+    #   The status of the delivery stream. If the status of a delivery
+    #   stream is `CREATING_FAILED`, this status doesn't change, and you
+    #   can't invoke `CreateDeliveryStream` again on it. However, you can
+    #   invoke the DeleteDeliveryStream operation to delete it.
     #   @return [String]
+    #
+    # @!attribute [rw] failure_description
+    #   Provides details in case one of the following operations fails due
+    #   to an error related to KMS: CreateDeliveryStream,
+    #   DeleteDeliveryStream, StartDeliveryStreamEncryption,
+    #   StopDeliveryStreamEncryption.
+    #   @return [Types::FailureDescription]
     #
     # @!attribute [rw] delivery_stream_encryption_configuration
     #   Indicates the server-side encryption (SSE) status for the delivery
@@ -739,6 +815,7 @@ module Aws::Firehose
       :delivery_stream_name,
       :delivery_stream_arn,
       :delivery_stream_status,
+      :failure_description,
       :delivery_stream_encryption_configuration,
       :delivery_stream_type,
       :version_id,
@@ -750,18 +827,110 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Indicates the server-side encryption (SSE) status for the delivery
-    # stream.
+    # Contains information about the server-side encryption (SSE) status for
+    # the delivery stream, the type customer master key (CMK) in use, if
+    # any, and the ARN of the CMK. You can get
+    # `DeliveryStreamEncryptionConfiguration` by invoking the
+    # DescribeDeliveryStream operation.
+    #
+    # @!attribute [rw] key_arn
+    #   If `KeyType` is `CUSTOMER_MANAGED_CMK`, this field contains the ARN
+    #   of the customer managed CMK. If `KeyType` is `AWS_OWNED_CMK`,
+    #   `DeliveryStreamEncryptionConfiguration` doesn't contain a value for
+    #   `KeyARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   Indicates the type of customer master key (CMK) that is used for
+    #   encryption. The default setting is `AWS_OWNED_CMK`. For more
+    #   information about CMKs, see [Customer Master Keys (CMKs)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
+    #   @return [String]
     #
     # @!attribute [rw] status
-    #   For a full description of the different values of this status, see
-    #   StartDeliveryStreamEncryption and StopDeliveryStreamEncryption.
+    #   This is the server-side encryption (SSE) status for the delivery
+    #   stream. For a full description of the different values of this
+    #   status, see StartDeliveryStreamEncryption and
+    #   StopDeliveryStreamEncryption. If this status is `ENABLING_FAILED` or
+    #   `DISABLING_FAILED`, it is the status of the most recent attempt to
+    #   enable or disable SSE, respectively.
     #   @return [String]
+    #
+    # @!attribute [rw] failure_description
+    #   Provides details in case one of the following operations fails due
+    #   to an error related to KMS: CreateDeliveryStream,
+    #   DeleteDeliveryStream, StartDeliveryStreamEncryption,
+    #   StopDeliveryStreamEncryption.
+    #   @return [Types::FailureDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeliveryStreamEncryptionConfiguration AWS API Documentation
     #
     class DeliveryStreamEncryptionConfiguration < Struct.new(
-      :status)
+      :key_arn,
+      :key_type,
+      :status,
+      :failure_description)
+      include Aws::Structure
+    end
+
+    # Specifies the type and Amazon Resource Name (ARN) of the CMK to use
+    # for Server-Side Encryption (SSE).
+    #
+    # @note When making an API call, you may pass DeliveryStreamEncryptionConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         key_arn: "AWSKMSKeyARN",
+    #         key_type: "AWS_OWNED_CMK", # required, accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
+    #       }
+    #
+    # @!attribute [rw] key_arn
+    #   If you set `KeyType` to `CUSTOMER_MANAGED_CMK`, you must specify the
+    #   Amazon Resource Name (ARN) of the CMK. If you set `KeyType` to
+    #   `AWS_OWNED_CMK`, Kinesis Data Firehose uses a service-account CMK.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   Indicates the type of customer master key (CMK) to use for
+    #   encryption. The default setting is `AWS_OWNED_CMK`. For more
+    #   information about CMKs, see [Customer Master Keys (CMKs)][1]. When
+    #   you invoke CreateDeliveryStream or StartDeliveryStreamEncryption
+    #   with `KeyType` set to CUSTOMER\_MANAGED\_CMK, Kinesis Data Firehose
+    #   invokes the Amazon KMS operation [CreateGrant][2] to create a grant
+    #   that allows the Kinesis Data Firehose service to use the customer
+    #   managed CMK to perform encryption and decryption. Kinesis Data
+    #   Firehose manages that grant.
+    #
+    #   When you invoke StartDeliveryStreamEncryption to change the CMK for
+    #   a delivery stream that is encrypted with a customer managed CMK,
+    #   Kinesis Data Firehose schedules the grant it had on the old CMK for
+    #   retirement.
+    #
+    #   You can use a CMK of type CUSTOMER\_MANAGED\_CMK to encrypt up to
+    #   500 delivery streams. If a CreateDeliveryStream or
+    #   StartDeliveryStreamEncryption operation exceeds this limit, Kinesis
+    #   Data Firehose throws a `LimitExceededException`.
+    #
+    #   To encrypt your delivery stream, use symmetric CMKs. Kinesis Data
+    #   Firehose doesn't support asymmetric CMKs. For information about
+    #   symmetric and asymmetric CMKs, see [About Symmetric and Asymmetric
+    #   CMKs][3] in the AWS Key Management Service developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
+    #   [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeliveryStreamEncryptionConfigurationInput AWS API Documentation
+    #
+    class DeliveryStreamEncryptionConfigurationInput < Struct.new(
+      :key_arn,
+      :key_type)
       include Aws::Structure
     end
 
@@ -942,9 +1111,10 @@ module Aws::Firehose
     #
     #       {
     #         role_arn: "RoleARN", # required
-    #         domain_arn: "ElasticsearchDomainARN", # required
+    #         domain_arn: "ElasticsearchDomainARN",
+    #         cluster_endpoint: "ElasticsearchClusterEndpoint",
     #         index_name: "ElasticsearchIndexName", # required
-    #         type_name: "ElasticsearchTypeName", # required
+    #         type_name: "ElasticsearchTypeName",
     #         index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
     #         buffering_hints: {
     #           interval_in_seconds: 1,
@@ -958,11 +1128,12 @@ module Aws::Firehose
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -994,6 +1165,11 @@ module Aws::Firehose
     #           log_group_name: "LogGroupName",
     #           log_stream_name: "LogStreamName",
     #         },
+    #         vpc_configuration: {
+    #           subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #           role_arn: "RoleARN", # required
+    #           security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] role_arn
@@ -1005,7 +1181,7 @@ module Aws::Firehose
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
@@ -1016,9 +1192,16 @@ module Aws::Firehose
     #   specified in **RoleARN**. For more information, see [Amazon Resource
     #   Names (ARNs) and AWS Service Namespaces][1].
     #
+    #   Specify either `ClusterEndpoint` or `DomainARN`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_endpoint
+    #   The endpoint to use when communicating with the cluster. Specify
+    #   either this `ClusterEndpoint` or the `DomainARN` field.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -1030,17 +1213,19 @@ module Aws::Firehose
     #   only one type per index. If you try to specify a new type for an
     #   existing index that already has another type, Kinesis Data Firehose
     #   returns an error during run time.
+    #
+    #   For Elasticsearch 7.x, don't specify a `TypeName`.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
     #   The Elasticsearch index rotation period. Index rotation appends a
-    #   time stamp to the `IndexName` to facilitate the expiration of old
+    #   timestamp to the `IndexName` to facilitate the expiration of old
     #   data. For more information, see [Index Rotation for the Amazon ES
     #   Destination][1]. The default value is `OneDay`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1067,7 +1252,7 @@ module Aws::Firehose
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup
     #   @return [String]
     #
     # @!attribute [rw] s3_configuration
@@ -1082,11 +1267,16 @@ module Aws::Firehose
     #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @!attribute [rw] vpc_configuration
+    #   The details of the VPC of the Amazon ES destination.
+    #   @return [Types::VpcConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationConfiguration AWS API Documentation
     #
     class ElasticsearchDestinationConfiguration < Struct.new(
       :role_arn,
       :domain_arn,
+      :cluster_endpoint,
       :index_name,
       :type_name,
       :index_rotation_period,
@@ -1095,7 +1285,8 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_configuration,
       :processing_configuration,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :vpc_configuration)
       include Aws::Structure
     end
 
@@ -1115,9 +1306,18 @@ module Aws::Firehose
     #   The ARN of the Amazon ES domain. For more information, see [Amazon
     #   Resource Names (ARNs) and AWS Service Namespaces][1].
     #
+    #   Kinesis Data Firehose uses either `ClusterEndpoint` or `DomainARN`
+    #   to send data to Amazon ES.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_endpoint
+    #   The endpoint to use when communicating with the cluster. Kinesis
+    #   Data Firehose uses either this `ClusterEndpoint` or the `DomainARN`
+    #   field to send data to Amazon ES.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -1125,7 +1325,9 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] type_name
-    #   The Elasticsearch type name.
+    #   The Elasticsearch type name. This applies to Elasticsearch 6.x and
+    #   lower versions. For Elasticsearch 7.x, there's no value for
+    #   `TypeName`.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
@@ -1156,11 +1358,16 @@ module Aws::Firehose
     #   The Amazon CloudWatch logging options.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @!attribute [rw] vpc_configuration_description
+    #   The details of the VPC of the Amazon ES destination.
+    #   @return [Types::VpcConfigurationDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationDescription AWS API Documentation
     #
     class ElasticsearchDestinationDescription < Struct.new(
       :role_arn,
       :domain_arn,
+      :cluster_endpoint,
       :index_name,
       :type_name,
       :index_rotation_period,
@@ -1169,7 +1376,8 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_destination_description,
       :processing_configuration,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :vpc_configuration_description)
       include Aws::Structure
     end
 
@@ -1181,6 +1389,7 @@ module Aws::Firehose
     #       {
     #         role_arn: "RoleARN",
     #         domain_arn: "ElasticsearchDomainARN",
+    #         cluster_endpoint: "ElasticsearchClusterEndpoint",
     #         index_name: "ElasticsearchIndexName",
     #         type_name: "ElasticsearchTypeName",
     #         index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
@@ -1195,11 +1404,12 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -1242,7 +1452,7 @@ module Aws::Firehose
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
@@ -1250,12 +1460,19 @@ module Aws::Firehose
     #   The ARN of the Amazon ES domain. The IAM role must have permissions
     #   for `DescribeElasticsearchDomain`, `DescribeElasticsearchDomains`,
     #   and `DescribeElasticsearchDomainConfig` after assuming the IAM role
-    #   specified in **RoleARN**. For more information, see [Amazon Resource
+    #   specified in `RoleARN`. For more information, see [Amazon Resource
     #   Names (ARNs) and AWS Service Namespaces][1].
+    #
+    #   Specify either `ClusterEndpoint` or `DomainARN`.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_endpoint
+    #   The endpoint to use when communicating with the cluster. Specify
+    #   either this `ClusterEndpoint` or the `DomainARN` field.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -1267,22 +1484,28 @@ module Aws::Firehose
     #   only one type per index. If you try to specify a new type for an
     #   existing index that already has another type, Kinesis Data Firehose
     #   returns an error during runtime.
+    #
+    #   If you upgrade Elasticsearch from 6.x to 7.x and don’t update your
+    #   delivery stream, Kinesis Data Firehose still delivers data to
+    #   Elasticsearch with the old index name and type name. If you want to
+    #   update your delivery stream with a new index name, provide an empty
+    #   string for `TypeName`.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
     #   The Elasticsearch index rotation period. Index rotation appends a
-    #   time stamp to `IndexName` to facilitate the expiration of old data.
+    #   timestamp to `IndexName` to facilitate the expiration of old data.
     #   For more information, see [Index Rotation for the Amazon ES
     #   Destination][1]. Default value is `OneDay`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
     #   The buffering options. If no value is specified,
-    #   **ElasticsearchBufferingHints** object default values are used.
+    #   `ElasticsearchBufferingHints` object default values are used.
     #   @return [Types::ElasticsearchBufferingHints]
     #
     # @!attribute [rw] retry_options
@@ -1308,6 +1531,7 @@ module Aws::Firehose
     class ElasticsearchDestinationUpdate < Struct.new(
       :role_arn,
       :domain_arn,
+      :cluster_endpoint,
       :index_name,
       :type_name,
       :index_rotation_period,
@@ -1382,11 +1606,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN", # required
     #         bucket_arn: "BucketARN", # required
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -1417,11 +1642,12 @@ module Aws::Firehose
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -1506,15 +1732,23 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered Amazon S3 files. You can specify an extra prefix to be
-    #   added in front of the time format prefix. If the prefix ends with a
-    #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
-    #   Kinesis Data Firehose Developer Guide*.
+    #   delivered Amazon S3 files. You can also specify a custom prefix, as
+    #   described in [Custom Prefixes for Amazon S3 Objects][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_output_prefix
+    #   A prefix that Kinesis Data Firehose evaluates and adds to failed
+    #   records before writing them to S3. This prefix appears immediately
+    #   following the bucket name. For information about how to specify this
+    #   prefix, see [Custom Prefixes for Amazon S3 Objects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1559,6 +1793,7 @@ module Aws::Firehose
       :role_arn,
       :bucket_arn,
       :prefix,
+      :error_output_prefix,
       :buffering_hints,
       :compression_format,
       :encryption_configuration,
@@ -1593,15 +1828,23 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered Amazon S3 files. You can specify an extra prefix to be
-    #   added in front of the time format prefix. If the prefix ends with a
-    #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
-    #   Kinesis Data Firehose Developer Guide*.
+    #   delivered Amazon S3 files. You can also specify a custom prefix, as
+    #   described in [Custom Prefixes for Amazon S3 Objects][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_output_prefix
+    #   A prefix that Kinesis Data Firehose evaluates and adds to failed
+    #   records before writing them to S3. This prefix appears immediately
+    #   following the bucket name. For information about how to specify this
+    #   prefix, see [Custom Prefixes for Amazon S3 Objects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1646,6 +1889,7 @@ module Aws::Firehose
       :role_arn,
       :bucket_arn,
       :prefix,
+      :error_output_prefix,
       :buffering_hints,
       :compression_format,
       :encryption_configuration,
@@ -1666,11 +1910,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN",
     #         bucket_arn: "BucketARN",
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -1701,11 +1946,12 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -1790,15 +2036,23 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered Amazon S3 files. You can specify an extra prefix to be
-    #   added in front of the time format prefix. If the prefix ends with a
-    #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
-    #   Kinesis Data Firehose Developer Guide*.
+    #   delivered Amazon S3 files. You can also specify a custom prefix, as
+    #   described in [Custom Prefixes for Amazon S3 Objects][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_output_prefix
+    #   A prefix that Kinesis Data Firehose evaluates and adds to failed
+    #   records before writing them to S3. This prefix appears immediately
+    #   following the bucket name. For information about how to specify this
+    #   prefix, see [Custom Prefixes for Amazon S3 Objects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1843,6 +2097,7 @@ module Aws::Firehose
       :role_arn,
       :bucket_arn,
       :prefix,
+      :error_output_prefix,
       :buffering_hints,
       :compression_format,
       :encryption_configuration,
@@ -1851,6 +2106,26 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_backup_update,
       :data_format_conversion_configuration)
+      include Aws::Structure
+    end
+
+    # Provides details in case one of the following operations fails due to
+    # an error related to KMS: CreateDeliveryStream, DeleteDeliveryStream,
+    # StartDeliveryStreamEncryption, StopDeliveryStreamEncryption.
+    #
+    # @!attribute [rw] type
+    #   The type of error that caused the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   A message providing details about the error that caused the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/FailureDescription AWS API Documentation
+    #
+    class FailureDescription < Struct.new(
+      :type,
+      :details)
       include Aws::Structure
     end
 
@@ -1870,11 +2145,11 @@ module Aws::Firehose
     #
     # @!attribute [rw] timestamp_formats
     #   Indicates how you want Kinesis Data Firehose to parse the date and
-    #   time stamps that may be present in your input data JSON. To specify
+    #   timestamps that may be present in your input data JSON. To specify
     #   these format strings, follow the pattern syntax of JodaTime's
     #   DateTimeFormat format strings. For more information, see [Class
     #   DateTimeFormat][1]. You can also use the special value `millis` to
-    #   parse time stamps in epoch milliseconds. If you don't specify a
+    #   parse timestamps in epoch milliseconds. If you don't specify a
     #   format, Kinesis Data Firehose uses `java.sql.Timestamp::valueOf` by
     #   default.
     #
@@ -1891,7 +2166,8 @@ module Aws::Firehose
     end
 
     # Specifies the deserializer you want to use to convert the format of
-    # the input data.
+    # the input data. This parameter is required if `Enabled` is set to
+    # true.
     #
     # @note When making an API call, you may pass InputFormatConfiguration
     #   data as a hash:
@@ -1921,6 +2197,39 @@ module Aws::Firehose
     #
     class InputFormatConfiguration < Struct.new(
       :deserializer)
+      include Aws::Structure
+    end
+
+    # The specified input parameter has a value that is not valid.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Kinesis Data Firehose throws this exception when an attempt to put
+    # records or to start or stop delivery stream encryption fails. This
+    # happens when the KMS service throws one of the following exception
+    # types: `AccessDeniedException`, `InvalidStateException`,
+    # `DisabledException`, or `NotFoundException`.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/InvalidKMSResourceException AWS API Documentation
+    #
+    class InvalidKMSResourceException < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -2014,7 +2323,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] delivery_start_timestamp
     #   Kinesis Data Firehose starts retrieving records from the Kinesis
-    #   data stream starting with this time stamp.
+    #   data stream starting with this timestamp.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/KinesisStreamSourceDescription AWS API Documentation
@@ -2023,6 +2332,19 @@ module Aws::Firehose
       :kinesis_stream_arn,
       :role_arn,
       :delivery_start_timestamp)
+      include Aws::Structure
+    end
+
+    # You have already reached the limit for a requested resource.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2299,7 +2621,8 @@ module Aws::Firehose
     end
 
     # Specifies the serializer that you want Kinesis Data Firehose to use to
-    # convert the format of your data before it writes it to Amazon S3.
+    # convert the format of your data before it writes it to Amazon S3. This
+    # parameter is required if `Enabled` is set to true.
     #
     # @note When making an API call, you may pass OutputFormatConfiguration
     #   data as a hash:
@@ -2379,7 +2702,7 @@ module Aws::Firehose
     #   The compression code to use over data blocks. The possible values
     #   are `UNCOMPRESSED`, `SNAPPY`, and `GZIP`, with the default being
     #   `SNAPPY`. Use `SNAPPY` for higher decompression speed. Use `GZIP` if
-    #   the compression ration is more important than speed.
+    #   the compression ratio is more important than speed.
     #   @return [String]
     #
     # @!attribute [rw] enable_dictionary_compression
@@ -2670,11 +2993,12 @@ module Aws::Firehose
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -2706,11 +3030,12 @@ module Aws::Firehose
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -2894,11 +3219,12 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -2930,11 +3256,12 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -3054,6 +3381,32 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The resource is already in use and not available for this operation.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource could not be found.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes the configuration of a destination in Amazon S3.
     #
     # @note When making an API call, you may pass S3DestinationConfiguration
@@ -3063,11 +3416,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN", # required
     #         bucket_arn: "BucketARN", # required
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -3102,15 +3456,23 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered Amazon S3 files. You can specify an extra prefix to be
-    #   added in front of the time format prefix. If the prefix ends with a
-    #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
-    #   Kinesis Data Firehose Developer Guide*.
+    #   delivered Amazon S3 files. You can also specify a custom prefix, as
+    #   described in [Custom Prefixes for Amazon S3 Objects][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_output_prefix
+    #   A prefix that Kinesis Data Firehose evaluates and adds to failed
+    #   records before writing them to S3. This prefix appears immediately
+    #   following the bucket name. For information about how to specify this
+    #   prefix, see [Custom Prefixes for Amazon S3 Objects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -3142,6 +3504,7 @@ module Aws::Firehose
       :role_arn,
       :bucket_arn,
       :prefix,
+      :error_output_prefix,
       :buffering_hints,
       :compression_format,
       :encryption_configuration,
@@ -3172,15 +3535,23 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered Amazon S3 files. You can specify an extra prefix to be
-    #   added in front of the time format prefix. If the prefix ends with a
-    #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
-    #   Kinesis Data Firehose Developer Guide*.
+    #   delivered Amazon S3 files. You can also specify a custom prefix, as
+    #   described in [Custom Prefixes for Amazon S3 Objects][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_output_prefix
+    #   A prefix that Kinesis Data Firehose evaluates and adds to failed
+    #   records before writing them to S3. This prefix appears immediately
+    #   following the bucket name. For information about how to specify this
+    #   prefix, see [Custom Prefixes for Amazon S3 Objects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -3208,6 +3579,7 @@ module Aws::Firehose
       :role_arn,
       :bucket_arn,
       :prefix,
+      :error_output_prefix,
       :buffering_hints,
       :compression_format,
       :encryption_configuration,
@@ -3224,11 +3596,12 @@ module Aws::Firehose
     #         role_arn: "RoleARN",
     #         bucket_arn: "BucketARN",
     #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
     #         buffering_hints: {
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -3263,15 +3636,23 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered Amazon S3 files. You can specify an extra prefix to be
-    #   added in front of the time format prefix. If the prefix ends with a
-    #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
-    #   Kinesis Data Firehose Developer Guide*.
+    #   delivered Amazon S3 files. You can also specify a custom prefix, as
+    #   described in [Custom Prefixes for Amazon S3 Objects][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_output_prefix
+    #   A prefix that Kinesis Data Firehose evaluates and adds to failed
+    #   records before writing them to S3. This prefix appears immediately
+    #   following the bucket name. For information about how to specify this
+    #   prefix, see [Custom Prefixes for Amazon S3 Objects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -3303,6 +3684,7 @@ module Aws::Firehose
       :role_arn,
       :bucket_arn,
       :prefix,
+      :error_output_prefix,
       :buffering_hints,
       :compression_format,
       :encryption_configuration,
@@ -3311,7 +3693,8 @@ module Aws::Firehose
     end
 
     # Specifies the schema to which you want Kinesis Data Firehose to
-    # configure your data before it writes it to Amazon S3.
+    # configure your data before it writes it to Amazon S3. This parameter
+    # is required if `Enabled` is set to true.
     #
     # @note When making an API call, you may pass SchemaConfiguration
     #   data as a hash:
@@ -3433,6 +3816,27 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The service is unavailable. Back off and retry the operation. If you
+    # continue to see the exception, throughput limits for the delivery
+    # stream may have been exceeded. For more information about limits and
+    # how to request an increase, see [Amazon Kinesis Data Firehose
+    # Limits][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/limits.html
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Details about a Kinesis data stream used as the source for a Kinesis
     # Data Firehose delivery stream.
     #
@@ -3466,11 +3870,12 @@ module Aws::Firehose
     #           role_arn: "RoleARN", # required
     #           bucket_arn: "BucketARN", # required
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -3650,11 +4055,12 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -3782,6 +4188,10 @@ module Aws::Firehose
     #
     #       {
     #         delivery_stream_name: "DeliveryStreamName", # required
+    #         delivery_stream_encryption_configuration_input: {
+    #           key_arn: "AWSKMSKeyARN",
+    #           key_type: "AWS_OWNED_CMK", # required, accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
+    #         },
     #       }
     #
     # @!attribute [rw] delivery_stream_name
@@ -3789,10 +4199,16 @@ module Aws::Firehose
     #   server-side encryption (SSE).
     #   @return [String]
     #
+    # @!attribute [rw] delivery_stream_encryption_configuration_input
+    #   Used to specify the type and Amazon Resource Name (ARN) of the KMS
+    #   key needed for Server-Side Encryption (SSE).
+    #   @return [Types::DeliveryStreamEncryptionConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/StartDeliveryStreamEncryptionInput AWS API Documentation
     #
     class StartDeliveryStreamEncryptionInput < Struct.new(
-      :delivery_stream_name)
+      :delivery_stream_name,
+      :delivery_stream_encryption_configuration_input)
       include Aws::Structure
     end
 
@@ -3927,11 +4343,12 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -3948,11 +4365,12 @@ module Aws::Firehose
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
     #           buffering_hints: {
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -3983,11 +4401,12 @@ module Aws::Firehose
     #             role_arn: "RoleARN",
     #             bucket_arn: "BucketARN",
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -4067,11 +4486,12 @@ module Aws::Firehose
     #             role_arn: "RoleARN",
     #             bucket_arn: "BucketARN",
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -4103,11 +4523,12 @@ module Aws::Firehose
     #             role_arn: "RoleARN",
     #             bucket_arn: "BucketARN",
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -4129,6 +4550,7 @@ module Aws::Firehose
     #         elasticsearch_destination_update: {
     #           role_arn: "RoleARN",
     #           domain_arn: "ElasticsearchDomainARN",
+    #           cluster_endpoint: "ElasticsearchClusterEndpoint",
     #           index_name: "ElasticsearchIndexName",
     #           type_name: "ElasticsearchTypeName",
     #           index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
@@ -4143,11 +4565,12 @@ module Aws::Firehose
     #             role_arn: "RoleARN",
     #             bucket_arn: "BucketARN",
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -4193,11 +4616,12 @@ module Aws::Firehose
     #             role_arn: "RoleARN",
     #             bucket_arn: "BucketARN",
     #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
     #             buffering_hints: {
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -4237,7 +4661,7 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] current_delivery_stream_version_id
-    #   Obtain this value from the **VersionId** result of
+    #   Obtain this value from the `VersionId` result of
     #   DeliveryStreamDescription. This value is required, and helps the
     #   service perform conditional operations. For example, if there is an
     #   interleaving update and this value is null, then the update
@@ -4287,6 +4711,108 @@ module Aws::Firehose
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationOutput AWS API Documentation
     #
     class UpdateDestinationOutput < Aws::EmptyStructure; end
+
+    # The details of the VPC of the Amazon ES destination.
+    #
+    # @note When making an API call, you may pass VpcConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #         role_arn: "RoleARN", # required
+    #         security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #       }
+    #
+    # @!attribute [rw] subnet_ids
+    #   The IDs of the subnets that you want Kinesis Data Firehose to use to
+    #   create ENIs in the VPC of the Amazon ES destination. Make sure that
+    #   the routing tables and inbound and outbound rules allow traffic to
+    #   flow from the subnets whose IDs are specified here to the subnets
+    #   that have the destination Amazon ES endpoints. Kinesis Data Firehose
+    #   creates at least one ENI in each of the subnets that are specified
+    #   here. Do not delete or modify these ENIs.
+    #
+    #   The number of ENIs that Kinesis Data Firehose creates in the subnets
+    #   specified here scales up and down automatically based on throughput.
+    #   To enable Kinesis Data Firehose to scale up the number of ENIs to
+    #   match throughput, ensure that you have sufficient quota. To help you
+    #   calculate the quota you need, assume that Kinesis Data Firehose can
+    #   create up to three ENIs for this delivery stream for each of the
+    #   subnets specified here. For more information about ENI quota, see
+    #   [Network Interfaces ][1] in the Amazon VPC Quotas topic.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that you want the delivery stream to use to
+    #   create endpoints in the destination VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the security groups that you want Kinesis Data Firehose
+    #   to use when it creates ENIs in the VPC of the Amazon ES destination.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/VpcConfiguration AWS API Documentation
+    #
+    class VpcConfiguration < Struct.new(
+      :subnet_ids,
+      :role_arn,
+      :security_group_ids)
+      include Aws::Structure
+    end
+
+    # The details of the VPC of the Amazon ES destination.
+    #
+    # @!attribute [rw] subnet_ids
+    #   The IDs of the subnets that Kinesis Data Firehose uses to create
+    #   ENIs in the VPC of the Amazon ES destination. Make sure that the
+    #   routing tables and inbound and outbound rules allow traffic to flow
+    #   from the subnets whose IDs are specified here to the subnets that
+    #   have the destination Amazon ES endpoints. Kinesis Data Firehose
+    #   creates at least one ENI in each of the subnets that are specified
+    #   here. Do not delete or modify these ENIs.
+    #
+    #   The number of ENIs that Kinesis Data Firehose creates in the subnets
+    #   specified here scales up and down automatically based on throughput.
+    #   To enable Kinesis Data Firehose to scale up the number of ENIs to
+    #   match throughput, ensure that you have sufficient quota. To help you
+    #   calculate the quota you need, assume that Kinesis Data Firehose can
+    #   create up to three ENIs for this delivery stream for each of the
+    #   subnets specified here. For more information about ENI quota, see
+    #   [Network Interfaces ][1] in the Amazon VPC Quotas topic.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that you want the delivery stream uses to
+    #   create endpoints in the destination VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the security groups that Kinesis Data Firehose uses when
+    #   it creates ENIs in the VPC of the Amazon ES destination.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the Amazon ES destination's VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/VpcConfigurationDescription AWS API Documentation
+    #
+    class VpcConfigurationDescription < Struct.new(
+      :subnet_ids,
+      :role_arn,
+      :security_group_ids,
+      :vpc_id)
+      include Aws::Structure
+    end
 
   end
 end

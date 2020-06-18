@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -25,17 +27,20 @@ require_relative 'aws-sdk-elasticloadbalancingv2/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     elastic_load_balancing_v2 = Aws::ElasticLoadBalancingV2::Client.new
+#     resp = elastic_load_balancing_v2.add_listener_certificates(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Elastic Load Balancing all
-# extend {Errors::ServiceError}.
+# Errors returned from Elastic Load Balancing are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ElasticLoadBalancingV2::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Elastic Load Balancing API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +48,6 @@ require_relative 'aws-sdk-elasticloadbalancingv2/customizations'
 # @service
 module Aws::ElasticLoadBalancingV2
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.45.1'
 
 end

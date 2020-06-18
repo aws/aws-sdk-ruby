@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -10,9 +12,8 @@ module Aws::CodePipeline
 
     # Represents an AWS session credentials object. These credentials are
     # temporary credentials that are issued by AWS Secure Token Service
-    # (STS). They can be used to access input and output artifacts in the
-    # Amazon S3 bucket used to store artifact for the pipeline in AWS
-    # CodePipeline.
+    # (STS). They can be used to access input and output artifacts in the S3
+    # bucket used to store artifact for the pipeline in AWS CodePipeline.
     #
     # @!attribute [rw] access_key_id
     #   The access key for the session.
@@ -169,30 +170,30 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] secret
     #   Whether the configuration property is secret. Secrets are hidden
-    #   from all calls except for GetJobDetails, GetThirdPartyJobDetails,
-    #   PollForJobs, and PollForThirdPartyJobs.
+    #   from all calls except for `GetJobDetails`,
+    #   `GetThirdPartyJobDetails`, `PollForJobs`, and
+    #   `PollForThirdPartyJobs`.
     #
     #   When updating a pipeline, passing * * * * * without changing
-    #   any other values of the action will preserve the prior value of the
+    #   any other values of the action preserves the previous value of the
     #   secret.
     #   @return [Boolean]
     #
     # @!attribute [rw] queryable
-    #   Indicates that the property will be used in conjunction with
-    #   PollForJobs. When creating a custom action, an action can have up to
-    #   one queryable property. If it has one, that property must be both
-    #   required and not secret.
+    #   Indicates that the property is used with `PollForJobs`. When
+    #   creating a custom action, an action can have up to one queryable
+    #   property. If it has one, that property must be both required and not
+    #   secret.
     #
     #   If you create a pipeline with a custom action type, and that custom
     #   action contains a queryable property, the value for that
-    #   configuration property is subject to additional restrictions. The
-    #   value must be less than or equal to twenty (20) characters. The
-    #   value can contain only alphanumeric characters, underscores, and
-    #   hyphens.
+    #   configuration property is subject to other restrictions. The value
+    #   must be less than or equal to twenty (20) characters. The value can
+    #   contain only alphanumeric characters, underscores, and hyphens.
     #   @return [Boolean]
     #
     # @!attribute [rw] description
-    #   The description of the action configuration property that will be
+    #   The description of the action configuration property that is
     #   displayed to users.
     #   @return [String]
     #
@@ -213,17 +214,23 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the context of an action within the stage of a pipeline to
-    # a job worker.
+    # Represents the context of an action in the stage of a pipeline to a
+    # job worker.
     #
     # @!attribute [rw] name
-    #   The name of the action within the context of a job.
+    #   The name of the action in the context of a job.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_execution_id
+    #   The system-generated unique ID that corresponds to an action's
+    #   execution.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionContext AWS API Documentation
     #
     class ActionContext < Struct.new(
-      :name)
+      :name,
+      :action_execution_id)
       include Aws::Structure
     end
 
@@ -256,6 +263,7 @@ module Aws::CodePipeline
     #         ],
     #         role_arn: "RoleArn",
     #         region: "AWSRegionName",
+    #         namespace: "ActionNamespace",
     #       }
     #
     # @!attribute [rw] name
@@ -263,7 +271,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] action_type_id
-    #   The configuration information for the action type.
+    #   Specifies the action type and the provider of the action.
     #   @return [Types::ActionTypeId]
     #
     # @!attribute [rw] run_order
@@ -271,7 +279,27 @@ module Aws::CodePipeline
     #   @return [Integer]
     #
     # @!attribute [rw] configuration
-    #   The action declaration's configuration.
+    #   The action's configuration. These are key-value pairs that specify
+    #   input values for an action. For more information, see [Action
+    #   Structure Requirements in CodePipeline][1]. For the list of
+    #   configuration properties for the AWS CloudFormation action type in
+    #   CodePipeline, see [Configuration Properties Reference][2] in the
+    #   *AWS CloudFormation User Guide*. For template snippets with
+    #   examples, see [Using Parameter Override Functions with CodePipeline
+    #   Pipelines][3] in the *AWS CloudFormation User Guide*.
+    #
+    #   The values can be represented in either JSON or YAML format. For
+    #   example, the JSON configuration item format is as follows:
+    #
+    #   *JSON:*
+    #
+    #   `"Configuration" : \{ Key : Value \},`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] output_artifacts
@@ -285,12 +313,17 @@ module Aws::CodePipeline
     #   @return [Array<Types::InputArtifact>]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM service role that will perform the declared
-    #   action. This is assumed through the roleArn for the pipeline.
+    #   The ARN of the IAM service role that performs the declared action.
+    #   This is assumed through the roleArn for the pipeline.
     #   @return [String]
     #
     # @!attribute [rw] region
     #   The action declaration's AWS Region, such as us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The variable namespace associated with the action. All variables
+    #   produced as output by this action fall under this namespace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionDeclaration AWS API Documentation
@@ -303,7 +336,8 @@ module Aws::CodePipeline
       :output_artifacts,
       :input_artifacts,
       :role_arn,
-      :region)
+      :region,
+      :namespace)
       include Aws::Structure
     end
 
@@ -325,8 +359,8 @@ module Aws::CodePipeline
     # @!attribute [rw] token
     #   The system-generated token used to identify a unique approval
     #   request. The token for each open approval request can be obtained
-    #   using the GetPipelineState command and is used to validate that the
-    #   approval request corresponding to this token is still valid.
+    #   using the `GetPipelineState` command. It is used to validate that
+    #   the approval request corresponding to this token is still valid.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_by
@@ -338,8 +372,8 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] external_execution_url
-    #   The URL of a resource external to AWS that will be used when running
-    #   the action, for example an external repository URL.
+    #   The URL of a resource external to AWS that is used when running the
+    #   action (for example, an external repository URL).
     #   @return [String]
     #
     # @!attribute [rw] percent_complete
@@ -365,6 +399,193 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # Returns information about an execution of an action, including the
+    # action execution ID, and the name, version, and timing of the action.
+    #
+    # @!attribute [rw] pipeline_execution_id
+    #   The pipeline execution ID for the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_execution_id
+    #   The action execution ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_version
+    #   The version of the pipeline where the action was run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage that contains the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_name
+    #   The name of the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the action execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_time
+    #   The last update time of the action execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the action execution. Status categories are
+    #   `InProgress`, `Succeeded`, and `Failed`.
+    #   @return [String]
+    #
+    # @!attribute [rw] input
+    #   Input details for the action execution, such as role ARN, Region,
+    #   and input artifacts.
+    #   @return [Types::ActionExecutionInput]
+    #
+    # @!attribute [rw] output
+    #   Output details for the action execution, such as the action
+    #   execution result.
+    #   @return [Types::ActionExecutionOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionDetail AWS API Documentation
+    #
+    class ActionExecutionDetail < Struct.new(
+      :pipeline_execution_id,
+      :action_execution_id,
+      :pipeline_version,
+      :stage_name,
+      :action_name,
+      :start_time,
+      :last_update_time,
+      :status,
+      :input,
+      :output)
+      include Aws::Structure
+    end
+
+    # Filter values for the action execution.
+    #
+    # @note When making an API call, you may pass ActionExecutionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         pipeline_execution_id: "PipelineExecutionId",
+    #       }
+    #
+    # @!attribute [rw] pipeline_execution_id
+    #   The pipeline execution ID used to filter action execution history.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionFilter AWS API Documentation
+    #
+    class ActionExecutionFilter < Struct.new(
+      :pipeline_execution_id)
+      include Aws::Structure
+    end
+
+    # Input information used for an action execution.
+    #
+    # @!attribute [rw] action_type_id
+    #   Represents information about an action type.
+    #   @return [Types::ActionTypeId]
+    #
+    # @!attribute [rw] configuration
+    #   Configuration data for an action execution.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] resolved_configuration
+    #   Configuration data for an action execution with all variable
+    #   references replaced with their real values for the execution.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM service role that performs the declared action.
+    #   This is assumed through the roleArn for the pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region for the action, such as us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_artifacts
+    #   Details of input artifacts of the action that correspond to the
+    #   action execution.
+    #   @return [Array<Types::ArtifactDetail>]
+    #
+    # @!attribute [rw] namespace
+    #   The variable namespace associated with the action. All variables
+    #   produced as output by this action fall under this namespace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionInput AWS API Documentation
+    #
+    class ActionExecutionInput < Struct.new(
+      :action_type_id,
+      :configuration,
+      :resolved_configuration,
+      :role_arn,
+      :region,
+      :input_artifacts,
+      :namespace)
+      include Aws::Structure
+    end
+
+    # Output details listed for an action execution, such as the action
+    # execution result.
+    #
+    # @!attribute [rw] output_artifacts
+    #   Details of output artifacts of the action that correspond to the
+    #   action execution.
+    #   @return [Array<Types::ArtifactDetail>]
+    #
+    # @!attribute [rw] execution_result
+    #   Execution result information listed in the output details for an
+    #   action execution.
+    #   @return [Types::ActionExecutionResult]
+    #
+    # @!attribute [rw] output_variables
+    #   The outputVariables field shows the key-value pairs that were output
+    #   as part of that execution.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionOutput AWS API Documentation
+    #
+    class ActionExecutionOutput < Struct.new(
+      :output_artifacts,
+      :execution_result,
+      :output_variables)
+      include Aws::Structure
+    end
+
+    # Execution result information, such as the external execution ID.
+    #
+    # @!attribute [rw] external_execution_id
+    #   The action provider's external ID for the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_execution_summary
+    #   The action provider's summary for the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_execution_url
+    #   The deepest external link to the external resource (for example, a
+    #   repository URL or deployment endpoint) that is used when running the
+    #   action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionResult AWS API Documentation
+    #
+    class ActionExecutionResult < Struct.new(
+      :external_execution_id,
+      :external_execution_summary,
+      :external_execution_url)
+      include Aws::Structure
+    end
+
+    # The specified action cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionNotFoundException AWS API Documentation
+    #
+    class ActionNotFoundException < Aws::EmptyStructure; end
+
     # Represents information about the version (or revision) of an action.
     #
     # @note When making an API call, you may pass ActionRevision
@@ -383,7 +604,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] revision_change_id
     #   The unique identifier of the change that set the state to this
-    #   revision, for example a deployment ID or timestamp.
+    #   revision (for example, a deployment ID or timestamp).
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -485,7 +706,7 @@ module Aws::CodePipeline
     # @!attribute [rw] category
     #   A category defines what kind of action can be taken in the stage,
     #   and constrains the provider type for the action. Valid categories
-    #   are limited to one of the values below.
+    #   are limited to one of the following values.
     #   @return [String]
     #
     # @!attribute [rw] owner
@@ -496,7 +717,13 @@ module Aws::CodePipeline
     #   The provider of the service being called by the action. Valid
     #   providers are determined by the action category. For example, an
     #   action in the Deploy category type might have a provider of AWS
-    #   CodeDeploy, which would be specified as CodeDeploy.
+    #   CodeDeploy, which would be specified as CodeDeploy. For more
+    #   information, see [Valid Action Types and Providers in
+    #   CodePipeline][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -512,6 +739,12 @@ module Aws::CodePipeline
       :version)
       include Aws::Structure
     end
+
+    # The specified action type cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeNotFoundException AWS API Documentation
+    #
+    class ActionTypeNotFoundException < Aws::EmptyStructure; end
 
     # Returns information about the settings for an action type.
     #
@@ -535,15 +768,15 @@ module Aws::CodePipeline
     #   The URL returned to the AWS CodePipeline console that provides a
     #   deep link to the resources of the external system, such as the
     #   configuration page for an AWS CodeDeploy deployment group. This link
-    #   is provided as part of the action display within the pipeline.
+    #   is provided as part of the action display in the pipeline.
     #   @return [String]
     #
     # @!attribute [rw] execution_url_template
     #   The URL returned to the AWS CodePipeline console that contains a
     #   link to the top-level landing page for the external system, such as
-    #   console page for AWS CodeDeploy. This link is shown on the pipeline
-    #   view page in the AWS CodePipeline console and provides a link to the
-    #   execution entity of the external action.
+    #   the console page for AWS CodeDeploy. This link is shown on the
+    #   pipeline view page in the AWS CodePipeline console and provides a
+    #   link to the execution entity of the external action.
     #   @return [String]
     #
     # @!attribute [rw] revision_url_template
@@ -561,6 +794,12 @@ module Aws::CodePipeline
       :revision_url_template)
       include Aws::Structure
     end
+
+    # The approval action has already been approved or rejected.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ApprovalAlreadyCompletedException AWS API Documentation
+    #
+    class ApprovalAlreadyCompletedException < Aws::EmptyStructure; end
 
     # Represents information about the result of an approval request.
     #
@@ -589,8 +828,8 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents information about an artifact that will be worked upon by
-    # actions in the pipeline.
+    # Represents information about an artifact that is worked on by actions
+    # in the pipeline.
     #
     # @!attribute [rw] name
     #   The artifact's name.
@@ -611,6 +850,25 @@ module Aws::CodePipeline
       :name,
       :revision,
       :location)
+      include Aws::Structure
+    end
+
+    # Artifact details for the action execution, such as the artifact
+    # location.
+    #
+    # @!attribute [rw] name
+    #   The artifact object name for the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3location
+    #   The Amazon S3 artifact location for the action execution.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactDetail AWS API Documentation
+    #
+    class ArtifactDetail < Struct.new(
+      :name,
+      :s3location)
       include Aws::Structure
     end
 
@@ -647,7 +905,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] s3_location
-    #   The Amazon S3 bucket that contains the artifact.
+    #   The S3 bucket that contains the artifact.
     #   @return [Types::S3ArtifactLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactLocation AWS API Documentation
@@ -662,8 +920,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] name
     #   The name of an artifact. This name might be system-generated, such
-    #   as "MyApp", or might be defined by the user when an action is
-    #   created.
+    #   as "MyApp", or defined by the user when an action is created.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
@@ -706,7 +963,13 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # The Amazon S3 bucket where artifacts are stored for the pipeline.
+    # The S3 bucket where artifacts for the pipeline are stored.
+    #
+    # <note markdown="1"> You must include either `artifactStore` or `artifactStores` in your
+    # pipeline, but you cannot use both. If you create a cross-region action
+    # in your pipeline, you must use `artifactStores`.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass ArtifactStore
     #   data as a hash:
@@ -725,12 +988,11 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The Amazon S3 bucket used for storing the artifacts for a pipeline.
-    #   You can specify the name of an S3 bucket but not a folder within the
-    #   bucket. A folder to contain the pipeline artifacts is created for
-    #   you based on the name of the pipeline. You can use any Amazon S3
-    #   bucket in the same AWS Region as the pipeline to store your pipeline
-    #   artifacts.
+    #   The S3 bucket used for storing the artifacts for a pipeline. You can
+    #   specify the name of an S3 bucket but not a folder in the bucket. A
+    #   folder to contain the pipeline artifacts is created for you based on
+    #   the name of the pipeline. You can use any S3 bucket in the same AWS
+    #   Region as the pipeline to store your pipeline artifacts.
     #   @return [String]
     #
     # @!attribute [rw] encryption_key
@@ -774,6 +1036,18 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # Unable to modify the tag due to a simultaneous update request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the input of a CreateCustomActionType operation.
     #
     # @note When making an API call, you may pass CreateCustomActionTypeInput
@@ -808,14 +1082,21 @@ module Aws::CodePipeline
     #           minimum_count: 1, # required
     #           maximum_count: 1, # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] category
     #   The category of the custom action, such as a build action or a test
     #   action.
     #
-    #   <note markdown="1"> Although Source and Approval are listed as valid values, they are
-    #   not currently functional. These values are reserved for future use.
+    #   <note markdown="1"> Although `Source` and `Approval` are listed as valid values, they
+    #   are not currently functional. These values are reserved for future
+    #   use.
     #
     #    </note>
     #   @return [String]
@@ -830,7 +1111,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] settings
-    #   Returns information about the settings for an action type.
+    #   URLs that provide users information about this custom action.
     #   @return [Types::ActionTypeSettings]
     #
     # @!attribute [rw] configuration_properties
@@ -846,7 +1127,7 @@ module Aws::CodePipeline
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html
     #   @return [Array<Types::ActionConfigurationProperty>]
     #
     # @!attribute [rw] input_artifact_details
@@ -859,6 +1140,10 @@ module Aws::CodePipeline
     #   ID.
     #   @return [Types::ArtifactDetails]
     #
+    # @!attribute [rw] tags
+    #   The tags for the custom action.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionTypeInput AWS API Documentation
     #
     class CreateCustomActionTypeInput < Struct.new(
@@ -868,24 +1153,30 @@ module Aws::CodePipeline
       :settings,
       :configuration_properties,
       :input_artifact_details,
-      :output_artifact_details)
+      :output_artifact_details,
+      :tags)
       include Aws::Structure
     end
 
-    # Represents the output of a CreateCustomActionType operation.
+    # Represents the output of a `CreateCustomActionType` operation.
     #
     # @!attribute [rw] action_type
     #   Returns information about the details of an action type.
     #   @return [Types::ActionType]
     #
+    # @!attribute [rw] tags
+    #   Specifies the tags applied to the custom action.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionTypeOutput AWS API Documentation
     #
     class CreateCustomActionTypeOutput < Struct.new(
-      :action_type)
+      :action_type,
+      :tags)
       include Aws::Structure
     end
 
-    # Represents the input of a CreatePipeline action.
+    # Represents the input of a `CreatePipeline` action.
     #
     # @note When making an API call, you may pass CreatePipelineInput
     #   data as a hash:
@@ -946,12 +1237,19 @@ module Aws::CodePipeline
     #                   ],
     #                   role_arn: "RoleArn",
     #                   region: "AWSRegionName",
+    #                   namespace: "ActionNamespace",
     #                 },
     #               ],
     #             },
     #           ],
     #           version: 1,
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] pipeline
@@ -959,24 +1257,34 @@ module Aws::CodePipeline
     #   the pipeline.
     #   @return [Types::PipelineDeclaration]
     #
+    # @!attribute [rw] tags
+    #   The tags for the pipeline.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreatePipelineInput AWS API Documentation
     #
     class CreatePipelineInput < Struct.new(
-      :pipeline)
+      :pipeline,
+      :tags)
       include Aws::Structure
     end
 
-    # Represents the output of a CreatePipeline action.
+    # Represents the output of a `CreatePipeline` action.
     #
     # @!attribute [rw] pipeline
     #   Represents the structure of actions and stages to be performed in
     #   the pipeline.
     #   @return [Types::PipelineDeclaration]
     #
+    # @!attribute [rw] tags
+    #   Specifies the tags applied to the pipeline.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreatePipelineOutput AWS API Documentation
     #
     class CreatePipelineOutput < Struct.new(
-      :pipeline)
+      :pipeline,
+      :tags)
       include Aws::Structure
     end
 
@@ -1019,8 +1327,8 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a DeleteCustomActionType operation. The custom
-    # action will be marked as deleted.
+    # Represents the input of a `DeleteCustomActionType` operation. The
+    # custom action will be marked as deleted.
     #
     # @note When making an API call, you may pass DeleteCustomActionTypeInput
     #   data as a hash:
@@ -1054,7 +1362,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a DeletePipeline action.
+    # Represents the input of a `DeletePipeline` action.
     #
     # @note When making an API call, you may pass DeletePipelineInput
     #   data as a hash:
@@ -1118,7 +1426,7 @@ module Aws::CodePipeline
     #
     class DeregisterWebhookWithThirdPartyOutput < Aws::EmptyStructure; end
 
-    # Represents the input of a DisableStageTransition action.
+    # Represents the input of a `DisableStageTransition` action.
     #
     # @note When making an API call, you may pass DisableStageTransitionInput
     #   data as a hash:
@@ -1141,14 +1449,14 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] transition_type
-    #   Specifies whether artifacts will be prevented from transitioning
-    #   into the stage and being processed by the actions in that stage
+    #   Specifies whether artifacts are prevented from transitioning into
+    #   the stage and being processed by the actions in that stage
     #   (inbound), or prevented from transitioning from the stage after they
     #   have been processed by the actions in that stage (outbound).
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   The reason given to the user why a stage is disabled, such as
+    #   The reason given to the user that a stage is disabled, such as
     #   waiting for manual approval or manual tests. This message is
     #   displayed in the pipeline console UI.
     #   @return [String]
@@ -1163,7 +1471,23 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of an EnableStageTransition action.
+    # The pipeline execution is already in a `Stopping` state. If you
+    # already chose to stop and wait, you cannot make that request again.
+    # You can choose to stop and abandon now, but be aware that this option
+    # can lead to failed tasks or out of sequence tasks. If you already
+    # chose to stop and abandon, you cannot make that request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DuplicatedStopRequestException AWS API Documentation
+    #
+    class DuplicatedStopRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Represents the input of an `EnableStageTransition` action.
     #
     # @note When making an API call, you may pass EnableStageTransitionInput
     #   data as a hash:
@@ -1186,10 +1510,10 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] transition_type
-    #   Specifies whether artifacts will be allowed to enter the stage and
-    #   be processed by the actions in that stage (inbound) or whether
-    #   already-processed artifacts will be allowed to transition to the
-    #   next stage (outbound).
+    #   Specifies whether artifacts are allowed to enter the stage and be
+    #   processed by the actions in that stage (inbound) or whether already
+    #   processed artifacts are allowed to transition to the next stage
+    #   (outbound).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/EnableStageTransitionInput AWS API Documentation
@@ -1213,8 +1537,14 @@ module Aws::CodePipeline
     #       }
     #
     # @!attribute [rw] id
-    #   The ID used to identify the key. For an AWS KMS key, this is the key
-    #   ID or key ARN.
+    #   The ID used to identify the key. For an AWS KMS key, you can use the
+    #   key ID, the key ARN, or the alias ARN.
+    #
+    #   <note markdown="1"> Aliases are recognized only in the account that created the customer
+    #   master key (CMK). For cross-account actions, you can only use the
+    #   key ID or key ARN to identify the key.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1234,7 +1564,7 @@ module Aws::CodePipeline
     # Represents information about an error in AWS CodePipeline.
     #
     # @!attribute [rw] code
-    #   The system ID or error number code of the error.
+    #   The system ID or number code of the error.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -1272,7 +1602,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] percent_complete
     #   The percentage of work completed on the action, represented on a
-    #   scale of zero to one hundred percent.
+    #   scale of 0 to 100 percent.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ExecutionDetails AWS API Documentation
@@ -1281,6 +1611,28 @@ module Aws::CodePipeline
       :summary,
       :external_execution_id,
       :percent_complete)
+      include Aws::Structure
+    end
+
+    # The interaction or event that started a pipeline execution.
+    #
+    # @!attribute [rw] trigger_type
+    #   The type of change-detection method, command, or user interaction
+    #   that started a pipeline execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_detail
+    #   Detail related to the event that started a pipeline execution, such
+    #   as the webhook ARN of the webhook that triggered the pipeline
+    #   execution or the user ARN for a user-initiated
+    #   `start-pipeline-execution` CLI command.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ExecutionTrigger AWS API Documentation
+    #
+    class ExecutionTrigger < Struct.new(
+      :trigger_type,
+      :trigger_detail)
       include Aws::Structure
     end
 
@@ -1316,7 +1668,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a GetJobDetails action.
+    # Represents the input of a `GetJobDetails` action.
     #
     # @note When making an API call, you may pass GetJobDetailsInput
     #   data as a hash:
@@ -1336,13 +1688,13 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a GetJobDetails action.
+    # Represents the output of a `GetJobDetails` action.
     #
     # @!attribute [rw] job_details
     #   The details of the job.
     #
     #   <note markdown="1"> If AWSSessionCredentials is used, a long-running job can call
-    #   GetJobDetails again to obtain new credentials.
+    #   `GetJobDetails` again to obtain new credentials.
     #
     #    </note>
     #   @return [Types::JobDetails]
@@ -1354,7 +1706,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a GetPipelineExecution action.
+    # Represents the input of a `GetPipelineExecution` action.
     #
     # @note When making an API call, you may pass GetPipelineExecutionInput
     #   data as a hash:
@@ -1382,7 +1734,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a GetPipelineExecution action.
+    # Represents the output of a `GetPipelineExecution` action.
     #
     # @!attribute [rw] pipeline_execution
     #   Represents information about the execution of a pipeline.
@@ -1395,7 +1747,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a GetPipeline action.
+    # Represents the input of a `GetPipeline` action.
     #
     # @note When making an API call, you may pass GetPipelineInput
     #   data as a hash:
@@ -1407,13 +1759,12 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] name
     #   The name of the pipeline for which you want to get information.
-    #   Pipeline names must be unique under an Amazon Web Services (AWS)
-    #   user account.
+    #   Pipeline names must be unique under an AWS user account.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   The version number of the pipeline. If you do not specify a version,
-    #   defaults to the most current version.
+    #   defaults to the current version.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineInput AWS API Documentation
@@ -1424,7 +1775,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a GetPipeline action.
+    # Represents the output of a `GetPipeline` action.
     #
     # @!attribute [rw] pipeline
     #   Represents the structure of actions and stages to be performed in
@@ -1433,7 +1784,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] metadata
     #   Represents the pipeline metadata information returned as part of the
-    #   output of a GetPipeline action.
+    #   output of a `GetPipeline` action.
     #   @return [Types::PipelineMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineOutput AWS API Documentation
@@ -1444,7 +1795,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a GetPipelineState action.
+    # Represents the input of a `GetPipelineState` action.
     #
     # @note When making an API call, you may pass GetPipelineStateInput
     #   data as a hash:
@@ -1464,7 +1815,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a GetPipelineState action.
+    # Represents the output of a `GetPipelineState` action.
     #
     # @!attribute [rw] pipeline_name
     #   The name of the pipeline for which you want to get the state.
@@ -1473,7 +1824,7 @@ module Aws::CodePipeline
     # @!attribute [rw] pipeline_version
     #   The version number of the pipeline.
     #
-    #   <note markdown="1"> A newly-created pipeline is always assigned a version number of `1`.
+    #   <note markdown="1"> A newly created pipeline is always assigned a version number of `1`.
     #
     #    </note>
     #   @return [Integer]
@@ -1504,7 +1855,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a GetThirdPartyJobDetails action.
+    # Represents the input of a `GetThirdPartyJobDetails` action.
     #
     # @note When making an API call, you may pass GetThirdPartyJobDetailsInput
     #   data as a hash:
@@ -1532,7 +1883,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a GetThirdPartyJobDetails action.
+    # Represents the output of a `GetThirdPartyJobDetails` action.
     #
     # @!attribute [rw] job_details
     #   The details of the job, including any protected values defined for
@@ -1557,7 +1908,7 @@ module Aws::CodePipeline
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the artifact to be worked on, for example, "My App".
+    #   The name of the artifact to be worked on (for example, "My App").
     #
     #   The input artifact of an action must exactly match the output
     #   artifact declared in a preceding action, but the input artifact does
@@ -1574,6 +1925,103 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The action declaration was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidActionDeclarationException AWS API Documentation
+    #
+    class InvalidActionDeclarationException < Aws::EmptyStructure; end
+
+    # The approval request already received a response or has expired.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidApprovalTokenException AWS API Documentation
+    #
+    class InvalidApprovalTokenException < Aws::EmptyStructure; end
+
+    # The specified resource ARN is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidArnException AWS API Documentation
+    #
+    class InvalidArnException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Reserved for future use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidBlockerDeclarationException AWS API Documentation
+    #
+    class InvalidBlockerDeclarationException < Aws::EmptyStructure; end
+
+    # The client token was specified in an invalid format
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidClientTokenException AWS API Documentation
+    #
+    class InvalidClientTokenException < Aws::EmptyStructure; end
+
+    # The job was specified in an invalid format or cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidJobException AWS API Documentation
+    #
+    class InvalidJobException < Aws::EmptyStructure; end
+
+    # The job state was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidJobStateException AWS API Documentation
+    #
+    class InvalidJobStateException < Aws::EmptyStructure; end
+
+    # The next token was specified in an invalid format. Make sure that the
+    # next token you provide is the token returned by a previous call.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Aws::EmptyStructure; end
+
+    # The nonce was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidNonceException AWS API Documentation
+    #
+    class InvalidNonceException < Aws::EmptyStructure; end
+
+    # The stage declaration was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidStageDeclarationException AWS API Documentation
+    #
+    class InvalidStageDeclarationException < Aws::EmptyStructure; end
+
+    # The structure was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidStructureException AWS API Documentation
+    #
+    class InvalidStructureException < Aws::EmptyStructure; end
+
+    # The specified resource tags are invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidTagsException AWS API Documentation
+    #
+    class InvalidTagsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified authentication type is in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidWebhookAuthenticationParametersException AWS API Documentation
+    #
+    class InvalidWebhookAuthenticationParametersException < Aws::EmptyStructure; end
+
+    # The specified event filter rule is in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidWebhookFilterPatternException AWS API Documentation
+    #
+    class InvalidWebhookFilterPatternException < Aws::EmptyStructure; end
+
     # Represents information about a job.
     #
     # @!attribute [rw] id
@@ -1581,7 +2029,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] data
-    #   Additional data about a job.
+    #   Other data about a job.
     #   @return [Types::JobData]
     #
     # @!attribute [rw] nonce
@@ -1604,8 +2052,8 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents additional information about a job required for a job
-    # worker to complete the job.
+    # Represents other information about a job required for a job worker to
+    # complete the job.
     #
     # @!attribute [rw] action_type_id
     #   Represents information about an action type.
@@ -1617,6 +2065,10 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] pipeline_context
     #   Represents information about a pipeline to a job worker.
+    #
+    #   <note markdown="1"> Includes `pipelineArn` and `pipelineExecutionId` for custom jobs.
+    #
+    #    </note>
     #   @return [Types::PipelineContext]
     #
     # @!attribute [rw] input_artifacts
@@ -1631,13 +2083,13 @@ module Aws::CodePipeline
     #   Represents an AWS session credentials object. These credentials are
     #   temporary credentials that are issued by AWS Secure Token Service
     #   (STS). They can be used to access input and output artifacts in the
-    #   Amazon S3 bucket used to store artifact for the pipeline in AWS
+    #   S3 bucket used to store artifacts for the pipeline in AWS
     #   CodePipeline.
     #   @return [Types::AWSSessionCredentials]
     #
     # @!attribute [rw] continuation_token
     #   A system-generated token, such as a AWS CodeDeploy deployment ID,
-    #   that a job requires in order to continue the job asynchronously.
+    #   required by a job to continue the job asynchronously.
     #   @return [String]
     #
     # @!attribute [rw] encryption_key
@@ -1666,8 +2118,8 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] data
-    #   Represents additional information about a job required for a job
-    #   worker to complete the job.
+    #   Represents other information about a job required for a job worker
+    #   to complete the job.
     #   @return [Types::JobData]
     #
     # @!attribute [rw] account_id
@@ -1683,7 +2135,89 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a ListActionTypes action.
+    # The job was specified in an invalid format or cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/JobNotFoundException AWS API Documentation
+    #
+    class JobNotFoundException < Aws::EmptyStructure; end
+
+    # The number of pipelines associated with the AWS account has exceeded
+    # the limit allowed for the account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass ListActionExecutionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         pipeline_name: "PipelineName", # required
+    #         filter: {
+    #           pipeline_execution_id: "PipelineExecutionId",
+    #         },
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] pipeline_name
+    #   The name of the pipeline for which you want to list action execution
+    #   history.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Input information used to filter action execution history.
+    #   @return [Types::ActionExecutionFilter]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value. Action execution history is retained for up to 12
+    #   months, based on action execution start times. Default value is 100.
+    #
+    #   <note markdown="1"> Detailed execution history is available for executions run on or
+    #   after February 21, 2019.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that was returned from the previous `ListActionExecutions`
+    #   call, which can be used to return the next set of action executions
+    #   in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionExecutionsInput AWS API Documentation
+    #
+    class ListActionExecutionsInput < Struct.new(
+      :pipeline_name,
+      :filter,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_execution_details
+    #   The details for a list of recent executions, such as action
+    #   execution ID.
+    #   @return [Array<Types::ActionExecutionDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   If the amount of returned information is significantly large, an
+    #   identifier is also returned and can be used in a subsequent
+    #   `ListActionExecutions` call to return the next set of action
+    #   executions in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionExecutionsOutput AWS API Documentation
+    #
+    class ListActionExecutionsOutput < Struct.new(
+      :action_execution_details,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Represents the input of a `ListActionTypes` action.
     #
     # @note When making an API call, you may pass ListActionTypesInput
     #   data as a hash:
@@ -1712,7 +2246,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a ListActionTypes action.
+    # Represents the output of a `ListActionTypes` action.
     #
     # @!attribute [rw] action_types
     #   Provides details of the action types.
@@ -1720,7 +2254,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] next_token
     #   If the amount of returned information is significantly large, an
-    #   identifier is also returned which can be used in a subsequent list
+    #   identifier is also returned. It can be used in a subsequent list
     #   action types call to return the next set of action types in the
     #   list.
     #   @return [String]
@@ -1733,7 +2267,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a ListPipelineExecutions action.
+    # Represents the input of a `ListPipelineExecutions` action.
     #
     # @note When making an API call, you may pass ListPipelineExecutionsInput
     #   data as a hash:
@@ -1752,15 +2286,15 @@ module Aws::CodePipeline
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. To
     #   retrieve the remaining results, make another call with the returned
-    #   nextToken value. The available pipeline execution history is limited
-    #   to the most recent 12 months, based on pipeline execution start
-    #   times. Default value is 100.
+    #   nextToken value. Pipeline history is limited to the most recent 12
+    #   months, based on pipeline execution start times. Default value is
+    #   100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token that was returned from the previous ListPipelineExecutions
-    #   call, which can be used to return the next set of pipeline
-    #   executions in the list.
+    #   The token that was returned from the previous
+    #   `ListPipelineExecutions` call, which can be used to return the next
+    #   set of pipeline executions in the list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutionsInput AWS API Documentation
@@ -1772,15 +2306,15 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a ListPipelineExecutions action.
+    # Represents the output of a `ListPipelineExecutions` action.
     #
     # @!attribute [rw] pipeline_execution_summaries
     #   A list of executions in the history of a pipeline.
     #   @return [Array<Types::PipelineExecutionSummary>]
     #
     # @!attribute [rw] next_token
-    #   A token that can be used in the next ListPipelineExecutions call. To
-    #   view all items in the list, continue to call this operation with
+    #   A token that can be used in the next `ListPipelineExecutions` call.
+    #   To view all items in the list, continue to call this operation with
     #   each subsequent token until no more nextToken values are returned.
     #   @return [String]
     #
@@ -1792,7 +2326,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a ListPipelines action.
+    # Represents the input of a `ListPipelines` action.
     #
     # @note When making an API call, you may pass ListPipelinesInput
     #   data as a hash:
@@ -1803,7 +2337,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] next_token
     #   An identifier that was returned from the previous list pipelines
-    #   call, which can be used to return the next set of pipelines in the
+    #   call. It can be used to return the next set of pipelines in the
     #   list.
     #   @return [String]
     #
@@ -1814,7 +2348,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a ListPipelines action.
+    # Represents the output of a `ListPipelines` action.
     #
     # @!attribute [rw] pipelines
     #   The list of pipelines.
@@ -1822,7 +2356,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] next_token
     #   If the amount of returned information is significantly large, an
-    #   identifier is also returned which can be used in a subsequent list
+    #   identifier is also returned. It can be used in a subsequent list
     #   pipelines call to return the next set of pipelines in the list.
     #   @return [String]
     #
@@ -1830,6 +2364,58 @@ module Aws::CodePipeline
     #
     class ListPipelinesOutput < Struct.new(
       :pipelines,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to get tags for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token that was returned from the previous API call, which would
+    #   be used to return the next page of the list. The ListTagsforResource
+    #   call lists all available tags in one call and does not use
+    #   pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] next_token
+    #   If the amount of returned information is significantly large, an
+    #   identifier is also returned and can be used in a subsequent API call
+    #   to return the next page of the list. The ListTagsforResource call
+    #   lists all available tags in one call and does not use pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags,
       :next_token)
       include Aws::Structure
     end
@@ -1846,8 +2432,8 @@ module Aws::CodePipeline
     #   A unique URL generated by CodePipeline. When a POST request is made
     #   to this URL, the defined pipeline is started as long as the body of
     #   the post request satisfies the defined authentication and filtering
-    #   conditions. Deleting and re-creating a webhook will make the old URL
-    #   invalid and generate a new URL.
+    #   conditions. Deleting and re-creating a webhook makes the old URL
+    #   invalid and generates a new one.
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -1867,6 +2453,10 @@ module Aws::CodePipeline
     #   The Amazon Resource Name (ARN) of the webhook.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Specifies the tags applied to the webhook.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListWebhookItem AWS API Documentation
     #
     class ListWebhookItem < Struct.new(
@@ -1875,7 +2465,8 @@ module Aws::CodePipeline
       :error_message,
       :error_code,
       :last_triggered,
-      :arn)
+      :arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -1925,6 +2516,13 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The stage has failed in a later run of the pipeline and the
+    # pipelineExecutionId associated with the request is out of date.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/NotLatestPipelineExecutionException AWS API Documentation
+    #
+    class NotLatestPipelineExecutionException < Aws::EmptyStructure; end
+
     # Represents information about the output of an action.
     #
     # @note When making an API call, you may pass OutputArtifact
@@ -1954,7 +2552,25 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # Exceeded the total size limit for all variables in the pipeline.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/OutputVariablesSizeExceededException AWS API Documentation
+    #
+    class OutputVariablesSizeExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents information about a pipeline to a job worker.
+    #
+    # <note markdown="1"> PipelineContext contains `pipelineArn` and `pipelineExecutionId` for
+    # custom action jobs. The `pipelineArn` and `pipelineExecutionId` fields
+    # are not populated for ThirdParty action jobs.
+    #
+    #  </note>
     #
     # @!attribute [rw] pipeline_name
     #   The name of the pipeline. This is a user-specified value. Pipeline
@@ -1967,16 +2583,25 @@ module Aws::CodePipeline
     #   @return [Types::StageContext]
     #
     # @!attribute [rw] action
-    #   The context of an action to a job worker within the stage of a
-    #   pipeline.
+    #   The context of an action to a job worker in the stage of a pipeline.
     #   @return [Types::ActionContext]
+    #
+    # @!attribute [rw] pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_execution_id
+    #   The execution ID of the pipeline.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineContext AWS API Documentation
     #
     class PipelineContext < Struct.new(
       :pipeline_name,
       :stage,
-      :action)
+      :action,
+      :pipeline_arn,
+      :pipeline_execution_id)
       include Aws::Structure
     end
 
@@ -2041,6 +2666,7 @@ module Aws::CodePipeline
     #                 ],
     #                 role_arn: "RoleArn",
     #                 region: "AWSRegionName",
+    #                 namespace: "ActionNamespace",
     #               },
     #             ],
     #           },
@@ -2054,23 +2680,31 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) for AWS CodePipeline to use to either
-    #   perform actions with no actionRoleArn, or to use to assume roles for
-    #   actions with an actionRoleArn.
+    #   perform actions with no `actionRoleArn`, or to use to assume roles
+    #   for actions with an `actionRoleArn`.
     #   @return [String]
     #
     # @!attribute [rw] artifact_store
-    #   Represents information about the Amazon S3 bucket where artifacts
-    #   are stored for the pipeline.
+    #   Represents information about the S3 bucket where artifacts are
+    #   stored for the pipeline.
+    #
+    #   <note markdown="1"> You must include either `artifactStore` or `artifactStores` in your
+    #   pipeline, but you cannot use both. If you create a cross-region
+    #   action in your pipeline, you must use `artifactStores`.
+    #
+    #    </note>
     #   @return [Types::ArtifactStore]
     #
     # @!attribute [rw] artifact_stores
-    #   A mapping of artifactStore objects and their corresponding regions.
-    #   There must be an artifact store for the pipeline region and for each
-    #   cross-region action within the pipeline. You can only use either
-    #   artifactStore or artifactStores, not both.
+    #   A mapping of `artifactStore` objects and their corresponding AWS
+    #   Regions. There must be an artifact store for the pipeline Region and
+    #   for each cross-region action in the pipeline.
     #
-    #   If you create a cross-region action in your pipeline, you must use
-    #   artifactStores.
+    #   <note markdown="1"> You must include either `artifactStore` or `artifactStores` in your
+    #   pipeline, but you cannot use both. If you create a cross-region
+    #   action in your pipeline, you must use `artifactStores`.
+    #
+    #    </note>
     #   @return [Hash<String,Types::ArtifactStore>]
     #
     # @!attribute [rw] stages
@@ -2079,8 +2713,8 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] version
     #   The version number of the pipeline. A new pipeline always has a
-    #   version number of 1. This number is automatically incremented when a
-    #   pipeline is updated.
+    #   version number of 1. This number is incremented when a pipeline is
+    #   updated.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineDeclaration AWS API Documentation
@@ -2098,11 +2732,12 @@ module Aws::CodePipeline
     # Represents information about an execution of a pipeline.
     #
     # @!attribute [rw] pipeline_name
-    #   The name of the pipeline that was executed.
+    #   The name of the pipeline with the specified pipeline execution.
     #   @return [String]
     #
     # @!attribute [rw] pipeline_version
-    #   The version number of the pipeline that was executed.
+    #   The version number of the pipeline with the specified pipeline
+    #   execution.
     #   @return [Integer]
     #
     # @!attribute [rw] pipeline_execution_id
@@ -2114,17 +2749,32 @@ module Aws::CodePipeline
     #
     #   * InProgress: The pipeline execution is currently running.
     #
+    #   * Stopped: The pipeline execution was manually stopped. For more
+    #     information, see [Stopped Executions][1].
+    #
+    #   * Stopping: The pipeline execution received a request to be manually
+    #     stopped. Depending on the selected stop mode, the execution is
+    #     either completing or abandoning in-progress actions. For more
+    #     information, see [Stopped Executions][1].
+    #
     #   * Succeeded: The pipeline execution was completed successfully.
     #
     #   * Superseded: While this pipeline execution was waiting for the next
     #     stage to be completed, a newer pipeline execution advanced and
-    #     continued through the pipeline instead.
+    #     continued through the pipeline instead. For more information, see
+    #     [Superseded Executions][2].
     #
     #   * Failed: The pipeline execution was not completed successfully.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped
+    #   [2]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded
     #   @return [String]
     #
     # @!attribute [rw] artifact_revisions
-    #   A list of ArtifactRevision objects included in a pipeline execution.
+    #   A list of `ArtifactRevision` objects included in a pipeline
+    #   execution.
     #   @return [Array<Types::ArtifactRevision>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecution AWS API Documentation
@@ -2135,6 +2785,26 @@ module Aws::CodePipeline
       :pipeline_execution_id,
       :status,
       :artifact_revisions)
+      include Aws::Structure
+    end
+
+    # The pipeline execution was specified in an invalid format or cannot be
+    # found, or an execution ID does not belong to the specified pipeline.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionNotFoundException AWS API Documentation
+    #
+    class PipelineExecutionNotFoundException < Aws::EmptyStructure; end
+
+    # Unable to stop the pipeline execution. The execution might already be
+    # in a `Stopped` state, or it might no longer be in progress.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionNotStoppableException AWS API Documentation
+    #
+    class PipelineExecutionNotStoppableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2149,13 +2819,27 @@ module Aws::CodePipeline
     #
     #   * InProgress: The pipeline execution is currently running.
     #
+    #   * Stopped: The pipeline execution was manually stopped. For more
+    #     information, see [Stopped Executions][1].
+    #
+    #   * Stopping: The pipeline execution received a request to be manually
+    #     stopped. Depending on the selected stop mode, the execution is
+    #     either completing or abandoning in-progress actions. For more
+    #     information, see [Stopped Executions][1].
+    #
     #   * Succeeded: The pipeline execution was completed successfully.
     #
     #   * Superseded: While this pipeline execution was waiting for the next
     #     stage to be completed, a newer pipeline execution advanced and
-    #     continued through the pipeline instead.
+    #     continued through the pipeline instead. For more information, see
+    #     [Superseded Executions][2].
     #
     #   * Failed: The pipeline execution was not completed successfully.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped
+    #   [2]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -2173,6 +2857,15 @@ module Aws::CodePipeline
     #   execution.
     #   @return [Array<Types::SourceRevision>]
     #
+    # @!attribute [rw] trigger
+    #   The interaction or event that started a pipeline execution, such as
+    #   automated change detection or a `StartPipelineExecution` API call.
+    #   @return [Types::ExecutionTrigger]
+    #
+    # @!attribute [rw] stop_trigger
+    #   The interaction that stopped a pipeline execution.
+    #   @return [Types::StopExecutionTrigger]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionSummary AWS API Documentation
     #
     class PipelineExecutionSummary < Struct.new(
@@ -2180,7 +2873,9 @@ module Aws::CodePipeline
       :status,
       :start_time,
       :last_update_time,
-      :source_revisions)
+      :source_revisions,
+      :trigger,
+      :stop_trigger)
       include Aws::Structure
     end
 
@@ -2207,6 +2902,18 @@ module Aws::CodePipeline
       :updated)
       include Aws::Structure
     end
+
+    # The specified pipeline name is already in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineNameInUseException AWS API Documentation
+    #
+    class PipelineNameInUseException < Aws::EmptyStructure; end
+
+    # The pipeline was specified in an invalid format or cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineNotFoundException AWS API Documentation
+    #
+    class PipelineNotFoundException < Aws::EmptyStructure; end
 
     # Returns a summary of a pipeline.
     #
@@ -2237,7 +2944,14 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a PollForJobs action.
+    # The pipeline version was specified in an invalid format or cannot be
+    # found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineVersionNotFoundException AWS API Documentation
+    #
+    class PipelineVersionNotFoundException < Aws::EmptyStructure; end
+
+    # Represents the input of a `PollForJobs` action.
     #
     # @note When making an API call, you may pass PollForJobsInput
     #   data as a hash:
@@ -2268,7 +2982,7 @@ module Aws::CodePipeline
     #   queryable properties, this value must be null or an empty map. For
     #   an action type with a queryable property, you must supply that
     #   property as a key in the map. Only jobs whose action configuration
-    #   matches the mapped value will be returned.
+    #   matches the mapped value are returned.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForJobsInput AWS API Documentation
@@ -2280,7 +2994,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a PollForJobs action.
+    # Represents the output of a `PollForJobs` action.
     #
     # @!attribute [rw] jobs
     #   Information about the jobs to take action on.
@@ -2293,7 +3007,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a PollForThirdPartyJobs action.
+    # Represents the input of a `PollForThirdPartyJobs` action.
     #
     # @note When making an API call, you may pass PollForThirdPartyJobsInput
     #   data as a hash:
@@ -2324,7 +3038,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a PollForThirdPartyJobs action.
+    # Represents the output of a `PollForThirdPartyJobs` action.
     #
     # @!attribute [rw] jobs
     #   Information about the jobs to take action on.
@@ -2337,7 +3051,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a PutActionRevision action.
+    # Represents the input of a `PutActionRevision` action.
     #
     # @note When making an API call, you may pass PutActionRevisionInput
     #   data as a hash:
@@ -2354,17 +3068,17 @@ module Aws::CodePipeline
     #       }
     #
     # @!attribute [rw] pipeline_name
-    #   The name of the pipeline that will start processing the revision to
-    #   the source.
+    #   The name of the pipeline that starts processing the revision to the
+    #   source.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   The name of the stage that contains the action that will act upon
-    #   the revision.
+    #   The name of the stage that contains the action that acts on the
+    #   revision.
     #   @return [String]
     #
     # @!attribute [rw] action_name
-    #   The name of the action that will process the revision.
+    #   The name of the action that processes the revision.
     #   @return [String]
     #
     # @!attribute [rw] action_revision
@@ -2381,7 +3095,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a PutActionRevision action.
+    # Represents the output of a `PutActionRevision` action.
     #
     # @!attribute [rw] new_revision
     #   Indicates whether the artifact revision was previously used in an
@@ -2400,7 +3114,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a PutApprovalResult action.
+    # Represents the input of a `PutApprovalResult` action.
     #
     # @note When making an API call, you may pass PutApprovalResultInput
     #   data as a hash:
@@ -2435,7 +3149,7 @@ module Aws::CodePipeline
     # @!attribute [rw] token
     #   The system-generated token used to identify a unique approval
     #   request. The token for each open approval request can be obtained
-    #   using the GetPipelineState action and is used to validate that the
+    #   using the GetPipelineState action. It is used to validate that the
     #   approval request corresponding to this token is still valid.
     #   @return [String]
     #
@@ -2450,7 +3164,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a PutApprovalResult action.
+    # Represents the output of a `PutApprovalResult` action.
     #
     # @!attribute [rw] approved_at
     #   The timestamp showing when the approval or rejection was submitted.
@@ -2463,7 +3177,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a PutJobFailureResult action.
+    # Represents the input of a `PutJobFailureResult` action.
     #
     # @note When making an API call, you may pass PutJobFailureResultInput
     #   data as a hash:
@@ -2479,7 +3193,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] job_id
     #   The unique system-generated ID of the job that failed. This is the
-    #   same ID returned from PollForJobs.
+    #   same ID returned from `PollForJobs`.
     #   @return [String]
     #
     # @!attribute [rw] failure_details
@@ -2494,7 +3208,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a PutJobSuccessResult action.
+    # Represents the input of a `PutJobSuccessResult` action.
     #
     # @note When making an API call, you may pass PutJobSuccessResultInput
     #   data as a hash:
@@ -2513,26 +3227,28 @@ module Aws::CodePipeline
     #           external_execution_id: "ExecutionId",
     #           percent_complete: 1,
     #         },
+    #         output_variables: {
+    #           "OutputVariablesKey" => "OutputVariablesValue",
+    #         },
     #       }
     #
     # @!attribute [rw] job_id
     #   The unique system-generated ID of the job that succeeded. This is
-    #   the same ID returned from PollForJobs.
+    #   the same ID returned from `PollForJobs`.
     #   @return [String]
     #
     # @!attribute [rw] current_revision
     #   The ID of the current revision of the artifact successfully worked
-    #   upon by the job.
+    #   on by the job.
     #   @return [Types::CurrentRevision]
     #
     # @!attribute [rw] continuation_token
     #   A token generated by a job worker, such as an AWS CodeDeploy
     #   deployment ID, that a successful job provides to identify a custom
-    #   action in progress. Future jobs will use this token in order to
-    #   identify the running instance of the action. It can be reused to
-    #   return additional information about the progress of the custom
-    #   action. When the action is complete, no continuation token should be
-    #   supplied.
+    #   action in progress. Future jobs use this token to identify the
+    #   running instance of the action. It can be reused to return more
+    #   information about the progress of the custom action. When the action
+    #   is complete, no continuation token should be supplied.
     #   @return [String]
     #
     # @!attribute [rw] execution_details
@@ -2540,17 +3256,25 @@ module Aws::CodePipeline
     #   taken by the job worker.
     #   @return [Types::ExecutionDetails]
     #
+    # @!attribute [rw] output_variables
+    #   Key-value pairs produced as output by a job worker that can be made
+    #   available to a downstream action configuration. `outputVariables`
+    #   can be included only when there is no continuation token on the
+    #   request.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobSuccessResultInput AWS API Documentation
     #
     class PutJobSuccessResultInput < Struct.new(
       :job_id,
       :current_revision,
       :continuation_token,
-      :execution_details)
+      :execution_details,
+      :output_variables)
       include Aws::Structure
     end
 
-    # Represents the input of a PutThirdPartyJobFailureResult action.
+    # Represents the input of a `PutThirdPartyJobFailureResult` action.
     #
     # @note When making an API call, you may pass PutThirdPartyJobFailureResultInput
     #   data as a hash:
@@ -2567,7 +3291,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] job_id
     #   The ID of the job that failed. This is the same ID returned from
-    #   PollForThirdPartyJobs.
+    #   `PollForThirdPartyJobs`.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -2589,7 +3313,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a PutThirdPartyJobSuccessResult action.
+    # Represents the input of a `PutThirdPartyJobSuccessResult` action.
     #
     # @note When making an API call, you may pass PutThirdPartyJobSuccessResultInput
     #   data as a hash:
@@ -2613,7 +3337,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] job_id
     #   The ID of the job that successfully completed. This is the same ID
-    #   returned from PollForThirdPartyJobs.
+    #   returned from `PollForThirdPartyJobs`.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -2629,11 +3353,10 @@ module Aws::CodePipeline
     # @!attribute [rw] continuation_token
     #   A token generated by a job worker, such as an AWS CodeDeploy
     #   deployment ID, that a successful job provides to identify a partner
-    #   action in progress. Future jobs will use this token in order to
-    #   identify the running instance of the action. It can be reused to
-    #   return additional information about the progress of the partner
-    #   action. When the action is complete, no continuation token should be
-    #   supplied.
+    #   action in progress. Future jobs use this token to identify the
+    #   running instance of the action. It can be reused to return more
+    #   information about the progress of the partner action. When the
+    #   action is complete, no continuation token should be supplied.
     #   @return [String]
     #
     # @!attribute [rw] execution_details
@@ -2672,20 +3395,31 @@ module Aws::CodePipeline
     #             secret_token: "WebhookAuthConfigurationSecretToken",
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] webhook
     #   The detail provided in an input file to create the webhook, such as
     #   the webhook name, the pipeline name, and the action name. Give the
-    #   webhook a unique name which identifies the webhook being defined.
-    #   You may choose to name the webhook after the pipeline and action it
-    #   targets so that you can easily recognize what it's used for later.
+    #   webhook a unique name that helps you identify it. You might name the
+    #   webhook after the pipeline and action it targets so that you can
+    #   easily recognize what it's used for later.
     #   @return [Types::WebhookDefinition]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the webhook.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutWebhookInput AWS API Documentation
     #
     class PutWebhookInput < Struct.new(
-      :webhook)
+      :webhook,
+      :tags)
       include Aws::Structure
     end
 
@@ -2724,7 +3458,13 @@ module Aws::CodePipeline
     #
     class RegisterWebhookWithThirdPartyOutput < Aws::EmptyStructure; end
 
-    # Represents the input of a RetryStageExecution action.
+    # The resource was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
+    # Represents the input of a `RetryStageExecution` action.
     #
     # @note When making an API call, you may pass RetryStageExecutionInput
     #   data as a hash:
@@ -2765,7 +3505,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a RetryStageExecution action.
+    # Represents the output of a `RetryStageExecution` action.
     #
     # @!attribute [rw] pipeline_execution_id
     #   The ID of the current workflow execution in the failed stage.
@@ -2778,15 +3518,15 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # The location of the Amazon S3 bucket that contains a revision.
+    # The location of the S3 bucket that contains a revision.
     #
     # @!attribute [rw] bucket_name
-    #   The name of the Amazon S3 bucket.
+    #   The name of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] object_key
-    #   The key of the object in the Amazon S3 bucket, which uniquely
-    #   identifies the object in the bucket.
+    #   The key of the object in the S3 bucket, which uniquely identifies
+    #   the object in the bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/S3ArtifactLocation AWS API Documentation
@@ -2794,6 +3534,24 @@ module Aws::CodePipeline
     class S3ArtifactLocation < Struct.new(
       :bucket_name,
       :object_key)
+      include Aws::Structure
+    end
+
+    # The Amazon S3 artifact location for an action's artifacts.
+    #
+    # @!attribute [rw] bucket
+    #   The Amazon S3 artifact bucket for an action's artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The artifact name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/S3Location AWS API Documentation
+    #
+    class S3Location < Struct.new(
+      :bucket,
+      :key)
       include Aws::Structure
     end
 
@@ -2885,6 +3643,7 @@ module Aws::CodePipeline
     #             ],
     #             role_arn: "RoleArn",
     #             region: "AWSRegionName",
+    #             namespace: "ActionNamespace",
     #           },
     #         ],
     #       }
@@ -2929,6 +3688,20 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The stage was specified in an invalid format or cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageNotFoundException AWS API Documentation
+    #
+    class StageNotFoundException < Aws::EmptyStructure; end
+
+    # Unable to retry. The pipeline structure or stage state might have
+    # changed while actions awaited retry, or the stage contains no failed
+    # actions.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageNotRetryableException AWS API Documentation
+    #
+    class StageNotRetryableException < Aws::EmptyStructure; end
+
     # Represents information about the state of the stage.
     #
     # @!attribute [rw] stage_name
@@ -2959,7 +3732,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of a StartPipelineExecution action.
+    # Represents the input of a `StartPipelineExecution` action.
     #
     # @note When making an API call, you may pass StartPipelineExecutionInput
     #   data as a hash:
@@ -2989,7 +3762,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of a StartPipelineExecution action.
+    # Represents the output of a `StartPipelineExecution` action.
     #
     # @!attribute [rw] pipeline_execution_id
     #   The unique system-generated ID of the pipeline execution that was
@@ -3003,14 +3776,142 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # A response to a PollForThirdPartyJobs request returned by AWS
-    # CodePipeline when there is a job to be worked upon by a partner
-    # action.
+    # The interaction that stopped a pipeline execution.
+    #
+    # @!attribute [rw] reason
+    #   The user-specified reason the pipeline was stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StopExecutionTrigger AWS API Documentation
+    #
+    class StopExecutionTrigger < Struct.new(
+      :reason)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopPipelineExecutionInput
+    #   data as a hash:
+    #
+    #       {
+    #         pipeline_name: "PipelineName", # required
+    #         pipeline_execution_id: "PipelineExecutionId", # required
+    #         abandon: false,
+    #         reason: "StopPipelineExecutionReason",
+    #       }
+    #
+    # @!attribute [rw] pipeline_name
+    #   The name of the pipeline to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_execution_id
+    #   The ID of the pipeline execution to be stopped in the current stage.
+    #   Use the `GetPipelineState` action to retrieve the current
+    #   pipelineExecutionId.
+    #   @return [String]
+    #
+    # @!attribute [rw] abandon
+    #   Use this option to stop the pipeline execution by abandoning, rather
+    #   than finishing, in-progress actions.
+    #
+    #   <note markdown="1"> This option can lead to failed or out-of-sequence tasks.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] reason
+    #   Use this option to enter comments, such as the reason the pipeline
+    #   was stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StopPipelineExecutionInput AWS API Documentation
+    #
+    class StopPipelineExecutionInput < Struct.new(
+      :pipeline_name,
+      :pipeline_execution_id,
+      :abandon,
+      :reason)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_execution_id
+    #   The unique system-generated ID of the pipeline execution that was
+    #   stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StopPipelineExecutionOutput AWS API Documentation
+    #
+    class StopPipelineExecutionOutput < Struct.new(
+      :pipeline_execution_id)
+      include Aws::Structure
+    end
+
+    # A tag is a key-value pair that is used to manage the resource.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The tag's key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag's value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource you want to add tags
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags you want to modify or add to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
+    # A response to a `PollForThirdPartyJobs` request returned by AWS
+    # CodePipeline when there is a job to be worked on by a partner action.
     #
     # @!attribute [rw] client_id
-    #   The clientToken portion of the clientId and clientToken pair used to
-    #   verify that the calling entity is allowed access to the job and its
-    #   details.
+    #   The `clientToken` portion of the `clientId` and `clientToken` pair
+    #   used to verify that the calling entity is allowed access to the job
+    #   and its details.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -3037,19 +3938,24 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] pipeline_context
     #   Represents information about a pipeline to a job worker.
+    #
+    #   <note markdown="1"> Does not include `pipelineArn` and `pipelineExecutionId` for
+    #   ThirdParty jobs.
+    #
+    #    </note>
     #   @return [Types::PipelineContext]
     #
     # @!attribute [rw] input_artifacts
-    #   The name of the artifact that will be worked upon by the action, if
-    #   any. This name might be system-generated, such as "MyApp", or
-    #   might be defined by the user when the action is created. The input
+    #   The name of the artifact that is worked on by the action, if any.
+    #   This name might be system-generated, such as "MyApp", or it might
+    #   be defined by the user when the action is created. The input
     #   artifact name must match the name of an output artifact generated by
     #   an action in an earlier action or stage of the pipeline.
     #   @return [Array<Types::Artifact>]
     #
     # @!attribute [rw] output_artifacts
-    #   The name of the artifact that will be the result of the action, if
-    #   any. This name might be system-generated, such as "MyBuiltApp", or
+    #   The name of the artifact that is the result of the action, if any.
+    #   This name might be system-generated, such as "MyBuiltApp", or it
     #   might be defined by the user when the action is created.
     #   @return [Array<Types::Artifact>]
     #
@@ -3057,13 +3963,13 @@ module Aws::CodePipeline
     #   Represents an AWS session credentials object. These credentials are
     #   temporary credentials that are issued by AWS Secure Token Service
     #   (STS). They can be used to access input and output artifacts in the
-    #   Amazon S3 bucket used to store artifact for the pipeline in AWS
+    #   S3 bucket used to store artifact for the pipeline in AWS
     #   CodePipeline.
     #   @return [Types::AWSSessionCredentials]
     #
     # @!attribute [rw] continuation_token
     #   A system-generated token, such as a AWS CodeDeploy deployment ID,
-    #   that a job requires in order to continue the job asynchronously.
+    #   that a job requires to continue the job asynchronously.
     #   @return [String]
     #
     # @!attribute [rw] encryption_key
@@ -3086,7 +3992,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # The details of a job sent in response to a GetThirdPartyJobDetails
+    # The details of a job sent in response to a `GetThirdPartyJobDetails`
     # request.
     #
     # @!attribute [rw] id
@@ -3109,6 +4015,18 @@ module Aws::CodePipeline
       :id,
       :data,
       :nonce)
+      include Aws::Structure
+    end
+
+    # The tags limit for a resource has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3143,7 +4061,35 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the input of an UpdatePipeline action.
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to remove tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of keys for the tags to be removed from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
+
+    # Represents the input of an `UpdatePipeline` action.
     #
     # @note When making an API call, you may pass UpdatePipelineInput
     #   data as a hash:
@@ -3204,6 +4150,7 @@ module Aws::CodePipeline
     #                   ],
     #                   role_arn: "RoleArn",
     #                   region: "AWSRegionName",
+    #                   namespace: "ActionNamespace",
     #                 },
     #               ],
     #             },
@@ -3223,7 +4170,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents the output of an UpdatePipeline action.
+    # Represents the output of an `UpdatePipeline` action.
     #
     # @!attribute [rw] pipeline
     #   The structure of the updated pipeline.
@@ -3236,6 +4183,12 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The validation was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ValidationException AWS API Documentation
+    #
+    class ValidationException < Aws::EmptyStructure; end
+
     # The authentication applied to incoming webhook trigger requests.
     #
     # @note When making an API call, you may pass WebhookAuthConfiguration
@@ -3247,14 +4200,14 @@ module Aws::CodePipeline
     #       }
     #
     # @!attribute [rw] allowed_ip_range
-    #   The property used to configure acceptance of webhooks within a
-    #   specific IP range. For IP, only the AllowedIPRange property must be
-    #   set, and this property must be set to a valid CIDR range.
+    #   The property used to configure acceptance of webhooks in an IP
+    #   address range. For IP, only the `AllowedIPRange` property must be
+    #   set. This property must be set to a valid CIDR range.
     #   @return [String]
     #
     # @!attribute [rw] secret_token
     #   The property used to configure GitHub authentication. For
-    #   GITHUB\_HMAC, only the SecretToken property must be set.
+    #   GITHUB\_HMAC, only the `SecretToken` property must be set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookAuthConfiguration AWS API Documentation
@@ -3308,25 +4261,31 @@ module Aws::CodePipeline
     #   @return [Array<Types::WebhookFilterRule>]
     #
     # @!attribute [rw] authentication
-    #   Supported options are GITHUB\_HMAC, IP and UNAUTHENTICATED.
+    #   Supported options are GITHUB\_HMAC, IP, and UNAUTHENTICATED.
     #
-    #   * GITHUB\_HMAC implements the authentication scheme described here:
-    #     https://developer.github.com/webhooks/securing/
+    #   * For information about the authentication scheme implemented by
+    #     GITHUB\_HMAC, see [Securing your webhooks][1] on the GitHub
+    #     Developer website.
     #
-    #   * IP will reject webhooks trigger requests unless they originate
-    #     from an IP within the IP range whitelisted in the authentication
+    #   * IP rejects webhooks trigger requests unless they originate from an
+    #     IP address in the IP range whitelisted in the authentication
     #     configuration.
     #
-    #   * UNAUTHENTICATED will accept all webhook trigger requests
-    #     regardless of origin.
+    #   * UNAUTHENTICATED accepts all webhook trigger requests regardless of
+    #     origin.
+    #
+    #
+    #
+    #   [1]: https://developer.github.com/webhooks/securing/
     #   @return [String]
     #
     # @!attribute [rw] authentication_configuration
     #   Properties that configure the authentication applied to incoming
     #   webhook trigger requests. The required properties depend on the
-    #   authentication type. For GITHUB\_HMAC, only the SecretToken property
-    #   must be set. For IP, only the AllowedIPRange property must be set to
-    #   a valid CIDR range. For UNAUTHENTICATED, no properties can be set.
+    #   authentication type. For GITHUB\_HMAC, only the `SecretToken
+    #   `property must be set. For IP, only the `AllowedIPRange `property
+    #   must be set to a valid CIDR range. For UNAUTHENTICATED, no
+    #   properties can be set.
     #   @return [Types::WebhookAuthConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookDefinition AWS API Documentation
@@ -3353,29 +4312,33 @@ module Aws::CodePipeline
     #       }
     #
     # @!attribute [rw] json_path
-    #   A JsonPath expression that will be applied to the body/payload of
-    #   the webhook. The value selected by JsonPath expression must match
-    #   the value specified in the matchEquals field, otherwise the request
-    #   will be ignored. More information on JsonPath expressions can be
-    #   found here: https://github.com/json-path/JsonPath.
+    #   A JsonPath expression that is applied to the body/payload of the
+    #   webhook. The value selected by the JsonPath expression must match
+    #   the value specified in the `MatchEquals` field. Otherwise, the
+    #   request is ignored. For more information, see [Java JsonPath
+    #   implementation][1] in GitHub.
+    #
+    #
+    #
+    #   [1]: https://github.com/json-path/JsonPath
     #   @return [String]
     #
     # @!attribute [rw] match_equals
-    #   The value selected by the JsonPath expression must match what is
-    #   supplied in the MatchEquals field, otherwise the request will be
+    #   The value selected by the `JsonPath` expression must match what is
+    #   supplied in the `MatchEquals` field. Otherwise, the request is
     #   ignored. Properties from the target action configuration can be
     #   included as placeholders in this value by surrounding the action
-    #   configuration key with curly braces. For example, if the value
+    #   configuration key with curly brackets. For example, if the value
     #   supplied here is "refs/heads/\\\{Branch\\}" and the target action
     #   has an action configuration property called "Branch" with a value
-    #   of "master", the MatchEquals value will be evaluated as
-    #   "refs/heads/master". A list of action configuration properties for
-    #   built-in action types can be found here: [Pipeline Structure
-    #   Reference Action Requirements][1].
+    #   of "master", the `MatchEquals` value is evaluated as
+    #   "refs/heads/master". For a list of action configuration properties
+    #   for built-in action types, see [Pipeline Structure Reference Action
+    #   Requirements][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookFilterRule AWS API Documentation
@@ -3385,6 +4348,13 @@ module Aws::CodePipeline
       :match_equals)
       include Aws::Structure
     end
+
+    # The specified webhook was entered in an invalid format or cannot be
+    # found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookNotFoundException AWS API Documentation
+    #
+    class WebhookNotFoundException < Aws::EmptyStructure; end
 
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'net/http'
 
 module Seahorse
@@ -10,6 +12,12 @@ module Seahorse
 
         def self.apply!
           return unless RUBY_VERSION < '2.5'
+          if RUBY_VERSION >= '2.3'
+            Net::HTTP::IDEMPOTENT_METHODS_.clear
+            return
+          end
+          # no further patches needed for above versions
+
           if RUBY_VERSION >= '2.0'
             Net::HTTP.send(:include, Ruby_2)
             Net::HTTP::IDEMPOTENT_METHODS_.clear
@@ -30,7 +38,7 @@ module Seahorse
                 begin
                   res = Net::HTTPResponse.read_new(@socket)
                   res.decode_content = req.decode_content
-                end while res.kind_of?(Net::HTTPContinue)
+                end while res.kind_of?(Net::HTTPInformation)
 
                 res.uri = req.uri
 

@@ -1,5 +1,10 @@
 language: ruby
 
+before_install:
+  - gem install bundler -v '< 2'
+
+dist: xenial
+
 rvm:
   - 1.9.3
   - 2.0.0
@@ -8,7 +13,10 @@ rvm:
   - 2.3
   - 2.4
   - 2.5
-  - jruby-9.1.16.0
+  - 2.6
+  - 2.7
+  - jruby-1.7.27
+  - jruby
 
 sudo: false
 
@@ -16,19 +24,30 @@ env:
   - PURE_RUBY=1
   - KITCHEN_SINK=1
 
-script: bundle exec rake test:spec
+script: >
+  (echo "travis_fold:start:sdkbuild") &&
+  (bundle exec rake build) &&
+  (echo "travis_fold:end:sdkbuild") &&
+  (bundle exec rake test:spec)
 
-bundler_args: --without docs release repl
+bundler_args: --without docs repl
 
 matrix:
   exclude:
-    - rvm: jruby-9.1.16.0
+    - rvm: jruby-1.7.27
+      env: KITCHEN_SINK=1
+    - rvm: jruby
       env: KITCHEN_SINK=1
   include:
     - rvm: 2.3
       env: OLD_OJ=1
     - rvm: 2.3
       env: OLD_OX=1
+    - rvm: 2.3
+      env: NO_H2=1
+  allow_failures:
+    - rvm: jruby-1.7.27
+    - rvm: jruby
 
 notifications:
   webhooks:

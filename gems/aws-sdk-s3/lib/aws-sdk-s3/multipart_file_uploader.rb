@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 require 'pathname'
-require 'thread'
 require 'set'
 
 module Aws
@@ -16,14 +17,17 @@ module Aws
       THREAD_COUNT = 10
 
       # @api private
-      CREATE_OPTIONS =
-        Set.new(Client.api.operation(:create_multipart_upload).input.shape.member_names)
+      CREATE_OPTIONS = Set.new(
+        Client.api.operation(:create_multipart_upload).input.shape.member_names
+      )
 
       # @api private
-      UPLOAD_PART_OPTIONS =
-        Set.new(Client.api.operation(:upload_part).input.shape.member_names)
+      UPLOAD_PART_OPTIONS = Set.new(
+        Client.api.operation(:upload_part).input.shape.member_names
+      )
 
       # @option options [Client] :client
+      # @option options [Integer] :thread_count (THREAD_COUNT)
       def initialize(options = {})
         @client = options[:client] || Client.new
         @thread_count = options[:thread_count] || THREAD_COUNT
@@ -32,9 +36,9 @@ module Aws
       # @return [Client]
       attr_reader :client
 
-      # @param [String,Pathname,File,Tempfile] source
-      # @option options [required,String] :bucket
-      # @option options [required,String] :key
+      # @param [String, Pathname, File, Tempfile] source The file to upload.
+      # @option options [required, String] :bucket The bucket to upload to.
+      # @option options [required, String] :key The key for the object.
       # @return [void]
       def upload(source, options = {})
         if File.size(source) < MIN_PART_SIZE
@@ -57,7 +61,8 @@ module Aws
           bucket: options[:bucket],
           key: options[:key],
           upload_id: upload_id,
-          multipart_upload: { parts: parts })
+          multipart_upload: { parts: parts }
+        )
       end
 
       def upload_parts(upload_id, source, options)
@@ -93,7 +98,7 @@ module Aws
         part_number = 1
         parts = []
         while offset < size
-          parts << upload_part_opts(options).merge({
+          parts << upload_part_opts(options).merge(
             upload_id: upload_id,
             part_number: part_number,
             body: FilePart.new(
@@ -101,7 +106,7 @@ module Aws
               offset: offset,
               size: part_size(size, default_part_size, offset)
             )
-          })
+          )
           part_number += 1
           offset += default_part_size
         end

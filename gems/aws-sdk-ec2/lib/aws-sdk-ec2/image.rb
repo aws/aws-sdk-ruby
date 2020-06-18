@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2
+
   class Image
 
     extend Aws::Deprecations
@@ -21,6 +24,7 @@ module Aws::EC2
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -76,10 +80,40 @@ module Aws::EC2
       data[:owner_id]
     end
 
-    # The value is `Windows` for Windows AMIs; otherwise blank.
+    # This value is set to `windows` for Windows AMIs; otherwise, it is
+    # blank.
     # @return [String]
     def platform
       data[:platform]
+    end
+
+    # The platform details associated with the billing code of the AMI. For
+    # more information, see [Obtaining Billing Information][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html
+    # @return [String]
+    def platform_details
+      data[:platform_details]
+    end
+
+    # The operation of the Amazon EC2 instance and the billing code that is
+    # associated with the AMI. `usageOperation` corresponds to the
+    # [lineitem/Operation][1] column on your AWS Cost and Usage Report and
+    # in the [AWS Price List API][2]. For the list of `UsageOperation`
+    # codes, see [Platform Details and Usage Operation Billing Codes][3] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html#Lineitem-details-O-Operation
+    # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/price-changes.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html#billing-info
+    # @return [String]
+    def usage_operation
+      data[:usage_operation]
     end
 
     # Any product codes associated with the AMI.
@@ -232,10 +266,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Image]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::ImageExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       resp = waiter.wait(params.merge(image_ids: [@id]))
       Image.new({
         id: @id,
@@ -249,7 +283,8 @@ module Aws::EC2
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -262,13 +297,15 @@ module Aws::EC2
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -299,17 +336,16 @@ module Aws::EC2
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -359,14 +395,57 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
       resp = @client.create_tags(options)
+      options[:tags].each do |t|
+        batch << Tag.new(
+          resource_id: @id,
+          key: t[:key],
+          value: t[:value],
+          client: @client
+        )
+      end
+      Tag::Collection.new([batch], size: batch.size)
+    end
+
+    # @example Request syntax with placeholder values
+    #
+    #   tag = image.delete_tags({
+    #     dry_run: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<Types::Tag>] :tags
+    #   The tags to delete. Specify a tag key and an optional tag value to
+    #   delete specific tags. If you specify a tag key without a tag value, we
+    #   delete any tag with this key regardless of its value. If you specify a
+    #   tag key with an empty string as the tag value, we delete the tag only
+    #   if its value is an empty string.
+    #
+    #   If you omit this parameter, we delete all user-defined tags for the
+    #   specified resources. We do not delete AWS-generated tags (tags that
+    #   have the `aws:` prefix).
+    # @return [Tag::Collection]
+    def delete_tags(options = {})
+      batch = []
+      options = Aws::Util.deep_merge(options, resources: [@id])
+      resp = @client.delete_tags(options)
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -460,13 +539,13 @@ module Aws::EC2
     #   The operation type. This parameter can be used only when the
     #   `Attribute` parameter is `launchPermission`.
     # @option options [Array<String>] :product_codes
-    #   One or more DevPay product codes. After you add a product code to an
-    #   AMI, it can't be removed.
+    #   The DevPay product codes. After you add a product code to an AMI, it
+    #   can't be removed.
     # @option options [Array<String>] :user_groups
-    #   One or more user groups. This parameter can be used only when the
-    #   `Attribute` parameter is `launchPermission`.
+    #   The user groups. This parameter can be used only when the `Attribute`
+    #   parameter is `launchPermission`.
     # @option options [Array<String>] :user_ids
-    #   One or more AWS account IDs. This parameter can be used only when the
+    #   The AWS account IDs. This parameter can be used only when the
     #   `Attribute` parameter is `launchPermission`.
     # @option options [String] :value
     #   The value of the attribute being modified. This parameter can be used
@@ -528,8 +607,8 @@ module Aws::EC2
 
     def yield_waiter_and_warn(waiter, &block)
       if !@waiter_block_warned
-        msg = "pass options to configure the waiter; "
-        msg << "yielding the waiter is deprecated"
+        msg = "pass options to configure the waiter; "\
+              "yielding the waiter is deprecated"
         warn(msg)
         @waiter_block_warned = true
       end
@@ -537,7 +616,9 @@ module Aws::EC2
     end
 
     def separate_params_and_options(options)
-      opts = Set.new([:client, :max_attempts, :delay, :before_attempt, :before_wait])
+      opts = Set.new(
+        [:client, :max_attempts, :delay, :before_attempt, :before_wait]
+      )
       waiter_opts = {}
       waiter_params = {}
       options.each_pair do |key, value|

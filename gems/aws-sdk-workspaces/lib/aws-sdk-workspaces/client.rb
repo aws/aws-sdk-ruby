@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:workspaces)
 
 module Aws::WorkSpaces
+  # An API client for WorkSpaces.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::WorkSpaces::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::WorkSpaces
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +109,7 @@ module Aws::WorkSpaces
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::WorkSpaces
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::WorkSpaces
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::WorkSpaces
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::WorkSpaces
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::WorkSpaces
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::WorkSpaces
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::WorkSpaces
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -208,6 +273,48 @@ module Aws::WorkSpaces
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -276,6 +383,56 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Copies the specified image from the specified Region to the current
+    # Region.
+    #
+    # @option params [required, String] :name
+    #   The name of the image.
+    #
+    # @option params [String] :description
+    #   A description of the image.
+    #
+    # @option params [required, String] :source_image_id
+    #   The identifier of the source image.
+    #
+    # @option params [required, String] :source_region
+    #   The identifier of the source Region.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the image.
+    #
+    # @return [Types::CopyWorkspaceImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopyWorkspaceImageResult#image_id #image_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_workspace_image({
+    #     name: "WorkspaceImageName", # required
+    #     description: "WorkspaceImageDescription",
+    #     source_image_id: "WorkspaceImageId", # required
+    #     source_region: "Region", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CopyWorkspaceImage AWS API Documentation
+    #
+    # @overload copy_workspace_image(params = {})
+    # @param [Hash] params ({})
+    def copy_workspace_image(params = {}, options = {})
+      req = build_request(:copy_workspace_image, params)
+      req.send_request(options)
+    end
+
     # Creates an IP access control group.
     #
     # An IP access control group provides you with the ability to control
@@ -301,6 +458,9 @@ module Aws::WorkSpaces
     # @option params [Array<Types::IpRuleItem>] :user_rules
     #   The rules to add to the group.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    #
     # @return [Types::CreateIpGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIpGroupResult#group_id #group_id} => String
@@ -314,6 +474,12 @@ module Aws::WorkSpaces
     #       {
     #         ip_rule: "IpRule",
     #         rule_desc: "IpRuleDesc",
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
     #       },
     #     ],
     #   })
@@ -331,14 +497,17 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Creates the specified tags for the specified WorkSpace.
+    # Creates the specified tags for the specified WorkSpaces resource.
     #
     # @option params [required, String] :resource_id
-    #   The identifier of the WorkSpace. To find this ID, use
-    #   DescribeWorkspaces.
+    #   The identifier of the WorkSpaces resource. The supported resource
+    #   types are WorkSpaces, registered directories, images, custom bundles,
+    #   and IP access control groups.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tags. Each WorkSpace can have a maximum of 50 tags.
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags. If
+    #   you want to add new tags to a set of existing tags, you must submit
+    #   all of the existing tags along with the new ones.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -428,7 +597,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].directory_id #=> String
     #   resp.pending_requests[0].user_name #=> String
     #   resp.pending_requests[0].ip_address #=> String
-    #   resp.pending_requests[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
+    #   resp.pending_requests[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.pending_requests[0].bundle_id #=> String
     #   resp.pending_requests[0].subnet_id #=> String
     #   resp.pending_requests[0].error_message #=> String
@@ -480,11 +649,12 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Deletes the specified tags from the specified WorkSpace.
+    # Deletes the specified tags from the specified WorkSpaces resource.
     #
     # @option params [required, String] :resource_id
-    #   The identifier of the WorkSpace. To find this ID, use
-    #   DescribeWorkspaces.
+    #   The identifier of the WorkSpaces resource. The supported resource
+    #   types are WorkSpaces, registered directories, images, custom bundles,
+    #   and IP access control groups.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The tag keys.
@@ -508,7 +678,8 @@ module Aws::WorkSpaces
     end
 
     # Deletes the specified image from your account. To delete an image, you
-    # must first delete any bundles that are associated with the image.
+    # must first delete any bundles that are associated with the image and
+    # un-share the image if it is shared with other accounts.
     #
     # @option params [required, String] :image_id
     #   The identifier of the image.
@@ -530,8 +701,36 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Retrieves a list that describes the configuration of bring your own
-    # license (BYOL) for the specified account.
+    # Deregisters the specified directory. This operation is asynchronous
+    # and returns before the WorkSpace directory is deregistered. If any
+    # WorkSpaces are registered to this directory, you must remove them
+    # before you can deregister the directory.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory. If any WorkSpaces are registered to
+    #   this directory, you must remove them before you deregister the
+    #   directory, or you will receive an OperationNotSupportedException
+    #   error.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_workspace_directory({
+    #     directory_id: "DirectoryId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeregisterWorkspaceDirectory AWS API Documentation
+    #
+    # @overload deregister_workspace_directory(params = {})
+    # @param [Hash] params ({})
+    def deregister_workspace_directory(params = {}, options = {})
+      req = build_request(:deregister_workspace_directory, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes the configuration of Bring Your Own
+    # License (BYOL) for the specified account.
     #
     # @return [Types::DescribeAccountResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -553,7 +752,7 @@ module Aws::WorkSpaces
     end
 
     # Retrieves a list that describes modifications to the configuration of
-    # bring your own license (BYOL) for the specified account.
+    # Bring Your Own License (BYOL) for the specified account.
     #
     # @option params [String] :next_token
     #   If you received a `NextToken` from a previous call that was paginated,
@@ -594,7 +793,7 @@ module Aws::WorkSpaces
     # WorkSpaces clients.
     #
     # @option params [required, Array<String>] :resource_ids
-    #   The resource identifiers, in the form of directory IDs.
+    #   The resource identifier, in the form of directory IDs.
     #
     # @return [Types::DescribeClientPropertiesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -666,11 +865,12 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Describes the specified tags for the specified WorkSpace.
+    # Describes the specified tags for the specified WorkSpaces resource.
     #
     # @option params [required, String] :resource_id
-    #   The identifier of the WorkSpace. To find this ID, use
-    #   DescribeWorkspaces.
+    #   The identifier of the WorkSpaces resource. The supported resource
+    #   types are WorkSpaces, registered directories, images, custom bundles,
+    #   and IP access control groups.
     #
     # @return [Types::DescribeTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -722,6 +922,8 @@ module Aws::WorkSpaces
     #   * {Types::DescribeWorkspaceBundlesResult#bundles #bundles} => Array&lt;Types::WorkspaceBundle&gt;
     #   * {Types::DescribeWorkspaceBundlesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_workspace_bundles({
@@ -737,9 +939,11 @@ module Aws::WorkSpaces
     #   resp.bundles[0].name #=> String
     #   resp.bundles[0].owner #=> String
     #   resp.bundles[0].description #=> String
+    #   resp.bundles[0].image_id #=> String
     #   resp.bundles[0].root_storage.capacity #=> String
     #   resp.bundles[0].user_storage.capacity #=> String
     #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO"
+    #   resp.bundles[0].last_updated_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundles AWS API Documentation
@@ -751,12 +955,15 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Describes the available AWS Directory Service directories that are
-    # registered with Amazon WorkSpaces.
+    # Describes the available directories that are registered with Amazon
+    # WorkSpaces.
     #
     # @option params [Array<String>] :directory_ids
     #   The identifiers of the directories. If the value is null, all
     #   directories are retrieved.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of directories to return.
     #
     # @option params [String] :next_token
     #   If you received a `NextToken` from a previous call that was paginated,
@@ -767,10 +974,13 @@ module Aws::WorkSpaces
     #   * {Types::DescribeWorkspaceDirectoriesResult#directories #directories} => Array&lt;Types::WorkspaceDirectory&gt;
     #   * {Types::DescribeWorkspaceDirectoriesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_workspace_directories({
     #     directory_ids: ["DirectoryId"],
+    #     limit: 1,
     #     next_token: "PaginationToken",
     #   })
     #
@@ -795,8 +1005,22 @@ module Aws::WorkSpaces
     #   resp.directories[0].workspace_creation_properties.default_ou #=> String
     #   resp.directories[0].workspace_creation_properties.custom_security_group_id #=> String
     #   resp.directories[0].workspace_creation_properties.user_enabled_as_local_administrator #=> Boolean
+    #   resp.directories[0].workspace_creation_properties.enable_maintenance_mode #=> Boolean
     #   resp.directories[0].ip_group_ids #=> Array
     #   resp.directories[0].ip_group_ids[0] #=> String
+    #   resp.directories[0].workspace_access_properties.device_type_windows #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_osx #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_web #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_ios #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_android #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_chrome_os #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_zero_client #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].tenancy #=> String, one of "DEDICATED", "SHARED"
+    #   resp.directories[0].selfservice_permissions.restart_workspace #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].selfservice_permissions.increase_volume_size #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].selfservice_permissions.change_compute_type #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].selfservice_permissions.switch_running_mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].selfservice_permissions.rebuild_workspace #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories AWS API Documentation
@@ -857,6 +1081,38 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Describes the snapshots for the specified WorkSpace.
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the WorkSpace.
+    #
+    # @return [Types::DescribeWorkspaceSnapshotsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorkspaceSnapshotsResult#rebuild_snapshots #rebuild_snapshots} => Array&lt;Types::Snapshot&gt;
+    #   * {Types::DescribeWorkspaceSnapshotsResult#restore_snapshots #restore_snapshots} => Array&lt;Types::Snapshot&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_workspace_snapshots({
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rebuild_snapshots #=> Array
+    #   resp.rebuild_snapshots[0].snapshot_time #=> Time
+    #   resp.restore_snapshots #=> Array
+    #   resp.restore_snapshots[0].snapshot_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceSnapshots AWS API Documentation
+    #
+    # @overload describe_workspace_snapshots(params = {})
+    # @param [Hash] params ({})
+    def describe_workspace_snapshots(params = {}, options = {})
+      req = build_request(:describe_workspace_snapshots, params)
+      req.send_request(options)
+    end
+
     # Describes the specified WorkSpaces.
     #
     # You can filter the results by using the bundle identifier, directory
@@ -896,6 +1152,8 @@ module Aws::WorkSpaces
     #   * {Types::DescribeWorkspacesResult#workspaces #workspaces} => Array&lt;Types::Workspace&gt;
     #   * {Types::DescribeWorkspacesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_workspaces({
@@ -914,7 +1172,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].directory_id #=> String
     #   resp.workspaces[0].user_name #=> String
     #   resp.workspaces[0].ip_address #=> String
-    #   resp.workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
+    #   resp.workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.workspaces[0].bundle_id #=> String
     #   resp.workspaces[0].subnet_id #=> String
     #   resp.workspaces[0].error_message #=> String
@@ -1009,7 +1267,7 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Imports the specified Windows 7 or Windows 10 bring your own license
+    # Imports the specified Windows 7 or Windows 10 Bring Your Own License
     # (BYOL) image into Amazon WorkSpaces. The image must be an already
     # licensed EC2 image that is in your AWS account, and you must own the
     # image.
@@ -1026,6 +1284,9 @@ module Aws::WorkSpaces
     # @option params [required, String] :image_description
     #   The description of the WorkSpace image.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    #
     # @return [Types::ImportWorkspaceImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportWorkspaceImageResult#image_id #image_id} => String
@@ -1037,6 +1298,12 @@ module Aws::WorkSpaces
     #     ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO
     #     image_name: "WorkspaceImageName", # required
     #     image_description: "WorkspaceImageDescription", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1054,7 +1321,7 @@ module Aws::WorkSpaces
 
     # Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks,
     # that you can use for the network management interface when you enable
-    # bring your own license (BYOL).
+    # Bring Your Own License (BYOL).
     #
     # The management network interface is connected to a secure Amazon
     # WorkSpaces management network. It is used for interactive streaming of
@@ -1101,7 +1368,57 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Modifies the configuration of bring your own license (BYOL) for the
+    # Migrates a WorkSpace from one operating system or bundle type to
+    # another, while retaining the data on the user volume.
+    #
+    # The migration process recreates the WorkSpace by using a new root
+    # volume from the target bundle image and the user volume from the last
+    # available snapshot of the original WorkSpace. During migration, the
+    # original `D:\Users\%USERNAME%` user profile folder is renamed to
+    # `D:\Users\%USERNAME%MMddyyTHHmmss%.NotMigrated`. A new
+    # `D:\Users\%USERNAME%` folder is generated by the new OS. Certain
+    # files in the old user profile are moved to the new user profile.
+    #
+    # For available migration scenarios, details about what happens during
+    # migration, and best practices, see [Migrate a WorkSpace][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/migrate-workspaces.html
+    #
+    # @option params [required, String] :source_workspace_id
+    #   The identifier of the WorkSpace to migrate from.
+    #
+    # @option params [required, String] :bundle_id
+    #   The identifier of the target bundle type to migrate the WorkSpace to.
+    #
+    # @return [Types::MigrateWorkspaceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MigrateWorkspaceResult#source_workspace_id #source_workspace_id} => String
+    #   * {Types::MigrateWorkspaceResult#target_workspace_id #target_workspace_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.migrate_workspace({
+    #     source_workspace_id: "WorkspaceId", # required
+    #     bundle_id: "BundleId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_workspace_id #=> String
+    #   resp.target_workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/MigrateWorkspace AWS API Documentation
+    #
+    # @overload migrate_workspace(params = {})
+    # @param [Hash] params ({})
+    def migrate_workspace(params = {}, options = {})
+      req = build_request(:migrate_workspace, params)
+      req.send_request(options)
+    end
+
+    # Modifies the configuration of Bring Your Own License (BYOL) for the
     # specified account.
     #
     # @option params [String] :dedicated_tenancy_support
@@ -1133,12 +1450,12 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Modifies the properties of the specified Amazon WorkSpaces client.
+    # Modifies the properties of the specified Amazon WorkSpaces clients.
     #
     # @option params [required, String] :resource_id
     #   The resource identifiers, in the form of directory IDs.
     #
-    # @option params [Types::ClientProperties] :client_properties
+    # @option params [required, Types::ClientProperties] :client_properties
     #   Information about the Amazon WorkSpaces client.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1147,7 +1464,7 @@ module Aws::WorkSpaces
     #
     #   resp = client.modify_client_properties({
     #     resource_id: "NonEmptyString", # required
-    #     client_properties: {
+    #     client_properties: { # required
     #       reconnect_enabled: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #   })
@@ -1158,6 +1475,117 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def modify_client_properties(params = {}, options = {})
       req = build_request(:modify_client_properties, params)
+      req.send_request(options)
+    end
+
+    # Modifies the self-service WorkSpace management capabilities for your
+    # users. For more information, see [Enable Self-Service WorkSpace
+    # Management Capabilities for Your Users][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the directory.
+    #
+    # @option params [required, Types::SelfservicePermissions] :selfservice_permissions
+    #   The permissions to enable or disable self-service capabilities.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_selfservice_permissions({
+    #     resource_id: "DirectoryId", # required
+    #     selfservice_permissions: { # required
+    #       restart_workspace: "ENABLED", # accepts ENABLED, DISABLED
+    #       increase_volume_size: "ENABLED", # accepts ENABLED, DISABLED
+    #       change_compute_type: "ENABLED", # accepts ENABLED, DISABLED
+    #       switch_running_mode: "ENABLED", # accepts ENABLED, DISABLED
+    #       rebuild_workspace: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifySelfservicePermissions AWS API Documentation
+    #
+    # @overload modify_selfservice_permissions(params = {})
+    # @param [Hash] params ({})
+    def modify_selfservice_permissions(params = {}, options = {})
+      req = build_request(:modify_selfservice_permissions, params)
+      req.send_request(options)
+    end
+
+    # Specifies which devices and operating systems users can use to access
+    # their WorkSpaces. For more information, see [ Control Device
+    # Access][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html#control-device-access
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the directory.
+    #
+    # @option params [required, Types::WorkspaceAccessProperties] :workspace_access_properties
+    #   The device types and operating systems to enable or disable for
+    #   access.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_workspace_access_properties({
+    #     resource_id: "DirectoryId", # required
+    #     workspace_access_properties: { # required
+    #       device_type_windows: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_osx: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_web: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_ios: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_android: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_chrome_os: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_zero_client: "ALLOW", # accepts ALLOW, DENY
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceAccessProperties AWS API Documentation
+    #
+    # @overload modify_workspace_access_properties(params = {})
+    # @param [Hash] params ({})
+    def modify_workspace_access_properties(params = {}, options = {})
+      req = build_request(:modify_workspace_access_properties, params)
+      req.send_request(options)
+    end
+
+    # Modify the default properties used to create WorkSpaces.
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the directory.
+    #
+    # @option params [required, Types::WorkspaceCreationProperties] :workspace_creation_properties
+    #   The default properties for creating WorkSpaces.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_workspace_creation_properties({
+    #     resource_id: "DirectoryId", # required
+    #     workspace_creation_properties: { # required
+    #       enable_internet_access: false,
+    #       default_ou: "DefaultOu",
+    #       custom_security_group_id: "SecurityGroupId",
+    #       user_enabled_as_local_administrator: false,
+    #       enable_maintenance_mode: false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceCreationProperties AWS API Documentation
+    #
+    # @overload modify_workspace_creation_properties(params = {})
+    # @param [Hash] params ({})
+    def modify_workspace_creation_properties(params = {}, options = {})
+      req = build_request(:modify_workspace_creation_properties, params)
       req.send_request(options)
     end
 
@@ -1197,9 +1625,9 @@ module Aws::WorkSpaces
     #
     # To maintain a WorkSpace without being interrupted, set the WorkSpace
     # state to `ADMIN_MAINTENANCE`. WorkSpaces in this state do not respond
-    # to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace
-    # in this state is not stopped. Users can log into a WorkSpace in the
-    # `ADMIN_MAINTENANCE` state.
+    # to requests to reboot, stop, start, rebuild, or restore. An AutoStop
+    # WorkSpace in this state is not stopped. Users cannot log into a
+    # WorkSpace in the `ADMIN_MAINTENANCE` state.
     #
     # @option params [required, String] :workspace_id
     #   The identifier of the WorkSpace.
@@ -1269,7 +1697,7 @@ module Aws::WorkSpaces
     # Rebuilds the specified WorkSpace.
     #
     # You cannot rebuild a WorkSpace unless its state is `AVAILABLE`,
-    # `ERROR`, or `UNHEALTHY`.
+    # `ERROR`, `UNHEALTHY`, or `STOPPED`.
     #
     # Rebuilding a WorkSpace is a potentially destructive action that can
     # result in the loss of data. For more information, see [Rebuild a
@@ -1280,7 +1708,7 @@ module Aws::WorkSpaces
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html
     #
     # @option params [required, Array<Types::RebuildRequest>] :rebuild_workspace_requests
     #   The WorkSpace to rebuild. You can specify a single WorkSpace.
@@ -1312,6 +1740,120 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def rebuild_workspaces(params = {}, options = {})
       req = build_request(:rebuild_workspaces, params)
+      req.send_request(options)
+    end
+
+    # Registers the specified directory. This operation is asynchronous and
+    # returns before the WorkSpace directory is registered. If this is the
+    # first time you are registering a directory, you will need to create
+    # the workspaces\_DefaultRole role before you can register a directory.
+    # For more information, see [ Creating the workspaces\_DefaultRole
+    # Role][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory. You cannot register a directory if it
+    #   does not have a status of Active. If the directory does not have a
+    #   status of Active, you will receive an InvalidResourceStateException
+    #   error. If you have already registered the maximum number of
+    #   directories that you can register with Amazon WorkSpaces, you will
+    #   receive a ResourceLimitExceededException error. Deregister directories
+    #   that you are not using for WorkSpaces, and try again.
+    #
+    # @option params [Array<String>] :subnet_ids
+    #   The identifiers of the subnets for your virtual private cloud (VPC).
+    #   Make sure that the subnets are in supported Availability Zones. The
+    #   subnets must also be in separate Availability Zones. If these
+    #   conditions are not met, you will receive an
+    #   OperationNotSupportedException error.
+    #
+    # @option params [required, Boolean] :enable_work_docs
+    #   Indicates whether Amazon WorkDocs is enabled or disabled. If you have
+    #   enabled this parameter and WorkDocs is not available in the Region,
+    #   you will receive an OperationNotSupportedException error. Set
+    #   `EnableWorkDocs` to disabled, and try again.
+    #
+    # @option params [Boolean] :enable_self_service
+    #   Indicates whether self-service capabilities are enabled or disabled.
+    #
+    # @option params [String] :tenancy
+    #   Indicates whether your WorkSpace directory is dedicated or shared. To
+    #   use Bring Your Own License (BYOL) images, this value must be set to
+    #   `DEDICATED` and your AWS account must be enabled for BYOL. If your
+    #   account has not been enabled for BYOL, you will receive an
+    #   InvalidParameterValuesException error. For more information about BYOL
+    #   images, see [Bring Your Own Windows Desktop Images][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags associated with the directory.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_workspace_directory({
+    #     directory_id: "DirectoryId", # required
+    #     subnet_ids: ["SubnetId"],
+    #     enable_work_docs: false, # required
+    #     enable_self_service: false,
+    #     tenancy: "DEDICATED", # accepts DEDICATED, SHARED
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RegisterWorkspaceDirectory AWS API Documentation
+    #
+    # @overload register_workspace_directory(params = {})
+    # @param [Hash] params ({})
+    def register_workspace_directory(params = {}, options = {})
+      req = build_request(:register_workspace_directory, params)
+      req.send_request(options)
+    end
+
+    # Restores the specified WorkSpace to its last known healthy state.
+    #
+    # You cannot restore a WorkSpace unless its state is ` AVAILABLE`,
+    # `ERROR`, `UNHEALTHY`, or `STOPPED`.
+    #
+    # Restoring a WorkSpace is a potentially destructive action that can
+    # result in the loss of data. For more information, see [Restore a
+    # WorkSpace][1].
+    #
+    # This operation is asynchronous and returns before the WorkSpace is
+    # completely restored.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/restore-workspace.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the WorkSpace.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_workspace({
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RestoreWorkspace AWS API Documentation
+    #
+    # @overload restore_workspace(params = {})
+    # @param [Hash] params ({})
+    def restore_workspace(params = {}, options = {})
+      req = build_request(:restore_workspace, params)
       req.send_request(options)
     end
 
@@ -1506,7 +2048,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.38.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

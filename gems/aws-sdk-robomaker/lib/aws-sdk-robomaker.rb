@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-robomaker/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     robo_maker = Aws::RoboMaker::Client.new
+#     resp = robo_maker.batch_describe_simulation_job(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS RoboMaker all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS RoboMaker are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::RoboMaker::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS RoboMaker API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-robomaker/customizations'
 # @service
 module Aws::RoboMaker
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.25.1'
 
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -25,17 +27,20 @@ require_relative 'aws-sdk-machinelearning/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     machine_learning = Aws::MachineLearning::Client.new
+#     resp = machine_learning.add_tags(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Machine Learning all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Machine Learning are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::MachineLearning::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Machine Learning API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +48,6 @@ require_relative 'aws-sdk-machinelearning/customizations'
 # @service
 module Aws::MachineLearning
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.21.1'
 
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -8,15 +10,52 @@
 module Aws::LicenseManager
   module Types
 
+    # Access to resource denied.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The AWS user account does not have permission to perform the action.
+    # Check the IAM policy associated with this account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/AuthorizationException AWS API Documentation
+    #
+    class AuthorizationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Describes automated discovery.
+    #
+    # @!attribute [rw] last_run_time
+    #   Time that automated discovery last ran.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/AutomatedDiscoveryInformation AWS API Documentation
+    #
+    class AutomatedDiscoveryInformation < Struct.new(
+      :last_run_time)
+      include Aws::Structure
+    end
+
     # Details about license consumption.
     #
     # @!attribute [rw] resource_type
-    #   Resource type of the resource consuming a license (instance, host,
-    #   or AMI).
+    #   Resource type of the resource consuming a license.
     #   @return [String]
     #
     # @!attribute [rw] consumed_licenses
-    #   Number of licenses consumed by a resource.
+    #   Number of licenses consumed by the resource.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ConsumedLicenseSummary AWS API Documentation
@@ -43,6 +82,18 @@ module Aws::LicenseManager
     #             value: "String",
     #           },
     #         ],
+    #         product_information_list: [
+    #           {
+    #             resource_type: "String", # required
+    #             product_information_filter_list: [ # required
+    #               {
+    #                 product_information_filter_name: "String", # required
+    #                 product_information_filter_value: ["String"], # required
+    #                 product_information_filter_comparator: "String", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -50,11 +101,11 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Human-friendly description of the license configuration.
+    #   Description of the license configuration.
     #   @return [String]
     #
     # @!attribute [rw] license_counting_type
-    #   Dimension to use to track the license inventory.
+    #   Dimension used to track the license inventory.
     #   @return [String]
     #
     # @!attribute [rw] license_count
@@ -62,21 +113,36 @@ module Aws::LicenseManager
     #   @return [Integer]
     #
     # @!attribute [rw] license_count_hard_limit
-    #   Flag indicating whether hard or soft license enforcement is used.
-    #   Exceeding a hard limit results in the blocked deployment of new
-    #   instances.
+    #   Indicates whether hard or soft license enforcement is used.
+    #   Exceeding a hard limit blocks the launch of new instances.
     #   @return [Boolean]
     #
     # @!attribute [rw] license_rules
-    #   Array of configured License Manager rules.
+    #   License rules. The syntax is #name=value (for example,
+    #   #allowedTenancy=EC2-DedicatedHost). Available rules vary by
+    #   dimension.
+    #
+    #   * `Cores` dimension: `allowedTenancy` \| `maximumCores` \|
+    #     `minimumCores`
+    #
+    #   * `Instances` dimension: `allowedTenancy` \| `maximumCores` \|
+    #     `minimumCores` \| `maximumSockets` \| `minimumSockets` \|
+    #     `maximumVcpus` \| `minimumVcpus`
+    #
+    #   * `Sockets` dimension: `allowedTenancy` \| `maximumSockets` \|
+    #     `minimumSockets`
+    #
+    #   * `vCPUs` dimension: `allowedTenancy` \| `honorVcpuOptimization` \|
+    #     `maximumVcpus` \| `minimumVcpus`
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   The tags to apply to the resources during launch. You can only tag
-    #   instances and volumes on launch. The specified tags are applied to
-    #   all instances or volumes that are created during launch. To tag a
-    #   resource after it has been created, see CreateTags .
+    #   Tags to add to the license configuration.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] product_information_list
+    #   Product information.
+    #   @return [Array<Types::ProductInformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateLicenseConfigurationRequest AWS API Documentation
     #
@@ -87,12 +153,13 @@ module Aws::LicenseManager
       :license_count,
       :license_count_hard_limit,
       :license_rules,
-      :tags)
+      :tags,
+      :product_information_list)
       include Aws::Structure
     end
 
     # @!attribute [rw] license_configuration_arn
-    #   ARN of the license configuration object after its creation.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateLicenseConfigurationResponse AWS API Documentation
@@ -110,7 +177,7 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] license_configuration_arn
-    #   Unique ID of the configuration object to delete.
+    #   ID of the license configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/DeleteLicenseConfigurationRequest AWS API Documentation
@@ -124,11 +191,21 @@ module Aws::LicenseManager
     #
     class DeleteLicenseConfigurationResponse < Aws::EmptyStructure; end
 
-    # A filter name and value pair that is used to return a more specific
-    # list of results from a describe operation. Filters can be used to
-    # match a set of resources by specific criteria, such as tags,
-    # attributes, or IDs. The filters supported by a `Describe` operation
-    # are documented with the `Describe` operation.
+    # A dependency required to run the API is missing.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/FailedDependencyException AWS API Documentation
+    #
+    class FailedDependencyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A filter name and value pair that is used to return more specific
+    # results from a describe operation. Filters can be used to match a set
+    # of resources by specific criteria, such as tags, attributes, or IDs.
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -143,7 +220,7 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   One or more filter values. Filter values are case-sensitive.
+    #   Filter values. Filter values are case-sensitive.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/Filter AWS API Documentation
@@ -151,6 +228,18 @@ module Aws::LicenseManager
     class Filter < Struct.new(
       :name,
       :values)
+      include Aws::Structure
+    end
+
+    # The request uses too many filters or too many filter values.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/FilterLimitExceededException AWS API Documentation
+    #
+    class FilterLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -162,7 +251,7 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] license_configuration_arn
-    #   ARN of the license configuration being requested.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetLicenseConfigurationRequest AWS API Documentation
@@ -177,7 +266,7 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] license_configuration_arn
-    #   ARN of the license configuration requested.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -189,12 +278,11 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] license_counting_type
-    #   Dimension on which the licenses are counted (for example, instances,
-    #   cores, sockets, or VCPUs).
+    #   Dimension on which the licenses are counted.
     #   @return [String]
     #
     # @!attribute [rw] license_rules
-    #   List of flexible text strings designating license rules.
+    #   License rules.
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_count
@@ -210,24 +298,32 @@ module Aws::LicenseManager
     #   @return [Integer]
     #
     # @!attribute [rw] status
-    #   License configuration status (active, etc.).
+    #   License configuration status.
     #   @return [String]
     #
     # @!attribute [rw] owner_account_id
-    #   Owner account ID for the license configuration.
+    #   Account ID of the owner of the license configuration.
     #   @return [String]
     #
     # @!attribute [rw] consumed_license_summary_list
-    #   List of summaries for consumed licenses used by various resources.
+    #   Summaries of the licenses consumed by resources.
     #   @return [Array<Types::ConsumedLicenseSummary>]
     #
     # @!attribute [rw] managed_resource_summary_list
-    #   List of summaries of managed resources.
+    #   Summaries of the managed resources.
     #   @return [Array<Types::ManagedResourceSummary>]
     #
     # @!attribute [rw] tags
-    #   List of tags attached to the license configuration.
+    #   Tags for the license configuration.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] product_information_list
+    #   Product information.
+    #   @return [Array<Types::ProductInformation>]
+    #
+    # @!attribute [rw] automated_discovery_information
+    #   Automated discovery information.
+    #   @return [Types::AutomatedDiscoveryInformation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetLicenseConfigurationResponse AWS API Documentation
     #
@@ -245,7 +341,9 @@ module Aws::LicenseManager
       :owner_account_id,
       :consumed_license_summary_list,
       :managed_resource_summary_list,
-      :tags)
+      :tags,
+      :product_information_list,
+      :automated_discovery_information)
       include Aws::Structure
     end
 
@@ -257,7 +355,7 @@ module Aws::LicenseManager
 
     # @!attribute [rw] s3_bucket_arn
     #   Regional S3 bucket path for storing reports, license trail event
-    #   data, discovery data, etc.
+    #   data, discovery data, and so on.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn
@@ -273,17 +371,52 @@ module Aws::LicenseManager
     #   Indicates whether cross-account discovery has been enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] license_manager_resource_share_arn
+    #   Amazon Resource Name (ARN) of the AWS resource share. The License
+    #   Manager master account will provide member accounts with access to
+    #   this share.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetServiceSettingsResponse AWS API Documentation
     #
     class GetServiceSettingsResponse < Struct.new(
       :s3_bucket_arn,
       :sns_topic_arn,
       :organization_configuration,
-      :enable_cross_accounts_discovery)
+      :enable_cross_accounts_discovery,
+      :license_manager_resource_share_arn)
       include Aws::Structure
     end
 
-    # An inventory filter object.
+    # One or more parameter values are not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # License Manager cannot allocate a license to a resource because of its
+    # state.
+    #
+    # For example, you cannot allocate a license to an instance in the
+    # process of shutting down.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/InvalidResourceStateException AWS API Documentation
+    #
+    class InvalidResourceStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An inventory filter.
     #
     # @note When making an API call, you may pass InventoryFilter
     #   data as a hash:
@@ -295,11 +428,11 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the filter.
+    #   Name of the filter.
     #   @return [String]
     #
     # @!attribute [rw] condition
-    #   The condition of the filter.
+    #   Condition of the filter.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -318,17 +451,17 @@ module Aws::LicenseManager
     # A license configuration is an abstraction of a customer license
     # agreement that can be consumed and enforced by License Manager.
     # Components include specifications for the license type (licensing by
-    # instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon EC2
-    # Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host
-    # affinity (how long a VM must be associated with a host), the number of
+    # instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy,
+    # Dedicated Instance, Dedicated Host, or all of these), host affinity
+    # (how long a VM must be associated with a host), and the number of
     # licenses purchased and used.
     #
     # @!attribute [rw] license_configuration_id
-    #   Unique ID of the `LicenseConfiguration` object.
+    #   Unique ID of the license configuration.
     #   @return [String]
     #
     # @!attribute [rw] license_configuration_arn
-    #   ARN of the `LicenseConfiguration` object.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -340,11 +473,11 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] license_counting_type
-    #   Dimension to use to track license inventory.
+    #   Dimension to use to track the license inventory.
     #   @return [String]
     #
     # @!attribute [rw] license_rules
-    #   Array of configured License Manager rules.
+    #   License rules.
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_count
@@ -352,7 +485,7 @@ module Aws::LicenseManager
     #   @return [Integer]
     #
     # @!attribute [rw] license_count_hard_limit
-    #   Sets the number of available licenses as a hard limit.
+    #   Number of available licenses as a hard limit.
     #   @return [Boolean]
     #
     # @!attribute [rw] consumed_licenses
@@ -368,12 +501,20 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] consumed_license_summary_list
-    #   List of summaries for licenses consumed by various resources.
+    #   Summaries for licenses consumed by various resources.
     #   @return [Array<Types::ConsumedLicenseSummary>]
     #
     # @!attribute [rw] managed_resource_summary_list
-    #   List of summaries for managed resources.
+    #   Summaries for managed resources.
     #   @return [Array<Types::ManagedResourceSummary>]
+    #
+    # @!attribute [rw] product_information_list
+    #   Product information.
+    #   @return [Array<Types::ProductInformation>]
+    #
+    # @!attribute [rw] automated_discovery_information
+    #   Automated discovery information.
+    #   @return [Types::AutomatedDiscoveryInformation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/LicenseConfiguration AWS API Documentation
     #
@@ -390,15 +531,16 @@ module Aws::LicenseManager
       :status,
       :owner_account_id,
       :consumed_license_summary_list,
-      :managed_resource_summary_list)
+      :managed_resource_summary_list,
+      :product_information_list,
+      :automated_discovery_information)
       include Aws::Structure
     end
 
-    # Describes a server resource that is associated with a license
-    # configuration.
+    # Describes an association with a license configuration.
     #
     # @!attribute [rw] resource_arn
-    #   ARN of the resource associated with the license configuration.
+    #   Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -424,33 +566,32 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # Contains details of the usage of each resource from the license pool.
+    # Details about the usage of a resource associated with a license
+    # configuration.
     #
     # @!attribute [rw] resource_arn
-    #   ARN of the resource associated with a license configuration.
+    #   Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   Type of resource associated with athe license configuration.
+    #   Type of resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_status
-    #   Status of a resource associated with the license configuration.
+    #   Status of the resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_owner_id
-    #   ID of the account that owns a resource that is associated with the
-    #   license configuration.
+    #   ID of the account that owns the resource.
     #   @return [String]
     #
     # @!attribute [rw] association_time
-    #   Time when the license configuration was initially associated with a
-    #   resource.
+    #   Time when the license configuration was initially associated with
+    #   the resource.
     #   @return [Time]
     #
     # @!attribute [rw] consumed_licenses
-    #   Number of licenses consumed out of the total provisioned in the
-    #   license configuration.
+    #   Number of licenses consumed by the resource.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/LicenseConfigurationUsage AWS API Documentation
@@ -465,7 +606,55 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # Object used for associating a license configuration with a resource.
+    # Describes the failure of a license operation.
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_time
+    #   Failure time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] operation_name
+    #   Name of the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_id
+    #   ID of the AWS account that owns the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_requested_by
+    #   The requester is "License Manager Automated Discovery".
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_list
+    #   Reserved.
+    #   @return [Array<Types::Metadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/LicenseOperationFailure AWS API Documentation
+    #
+    class LicenseOperationFailure < Struct.new(
+      :resource_arn,
+      :resource_type,
+      :error_message,
+      :failure_time,
+      :operation_name,
+      :resource_owner_id,
+      :operation_requested_by,
+      :metadata_list)
+      include Aws::Structure
+    end
+
+    # Details for associating a license configuration with a resource.
     #
     # @note When making an API call, you may pass LicenseSpecification
     #   data as a hash:
@@ -475,13 +664,26 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] license_configuration_arn
-    #   ARN of the `LicenseConfiguration` object.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/LicenseSpecification AWS API Documentation
     #
     class LicenseSpecification < Struct.new(
       :license_configuration_arn)
+      include Aws::Structure
+    end
+
+    # You do not have enough licenses available to support a new resource
+    # launch.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/LicenseUsageException AWS API Documentation
+    #
+    class LicenseUsageException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -495,13 +697,11 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] license_configuration_arn
-    #   ARN of a `LicenseConfiguration` object.
+    #   Amazon Resource Name (ARN) of a license configuration.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned
-    #   `NextToken` value.
+    #   Maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -518,10 +718,7 @@ module Aws::LicenseManager
     end
 
     # @!attribute [rw] license_configuration_associations
-    #   Lists association objects for the license configuration, each
-    #   containing the association time, number of consumed licenses,
-    #   resource ARN, resource ID, account ID that owns the resource,
-    #   resource size, and resource type.
+    #   Information about the associations for the license configuration.
     #   @return [Array<Types::LicenseConfigurationAssociation>]
     #
     # @!attribute [rw] next_token
@@ -532,6 +729,52 @@ module Aws::LicenseManager
     #
     class ListAssociationsForLicenseConfigurationResponse < Struct.new(
       :license_configuration_associations,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFailuresForLicenseConfigurationOperationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         license_configuration_arn: "String", # required
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] license_configuration_arn
+    #   Amazon Resource Name of the license configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListFailuresForLicenseConfigurationOperationsRequest AWS API Documentation
+    #
+    class ListFailuresForLicenseConfigurationOperationsRequest < Struct.new(
+      :license_configuration_arn,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] license_operation_failure_list
+    #   License configuration operations that failed.
+    #   @return [Array<Types::LicenseOperationFailure>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListFailuresForLicenseConfigurationOperationsResponse AWS API Documentation
+    #
+    class ListFailuresForLicenseConfigurationOperationsResponse < Struct.new(
+      :license_operation_failure_list,
       :next_token)
       include Aws::Structure
     end
@@ -552,13 +795,11 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] license_configuration_arns
-    #   An array of ARNs for the calling account’s license configurations.
+    #   Amazon Resource Names (ARN) of the license configurations.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned
-    #   `NextToken` value.
+    #   Maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -566,7 +807,19 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   Filters to scope the results. The following filters and logical
+    #   operators are supported:
+    #
+    #   * `licenseCountingType` - The dimension on which licenses are
+    #     counted (vCPU). Logical operators are `EQUALS` \| `NOT_EQUALS`.
+    #
+    #   * `enforceLicenseCount` - A Boolean value that indicates whether
+    #     hard license enforcement is used. Logical operators are `EQUALS`
+    #     \| `NOT_EQUALS`.
+    #
+    #   * `usagelimitExceeded` - A Boolean value that indicates whether the
+    #     available licenses have been exceeded. Logical operators are
+    #     `EQUALS` \| `NOT_EQUALS`.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseConfigurationsRequest AWS API Documentation
@@ -580,7 +833,7 @@ module Aws::LicenseManager
     end
 
     # @!attribute [rw] license_configurations
-    #   Array of license configuration objects.
+    #   Information about the license configurations.
     #   @return [Array<Types::LicenseConfiguration>]
     #
     # @!attribute [rw] next_token
@@ -605,14 +858,12 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   ARN of an AMI or Amazon EC2 instance that has an associated license
-    #   configuration.
+    #   Amazon Resource Name (ARN) of a resource that has an associated
+    #   license configuration.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned
-    #   `NextToken` value.
+    #   Maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -660,9 +911,7 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned
-    #   `NextToken` value.
+    #   Maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -670,7 +919,25 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   Filters to scope the results. The following filters and logical
+    #   operators are supported:
+    #
+    #   * `account_id` - The ID of the AWS account that owns the resource.
+    #     Logical operators are `EQUALS` \| `NOT_EQUALS`.
+    #
+    #   * `application_name` - The name of the application. Logical
+    #     operators are `EQUALS` \| `BEGINS_WITH`.
+    #
+    #   * `license_included` - The type of license included. Logical
+    #     operators are `EQUALS` \| `NOT_EQUALS`. Possible values are
+    #     `sql-server-enterprise` \| `sql-server-standard` \|
+    #     `sql-server-web` \| `windows-server-datacenter`.
+    #
+    #   * `platform` - The platform of the resource. Logical operators are
+    #     `EQUALS` \| `BEGINS_WITH`.
+    #
+    #   * `resource_id` - The ID of the resource. Logical operators are
+    #     `EQUALS` \| `NOT_EQUALS`.
     #   @return [Array<Types::InventoryFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListResourceInventoryRequest AWS API Documentation
@@ -683,7 +950,7 @@ module Aws::LicenseManager
     end
 
     # @!attribute [rw] resource_inventory_list
-    #   The detailed list of resources.
+    #   Information about the resources.
     #   @return [Array<Types::ResourceInventory>]
     #
     # @!attribute [rw] next_token
@@ -706,7 +973,7 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   ARN for the resource.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListTagsForResourceRequest AWS API Documentation
@@ -717,7 +984,7 @@ module Aws::LicenseManager
     end
 
     # @!attribute [rw] tags
-    #   List of tags attached to the resource.
+    #   Information about the tags.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListTagsForResourceResponse AWS API Documentation
@@ -743,13 +1010,11 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] license_configuration_arn
-    #   ARN of the targeted `LicenseConfiguration` object.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned
-    #   `NextToken` value.
+    #   Maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -757,7 +1022,18 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   List of filters to apply.
+    #   Filters to scope the results. The following filters and logical
+    #   operators are supported:
+    #
+    #   * `resourceArn` - The ARN of the license configuration resource.
+    #     Logical operators are `EQUALS` \| `NOT_EQUALS`.
+    #
+    #   * `resourceType` - The resource type (EC2\_INSTANCE \| EC2\_HOST \|
+    #     EC2\_AMI \| SYSTEMS\_MANAGER\_MANAGED\_INSTANCE). Logical
+    #     operators are `EQUALS` \| `NOT_EQUALS`.
+    #
+    #   * `resourceAccount` - The ID of the account that owns the resource.
+    #     Logical operators are `EQUALS` \| `NOT_EQUALS`.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListUsageForLicenseConfigurationRequest AWS API Documentation
@@ -771,7 +1047,7 @@ module Aws::LicenseManager
     end
 
     # @!attribute [rw] license_configuration_usage_list
-    #   An array of `LicenseConfigurationUsage` objects.
+    #   Information about the license configurations.
     #   @return [Array<Types::LicenseConfigurationUsage>]
     #
     # @!attribute [rw] next_token
@@ -786,10 +1062,10 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # Summary for a resource.
+    # Summary information about a managed resource.
     #
     # @!attribute [rw] resource_type
-    #   Type of resource associated with a license (instance, host, or AMI).
+    #   Type of resource associated with a license.
     #   @return [String]
     #
     # @!attribute [rw] association_count
@@ -804,7 +1080,25 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # Object containing configuration information for AWS Organizations.
+    # Reserved.
+    #
+    # @!attribute [rw] name
+    #   Reserved.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Reserved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/Metadata AWS API Documentation
+    #
+    class Metadata < Struct.new(
+      :name,
+      :value)
+      include Aws::Structure
+    end
+
+    # Configuration information for AWS Organizations.
     #
     # @note When making an API call, you may pass OrganizationConfiguration
     #   data as a hash:
@@ -814,7 +1108,7 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] enable_integration
-    #   Flag to activate AWS Organization integration.
+    #   Enables AWS Organization integration.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/OrganizationConfiguration AWS API Documentation
@@ -824,22 +1118,118 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # A set of attributes that describe a resource.
+    # Describes product information for a license configuration.
+    #
+    # @note When making an API call, you may pass ProductInformation
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "String", # required
+    #         product_information_filter_list: [ # required
+    #           {
+    #             product_information_filter_name: "String", # required
+    #             product_information_filter_value: ["String"], # required
+    #             product_information_filter_comparator: "String", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type. The value is `SSM_MANAGED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_information_filter_list
+    #   Product information filters. The following filters and logical
+    #   operators are supported:
+    #
+    #   * `Application Name` - The name of the application. Logical operator
+    #     is `EQUALS`.
+    #
+    #   * `Application Publisher` - The publisher of the application.
+    #     Logical operator is `EQUALS`.
+    #
+    #   * `Application Version` - The version of the application. Logical
+    #     operator is `EQUALS`.
+    #
+    #   * `Platform Name` - The name of the platform. Logical operator is
+    #     `EQUALS`.
+    #
+    #   * `Platform Type` - The platform type. Logical operator is `EQUALS`.
+    #
+    #   * `License Included` - The type of license included. Logical
+    #     operators are `EQUALS` and `NOT_EQUALS`. Possible values are
+    #     `sql-server-enterprise` \| `sql-server-standard` \|
+    #     `sql-server-web` \| `windows-server-datacenter`.
+    #   @return [Array<Types::ProductInformationFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ProductInformation AWS API Documentation
+    #
+    class ProductInformation < Struct.new(
+      :resource_type,
+      :product_information_filter_list)
+      include Aws::Structure
+    end
+
+    # Describes product information filters.
+    #
+    # @note When making an API call, you may pass ProductInformationFilter
+    #   data as a hash:
+    #
+    #       {
+    #         product_information_filter_name: "String", # required
+    #         product_information_filter_value: ["String"], # required
+    #         product_information_filter_comparator: "String", # required
+    #       }
+    #
+    # @!attribute [rw] product_information_filter_name
+    #   Filter name.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_information_filter_value
+    #   Filter value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] product_information_filter_comparator
+    #   Logical operator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ProductInformationFilter AWS API Documentation
+    #
+    class ProductInformationFilter < Struct.new(
+      :product_information_filter_name,
+      :product_information_filter_value,
+      :product_information_filter_comparator)
+      include Aws::Structure
+    end
+
+    # Too many requests have been submitted. Try again after a brief wait.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/RateLimitExceededException AWS API Documentation
+    #
+    class RateLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Details about a resource.
     #
     # @!attribute [rw] resource_id
-    #   Unique ID of the resource.
+    #   ID of the resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource.
+    #   Type of resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource.
+    #   Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the resource.
+    #   Platform of the resource.
     #   @return [String]
     #
     # @!attribute [rw] platform_version
@@ -847,7 +1237,7 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] resource_owning_account_id
-    #   Unique ID of the account that owns the resource.
+    #   ID of the account that owns the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ResourceInventory AWS API Documentation
@@ -862,7 +1252,31 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # Tag for a resource in a key-value format.
+    # Your resource limits have been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ResourceLimitExceededException AWS API Documentation
+    #
+    class ResourceLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The server experienced an internal error. Try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ServerInternalException AWS API Documentation
+    #
+    class ServerInternalException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Details about a tag for a license configuration.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -873,11 +1287,11 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] key
-    #   Key for the resource tag.
+    #   Tag key.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Value for the resource tag.
+    #   Tag value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/Tag AWS API Documentation
@@ -902,11 +1316,11 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   Resource of the ARN to be tagged.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Names of the tags to attach to the resource.
+    #   One or more tags.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/TagResourceRequest AWS API Documentation
@@ -930,11 +1344,11 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   ARN of the resource.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   List keys identifying tags to remove.
+    #   Keys identifying the tags to remove.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UntagResourceRequest AWS API Documentation
@@ -960,18 +1374,30 @@ module Aws::LicenseManager
     #         license_count_hard_limit: false,
     #         name: "String",
     #         description: "String",
+    #         product_information_list: [
+    #           {
+    #             resource_type: "String", # required
+    #             product_information_filter_list: [ # required
+    #               {
+    #                 product_information_filter_name: "String", # required
+    #                 product_information_filter_value: ["String"], # required
+    #                 product_information_filter_comparator: "String", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] license_configuration_arn
-    #   ARN for a license configuration.
+    #   Amazon Resource Name (ARN) of the license configuration.
     #   @return [String]
     #
     # @!attribute [rw] license_configuration_status
-    #   New status of the license configuration (`ACTIVE` or `INACTIVE`).
+    #   New status of the license configuration.
     #   @return [String]
     #
     # @!attribute [rw] license_rules
-    #   List of flexible text strings designating license rules.
+    #   New license rules.
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_count
@@ -979,7 +1405,7 @@ module Aws::LicenseManager
     #   @return [Integer]
     #
     # @!attribute [rw] license_count_hard_limit
-    #   Sets the number of available licenses as a hard limit.
+    #   New hard limit of the number of available licenses.
     #   @return [Boolean]
     #
     # @!attribute [rw] name
@@ -987,8 +1413,12 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   New human-friendly description of the license configuration.
+    #   New description of the license configuration.
     #   @return [String]
+    #
+    # @!attribute [rw] product_information_list
+    #   New product information.
+    #   @return [Array<Types::ProductInformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseConfigurationRequest AWS API Documentation
     #
@@ -999,7 +1429,8 @@ module Aws::LicenseManager
       :license_count,
       :license_count_hard_limit,
       :name,
-      :description)
+      :description,
+      :product_information_list)
       include Aws::Structure
     end
 
@@ -1025,15 +1456,15 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   ARN for an AWS server resource.
+    #   Amazon Resource Name (ARN) of the AWS resource.
     #   @return [String]
     #
     # @!attribute [rw] add_license_specifications
-    #   License configuration ARNs to be added to a resource.
+    #   ARNs of the license configurations to add.
     #   @return [Array<Types::LicenseSpecification>]
     #
     # @!attribute [rw] remove_license_specifications
-    #   License configuration ARNs to be removed from a resource.
+    #   ARNs of the license configurations to remove.
     #   @return [Array<Types::LicenseSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseSpecificationsForResourceRequest AWS API Documentation
@@ -1062,16 +1493,17 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] s3_bucket_arn
-    #   ARN of the Amazon S3 bucket where License Manager information is
-    #   stored.
+    #   Amazon Resource Name (ARN) of the Amazon S3 bucket where the License
+    #   Manager information is stored.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn
-    #   ARN of the Amazon SNS topic used for License Manager alerts.
+    #   Amazon Resource Name (ARN) of the Amazon SNS topic used for License
+    #   Manager alerts.
     #   @return [String]
     #
     # @!attribute [rw] organization_configuration
-    #   Integrates AWS Organizations with License Manager for cross-account
+    #   Enables integration with AWS Organizations for cross-account
     #   discovery.
     #   @return [Types::OrganizationConfiguration]
     #

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-kafka/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     kafka = Aws::Kafka::Client.new
+#     resp = kafka.create_cluster(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Managed Streaming for Kafka all
-# extend {Errors::ServiceError}.
+# Errors returned from Managed Streaming for Kafka are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Kafka::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Managed Streaming for Kafka API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-kafka/customizations'
 # @service
 module Aws::Kafka
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.22.1'
 
 end

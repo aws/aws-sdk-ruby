@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../spec_helper'
 require 'ostruct'
 
@@ -123,6 +125,13 @@ module Seahorse
         end
 
         it 'can return a list of valid operation names' do
+          expect(client.operation_names).to eq([:operation_name])
+        end
+
+        it 'does not include async operation names' do
+          op = Model::Operation.new
+          op.async = true
+          api.add_operation(:async_op, op)
           expect(client.operation_names).to eq([:operation_name])
         end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -22,6 +24,18 @@ module Aws::ImportExport
     class Artifact < Struct.new(
       :description,
       :url)
+      include Aws::Structure
+    end
+
+    # The account specified does not have the appropriate bucket
+    # permissions.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class BucketPermissionException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -58,6 +72,17 @@ module Aws::ImportExport
     #
     class CancelJobOutput < Struct.new(
       :success)
+      include Aws::Structure
+    end
+
+    # The specified job ID has been canceled and is no longer valid.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class CanceledJobIdException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -141,6 +166,30 @@ module Aws::ImportExport
       :signature_file_contents,
       :warning_message,
       :artifact_list)
+      include Aws::Structure
+    end
+
+    # Each account can create only a certain number of jobs per day. If you
+    # need to create more than this, please contact
+    # awsimportexport@amazon.com to explain your particular use case.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class CreateJobQuotaExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that the specified job has expired out of the system.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class ExpiredJobIdException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -366,6 +415,98 @@ module Aws::ImportExport
       include Aws::Structure
     end
 
+    # The AWS Access Key ID specified in the request did not match the
+    # manifest's accessKeyId value. The manifest and the request
+    # authentication must use the same AWS Access Key ID.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class InvalidAccessKeyIdException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The address specified in the manifest is invalid.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class InvalidAddressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more customs parameters was invalid. Please correct and
+    # resubmit.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class InvalidCustomsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # File system specified in export manifest is invalid.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class InvalidFileSystemException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The JOBID was missing, not found, or not associated with the AWS
+    # account.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class InvalidJobIdException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more manifest fields was invalid. Please correct and resubmit.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class InvalidManifestFieldException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more parameters had an invalid value.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The client tool version is invalid.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class InvalidVersionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Representation of a job returned by the ListJobs operation.
     #
     # @!attribute [rw] job_id
@@ -443,6 +584,99 @@ module Aws::ImportExport
     class ListJobsOutput < Struct.new(
       :jobs,
       :is_truncated)
+      include Aws::Structure
+    end
+
+    # Your manifest is not well-formed.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class MalformedManifestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more required customs parameters was missing from the manifest.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class MissingCustomsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more required fields were missing from the manifest file.
+    # Please correct and resubmit.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class MissingManifestFieldException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more required parameters was missing from the request.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class MissingParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Your manifest file contained buckets from multiple regions. A job is
+    # restricted to buckets from one region. Please correct and resubmit.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class MultipleRegionsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified bucket does not exist. Create the specified bucket or
+    # change the manifest's bucket, exportBucket, or logBucket field to a
+    # bucket that the account, as specified by the manifest's Access Key
+    # ID, has write permissions to.
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class NoSuchBucketException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # AWS Import/Export cannot cancel the job
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class UnableToCancelJobIdException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # AWS Import/Export cannot update the job
+    #
+    # @!attribute [rw] message
+    #   The human-readable description of a particular error.
+    #   @return [String]
+    #
+    class UnableToUpdateJobIdException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

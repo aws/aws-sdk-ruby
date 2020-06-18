@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-resourcegroups/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     resource_groups = Aws::ResourceGroups::Client.new
+#     resp = resource_groups.create_group(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Resource Groups all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Resource Groups are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ResourceGroups::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Resource Groups API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-resourcegroups/customizations'
 # @service
 module Aws::ResourceGroups
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.25.1'
 
 end

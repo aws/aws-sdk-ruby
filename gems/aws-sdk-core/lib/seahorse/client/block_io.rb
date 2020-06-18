@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Seahorse
   module Client
     class BlockIO
@@ -11,6 +13,7 @@ module Seahorse
       # @return [Integer]
       def write(chunk)
         @block.call(chunk)
+      ensure
         chunk.bytesize.tap { |chunk_size| @size += chunk_size }
       end
 

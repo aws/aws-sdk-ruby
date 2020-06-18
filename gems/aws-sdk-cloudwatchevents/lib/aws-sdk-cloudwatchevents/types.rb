@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -7,6 +9,24 @@
 
 module Aws::CloudWatchEvents
   module Types
+
+    # @note When making an API call, you may pass ActivateEventSourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EventSourceName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the partner event source to activate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ActivateEventSourceRequest AWS API Documentation
+    #
+    class ActivateEventSourceRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
 
     # This structure specifies the VPC subnets and security groups for the
     # task, and whether a public IP address is to be used. This structure is
@@ -146,6 +166,12 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # There is concurrent modification on a rule or target.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Aws::EmptyStructure; end
+
     # A JSON string which you can use to limit the event bus permissions you
     # are granting to only accounts that fulfill the condition. Currently,
     # the only supported condition is membership in a certain AWS
@@ -189,16 +215,177 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateEventBusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EventBusName", # required
+    #         event_source_name: "EventSourceName",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the new event bus.
+    #
+    #   Event bus names cannot contain the / character. You can't use the
+    #   name `default` for a custom event bus, as this name is already used
+    #   for your account's default event bus.
+    #
+    #   If this is a partner event bus, the name must exactly match the name
+    #   of the partner event source that this event bus is matched to.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source_name
+    #   If you are creating a partner event bus, this specifies the partner
+    #   event source that the new event bus will be matched with.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to associate with the event bus.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreateEventBusRequest AWS API Documentation
+    #
+    class CreateEventBusRequest < Struct.new(
+      :name,
+      :event_source_name,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_bus_arn
+    #   The ARN of the new event bus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreateEventBusResponse AWS API Documentation
+    #
+    class CreateEventBusResponse < Struct.new(
+      :event_bus_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreatePartnerEventSourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EventSourceName", # required
+    #         account: "AccountId", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the partner event source. This name must be unique and
+    #   must be in the format ` partner_name/event_namespace/event_name `.
+    #   The AWS account that wants to use this partner event source must
+    #   create a partner event bus with a name that matches the name of the
+    #   partner event source.
+    #   @return [String]
+    #
+    # @!attribute [rw] account
+    #   The AWS account ID that is permitted to create a matching partner
+    #   event bus for this partner event source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreatePartnerEventSourceRequest AWS API Documentation
+    #
+    class CreatePartnerEventSourceRequest < Struct.new(
+      :name,
+      :account)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_source_arn
+    #   The ARN of the partner event source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreatePartnerEventSourceResponse AWS API Documentation
+    #
+    class CreatePartnerEventSourceResponse < Struct.new(
+      :event_source_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeactivateEventSourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EventSourceName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the partner event source to deactivate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeactivateEventSourceRequest AWS API Documentation
+    #
+    class DeactivateEventSourceRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteEventBusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EventBusName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the event bus to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteEventBusRequest AWS API Documentation
+    #
+    class DeleteEventBusRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeletePartnerEventSourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EventSourceName", # required
+    #         account: "AccountId", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the event source to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] account
+    #   The AWS account ID of the AWS customer that the event source was
+    #   created for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeletePartnerEventSourceRequest AWS API Documentation
+    #
+    class DeletePartnerEventSourceRequest < Struct.new(
+      :name,
+      :account)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteRuleRequest
     #   data as a hash:
     #
     #       {
     #         name: "RuleName", # required
+    #         event_bus_name: "EventBusName",
     #         force: false,
     #       }
     #
     # @!attribute [rw] name
     #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bus_name
+    #   The event bus associated with the rule. If you omit this, the
+    #   default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] force
@@ -213,15 +400,29 @@ module Aws::CloudWatchEvents
     #
     class DeleteRuleRequest < Struct.new(
       :name,
+      :event_bus_name,
       :force)
       include Aws::Structure
     end
 
-    # @api private
+    # @note When making an API call, you may pass DescribeEventBusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EventBusName",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the event bus to show details for. If you omit this, the
+    #   default event bus is displayed.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBusRequest AWS API Documentation
     #
-    class DescribeEventBusRequest < Aws::EmptyStructure; end
+    class DescribeEventBusRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
 
     # @!attribute [rw] name
     #   The name of the event bus. Currently, this is always `default`.
@@ -246,21 +447,122 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeEventSourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EventSourceName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the partner event source to display the details of.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventSourceRequest AWS API Documentation
+    #
+    class DescribeEventSourceRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the partner event source.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   The name of the SaaS partner that created the event source.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the event source was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiration_time
+    #   The date and time that the event source will expire if you do not
+    #   create a matching event bus.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the partner event source.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the event source. If it is ACTIVE, you have already
+    #   created a matching event bus for this event source, and that event
+    #   bus is active. If it is PENDING, either you haven't yet created a
+    #   matching event bus, or that event bus is deactivated. If it is
+    #   DELETED, you have created a matching event bus, but the event source
+    #   has since been deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventSourceResponse AWS API Documentation
+    #
+    class DescribeEventSourceResponse < Struct.new(
+      :arn,
+      :created_by,
+      :creation_time,
+      :expiration_time,
+      :name,
+      :state)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribePartnerEventSourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EventSourceName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the event source to display.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribePartnerEventSourceRequest AWS API Documentation
+    #
+    class DescribePartnerEventSourceRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the event source.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the event source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribePartnerEventSourceResponse AWS API Documentation
+    #
+    class DescribePartnerEventSourceResponse < Struct.new(
+      :arn,
+      :name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeRuleRequest
     #   data as a hash:
     #
     #       {
     #         name: "RuleName", # required
+    #         event_bus_name: "EventBusName",
     #       }
     #
     # @!attribute [rw] name
     #   The name of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] event_bus_name
+    #   The event bus associated with the rule. If you omit this, the
+    #   default event bus is used.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRuleRequest AWS API Documentation
     #
     class DescribeRuleRequest < Struct.new(
-      :name)
+      :name,
+      :event_bus_name)
       include Aws::Structure
     end
 
@@ -274,11 +576,11 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] event_pattern
     #   The event pattern. For more information, see [Events and Event
-    #   Patterns][1] in the *Amazon CloudWatch Events User Guide*.
+    #   Patterns][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression
@@ -305,6 +607,10 @@ module Aws::CloudWatchEvents
     #   created the rule.
     #   @return [String]
     #
+    # @!attribute [rw] event_bus_name
+    #   The event bus associated with the rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRuleResponse AWS API Documentation
     #
     class DescribeRuleResponse < Struct.new(
@@ -315,7 +621,8 @@ module Aws::CloudWatchEvents
       :state,
       :description,
       :role_arn,
-      :managed_by)
+      :managed_by,
+      :event_bus_name)
       include Aws::Structure
     end
 
@@ -324,16 +631,23 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         name: "RuleName", # required
+    #         event_bus_name: "EventBusName",
     #       }
     #
     # @!attribute [rw] name
     #   The name of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] event_bus_name
+    #   The event bus associated with the rule. If you omit this, the
+    #   default event bus is used.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRuleRequest AWS API Documentation
     #
     class DisableRuleRequest < Struct.new(
-      :name)
+      :name,
+      :event_bus_name)
       include Aws::Structure
     end
 
@@ -378,7 +692,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
@@ -403,7 +717,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
     # @!attribute [rw] group
@@ -428,16 +742,100 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         name: "RuleName", # required
+    #         event_bus_name: "EventBusName",
     #       }
     #
     # @!attribute [rw] name
     #   The name of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] event_bus_name
+    #   The event bus associated with the rule. If you omit this, the
+    #   default event bus is used.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRuleRequest AWS API Documentation
     #
     class EnableRuleRequest < Struct.new(
-      :name)
+      :name,
+      :event_bus_name)
+      include Aws::Structure
+    end
+
+    # An event bus receives events from a source and routes them to rules
+    # associated with that event bus. Your account's default event bus
+    # receives rules from AWS services. A custom event bus can receive rules
+    # from AWS services as well as your custom applications and services. A
+    # partner event bus receives events from an event source created by an
+    # SaaS partner. These events come from the partners services or
+    # applications.
+    #
+    # @!attribute [rw] name
+    #   The name of the event bus.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the event bus.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The permissions policy of the event bus, describing which other AWS
+    #   accounts can write events to this event bus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EventBus AWS API Documentation
+    #
+    class EventBus < Struct.new(
+      :name,
+      :arn,
+      :policy)
+      include Aws::Structure
+    end
+
+    # A partner event source is created by an SaaS partner. If a customer
+    # creates a partner event bus that matches this event source, that AWS
+    # account can receive events from the partner's applications or
+    # services.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the event source.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   The name of the partner that created the event source.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time the event source was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiration_time
+    #   The date and time that the event source will expire, if the AWS
+    #   account doesn't create a matching event bus for it.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the event source.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the event source. If it is ACTIVE, you have already
+    #   created a matching event bus for this event source, and that event
+    #   bus is active. If it is PENDING, either you haven't yet created a
+    #   matching event bus, or that event bus is deactivated. If it is
+    #   DELETED, you have created a matching event bus, but the event source
+    #   has since been deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EventSource AWS API Documentation
+    #
+    class EventSource < Struct.new(
+      :arn,
+      :created_by,
+      :creation_time,
+      :expiration_time,
+      :name,
+      :state)
       include Aws::Structure
     end
 
@@ -517,6 +915,24 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # This exception occurs due to unexpected causes.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/InternalException AWS API Documentation
+    #
+    class InternalException < Aws::EmptyStructure; end
+
+    # The event pattern is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/InvalidEventPatternException AWS API Documentation
+    #
+    class InvalidEventPatternException < Aws::EmptyStructure; end
+
+    # The specified state is not a valid state for an event source.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Aws::EmptyStructure; end
+
     # This object enables you to specify a JSON path to extract from the
     # event and use as the partition key for the Amazon Kinesis data stream,
     # so that you can control the shard to which the event goes. If you do
@@ -537,7 +953,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key
+    #   [1]: https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/KinesisParameters AWS API Documentation
@@ -547,17 +963,234 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # You tried to create more rules or add more targets to a rule than is
+    # allowed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass ListEventBusesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name_prefix: "EventBusName",
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] name_prefix
+    #   Specifying this limits the results to only those event buses with
+    #   names that start with the specified prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifying this limits the number of results returned by this
+    #   operation. The operation also returns a NextToken which you can use
+    #   in a subsequent operation to retrieve the next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListEventBusesRequest AWS API Documentation
+    #
+    class ListEventBusesRequest < Struct.new(
+      :name_prefix,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_buses
+    #   This list of event buses.
+    #   @return [Array<Types::EventBus>]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use in a subsequent operation to retrieve the next
+    #   set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListEventBusesResponse AWS API Documentation
+    #
+    class ListEventBusesResponse < Struct.new(
+      :event_buses,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListEventSourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name_prefix: "EventSourceNamePrefix",
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] name_prefix
+    #   Specifying this limits the results to only those partner event
+    #   sources with names that start with the specified prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifying this limits the number of results returned by this
+    #   operation. The operation also returns a NextToken which you can use
+    #   in a subsequent operation to retrieve the next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListEventSourcesRequest AWS API Documentation
+    #
+    class ListEventSourcesRequest < Struct.new(
+      :name_prefix,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_sources
+    #   The list of event sources.
+    #   @return [Array<Types::EventSource>]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use in a subsequent operation to retrieve the next
+    #   set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListEventSourcesResponse AWS API Documentation
+    #
+    class ListEventSourcesResponse < Struct.new(
+      :event_sources,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListPartnerEventSourceAccountsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_source_name: "EventSourceName", # required
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] event_source_name
+    #   The name of the partner event source to display account information
+    #   about.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned by a previous call to this operation. Specifying
+    #   this retrieves the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifying this limits the number of results returned by this
+    #   operation. The operation also returns a NextToken which you can use
+    #   in a subsequent operation to retrieve the next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListPartnerEventSourceAccountsRequest AWS API Documentation
+    #
+    class ListPartnerEventSourceAccountsRequest < Struct.new(
+      :event_source_name,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] partner_event_source_accounts
+    #   The list of partner event sources returned by the operation.
+    #   @return [Array<Types::PartnerEventSourceAccount>]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use in a subsequent operation to retrieve the next
+    #   set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListPartnerEventSourceAccountsResponse AWS API Documentation
+    #
+    class ListPartnerEventSourceAccountsResponse < Struct.new(
+      :partner_event_source_accounts,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListPartnerEventSourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name_prefix: "PartnerEventSourceNamePrefix", # required
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] name_prefix
+    #   If you specify this, the results are limited to only those partner
+    #   event sources that start with the string you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned by a previous call to this operation. Specifying
+    #   this retrieves the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   pecifying this limits the number of results returned by this
+    #   operation. The operation also returns a NextToken which you can use
+    #   in a subsequent operation to retrieve the next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListPartnerEventSourcesRequest AWS API Documentation
+    #
+    class ListPartnerEventSourcesRequest < Struct.new(
+      :name_prefix,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] partner_event_sources
+    #   The list of partner event sources returned by the operation.
+    #   @return [Array<Types::PartnerEventSource>]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use in a subsequent operation to retrieve the next
+    #   set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListPartnerEventSourcesResponse AWS API Documentation
+    #
+    class ListPartnerEventSourcesResponse < Struct.new(
+      :partner_event_sources,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListRuleNamesByTargetRequest
     #   data as a hash:
     #
     #       {
     #         target_arn: "TargetArn", # required
+    #         event_bus_name: "EventBusName",
     #         next_token: "NextToken",
     #         limit: 1,
     #       }
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) of the target resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bus_name
+    #   Limits the results to show only the rules associated with the
+    #   specified event bus.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -573,6 +1206,7 @@ module Aws::CloudWatchEvents
     #
     class ListRuleNamesByTargetRequest < Struct.new(
       :target_arn,
+      :event_bus_name,
       :next_token,
       :limit)
       include Aws::Structure
@@ -600,12 +1234,18 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         name_prefix: "RuleName",
+    #         event_bus_name: "EventBusName",
     #         next_token: "NextToken",
     #         limit: 1,
     #       }
     #
     # @!attribute [rw] name_prefix
     #   The prefix matching the rule name.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bus_name
+    #   Limits the results to show only the rules associated with the
+    #   specified event bus.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -621,6 +1261,7 @@ module Aws::CloudWatchEvents
     #
     class ListRulesRequest < Struct.new(
       :name_prefix,
+      :event_bus_name,
       :next_token,
       :limit)
       include Aws::Structure
@@ -643,17 +1284,53 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the EventBridge resource for which you want to view tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tag keys and values associated with the resource you
+    #   specified
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTargetsByRuleRequest
     #   data as a hash:
     #
     #       {
     #         rule: "RuleName", # required
+    #         event_bus_name: "EventBusName",
     #         next_token: "NextToken",
     #         limit: 1,
     #       }
     #
     # @!attribute [rw] rule
     #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bus_name
+    #   The event bus associated with the rule. If you omit this, the
+    #   default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -669,6 +1346,7 @@ module Aws::CloudWatchEvents
     #
     class ListTargetsByRuleRequest < Struct.new(
       :rule,
+      :event_bus_name,
       :next_token,
       :limit)
       include Aws::Structure
@@ -690,6 +1368,18 @@ module Aws::CloudWatchEvents
       :next_token)
       include Aws::Structure
     end
+
+    # This rule was created by an AWS service on behalf of your account. It
+    # is managed by that service. If you see this error in response to
+    # `DeleteRule` or `RemoveTargets`, you can use the `Force` parameter in
+    # those calls to delete the rule or remove targets from the rule. You
+    # cannot modify these managed rules by using `DisableRule`,
+    # `EnableRule`, `PutTargets`, `PutRule`, `TagResource`, or
+    # `UntagResource`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ManagedRuleException AWS API Documentation
+    #
+    class ManagedRuleException < Aws::EmptyStructure; end
 
     # This structure specifies the network configuration for an ECS task.
     #
@@ -718,6 +1408,68 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # A partner event source is created by an SaaS partner. If a customer
+    # creates a partner event bus that matches this event source, that AWS
+    # account can receive events from the partner's applications or
+    # services.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the partner event source.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the partner event source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PartnerEventSource AWS API Documentation
+    #
+    class PartnerEventSource < Struct.new(
+      :arn,
+      :name)
+      include Aws::Structure
+    end
+
+    # The AWS account that a partner event source has been offered to.
+    #
+    # @!attribute [rw] account
+    #   The AWS account ID that the partner event source was offered to.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time the event source was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiration_time
+    #   The date and time that the event source will expire, if the AWS
+    #   account doesn't create a matching event bus for it.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the event source. If it is ACTIVE, you have already
+    #   created a matching event bus for this event source, and that event
+    #   bus is active. If it is PENDING, either you haven't yet created a
+    #   matching event bus, or that event bus is deactivated. If it is
+    #   DELETED, you have created a matching event bus, but the event source
+    #   has since been deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PartnerEventSourceAccount AWS API Documentation
+    #
+    class PartnerEventSourceAccount < Struct.new(
+      :account,
+      :creation_time,
+      :expiration_time,
+      :state)
+      include Aws::Structure
+    end
+
+    # The event bus policy is too long. For more information, see the
+    # limits.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PolicyLengthExceededException AWS API Documentation
+    #
+    class PolicyLengthExceededException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass PutEventsRequest
     #   data as a hash:
     #
@@ -729,6 +1481,7 @@ module Aws::CloudWatchEvents
     #             resources: ["EventResource"],
     #             detail_type: "String",
     #             detail: "String",
+    #             event_bus_name: "NonPartnerEventBusName",
     #           },
     #         ],
     #       }
@@ -757,6 +1510,7 @@ module Aws::CloudWatchEvents
     #         resources: ["EventResource"],
     #         detail_type: "String",
     #         detail: "String",
+    #         event_bus_name: "NonPartnerEventBusName",
     #       }
     #
     # @!attribute [rw] time
@@ -769,7 +1523,7 @@ module Aws::CloudWatchEvents
     #   @return [Time]
     #
     # @!attribute [rw] source
-    #   The source of the event. This field is required.
+    #   The source of the event.
     #   @return [String]
     #
     # @!attribute [rw] resources
@@ -788,6 +1542,11 @@ module Aws::CloudWatchEvents
     #   string may contain fields and nested subobjects.
     #   @return [String]
     #
+    # @!attribute [rw] event_bus_name
+    #   The event bus that will receive the event. Only the rules that are
+    #   associated with this event bus will be able to match the event.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsRequestEntry AWS API Documentation
     #
     class PutEventsRequestEntry < Struct.new(
@@ -795,7 +1554,8 @@ module Aws::CloudWatchEvents
       :source,
       :resources,
       :detail_type,
-      :detail)
+      :detail,
+      :event_bus_name)
       include Aws::Structure
     end
 
@@ -841,10 +1601,126 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutPartnerEventsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entries: [ # required
+    #           {
+    #             time: Time.now,
+    #             source: "EventSourceName",
+    #             resources: ["EventResource"],
+    #             detail_type: "String",
+    #             detail: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] entries
+    #   The list of events to write to the event bus.
+    #   @return [Array<Types::PutPartnerEventsRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEventsRequest AWS API Documentation
+    #
+    class PutPartnerEventsRequest < Struct.new(
+      :entries)
+      include Aws::Structure
+    end
+
+    # The details about an event generated by an SaaS partner.
+    #
+    # @note When making an API call, you may pass PutPartnerEventsRequestEntry
+    #   data as a hash:
+    #
+    #       {
+    #         time: Time.now,
+    #         source: "EventSourceName",
+    #         resources: ["EventResource"],
+    #         detail_type: "String",
+    #         detail: "String",
+    #       }
+    #
+    # @!attribute [rw] time
+    #   The date and time of the event.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source
+    #   The event source that is generating the evntry.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   AWS resources, identified by Amazon Resource Name (ARN), which the
+    #   event primarily concerns. Any number, including zero, may be
+    #   present.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] detail_type
+    #   A free-form string used to decide what fields to expect in the event
+    #   detail.
+    #   @return [String]
+    #
+    # @!attribute [rw] detail
+    #   A valid JSON string. There is no other schema imposed. The JSON
+    #   string may contain fields and nested subobjects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEventsRequestEntry AWS API Documentation
+    #
+    class PutPartnerEventsRequestEntry < Struct.new(
+      :time,
+      :source,
+      :resources,
+      :detail_type,
+      :detail)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_entry_count
+    #   The number of events from this operation that could not be written
+    #   to the partner event bus.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] entries
+    #   The list of events from this operation that were successfully
+    #   written to the partner event bus.
+    #   @return [Array<Types::PutPartnerEventsResultEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEventsResponse AWS API Documentation
+    #
+    class PutPartnerEventsResponse < Struct.new(
+      :failed_entry_count,
+      :entries)
+      include Aws::Structure
+    end
+
+    # Represents an event that a partner tried to generate, but failed.
+    #
+    # @!attribute [rw] event_id
+    #   The ID of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code that indicates why the event submission failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message that explains why the event submission failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEventsResultEntry AWS API Documentation
+    #
+    class PutPartnerEventsResultEntry < Struct.new(
+      :event_id,
+      :error_code,
+      :error_message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutPermissionRequest
     #   data as a hash:
     #
     #       {
+    #         event_bus_name: "NonPartnerEventBusName",
     #         action: "Action", # required
     #         principal: "Principal", # required
     #         statement_id: "StatementId", # required
@@ -854,6 +1730,11 @@ module Aws::CloudWatchEvents
     #           value: "String", # required
     #         },
     #       }
+    #
+    # @!attribute [rw] event_bus_name
+    #   The event bus associated with the rule. If you omit this, the
+    #   default event bus is used.
+    #   @return [String]
     #
     # @!attribute [rw] action
     #   The action that you are enabling the other account to perform.
@@ -896,12 +1777,13 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
     #   @return [Types::Condition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermissionRequest AWS API Documentation
     #
     class PutPermissionRequest < Struct.new(
+      :event_bus_name,
       :action,
       :principal,
       :statement_id,
@@ -919,6 +1801,13 @@ module Aws::CloudWatchEvents
     #         state: "ENABLED", # accepts ENABLED, DISABLED
     #         description: "RuleDescription",
     #         role_arn: "RoleArn",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #         event_bus_name: "EventBusName",
     #       }
     #
     # @!attribute [rw] name
@@ -932,11 +1821,11 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] event_pattern
     #   The event pattern. For more information, see [Events and Event
-    #   Patterns][1] in the *Amazon CloudWatch Events User Guide*.
+    #   Patterns][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -952,6 +1841,15 @@ module Aws::CloudWatchEvents
     #   rule.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The list of key-value pairs to associate with the rule.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] event_bus_name
+    #   The event bus to associate with this rule. If you omit this, the
+    #   default event bus is used.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRuleRequest AWS API Documentation
     #
     class PutRuleRequest < Struct.new(
@@ -960,7 +1858,9 @@ module Aws::CloudWatchEvents
       :event_pattern,
       :state,
       :description,
-      :role_arn)
+      :role_arn,
+      :tags,
+      :event_bus_name)
       include Aws::Structure
     end
 
@@ -980,6 +1880,7 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         rule: "RuleName", # required
+    #         event_bus_name: "EventBusName",
     #         targets: [ # required
     #           {
     #             id: "TargetId", # required
@@ -1039,6 +1940,11 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] event_bus_name
+    #   The name of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
+    #   @return [String]
+    #
     # @!attribute [rw] targets
     #   The targets to update or add to the rule.
     #   @return [Array<Types::Target>]
@@ -1047,6 +1953,7 @@ module Aws::CloudWatchEvents
     #
     class PutTargetsRequest < Struct.new(
       :rule,
+      :event_bus_name,
       :targets)
       include Aws::Structure
     end
@@ -1097,6 +2004,7 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         statement_id: "StatementId", # required
+    #         event_bus_name: "NonPartnerEventBusName",
     #       }
     #
     # @!attribute [rw] statement_id
@@ -1104,10 +2012,16 @@ module Aws::CloudWatchEvents
     #   allowed to put events to the default event bus.
     #   @return [String]
     #
+    # @!attribute [rw] event_bus_name
+    #   The name of the event bus to revoke permissions for. If you omit
+    #   this, the default event bus is used.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemovePermissionRequest AWS API Documentation
     #
     class RemovePermissionRequest < Struct.new(
-      :statement_id)
+      :statement_id,
+      :event_bus_name)
       include Aws::Structure
     end
 
@@ -1116,12 +2030,17 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         rule: "RuleName", # required
+    #         event_bus_name: "EventBusName",
     #         ids: ["TargetId"], # required
     #         force: false,
     #       }
     #
     # @!attribute [rw] rule
     #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bus_name
+    #   The name of the event bus associated with the rule.
     #   @return [String]
     #
     # @!attribute [rw] ids
@@ -1140,6 +2059,7 @@ module Aws::CloudWatchEvents
     #
     class RemoveTargetsRequest < Struct.new(
       :rule,
+      :event_bus_name,
       :ids,
       :force)
       include Aws::Structure
@@ -1186,7 +2106,19 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Contains information about a rule in Amazon CloudWatch Events.
+    # The resource you are trying to create already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Aws::EmptyStructure; end
+
+    # An entity that you specified does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
+    # Contains information about a rule in Amazon EventBridge.
     #
     # @!attribute [rw] name
     #   The name of the rule.
@@ -1198,11 +2130,11 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] event_pattern
     #   The event pattern of the rule. For more information, see [Events and
-    #   Event Patterns][1] in the *Amazon CloudWatch Events User Guide*.
+    #   Event Patterns][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1229,6 +2161,10 @@ module Aws::CloudWatchEvents
     #   the rule.
     #   @return [String]
     #
+    # @!attribute [rw] event_bus_name
+    #   The event bus associated with the rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Rule AWS API Documentation
     #
     class Rule < Struct.new(
@@ -1239,7 +2175,8 @@ module Aws::CloudWatchEvents
       :description,
       :schedule_expression,
       :role_arn,
-      :managed_by)
+      :managed_by,
+      :event_bus_name)
       include Aws::Structure
     end
 
@@ -1321,6 +2258,67 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # A key-value pair associated with an AWS resource. In EventBridge,
+    # rules and event buses support tagging.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   A string you can use to assign a value. The combination of tag keys
+    #   and values can help you organize and categorize your resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the specified tag key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the EventBridge resource that you're adding tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of key-value pairs to associate with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Targets are the resources to be invoked when a rule is triggered. For
     # a complete list of services and resources that can be set as a target,
     # see PutTargets.
@@ -1330,11 +2328,11 @@ module Aws::CloudWatchEvents
     # organization instead of directly by the account ID, then you must
     # specify a `RoleArn` with proper permissions in the `Target` structure.
     # For more information, see [Sending and Receiving Events Between AWS
-    # Accounts][1] in the *Amazon CloudWatch Events User Guide*.
+    # Accounts][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
     #
     # @note When making an API call, you may pass Target
     #   data as a hash:
@@ -1452,7 +2450,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
     #   @return [Types::EcsParameters]
     #
     # @!attribute [rw] batch_parameters
@@ -1462,7 +2460,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/jobs.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/jobs.html
     #   @return [Types::BatchParameters]
     #
     # @!attribute [rw] sqs_parameters
@@ -1500,11 +2498,11 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] event_pattern
     #   The event pattern. For more information, see [Events and Event
-    #   Patterns][1] in the *Amazon CloudWatch Events User Guide*.
+    #   Patterns][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html
     #   @return [String]
     #
     # @!attribute [rw] event
@@ -1529,6 +2527,35 @@ module Aws::CloudWatchEvents
       :result)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the EventBridge resource from which you are removing
+    #   tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of tag keys to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
   end
 end

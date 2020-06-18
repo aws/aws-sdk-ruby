@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -175,6 +177,12 @@ module Aws::DataPipeline
     InstanceIdentity.add_member(:signature, Shapes::ShapeRef.new(shape: string, location_name: "signature"))
     InstanceIdentity.struct_class = Types::InstanceIdentity
 
+    InternalServiceError.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InternalServiceError.struct_class = Types::InternalServiceError
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     ListPipelinesInput.add_member(:marker, Shapes::ShapeRef.new(shape: string, location_name: "marker"))
     ListPipelinesInput.struct_class = Types::ListPipelinesInput
 
@@ -205,6 +213,9 @@ module Aws::DataPipeline
 
     ParameterValueList.member = Shapes::ShapeRef.new(shape: ParameterValue)
 
+    PipelineDeletedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    PipelineDeletedException.struct_class = Types::PipelineDeletedException
+
     PipelineDescription.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: id, required: true, location_name: "pipelineId"))
     PipelineDescription.add_member(:name, Shapes::ShapeRef.new(shape: id, required: true, location_name: "name"))
     PipelineDescription.add_member(:fields, Shapes::ShapeRef.new(shape: fieldList, required: true, location_name: "fields"))
@@ -217,6 +228,9 @@ module Aws::DataPipeline
     PipelineIdName.add_member(:id, Shapes::ShapeRef.new(shape: id, location_name: "id"))
     PipelineIdName.add_member(:name, Shapes::ShapeRef.new(shape: id, location_name: "name"))
     PipelineIdName.struct_class = Types::PipelineIdName
+
+    PipelineNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    PipelineNotFoundException.struct_class = Types::PipelineNotFoundException
 
     PipelineObject.add_member(:id, Shapes::ShapeRef.new(shape: id, required: true, location_name: "id"))
     PipelineObject.add_member(:name, Shapes::ShapeRef.new(shape: id, required: true, location_name: "name"))
@@ -306,6 +320,9 @@ module Aws::DataPipeline
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: tagKey, required: true, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: tagValue, required: true, location_name: "value"))
     Tag.struct_class = Types::Tag
+
+    TaskNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    TaskNotFoundException.struct_class = Types::TaskNotFoundException
 
     TaskObject.add_member(:task_id, Shapes::ShapeRef.new(shape: taskId, location_name: "taskId"))
     TaskObject.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: id, location_name: "pipelineId"))

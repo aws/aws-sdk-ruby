@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -94,12 +96,18 @@ module Aws::ImportExport
 
     ArtifactList.member = Shapes::ShapeRef.new(shape: Artifact)
 
+    BucketPermissionException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    BucketPermissionException.struct_class = Types::BucketPermissionException
+
     CancelJobInput.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     CancelJobInput.add_member(:api_version, Shapes::ShapeRef.new(shape: APIVersion, location_name: "APIVersion"))
     CancelJobInput.struct_class = Types::CancelJobInput
 
     CancelJobOutput.add_member(:success, Shapes::ShapeRef.new(shape: Success, location_name: "Success"))
     CancelJobOutput.struct_class = Types::CancelJobOutput
+
+    CanceledJobIdException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    CanceledJobIdException.struct_class = Types::CanceledJobIdException
 
     CreateJobInput.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, required: true, location_name: "JobType"))
     CreateJobInput.add_member(:manifest, Shapes::ShapeRef.new(shape: Manifest, required: true, location_name: "Manifest"))
@@ -115,6 +123,12 @@ module Aws::ImportExport
     CreateJobOutput.add_member(:warning_message, Shapes::ShapeRef.new(shape: WarningMessage, location_name: "WarningMessage"))
     CreateJobOutput.add_member(:artifact_list, Shapes::ShapeRef.new(shape: ArtifactList, location_name: "ArtifactList"))
     CreateJobOutput.struct_class = Types::CreateJobOutput
+
+    CreateJobQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    CreateJobQuotaExceededException.struct_class = Types::CreateJobQuotaExceededException
+
+    ExpiredJobIdException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ExpiredJobIdException.struct_class = Types::ExpiredJobIdException
 
     GetShippingLabelInput.add_member(:job_ids, Shapes::ShapeRef.new(shape: JobIdList, required: true, location_name: "jobIds"))
     GetShippingLabelInput.add_member(:name, Shapes::ShapeRef.new(shape: name, location_name: "name"))
@@ -156,6 +170,30 @@ module Aws::ImportExport
     GetStatusOutput.add_member(:artifact_list, Shapes::ShapeRef.new(shape: ArtifactList, location_name: "ArtifactList"))
     GetStatusOutput.struct_class = Types::GetStatusOutput
 
+    InvalidAccessKeyIdException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidAccessKeyIdException.struct_class = Types::InvalidAccessKeyIdException
+
+    InvalidAddressException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidAddressException.struct_class = Types::InvalidAddressException
+
+    InvalidCustomsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidCustomsException.struct_class = Types::InvalidCustomsException
+
+    InvalidFileSystemException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidFileSystemException.struct_class = Types::InvalidFileSystemException
+
+    InvalidJobIdException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidJobIdException.struct_class = Types::InvalidJobIdException
+
+    InvalidManifestFieldException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidManifestFieldException.struct_class = Types::InvalidManifestFieldException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidVersionException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidVersionException.struct_class = Types::InvalidVersionException
+
     Job.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     Job.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
     Job.add_member(:is_canceled, Shapes::ShapeRef.new(shape: IsCanceled, location_name: "IsCanceled"))
@@ -174,6 +212,30 @@ module Aws::ImportExport
     ListJobsOutput.add_member(:jobs, Shapes::ShapeRef.new(shape: JobsList, location_name: "Jobs"))
     ListJobsOutput.add_member(:is_truncated, Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
     ListJobsOutput.struct_class = Types::ListJobsOutput
+
+    MalformedManifestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MalformedManifestException.struct_class = Types::MalformedManifestException
+
+    MissingCustomsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MissingCustomsException.struct_class = Types::MissingCustomsException
+
+    MissingManifestFieldException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MissingManifestFieldException.struct_class = Types::MissingManifestFieldException
+
+    MissingParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MissingParameterException.struct_class = Types::MissingParameterException
+
+    MultipleRegionsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MultipleRegionsException.struct_class = Types::MultipleRegionsException
+
+    NoSuchBucketException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchBucketException.struct_class = Types::NoSuchBucketException
+
+    UnableToCancelJobIdException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnableToCancelJobIdException.struct_class = Types::UnableToCancelJobIdException
+
+    UnableToUpdateJobIdException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnableToUpdateJobIdException.struct_class = Types::UnableToUpdateJobIdException
 
     UpdateJobInput.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     UpdateJobInput.add_member(:manifest, Shapes::ShapeRef.new(shape: Manifest, required: true, location_name: "Manifest"))

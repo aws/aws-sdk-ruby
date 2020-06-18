@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-health/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     health = Aws::Health::Client.new
+#     resp = health.describe_affected_accounts_for_organization(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Health APIs and Notifications all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Health APIs and Notifications are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Health::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Health APIs and Notifications API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-health/customizations'
 # @service
 module Aws::Health
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.26.1'
 
 end

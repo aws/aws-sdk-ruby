@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AutoScaling
+
   class LifecycleHook
 
     extend Aws::Deprecations
@@ -24,6 +27,7 @@ module Aws::AutoScaling
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -66,8 +70,8 @@ module Aws::AutoScaling
       data[:role_arn]
     end
 
-    # Additional information that you want to include any time Amazon EC2
-    # Auto Scaling sends a message to the notification target.
+    # Additional information that is included any time Amazon EC2 Auto
+    # Scaling sends a message to the notification target.
     # @return [String]
     def notification_metadata
       data[:notification_metadata]
@@ -75,8 +79,8 @@ module Aws::AutoScaling
 
     # The maximum time, in seconds, that can elapse before the lifecycle
     # hook times out. If the lifecycle hook times out, Amazon EC2 Auto
-    # Scaling performs the default action. You can prevent the lifecycle
-    # hook from timing out by calling RecordLifecycleActionHeartbeat.
+    # Scaling performs the action that you specified in the `DefaultResult`
+    # parameter.
     # @return [Integer]
     def heartbeat_timeout
       data[:heartbeat_timeout]
@@ -93,8 +97,7 @@ module Aws::AutoScaling
 
     # Defines the action the Auto Scaling group should take when the
     # lifecycle hook timeout elapses or if an unexpected failure occurs. The
-    # valid values are `CONTINUE` and `ABANDON`. The default value is
-    # `CONTINUE`.
+    # possible values are `CONTINUE` and `ABANDON`.
     # @return [String]
     def default_result
       data[:default_result]
@@ -143,7 +146,8 @@ module Aws::AutoScaling
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -156,13 +160,15 @@ module Aws::AutoScaling
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -193,17 +199,16 @@ module Aws::AutoScaling
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -290,25 +295,28 @@ module Aws::AutoScaling
     # @param [Hash] options ({})
     # @option options [String] :lifecycle_transition
     #   The instance state to which you want to attach the lifecycle hook. The
-    #   possible values are:
+    #   valid values are:
     #
     #   * autoscaling:EC2\_INSTANCE\_LAUNCHING
     #
     #   * autoscaling:EC2\_INSTANCE\_TERMINATING
     #
-    #   This parameter is required for new lifecycle hooks, but optional when
-    #   updating existing hooks.
+    #   Conditional: This parameter is required for new lifecycle hooks, but
+    #   optional when updating existing hooks.
     # @option options [String] :role_arn
     #   The ARN of the IAM role that allows the Auto Scaling group to publish
-    #   to the specified notification target.
+    #   to the specified notification target, for example, an Amazon SNS topic
+    #   or an Amazon SQS queue.
     #
-    #   This parameter is required for new lifecycle hooks, but optional when
-    #   updating existing hooks.
+    #   Conditional: This parameter is required for new lifecycle hooks, but
+    #   optional when updating existing hooks.
     # @option options [String] :notification_target_arn
     #   The ARN of the notification target that Amazon EC2 Auto Scaling uses
     #   to notify you when an instance is in the transition state for the
     #   lifecycle hook. This target can be either an SQS queue or an SNS
-    #   topic. If you specify an empty string, this overrides the current ARN.
+    #   topic.
+    #
+    #   If you specify an empty string, this overrides the current ARN.
     #
     #   This operation uses the JSON format when sending notifications to an
     #   Amazon SQS queue, and an email key-value pair format when sending
@@ -318,16 +326,17 @@ module Aws::AutoScaling
     #   it a test message. Test messages contain the following additional
     #   key-value pair: `"Event": "autoscaling:TEST_NOTIFICATION"`.
     # @option options [String] :notification_metadata
-    #   Contains additional information that you want to include any time
-    #   Amazon EC2 Auto Scaling sends a message to the notification target.
+    #   Additional information that you want to include any time Amazon EC2
+    #   Auto Scaling sends a message to the notification target.
     # @option options [Integer] :heartbeat_timeout
     #   The maximum time, in seconds, that can elapse before the lifecycle
-    #   hook times out. The range is from 30 to 7200 seconds. The default is
-    #   3600 seconds (1 hour).
+    #   hook times out. The range is from `30` to `7200` seconds. The default
+    #   value is `3600` seconds (1 hour).
     #
     #   If the lifecycle hook times out, Amazon EC2 Auto Scaling performs the
-    #   default action. You can prevent the lifecycle hook from timing out by
-    #   calling RecordLifecycleActionHeartbeat.
+    #   action that you specified in the `DefaultResult` parameter. You can
+    #   prevent the lifecycle hook from timing out by calling the
+    #   RecordLifecycleActionHeartbeat API.
     # @option options [String] :default_result
     #   Defines the action the Auto Scaling group should take when the
     #   lifecycle hook timeout elapses or if an unexpected failure occurs.

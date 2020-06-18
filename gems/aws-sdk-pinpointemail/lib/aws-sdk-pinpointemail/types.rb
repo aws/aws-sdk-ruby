@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -7,6 +9,52 @@
 
 module Aws::PinpointEmail
   module Types
+
+    # The message can't be sent because the account's ability to send
+    # email has been permanently restricted.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/AccountSuspendedException AWS API Documentation
+    #
+    class AccountSuspendedException < Aws::EmptyStructure; end
+
+    # The resource specified in your request already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Aws::EmptyStructure; end
+
+    # The input you provided is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Aws::EmptyStructure; end
+
+    # An object that contains information about a blacklisting event that
+    # impacts one of the dedicated IP addresses that is associated with your
+    # account.
+    #
+    # @!attribute [rw] rbl_name
+    #   The name of the blacklist that the IP address appears on.
+    #   @return [String]
+    #
+    # @!attribute [rw] listing_time
+    #   The time when the blacklisting event occurred, shown in Unix time
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   Additional information about the blacklisting event, as provided by
+    #   the blacklist maintainer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/BlacklistEntry AWS API Documentation
+    #
+    class BlacklistEntry < Struct.new(
+      :rbl_name,
+      :listing_time,
+      :description)
+      include Aws::Structure
+    end
 
     # Represents the body of the email message.
     #
@@ -125,6 +173,12 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
+    # The resource is being modified by another operation or thread.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Aws::EmptyStructure; end
+
     # An object that represents the content of the email, and optionally a
     # character set specification.
     #
@@ -225,11 +279,12 @@ module Aws::PinpointEmail
     #   data as a hash:
     #
     #       {
-    #         configuration_set_name: "ConfigurationSetName",
+    #         configuration_set_name: "ConfigurationSetName", # required
     #         tracking_options: {
     #           custom_redirect_domain: "CustomRedirectDomain", # required
     #         },
     #         delivery_options: {
+    #           tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #           sending_pool_name: "PoolName",
     #         },
     #         reputation_options: {
@@ -239,6 +294,12 @@ module Aws::PinpointEmail
     #         sending_options: {
     #           sending_enabled: false,
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] configuration_set_name
@@ -266,6 +327,11 @@ module Aws::PinpointEmail
     #   that you send using the configuration set.
     #   @return [Types::SendingOptions]
     #
+    # @!attribute [rw] tags
+    #   An array of objects that define the tags (keys and values) that you
+    #   want to associate with the configuration set.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateConfigurationSetRequest AWS API Documentation
     #
     class CreateConfigurationSetRequest < Struct.new(
@@ -273,7 +339,8 @@ module Aws::PinpointEmail
       :tracking_options,
       :delivery_options,
       :reputation_options,
-      :sending_options)
+      :sending_options,
+      :tags)
       include Aws::Structure
     end
 
@@ -291,16 +358,28 @@ module Aws::PinpointEmail
     #
     #       {
     #         pool_name: "PoolName", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] pool_name
     #   The name of the dedicated IP pool.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An object that defines the tags (keys and values) that you want to
+    #   associate with the pool.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDedicatedIpPoolRequest AWS API Documentation
     #
     class CreateDedicatedIpPoolRequest < Struct.new(
-      :pool_name)
+      :pool_name,
+      :tags)
       include Aws::Structure
     end
 
@@ -311,6 +390,109 @@ module Aws::PinpointEmail
     #
     class CreateDedicatedIpPoolResponse < Aws::EmptyStructure; end
 
+    # A request to perform a predictive inbox placement test. Predictive
+    # inbox placement tests can help you predict how your messages will be
+    # handled by various email providers around the world. When you perform
+    # a predictive inbox placement test, you provide a sample message that
+    # contains the content that you plan to send to your customers. Amazon
+    # Pinpoint then sends that message to special email addresses spread
+    # across several major email providers. After about 24 hours, the test
+    # is complete, and you can use the `GetDeliverabilityTestReport`
+    # operation to view the results of the test.
+    #
+    # @note When making an API call, you may pass CreateDeliverabilityTestReportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         report_name: "ReportName",
+    #         from_email_address: "EmailAddress", # required
+    #         content: { # required
+    #           simple: {
+    #             subject: { # required
+    #               data: "MessageData", # required
+    #               charset: "Charset",
+    #             },
+    #             body: { # required
+    #               text: {
+    #                 data: "MessageData", # required
+    #                 charset: "Charset",
+    #               },
+    #               html: {
+    #                 data: "MessageData", # required
+    #                 charset: "Charset",
+    #               },
+    #             },
+    #           },
+    #           raw: {
+    #             data: "data", # required
+    #           },
+    #           template: {
+    #             template_arn: "TemplateArn",
+    #             template_data: "TemplateData",
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] report_name
+    #   A unique name that helps you to identify the predictive inbox
+    #   placement test when you retrieve the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_email_address
+    #   The email address that the predictive inbox placement test email was
+    #   sent from.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The HTML body of the message that you sent when you performed the
+    #   predictive inbox placement test.
+    #   @return [Types::EmailContent]
+    #
+    # @!attribute [rw] tags
+    #   An array of objects that define the tags (keys and values) that you
+    #   want to associate with the predictive inbox placement test.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDeliverabilityTestReportRequest AWS API Documentation
+    #
+    class CreateDeliverabilityTestReportRequest < Struct.new(
+      :report_name,
+      :from_email_address,
+      :content,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Information about the predictive inbox placement test that you
+    # created.
+    #
+    # @!attribute [rw] report_id
+    #   A unique string that identifies the predictive inbox placement test.
+    #   @return [String]
+    #
+    # @!attribute [rw] deliverability_test_status
+    #   The status of the predictive inbox placement test. If the status is
+    #   `IN_PROGRESS`, then the predictive inbox placement test is currently
+    #   running. Predictive inbox placement tests are usually complete
+    #   within 24 hours of creating the test. If the status is `COMPLETE`,
+    #   then the test is finished, and you can use the
+    #   `GetDeliverabilityTestReport` to view the results of the test.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDeliverabilityTestReportResponse AWS API Documentation
+    #
+    class CreateDeliverabilityTestReportResponse < Struct.new(
+      :report_id,
+      :deliverability_test_status)
+      include Aws::Structure
+    end
+
     # A request to begin the verification process for an email identity (an
     # email address or domain).
     #
@@ -319,16 +501,28 @@ module Aws::PinpointEmail
     #
     #       {
     #         email_identity: "Identity", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] email_identity
     #   The email address or domain that you want to verify.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An array of objects that define the tags (keys and values) that you
+    #   want to associate with the email identity.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateEmailIdentityRequest AWS API Documentation
     #
     class CreateEmailIdentityRequest < Struct.new(
-      :email_identity)
+      :email_identity,
+      :tags)
       include Aws::Structure
     end
 
@@ -351,7 +545,7 @@ module Aws::PinpointEmail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html
     #   @return [Boolean]
     #
     # @!attribute [rw] dkim_attributes
@@ -367,6 +561,33 @@ module Aws::PinpointEmail
       :identity_type,
       :verified_for_sending_status,
       :dkim_attributes)
+      include Aws::Structure
+    end
+
+    # An object that contains information about the volume of email sent on
+    # each day of the analysis period.
+    #
+    # @!attribute [rw] start_date
+    #   The date that the DailyVolume metrics apply to, in Unix time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] volume_statistics
+    #   An object that contains inbox placement metrics for a specific day
+    #   in the analysis period.
+    #   @return [Types::VolumeStatistics]
+    #
+    # @!attribute [rw] domain_isp_placements
+    #   An object that contains inbox placement metrics for a specified day
+    #   in the analysis period, broken out by the recipient's email
+    #   provider.
+    #   @return [Array<Types::DomainIspPlacement>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DailyVolume AWS API Documentation
+    #
+    class DailyVolume < Struct.new(
+      :start_date,
+      :volume_statistics,
+      :domain_isp_placements)
       include Aws::Structure
     end
 
@@ -529,14 +750,71 @@ module Aws::PinpointEmail
     #
     class DeleteEmailIdentityResponse < Aws::EmptyStructure; end
 
+    # An object that contains metadata related to a predictive inbox
+    # placement test.
+    #
+    # @!attribute [rw] report_id
+    #   A unique string that identifies the predictive inbox placement test.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_name
+    #   A name that helps you identify a predictive inbox placement test
+    #   report.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The subject line for an email that you submitted in a predictive
+    #   inbox placement test.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_email_address
+    #   The sender address that you specified for the predictive inbox
+    #   placement test.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_date
+    #   The date and time when the predictive inbox placement test was
+    #   created, in Unix time format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deliverability_test_status
+    #   The status of the predictive inbox placement test. If the status is
+    #   `IN_PROGRESS`, then the predictive inbox placement test is currently
+    #   running. Predictive inbox placement tests are usually complete
+    #   within 24 hours of creating the test. If the status is `COMPLETE`,
+    #   then the test is finished, and you can use the
+    #   `GetDeliverabilityTestReport` to view the results of the test.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeliverabilityTestReport AWS API Documentation
+    #
+    class DeliverabilityTestReport < Struct.new(
+      :report_id,
+      :report_name,
+      :subject,
+      :from_email_address,
+      :create_date,
+      :deliverability_test_status)
+      include Aws::Structure
+    end
+
     # Used to associate a configuration set with a dedicated IP pool.
     #
     # @note When making an API call, you may pass DeliveryOptions
     #   data as a hash:
     #
     #       {
+    #         tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #         sending_pool_name: "PoolName",
     #       }
+    #
+    # @!attribute [rw] tls_policy
+    #   Specifies whether messages that use the configuration set are
+    #   required to use Transport Layer Security (TLS). If the value is
+    #   `Require`, messages are only delivered if a TLS connection can be
+    #   established. If the value is `Optional`, messages can be delivered
+    #   in plain text if a TLS connection can't be established.
+    #   @return [String]
     #
     # @!attribute [rw] sending_pool_name
     #   The name of the dedicated IP pool that you want to associate with
@@ -546,6 +824,7 @@ module Aws::PinpointEmail
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeliveryOptions AWS API Documentation
     #
     class DeliveryOptions < Struct.new(
+      :tls_policy,
       :sending_pool_name)
       include Aws::Structure
     end
@@ -637,6 +916,195 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
+    # An object that contains the deliverability data for a specific
+    # campaign. This data is available for a campaign only if the campaign
+    # sent email by using a domain that the Deliverability dashboard is
+    # enabled for (`PutDeliverabilityDashboardOption` operation).
+    #
+    # @!attribute [rw] campaign_id
+    #   The unique identifier for the campaign. Amazon Pinpoint
+    #   automatically generates and assigns this identifier to a campaign.
+    #   This value is not the same as the campaign identifier that Amazon
+    #   Pinpoint assigns to campaigns that you create and manage by using
+    #   the Amazon Pinpoint API or the Amazon Pinpoint console.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_url
+    #   The URL of an image that contains a snapshot of the email message
+    #   that was sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The subject line, or title, of the email message.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_address
+    #   The verified email address that the email message was sent from.
+    #   @return [String]
+    #
+    # @!attribute [rw] sending_ips
+    #   The IP addresses that were used to send the email message.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] first_seen_date_time
+    #   The first time, in Unix time format, when the email message was
+    #   delivered to any recipient's inbox. This value can help you
+    #   determine how long it took for a campaign to deliver an email
+    #   message.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_seen_date_time
+    #   The last time, in Unix time format, when the email message was
+    #   delivered to any recipient's inbox. This value can help you
+    #   determine how long it took for a campaign to deliver an email
+    #   message.
+    #   @return [Time]
+    #
+    # @!attribute [rw] inbox_count
+    #   The number of email messages that were delivered to recipients’
+    #   inboxes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] spam_count
+    #   The number of email messages that were delivered to recipients'
+    #   spam or junk mail folders.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] read_rate
+    #   The percentage of email messages that were opened by recipients. Due
+    #   to technical limitations, this value only includes recipients who
+    #   opened the message by using an email client that supports images.
+    #   @return [Float]
+    #
+    # @!attribute [rw] delete_rate
+    #   The percentage of email messages that were deleted by recipients,
+    #   without being opened first. Due to technical limitations, this value
+    #   only includes recipients who opened the message by using an email
+    #   client that supports images.
+    #   @return [Float]
+    #
+    # @!attribute [rw] read_delete_rate
+    #   The percentage of email messages that were opened and then deleted
+    #   by recipients. Due to technical limitations, this value only
+    #   includes recipients who opened the message by using an email client
+    #   that supports images.
+    #   @return [Float]
+    #
+    # @!attribute [rw] projected_volume
+    #   The projected number of recipients that the email message was sent
+    #   to.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] esps
+    #   The major email providers who handled the email message.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DomainDeliverabilityCampaign AWS API Documentation
+    #
+    class DomainDeliverabilityCampaign < Struct.new(
+      :campaign_id,
+      :image_url,
+      :subject,
+      :from_address,
+      :sending_ips,
+      :first_seen_date_time,
+      :last_seen_date_time,
+      :inbox_count,
+      :spam_count,
+      :read_rate,
+      :delete_rate,
+      :read_delete_rate,
+      :projected_volume,
+      :esps)
+      include Aws::Structure
+    end
+
+    # An object that contains information about the Deliverability dashboard
+    # subscription for a verified domain that you use to send email and
+    # currently has an active Deliverability dashboard subscription. If a
+    # Deliverability dashboard subscription is active for a domain, you gain
+    # access to reputation, inbox placement, and other metrics for the
+    # domain.
+    #
+    # @note When making an API call, you may pass DomainDeliverabilityTrackingOption
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "Domain",
+    #         subscription_start_date: Time.now,
+    #         inbox_placement_tracking_option: {
+    #           global: false,
+    #           tracked_isps: ["IspName"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   A verified domain that’s associated with your AWS account and
+    #   currently has an active Deliverability dashboard subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_start_date
+    #   The date, in Unix time format, when you enabled the Deliverability
+    #   dashboard for the domain.
+    #   @return [Time]
+    #
+    # @!attribute [rw] inbox_placement_tracking_option
+    #   An object that contains information about the inbox placement data
+    #   settings for the domain.
+    #   @return [Types::InboxPlacementTrackingOption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DomainDeliverabilityTrackingOption AWS API Documentation
+    #
+    class DomainDeliverabilityTrackingOption < Struct.new(
+      :domain,
+      :subscription_start_date,
+      :inbox_placement_tracking_option)
+      include Aws::Structure
+    end
+
+    # An object that contains inbox placement data for email sent from one
+    # of your email domains to a specific email provider.
+    #
+    # @!attribute [rw] isp_name
+    #   The name of the email provider that the inbox placement data applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbox_raw_count
+    #   The total number of messages that were sent from the selected domain
+    #   to the specified email provider that arrived in recipients'
+    #   inboxes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] spam_raw_count
+    #   The total number of messages that were sent from the selected domain
+    #   to the specified email provider that arrived in recipients' spam or
+    #   junk mail folders.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] inbox_percentage
+    #   The percentage of messages that were sent from the selected domain
+    #   to the specified email provider that arrived in recipients'
+    #   inboxes.
+    #   @return [Float]
+    #
+    # @!attribute [rw] spam_percentage
+    #   The percentage of messages that were sent from the selected domain
+    #   to the specified email provider that arrived in recipients' spam or
+    #   junk mail folders.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DomainIspPlacement AWS API Documentation
+    #
+    class DomainIspPlacement < Struct.new(
+      :isp_name,
+      :inbox_raw_count,
+      :spam_raw_count,
+      :inbox_percentage,
+      :spam_percentage)
+      include Aws::Structure
+    end
+
     # An object that defines the entire content of the email, including the
     # message headers and the body content. You can create a simple email
     # message, in which you specify the subject and the text and HTML
@@ -666,6 +1134,10 @@ module Aws::PinpointEmail
     #         },
     #         raw: {
     #           data: "data", # required
+    #         },
+    #         template: {
+    #           template_arn: "TemplateArn",
+    #           template_data: "TemplateData",
     #         },
     #       }
     #
@@ -703,11 +1175,16 @@ module Aws::PinpointEmail
     #   [1]: https://tools.ietf.org/html/rfc5321
     #   @return [Types::RawMessage]
     #
+    # @!attribute [rw] template
+    #   The template to use for the email message.
+    #   @return [Types::Template]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/EmailContent AWS API Documentation
     #
     class EmailContent < Struct.new(
       :simple,
-      :raw)
+      :raw,
+      :template)
       include Aws::Structure
     end
 
@@ -932,6 +1409,43 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
+    # A request to retrieve a list of the blacklists that your dedicated IP
+    # addresses appear on.
+    #
+    # @note When making an API call, you may pass GetBlacklistReportsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         blacklist_item_names: ["BlacklistItemName"], # required
+    #       }
+    #
+    # @!attribute [rw] blacklist_item_names
+    #   A list of IP addresses that you want to retrieve blacklist
+    #   information about. You can only specify the dedicated IP addresses
+    #   that you use to send email using Amazon Pinpoint or Amazon SES.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetBlacklistReportsRequest AWS API Documentation
+    #
+    class GetBlacklistReportsRequest < Struct.new(
+      :blacklist_item_names)
+      include Aws::Structure
+    end
+
+    # An object that contains information about blacklist events.
+    #
+    # @!attribute [rw] blacklist_report
+    #   An object that contains information about a blacklist that one of
+    #   your dedicated IP addresses appears on.
+    #   @return [Hash<String,Array<Types::BlacklistEntry>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetBlacklistReportsResponse AWS API Documentation
+    #
+    class GetBlacklistReportsResponse < Struct.new(
+      :blacklist_report)
+      include Aws::Structure
+    end
+
     # A request to obtain information about the event destinations for a
     # configuration set.
     #
@@ -1016,6 +1530,11 @@ module Aws::PinpointEmail
     #   that you send using the configuration set.
     #   @return [Types::SendingOptions]
     #
+    # @!attribute [rw] tags
+    #   An array of objects that define the tags (keys and values) that are
+    #   associated with the configuration set.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetConfigurationSetResponse AWS API Documentation
     #
     class GetConfigurationSetResponse < Struct.new(
@@ -1023,7 +1542,8 @@ module Aws::PinpointEmail
       :tracking_options,
       :delivery_options,
       :reputation_options,
-      :sending_options)
+      :sending_options,
+      :tags)
       include Aws::Structure
     end
 
@@ -1124,6 +1644,239 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
+    # Retrieve information about the status of the Deliverability dashboard
+    # for your Amazon Pinpoint account. When the Deliverability dashboard is
+    # enabled, you gain access to reputation, deliverability, and other
+    # metrics for the domains that you use to send email using Amazon
+    # Pinpoint. You also gain the ability to perform predictive inbox
+    # placement tests.
+    #
+    # When you use the Deliverability dashboard, you pay a monthly
+    # subscription charge, in addition to any other fees that you accrue by
+    # using Amazon Pinpoint. For more information about the features and
+    # cost of a Deliverability dashboard subscription, see [Amazon Pinpoint
+    # Pricing][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/pinpoint/pricing/
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityDashboardOptionsRequest AWS API Documentation
+    #
+    class GetDeliverabilityDashboardOptionsRequest < Aws::EmptyStructure; end
+
+    # An object that shows the status of the Deliverability dashboard for
+    # your Amazon Pinpoint account.
+    #
+    # @!attribute [rw] dashboard_enabled
+    #   Specifies whether the Deliverability dashboard is enabled for your
+    #   Amazon Pinpoint account. If this value is `true`, the dashboard is
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] subscription_expiry_date
+    #   The date, in Unix time format, when your current subscription to the
+    #   Deliverability dashboard is scheduled to expire, if your
+    #   subscription is scheduled to expire at the end of the current
+    #   calendar month. This value is null if you have an active
+    #   subscription that isn’t due to expire at the end of the month.
+    #   @return [Time]
+    #
+    # @!attribute [rw] account_status
+    #   The current status of your Deliverability dashboard subscription. If
+    #   this value is `PENDING_EXPIRATION`, your subscription is scheduled
+    #   to expire at the end of the current calendar month.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_subscribed_domains
+    #   An array of objects, one for each verified domain that you use to
+    #   send email and currently has an active Deliverability dashboard
+    #   subscription that isn’t scheduled to expire at the end of the
+    #   current calendar month.
+    #   @return [Array<Types::DomainDeliverabilityTrackingOption>]
+    #
+    # @!attribute [rw] pending_expiration_subscribed_domains
+    #   An array of objects, one for each verified domain that you use to
+    #   send email and currently has an active Deliverability dashboard
+    #   subscription that's scheduled to expire at the end of the current
+    #   calendar month.
+    #   @return [Array<Types::DomainDeliverabilityTrackingOption>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityDashboardOptionsResponse AWS API Documentation
+    #
+    class GetDeliverabilityDashboardOptionsResponse < Struct.new(
+      :dashboard_enabled,
+      :subscription_expiry_date,
+      :account_status,
+      :active_subscribed_domains,
+      :pending_expiration_subscribed_domains)
+      include Aws::Structure
+    end
+
+    # A request to retrieve the results of a predictive inbox placement
+    # test.
+    #
+    # @note When making an API call, you may pass GetDeliverabilityTestReportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         report_id: "ReportId", # required
+    #       }
+    #
+    # @!attribute [rw] report_id
+    #   A unique string that identifies the predictive inbox placement test.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityTestReportRequest AWS API Documentation
+    #
+    class GetDeliverabilityTestReportRequest < Struct.new(
+      :report_id)
+      include Aws::Structure
+    end
+
+    # The results of the predictive inbox placement test.
+    #
+    # @!attribute [rw] deliverability_test_report
+    #   An object that contains the results of the predictive inbox
+    #   placement test.
+    #   @return [Types::DeliverabilityTestReport]
+    #
+    # @!attribute [rw] overall_placement
+    #   An object that specifies how many test messages that were sent
+    #   during the predictive inbox placement test were delivered to
+    #   recipients' inboxes, how many were sent to recipients' spam
+    #   folders, and how many weren't delivered.
+    #   @return [Types::PlacementStatistics]
+    #
+    # @!attribute [rw] isp_placements
+    #   An object that describes how the test email was handled by several
+    #   email providers, including Gmail, Hotmail, Yahoo, AOL, and others.
+    #   @return [Array<Types::IspPlacement>]
+    #
+    # @!attribute [rw] message
+    #   An object that contains the message that you sent when you performed
+    #   this predictive inbox placement test.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of objects that define the tags (keys and values) that are
+    #   associated with the predictive inbox placement test.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityTestReportResponse AWS API Documentation
+    #
+    class GetDeliverabilityTestReportResponse < Struct.new(
+      :deliverability_test_report,
+      :overall_placement,
+      :isp_placements,
+      :message,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Retrieve all the deliverability data for a specific campaign. This
+    # data is available for a campaign only if the campaign sent email by
+    # using a domain that the Deliverability dashboard is enabled for
+    # (`PutDeliverabilityDashboardOption` operation).
+    #
+    # @note When making an API call, you may pass GetDomainDeliverabilityCampaignRequest
+    #   data as a hash:
+    #
+    #       {
+    #         campaign_id: "CampaignId", # required
+    #       }
+    #
+    # @!attribute [rw] campaign_id
+    #   The unique identifier for the campaign. Amazon Pinpoint
+    #   automatically generates and assigns this identifier to a campaign.
+    #   This value is not the same as the campaign identifier that Amazon
+    #   Pinpoint assigns to campaigns that you create and manage by using
+    #   the Amazon Pinpoint API or the Amazon Pinpoint console.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainDeliverabilityCampaignRequest AWS API Documentation
+    #
+    class GetDomainDeliverabilityCampaignRequest < Struct.new(
+      :campaign_id)
+      include Aws::Structure
+    end
+
+    # An object that contains all the deliverability data for a specific
+    # campaign. This data is available for a campaign only if the campaign
+    # sent email by using a domain that the Deliverability dashboard is
+    # enabled for (`PutDeliverabilityDashboardOption` operation).
+    #
+    # @!attribute [rw] domain_deliverability_campaign
+    #   An object that contains the deliverability data for the campaign.
+    #   @return [Types::DomainDeliverabilityCampaign]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainDeliverabilityCampaignResponse AWS API Documentation
+    #
+    class GetDomainDeliverabilityCampaignResponse < Struct.new(
+      :domain_deliverability_campaign)
+      include Aws::Structure
+    end
+
+    # A request to obtain deliverability metrics for a domain.
+    #
+    # @note When making an API call, you may pass GetDomainStatisticsReportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "Identity", # required
+    #         start_date: Time.now, # required
+    #         end_date: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The domain that you want to obtain deliverability metrics for.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The first day (in Unix time) that you want to obtain domain
+    #   deliverability metrics for.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The last day (in Unix time) that you want to obtain domain
+    #   deliverability metrics for. The `EndDate` that you specify has to be
+    #   less than or equal to 30 days after the `StartDate`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainStatisticsReportRequest AWS API Documentation
+    #
+    class GetDomainStatisticsReportRequest < Struct.new(
+      :domain,
+      :start_date,
+      :end_date)
+      include Aws::Structure
+    end
+
+    # An object that includes statistics that are related to the domain that
+    # you specified.
+    #
+    # @!attribute [rw] overall_volume
+    #   An object that contains deliverability metrics for the domain that
+    #   you specified. The data in this object is a summary of all of the
+    #   data that was collected from the `StartDate` to the `EndDate`.
+    #   @return [Types::OverallVolume]
+    #
+    # @!attribute [rw] daily_volumes
+    #   An object that contains deliverability metrics for the domain that
+    #   you specified. This object contains data for each day, starting on
+    #   the `StartDate` and ending on the `EndDate`.
+    #   @return [Array<Types::DailyVolume>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainStatisticsReportResponse AWS API Documentation
+    #
+    class GetDomainStatisticsReportResponse < Struct.new(
+      :overall_volume,
+      :daily_volumes)
+      include Aws::Structure
+    end
+
     # A request to return details about an email identity.
     #
     # @note When making an API call, you may pass GetEmailIdentityRequest
@@ -1175,7 +1928,7 @@ module Aws::PinpointEmail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html
     #   @return [Boolean]
     #
     # @!attribute [rw] dkim_attributes
@@ -1190,6 +1943,11 @@ module Aws::PinpointEmail
     #   for the email identity.
     #   @return [Types::MailFromAttributes]
     #
+    # @!attribute [rw] tags
+    #   An array of objects that define the tags (keys and values) that are
+    #   associated with the email identity.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetEmailIdentityResponse AWS API Documentation
     #
     class GetEmailIdentityResponse < Struct.new(
@@ -1197,7 +1955,8 @@ module Aws::PinpointEmail
       :feedback_forwarding_status,
       :verified_for_sending_status,
       :dkim_attributes,
-      :mail_from_attributes)
+      :mail_from_attributes,
+      :tags)
       include Aws::Structure
     end
 
@@ -1237,6 +1996,59 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
+    # An object that contains information about the inbox placement data
+    # settings for a verified domain that’s associated with your AWS
+    # account. This data is available only if you enabled the Deliverability
+    # dashboard for the domain (`PutDeliverabilityDashboardOption`
+    # operation).
+    #
+    # @note When making an API call, you may pass InboxPlacementTrackingOption
+    #   data as a hash:
+    #
+    #       {
+    #         global: false,
+    #         tracked_isps: ["IspName"],
+    #       }
+    #
+    # @!attribute [rw] global
+    #   Specifies whether inbox placement data is being tracked for the
+    #   domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tracked_isps
+    #   An array of strings, one for each major email provider that the
+    #   inbox placement data applies to.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/InboxPlacementTrackingOption AWS API Documentation
+    #
+    class InboxPlacementTrackingOption < Struct.new(
+      :global,
+      :tracked_isps)
+      include Aws::Structure
+    end
+
+    # An object that describes how email sent during the predictive inbox
+    # placement test was handled by a certain email provider.
+    #
+    # @!attribute [rw] isp_name
+    #   The name of the email provider that the inbox placement data applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] placement_statistics
+    #   An object that contains inbox placement metrics for a specific email
+    #   provider.
+    #   @return [Types::PlacementStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/IspPlacement AWS API Documentation
+    #
+    class IspPlacement < Struct.new(
+      :isp_name,
+      :placement_statistics)
+      include Aws::Structure
+    end
+
     # An object that defines an Amazon Kinesis Data Firehose destination for
     # email events. You can use Amazon Kinesis Data Firehose to stream data
     # to other services, such as Amazon S3 and Amazon Redshift.
@@ -1267,6 +2079,12 @@ module Aws::PinpointEmail
       :delivery_stream_arn)
       include Aws::Structure
     end
+
+    # There are too many instances of the specified resource type.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # A request to obtain a list of configuration sets for your Amazon
     # Pinpoint account in the current AWS Region.
@@ -1374,6 +2192,149 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
+    # A request to list all of the predictive inbox placement tests that
+    # you've performed.
+    #
+    # @note When making an API call, you may pass ListDeliverabilityTestReportsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         page_size: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a previous call to
+    #   `ListDeliverabilityTestReports` to indicate the position in the list
+    #   of predictive inbox placement tests.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The number of results to show in a single call to
+    #   `ListDeliverabilityTestReports`. If the number of results is larger
+    #   than the number you specified in this parameter, then the response
+    #   includes a `NextToken` element, which you can use to obtain
+    #   additional results.
+    #
+    #   The value you specify has to be at least 0, and can be no more than
+    #   1000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDeliverabilityTestReportsRequest AWS API Documentation
+    #
+    class ListDeliverabilityTestReportsRequest < Struct.new(
+      :next_token,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # A list of the predictive inbox placement test reports that are
+    # available for your account, regardless of whether or not those tests
+    # are complete.
+    #
+    # @!attribute [rw] deliverability_test_reports
+    #   An object that contains a lists of predictive inbox placement tests
+    #   that you've performed.
+    #   @return [Array<Types::DeliverabilityTestReport>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there are additional predictive inbox
+    #   placement tests to list. To view additional predictive inbox
+    #   placement tests, issue another request to
+    #   `ListDeliverabilityTestReports`, and pass this token in the
+    #   `NextToken` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDeliverabilityTestReportsResponse AWS API Documentation
+    #
+    class ListDeliverabilityTestReportsResponse < Struct.new(
+      :deliverability_test_reports,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Retrieve deliverability data for all the campaigns that used a
+    # specific domain to send email during a specified time range. This data
+    # is available for a domain only if you enabled the Deliverability
+    # dashboard (`PutDeliverabilityDashboardOption` operation) for the
+    # domain.
+    #
+    # @note When making an API call, you may pass ListDomainDeliverabilityCampaignsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         start_date: Time.now, # required
+    #         end_date: Time.now, # required
+    #         subscribed_domain: "Domain", # required
+    #         next_token: "NextToken",
+    #         page_size: 1,
+    #       }
+    #
+    # @!attribute [rw] start_date
+    #   The first day, in Unix time format, that you want to obtain
+    #   deliverability data for.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The last day, in Unix time format, that you want to obtain
+    #   deliverability data for. This value has to be less than or equal to
+    #   30 days after the value of the `StartDate` parameter.
+    #   @return [Time]
+    #
+    # @!attribute [rw] subscribed_domain
+    #   The domain to obtain deliverability data for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token that’s returned from a previous call to the
+    #   `ListDomainDeliverabilityCampaigns` operation. This token indicates
+    #   the position of a campaign in the list of campaigns.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of results to include in response to a single
+    #   call to the `ListDomainDeliverabilityCampaigns` operation. If the
+    #   number of results is larger than the number that you specify in this
+    #   parameter, the response includes a `NextToken` element, which you
+    #   can use to obtain additional results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDomainDeliverabilityCampaignsRequest AWS API Documentation
+    #
+    class ListDomainDeliverabilityCampaignsRequest < Struct.new(
+      :start_date,
+      :end_date,
+      :subscribed_domain,
+      :next_token,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # An array of objects that provide deliverability data for all the
+    # campaigns that used a specific domain to send email during a specified
+    # time range. This data is available for a domain only if you enabled
+    # the Deliverability dashboard (`PutDeliverabilityDashboardOption`
+    # operation) for the domain.
+    #
+    # @!attribute [rw] domain_deliverability_campaigns
+    #   An array of responses, one for each campaign that used the domain to
+    #   send email during the specified time range.
+    #   @return [Array<Types::DomainDeliverabilityCampaign>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that’s returned from a previous call to the
+    #   `ListDomainDeliverabilityCampaigns` operation. This token indicates
+    #   the position of the campaign in the list of campaigns.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDomainDeliverabilityCampaignsResponse AWS API Documentation
+    #
+    class ListDomainDeliverabilityCampaignsResponse < Struct.new(
+      :domain_deliverability_campaigns,
+      :next_token)
+      include Aws::Structure
+    end
+
     # A request to list all of the email identities associated with your
     # Amazon Pinpoint account. This list includes identities that you've
     # already verified, identities that are unverified, and identities that
@@ -1434,6 +2395,38 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   retrieve tag information for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   An array that lists all the tags that are associated with the
+    #   resource. Each tag consists of a required tag key (`Key`) and an
+    #   associated tag value (`Value`)
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # A list of attributes that are associated with a MAIL FROM domain.
     #
     # @!attribute [rw] mail_from_domain
@@ -1480,6 +2473,12 @@ module Aws::PinpointEmail
       :behavior_on_mx_failure)
       include Aws::Structure
     end
+
+    # The message can't be sent because the sending domain isn't verified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/MailFromDomainNotVerifiedException AWS API Documentation
+    #
+    class MailFromDomainNotVerifiedException < Aws::EmptyStructure; end
 
     # Represents the email message that you're sending. The `Message`
     # object consists of a subject line and a message body.
@@ -1528,6 +2527,12 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
+    # The message can't be sent because it contains invalid content.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/MessageRejected AWS API Documentation
+    #
+    class MessageRejected < Aws::EmptyStructure; end
+
     # Contains the name and value of a tag that you apply to an email. You
     # can use message tags when you publish email sending events.
     #
@@ -1567,6 +2572,39 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
+    # The resource you attempted to access doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Aws::EmptyStructure; end
+
+    # An object that contains information about email that was sent from the
+    # selected domain.
+    #
+    # @!attribute [rw] volume_statistics
+    #   An object that contains information about the numbers of messages
+    #   that arrived in recipients' inboxes and junk mail folders.
+    #   @return [Types::VolumeStatistics]
+    #
+    # @!attribute [rw] read_rate_percent
+    #   The percentage of emails that were sent from the domain that were
+    #   read by their recipients.
+    #   @return [Float]
+    #
+    # @!attribute [rw] domain_isp_placements
+    #   An object that contains inbox and junk mail placement metrics for
+    #   individual email providers.
+    #   @return [Array<Types::DomainIspPlacement>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/OverallVolume AWS API Documentation
+    #
+    class OverallVolume < Struct.new(
+      :volume_statistics,
+      :read_rate_percent,
+      :domain_isp_placements)
+      include Aws::Structure
+    end
+
     # An object that defines a Amazon Pinpoint destination for email events.
     # You can use Amazon Pinpoint events to create attributes in Amazon
     # Pinpoint projects. You can use these attributes to create segments for
@@ -1588,6 +2626,44 @@ module Aws::PinpointEmail
     #
     class PinpointDestination < Struct.new(
       :application_arn)
+      include Aws::Structure
+    end
+
+    # An object that contains inbox placement data for an email provider.
+    #
+    # @!attribute [rw] inbox_percentage
+    #   The percentage of emails that arrived in recipients' inboxes during
+    #   the predictive inbox placement test.
+    #   @return [Float]
+    #
+    # @!attribute [rw] spam_percentage
+    #   The percentage of emails that arrived in recipients' spam or junk
+    #   mail folders during the predictive inbox placement test.
+    #   @return [Float]
+    #
+    # @!attribute [rw] missing_percentage
+    #   The percentage of emails that didn't arrive in recipients' inboxes
+    #   at all during the predictive inbox placement test.
+    #   @return [Float]
+    #
+    # @!attribute [rw] spf_percentage
+    #   The percentage of emails that were authenticated by using Sender
+    #   Policy Framework (SPF) during the predictive inbox placement test.
+    #   @return [Float]
+    #
+    # @!attribute [rw] dkim_percentage
+    #   The percentage of emails that were authenticated by using DomainKeys
+    #   Identified Mail (DKIM) during the predictive inbox placement test.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PlacementStatistics AWS API Documentation
+    #
+    class PlacementStatistics < Struct.new(
+      :inbox_percentage,
+      :spam_percentage,
+      :missing_percentage,
+      :spf_percentage,
+      :dkim_percentage)
       include Aws::Structure
     end
 
@@ -1663,12 +2739,21 @@ module Aws::PinpointEmail
     #
     #       {
     #         configuration_set_name: "ConfigurationSetName", # required
+    #         tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #         sending_pool_name: "SendingPoolName",
     #       }
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that you want to associate with a
     #   dedicated IP pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_policy
+    #   Specifies whether messages that use the configuration set are
+    #   required to use Transport Layer Security (TLS). If the value is
+    #   `Require`, messages are only delivered if a TLS connection can be
+    #   established. If the value is `Optional`, messages can be delivered
+    #   in plain text if a TLS connection can't be established.
     #   @return [String]
     #
     # @!attribute [rw] sending_pool_name
@@ -1680,6 +2765,7 @@ module Aws::PinpointEmail
     #
     class PutConfigurationSetDeliveryOptionsRequest < Struct.new(
       :configuration_set_name,
+      :tls_policy,
       :sending_pool_name)
       include Aws::Structure
     end
@@ -1828,6 +2914,9 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDedicatedIpInPoolResponse AWS API Documentation
     #
     class PutDedicatedIpInPoolResponse < Aws::EmptyStructure; end
@@ -1868,6 +2957,65 @@ module Aws::PinpointEmail
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDedicatedIpWarmupAttributesResponse AWS API Documentation
     #
     class PutDedicatedIpWarmupAttributesResponse < Aws::EmptyStructure; end
+
+    # Enable or disable the Deliverability dashboard for your Amazon
+    # Pinpoint account. When you enable the Deliverability dashboard, you
+    # gain access to reputation, deliverability, and other metrics for the
+    # domains that you use to send email using Amazon Pinpoint. You also
+    # gain the ability to perform predictive inbox placement tests.
+    #
+    # When you use the Deliverability dashboard, you pay a monthly
+    # subscription charge, in addition to any other fees that you accrue by
+    # using Amazon Pinpoint. For more information about the features and
+    # cost of a Deliverability dashboard subscription, see [Amazon Pinpoint
+    # Pricing][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/pinpoint/pricing/
+    #
+    # @note When making an API call, you may pass PutDeliverabilityDashboardOptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dashboard_enabled: false, # required
+    #         subscribed_domains: [
+    #           {
+    #             domain: "Domain",
+    #             subscription_start_date: Time.now,
+    #             inbox_placement_tracking_option: {
+    #               global: false,
+    #               tracked_isps: ["IspName"],
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dashboard_enabled
+    #   Specifies whether to enable the Deliverability dashboard for your
+    #   Amazon Pinpoint account. To enable the dashboard, set this value to
+    #   `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] subscribed_domains
+    #   An array of objects, one for each verified domain that you use to
+    #   send email and enabled the Deliverability dashboard for.
+    #   @return [Array<Types::DomainDeliverabilityTrackingOption>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDeliverabilityDashboardOptionRequest AWS API Documentation
+    #
+    class PutDeliverabilityDashboardOptionRequest < Struct.new(
+      :dashboard_enabled,
+      :subscribed_domains)
+      include Aws::Structure
+    end
+
+    # A response that indicates whether the Deliverability dashboard is
+    # enabled for your Amazon Pinpoint account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDeliverabilityDashboardOptionResponse AWS API Documentation
+    #
+    class PutDeliverabilityDashboardOptionResponse < Aws::EmptyStructure; end
 
     # A request to enable or disable DKIM signing of email that you send
     # from an email identity.
@@ -2077,9 +3225,9 @@ module Aws::PinpointEmail
     #   @return [Boolean]
     #
     # @!attribute [rw] last_fresh_start
-    #   The date and time when the reputation metrics were last given a
-    #   fresh start. When your account is given a fresh start, your
-    #   reputation metrics are calculated starting from the date of the
+    #   The date and time (in Unix time) when the reputation metrics were
+    #   last given a fresh start. When your account is given a fresh start,
+    #   your reputation metrics are calculated starting from the date of the
     #   fresh start.
     #   @return [Time]
     #
@@ -2124,6 +3272,10 @@ module Aws::PinpointEmail
     #           },
     #           raw: {
     #             data: "data", # required
+    #           },
+    #           template: {
+    #             template_arn: "TemplateArn",
+    #             template_data: "TemplateData",
     #           },
     #         },
     #         email_tags: [
@@ -2259,6 +3411,13 @@ module Aws::PinpointEmail
       include Aws::Structure
     end
 
+    # The message can't be sent because the account's ability to send
+    # email is currently paused.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/SendingPausedException AWS API Documentation
+    #
+    class SendingPausedException < Aws::EmptyStructure; end
+
     # An object that defines an Amazon SNS destination for email events. You
     # can use Amazon SNS to send notification when certain email events
     # occur.
@@ -2277,7 +3436,7 @@ module Aws::PinpointEmail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/SnsDestination AWS API Documentation
@@ -2286,6 +3445,136 @@ module Aws::PinpointEmail
       :topic_arn)
       include Aws::Structure
     end
+
+    # An object that defines the tags that are associated with a resource.
+    # A *tag* is a label that you optionally define and associate with a
+    # resource in Amazon Pinpoint. Tags can help you categorize and manage
+    # resources in different ways, such as by purpose, owner, environment,
+    # or other criteria. A resource can have as many as 50 tags.
+    #
+    # Each tag consists of a required *tag key* and an associated *tag
+    # value*, both of which you define. A tag key is a general label that
+    # acts as a category for a more specific tag value. A tag value acts as
+    # a descriptor within a tag key. A tag key can contain as many as 128
+    # characters. A tag value can contain as many as 256 characters. The
+    # characters can be Unicode letters, digits, white space, or one of the
+    # following symbols: \_ . : / = + -. The following additional
+    # restrictions apply to tags:
+    #
+    # * Tag keys and values are case sensitive.
+    #
+    # * For each associated resource, each tag key must be unique and it can
+    #   have only one value.
+    #
+    # * The `aws:` prefix is reserved for use by AWS; you can’t use it in
+    #   any tag keys or values that you define. In addition, you can't edit
+    #   or remove tag keys or values that use this prefix. Tags that use
+    #   this prefix don’t count against the limit of 50 tags per resource.
+    #
+    # * You can associate tags with public or shared resources, but the tags
+    #   are available only for your AWS account, not any other accounts that
+    #   share the resource. In addition, the tags are available only for
+    #   resources that are located in the specified AWS Region for your AWS
+    #   account.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that defines a tag. The maximum length
+    #   of a tag key is 128 characters. The minimum length is 1 character.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional part of a key-value pair that defines a tag. The
+    #   maximum length of a tag value is 256 characters. The minimum length
+    #   is 0 characters. If you don’t want a resource to have a specific tag
+    #   value, don’t specify a value for this parameter. Amazon Pinpoint
+    #   will set the value to an empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to add
+    #   one or more tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of the tags that you want to add to the resource. A tag
+    #   consists of a required tag key (`Key`) and an associated tag value
+    #   (`Value`). The maximum length of a tag key is 128 characters. The
+    #   maximum length of a tag value is 256 characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass Template
+    #   data as a hash:
+    #
+    #       {
+    #         template_arn: "TemplateArn",
+    #         template_data: "TemplateData",
+    #       }
+    #
+    # @!attribute [rw] template_arn
+    #   The Amazon Resource Name (ARN) of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_data
+    #   An object that defines the values to use for message variables in
+    #   the template. This object is a set of key-value pairs. Each key
+    #   defines a message variable in the template. The corresponding value
+    #   defines the value to use for that variable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/Template AWS API Documentation
+    #
+    class Template < Struct.new(
+      :template_arn,
+      :template_data)
+      include Aws::Structure
+    end
+
+    # Too many requests have been made to the operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Aws::EmptyStructure; end
 
     # An object that defines the tracking options for a configuration set.
     # When you use Amazon Pinpoint to send an email, it contains an
@@ -2314,6 +3603,42 @@ module Aws::PinpointEmail
       :custom_redirect_domain)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   remove one or more tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tags (tag keys) that you want to remove from the resource. When
+    #   you specify a tag key, the action removes both that key and its
+    #   associated tag value.
+    #
+    #   To remove more than one tag from the resource, append the `TagKeys`
+    #   parameter and argument for each additional tag to remove, separated
+    #   by an ampersand. For example:
+    #   `/v1/email/tags?ResourceArn=ResourceArn&TagKeys=Key1&TagKeys=Key2`
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # A request to change the settings for an event destination for a
     # configuration set.
@@ -2377,6 +3702,38 @@ module Aws::PinpointEmail
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/UpdateConfigurationSetEventDestinationResponse AWS API Documentation
     #
     class UpdateConfigurationSetEventDestinationResponse < Aws::EmptyStructure; end
+
+    # An object that contains information about the amount of email that was
+    # delivered to recipients.
+    #
+    # @!attribute [rw] inbox_raw_count
+    #   The total number of emails that arrived in recipients' inboxes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] spam_raw_count
+    #   The total number of emails that arrived in recipients' spam or junk
+    #   mail folders.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] projected_inbox
+    #   An estimate of the percentage of emails sent from the current domain
+    #   that will arrive in recipients' inboxes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] projected_spam
+    #   An estimate of the percentage of emails sent from the current domain
+    #   that will arrive in recipients' spam or junk mail folders.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/VolumeStatistics AWS API Documentation
+    #
+    class VolumeStatistics < Struct.new(
+      :inbox_raw_count,
+      :spam_raw_count,
+      :projected_inbox,
+      :projected_spam)
+      include Aws::Structure
+    end
 
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-efs/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     efs = Aws::EFS::Client.new
+#     resp = efs.create_access_point(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Elastic File System all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Elastic File System are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::EFS::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Elastic File System API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-efs/customizations'
 # @service
 module Aws::EFS
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.30.1'
 
 end

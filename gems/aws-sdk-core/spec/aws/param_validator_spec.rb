@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../spec_helper'
 
 module Aws
@@ -74,6 +76,15 @@ module Aws
           'missing required parameter params[:nested][:string]',
           'unexpected value at params[:nested][:foo]'
         ])
+      end
+
+      it 'raises an error when providing eventstream at input' do
+        validate({event_stream: [].each }, 'instead of providing value directly for eventstreams at input, expected to use #signal events per stream')
+      end
+
+      it 'accepts no eventstream input even when marked required' do
+        shapes['StructureShape']['required'] = %w(EventStream)
+        validate({})
       end
 
     end

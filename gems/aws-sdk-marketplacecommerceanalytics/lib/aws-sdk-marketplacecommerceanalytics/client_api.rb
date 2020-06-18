@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -45,6 +47,9 @@ module Aws::MarketplaceCommerceAnalytics
     GenerateDataSetResult.add_member(:data_set_request_id, Shapes::ShapeRef.new(shape: DataSetRequestId, location_name: "dataSetRequestId"))
     GenerateDataSetResult.struct_class = Types::GenerateDataSetResult
 
+    MarketplaceCommerceAnalyticsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    MarketplaceCommerceAnalyticsException.struct_class = Types::MarketplaceCommerceAnalyticsException
+
     StartSupportDataExportRequest.add_member(:data_set_type, Shapes::ShapeRef.new(shape: SupportDataSetType, required: true, location_name: "dataSetType"))
     StartSupportDataExportRequest.add_member(:from_date, Shapes::ShapeRef.new(shape: FromDate, required: true, location_name: "fromDate"))
     StartSupportDataExportRequest.add_member(:role_name_arn, Shapes::ShapeRef.new(shape: RoleNameArn, required: true, location_name: "roleNameArn"))
@@ -69,6 +74,7 @@ module Aws::MarketplaceCommerceAnalytics
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Marketplace Commerce Analytics",
+        "serviceId" => "Marketplace Commerce Analytics",
         "signatureVersion" => "v4",
         "signingName" => "marketplacecommerceanalytics",
         "targetPrefix" => "MarketplaceCommerceAnalytics20150701",

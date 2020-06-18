@@ -1,6 +1,162 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2020-06-12)
+------------------
+
+* Feature - Display EndpointType in DescribeGatewayInformation
+
+1.42.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.42.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2020-04-30)
+------------------
+
+* Feature - Adding support for S3_INTELLIGENT_TIERING as a storage class option
+
+1.38.0 (2020-04-23)
+------------------
+
+* Feature - Added AutomaticTapeCreation APIs
+
+1.37.0 (2020-03-31)
+------------------
+
+* Feature - Adding audit logging support for SMB File Shares
+
+1.36.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2020-02-04)
+------------------
+
+* Feature - Adding KVM as a support hypervisor
+
+1.34.0 (2019-11-20)
+------------------
+
+* Feature - The new DescribeAvailabilityMonitorTest API provides the results of the most recent High Availability monitoring test. The new StartAvailabilityMonitorTest API verifies the storage gateway is configured for High Availability monitoring. The new ActiveDirectoryStatus response element has been added to the DescribeSMBSettings and JoinDomain APIs to indicate the status of the gateway after the most recent JoinDomain operation. The new TimeoutInSeconds parameter of the JoinDomain API allows for the configuration of the timeout in which the JoinDomain operation must complete.
+
+1.33.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2019-09-10)
+------------------
+
+* Feature - The CloudWatchLogGroupARN parameter of the UpdateGatewayInformation API allows for configuring the gateway to use a CloudWatch log-group where Storage Gateway health events will be logged.
+
+1.31.0 (2019-08-15)
+------------------
+
+* Feature - CreateSnapshotFromVolumeRecoveryPoint API supports new parameter: Tags (to be attached to the created resource)
+
+1.30.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2019-06-04)
+------------------
+
+* Feature - AWS Storage Gateway now supports AWS PrivateLink, enabling you to administer and use gateways without needing to use public IP addresses or a NAT/Internet Gateway, while avoiding traffic from going over the internet.
+
+1.26.0 (2019-05-28)
+------------------
+
+* Feature - Introduce AssignTapePool operation to allow customers to migrate tapes between pools.
+
+1.25.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.24.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.23.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2019-05-07)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-04-24)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-04-16)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2019-03-27)
+------------------
+
+* Feature - API update.
+
+1.18.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.15.0 (2019-03-05)
+------------------
+
+* Feature - API update.
+
+1.14.0 (2019-01-14)
+------------------
+
+* Feature - API update.
+
 1.13.0 (2018-11-20)
 ------------------
 
@@ -140,4 +296,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-storagegateway` gem.
-

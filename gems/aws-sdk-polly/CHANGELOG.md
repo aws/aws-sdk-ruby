@@ -1,6 +1,97 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-06-16)
+------------------
+
+* Feature - Amazon Polly adds new US English child voice - Kevin. Kevin is available as Neural voice only.
+
+1.31.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.31.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2019-10-23)
+------------------
+
+* Feature - Amazon Polly adds new female voices: US Spanish - Lupe and Brazilian Portuguese - Camila; both voices are available in Standard and Neural engine.
+
+1.26.0 (2019-07-30)
+------------------
+
+* Feature - Amazon Polly adds support for Neural text-to-speech engine.
+
+1.25.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2019-04-17)
+------------------
+
+* Feature - API update.
+
+1.18.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
 1.15.0 (2018-11-20)
 ------------------
 
@@ -145,4 +236,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-polly`.
-

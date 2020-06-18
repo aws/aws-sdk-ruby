@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudWatch
+
   class Metric
 
     extend Aws::Deprecations
@@ -24,6 +27,7 @@ module Aws::CloudWatch
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -88,7 +92,8 @@ module Aws::CloudWatch
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -101,13 +106,15 @@ module Aws::CloudWatch
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -138,17 +145,16 @@ module Aws::CloudWatch
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -210,16 +216,16 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
-    #   [2]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     # @option options [required, Time,DateTime,Date,Integer,String] :start_time
     #   The time stamp that determines the first data point to return. Start
     #   times are evaluated relative to the time that CloudWatch receives the
     #   request.
     #
     #   The value specified is inclusive; results include data points with the
-    #   specified time stamp. The time stamp must be in ISO 8601 UTC format
-    #   (for example, 2016-10-03T23:00:00Z).
+    #   specified time stamp. In a raw HTTP query, the time stamp must be in
+    #   ISO 8601 UTC format (for example, 2016-10-03T23:00:00Z).
     #
     #   CloudWatch rounds the specified time stamp as follows:
     #
@@ -246,8 +252,8 @@ module Aws::CloudWatch
     #   The time stamp that determines the last data point to return.
     #
     #   The value specified is exclusive; results include data points up to
-    #   the specified time stamp. The time stamp must be in ISO 8601 UTC
-    #   format (for example, 2016-10-10T23:00:00Z).
+    #   the specified time stamp. In a raw HTTP query, the time stamp must be
+    #   in ISO 8601 UTC format (for example, 2016-10-10T23:00:00Z).
     # @option options [required, Integer] :period
     #   The granularity, in seconds, of the returned data points. For metrics
     #   with regular resolution, a period can be as short as one minute (60
@@ -281,10 +287,13 @@ module Aws::CloudWatch
     #   available for metrics when any of the metric values are negative
     #   numbers.
     # @option options [String] :unit
-    #   The unit for a given metric. Metrics may be reported in multiple
-    #   units. Not supplying a unit results in all units being returned. If
-    #   you specify only a unit that the metric does not report, the results
-    #   of the call are null.
+    #   The unit for a given metric. If you omit `Unit`, all data that was
+    #   collected with any unit is returned, along with the corresponding
+    #   units that were specified when the data was reported to CloudWatch. If
+    #   you specify a unit, the operation returns only data data that was
+    #   collected with that unit specified. If you specify a unit that does
+    #   not match the data collected, the results of the operation are null.
+    #   CloudWatch does not perform unit conversions.
     # @return [Types::GetMetricStatisticsOutput]
     def get_statistics(options = {})
       options = options.merge(
@@ -316,8 +325,8 @@ module Aws::CloudWatch
     #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #     evaluation_periods: 1, # required
     #     datapoints_to_alarm: 1,
-    #     threshold: 1.0, # required
-    #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
+    #     threshold: 1.0,
+    #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold, LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, GreaterThanUpperThreshold
     #     treat_missing_data: "TreatMissingData",
     #     evaluate_low_sample_count_percentile: "EvaluateLowSampleCountPercentile",
     #     metrics: [
@@ -341,8 +350,16 @@ module Aws::CloudWatch
     #         expression: "MetricExpression",
     #         label: "MetricLabel",
     #         return_data: false,
+    #         period: 1,
     #       },
     #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     threshold_metric_id: "MetricId",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :alarm_name
@@ -352,7 +369,7 @@ module Aws::CloudWatch
     #   The description for the alarm.
     # @option options [Boolean] :actions_enabled
     #   Indicates whether actions should be executed during any changes to the
-    #   alarm state. The default is TRUE.
+    #   alarm state. The default is `TRUE`.
     # @option options [Array<String>] :ok_actions
     #   The actions to execute when this alarm transitions to an `OK` state
     #   from any other state. Each action is specified as an Amazon Resource
@@ -363,7 +380,7 @@ module Aws::CloudWatch
     #   `arn:aws:automate:region:ec2:recover` \|
     #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
-    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
     #
     #   Valid Values (for use with IAM roles):
@@ -380,8 +397,9 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
-    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
     #
     #   Valid Values (for use with IAM roles):
@@ -398,8 +416,9 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
-    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
     #
     #   Valid Values (for use with IAM roles):
@@ -424,6 +443,10 @@ module Aws::CloudWatch
     #   The length, in seconds, used each time the metric specified in
     #   `MetricName` is evaluated. Valid values are 10, 30, and any multiple
     #   of 60.
+    #
+    #   `Period` is required for alarms based on static thresholds. If you are
+    #   creating an alarm based on a metric math expression, you specify the
+    #   period for each metric within the objects in the `Metrics` array.
     #
     #   Be sure to specify 10 or 30 only for metrics that are stored by a
     #   `PutMetricData` call with a `StorageResolution` of 1. If you specify a
@@ -451,9 +474,18 @@ module Aws::CloudWatch
     #   help provide conceptual meaning to your data. Metric data points that
     #   specify a unit of measure, such as Percent, are aggregated separately.
     #
-    #   If you specify a unit, you must use a unit that is appropriate for the
-    #   metric. Otherwise, the CloudWatch alarm can get stuck in the
-    #   `INSUFFICIENT DATA` state.
+    #   If you don't specify `Unit`, CloudWatch retrieves all unit types that
+    #   have been published for the metric and attempts to evaluate the alarm.
+    #   Usually metrics are published with only one unit, so the alarm will
+    #   work as intended.
+    #
+    #   However, if the metric is published with multiple types of units and
+    #   you don't specify a unit, the alarm's behavior is not defined and
+    #   will behave un-predictably.
+    #
+    #   We recommend omitting `Unit` so that you don't inadvertently specify
+    #   an incorrect unit that is not published for this metric. Doing so
+    #   causes the alarm to be stuck in the `INSUFFICIENT DATA` state.
     # @option options [required, Integer] :evaluation_periods
     #   The number of periods over which data is compared to the specified
     #   threshold. If you are setting an alarm that requires that a number of
@@ -465,20 +497,27 @@ module Aws::CloudWatch
     #   day, so this number multiplied by `Period` cannot be more than 86,400
     #   seconds.
     # @option options [Integer] :datapoints_to_alarm
-    #   The number of datapoints that must be breaching to trigger the alarm.
+    #   The number of data points that must be breaching to trigger the alarm.
     #   This is used only if you are setting an "M out of N" alarm. In that
     #   case, this value is the M. For more information, see [Evaluating an
     #   Alarm][1] in the *Amazon CloudWatch User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation
-    # @option options [required, Float] :threshold
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation
+    # @option options [Float] :threshold
     #   The value against which the specified statistic is compared.
+    #
+    #   This parameter is required for alarms based on static thresholds, but
+    #   should not be used for alarms based on anomaly detection models.
     # @option options [required, String] :comparison_operator
     #   The arithmetic operation to use when comparing the specified statistic
     #   and threshold. The specified statistic value is used as the first
     #   operand.
+    #
+    #   The values `LessThanLowerOrGreaterThanUpperThreshold`,
+    #   `LessThanLowerThreshold`, and `GreaterThanUpperThreshold` are used
+    #   only for alarms based on anomaly detection models.
     # @option options [String] :treat_missing_data
     #   Sets how this alarm is to handle missing data points. If
     #   `TreatMissingData` is omitted, the default behavior of `missing` is
@@ -489,7 +528,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
     # @option options [String] :evaluate_low_sample_count_percentile
     #   Used only for alarms based on percentiles. If you specify `ignore`,
     #   the alarm state does not change during periods with too few data
@@ -503,25 +542,53 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
     # @option options [Array<Types::MetricDataQuery>] :metrics
     #   An array of `MetricDataQuery` structures that enable you to create an
-    #   alarm based on the result of a metric math expression. Each item in
-    #   the `Metrics` array either retrieves a metric or performs a math
-    #   expression.
+    #   alarm based on the result of a metric math expression. For each
+    #   `PutMetricAlarm` operation, you must specify either `MetricName` or a
+    #   `Metrics` array.
+    #
+    #   Each item in the `Metrics` array either retrieves a metric or performs
+    #   a math expression.
+    #
+    #   One item in the `Metrics` array is the expression that the alarm
+    #   watches. You designate this expression by setting `ReturnValue` to
+    #   true for this object in the array. For more information, see
+    #   [MetricDataQuery][1].
     #
     #   If you use the `Metrics` parameter, you cannot include the
     #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
     #   `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
     #   operation. Instead, you retrieve the metrics you are using in your
     #   math expression as part of the `Metrics` array.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html
+    # @option options [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to associate with the alarm. You can
+    #   associate as many as 50 tags with an alarm.
+    #
+    #   Tags can help you organize and categorize your resources. You can also
+    #   use them to scope user permissions, by granting a user permission to
+    #   access or change only resources with certain tag values.
+    # @option options [String] :threshold_metric_id
+    #   If this is an alarm based on an anomaly detection model, make this
+    #   value match the ID of the `ANOMALY_DETECTION_BAND` function.
+    #
+    #   For an example of how to use this parameter, see the **Anomaly
+    #   Detection Model Alarm** example on this page.
+    #
+    #   If your alarm uses this parameter, it cannot have Auto Scaling
+    #   actions.
     # @return [Alarm]
     def put_alarm(options = {})
       options = options.merge(
         namespace: @namespace,
         metric_name: @name
       )
-      resp = @client.put_metric_alarm(options)
+      @client.put_metric_alarm(options)
       Alarm.new(
         name: options[:alarm_name],
         client: @client

@@ -49,6 +49,38 @@
         {"shape":"ResourceNotFoundException"}
       ]
     },
+    "AssociateHealthCheck":{
+      "name":"AssociateHealthCheck",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociateHealthCheckRequest"},
+      "output":{"shape":"AssociateHealthCheckResponse"},
+      "errors":[
+        {"shape":"InternalErrorException"},
+        {"shape":"LimitsExceededException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"OptimisticLockException"}
+      ]
+    },
+    "AssociateProactiveEngagementDetails":{
+      "name":"AssociateProactiveEngagementDetails",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociateProactiveEngagementDetailsRequest"},
+      "output":{"shape":"AssociateProactiveEngagementDetailsResponse"},
+      "errors":[
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidOperationException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OptimisticLockException"}
+      ]
+    },
     "CreateProtection":{
       "name":"CreateProtection",
       "http":{
@@ -158,6 +190,7 @@
       "output":{"shape":"DescribeProtectionResponse"},
       "errors":[
         {"shape":"InternalErrorException"},
+        {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"}
       ]
     },
@@ -172,6 +205,22 @@
       "errors":[
         {"shape":"InternalErrorException"},
         {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "DisableProactiveEngagement":{
+      "name":"DisableProactiveEngagement",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisableProactiveEngagementRequest"},
+      "output":{"shape":"DisableProactiveEngagementResponse"},
+      "errors":[
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidOperationException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OptimisticLockException"}
       ]
     },
     "DisassociateDRTLogBucket":{
@@ -204,6 +253,37 @@
         {"shape":"InvalidOperationException"},
         {"shape":"OptimisticLockException"},
         {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "DisassociateHealthCheck":{
+      "name":"DisassociateHealthCheck",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisassociateHealthCheckRequest"},
+      "output":{"shape":"DisassociateHealthCheckResponse"},
+      "errors":[
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OptimisticLockException"}
+      ]
+    },
+    "EnableProactiveEngagement":{
+      "name":"EnableProactiveEngagement",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"EnableProactiveEngagementRequest"},
+      "output":{"shape":"EnableProactiveEngagementResponse"},
+      "errors":[
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidOperationException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OptimisticLockException"}
       ]
     },
     "GetSubscriptionState":{
@@ -317,6 +397,34 @@
       "members":{
       }
     },
+    "AssociateHealthCheckRequest":{
+      "type":"structure",
+      "required":[
+        "ProtectionId",
+        "HealthCheckArn"
+      ],
+      "members":{
+        "ProtectionId":{"shape":"ProtectionId"},
+        "HealthCheckArn":{"shape":"HealthCheckArn"}
+      }
+    },
+    "AssociateHealthCheckResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "AssociateProactiveEngagementDetailsRequest":{
+      "type":"structure",
+      "required":["EmergencyContactList"],
+      "members":{
+        "EmergencyContactList":{"shape":"EmergencyContactList"}
+      }
+    },
+    "AssociateProactiveEngagementDetailsResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "AttackDetail":{
       "type":"structure",
       "members":{
@@ -365,7 +473,9 @@
         "SOURCE_ASN",
         "SOURCE_COUNTRY",
         "SOURCE_IP_ADDRESS",
-        "SOURCE_USER_AGENT"
+        "SOURCE_USER_AGENT",
+        "WORDPRESS_PINGBACK_REFLECTOR",
+        "WORDPRESS_PINGBACK_SOURCE"
       ]
     },
     "AttackSummaries":{
@@ -400,6 +510,12 @@
         "ENABLED",
         "DISABLED"
       ]
+    },
+    "ContactNotes":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"^[\\w\\s\\.\\-,:/()+@]*$"
     },
     "Contributor":{
       "type":"structure",
@@ -497,9 +613,9 @@
     },
     "DescribeProtectionRequest":{
       "type":"structure",
-      "required":["ProtectionId"],
       "members":{
-        "ProtectionId":{"shape":"ProtectionId"}
+        "ProtectionId":{"shape":"ProtectionId"},
+        "ResourceArn":{"shape":"ResourceArn"}
       }
     },
     "DescribeProtectionResponse":{
@@ -517,6 +633,16 @@
       "type":"structure",
       "members":{
         "Subscription":{"shape":"Subscription"}
+      }
+    },
+    "DisableProactiveEngagementRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DisableProactiveEngagementResponse":{
+      "type":"structure",
+      "members":{
       }
     },
     "DisassociateDRTLogBucketRequest":{
@@ -541,6 +667,22 @@
       "members":{
       }
     },
+    "DisassociateHealthCheckRequest":{
+      "type":"structure",
+      "required":[
+        "ProtectionId",
+        "HealthCheckArn"
+      ],
+      "members":{
+        "ProtectionId":{"shape":"ProtectionId"},
+        "HealthCheckArn":{"shape":"HealthCheckArn"}
+      }
+    },
+    "DisassociateHealthCheckResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "Double":{"type":"double"},
     "DurationInSeconds":{
       "type":"long",
@@ -556,7 +698,9 @@
       "type":"structure",
       "required":["EmailAddress"],
       "members":{
-        "EmailAddress":{"shape":"EmailAddress"}
+        "EmailAddress":{"shape":"EmailAddress"},
+        "PhoneNumber":{"shape":"PhoneNumber"},
+        "ContactNotes":{"shape":"ContactNotes"}
       }
     },
     "EmergencyContactList":{
@@ -564,6 +708,16 @@
       "member":{"shape":"EmergencyContact"},
       "max":10,
       "min":0
+    },
+    "EnableProactiveEngagementRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "EnableProactiveEngagementResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "GetSubscriptionStateRequest":{
       "type":"structure",
@@ -576,6 +730,17 @@
       "members":{
         "SubscriptionState":{"shape":"SubscriptionState"}
       }
+    },
+    "HealthCheckArn":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"^arn:aws:route53:::healthcheck/\\S{36}$"
+    },
+    "HealthCheckId":{"type":"string"},
+    "HealthCheckIds":{
+      "type":"list",
+      "member":{"shape":"HealthCheckId"}
     },
     "Integer":{"type":"integer"},
     "InternalErrorException":{
@@ -717,12 +882,27 @@
       },
       "exception":true
     },
+    "PhoneNumber":{
+      "type":"string",
+      "max":16,
+      "min":1,
+      "pattern":"^\\+[1-9]\\d{1,14}$"
+    },
+    "ProactiveEngagementStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED",
+        "PENDING"
+      ]
+    },
     "Protection":{
       "type":"structure",
       "members":{
         "Id":{"shape":"ProtectionId"},
         "Name":{"shape":"ProtectionName"},
-        "ResourceArn":{"shape":"ResourceArn"}
+        "ResourceArn":{"shape":"ResourceArn"},
+        "HealthCheckIds":{"shape":"HealthCheckIds"}
       }
     },
     "ProtectionId":{
@@ -799,7 +979,8 @@
         "EndTime":{"shape":"Timestamp"},
         "TimeCommitmentInSeconds":{"shape":"DurationInSeconds"},
         "AutoRenew":{"shape":"AutoRenew"},
-        "Limits":{"shape":"Limits"}
+        "Limits":{"shape":"Limits"},
+        "ProactiveEngagementStatus":{"shape":"ProactiveEngagementStatus"}
       }
     },
     "SubscriptionState":{

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-cloudhsm/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     cloud_hsm = Aws::CloudHSM::Client.new
+#     resp = cloud_hsm.add_tags_to_resource(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon CloudHSM all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon CloudHSM are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CloudHSM::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon CloudHSM API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-cloudhsm/customizations'
 # @service
 module Aws::CloudHSM
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.23.1'
 
 end

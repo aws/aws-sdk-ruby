@@ -1,20 +1,24 @@
+# frozen_string_literal: true
+
 require_relative '../spec_helper'
 
 module Aws
   module S3
     describe Bucket do
       describe '#url' do
-
-        let(:options) {{
-          region:'us-east-1',
-          access_key_id:'akid',
-          secret_access_key:'secret'
-        }}
+        let(:options) do
+          {
+            region: 'us-east-1',
+            access_key_id: 'akid',
+            secret_access_key: 'secret'
+          }
+        end
 
         let(:client) { Client.new(options) }
 
         it 'returns a HTTPS url for the bucket' do
-          expect(Bucket.new('name', client: client).url).to eq('https://name.s3.amazonaws.com')
+          expect(Bucket.new('name', client: client).url)
+            .to eq('https://name.s3.amazonaws.com')
         end
 
         it 'uses the configured endpoint as the domain' do
@@ -23,12 +27,12 @@ module Aws
           expect(bucket.url).to eq('https://name.customdomain.com')
         end
 
-        it 'uses path-style addressing when the bucket name is not dns-compatible' do
+        it 'uses path-style address when bucket name is not dns-compatible' do
           bucket = Bucket.new('BucketName', client: client)
           expect(bucket.url).to eq('https://s3.amazonaws.com/BucketName')
         end
 
-        it 'uses path-style addressing when the dns-compat bucket name contains dots' do
+        it 'uses path-style address when the dns-compat bucket name has dots' do
           bucket = Bucket.new('bucket.name', client: client)
           expect(bucket.url).to eq('https://s3.amazonaws.com/bucket.name')
         end
@@ -46,6 +50,16 @@ module Aws
           expect(bucket.url).to eq('http://localhost:8080/name')
         end
 
+        it 'accepts an accesspoint arn' do
+          bucket = Bucket.new(
+            'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint',
+            client: client
+          )
+          expect(bucket.url).to eq(
+            'https://myendpoint-123456789012.s3-accesspoint'\
+            '.us-west-2.amazonaws.com'
+          )
+        end
       end
     end
   end

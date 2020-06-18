@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -100,6 +102,12 @@ module Aws::PI
     GetResourceMetricsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetResourceMetricsResponse.struct_class = Types::GetResourceMetricsResponse
 
+    InternalServiceError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InternalServiceError.struct_class = Types::InternalServiceError
+
+    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidArgumentException.struct_class = Types::InvalidArgumentException
+
     MetricKeyDataPoints.add_member(:key, Shapes::ShapeRef.new(shape: ResponseResourceMetricKey, location_name: "Key"))
     MetricKeyDataPoints.add_member(:data_points, Shapes::ShapeRef.new(shape: DataPointsList, location_name: "DataPoints"))
     MetricKeyDataPoints.struct_class = Types::MetricKeyDataPoints
@@ -117,6 +125,9 @@ module Aws::PI
     MetricQueryList.member = Shapes::ShapeRef.new(shape: MetricQuery)
 
     MetricValuesList.member = Shapes::ShapeRef.new(shape: Double)
+
+    NotAuthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    NotAuthorizedException.struct_class = Types::NotAuthorizedException
 
     ResponsePartitionKey.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionMap, required: true, location_name: "Dimensions"))
     ResponsePartitionKey.struct_class = Types::ResponsePartitionKey

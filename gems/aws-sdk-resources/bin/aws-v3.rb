@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'rubygems'
 require 'optparse'
@@ -89,16 +90,25 @@ options[:load_paths].each do |path|
   $LOAD_PATH.unshift(path)
 end
 
-# need to load `aws-sdk-core` first
-$LOAD_PATH.unshift(File.expand_path("../../../aws-sdk-core/lib", __FILE__))
+# When running the REPL locally, we want to load all of the gems from source.
+# First load aws-sdk-core and its dependencies.
+# (Sigv2 is still used by the deprecated SimpleDB service gem)
+core_gems = %w(aws-sdk-core aws-sigv4 aws-partitions aws-eventstream aws-sigv2)
+core_gems.each do |gem_name|
+  $LOAD_PATH.unshift(File.expand_path("../../../#{gem_name}/lib", __FILE__))
+end
 
-# load the aws-sdk-resources gem
+# Then load and require aws-sdk-resources. Without loading the core gems before
+# requiring aws-sdk-resources, we would get locally installed gems instead of
+# from source.
 $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
+
+# The Aws namespace used to check autoload requires aws-sdk-resources.
 require 'aws-sdk-resources'
 
-# when running the REPL locally, we want to load all of the gems from source
+# Finally load all of the gems. Core is loaded a second time because of STS.
 if File.directory?(File.expand_path('../../../../build_tools', __FILE__))
-  gems = %w(aws-sdk-core aws-sigv4 aws-sigv2 aws-partitions aws-eventstream)
+  gems = []
   Aws.constants.each do |const_name|
     if Aws.autoload?(const_name)
       gems << "aws-sdk-#{const_name.downcase}"

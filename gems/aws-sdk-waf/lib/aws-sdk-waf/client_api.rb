@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -47,6 +49,8 @@ module Aws::WAF
     CreateSizeConstraintSetResponse = Shapes::StructureShape.new(name: 'CreateSizeConstraintSetResponse')
     CreateSqlInjectionMatchSetRequest = Shapes::StructureShape.new(name: 'CreateSqlInjectionMatchSetRequest')
     CreateSqlInjectionMatchSetResponse = Shapes::StructureShape.new(name: 'CreateSqlInjectionMatchSetResponse')
+    CreateWebACLMigrationStackRequest = Shapes::StructureShape.new(name: 'CreateWebACLMigrationStackRequest')
+    CreateWebACLMigrationStackResponse = Shapes::StructureShape.new(name: 'CreateWebACLMigrationStackResponse')
     CreateWebACLRequest = Shapes::StructureShape.new(name: 'CreateWebACLRequest')
     CreateWebACLResponse = Shapes::StructureShape.new(name: 'CreateWebACLResponse')
     CreateXssMatchSetRequest = Shapes::StructureShape.new(name: 'CreateXssMatchSetRequest')
@@ -79,6 +83,9 @@ module Aws::WAF
     DeleteWebACLResponse = Shapes::StructureShape.new(name: 'DeleteWebACLResponse')
     DeleteXssMatchSetRequest = Shapes::StructureShape.new(name: 'DeleteXssMatchSetRequest')
     DeleteXssMatchSetResponse = Shapes::StructureShape.new(name: 'DeleteXssMatchSetResponse')
+    ErrorReason = Shapes::StringShape.new(name: 'ErrorReason')
+    ExcludedRule = Shapes::StructureShape.new(name: 'ExcludedRule')
+    ExcludedRules = Shapes::ListShape.new(name: 'ExcludedRules')
     FieldToMatch = Shapes::StructureShape.new(name: 'FieldToMatch')
     GeoMatchConstraint = Shapes::StructureShape.new(name: 'GeoMatchConstraint')
     GeoMatchConstraintType = Shapes::StringShape.new(name: 'GeoMatchConstraintType')
@@ -143,6 +150,7 @@ module Aws::WAF
     IPSetUpdate = Shapes::StructureShape.new(name: 'IPSetUpdate')
     IPSetUpdates = Shapes::ListShape.new(name: 'IPSetUpdates')
     IPString = Shapes::StringShape.new(name: 'IPString')
+    IgnoreUnsupportedType = Shapes::BooleanShape.new(name: 'IgnoreUnsupportedType')
     ListActivatedRulesInRuleGroupRequest = Shapes::StructureShape.new(name: 'ListActivatedRulesInRuleGroupRequest')
     ListActivatedRulesInRuleGroupResponse = Shapes::StructureShape.new(name: 'ListActivatedRulesInRuleGroupResponse')
     ListByteMatchSetsRequest = Shapes::StructureShape.new(name: 'ListByteMatchSetsRequest')
@@ -169,6 +177,8 @@ module Aws::WAF
     ListSqlInjectionMatchSetsResponse = Shapes::StructureShape.new(name: 'ListSqlInjectionMatchSetsResponse')
     ListSubscribedRuleGroupsRequest = Shapes::StructureShape.new(name: 'ListSubscribedRuleGroupsRequest')
     ListSubscribedRuleGroupsResponse = Shapes::StructureShape.new(name: 'ListSubscribedRuleGroupsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListWebACLsRequest = Shapes::StructureShape.new(name: 'ListWebACLsRequest')
     ListWebACLsResponse = Shapes::StructureShape.new(name: 'ListWebACLsResponse')
     ListXssMatchSetsRequest = Shapes::StructureShape.new(name: 'ListXssMatchSetsRequest')
@@ -181,6 +191,7 @@ module Aws::WAF
     MatchFieldData = Shapes::StringShape.new(name: 'MatchFieldData')
     MatchFieldType = Shapes::StringShape.new(name: 'MatchFieldType')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
+    MigrationErrorType = Shapes::StringShape.new(name: 'MigrationErrorType')
     Negated = Shapes::BooleanShape.new(name: 'Negated')
     NextMarker = Shapes::StringShape.new(name: 'NextMarker')
     PaginationLimit = Shapes::IntegerShape.new(name: 'PaginationLimit')
@@ -229,6 +240,8 @@ module Aws::WAF
     RuleSummary = Shapes::StructureShape.new(name: 'RuleSummary')
     RuleUpdate = Shapes::StructureShape.new(name: 'RuleUpdate')
     RuleUpdates = Shapes::ListShape.new(name: 'RuleUpdates')
+    S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
+    S3ObjectUrl = Shapes::StringShape.new(name: 'S3ObjectUrl')
     SampleWeight = Shapes::IntegerShape.new(name: 'SampleWeight')
     SampledHTTPRequest = Shapes::StructureShape.new(name: 'SampledHTTPRequest')
     SampledHTTPRequests = Shapes::ListShape.new(name: 'SampledHTTPRequests')
@@ -249,10 +262,20 @@ module Aws::WAF
     SqlInjectionMatchTuples = Shapes::ListShape.new(name: 'SqlInjectionMatchTuples')
     SubscribedRuleGroupSummaries = Shapes::ListShape.new(name: 'SubscribedRuleGroupSummaries')
     SubscribedRuleGroupSummary = Shapes::StructureShape.new(name: 'SubscribedRuleGroupSummary')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagInfoForResource = Shapes::StructureShape.new(name: 'TagInfoForResource')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TextTransformation = Shapes::StringShape.new(name: 'TextTransformation')
     TimeWindow = Shapes::StructureShape.new(name: 'TimeWindow')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     URIString = Shapes::StringShape.new(name: 'URIString')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateByteMatchSetRequest = Shapes::StructureShape.new(name: 'UpdateByteMatchSetRequest')
     UpdateByteMatchSetResponse = Shapes::StructureShape.new(name: 'UpdateByteMatchSetResponse')
     UpdateGeoMatchSetRequest = Shapes::StructureShape.new(name: 'UpdateGeoMatchSetRequest')
@@ -277,7 +300,9 @@ module Aws::WAF
     UpdateWebACLResponse = Shapes::StructureShape.new(name: 'UpdateWebACLResponse')
     UpdateXssMatchSetRequest = Shapes::StructureShape.new(name: 'UpdateXssMatchSetRequest')
     UpdateXssMatchSetResponse = Shapes::StructureShape.new(name: 'UpdateXssMatchSetResponse')
+    WAFBadRequestException = Shapes::StructureShape.new(name: 'WAFBadRequestException')
     WAFDisallowedNameException = Shapes::StructureShape.new(name: 'WAFDisallowedNameException')
+    WAFEntityMigrationException = Shapes::StructureShape.new(name: 'WAFEntityMigrationException')
     WAFInternalErrorException = Shapes::StructureShape.new(name: 'WAFInternalErrorException')
     WAFInvalidAccountException = Shapes::StructureShape.new(name: 'WAFInvalidAccountException')
     WAFInvalidOperationException = Shapes::StructureShape.new(name: 'WAFInvalidOperationException')
@@ -289,8 +314,11 @@ module Aws::WAF
     WAFNonexistentContainerException = Shapes::StructureShape.new(name: 'WAFNonexistentContainerException')
     WAFNonexistentItemException = Shapes::StructureShape.new(name: 'WAFNonexistentItemException')
     WAFReferencedItemException = Shapes::StructureShape.new(name: 'WAFReferencedItemException')
+    WAFServiceLinkedRoleErrorException = Shapes::StructureShape.new(name: 'WAFServiceLinkedRoleErrorException')
     WAFStaleDataException = Shapes::StructureShape.new(name: 'WAFStaleDataException')
     WAFSubscriptionNotFoundException = Shapes::StructureShape.new(name: 'WAFSubscriptionNotFoundException')
+    WAFTagOperationException = Shapes::StructureShape.new(name: 'WAFTagOperationException')
+    WAFTagOperationInternalErrorException = Shapes::StructureShape.new(name: 'WAFTagOperationInternalErrorException')
     WafAction = Shapes::StructureShape.new(name: 'WafAction')
     WafActionType = Shapes::StringShape.new(name: 'WafActionType')
     WafOverrideAction = Shapes::StructureShape.new(name: 'WafOverrideAction')
@@ -315,6 +343,7 @@ module Aws::WAF
     ActivatedRule.add_member(:action, Shapes::ShapeRef.new(shape: WafAction, location_name: "Action"))
     ActivatedRule.add_member(:override_action, Shapes::ShapeRef.new(shape: WafOverrideAction, location_name: "OverrideAction"))
     ActivatedRule.add_member(:type, Shapes::ShapeRef.new(shape: WafRuleType, location_name: "Type"))
+    ActivatedRule.add_member(:excluded_rules, Shapes::ShapeRef.new(shape: ExcludedRules, location_name: "ExcludedRules"))
     ActivatedRule.struct_class = Types::ActivatedRule
 
     ActivatedRules.member = Shapes::ShapeRef.new(shape: ActivatedRule)
@@ -373,6 +402,7 @@ module Aws::WAF
     CreateRateBasedRuleRequest.add_member(:rate_key, Shapes::ShapeRef.new(shape: RateKey, required: true, location_name: "RateKey"))
     CreateRateBasedRuleRequest.add_member(:rate_limit, Shapes::ShapeRef.new(shape: RateLimit, required: true, location_name: "RateLimit"))
     CreateRateBasedRuleRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    CreateRateBasedRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateRateBasedRuleRequest.struct_class = Types::CreateRateBasedRuleRequest
 
     CreateRateBasedRuleResponse.add_member(:rule, Shapes::ShapeRef.new(shape: RateBasedRule, location_name: "Rule"))
@@ -398,6 +428,7 @@ module Aws::WAF
     CreateRuleGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     CreateRuleGroupRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     CreateRuleGroupRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    CreateRuleGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateRuleGroupRequest.struct_class = Types::CreateRuleGroupRequest
 
     CreateRuleGroupResponse.add_member(:rule_group, Shapes::ShapeRef.new(shape: RuleGroup, location_name: "RuleGroup"))
@@ -407,6 +438,7 @@ module Aws::WAF
     CreateRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     CreateRuleRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     CreateRuleRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    CreateRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateRuleRequest.struct_class = Types::CreateRuleRequest
 
     CreateRuleResponse.add_member(:rule, Shapes::ShapeRef.new(shape: Rule, location_name: "Rule"))
@@ -429,10 +461,19 @@ module Aws::WAF
     CreateSqlInjectionMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     CreateSqlInjectionMatchSetResponse.struct_class = Types::CreateSqlInjectionMatchSetResponse
 
+    CreateWebACLMigrationStackRequest.add_member(:web_acl_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "WebACLId"))
+    CreateWebACLMigrationStackRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "S3BucketName"))
+    CreateWebACLMigrationStackRequest.add_member(:ignore_unsupported_type, Shapes::ShapeRef.new(shape: IgnoreUnsupportedType, required: true, location_name: "IgnoreUnsupportedType"))
+    CreateWebACLMigrationStackRequest.struct_class = Types::CreateWebACLMigrationStackRequest
+
+    CreateWebACLMigrationStackResponse.add_member(:s3_object_url, Shapes::ShapeRef.new(shape: S3ObjectUrl, required: true, location_name: "S3ObjectUrl"))
+    CreateWebACLMigrationStackResponse.struct_class = Types::CreateWebACLMigrationStackResponse
+
     CreateWebACLRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     CreateWebACLRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     CreateWebACLRequest.add_member(:default_action, Shapes::ShapeRef.new(shape: WafAction, required: true, location_name: "DefaultAction"))
     CreateWebACLRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    CreateWebACLRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateWebACLRequest.struct_class = Types::CreateWebACLRequest
 
     CreateWebACLResponse.add_member(:web_acl, Shapes::ShapeRef.new(shape: WebACL, location_name: "WebACL"))
@@ -540,6 +581,11 @@ module Aws::WAF
 
     DeleteXssMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     DeleteXssMatchSetResponse.struct_class = Types::DeleteXssMatchSetResponse
+
+    ExcludedRule.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
+    ExcludedRule.struct_class = Types::ExcludedRule
+
+    ExcludedRules.member = Shapes::ShapeRef.new(shape: ExcludedRule)
 
     FieldToMatch.add_member(:type, Shapes::ShapeRef.new(shape: MatchFieldType, required: true, location_name: "Type"))
     FieldToMatch.add_member(:data, Shapes::ShapeRef.new(shape: MatchFieldData, location_name: "Data"))
@@ -824,6 +870,15 @@ module Aws::WAF
     ListSubscribedRuleGroupsResponse.add_member(:rule_groups, Shapes::ShapeRef.new(shape: SubscribedRuleGroupSummaries, location_name: "RuleGroups"))
     ListSubscribedRuleGroupsResponse.struct_class = Types::ListSubscribedRuleGroupsResponse
 
+    ListTagsForResourceRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListTagsForResourceRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListTagsForResourceResponse.add_member(:tag_info_for_resource, Shapes::ShapeRef.new(shape: TagInfoForResource, location_name: "TagInfoForResource"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ListWebACLsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListWebACLsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
     ListWebACLsRequest.struct_class = Types::ListWebACLsRequest
@@ -1022,9 +1077,33 @@ module Aws::WAF
     SubscribedRuleGroupSummary.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     SubscribedRuleGroupSummary.struct_class = Types::SubscribedRuleGroupSummary
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagInfoForResource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceARN"))
+    TagInfoForResource.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+    TagInfoForResource.struct_class = Types::TagInfoForResource
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     TimeWindow.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
     TimeWindow.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
     TimeWindow.struct_class = Types::TimeWindow
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateByteMatchSetRequest.add_member(:byte_match_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ByteMatchSetId"))
     UpdateByteMatchSetRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
@@ -1124,6 +1203,66 @@ module Aws::WAF
     UpdateXssMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     UpdateXssMatchSetResponse.struct_class = Types::UpdateXssMatchSetResponse
 
+    WAFBadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFBadRequestException.struct_class = Types::WAFBadRequestException
+
+    WAFDisallowedNameException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFDisallowedNameException.struct_class = Types::WAFDisallowedNameException
+
+    WAFEntityMigrationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFEntityMigrationException.add_member(:migration_error_type, Shapes::ShapeRef.new(shape: MigrationErrorType, location_name: "MigrationErrorType"))
+    WAFEntityMigrationException.add_member(:migration_error_reason, Shapes::ShapeRef.new(shape: ErrorReason, location_name: "MigrationErrorReason"))
+    WAFEntityMigrationException.struct_class = Types::WAFEntityMigrationException
+
+    WAFInternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFInternalErrorException.struct_class = Types::WAFInternalErrorException
+
+    WAFInvalidAccountException.struct_class = Types::WAFInvalidAccountException
+
+    WAFInvalidOperationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFInvalidOperationException.struct_class = Types::WAFInvalidOperationException
+
+    WAFInvalidParameterException.add_member(:field, Shapes::ShapeRef.new(shape: ParameterExceptionField, location_name: "field"))
+    WAFInvalidParameterException.add_member(:parameter, Shapes::ShapeRef.new(shape: ParameterExceptionParameter, location_name: "parameter"))
+    WAFInvalidParameterException.add_member(:reason, Shapes::ShapeRef.new(shape: ParameterExceptionReason, location_name: "reason"))
+    WAFInvalidParameterException.struct_class = Types::WAFInvalidParameterException
+
+    WAFInvalidPermissionPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFInvalidPermissionPolicyException.struct_class = Types::WAFInvalidPermissionPolicyException
+
+    WAFInvalidRegexPatternException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFInvalidRegexPatternException.struct_class = Types::WAFInvalidRegexPatternException
+
+    WAFLimitsExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFLimitsExceededException.struct_class = Types::WAFLimitsExceededException
+
+    WAFNonEmptyEntityException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFNonEmptyEntityException.struct_class = Types::WAFNonEmptyEntityException
+
+    WAFNonexistentContainerException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFNonexistentContainerException.struct_class = Types::WAFNonexistentContainerException
+
+    WAFNonexistentItemException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFNonexistentItemException.struct_class = Types::WAFNonexistentItemException
+
+    WAFReferencedItemException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFReferencedItemException.struct_class = Types::WAFReferencedItemException
+
+    WAFServiceLinkedRoleErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFServiceLinkedRoleErrorException.struct_class = Types::WAFServiceLinkedRoleErrorException
+
+    WAFStaleDataException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFStaleDataException.struct_class = Types::WAFStaleDataException
+
+    WAFSubscriptionNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFSubscriptionNotFoundException.struct_class = Types::WAFSubscriptionNotFoundException
+
+    WAFTagOperationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFTagOperationException.struct_class = Types::WAFTagOperationException
+
+    WAFTagOperationInternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFTagOperationInternalErrorException.struct_class = Types::WAFTagOperationInternalErrorException
+
     WafAction.add_member(:type, Shapes::ShapeRef.new(shape: WafActionType, required: true, location_name: "Type"))
     WafAction.struct_class = Types::WafAction
 
@@ -1135,6 +1274,7 @@ module Aws::WAF
     WebACL.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
     WebACL.add_member(:default_action, Shapes::ShapeRef.new(shape: WafAction, required: true, location_name: "DefaultAction"))
     WebACL.add_member(:rules, Shapes::ShapeRef.new(shape: ActivatedRules, required: true, location_name: "Rules"))
+    WebACL.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "WebACLArn"))
     WebACL.struct_class = Types::WebACL
 
     WebACLSummaries.member = Shapes::ShapeRef.new(shape: WebACLSummary)
@@ -1244,6 +1384,9 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFDisallowedNameException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFBadRequestException)
       end)
 
       api.add_operation(:create_regex_match_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1281,6 +1424,9 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFDisallowedNameException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFBadRequestException)
       end)
 
       api.add_operation(:create_rule_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1293,6 +1439,9 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFDisallowedNameException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFBadRequestException)
       end)
 
       api.add_operation(:create_size_constraint_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1335,6 +1484,22 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFDisallowedNameException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFBadRequestException)
+      end)
+
+      api.add_operation(:create_web_acl_migration_stack, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWebACLMigrationStack"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateWebACLMigrationStackRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateWebACLMigrationStackResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFEntityMigrationException)
       end)
 
       api.add_operation(:create_xss_match_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1427,6 +1592,8 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFReferencedItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonEmptyEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
       end)
 
       api.add_operation(:delete_regex_match_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1469,6 +1636,8 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFReferencedItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonEmptyEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
       end)
 
       api.add_operation(:delete_rule_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1483,6 +1652,8 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFReferencedItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonEmptyEntityException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
       end)
 
       api.add_operation(:delete_size_constraint_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1525,6 +1696,8 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFReferencedItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonEmptyEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
       end)
 
       api.add_operation(:delete_xss_match_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1864,6 +2037,20 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFBadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+      end)
+
       api.add_operation(:list_web_acls, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListWebACLs"
         o.http_method = "POST"
@@ -1893,6 +2080,7 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFServiceLinkedRoleErrorException)
       end)
 
       api.add_operation(:put_permission_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1905,6 +2093,35 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidPermissionPolicyException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFBadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFBadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
       end)
 
       api.add_operation(:update_byte_match_set, Seahorse::Model::Operation.new.tap do |o|

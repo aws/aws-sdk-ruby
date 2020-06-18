@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../../spec_helper'
 require 'logger'
 
@@ -9,7 +11,7 @@ module Seahorse
         class LogNullDevice
           attr_reader :messages
           def write(msg)
-            @messages ||= ''
+            @messages ||= String.new
             @messages << msg
           end
           def close; end

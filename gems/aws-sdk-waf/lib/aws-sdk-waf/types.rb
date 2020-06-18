@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -8,6 +10,15 @@
 module Aws::WAF
   module Types
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # The `ActivatedRule` object in an UpdateWebACL request specifies a
     # `Rule` that you want to insert or delete, the priority of the `Rule`
     # in the `WebACL`, and the action that you want AWS WAF to take when a
@@ -15,6 +26,11 @@ module Aws::WAF
     #
     # To specify whether to insert or delete a `Rule`, use the `Action`
     # parameter in the WebACLUpdate data type.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass ActivatedRule
     #   data as a hash:
@@ -29,6 +45,11 @@ module Aws::WAF
     #           type: "NONE", # required, accepts NONE, COUNT
     #         },
     #         type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #         excluded_rules: [
+    #           {
+    #             rule_id: "ResourceId", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] priority
@@ -63,7 +84,7 @@ module Aws::WAF
     #     request based on the remaining rules in the web ACL.
     #
     #   `ActivatedRule|OverrideAction` applies only when updating or adding
-    #   a `RuleGroup` to a `WebACL`. In this case you do not use
+    #   a `RuleGroup` to a `WebACL`. In this case, you do not use
     #   `ActivatedRule|Action`. For all other update requests,
     #   `ActivatedRule|Action` is used instead of
     #   `ActivatedRule|OverrideAction`.
@@ -99,6 +120,51 @@ module Aws::WAF
     #   does not exist.
     #   @return [String]
     #
+    # @!attribute [rw] excluded_rules
+    #   An array of rules to exclude from a rule group. This is applicable
+    #   only when the `ActivatedRule` refers to a `RuleGroup`.
+    #
+    #   Sometimes it is necessary to troubleshoot rule groups that are
+    #   blocking traffic unexpectedly (false positives). One troubleshooting
+    #   technique is to identify the specific rule within the rule group
+    #   that is blocking the legitimate traffic and then disable (exclude)
+    #   that particular rule. You can exclude rules from both your own rule
+    #   groups and AWS Marketplace rule groups that have been associated
+    #   with a web ACL.
+    #
+    #   Specifying `ExcludedRules` does not remove those rules from the rule
+    #   group. Rather, it changes the action for the rules to `COUNT`.
+    #   Therefore, requests that match an `ExcludedRule` are counted but not
+    #   blocked. The `RuleGroup` owner will receive COUNT metrics for each
+    #   `ExcludedRule`.
+    #
+    #   If you want to exclude rules from a rule group that is already
+    #   associated with a web ACL, perform the following steps:
+    #
+    #   1.  Use the AWS WAF logs to identify the IDs of the rules that you
+    #       want to exclude. For more information about the logs, see
+    #       [Logging Web ACL Traffic Information][1].
+    #
+    #   2.  Submit an UpdateWebACL request that has two actions:
+    #
+    #       * The first action deletes the existing rule group from the web
+    #         ACL. That is, in the UpdateWebACL request, the first
+    #         `Updates:Action` should be `DELETE` and
+    #         `Updates:ActivatedRule:RuleId` should be the rule group that
+    #         contains the rules that you want to exclude.
+    #
+    #       * The second action inserts the same rule group back in, but
+    #         specifying the rules to exclude. That is, the second
+    #         `Updates:Action` should be `INSERT`,
+    #         `Updates:ActivatedRule:RuleId` should be the rule group that
+    #         you just removed, and `ExcludedRules` should contain the rules
+    #         that you want to exclude.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+    #   @return [Array<Types::ExcludedRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ActivatedRule AWS API Documentation
     #
     class ActivatedRule < Struct.new(
@@ -106,10 +172,20 @@ module Aws::WAF
       :rule_id,
       :action,
       :override_action,
-      :type)
+      :type,
+      :excluded_rules)
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # In a GetByteMatchSet request, `ByteMatchSet` is a complex type that
     # contains the `ByteMatchSetId` and `Name` of a `ByteMatchSet`, and the
     # values that you specified when you updated the `ByteMatchSet`.
@@ -120,6 +196,11 @@ module Aws::WAF
     # contains more than one `ByteMatchTuple` object, a request needs to
     # match the settings in only one `ByteMatchTuple` to be considered a
     # match.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] byte_match_set_id
     #   The `ByteMatchSetId` for a `ByteMatchSet`. You use `ByteMatchSetId`
@@ -154,8 +235,22 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returned by ListByteMatchSets. Each `ByteMatchSetSummary` object
     # includes the `Name` and `ByteMatchSetId` for one ByteMatchSet.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] byte_match_set_id
     #   The `ByteMatchSetId` for a `ByteMatchSet`. You use `ByteMatchSetId`
@@ -180,9 +275,23 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # In an UpdateByteMatchSet request, `ByteMatchSetUpdate` specifies
     # whether to insert or delete a ByteMatchTuple and includes the settings
     # for the `ByteMatchTuple`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass ByteMatchSetUpdate
     #   data as a hash:
@@ -220,9 +329,23 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # The bytes (typically a string that corresponds with ASCII characters)
     # that you want AWS WAF to search for in web requests, the location in
     # requests that you want AWS WAF to search, and other settings.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass ByteMatchTuple
     #   data as a hash:
@@ -297,7 +420,7 @@ module Aws::WAF
     #   For example, suppose the value of `Type` is `HEADER` and the value
     #   of `Data` is `User-Agent`. If you want to search the `User-Agent`
     #   header for the value `BadBot`, you base64-encode `BadBot` using MIME
-    #   base64 encoding and include the resulting value, `QmFkQm90`, in the
+    #   base64-encoding and include the resulting value, `QmFkQm90`, in the
     #   value of `TargetString`.
     #
     #   **If you're using the AWS CLI or one of the AWS SDKs**
@@ -310,7 +433,7 @@ module Aws::WAF
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass AWS WAF. If you
     #   specify a transformation, AWS WAF performs the transformation on
-    #   `TargetString` before inspecting a request for a match.
+    #   `FieldToMatch` before inspecting it for a match.
     #
     #   You can only specify a single type of TextTransformation.
     #
@@ -582,6 +705,12 @@ module Aws::WAF
     #         rate_key: "IP", # required, accepts IP
     #         rate_limit: 1, # required
     #         change_token: "ChangeToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -592,8 +721,10 @@ module Aws::WAF
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this
     #   `RateBasedRule`. The name can contain only alphanumeric characters
-    #   (A-Z, a-z, 0-9); the name can't contain whitespace. You can't
-    #   change the name of the metric after you create the `RateBasedRule`.
+    #   (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It
+    #   can't contain whitespace or metric names reserved for AWS WAF,
+    #   including "All" and "Default\_Action." You can't change the
+    #   name of the metric after you create the `RateBasedRule`.
     #   @return [String]
     #
     # @!attribute [rw] rate_key
@@ -618,6 +749,9 @@ module Aws::WAF
     #   request. For more information, see GetChangeTokenStatus.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRateBasedRuleRequest AWS API Documentation
     #
     class CreateRateBasedRuleRequest < Struct.new(
@@ -625,7 +759,8 @@ module Aws::WAF
       :metric_name,
       :rate_key,
       :rate_limit,
-      :change_token)
+      :change_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -742,6 +877,12 @@ module Aws::WAF
     #         name: "ResourceName", # required
     #         metric_name: "MetricName", # required
     #         change_token: "ChangeToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -751,21 +892,27 @@ module Aws::WAF
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `RuleGroup`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change the name of
-    #   the metric after you create the `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change the name of the metric
+    #   after you create the `RuleGroup`.
     #   @return [String]
     #
     # @!attribute [rw] change_token
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleGroupRequest AWS API Documentation
     #
     class CreateRuleGroupRequest < Struct.new(
       :name,
       :metric_name,
-      :change_token)
+      :change_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -794,6 +941,12 @@ module Aws::WAF
     #         name: "ResourceName", # required
     #         metric_name: "MetricName", # required
     #         change_token: "ChangeToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -803,21 +956,27 @@ module Aws::WAF
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `Rule`. The
-    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change the name of the
-    #   metric after you create the `Rule`.
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change the name of the metric
+    #   after you create the `Rule`.
     #   @return [String]
     #
     # @!attribute [rw] change_token
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleRequest AWS API Documentation
     #
     class CreateRuleRequest < Struct.new(
       :name,
       :metric_name,
-      :change_token)
+      :change_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -932,6 +1091,66 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateWebACLMigrationStackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         web_acl_id: "ResourceId", # required
+    #         s3_bucket_name: "S3BucketName", # required
+    #         ignore_unsupported_type: false, # required
+    #       }
+    #
+    # @!attribute [rw] web_acl_id
+    #   The UUID of the WAF Classic web ACL that you want to migrate to WAF
+    #   v2.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the Amazon S3 bucket to store the CloudFormation
+    #   template in. The S3 bucket must be configured as follows for the
+    #   migration:
+    #
+    #   * The bucket name must start with `aws-waf-migration-`. For example,
+    #     `aws-waf-migration-my-web-acl`.
+    #
+    #   * The bucket must be in the Region where you are deploying the
+    #     template. For example, for a web ACL in us-west-2, you must use an
+    #     Amazon S3 bucket in us-west-2 and you must deploy the template
+    #     stack to us-west-2.
+    #
+    #   * The bucket policies must permit the migration process to write
+    #     data. For listings of the bucket policies, see the Examples
+    #     section.
+    #   @return [String]
+    #
+    # @!attribute [rw] ignore_unsupported_type
+    #   Indicates whether to exclude entities that can't be migrated or to
+    #   stop the migration. Set this to true to ignore unsupported entities
+    #   in the web ACL during the migration. Otherwise, if AWS WAF
+    #   encounters unsupported entities, it stops the process and throws an
+    #   exception.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateWebACLMigrationStackRequest AWS API Documentation
+    #
+    class CreateWebACLMigrationStackRequest < Struct.new(
+      :web_acl_id,
+      :s3_bucket_name,
+      :ignore_unsupported_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] s3_object_url
+    #   The URL of the template created in Amazon S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateWebACLMigrationStackResponse AWS API Documentation
+    #
+    class CreateWebACLMigrationStackResponse < Struct.new(
+      :s3_object_url)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateWebACLRequest
     #   data as a hash:
     #
@@ -942,6 +1161,12 @@ module Aws::WAF
     #           type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #         },
     #         change_token: "ChangeToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -950,10 +1175,12 @@ module Aws::WAF
     #   @return [String]
     #
     # @!attribute [rw] metric_name
-    #   A friendly name or description for the metrics for this `WebACL`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change `MetricName`
-    #   after you create the `WebACL`.
+    #   A friendly name or description for the metrics for this `WebACL`.The
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change `MetricName` after you
+    #   create the `WebACL`.
     #   @return [String]
     #
     # @!attribute [rw] default_action
@@ -966,13 +1193,17 @@ module Aws::WAF
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateWebACLRequest AWS API Documentation
     #
     class CreateWebACLRequest < Struct.new(
       :name,
       :metric_name,
       :default_action,
-      :change_token)
+      :change_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -1565,7 +1796,57 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
+    # The rule to exclude from a rule group. This is applicable only when
+    # the `ActivatedRule` refers to a `RuleGroup`. The rule must belong to
+    # the `RuleGroup` that is specified by the `ActivatedRule`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #
+    # @note When making an API call, you may pass ExcludedRule
+    #   data as a hash:
+    #
+    #       {
+    #         rule_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the rule to exclude from the rule group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ExcludedRule AWS API Documentation
+    #
+    class ExcludedRule < Struct.new(
+      :rule_id)
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies where in a web request to look for `TargetString`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass FieldToMatch
     #   data as a hash:
@@ -1635,8 +1916,22 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # The country from which web requests originate that you want AWS WAF to
     # search for.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass GeoMatchConstraint
     #   data as a hash:
@@ -1663,7 +1958,21 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Contains one or more countries that AWS WAF will search for.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] geo_match_set_id
     #   The `GeoMatchSetId` for an `GeoMatchSet`. You use `GeoMatchSetId` to
@@ -1695,7 +2004,21 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Contains the identifier and the name of the `GeoMatchSet`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] geo_match_set_id
     #   The `GeoMatchSetId` for an GeoMatchSet. You can use `GeoMatchSetId`
@@ -1716,8 +2039,22 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies the type of update to perform to an GeoMatchSet with
     # UpdateGeoMatchSet.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass GeoMatchSetUpdate
     #   data as a hash:
@@ -2212,9 +2549,10 @@ module Aws::WAF
     # @!attribute [rw] time_window
     #   The start date and time and the end date and time of the range for
     #   which you want `GetSampledRequests` to return a sample of requests.
-    #   Specify the date and time in the following format:
-    #   `"2016-09-27T14:50Z"`. You can specify any time range in the
-    #   previous three hours.
+    #   You must specify the times in Coordinated Universal Time (UTC)
+    #   format. UTC format includes the special designator, `Z`. For
+    #   example, `"2016-09-27T14:50Z"`. You can specify any time range in
+    #   the previous three hours.
     #   @return [Types::TimeWindow]
     #
     # @!attribute [rw] max_items
@@ -2252,7 +2590,8 @@ module Aws::WAF
     #   `GetSampledRequests` request. However, if your AWS resource received
     #   more than 5,000 requests during the time range that you specified in
     #   the request, `GetSampledRequests` returns the time range for the
-    #   first 5,000 requests.
+    #   first 5,000 requests. Times are in Coordinated Universal Time (UTC)
+    #   format.
     #   @return [Types::TimeWindow]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSampledRequestsResponse AWS API Documentation
@@ -2437,11 +2776,25 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # The response from a GetSampledRequests request includes an
     # `HTTPHeader` complex type that appears as `Headers` in the response
     # syntax. `HTTPHeader` contains the names and values of all of the
     # headers that appear in one of the web requests that were returned by
     # `GetSampledRequests`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
     #   The name of one of the headers in the sampled web request.
@@ -2459,10 +2812,24 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # The response from a GetSampledRequests request includes an
     # `HTTPRequest` complex type that appears as `Request` in the response
     # syntax. `HTTPRequest` contains information about one of the web
     # requests that were returned by `GetSampledRequests`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] client_ip
     #   The IP address that the request originated from. If the `WebACL` is
@@ -2520,21 +2887,32 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Contains one or more IP addresses or blocks of IP addresses specified
     # in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
     # IPv4 address ranges: /8 and any range between /16 through /32. AWS WAF
-    # supports IPv6 address ranges: /16, /24, /32, /48, /56, /64, and /128.
+    # supports IPv6 address ranges: /24, /32, /48, /56, /64, and /128.
     #
     # To specify an individual IP address, you specify the four-part IP
-    # address followed by a `/32`, for example, 192.0.2.0/31. To block a
+    # address followed by a `/32`, for example, 192.0.2.0/32. To block a
     # range of IP addresses, you can specify /8 or any range between /16
-    # through /32 (for IPv4) or /16, /24, /32, /48, /56, /64, or /128 (for
-    # IPv6). For more information about CIDR notation, see the Wikipedia
-    # entry [Classless Inter-Domain Routing][1].
+    # through /32 (for IPv4) or /24, /32, /48, /56, /64, or /128 (for IPv6).
+    # For more information about CIDR notation, see the Wikipedia entry
+    # [Classless Inter-Domain Routing][3].
     #
     #
     #
-    # [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
     #
     # @!attribute [rw] ip_set_id
     #   The `IPSetId` for an `IPSet`. You use `IPSetId` to get information
@@ -2568,8 +2946,22 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies the IP address type (`IPV4` or `IPV6`) and the IP address
     # range (in CIDR format) that web requests originate from.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass IPSetDescriptor
     #   data as a hash:
@@ -2623,7 +3015,21 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Contains the identifier and the name of the `IPSet`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] ip_set_id
     #   The `IPSetId` for an IPSet. You can use `IPSetId` in a GetIPSet
@@ -2643,7 +3049,21 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies the type of update to perform to an IPSet with UpdateIPSet.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass IPSetUpdate
     #   data as a hash:
@@ -2853,12 +3273,11 @@ module Aws::WAF
     #       }
     #
     # @!attribute [rw] next_marker
-    #   If you specify a value for `Limit` and you have more `IPSets` than
-    #   the value of `Limit`, AWS WAF returns a `NextMarker` value in the
-    #   response that allows you to list another group of `IPSets`. For the
-    #   second and subsequent `ListIPSets` requests, specify the value of
-    #   `NextMarker` from the previous response to get information about
-    #   another batch of `IPSets`.
+    #   AWS WAF returns a `NextMarker` value in the response that allows you
+    #   to list another group of `IPSets`. For the second and subsequent
+    #   `ListIPSets` requests, specify the value of `NextMarker` from the
+    #   previous response to get information about another batch of
+    #   `IPSets`.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -2877,11 +3296,9 @@ module Aws::WAF
     end
 
     # @!attribute [rw] next_marker
-    #   If you have more `IPSet` objects than the number that you specified
-    #   for `Limit` in the request, the response includes a `NextMarker`
-    #   value. To list more `IPSet` objects, submit another `ListIPSets`
-    #   request, and specify the `NextMarker` value from the response in the
-    #   `NextMarker` value in the next request.
+    #   To list more `IPSet` objects, submit another `ListIPSets` request,
+    #   and in the next request use the `NextMarker` response value as the
+    #   `NextMarker` value.
     #   @return [String]
     #
     # @!attribute [rw] ip_sets
@@ -3385,6 +3802,47 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] next_marker
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :next_marker,
+      :limit,
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_info_for_resource
+    #   @return [Types::TagInfoForResource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :next_marker,
+      :tag_info_for_resource)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListWebACLsRequest
     #   data as a hash:
     #
@@ -3497,8 +3955,22 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # The Amazon Kinesis Data Firehose delivery streams, `RedactedFields`
-    # information, and the web ACL Amazon Resource Name (ARN).
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
+    # The Amazon Kinesis Data Firehose, `RedactedFields` information, and
+    # the web ACL Amazon Resource Name (ARN).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass LoggingConfiguration
     #   data as a hash:
@@ -3520,13 +3992,13 @@ module Aws::WAF
     #   @return [String]
     #
     # @!attribute [rw] log_destination_configs
-    #   An array of Amazon Kinesis Data Firehose delivery stream ARNs.
+    #   An array of Amazon Kinesis Data Firehose ARNs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] redacted_fields
     #   The parts of the request that you want redacted from the logs. For
     #   example, if you redact the cookie field, the cookie field in the
-    #   delivery stream will be `xxx`.
+    #   firehose will be `xxx`.
     #   @return [Array<Types::FieldToMatch>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/LoggingConfiguration AWS API Documentation
@@ -3538,11 +4010,25 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet,
     # RegexMatchSet, GeoMatchSet, and SizeConstraintSet objects that you
     # want to add to a `Rule` and, for each object, indicates whether you
     # want to negate the settings, for example, requests that do NOT
     # originate from the IP address 192.0.2.44.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass Predicate
     #   data as a hash:
@@ -3605,9 +4091,14 @@ module Aws::WAF
     #       }
     #
     # @!attribute [rw] logging_configuration
-    #   The Amazon Kinesis Data Firehose delivery streams that contains the
-    #   inspected traffic information, the redacted fields details, and the
-    #   Amazon Resource Name (ARN) of the web ACL to monitor.
+    #   The Amazon Kinesis Data Firehose that contains the inspected traffic
+    #   information, the redacted fields details, and the Amazon Resource
+    #   Name (ARN) of the web ACL to monitor.
+    #
+    #   <note markdown="1"> When specifying `Type` in `RedactedFields`, you must use one of the
+    #   following values: `URI`, `QUERY_STRING`, `HEADER`, or `METHOD`.
+    #
+    #    </note>
     #   @return [Types::LoggingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/PutLoggingConfigurationRequest AWS API Documentation
@@ -3657,6 +4148,15 @@ module Aws::WAF
     #
     class PutPermissionPolicyResponse < Aws::EmptyStructure; end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # A `RateBasedRule` is identical to a regular Rule, with one addition: a
     # `RateBasedRule` counts the number of requests that arrive from a
     # specified IP address every five minutes. For example, based on recent
@@ -3667,11 +4167,16 @@ module Aws::WAF
     #
     # * They contain the value `BadBot` in the `User-Agent` header.
     #
-    # In the rule, you also define the rate limit as 15,000.
+    # In the rule, you also define the rate limit as 1,000.
     #
-    # Requests that meet both of these conditions and exceed 15,000 requests
+    # Requests that meet both of these conditions and exceed 1,000 requests
     # every five minutes trigger the rule's action (block or count), which
     # is defined in the web ACL.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] rule_id
     #   A unique identifier for a `RateBasedRule`. You use `RuleId` to get
@@ -3690,8 +4195,10 @@ module Aws::WAF
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for a
     #   `RateBasedRule`. The name can contain only alphanumeric characters
-    #   (A-Z, a-z, 0-9); the name can't contain whitespace. You can't
-    #   change the name of the metric after you create the `RateBasedRule`.
+    #   (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It
+    #   can't contain whitespace or metric names reserved for AWS WAF,
+    #   including "All" and "Default\_Action." You can't change the
+    #   name of the metric after you create the `RateBasedRule`.
     #   @return [String]
     #
     # @!attribute [rw] match_predicates
@@ -3728,6 +4235,15 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # In a GetRegexMatchSet request, `RegexMatchSet` is a complex type that
     # contains the `RegexMatchSetId` and `Name` of a `RegexMatchSet`, and
     # the values that you specified when you updated the `RegexMatchSet`.
@@ -3738,6 +4254,11 @@ module Aws::WAF
     # contains more than one `RegexMatchTuple` object, a request needs to
     # match the settings in only one `ByteMatchTuple` to be considered a
     # match.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] regex_match_set_id
     #   The `RegexMatchSetId` for a `RegexMatchSet`. You use
@@ -3780,8 +4301,22 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returned by ListRegexMatchSets. Each `RegexMatchSetSummary` object
     # includes the `Name` and `RegexMatchSetId` for one RegexMatchSet.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] regex_match_set_id
     #   The `RegexMatchSetId` for a `RegexMatchSet`. You use
@@ -3806,9 +4341,23 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # In an UpdateRegexMatchSet request, `RegexMatchSetUpdate` specifies
     # whether to insert or delete a RegexMatchTuple and includes the
     # settings for the `RegexMatchTuple`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass RegexMatchSetUpdate
     #   data as a hash:
@@ -3846,6 +4395,15 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # The regular expression pattern that you want AWS WAF to search for in
     # web requests, the location in requests that you want AWS WAF to
     # search, and other settings. Each `RegexMatchTuple` object contains:
@@ -3859,6 +4417,11 @@ module Aws::WAF
     # * Whether to perform any conversions on the request, such as
     #   converting it to lowercase, before inspecting it for the specified
     #   string.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass RegexMatchTuple
     #   data as a hash:
@@ -3976,9 +4539,23 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # The `RegexPatternSet` specifies the regular expression (regex) pattern
     # that you want AWS WAF to search for, such as `B[a@]dB[o0]t`. You can
     # then configure AWS WAF to reject those requests.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] regex_pattern_set_id
     #   The identifier for the `RegexPatternSet`. You use
@@ -4009,8 +4586,22 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Returned by ListRegexPatternSets. Each `RegexPatternSetSummary` object
     # includes the `Name` and `RegexPatternSetId` for one RegexPatternSet.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] regex_pattern_set_id
     #   The `RegexPatternSetId` for a `RegexPatternSet`. You use
@@ -4035,9 +4626,23 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # In an UpdateRegexPatternSet request, `RegexPatternSetUpdate` specifies
     # whether to insert or delete a `RegexPatternString` and includes the
     # settings for the `RegexPatternString`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass RegexPatternSetUpdate
     #   data as a hash:
@@ -4064,6 +4669,15 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # A combination of ByteMatchSet, IPSet, and/or SqlInjectionMatchSet
     # objects that identify the web requests that you want to allow, block,
     # or count. For example, you might create a `Rule` that includes the
@@ -4078,6 +4692,11 @@ module Aws::WAF
     # To match the settings in this `Rule`, a request must originate from
     # `192.0.2.44` AND include a `User-Agent` header for which the value is
     # `BadBot`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] rule_id
     #   A unique identifier for a `Rule`. You use `RuleId` to get more
@@ -4096,9 +4715,11 @@ module Aws::WAF
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `Rule`. The
-    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change `MetricName` after
-    #   you create the `Rule`.
+    #   name can contain only alphanumeric characters (A-Z, a-z, 0-9), with
+    #   maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change `MetricName` after you
+    #   create the `Rule`.
     #   @return [String]
     #
     # @!attribute [rw] predicates
@@ -4117,6 +4738,15 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # A collection of predefined rules that you can add to a web ACL.
     #
     # Rule groups are subject to the following limits:
@@ -4127,6 +4757,11 @@ module Aws::WAF
     # * One rule group per web ACL.
     #
     # * Ten rules per rule group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] rule_group_id
     #   A unique identifier for a `RuleGroup`. You use `RuleGroupId` to get
@@ -4145,9 +4780,11 @@ module Aws::WAF
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `RuleGroup`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change the name of
-    #   the metric after you create the `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change the name of the metric
+    #   after you create the `RuleGroup`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RuleGroup AWS API Documentation
@@ -4159,8 +4796,22 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Contains the identifier and the friendly name or description of the
     # `RuleGroup`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] rule_group_id
     #   A unique identifier for a `RuleGroup`. You use `RuleGroupId` to get
@@ -4185,8 +4836,22 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies an `ActivatedRule` and indicates whether you want to add it
     # to a `RuleGroup` or delete it from a `RuleGroup`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass RuleGroupUpdate
     #   data as a hash:
@@ -4203,6 +4868,11 @@ module Aws::WAF
     #             type: "NONE", # required, accepts NONE, COUNT
     #           },
     #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #           excluded_rules: [
+    #             {
+    #               rule_id: "ResourceId", # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -4226,8 +4896,22 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Contains the identifier and the friendly name or description of the
     # `Rule`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] rule_id
     #   A unique identifier for a `Rule`. You use `RuleId` to get more
@@ -4252,8 +4936,22 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies a `Predicate` (such as an `IPSet`) and indicates whether you
     # want to add it to a `Rule` or delete it from a `Rule`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass RuleUpdate
     #   data as a hash:
@@ -4285,11 +4983,25 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # The response from a GetSampledRequests request includes a
     # `SampledHTTPRequests` complex type that appears as `SampledRequests`
     # in the response syntax. `SampledHTTPRequests` contains one
     # `SampledHTTPRequest` object for each web request that is returned by
     # `GetSampledRequests`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] request
     #   A complex type that contains detailed information about the request.
@@ -4330,11 +5042,25 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies a constraint on the size of a part of the web request. AWS
     # WAF uses the `Size`, `ComparisonOperator`, and `FieldToMatch` to build
     # an expression in the form of "`Size` `ComparisonOperator` size in
     # bytes of `FieldToMatch`". If that expression is true, the
     # `SizeConstraint` is considered to match.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass SizeConstraint
     #   data as a hash:
@@ -4357,7 +5083,7 @@ module Aws::WAF
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass AWS WAF. If you
     #   specify a transformation, AWS WAF performs the transformation on
-    #   `FieldToMatch` before inspecting a request for a match.
+    #   `FieldToMatch` before inspecting it for a match.
     #
     #   You can only specify a single type of TextTransformation.
     #
@@ -4486,11 +5212,25 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # A complex type that contains `SizeConstraint` objects, which specify
     # the parts of web requests that you want AWS WAF to inspect the size
     # of. If a `SizeConstraintSet` contains more than one `SizeConstraint`
     # object, a request only needs to match one constraint to be considered
     # a match.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] size_constraint_set_id
     #   A unique identifier for a `SizeConstraintSet`. You use
@@ -4522,7 +5262,21 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # The `Id` and `Name` of a `SizeConstraintSet`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] size_constraint_set_id
     #   A unique identifier for a `SizeConstraintSet`. You use
@@ -4548,9 +5302,23 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies the part of a web request that you want to inspect the size
     # of and indicates whether you want to add the specification to a
     # SizeConstraintSet or delete it from a `SizeConstraintSet`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass SizeConstraintSetUpdate
     #   data as a hash:
@@ -4590,6 +5358,15 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # A complex type that contains `SqlInjectionMatchTuple` objects, which
     # specify the parts of web requests that you want AWS WAF to inspect for
     # snippets of malicious SQL code and, if you want AWS WAF to inspect a
@@ -4597,6 +5374,11 @@ module Aws::WAF
     # more than one `SqlInjectionMatchTuple` object, a request needs to
     # include snippets of SQL code in only one of the specified parts of the
     # request to be considered a match.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] sql_injection_match_set_id
     #   A unique identifier for a `SqlInjectionMatchSet`. You use
@@ -4629,7 +5411,21 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # The `Id` and `Name` of a `SqlInjectionMatchSet`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] sql_injection_match_set_id
     #   A unique identifier for a `SqlInjectionMatchSet`. You use
@@ -4656,10 +5452,24 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies the part of a web request that you want to inspect for
     # snippets of malicious SQL code and indicates whether you want to add
     # the specification to a SqlInjectionMatchSet or delete it from a
     # `SqlInjectionMatchSet`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass SqlInjectionMatchSetUpdate
     #   data as a hash:
@@ -4695,9 +5505,23 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies the part of a web request that you want AWS WAF to inspect
     # for snippets of malicious SQL code and, if you want AWS WAF to inspect
     # a header, the name of the header.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass SqlInjectionMatchTuple
     #   data as a hash:
@@ -4719,7 +5543,7 @@ module Aws::WAF
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass AWS WAF. If you
     #   specify a transformation, AWS WAF performs the transformation on
-    #   `FieldToMatch` before inspecting a request for a match.
+    #   `FieldToMatch` before inspecting it for a match.
     #
     #   You can only specify a single type of TextTransformation.
     #
@@ -4801,7 +5625,21 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # A summary of the rule groups you are subscribed to.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] rule_group_id
     #   A unique identifier for a `RuleGroup`.
@@ -4814,9 +5652,11 @@ module Aws::WAF
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `RuleGroup`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change the name of
-    #   the metric after you create the `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change the name of the metric
+    #   after you create the `RuleGroup`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/SubscribedRuleGroupSummary AWS API Documentation
@@ -4828,9 +5668,140 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
+    # A tag associated with an AWS resource. Tags are key:value pairs that
+    # you can use to categorize and manage your resources, for purposes like
+    # billing. For example, you might set the tag key to "customer" and
+    # the value to the customer name or ID. You can specify one or more tags
+    # to add to each AWS resource, up to 50 tags for a resource.
+    #
+    # Tagging is only available through the API, SDKs, and CLI. You can't
+    # manage or view tags through the AWS WAF Classic console. You can tag
+    # the AWS resources that you manage through AWS WAF Classic: web ACLs,
+    # rule groups, and rules.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
+    # Information for a tag associated with an AWS resource. Tags are
+    # key:value pairs that you can use to categorize and manage your
+    # resources, for purposes like billing. For example, you might set the
+    # tag key to "customer" and the value to the customer name or ID. You
+    # can specify one or more tags to add to each AWS resource, up to 50
+    # tags for a resource.
+    #
+    # Tagging is only available through the API, SDKs, and CLI. You can't
+    # manage or view tags through the AWS WAF Classic console. You can tag
+    # the AWS resources that you manage through AWS WAF Classic: web ACLs,
+    # rule groups, and rules.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_list
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/TagInfoForResource AWS API Documentation
+    #
+    class TagInfoForResource < Struct.new(
+      :resource_arn,
+      :tag_list)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # In a GetSampledRequests request, the `StartTime` and `EndTime` objects
     # specify the time range for which you want AWS WAF to return a sample
     # of web requests.
+    #
+    # You must specify the times in Coordinated Universal Time (UTC) format.
+    # UTC format includes the special designator, `Z`. For example,
+    # `"2016-09-27T14:50Z"`.
     #
     # In a GetSampledRequests response, the `StartTime` and `EndTime`
     # objects specify the time range for which AWS WAF actually returned a
@@ -4840,6 +5811,11 @@ module Aws::WAF
     # 5,000 requests during that period, AWS WAF stops sampling after the
     # 5,000th request. In that case, `EndTime` is the time that AWS WAF
     # received the 5,000th request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass TimeWindow
     #   data as a hash:
@@ -4852,17 +5828,19 @@ module Aws::WAF
     # @!attribute [rw] start_time
     #   The beginning of the time range from which you want
     #   `GetSampledRequests` to return a sample of the requests that your
-    #   AWS resource received. Specify the date and time in the following
-    #   format: `"2016-09-27T14:50Z"`. You can specify any time range in the
-    #   previous three hours.
+    #   AWS resource received. You must specify the date and time in
+    #   Coordinated Universal Time (UTC) format. UTC format includes the
+    #   special designator, `Z`. For example, `"2016-09-27T14:50Z"`. You can
+    #   specify any time range in the previous three hours.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end of the time range from which you want `GetSampledRequests`
     #   to return a sample of the requests that your AWS resource received.
-    #   Specify the date and time in the following format:
-    #   `"2016-09-27T14:50Z"`. You can specify any time range in the
-    #   previous three hours.
+    #   You must specify the date and time in Coordinated Universal Time
+    #   (UTC) format. UTC format includes the special designator, `Z`. For
+    #   example, `"2016-09-27T14:50Z"`. You can specify any time range in
+    #   the previous three hours.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/TimeWindow AWS API Documentation
@@ -4872,6 +5850,32 @@ module Aws::WAF
       :end_time)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateByteMatchSetRequest
     #   data as a hash:
@@ -5257,6 +6261,11 @@ module Aws::WAF
     #                 type: "NONE", # required, accepts NONE, COUNT
     #               },
     #               type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #               excluded_rules: [
+    #                 {
+    #                   rule_id: "ResourceId", # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -5526,6 +6535,11 @@ module Aws::WAF
     #                 type: "NONE", # required, accepts NONE, COUNT
     #               },
     #               type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #               excluded_rules: [
+    #                 {
+    #                   rule_id: "ResourceId", # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -5554,7 +6568,7 @@ module Aws::WAF
     #
     #   * ActivatedRule: Contains `Action`, `OverrideAction`, `Priority`,
     #     `RuleId`, and `Type`. `ActivatedRule|OverrideAction` applies only
-    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case
+    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case,
     #     you do not use `ActivatedRule|Action`. For all other update
     #     requests, `ActivatedRule|Action` is used instead of
     #     `ActivatedRule|OverrideAction`.
@@ -5625,7 +6639,7 @@ module Aws::WAF
     #
     # @!attribute [rw] updates
     #   An array of `XssMatchSetUpdate` objects that you want to insert into
-    #   or delete from a XssMatchSet. For more information, see the
+    #   or delete from an XssMatchSet. For more information, see the
     #   applicable data types:
     #
     #   * XssMatchSetUpdate: Contains `Action` and `XssMatchTuple`
@@ -5659,12 +6673,393 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFBadRequestException AWS API Documentation
+    #
+    class WAFBadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The name specified is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFDisallowedNameException AWS API Documentation
+    #
+    class WAFDisallowedNameException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed due to a problem with the migration. The failure
+    # cause is provided in the exception, in the `MigrationErrorType`\:
+    #
+    # * `ENTITY_NOT_SUPPORTED` - The web ACL has an unsupported entity but
+    #   the `IgnoreUnsupportedType` is not set to true.
+    #
+    # * `ENTITY_NOT_FOUND` - The web ACL doesn't exist.
+    #
+    # * `S3_BUCKET_NO_PERMISSION` - You don't have permission to perform
+    #   the `PutObject` action to the specified Amazon S3 bucket.
+    #
+    # * `S3_BUCKET_NOT_ACCESSIBLE` - The bucket policy doesn't allow AWS
+    #   WAF to perform the `PutObject` action in the bucket.
+    #
+    # * `S3_BUCKET_NOT_FOUND` - The S3 bucket doesn't exist.
+    #
+    # * `S3_BUCKET_INVALID_REGION` - The S3 bucket is not in the same Region
+    #   as the web ACL.
+    #
+    # * `S3_INTERNAL_ERROR` - AWS WAF failed to create the template in the
+    #   S3 bucket for another reason.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] migration_error_type
+    #   @return [String]
+    #
+    # @!attribute [rw] migration_error_reason
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFEntityMigrationException AWS API Documentation
+    #
+    class WAFEntityMigrationException < Struct.new(
+      :message,
+      :migration_error_type,
+      :migration_error_reason)
+      include Aws::Structure
+    end
+
+    # The operation failed because of a system problem, even though the
+    # request was valid. Retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFInternalErrorException AWS API Documentation
+    #
+    class WAFInternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because you tried to create, update, or delete an
+    # object by using an invalid account identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFInvalidAccountException AWS API Documentation
+    #
+    class WAFInvalidAccountException < Aws::EmptyStructure; end
+
+    # The operation failed because there was nothing to do. For example:
+    #
+    # * You tried to remove a `Rule` from a `WebACL`, but the `Rule` isn't
+    #   in the specified `WebACL`.
+    #
+    # * You tried to remove an IP address from an `IPSet`, but the IP
+    #   address isn't in the specified `IPSet`.
+    #
+    # * You tried to remove a `ByteMatchTuple` from a `ByteMatchSet`, but
+    #   the `ByteMatchTuple` isn't in the specified `WebACL`.
+    #
+    # * You tried to add a `Rule` to a `WebACL`, but the `Rule` already
+    #   exists in the specified `WebACL`.
+    #
+    # * You tried to add a `ByteMatchTuple` to a `ByteMatchSet`, but the
+    #   `ByteMatchTuple` already exists in the specified `WebACL`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFInvalidOperationException AWS API Documentation
+    #
+    class WAFInvalidOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because AWS WAF didn't recognize a parameter in
+    # the request. For example:
+    #
+    # * You specified an invalid parameter name.
+    #
+    # * You specified an invalid value.
+    #
+    # * You tried to update an object (`ByteMatchSet`, `IPSet`, `Rule`, or
+    #   `WebACL`) using an action other than `INSERT` or `DELETE`.
+    #
+    # * You tried to create a `WebACL` with a `DefaultAction` `Type` other
+    #   than `ALLOW`, `BLOCK`, or `COUNT`.
+    #
+    # * You tried to create a `RateBasedRule` with a `RateKey` value other
+    #   than `IP`.
+    #
+    # * You tried to update a `WebACL` with a `WafAction` `Type` other than
+    #   `ALLOW`, `BLOCK`, or `COUNT`.
+    #
+    # * You tried to update a `ByteMatchSet` with a `FieldToMatch` `Type`
+    #   other than HEADER, METHOD, QUERY\_STRING, URI, or BODY.
+    #
+    # * You tried to update a `ByteMatchSet` with a `Field` of `HEADER` but
+    #   no value for `Data`.
+    #
+    # * Your request references an ARN that is malformed, or corresponds to
+    #   a resource with which a web ACL cannot be associated.
+    #
+    # @!attribute [rw] field
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFInvalidParameterException AWS API Documentation
+    #
+    class WAFInvalidParameterException < Struct.new(
+      :field,
+      :parameter,
+      :reason)
+      include Aws::Structure
+    end
+
+    # The operation failed because the specified policy is not in the proper
+    # format.
+    #
+    # The policy is subject to the following restrictions:
+    #
+    # * You can attach only one policy with each `PutPermissionPolicy`
+    #   request.
+    #
+    # * The policy must include an `Effect`, `Action` and `Principal`.
+    #
+    # * `Effect` must specify `Allow`.
+    #
+    # * The `Action` in the policy must be `waf:UpdateWebACL`,
+    #   `waf-regional:UpdateWebACL`, `waf:GetRuleGroup` and
+    #   `waf-regional:GetRuleGroup` . Any extra or wildcard actions in the
+    #   policy will be rejected.
+    #
+    # * The policy cannot include a `Resource` parameter.
+    #
+    # * The ARN in the request must be a valid WAF RuleGroup ARN and the
+    #   RuleGroup must exist in the same region.
+    #
+    # * The user making the request must be the owner of the RuleGroup.
+    #
+    # * Your policy must be composed using IAM Policy version 2012-10-17.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFInvalidPermissionPolicyException AWS API Documentation
+    #
+    class WAFInvalidPermissionPolicyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The regular expression (regex) you specified in `RegexPatternString`
+    # is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFInvalidRegexPatternException AWS API Documentation
+    #
+    class WAFInvalidRegexPatternException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation exceeds a resource limit, for example, the maximum
+    # number of `WebACL` objects that you can create for an AWS account. For
+    # more information, see [Limits][1] in the *AWS WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFLimitsExceededException AWS API Documentation
+    #
+    class WAFLimitsExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because you tried to delete an object that isn't
+    # empty. For example:
+    #
+    # * You tried to delete a `WebACL` that still contains one or more
+    #   `Rule` objects.
+    #
+    # * You tried to delete a `Rule` that still contains one or more
+    #   `ByteMatchSet` objects or other predicates.
+    #
+    # * You tried to delete a `ByteMatchSet` that contains one or more
+    #   `ByteMatchTuple` objects.
+    #
+    # * You tried to delete an `IPSet` that references one or more IP
+    #   addresses.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFNonEmptyEntityException AWS API Documentation
+    #
+    class WAFNonEmptyEntityException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because you tried to add an object to or delete
+    # an object from another object that doesn't exist. For example:
+    #
+    # * You tried to add a `Rule` to or delete a `Rule` from a `WebACL` that
+    #   doesn't exist.
+    #
+    # * You tried to add a `ByteMatchSet` to or delete a `ByteMatchSet` from
+    #   a `Rule` that doesn't exist.
+    #
+    # * You tried to add an IP address to or delete an IP address from an
+    #   `IPSet` that doesn't exist.
+    #
+    # * You tried to add a `ByteMatchTuple` to or delete a `ByteMatchTuple`
+    #   from a `ByteMatchSet` that doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFNonexistentContainerException AWS API Documentation
+    #
+    class WAFNonexistentContainerException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because the referenced object doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFNonexistentItemException AWS API Documentation
+    #
+    class WAFNonexistentItemException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because you tried to delete an object that is
+    # still in use. For example:
+    #
+    # * You tried to delete a `ByteMatchSet` that is still referenced by a
+    #   `Rule`.
+    #
+    # * You tried to delete a `Rule` that is still referenced by a `WebACL`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFReferencedItemException AWS API Documentation
+    #
+    class WAFReferencedItemException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # AWS WAF is not able to access the service linked role. This can be
+    # caused by a previous `PutLoggingConfiguration` request, which can lock
+    # the service linked role for about 20 seconds. Please try your request
+    # again. The service linked role can also be locked by a previous
+    # `DeleteServiceLinkedRole` request, which can lock the role for 15
+    # minutes or more. If you recently made a `DeleteServiceLinkedRole`,
+    # wait at least 15 minutes and try the request again. If you receive
+    # this same exception again, you will have to wait additional time until
+    # the role is unlocked.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFServiceLinkedRoleErrorException AWS API Documentation
+    #
+    class WAFServiceLinkedRoleErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation failed because you tried to create, update, or delete an
+    # object by using a change token that has already been used.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFStaleDataException AWS API Documentation
+    #
+    class WAFStaleDataException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified subscription does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFSubscriptionNotFoundException AWS API Documentation
+    #
+    class WAFSubscriptionNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFTagOperationException AWS API Documentation
+    #
+    class WAFTagOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WAFTagOperationInternalErrorException AWS API Documentation
+    #
+    class WAFTagOperationInternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # For the action that is associated with a rule in a `WebACL`, specifies
     # the action that you want AWS WAF to perform when a web request matches
     # all of the conditions in a rule. For the default action in a `WebACL`,
     # specifies the action that you want AWS WAF to take when a web request
     # doesn't match all of the conditions in any of the rules in a
     # `WebACL`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass WafAction
     #   data as a hash:
@@ -5695,8 +7090,22 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # The action to take if any rule within the `RuleGroup` matches a
     # request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass WafOverrideAction
     #   data as a hash:
@@ -5718,6 +7127,15 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Contains the `Rules` that identify the requests that you want to
     # allow, block, or count. In a `WebACL`, you also specify a default
     # action (`ALLOW` or `BLOCK`), and the action for each `Rule` that you
@@ -5728,6 +7146,11 @@ module Aws::WAF
     # `Rule` to a `WebACL`, a request needs to match only one of the
     # specifications to be allowed, blocked, or counted. For more
     # information, see UpdateWebACL.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] web_acl_id
     #   A unique identifier for a `WebACL`. You use `WebACLId` to get
@@ -5745,9 +7168,11 @@ module Aws::WAF
     #
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `WebACL`.
-    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change `MetricName`
-    #   after you create the `WebACL`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9),
+    #   with maximum length 128 and minimum length one. It can't contain
+    #   whitespace or metric names reserved for AWS WAF, including "All"
+    #   and "Default\_Action." You can't change `MetricName` after you
+    #   create the `WebACL`.
     #   @return [String]
     #
     # @!attribute [rw] default_action
@@ -5760,6 +7185,10 @@ module Aws::WAF
     #   priority of the `Rule`, and the ID of the `Rule`.
     #   @return [Array<Types::ActivatedRule>]
     #
+    # @!attribute [rw] web_acl_arn
+    #   Tha Amazon Resource Name (ARN) of the web ACL.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WebACL AWS API Documentation
     #
     class WebACL < Struct.new(
@@ -5767,11 +7196,26 @@ module Aws::WAF
       :name,
       :metric_name,
       :default_action,
-      :rules)
+      :rules,
+      :web_acl_arn)
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Contains the identifier and the name or description of the WebACL.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] web_acl_id
     #   A unique identifier for a `WebACL`. You use `WebACLId` to get
@@ -5795,8 +7239,22 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies whether to insert a `Rule` into or delete a `Rule` from a
     # `WebACL`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass WebACLUpdate
     #   data as a hash:
@@ -5813,6 +7271,11 @@ module Aws::WAF
     #             type: "NONE", # required, accepts NONE, COUNT
     #           },
     #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #           excluded_rules: [
+    #             {
+    #               rule_id: "ResourceId", # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -5836,6 +7299,15 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # A complex type that contains `XssMatchTuple` objects, which specify
     # the parts of web requests that you want AWS WAF to inspect for
     # cross-site scripting attacks and, if you want AWS WAF to inspect a
@@ -5843,6 +7315,11 @@ module Aws::WAF
     # one `XssMatchTuple` object, a request needs to include cross-site
     # scripting attacks in only one of the specified parts of the request to
     # be considered a match.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] xss_match_set_id
     #   A unique identifier for an `XssMatchSet`. You use `XssMatchSetId` to
@@ -5873,7 +7350,21 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # The `Id` and `Name` of an `XssMatchSet`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] xss_match_set_id
     #   A unique identifier for an `XssMatchSet`. You use `XssMatchSetId` to
@@ -5898,9 +7389,23 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies the part of a web request that you want to inspect for
     # cross-site scripting attacks and indicates whether you want to add the
     # specification to an XssMatchSet or delete it from an `XssMatchSet`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass XssMatchSetUpdate
     #   data as a hash:
@@ -5917,8 +7422,8 @@ module Aws::WAF
     #       }
     #
     # @!attribute [rw] action
-    #   Specify `INSERT` to add a XssMatchSetUpdate to an XssMatchSet. Use
-    #   `DELETE` to remove a `XssMatchSetUpdate` from an `XssMatchSet`.
+    #   Specify `INSERT` to add an XssMatchSetUpdate to an XssMatchSet. Use
+    #   `DELETE` to remove an `XssMatchSetUpdate` from an `XssMatchSet`.
     #   @return [String]
     #
     # @!attribute [rw] xss_match_tuple
@@ -5935,9 +7440,23 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is **AWS WAF Classic** documentation. For more information, see
+    # [AWS WAF Classic][1] in the developer guide.
+    #
+    #  **For the latest version of AWS WAF**, use the AWS WAFV2 API and see
+    # the [AWS WAF Developer Guide][2]. With the latest version, AWS WAF has
+    # a single set of endpoints for regional and global use.
+    #
+    #  </note>
+    #
     # Specifies the part of a web request that you want AWS WAF to inspect
     # for cross-site scripting attacks and, if you want AWS WAF to inspect a
     # header, the name of the header.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass XssMatchTuple
     #   data as a hash:
@@ -5959,7 +7478,7 @@ module Aws::WAF
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass AWS WAF. If you
     #   specify a transformation, AWS WAF performs the transformation on
-    #   `FieldToMatch` before inspecting a request for a match.
+    #   `FieldToMatch` before inspecting it for a match.
     #
     #   You can only specify a single type of TextTransformation.
     #

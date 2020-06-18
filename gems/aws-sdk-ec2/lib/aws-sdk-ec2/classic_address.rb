@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2
+
   class ClassicAddress
 
     extend Aws::Deprecations
@@ -21,6 +24,7 @@ module Aws::EC2
       @public_ip = extract_public_ip(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -87,6 +91,24 @@ module Aws::EC2
       data[:public_ipv_4_pool]
     end
 
+    # The name of the location from which the IP address is advertised.
+    # @return [String]
+    def network_border_group
+      data[:network_border_group]
+    end
+
+    # The customer-owned IP address.
+    # @return [String]
+    def customer_owned_ip
+      data[:customer_owned_ip]
+    end
+
+    # The ID of the customer-owned address pool.
+    # @return [String]
+    def customer_owned_ipv_4_pool
+      data[:customer_owned_ipv_4_pool]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -127,7 +149,8 @@ module Aws::EC2
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -140,13 +163,15 @@ module Aws::EC2
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -177,17 +202,16 @@ module Aws::EC2
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -222,11 +246,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.associate({
-    #     allocation_id: "String",
-    #     instance_id: "String",
+    #     allocation_id: "AllocationId",
+    #     instance_id: "InstanceId",
     #     allow_reassociation: false,
     #     dry_run: false,
-    #     network_interface_id: "String",
+    #     network_interface_id: "NetworkInterfaceId",
     #     private_ip_address: "String",
     #   })
     # @param [Hash] options ({})
@@ -253,6 +277,9 @@ module Aws::EC2
     # @option options [String] :network_interface_id
     #   \[EC2-VPC\] The ID of the network interface. If the instance has more
     #   than one network interface, you must specify a network interface ID.
+    #
+    #   For EC2-VPC, you can specify either the instance ID or the network
+    #   interface ID, but not both.
     # @option options [String] :private_ip_address
     #   \[EC2-VPC\] The primary or secondary private IP address to associate
     #   with the Elastic IP address. If no private IP address is specified,
@@ -268,7 +295,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.disassociate({
-    #     association_id: "String",
+    #     association_id: "ElasticIpAssociationId",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -289,12 +316,30 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.release({
-    #     allocation_id: "String",
+    #     allocation_id: "AllocationId",
+    #     network_border_group: "String",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :allocation_id
     #   \[EC2-VPC\] The allocation ID. Required for EC2-VPC.
+    # @option options [String] :network_border_group
+    #   The location that the IP address is released from.
+    #
+    #   If you provide an incorrect network border group, you will receive an
+    #   `InvalidAddress.NotFound` error. For more information, see [Error
+    #   Codes][1].
+    #
+    #   <note markdown="1"> You cannot use a network border group with EC2 Classic. If you attempt
+    #   this operation on EC2 classic, you will receive an
+    #   `InvalidParameterCombination` error. For more information, see [Error
+    #   Codes][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

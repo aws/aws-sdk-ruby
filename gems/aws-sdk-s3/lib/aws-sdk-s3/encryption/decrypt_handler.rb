@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'base64'
 
 module Aws
@@ -30,6 +32,7 @@ module Aws
 
         def call(context)
           attach_http_event_listeners(context)
+          apply_cse_user_agent(context)
           @handler.call(context)
         end
 
@@ -174,6 +177,14 @@ module Aws
 
         def body_contains_auth_tag?(context)
           context.http_response.headers['x-amz-meta-x-amz-tag-len']
+        end
+
+        def apply_cse_user_agent(context)
+          if context.config.user_agent_suffix.nil?
+            context.config.user_agent_suffix = 'CSE_V1'
+          elsif !context.config.user_agent_suffix.include? 'CSE_V1'
+            context.config.user_agent_suffix += ' CSE_V1'
+          end
         end
 
       end

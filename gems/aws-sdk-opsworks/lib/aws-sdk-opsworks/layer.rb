@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -6,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::OpsWorks
+
   class Layer
 
     extend Aws::Deprecations
@@ -21,6 +24,7 @@ module Aws::OpsWorks
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -91,7 +95,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def custom_instance_profile_arn
       data[:custom_instance_profile_arn]
@@ -141,8 +145,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     # @return [Boolean]
     def auto_assign_elastic_ips
       data[:auto_assign_elastic_ips]
@@ -154,7 +158,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     # @return [Boolean]
     def auto_assign_public_ips
       data[:auto_assign_public_ips]
@@ -163,17 +167,17 @@ module Aws::OpsWorks
     # AWS OpsWorks Stacks supports five lifecycle events: **setup**,
     # **configuration**, **deploy**, **undeploy**, and **shutdown**. For
     # each layer, AWS OpsWorks Stacks runs a set of standard recipes for
-    # each event. In addition, you can provide custom recipes for any or all
-    # layers and events. AWS OpsWorks Stacks runs custom event recipes after
-    # the standard recipes. `LayerCustomRecipes` specifies the custom
-    # recipes for a particular layer to be run in response to each of the
-    # five events.
+    # each event. You can also provide custom recipes for any or all layers
+    # and events. AWS OpsWorks Stacks runs custom event recipes after the
+    # standard recipes. `LayerCustomRecipes` specifies the custom recipes
+    # for a particular layer to be run in response to each of the five
+    # events.
     #
     # To specify a recipe, use the cookbook's directory name in the
     # repository followed by two colons and the recipe name, which is the
-    # recipe's file name without the .rb extension. For example:
-    # phpapp2::dbsetup specifies the dbsetup.rb recipe in the repository's
-    # phpapp2 folder.
+    # recipe's file name without the `.rb` extension. For example:
+    # `phpapp2::dbsetup` specifies the `dbsetup.rb` recipe in the
+    # repository's `phpapp2` folder.
     # @return [Types::Recipes]
     def default_recipes
       data[:default_recipes]
@@ -261,7 +265,8 @@ module Aws::OpsWorks
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -274,13 +279,15 @@ module Aws::OpsWorks
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -311,17 +318,16 @@ module Aws::OpsWorks
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #

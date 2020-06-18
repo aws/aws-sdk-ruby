@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-applicationautoscaling/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     application_auto_scaling = Aws::ApplicationAutoScaling::Client.new
+#     resp = application_auto_scaling.delete_scaling_policy(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Application Auto Scaling all
-# extend {Errors::ServiceError}.
+# Errors returned from Application Auto Scaling are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ApplicationAutoScaling::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Application Auto Scaling API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-applicationautoscaling/customizations'
 # @service
 module Aws::ApplicationAutoScaling
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.41.1'
 
 end

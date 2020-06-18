@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -7,6 +9,73 @@
 
 module Aws::Connect
   module Types
+
+    # A chat message.
+    #
+    # @note When making an API call, you may pass ChatMessage
+    #   data as a hash:
+    #
+    #       {
+    #         content_type: "ChatContentType", # required
+    #         content: "ChatContent", # required
+    #       }
+    #
+    # @!attribute [rw] content_type
+    #   The type of the content. Supported types are text/plain.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the chat message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ChatMessage AWS API Documentation
+    #
+    class ChatMessage < Struct.new(
+      :content_type,
+      :content)
+      include Aws::Structure
+    end
+
+    # Contains summary information about a contact flow.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_type
+    #   The type of contact flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowSummary AWS API Documentation
+    #
+    class ContactFlowSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :contact_flow_type)
+      include Aws::Structure
+    end
+
+    # The contact with the specified ID is not active or does not exist.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactNotFoundException AWS API Documentation
+    #
+    class ContactNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass CreateUserRequest
     #   data as a hash:
@@ -30,70 +99,66 @@ module Aws::Connect
     #         routing_profile_id: "RoutingProfileId", # required
     #         hierarchy_group_id: "HierarchyGroupId",
     #         instance_id: "InstanceId", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] username
-    #   The user name in Amazon Connect for the account to create.
+    #   The user name for the account. For instances not using SAML for
+    #   identity management, the user name can include up to 20 characters.
+    #   If you are using SAML for identity management, the user name can
+    #   include up to 64 characters from \[a-zA-Z0-9\_-.\\@\]+.
     #   @return [String]
     #
     # @!attribute [rw] password
-    #   The password for the user account to create. This is required if you
-    #   are using Amazon Connect for identity management. If you are using
-    #   SAML for identity management and include this parameter, an
-    #   `InvalidRequestException` is returned.
+    #   The password for the user account. A password is required if you are
+    #   using Amazon Connect for identity management. Otherwise, it is an
+    #   error to include a password.
     #   @return [String]
     #
     # @!attribute [rw] identity_info
-    #   Information about the user, including email address, first name, and
-    #   last name.
+    #   The information about the identity of the user.
     #   @return [Types::UserIdentityInfo]
     #
     # @!attribute [rw] phone_config
-    #   Specifies the phone settings for the user, including
-    #   AfterContactWorkTimeLimit, AutoAccept, DeskPhoneNumber, and
-    #   PhoneType.
+    #   The phone settings for the user.
     #   @return [Types::UserPhoneConfig]
     #
     # @!attribute [rw] directory_user_id
-    #   The unique identifier for the user account in the directory service
-    #   directory used for identity management. If Amazon Connect is unable
-    #   to access the existing directory, you can use the `DirectoryUserId`
-    #   to authenticate users. If you include the parameter, it is assumed
-    #   that Amazon Connect cannot access the directory. If the parameter is
-    #   not included, the UserIdentityInfo is used to authenticate users
-    #   from your existing directory.
+    #   The identifier of the user account in the directory used for
+    #   identity management. If Amazon Connect cannot access the directory,
+    #   you can specify this identifier to authenticate users. If you
+    #   include the identifier, we assume that Amazon Connect cannot access
+    #   the directory. Otherwise, the identity information is used to
+    #   authenticate users from your directory.
     #
     #   This parameter is required if you are using an existing directory
     #   for identity management in Amazon Connect when Amazon Connect cannot
     #   access your directory to authenticate users. If you are using SAML
-    #   for identity management and include this parameter, an
-    #   `InvalidRequestException` is returned.
+    #   for identity management and include this parameter, an error is
+    #   returned.
     #   @return [String]
     #
     # @!attribute [rw] security_profile_ids
-    #   The unique identifier of the security profile to assign to the user
-    #   created.
+    #   The identifier of the security profile for the user.
     #   @return [Array<String>]
     #
     # @!attribute [rw] routing_profile_id
-    #   The unique identifier for the routing profile to assign to the user
-    #   created.
+    #   The identifier of the routing profile for the user.
     #   @return [String]
     #
     # @!attribute [rw] hierarchy_group_id
-    #   The unique identifier for the hierarchy group to assign to the user
-    #   created.
+    #   The identifier of the hierarchy group for the user.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserRequest AWS API Documentation
     #
@@ -106,16 +171,17 @@ module Aws::Connect
       :security_profile_ids,
       :routing_profile_id,
       :hierarchy_group_id,
-      :instance_id)
+      :instance_id,
+      :tags)
       include Aws::Structure
     end
 
     # @!attribute [rw] user_id
-    #   The unique identifier for the user account in Amazon Connect
+    #   The identifier of the user account.
     #   @return [String]
     #
     # @!attribute [rw] user_arn
-    #   The Amazon Resource Name (ARN) of the user account created.
+    #   The Amazon Resource Name (ARN) of the user account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserResponse AWS API Documentation
@@ -126,16 +192,16 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The credentials to use for federation.
+    # Contains credentials to use for federation.
     #
     # @!attribute [rw] access_token
     #   An access token generated for a federated user to access Amazon
-    #   Connect
+    #   Connect.
     #   @return [String]
     #
     # @!attribute [rw] access_token_expiration
     #   A token generated with an expiration time for the session a user is
-    #   logged in to Amazon Connect
+    #   logged in to Amazon Connect.
     #   @return [Time]
     #
     # @!attribute [rw] refresh_token
@@ -157,14 +223,13 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `CurrentMetric` object that contains the Name and Unit for the
-    # metric.
+    # Contains information about a real-time metric.
     #
     # @note When making an API call, you may pass CurrentMetric
     #   data as a hash:
     #
     #       {
-    #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED
+    #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
     #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
     #       }
     #
@@ -184,14 +249,14 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `CurrentMetricData` object.
+    # Contains the data for a real-time metric.
     #
     # @!attribute [rw] metric
-    #   The metric in a `CurrentMetricData` object.
+    #   Information about the metric.
     #   @return [Types::CurrentMetric]
     #
     # @!attribute [rw] value
-    #   The value of the metric in the CurrentMetricData object.
+    #   The value of the metric.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CurrentMetricData AWS API Documentation
@@ -202,14 +267,14 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `CurrentMetricResult` object.
+    # Contains information about a set of real-time metrics.
     #
     # @!attribute [rw] dimensions
-    #   The `Dimensions` for the `CurrentMetricResult` object.
+    #   The dimensions for the metrics.
     #   @return [Types::Dimensions]
     #
     # @!attribute [rw] collections
-    #   The `Collections` for the `CurrentMetricResult` object.
+    #   The set of metrics.
     #   @return [Array<Types::CurrentMetricData>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CurrentMetricResult AWS API Documentation
@@ -229,17 +294,11 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The unique identifier of the user to delete.
+    #   The identifier of the user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteUserRequest AWS API Documentation
@@ -259,17 +318,11 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] hierarchy_group_id
-    #   The identifier for the hierarchy group to return.
+    #   The identifier of the hierarchy group.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyGroupRequest AWS API Documentation
@@ -281,7 +334,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] hierarchy_group
-    #   Returns a `HierarchyGroup` object.
+    #   Information about the hierarchy group.
     #   @return [Types::HierarchyGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyGroupResponse AWS API Documentation
@@ -299,13 +352,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyStructureRequest AWS API Documentation
@@ -316,7 +363,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] hierarchy_structure
-    #   A `HierarchyStructure` object.
+    #   Information about the hierarchy structure.
     #   @return [Types::HierarchyStructure]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyStructureResponse AWS API Documentation
@@ -335,17 +382,11 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] user_id
-    #   Unique identifier for the user account to return.
+    #   The identifier of the user account.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserRequest AWS API Documentation
@@ -357,8 +398,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] user
-    #   A `User` object that contains information about the user account and
-    #   configuration settings.
+    #   Information about the user account and configuration settings.
     #   @return [Types::User]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserResponse AWS API Documentation
@@ -368,16 +408,27 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `Dimensions` object that includes the Channel and Queue for the
-    # metric.
+    # Outbound calls to the destination number are not allowed.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DestinationNotAllowedException AWS API Documentation
+    #
+    class DestinationNotAllowedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Contains information about the dimensions for a set of metrics.
     #
     # @!attribute [rw] queue
-    #   A `QueueReference` object used as one part of dimension for the
-    #   metrics results.
+    #   Information about the queue for which metrics are returned.
     #   @return [Types::QueueReference]
     #
     # @!attribute [rw] channel
-    #   The channel used for grouping and filters. Only VOICE is supported.
+    #   The channel used for grouping and filters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Dimensions AWS API Documentation
@@ -388,25 +439,35 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The filter, either channel or queues, to apply to the metric results
-    # retrieved.
+    # A resource with the specified name already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DuplicateResourceException AWS API Documentation
+    #
+    class DuplicateResourceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Contains the filter to apply when retrieving metrics.
     #
     # @note When making an API call, you may pass Filters
     #   data as a hash:
     #
     #       {
     #         queues: ["QueueId"],
-    #         channels: ["VOICE"], # accepts VOICE
+    #         channels: ["VOICE"], # accepts VOICE, CHAT
     #       }
     #
     # @!attribute [rw] queues
-    #   A list of up to 100 queue IDs or queue ARNs to use to filter the
-    #   metrics retrieved. You can include both IDs and ARNs in a request.
+    #   The queues to use to filter the metrics. You can specify up to 100
+    #   queues per request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] channels
-    #   The Channel to use as a filter for the metrics returned. Only VOICE
-    #   is supported.
+    #   The channel to use to filter the metrics.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Filters AWS API Documentation
@@ -417,6 +478,41 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetContactAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         initial_contact_id: "ContactId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_contact_id
+    #   The identifier of the initial contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetContactAttributesRequest AWS API Documentation
+    #
+    class GetContactAttributesRequest < Struct.new(
+      :instance_id,
+      :initial_contact_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   Information about the attributes.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetContactAttributesResponse AWS API Documentation
+    #
+    class GetContactAttributesResponse < Struct.new(
+      :attributes)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetCurrentMetricDataRequest
     #   data as a hash:
     #
@@ -424,12 +520,12 @@ module Aws::Connect
     #         instance_id: "InstanceId", # required
     #         filters: { # required
     #           queues: ["QueueId"],
-    #           channels: ["VOICE"], # accepts VOICE
+    #           channels: ["VOICE"], # accepts VOICE, CHAT
     #         },
     #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #         current_metrics: [ # required
     #           {
-    #             name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED
+    #             name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
     #             unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
     #           },
     #         ],
@@ -438,71 +534,37 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   A `Filters` object that contains a list of queue IDs or queue ARNs,
-    #   up to 100, or list of Channels to use to filter the metrics returned
-    #   in the response. Metric data is retrieved only for the resources
-    #   associated with the queue IDs, ARNs, or Channels included in the
-    #   filter. You can include both IDs and ARNs in the same request. To
-    #   retrieve metrics for all queues, add the queue ID or ARN for each
-    #   queue in your instance. Only VOICE is supported for Channels.
-    #
-    #   To find the ARN for a queue, open the queue you want to use in the
-    #   Amazon Connect Queue editor. The ARN for the queue is displayed in
-    #   the address bar as part of the URL. For example, the queue ARN is
-    #   the set of characters at the end of the URL, after 'id=' such as
-    #   `arn:aws:connect:us-east-1:270923740243:instance/78fb859d-1b7d-44b1-8aa3-12f0835c5855/queue/1d1a4575-9618-40ab-bbeb-81e45795fe61`.
-    #   The queue ID is also included in the URL, and is the string after
-    #   'queue/'.
+    #   The queues, up to 100, or channels, to use to filter the metrics
+    #   returned. Metric data is retrieved only for the resources associated
+    #   with the queues or channels included in the filter. You can include
+    #   both queue IDs and queue ARNs in the same request. The only
+    #   supported channel is `VOICE`.
     #   @return [Types::Filters]
     #
     # @!attribute [rw] groupings
     #   The grouping applied to the metrics returned. For example, when
-    #   grouped by QUEUE, the metrics returned apply to each queue rather
-    #   than aggregated for all queues. If you group by CHANNEL, you should
-    #   include a Channels filter. The only supported channel is VOICE.
+    #   grouped by `QUEUE`, the metrics returned apply to each queue rather
+    #   than aggregated for all queues. If you group by `CHANNEL`, you
+    #   should include a Channels filter. The only supported channel is
+    #   `VOICE`.
     #
-    #   If no `Grouping` is included in the request, a summary of
-    #   `CurrentMetrics` is returned.
+    #   If no `Grouping` is included in the request, a summary of metrics is
+    #   returned.
     #   @return [Array<String>]
     #
     # @!attribute [rw] current_metrics
-    #   A list of `CurrentMetric` objects for the metrics to retrieve. Each
-    #   `CurrentMetric` includes a name of a metric to retrieve and the unit
-    #   to use for it.
-    #
+    #   The metrics to retrieve. Specify the name and unit for each metric.
     #   The following metrics are available:
-    #
-    #   AGENTS\_AVAILABLE
-    #
-    #   : Unit: COUNT
-    #
-    #   AGENTS\_ONLINE
-    #
-    #   : Unit: COUNT
-    #
-    #   AGENTS\_ON\_CALL
-    #
-    #   : Unit: COUNT
-    #
-    #   AGENTS\_STAFFED
-    #
-    #   : Unit: COUNT
     #
     #   AGENTS\_AFTER\_CONTACT\_WORK
     #
     #   : Unit: COUNT
     #
-    #   AGENTS\_NON\_PRODUCTIVE
+    #   AGENTS\_AVAILABLE
     #
     #   : Unit: COUNT
     #
@@ -510,7 +572,31 @@ module Aws::Connect
     #
     #   : Unit: COUNT
     #
+    #   AGENTS\_NON\_PRODUCTIVE
+    #
+    #   : Unit: COUNT
+    #
+    #   AGENTS\_ON\_CALL
+    #
+    #   : Unit: COUNT
+    #
+    #   AGENTS\_ON\_CONTACT
+    #
+    #   : Unit: COUNT
+    #
+    #   AGENTS\_ONLINE
+    #
+    #   : Unit: COUNT
+    #
+    #   AGENTS\_STAFFED
+    #
+    #   : Unit: COUNT
+    #
     #   CONTACTS\_IN\_QUEUE
+    #
+    #   : Unit: COUNT
+    #
+    #   CONTACTS\_SCHEDULED
     #
     #   : Unit: COUNT
     #
@@ -518,7 +604,11 @@ module Aws::Connect
     #
     #   : Unit: SECONDS
     #
-    #   CONTACTS\_SCHEDULED
+    #   SLOTS\_ACTIVE
+    #
+    #   : Unit: COUNT
+    #
+    #   SLOTS\_AVAILABLE
     #
     #   : Unit: COUNT
     #   @return [Array<Types::CurrentMetric>]
@@ -529,13 +619,12 @@ module Aws::Connect
     #   results.
     #
     #   The token expires after 5 minutes from the time it is created.
-    #   Subsequent requests that use the [NextToken]() must use the same
-    #   request parameters as the request that generated the token.
+    #   Subsequent requests that use the token must use the same request
+    #   parameters as the request that generated the token.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   `MaxResults` indicates the maximum number of results to return per
-    #   page in the response, between 1 and 100.
+    #   The maximimum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentMetricDataRequest AWS API Documentation
@@ -551,32 +640,20 @@ module Aws::Connect
     end
 
     # @!attribute [rw] next_token
-    #   A string returned in the response. Use the value returned in the
-    #   response as the value of the NextToken in a subsequent request to
-    #   retrieve the next set of results.
+    #   If there are additional results, this is the token for the next set
+    #   of results.
     #
     #   The token expires after 5 minutes from the time it is created.
-    #   Subsequent requests that use the NextToken must use the same request
+    #   Subsequent requests that use the token must use the same request
     #   parameters as the request that generated the token.
     #   @return [String]
     #
     # @!attribute [rw] metric_results
-    #   A list of `CurrentMetricResult` objects organized by `Dimensions`
-    #   combining with `CurrentMetricDataCollections`.
-    #
-    #   `Dimensions` is the resourceId specified in the `Filters` of the
-    #   request.
-    #
-    #   `Collections` is a list of `CurrentMetricData` objects with
-    #   corresponding values to the `CurrentMetrics` specified in the
-    #   request.
-    #
-    #   If no `Grouping` is specified in the request, `Collections` is a
-    #   summary for the `CurrentMetric` returned.
+    #   Information about the real-time metrics.
     #   @return [Array<Types::CurrentMetricResult>]
     #
     # @!attribute [rw] data_snapshot_time
-    #   The time at which `CurrentMetricData` was retrieved and cached for
+    #   The time at which the metrics were retrieved and cached for
     #   pagination.
     #   @return [Time]
     #
@@ -597,13 +674,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFederationTokenRequest AWS API Documentation
@@ -633,7 +704,7 @@ module Aws::Connect
     #         end_time: Time.now, # required
     #         filters: { # required
     #           queues: ["QueueId"],
-    #           channels: ["VOICE"], # accepts VOICE
+    #           channels: ["VOICE"], # accepts VOICE, CHAT
     #         },
     #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #         historical_metrics: [ # required
@@ -652,13 +723,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -667,64 +732,82 @@ module Aws::Connect
     #   time must be specified using a multiple of 5 minutes, such as 10:05,
     #   10:10, 10:15.
     #
-    #   `StartTime` cannot be earlier than 24 hours before the time of the
-    #   request. Historical metrics are available in Amazon Connect only for
-    #   24 hours.
+    #   The start time cannot be earlier than 24 hours before the time of
+    #   the request. Historical metrics are available only for 24 hours.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The timestamp, in UNIX Epoch time format, at which to end the
     #   reporting interval for the retrieval of historical metrics data. The
     #   time must be specified using an interval of 5 minutes, such as
-    #   11:00, 11:05, 11:10, and must be later than the `StartTime`
+    #   11:00, 11:05, 11:10, and must be later than the start time
     #   timestamp.
     #
-    #   The time range between `StartTime` and `EndTime` must be less than
-    #   24 hours.
+    #   The time range between the start and end time must be less than 24
+    #   hours.
     #   @return [Time]
     #
     # @!attribute [rw] filters
-    #   A `Filters` object that contains a list of queue IDs or queue ARNs,
-    #   up to 100, or a list of Channels to use to filter the metrics
-    #   returned in the response. Metric data is retrieved only for the
-    #   resources associated with the IDs, ARNs, or Channels included in the
-    #   filter. You can use both IDs and ARNs together in a request. Only
-    #   VOICE is supported for Channel.
-    #
-    #   To find the ARN for a queue, open the queue you want to use in the
-    #   Amazon Connect Queue editor. The ARN for the queue is displayed in
-    #   the address bar as part of the URL. For example, the queue ARN is
-    #   the set of characters at the end of the URL, after 'id=' such as
-    #   `arn:aws:connect:us-east-1:270923740243:instance/78fb859d-1b7d-44b1-8aa3-12f0835c5855/queue/1d1a4575-9618-40ab-bbeb-81e45795fe61`.
-    #   The queue ID is also included in the URL, and is the string after
-    #   'queue/'.
+    #   The queues, up to 100, or channels, to use to filter the metrics
+    #   returned. Metric data is retrieved only for the resources associated
+    #   with the queues or channels included in the filter. You can include
+    #   both queue IDs and queue ARNs in the same request. The only
+    #   supported channel is `VOICE`.
     #   @return [Types::Filters]
     #
     # @!attribute [rw] groupings
     #   The grouping applied to the metrics returned. For example, when
-    #   results are grouped by queueId, the metrics returned are grouped by
+    #   results are grouped by queue, the metrics returned are grouped by
     #   queue. The values returned apply to the metrics for each queue
     #   rather than aggregated for all queues.
     #
-    #   The current version supports grouping by Queue
+    #   The only supported grouping is `QUEUE`.
     #
-    #   If no `Grouping` is included in the request, a summary of
-    #   `HistoricalMetrics` for all queues is returned.
+    #   If no grouping is specified, a summary of metrics for all queues is
+    #   returned.
     #   @return [Array<String>]
     #
     # @!attribute [rw] historical_metrics
-    #   A list of `HistoricalMetric` objects that contain the metrics to
-    #   retrieve with the request.
+    #   The metrics to retrieve. Specify the name, unit, and statistic for
+    #   each metric. The following historical metrics are available:
     #
-    #   A `HistoricalMetric` object contains: `HistoricalMetricName`,
-    #   `Statistic`, `Threshold`, and `Unit`.
+    #   ABANDON\_TIME
     #
-    #   For each historical metric you include in the request, you must
-    #   include a `Unit` and a `Statistic`.
+    #   : Unit: SECONDS
     #
-    #   The following historical metrics are available:
+    #     Statistic: AVG
     #
-    #   CONTACTS\_QUEUED
+    #   AFTER\_CONTACT\_WORK\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistic: AVG
+    #
+    #   API\_CONTACTS\_HANDLED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CALLBACK\_CONTACTS\_HANDLED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_ABANDONED
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_AGENT\_HUNG\_UP\_FIRST
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_CONSULTED
     #
     #   : Unit: COUNT
     #
@@ -734,151 +817,109 @@ module Aws::Connect
     #
     #   : Unit: COUNT
     #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_ABANDONED
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_CONSULTED
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_AGENT\_HUNG\_UP\_FIRST
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
+    #     Statistic: SUM
     #
     #   CONTACTS\_HANDLED\_INCOMING
     #
     #   : Unit: COUNT
     #
-    #     Statistics: SUM
+    #     Statistic: SUM
     #
     #   CONTACTS\_HANDLED\_OUTBOUND
     #
     #   : Unit: COUNT
     #
-    #     Statistics: SUM
+    #     Statistic: SUM
     #
     #   CONTACTS\_HOLD\_ABANDONS
     #
     #   : Unit: COUNT
     #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_TRANSFERRED\_IN
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_TRANSFERRED\_OUT
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_TRANSFERRED\_IN\_FROM\_QUEUE
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CONTACTS\_TRANSFERRED\_OUT\_FROM\_QUEUE
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CALLBACK\_CONTACTS\_HANDLED
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   CALLBACK\_CONTACTS\_HANDLED
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   API\_CONTACTS\_HANDLED
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
+    #     Statistic: SUM
     #
     #   CONTACTS\_MISSED
     #
     #   : Unit: COUNT
     #
-    #     Statistics: SUM
+    #     Statistic: SUM
     #
-    #   OCCUPANCY
+    #   CONTACTS\_QUEUED
     #
-    #   : Unit: PERCENT
+    #   : Unit: COUNT
     #
-    #     Statistics: AVG
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_TRANSFERRED\_IN
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_TRANSFERRED\_IN\_FROM\_QUEUE
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_TRANSFERRED\_OUT
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
+    #
+    #   CONTACTS\_TRANSFERRED\_OUT\_FROM\_QUEUE
+    #
+    #   : Unit: COUNT
+    #
+    #     Statistic: SUM
     #
     #   HANDLE\_TIME
     #
     #   : Unit: SECONDS
     #
-    #     Statistics: AVG
-    #
-    #   AFTER\_CONTACT\_WORK\_TIME
-    #
-    #   : Unit: SECONDS
-    #
-    #     Statistics: AVG
-    #
-    #   QUEUED\_TIME
-    #
-    #   : Unit: SECONDS
-    #
-    #     Statistics: MAX
-    #
-    #   ABANDON\_TIME
-    #
-    #   : Unit: COUNT
-    #
-    #     Statistics: SUM
-    #
-    #   QUEUE\_ANSWER\_TIME
-    #
-    #   : Unit: SECONDS
-    #
-    #     Statistics: AVG
+    #     Statistic: AVG
     #
     #   HOLD\_TIME
     #
     #   : Unit: SECONDS
     #
-    #     Statistics: AVG
-    #
-    #   INTERACTION\_TIME
-    #
-    #   : Unit: SECONDS
-    #
-    #     Statistics: AVG
+    #     Statistic: AVG
     #
     #   INTERACTION\_AND\_HOLD\_TIME
     #
     #   : Unit: SECONDS
     #
-    #     Statistics: AVG
+    #     Statistic: AVG
+    #
+    #   INTERACTION\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistic: AVG
+    #
+    #   OCCUPANCY
+    #
+    #   : Unit: PERCENT
+    #
+    #     Statistic: AVG
+    #
+    #   QUEUE\_ANSWER\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistic: AVG
+    #
+    #   QUEUED\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     Statistic: MAX
     #
     #   SERVICE\_LEVEL
     #
     #   : Unit: PERCENT
     #
-    #     Statistics: AVG
+    #     Statistic: AVG
     #
     #     Threshold: Only "Less than" comparisons are supported, with the
     #     following service level thresholds: 15, 20, 25, 30, 45, 60, 90,
@@ -892,8 +933,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Indicates the maximum number of results to return per page in the
-    #   response, between 1-100.
+    #   The maximimum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetMetricDataRequest AWS API Documentation
@@ -911,24 +951,18 @@ module Aws::Connect
     end
 
     # @!attribute [rw] next_token
-    #   A string returned in the response. Use the value returned in the
-    #   response as the value of the NextToken in a subsequent request to
-    #   retrieve the next set of results.
+    #   If there are additional results, this is the token for the next set
+    #   of results.
     #
     #   The token expires after 5 minutes from the time it is created.
-    #   Subsequent requests that use the NextToken must use the same request
+    #   Subsequent requests that use the token must use the same request
     #   parameters as the request that generated the token.
     #   @return [String]
     #
     # @!attribute [rw] metric_results
-    #   A list of `HistoricalMetricResult` objects, organized by
-    #   `Dimensions`, which is the ID of the resource specified in the
-    #   `Filters` used for the request. The metrics are combined with the
-    #   metrics included in `Collections`, which is a list of
-    #   `HisotricalMetricData` objects.
+    #   Information about the historical metrics.
     #
-    #   If no `Grouping` is specified in the request, `Collections` includes
-    #   summary data for the `HistoricalMetrics`.
+    #   If no grouping is specified, a summary of metric data is returned.
     #   @return [Array<Types::HistoricalMetricResult>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetMetricDataResponse AWS API Documentation
@@ -939,28 +973,26 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `HierarchyGroup` object that contains information about a hierarchy
-    # group in your Amazon Connect instance.
+    # Contains information about a hierarchy group.
     #
     # @!attribute [rw] id
-    #   The identifier for the hierarchy group.
+    #   The identifier of the hierarchy group.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) for the hierarchy group.
+    #   The Amazon Resource Name (ARN) of the hierarchy group.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the hierarchy group in your instance.
+    #   The name of the hierarchy group.
     #   @return [String]
     #
     # @!attribute [rw] level_id
-    #   The identifier for the level in the hierarchy group.
+    #   The identifier of the level in the hierarchy group.
     #   @return [String]
     #
     # @!attribute [rw] hierarchy_path
-    #   A `HierarchyPath` object that contains information about the levels
-    #   in the hierarchy group.
+    #   Information about the levels in the hierarchy group.
     #   @return [Types::HierarchyPath]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroup AWS API Documentation
@@ -974,15 +1006,14 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `HierarchyGroupSummary` object that contains information about the
-    # hierarchy group, including ARN, Id, and Name.
+    # Contains summary information about a hierarchy group.
     #
     # @!attribute [rw] id
     #   The identifier of the hierarchy group.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN for the hierarchy group.
+    #   The Amazon Resource Name (ARN) of the hierarchy group.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -998,19 +1029,18 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `HierarchyLevel` object that contains information about the levels
-    # in a hierarchy group, including ARN, Id, and Name.
+    # Contains information about a hierarchy level.
     #
     # @!attribute [rw] id
-    #   The identifier for the hierarchy group level.
+    #   The identifier of the hierarchy level.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN for the hierarchy group level.
+    #   The Amazon Resource Name (ARN) of the hierarchy level.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the hierarchy group level.
+    #   The name of the hierarchy level.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyLevel AWS API Documentation
@@ -1022,32 +1052,26 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `HierarchyPath` object that contains information about the levels of
-    # the hierarchy group.
+    # Contains information about the levels of a hierarchy group.
     #
     # @!attribute [rw] level_one
-    #   A `HierarchyGroupSummary` object that contains information about the
-    #   level of the hierarchy group, including ARN, Id, and Name.
+    #   Information about level one.
     #   @return [Types::HierarchyGroupSummary]
     #
     # @!attribute [rw] level_two
-    #   A `HierarchyGroupSummary` object that contains information about the
-    #   level of the hierarchy group, including ARN, Id, and Name.
+    #   Information about level two.
     #   @return [Types::HierarchyGroupSummary]
     #
     # @!attribute [rw] level_three
-    #   A `HierarchyGroupSummary` object that contains information about the
-    #   level of the hierarchy group, including ARN, Id, and Name.
+    #   Information about level three.
     #   @return [Types::HierarchyGroupSummary]
     #
     # @!attribute [rw] level_four
-    #   A `HierarchyGroupSummary` object that contains information about the
-    #   level of the hierarchy group, including ARN, Id, and Name.
+    #   Information about level four.
     #   @return [Types::HierarchyGroupSummary]
     #
     # @!attribute [rw] level_five
-    #   A `HierarchyGroupSummary` object that contains information about the
-    #   level of the hierarchy group, including ARN, Id, and Name.
+    #   Information about level five.
     #   @return [Types::HierarchyGroupSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyPath AWS API Documentation
@@ -1061,32 +1085,26 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `HierarchyStructure` object that contains information about the
-    # hierarchy group structure.
+    # Contains information about a hierarchy structure.
     #
     # @!attribute [rw] level_one
-    #   A `HierarchyLevel` object that contains information about the
-    #   hierarchy group level.
+    #   Information about level one.
     #   @return [Types::HierarchyLevel]
     #
     # @!attribute [rw] level_two
-    #   A `HierarchyLevel` object that contains information about the
-    #   hierarchy group level.
+    #   Information about level two.
     #   @return [Types::HierarchyLevel]
     #
     # @!attribute [rw] level_three
-    #   A `HierarchyLevel` object that contains information about the
-    #   hierarchy group level.
+    #   Information about level three.
     #   @return [Types::HierarchyLevel]
     #
     # @!attribute [rw] level_four
-    #   A `HierarchyLevel` object that contains information about the
-    #   hierarchy group level.
+    #   Information about level four.
     #   @return [Types::HierarchyLevel]
     #
     # @!attribute [rw] level_five
-    #   A `HierarchyLevel` object that contains information about the
-    #   hierarchy group level.
+    #   Information about level five.
     #   @return [Types::HierarchyLevel]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyStructure AWS API Documentation
@@ -1100,8 +1118,7 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `HistoricalMetric` object that contains the Name, Unit, Statistic,
-    # and Threshold for the metric.
+    # Contains information about a historical metric.
     #
     # @note When making an API call, you may pass HistoricalMetric
     #   data as a hash:
@@ -1117,7 +1134,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the historical metric.
+    #   The name of the metric.
     #   @return [String]
     #
     # @!attribute [rw] threshold
@@ -1125,11 +1142,11 @@ module Aws::Connect
     #   @return [Types::Threshold]
     #
     # @!attribute [rw] statistic
-    #   The statistic for the metric: SUM, MAX, or SUM.
+    #   The statistic for the metric.
     #   @return [String]
     #
     # @!attribute [rw] unit
-    #   The unit for the metric: COUNT, PERCENT, or SECONDS.
+    #   The unit for the metric.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetric AWS API Documentation
@@ -1142,15 +1159,14 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `HistoricalMetricData` object than contains a `Metric` and a
-    # `Value`.
+    # Contains the data for a historical metric.
     #
     # @!attribute [rw] metric
-    #   A `HistoricalMetric` object.
+    #   Information about the metric.
     #   @return [Types::HistoricalMetric]
     #
     # @!attribute [rw] value
-    #   The `Value` of the metric.
+    #   The value of the metric.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetricData AWS API Documentation
@@ -1161,14 +1177,14 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The metrics data returned from a `GetMetricData` operation.
+    # Contains information about the historical metrics retrieved.
     #
     # @!attribute [rw] dimensions
-    #   The `Dimensions` for the metrics.
+    #   The dimension for the metrics.
     #   @return [Types::Dimensions]
     #
     # @!attribute [rw] collections
-    #   A list of `HistoricalMetricData` objects.
+    #   The set of metrics.
     #   @return [Array<Types::HistoricalMetricData>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetricResult AWS API Documentation
@@ -1176,6 +1192,302 @@ module Aws::Connect
     class HistoricalMetricResult < Struct.new(
       :dimensions,
       :collections)
+      include Aws::Structure
+    end
+
+    # Contains summary information about hours of operation for a contact
+    # center.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the hours of operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperationSummary AWS API Documentation
+    #
+    class HoursOfOperationSummary < Struct.new(
+      :id,
+      :arn,
+      :name)
+      include Aws::Structure
+    end
+
+    # Request processing failed due to an error or failure with the service.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more of the specified parameters are not valid.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is not valid.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The allowed limit for the resource has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListContactFlowsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_types: ["CONTACT_FLOW"], # accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_types
+    #   The type of contact flow.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlowsRequest AWS API Documentation
+    #
+    class ListContactFlowsRequest < Struct.new(
+      :instance_id,
+      :contact_flow_types,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_flow_summary_list
+    #   Information about the contact flows.
+    #   @return [Array<Types::ContactFlowSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlowsResponse AWS API Documentation
+    #
+    class ListContactFlowsResponse < Struct.new(
+      :contact_flow_summary_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListHoursOfOperationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListHoursOfOperationsRequest AWS API Documentation
+    #
+    class ListHoursOfOperationsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hours_of_operation_summary_list
+    #   Information about the hours of operation.
+    #   @return [Array<Types::HoursOfOperationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListHoursOfOperationsResponse AWS API Documentation
+    #
+    class ListHoursOfOperationsResponse < Struct.new(
+      :hours_of_operation_summary_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListPhoneNumbersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID
+    #         phone_number_country_codes: ["AF"], # accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_types
+    #   The type of phone number.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] phone_number_country_codes
+    #   The ISO country code.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersRequest AWS API Documentation
+    #
+    class ListPhoneNumbersRequest < Struct.new(
+      :instance_id,
+      :phone_number_types,
+      :phone_number_country_codes,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] phone_number_summary_list
+    #   Information about the phone numbers.
+    #   @return [Array<Types::PhoneNumberSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersResponse AWS API Documentation
+    #
+    class ListPhoneNumbersResponse < Struct.new(
+      :phone_number_summary_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListQueuesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         queue_types: ["STANDARD"], # accepts STANDARD, AGENT
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_types
+    #   The type of queue.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueuesRequest AWS API Documentation
+    #
+    class ListQueuesRequest < Struct.new(
+      :instance_id,
+      :queue_types,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_summary_list
+    #   Information about the queues.
+    #   @return [Array<Types::QueueSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueuesResponse AWS API Documentation
+    #
+    class ListQueuesResponse < Struct.new(
+      :queue_summary_list,
+      :next_token)
       include Aws::Structure
     end
 
@@ -1189,13 +1501,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1205,7 +1511,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of routing profiles to return in the response.
+    #   The maximimum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfilesRequest AWS API Documentation
@@ -1218,14 +1524,12 @@ module Aws::Connect
     end
 
     # @!attribute [rw] routing_profile_summary_list
-    #   An array of `RoutingProfileSummary` objects that include the ARN,
-    #   Id, and Name of the routing profile.
+    #   Information about the routing profiles.
     #   @return [Array<Types::RoutingProfileSummary>]
     #
     # @!attribute [rw] next_token
-    #   A string returned in the response. Use the value returned in the
-    #   response as the value of the NextToken in a subsequent request to
-    #   retrieve the next set of results.
+    #   If there are additional results, this is the token for the next set
+    #   of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfilesResponse AWS API Documentation
@@ -1246,13 +1550,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1262,7 +1560,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of security profiles to return.
+    #   The maximimum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfilesRequest AWS API Documentation
@@ -1275,13 +1573,12 @@ module Aws::Connect
     end
 
     # @!attribute [rw] security_profile_summary_list
-    #   An array of `SecurityProfileSummary` objects.
+    #   Information about the security profiles.
     #   @return [Array<Types::SecurityProfileSummary>]
     #
     # @!attribute [rw] next_token
-    #   A string returned in the response. Use the value returned in the
-    #   response as the value of the NextToken in a subsequent request to
-    #   retrieve the next set of results.
+    #   If there are additional results, this is the token for the next set
+    #   of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfilesResponse AWS API Documentation
@@ -1289,6 +1586,35 @@ module Aws::Connect
     class ListSecurityProfilesResponse < Struct.new(
       :security_profile_summary_list,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   Information about the tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -1302,13 +1628,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1318,7 +1638,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of hierarchy groups to return.
+    #   The maximimum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserHierarchyGroupsRequest AWS API Documentation
@@ -1331,13 +1651,12 @@ module Aws::Connect
     end
 
     # @!attribute [rw] user_hierarchy_group_summary_list
-    #   An array of `HierarchyGroupSummary` objects.
+    #   Information about the hierarchy groups.
     #   @return [Array<Types::HierarchyGroupSummary>]
     #
     # @!attribute [rw] next_token
-    #   A string returned in the response. Use the value returned in the
-    #   response as the value of the NextToken in a subsequent request to
-    #   retrieve the next set of results.
+    #   If there are additional results, this is the token for the next set
+    #   of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserHierarchyGroupsResponse AWS API Documentation
@@ -1358,13 +1677,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1374,7 +1687,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in the response.
+    #   The maximimum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUsersRequest AWS API Documentation
@@ -1387,14 +1700,12 @@ module Aws::Connect
     end
 
     # @!attribute [rw] user_summary_list
-    #   An array of `UserSummary` objects that contain information about the
-    #   users in your instance.
+    #   Information about the users.
     #   @return [Array<Types::UserSummary>]
     #
     # @!attribute [rw] next_token
-    #   A string returned in the response. Use the value returned in the
-    #   response as the value of the NextToken in a subsequent request to
-    #   retrieve the next set of results.
+    #   If there are additional results, this is the token for the next set
+    #   of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUsersResponse AWS API Documentation
@@ -1405,15 +1716,82 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A QueueReference object that contains the the QueueId and ARN for the
-    # queue resource for which metrics are returned.
+    # The contact is not permitted.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/OutboundContactNotPermittedException AWS API Documentation
+    #
+    class OutboundContactNotPermittedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The customer's details.
+    #
+    # @note When making an API call, you may pass ParticipantDetails
+    #   data as a hash:
+    #
+    #       {
+    #         display_name: "DisplayName", # required
+    #       }
+    #
+    # @!attribute [rw] display_name
+    #   Display name of the participant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ParticipantDetails AWS API Documentation
+    #
+    class ParticipantDetails < Struct.new(
+      :display_name)
+      include Aws::Structure
+    end
+
+    # Contains summary information about a phone number for a contact
+    # center.
     #
     # @!attribute [rw] id
-    #   The ID of the queue associated with the metrics returned.
+    #   The identifier of the phone number.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of queue.
+    #   The Amazon Resource Name (ARN) of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_type
+    #   The type of phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_country_code
+    #   The ISO country code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PhoneNumberSummary AWS API Documentation
+    #
+    class PhoneNumberSummary < Struct.new(
+      :id,
+      :arn,
+      :phone_number,
+      :phone_number_type,
+      :phone_number_country_code)
+      include Aws::Structure
+    end
+
+    # Contains information about a queue resource for which metrics are
+    # returned.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the queue.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueReference AWS API Documentation
@@ -1424,15 +1802,55 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `RoutingProfileSummary` object that contains information about a
-    # routing profile, including ARN, Id, and Name.
+    # Contains summary information about a queue.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_type
+    #   The type of queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueSummary AWS API Documentation
+    #
+    class QueueSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :queue_type)
+      include Aws::Structure
+    end
+
+    # The specified resource was not found.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Contains summary information about a routing profile.
     #
     # @!attribute [rw] id
     #   The identifier of the routing profile.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN of the routing profile.
+    #   The Amazon Resource Name (ARN) of the routing profile.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1448,15 +1866,14 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `SecurityProfileSummary` object that contains information about a
-    # security profile, including ARN, Id, Name.
+    # Contains information about a security profile.
     #
     # @!attribute [rw] id
     #   The identifier of the security profile.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN of the security profile.
+    #   The Amazon Resource Name (ARN) of the security profile.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1469,6 +1886,99 @@ module Aws::Connect
       :id,
       :arn,
       :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartChatContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #         attributes: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
+    #         participant_details: { # required
+    #           display_name: "DisplayName", # required
+    #         },
+    #         initial_message: {
+    #           content_type: "ChatContentType", # required
+    #           content: "ChatContent", # required
+    #         },
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow for the chat.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes, and can be accessed in contact
+    #   flows just like any other contact attributes.
+    #
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] participant_details
+    #   Information identifying the participant.
+    #   @return [Types::ParticipantDetails]
+    #
+    # @!attribute [rw] initial_message
+    #   The initial message to be sent to the newly created chat.
+    #   @return [Types::ChatMessage]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
+    #
+    class StartChatContactRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id,
+      :attributes,
+      :participant_details,
+      :initial_message,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_id
+    #   The identifier of this contact within the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_id
+    #   The identifier for a chat participant. The participantId for a chat
+    #   participant is the same throughout the chat lifecycle.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_token
+    #   The token used by the chat participant to call
+    #   [CreateParticipantConnection][1]. The participant token is valid for
+    #   the lifetime of a chat participant.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactResponse AWS API Documentation
+    #
+    class StartChatContactResponse < Struct.new(
+      :contact_id,
+      :participant_id,
+      :participant_token)
       include Aws::Structure
     end
 
@@ -1488,28 +1998,15 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] destination_phone_number
-    #   The phone number of the customer in E.164 format.
+    #   The phone number of the customer, in E.164 format.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier for the contact flow to connect the outbound call to.
-    #
-    #   To find the `ContactFlowId`, open the contact flow you want to use
-    #   in the Amazon Connect contact flow editor. The ID for the contact
-    #   flow is displayed in the address bar as part of the URL. For
-    #   example, the contact flow ID is the set of characters at the end of
-    #   the URL, after 'contact-flow/' such as
-    #   `78ea8fd5-2659-4f2b-b528-699760ccfc1b`.
+    #   The identifier of the contact flow for the outbound call.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -1523,35 +2020,27 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] source_phone_number
-    #   The phone number, in E.164 format, associated with your Amazon
-    #   Connect instance to use for the outbound call.
+    #   The phone number associated with the Amazon Connect instance, in
+    #   E.164 format. If you do not specify a source phone number, you must
+    #   specify a queue.
     #   @return [String]
     #
     # @!attribute [rw] queue_id
-    #   The queue to add the call to. If you specify a queue, the phone
-    #   displayed for caller ID is the phone number specified in the queue.
-    #   If you do not specify a queue, the queue used will be the queue
-    #   defined in the contact flow.
-    #
-    #   To find the `QueueId`, open the queue you want to use in the Amazon
-    #   Connect Queue editor. The ID for the queue is displayed in the
-    #   address bar as part of the URL. For example, the queue ID is the set
-    #   of characters at the end of the URL, after 'queue/' such as
-    #   `queue/aeg40574-2d01-51c3-73d6-bf8624d2168c`.
+    #   The queue for the call. If you specify a queue, the phone displayed
+    #   for caller ID is the phone number specified in the queue. If you do
+    #   not specify a queue, the queue defined in the contact flow is used.
+    #   If you do not specify a queue, you must specify a source phone
+    #   number.
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   Specify a custom key-value pair using an attribute map. The
-    #   attributes are standard Amazon Connect attributes, and can be
-    #   accessed in contact flows just like any other contact attributes.
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes, and can be accessed in contact
+    #   flows just like any other contact attributes.
     #
-    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs.
-    #   Attribute keys can include only alphanumeric, dash, and underscore
-    #   characters.
-    #
-    #   For example, if you want play a greeting when the customer answers
-    #   the call, you can pass the customer name in attributes similar to
-    #   the following:
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundVoiceContactRequest AWS API Documentation
@@ -1568,8 +2057,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_id
-    #   The unique identifier of this contact within your Amazon Connect
-    #   instance.
+    #   The identifier of this contact within the Amazon Connect instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundVoiceContactResponse AWS API Documentation
@@ -1588,17 +2076,11 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] contact_id
-    #   The unique identifier of the contact to end.
+    #   The ID of the contact.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactRequest AWS API Documentation
@@ -1613,8 +2095,34 @@ module Aws::Connect
     #
     class StopContactResponse < Aws::EmptyStructure; end
 
-    # A `Threshold` object that includes a comparison and `ThresholdValue`
-    # to compare to. Used with service level metrics.
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ARN", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags. For example, \\\{ "tags":
+    #   \\\{"key1":"value1", "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Contains information about the threshold for service level metrics.
     #
     # @note When making an API call, you may pass Threshold
     #   data as a hash:
@@ -1625,13 +2133,12 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] comparison
-    #   The Threshold to use to compare service level metrics to. Only
-    #   "Less than" (LT) comparisons are supported.
+    #   The type of comparison. Only "less than" (LT) comparisons are
+    #   supported.
     #   @return [String]
     #
     # @!attribute [rw] threshold_value
-    #   The value of the threshold to compare the metric to. Only "Less
-    #   than" (LT) comparisons are supported.
+    #   The threshold value to compare.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Threshold AWS API Documentation
@@ -1639,6 +2146,42 @@ module Aws::Connect
     class Threshold < Struct.new(
       :comparison,
       :threshold_value)
+      include Aws::Structure
+    end
+
+    # The throttling limit has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ARN", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 
@@ -1654,23 +2197,21 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] initial_contact_id
-    #   The unique identifier of the contact for which to update attributes.
-    #   This is the identifier for the contact associated with the first
-    #   interaction with the contact center.
+    #   The identifier of the contact. This is the identifier of the contact
+    #   associated with the first interaction with the contact center.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   The key-value pairs for the attribute to update.
+    #   The Amazon Connect attributes. These attributes can be accessed in
+    #   contact flows just like any other contact attributes.
+    #
+    #   You can have up to 32,768 UTF-8 bytes across all attributes for a
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactAttributesRequest AWS API Documentation
@@ -1696,21 +2237,15 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] hierarchy_group_id
-    #   The identifier for the hierarchy group to assign to the user.
+    #   The identifier of the hierarchy group.
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The identifier of the user account to assign the hierarchy group to.
+    #   The identifier of the user account.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyRequest AWS API Documentation
@@ -1736,22 +2271,15 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] identity_info
-    #   A `UserIdentityInfo` object.
+    #   The identity information for the user.
     #   @return [Types::UserIdentityInfo]
     #
     # @!attribute [rw] user_id
-    #   The identifier for the user account to update identity information
-    #   for.
+    #   The identifier of the user account.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserIdentityInfoRequest AWS API Documentation
@@ -1778,23 +2306,15 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] phone_config
-    #   A `UserPhoneConfig` object that contains settings for
-    #   `AfterContactWorkTimeLimit`, `AutoAccept`, `DeskPhoneNumber`, and
-    #   `PhoneType` to assign to the user.
+    #   Information about phone configuration settings for the user.
     #   @return [Types::UserPhoneConfig]
     #
     # @!attribute [rw] user_id
-    #   The identifier for the user account to change phone settings for.
+    #   The identifier of the user account.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserPhoneConfigRequest AWS API Documentation
@@ -1816,22 +2336,15 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] routing_profile_id
-    #   The identifier of the routing profile to assign to the user.
+    #   The identifier of the routing profile for the user.
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The identifier for the user account to assign the routing profile
-    #   to.
+    #   The identifier of the user account.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserRoutingProfileRequest AWS API Documentation
@@ -1853,21 +2366,15 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] security_profile_ids
-    #   The identifiers for the security profiles to assign to the user.
+    #   The identifiers of the security profiles for the user.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_id
-    #   The identifier of the user account to assign the security profiles.
+    #   The identifier of the user account.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier for your Amazon Connect instance. To find the ID of
-    #   your instance, open the AWS console and select Amazon Connect.
-    #   Select the alias of the instance in the Instance alias column. The
-    #   instance ID is displayed in the Overview section of your instance
-    #   settings. For example, the instance ID is the set of characters at
-    #   the end of the instance ARN, after instance/, such as
-    #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+    #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserSecurityProfilesRequest AWS API Documentation
@@ -1879,15 +2386,15 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `User` object that contains information about a user account in your
-    # Amazon Connect instance, including configuration settings.
+    # Contains information about a user account for a Amazon Connect
+    # instance.
     #
     # @!attribute [rw] id
     #   The identifier of the user account.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN of the user account.
+    #   The Amazon Resource Name (ARN) of the user account.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -1895,29 +2402,33 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] identity_info
-    #   A `UserIdentityInfo` object.
+    #   Information about the user identity.
     #   @return [Types::UserIdentityInfo]
     #
     # @!attribute [rw] phone_config
-    #   A `UserPhoneConfig` object.
+    #   Information about the phone configuration for the user.
     #   @return [Types::UserPhoneConfig]
     #
     # @!attribute [rw] directory_user_id
-    #   The directory Id for the user account in the existing directory used
-    #   for identity management.
+    #   The identifier of the user account in the directory used for
+    #   identity management.
     #   @return [String]
     #
     # @!attribute [rw] security_profile_ids
-    #   The identifier(s) for the security profile assigned to the user.
+    #   The identifiers of the security profiles for the user.
     #   @return [Array<String>]
     #
     # @!attribute [rw] routing_profile_id
-    #   The identifier of the routing profile assigned to the user.
+    #   The identifier of the routing profile for the user.
     #   @return [String]
     #
     # @!attribute [rw] hierarchy_group_id
-    #   The identifier for the hierarchy group assigned to the user.
+    #   The identifier of the hierarchy group for the user.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/User AWS API Documentation
     #
@@ -1930,12 +2441,12 @@ module Aws::Connect
       :directory_user_id,
       :security_profile_ids,
       :routing_profile_id,
-      :hierarchy_group_id)
+      :hierarchy_group_id,
+      :tags)
       include Aws::Structure
     end
 
-    # A `UserIdentityInfo` object that contains information about the
-    # user's identity, including email address, first name, and last name.
+    # Contains information about the identity of a user.
     #
     # @note When making an API call, you may pass UserIdentityInfo
     #   data as a hash:
@@ -1947,19 +2458,18 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] first_name
-    #   The first name used in the user account. This is required if you are
-    #   using Amazon Connect or SAML for identity management.
+    #   The first name. This is required if you are using Amazon Connect or
+    #   SAML for identity management.
     #   @return [String]
     #
     # @!attribute [rw] last_name
-    #   The last name used in the user account. This is required if you are
-    #   using Amazon Connect or SAML for identity management.
+    #   The last name. This is required if you are using Amazon Connect or
+    #   SAML for identity management.
     #   @return [String]
     #
     # @!attribute [rw] email
-    #   The email address added to the user account. If you are using SAML
-    #   for identity management and include this parameter, an
-    #   `InvalidRequestException` is returned.
+    #   The email address. If you are using SAML for identity management and
+    #   include this parameter, an error is returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserIdentityInfo AWS API Documentation
@@ -1971,8 +2481,21 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `UserPhoneConfig` object that contains information about the user
-    # phone configuration settings.
+    # No user with the specified credentials was found in the Amazon Connect
+    # instance.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserNotFoundException AWS API Documentation
+    #
+    class UserNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Contains information about the phone configuration settings for a
+    # user.
     #
     # @note When making an API call, you may pass UserPhoneConfig
     #   data as a hash:
@@ -1985,16 +2508,15 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] phone_type
-    #   The phone type selected for the user, either Soft phone or Desk
-    #   phone.
+    #   The phone type.
     #   @return [String]
     #
     # @!attribute [rw] auto_accept
-    #   The Auto accept setting for the user, Yes or No.
+    #   The Auto accept setting.
     #   @return [Boolean]
     #
     # @!attribute [rw] after_contact_work_time_limit
-    #   The After Call Work (ACW) timeout setting, in seconds, for the user.
+    #   The After Call Work (ACW) timeout setting, in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] desk_phone_number
@@ -2011,19 +2533,18 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A `UserSummary` object that contains Information about a user,
-    # including ARN, Id, and user name.
+    # Contains summary information about a user.
     #
     # @!attribute [rw] id
-    #   The identifier for the user account.
+    #   The identifier of the user account.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN for the user account.
+    #   The Amazon Resource Name (ARN) of the user account.
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The Amazon Connect user name for the user account.
+    #   The Amazon Connect user name of the user account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserSummary AWS API Documentation

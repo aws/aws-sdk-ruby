@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,17 +26,20 @@ require_relative 'aws-sdk-kinesisanalyticsv2/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     kinesis_analytics_v2 = Aws::KinesisAnalyticsV2::Client.new
+#     resp = kinesis_analytics_v2.add_application_cloud_watch_logging_option(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Kinesis Analytics all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Kinesis Analytics are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::KinesisAnalyticsV2::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Kinesis Analytics API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +47,6 @@ require_relative 'aws-sdk-kinesisanalyticsv2/customizations'
 # @service
 module Aws::KinesisAnalyticsV2
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.17.1'
 
 end

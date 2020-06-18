@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -26,17 +28,20 @@ require_relative 'aws-sdk-dynamodb/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     dynamo_db = Aws::DynamoDB::Client.new
+#     resp = dynamo_db.batch_get_item(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon DynamoDB all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon DynamoDB are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::DynamoDB::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon DynamoDB API errors
 #     end
 #
 # See {Errors} for more information.
@@ -44,6 +49,6 @@ require_relative 'aws-sdk-dynamodb/customizations'
 # @service
 module Aws::DynamoDB
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.49.1'
 
 end

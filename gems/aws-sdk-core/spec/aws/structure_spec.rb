@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../spec_helper'
 
 module Aws
@@ -20,6 +22,14 @@ module Aws
 
       it 'returns a hash' do
         expect(Structure.new(:abc).new.to_hash).to eq({})
+      end
+
+      it 'accepts :members member' do
+        s = Structure.new(:members, :foo).new(foo: 'bar', members: ['foo'])
+        expect(s.to_hash).to eq({
+          foo: 'bar',
+          members: ['foo']
+        })
       end
 
       it 'only serializes non-nil members' do
@@ -66,5 +76,15 @@ module Aws
       end
 
     end
+
+    describe "#to_s" do
+      it 'filters sensitive parameters' do
+        struct = Structure.new(:trait, :access_token).new
+        struct.trait = "Trait"
+        struct.access_token = "asdf1234"
+        expect(struct.to_s).to eq("{:trait=>\"Trait\", :access_token=>\"[FILTERED]\"}")
+      end
+    end
+
   end
 end

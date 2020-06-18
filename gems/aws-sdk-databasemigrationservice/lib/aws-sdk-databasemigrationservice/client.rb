@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:databasemigrationservice)
 
 module Aws::DatabaseMigrationService
+  # An API client for DatabaseMigrationService.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::DatabaseMigrationService::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::DatabaseMigrationService
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +109,7 @@ module Aws::DatabaseMigrationService
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::DatabaseMigrationService
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::DatabaseMigrationService
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::DatabaseMigrationService
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::DatabaseMigrationService
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::DatabaseMigrationService
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::DatabaseMigrationService
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::DatabaseMigrationService
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,6 +274,48 @@ module Aws::DatabaseMigrationService
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
@@ -222,12 +329,14 @@ module Aws::DatabaseMigrationService
     # for DMS.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to
-    #   be added to. AWS DMS resources include a replication instance,
-    #   endpoint, and a replication task.
+    #   Identifies the AWS DMS resource to which tags should be added. The
+    #   value for this parameter is an Amazon Resource Name (ARN).
+    #
+    #   For AWS DMS, you can tag a replication instance, an endpoint, or a
+    #   replication task.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tag to be assigned to the DMS resource.
+    #   One or more tags to be assigned to the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -273,21 +382,79 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Applies a pending maintenance action to a resource (for example, to a
+    # replication instance).
+    #
+    # @option params [required, String] :replication_instance_arn
+    #   The Amazon Resource Name (ARN) of the AWS DMS resource that the
+    #   pending maintenance action applies to.
+    #
+    # @option params [required, String] :apply_action
+    #   The pending maintenance action to apply to this resource.
+    #
+    # @option params [required, String] :opt_in_type
+    #   A value that specifies the type of opt-in request, or undoes an opt-in
+    #   request. You can't undo an opt-in request of type `immediate`.
+    #
+    #   Valid values:
+    #
+    #   * `immediate` - Apply the maintenance action immediately.
+    #
+    #   * `next-maintenance` - Apply the maintenance action during the next
+    #     maintenance window for the resource.
+    #
+    #   * `undo-opt-in` - Cancel any existing `next-maintenance` opt-in
+    #     requests.
+    #
+    # @return [Types::ApplyPendingMaintenanceActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ApplyPendingMaintenanceActionResponse#resource_pending_maintenance_actions #resource_pending_maintenance_actions} => Types::ResourcePendingMaintenanceActions
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.apply_pending_maintenance_action({
+    #     replication_instance_arn: "String", # required
+    #     apply_action: "String", # required
+    #     opt_in_type: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_pending_maintenance_actions.resource_identifier #=> String
+    #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details #=> Array
+    #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].action #=> String
+    #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].auto_applied_after_date #=> Time
+    #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].forced_apply_date #=> Time
+    #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].opt_in_status #=> String
+    #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].current_apply_date #=> Time
+    #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ApplyPendingMaintenanceAction AWS API Documentation
+    #
+    # @overload apply_pending_maintenance_action(params = {})
+    # @param [Hash] params ({})
+    def apply_pending_maintenance_action(params = {}, options = {})
+      req = build_request(:apply_pending_maintenance_action, params)
+      req.send_request(options)
+    end
+
     # Creates an endpoint using the provided settings.
     #
     # @option params [required, String] :endpoint_identifier
-    #   The database endpoint identifier. Identifiers must begin with a
-    #   letter; must contain only ASCII letters, digits, and hyphens; and must
-    #   not end with a hyphen or contain two consecutive hyphens.
+    #   The database endpoint identifier. Identifiers must begin with a letter
+    #   and must contain only ASCII letters, digits, and hyphens. They can't
+    #   end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [required, String] :endpoint_type
-    #   The type of endpoint.
+    #   The type of endpoint. Valid values are `source` and `target`.
     #
     # @option params [required, String] :engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
-    #   `EndPointType` value, include `mysql`, `oracle`, `postgres`,
-    #   `mariadb`, `aurora`, `aurora-postgresql`, `redshift`, `s3`, `db2`,
-    #   `azuredb`, `sybase`, `dynamodb`, `mongodb`, and `sqlserver`.
+    #   `EndpointType` value, include `"mysql"`, `"oracle"`, `"postgres"`,
+    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`, `"s3"`,
+    #   `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
+    #   `"sqlserver"`.
     #
     # @option params [String] :username
     #   The user name to be used to log in to the endpoint database.
@@ -305,25 +472,37 @@ module Aws::DatabaseMigrationService
     #   The name of the endpoint database.
     #
     # @option params [String] :extra_connection_attributes
-    #   Additional attributes associated with the connection.
+    #   Additional attributes associated with the connection. Each attribute
+    #   is specified as a name-value pair associated by an equal sign (=).
+    #   Multiple attributes are separated by a semicolon (;) with no
+    #   additional white space. For information on the attributes available
+    #   for connecting your source or target endpoint, see [Working with AWS
+    #   DMS Endpoints][1] in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Endpoints.html
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key identifier to use to encrypt the connection
-    #   parameters. If you don't specify a value for the `KmsKeyId`
-    #   parameter, then AWS DMS uses your default encryption key. AWS KMS
-    #   creates the default encryption key for your AWS account. Your AWS
-    #   account has a different default encryption key for each AWS Region.
+    #   An AWS KMS key identifier that is used to encrypt the connection
+    #   parameters for the endpoint.
+    #
+    #   If you don't specify a value for the `KmsKeyId` parameter, then AWS
+    #   DMS uses your default encryption key.
+    #
+    #   AWS KMS creates the default encryption key for your AWS account. Your
+    #   AWS account has a different default encryption key for each AWS
+    #   Region.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be added to the endpoint.
+    #   One or more tags to be assigned to the endpoint.
     #
     # @option params [String] :certificate_arn
     #   The Amazon Resource Name (ARN) for the certificate.
     #
     # @option params [String] :ssl_mode
     #   The Secure Sockets Layer (SSL) mode to use for the SSL connection. The
-    #   SSL mode can be one of four values: `none`, `require`, `verify-ca`,
-    #   `verify-full`. The default value is `none`.
+    #   default is `none`
     #
     # @option params [String] :service_access_role_arn
     #   The Amazon Resource Name (ARN) for the service access role that you
@@ -334,13 +513,13 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Types::DynamoDbSettings] :dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
-    #   more information about the available settings, see [Using Object
-    #   Mapping to Migrate Data to DynamoDB][1] in the *AWS Database Migration
-    #   Service User Guide.*
+    #   information about other available settings, see [Using Object Mapping
+    #   to Migrate Data to DynamoDB][1] in the *AWS Database Migration Service
+    #   User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
     #
     # @option params [Types::S3Settings] :s3_settings
     #   Settings in JSON format for the target Amazon S3 endpoint. For more
@@ -350,50 +529,59 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring
     #
     # @option params [Types::DmsTransferSettings] :dms_transfer_settings
     #   The settings in JSON format for the DMS transfer type of source
     #   endpoint.
     #
-    #   Possible attributes include the following:
+    #   Possible settings include the following:
     #
-    #   * `serviceAccessRoleArn` - The IAM role that has permission to access
+    #   * `ServiceAccessRoleArn` - The IAM role that has permission to access
     #     the Amazon S3 bucket.
     #
-    #   * `bucketName` - The name of the S3 bucket to use.
+    #   * `BucketName` - The name of the S3 bucket to use.
     #
-    #   * `compressionType` - An optional parameter to use GZIP to compress
+    #   * `CompressionType` - An optional parameter to use GZIP to compress
     #     the target files. To use GZIP, set this value to `NONE` (the
     #     default). To keep the files uncompressed, don't use this value.
     #
-    #   Shorthand syntax for these attributes is as follows:
+    #   Shorthand syntax for these settings is as follows:
     #   `ServiceAccessRoleArn=string,BucketName=string,CompressionType=string`
     #
-    #   JSON syntax for these attributes is as follows: `\{
+    #   JSON syntax for these settings is as follows: `\{
     #   "ServiceAccessRoleArn": "string", "BucketName": "string",
     #   "CompressionType": "none"|"gzip" \} `
     #
     # @option params [Types::MongoDbSettings] :mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
-    #   information about the available settings, see the configuration
-    #   properties section in [ Using MongoDB as a Target for AWS Database
-    #   Migration Service][1] in the *AWS Database Migration Service User
-    #   Guide.*
+    #   information about the available settings, see [Using MongoDB as a
+    #   Target for AWS Database Migration Service][1] in the *AWS Database
+    #   Migration Service User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html#CHAP_Source.MongoDB.Configuration
     #
     # @option params [Types::KinesisSettings] :kinesis_settings
-    #   Settings in JSON format for the target Amazon Kinesis Data Streams
-    #   endpoint. For more information about the available settings, see
-    #   [Using Object Mapping to Migrate Data to a Kinesis Data Stream][1] in
-    #   the *AWS Database Migration User Guide.*
+    #   Settings in JSON format for the target endpoint for Amazon Kinesis
+    #   Data Streams. For more information about the available settings, see
+    #   [Using Amazon Kinesis Data Streams as a Target for AWS Database
+    #   Migration Service][1] in the *AWS Database Migration User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html
+    #
+    # @option params [Types::KafkaSettings] :kafka_settings
+    #   Settings in JSON format for the target Apache Kafka endpoint. For more
+    #   information about the available settings, see [Using Apache Kafka as a
+    #   Target for AWS Database Migration Service][1] in the *AWS Database
+    #   Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html
     #
     # @option params [Types::ElasticsearchSettings] :elasticsearch_settings
     #   Settings in JSON format for the target Elasticsearch endpoint. For
@@ -403,7 +591,20 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
+    #
+    # @option params [Types::NeptuneSettings] :neptune_settings
+    #   Settings in JSON format for the target Amazon Neptune endpoint. For
+    #   more information about the available settings, see
+    #   [https://docs.aws.amazon.com/dms/latest/userguide/CHAP\_Target.Neptune.html#CHAP\_Target.Neptune.EndpointSettings][1]
+    #   in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings
+    #
+    # @option params [Types::RedshiftSettings] :redshift_settings
+    #   Provides information that defines an Amazon Redshift endpoint.
     #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -484,6 +685,20 @@ module Aws::DatabaseMigrationService
     #       bucket_folder: "String",
     #       bucket_name: "String",
     #       compression_type: "none", # accepts none, gzip
+    #       encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #       server_side_encryption_kms_key_id: "String",
+    #       data_format: "csv", # accepts csv, parquet
+    #       encoding_type: "plain", # accepts plain, plain-dictionary, rle-dictionary
+    #       dict_page_size_limit: 1,
+    #       row_group_length: 1,
+    #       data_page_size: 1,
+    #       parquet_version: "parquet-1-0", # accepts parquet-1-0, parquet-2-0
+    #       enable_statistics: false,
+    #       include_op_for_full_load: false,
+    #       cdc_inserts_only: false,
+    #       timestamp_column_name: "String",
+    #       parquet_timestamp_in_millisecond: false,
+    #       cdc_inserts_and_updates: false,
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -505,14 +720,59 @@ module Aws::DatabaseMigrationService
     #     },
     #     kinesis_settings: {
     #       stream_arn: "String",
-    #       message_format: "json", # accepts json
+    #       message_format: "json", # accepts json, json-unformatted
     #       service_access_role_arn: "String",
+    #       include_transaction_details: false,
+    #       include_partition_value: false,
+    #       partition_include_schema_table: false,
+    #       include_table_alter_operations: false,
+    #       include_control_details: false,
+    #     },
+    #     kafka_settings: {
+    #       broker: "String",
+    #       topic: "String",
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
     #       endpoint_uri: "String", # required
     #       full_load_error_percentage: 1,
     #       error_retry_duration: 1,
+    #     },
+    #     neptune_settings: {
+    #       service_access_role_arn: "String",
+    #       s3_bucket_name: "String", # required
+    #       s3_bucket_folder: "String", # required
+    #       error_retry_duration: 1,
+    #       max_file_size: 1,
+    #       max_retry_count: 1,
+    #       iam_auth_enabled: false,
+    #     },
+    #     redshift_settings: {
+    #       accept_any_date: false,
+    #       after_connect_script: "String",
+    #       bucket_folder: "String",
+    #       bucket_name: "String",
+    #       connection_timeout: 1,
+    #       database_name: "String",
+    #       date_format: "String",
+    #       empty_as_null: false,
+    #       encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #       file_transfer_upload_streams: 1,
+    #       load_timeout: 1,
+    #       max_file_size: 1,
+    #       password: "SecretString",
+    #       port: 1,
+    #       remove_quotes: false,
+    #       replace_invalid_chars: "String",
+    #       replace_chars: "String",
+    #       server_name: "String",
+    #       service_access_role_arn: "String",
+    #       server_side_encryption_kms_key_id: "String",
+    #       time_format: "String",
+    #       trim_blanks: false,
+    #       truncate_columns: false,
+    #       username: "String",
+    #       write_buffer_size: 1,
     #     },
     #   })
     #
@@ -543,6 +803,20 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.bucket_folder #=> String
     #   resp.endpoint.s3_settings.bucket_name #=> String
     #   resp.endpoint.s3_settings.compression_type #=> String, one of "none", "gzip"
+    #   resp.endpoint.s3_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoint.s3_settings.server_side_encryption_kms_key_id #=> String
+    #   resp.endpoint.s3_settings.data_format #=> String, one of "csv", "parquet"
+    #   resp.endpoint.s3_settings.encoding_type #=> String, one of "plain", "plain-dictionary", "rle-dictionary"
+    #   resp.endpoint.s3_settings.dict_page_size_limit #=> Integer
+    #   resp.endpoint.s3_settings.row_group_length #=> Integer
+    #   resp.endpoint.s3_settings.data_page_size #=> Integer
+    #   resp.endpoint.s3_settings.parquet_version #=> String, one of "parquet-1-0", "parquet-2-0"
+    #   resp.endpoint.s3_settings.enable_statistics #=> Boolean
+    #   resp.endpoint.s3_settings.include_op_for_full_load #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_inserts_only #=> Boolean
+    #   resp.endpoint.s3_settings.timestamp_column_name #=> String
+    #   resp.endpoint.s3_settings.parquet_timestamp_in_millisecond #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_inserts_and_updates #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -558,12 +832,51 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
     #   resp.endpoint.kinesis_settings.stream_arn #=> String
-    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json"
+    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
+    #   resp.endpoint.kinesis_settings.include_transaction_details #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_partition_value #=> Boolean
+    #   resp.endpoint.kinesis_settings.partition_include_schema_table #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_table_alter_operations #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
+    #   resp.endpoint.kafka_settings.broker #=> String
+    #   resp.endpoint.kafka_settings.topic #=> String
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
     #   resp.endpoint.elasticsearch_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.neptune_settings.service_access_role_arn #=> String
+    #   resp.endpoint.neptune_settings.s3_bucket_name #=> String
+    #   resp.endpoint.neptune_settings.s3_bucket_folder #=> String
+    #   resp.endpoint.neptune_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.neptune_settings.max_file_size #=> Integer
+    #   resp.endpoint.neptune_settings.max_retry_count #=> Integer
+    #   resp.endpoint.neptune_settings.iam_auth_enabled #=> Boolean
+    #   resp.endpoint.redshift_settings.accept_any_date #=> Boolean
+    #   resp.endpoint.redshift_settings.after_connect_script #=> String
+    #   resp.endpoint.redshift_settings.bucket_folder #=> String
+    #   resp.endpoint.redshift_settings.bucket_name #=> String
+    #   resp.endpoint.redshift_settings.connection_timeout #=> Integer
+    #   resp.endpoint.redshift_settings.database_name #=> String
+    #   resp.endpoint.redshift_settings.date_format #=> String
+    #   resp.endpoint.redshift_settings.empty_as_null #=> Boolean
+    #   resp.endpoint.redshift_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoint.redshift_settings.file_transfer_upload_streams #=> Integer
+    #   resp.endpoint.redshift_settings.load_timeout #=> Integer
+    #   resp.endpoint.redshift_settings.max_file_size #=> Integer
+    #   resp.endpoint.redshift_settings.password #=> String
+    #   resp.endpoint.redshift_settings.port #=> Integer
+    #   resp.endpoint.redshift_settings.remove_quotes #=> Boolean
+    #   resp.endpoint.redshift_settings.replace_invalid_chars #=> String
+    #   resp.endpoint.redshift_settings.replace_chars #=> String
+    #   resp.endpoint.redshift_settings.server_name #=> String
+    #   resp.endpoint.redshift_settings.service_access_role_arn #=> String
+    #   resp.endpoint.redshift_settings.server_side_encryption_kms_key_id #=> String
+    #   resp.endpoint.redshift_settings.time_format #=> String
+    #   resp.endpoint.redshift_settings.trim_blanks #=> Boolean
+    #   resp.endpoint.redshift_settings.truncate_columns #=> Boolean
+    #   resp.endpoint.redshift_settings.username #=> String
+    #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint AWS API Documentation
     #
@@ -595,12 +908,11 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
     #
     # @option params [required, String] :subscription_name
-    #   The name of the AWS DMS event notification subscription.
-    #
-    #   Constraints: The name must be less than 255 characters.
+    #   The name of the AWS DMS event notification subscription. This name
+    #   must be less than 255 characters.
     #
     # @option params [required, String] :sns_topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic created for
@@ -611,34 +923,35 @@ module Aws::DatabaseMigrationService
     #   The type of AWS DMS resource that generates the events. For example,
     #   if you want to be notified of events generated by a replication
     #   instance, you set this parameter to `replication-instance`. If this
-    #   value is not specified, all events are returned.
+    #   value isn't specified, all events are returned.
     #
-    #   Valid values: replication-instance \| migration-task
+    #   Valid values: `replication-instance` \| `replication-task`
     #
     # @option params [Array<String>] :event_categories
     #   A list of event categories for a source type that you want to
-    #   subscribe to. You can see a list of the categories for a given source
-    #   type by calling the `DescribeEventCategories` action or in the topic
-    #   [Working with Events and Notifications][1] in the *AWS Database
-    #   Migration Service User Guide.*
+    #   subscribe to. For more information, see [Working with Events and
+    #   Notifications][1] in the *AWS Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
     #
     # @option params [Array<String>] :source_ids
-    #   The list of identifiers of the event sources for which events will be
-    #   returned. If not specified, then all sources are included in the
-    #   response. An identifier must begin with a letter and must contain only
-    #   ASCII letters, digits, and hyphens; it cannot end with a hyphen or
-    #   contain two consecutive hyphens.
+    #   A list of identifiers for which AWS DMS provides notification events.
+    #
+    #   If you don't specify a value, notifications are provided for all
+    #   sources.
+    #
+    #   If you specify multiple values, they must be of the same type. For
+    #   example, if you specify a database instance ID, then all of the other
+    #   values must be database instance IDs.
     #
     # @option params [Boolean] :enabled
     #   A Boolean value; set to `true` to activate the subscription, or set to
     #   `false` to create the subscription but not activate it.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A tag to be attached to the event subscription.
+    #   One or more tags to be assigned to the event subscription.
     #
     # @return [Types::CreateEventSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -686,6 +999,17 @@ module Aws::DatabaseMigrationService
 
     # Creates the replication instance using the specified parameters.
     #
+    # AWS DMS requires that your account have certain roles with appropriate
+    # permissions before you can create a replication instance. For
+    # information on the required roles, see [Creating the IAM Roles to Use
+    # With the AWS CLI and AWS DMS API][1]. For information on the required
+    # permissions, see [IAM Permissions Needed to Use AWS DMS][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.APIRole.html
+    # [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.IAMPermissions.html
+    #
     # @option params [required, String] :replication_instance_identifier
     #   The replication instance identifier. This parameter is stored as a
     #   lowercase string.
@@ -696,7 +1020,7 @@ module Aws::DatabaseMigrationService
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `myrepinstance`
     #
@@ -718,13 +1042,9 @@ module Aws::DatabaseMigrationService
     #   replication instance.
     #
     # @option params [String] :availability_zone
-    #   The EC2 Availability Zone that the replication instance will be
-    #   created in.
-    #
-    #   Default: A random, system-chosen Availability Zone in the endpoint's
-    #   region.
-    #
-    #   Example: `us-east-1d`
+    #   The Availability Zone where the replication instance will be created.
+    #   The default value is a random, system-chosen Availability Zone in the
+    #   endpoint's AWS Region, for example: `us-east-1d`
     #
     # @option params [String] :replication_subnet_group_identifier
     #   A subnet group to associate with the replication instance.
@@ -736,35 +1056,40 @@ module Aws::DatabaseMigrationService
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per region, occurring on a random day of the week.
+    #   time per AWS Region, occurring on a random day of the week.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
     #
     #   Constraints: Minimum 30-minute window.
     #
     # @option params [Boolean] :multi_az
-    #   Specifies if the replication instance is a Multi-AZ deployment. You
-    #   cannot set the `AvailabilityZone` parameter if the Multi-AZ parameter
-    #   is set to `true`.
+    #   Specifies whether the replication instance is a Multi-AZ deployment.
+    #   You can't set the `AvailabilityZone` parameter if the Multi-AZ
+    #   parameter is set to `true`.
     #
     # @option params [String] :engine_version
     #   The engine version number of the replication instance.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor engine upgrades will be applied automatically to
-    #   the replication instance during the maintenance window.
+    #   A value that indicates whether minor engine upgrades are applied
+    #   automatically to the replication instance during the maintenance
+    #   window. This parameter defaults to `true`.
     #
     #   Default: `true`
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be associated with the replication instance.
+    #   One or more tags to be assigned to the replication instance.
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key identifier that is used to encrypt the content on the
-    #   replication instance. If you don't specify a value for the `KmsKeyId`
-    #   parameter, then AWS DMS uses your default encryption key. AWS KMS
-    #   creates the default encryption key for your AWS account. Your AWS
-    #   account has a different default encryption key for each AWS Region.
+    #   An AWS KMS key identifier that is used to encrypt the data on the
+    #   replication instance.
+    #
+    #   If you don't specify a value for the `KmsKeyId` parameter, then AWS
+    #   DMS uses your default encryption key.
+    #
+    #   AWS KMS creates the default encryption key for your AWS account. Your
+    #   AWS account has a different default encryption key for each AWS
+    #   Region.
     #
     # @option params [Boolean] :publicly_accessible
     #   Specifies the accessibility options for the replication instance. A
@@ -949,10 +1274,10 @@ module Aws::DatabaseMigrationService
     #   The description for the subnet group.
     #
     # @option params [required, Array<String>] :subnet_ids
-    #   The EC2 subnet IDs for the subnet group.
+    #   One or more subnet IDs to be assigned to the subnet group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tag to be assigned to the subnet group.
+    #   One or more tags to be assigned to the subnet group.
     #
     # @return [Types::CreateReplicationSubnetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1021,7 +1346,7 @@ module Aws::DatabaseMigrationService
     # Creates a replication task using the specified parameters.
     #
     # @option params [required, String] :replication_task_identifier
-    #   The replication task identifier.
+    #   An identifier for the replication task.
     #
     #   Constraints:
     #
@@ -1032,36 +1357,37 @@ module Aws::DatabaseMigrationService
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [required, String] :source_endpoint_arn
-    #   The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   An Amazon Resource Name (ARN) that uniquely identifies the source
     #   endpoint.
     #
     # @option params [required, String] :target_endpoint_arn
-    #   The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   An Amazon Resource Name (ARN) that uniquely identifies the target
     #   endpoint.
     #
     # @option params [required, String] :replication_instance_arn
-    #   The Amazon Resource Name (ARN) of the replication instance.
+    #   The Amazon Resource Name (ARN) of a replication instance.
     #
     # @option params [required, String] :migration_type
-    #   The migration type.
+    #   The migration type. Valid values: `full-load` \| `cdc` \|
+    #   `full-load-and-cdc`
     #
     # @option params [required, String] :table_mappings
-    #   When using the AWS CLI or boto3, provide the path of the JSON file
-    #   that contains the table mappings. Precede the path with "file://".
-    #   When working with the DMS API, provide the JSON as the parameter
-    #   value.
+    #   The table mappings for the task, in JSON format. For more information,
+    #   see [Using Table Mapping to Specify Task Settings][1] in the *AWS
+    #   Database Migration User Guide.*
     #
-    #   For example, --table-mappings file://mappingfile.json
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html
     #
     # @option params [String] :replication_task_settings
-    #   Settings for the task, such as target metadata settings. For a
-    #   complete list of task settings, see [Task Settings for AWS Database
-    #   Migration Service Tasks][1] in the *AWS Database Migration User
-    #   Guide.*
+    #   Overall settings for the task, in JSON format. For more information,
+    #   see [Specifying Task Settings for AWS Database Migration Service
+    #   Tasks][1] in the *AWS Database Migration User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
     #   Indicates the start time for a change data capture (CDC) operation.
@@ -1085,6 +1411,19 @@ module Aws::DatabaseMigrationService
     #
     #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
     #
+    #   <note markdown="1"> When you use this task setting with a source PostgreSQL database, a
+    #   logical replication slot should already be created and associated with
+    #   the source endpoint. You can verify this by setting the `slotName`
+    #   extra connection attribute to the name of this logical replication
+    #   slot. For more information, see [Extra Connection Attributes When
+    #   Using PostgreSQL as a Source for AWS DMS][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
+    #
     # @option params [String] :cdc_stop_position
     #   Indicates when you want a change data capture (CDC) operation to stop.
     #   The value can be either server time or commit time.
@@ -1096,7 +1435,17 @@ module Aws::DatabaseMigrationService
     #   3018-02-09T12:12:12 “
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to be added to the replication instance.
+    #   One or more tags to be assigned to the replication task.
+    #
+    # @option params [String] :task_data
+    #   Supplemental information that the task requires to migrate the data
+    #   for certain source and target endpoints. For more information, see
+    #   [Specifying Supplemental Data for Task Settings][1] in the *AWS
+    #   Database Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
     #
     # @return [Types::CreateReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1159,6 +1508,7 @@ module Aws::DatabaseMigrationService
     #         value: "String",
     #       },
     #     ],
+    #     task_data: "String",
     #   })
     #
     # @example Response structure
@@ -1185,6 +1535,12 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTask AWS API Documentation
     #
@@ -1244,6 +1600,60 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def delete_certificate(params = {}, options = {})
       req = build_request(:delete_certificate, params)
+      req.send_request(options)
+    end
+
+    # Deletes the connection between a replication instance and an endpoint.
+    #
+    # @option params [required, String] :endpoint_arn
+    #   The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   endpoint.
+    #
+    # @option params [required, String] :replication_instance_arn
+    #   The Amazon Resource Name (ARN) of the replication instance.
+    #
+    # @return [Types::DeleteConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteConnectionResponse#connection #connection} => Types::Connection
+    #
+    #
+    # @example Example: Delete Connection
+    #
+    #   # Deletes the connection between the replication instance and the endpoint.
+    #
+    #   resp = client.delete_connection({
+    #     endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM", 
+    #     replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     connection: {
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connection({
+    #     endpoint_arn: "String", # required
+    #     replication_instance_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection.replication_instance_arn #=> String
+    #   resp.connection.endpoint_arn #=> String
+    #   resp.connection.status #=> String
+    #   resp.connection.last_failure_message #=> String
+    #   resp.connection.endpoint_identifier #=> String
+    #   resp.connection.replication_instance_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteConnection AWS API Documentation
+    #
+    # @overload delete_connection(params = {})
+    # @param [Hash] params ({})
+    def delete_connection(params = {}, options = {})
+      req = build_request(:delete_connection, params)
       req.send_request(options)
     end
 
@@ -1320,6 +1730,20 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.bucket_folder #=> String
     #   resp.endpoint.s3_settings.bucket_name #=> String
     #   resp.endpoint.s3_settings.compression_type #=> String, one of "none", "gzip"
+    #   resp.endpoint.s3_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoint.s3_settings.server_side_encryption_kms_key_id #=> String
+    #   resp.endpoint.s3_settings.data_format #=> String, one of "csv", "parquet"
+    #   resp.endpoint.s3_settings.encoding_type #=> String, one of "plain", "plain-dictionary", "rle-dictionary"
+    #   resp.endpoint.s3_settings.dict_page_size_limit #=> Integer
+    #   resp.endpoint.s3_settings.row_group_length #=> Integer
+    #   resp.endpoint.s3_settings.data_page_size #=> Integer
+    #   resp.endpoint.s3_settings.parquet_version #=> String, one of "parquet-1-0", "parquet-2-0"
+    #   resp.endpoint.s3_settings.enable_statistics #=> Boolean
+    #   resp.endpoint.s3_settings.include_op_for_full_load #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_inserts_only #=> Boolean
+    #   resp.endpoint.s3_settings.timestamp_column_name #=> String
+    #   resp.endpoint.s3_settings.parquet_timestamp_in_millisecond #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_inserts_and_updates #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -1335,12 +1759,51 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
     #   resp.endpoint.kinesis_settings.stream_arn #=> String
-    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json"
+    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
+    #   resp.endpoint.kinesis_settings.include_transaction_details #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_partition_value #=> Boolean
+    #   resp.endpoint.kinesis_settings.partition_include_schema_table #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_table_alter_operations #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
+    #   resp.endpoint.kafka_settings.broker #=> String
+    #   resp.endpoint.kafka_settings.topic #=> String
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
     #   resp.endpoint.elasticsearch_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.neptune_settings.service_access_role_arn #=> String
+    #   resp.endpoint.neptune_settings.s3_bucket_name #=> String
+    #   resp.endpoint.neptune_settings.s3_bucket_folder #=> String
+    #   resp.endpoint.neptune_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.neptune_settings.max_file_size #=> Integer
+    #   resp.endpoint.neptune_settings.max_retry_count #=> Integer
+    #   resp.endpoint.neptune_settings.iam_auth_enabled #=> Boolean
+    #   resp.endpoint.redshift_settings.accept_any_date #=> Boolean
+    #   resp.endpoint.redshift_settings.after_connect_script #=> String
+    #   resp.endpoint.redshift_settings.bucket_folder #=> String
+    #   resp.endpoint.redshift_settings.bucket_name #=> String
+    #   resp.endpoint.redshift_settings.connection_timeout #=> Integer
+    #   resp.endpoint.redshift_settings.database_name #=> String
+    #   resp.endpoint.redshift_settings.date_format #=> String
+    #   resp.endpoint.redshift_settings.empty_as_null #=> Boolean
+    #   resp.endpoint.redshift_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoint.redshift_settings.file_transfer_upload_streams #=> Integer
+    #   resp.endpoint.redshift_settings.load_timeout #=> Integer
+    #   resp.endpoint.redshift_settings.max_file_size #=> Integer
+    #   resp.endpoint.redshift_settings.password #=> String
+    #   resp.endpoint.redshift_settings.port #=> Integer
+    #   resp.endpoint.redshift_settings.remove_quotes #=> Boolean
+    #   resp.endpoint.redshift_settings.replace_invalid_chars #=> String
+    #   resp.endpoint.redshift_settings.replace_chars #=> String
+    #   resp.endpoint.redshift_settings.server_name #=> String
+    #   resp.endpoint.redshift_settings.service_access_role_arn #=> String
+    #   resp.endpoint.redshift_settings.server_side_encryption_kms_key_id #=> String
+    #   resp.endpoint.redshift_settings.time_format #=> String
+    #   resp.endpoint.redshift_settings.trim_blanks #=> Boolean
+    #   resp.endpoint.redshift_settings.truncate_columns #=> Boolean
+    #   resp.endpoint.redshift_settings.username #=> String
+    #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint AWS API Documentation
     #
@@ -1622,6 +2085,12 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTask AWS API Documentation
     #
@@ -1632,17 +2101,21 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
-    # Lists all of the AWS DMS attributes for a customer account. The
-    # attributes include AWS DMS quotas for the account, such as the number
-    # of replication instances allowed. The description for a quota includes
-    # the quota name, current usage toward that quota, and the quota's
-    # maximum value.
+    # Lists all of the AWS DMS attributes for a customer account. These
+    # attributes include AWS DMS quotas for the account and a unique account
+    # identifier in a particular DMS region. DMS quotas include a list of
+    # resource quotas supported by the account, such as the number of
+    # replication instances allowed. The description for each resource
+    # quota, includes the quota name, current usage toward that quota, and
+    # the quota's maximum value. DMS uses the unique account identifier to
+    # name each artifact used by DMS in the given region.
     #
     # This command does not take any parameters.
     #
     # @return [Types::DescribeAccountAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAccountAttributesResponse#account_quotas #account_quotas} => Array&lt;Types::AccountQuota&gt;
+    #   * {Types::DescribeAccountAttributesResponse#unique_account_identifier #unique_account_identifier} => String
     #
     #
     # @example Example: Describe acount attributes
@@ -1681,6 +2154,7 @@ module Aws::DatabaseMigrationService
     #   resp.account_quotas[0].account_quota_name #=> String
     #   resp.account_quotas[0].used #=> Integer
     #   resp.account_quotas[0].max #=> Integer
+    #   resp.unique_account_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeAccountAttributes AWS API Documentation
     #
@@ -1714,6 +2188,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeCertificatesResponse#marker #marker} => String
     #   * {Types::DescribeCertificatesResponse#certificates #certificates} => Array&lt;Types::Certificate&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe certificates
@@ -1807,6 +2283,8 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeConnectionsResponse#marker #marker} => String
     #   * {Types::DescribeConnectionsResponse#connections #connections} => Array&lt;Types::Connection&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: Describe connections
     #
@@ -1865,6 +2343,11 @@ module Aws::DatabaseMigrationService
     #   resp.connections[0].endpoint_identifier #=> String
     #   resp.connections[0].replication_instance_identifier #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * test_connection_succeeds
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeConnections AWS API Documentation
     #
     # @overload describe_connections(params = {})
@@ -1900,6 +2383,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeEndpointTypesResponse#marker #marker} => String
     #   * {Types::DescribeEndpointTypesResponse#supported_endpoint_types #supported_endpoint_types} => Array&lt;Types::SupportedEndpointType&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe endpoint types
@@ -1947,6 +2432,7 @@ module Aws::DatabaseMigrationService
     #   resp.supported_endpoint_types[0].engine_name #=> String
     #   resp.supported_endpoint_types[0].supports_cdc #=> Boolean
     #   resp.supported_endpoint_types[0].endpoint_type #=> String, one of "source", "target"
+    #   resp.supported_endpoint_types[0].replication_instance_engine_minimum_version #=> String
     #   resp.supported_endpoint_types[0].engine_display_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointTypes AWS API Documentation
@@ -1986,6 +2472,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeEndpointsResponse#marker #marker} => String
     #   * {Types::DescribeEndpointsResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe endpoints
@@ -2055,6 +2543,20 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].s3_settings.bucket_folder #=> String
     #   resp.endpoints[0].s3_settings.bucket_name #=> String
     #   resp.endpoints[0].s3_settings.compression_type #=> String, one of "none", "gzip"
+    #   resp.endpoints[0].s3_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoints[0].s3_settings.server_side_encryption_kms_key_id #=> String
+    #   resp.endpoints[0].s3_settings.data_format #=> String, one of "csv", "parquet"
+    #   resp.endpoints[0].s3_settings.encoding_type #=> String, one of "plain", "plain-dictionary", "rle-dictionary"
+    #   resp.endpoints[0].s3_settings.dict_page_size_limit #=> Integer
+    #   resp.endpoints[0].s3_settings.row_group_length #=> Integer
+    #   resp.endpoints[0].s3_settings.data_page_size #=> Integer
+    #   resp.endpoints[0].s3_settings.parquet_version #=> String, one of "parquet-1-0", "parquet-2-0"
+    #   resp.endpoints[0].s3_settings.enable_statistics #=> Boolean
+    #   resp.endpoints[0].s3_settings.include_op_for_full_load #=> Boolean
+    #   resp.endpoints[0].s3_settings.cdc_inserts_only #=> Boolean
+    #   resp.endpoints[0].s3_settings.timestamp_column_name #=> String
+    #   resp.endpoints[0].s3_settings.parquet_timestamp_in_millisecond #=> Boolean
+    #   resp.endpoints[0].s3_settings.cdc_inserts_and_updates #=> Boolean
     #   resp.endpoints[0].dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].dms_transfer_settings.bucket_name #=> String
     #   resp.endpoints[0].mongo_db_settings.username #=> String
@@ -2070,12 +2572,56 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].mongo_db_settings.auth_source #=> String
     #   resp.endpoints[0].mongo_db_settings.kms_key_id #=> String
     #   resp.endpoints[0].kinesis_settings.stream_arn #=> String
-    #   resp.endpoints[0].kinesis_settings.message_format #=> String, one of "json"
+    #   resp.endpoints[0].kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoints[0].kinesis_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].kinesis_settings.include_transaction_details #=> Boolean
+    #   resp.endpoints[0].kinesis_settings.include_partition_value #=> Boolean
+    #   resp.endpoints[0].kinesis_settings.partition_include_schema_table #=> Boolean
+    #   resp.endpoints[0].kinesis_settings.include_table_alter_operations #=> Boolean
+    #   resp.endpoints[0].kinesis_settings.include_control_details #=> Boolean
+    #   resp.endpoints[0].kafka_settings.broker #=> String
+    #   resp.endpoints[0].kafka_settings.topic #=> String
     #   resp.endpoints[0].elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoints[0].elasticsearch_settings.full_load_error_percentage #=> Integer
     #   resp.endpoints[0].elasticsearch_settings.error_retry_duration #=> Integer
+    #   resp.endpoints[0].neptune_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].neptune_settings.s3_bucket_name #=> String
+    #   resp.endpoints[0].neptune_settings.s3_bucket_folder #=> String
+    #   resp.endpoints[0].neptune_settings.error_retry_duration #=> Integer
+    #   resp.endpoints[0].neptune_settings.max_file_size #=> Integer
+    #   resp.endpoints[0].neptune_settings.max_retry_count #=> Integer
+    #   resp.endpoints[0].neptune_settings.iam_auth_enabled #=> Boolean
+    #   resp.endpoints[0].redshift_settings.accept_any_date #=> Boolean
+    #   resp.endpoints[0].redshift_settings.after_connect_script #=> String
+    #   resp.endpoints[0].redshift_settings.bucket_folder #=> String
+    #   resp.endpoints[0].redshift_settings.bucket_name #=> String
+    #   resp.endpoints[0].redshift_settings.connection_timeout #=> Integer
+    #   resp.endpoints[0].redshift_settings.database_name #=> String
+    #   resp.endpoints[0].redshift_settings.date_format #=> String
+    #   resp.endpoints[0].redshift_settings.empty_as_null #=> Boolean
+    #   resp.endpoints[0].redshift_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoints[0].redshift_settings.file_transfer_upload_streams #=> Integer
+    #   resp.endpoints[0].redshift_settings.load_timeout #=> Integer
+    #   resp.endpoints[0].redshift_settings.max_file_size #=> Integer
+    #   resp.endpoints[0].redshift_settings.password #=> String
+    #   resp.endpoints[0].redshift_settings.port #=> Integer
+    #   resp.endpoints[0].redshift_settings.remove_quotes #=> Boolean
+    #   resp.endpoints[0].redshift_settings.replace_invalid_chars #=> String
+    #   resp.endpoints[0].redshift_settings.replace_chars #=> String
+    #   resp.endpoints[0].redshift_settings.server_name #=> String
+    #   resp.endpoints[0].redshift_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].redshift_settings.server_side_encryption_kms_key_id #=> String
+    #   resp.endpoints[0].redshift_settings.time_format #=> String
+    #   resp.endpoints[0].redshift_settings.trim_blanks #=> Boolean
+    #   resp.endpoints[0].redshift_settings.truncate_columns #=> Boolean
+    #   resp.endpoints[0].redshift_settings.username #=> String
+    #   resp.endpoints[0].redshift_settings.write_buffer_size #=> Integer
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * endpoint_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpoints AWS API Documentation
     #
@@ -2093,12 +2639,12 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
     #
     # @option params [String] :source_type
     #   The type of AWS DMS resource that generates events.
     #
-    #   Valid values: replication-instance \| migration-task
+    #   Valid values: replication-instance \| replication-task
     #
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to the action.
@@ -2169,6 +2715,8 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeEventSubscriptionsResponse#marker #marker} => String
     #   * {Types::DescribeEventSubscriptionsResponse#event_subscriptions_list #event_subscriptions_list} => Array&lt;Types::EventSubscription&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_event_subscriptions({
@@ -2215,17 +2763,15 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
     #
     # @option params [String] :source_identifier
-    #   The identifier of the event source. An identifier must begin with a
-    #   letter and must contain only ASCII letters, digits, and hyphens. It
-    #   cannot end with a hyphen or contain two consecutive hyphens.
+    #   The identifier of an event source.
     #
     # @option params [String] :source_type
     #   The type of AWS DMS resource that generates events.
     #
-    #   Valid values: replication-instance \| migration-task
+    #   Valid values: replication-instance \| replication-task
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The start time for the events to be listed.
@@ -2237,8 +2783,7 @@ module Aws::DatabaseMigrationService
     #   The duration of the events to be listed.
     #
     # @option params [Array<String>] :event_categories
-    #   A list of event categories for a source type that you want to
-    #   subscribe to.
+    #   A list of event categories for the source type that you've chosen.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to the action.
@@ -2262,6 +2807,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeEventsResponse#marker #marker} => String
     #   * {Types::DescribeEventsResponse#events #events} => Array&lt;Types::Event&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2325,6 +2872,8 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeOrderableReplicationInstancesResponse#orderable_replication_instances #orderable_replication_instances} => Array&lt;Types::OrderableReplicationInstance&gt;
     #   * {Types::DescribeOrderableReplicationInstancesResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: Describe orderable replication instances
     #
@@ -2359,6 +2908,9 @@ module Aws::DatabaseMigrationService
     #   resp.orderable_replication_instances[0].max_allocated_storage #=> Integer
     #   resp.orderable_replication_instances[0].default_allocated_storage #=> Integer
     #   resp.orderable_replication_instances[0].included_allocated_storage #=> Integer
+    #   resp.orderable_replication_instances[0].availability_zones #=> Array
+    #   resp.orderable_replication_instances[0].availability_zones[0] #=> String
+    #   resp.orderable_replication_instances[0].release_status #=> String, one of "beta"
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeOrderableReplicationInstances AWS API Documentation
@@ -2367,6 +2919,71 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def describe_orderable_replication_instances(params = {}, options = {})
       req = build_request(:describe_orderable_replication_instances, params)
+      req.send_request(options)
+    end
+
+    # For internal use only
+    #
+    # @option params [String] :replication_instance_arn
+    #   The Amazon Resource Name (ARN) of the replication instance.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @return [Types::DescribePendingMaintenanceActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePendingMaintenanceActionsResponse#pending_maintenance_actions #pending_maintenance_actions} => Array&lt;Types::ResourcePendingMaintenanceActions&gt;
+    #   * {Types::DescribePendingMaintenanceActionsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_pending_maintenance_actions({
+    #     replication_instance_arn: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pending_maintenance_actions #=> Array
+    #   resp.pending_maintenance_actions[0].resource_identifier #=> String
+    #   resp.pending_maintenance_actions[0].pending_maintenance_action_details #=> Array
+    #   resp.pending_maintenance_actions[0].pending_maintenance_action_details[0].action #=> String
+    #   resp.pending_maintenance_actions[0].pending_maintenance_action_details[0].auto_applied_after_date #=> Time
+    #   resp.pending_maintenance_actions[0].pending_maintenance_action_details[0].forced_apply_date #=> Time
+    #   resp.pending_maintenance_actions[0].pending_maintenance_action_details[0].opt_in_status #=> String
+    #   resp.pending_maintenance_actions[0].pending_maintenance_action_details[0].current_apply_date #=> Time
+    #   resp.pending_maintenance_actions[0].pending_maintenance_action_details[0].description #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribePendingMaintenanceActions AWS API Documentation
+    #
+    # @overload describe_pending_maintenance_actions(params = {})
+    # @param [Hash] params ({})
+    def describe_pending_maintenance_actions(params = {}, options = {})
+      req = build_request(:describe_pending_maintenance_actions, params)
       req.send_request(options)
     end
 
@@ -2444,6 +3061,8 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeReplicationInstanceTaskLogsResponse#replication_instance_task_logs #replication_instance_task_logs} => Array&lt;Types::ReplicationInstanceTaskLog&gt;
     #   * {Types::DescribeReplicationInstanceTaskLogsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_replication_instance_task_logs({
@@ -2499,6 +3118,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeReplicationInstancesResponse#marker #marker} => String
     #   * {Types::DescribeReplicationInstancesResponse#replication_instances #replication_instances} => Array&lt;Types::ReplicationInstance&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe replication instances
@@ -2581,6 +3202,12 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instances[0].free_until #=> Time
     #   resp.replication_instances[0].dns_name_servers #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * replication_instance_available
+    #   * replication_instance_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstances AWS API Documentation
     #
     # @overload describe_replication_instances(params = {})
@@ -2594,6 +3221,8 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to the describe action.
+    #
+    #   Valid filter names: replication-subnet-group-id
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -2614,6 +3243,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeReplicationSubnetGroupsResponse#marker #marker} => String
     #   * {Types::DescribeReplicationSubnetGroupsResponse#replication_subnet_groups #replication_subnet_groups} => Array&lt;Types::ReplicationSubnetGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe replication subnet groups
@@ -2680,9 +3311,9 @@ module Aws::DatabaseMigrationService
     # returns the latest results.
     #
     # @option params [String] :replication_task_arn
-    #   \- The Amazon Resource Name (ARN) string that uniquely identifies the
-    #   task. When this input parameter is specified the API will return only
-    #   one result and ignore the values of the max-records and marker
+    #   The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   task. When this input parameter is specified, the API returns only one
+    #   result and ignore the values of the `MaxRecords` and `Marker`
     #   parameters.
     #
     # @option params [Integer] :max_records
@@ -2705,6 +3336,8 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeReplicationTaskAssessmentResultsResponse#marker #marker} => String
     #   * {Types::DescribeReplicationTaskAssessmentResultsResponse#bucket_name #bucket_name} => String
     #   * {Types::DescribeReplicationTaskAssessmentResultsResponse#replication_task_assessment_results #replication_task_assessment_results} => Array&lt;Types::ReplicationTaskAssessmentResult&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2760,10 +3393,17 @@ module Aws::DatabaseMigrationService
     #   parameter is specified, the response includes only records beyond the
     #   marker, up to the value specified by `MaxRecords`.
     #
+    # @option params [Boolean] :without_settings
+    #   An option to set to avoid returning information about settings. Use
+    #   this to reduce overhead when setting information is too large. To use
+    #   this option, choose `true`; otherwise, choose `false` (the default).
+    #
     # @return [Types::DescribeReplicationTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeReplicationTasksResponse#marker #marker} => String
     #   * {Types::DescribeReplicationTasksResponse#replication_tasks #replication_tasks} => Array&lt;Types::ReplicationTask&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe replication tasks
@@ -2802,6 +3442,7 @@ module Aws::DatabaseMigrationService
     #     ],
     #     max_records: 1,
     #     marker: "String",
+    #     without_settings: false,
     #   })
     #
     # @example Response structure
@@ -2830,6 +3471,20 @@ module Aws::DatabaseMigrationService
     #   resp.replication_tasks[0].replication_task_stats.tables_loading #=> Integer
     #   resp.replication_tasks[0].replication_task_stats.tables_queued #=> Integer
     #   resp.replication_tasks[0].replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_tasks[0].replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_tasks[0].replication_task_stats.start_date #=> Time
+    #   resp.replication_tasks[0].replication_task_stats.stop_date #=> Time
+    #   resp.replication_tasks[0].replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_tasks[0].replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_tasks[0].task_data #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * replication_task_deleted
+    #   * replication_task_ready
+    #   * replication_task_running
+    #   * replication_task_stopped
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTasks AWS API Documentation
     #
@@ -2865,6 +3520,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeSchemasResponse#marker #marker} => String
     #   * {Types::DescribeSchemasResponse#schemas #schemas} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe schemas
@@ -2946,6 +3603,8 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeTableStatisticsResponse#table_statistics #table_statistics} => Array&lt;Types::TableStatistics&gt;
     #   * {Types::DescribeTableStatisticsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: Describe table statistics
     #
@@ -2993,6 +3652,9 @@ module Aws::DatabaseMigrationService
     #   resp.table_statistics[0].full_load_rows #=> Integer
     #   resp.table_statistics[0].full_load_condtnl_chk_failed_rows #=> Integer
     #   resp.table_statistics[0].full_load_error_rows #=> Integer
+    #   resp.table_statistics[0].full_load_start_time #=> Time
+    #   resp.table_statistics[0].full_load_end_time #=> Time
+    #   resp.table_statistics[0].full_load_reloaded #=> Boolean
     #   resp.table_statistics[0].last_update_time #=> Time
     #   resp.table_statistics[0].table_state #=> String
     #   resp.table_statistics[0].validation_pending_records #=> Integer
@@ -3014,14 +3676,16 @@ module Aws::DatabaseMigrationService
     # Uploads the specified certificate.
     #
     # @option params [required, String] :certificate_identifier
-    #   The customer-assigned name of the certificate. Valid characters are
-    #   A-z and 0-9.
+    #   A customer-assigned name for the certificate. Identifiers must begin
+    #   with a letter and must contain only ASCII letters, digits, and
+    #   hyphens. They can't end with a hyphen or contain two consecutive
+    #   hyphens.
     #
     # @option params [String] :certificate_pem
-    #   The contents of the .pem X.509 certificate file for the certificate.
+    #   The contents of a `.pem` file, which contains an X.509 certificate.
     #
     # @option params [String, IO] :certificate_wallet
-    #   The location of the imported Oracle Wallet certificate for use with
+    #   The location of an imported Oracle Wallet certificate for use with
     #   SSL.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -3136,18 +3800,20 @@ module Aws::DatabaseMigrationService
     #   endpoint.
     #
     # @option params [String] :endpoint_identifier
-    #   The database endpoint identifier. Identifiers must begin with a
-    #   letter; must contain only ASCII letters, digits, and hyphens; and must
-    #   not end with a hyphen or contain two consecutive hyphens.
+    #   The database endpoint identifier. Identifiers must begin with a letter
+    #   and must contain only ASCII letters, digits, and hyphens. They can't
+    #   end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [String] :endpoint_type
-    #   The type of endpoint.
+    #   The type of endpoint. Valid values are `source` and `target`.
     #
     # @option params [String] :engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
-    #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
-    #   aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase,
-    #   dynamodb, mongodb, and sqlserver.
+    #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
+    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`, `"s3"`,
+    #   `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
+    #   `"sqlserver"`.
     #
     # @option params [String] :username
     #   The user name to be used to login to the endpoint database.
@@ -3173,12 +3839,8 @@ module Aws::DatabaseMigrationService
     #   connection.
     #
     # @option params [String] :ssl_mode
-    #   The SSL mode to be used.
-    #
-    #   SSL mode can be one of four values: none, require, verify-ca,
-    #   verify-full.
-    #
-    #   The default value is none.
+    #   The SSL mode used to connect to the endpoint. The default value is
+    #   `none`.
     #
     # @option params [String] :service_access_role_arn
     #   The Amazon Resource Name (ARN) for the service access role you want to
@@ -3189,13 +3851,13 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Types::DynamoDbSettings] :dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
-    #   more information about the available settings, see [Using Object
-    #   Mapping to Migrate Data to DynamoDB][1] in the *AWS Database Migration
-    #   Service User Guide.*
+    #   information about other available settings, see [Using Object Mapping
+    #   to Migrate Data to DynamoDB][1] in the *AWS Database Migration Service
+    #   User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
     #
     # @option params [Types::S3Settings] :s3_settings
     #   Settings in JSON format for the target Amazon S3 endpoint. For more
@@ -3205,7 +3867,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring
     #
     # @option params [Types::DmsTransferSettings] :dms_transfer_settings
     #   The settings in JSON format for the DMS transfer type of source
@@ -3213,22 +3875,22 @@ module Aws::DatabaseMigrationService
     #
     #   Attributes include the following:
     #
-    #   * serviceAccessRoleArn - The IAM role that has permission to access
-    #     the Amazon S3 bucket.
+    #   * serviceAccessRoleArn - The AWS Identity and Access Management (IAM)
+    #     role that has permission to access the Amazon S3 bucket.
     #
     #   * BucketName - The name of the S3 bucket to use.
     #
     #   * compressionType - An optional parameter to use GZIP to compress the
-    #     target files. Set to NONE (the default) or do not use to leave the
-    #     files uncompressed.
+    #     target files. Either set this parameter to NONE (the default) or
+    #     don't use it to leave the files uncompressed.
     #
-    #   Shorthand syntax: ServiceAccessRoleArn=string
-    #   ,BucketName=string,CompressionType=string
+    #   Shorthand syntax for these settings is as follows:
+    #   `ServiceAccessRoleArn=string
+    #   ,BucketName=string,CompressionType=string`
     #
-    #   JSON syntax:
-    #
-    #   \\\{ "ServiceAccessRoleArn": "string", "BucketName": "string",
-    #   "CompressionType": "none"\|"gzip" \\}
+    #   JSON syntax for these settings is as follows: `\{
+    #   "ServiceAccessRoleArn": "string", "BucketName": "string",
+    #   "CompressionType": "none"|"gzip" \} `
     #
     # @option params [Types::MongoDbSettings] :mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
@@ -3239,17 +3901,27 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
     #
     # @option params [Types::KinesisSettings] :kinesis_settings
-    #   Settings in JSON format for the target Amazon Kinesis Data Streams
-    #   endpoint. For more information about the available settings, see
-    #   [Using Object Mapping to Migrate Data to a Kinesis Data Stream][1] in
-    #   the *AWS Database Migration User Guide.*
+    #   Settings in JSON format for the target endpoint for Amazon Kinesis
+    #   Data Streams. For more information about the available settings, see
+    #   [Using Amazon Kinesis Data Streams as a Target for AWS Database
+    #   Migration Service][1] in the *AWS Database Migration User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html
+    #
+    # @option params [Types::KafkaSettings] :kafka_settings
+    #   Settings in JSON format for the target Apache Kafka endpoint. For more
+    #   information about the available settings, see [Using Apache Kafka as a
+    #   Target for AWS Database Migration Service][1] in the *AWS Database
+    #   Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html
     #
     # @option params [Types::ElasticsearchSettings] :elasticsearch_settings
     #   Settings in JSON format for the target Elasticsearch endpoint. For
@@ -3259,7 +3931,20 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
+    #
+    # @option params [Types::NeptuneSettings] :neptune_settings
+    #   Settings in JSON format for the target Amazon Neptune endpoint. For
+    #   more information about the available settings, see
+    #   [https://docs.aws.amazon.com/dms/latest/userguide/CHAP\_Target.Neptune.html#CHAP\_Target.Neptune.EndpointSettings][1]
+    #   in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings
+    #
+    # @option params [Types::RedshiftSettings] :redshift_settings
+    #   Provides information that defines an Amazon Redshift endpoint.
     #
     # @return [Types::ModifyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3319,6 +4004,20 @@ module Aws::DatabaseMigrationService
     #       bucket_folder: "String",
     #       bucket_name: "String",
     #       compression_type: "none", # accepts none, gzip
+    #       encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #       server_side_encryption_kms_key_id: "String",
+    #       data_format: "csv", # accepts csv, parquet
+    #       encoding_type: "plain", # accepts plain, plain-dictionary, rle-dictionary
+    #       dict_page_size_limit: 1,
+    #       row_group_length: 1,
+    #       data_page_size: 1,
+    #       parquet_version: "parquet-1-0", # accepts parquet-1-0, parquet-2-0
+    #       enable_statistics: false,
+    #       include_op_for_full_load: false,
+    #       cdc_inserts_only: false,
+    #       timestamp_column_name: "String",
+    #       parquet_timestamp_in_millisecond: false,
+    #       cdc_inserts_and_updates: false,
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -3340,14 +4039,59 @@ module Aws::DatabaseMigrationService
     #     },
     #     kinesis_settings: {
     #       stream_arn: "String",
-    #       message_format: "json", # accepts json
+    #       message_format: "json", # accepts json, json-unformatted
     #       service_access_role_arn: "String",
+    #       include_transaction_details: false,
+    #       include_partition_value: false,
+    #       partition_include_schema_table: false,
+    #       include_table_alter_operations: false,
+    #       include_control_details: false,
+    #     },
+    #     kafka_settings: {
+    #       broker: "String",
+    #       topic: "String",
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
     #       endpoint_uri: "String", # required
     #       full_load_error_percentage: 1,
     #       error_retry_duration: 1,
+    #     },
+    #     neptune_settings: {
+    #       service_access_role_arn: "String",
+    #       s3_bucket_name: "String", # required
+    #       s3_bucket_folder: "String", # required
+    #       error_retry_duration: 1,
+    #       max_file_size: 1,
+    #       max_retry_count: 1,
+    #       iam_auth_enabled: false,
+    #     },
+    #     redshift_settings: {
+    #       accept_any_date: false,
+    #       after_connect_script: "String",
+    #       bucket_folder: "String",
+    #       bucket_name: "String",
+    #       connection_timeout: 1,
+    #       database_name: "String",
+    #       date_format: "String",
+    #       empty_as_null: false,
+    #       encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #       file_transfer_upload_streams: 1,
+    #       load_timeout: 1,
+    #       max_file_size: 1,
+    #       password: "SecretString",
+    #       port: 1,
+    #       remove_quotes: false,
+    #       replace_invalid_chars: "String",
+    #       replace_chars: "String",
+    #       server_name: "String",
+    #       service_access_role_arn: "String",
+    #       server_side_encryption_kms_key_id: "String",
+    #       time_format: "String",
+    #       trim_blanks: false,
+    #       truncate_columns: false,
+    #       username: "String",
+    #       write_buffer_size: 1,
     #     },
     #   })
     #
@@ -3378,6 +4122,20 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.bucket_folder #=> String
     #   resp.endpoint.s3_settings.bucket_name #=> String
     #   resp.endpoint.s3_settings.compression_type #=> String, one of "none", "gzip"
+    #   resp.endpoint.s3_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoint.s3_settings.server_side_encryption_kms_key_id #=> String
+    #   resp.endpoint.s3_settings.data_format #=> String, one of "csv", "parquet"
+    #   resp.endpoint.s3_settings.encoding_type #=> String, one of "plain", "plain-dictionary", "rle-dictionary"
+    #   resp.endpoint.s3_settings.dict_page_size_limit #=> Integer
+    #   resp.endpoint.s3_settings.row_group_length #=> Integer
+    #   resp.endpoint.s3_settings.data_page_size #=> Integer
+    #   resp.endpoint.s3_settings.parquet_version #=> String, one of "parquet-1-0", "parquet-2-0"
+    #   resp.endpoint.s3_settings.enable_statistics #=> Boolean
+    #   resp.endpoint.s3_settings.include_op_for_full_load #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_inserts_only #=> Boolean
+    #   resp.endpoint.s3_settings.timestamp_column_name #=> String
+    #   resp.endpoint.s3_settings.parquet_timestamp_in_millisecond #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_inserts_and_updates #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -3393,12 +4151,51 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
     #   resp.endpoint.kinesis_settings.stream_arn #=> String
-    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json"
+    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
+    #   resp.endpoint.kinesis_settings.include_transaction_details #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_partition_value #=> Boolean
+    #   resp.endpoint.kinesis_settings.partition_include_schema_table #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_table_alter_operations #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
+    #   resp.endpoint.kafka_settings.broker #=> String
+    #   resp.endpoint.kafka_settings.topic #=> String
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
     #   resp.endpoint.elasticsearch_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.neptune_settings.service_access_role_arn #=> String
+    #   resp.endpoint.neptune_settings.s3_bucket_name #=> String
+    #   resp.endpoint.neptune_settings.s3_bucket_folder #=> String
+    #   resp.endpoint.neptune_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.neptune_settings.max_file_size #=> Integer
+    #   resp.endpoint.neptune_settings.max_retry_count #=> Integer
+    #   resp.endpoint.neptune_settings.iam_auth_enabled #=> Boolean
+    #   resp.endpoint.redshift_settings.accept_any_date #=> Boolean
+    #   resp.endpoint.redshift_settings.after_connect_script #=> String
+    #   resp.endpoint.redshift_settings.bucket_folder #=> String
+    #   resp.endpoint.redshift_settings.bucket_name #=> String
+    #   resp.endpoint.redshift_settings.connection_timeout #=> Integer
+    #   resp.endpoint.redshift_settings.database_name #=> String
+    #   resp.endpoint.redshift_settings.date_format #=> String
+    #   resp.endpoint.redshift_settings.empty_as_null #=> Boolean
+    #   resp.endpoint.redshift_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoint.redshift_settings.file_transfer_upload_streams #=> Integer
+    #   resp.endpoint.redshift_settings.load_timeout #=> Integer
+    #   resp.endpoint.redshift_settings.max_file_size #=> Integer
+    #   resp.endpoint.redshift_settings.password #=> String
+    #   resp.endpoint.redshift_settings.port #=> Integer
+    #   resp.endpoint.redshift_settings.remove_quotes #=> Boolean
+    #   resp.endpoint.redshift_settings.replace_invalid_chars #=> String
+    #   resp.endpoint.redshift_settings.replace_chars #=> String
+    #   resp.endpoint.redshift_settings.server_name #=> String
+    #   resp.endpoint.redshift_settings.service_access_role_arn #=> String
+    #   resp.endpoint.redshift_settings.server_side_encryption_kms_key_id #=> String
+    #   resp.endpoint.redshift_settings.time_format #=> String
+    #   resp.endpoint.redshift_settings.trim_blanks #=> Boolean
+    #   resp.endpoint.redshift_settings.truncate_columns #=> Boolean
+    #   resp.endpoint.redshift_settings.username #=> String
+    #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint AWS API Documentation
     #
@@ -3424,7 +4221,7 @@ module Aws::DatabaseMigrationService
     #   The type of AWS DMS resource that generates the events you want to
     #   subscribe to.
     #
-    #   Valid values: replication-instance \| migration-task
+    #   Valid values: replication-instance \| replication-task
     #
     # @option params [Array<String>] :event_categories
     #   A list of event categories for a source type that you want to
@@ -3518,30 +4315,36 @@ module Aws::DatabaseMigrationService
     #   Constraints: Must be at least 30 minutes
     #
     # @option params [Boolean] :multi_az
-    #   Specifies if the replication instance is a Multi-AZ deployment. You
-    #   cannot set the `AvailabilityZone` parameter if the Multi-AZ parameter
-    #   is set to `true`.
+    #   Specifies whether the replication instance is a Multi-AZ deployment.
+    #   You can't set the `AvailabilityZone` parameter if the Multi-AZ
+    #   parameter is set to `true`.
     #
     # @option params [String] :engine_version
     #   The engine version number of the replication instance.
     #
     # @option params [Boolean] :allow_major_version_upgrade
     #   Indicates that major version upgrades are allowed. Changing this
-    #   parameter does not result in an outage and the change is
+    #   parameter does not result in an outage, and the change is
     #   asynchronously applied as soon as possible.
     #
-    #   Constraints: This parameter must be set to true when specifying a
-    #   value for the `EngineVersion` parameter that is a different major
-    #   version than the replication instance's current version.
+    #   This parameter must be set to `true` when specifying a value for the
+    #   `EngineVersion` parameter that is a different major version than the
+    #   replication instance's current version.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor version upgrades will be applied automatically to
-    #   the replication instance during the maintenance window. Changing this
-    #   parameter does not result in an outage except in the following case
-    #   and the change is asynchronously applied as soon as possible. An
-    #   outage will result if this parameter is set to `true` during the
-    #   maintenance window, and a newer minor version is available, and AWS
-    #   DMS has enabled auto patching for that engine version.
+    #   A value that indicates that minor version upgrades are applied
+    #   automatically to the replication instance during the maintenance
+    #   window. Changing this parameter doesn't result in an outage, except
+    #   in the case dsecribed following. The change is asynchronously applied
+    #   as soon as possible.
+    #
+    #   An outage does result if these factors apply:
+    #
+    #   * This parameter is set to `true` during the maintenance window.
+    #
+    #   * A newer minor version is available.
+    #
+    #   * AWS DMS has enabled automatic patching for the given engine version.
     #
     # @option params [String] :replication_instance_identifier
     #   The replication instance identifier. This parameter is stored as a
@@ -3697,7 +4500,7 @@ module Aws::DatabaseMigrationService
     #   The name of the replication instance subnet group.
     #
     # @option params [String] :replication_subnet_group_description
-    #   The description of the replication instance subnet group.
+    #   A description for the replication instance subnet group.
     #
     # @option params [required, Array<String>] :subnet_ids
     #   A list of subnet IDs.
@@ -3762,7 +4565,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html
     #
     # @option params [required, String] :replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task.
@@ -3779,20 +4582,17 @@ module Aws::DatabaseMigrationService
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [String] :migration_type
-    #   The migration type.
-    #
-    #   Valid values: full-load \| cdc \| full-load-and-cdc
+    #   The migration type. Valid values: `full-load` \| `cdc` \|
+    #   `full-load-and-cdc`
     #
     # @option params [String] :table_mappings
     #   When using the AWS CLI or boto3, provide the path of the JSON file
-    #   that contains the table mappings. Precede the path with "file://".
+    #   that contains the table mappings. Precede the path with `file://`.
     #   When working with the DMS API, provide the JSON as the parameter
-    #   value.
-    #
-    #   For example, --table-mappings file://mappingfile.json
+    #   value, for example: `--table-mappings file://mappingfile.json`
     #
     # @option params [String] :replication_task_settings
-    #   JSON file that contains settings for the task, such as target metadata
+    #   JSON file that contains settings for the task, such as task metadata
     #   settings.
     #
     # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
@@ -3817,6 +4617,19 @@ module Aws::DatabaseMigrationService
     #
     #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
     #
+    #   <note markdown="1"> When you use this task setting with a source PostgreSQL database, a
+    #   logical replication slot should already be created and associated with
+    #   the source endpoint. You can verify this by setting the `slotName`
+    #   extra connection attribute to the name of this logical replication
+    #   slot. For more information, see [Extra Connection Attributes When
+    #   Using PostgreSQL as a Source for AWS DMS][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
+    #
     # @option params [String] :cdc_stop_position
     #   Indicates when you want a change data capture (CDC) operation to stop.
     #   The value can be either server time or commit time.
@@ -3826,6 +4639,16 @@ module Aws::DatabaseMigrationService
     #
     #   Commit time example: --cdc-stop-position “commit\_time:
     #   3018-02-09T12:12:12 “
+    #
+    # @option params [String] :task_data
+    #   Supplemental information that the task requires to migrate the data
+    #   for certain source and target endpoints. For more information, see
+    #   [Specifying Supplemental Data for Task Settings][1] in the *AWS
+    #   Database Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
     #
     # @return [Types::ModifyReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3842,6 +4665,7 @@ module Aws::DatabaseMigrationService
     #     cdc_start_time: Time.now,
     #     cdc_start_position: "String",
     #     cdc_stop_position: "String",
+    #     task_data: "String",
     #   })
     #
     # @example Response structure
@@ -3868,6 +4692,12 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTask AWS API Documentation
     #
@@ -4057,8 +4887,8 @@ module Aws::DatabaseMigrationService
     # Removes metadata tags from a DMS resource.
     #
     # @option params [required, String] :resource_arn
-    #   &gt;The Amazon Resource Name (ARN) of the AWS DMS resource the tag is
-    #   to be removed from.
+    #   An AWS DMS resource from which you want to remove tag(s). The value
+    #   for this parameter is an Amazon Resource Name (ARN).
     #
     # @option params [required, Array<String>] :tag_keys
     #   The tag key (name) of the tag to be removed.
@@ -4103,7 +4933,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html
     #
     # @option params [required, String] :replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task to be started.
@@ -4132,6 +4962,19 @@ module Aws::DatabaseMigrationService
     #   "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
     #
     #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+    #
+    #   <note markdown="1"> When you use this task setting with a source PostgreSQL database, a
+    #   logical replication slot should already be created and associated with
+    #   the source endpoint. You can verify this by setting the `slotName`
+    #   extra connection attribute to the name of this logical replication
+    #   slot. For more information, see [Extra Connection Attributes When
+    #   Using PostgreSQL as a Source for AWS DMS][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
     #
     # @option params [String] :cdc_stop_position
     #   Indicates when you want a change data capture (CDC) operation to stop.
@@ -4208,6 +5051,12 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTask AWS API Documentation
     #
@@ -4258,6 +5107,12 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessment AWS API Documentation
     #
@@ -4332,6 +5187,12 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTask AWS API Documentation
     #
@@ -4410,7 +5271,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.35.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -4427,7 +5288,7 @@ module Aws::DatabaseMigrationService
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #
@@ -4476,16 +5337,16 @@ module Aws::DatabaseMigrationService
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                    | params                            | :delay   | :max_attempts |
-    # | ------------------------------ | --------------------------------- | -------- | ------------- |
-    # | endpoint_deleted               | {#describe_endpoints}             | 5        | 60            |
-    # | replication_instance_available | {#describe_replication_instances} | 60       | 60            |
-    # | replication_instance_deleted   | {#describe_replication_instances} | 15       | 60            |
-    # | replication_task_deleted       | {#describe_replication_tasks}     | 15       | 60            |
-    # | replication_task_ready         | {#describe_replication_tasks}     | 15       | 60            |
-    # | replication_task_running       | {#describe_replication_tasks}     | 15       | 60            |
-    # | replication_task_stopped       | {#describe_replication_tasks}     | 15       | 60            |
-    # | test_connection_succeeds       | {#test_connection}                | 5        | 60            |
+    # | waiter_name                    | params                                  | :delay   | :max_attempts |
+    # | ------------------------------ | --------------------------------------- | -------- | ------------- |
+    # | endpoint_deleted               | {Client#describe_endpoints}             | 5        | 60            |
+    # | replication_instance_available | {Client#describe_replication_instances} | 60       | 60            |
+    # | replication_instance_deleted   | {Client#describe_replication_instances} | 15       | 60            |
+    # | replication_task_deleted       | {Client#describe_replication_tasks}     | 15       | 60            |
+    # | replication_task_ready         | {Client#describe_replication_tasks}     | 15       | 60            |
+    # | replication_task_running       | {Client#describe_replication_tasks}     | 15       | 60            |
+    # | replication_task_stopped       | {Client#describe_replication_tasks}     | 15       | 60            |
+    # | test_connection_succeeds       | {Client#describe_connections}           | 5        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

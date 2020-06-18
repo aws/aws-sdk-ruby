@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module Rest
     module Request
@@ -50,8 +52,8 @@ module Aws
             if StringShape === shape_ref.shape.member.shape
               list_of_strings(shape_ref.location_name, param_value)
             else
-              msg = "Only list of strings supported, got "
-              msg << shape_ref.shape.member.shape.class.name
+              msg = "Only list of strings supported, got "\
+                    "#{shape_ref.shape.member.shape.class.name}"
               raise NotImplementedError, msg
             end
           else

@@ -567,6 +567,7 @@
       },
       "input":{"shape":"PutObjectRequest"},
       "output":{"shape":"PutObjectOutput"},
+      "httpChecksumRequired": { "required": "true" },
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUT.html"
     },
     "PutObjectAcl":{

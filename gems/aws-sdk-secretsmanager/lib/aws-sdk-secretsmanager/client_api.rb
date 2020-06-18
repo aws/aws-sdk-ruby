@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -61,6 +63,7 @@ module Aws::SecretsManager
     NameType = Shapes::StringShape.new(name: 'NameType')
     NextTokenType = Shapes::StringShape.new(name: 'NextTokenType')
     NonEmptyResourcePolicyType = Shapes::StringShape.new(name: 'NonEmptyResourcePolicyType')
+    OwningServiceType = Shapes::StringShape.new(name: 'OwningServiceType')
     PasswordLengthType = Shapes::IntegerShape.new(name: 'PasswordLengthType')
     PreconditionNotMetException = Shapes::StructureShape.new(name: 'PreconditionNotMetException')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
@@ -126,6 +129,9 @@ module Aws::SecretsManager
     CreateSecretResponse.add_member(:version_id, Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "VersionId"))
     CreateSecretResponse.struct_class = Types::CreateSecretResponse
 
+    DecryptionFailure.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DecryptionFailure.struct_class = Types::DecryptionFailure
+
     DeleteResourcePolicyRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
 
@@ -159,7 +165,11 @@ module Aws::SecretsManager
     DescribeSecretResponse.add_member(:deleted_date, Shapes::ShapeRef.new(shape: DeletedDateType, location_name: "DeletedDate", metadata: {"box"=>true}))
     DescribeSecretResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagListType, location_name: "Tags"))
     DescribeSecretResponse.add_member(:version_ids_to_stages, Shapes::ShapeRef.new(shape: SecretVersionsToStagesMapType, location_name: "VersionIdsToStages"))
+    DescribeSecretResponse.add_member(:owning_service, Shapes::ShapeRef.new(shape: OwningServiceType, location_name: "OwningService"))
     DescribeSecretResponse.struct_class = Types::DescribeSecretResponse
+
+    EncryptionFailure.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    EncryptionFailure.struct_class = Types::EncryptionFailure
 
     GetRandomPasswordRequest.add_member(:password_length, Shapes::ShapeRef.new(shape: PasswordLengthType, location_name: "PasswordLength", metadata: {"box"=>true}))
     GetRandomPasswordRequest.add_member(:exclude_characters, Shapes::ShapeRef.new(shape: ExcludeCharactersType, location_name: "ExcludeCharacters"))
@@ -196,6 +206,21 @@ module Aws::SecretsManager
     GetSecretValueResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDateType, location_name: "CreatedDate", metadata: {"box"=>true}))
     GetSecretValueResponse.struct_class = Types::GetSecretValueResponse
 
+    InternalServiceError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServiceError.struct_class = Types::InternalServiceError
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListSecretVersionIdsRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
     ListSecretVersionIdsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "MaxResults", metadata: {"box"=>true}))
     ListSecretVersionIdsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenType, location_name: "NextToken"))
@@ -215,6 +240,12 @@ module Aws::SecretsManager
     ListSecretsResponse.add_member(:secret_list, Shapes::ShapeRef.new(shape: SecretListType, location_name: "SecretList"))
     ListSecretsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenType, location_name: "NextToken"))
     ListSecretsResponse.struct_class = Types::ListSecretsResponse
+
+    MalformedPolicyDocumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
+
+    PreconditionNotMetException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PreconditionNotMetException.struct_class = Types::PreconditionNotMetException
 
     PutResourcePolicyRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
     PutResourcePolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: NonEmptyResourcePolicyType, required: true, location_name: "ResourcePolicy"))
@@ -236,6 +267,12 @@ module Aws::SecretsManager
     PutSecretValueResponse.add_member(:version_id, Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "VersionId"))
     PutSecretValueResponse.add_member(:version_stages, Shapes::ShapeRef.new(shape: SecretVersionStagesType, location_name: "VersionStages"))
     PutSecretValueResponse.struct_class = Types::PutSecretValueResponse
+
+    ResourceExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceExistsException.struct_class = Types::ResourceExistsException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RestoreSecretRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
     RestoreSecretRequest.struct_class = Types::RestoreSecretRequest
@@ -271,6 +308,7 @@ module Aws::SecretsManager
     SecretListEntry.add_member(:deleted_date, Shapes::ShapeRef.new(shape: DeletedDateType, location_name: "DeletedDate"))
     SecretListEntry.add_member(:tags, Shapes::ShapeRef.new(shape: TagListType, location_name: "Tags"))
     SecretListEntry.add_member(:secret_versions_to_stages, Shapes::ShapeRef.new(shape: SecretVersionsToStagesMapType, location_name: "SecretVersionsToStages"))
+    SecretListEntry.add_member(:owning_service, Shapes::ShapeRef.new(shape: OwningServiceType, location_name: "OwningService"))
     SecretListEntry.struct_class = Types::SecretListEntry
 
     SecretListType.member = Shapes::ShapeRef.new(shape: SecretListEntry)

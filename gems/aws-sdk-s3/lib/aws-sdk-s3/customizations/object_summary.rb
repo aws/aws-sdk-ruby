@@ -1,8 +1,13 @@
+# frozen_string_literal: true
+
 module Aws
   module S3
     class ObjectSummary
 
       alias content_length size
+
+      # Make the method redefinable
+      alias_method :copy_from, :copy_from
 
       # @param (see Object#copy_from)
       # @options (see Object#copy_from)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -50,6 +52,12 @@ module Aws::ElasticLoadBalancing
       :s3_bucket_prefix)
       include Aws::Structure
     end
+
+    # The specified load balancer does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AccessPointNotFoundException AWS API Documentation
+    #
+    class AccessPointNotFoundException < Aws::EmptyStructure; end
 
     # Contains the parameters for EnableAvailabilityZonesForLoadBalancer.
     #
@@ -272,6 +280,15 @@ module Aws::ElasticLoadBalancing
       :policy_names)
       include Aws::Structure
     end
+
+    # The specified ARN does not refer to a valid SSL certificate in AWS
+    # Identity and Access Management (IAM) or AWS Certificate Manager (ACM).
+    # Note that if you recently uploaded the certificate to IAM, this error
+    # might indicate that the certificate is not fully available yet.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CertificateNotFoundException AWS API Documentation
+    #
+    class CertificateNotFoundException < Aws::EmptyStructure; end
 
     # Contains the parameters for ConfigureHealthCheck.
     #
@@ -775,6 +792,13 @@ module Aws::ElasticLoadBalancing
     #
     class DeleteLoadBalancerPolicyOutput < Aws::EmptyStructure; end
 
+    # A request made by Elastic Load Balancing to another service exceeds
+    # the maximum request rate permitted for your account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DependencyThrottleException AWS API Documentation
+    #
+    class DependencyThrottleException < Aws::EmptyStructure; end
+
     # Contains the parameters for DeregisterInstancesFromLoadBalancer.
     #
     # @note When making an API call, you may pass DeregisterEndPointsInput
@@ -1134,6 +1158,33 @@ module Aws::ElasticLoadBalancing
       include Aws::Structure
     end
 
+    # The specified load balancer name already exists for this account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DuplicateAccessPointNameException AWS API Documentation
+    #
+    class DuplicateAccessPointNameException < Aws::EmptyStructure; end
+
+    # A listener already exists for the specified load balancer name and
+    # port, but with a different instance port, protocol, or SSL
+    # certificate.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DuplicateListenerException AWS API Documentation
+    #
+    class DuplicateListenerException < Aws::EmptyStructure; end
+
+    # A policy with the specified name already exists for this load
+    # balancer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DuplicatePolicyNameException AWS API Documentation
+    #
+    class DuplicatePolicyNameException < Aws::EmptyStructure; end
+
+    # A tag key was specified more than once.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DuplicateTagKeysException AWS API Documentation
+    #
+    class DuplicateTagKeysException < Aws::EmptyStructure; end
+
     # Information about a health check.
     #
     # @note When making an API call, you may pass HealthCheck
@@ -1284,6 +1335,37 @@ module Aws::ElasticLoadBalancing
       include Aws::Structure
     end
 
+    # The requested configuration change is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/InvalidConfigurationRequestException AWS API Documentation
+    #
+    class InvalidConfigurationRequestException < Aws::EmptyStructure; end
+
+    # The specified endpoint is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/InvalidEndPointException AWS API Documentation
+    #
+    class InvalidEndPointException < Aws::EmptyStructure; end
+
+    # The specified value for the schema is not valid. You can only specify
+    # a scheme for load balancers in a VPC.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/InvalidSchemeException AWS API Documentation
+    #
+    class InvalidSchemeException < Aws::EmptyStructure; end
+
+    # One or more of the specified security groups do not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/InvalidSecurityGroupException AWS API Documentation
+    #
+    class InvalidSecurityGroupException < Aws::EmptyStructure; end
+
+    # The specified VPC has no associated Internet gateway.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/InvalidSubnetException AWS API Documentation
+    #
+    class InvalidSubnetException < Aws::EmptyStructure; end
+
     # Information about a policy for duration-based session stickiness.
     #
     # @!attribute [rw] policy_name
@@ -1415,6 +1497,19 @@ module Aws::ElasticLoadBalancing
       :policy_names)
       include Aws::Structure
     end
+
+    # The load balancer does not have a listener configured at the specified
+    # port.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ListenerNotFoundException AWS API Documentation
+    #
+    class ListenerNotFoundException < Aws::EmptyStructure; end
+
+    # The specified load balancer attribute does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/LoadBalancerAttributeNotFoundException AWS API Documentation
+    #
+    class LoadBalancerAttributeNotFoundException < Aws::EmptyStructure; end
 
     # The attributes for a load balancer.
     #
@@ -1685,6 +1780,12 @@ module Aws::ElasticLoadBalancing
       include Aws::Structure
     end
 
+    # This operation is not allowed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/OperationNotPermittedException AWS API Documentation
+    #
+    class OperationNotPermittedException < Aws::EmptyStructure; end
+
     # The policies for a load balancer.
     #
     # @!attribute [rw] app_cookie_stickiness_policies
@@ -1820,6 +1921,12 @@ module Aws::ElasticLoadBalancing
       include Aws::Structure
     end
 
+    # One or more of the specified policies do not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyNotFoundException AWS API Documentation
+    #
+    class PolicyNotFoundException < Aws::EmptyStructure; end
+
     # Information about a policy type.
     #
     # @!attribute [rw] policy_type_name
@@ -1843,6 +1950,12 @@ module Aws::ElasticLoadBalancing
       :policy_attribute_type_descriptions)
       include Aws::Structure
     end
+
+    # One or more of the specified policy types do not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyTypeNotFoundException AWS API Documentation
+    #
+    class PolicyTypeNotFoundException < Aws::EmptyStructure; end
 
     # Contains the parameters for RegisterInstancesWithLoadBalancer.
     #
@@ -2098,6 +2211,12 @@ module Aws::ElasticLoadBalancing
       include Aws::Structure
     end
 
+    # One or more of the specified subnets do not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SubnetNotFoundException AWS API Documentation
+    #
+    class SubnetNotFoundException < Aws::EmptyStructure; end
+
     # Information about a tag.
     #
     # @note When making an API call, you may pass Tag
@@ -2161,6 +2280,32 @@ module Aws::ElasticLoadBalancing
       :key)
       include Aws::Structure
     end
+
+    # The quota for the number of load balancers has been reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/TooManyAccessPointsException AWS API Documentation
+    #
+    class TooManyAccessPointsException < Aws::EmptyStructure; end
+
+    # The quota for the number of policies for this load balancer has been
+    # reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/TooManyPoliciesException AWS API Documentation
+    #
+    class TooManyPoliciesException < Aws::EmptyStructure; end
+
+    # The quota for the number of tags that can be assigned to a load
+    # balancer has been reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Aws::EmptyStructure; end
+
+    # The specified protocol or signature version is not supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/UnsupportedProtocolException AWS API Documentation
+    #
+    class UnsupportedProtocolException < Aws::EmptyStructure; end
 
   end
 end

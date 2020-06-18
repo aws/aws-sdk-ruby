@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Seahorse
   module Client
     module Http
@@ -40,12 +42,17 @@ module Seahorse
           end
         end
 
-        # @return [String]
+        # @return [String|Array]
         def body_contents
-          body.rewind
-          contents = body.read
-          body.rewind
-          contents
+          if body.is_a?(Array)
+            # an array of parsed events
+            body
+          else
+            body.rewind
+            contents = body.read
+            body.rewind
+            contents
+          end
         end
 
         # @param [Integer] status_code
@@ -104,8 +111,8 @@ module Seahorse
             @done = true
             emit(:done)
           else
-            msg = "options must be empty or must contain :status_code, :headers, "
-            msg << "and :body"
+            msg = 'options must be empty or must contain :status_code, :headers, '\
+                  'and :body'
             raise ArgumentError, msg
           end
         end
@@ -117,15 +124,15 @@ module Seahorse
         end
 
         def on_headers(status_code_range = nil, &block)
-          @listeners[:headers] << listener(status_code_range, Proc.new)
+          @listeners[:headers] << listener(status_code_range, block)
         end
 
         def on_data(&callback)
-          @listeners[:data] << Proc.new
+          @listeners[:data] << callback
         end
 
         def on_done(status_code_range = nil, &callback)
-          listener = listener(status_code_range, Proc.new)
+          listener = listener(status_code_range, callback)
           if @done
             listener.call
           else

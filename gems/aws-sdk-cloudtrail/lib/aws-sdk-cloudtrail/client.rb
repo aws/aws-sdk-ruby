@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -23,12 +25,26 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:cloudtrail)
 
 module Aws::CloudTrail
+  # An API client for CloudTrail.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::CloudTrail::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -55,6 +71,8 @@ module Aws::CloudTrail
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -91,7 +109,7 @@ module Aws::CloudTrail
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -106,6 +124,12 @@ module Aws::CloudTrail
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -113,6 +137,10 @@ module Aws::CloudTrail
     #   @option options [String] :client_side_monitoring_client_id ("")
     #     Allows you to provide an identifier for this client which will be attached to
     #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
     #   @option options [Integer] :client_side_monitoring_port (31000)
     #     Required for publishing client metrics. The port that the client side monitoring
@@ -126,6 +154,10 @@ module Aws::CloudTrail
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -133,7 +165,7 @@ module Aws::CloudTrail
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -148,7 +180,7 @@ module Aws::CloudTrail
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -160,15 +192,29 @@ module Aws::CloudTrail
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -176,11 +222,30 @@ module Aws::CloudTrail
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,18 +274,62 @@ module Aws::CloudTrail
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
 
-    # Adds one or more tags to a trail, up to a limit of 50. Tags must be
-    # unique per trail. Overwrites an existing tag's value when a new value
-    # is specified for an existing tag key. If you specify a key without a
-    # value, the tag will be created with the specified key and a value of
-    # null. You can tag a trail that applies to all regions only from the
-    # region in which the trail was created (that is, from its home region).
+    # Adds one or more tags to a trail, up to a limit of 50. Overwrites an
+    # existing tag's value when a new value is specified for an existing
+    # tag key. Tag key names must be unique for a trail; you cannot have two
+    # keys with the same name but different values. If you specify a key
+    # without a value, the tag will be created with the specified key and a
+    # value of null. You can tag a trail that applies to all AWS Regions
+    # only from the Region in which the trail was created (also known as its
+    # home region).
     #
     # @option params [required, String] :resource_id
     #   Specifies the ARN of the trail to which one or more tags will be
@@ -255,8 +364,7 @@ module Aws::CloudTrail
     end
 
     # Creates a trail that specifies the settings for delivery of log data
-    # to an Amazon S3 bucket. A maximum of five trails can exist in a
-    # region, irrespective of the region in which they were created.
+    # to an Amazon S3 bucket.
     #
     # @option params [required, String] :name
     #   Specifies the name of the trail. The name must meet the following
@@ -280,7 +388,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
     #
     # @option params [String] :s3_key_prefix
     #   Specifies the Amazon S3 key prefix that comes after the name of the
@@ -290,7 +398,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #
     # @option params [String] :sns_topic_name
     #   Specifies the name of the Amazon SNS topic defined for notification of
@@ -302,7 +410,9 @@ module Aws::CloudTrail
     #
     # @option params [Boolean] :is_multi_region_trail
     #   Specifies whether the trail is created in the current region or in all
-    #   regions. The default is false.
+    #   regions. The default is false, which creates a trail only in the
+    #   region where you are signed in. As a best practice, consider creating
+    #   trails that log events in all regions.
     #
     # @option params [Boolean] :enable_log_file_validation
     #   Specifies whether log file integrity validation is enabled. The
@@ -353,6 +463,9 @@ module Aws::CloudTrail
     #   made on behalf of an AWS account that is the master account for an
     #   organization in AWS Organizations.
     #
+    # @option params [Array<Types::Tag>] :tags_list
+    #   A list of tags.
+    #
     # @return [Types::CreateTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTrailResponse#name #name} => String
@@ -383,6 +496,12 @@ module Aws::CloudTrail
     #     cloud_watch_logs_role_arn: "String",
     #     kms_key_id: "String",
     #     is_organization_trail: false,
+    #     tags_list: [
+    #       {
+    #         key: "String", # required
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -437,8 +556,8 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Retrieves settings for the trail associated with the current region
-    # for your account.
+    # Retrieves settings for one or more trails associated with the current
+    # region for your account.
     #
     # @option params [Array<String>] :trail_name_list
     #   Specifies a list of trail names, trail ARNs, or both, of the trails to
@@ -499,6 +618,7 @@ module Aws::CloudTrail
     #   resp.trail_list[0].cloud_watch_logs_role_arn #=> String
     #   resp.trail_list[0].kms_key_id #=> String
     #   resp.trail_list[0].has_custom_event_selectors #=> Boolean
+    #   resp.trail_list[0].has_insight_selectors #=> Boolean
     #   resp.trail_list[0].is_organization_trail #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrails AWS API Documentation
@@ -528,7 +648,7 @@ module Aws::CloudTrail
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
     #
     # @option params [required, String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
@@ -571,6 +691,8 @@ module Aws::CloudTrail
     #   resp.event_selectors[0].data_resources[0].type #=> String
     #   resp.event_selectors[0].data_resources[0].values #=> Array
     #   resp.event_selectors[0].data_resources[0].values[0] #=> String
+    #   resp.event_selectors[0].exclude_management_event_sources #=> Array
+    #   resp.event_selectors[0].exclude_management_event_sources[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectors AWS API Documentation
     #
@@ -578,6 +700,110 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def get_event_selectors(params = {}, options = {})
       req = build_request(:get_event_selectors, params)
+      req.send_request(options)
+    end
+
+    # Describes the settings for the Insights event selectors that you
+    # configured for your trail. `GetInsightSelectors` shows if CloudTrail
+    # Insights event logging is enabled on the trail, and if it is, which
+    # insight types are enabled. If you run `GetInsightSelectors` on a trail
+    # that does not have Insights events enabled, the operation throws the
+    # exception `InsightNotEnabledException`
+    #
+    # For more information, see [Logging CloudTrail Insights Events for
+    # Trails ][1] in the *AWS CloudTrail User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
+    #
+    # @option params [required, String] :trail_name
+    #   Specifies the name of the trail or trail ARN. If you specify a trail
+    #   name, the string must meet the following requirements:
+    #
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
+    #     underscores (\_), or dashes (-)
+    #
+    #   * Start with a letter or number, and end with a letter or number
+    #
+    #   * Be between 3 and 128 characters
+    #
+    #   * Have no adjacent periods, underscores or dashes. Names like
+    #     `my-_namespace` and `my--namespace` are not valid.
+    #
+    #   * Not be in IP address format (for example, 192.168.5.4)
+    #
+    #   If you specify a trail ARN, it must be in the format:
+    #
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #
+    # @return [Types::GetInsightSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInsightSelectorsResponse#trail_arn #trail_arn} => String
+    #   * {Types::GetInsightSelectorsResponse#insight_selectors #insight_selectors} => Array&lt;Types::InsightSelector&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_insight_selectors({
+    #     trail_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trail_arn #=> String
+    #   resp.insight_selectors #=> Array
+    #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetInsightSelectors AWS API Documentation
+    #
+    # @overload get_insight_selectors(params = {})
+    # @param [Hash] params ({})
+    def get_insight_selectors(params = {}, options = {})
+      req = build_request(:get_insight_selectors, params)
+      req.send_request(options)
+    end
+
+    # Returns settings information for a specified trail.
+    #
+    # @option params [required, String] :name
+    #   The name or the Amazon Resource Name (ARN) of the trail for which you
+    #   want to retrieve settings information.
+    #
+    # @return [Types::GetTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTrailResponse#trail #trail} => Types::Trail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_trail({
+    #     name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trail.name #=> String
+    #   resp.trail.s3_bucket_name #=> String
+    #   resp.trail.s3_key_prefix #=> String
+    #   resp.trail.sns_topic_name #=> String
+    #   resp.trail.sns_topic_arn #=> String
+    #   resp.trail.include_global_service_events #=> Boolean
+    #   resp.trail.is_multi_region_trail #=> Boolean
+    #   resp.trail.home_region #=> String
+    #   resp.trail.trail_arn #=> String
+    #   resp.trail.log_file_validation_enabled #=> Boolean
+    #   resp.trail.cloud_watch_logs_log_group_arn #=> String
+    #   resp.trail.cloud_watch_logs_role_arn #=> String
+    #   resp.trail.kms_key_id #=> String
+    #   resp.trail.has_custom_event_selectors #=> Boolean
+    #   resp.trail.has_insight_selectors #=> Boolean
+    #   resp.trail.is_organization_trail #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrail AWS API Documentation
+    #
+    # @overload get_trail(params = {})
+    # @param [Hash] params ({})
+    def get_trail(params = {}, options = {})
+      req = build_request(:get_trail, params)
       req.send_request(options)
     end
 
@@ -681,6 +907,8 @@ module Aws::CloudTrail
     #   * {Types::ListPublicKeysResponse#public_key_list #public_key_list} => Array&lt;Types::PublicKey&gt;
     #   * {Types::ListPublicKeysResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_public_keys({
@@ -723,6 +951,8 @@ module Aws::CloudTrail
     #   * {Types::ListTagsResponse#resource_tag_list #resource_tag_list} => Array&lt;Types::ResourceTag&gt;
     #   * {Types::ListTagsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags({
@@ -748,9 +978,49 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Looks up [management events][1] captured by CloudTrail. Events for a
-    # region can be looked up in that region during the last 90 days. Lookup
-    # supports the following attributes:
+    # Lists trails that are in the current account.
+    #
+    # @option params [String] :next_token
+    #   The token to use to get the next page of results after a previous API
+    #   call. This token must be passed in with the same parameters that were
+    #   specified in the the original call. For example, if the original call
+    #   specified an AttributeKey of 'Username' with a value of 'root',
+    #   the call with NextToken should include those same parameters.
+    #
+    # @return [Types::ListTrailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTrailsResponse#trails #trails} => Array&lt;Types::TrailInfo&gt;
+    #   * {Types::ListTrailsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_trails({
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trails #=> Array
+    #   resp.trails[0].trail_arn #=> String
+    #   resp.trails[0].name #=> String
+    #   resp.trails[0].home_region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTrails AWS API Documentation
+    #
+    # @overload list_trails(params = {})
+    # @param [Hash] params ({})
+    def list_trails(params = {}, options = {})
+      req = build_request(:list_trails, params)
+      req.send_request(options)
+    end
+
+    # Looks up [management events][1] or [CloudTrail Insights events][2]
+    # that are captured by CloudTrail. You can look up events that occurred
+    # in a region within the last 90 days. Lookup supports the following
+    # attributes for management events:
     #
     # * AWS access key
     #
@@ -768,20 +1038,25 @@ module Aws::CloudTrail
     #
     # * User name
     #
+    # Lookup supports the following attributes for Insights events:
+    #
+    # * Event ID
+    #
+    # * Event name
+    #
+    # * Event source
+    #
     # All attributes are optional. The default number of results returned is
     # 50, with a maximum of 50 possible. The response includes a token that
     # you can use to get the next page of results.
     #
-    # The rate of lookup requests is limited to one per second per account.
+    # The rate of lookup requests is limited to two per second per account.
     # If this limit is exceeded, a throttling error occurs.
-    #
-    # Events that occurred during the selected time range will not be
-    # available for lookup if CloudTrail logging was not enabled when the
-    # events occurred.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events
     #
     # @option params [Array<Types::LookupAttribute>] :lookup_attributes
     #   Contains a list of lookup attributes. Currently the list can contain
@@ -796,6 +1071,12 @@ module Aws::CloudTrail
     #   Specifies that only events that occur before or at the specified time
     #   are returned. If the specified end time is before the specified start
     #   time, an error is returned.
+    #
+    # @option params [String] :event_category
+    #   Specifies the event category. If you do not specify an event category,
+    #   events of the category are not returned in the response. For example,
+    #   if you do not specify `insight` as the value of `EventCategory`, no
+    #   Insights events are returned.
     #
     # @option params [Integer] :max_results
     #   The number of events to return. Possible values are 1 through 50. The
@@ -813,6 +1094,8 @@ module Aws::CloudTrail
     #   * {Types::LookupEventsResponse#events #events} => Array&lt;Types::Event&gt;
     #   * {Types::LookupEventsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.lookup_events({
@@ -824,6 +1107,7 @@ module Aws::CloudTrail
     #     ],
     #     start_time: Time.now,
     #     end_time: Time.now,
+    #     event_category: "insight", # accepts insight
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -891,7 +1175,7 @@ module Aws::CloudTrail
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
     # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
     #
     # @option params [required, String] :trail_name
@@ -937,6 +1221,7 @@ module Aws::CloudTrail
     #             values: ["String"],
     #           },
     #         ],
+    #         exclude_management_event_sources: ["String"],
     #       },
     #     ],
     #   })
@@ -951,6 +1236,8 @@ module Aws::CloudTrail
     #   resp.event_selectors[0].data_resources[0].type #=> String
     #   resp.event_selectors[0].data_resources[0].values #=> Array
     #   resp.event_selectors[0].data_resources[0].values[0] #=> String
+    #   resp.event_selectors[0].exclude_management_event_sources #=> Array
+    #   resp.event_selectors[0].exclude_management_event_sources[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectors AWS API Documentation
     #
@@ -958,6 +1245,52 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def put_event_selectors(params = {}, options = {})
       req = build_request(:put_event_selectors, params)
+      req.send_request(options)
+    end
+
+    # Lets you enable Insights event logging by specifying the Insights
+    # selectors that you want to enable on an existing trail. You also use
+    # `PutInsightSelectors` to turn off Insights event logging, by passing
+    # an empty list of insight types. In this release, only
+    # `ApiCallRateInsight` is supported as an Insights selector.
+    #
+    # @option params [required, String] :trail_name
+    #   The name of the CloudTrail trail for which you want to change or add
+    #   Insights selectors.
+    #
+    # @option params [required, Array<Types::InsightSelector>] :insight_selectors
+    #   A JSON string that contains the insight types you want to log on a
+    #   trail. In this release, only `ApiCallRateInsight` is supported as an
+    #   insight type.
+    #
+    # @return [Types::PutInsightSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutInsightSelectorsResponse#trail_arn #trail_arn} => String
+    #   * {Types::PutInsightSelectorsResponse#insight_selectors #insight_selectors} => Array&lt;Types::InsightSelector&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_insight_selectors({
+    #     trail_name: "String", # required
+    #     insight_selectors: [ # required
+    #       {
+    #         insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trail_arn #=> String
+    #   resp.insight_selectors #=> Array
+    #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectors AWS API Documentation
+    #
+    # @overload put_insight_selectors(params = {})
+    # @param [Hash] params ({})
+    def put_insight_selectors(params = {}, options = {})
+      req = build_request(:put_insight_selectors, params)
       req.send_request(options)
     end
 
@@ -1091,7 +1424,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
     #
     # @option params [String] :s3_key_prefix
     #   Specifies the Amazon S3 key prefix that comes after the name of the
@@ -1101,7 +1434,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
     #
     # @option params [String] :sns_topic_name
     #   Specifies the name of the Amazon SNS topic defined for notification of
@@ -1118,7 +1451,8 @@ module Aws::CloudTrail
     #   (replications of the trail) will be created in the other regions. If
     #   the trail exists in all regions and this value is set to false, the
     #   trail will remain in the region where it was created, and its shadow
-    #   trails in other regions will be deleted.
+    #   trails in other regions will be deleted. As a best practice, consider
+    #   using trails that log events in all regions.
     #
     # @option params [Boolean] :enable_log_file_validation
     #   Specifies whether log file validation is enabled. The default is
@@ -1244,7 +1578,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.24.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

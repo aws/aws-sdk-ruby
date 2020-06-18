@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -12,13 +14,16 @@ module Aws::Polly
     include Seahorse::Model
 
     Alphabet = Shapes::StringShape.new(name: 'Alphabet')
-    AudioStream = Shapes::BlobShape.new(name: 'AudioStream')
+    AudioStream = Shapes::BlobShape.new(name: 'AudioStream', streaming: true)
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DeleteLexiconInput = Shapes::StructureShape.new(name: 'DeleteLexiconInput')
     DeleteLexiconOutput = Shapes::StructureShape.new(name: 'DeleteLexiconOutput')
     DescribeVoicesInput = Shapes::StructureShape.new(name: 'DescribeVoicesInput')
     DescribeVoicesOutput = Shapes::StructureShape.new(name: 'DescribeVoicesOutput')
+    Engine = Shapes::StringShape.new(name: 'Engine')
+    EngineList = Shapes::ListShape.new(name: 'EngineList')
+    EngineNotSupportedException = Shapes::StructureShape.new(name: 'EngineNotSupportedException')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Gender = Shapes::StringShape.new(name: 'Gender')
     GetLexiconInput = Shapes::StructureShape.new(name: 'GetLexiconInput')
@@ -98,6 +103,7 @@ module Aws::Polly
 
     DeleteLexiconOutput.struct_class = Types::DeleteLexiconOutput
 
+    DescribeVoicesInput.add_member(:engine, Shapes::ShapeRef.new(shape: Engine, location: "querystring", location_name: "Engine"))
     DescribeVoicesInput.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location: "querystring", location_name: "LanguageCode"))
     DescribeVoicesInput.add_member(:include_additional_language_codes, Shapes::ShapeRef.new(shape: IncludeAdditionalLanguageCodes, location: "querystring", location_name: "IncludeAdditionalLanguageCodes"))
     DescribeVoicesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
@@ -106,6 +112,11 @@ module Aws::Polly
     DescribeVoicesOutput.add_member(:voices, Shapes::ShapeRef.new(shape: VoiceList, location_name: "Voices"))
     DescribeVoicesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeVoicesOutput.struct_class = Types::DescribeVoicesOutput
+
+    EngineList.member = Shapes::ShapeRef.new(shape: Engine)
+
+    EngineNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    EngineNotSupportedException.struct_class = Types::EngineNotSupportedException
 
     GetLexiconInput.add_member(:name, Shapes::ShapeRef.new(shape: LexiconName, required: true, location: "uri", location_name: "LexiconName"))
     GetLexiconInput.struct_class = Types::GetLexiconInput
@@ -120,7 +131,34 @@ module Aws::Polly
     GetSpeechSynthesisTaskOutput.add_member(:synthesis_task, Shapes::ShapeRef.new(shape: SynthesisTask, location_name: "SynthesisTask"))
     GetSpeechSynthesisTaskOutput.struct_class = Types::GetSpeechSynthesisTaskOutput
 
+    InvalidLexiconException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidLexiconException.struct_class = Types::InvalidLexiconException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidS3BucketException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidS3BucketException.struct_class = Types::InvalidS3BucketException
+
+    InvalidS3KeyException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidS3KeyException.struct_class = Types::InvalidS3KeyException
+
+    InvalidSampleRateException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidSampleRateException.struct_class = Types::InvalidSampleRateException
+
+    InvalidSnsTopicArnException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidSnsTopicArnException.struct_class = Types::InvalidSnsTopicArnException
+
+    InvalidSsmlException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidSsmlException.struct_class = Types::InvalidSsmlException
+
+    InvalidTaskIdException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidTaskIdException.struct_class = Types::InvalidTaskIdException
+
     LanguageCodeList.member = Shapes::ShapeRef.new(shape: LanguageCode)
+
+    LanguageNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LanguageNotSupportedException.struct_class = Types::LanguageNotSupportedException
 
     Lexicon.add_member(:content, Shapes::ShapeRef.new(shape: LexiconContent, location_name: "Content"))
     Lexicon.add_member(:name, Shapes::ShapeRef.new(shape: LexiconName, location_name: "Name"))
@@ -142,6 +180,12 @@ module Aws::Polly
 
     LexiconNameList.member = Shapes::ShapeRef.new(shape: LexiconName)
 
+    LexiconNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LexiconNotFoundException.struct_class = Types::LexiconNotFoundException
+
+    LexiconSizeExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LexiconSizeExceededException.struct_class = Types::LexiconSizeExceededException
+
     ListLexiconsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListLexiconsInput.struct_class = Types::ListLexiconsInput
 
@@ -158,14 +202,31 @@ module Aws::Polly
     ListSpeechSynthesisTasksOutput.add_member(:synthesis_tasks, Shapes::ShapeRef.new(shape: SynthesisTasks, location_name: "SynthesisTasks"))
     ListSpeechSynthesisTasksOutput.struct_class = Types::ListSpeechSynthesisTasksOutput
 
+    MarksNotSupportedForFormatException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MarksNotSupportedForFormatException.struct_class = Types::MarksNotSupportedForFormatException
+
+    MaxLexemeLengthExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MaxLexemeLengthExceededException.struct_class = Types::MaxLexemeLengthExceededException
+
+    MaxLexiconsNumberExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MaxLexiconsNumberExceededException.struct_class = Types::MaxLexiconsNumberExceededException
+
     PutLexiconInput.add_member(:name, Shapes::ShapeRef.new(shape: LexiconName, required: true, location: "uri", location_name: "LexiconName"))
     PutLexiconInput.add_member(:content, Shapes::ShapeRef.new(shape: LexiconContent, required: true, location_name: "Content"))
     PutLexiconInput.struct_class = Types::PutLexiconInput
 
     PutLexiconOutput.struct_class = Types::PutLexiconOutput
 
+    ServiceFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ServiceFailureException.struct_class = Types::ServiceFailureException
+
     SpeechMarkTypeList.member = Shapes::ShapeRef.new(shape: SpeechMarkType)
 
+    SsmlMarksNotSupportedForTextTypeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    SsmlMarksNotSupportedForTextTypeException.struct_class = Types::SsmlMarksNotSupportedForTextTypeException
+
+    StartSpeechSynthesisTaskInput.add_member(:engine, Shapes::ShapeRef.new(shape: Engine, location_name: "Engine"))
+    StartSpeechSynthesisTaskInput.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     StartSpeechSynthesisTaskInput.add_member(:lexicon_names, Shapes::ShapeRef.new(shape: LexiconNameList, location_name: "LexiconNames"))
     StartSpeechSynthesisTaskInput.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, required: true, location_name: "OutputFormat"))
     StartSpeechSynthesisTaskInput.add_member(:output_s3_bucket_name, Shapes::ShapeRef.new(shape: OutputS3BucketName, required: true, location_name: "OutputS3BucketName"))
@@ -176,12 +237,12 @@ module Aws::Polly
     StartSpeechSynthesisTaskInput.add_member(:text, Shapes::ShapeRef.new(shape: Text, required: true, location_name: "Text"))
     StartSpeechSynthesisTaskInput.add_member(:text_type, Shapes::ShapeRef.new(shape: TextType, location_name: "TextType"))
     StartSpeechSynthesisTaskInput.add_member(:voice_id, Shapes::ShapeRef.new(shape: VoiceId, required: true, location_name: "VoiceId"))
-    StartSpeechSynthesisTaskInput.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     StartSpeechSynthesisTaskInput.struct_class = Types::StartSpeechSynthesisTaskInput
 
     StartSpeechSynthesisTaskOutput.add_member(:synthesis_task, Shapes::ShapeRef.new(shape: SynthesisTask, location_name: "SynthesisTask"))
     StartSpeechSynthesisTaskOutput.struct_class = Types::StartSpeechSynthesisTaskOutput
 
+    SynthesisTask.add_member(:engine, Shapes::ShapeRef.new(shape: Engine, location_name: "Engine"))
     SynthesisTask.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskId, location_name: "TaskId"))
     SynthesisTask.add_member(:task_status, Shapes::ShapeRef.new(shape: TaskStatus, location_name: "TaskStatus"))
     SynthesisTask.add_member(:task_status_reason, Shapes::ShapeRef.new(shape: TaskStatusReason, location_name: "TaskStatusReason"))
@@ -198,8 +259,13 @@ module Aws::Polly
     SynthesisTask.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     SynthesisTask.struct_class = Types::SynthesisTask
 
+    SynthesisTaskNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    SynthesisTaskNotFoundException.struct_class = Types::SynthesisTaskNotFoundException
+
     SynthesisTasks.member = Shapes::ShapeRef.new(shape: SynthesisTask)
 
+    SynthesizeSpeechInput.add_member(:engine, Shapes::ShapeRef.new(shape: Engine, location_name: "Engine"))
+    SynthesizeSpeechInput.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     SynthesizeSpeechInput.add_member(:lexicon_names, Shapes::ShapeRef.new(shape: LexiconNameList, location_name: "LexiconNames"))
     SynthesizeSpeechInput.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, required: true, location_name: "OutputFormat"))
     SynthesizeSpeechInput.add_member(:sample_rate, Shapes::ShapeRef.new(shape: SampleRate, location_name: "SampleRate"))
@@ -207,7 +273,6 @@ module Aws::Polly
     SynthesizeSpeechInput.add_member(:text, Shapes::ShapeRef.new(shape: Text, required: true, location_name: "Text"))
     SynthesizeSpeechInput.add_member(:text_type, Shapes::ShapeRef.new(shape: TextType, location_name: "TextType"))
     SynthesizeSpeechInput.add_member(:voice_id, Shapes::ShapeRef.new(shape: VoiceId, required: true, location_name: "VoiceId"))
-    SynthesizeSpeechInput.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     SynthesizeSpeechInput.struct_class = Types::SynthesizeSpeechInput
 
     SynthesizeSpeechOutput.add_member(:audio_stream, Shapes::ShapeRef.new(shape: AudioStream, location_name: "AudioStream"))
@@ -217,12 +282,22 @@ module Aws::Polly
     SynthesizeSpeechOutput[:payload] = :audio_stream
     SynthesizeSpeechOutput[:payload_member] = SynthesizeSpeechOutput.member(:audio_stream)
 
+    TextLengthExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TextLengthExceededException.struct_class = Types::TextLengthExceededException
+
+    UnsupportedPlsAlphabetException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnsupportedPlsAlphabetException.struct_class = Types::UnsupportedPlsAlphabetException
+
+    UnsupportedPlsLanguageException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnsupportedPlsLanguageException.struct_class = Types::UnsupportedPlsLanguageException
+
     Voice.add_member(:gender, Shapes::ShapeRef.new(shape: Gender, location_name: "Gender"))
     Voice.add_member(:id, Shapes::ShapeRef.new(shape: VoiceId, location_name: "Id"))
     Voice.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     Voice.add_member(:language_name, Shapes::ShapeRef.new(shape: LanguageName, location_name: "LanguageName"))
     Voice.add_member(:name, Shapes::ShapeRef.new(shape: VoiceName, location_name: "Name"))
     Voice.add_member(:additional_language_codes, Shapes::ShapeRef.new(shape: LanguageCodeList, location_name: "AdditionalLanguageCodes"))
+    Voice.add_member(:supported_engines, Shapes::ShapeRef.new(shape: EngineList, location_name: "SupportedEngines"))
     Voice.struct_class = Types::Voice
 
     VoiceList.member = Shapes::ShapeRef.new(shape: Voice)
@@ -337,6 +412,7 @@ module Aws::Polly
         o.errors << Shapes::ShapeRef.new(shape: InvalidSampleRateException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSnsTopicArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSsmlException)
+        o.errors << Shapes::ShapeRef.new(shape: EngineNotSupportedException)
         o.errors << Shapes::ShapeRef.new(shape: LexiconNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
         o.errors << Shapes::ShapeRef.new(shape: MarksNotSupportedForFormatException)
@@ -358,6 +434,7 @@ module Aws::Polly
         o.errors << Shapes::ShapeRef.new(shape: MarksNotSupportedForFormatException)
         o.errors << Shapes::ShapeRef.new(shape: SsmlMarksNotSupportedForTextTypeException)
         o.errors << Shapes::ShapeRef.new(shape: LanguageNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: EngineNotSupportedException)
       end)
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -51,6 +53,9 @@ module Aws::IoTJobsDataPlane
     VersionNumber = Shapes::IntegerShape.new(name: 'VersionNumber')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
+    CertificateValidationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    CertificateValidationException.struct_class = Types::CertificateValidationException
+
     DescribeJobExecutionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: DescribeJobExecutionJobId, required: true, location: "uri", location_name: "jobId"))
     DescribeJobExecutionRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
     DescribeJobExecutionRequest.add_member(:include_job_document, Shapes::ShapeRef.new(shape: IncludeJobDocument, location: "querystring", location_name: "includeJobDocument"))
@@ -69,6 +74,12 @@ module Aws::IoTJobsDataPlane
     GetPendingJobExecutionsResponse.add_member(:in_progress_jobs, Shapes::ShapeRef.new(shape: JobExecutionSummaryList, location_name: "inProgressJobs"))
     GetPendingJobExecutionsResponse.add_member(:queued_jobs, Shapes::ShapeRef.new(shape: JobExecutionSummaryList, location_name: "queuedJobs"))
     GetPendingJobExecutionsResponse.struct_class = Types::GetPendingJobExecutionsResponse
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    InvalidStateTransitionException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidStateTransitionException.struct_class = Types::InvalidStateTransitionException
 
     JobExecution.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
     JobExecution.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, location_name: "thingName"))
@@ -98,6 +109,12 @@ module Aws::IoTJobsDataPlane
 
     JobExecutionSummaryList.member = Shapes::ShapeRef.new(shape: JobExecutionSummary)
 
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     StartNextPendingJobExecutionRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
     StartNextPendingJobExecutionRequest.add_member(:status_details, Shapes::ShapeRef.new(shape: DetailsMap, location_name: "statusDetails"))
     StartNextPendingJobExecutionRequest.add_member(:step_timeout_in_minutes, Shapes::ShapeRef.new(shape: StepTimeoutInMinutes, location_name: "stepTimeoutInMinutes"))
@@ -105,6 +122,13 @@ module Aws::IoTJobsDataPlane
 
     StartNextPendingJobExecutionResponse.add_member(:execution, Shapes::ShapeRef.new(shape: JobExecution, location_name: "execution"))
     StartNextPendingJobExecutionResponse.struct_class = Types::StartNextPendingJobExecutionResponse
+
+    TerminalStateException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    TerminalStateException.struct_class = Types::TerminalStateException
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ThrottlingException.add_member(:payload, Shapes::ShapeRef.new(shape: BinaryBlob, location_name: "payload"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     UpdateJobExecutionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     UpdateJobExecutionRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))

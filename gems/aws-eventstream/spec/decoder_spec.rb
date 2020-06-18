@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'spec_helper'
 
 module Aws
@@ -5,8 +7,8 @@ module Aws
 
     describe Decoder do
 
-      describe "#decode" do
-        
+      describe '#decode' do
+
         Dir.glob(File.expand_path('../fixtures/encoded/positive/*', __FILE__)).each do |path|
           expect_msg = SpecHelper.expected_decoded_message(path)
 
@@ -38,12 +40,12 @@ module Aws
 
         it '#decode_chunk data for multiple messages' do
           files = Dir.glob(File.expand_path('../fixtures/encoded/positive/*', __FILE__))
-          data = File.read(files[0])
-          second_message = File.read(files[2])
-          data << File.read(files[2])
+          data_chunk_0 = File.read(files[0], mode: 'rb')
+          data_chunk_1 = File.read(files[2], mode: 'rb')
+          second_message = data_chunk_1
           decoder = Decoder.new(format: false)
 
-          msg, eof = decoder.decode_chunk(data)
+          msg, eof = decoder.decode_chunk([data_chunk_0, data_chunk_1].pack('a*a*'))
           expect_msg = SpecHelper.expected_decoded_message(files[0])
           expect(msg.payload.read).to eq(expect_msg.payload.read)
           expect(msg.headers.size).to eq(expect_msg.headers.size)
@@ -54,8 +56,7 @@ module Aws
           end
           expect(eof).to be false
 
-          expect(decoder.message_buffer.read).to eq(second_message)
-          decoder.message_buffer.rewind
+          expect(decoder.send(:message_buffer)).to eq(second_message)
 
           msg, eof = decoder.decode_chunk
           expect_msg = SpecHelper.expected_decoded_message(files[2])
@@ -80,9 +81,7 @@ module Aws
           expect(msg).to be_nil
           expect(eof).to be true
 
-          decoder.message_buffer.rewind
-          expect(decoder.message_buffer.read).to eq(first_part)
-          decoder.message_buffer.rewind
+          expect(decoder.send(:message_buffer)).to eq(first_part)
 
           msg, eof = decoder.decode_chunk(second_part)
           expect_msg = SpecHelper.expected_decoded_message(file)
@@ -99,7 +98,7 @@ module Aws
 
         it '#decode_chunk buffers partial message' do
           file = Dir.glob(File.expand_path('../fixtures/encoded/positive/*', __FILE__)).first
-          data = File.read(file)
+          data = File.read(file, mode: 'rb')
           first_part = data[0..13]
           second_part = data[14..-1]
           decoder = Decoder.new(format: false)
@@ -108,9 +107,7 @@ module Aws
           expect(msg).to be_nil
           expect(eof).to be true
 
-          decoder.message_buffer.rewind
-          expect(decoder.message_buffer.read).to eq(first_part)
-          decoder.message_buffer.rewind
+          expect(decoder.send(:message_buffer)).to eq(first_part)
 
           msg, eof = decoder.decode_chunk(second_part)
           expect_msg = SpecHelper.expected_decoded_message(file)

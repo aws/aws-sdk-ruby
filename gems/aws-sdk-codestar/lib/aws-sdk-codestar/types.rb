@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -211,6 +213,13 @@ module Aws::CodeStar
       :s3)
       include Aws::Structure
     end
+
+    # Another modification is being made. That modification must complete
+    # before you can make your change.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreateProjectRequest
     #   data as a hash:
@@ -735,6 +744,24 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
+    # The next token is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Aws::EmptyStructure; end
+
+    # The service role is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/InvalidServiceRoleException AWS API Documentation
+    #
+    class InvalidServiceRoleException < Aws::EmptyStructure; end
+
+    # A resource limit has been exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass ListProjectsRequest
     #   data as a hash:
     #
@@ -963,6 +990,34 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
+    # An AWS CodeStar project with the same ID already exists in this region
+    # for the AWS account. AWS CodeStar project IDs must be unique within a
+    # region for the AWS account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ProjectAlreadyExistsException AWS API Documentation
+    #
+    class ProjectAlreadyExistsException < Aws::EmptyStructure; end
+
+    # Project configuration information is required but not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ProjectConfigurationException AWS API Documentation
+    #
+    class ProjectConfigurationException < Aws::EmptyStructure; end
+
+    # The project creation request was valid, but a nonspecific exception or
+    # error occurred during project creation. The project could not be
+    # created in AWS CodeStar.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ProjectCreationFailedException AWS API Documentation
+    #
+    class ProjectCreationFailedException < Aws::EmptyStructure; end
+
+    # The specified AWS CodeStar project was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ProjectNotFoundException AWS API Documentation
+    #
+    class ProjectNotFoundException < Aws::EmptyStructure; end
+
     # An indication of whether a project creation or deletion is failed or
     # successful.
     #
@@ -1109,6 +1164,18 @@ module Aws::CodeStar
       :remote_access_allowed)
       include Aws::Structure
     end
+
+    # The team member is already associated with a role in this project.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TeamMemberAlreadyAssociatedException AWS API Documentation
+    #
+    class TeamMemberAlreadyAssociatedException < Aws::EmptyStructure; end
+
+    # The specified team member was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TeamMemberNotFoundException AWS API Documentation
+    #
+    class TeamMemberNotFoundException < Aws::EmptyStructure; end
 
     # The toolchain template file provided with the project request. AWS
     # CodeStar uses the template to provision the toolchain stack in AWS
@@ -1396,6 +1463,20 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
+    # A user profile with that name already exists in this region for the
+    # AWS account. AWS CodeStar user profile names must be unique within a
+    # region for the AWS account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UserProfileAlreadyExistsException AWS API Documentation
+    #
+    class UserProfileAlreadyExistsException < Aws::EmptyStructure; end
+
+    # The user profile was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UserProfileNotFoundException AWS API Documentation
+    #
+    class UserProfileNotFoundException < Aws::EmptyStructure; end
+
     # Information about a user's profile in AWS CodeStar.
     #
     # @!attribute [rw] user_arn
@@ -1435,6 +1516,12 @@ module Aws::CodeStar
       :ssh_public_key)
       include Aws::Structure
     end
+
+    # The specified input is either not valid, or it could not be validated.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ValidationException AWS API Documentation
+    #
+    class ValidationException < Aws::EmptyStructure; end
 
   end
 end
