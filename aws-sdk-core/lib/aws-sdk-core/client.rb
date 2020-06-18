@@ -63,7 +63,13 @@ module Aws
       def soft_deprecation
         unless @warned
           @warned = true
-          warn("NEWER VERSION AVAILABLE: Please upgrade to AWS SDK For Ruby V3")
+          warn(
+            "Version 2 of the Ruby SDK will enter maintenance mode as of "\
+            "November 20, 2020. To continue receiving service updates and new "\
+            "features, please upgrade to Version 3. More information can be "\
+            "found here: https://aws.amazon.com/blogs/developer/"\
+            "deprecation-schedule-for-aws-sdk-for-ruby-v2/"
+          )
         end
       end
 

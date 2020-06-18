@@ -11,6 +11,7 @@ coverage
 /release-notes.html
 /TODO
 *.DS_Store
+.ruby-version
 
 /developer_guide/output
 /developer_guide/tmp
