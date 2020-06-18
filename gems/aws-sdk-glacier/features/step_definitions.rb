@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@glacier") do
   @client = Aws::Glacier::Client.new
 end

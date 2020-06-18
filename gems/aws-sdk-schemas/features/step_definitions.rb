@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@schemas") do
   @service = Aws::Schemas::Resource.new
   @client = @service.client

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Gem::Specification.new do |spec|
   spec.name          = 'aws-eventstream'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@comprehendmedical") do
   @service = Aws::ComprehendMedical::Resource.new
   @client = @service.client

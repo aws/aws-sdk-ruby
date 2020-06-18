@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # updates the services in the aws-partitions gem
 task 'update-partition-service-list' do
   lines = []

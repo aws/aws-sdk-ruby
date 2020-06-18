@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@licensemanager") do
   @service = Aws::LicenseManager::Resource.new
   @client = @service.client

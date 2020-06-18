@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@qldbsession") do
   @service = Aws::QLDBSession::Resource.new
   @client = @service.client

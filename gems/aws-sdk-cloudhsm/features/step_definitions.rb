@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@cloudhsm") do
   @service = Aws::CloudHSM::Resource.new
   @client = @service.client

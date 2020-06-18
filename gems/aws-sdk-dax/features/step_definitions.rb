@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@dax") do
   @service = Aws::DAX::Resource.new
   @client = @service.client

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@securityhub") do
   @service = Aws::SecurityHub::Resource.new
   @client = @service.client

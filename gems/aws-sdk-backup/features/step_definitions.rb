@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@backup") do
   @service = Aws::Backup::Resource.new
   @client = @service.client
