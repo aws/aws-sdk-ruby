@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
 
   # Decorates a {Seahorse::Client::Response} with paging convenience methods.

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'cgi'
 require 'net/http'
 require 'net/https'

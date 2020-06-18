@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-06-16)
+------------------
+
+* Feature - Amazon Polly adds new US English child voice - Kevin. Kevin is available as Neural voice only.
+
 1.31.1 (2020-06-11)
 ------------------
 

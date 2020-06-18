@@ -636,12 +636,13 @@ module Aws::EC2
     #   * `encrypted` - Indicates whether the snapshot is encrypted (`true` \|
     #     `false`)
     #
-    #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
-    #     `self` \| `all` \| `aws-marketplace` \| `microsoft`) of snapshot
-    #     owners. Not to be confused with the user-configured AWS account
-    #     alias, which is set from the IAM console.
+    #   * `owner-alias` - The owner alias, from an Amazon-maintained list
+    #     (`amazon`). This is not the user-configured AWS account alias set
+    #     using the IAM console. We recommend that you use the related
+    #     parameter instead of this filter.
     #
-    #   * `owner-id` - The ID of the AWS account that owns the snapshot.
+    #   * `owner-id` - The AWS account ID of the owner. We recommend that you
+    #     use the related parameter instead of this filter.
     #
     #   * `progress` - The progress of the snapshot, as a percentage (for
     #     example, 80%).
@@ -667,7 +668,8 @@ module Aws::EC2
     #
     #   * `volume-size` - The size of the volume, in GiB.
     # @option options [Array<String>] :owner_ids
-    #   Describes the snapshots owned by these owners.
+    #   Scopes the results to snapshots with the specified owners. You can
+    #   specify a combination of AWS account IDs, `self`, and `amazon`.
     # @option options [Array<String>] :restorable_by_user_ids
     #   The IDs of the AWS accounts that can create volumes from the snapshot.
     # @option options [Array<String>] :snapshot_ids

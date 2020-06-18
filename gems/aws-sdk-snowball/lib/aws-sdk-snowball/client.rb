@@ -502,21 +502,32 @@ module Aws::Snowball
     #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #
     # @option params [String] :snowball_type
-    #   The type of AWS Snowball device to use for this cluster. Currently,
-    #   the only supported device type for cluster jobs is `EDGE`.
+    #   The type of AWS Snowball device to use for this cluster.
     #
-    #   For more information, see [Snowball Edge Device Options][1] in the
-    #   Snowball Edge Developer Guide.
+    #   <note markdown="1"> For cluster jobs, AWS Snowball currently supports only the `EDGE`
+    #   device type.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html
+    #    </note>
     #
     # @option params [required, String] :shipping_option
     #   The shipping speed for each node in this cluster. This speed doesn't
     #   dictate how soon you'll get each Snowball Edge device, rather it
     #   represents how quickly each device moves to its destination while in
     #   transit. Regional shipping speeds are as follows:
+    #
+    #   * In Australia, you have access to express shipping. Typically,
+    #     Snowballs shipped express are delivered in about a day.
+    #
+    #   * In the European Union (EU), you have access to express shipping.
+    #     Typically, Snowballs shipped express are delivered in about a day.
+    #     In addition, most countries in the EU have access to standard
+    #     shipping, which typically takes less than a week, one way.
+    #
+    #   * In India, Snowballs are delivered in one to seven days.
+    #
+    #   * In the United States of America (US), you have access to one-day
+    #     shipping and two-day shipping.
+    #   ^
     #
     #   * In Australia, you have access to express shipping. Typically,
     #     devices shipped express are delivered in about a day.
@@ -615,7 +626,7 @@ module Aws::Snowball
     #     address_id: "AddressId", # required
     #     kms_key_arn: "KmsKeyARN",
     #     role_arn: "RoleARN", # required
-    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S
+    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD
     #     shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
@@ -724,6 +735,13 @@ module Aws::Snowball
     #   job attributes are inherited from the cluster.
     #
     # @option params [String] :snowball_type
+    #   The type of AWS Snowball device to use for this job.
+    #
+    #   <note markdown="1"> For cluster jobs, AWS Snowball currently supports only the `EDGE`
+    #   device type.
+    #
+    #    </note>
+    #
     #   The type of AWS Snowball device to use for this job. Currently, the
     #   only supported device type for cluster jobs is `EDGE`.
     #
@@ -740,6 +758,9 @@ module Aws::Snowball
     #
     # @option params [Types::TaxDocuments] :tax_documents
     #   The tax documents required in your AWS Region.
+    #
+    # @option params [Types::DeviceConfiguration] :device_configuration
+    #   Defines the device configuration for an AWS Snowcone job.
     #
     # @return [Types::CreateJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -817,7 +838,7 @@ module Aws::Snowball
     #     address_id: "AddressId",
     #     kms_key_arn: "KmsKeyARN",
     #     role_arn: "RoleARN",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, NoPreference
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, NoPreference
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
@@ -825,11 +846,18 @@ module Aws::Snowball
     #       notify_all: false,
     #     },
     #     cluster_id: "ClusterId",
-    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S
+    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD
     #     forwarding_address_id: "AddressId",
     #     tax_documents: {
     #       ind: {
     #         gstin: "GSTIN",
+    #       },
+    #     },
+    #     device_configuration: {
+    #       snowcone_device_configuration: {
+    #         wireless_connection: {
+    #           is_wifi_enabled: false,
+    #         },
     #       },
     #     },
     #   })
@@ -1057,7 +1085,7 @@ module Aws::Snowball
     #   resp.cluster_metadata.role_arn #=> String
     #   resp.cluster_metadata.cluster_state #=> String, one of "AwaitingQuorum", "Pending", "InUse", "Complete", "Cancelled"
     #   resp.cluster_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.cluster_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S"
+    #   resp.cluster_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD"
     #   resp.cluster_metadata.creation_date #=> Time
     #   resp.cluster_metadata.resources.s3_resources #=> Array
     #   resp.cluster_metadata.resources.s3_resources[0].bucket_arn #=> String
@@ -1153,7 +1181,7 @@ module Aws::Snowball
     #   resp.job_metadata.job_id #=> String
     #   resp.job_metadata.job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S"
+    #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD"
     #   resp.job_metadata.creation_date #=> Time
     #   resp.job_metadata.resources.s3_resources #=> Array
     #   resp.job_metadata.resources.s3_resources[0].bucket_arn #=> String
@@ -1175,7 +1203,7 @@ module Aws::Snowball
     #   resp.job_metadata.shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.status #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "NoPreference"
+    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "NoPreference"
     #   resp.job_metadata.notification.sns_topic_arn #=> String
     #   resp.job_metadata.notification.job_states_to_notify #=> Array
     #   resp.job_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1190,11 +1218,12 @@ module Aws::Snowball
     #   resp.job_metadata.cluster_id #=> String
     #   resp.job_metadata.forwarding_address_id #=> String
     #   resp.job_metadata.tax_documents.ind.gstin #=> String
+    #   resp.job_metadata.device_configuration.snowcone_device_configuration.wireless_connection.is_wifi_enabled #=> Boolean
     #   resp.sub_job_metadata #=> Array
     #   resp.sub_job_metadata[0].job_id #=> String
     #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.sub_job_metadata[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S"
+    #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD"
     #   resp.sub_job_metadata[0].creation_date #=> Time
     #   resp.sub_job_metadata[0].resources.s3_resources #=> Array
     #   resp.sub_job_metadata[0].resources.s3_resources[0].bucket_arn #=> String
@@ -1216,7 +1245,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.status #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "NoPreference"
+    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "NoPreference"
     #   resp.sub_job_metadata[0].notification.sns_topic_arn #=> String
     #   resp.sub_job_metadata[0].notification.job_states_to_notify #=> Array
     #   resp.sub_job_metadata[0].notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1231,6 +1260,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].cluster_id #=> String
     #   resp.sub_job_metadata[0].forwarding_address_id #=> String
     #   resp.sub_job_metadata[0].tax_documents.ind.gstin #=> String
+    #   resp.sub_job_metadata[0].device_configuration.snowcone_device_configuration.wireless_connection.is_wifi_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJob AWS API Documentation
     #
@@ -1543,7 +1573,7 @@ module Aws::Snowball
     #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD"
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
@@ -1725,7 +1755,7 @@ module Aws::Snowball
     #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD"
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
@@ -1943,7 +1973,7 @@ module Aws::Snowball
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     description: "String",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, NoPreference
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, NoPreference
     #     forwarding_address_id: "AddressId",
     #   })
     #
@@ -1969,7 +1999,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.28.1'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

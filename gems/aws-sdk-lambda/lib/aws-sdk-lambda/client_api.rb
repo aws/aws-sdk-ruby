@@ -53,6 +53,10 @@ module Aws::Lambda
     EC2AccessDeniedException = Shapes::StructureShape.new(name: 'EC2AccessDeniedException')
     EC2ThrottledException = Shapes::StructureShape.new(name: 'EC2ThrottledException')
     EC2UnexpectedException = Shapes::StructureShape.new(name: 'EC2UnexpectedException')
+    EFSIOException = Shapes::StructureShape.new(name: 'EFSIOException')
+    EFSMountConnectivityException = Shapes::StructureShape.new(name: 'EFSMountConnectivityException')
+    EFSMountFailureException = Shapes::StructureShape.new(name: 'EFSMountFailureException')
+    EFSMountTimeoutException = Shapes::StructureShape.new(name: 'EFSMountTimeoutException')
     ENILimitReachedException = Shapes::StructureShape.new(name: 'ENILimitReachedException')
     Enabled = Shapes::BooleanShape.new(name: 'Enabled')
     Environment = Shapes::StructureShape.new(name: 'Environment')
@@ -65,6 +69,9 @@ module Aws::Lambda
     EventSourceMappingsList = Shapes::ListShape.new(name: 'EventSourceMappingsList')
     EventSourcePosition = Shapes::StringShape.new(name: 'EventSourcePosition')
     EventSourceToken = Shapes::StringShape.new(name: 'EventSourceToken')
+    FileSystemArn = Shapes::StringShape.new(name: 'FileSystemArn')
+    FileSystemConfig = Shapes::StructureShape.new(name: 'FileSystemConfig')
+    FileSystemConfigList = Shapes::ListShape.new(name: 'FileSystemConfigList')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     FunctionCode = Shapes::StructureShape.new(name: 'FunctionCode')
     FunctionCodeLocation = Shapes::StructureShape.new(name: 'FunctionCodeLocation')
@@ -149,6 +156,7 @@ module Aws::Lambda
     ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
     ListVersionsByFunctionRequest = Shapes::StructureShape.new(name: 'ListVersionsByFunctionRequest')
     ListVersionsByFunctionResponse = Shapes::StructureShape.new(name: 'ListVersionsByFunctionResponse')
+    LocalMountPath = Shapes::StringShape.new(name: 'LocalMountPath')
     LogType = Shapes::StringShape.new(name: 'LogType')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MasterRegion = Shapes::StringShape.new(name: 'MasterRegion')
@@ -339,6 +347,7 @@ module Aws::Lambda
     CreateFunctionRequest.add_member(:tracing_config, Shapes::ShapeRef.new(shape: TracingConfig, location_name: "TracingConfig"))
     CreateFunctionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateFunctionRequest.add_member(:layers, Shapes::ShapeRef.new(shape: LayerList, location_name: "Layers"))
+    CreateFunctionRequest.add_member(:file_system_configs, Shapes::ShapeRef.new(shape: FileSystemConfigList, location_name: "FileSystemConfigs"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     DeadLetterConfig.add_member(:target_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "TargetArn"))
@@ -387,6 +396,22 @@ module Aws::Lambda
     EC2UnexpectedException.add_member(:ec2_error_code, Shapes::ShapeRef.new(shape: String, location_name: "EC2ErrorCode"))
     EC2UnexpectedException.struct_class = Types::EC2UnexpectedException
 
+    EFSIOException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    EFSIOException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EFSIOException.struct_class = Types::EFSIOException
+
+    EFSMountConnectivityException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    EFSMountConnectivityException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EFSMountConnectivityException.struct_class = Types::EFSMountConnectivityException
+
+    EFSMountFailureException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    EFSMountFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EFSMountFailureException.struct_class = Types::EFSMountFailureException
+
+    EFSMountTimeoutException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    EFSMountTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    EFSMountTimeoutException.struct_class = Types::EFSMountTimeoutException
+
     ENILimitReachedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     ENILimitReachedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ENILimitReachedException.struct_class = Types::ENILimitReachedException
@@ -422,6 +447,12 @@ module Aws::Lambda
     EventSourceMappingConfiguration.struct_class = Types::EventSourceMappingConfiguration
 
     EventSourceMappingsList.member = Shapes::ShapeRef.new(shape: EventSourceMappingConfiguration)
+
+    FileSystemConfig.add_member(:arn, Shapes::ShapeRef.new(shape: FileSystemArn, required: true, location_name: "Arn"))
+    FileSystemConfig.add_member(:local_mount_path, Shapes::ShapeRef.new(shape: LocalMountPath, required: true, location_name: "LocalMountPath"))
+    FileSystemConfig.struct_class = Types::FileSystemConfig
+
+    FileSystemConfigList.member = Shapes::ShapeRef.new(shape: FileSystemConfig)
 
     FunctionCode.add_member(:zip_file, Shapes::ShapeRef.new(shape: Blob, location_name: "ZipFile"))
     FunctionCode.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket"))
@@ -459,6 +490,7 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:last_update_status, Shapes::ShapeRef.new(shape: LastUpdateStatus, location_name: "LastUpdateStatus"))
     FunctionConfiguration.add_member(:last_update_status_reason, Shapes::ShapeRef.new(shape: LastUpdateStatusReason, location_name: "LastUpdateStatusReason"))
     FunctionConfiguration.add_member(:last_update_status_reason_code, Shapes::ShapeRef.new(shape: LastUpdateStatusReasonCode, location_name: "LastUpdateStatusReasonCode"))
+    FunctionConfiguration.add_member(:file_system_configs, Shapes::ShapeRef.new(shape: FileSystemConfigList, location_name: "FileSystemConfigs"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionEventInvokeConfig.add_member(:last_modified, Shapes::ShapeRef.new(shape: Date, location_name: "LastModified"))
@@ -933,6 +965,7 @@ module Aws::Lambda
     UpdateFunctionConfigurationRequest.add_member(:tracing_config, Shapes::ShapeRef.new(shape: TracingConfig, location_name: "TracingConfig"))
     UpdateFunctionConfigurationRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
     UpdateFunctionConfigurationRequest.add_member(:layers, Shapes::ShapeRef.new(shape: LayerList, location_name: "Layers"))
+    UpdateFunctionConfigurationRequest.add_member(:file_system_configs, Shapes::ShapeRef.new(shape: FileSystemConfigList, location_name: "FileSystemConfigs"))
     UpdateFunctionConfigurationRequest.struct_class = Types::UpdateFunctionConfigurationRequest
 
     UpdateFunctionEventInvokeConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -1282,6 +1315,10 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: EC2UnexpectedException)
         o.errors << Shapes::ShapeRef.new(shape: SubnetIPAddressLimitReachedException)
         o.errors << Shapes::ShapeRef.new(shape: ENILimitReachedException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSMountConnectivityException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSMountFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSMountTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSIOException)
         o.errors << Shapes::ShapeRef.new(shape: EC2ThrottledException)
         o.errors << Shapes::ShapeRef.new(shape: EC2AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetIDException)

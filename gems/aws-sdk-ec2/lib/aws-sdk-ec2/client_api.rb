@@ -803,6 +803,7 @@ module Aws::EC2
     EbsInfo = Shapes::StructureShape.new(name: 'EbsInfo')
     EbsInstanceBlockDevice = Shapes::StructureShape.new(name: 'EbsInstanceBlockDevice')
     EbsInstanceBlockDeviceSpecification = Shapes::StructureShape.new(name: 'EbsInstanceBlockDeviceSpecification')
+    EbsNvmeSupport = Shapes::StringShape.new(name: 'EbsNvmeSupport')
     EbsOptimizedInfo = Shapes::StructureShape.new(name: 'EbsOptimizedInfo')
     EbsOptimizedSupport = Shapes::StringShape.new(name: 'EbsOptimizedSupport')
     EfaSupportedFlag = Shapes::BooleanShape.new(name: 'EfaSupportedFlag')
@@ -5245,6 +5246,7 @@ module Aws::EC2
     EbsInfo.add_member(:ebs_optimized_support, Shapes::ShapeRef.new(shape: EbsOptimizedSupport, location_name: "ebsOptimizedSupport"))
     EbsInfo.add_member(:encryption_support, Shapes::ShapeRef.new(shape: EbsEncryptionSupport, location_name: "encryptionSupport"))
     EbsInfo.add_member(:ebs_optimized_info, Shapes::ShapeRef.new(shape: EbsOptimizedInfo, location_name: "ebsOptimizedInfo"))
+    EbsInfo.add_member(:nvme_support, Shapes::ShapeRef.new(shape: EbsNvmeSupport, location_name: "nvmeSupport"))
     EbsInfo.struct_class = Types::EbsInfo
 
     EbsInstanceBlockDevice.add_member(:attach_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "attachTime"))

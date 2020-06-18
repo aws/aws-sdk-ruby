@@ -441,7 +441,7 @@ module Aws::DataExchange
     #         ],
     #         data_set_id: "Id", # required
     #         encryption: {
-    #           kms_key_arn: "__string", # required
+    #           kms_key_arn: "__string",
     #           type: "aws:kms", # required, accepts aws:kms, AES256
     #         },
     #         revision_id: "Id", # required
@@ -1374,7 +1374,7 @@ module Aws::DataExchange
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.5.1'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

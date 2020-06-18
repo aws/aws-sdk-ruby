@@ -10,6 +10,19 @@
 module Aws::AutoScaling
   module Types
 
+    # The request failed because an active instance refresh for the
+    # specified Auto Scaling group was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ActiveInstanceRefreshNotFoundFault AWS API Documentation
+    #
+    class ActiveInstanceRefreshNotFoundFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] activities
     #   The scaling activities. Activities are sorted by start time.
     #   Activities still in progress are described first.
@@ -669,6 +682,35 @@ module Aws::AutoScaling
       :device_name,
       :ebs,
       :no_device)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_refresh_id
+    #   The instance refresh ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CancelInstanceRefreshAnswer AWS API Documentation
+    #
+    class CancelInstanceRefreshAnswer < Struct.new(
+      :instance_refresh_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CancelInstanceRefreshType
+    #   data as a hash:
+    #
+    #       {
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #       }
+    #
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CancelInstanceRefreshType AWS API Documentation
+    #
+    class CancelInstanceRefreshType < Struct.new(
+      :auto_scaling_group_name)
       include Aws::Structure
     end
 
@@ -1775,6 +1817,71 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_refreshes
+    #   The instance refreshes for the specified group.
+    #
+    #   For more information, see [Replacing Auto Scaling Instances Based on
+    #   an Instance Refresh][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html
+    #   @return [Array<Types::InstanceRefresh>]
+    #
+    # @!attribute [rw] next_token
+    #   A string that indicates that the response contains more items than
+    #   can be returned in a single response. To receive additional items,
+    #   specify this string for the `NextToken` value when requesting the
+    #   next set of items. This value is null when there are no more items
+    #   to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeInstanceRefreshesAnswer AWS API Documentation
+    #
+    class DescribeInstanceRefreshesAnswer < Struct.new(
+      :instance_refreshes,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInstanceRefreshesType
+    #   data as a hash:
+    #
+    #       {
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #         instance_refresh_ids: ["XmlStringMaxLen255"],
+    #         next_token: "XmlString",
+    #         max_records: 1,
+    #       }
+    #
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_refresh_ids
+    #   One or more instance refresh IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of items to return with this call. The default
+    #   value is `50` and the maximum value is `100`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeInstanceRefreshesType AWS API Documentation
+    #
+    class DescribeInstanceRefreshesType < Struct.new(
+      :auto_scaling_group_name,
+      :instance_refresh_ids,
+      :next_token,
+      :max_records)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] lifecycle_hook_types
     #   The lifecycle hook types.
     #   @return [Array<String>]
@@ -2858,7 +2965,91 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes an instances distribution for an Auto Scaling group with
+    # Describes an instance refresh for an Auto Scaling group.
+    #
+    # @!attribute [rw] instance_refresh_id
+    #   The instance refresh ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status for the instance refresh operation:
+    #
+    #   * `Pending` - The request was created, but the operation has not
+    #     started.
+    #
+    #   * `InProgress` - The operation is in progress.
+    #
+    #   * `Successful` - The operation completed successfully.
+    #
+    #   * `Failed` - The operation failed to complete. You can troubleshoot
+    #     using the status reason and the scaling activities.
+    #
+    #   * `Cancelling` - An ongoing operation is being cancelled.
+    #     Cancellation does not roll back any replacements that have already
+    #     been completed, but it prevents new replacements from being
+    #     started.
+    #
+    #   * `Cancelled` - The operation is cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Provides more details about the current status of the instance
+    #   refresh.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time at which the instance refresh began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The date and time at which the instance refresh ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] percentage_complete
+    #   The percentage of the instance refresh that is complete. For each
+    #   instance replacement, Amazon EC2 Auto Scaling tracks the instance's
+    #   health status and warm-up time. When the instance's health status
+    #   changes to healthy and the specified warm-up time passes, the
+    #   instance is considered updated and added to the percentage complete.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instances_to_update
+    #   The number of instances remaining to update before the instance
+    #   refresh is complete.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceRefresh AWS API Documentation
+    #
+    class InstanceRefresh < Struct.new(
+      :instance_refresh_id,
+      :auto_scaling_group_name,
+      :status,
+      :status_reason,
+      :start_time,
+      :end_time,
+      :percentage_complete,
+      :instances_to_update)
+      include Aws::Structure
+    end
+
+    # The request failed because an active instance refresh operation
+    # already exists for the specified Auto Scaling group.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceRefreshInProgressFault AWS API Documentation
+    #
+    class InstanceRefreshInProgressFault < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Describes an instances distribution for an Auto Scaling group with a
     # MixedInstancesPolicy.
     #
     # The instances distribution specifies the distribution of On-Demand
@@ -4004,7 +4195,9 @@ module Aws::AutoScaling
     #   `ALBRequestCountPerTarget` and there is a target group attached to
     #   the Auto Scaling group.
     #
-    #   The format is
+    #   Elastic Load Balancing sends data about your load balancers to
+    #   Amazon CloudWatch. CloudWatch collects the data and specifies the
+    #   format to use to access the data. The format is
     #   `app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id
     #   `, where
     #
@@ -4013,6 +4206,15 @@ module Aws::AutoScaling
     #
     #   * `targetgroup/target-group-name/target-group-id ` is the final
     #     portion of the target group ARN.
+    #
+    #   To find the ARN for an Application Load Balancer, use the
+    #   [DescribeLoadBalancers][1] API operation. To find the ARN for the
+    #   target group, use the [DescribeTargetGroups][2] API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PredefinedMetricSpecification AWS API Documentation
@@ -4046,6 +4248,8 @@ module Aws::AutoScaling
     #   * `AZRebalance`
     #
     #   * `HealthCheck`
+    #
+    #   * `InstanceRefresh`
     #
     #   * `ReplaceUnhealthy`
     #
@@ -4533,6 +4737,42 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # Describes information used to start an instance refresh.
+    #
+    # @note When making an API call, you may pass RefreshPreferences
+    #   data as a hash:
+    #
+    #       {
+    #         min_healthy_percentage: 1,
+    #         instance_warmup: 1,
+    #       }
+    #
+    # @!attribute [rw] min_healthy_percentage
+    #   The amount of capacity in the Auto Scaling group that must remain
+    #   healthy during an instance refresh to allow the operation to
+    #   continue, as a percentage of the desired capacity of the Auto
+    #   Scaling group (rounded up to the nearest integer). The default is
+    #   `90`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_warmup
+    #   The number of seconds until a newly launched instance is configured
+    #   and ready to use. During this time, Amazon EC2 Auto Scaling does not
+    #   immediately move on to the next replacement. The default is to use
+    #   the value specified for the health check grace period for the group.
+    #
+    #   Note: While warming up, a newly launched instance is not counted
+    #   toward the aggregated metrics of the Auto Scaling group.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RefreshPreferences AWS API Documentation
+    #
+    class RefreshPreferences < Struct.new(
+      :min_healthy_percentage,
+      :instance_warmup)
+      include Aws::Structure
+    end
+
     # You already have a pending update to an Amazon EC2 Auto Scaling
     # resource (for example, an Auto Scaling group, instance, or load
     # balancer).
@@ -4682,24 +4922,27 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] scaling_processes
-    #   One or more of the following processes. If you omit this parameter,
-    #   all processes are specified.
+    #   One or more of the following processes:
     #
     #   * `Launch`
     #
     #   * `Terminate`
     #
-    #   * `HealthCheck`
-    #
-    #   * `ReplaceUnhealthy`
-    #
-    #   * `AZRebalance`
+    #   * `AddToLoadBalancer`
     #
     #   * `AlarmNotification`
     #
+    #   * `AZRebalance`
+    #
+    #   * `HealthCheck`
+    #
+    #   * `InstanceRefresh`
+    #
+    #   * `ReplaceUnhealthy`
+    #
     #   * `ScheduledActions`
     #
-    #   * `AddToLoadBalancer`
+    #   If you omit this parameter, all processes are specified.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScalingProcessQuery AWS API Documentation
@@ -5003,6 +5246,58 @@ module Aws::AutoScaling
       :instance_ids,
       :auto_scaling_group_name,
       :protected_from_scale_in)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_refresh_id
+    #   A unique ID for tracking the progress of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/StartInstanceRefreshAnswer AWS API Documentation
+    #
+    class StartInstanceRefreshAnswer < Struct.new(
+      :instance_refresh_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartInstanceRefreshType
+    #   data as a hash:
+    #
+    #       {
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #         strategy: "Rolling", # accepts Rolling
+    #         preferences: {
+    #           min_healthy_percentage: 1,
+    #           instance_warmup: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] strategy
+    #   The strategy to use for the instance refresh. The only valid value
+    #   is `Rolling`.
+    #
+    #   A rolling update is an update that is applied to all instances in an
+    #   Auto Scaling group until all instances have been updated. A rolling
+    #   update can fail due to failed health checks or if instances are on
+    #   standby or are protected from scale-in. If the rolling update
+    #   process fails, any instances that were already replaced are not
+    #   rolled back to their previous configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferences
+    #   Set of preferences associated with the instance refresh request.
+    #   @return [Types::RefreshPreferences]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/StartInstanceRefreshType AWS API Documentation
+    #
+    class StartInstanceRefreshType < Struct.new(
+      :auto_scaling_group_name,
+      :strategy,
+      :preferences)
       include Aws::Structure
     end
 

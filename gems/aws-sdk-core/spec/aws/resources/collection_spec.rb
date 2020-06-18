@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Enumerable
   class Enumerator; end
 end

@@ -6236,8 +6236,8 @@ module Aws::CloudFront
     #   A unique identifier for the origin. This value must be unique within
     #   the distribution.
     #
-    #   Use this value to specify the `TargetOriginId` in a CacheBehavior or
-    #   DefaultCacheBehavior.
+    #   Use this value to specify the `TargetOriginId` in a `CacheBehavior`
+    #   or `DefaultCacheBehavior`.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -6296,12 +6296,18 @@ module Aws::CloudFront
     #   origin. The minimum number is 1, the maximum is 3, and the default
     #   (if you don’t specify otherwise) is 3.
     #
-    #   For more information, see [Origin Connection Attempts][1] in the
+    #   For a custom origin (including an Amazon S3 bucket that’s configured
+    #   with static website hosting), this value also specifies the number
+    #   of times that CloudFront attempts to get a response from the origin,
+    #   in the case of an [Origin Response Timeout][1].
+    #
+    #   For more information, see [Origin Connection Attempts][2] in the
     #   *Amazon CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-attempts
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-attempts
     #   @return [Integer]
     #
     # @!attribute [rw] connection_timeout
