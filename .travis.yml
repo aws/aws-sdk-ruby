@@ -3,7 +3,7 @@ language: ruby
 before_install:
   - gem install bundler -v '< 2'
 
-dist: trusty
+dist: xenial
 
 rvm:
   - 1.9.3
@@ -25,7 +25,9 @@ env:
   - KITCHEN_SINK=1
 
 script: >
+  (echo "travis_fold:start:sdkbuild") &&
   (bundle exec rake build) &&
+  (echo "travis_fold:end:sdkbuild") &&
   (bundle exec rake test:spec)
 
 bundler_args: --without docs repl
