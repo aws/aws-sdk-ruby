@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add a new version of the S3 Client Side Encryption Client: EncryptionV2::Client which supports more modern encryption algorithms. 
+
 1.68.1 (2020-06-11)
 ------------------
 
