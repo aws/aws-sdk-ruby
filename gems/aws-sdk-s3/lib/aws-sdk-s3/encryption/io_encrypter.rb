@@ -57,8 +57,8 @@ module Aws
         def encrypt_to_tempfile(cipher, io)
           encrypted = Tempfile.new(self.object_id.to_s)
           encrypted.binmode
-          while chunk = io.read(ONE_MEGABYTE, read_buffer ||= String.new)
-            encrypted.write(cipher.update(chunk, cipher_buffer ||= String.new))
+          while chunk = io.read(ONE_MEGABYTE)
+            encrypted.write(cipher.update(chunk))
           end
           encrypted.write(cipher.final)
           encrypted.rewind

@@ -12,7 +12,6 @@ module Aws
           @cipher = cipher.clone
           # Ensure that IO is reset between retries
           @io = io.tap { |io| io.truncate(0) if io.respond_to?(:truncate) }
-          @cipher_buffer = String.new
         end
 
         # @return [#write]
@@ -20,7 +19,7 @@ module Aws
 
         def write(chunk)
           # decrypt and write
-          @io.write(@cipher.update(chunk, @cipher_buffer))
+          @io.write(@cipher.update(chunk))
         end
 
         def finalize
