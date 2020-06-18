@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.531 (2020-06-18)
+------------------
+
 * Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
 
 * Feature - Aws::MarketplaceMetering - Updated the documentation for AWSMarketplace Metering.
