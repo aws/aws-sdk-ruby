@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -339,7 +341,7 @@ module Aws::DataExchange
     #             ],
     #             data_set_id: "Id", # required
     #             encryption: {
-    #               kms_key_arn: "__string", # required
+    #               kms_key_arn: "__string",
     #               type: "aws:kms", # required, accepts aws:kms, AES256
     #             },
     #             revision_id: "Id", # required
@@ -747,7 +749,7 @@ module Aws::DataExchange
     #         ],
     #         data_set_id: "Id", # required
     #         encryption: {
-    #           kms_key_arn: "__string", # required
+    #           kms_key_arn: "__string",
     #           type: "aws:kms", # required, accepts aws:kms, AES256
     #         },
     #         revision_id: "Id", # required
@@ -819,7 +821,7 @@ module Aws::DataExchange
     #   data as a hash:
     #
     #       {
-    #         kms_key_arn: "__string", # required
+    #         kms_key_arn: "__string",
     #         type: "aws:kms", # required, accepts aws:kms, AES256
     #       }
     #
@@ -1659,7 +1661,7 @@ module Aws::DataExchange
     #           ],
     #           data_set_id: "Id", # required
     #           encryption: {
-    #             kms_key_arn: "__string", # required
+    #             kms_key_arn: "__string",
     #             type: "aws:kms", # required, accepts aws:kms, AES256
     #           },
     #           revision_id: "Id", # required

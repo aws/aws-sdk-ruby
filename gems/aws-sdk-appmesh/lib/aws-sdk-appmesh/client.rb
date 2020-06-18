@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::AppMesh
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::AppMesh
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -414,7 +418,7 @@ module Aws::AppMesh
     #   not your own, then the account that you specify must share the mesh
     #   with your account before you can create the resource in the service
     #   mesh. For more information about mesh sharing, see [Working with
-    #   Shared Meshes][1].
+    #   shared meshes][1].
     #
     #
     #
@@ -489,6 +493,16 @@ module Aws::AppMesh
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
     #         },
+    #         timeout: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           per_request: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #         },
     #       },
     #       http2_route: {
     #         action: { # required
@@ -528,6 +542,16 @@ module Aws::AppMesh
     #             value: 1,
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
+    #         },
+    #         timeout: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           per_request: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
     #         },
     #       },
     #       http_route: {
@@ -569,6 +593,16 @@ module Aws::AppMesh
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
     #         },
+    #         timeout: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           per_request: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #         },
     #       },
     #       priority: 1,
     #       tcp_route: {
@@ -579,6 +613,12 @@ module Aws::AppMesh
     #               weight: 1, # required
     #             },
     #           ],
+    #         },
+    #         timeout: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
     #         },
     #       },
     #     },
@@ -625,6 +665,10 @@ module Aws::AppMesh
     #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.grpc_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.idle.value #=> Integer
+    #   resp.route.spec.grpc_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http2_route.action.weighted_targets #=> Array
     #   resp.route.spec.http2_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http2_route.action.weighted_targets[0].weight #=> Integer
@@ -647,6 +691,10 @@ module Aws::AppMesh
     #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.http2_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.idle.value #=> Integer
+    #   resp.route.spec.http2_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
@@ -669,10 +717,16 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.http_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.idle.value #=> Integer
+    #   resp.route.spec.http_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.tcp_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.tcp_route.timeout.idle.value #=> Integer
     #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.route.virtual_router_name #=> String
     #
@@ -736,7 +790,7 @@ module Aws::AppMesh
     #   not your own, then the account that you specify must share the mesh
     #   with your account before you can create the resource in the service
     #   mesh. For more information about mesh sharing, see [Working with
-    #   Shared Meshes][1].
+    #   shared meshes][1].
     #
     #
     #
@@ -822,6 +876,44 @@ module Aws::AppMesh
     #             port: 1, # required
     #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #           },
+    #           timeout: {
+    #             grpc: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               per_request: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #             },
+    #             http: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               per_request: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #             },
+    #             http2: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               per_request: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #             },
+    #             tcp: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #             },
+    #           },
     #           tls: {
     #             certificate: { # required
     #               acm: {
@@ -902,6 +994,20 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.value #=> Integer
     #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
@@ -956,7 +1062,7 @@ module Aws::AppMesh
     #   not your own, then the account that you specify must share the mesh
     #   with your account before you can create the resource in the service
     #   mesh. For more information about mesh sharing, see [Working with
-    #   Shared Meshes][1].
+    #   shared meshes][1].
     #
     #
     #
@@ -1061,7 +1167,7 @@ module Aws::AppMesh
     #   not your own, then the account that you specify must share the mesh
     #   with your account before you can create the resource in the service
     #   mesh. For more information about mesh sharing, see [Working with
-    #   Shared Meshes][1].
+    #   shared meshes][1].
     #
     #
     #
@@ -1183,7 +1289,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1242,6 +1348,10 @@ module Aws::AppMesh
     #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.grpc_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.idle.value #=> Integer
+    #   resp.route.spec.grpc_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http2_route.action.weighted_targets #=> Array
     #   resp.route.spec.http2_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http2_route.action.weighted_targets[0].weight #=> Integer
@@ -1264,6 +1374,10 @@ module Aws::AppMesh
     #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.http2_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.idle.value #=> Integer
+    #   resp.route.spec.http2_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
@@ -1286,10 +1400,16 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.http_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.idle.value #=> Integer
+    #   resp.route.spec.http_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.tcp_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.tcp_route.timeout.idle.value #=> Integer
     #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.route.virtual_router_name #=> String
     #
@@ -1314,7 +1434,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1369,6 +1489,20 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.value #=> Integer
     #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
@@ -1404,7 +1538,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1459,7 +1593,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1513,7 +1647,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1561,7 +1695,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1620,6 +1754,10 @@ module Aws::AppMesh
     #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.grpc_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.idle.value #=> Integer
+    #   resp.route.spec.grpc_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http2_route.action.weighted_targets #=> Array
     #   resp.route.spec.http2_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http2_route.action.weighted_targets[0].weight #=> Integer
@@ -1642,6 +1780,10 @@ module Aws::AppMesh
     #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.http2_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.idle.value #=> Integer
+    #   resp.route.spec.http2_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
@@ -1664,10 +1806,16 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.http_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.idle.value #=> Integer
+    #   resp.route.spec.http_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.tcp_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.tcp_route.timeout.idle.value #=> Integer
     #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.route.virtual_router_name #=> String
     #
@@ -1689,7 +1837,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1744,6 +1892,20 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.value #=> Integer
     #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
@@ -1776,7 +1938,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1831,7 +1993,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -1954,7 +2116,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2081,7 +2243,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2150,7 +2312,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2219,7 +2381,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2403,7 +2565,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2470,6 +2632,16 @@ module Aws::AppMesh
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
     #         },
+    #         timeout: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           per_request: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #         },
     #       },
     #       http2_route: {
     #         action: { # required
@@ -2509,6 +2681,16 @@ module Aws::AppMesh
     #             value: 1,
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
+    #         },
+    #         timeout: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           per_request: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
     #         },
     #       },
     #       http_route: {
@@ -2550,6 +2732,16 @@ module Aws::AppMesh
     #           },
     #           tcp_retry_events: ["connection-error"], # accepts connection-error
     #         },
+    #         timeout: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #           per_request: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
+    #         },
     #       },
     #       priority: 1,
     #       tcp_route: {
@@ -2560,6 +2752,12 @@ module Aws::AppMesh
     #               weight: 1, # required
     #             },
     #           ],
+    #         },
+    #         timeout: {
+    #           idle: {
+    #             unit: "ms", # accepts ms, s
+    #             value: 1,
+    #           },
     #         },
     #       },
     #     },
@@ -2600,6 +2798,10 @@ module Aws::AppMesh
     #   resp.route.spec.grpc_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.grpc_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.grpc_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.idle.value #=> Integer
+    #   resp.route.spec.grpc_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.grpc_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http2_route.action.weighted_targets #=> Array
     #   resp.route.spec.http2_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http2_route.action.weighted_targets[0].weight #=> Integer
@@ -2622,6 +2824,10 @@ module Aws::AppMesh
     #   resp.route.spec.http2_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http2_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.http2_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.idle.value #=> Integer
+    #   resp.route.spec.http2_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http2_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.http_route.action.weighted_targets #=> Array
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
@@ -2644,10 +2850,16 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.retry_policy.per_retry_timeout.value #=> Integer
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events #=> Array
     #   resp.route.spec.http_route.retry_policy.tcp_retry_events[0] #=> String, one of "connection-error"
+    #   resp.route.spec.http_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.idle.value #=> Integer
+    #   resp.route.spec.http_route.timeout.per_request.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.http_route.timeout.per_request.value #=> Integer
     #   resp.route.spec.priority #=> Integer
     #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
     #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
+    #   resp.route.spec.tcp_route.timeout.idle.unit #=> String, one of "ms", "s"
+    #   resp.route.spec.tcp_route.timeout.idle.value #=> Integer
     #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.route.virtual_router_name #=> String
     #
@@ -2677,7 +2889,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2757,6 +2969,44 @@ module Aws::AppMesh
     #             port: 1, # required
     #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
     #           },
+    #           timeout: {
+    #             grpc: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               per_request: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #             },
+    #             http: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               per_request: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #             },
+    #             http2: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #               per_request: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #             },
+    #             tcp: {
+    #               idle: {
+    #                 unit: "ms", # accepts ms, s
+    #                 value: 1,
+    #               },
+    #             },
+    #           },
     #           tls: {
     #             certificate: { # required
     #               acm: {
@@ -2831,6 +3081,20 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.idle.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.grpc.per_request.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.idle.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http.per_request.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.idle.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.http2.per_request.value #=> Integer
+    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.unit #=> String, one of "ms", "s"
+    #   resp.virtual_node.spec.listeners[0].timeout.tcp.idle.value #=> Integer
     #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
@@ -2871,7 +3135,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -2949,7 +3213,7 @@ module Aws::AppMesh
     #   The AWS IAM account ID of the service mesh owner. If the account ID is
     #   not your own, then it's the ID of the account that shared the mesh
     #   with your account. For more information about mesh sharing, see
-    #   [Working with Shared Meshes][1].
+    #   [Working with shared meshes][1].
     #
     #
     #
@@ -3022,7 +3286,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

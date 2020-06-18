@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::ComputeOptimizer
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::ComputeOptimizer
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -318,6 +322,309 @@ module Aws::ComputeOptimizer
 
     # @!group API Operations
 
+    # Describes recommendation export jobs created in the last seven days.
+    #
+    # Use the `ExportAutoScalingGroupRecommendations` or
+    # `ExportEC2InstanceRecommendations` actions to request an export of
+    # your recommendations. Then use the `DescribeRecommendationExportJobs`
+    # action to view your export jobs.
+    #
+    # @option params [Array<String>] :job_ids
+    #   The identification numbers of the export jobs to return.
+    #
+    #   An export job ID is returned when you create an export using the
+    #   `ExportAutoScalingGroupRecommendations` or
+    #   `ExportEC2InstanceRecommendations` actions.
+    #
+    #   All export jobs created in the last seven days are returned if this
+    #   parameter is omitted.
+    #
+    # @option params [Array<Types::JobFilter>] :filters
+    #   An array of objects that describe a filter to return a more specific
+    #   list of export jobs.
+    #
+    # @option params [String] :next_token
+    #   The token to advance to the next page of export jobs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of export jobs to return with a single request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `NextToken` value.
+    #
+    # @return [Types::DescribeRecommendationExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRecommendationExportJobsResponse#recommendation_export_jobs #recommendation_export_jobs} => Array&lt;Types::RecommendationExportJob&gt;
+    #   * {Types::DescribeRecommendationExportJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_recommendation_export_jobs({
+    #     job_ids: ["JobId"],
+    #     filters: [
+    #       {
+    #         name: "ResourceType", # accepts ResourceType, JobStatus
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommendation_export_jobs #=> Array
+    #   resp.recommendation_export_jobs[0].job_id #=> String
+    #   resp.recommendation_export_jobs[0].destination.s3.bucket #=> String
+    #   resp.recommendation_export_jobs[0].destination.s3.key #=> String
+    #   resp.recommendation_export_jobs[0].destination.s3.metadata_key #=> String
+    #   resp.recommendation_export_jobs[0].resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup"
+    #   resp.recommendation_export_jobs[0].status #=> String, one of "Queued", "InProgress", "Complete", "Failed"
+    #   resp.recommendation_export_jobs[0].creation_timestamp #=> Time
+    #   resp.recommendation_export_jobs[0].last_updated_timestamp #=> Time
+    #   resp.recommendation_export_jobs[0].failure_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/DescribeRecommendationExportJobs AWS API Documentation
+    #
+    # @overload describe_recommendation_export_jobs(params = {})
+    # @param [Hash] params ({})
+    def describe_recommendation_export_jobs(params = {}, options = {})
+      req = build_request(:describe_recommendation_export_jobs, params)
+      req.send_request(options)
+    end
+
+    # Exports optimization recommendations for Auto Scaling groups.
+    #
+    # Recommendations are exported in a comma-separated values (.csv) file,
+    # and its metadata in a JavaScript Object Notation (.json) file, to an
+    # existing Amazon Simple Storage Service (Amazon S3) bucket that you
+    # specify. For more information, see [Exporting Recommendations][1] in
+    # the *Compute Optimizer User Guide*.
+    #
+    # You can have only one Auto Scaling group export job in progress per
+    # AWS Region.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html
+    #
+    # @option params [Array<String>] :account_ids
+    #   The IDs of the AWS accounts for which to export Auto Scaling group
+    #   recommendations.
+    #
+    #   If your account is the master account of an organization, use this
+    #   parameter to specify the member accounts for which you want to export
+    #   recommendations.
+    #
+    #   This parameter cannot be specified together with the include member
+    #   accounts parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export if
+    #   this parameter, or the include member accounts parameter, is omitted.
+    #
+    #   You can specify multiple account IDs per request.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   An array of objects that describe a filter to export a more specific
+    #   set of Auto Scaling group recommendations.
+    #
+    # @option params [Array<String>] :fields_to_export
+    #   The recommendations data to include in the export file.
+    #
+    # @option params [required, Types::S3DestinationConfig] :s3_destination_config
+    #   An object to specify the destination Amazon Simple Storage Service
+    #   (Amazon S3) bucket name and key prefix for the export job.
+    #
+    #   You must create the destination Amazon S3 bucket for your
+    #   recommendations export before you create the export job. Compute
+    #   Optimizer does not create the S3 bucket for you. After you create the
+    #   S3 bucket, ensure that it has the required permission policy to allow
+    #   Compute Optimizer to write the export file to it. If you plan to
+    #   specify an object prefix when you create the export job, you must
+    #   include the object prefix in the policy that you add to the S3 bucket.
+    #   For more information, see [Amazon S3 Bucket Policy for Compute
+    #   Optimizer][1] in the *Compute Optimizer user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
+    #
+    # @option params [String] :file_format
+    #   The format of the export file.
+    #
+    #   The only export file format currently supported is `Csv`.
+    #
+    # @option params [Boolean] :include_member_accounts
+    #   Indicates whether to include recommendations for resources in all
+    #   member accounts of the organization if your account is the master
+    #   account of an organization.
+    #
+    #   The member accounts must also be opted in to Compute Optimizer.
+    #
+    #   Recommendations for member accounts of the organization are not
+    #   included in the export file if this parameter is omitted.
+    #
+    #   This parameter cannot be specified together with the account IDs
+    #   parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export if
+    #   this parameter, or the account IDs parameter, is omitted.
+    #
+    # @return [Types::ExportAutoScalingGroupRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportAutoScalingGroupRecommendationsResponse#job_id #job_id} => String
+    #   * {Types::ExportAutoScalingGroupRecommendationsResponse#s3_destination #s3_destination} => Types::S3Destination
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_auto_scaling_group_recommendations({
+    #     account_ids: ["AccountId"],
+    #     filters: [
+    #       {
+    #         name: "Finding", # accepts Finding, RecommendationSourceType
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp
+    #     s3_destination_config: { # required
+    #       bucket: "DestinationBucket",
+    #       key_prefix: "DestinationKeyPrefix",
+    #     },
+    #     file_format: "Csv", # accepts Csv
+    #     include_member_accounts: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.s3_destination.bucket #=> String
+    #   resp.s3_destination.key #=> String
+    #   resp.s3_destination.metadata_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportAutoScalingGroupRecommendations AWS API Documentation
+    #
+    # @overload export_auto_scaling_group_recommendations(params = {})
+    # @param [Hash] params ({})
+    def export_auto_scaling_group_recommendations(params = {}, options = {})
+      req = build_request(:export_auto_scaling_group_recommendations, params)
+      req.send_request(options)
+    end
+
+    # Exports optimization recommendations for Amazon EC2 instances.
+    #
+    # Recommendations are exported in a comma-separated values (.csv) file,
+    # and its metadata in a JavaScript Object Notation (.json) file, to an
+    # existing Amazon Simple Storage Service (Amazon S3) bucket that you
+    # specify. For more information, see [Exporting Recommendations][1] in
+    # the *Compute Optimizer User Guide*.
+    #
+    # You can have only one Amazon EC2 instance export job in progress per
+    # AWS Region.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html
+    #
+    # @option params [Array<String>] :account_ids
+    #   The IDs of the AWS accounts for which to export instance
+    #   recommendations.
+    #
+    #   If your account is the master account of an organization, use this
+    #   parameter to specify the member accounts for which you want to export
+    #   recommendations.
+    #
+    #   This parameter cannot be specified together with the include member
+    #   accounts parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export if
+    #   this parameter, or the include member accounts parameter, is omitted.
+    #
+    #   You can specify multiple account IDs per request.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   An array of objects that describe a filter to export a more specific
+    #   set of instance recommendations.
+    #
+    # @option params [Array<String>] :fields_to_export
+    #   The recommendations data to include in the export file.
+    #
+    # @option params [required, Types::S3DestinationConfig] :s3_destination_config
+    #   An object to specify the destination Amazon Simple Storage Service
+    #   (Amazon S3) bucket name and key prefix for the export job.
+    #
+    #   You must create the destination Amazon S3 bucket for your
+    #   recommendations export before you create the export job. Compute
+    #   Optimizer does not create the S3 bucket for you. After you create the
+    #   S3 bucket, ensure that it has the required permission policy to allow
+    #   Compute Optimizer to write the export file to it. If you plan to
+    #   specify an object prefix when you create the export job, you must
+    #   include the object prefix in the policy that you add to the S3 bucket.
+    #   For more information, see [Amazon S3 Bucket Policy for Compute
+    #   Optimizer][1] in the *Compute Optimizer user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
+    #
+    # @option params [String] :file_format
+    #   The format of the export file.
+    #
+    #   The only export file format currently supported is `Csv`.
+    #
+    # @option params [Boolean] :include_member_accounts
+    #   Indicates whether to include recommendations for resources in all
+    #   member accounts of the organization if your account is the master
+    #   account of an organization.
+    #
+    #   The member accounts must also be opted in to Compute Optimizer.
+    #
+    #   Recommendations for member accounts of the organization are not
+    #   included in the export file if this parameter is omitted.
+    #
+    #   Recommendations for member accounts are not included in the export if
+    #   this parameter, or the account IDs parameter, is omitted.
+    #
+    # @return [Types::ExportEC2InstanceRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportEC2InstanceRecommendationsResponse#job_id #job_id} => String
+    #   * {Types::ExportEC2InstanceRecommendationsResponse#s3_destination #s3_destination} => Types::S3Destination
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_ec2_instance_recommendations({
+    #     account_ids: ["AccountId"],
+    #     filters: [
+    #       {
+    #         name: "Finding", # accepts Finding, RecommendationSourceType
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp
+    #     s3_destination_config: { # required
+    #       bucket: "DestinationBucket",
+    #       key_prefix: "DestinationKeyPrefix",
+    #     },
+    #     file_format: "Csv", # accepts Csv
+    #     include_member_accounts: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.s3_destination.bucket #=> String
+    #   resp.s3_destination.key #=> String
+    #   resp.s3_destination.metadata_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportEC2InstanceRecommendations AWS API Documentation
+    #
+    # @overload export_ec2_instance_recommendations(params = {})
+    # @param [Hash] params ({})
+    def export_ec2_instance_recommendations(params = {}, options = {})
+      req = build_request(:export_ec2_instance_recommendations, params)
+      req.send_request(options)
+    end
+
     # Returns Auto Scaling group recommendations.
     #
     # AWS Compute Optimizer currently generates recommendations for Auto
@@ -334,8 +641,12 @@ module Aws::ComputeOptimizer
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is.html
     #
     # @option params [Array<String>] :account_ids
-    #   The AWS account IDs for which to return Auto Scaling group
+    #   The IDs of the AWS accounts for which to return Auto Scaling group
     #   recommendations.
+    #
+    #   If your account is the master account of an organization, use this
+    #   parameter to specify the member accounts for which you want to return
+    #   Auto Scaling group recommendations.
     #
     #   Only one account ID can be specified per request.
     #
@@ -349,10 +660,10 @@ module Aws::ComputeOptimizer
     #
     # @option params [Integer] :max_results
     #   The maximum number of Auto Scaling group recommendations to return
-    #   with a single call.
+    #   with a single request.
     #
-    #   To retrieve the remaining results, make another call with the returned
-    #   `NextToken` value.
+    #   To retrieve the remaining results, make another request with the
+    #   returned `NextToken` value.
     #
     # @option params [Array<Types::Filter>] :filters
     #   An array of objects that describe a filter that returns a more
@@ -442,17 +753,22 @@ module Aws::ComputeOptimizer
     #
     # @option params [Integer] :max_results
     #   The maximum number of instance recommendations to return with a single
-    #   call.
+    #   request.
     #
-    #   To retrieve the remaining results, make another call with the returned
-    #   `NextToken` value.
+    #   To retrieve the remaining results, make another request with the
+    #   returned `NextToken` value.
     #
     # @option params [Array<Types::Filter>] :filters
     #   An array of objects that describe a filter that returns a more
     #   specific list of instance recommendations.
     #
     # @option params [Array<String>] :account_ids
-    #   The AWS account IDs for which to return instance recommendations.
+    #   The IDs of the AWS accounts for which to return instance
+    #   recommendations.
+    #
+    #   If your account is the master account of an organization, use this
+    #   parameter to specify the member accounts for which you want to return
+    #   instance recommendations.
     #
     #   Only one account ID can be specified per request.
     #
@@ -574,7 +890,7 @@ module Aws::ComputeOptimizer
     # Returns the enrollment (opt in) status of an account to the AWS
     # Compute Optimizer service.
     #
-    # If the account is a master account of an organization, this operation
+    # If the account is the master account of an organization, this action
     # also confirms the enrollment status of member accounts within the
     # organization.
     #
@@ -607,7 +923,12 @@ module Aws::ComputeOptimizer
     # not optimized, or optimized.
     #
     # @option params [Array<String>] :account_ids
-    #   The AWS account IDs for which to return recommendation summaries.
+    #   The IDs of the AWS accounts for which to return recommendation
+    #   summaries.
+    #
+    #   If your account is the master account of an organization, use this
+    #   parameter to specify the member accounts for which you want to return
+    #   recommendation summaries.
     #
     #   Only one account ID can be specified per request.
     #
@@ -616,10 +937,10 @@ module Aws::ComputeOptimizer
     #
     # @option params [Integer] :max_results
     #   The maximum number of recommendation summaries to return with a single
-    #   call.
+    #   request.
     #
-    #   To retrieve the remaining results, make another call with the returned
-    #   `NextToken` value.
+    #   To retrieve the remaining results, make another request with the
+    #   returned `NextToken` value.
     #
     # @return [Types::GetRecommendationSummariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -656,8 +977,8 @@ module Aws::ComputeOptimizer
     # Updates the enrollment (opt in) status of an account to the AWS
     # Compute Optimizer service.
     #
-    # If the account is a master account of an organization, this operation
-    # can also enroll member accounts within the organization.
+    # If the account is a master account of an organization, this action can
+    # also be used to enroll member accounts within the organization.
     #
     # @option params [required, String] :status
     #   The new enrollment status of the account.
@@ -666,8 +987,8 @@ module Aws::ComputeOptimizer
     #   `Pending` or `Failed` are specified.
     #
     # @option params [Boolean] :include_member_accounts
-    #   Indicates whether to enroll member accounts within the organization,
-    #   if the account is a master account of an organization.
+    #   Indicates whether to enroll member accounts of the organization if the
+    #   your account is the master account of an organization.
     #
     # @return [Types::UpdateEnrollmentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -708,7 +1029,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

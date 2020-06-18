@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::AppConfig
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::AppConfig
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -396,7 +400,7 @@ module Aws::AppConfig
     #   `s3://<bucket>/<objectKey> `. Here is an example:
     #   s3://my-bucket/my-app/us-east-1/my-config.json
     #
-    # @option params [required, String] :retrieval_role_arn
+    # @option params [String] :retrieval_role_arn
     #   The ARN of an IAM role with permission to access the configuration at
     #   the specified LocationUri.
     #
@@ -425,7 +429,7 @@ module Aws::AppConfig
     #     name: "Name", # required
     #     description: "Description",
     #     location_uri: "Uri", # required
-    #     retrieval_role_arn: "Arn", # required
+    #     retrieval_role_arn: "RoleArn",
     #     validators: [
     #       {
     #         type: "JSON_SCHEMA", # required, accepts JSON_SCHEMA, LAMBDA
@@ -609,7 +613,7 @@ module Aws::AppConfig
     #     monitors: [
     #       {
     #         alarm_arn: "Arn",
-    #         alarm_role_arn: "Arn",
+    #         alarm_role_arn: "RoleArn",
     #       },
     #     ],
     #     tags: {
@@ -634,6 +638,73 @@ module Aws::AppConfig
     # @param [Hash] params ({})
     def create_environment(params = {}, options = {})
       req = build_request(:create_environment, params)
+      req.send_request(options)
+    end
+
+    # Create a new configuration in the AppConfig configuration store.
+    #
+    # @option params [required, String] :application_id
+    #   The application ID.
+    #
+    # @option params [required, String] :configuration_profile_id
+    #   The configuration profile ID.
+    #
+    # @option params [String] :description
+    #   A description of the configuration.
+    #
+    # @option params [required, String, IO] :content
+    #   The content of the configuration or the configuration data.
+    #
+    # @option params [required, String] :content_type
+    #   A standard MIME type describing the format of the configuration
+    #   content. For more information, see [Content-Type][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+    #
+    # @option params [Integer] :latest_version_number
+    #   An optional locking token used to prevent race conditions from
+    #   overwriting configuration updates when creating a new version. To
+    #   ensure your data is not overwritten when creating multiple hosted
+    #   configuration versions in rapid succession, specify the version of the
+    #   latest hosted configuration version.
+    #
+    # @return [Types::HostedConfigurationVersion] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::HostedConfigurationVersion#application_id #application_id} => String
+    #   * {Types::HostedConfigurationVersion#configuration_profile_id #configuration_profile_id} => String
+    #   * {Types::HostedConfigurationVersion#version_number #version_number} => Integer
+    #   * {Types::HostedConfigurationVersion#description #description} => String
+    #   * {Types::HostedConfigurationVersion#content #content} => String
+    #   * {Types::HostedConfigurationVersion#content_type #content_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_hosted_configuration_version({
+    #     application_id: "Id", # required
+    #     configuration_profile_id: "Id", # required
+    #     description: "Description",
+    #     content: "data", # required
+    #     content_type: "StringWithLengthBetween1And255", # required
+    #     latest_version_number: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.configuration_profile_id #=> String
+    #   resp.version_number #=> Integer
+    #   resp.description #=> String
+    #   resp.content #=> String
+    #   resp.content_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateHostedConfigurationVersion AWS API Documentation
+    #
+    # @overload create_hosted_configuration_version(params = {})
+    # @param [Hash] params ({})
+    def create_hosted_configuration_version(params = {}, options = {})
+      req = build_request(:create_hosted_configuration_version, params)
       req.send_request(options)
     end
 
@@ -735,6 +806,37 @@ module Aws::AppConfig
     # @param [Hash] params ({})
     def delete_environment(params = {}, options = {})
       req = build_request(:delete_environment, params)
+      req.send_request(options)
+    end
+
+    # Delete a version of a configuration from the AppConfig configuration
+    # store.
+    #
+    # @option params [required, String] :application_id
+    #   The application ID.
+    #
+    # @option params [required, String] :configuration_profile_id
+    #   The configuration profile ID.
+    #
+    # @option params [required, Integer] :version_number
+    #   The versions number to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_hosted_configuration_version({
+    #     application_id: "Id", # required
+    #     configuration_profile_id: "Id", # required
+    #     version_number: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteHostedConfigurationVersion AWS API Documentation
+    #
+    # @overload delete_hosted_configuration_version(params = {})
+    # @param [Hash] params ({})
+    def delete_hosted_configuration_version(params = {}, options = {})
+      req = build_request(:delete_hosted_configuration_version, params)
       req.send_request(options)
     end
 
@@ -1075,6 +1177,52 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
+    # Get information about a specific configuration version.
+    #
+    # @option params [required, String] :application_id
+    #   The application ID.
+    #
+    # @option params [required, String] :configuration_profile_id
+    #   The configuration profile ID.
+    #
+    # @option params [required, Integer] :version_number
+    #   The version.
+    #
+    # @return [Types::HostedConfigurationVersion] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::HostedConfigurationVersion#application_id #application_id} => String
+    #   * {Types::HostedConfigurationVersion#configuration_profile_id #configuration_profile_id} => String
+    #   * {Types::HostedConfigurationVersion#version_number #version_number} => Integer
+    #   * {Types::HostedConfigurationVersion#description #description} => String
+    #   * {Types::HostedConfigurationVersion#content #content} => String
+    #   * {Types::HostedConfigurationVersion#content_type #content_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_hosted_configuration_version({
+    #     application_id: "Id", # required
+    #     configuration_profile_id: "Id", # required
+    #     version_number: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.configuration_profile_id #=> String
+    #   resp.version_number #=> Integer
+    #   resp.description #=> String
+    #   resp.content #=> String
+    #   resp.content_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetHostedConfigurationVersion AWS API Documentation
+    #
+    # @overload get_hosted_configuration_version(params = {})
+    # @param [Hash] params ({})
+    def get_hosted_configuration_version(params = {}, options = {})
+      req = build_request(:get_hosted_configuration_version, params)
+      req.send_request(options)
+    end
+
     # List all applications in your AWS account.
     #
     # @option params [Integer] :max_results
@@ -1319,6 +1467,59 @@ module Aws::AppConfig
     # @param [Hash] params ({})
     def list_environments(params = {}, options = {})
       req = build_request(:list_environments, params)
+      req.send_request(options)
+    end
+
+    # View a list of configurations stored in the AppConfig configuration
+    # store by version.
+    #
+    # @option params [required, String] :application_id
+    #   The application ID.
+    #
+    # @option params [required, String] :configuration_profile_id
+    #   The configuration profile ID.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @return [Types::HostedConfigurationVersions] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::HostedConfigurationVersions#items #items} => Array&lt;Types::HostedConfigurationVersionSummary&gt;
+    #   * {Types::HostedConfigurationVersions#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_hosted_configuration_versions({
+    #     application_id: "Id", # required
+    #     configuration_profile_id: "Id", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].application_id #=> String
+    #   resp.items[0].configuration_profile_id #=> String
+    #   resp.items[0].version_number #=> Integer
+    #   resp.items[0].description #=> String
+    #   resp.items[0].content_type #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListHostedConfigurationVersions AWS API Documentation
+    #
+    # @overload list_hosted_configuration_versions(params = {})
+    # @param [Hash] params ({})
+    def list_hosted_configuration_versions(params = {}, options = {})
+      req = build_request(:list_hosted_configuration_versions, params)
       req.send_request(options)
     end
 
@@ -1658,7 +1859,7 @@ module Aws::AppConfig
     #     configuration_profile_id: "Id", # required
     #     name: "Name",
     #     description: "Description",
-    #     retrieval_role_arn: "Arn",
+    #     retrieval_role_arn: "RoleArn",
     #     validators: [
     #       {
     #         type: "JSON_SCHEMA", # required, accepts JSON_SCHEMA, LAMBDA
@@ -1815,7 +2016,7 @@ module Aws::AppConfig
     #     monitors: [
     #       {
     #         alarm_arn: "Arn",
-    #         alarm_role_arn: "Arn",
+    #         alarm_role_arn: "RoleArn",
     #       },
     #     ],
     #   })
@@ -1884,7 +2085,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

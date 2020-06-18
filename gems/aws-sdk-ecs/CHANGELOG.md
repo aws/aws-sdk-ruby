@@ -1,6 +1,19 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2020-06-11)
+------------------
+
+* Feature - This release adds support for deleting capacity providers.
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.64.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.63.0 (2020-05-28)
 ------------------
 
@@ -395,4 +408,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-ecs` gem.
-

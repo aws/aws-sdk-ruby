@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::QLDB
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::QLDB
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -350,6 +354,13 @@ module Aws::QLDB
     # @option params [required, String] :name
     #   The name of the ledger that you want to create. The name must be
     #   unique among all of your ledgers in the current AWS Region.
+    #
+    #   Naming constraints for ledger names are defined in [Quotas in Amazon
+    #   QLDB][1] in the *Amazon QLDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value pairs to add as tags to the ledger that you want to
@@ -665,9 +676,12 @@ module Aws::QLDB
       req.send_request(options)
     end
 
-    # Returns a journal block object at a specified address in a ledger.
-    # Also returns a proof of the specified block for verification if
+    # Returns a block object at a specified address in a journal. Also
+    # returns a proof of the specified block for verification if
     # `DigestTipAddress` is provided.
+    #
+    # For information about the data contents in a block, see [Journal
+    # contents][1] in the *Amazon QLDB Developer Guide*.
     #
     # If the specified ledger doesn't exist or is in `DELETING` status,
     # then throws `ResourceNotFoundException`.
@@ -677,6 +691,10 @@ module Aws::QLDB
     #
     # If no block exists with the specified address, then throws
     # `InvalidParameterException`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/journal-contents.html
     #
     # @option params [required, String] :name
     #   The name of the ledger.
@@ -1090,10 +1108,10 @@ module Aws::QLDB
       req.send_request(options)
     end
 
-    # Creates a stream for a given Amazon QLDB ledger that delivers the
-    # journal data to a specified Amazon Kinesis Data Streams resource. The
-    # stream captures every document revision that is committed to your
-    # journal and sends it to the Kinesis data stream.
+    # Creates a journal stream for a given Amazon QLDB ledger. The stream
+    # captures every document revision that is committed to the ledger's
+    # journal and delivers the data to a specified Amazon Kinesis Data
+    # Streams resource.
     #
     # @option params [required, String] :ledger_name
     #   The name of the ledger.
@@ -1123,8 +1141,8 @@ module Aws::QLDB
     #
     # @option params [Time,DateTime,Date,Integer,String] :exclusive_end_time
     #   The exclusive date and time that specifies when the stream ends. If
-    #   you keep this parameter blank, the stream runs indefinitely until you
-    #   cancel it.
+    #   you don't define this parameter, the stream runs indefinitely until
+    #   you cancel it.
     #
     #   The `ExclusiveEndTime` must be in `ISO 8601` date and time format and
     #   in Universal Coordinated Time (UTC). For example:
@@ -1140,11 +1158,9 @@ module Aws::QLDB
     #   stream.
     #
     #   Your stream name must be unique among other *active* streams for a
-    #   given ledger. If you try to create a stream with the same name and
-    #   configuration of an active, existing stream for the same ledger, QLDB
-    #   simply returns the existing stream. Stream names have the same naming
-    #   constraints as ledger names, as defined in [Quotas in Amazon QLDB][1]
-    #   in the *Amazon QLDB Developer Guide*.
+    #   given ledger. Stream names have the same naming constraints as ledger
+    #   names, as defined in [Quotas in Amazon QLDB][1] in the *Amazon QLDB
+    #   Developer Guide*.
     #
     #
     #
@@ -1312,7 +1328,7 @@ module Aws::QLDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qldb'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

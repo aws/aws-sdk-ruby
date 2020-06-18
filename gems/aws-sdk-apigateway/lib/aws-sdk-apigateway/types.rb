@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -4471,7 +4473,7 @@ module Aws::APIGateway
     # @!attribute [rw] body
     #   \[Required\] The POST request body containing external API
     #   definitions. Currently, only OpenAPI definition JSON/YAML files are
-    #   supported. The maximum size of the API definition file is 2MB.
+    #   supported. The maximum size of the API definition file is 6MB.
     #   @return [String]
     #
     class ImportRestApiRequest < Struct.new(
@@ -4662,9 +4664,10 @@ module Aws::APIGateway
     #   @return [Integer]
     #
     # @!attribute [rw] cache_namespace
-    #   An API-specific tag group of related cached parameters. To be valid
-    #   values for `cacheKeyParameters`, these parameters must also be
-    #   specified for Method `requestParameters`.
+    #   Specifies a group of related cached parameters. By default, API
+    #   Gateway uses the resource ID as the `cacheNamespace`. You can
+    #   specify the same `cacheNamespace` across resources to return the
+    #   same cached data for requests to different resources.
     #   @return [String]
     #
     # @!attribute [rw] cache_key_parameters
@@ -4707,6 +4710,10 @@ module Aws::APIGateway
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #   @return [Hash<String,Types::IntegrationResponse>]
     #
+    # @!attribute [rw] tls_config
+    #   Specifies the TLS configuration for an integration.
+    #   @return [Types::TlsConfig]
+    #
     class Integration < Struct.new(
       :type,
       :http_method,
@@ -4721,7 +4728,8 @@ module Aws::APIGateway
       :timeout_in_millis,
       :cache_namespace,
       :cache_key_parameters,
-      :integration_responses)
+      :integration_responses,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -5457,6 +5465,9 @@ module Aws::APIGateway
     #         cache_key_parameters: ["String"],
     #         content_handling: "CONVERT_TO_BINARY", # accepts CONVERT_TO_BINARY, CONVERT_TO_TEXT
     #         timeout_in_millis: 1,
+    #         tls_config: {
+    #           insecure_skip_verification: false,
+    #         },
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -5574,11 +5585,16 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_namespace
-    #   A list of request parameters whose values are to be cached.
+    #   Specifies a group of related cached parameters. By default, API
+    #   Gateway uses the resource ID as the `cacheNamespace`. You can
+    #   specify the same `cacheNamespace` across resources to return the
+    #   same cached data for requests to different resources.
     #   @return [String]
     #
     # @!attribute [rw] cache_key_parameters
-    #   An API-specific tag group of related cached parameters.
+    #   A list of request parameters whose values API Gateway caches. To be
+    #   valid values for `cacheKeyParameters`, these parameters must also be
+    #   specified for Method `requestParameters`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] content_handling
@@ -5603,6 +5619,9 @@ module Aws::APIGateway
     #   is 29,000 milliseconds or 29 seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] tls_config
+    #   @return [Types::TlsConfig]
+    #
     class PutIntegrationRequest < Struct.new(
       :rest_api_id,
       :resource_id,
@@ -5619,7 +5638,8 @@ module Aws::APIGateway
       :cache_namespace,
       :cache_key_parameters,
       :content_handling,
-      :timeout_in_millis)
+      :timeout_in_millis,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -5935,7 +5955,7 @@ module Aws::APIGateway
     # @!attribute [rw] body
     #   \[Required\] The PUT request body containing external API
     #   definitions. Currently, only OpenAPI definition JSON/YAML files are
-    #   supported. The maximum size of the API definition file is 2MB.
+    #   supported. The maximum size of the API definition file is 6MB.
     #   @return [String]
     #
     class PutRestApiRequest < Struct.new(
@@ -6862,6 +6882,34 @@ module Aws::APIGateway
     class ThrottleSettings < Struct.new(
       :burst_limit,
       :rate_limit)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TlsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         insecure_skip_verification: false,
+    #       }
+    #
+    # @!attribute [rw] insecure_skip_verification
+    #   Specifies whether or not API Gateway skips verification that the
+    #   certificate for an integration endpoint is issued by a [supported
+    #   certificate authority][1]. This isn’t recommended, but it enables
+    #   you to use certificates that are signed by private certificate
+    #   authorities, or certificates that are self-signed. If enabled, API
+    #   Gateway still performs basic certificate validation, which includes
+    #   checking the certificate's expiration date, hostname, and presence
+    #   of a root certificate authority. Supported only for `HTTP` and
+    #   `HTTP_PROXY` integrations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-supported-certificate-authorities-for-http-endpoints.html
+    #   @return [Boolean]
+    #
+    class TlsConfig < Struct.new(
+      :insecure_skip_verification)
       include Aws::Structure
     end
 

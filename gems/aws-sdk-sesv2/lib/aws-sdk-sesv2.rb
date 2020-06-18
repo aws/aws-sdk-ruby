@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -45,6 +47,6 @@ require_relative 'aws-sdk-sesv2/customizations'
 # @service
 module Aws::SESV2
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.7.0'
 
 end

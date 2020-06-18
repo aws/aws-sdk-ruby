@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@personalize") do
   @service = Aws::Personalize::Resource.new
   @client = @service.client

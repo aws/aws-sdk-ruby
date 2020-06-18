@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -167,29 +169,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies one or more findings to archive.
-    #
-    # @note When making an API call, you may pass ArchiveFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_ids: ["__string"], # required
-    #       }
-    #
-    # @!attribute [rw] finding_ids
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ArchiveFindingsRequest AWS API Documentation
-    #
-    class ArchiveFindingsRequest < Struct.new(
-      :finding_ids)
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ArchiveFindingsResponse AWS API Documentation
-    #
-    class ArchiveFindingsResponse < Aws::EmptyStructure; end
-
     # Reserved for future use.
     #
     # @!attribute [rw] access_key_id
@@ -206,7 +185,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] session_context
     #   Provides information about a session that was created for an entity
-    #   who performed an action by using temporary security credentials.
+    #   that performed an action by using temporary security credentials.
     #   @return [Types::SessionContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AssumedRole AWS API Documentation
@@ -684,9 +663,9 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies where to export data classification results to, and the
+    # Specifies where to store data classification results, and the
     # encryption settings to use when storing results in that location.
-    # Currently, you can export classification results only to an S3 bucket.
+    # Currently, you can store classification results only in an S3 bucket.
     #
     # @note When making an API call, you may pass ClassificationExportConfiguration
     #   data as a hash:
@@ -700,7 +679,7 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] s3_destination
-    #   Specifies an S3 bucket to export data classification results to, and
+    #   Specifies an S3 bucket to store data classification results in, and
     #   the encryption settings to use when storing results in that bucket.
     #   @return [Types::S3Destination]
     #
@@ -1035,8 +1014,9 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] action
-    #   The action to perform on findings that meet the filter criteria.
-    #   Valid values are:
+    #   The action to perform on findings that meet the filter criteria. To
+    #   suppress (automatically archive) findings that meet the criteria,
+    #   set this value to ARCHIVE. Valid values are:
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -1765,9 +1745,10 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] finding_publishing_frequency
-    #   The frequency with which Amazon Macie publishes findings for an
-    #   account. This includes adding findings to AWS Security Hub and
-    #   exporting finding events to Amazon CloudWatch. Valid values are:
+    #   The frequency with which Amazon Macie publishes updates to policy
+    #   findings for an account. This includes publishing updates to AWS
+    #   Security Hub and Amazon EventBridge (formerly called Amazon
+    #   CloudWatch Events). Valid values are:
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1835,7 +1816,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] session_context
     #   Provides information about a session that was created for an entity
-    #   who performed an action by using temporary security credentials.
+    #   that performed an action by using temporary security credentials.
     #   @return [Types::SessionContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/FederatedUser AWS API Documentation
@@ -1941,6 +1922,8 @@ module Aws::Macie2
     # produced a policy finding.
     #
     # @!attribute [rw] action_type
+    #   The type of action that occurred for the resource and produced the
+    #   policy finding.
     #   @return [String]
     #
     # @!attribute [rw] api_call_details
@@ -1966,7 +1949,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about an entity who performed an action that
+    # Provides information about an entity that performed an action that
     # produced a policy finding for a resource.
     #
     # @!attribute [rw] domain_details
@@ -2151,12 +2134,12 @@ module Aws::Macie2
     class GetClassificationExportConfigurationRequest < Aws::EmptyStructure; end
 
     # Provides information about the current configuration settings for
-    # exporting data classification results.
+    # storing data classification results.
     #
     # @!attribute [rw] configuration
-    #   Specifies where to export data classification results to, and the
+    #   Specifies where to store data classification results, and the
     #   encryption settings to use when storing results in that location.
-    #   Currently, you can export classification results only to an S3
+    #   Currently, you can store classification results only in an S3
     #   bucket.
     #   @return [Types::ClassificationExportConfiguration]
     #
@@ -2326,8 +2309,9 @@ module Aws::Macie2
     # Provides information about a findings filter.
     #
     # @!attribute [rw] action
-    #   The action to perform on findings that meet the filter criteria.
-    #   Valid values are:
+    #   The action to perform on findings that meet the filter criteria. To
+    #   suppress (automatically archive) findings that meet the criteria,
+    #   set this value to ARCHIVE. Valid values are:
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -2445,9 +2429,10 @@ module Aws::Macie2
     #   @return [Time]
     #
     # @!attribute [rw] finding_publishing_frequency
-    #   The frequency with which Amazon Macie publishes findings for an
-    #   account. This includes adding findings to AWS Security Hub and
-    #   exporting finding events to Amazon CloudWatch. Valid values are:
+    #   The frequency with which Amazon Macie publishes updates to policy
+    #   findings for an account. This includes publishing updates to AWS
+    #   Security Hub and Amazon EventBridge (formerly called Amazon
+    #   CloudWatch Events). Valid values are:
     #   @return [String]
     #
     # @!attribute [rw] service_role
@@ -3563,7 +3548,7 @@ module Aws::Macie2
     #   @return [Types::FindingAction]
     #
     # @!attribute [rw] actor
-    #   Provides information about an entity who performed an action that
+    #   Provides information about an entity that performed an action that
     #   produced a policy finding for a resource.
     #   @return [Types::FindingActor]
     #
@@ -3575,9 +3560,9 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies where to export data classification results to, and the
+    # Specifies where to store data classification results, and the
     # encryption settings to use when storing results in that location.
-    # Currently, you can export classification results only to an S3 bucket.
+    # Currently, you can store classification results only in an S3 bucket.
     #
     # @note When making an API call, you may pass PutClassificationExportConfigurationRequest
     #   data as a hash:
@@ -3593,9 +3578,9 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] configuration
-    #   Specifies where to export data classification results to, and the
+    #   Specifies where to store data classification results, and the
     #   encryption settings to use when storing results in that location.
-    #   Currently, you can export classification results only to an S3
+    #   Currently, you can store classification results only in an S3
     #   bucket.
     #   @return [Types::ClassificationExportConfiguration]
     #
@@ -3606,13 +3591,13 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about updated settings for exporting data
+    # Provides information about updated settings for storing data
     # classification results.
     #
     # @!attribute [rw] configuration
-    #   Specifies where to export data classification results to, and the
+    #   Specifies where to store data classification results, and the
     #   encryption settings to use when storing results in that location.
-    #   Currently, you can export classification results only to an S3
+    #   Currently, you can store classification results only in an S3
     #   bucket.
     #   @return [Types::ClassificationExportConfiguration]
     #
@@ -3759,7 +3744,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies an S3 bucket to export data classification results to, and
+    # Specifies an S3 bucket to store data classification results in, and
     # the encryption settings to use when storing results in that bucket.
     #
     # @note When making an API call, you may pass S3Destination
@@ -3994,6 +3979,8 @@ module Aws::Macie2
     # occurrences of sensitive data that produced a finding.
     #
     # @!attribute [rw] category
+    #   The category of sensitive data that was detected and produced the
+    #   finding.
     #   @return [String]
     #
     # @!attribute [rw] detections
@@ -4065,7 +4052,7 @@ module Aws::Macie2
     end
 
     # Provides information about a session that was created for an entity
-    # who performed an action by using temporary security credentials.
+    # that performed an action by using temporary security credentials.
     #
     # @!attribute [rw] attributes
     #   Provides information about the context in which temporary security
@@ -4393,29 +4380,6 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies one or more findings to reactivate (unarchive).
-    #
-    # @note When making an API call, you may pass UnarchiveFindingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         finding_ids: ["__string"], # required
-    #       }
-    #
-    # @!attribute [rw] finding_ids
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UnarchiveFindingsRequest AWS API Documentation
-    #
-    class UnarchiveFindingsRequest < Struct.new(
-      :finding_ids)
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UnarchiveFindingsResponse AWS API Documentation
-    #
-    class UnarchiveFindingsResponse < Aws::EmptyStructure; end
-
     # Provides information about an account-related request that hasn't
     # been processed.
     #
@@ -4522,8 +4486,9 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] action
-    #   The action to perform on findings that meet the filter criteria.
-    #   Valid values are:
+    #   The action to perform on findings that meet the filter criteria. To
+    #   suppress (automatically archive) findings that meet the criteria,
+    #   set this value to ARCHIVE. Valid values are:
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4584,9 +4549,10 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] finding_publishing_frequency
-    #   The frequency with which Amazon Macie publishes findings for an
-    #   account. This includes adding findings to AWS Security Hub and
-    #   exporting finding events to Amazon CloudWatch. Valid values are:
+    #   The frequency with which Amazon Macie publishes updates to policy
+    #   findings for an account. This includes publishing updates to AWS
+    #   Security Hub and Amazon EventBridge (formerly called Amazon
+    #   CloudWatch Events). Valid values are:
     #   @return [String]
     #
     # @!attribute [rw] status

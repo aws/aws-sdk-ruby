@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../changelog'
 require_relative '../custom_service'
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@firehose") do
   @service = Aws::Firehose::Resource.new
   @client = @service.client

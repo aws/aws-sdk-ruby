@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@sqs") do
   @client = Aws::SQS::Client.new
   @sqs_created_queues = []

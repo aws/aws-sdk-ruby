@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -91,7 +93,6 @@ module Aws::CognitoIdentityProvider
     AuthEventsType = Shapes::ListShape.new(name: 'AuthEventsType')
     AuthFlowType = Shapes::StringShape.new(name: 'AuthFlowType')
     AuthParametersType = Shapes::MapShape.new(name: 'AuthParametersType')
-    AuthParametersValueType = Shapes::StringShape.new(name: 'AuthParametersValueType')
     AuthenticationResultType = Shapes::StructureShape.new(name: 'AuthenticationResultType')
     BlockedIPRangeListType = Shapes::ListShape.new(name: 'BlockedIPRangeListType')
     BooleanType = Shapes::BooleanShape.new(name: 'BooleanType')
@@ -749,7 +750,7 @@ module Aws::CognitoIdentityProvider
     AuthEventsType.member = Shapes::ShapeRef.new(shape: AuthEventType)
 
     AuthParametersType.key = Shapes::ShapeRef.new(shape: StringType)
-    AuthParametersType.value = Shapes::ShapeRef.new(shape: AuthParametersValueType)
+    AuthParametersType.value = Shapes::ShapeRef.new(shape: StringType)
 
     AuthenticationResultType.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
     AuthenticationResultType.add_member(:expires_in, Shapes::ShapeRef.new(shape: IntegerType, location_name: "ExpiresIn"))
@@ -2160,6 +2161,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AliasExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
@@ -2993,6 +2995,7 @@ module Aws::CognitoIdentityProvider
         o.name = "InitiateAuth"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: InitiateAuthRequest)
         o.output = Shapes::ShapeRef.new(shape: InitiateAuthResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3213,6 +3216,7 @@ module Aws::CognitoIdentityProvider
         o.name = "RespondToAuthChallenge"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: RespondToAuthChallengeRequest)
         o.output = Shapes::ShapeRef.new(shape: RespondToAuthChallengeResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -166,6 +168,332 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeRecommendationExportJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_ids: ["JobId"],
+    #         filters: [
+    #           {
+    #             name: "ResourceType", # accepts ResourceType, JobStatus
+    #             values: ["FilterValue"],
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] job_ids
+    #   The identification numbers of the export jobs to return.
+    #
+    #   An export job ID is returned when you create an export using the
+    #   `ExportAutoScalingGroupRecommendations` or
+    #   `ExportEC2InstanceRecommendations` actions.
+    #
+    #   All export jobs created in the last seven days are returned if this
+    #   parameter is omitted.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of objects that describe a filter to return a more specific
+    #   list of export jobs.
+    #   @return [Array<Types::JobFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to advance to the next page of export jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of export jobs to return with a single request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `NextToken` value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/DescribeRecommendationExportJobsRequest AWS API Documentation
+    #
+    class DescribeRecommendationExportJobsRequest < Struct.new(
+      :job_ids,
+      :filters,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommendation_export_jobs
+    #   An array of objects that describe recommendation export jobs.
+    #   @return [Array<Types::RecommendationExportJob>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to advance to the next page of export jobs.
+    #
+    #   This value is null when there are no more pages of export jobs to
+    #   return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/DescribeRecommendationExportJobsResponse AWS API Documentation
+    #
+    class DescribeRecommendationExportJobsResponse < Struct.new(
+      :recommendation_export_jobs,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExportAutoScalingGroupRecommendationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_ids: ["AccountId"],
+    #         filters: [
+    #           {
+    #             name: "Finding", # accepts Finding, RecommendationSourceType
+    #             values: ["FilterValue"],
+    #           },
+    #         ],
+    #         fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp
+    #         s3_destination_config: { # required
+    #           bucket: "DestinationBucket",
+    #           key_prefix: "DestinationKeyPrefix",
+    #         },
+    #         file_format: "Csv", # accepts Csv
+    #         include_member_accounts: false,
+    #       }
+    #
+    # @!attribute [rw] account_ids
+    #   The IDs of the AWS accounts for which to export Auto Scaling group
+    #   recommendations.
+    #
+    #   If your account is the master account of an organization, use this
+    #   parameter to specify the member accounts for which you want to
+    #   export recommendations.
+    #
+    #   This parameter cannot be specified together with the include member
+    #   accounts parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export
+    #   if this parameter, or the include member accounts parameter, is
+    #   omitted.
+    #
+    #   You can specify multiple account IDs per request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of objects that describe a filter to export a more specific
+    #   set of Auto Scaling group recommendations.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] fields_to_export
+    #   The recommendations data to include in the export file.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_destination_config
+    #   An object to specify the destination Amazon Simple Storage Service
+    #   (Amazon S3) bucket name and key prefix for the export job.
+    #
+    #   You must create the destination Amazon S3 bucket for your
+    #   recommendations export before you create the export job. Compute
+    #   Optimizer does not create the S3 bucket for you. After you create
+    #   the S3 bucket, ensure that it has the required permission policy to
+    #   allow Compute Optimizer to write the export file to it. If you plan
+    #   to specify an object prefix when you create the export job, you must
+    #   include the object prefix in the policy that you add to the S3
+    #   bucket. For more information, see [Amazon S3 Bucket Policy for
+    #   Compute Optimizer][1] in the *Compute Optimizer user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
+    #   @return [Types::S3DestinationConfig]
+    #
+    # @!attribute [rw] file_format
+    #   The format of the export file.
+    #
+    #   The only export file format currently supported is `Csv`.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_member_accounts
+    #   Indicates whether to include recommendations for resources in all
+    #   member accounts of the organization if your account is the master
+    #   account of an organization.
+    #
+    #   The member accounts must also be opted in to Compute Optimizer.
+    #
+    #   Recommendations for member accounts of the organization are not
+    #   included in the export file if this parameter is omitted.
+    #
+    #   This parameter cannot be specified together with the account IDs
+    #   parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export
+    #   if this parameter, or the account IDs parameter, is omitted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportAutoScalingGroupRecommendationsRequest AWS API Documentation
+    #
+    class ExportAutoScalingGroupRecommendationsRequest < Struct.new(
+      :account_ids,
+      :filters,
+      :fields_to_export,
+      :s3_destination_config,
+      :file_format,
+      :include_member_accounts)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identification number of the export job.
+    #
+    #   Use the `DescribeRecommendationExportJobs` action, and specify the
+    #   job ID to view the status of an export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   An object that describes the destination Amazon S3 bucket of a
+    #   recommendations export file.
+    #   @return [Types::S3Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportAutoScalingGroupRecommendationsResponse AWS API Documentation
+    #
+    class ExportAutoScalingGroupRecommendationsResponse < Struct.new(
+      :job_id,
+      :s3_destination)
+      include Aws::Structure
+    end
+
+    # Describes the destination of the recommendations export and metadata
+    # files.
+    #
+    # @!attribute [rw] s3
+    #   An object that describes the destination Amazon Simple Storage
+    #   Service (Amazon S3) bucket name and object keys of a recommendations
+    #   export file, and its associated metadata file.
+    #   @return [Types::S3Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportDestination AWS API Documentation
+    #
+    class ExportDestination < Struct.new(
+      :s3)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExportEC2InstanceRecommendationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_ids: ["AccountId"],
+    #         filters: [
+    #           {
+    #             name: "Finding", # accepts Finding, RecommendationSourceType
+    #             values: ["FilterValue"],
+    #           },
+    #         ],
+    #         fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp
+    #         s3_destination_config: { # required
+    #           bucket: "DestinationBucket",
+    #           key_prefix: "DestinationKeyPrefix",
+    #         },
+    #         file_format: "Csv", # accepts Csv
+    #         include_member_accounts: false,
+    #       }
+    #
+    # @!attribute [rw] account_ids
+    #   The IDs of the AWS accounts for which to export instance
+    #   recommendations.
+    #
+    #   If your account is the master account of an organization, use this
+    #   parameter to specify the member accounts for which you want to
+    #   export recommendations.
+    #
+    #   This parameter cannot be specified together with the include member
+    #   accounts parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export
+    #   if this parameter, or the include member accounts parameter, is
+    #   omitted.
+    #
+    #   You can specify multiple account IDs per request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of objects that describe a filter to export a more specific
+    #   set of instance recommendations.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] fields_to_export
+    #   The recommendations data to include in the export file.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_destination_config
+    #   An object to specify the destination Amazon Simple Storage Service
+    #   (Amazon S3) bucket name and key prefix for the export job.
+    #
+    #   You must create the destination Amazon S3 bucket for your
+    #   recommendations export before you create the export job. Compute
+    #   Optimizer does not create the S3 bucket for you. After you create
+    #   the S3 bucket, ensure that it has the required permission policy to
+    #   allow Compute Optimizer to write the export file to it. If you plan
+    #   to specify an object prefix when you create the export job, you must
+    #   include the object prefix in the policy that you add to the S3
+    #   bucket. For more information, see [Amazon S3 Bucket Policy for
+    #   Compute Optimizer][1] in the *Compute Optimizer user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
+    #   @return [Types::S3DestinationConfig]
+    #
+    # @!attribute [rw] file_format
+    #   The format of the export file.
+    #
+    #   The only export file format currently supported is `Csv`.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_member_accounts
+    #   Indicates whether to include recommendations for resources in all
+    #   member accounts of the organization if your account is the master
+    #   account of an organization.
+    #
+    #   The member accounts must also be opted in to Compute Optimizer.
+    #
+    #   Recommendations for member accounts of the organization are not
+    #   included in the export file if this parameter is omitted.
+    #
+    #   Recommendations for member accounts are not included in the export
+    #   if this parameter, or the account IDs parameter, is omitted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportEC2InstanceRecommendationsRequest AWS API Documentation
+    #
+    class ExportEC2InstanceRecommendationsRequest < Struct.new(
+      :account_ids,
+      :filters,
+      :fields_to_export,
+      :s3_destination_config,
+      :file_format,
+      :include_member_accounts)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identification number of the export job.
+    #
+    #   Use the `DescribeRecommendationExportJobs` action, and specify the
+    #   job ID to view the status of an export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   An object that describes the destination Amazon S3 bucket of a
+    #   recommendations export file.
+    #   @return [Types::S3Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportEC2InstanceRecommendationsResponse AWS API Documentation
+    #
+    class ExportEC2InstanceRecommendationsResponse < Struct.new(
+      :job_id,
+      :s3_destination)
+      include Aws::Structure
+    end
+
     # Describes a filter that returns a more specific list of
     # recommendations.
     #
@@ -180,27 +508,27 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] name
     #   The name of the filter.
     #
-    #   Specify `Finding` to filter the results to a specific findings
-    #   classification.
+    #   Specify `Finding` to return recommendations with a specific findings
+    #   classification (e.g., `Overprovisioned`).
     #
-    #   Specify `RecommendationSourceType` to filter the results to a
-    #   specific resource type.
+    #   Specify `RecommendationSourceType` to return recommendations of a
+    #   specific resource type (e.g., `AutoScalingGroup`).
     #   @return [String]
     #
     # @!attribute [rw] values
     #   The value of the filter.
     #
-    #   If you specify the `name` parameter as `Finding`, and you're
+    #   If you specify the `name` parameter as `Finding`, and you request
     #   recommendations for an *instance*, then the valid values are
     #   `Underprovisioned`, `Overprovisioned`, `NotOptimized`, or
     #   `Optimized`.
     #
-    #   If you specify the `name` parameter as `Finding`, and you're
+    #   If you specify the `name` parameter as `Finding`, and you request
     #   recommendations for an *Auto Scaling group*, then the valid values
     #   are `Optimized`, or `NotOptimized`.
     #
     #   If you specify the `name` parameter as `RecommendationSourceType`,
-    #   then the valid values are `EC2Instance`, or `AutoScalingGroup`.
+    #   then the valid values are `Ec2Instance`, or `AutoScalingGroup`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/Filter AWS API Documentation
@@ -228,8 +556,12 @@ module Aws::ComputeOptimizer
     #       }
     #
     # @!attribute [rw] account_ids
-    #   The AWS account IDs for which to return Auto Scaling group
+    #   The IDs of the AWS accounts for which to return Auto Scaling group
     #   recommendations.
+    #
+    #   If your account is the master account of an organization, use this
+    #   parameter to specify the member accounts for which you want to
+    #   return Auto Scaling group recommendations.
     #
     #   Only one account ID can be specified per request.
     #   @return [Array<String>]
@@ -246,9 +578,9 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] max_results
     #   The maximum number of Auto Scaling group recommendations to return
-    #   with a single call.
+    #   with a single request.
     #
-    #   To retrieve the remaining results, make another call with the
+    #   To retrieve the remaining results, make another request with the
     #   returned `NextToken` value.
     #   @return [Integer]
     #
@@ -324,9 +656,9 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] max_results
     #   The maximum number of instance recommendations to return with a
-    #   single call.
+    #   single request.
     #
-    #   To retrieve the remaining results, make another call with the
+    #   To retrieve the remaining results, make another request with the
     #   returned `NextToken` value.
     #   @return [Integer]
     #
@@ -336,7 +668,12 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] account_ids
-    #   The AWS account IDs for which to return instance recommendations.
+    #   The IDs of the AWS accounts for which to return instance
+    #   recommendations.
+    #
+    #   If your account is the master account of an organization, use this
+    #   parameter to specify the member accounts for which you want to
+    #   return instance recommendations.
     #
     #   Only one account ID can be specified per request.
     #   @return [Array<String>]
@@ -503,7 +840,12 @@ module Aws::ComputeOptimizer
     #       }
     #
     # @!attribute [rw] account_ids
-    #   The AWS account IDs for which to return recommendation summaries.
+    #   The IDs of the AWS accounts for which to return recommendation
+    #   summaries.
+    #
+    #   If your account is the master account of an organization, use this
+    #   parameter to specify the member accounts for which you want to
+    #   return recommendation summaries.
     #
     #   Only one account ID can be specified per request.
     #   @return [Array<String>]
@@ -514,9 +856,9 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] max_results
     #   The maximum number of recommendation summaries to return with a
-    #   single call.
+    #   single request.
     #
-    #   To retrieve the remaining results, make another call with the
+    #   To retrieve the remaining results, make another request with the
     #   returned `NextToken` value.
     #   @return [Integer]
     #
@@ -556,7 +898,7 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the instance recommendation.
+    #   The AWS account ID of the instance.
     #   @return [String]
     #
     # @!attribute [rw] instance_name
@@ -677,8 +1019,7 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # The request processing has failed because of an unknown error,
-    # exception, or failure.
+    # An internal error has occurred. Try your call again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -702,6 +1043,60 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Describes a filter that returns a more specific list of recommendation
+    # export jobs.
+    #
+    # This filter is used with the `DescribeRecommendationExportJobs`
+    # action.
+    #
+    # @note When making an API call, you may pass JobFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourceType", # accepts ResourceType, JobStatus
+    #         values: ["FilterValue"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the filter.
+    #
+    #   Specify `ResourceType` to return export jobs of a specific resource
+    #   type (e.g., `Ec2Instance`).
+    #
+    #   Specify `JobStatus` to return export jobs with a specific status
+    #   (e.g, `Complete`).
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value of the filter.
+    #
+    #   If you specify the `name` parameter as `ResourceType`, the valid
+    #   values are `Ec2Instance` or `AutoScalingGroup`.
+    #
+    #   If you specify the `name` parameter as `JobStatus`, the valid values
+    #   are `Queued`, `InProgress`, `Complete`, or `Failed`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/JobFilter AWS API Documentation
+    #
+    class JobFilter < Struct.new(
+      :name,
+      :values)
+      include Aws::Structure
+    end
+
+    # The request exceeds a limit of the service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The request must contain either a valid (registered) AWS access key ID
     # or X.509 certificate.
     #
@@ -715,7 +1110,7 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # You must opt in to the service to perform this action.
+    # The account is not opted in to AWS Compute Optimizer.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -758,6 +1153,56 @@ module Aws::ComputeOptimizer
       :name,
       :timestamps,
       :values)
+      include Aws::Structure
+    end
+
+    # Describes a recommendation export job.
+    #
+    # Use the `DescribeRecommendationExportJobs` action to view your
+    # recommendation export jobs.
+    #
+    # Use the `ExportAutoScalingGroupRecommendations` or
+    # `ExportEC2InstanceRecommendations` actions to request an export of
+    # your recommendations.
+    #
+    # @!attribute [rw] job_id
+    #   The identification number of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   An object that describes the destination of the export file.
+    #   @return [Types::ExportDestination]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type of the exported recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The timestamp of when the export job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The timestamp of when the export job was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for an export job failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RecommendationExportJob AWS API Documentation
+    #
+    class RecommendationExportJob < Struct.new(
+      :job_id,
+      :destination,
+      :resource_type,
+      :status,
+      :creation_timestamp,
+      :last_updated_timestamp,
+      :failure_reason)
       include Aws::Structure
     end
 
@@ -833,7 +1278,7 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # The specified resource was not found.
+    # A resource that is required for the action doesn't exist.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -842,6 +1287,80 @@ module Aws::ComputeOptimizer
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # Describes the destination Amazon Simple Storage Service (Amazon S3)
+    # bucket name and object keys of a recommendations export file, and its
+    # associated metadata file.
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket used as the destination of an
+    #   export file.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The Amazon S3 bucket key of an export file.
+    #
+    #   The key uniquely identifies the object, or export file, in the S3
+    #   bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_key
+    #   The Amazon S3 bucket key of a metadata file.
+    #
+    #   The key uniquely identifies the object, or metadata file, in the S3
+    #   bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/S3Destination AWS API Documentation
+    #
+    class S3Destination < Struct.new(
+      :bucket,
+      :key,
+      :metadata_key)
+      include Aws::Structure
+    end
+
+    # Describes the destination Amazon Simple Storage Service (Amazon S3)
+    # bucket name and key prefix for a recommendations export job.
+    #
+    # You must create the destination Amazon S3 bucket for your
+    # recommendations export before you create the export job. Compute
+    # Optimizer does not create the S3 bucket for you. After you create the
+    # S3 bucket, ensure that it has the required permission policy to allow
+    # Compute Optimizer to write the export file to it. If you plan to
+    # specify an object prefix when you create the export job, you must
+    # include the object prefix in the policy that you add to the S3 bucket.
+    # For more information, see [Amazon S3 Bucket Policy for Compute
+    # Optimizer][1] in the *Compute Optimizer user guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
+    #
+    # @note When making an API call, you may pass S3DestinationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "DestinationBucket",
+    #         key_prefix: "DestinationKeyPrefix",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket to use as the destination for an
+    #   export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefix
+    #   The Amazon S3 bucket prefix for an export job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/S3DestinationConfig AWS API Documentation
+    #
+    class S3DestinationConfig < Struct.new(
+      :bucket,
+      :key_prefix)
       include Aws::Structure
     end
 
@@ -875,7 +1394,7 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # The limit on the number of requests per second was exceeded.
+    # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -903,8 +1422,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] include_member_accounts
-    #   Indicates whether to enroll member accounts within the organization,
-    #   if the account is a master account of an organization.
+    #   Indicates whether to enroll member accounts of the organization if
+    #   the your account is the master account of an organization.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/UpdateEnrollmentStatusRequest AWS API Documentation

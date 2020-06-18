@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -819,6 +821,12 @@ module Aws::EMR
     #   stored.
     #   @return [String]
     #
+    # @!attribute [rw] log_encryption_kms_key_id
+    #   The AWS KMS customer master key (CMK) used for encrypting log files.
+    #   This attribute is only available with EMR version 5.30.0 and later,
+    #   excluding EMR 6.0.0.
+    #   @return [String]
+    #
     # @!attribute [rw] requested_ami_version
     #   The AMI version requested for this cluster.
     #   @return [String]
@@ -977,6 +985,7 @@ module Aws::EMR
       :ec2_instance_attributes,
       :instance_collection_type,
       :log_uri,
+      :log_encryption_kms_key_id,
       :requested_ami_version,
       :running_ami_version,
       :release_label,
@@ -3140,6 +3149,12 @@ module Aws::EMR
     #   The location in Amazon S3 where log files for the job are stored.
     #   @return [String]
     #
+    # @!attribute [rw] log_encryption_kms_key_id
+    #   The AWS KMS customer master key (CMK) used for encrypting log files.
+    #   This attribute is only available with EMR version 5.30.0 and later,
+    #   excluding EMR 6.0.0.
+    #   @return [String]
+    #
     # @!attribute [rw] ami_version
     #   Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR
     #   releases 4.0 and later, `ReleaseLabel` is used. To specify a custom
@@ -3220,6 +3235,7 @@ module Aws::EMR
       :job_flow_id,
       :name,
       :log_uri,
+      :log_encryption_kms_key_id,
       :ami_version,
       :execution_status_detail,
       :instances,
@@ -4608,6 +4624,7 @@ module Aws::EMR
     #       {
     #         name: "XmlStringMaxLen256", # required
     #         log_uri: "XmlString",
+    #         log_encryption_kms_key_id: "XmlString",
     #         additional_info: "XmlString",
     #         ami_version: "XmlStringMaxLen256",
     #         release_label: "XmlStringMaxLen256",
@@ -4846,6 +4863,13 @@ module Aws::EMR
     #   a value is not provided, logs are not created.
     #   @return [String]
     #
+    # @!attribute [rw] log_encryption_kms_key_id
+    #   The AWS KMS customer master key (CMK) used for encrypting log files.
+    #   If a value is not provided, the logs will remain encrypted by
+    #   AES-256. This attribute is only available with EMR version 5.30.0
+    #   and later, excluding EMR 6.0.0.
+    #   @return [String]
+    #
     # @!attribute [rw] additional_info
     #   A JSON string for selecting additional features.
     #   @return [String]
@@ -5071,6 +5095,7 @@ module Aws::EMR
     class RunJobFlowInput < Struct.new(
       :name,
       :log_uri,
+      :log_encryption_kms_key_id,
       :additional_info,
       :ami_version,
       :release_label,

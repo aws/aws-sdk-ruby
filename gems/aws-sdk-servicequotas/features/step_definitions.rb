@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@servicequotas") do
   @service = Aws::ServiceQuotas::Resource.new
   @client = @service.client

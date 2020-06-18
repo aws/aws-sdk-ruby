@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::GuardDuty
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::GuardDuty
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -637,7 +641,8 @@ module Aws::GuardDuty
     #   The format of the file that contains the IPSet.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the IPSet.
+    #   The URI of the file that contains the IPSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #
     # @option params [required, Boolean] :activate
     #   A Boolean value that indicates whether GuardDuty is to start using the
@@ -822,7 +827,8 @@ module Aws::GuardDuty
     #   The format of the file that contains the ThreatIntelSet.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the ThreatIntelSet.
+    #   The URI of the file that contains the ThreatIntelSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #
     # @option params [required, Boolean] :activate
     #   A Boolean value that indicates whether GuardDuty is to start using the
@@ -1422,6 +1428,30 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.access_key_details.principal_id #=> String
     #   resp.findings[0].resource.access_key_details.user_name #=> String
     #   resp.findings[0].resource.access_key_details.user_type #=> String
+    #   resp.findings[0].resource.s3_bucket_details #=> Array
+    #   resp.findings[0].resource.s3_bucket_details[0].arn #=> String
+    #   resp.findings[0].resource.s3_bucket_details[0].name #=> String
+    #   resp.findings[0].resource.s3_bucket_details[0].type #=> String
+    #   resp.findings[0].resource.s3_bucket_details[0].created_at #=> Time
+    #   resp.findings[0].resource.s3_bucket_details[0].owner.id #=> String
+    #   resp.findings[0].resource.s3_bucket_details[0].tags #=> Array
+    #   resp.findings[0].resource.s3_bucket_details[0].tags[0].key #=> String
+    #   resp.findings[0].resource.s3_bucket_details[0].tags[0].value #=> String
+    #   resp.findings[0].resource.s3_bucket_details[0].default_server_side_encryption.encryption_type #=> String
+    #   resp.findings[0].resource.s3_bucket_details[0].default_server_side_encryption.kms_master_key_arn #=> String
+    #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.bucket_level_permissions.access_control_list.allows_public_read_access #=> Boolean
+    #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.bucket_level_permissions.access_control_list.allows_public_write_access #=> Boolean
+    #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.bucket_level_permissions.bucket_policy.allows_public_read_access #=> Boolean
+    #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.bucket_level_permissions.bucket_policy.allows_public_write_access #=> Boolean
+    #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.bucket_level_permissions.block_public_access.ignore_public_acls #=> Boolean
+    #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.bucket_level_permissions.block_public_access.restrict_public_buckets #=> Boolean
+    #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.bucket_level_permissions.block_public_access.block_public_acls #=> Boolean
+    #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.bucket_level_permissions.block_public_access.block_public_policy #=> Boolean
+    #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.account_level_permissions.block_public_access.ignore_public_acls #=> Boolean
+    #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.account_level_permissions.block_public_access.restrict_public_buckets #=> Boolean
+    #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.account_level_permissions.block_public_access.block_public_acls #=> Boolean
+    #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.account_level_permissions.block_public_access.block_public_policy #=> Boolean
+    #   resp.findings[0].resource.s3_bucket_details[0].public_access.effective_permission #=> String
     #   resp.findings[0].resource.instance_details.availability_zone #=> String
     #   resp.findings[0].resource.instance_details.iam_instance_profile.arn #=> String
     #   resp.findings[0].resource.instance_details.iam_instance_profile.id #=> String
@@ -1946,8 +1976,6 @@ module Aws::GuardDuty
     #
     #   * resource.instanceDetails.instanceId
     #
-    #   * resource.instanceDetails.outpostArn
-    #
     #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
     #
     #   * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
@@ -1997,8 +2025,6 @@ module Aws::GuardDuty
     #   * service.action.networkConnectionAction.localPortDetails.port
     #
     #   * service.action.networkConnectionAction.protocol
-    #
-    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
@@ -2194,8 +2220,8 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Lists details about associated member accounts for the current
-    # GuardDuty master account.
+    # Lists details about all member accounts for the current GuardDuty
+    # master account.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector the member is associated with.
@@ -2213,11 +2239,9 @@ module Aws::GuardDuty
     #   data.
     #
     # @option params [String] :only_associated
-    #   Specifies what member accounts the response includes based on their
-    #   relationship status with the master account. The default value is
-    #   "true". If set to "false" the response includes all existing
-    #   member accounts (including members who haven't been invited yet or
-    #   have been disassociated).
+    #   Specifies whether to only return associated members or to return all
+    #   members (including members who haven't been invited yet or have been
+    #   disassociated).
     #
     # @return [Types::ListMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2733,7 +2757,8 @@ module Aws::GuardDuty
     #   The unique ID that specifies the IPSet that you want to update.
     #
     # @option params [String] :location
-    #   The updated URI of the file that contains the IPSet.
+    #   The updated URI of the file that contains the IPSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #
     # @option params [Boolean] :activate
     #   The updated Boolean value that specifies whether the IPSet is active
@@ -2838,7 +2863,8 @@ module Aws::GuardDuty
     #   update.
     #
     # @option params [String] :location
-    #   The updated URI of the file that contains the ThreateIntelSet.
+    #   The updated URI of the file that contains the ThreateIntelSet. For
+    #   example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #
     # @option params [Boolean] :activate
     #   The updated Boolean value that specifies whether the ThreateIntelSet
@@ -2878,7 +2904,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.35.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

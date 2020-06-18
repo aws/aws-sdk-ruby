@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -3488,6 +3490,66 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # A complex type that identifies a hosted zone that a specified Amazon
+    # VPC is associated with and the owner of the hosted zone. If there is a
+    # value for `OwningAccount`, there is no value for `OwningService`, and
+    # vice versa.
+    #
+    # @!attribute [rw] owning_account
+    #   If the hosted zone was created by an AWS account, or was created by
+    #   an AWS service that creates hosted zones using the current account,
+    #   `OwningAccount` contains the account ID of that account. For
+    #   example, when you use AWS Cloud Map to create a hosted zone, Cloud
+    #   Map creates the hosted zone using the current AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_service
+    #   If an AWS service uses its own account to create a hosted zone and
+    #   associate the specified VPC with that hosted zone, `OwningService`
+    #   contains an abbreviation that identifies the service. For example,
+    #   if Amazon Elastic File System (Amazon EFS) created a hosted zone and
+    #   associated a VPC with the hosted zone, the value of `OwningService`
+    #   is `efs.amazonaws.com`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneOwner AWS API Documentation
+    #
+    class HostedZoneOwner < Struct.new(
+      :owning_account,
+      :owning_service)
+      include Aws::Structure
+    end
+
+    # In the response to a `ListHostedZonesByVPC` request, the
+    # `HostedZoneSummaries` element contains one `HostedZoneSummary` element
+    # for each hosted zone that the specified Amazon VPC is associated with.
+    # Each `HostedZoneSummary` element contains the hosted zone name and ID,
+    # and information about who owns the hosted zone.
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   The Route 53 hosted zone ID of a private hosted zone that the
+    #   specified VPC is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the private hosted zone, such as `example.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The owner of a private hosted zone that the specified VPC is
+    #   associated with. The owner can be either an AWS account or an AWS
+    #   service.
+    #   @return [Types::HostedZoneOwner]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneSummary AWS API Documentation
+    #
+    class HostedZoneSummary < Struct.new(
+      :hosted_zone_id,
+      :name,
+      :owner)
+      include Aws::Structure
+    end
+
     # The resource you're trying to access is unsupported on this Amazon
     # Route 53 endpoint.
     #
@@ -4005,6 +4067,84 @@ module Aws::Route53
       :next_dns_name,
       :next_hosted_zone_id,
       :max_items)
+      include Aws::Structure
+    end
+
+    # Lists all the private hosted zones that a specified VPC is associated
+    # with, regardless of which AWS account created the hosted zones.
+    #
+    # @note When making an API call, you may pass ListHostedZonesByVPCRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_id: "VPCId", # required
+    #         vpc_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #         max_items: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the Amazon VPC that you want to list hosted zones for.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_region
+    #   For the Amazon VPC that you specified for `VPCId`, the AWS Region
+    #   that you created the VPC in.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   (Optional) The maximum number of hosted zones that you want Amazon
+    #   Route 53 to return. If the specified VPC is associated with more
+    #   than `MaxItems` hosted zones, the response includes a `NextToken`
+    #   element. `NextToken` contains the hosted zone ID of the first hosted
+    #   zone that Route 53 will return if you submit another request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response included a `NextToken` element, the
+    #   specified VPC is associated with more hosted zones. To get more
+    #   hosted zones, submit another `ListHostedZonesByVPC` request.
+    #
+    #   For the value of `NextToken`, specify the value of `NextToken` from
+    #   the previous response.
+    #
+    #   If the previous response didn't include a `NextToken` element,
+    #   there are no more hosted zones to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesByVPCRequest AWS API Documentation
+    #
+    class ListHostedZonesByVPCRequest < Struct.new(
+      :vpc_id,
+      :vpc_region,
+      :max_items,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hosted_zone_summaries
+    #   A list that contains one `HostedZoneSummary` element for each hosted
+    #   zone that the specified Amazon VPC is associated with. Each
+    #   `HostedZoneSummary` element contains the hosted zone name and ID,
+    #   and information about who owns the hosted zone.
+    #   @return [Array<Types::HostedZoneSummary>]
+    #
+    # @!attribute [rw] max_items
+    #   The value that you specified for `MaxItems` in the most recent
+    #   `ListHostedZonesByVPC` request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The value that you specified for `NextToken` in the most recent
+    #   `ListHostedZonesByVPC` request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesByVPCResponse AWS API Documentation
+    #
+    class ListHostedZonesByVPCResponse < Struct.new(
+      :hosted_zone_summaries,
+      :max_items,
+      :next_token)
       include Aws::Structure
     end
 

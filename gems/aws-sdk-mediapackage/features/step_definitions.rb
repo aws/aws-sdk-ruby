@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@mediapackage") do
   @service = Aws::MediaPackage::Resource.new
   @client = @service.client

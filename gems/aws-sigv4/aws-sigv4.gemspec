@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Gem::Specification.new do |spec|
   spec.name          = 'aws-sigv4'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
@@ -8,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.license       = 'Apache-2.0'
   spec.files         = Dir['lib/**/*.rb']
 
-  spec.add_dependency('aws-eventstream', '~> 1.0', '>= 1.0.2') # For signning event stream events
+  spec.add_dependency('aws-eventstream', '~> 1', '>= 1.0.2') # For signing event stream events
 
   spec.metadata = {
     'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sigv4',

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -25,7 +27,7 @@ require_relative 'aws-sdk-elasticsearchservice/customizations'
 # structure.
 #
 #     elasticsearch_service = Aws::ElasticsearchService::Client.new
-#     resp = elasticsearch_service.add_tags(params)
+#     resp = elasticsearch_service.accept_inbound_cross_cluster_search_connection(params)
 #
 # See {Client} for more information.
 #
@@ -45,6 +47,6 @@ require_relative 'aws-sdk-elasticsearchservice/customizations'
 # @service
 module Aws::ElasticsearchService
 
-  GEM_VERSION = '1.35.0'
+  GEM_VERSION = '1.37.1'
 
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module Route53
     module Plugins

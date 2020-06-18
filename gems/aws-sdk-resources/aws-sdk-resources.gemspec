@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Gem::Specification.new do |spec|
 
   spec.name          = 'aws-sdk-resources'
@@ -48,6 +50,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-cloudwatch', '~> 1')
   spec.add_dependency('aws-sdk-cloudwatchevents', '~> 1')
   spec.add_dependency('aws-sdk-cloudwatchlogs', '~> 1')
+  spec.add_dependency('aws-sdk-codeartifact', '~> 1')
   spec.add_dependency('aws-sdk-codebuild', '~> 1')
   spec.add_dependency('aws-sdk-codecommit', '~> 1')
   spec.add_dependency('aws-sdk-codedeploy', '~> 1')

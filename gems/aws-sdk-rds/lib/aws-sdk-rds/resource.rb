@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -79,6 +81,7 @@ module Aws::RDS
     #     copy_tags_to_snapshot: false,
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     enable_global_write_forwarding: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -341,6 +344,10 @@ module Aws::RDS
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
     #
+    #   <note markdown="1"> Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+    #
+    #    </note>
+    #
     #   Default: 0
     #
     #   Constraints:
@@ -429,6 +436,13 @@ module Aws::RDS
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
+    # @option options [Boolean] :enable_global_write_forwarding
+    #   A value that indicates whether to enable write operations to be
+    #   forwarded from this cluster to the primary cluster in an Aurora global
+    #   database. The resulting changes are replicated back to this cluster.
+    #   This parameter only applies to DB clusters that are secondary clusters
+    #   in an Aurora global database. By default, Aurora disallows write
+    #   operations for secondary clusters.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1129,11 +1143,16 @@ module Aws::RDS
     #   more information, see `CreateDBCluster`.
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
-    #   When the DB instance is publicly accessible, it is an Internet-facing
-    #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance isn't publicly accessible, it
-    #   is an internal instance with a DNS name that resolves to a private IP
-    #   address.
+    #
+    #   When the DB instance is publicly accessible, its DNS endpoint resolves
+    #   to the private IP address from within the DB instance's VPC, and to
+    #   the public IP address from outside of the DB instance's VPC. Access
+    #   to the DB instance is ultimately controlled by the security group it
+    #   uses, and that public access is not permitted if the security group
+    #   assigned to the DB instance doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
     #
     #   Default: The default behavior varies depending on whether
     #   `DBSubnetGroupName` is specified.

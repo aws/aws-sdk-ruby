@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -1573,7 +1575,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #   @return [String]
     #
     # @!attribute [rw] crawler_security_configuration
@@ -1728,6 +1730,8 @@ module Aws::Glue
     #         dynamo_db_targets: [
     #           {
     #             path: "Path",
+    #             scan_all: false,
+    #             scan_rate: 1.0,
     #           },
     #         ],
     #         catalog_targets: [
@@ -1891,6 +1895,8 @@ module Aws::Glue
     #           dynamo_db_targets: [
     #             {
     #               path: "Path",
+    #               scan_all: false,
+    #               scan_rate: 1.0,
     #             },
     #           ],
     #           catalog_targets: [
@@ -1937,14 +1943,13 @@ module Aws::Glue
     #   @return [Types::CrawlerTargets]
     #
     # @!attribute [rw] schedule
-    #   A `cron` expression used to specify the schedule. For more
-    #   information, see [Time-Based Schedules for Jobs and Crawlers][1].
-    #   For example, to run something every day at 12:15 UTC, specify
-    #   `cron(15 12 * * ? *)`.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @!attribute [rw] classifiers
@@ -1963,13 +1968,13 @@ module Aws::Glue
     #   @return [Types::SchemaChangePolicy]
     #
     # @!attribute [rw] configuration
-    #   The crawler configuration information. This versioned JSON string
-    #   allows users to specify aspects of a crawler's behavior. For more
+    #   Crawler configuration information. This versioned JSON string allows
+    #   users to specify aspects of a crawler's behavior. For more
     #   information, see [Configuring a Crawler][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #   @return [String]
     #
     # @!attribute [rw] crawler_security_configuration
@@ -1978,13 +1983,13 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to use with this crawler request. You can use tags to limit
-    #   access to the crawler. For more information, see [AWS Tags in AWS
-    #   Glue][1].
+    #   The tags to use with this crawler request. You may use tags to limit
+    #   access to the crawler. For more information about tags in AWS Glue,
+    #   see [AWS Tags in AWS Glue][1] in the developer guide.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawlerRequest AWS API Documentation
@@ -2714,7 +2719,7 @@ module Aws::Glue
     #
     # @!attribute [rw] json_path
     #   A `JsonPath` string defining the JSON data for the classifier to
-    #   classify. AWS Glue supports a subset of `JsonPath`, as described in
+    #   classify. AWS Glue supports a subset of JsonPath, as described in
     #   [Writing JsonPath Custom Classifiers][1].
     #
     #
@@ -4440,16 +4445,43 @@ module Aws::Glue
     #
     #       {
     #         path: "Path",
+    #         scan_all: false,
+    #         scan_rate: 1.0,
     #       }
     #
     # @!attribute [rw] path
     #   The name of the DynamoDB table to crawl.
     #   @return [String]
     #
+    # @!attribute [rw] scan_all
+    #   Indicates whether to scan all the records, or to sample rows from
+    #   the table. Scanning all the records can take a long time when the
+    #   table is not a high throughput table.
+    #
+    #   A value of `true` means to scan all records, while a value of
+    #   `false` means to sample the records. If no value is specified, the
+    #   value defaults to `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] scan_rate
+    #   The percentage of the configured read capacity units to use by the
+    #   AWS Glue crawler. Read capacity units is a term defined by DynamoDB,
+    #   and is a numeric value that acts as rate limiter for the number of
+    #   reads that can be performed on that table per second.
+    #
+    #   The valid values are null or a value between 0.1 to 1.5. A null
+    #   value is used when user does not provide a value, and defaults to
+    #   0.5 of the configured Read Capacity Unit (for provisioned tables),
+    #   or 0.25 of the max configured Read Capacity Unit (for tables using
+    #   on-demand mode).
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DynamoDBTarget AWS API Documentation
     #
     class DynamoDBTarget < Struct.new(
-      :path)
+      :path,
+      :scan_all,
+      :scan_rate)
       include Aws::Structure
     end
 
@@ -6821,7 +6853,9 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The name of the catalog database where the functions are located.
+    #   The name of the catalog database where the functions are located. If
+    #   none is provided, functions from all the databases across the
+    #   catalog will be returned.
     #   @return [String]
     #
     # @!attribute [rw] pattern
@@ -7112,7 +7146,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html
     #   @return [String]
     #
     # @!attribute [rw] custom_patterns
@@ -7121,7 +7155,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GrokClassifier AWS API Documentation
@@ -7256,7 +7290,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JdbcTarget AWS API Documentation
@@ -8024,7 +8058,7 @@ module Aws::Glue
     #
     # @!attribute [rw] json_path
     #   A `JsonPath` string defining the JSON data for the classifier to
-    #   classify. AWS Glue supports a subset of `JsonPath`, as described in
+    #   classify. AWS Glue supports a subset of JsonPath, as described in
     #   [Writing JsonPath Custom Classifiers][1].
     #
     #
@@ -9419,7 +9453,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3Target AWS API Documentation
@@ -9433,14 +9467,13 @@ module Aws::Glue
     # A scheduling object using a `cron` statement to schedule an event.
     #
     # @!attribute [rw] schedule_expression
-    #   A `cron` expression used to specify the schedule. For more
-    #   information, see [Time-Based Schedules for Jobs and Crawlers][1].
-    #   For example, to run something every day at 12:15 UTC, specify
-    #   `cron(15 12 * * ? *)`.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -11388,6 +11421,8 @@ module Aws::Glue
     #           dynamo_db_targets: [
     #             {
     #               path: "Path",
+    #               scan_all: false,
+    #               scan_rate: 1.0,
     #             },
     #           ],
     #           catalog_targets: [
@@ -11431,14 +11466,13 @@ module Aws::Glue
     #   @return [Types::CrawlerTargets]
     #
     # @!attribute [rw] schedule
-    #   A `cron` expression used to specify the schedule. For more
-    #   information, see [Time-Based Schedules for Jobs and Crawlers][1].
-    #   For example, to run something every day at 12:15 UTC, specify
-    #   `cron(15 12 * * ? *)`.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @!attribute [rw] classifiers
@@ -11457,13 +11491,13 @@ module Aws::Glue
     #   @return [Types::SchemaChangePolicy]
     #
     # @!attribute [rw] configuration
-    #   The crawler configuration information. This versioned JSON string
-    #   allows users to specify aspects of a crawler's behavior. For more
+    #   Crawler configuration information. This versioned JSON string allows
+    #   users to specify aspects of a crawler's behavior. For more
     #   information, see [Configuring a Crawler][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #   @return [String]
     #
     # @!attribute [rw] crawler_security_configuration
@@ -11505,14 +11539,14 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The updated `cron` expression used to specify the schedule. For more
-    #   information, see [Time-Based Schedules for Jobs and Crawlers][1].
-    #   For example, to run something every day at 12:15 UTC, specify
-    #   `cron(15 12 * * ? *)`.
+    #   The updated `cron` expression used to specify the schedule (see
+    #   [Time-Based Schedules for Jobs and Crawlers][1]. For example, to run
+    #   something every day at 12:15 UTC, you would specify: `cron(15 12 * *
+    #   ? *)`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerScheduleRequest AWS API Documentation
@@ -11846,7 +11880,7 @@ module Aws::Glue
     #
     # @!attribute [rw] json_path
     #   A `JsonPath` string defining the JSON data for the classifier to
-    #   classify. AWS Glue supports a subset of `JsonPath`, as described in
+    #   classify. AWS Glue supports a subset of JsonPath, as described in
     #   [Writing JsonPath Custom Classifiers][1].
     #
     #
@@ -12412,6 +12446,10 @@ module Aws::Glue
     #   The name of the function.
     #   @return [String]
     #
+    # @!attribute [rw] database_name
+    #   The name of the database where the function resides.
+    #   @return [String]
+    #
     # @!attribute [rw] class_name
     #   The Java class that contains the function code.
     #   @return [String]
@@ -12436,6 +12474,7 @@ module Aws::Glue
     #
     class UserDefinedFunction < Struct.new(
       :function_name,
+      :database_name,
       :class_name,
       :owner_name,
       :owner_type,

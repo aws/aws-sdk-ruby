@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'forwardable'
 
 module Aws
@@ -181,7 +183,7 @@ module Aws
 
         extend Deprecations
         extend Forwardable
-        def_delegators :@client, :config, :delete_object, :head_object
+        def_delegators :@client, :config, :delete_object, :head_object, :build_request
 
         # Creates a new encryption client. You must provide one of the following
         # options:

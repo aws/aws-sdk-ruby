@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -943,7 +945,7 @@ module Aws::CognitoIdentityProvider
     #         client_id: "ClientIdType", # required
     #         auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH, ADMIN_USER_PASSWORD_AUTH
     #         auth_parameters: {
-    #           "StringType" => "AuthParametersValueType",
+    #           "StringType" => "StringType",
     #         },
     #         client_metadata: {
     #           "StringType" => "StringType",
@@ -5382,7 +5384,7 @@ module Aws::CognitoIdentityProvider
     #       {
     #         auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH, ADMIN_USER_PASSWORD_AUTH
     #         auth_parameters: {
-    #           "StringType" => "AuthParametersValueType",
+    #           "StringType" => "StringType",
     #         },
     #         client_metadata: {
     #           "StringType" => "StringType",

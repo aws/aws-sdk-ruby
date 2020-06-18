@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -612,6 +614,10 @@ module Aws::RDS
     # @option options [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
+    #
+    #   <note markdown="1"> Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+    #
+    #    </note>
     #
     #   Default: 0
     #

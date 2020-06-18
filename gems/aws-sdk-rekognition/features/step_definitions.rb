@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@rekognition") do
   @service = Aws::Rekognition::Resource.new
   @client = @service.client

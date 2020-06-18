@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -25,7 +27,7 @@ require_relative 'aws-sdk-computeoptimizer/customizations'
 # structure.
 #
 #     compute_optimizer = Aws::ComputeOptimizer::Client.new
-#     resp = compute_optimizer.get_auto_scaling_group_recommendations(params)
+#     resp = compute_optimizer.describe_recommendation_export_jobs(params)
 #
 # See {Client} for more information.
 #
@@ -45,6 +47,6 @@ require_relative 'aws-sdk-computeoptimizer/customizations'
 # @service
 module Aws::ComputeOptimizer
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.1'
 
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RetryErrorsSvc = ApiHelper.sample_service
 
 # Sets up the handler to run retry tests

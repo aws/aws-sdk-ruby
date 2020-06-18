@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require_relative '../spec_helper'
 require 'stringio'
 
 module Aws
   module S3
-    describe Client do
-      describe 'MD5 checksums' do
+    module Plugins
+      describe Md5s do
         it 'has a :compute_checksums option that defaults to true' do
           client = Client.new(stub_responses: true)
           expect(client.config.compute_checksums).to be(true)
@@ -117,26 +119,6 @@ module Aws
             expect(resp.context.http_request.headers['content-md5']).to eq(
               '+kDD2/74SZx+Rz+/Dw7I1Q=='
             )
-          end
-        end
-
-        {
-          'delete_objects' => { bucket: 'b', delete: { objects: [] } },
-          'put_bucket_cors' => {
-            bucket: 'b', cors_configuration: { cors_rules: [] }
-          },
-          'put_bucket_lifecycle' => {
-            bucket: 'b', lifecycle_configuration: { rules: [] }
-          },
-          'put_bucket_policy' => { bucket: 'b', policy: '{foo:"bar"}' },
-          'put_bucket_tagging' => { bucket: 'b', tagging: { tag_set: [] } }
-        }.each_pair do |operation, params|
-          it "computes md5 for #{operation} when :compute_checksums is false" do
-            client = Client.new(stub_responses: true, compute_checksums: false)
-            resp = client.send(operation, params)
-            md5 = resp.context.http_request.headers['content-md5']
-            expect(md5).to be_kind_of(String)
-            expect(md5.size).to eq(24)
           end
         end
       end

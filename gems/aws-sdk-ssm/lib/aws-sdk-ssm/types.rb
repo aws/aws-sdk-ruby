@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -373,6 +375,13 @@ module Aws::SSM
     #   By default, all associations use `AUTO` mode.
     #   @return [String]
     #
+    # @!attribute [rw] apply_only_at_cron_interval
+    #   By default, when you create a new associations, the system runs it
+    #   immediately after it is created and then according to the schedule
+    #   you specified. Specify this option if you don't want an association
+    #   to run immediately after you create it.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
     #
     class AssociationDescription < Struct.new(
@@ -396,7 +405,8 @@ module Aws::SSM
       :max_errors,
       :max_concurrency,
       :compliance_severity,
-      :sync_compliance)
+      :sync_compliance,
+      :apply_only_at_cron_interval)
       include Aws::Structure
     end
 
@@ -781,6 +791,13 @@ module Aws::SSM
     #   By default, all associations use `AUTO` mode.
     #   @return [String]
     #
+    # @!attribute [rw] apply_only_at_cron_interval
+    #   By default, when you create a new associations, the system runs it
+    #   immediately after it is created and then according to the schedule
+    #   you specified. Specify this option if you don't want an association
+    #   to run immediately after you create it.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo AWS API Documentation
     #
     class AssociationVersionInfo < Struct.new(
@@ -797,7 +814,8 @@ module Aws::SSM
       :max_errors,
       :max_concurrency,
       :compliance_severity,
-      :sync_compliance)
+      :sync_compliance,
+      :apply_only_at_cron_interval)
       include Aws::Structure
     end
 
@@ -2357,6 +2375,7 @@ module Aws::SSM
     #             max_concurrency: "MaxConcurrency",
     #             compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #             sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #             apply_only_at_cron_interval: false,
     #           },
     #         ],
     #       }
@@ -2405,6 +2424,7 @@ module Aws::SSM
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #         apply_only_at_cron_interval: false,
     #       }
     #
     # @!attribute [rw] name
@@ -2516,6 +2536,13 @@ module Aws::SSM
     #   By default, all associations use `AUTO` mode.
     #   @return [String]
     #
+    # @!attribute [rw] apply_only_at_cron_interval
+    #   By default, when you create a new associations, the system runs it
+    #   immediately after it is created and then according to the schedule
+    #   you specified. Specify this option if you don't want an association
+    #   to run immediately after you create it.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry AWS API Documentation
     #
     class CreateAssociationBatchRequestEntry < Struct.new(
@@ -2531,7 +2558,8 @@ module Aws::SSM
       :max_errors,
       :max_concurrency,
       :compliance_severity,
-      :sync_compliance)
+      :sync_compliance,
+      :apply_only_at_cron_interval)
       include Aws::Structure
     end
 
@@ -2581,6 +2609,7 @@ module Aws::SSM
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #         apply_only_at_cron_interval: false,
     #       }
     #
     # @!attribute [rw] name
@@ -2713,6 +2742,13 @@ module Aws::SSM
     #   By default, all associations use `AUTO` mode.
     #   @return [String]
     #
+    # @!attribute [rw] apply_only_at_cron_interval
+    #   By default, when you create a new associations, the system runs it
+    #   immediately after it is created and then according to the schedule
+    #   you specified. Specify this option if you don't want an association
+    #   to run immediately after you create it.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
     #
     class CreateAssociationRequest < Struct.new(
@@ -2728,7 +2764,8 @@ module Aws::SSM
       :max_errors,
       :max_concurrency,
       :compliance_severity,
-      :sync_compliance)
+      :sync_compliance,
+      :apply_only_at_cron_interval)
       include Aws::Structure
     end
 
@@ -2911,6 +2948,7 @@ module Aws::SSM
     #         end_date: "MaintenanceWindowStringDateTime",
     #         schedule: "MaintenanceWindowSchedule", # required
     #         schedule_timezone: "MaintenanceWindowTimezone",
+    #         schedule_offset: 1,
     #         duration: 1, # required
     #         cutoff: 1, # required
     #         allow_unassociated_targets: false, # required
@@ -2963,6 +3001,19 @@ module Aws::SSM
     #
     #   [1]: https://www.iana.org/time-zones
     #   @return [String]
+    #
+    # @!attribute [rw] schedule_offset
+    #   The number of days to wait after the date and time specified by a
+    #   CRON expression before running the maintenance window.
+    #
+    #   For example, the following cron expression schedules a maintenance
+    #   window to run on the third Tuesday of every month at 11:30 PM.
+    #
+    #   `cron(0 30 23 ? * TUE#3 *)`
+    #
+    #   If the schedule offset is `2`, the maintenance window won't run
+    #   until two days later.
+    #   @return [Integer]
     #
     # @!attribute [rw] duration
     #   The duration of the maintenance window in hours.
@@ -3020,6 +3071,7 @@ module Aws::SSM
       :end_date,
       :schedule,
       :schedule_timezone,
+      :schedule_offset,
       :duration,
       :cutoff,
       :allow_unassociated_targets,
@@ -7662,6 +7714,11 @@ module Aws::SSM
     #   [1]: https://www.iana.org/time-zones
     #   @return [String]
     #
+    # @!attribute [rw] schedule_offset
+    #   The number of days to wait to run a maintenance window after the
+    #   scheduled CRON expression date and time.
+    #   @return [Integer]
+    #
     # @!attribute [rw] next_execution_time
     #   The next time the maintenance window will actually run, taking into
     #   account any specified times for the maintenance window to become
@@ -7704,6 +7761,7 @@ module Aws::SSM
       :end_date,
       :schedule,
       :schedule_timezone,
+      :schedule_offset,
       :next_execution_time,
       :duration,
       :cutoff,
@@ -11155,6 +11213,11 @@ module Aws::SSM
     #   based on, in Internet Assigned Numbers Authority (IANA) format.
     #   @return [String]
     #
+    # @!attribute [rw] schedule_offset
+    #   The number of days to wait to run a maintenance window after the
+    #   scheduled CRON expression date and time.
+    #   @return [Integer]
+    #
     # @!attribute [rw] end_date
     #   The date and time, in ISO-8601 Extended format, for when the
     #   maintenance window is scheduled to become inactive.
@@ -11182,6 +11245,7 @@ module Aws::SSM
       :cutoff,
       :schedule,
       :schedule_timezone,
+      :schedule_offset,
       :end_date,
       :start_date,
       :next_execution_time)
@@ -13516,15 +13580,19 @@ module Aws::SSM
     # @!attribute [rw] type
     #   The type of parameter that you want to add to the system.
     #
+    #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
+    #   templates or in the China Regions.
+    #
+    #    </note>
+    #
     #   Items in a `StringList` must be separated by a comma (,). You can't
     #   use other punctuation or special character to escape items in the
     #   list. If you have a parameter value that requires a comma, then use
     #   the `String` data type.
     #
-    #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
-    #   templates or in the China Regions.
-    #
-    #    </note>
+    #   Specifying a parameter type is not required when updating a
+    #   parameter. You must specify a parameter type when creating a
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -15618,8 +15686,9 @@ module Aws::SSM
     # @!attribute [rw] document_name
     #   The name of the SSM document to define the parameters and plugin
     #   settings for the session. For example, `SSM-SessionManagerRunShell`.
-    #   If no document name is provided, a shell to the instance is launched
-    #   by default.
+    #   You can call the GetDocument API to verify the document exists
+    #   before attempting to start a session. If no document name is
+    #   provided, a shell to the instance is launched by default.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -16272,6 +16341,7 @@ module Aws::SSM
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #         apply_only_at_cron_interval: false,
     #       }
     #
     # @!attribute [rw] association_id
@@ -16392,6 +16462,20 @@ module Aws::SSM
     #   By default, all associations use `AUTO` mode.
     #   @return [String]
     #
+    # @!attribute [rw] apply_only_at_cron_interval
+    #   By default, when you update an association, the system runs it
+    #   immediately after it is updated and then according to the schedule
+    #   you specified. Specify this option if you don't want an association
+    #   to run immediately after you update it.
+    #
+    #   Also, if you specified this option when you created the association,
+    #   you can reset it. To do so, specify the
+    #   `no-apply-only-at-cron-interval` parameter when you update the
+    #   association from the command line. This parameter forces the
+    #   association to run immediately after updating it and according to
+    #   the interval specified.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
     #
     class UpdateAssociationRequest < Struct.new(
@@ -16408,7 +16492,8 @@ module Aws::SSM
       :max_errors,
       :max_concurrency,
       :compliance_severity,
-      :sync_compliance)
+      :sync_compliance,
+      :apply_only_at_cron_interval)
       include Aws::Structure
     end
 
@@ -16598,6 +16683,7 @@ module Aws::SSM
     #         end_date: "MaintenanceWindowStringDateTime",
     #         schedule: "MaintenanceWindowSchedule",
     #         schedule_timezone: "MaintenanceWindowTimezone",
+    #         schedule_offset: 1,
     #         duration: 1,
     #         cutoff: 1,
     #         allow_unassociated_targets: false,
@@ -16653,6 +16739,19 @@ module Aws::SSM
     #   [1]: https://www.iana.org/time-zones
     #   @return [String]
     #
+    # @!attribute [rw] schedule_offset
+    #   The number of days to wait after the date and time specified by a
+    #   CRON expression before running the maintenance window.
+    #
+    #   For example, the following cron expression schedules a maintenance
+    #   window to run the third Tuesday of every month at 11:30 PM.
+    #
+    #   `cron(0 30 23 ? * TUE#3 *)`
+    #
+    #   If the schedule offset is `2`, the maintenance window won't run
+    #   until two days later.
+    #   @return [Integer]
+    #
     # @!attribute [rw] duration
     #   The duration of the maintenance window in hours.
     #   @return [Integer]
@@ -16687,6 +16786,7 @@ module Aws::SSM
       :end_date,
       :schedule,
       :schedule_timezone,
+      :schedule_offset,
       :duration,
       :cutoff,
       :allow_unassociated_targets,
@@ -16736,6 +16836,11 @@ module Aws::SSM
     #   [1]: https://www.iana.org/time-zones
     #   @return [String]
     #
+    # @!attribute [rw] schedule_offset
+    #   The number of days to wait to run a maintenance window after the
+    #   scheduled CRON expression date and time.
+    #   @return [Integer]
+    #
     # @!attribute [rw] duration
     #   The duration of the maintenance window in hours.
     #   @return [Integer]
@@ -16764,6 +16869,7 @@ module Aws::SSM
       :end_date,
       :schedule,
       :schedule_timezone,
+      :schedule_offset,
       :duration,
       :cutoff,
       :allow_unassociated_targets,

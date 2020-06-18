@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@cloudsearch") do
   @service = Aws::CloudSearch::Resource.new
   @client = @service.client

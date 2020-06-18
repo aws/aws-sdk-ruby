@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::Macie2
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::Macie2
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -330,27 +334,6 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def accept_invitation(params = {}, options = {})
       req = build_request(:accept_invitation, params)
-      req.send_request(options)
-    end
-
-    # Archives one or more findings.
-    #
-    # @option params [required, Array<String>] :finding_ids
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.archive_findings({
-    #     finding_ids: ["__string"], # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ArchiveFindings AWS API Documentation
-    #
-    # @overload archive_findings(params = {})
-    # @param [Hash] params ({})
-    def archive_findings(params = {}, options = {})
-      req = build_request(:archive_findings, params)
       req.send_request(options)
     end
 
@@ -579,8 +562,9 @@ module Aws::Macie2
     # filter.
     #
     # @option params [required, String] :action
-    #   The action to perform on findings that meet the filter criteria. Valid
-    #   values are:
+    #   The action to perform on findings that meet the filter criteria. To
+    #   suppress (automatically archive) findings that meet the criteria, set
+    #   this value to ARCHIVE. Valid values are:
     #
     # @option params [String] :client_token
     #   **A suitable default value is auto-generated.** You should normally
@@ -1147,9 +1131,10 @@ module Aws::Macie2
     #   not need to pass this option.**
     #
     # @option params [String] :finding_publishing_frequency
-    #   The frequency with which Amazon Macie publishes findings for an
-    #   account. This includes adding findings to AWS Security Hub and
-    #   exporting finding events to Amazon CloudWatch. Valid values are:
+    #   The frequency with which Amazon Macie publishes updates to policy
+    #   findings for an account. This includes publishing updates to AWS
+    #   Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch
+    #   Events). Valid values are:
     #
     # @option params [String] :status
     #   The status of an Amazon Macie account. Valid values are:
@@ -1250,7 +1235,7 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves the configuration settings for exporting data classification
+    # Retrieves the configuration settings for storing data classification
     # results.
     #
     # @return [Types::GetClassificationExportConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1482,7 +1467,7 @@ module Aws::Macie2
     #   resp.findings[0].region #=> String
     #   resp.findings[0].resources_affected.s3_bucket.arn #=> String
     #   resp.findings[0].resources_affected.s3_bucket.created_at #=> Time
-    #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms"
+    #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN"
     #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.kms_master_key_id #=> String
     #   resp.findings[0].resources_affected.s3_bucket.name #=> String
     #   resp.findings[0].resources_affected.s3_bucket.owner.display_name #=> String
@@ -1510,7 +1495,7 @@ module Aws::Macie2
     #   resp.findings[0].resources_affected.s3_object.last_modified #=> Time
     #   resp.findings[0].resources_affected.s3_object.path #=> String
     #   resp.findings[0].resources_affected.s3_object.public_access #=> Boolean
-    #   resp.findings[0].resources_affected.s3_object.server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms"
+    #   resp.findings[0].resources_affected.s3_object.server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN"
     #   resp.findings[0].resources_affected.s3_object.server_side_encryption.kms_master_key_id #=> String
     #   resp.findings[0].resources_affected.s3_object.size #=> Integer
     #   resp.findings[0].resources_affected.s3_object.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "ONEZONE_IA", "GLACIER"
@@ -2130,13 +2115,13 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Creates or updates the configuration settings for exporting data
+    # Creates or updates the configuration settings for storing data
     # classification results.
     #
     # @option params [required, Types::ClassificationExportConfiguration] :configuration
-    #   Specifies where to export data classification results to, and the
+    #   Specifies where to store data classification results, and the
     #   encryption settings to use when storing results in that location.
-    #   Currently, you can export classification results only to an S3 bucket.
+    #   Currently, you can store classification results only in an S3 bucket.
     #
     # @return [Types::PutClassificationExportConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2239,27 +2224,6 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Reactivates (unarchives) one or more findings.
-    #
-    # @option params [required, Array<String>] :finding_ids
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.unarchive_findings({
-    #     finding_ids: ["__string"], # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UnarchiveFindings AWS API Documentation
-    #
-    # @overload unarchive_findings(params = {})
-    # @param [Hash] params ({})
-    def unarchive_findings(params = {}, options = {})
-      req = build_request(:unarchive_findings, params)
-      req.send_request(options)
-    end
-
     # Removes one or more tags (keys and values) from a classification job,
     # custom data identifier, findings filter, or member account.
     #
@@ -2313,8 +2277,9 @@ module Aws::Macie2
     # Updates the criteria and other settings for a findings filter.
     #
     # @option params [String] :action
-    #   The action to perform on findings that meet the filter criteria. Valid
-    #   values are:
+    #   The action to perform on findings that meet the filter criteria. To
+    #   suppress (automatically archive) findings that meet the criteria, set
+    #   this value to ARCHIVE. Valid values are:
     #
     # @option params [String] :description
     #
@@ -2373,9 +2338,10 @@ module Aws::Macie2
     # configuration settings for a Macie account.
     #
     # @option params [String] :finding_publishing_frequency
-    #   The frequency with which Amazon Macie publishes findings for an
-    #   account. This includes adding findings to AWS Security Hub and
-    #   exporting finding events to Amazon CloudWatch. Valid values are:
+    #   The frequency with which Amazon Macie publishes updates to policy
+    #   findings for an account. This includes publishing updates to AWS
+    #   Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch
+    #   Events). Valid values are:
     #
     # @option params [String] :status
     #   The status of an Amazon Macie account. Valid values are:
@@ -2458,7 +2424,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

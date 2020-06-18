@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -28,6 +30,7 @@ module Aws::ComputeOptimizer
   # * {AccessDeniedException}
   # * {InternalServerException}
   # * {InvalidParameterValueException}
+  # * {LimitExceededException}
   # * {MissingAuthenticationToken}
   # * {OptInRequiredException}
   # * {ResourceNotFoundException}
@@ -75,6 +78,21 @@ module Aws::ComputeOptimizer
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ComputeOptimizer::Types::InvalidParameterValueException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class LimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ComputeOptimizer::Types::LimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

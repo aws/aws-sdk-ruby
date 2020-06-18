@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@apigatewayv2") do
   @service = Aws::ApiGatewayV2::Resource.new
   @client = @service.client

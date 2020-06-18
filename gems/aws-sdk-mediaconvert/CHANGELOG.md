@@ -1,6 +1,27 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2020-06-18)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for NexGuard FileMarker SDK, which allows NexGuard partners to watermark proprietary content in mezzanine and OTT streaming contexts.
+
+1.51.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.51.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2020-06-03)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for the encoding of VP8 or VP9 video in WebM container with Vorbis or Opus audio.
+
 1.49.0 (2020-05-28)
 ------------------
 
@@ -250,4 +271,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-mediaconvert`.
-

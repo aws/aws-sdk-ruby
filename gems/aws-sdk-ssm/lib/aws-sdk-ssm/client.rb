@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::SSM
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::SSM
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -577,14 +581,19 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Associates the specified Systems Manager document with the specified
-    # instances or targets.
-    #
-    # When you associate a document with one or more instances, SSM Agent
-    # running on the instance processes the document and configures the
-    # instance as specified. If you associate a document with an instance
-    # that already has an associated document, the system returns the
-    # `AssociationAlreadyExists` exception.
+    # A State Manager association defines the state that you want to
+    # maintain on your instances. For example, an association can specify
+    # that anti-virus software must be installed and running on your
+    # instances, or that certain ports must be closed. For static targets,
+    # the association specifies a schedule for when the configuration is
+    # reapplied. For dynamic targets, such as an AWS Resource Group or an
+    # AWS Autoscaling Group, State Manager applies the configuration when
+    # new instances are added to the group. The association also specifies
+    # actions to take when applying the configuration. For example, an
+    # association for anti-virus software might run once a day. If the
+    # software is not installed, then State Manager installs it. If the
+    # software is installed, but the service is not running, then the
+    # association might instruct State Manager to start the service.
     #
     # @option params [required, String] :name
     #   The name of the SSM document that contains the configuration
@@ -703,6 +712,12 @@ module Aws::SSM
     #
     #   By default, all associations use `AUTO` mode.
     #
+    # @option params [Boolean] :apply_only_at_cron_interval
+    #   By default, when you create a new associations, the system runs it
+    #   immediately after it is created and then according to the schedule you
+    #   specified. Specify this option if you don't want an association to
+    #   run immediately after you create it.
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -736,6 +751,7 @@ module Aws::SSM
     #     max_concurrency: "MaxConcurrency",
     #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #     sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #     apply_only_at_cron_interval: false,
     #   })
     #
     # @example Response structure
@@ -774,6 +790,7 @@ module Aws::SSM
     #   resp.association_description.max_concurrency #=> String
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_description.apply_only_at_cron_interval #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -834,6 +851,7 @@ module Aws::SSM
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #         apply_only_at_cron_interval: false,
     #       },
     #     ],
     #   })
@@ -875,6 +893,7 @@ module Aws::SSM
     #   resp.successful[0].max_concurrency #=> String
     #   resp.successful[0].compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.successful[0].sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.successful[0].apply_only_at_cron_interval #=> Boolean
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -896,6 +915,7 @@ module Aws::SSM
     #   resp.failed[0].entry.max_concurrency #=> String
     #   resp.failed[0].entry.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.failed[0].entry.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.failed[0].entry.apply_only_at_cron_interval #=> Boolean
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
@@ -1132,6 +1152,18 @@ module Aws::SSM
     #
     #   [1]: https://www.iana.org/time-zones
     #
+    # @option params [Integer] :schedule_offset
+    #   The number of days to wait after the date and time specified by a CRON
+    #   expression before running the maintenance window.
+    #
+    #   For example, the following cron expression schedules a maintenance
+    #   window to run on the third Tuesday of every month at 11:30 PM.
+    #
+    #   `cron(0 30 23 ? * TUE#3 *)`
+    #
+    #   If the schedule offset is `2`, the maintenance window won't run until
+    #   two days later.
+    #
     # @option params [required, Integer] :duration
     #   The duration of the maintenance window in hours.
     #
@@ -1187,6 +1219,7 @@ module Aws::SSM
     #     end_date: "MaintenanceWindowStringDateTime",
     #     schedule: "MaintenanceWindowSchedule", # required
     #     schedule_timezone: "MaintenanceWindowTimezone",
+    #     schedule_offset: 1,
     #     duration: 1, # required
     #     cutoff: 1, # required
     #     allow_unassociated_targets: false, # required
@@ -2217,6 +2250,7 @@ module Aws::SSM
     #   resp.association_description.max_concurrency #=> String
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_description.apply_only_at_cron_interval #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -3666,6 +3700,7 @@ module Aws::SSM
     #   resp.window_identities[0].cutoff #=> Integer
     #   resp.window_identities[0].schedule #=> String
     #   resp.window_identities[0].schedule_timezone #=> String
+    #   resp.window_identities[0].schedule_offset #=> Integer
     #   resp.window_identities[0].end_date #=> String
     #   resp.window_identities[0].start_date #=> String
     #   resp.window_identities[0].next_execution_time #=> String
@@ -4840,6 +4875,7 @@ module Aws::SSM
     #   * {Types::GetMaintenanceWindowResult#end_date #end_date} => String
     #   * {Types::GetMaintenanceWindowResult#schedule #schedule} => String
     #   * {Types::GetMaintenanceWindowResult#schedule_timezone #schedule_timezone} => String
+    #   * {Types::GetMaintenanceWindowResult#schedule_offset #schedule_offset} => Integer
     #   * {Types::GetMaintenanceWindowResult#next_execution_time #next_execution_time} => String
     #   * {Types::GetMaintenanceWindowResult#duration #duration} => Integer
     #   * {Types::GetMaintenanceWindowResult#cutoff #cutoff} => Integer
@@ -4863,6 +4899,7 @@ module Aws::SSM
     #   resp.end_date #=> String
     #   resp.schedule #=> String
     #   resp.schedule_timezone #=> String
+    #   resp.schedule_offset #=> Integer
     #   resp.next_execution_time #=> String
     #   resp.duration #=> Integer
     #   resp.cutoff #=> Integer
@@ -5815,6 +5852,7 @@ module Aws::SSM
     #   resp.association_versions[0].max_concurrency #=> String
     #   resp.association_versions[0].compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_versions[0].sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_versions[0].apply_only_at_cron_interval #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions AWS API Documentation
@@ -6884,15 +6922,18 @@ module Aws::SSM
     # @option params [String] :type
     #   The type of parameter that you want to add to the system.
     #
+    #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
+    #   templates or in the China Regions.
+    #
+    #    </note>
+    #
     #   Items in a `StringList` must be separated by a comma (,). You can't
     #   use other punctuation or special character to escape items in the
     #   list. If you have a parameter value that requires a comma, then use
     #   the `String` data type.
     #
-    #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
-    #   templates or in the China Regions.
-    #
-    #    </note>
+    #   Specifying a parameter type is not required when updating a parameter.
+    #   You must specify a parameter type when creating a parameter.
     #
     # @option params [String] :key_id
     #   The KMS Key ID that you want to use to encrypt a parameter. Either the
@@ -8047,8 +8088,9 @@ module Aws::SSM
     # @option params [String] :document_name
     #   The name of the SSM document to define the parameters and plugin
     #   settings for the session. For example, `SSM-SessionManagerRunShell`.
-    #   If no document name is provided, a shell to the instance is launched
-    #   by default.
+    #   You can call the GetDocument API to verify the document exists before
+    #   attempting to start a session. If no document name is provided, a
+    #   shell to the instance is launched by default.
     #
     # @option params [Hash<String,Array>] :parameters
     #   Reserved for future use.
@@ -8260,6 +8302,19 @@ module Aws::SSM
     #
     #   By default, all associations use `AUTO` mode.
     #
+    # @option params [Boolean] :apply_only_at_cron_interval
+    #   By default, when you update an association, the system runs it
+    #   immediately after it is updated and then according to the schedule you
+    #   specified. Specify this option if you don't want an association to
+    #   run immediately after you update it.
+    #
+    #   Also, if you specified this option when you created the association,
+    #   you can reset it. To do so, specify the
+    #   `no-apply-only-at-cron-interval` parameter when you update the
+    #   association from the command line. This parameter forces the
+    #   association to run immediately after updating it and according to the
+    #   interval specified.
+    #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -8294,6 +8349,7 @@ module Aws::SSM
     #     max_concurrency: "MaxConcurrency",
     #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #     sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #     apply_only_at_cron_interval: false,
     #   })
     #
     # @example Response structure
@@ -8332,6 +8388,7 @@ module Aws::SSM
     #   resp.association_description.max_concurrency #=> String
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_description.apply_only_at_cron_interval #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -8407,6 +8464,7 @@ module Aws::SSM
     #   resp.association_description.max_concurrency #=> String
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_description.apply_only_at_cron_interval #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -8602,6 +8660,18 @@ module Aws::SSM
     #
     #   [1]: https://www.iana.org/time-zones
     #
+    # @option params [Integer] :schedule_offset
+    #   The number of days to wait after the date and time specified by a CRON
+    #   expression before running the maintenance window.
+    #
+    #   For example, the following cron expression schedules a maintenance
+    #   window to run the third Tuesday of every month at 11:30 PM.
+    #
+    #   `cron(0 30 23 ? * TUE#3 *)`
+    #
+    #   If the schedule offset is `2`, the maintenance window won't run until
+    #   two days later.
+    #
     # @option params [Integer] :duration
     #   The duration of the maintenance window in hours.
     #
@@ -8630,6 +8700,7 @@ module Aws::SSM
     #   * {Types::UpdateMaintenanceWindowResult#end_date #end_date} => String
     #   * {Types::UpdateMaintenanceWindowResult#schedule #schedule} => String
     #   * {Types::UpdateMaintenanceWindowResult#schedule_timezone #schedule_timezone} => String
+    #   * {Types::UpdateMaintenanceWindowResult#schedule_offset #schedule_offset} => Integer
     #   * {Types::UpdateMaintenanceWindowResult#duration #duration} => Integer
     #   * {Types::UpdateMaintenanceWindowResult#cutoff #cutoff} => Integer
     #   * {Types::UpdateMaintenanceWindowResult#allow_unassociated_targets #allow_unassociated_targets} => Boolean
@@ -8645,6 +8716,7 @@ module Aws::SSM
     #     end_date: "MaintenanceWindowStringDateTime",
     #     schedule: "MaintenanceWindowSchedule",
     #     schedule_timezone: "MaintenanceWindowTimezone",
+    #     schedule_offset: 1,
     #     duration: 1,
     #     cutoff: 1,
     #     allow_unassociated_targets: false,
@@ -8661,6 +8733,7 @@ module Aws::SSM
     #   resp.end_date #=> String
     #   resp.schedule #=> String
     #   resp.schedule_timezone #=> String
+    #   resp.schedule_offset #=> Integer
     #   resp.duration #=> Integer
     #   resp.cutoff #=> Integer
     #   resp.allow_unassociated_targets #=> Boolean
@@ -9506,7 +9579,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::Personalize
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::Personalize
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -329,6 +333,11 @@ module Aws::Personalize
     #   The Amazon Resource Name (ARN) of the solution version that will be
     #   used to generate the batch inference recommendations.
     #
+    # @option params [String] :filter_arn
+    #   The ARN of the filter to apply to the batch inference job. For more
+    #   information on using filters, see Using Filters with Amazon
+    #   Personalize.
+    #
     # @option params [Integer] :num_results
     #   The number of recommendations to retreive.
     #
@@ -354,6 +363,7 @@ module Aws::Personalize
     #   resp = client.create_batch_inference_job({
     #     job_name: "Name", # required
     #     solution_version_arn: "Arn", # required
+    #     filter_arn: "Arn",
     #     num_results: 1,
     #     job_input: { # required
     #       s3_data_source: { # required
@@ -790,6 +800,52 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Creates a recommendation filter. For more information, see Using
+    # Filters with Amazon Personalize.
+    #
+    # @option params [required, String] :name
+    #   The name of the filter to create.
+    #
+    # @option params [required, String] :dataset_group_arn
+    #   The ARN of the dataset group that the filter will belong to.
+    #
+    # @option params [required, String] :filter_expression
+    #   The filter expression that designates the interaction types that the
+    #   filter will filter out. A filter expression must follow the following
+    #   format:
+    #
+    #   `EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")`
+    #
+    #   Where "EVENT\_TYPE" is the type of event to filter out. To filter
+    #   out all items with any interactions history, set `"*"` as the
+    #   EVENT\_TYPE. For more information, see Using Filters with Amazon
+    #   Personalize.
+    #
+    # @return [Types::CreateFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFilterResponse#filter_arn #filter_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_filter({
+    #     name: "Name", # required
+    #     dataset_group_arn: "Arn", # required
+    #     filter_expression: "FilterExpression", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.filter_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateFilter AWS API Documentation
+    #
+    # @overload create_filter(params = {})
+    # @param [Hash] params ({})
+    def create_filter(params = {}, options = {})
+      req = build_request(:create_filter, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Personalize schema from the specified schema string.
     # The schema you create must be in Avro JSON format.
     #
@@ -1181,6 +1237,28 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Deletes a filter.
+    #
+    # @option params [required, String] :filter_arn
+    #   The ARN of the filter to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_filter({
+    #     filter_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DeleteFilter AWS API Documentation
+    #
+    # @overload delete_filter(params = {})
+    # @param [Hash] params ({})
+    def delete_filter(params = {}, options = {})
+      req = build_request(:delete_filter, params)
+      req.send_request(options)
+    end
+
     # Deletes a schema. Before deleting a schema, you must delete all
     # datasets referencing the schema. For more information on schemas, see
     # CreateSchema.
@@ -1308,6 +1386,7 @@ module Aws::Personalize
     #
     #   resp.batch_inference_job.job_name #=> String
     #   resp.batch_inference_job.batch_inference_job_arn #=> String
+    #   resp.batch_inference_job.filter_arn #=> String
     #   resp.batch_inference_job.failure_reason #=> String
     #   resp.batch_inference_job.solution_version_arn #=> String
     #   resp.batch_inference_job.num_results #=> Integer
@@ -1560,6 +1639,41 @@ module Aws::Personalize
     # @param [Hash] params ({})
     def describe_feature_transformation(params = {}, options = {})
       req = build_request(:describe_feature_transformation, params)
+      req.send_request(options)
+    end
+
+    # Describes a filter's properties.
+    #
+    # @option params [required, String] :filter_arn
+    #   The ARN of the filter to describe.
+    #
+    # @return [Types::DescribeFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFilterResponse#filter #filter} => Types::Filter
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_filter({
+    #     filter_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.filter.name #=> String
+    #   resp.filter.filter_arn #=> String
+    #   resp.filter.creation_date_time #=> Time
+    #   resp.filter.last_updated_date_time #=> Time
+    #   resp.filter.dataset_group_arn #=> String
+    #   resp.filter.failure_reason #=> String
+    #   resp.filter.filter_expression #=> String
+    #   resp.filter.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeFilter AWS API Documentation
+    #
+    # @overload describe_filter(params = {})
+    # @param [Hash] params ({})
+    def describe_filter(params = {}, options = {})
+      req = build_request(:describe_filter, params)
       req.send_request(options)
     end
 
@@ -2121,6 +2235,52 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Lists all filters that belong to a given dataset group.
+    #
+    # @option params [String] :dataset_group_arn
+    #   The ARN of the dataset group that contains the filters.
+    #
+    # @option params [String] :next_token
+    #   A token returned from the previous call to `ListFilters` for getting
+    #   the next set of filters (if they exist).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of filters to return.
+    #
+    # @return [Types::ListFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFiltersResponse#filters #filters} => Array&lt;Types::FilterSummary&gt;
+    #   * {Types::ListFiltersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_filters({
+    #     dataset_group_arn: "Arn",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.filters #=> Array
+    #   resp.filters[0].name #=> String
+    #   resp.filters[0].filter_arn #=> String
+    #   resp.filters[0].creation_date_time #=> Time
+    #   resp.filters[0].last_updated_date_time #=> Time
+    #   resp.filters[0].dataset_group_arn #=> String
+    #   resp.filters[0].failure_reason #=> String
+    #   resp.filters[0].status #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListFilters AWS API Documentation
+    #
+    # @overload list_filters(params = {})
+    # @param [Hash] params ({})
+    def list_filters(params = {}, options = {})
+      req = build_request(:list_filters, params)
+      req.send_request(options)
+    end
+
     # Returns a list of available recipes. The response provides the
     # properties for each recipe, including the recipe's Amazon Resource
     # Name (ARN).
@@ -2373,7 +2533,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.14.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

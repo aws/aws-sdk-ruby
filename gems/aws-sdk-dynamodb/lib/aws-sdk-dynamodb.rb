@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -47,6 +49,6 @@ require_relative 'aws-sdk-dynamodb/customizations'
 # @service
 module Aws::DynamoDB
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.49.1'
 
 end

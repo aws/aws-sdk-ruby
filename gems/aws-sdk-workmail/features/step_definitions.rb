@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@workmail") do
   @service = Aws::WorkMail::Resource.new
   @client = @service.client

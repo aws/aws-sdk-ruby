@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+1.14.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.14.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2020-06-05)
+------------------
+
+* Feature - Adds ability to create and apply filters.
+
 1.12.0 (2020-05-28)
 ------------------
 
@@ -24,7 +40,7 @@ Unreleased Changes
 1.8.0 (2019-11-14)
 ------------------
 
-* Feature - Amazon Personalize: Adds ability to get batch recommendations by creating a batch inference job.
+* Feature - Adds ability to get batch recommendations by creating a batch inference job.
 
 1.7.0 (2019-10-23)
 ------------------
@@ -34,7 +50,7 @@ Unreleased Changes
 1.6.0 (2019-10-14)
 ------------------
 
-* Feature - AWS Personalize: Adds ability to create a solution version using FULL or UPDATE training mode
+* Feature - Adds ability to create a solution version using FULL or UPDATE training mode
 
 1.5.0 (2019-09-17)
 ------------------
@@ -65,4 +81,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-personalize`.
-

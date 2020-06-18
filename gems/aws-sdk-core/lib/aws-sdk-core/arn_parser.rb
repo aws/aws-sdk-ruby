@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module ARNParser
     # Parse a string with an ARN format into an {Aws::ARN} object.

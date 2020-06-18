@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-06-15)
+------------------
+
+* Feature - feature: Chime: This release introduces the ability to create an AWS Chime SDK meeting with attendees.
+
+1.29.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.29.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.28.0 (2020-05-28)
 ------------------
 

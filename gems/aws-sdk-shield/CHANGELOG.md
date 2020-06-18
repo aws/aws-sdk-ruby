@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+1.27.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.27.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Corrections to the supported format for contact phone numbers and to the description for the create subscription action.
+
+1.26.0 (2020-06-08)
+------------------
+
+* Feature - This release adds the option for customers to identify a contact name and method that the DDoS Response Team can proactively engage when a Route 53 Health Check that is associated with a Shield protected resource fails.
+
 1.25.0 (2020-05-28)
 ------------------
 
@@ -185,4 +201,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-shield`.
-

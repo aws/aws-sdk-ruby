@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -77,6 +79,7 @@ module Aws::AppMesh
     GrpcRouteMetadata = Shapes::StructureShape.new(name: 'GrpcRouteMetadata')
     GrpcRouteMetadataList = Shapes::ListShape.new(name: 'GrpcRouteMetadataList')
     GrpcRouteMetadataMatchMethod = Shapes::StructureShape.new(name: 'GrpcRouteMetadataMatchMethod')
+    GrpcTimeout = Shapes::StructureShape.new(name: 'GrpcTimeout')
     HeaderMatch = Shapes::StringShape.new(name: 'HeaderMatch')
     HeaderMatchMethod = Shapes::StructureShape.new(name: 'HeaderMatchMethod')
     HeaderName = Shapes::StringShape.new(name: 'HeaderName')
@@ -95,6 +98,7 @@ module Aws::AppMesh
     HttpRouteHeaders = Shapes::ListShape.new(name: 'HttpRouteHeaders')
     HttpRouteMatch = Shapes::StructureShape.new(name: 'HttpRouteMatch')
     HttpScheme = Shapes::StringShape.new(name: 'HttpScheme')
+    HttpTimeout = Shapes::StructureShape.new(name: 'HttpTimeout')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListMeshesInput = Shapes::StructureShape.new(name: 'ListMeshesInput')
@@ -115,6 +119,7 @@ module Aws::AppMesh
     ListVirtualServicesLimit = Shapes::IntegerShape.new(name: 'ListVirtualServicesLimit')
     ListVirtualServicesOutput = Shapes::StructureShape.new(name: 'ListVirtualServicesOutput')
     Listener = Shapes::StructureShape.new(name: 'Listener')
+    ListenerTimeout = Shapes::StructureShape.new(name: 'ListenerTimeout')
     ListenerTls = Shapes::StructureShape.new(name: 'ListenerTls')
     ListenerTlsAcmCertificate = Shapes::StructureShape.new(name: 'ListenerTlsAcmCertificate')
     ListenerTlsCertificate = Shapes::StructureShape.new(name: 'ListenerTlsCertificate')
@@ -164,6 +169,7 @@ module Aws::AppMesh
     TcpRetryPolicyEvents = Shapes::ListShape.new(name: 'TcpRetryPolicyEvents')
     TcpRoute = Shapes::StructureShape.new(name: 'TcpRoute')
     TcpRouteAction = Shapes::StructureShape.new(name: 'TcpRouteAction')
+    TcpTimeout = Shapes::StructureShape.new(name: 'TcpTimeout')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TlsValidationContext = Shapes::StructureShape.new(name: 'TlsValidationContext')
     TlsValidationContextAcmTrust = Shapes::StructureShape.new(name: 'TlsValidationContextAcmTrust')
@@ -439,6 +445,7 @@ module Aws::AppMesh
     GrpcRoute.add_member(:action, Shapes::ShapeRef.new(shape: GrpcRouteAction, required: true, location_name: "action"))
     GrpcRoute.add_member(:match, Shapes::ShapeRef.new(shape: GrpcRouteMatch, required: true, location_name: "match"))
     GrpcRoute.add_member(:retry_policy, Shapes::ShapeRef.new(shape: GrpcRetryPolicy, location_name: "retryPolicy"))
+    GrpcRoute.add_member(:timeout, Shapes::ShapeRef.new(shape: GrpcTimeout, location_name: "timeout"))
     GrpcRoute.struct_class = Types::GrpcRoute
 
     GrpcRouteAction.add_member(:weighted_targets, Shapes::ShapeRef.new(shape: WeightedTargets, required: true, location_name: "weightedTargets"))
@@ -462,6 +469,10 @@ module Aws::AppMesh
     GrpcRouteMetadataMatchMethod.add_member(:regex, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "regex"))
     GrpcRouteMetadataMatchMethod.add_member(:suffix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "suffix"))
     GrpcRouteMetadataMatchMethod.struct_class = Types::GrpcRouteMetadataMatchMethod
+
+    GrpcTimeout.add_member(:idle, Shapes::ShapeRef.new(shape: Duration, location_name: "idle"))
+    GrpcTimeout.add_member(:per_request, Shapes::ShapeRef.new(shape: Duration, location_name: "perRequest"))
+    GrpcTimeout.struct_class = Types::GrpcTimeout
 
     HeaderMatchMethod.add_member(:exact, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "exact"))
     HeaderMatchMethod.add_member(:prefix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "prefix"))
@@ -490,6 +501,7 @@ module Aws::AppMesh
     HttpRoute.add_member(:action, Shapes::ShapeRef.new(shape: HttpRouteAction, required: true, location_name: "action"))
     HttpRoute.add_member(:match, Shapes::ShapeRef.new(shape: HttpRouteMatch, required: true, location_name: "match"))
     HttpRoute.add_member(:retry_policy, Shapes::ShapeRef.new(shape: HttpRetryPolicy, location_name: "retryPolicy"))
+    HttpRoute.add_member(:timeout, Shapes::ShapeRef.new(shape: HttpTimeout, location_name: "timeout"))
     HttpRoute.struct_class = Types::HttpRoute
 
     HttpRouteAction.add_member(:weighted_targets, Shapes::ShapeRef.new(shape: WeightedTargets, required: true, location_name: "weightedTargets"))
@@ -507,6 +519,10 @@ module Aws::AppMesh
     HttpRouteMatch.add_member(:prefix, Shapes::ShapeRef.new(shape: String, required: true, location_name: "prefix"))
     HttpRouteMatch.add_member(:scheme, Shapes::ShapeRef.new(shape: HttpScheme, location_name: "scheme"))
     HttpRouteMatch.struct_class = Types::HttpRouteMatch
+
+    HttpTimeout.add_member(:idle, Shapes::ShapeRef.new(shape: Duration, location_name: "idle"))
+    HttpTimeout.add_member(:per_request, Shapes::ShapeRef.new(shape: Duration, location_name: "perRequest"))
+    HttpTimeout.struct_class = Types::HttpTimeout
 
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerErrorException.struct_class = Types::InternalServerErrorException
@@ -574,8 +590,15 @@ module Aws::AppMesh
 
     Listener.add_member(:health_check, Shapes::ShapeRef.new(shape: HealthCheckPolicy, location_name: "healthCheck"))
     Listener.add_member(:port_mapping, Shapes::ShapeRef.new(shape: PortMapping, required: true, location_name: "portMapping"))
+    Listener.add_member(:timeout, Shapes::ShapeRef.new(shape: ListenerTimeout, location_name: "timeout"))
     Listener.add_member(:tls, Shapes::ShapeRef.new(shape: ListenerTls, location_name: "tls"))
     Listener.struct_class = Types::Listener
+
+    ListenerTimeout.add_member(:grpc, Shapes::ShapeRef.new(shape: GrpcTimeout, location_name: "grpc"))
+    ListenerTimeout.add_member(:http, Shapes::ShapeRef.new(shape: HttpTimeout, location_name: "http"))
+    ListenerTimeout.add_member(:http2, Shapes::ShapeRef.new(shape: HttpTimeout, location_name: "http2"))
+    ListenerTimeout.add_member(:tcp, Shapes::ShapeRef.new(shape: TcpTimeout, location_name: "tcp"))
+    ListenerTimeout.struct_class = Types::ListenerTimeout
 
     ListenerTls.add_member(:certificate, Shapes::ShapeRef.new(shape: ListenerTlsCertificate, required: true, location_name: "certificate"))
     ListenerTls.add_member(:mode, Shapes::ShapeRef.new(shape: ListenerTlsMode, required: true, location_name: "mode"))
@@ -700,10 +723,14 @@ module Aws::AppMesh
     TcpRetryPolicyEvents.member = Shapes::ShapeRef.new(shape: TcpRetryPolicyEvent)
 
     TcpRoute.add_member(:action, Shapes::ShapeRef.new(shape: TcpRouteAction, required: true, location_name: "action"))
+    TcpRoute.add_member(:timeout, Shapes::ShapeRef.new(shape: TcpTimeout, location_name: "timeout"))
     TcpRoute.struct_class = Types::TcpRoute
 
     TcpRouteAction.add_member(:weighted_targets, Shapes::ShapeRef.new(shape: WeightedTargets, required: true, location_name: "weightedTargets"))
     TcpRouteAction.struct_class = Types::TcpRouteAction
+
+    TcpTimeout.add_member(:idle, Shapes::ShapeRef.new(shape: Duration, location_name: "idle"))
+    TcpTimeout.struct_class = Types::TcpTimeout
 
     TlsValidationContext.add_member(:trust, Shapes::ShapeRef.new(shape: TlsValidationContextTrust, required: true, location_name: "trust"))
     TlsValidationContext.struct_class = Types::TlsValidationContext

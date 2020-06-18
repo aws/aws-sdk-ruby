@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::KMS
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::KMS
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -460,9 +464,9 @@ module Aws::KMS
     end
 
     # Creates a display name for a customer managed customer master key
-    # (CMK). You can use an alias to identify a CMK in cryptographic
-    # operations, such as Encrypt and GenerateDataKey. You can change the
-    # CMK associated with the alias at any time.
+    # (CMK). You can use an alias to identify a CMK in [cryptographic
+    # operations][1], such as Encrypt and GenerateDataKey. You can change
+    # the CMK associated with the alias at any time.
     #
     # Aliases are easier to remember than key IDs. They can also help to
     # simplify your applications. For example, if you use an alias in your
@@ -486,8 +490,8 @@ module Aws::KMS
     #
     # * You can associate an alias with any customer managed CMK in the same
     #   AWS account and Region. However, you do not have permission to
-    #   associate an alias with an [AWS managed CMK][1] or an [AWS owned
-    #   CMK][2].
+    #   associate an alias with an [AWS managed CMK][2] or an [AWS owned
+    #   CMK][3].
     #
     # * To change the CMK associated with an alias, use the UpdateAlias
     #   operation. The current CMK and the new CMK must be the same type
@@ -499,7 +503,7 @@ module Aws::KMS
     #   `alias/ExampleAlias`. It can contain only alphanumeric characters,
     #   forward slashes (/), underscores (\_), and dashes (-). The alias
     #   name cannot begin with `alias/aws/`. The `alias/aws/` prefix is
-    #   reserved for [AWS managed CMKs][1].
+    #   reserved for [AWS managed CMKs][2].
     #
     # * The alias name must be unique within an AWS Region. However, you can
     #   use the same alias name in multiple Regions of the same AWS account.
@@ -510,12 +514,12 @@ module Aws::KMS
     #   and then create a new alias with the desired name.
     #
     # * You can use an alias name or alias ARN to identify a CMK in AWS KMS
-    #   cryptographic operations and in the DescribeKey operation. However,
-    #   you cannot use alias names or alias ARNs in API operations that
-    #   manage CMKs, such as DisableKey or GetKeyPolicy. For information
-    #   about the valid CMK identifiers for each AWS KMS API operation, see
-    #   the descriptions of the `KeyId` parameter in the API operation
-    #   documentation.
+    #   [cryptographic operations][1] and in the DescribeKey operation.
+    #   However, you cannot use alias names or alias ARNs in API operations
+    #   that manage CMKs, such as DisableKey or GetKeyPolicy. For
+    #   information about the valid CMK identifiers for each AWS KMS API
+    #   operation, see the descriptions of the `KeyId` parameter in the API
+    #   operation documentation.
     #
     # Because an alias is not a property of a CMK, you can delete and change
     # the aliases of a CMK without affecting the CMK. Also, aliases do not
@@ -525,13 +529,14 @@ module Aws::KMS
     #
     # The CMK that you use for this operation must be in a compatible key
     # state. For details, see [How Key State Affects Use of a Customer
-    # Master Key][3] in the *AWS Key Management Service Developer Guide*.
+    # Master Key][4] in the *AWS Key Management Service Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
     # @option params [required, String] :alias_name
     #   Specifies the alias name. This value must begin with `alias/` followed
@@ -677,8 +682,8 @@ module Aws::KMS
     # grant are met. When setting permissions, grants are an alternative to
     # key policies.
     #
-    # To create a grant that allows a cryptographic operation only when the
-    # request includes a particular [encryption context][1], use the
+    # To create a grant that allows a [cryptographic operation][1] only when
+    # the request includes a particular [encryption context][2], use the
     # `Constraints` parameter. For details, see GrantConstraints.
     #
     # You can create grants on symmetric and asymmetric CMKs. However, if
@@ -693,9 +698,9 @@ module Aws::KMS
     #
     # * Grants for asymmetric CMKs cannot allow operations that are not
     #   supported for asymmetric CMKs, including operations that [generate
-    #   data keys][2] or [data key pairs][3], or operations related to
-    #   [automatic key rotation][4], [imported key material][5], or CMKs in
-    #   [custom key stores][6].
+    #   data keys][3] or [data key pairs][4], or operations related to
+    #   [automatic key rotation][5], [imported key material][6], or CMKs in
+    #   [custom key stores][7].
     #
     # * Grants for asymmetric CMKs with a `KeyUsage` of `ENCRYPT_DECRYPT`
     #   cannot allow the Sign or Verify operations. Grants for asymmetric
@@ -707,29 +712,30 @@ module Aws::KMS
     #   asymmetric CMKs.
     #
     # For information about symmetric and asymmetric CMKs, see [Using
-    # Symmetric and Asymmetric CMKs][7] in the *AWS Key Management Service
+    # Symmetric and Asymmetric CMKs][8] in the *AWS Key Management Service
     # Developer Guide*.
     #
     # To perform this operation on a CMK in a different AWS account, specify
     # the key ARN in the value of the `KeyId` parameter. For more
-    # information about grants, see [Grants][8] in the <i> <i>AWS Key
+    # information about grants, see [Grants][9] in the <i> <i>AWS Key
     # Management Service Developer Guide</i> </i>.
     #
     # The CMK that you use for this operation must be in a compatible key
     # state. For details, see [How Key State Affects Use of a Customer
-    # Master Key][9] in the *AWS Key Management Service Developer Guide*.
+    # Master Key][10] in the *AWS Key Management Service Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
-    # [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKey
-    # [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKeyPair
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
-    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    # [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKey
+    # [4]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKeyPair
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
     # @option params [required, String] :key_id
     #   The unique identifier for the customer master key (CMK) that the grant
@@ -783,15 +789,16 @@ module Aws::KMS
     #   A list of operations that the grant permits.
     #
     # @option params [Types::GrantConstraints] :constraints
-    #   Allows a cryptographic operation only when the encryption context
+    #   Allows a [cryptographic operation][1] only when the encryption context
     #   matches or includes the encryption context specified in this
     #   structure. For more information about encryption context, see
-    #   [Encryption Context][1] in the <i> <i>AWS Key Management Service
+    #   [Encryption Context][2] in the <i> <i>AWS Key Management Service
     #   Developer Guide</i> </i>.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -1006,10 +1013,10 @@ module Aws::KMS
     #   for a task.
     #
     # @option params [String] :key_usage
-    #   Determines the cryptographic operations for which you can use the CMK.
-    #   The default value is `ENCRYPT_DECRYPT`. This parameter is required
-    #   only for asymmetric CMKs. You can't change the `KeyUsage` value after
-    #   the CMK is created.
+    #   Determines the [cryptographic operations][1] for which you can use the
+    #   CMK. The default value is `ENCRYPT_DECRYPT`. This parameter is
+    #   required only for asymmetric CMKs. You can't change the `KeyUsage`
+    #   value after the CMK is created.
     #
     #   Select only one valid value.
     #
@@ -1019,6 +1026,10 @@ module Aws::KMS
     #     or `SIGN_VERIFY`.
     #
     #   * For asymmetric CMKs with ECC key material, specify `SIGN_VERIFY`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
     #
     # @option params [String] :customer_master_key_spec
     #   Specifies the type of CMK to create. The default value,
@@ -1310,9 +1321,9 @@ module Aws::KMS
     #
     # @option params [Hash<String,String>] :encryption_context
     #   Specifies the encryption context to use when decrypting the data. An
-    #   encryption context is valid only for cryptographic operations with a
-    #   symmetric CMK. The standard asymmetric encryption algorithms that AWS
-    #   KMS uses do not support an encryption context.
+    #   encryption context is valid only for [cryptographic operations][1]
+    #   with a symmetric CMK. The standard asymmetric encryption algorithms
+    #   that AWS KMS uses do not support an encryption context.
     #
     #   An *encryption context* is a collection of non-secret key-value pairs
     #   that represents additional authenticated data. When you use an
@@ -1321,12 +1332,13 @@ module Aws::KMS
     #   encryption context is optional when encrypting with a symmetric CMK,
     #   but it is highly recommended.
     #
-    #   For more information, see [Encryption Context][1] in the *AWS Key
+    #   For more information, see [Encryption Context][2] in the *AWS Key
     #   Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -1479,13 +1491,13 @@ module Aws::KMS
     # The custom key store that you delete cannot contain any AWS KMS
     # [customer master keys (CMKs)][2]. Before deleting the key store,
     # verify that you will never need to use any of the CMKs in the key
-    # store for any cryptographic operations. Then, use ScheduleKeyDeletion
-    # to delete the AWS KMS customer master keys (CMKs) from the key store.
-    # When the scheduled waiting period expires, the `ScheduleKeyDeletion`
-    # operation deletes the CMKs. Then it makes a best effort to delete the
-    # key material from the associated cluster. However, you might need to
-    # manually [delete the orphaned key material][3] from the cluster and
-    # its backups.
+    # store for any [cryptographic operations][3]. Then, use
+    # ScheduleKeyDeletion to delete the AWS KMS customer master keys (CMKs)
+    # from the key store. When the scheduled waiting period expires, the
+    # `ScheduleKeyDeletion` operation deletes the CMKs. Then it makes a best
+    # effort to delete the key material from the associated cluster.
+    # However, you might need to manually [delete the orphaned key
+    # material][4] from the cluster and its backups.
     #
     # After all CMKs are deleted from AWS KMS, use DisconnectCustomKeyStore
     # to disconnect the key store from AWS KMS. Then, you can delete the
@@ -1508,7 +1520,8 @@ module Aws::KMS
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key
     #
     # @option params [required, String] :custom_key_store_id
     #   Enter the ID of the custom key store you want to delete. To find the
@@ -1848,20 +1861,21 @@ module Aws::KMS
     end
 
     # Sets the state of a customer master key (CMK) to disabled, thereby
-    # preventing its use for cryptographic operations. You cannot perform
-    # this operation on a CMK in a different AWS account.
+    # preventing its use for [cryptographic operations][1]. You cannot
+    # perform this operation on a CMK in a different AWS account.
     #
     # For more information about how key state affects the use of a CMK, see
-    # [How Key State Affects the Use of a Customer Master Key][1] in the <i>
+    # [How Key State Affects the Use of a Customer Master Key][2] in the <i>
     # <i>AWS Key Management Service Developer Guide</i> </i>.
     #
     # The CMK that you use for this operation must be in a compatible key
     # state. For details, see [How Key State Affects Use of a Customer
-    # Master Key][1] in the *AWS Key Management Service Developer Guide*.
+    # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
     # @option params [required, String] :key_id
     #   A unique identifier for the customer master key (CMK).
@@ -1976,8 +1990,8 @@ module Aws::KMS
     #
     # <note markdown="1"> While a custom key store is disconnected, all attempts to create
     # customer master keys (CMKs) in the custom key store or to use existing
-    # CMKs in cryptographic operations will fail. This action can prevent
-    # users from storing and accessing sensitive data.
+    # CMKs in [cryptographic operations][2] will fail. This action can
+    # prevent users from storing and accessing sensitive data.
     #
     #  </note>
     #
@@ -1997,6 +2011,7 @@ module Aws::KMS
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
     #
     # @option params [required, String] :custom_key_store_id
     #   Enter the ID of the custom key store you want to disconnect. To find
@@ -2021,16 +2036,17 @@ module Aws::KMS
     end
 
     # Sets the key state of a customer master key (CMK) to enabled. This
-    # allows you to use the CMK for cryptographic operations. You cannot
-    # perform this operation on a CMK in a different AWS account.
+    # allows you to use the CMK for [cryptographic operations][1]. You
+    # cannot perform this operation on a CMK in a different AWS account.
     #
     # The CMK that you use for this operation must be in a compatible key
     # state. For details, see [How Key State Affects Use of a Customer
-    # Master Key][1] in the *AWS Key Management Service Developer Guide*.
+    # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
     # @option params [required, String] :key_id
     #   A unique identifier for the customer master key (CMK).
@@ -2142,11 +2158,13 @@ module Aws::KMS
     #   identifier or database password, or other sensitive information.
     #
     # * You can use the `Encrypt` operation to move encrypted data from one
-    #   AWS region to another. In the first region, generate a data key and
-    #   use the plaintext key to encrypt the data. Then, in the new region,
-    #   call the `Encrypt` method on same plaintext data key. Now, you can
-    #   safely move the encrypted data and encrypted data key to the new
-    #   region, and decrypt in the new region when necessary.
+    #   AWS Region to another. For example, in Region A, generate a data key
+    #   and use the plaintext key to encrypt your data. Then, in Region A,
+    #   use the `Encrypt` operation to encrypt the plaintext data key under
+    #   a CMK in Region B. Now, you can move the encrypted data and the
+    #   encrypted data key to Region B. When necessary, you can decrypt the
+    #   encrypted data key and the encrypted data entirely within in Region
+    #   B.
     #
     # You don't need to use the `Encrypt` operation to encrypt a data key.
     # The GenerateDataKey and GenerateDataKeyPair operations return a
@@ -2246,9 +2264,10 @@ module Aws::KMS
     #
     # @option params [Hash<String,String>] :encryption_context
     #   Specifies the encryption context that will be used to encrypt the
-    #   data. An encryption context is valid only for cryptographic operations
-    #   with a symmetric CMK. The standard asymmetric encryption algorithms
-    #   that AWS KMS uses do not support an encryption context.
+    #   data. An encryption context is valid only for [cryptographic
+    #   operations][1] with a symmetric CMK. The standard asymmetric
+    #   encryption algorithms that AWS KMS uses do not support an encryption
+    #   context.
     #
     #   An *encryption context* is a collection of non-secret key-value pairs
     #   that represents additional authenticated data. When you use an
@@ -2257,12 +2276,13 @@ module Aws::KMS
     #   encryption context is optional when encrypting with a symmetric CMK,
     #   but it is highly recommended.
     #
-    #   For more information, see [Encryption Context][1] in the *AWS Key
+    #   For more information, see [Encryption Context][2] in the *AWS Key
     #   Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -2333,27 +2353,21 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Generates a unique symmetric data key. This operation returns a
-    # plaintext copy of the data key and a copy that is encrypted under a
-    # customer master key (CMK) that you specify. You can use the plaintext
-    # key to encrypt your data outside of AWS KMS and store the encrypted
-    # data key with the encrypted data.
+    # Generates a unique symmetric data key for client-side encryption. This
+    # operation returns a plaintext copy of the data key and a copy that is
+    # encrypted under a customer master key (CMK) that you specify. You can
+    # use the plaintext key to encrypt your data outside of AWS KMS and
+    # store the encrypted data key with the encrypted data.
     #
     # `GenerateDataKey` returns a unique data key for each request. The
-    # bytes in the key are not related to the caller or CMK that is used to
-    # encrypt the data key.
+    # bytes in the plaintext key are not related to the caller or the CMK.
     #
     # To generate a data key, specify the symmetric CMK that will be used to
     # encrypt the data key. You cannot use an asymmetric CMK to generate
     # data keys. To get the type of your CMK, use the DescribeKey operation.
-    #
     # You must also specify the length of the data key. Use either the
     # `KeySpec` or `NumberOfBytes` parameters (but not both). For 128-bit
     # and 256-bit data keys, use the `KeySpec` parameter.
-    #
-    # If the operation succeeds, the plaintext copy of the data key is in
-    # the `Plaintext` field of the response, and the encrypted copy of the
-    # data key in the `CiphertextBlob` field.
     #
     # To get only an encrypted copy of the data key, use
     # GenerateDataKeyWithoutPlaintext. To generate an asymmetric data key
@@ -2365,7 +2379,7 @@ module Aws::KMS
     # to the encryption operation. If you specify an `EncryptionContext`,
     # you must specify the same encryption context (a case-sensitive exact
     # match) when decrypting the encrypted data key. Otherwise, the request
-    # to decrypt fails with an InvalidCiphertextException. For more
+    # to decrypt fails with an `InvalidCiphertextException`. For more
     # information, see [Encryption Context][1] in the *AWS Key Management
     # Service Developer Guide*.
     #
@@ -2373,30 +2387,40 @@ module Aws::KMS
     # state. For details, see [How Key State Affects Use of a Customer
     # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
+    # **How to use your data key**
+    #
     # We recommend that you use the following pattern to encrypt data
-    # locally in your application:
+    # locally in your application. You can write your own code or use a
+    # client-side encryption library, such as the [AWS Encryption SDK][3],
+    # the [Amazon DynamoDB Encryption Client][4], or [Amazon S3 client-side
+    # encryption][5] to do these tasks for you.
     #
-    # 1.  Use the `GenerateDataKey` operation to get a data encryption key.
+    # To encrypt data outside of AWS KMS:
     #
-    # 2.  Use the plaintext data key (returned in the `Plaintext` field of
-    #     the response) to encrypt data locally, then erase the plaintext
-    #     data key from memory.
+    # 1.  Use the `GenerateDataKey` operation to get a data key.
     #
-    # 3.  Store the encrypted data key (returned in the `CiphertextBlob`
-    #     field of the response) alongside the locally encrypted data.
+    # 2.  Use the plaintext data key (in the `Plaintext` field of the
+    #     response) to encrypt your data outside of AWS KMS. Then erase the
+    #     plaintext data key from memory.
     #
-    # To decrypt data locally:
+    # 3.  Store the encrypted data key (in the `CiphertextBlob` field of the
+    #     response) with the encrypted data.
+    #
+    # To decrypt data outside of AWS KMS:
     #
     # 1.  Use the Decrypt operation to decrypt the encrypted data key. The
     #     operation returns a plaintext copy of the data key.
     #
-    # 2.  Use the plaintext data key to decrypt data locally, then erase the
-    #     plaintext data key from memory.
+    # 2.  Use the plaintext data key to decrypt data outside of AWS KMS,
+    #     then erase the plaintext data key from memory.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [3]: https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/
+    # [4]: https://docs.aws.amazon.com/dynamodb-encryption-client/latest/devguide/
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
     #
     # @option params [required, String] :key_id
     #   Identifies the symmetric CMK that encrypts the data key.
@@ -2534,8 +2558,8 @@ module Aws::KMS
     #
     # To generate a data key pair, you must specify a symmetric customer
     # master key (CMK) to encrypt the private key in a data key pair. You
-    # cannot use an asymmetric CMK. To get the type of your CMK, use the
-    # DescribeKey operation.
+    # cannot use an asymmetric CMK or a CMK in a custom key store. To get
+    # the type and origin of your CMK, use the DescribeKey operation.
     #
     # If you are using the data key pair to encrypt data, or for any
     # operation where you don't immediately need a private key, consider
@@ -2550,7 +2574,7 @@ module Aws::KMS
     # to the encryption operation. If you specify an `EncryptionContext`,
     # you must specify the same encryption context (a case-sensitive exact
     # match) when decrypting the encrypted data key. Otherwise, the request
-    # to decrypt fails with an InvalidCiphertextException. For more
+    # to decrypt fails with an `InvalidCiphertextException`. For more
     # information, see [Encryption Context][1] in the *AWS Key Management
     # Service Developer Guide*.
     #
@@ -2583,7 +2607,9 @@ module Aws::KMS
     #
     # @option params [required, String] :key_id
     #   Specifies the symmetric CMK that encrypts the private key in the data
-    #   key pair. You cannot specify an asymmetric CMKs.
+    #   key pair. You cannot specify an asymmetric CMK or a CMK in a custom
+    #   key store. To get the type and origin of your CMK, use the DescribeKey
+    #   operation.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
@@ -2666,8 +2692,9 @@ module Aws::KMS
     #
     # To generate a data key pair, you must specify a symmetric customer
     # master key (CMK) to encrypt the private key in the data key pair. You
-    # cannot use an asymmetric CMK. To get the type of your CMK, use the
-    # `KeySpec` field in the DescribeKey response.
+    # cannot use an asymmetric CMK or a CMK in a custom key store. To get
+    # the type and origin of your CMK, use the `KeySpec` field in the
+    # DescribeKey response.
     #
     # You can use the public key that `GenerateDataKeyPairWithoutPlaintext`
     # returns to encrypt data or verify a signature outside of AWS KMS.
@@ -2683,7 +2710,7 @@ module Aws::KMS
     # to the encryption operation. If you specify an `EncryptionContext`,
     # you must specify the same encryption context (a case-sensitive exact
     # match) when decrypting the encrypted data key. Otherwise, the request
-    # to decrypt fails with an InvalidCiphertextException. For more
+    # to decrypt fails with an `InvalidCiphertextException`. For more
     # information, see [Encryption Context][1] in the *AWS Key Management
     # Service Developer Guide*.
     #
@@ -2716,8 +2743,9 @@ module Aws::KMS
     #
     # @option params [required, String] :key_id
     #   Specifies the CMK that encrypts the private key in the data key pair.
-    #   You must specify a symmetric CMK. You cannot use an asymmetric CMK. To
-    #   get the type of your CMK, use the DescribeKey operation.
+    #   You must specify a symmetric CMK. You cannot use an asymmetric CMK or
+    #   a CMK in a custom key store. To get the type and origin of your CMK,
+    #   use the DescribeKey operation.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
@@ -2826,7 +2854,7 @@ module Aws::KMS
     # to the encryption operation. If you specify an `EncryptionContext`,
     # you must specify the same encryption context (a case-sensitive exact
     # match) when decrypting the encrypted data key. Otherwise, the request
-    # to decrypt fails with an InvalidCiphertextException. For more
+    # to decrypt fails with an `InvalidCiphertextException`. For more
     # information, see [Encryption Context][1] in the *AWS Key Management
     # Service Developer Guide*.
     #
@@ -3660,6 +3688,19 @@ module Aws::KMS
     # To perform this operation on a CMK in a different AWS account, specify
     # the key ARN in the value of the `KeyId` parameter.
     #
+    # <note markdown="1"> The `GranteePrincipal` field in the `ListGrants` response usually
+    # contains the user or role designated as the grantee principal in the
+    # grant. However, when the grantee principal in the grant is an AWS
+    # service, the `GranteePrincipal` field contains the [service
+    # principal][1], which might represent several different grantee
+    # principals.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services
+    #
     # @option params [Integer] :limit
     #   Use this parameter to specify the maximum number of items to return.
     #   When this value is present, AWS KMS does not return more than the
@@ -4289,16 +4330,16 @@ module Aws::KMS
     # under which data is encrypted, such as when you [manually rotate][1] a
     # CMK or change the CMK that protects a ciphertext. You can also use it
     # to reencrypt ciphertext under the same CMK, such as to change the
-    # encryption context of a ciphertext.
+    # [encryption context][2] of a ciphertext.
     #
     # The `ReEncrypt` operation can decrypt ciphertext that was encrypted by
     # using an AWS KMS CMK in an AWS KMS operation, such as Encrypt or
     # GenerateDataKey. It can also decrypt ciphertext that was encrypted by
-    # using the public key of an asymmetric CMK outside of AWS KMS. However,
-    # it cannot decrypt ciphertext produced by other libraries, such as the
-    # [AWS Encryption SDK][2] or [Amazon S3 client-side encryption][3].
-    # These libraries return a ciphertext format that is incompatible with
-    # AWS KMS.
+    # using the public key of an [asymmetric CMK][3] outside of AWS KMS.
+    # However, it cannot decrypt ciphertext produced by other libraries,
+    # such as the [AWS Encryption SDK][4] or [Amazon S3 client-side
+    # encryption][5]. These libraries return a ciphertext format that is
+    # incompatible with AWS KMS.
     #
     # When you use the `ReEncrypt` operation, you need to provide
     # information for the decrypt operation and the subsequent encrypt
@@ -4336,29 +4377,30 @@ module Aws::KMS
     # Unlike other AWS KMS API operations, `ReEncrypt` callers must have two
     # permissions:
     #
-    # * `kms:EncryptFrom` permission on the source CMK
+    # * `kms:ReEncryptFrom` permission on the source CMK
     #
-    # * `kms:EncryptTo` permission on the destination CMK
+    # * `kms:ReEncryptTo` permission on the destination CMK
     #
-    # To permit reencryption from
-    #
-    # or to a CMK, include the `"kms:ReEncrypt*"` permission in your [key
-    # policy][4]. This permission is automatically included in the key
-    # policy when you use the console to create a CMK. But you must include
-    # it manually when you create a CMK programmatically or when you use the
-    # PutKeyPolicy operation set a key policy.
+    # To permit reencryption from or to a CMK, include the
+    # `"kms:ReEncrypt*"` permission in your [key policy][6]. This permission
+    # is automatically included in the key policy when you use the console
+    # to create a CMK. But you must include it manually when you create a
+    # CMK programmatically or when you use the PutKeyPolicy operation to set
+    # a key policy.
     #
     # The CMK that you use for this operation must be in a compatible key
     # state. For details, see [How Key State Affects Use of a Customer
-    # Master Key][5] in the *AWS Key Management Service Developer Guide*.
+    # Master Key][7] in the *AWS Key Management Service Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotate-keys-manually
-    # [2]: https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#asymmetric-cmks
+    # [4]: https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
     # @option params [required, String, IO] :ciphertext_blob
     #   Ciphertext of the data to reencrypt.
@@ -5437,7 +5479,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.34.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

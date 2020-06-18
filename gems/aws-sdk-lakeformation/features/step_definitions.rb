@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@lakeformation") do
   @service = Aws::LakeFormation::Resource.new
   @client = @service.client

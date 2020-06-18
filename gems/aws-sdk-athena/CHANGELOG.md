@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+1.28.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.28.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2020-06-01)
+------------------
+
+* Feature - This release adds support for connecting Athena to your own Apache Hive Metastores in addition to the AWS Glue Data Catalog. For more information, please see https://docs.aws.amazon.com/athena/latest/ug/connect-to-data-source-hive.html
+
 1.26.0 (2020-05-28)
 ------------------
 
@@ -173,4 +189,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-athena`.
-

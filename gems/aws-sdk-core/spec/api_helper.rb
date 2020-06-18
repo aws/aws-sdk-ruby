@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 
 module ApiHelper
@@ -66,6 +68,13 @@ module ApiHelper
             'String' => { 'shape' => 'StringShape' },
             'Timestamp' => { 'shape' => 'TimestampShape' },
             'EventStream' => { 'shape' => 'EventStream' }
+          }
+        },
+        'PayloadStructureShape' => {
+          'type' => 'structure',
+          'payload' => 'StreamingBlob',
+          'members' => {
+            'StreamingBlob' => { 'shape' => 'BlobShape', 'streaming' => 'true' }
           }
         },
         'EventStream' => {

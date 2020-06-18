@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2020-06-15)
+------------------
+
+* Feature - This release adds a hosted configuration source provider. Customers can now store their application configurations directly in AppConfig, without the need for an external configuration source.
+
+1.7.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.7.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - This release allows customers to choose from a list of predefined deployment strategies while starting deployments.
+
 1.6.0 (2020-05-28)
 ------------------
 
@@ -35,4 +51,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-appconfig`.
-

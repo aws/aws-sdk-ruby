@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 
 module BuildTools
@@ -8,9 +10,9 @@ module BuildTools
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
     # Minimum `aws-sdk-core` version for new gem builds
-    MINIMUM_CORE_VERSION = "3.71.0"
+    MINIMUM_CORE_VERSION = "3.99.0"
     # Minimum `aws-sdk-core` version for new S3 gem builds
-    MINIMUM_CORE_VERSION_S3 = "3.96.1"
+    MINIMUM_CORE_VERSION_S3 = "3.99.0"
 
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 

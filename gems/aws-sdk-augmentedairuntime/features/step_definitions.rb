@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@augmentedairuntime") do
   @service = Aws::AugmentedAIRuntime::Resource.new
   @client = @service.client

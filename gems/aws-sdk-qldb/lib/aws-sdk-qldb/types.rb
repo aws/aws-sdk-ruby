@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -58,6 +60,13 @@ module Aws::QLDB
     # @!attribute [rw] name
     #   The name of the ledger that you want to create. The name must be
     #   unique among all of your ledgers in the current AWS Region.
+    #
+    #   Naming constraints for ledger names are defined in [Quotas in Amazon
+    #   QLDB][1] in the *Amazon QLDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -713,7 +722,7 @@ module Aws::QLDB
     #   @return [String]
     #
     # @!attribute [rw] aggregation_enabled
-    #   Enables QLDB to publish multiple stream records in a single Kinesis
+    #   Enables QLDB to publish multiple data records in a single Kinesis
     #   Data Streams record. To learn more, see [KPL Key Concepts][1] in the
     #   *Amazon Kinesis Data Streams Developer Guide*.
     #
@@ -1268,7 +1277,7 @@ module Aws::QLDB
     #
     # @!attribute [rw] exclusive_end_time
     #   The exclusive date and time that specifies when the stream ends. If
-    #   you keep this parameter blank, the stream runs indefinitely until
+    #   you don't define this parameter, the stream runs indefinitely until
     #   you cancel it.
     #
     #   The `ExclusiveEndTime` must be in `ISO 8601` date and time format
@@ -1287,11 +1296,9 @@ module Aws::QLDB
     #   stream.
     #
     #   Your stream name must be unique among other *active* streams for a
-    #   given ledger. If you try to create a stream with the same name and
-    #   configuration of an active, existing stream for the same ledger,
-    #   QLDB simply returns the existing stream. Stream names have the same
-    #   naming constraints as ledger names, as defined in [Quotas in Amazon
-    #   QLDB][1] in the *Amazon QLDB Developer Guide*.
+    #   given ledger. Stream names have the same naming constraints as
+    #   ledger names, as defined in [Quotas in Amazon QLDB][1] in the
+    #   *Amazon QLDB Developer Guide*.
     #
     #
     #
@@ -1464,8 +1471,7 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # A structure that can contain an Amazon Ion value in multiple encoding
-    # formats.
+    # A structure that can contain a value in multiple encoding formats.
     #
     # @note When making an API call, you may pass ValueHolder
     #   data as a hash:

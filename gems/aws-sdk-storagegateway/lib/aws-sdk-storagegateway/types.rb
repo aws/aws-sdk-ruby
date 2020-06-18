@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -20,9 +22,9 @@ module Aws::StorageGateway
     #
     # * ActivateGatewayInput$GatewayType
     #
-    # * ActivateGatewayInput$TapeDriveType
-    #
     # * ActivateGatewayInput$MediumChangerType
+    #
+    # * ActivateGatewayInput$TapeDriveType
     #
     # @note When making an API call, you may pass ActivateGatewayInput
     #   data as a hash:
@@ -53,9 +55,12 @@ module Aws::StorageGateway
     #   the arguments you pass to the `ActivateGateway` API call determine
     #   the actual configuration of your gateway.
     #
-    #   For more information, see
-    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html
-    #   in the Storage Gateway User Guide.
+    #   For more information, see [Getting activation key][1] in the *AWS
+    #   Storage Gateway User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html
     #   @return [String]
     #
     # @!attribute [rw] gateway_name
@@ -76,15 +81,15 @@ module Aws::StorageGateway
     #   data. The gateway AWS Region specified must be the same AWS Region
     #   as the AWS Region in your `Host` header in the request. For more
     #   information about available AWS Regions and endpoints for AWS
-    #   Storage Gateway, see [Regions and Endpoints][1] in the *Amazon Web
-    #   Services Glossary*.
+    #   Storage Gateway, see [AWS Storage Gateway endpoints and quotas][1]
+    #   in the *AWS General Reference*.
     #
-    #   Valid Values: See [AWS Storage Gateway Regions and Endpoints][1] in
-    #   the AWS General Reference.
+    #   Valid Values: See [AWS Storage Gateway endpoints and quotas][1] in
+    #   the *AWS General Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/sg.html
     #   @return [String]
     #
     # @!attribute [rw] gateway_type
@@ -92,21 +97,21 @@ module Aws::StorageGateway
     #   specified is critical to all later functions of the gateway and
     #   cannot be changed after activation. The default value is `CACHED`.
     #
-    #   Valid Values: "STORED", "CACHED", "VTL", "FILE\_S3"
+    #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `FILE_S3`
     #   @return [String]
     #
     # @!attribute [rw] tape_drive_type
     #   The value that indicates the type of tape drive to use for tape
     #   gateway. This field is optional.
     #
-    #   Valid Values: "IBM-ULT3580-TD5"
+    #   Valid Values: `IBM-ULT3580-TD5`
     #   @return [String]
     #
     # @!attribute [rw] medium_changer_type
     #   The value that indicates the type of medium changer to use for tape
     #   gateway. This field is optional.
     #
-    #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
+    #   Valid Values: `STK-L700` \| `AWS-Gateway-VTL`
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -368,7 +373,7 @@ module Aws::StorageGateway
     #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the
     #   pool.
     #
-    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AssignTapePoolInput AWS API Documentation
@@ -527,7 +532,7 @@ module Aws::StorageGateway
     #   the storage class (S3 Glacier or S3 Glacier Deep Archive) that
     #   corresponds to the pool.
     #
-    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @!attribute [rw] tape_size_in_bytes
@@ -573,8 +578,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] volume_attachment_status
     #   A value that indicates whether a storage volume is attached to or
-    #   detached from a gateway. For more information, see [Moving Your
-    #   Volumes to a Different Gateway][1].
+    #   detached from a gateway. For more information, see [Moving your
+    #   volumes to a different gateway][1].
     #
     #
     #
@@ -624,9 +629,10 @@ module Aws::StorageGateway
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] target_name
@@ -814,7 +820,7 @@ module Aws::StorageGateway
     # @!attribute [rw] snapshot_id
     #   The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore
     #   as the new cached volume. Specify this field if you want to create
-    #   the iSCSI storage volume from a snapshot otherwise do not include
+    #   the iSCSI storage volume from a snapshot; otherwise, do not include
     #   this field. To list snapshots for your account use
     #   [DescribeSnapshots][1] in the *Amazon Elastic Compute Cloud API
     #   Reference*.
@@ -859,14 +865,17 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -963,14 +972,17 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -984,15 +996,17 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the file gateway. Possible values are `S3_STANDARD`,
-    #   `S3_STANDARD_IA`, or `S3_ONEZONE_IA`. If this field is not
-    #   populated, the default value `S3_STANDARD` is used. Optional.
+    #   by the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
+    #
+    #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
+    #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
     #   @return [String]
     #
     # @!attribute [rw] object_acl
-    #   A value that sets the access control list permission for objects in
-    #   the S3 bucket that a file gateway puts objects into. The default
-    #   value is "private".
+    #   A value that sets the access control list (ACL) permission for
+    #   objects in the S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #   @return [String]
     #
     # @!attribute [rw] client_list
@@ -1001,39 +1015,48 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] squash
-    #   A value that maps a user to anonymous user. Valid options are the
-    #   following:
+    #   A value that maps a user to anonymous user.
     #
-    #   * `RootSquash` - Only root is mapped to anonymous user.
+    #   Valid values are the following:
     #
-    #   * `NoSquash` - No one is mapped to anonymous user
+    #   * `RootSquash`\: Only root is mapped to anonymous user.
     #
-    #   * `AllSquash` - Everyone is mapped to anonymous user.
+    #   * `NoSquash`\: No one is mapped to anonymous user.
+    #
+    #   * `AllSquash`\: Everyone is mapped to anonymous user.
     #   @return [String]
     #
     # @!attribute [rw] read_only
-    #   A value that sets the write status of a file share. This value is
-    #   true if the write status is read-only, and otherwise false.
+    #   A value that sets the write status of a file share. Set this value
+    #   to `true` to set the write status to read-only, otherwise set to
+    #   `false`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] guess_mime_type_enabled
     #   A value that enables guessing of the MIME type for uploaded objects
-    #   based on file extensions. Set this value to true to enable MIME type
-    #   guessing, and otherwise to false. The default value is true.
+    #   based on file extensions. Set this value to `true` to enable MIME
+    #   type guessing, otherwise set to `false`. The default value is
+    #   `true`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_pays
     #   A value that sets who pays the cost of the request and the cost
     #   associated with data download from the S3 bucket. If this value is
-    #   set to true, the requester pays the costs. Otherwise the S3 bucket
-    #   owner pays. However, the S3 bucket owner always pays the cost of
-    #   storing data.
+    #   set to `true`, the requester pays the costs; otherwise, the S3
+    #   bucket owner pays. However, the S3 bucket owner always pays the cost
+    #   of storing data.
     #
     #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
     #   file share, so make sure that the configuration on the file share is
     #   the same as the S3 bucket configuration.
     #
     #    </note>
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -1124,14 +1147,17 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -1145,50 +1171,66 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the file gateway. Possible values are `S3_STANDARD`,
-    #   `S3_STANDARD_IA`, or `S3_ONEZONE_IA`. If this field is not
-    #   populated, the default value `S3_STANDARD` is used. Optional.
+    #   by the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
+    #
+    #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
+    #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
     #   @return [String]
     #
     # @!attribute [rw] object_acl
-    #   A value that sets the access control list permission for objects in
-    #   the S3 bucket that a file gateway puts objects into. The default
-    #   value is "private".
+    #   A value that sets the access control list (ACL) permission for
+    #   objects in the S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #   @return [String]
     #
     # @!attribute [rw] read_only
-    #   A value that sets the write status of a file share. This value is
-    #   true if the write status is read-only, and otherwise false.
+    #   A value that sets the write status of a file share. Set this value
+    #   to `true` to set the write status to read-only, otherwise set to
+    #   `false`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] guess_mime_type_enabled
     #   A value that enables guessing of the MIME type for uploaded objects
-    #   based on file extensions. Set this value to true to enable MIME type
-    #   guessing, and otherwise to false. The default value is true.
+    #   based on file extensions. Set this value to `true` to enable MIME
+    #   type guessing, otherwise set to `false`. The default value is
+    #   `true`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_pays
     #   A value that sets who pays the cost of the request and the cost
     #   associated with data download from the S3 bucket. If this value is
-    #   set to true, the requester pays the costs. Otherwise the S3 bucket
-    #   owner pays. However, the S3 bucket owner always pays the cost of
-    #   storing data.
+    #   set to `true`, the requester pays the costs; otherwise, the S3
+    #   bucket owner pays. However, the S3 bucket owner always pays the cost
+    #   of storing data.
     #
     #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
     #   file share, so make sure that the configuration on the file share is
     #   the same as the S3 bucket configuration.
     #
     #    </note>
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] smbacl_enabled
-    #   Set this value to "true to enable ACL (access control list) on the
-    #   SMB file share. Set it to "false" to map file and directory
+    #   Set this value to `true` to enable access control list (ACL) on the
+    #   SMB file share. Set it to `false` to map file and directory
     #   permissions to the POSIX permissions.
     #
-    #   For more information, see
-    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
-    #   in the Storage Gateway User Guide.
+    #   For more information, see [Using Microsoft Windows ACLs to control
+    #   access to an SMB file share][1] in the *AWS Storage Gateway User
+    #   Guide*.
+    #
+    #   Valid Values: `true` \| `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_user_list
@@ -1204,7 +1246,7 @@ module Aws::StorageGateway
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
-    #   character. For example `@group1`. Can only be set if Authentication
+    #   character. For example, `@group1`. Can only be set if Authentication
     #   is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
@@ -1222,9 +1264,9 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] authentication
     #   The authentication method that users use to access the file share.
+    #   The default is `ActiveDirectory`.
     #
-    #   Valid values are `ActiveDirectory` or `GuestAccess`. The default is
-    #   `ActiveDirectory`.
+    #   Valid Values: `ActiveDirectory` \| `GuestAccess`
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1300,7 +1342,7 @@ module Aws::StorageGateway
     #   Textual description of the snapshot that appears in the Amazon EC2
     #   console, Elastic Block Store snapshots panel in the **Description**
     #   field, and in the AWS Storage Gateway snapshot **Details** pane,
-    #   **Description** field
+    #   **Description** field.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1376,7 +1418,7 @@ module Aws::StorageGateway
     #   Textual description of the snapshot that appears in the Amazon EC2
     #   console, Elastic Block Store snapshots panel in the **Description**
     #   field, and in the AWS Storage Gateway snapshot **Details** pane,
-    #   **Description** field
+    #   **Description** field.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1473,7 +1515,7 @@ module Aws::StorageGateway
     # @!attribute [rw] snapshot_id
     #   The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore
     #   as the new stored volume. Specify this field if you want to create
-    #   the iSCSI storage volume from a snapshot otherwise do not include
+    #   the iSCSI storage volume from a snapshot; otherwise, do not include
     #   this field. To list snapshots for your account use
     #   [DescribeSnapshots][1] in the *Amazon Elastic Compute Cloud API
     #   Reference*.
@@ -1484,11 +1526,10 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] preserve_existing_data
-    #   Specify this field as true if you want to preserve the data on the
-    #   local disk. Otherwise, specifying this field as false creates an
-    #   empty volume.
+    #   Set to true `true` if you want to preserve the data on the local
+    #   disk. Otherwise, set to `false` to create an empty volume.
     #
-    #   Valid Values: true, false
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] target_name
@@ -1512,14 +1553,17 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of the KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1617,14 +1661,17 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] pool_id
@@ -1632,10 +1679,9 @@ module Aws::StorageGateway
     #   The tape in this pool is archived in the S3 storage class that is
     #   associated with the pool. When you use your backup application to
     #   eject the tape, the tape is archived directly into the storage class
-    #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the
-    #   pool.
+    #   (S3 Glacier or S3 Deep Archive) that corresponds to the pool.
     #
-    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1739,14 +1785,17 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] pool_id
@@ -1757,7 +1806,7 @@ module Aws::StorageGateway
     #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the
     #   pool.
     #
-    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1858,7 +1907,7 @@ module Aws::StorageGateway
     #   One of the BandwidthType values that indicates the gateway bandwidth
     #   rate limit to delete.
     #
-    #   Valid Values: `Upload`, `Download`, `All`.
+    #   Valid Values: `Upload` \| `Download` \| `All`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteBandwidthRateLimitInput AWS API Documentation
@@ -1950,11 +1999,13 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] force_delete
-    #   If this value is set to true, the operation deletes a file share
+    #   If this value is set to `true`, the operation deletes a file share
     #   immediately and aborts all data uploads to AWS. Otherwise, the file
     #   share is not deleted until all data is uploaded to AWS. This process
     #   aborts the data upload process, and the file share enters the
-    #   FORCE\_DELETING status.
+    #   `FORCE_DELETING` status.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteFileShareInput AWS API Documentation
@@ -2143,7 +2194,7 @@ module Aws::StorageGateway
     end
 
     # A JSON object containing the Amazon Resource Name (ARN) of the storage
-    # volume that was deleted
+    # volume that was deleted.
     #
     # @!attribute [rw] volume_arn
     #   The Amazon Resource Name (ARN) of the storage volume that was
@@ -2385,7 +2436,7 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # A JSON object containing a .
+    # A JSON object containing the following fields:
     #
     # @!attribute [rw] chap_credentials
     #   An array of ChapInfo objects that represent CHAP credentials. Each
@@ -2515,6 +2566,12 @@ module Aws::StorageGateway
     #   The type of hypervisor environment used by the host.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_type
+    #   The type of endpoint for your gateway.
+    #
+    #   Valid Values: `STANDARD` \| `FIPS`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationOutput AWS API Documentation
     #
     class DescribeGatewayInformationOutput < Struct.new(
@@ -2532,7 +2589,8 @@ module Aws::StorageGateway
       :tags,
       :vpc_endpoint,
       :cloud_watch_log_group_arn,
-      :host_environment)
+      :host_environment,
+      :endpoint_type)
       include Aws::Structure
     end
 
@@ -2600,10 +2658,6 @@ module Aws::StorageGateway
     #   represented as an ordinal number from 1 to 28, where 1 represents
     #   the first day of the month and 28 represents the last day of the
     #   month.
-    #
-    #   <note markdown="1"> This value is only available for tape and volume gateways.
-    #
-    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] timezone
@@ -2726,49 +2780,52 @@ module Aws::StorageGateway
     #   Indicates the status of a gateway that is a member of the Active
     #   Directory domain.
     #
-    #   * ACCESS\_DENIED: Indicates that the `JoinDomain` operation failed
+    #   * `ACCESS_DENIED`\: Indicates that the `JoinDomain` operation failed
     #     due to an authentication error.
     #
-    #   * DETACHED: Indicates that gateway is not joined to a domain.
+    #   * `DETACHED`\: Indicates that gateway is not joined to a domain.
     #
-    #   * JOINED: Indicates that the gateway has successfully joined a
+    #   * `JOINED`\: Indicates that the gateway has successfully joined a
     #     domain.
     #
-    #   * JOINING: Indicates that a `JoinDomain` operation is in progress.
+    #   * `JOINING`\: Indicates that a `JoinDomain` operation is in
+    #     progress.
     #
-    #   * NETWORK\_ERROR: Indicates that `JoinDomain` operation failed due
+    #   * `NETWORK_ERROR`\: Indicates that `JoinDomain` operation failed due
     #     to a network or connectivity error.
     #
-    #   * TIMEOUT: Indicates that the `JoinDomain` operation failed because
-    #     the operation didn't complete within the allotted time.
+    #   * `TIMEOUT`\: Indicates that the `JoinDomain` operation failed
+    #     because the operation didn't complete within the allotted time.
     #
-    #   * UNKNOWN\_ERROR: Indicates that the `JoinDomain` operation failed
+    #   * `UNKNOWN_ERROR`\: Indicates that the `JoinDomain` operation failed
     #     due to another type of error.
     #   @return [String]
     #
     # @!attribute [rw] smb_guest_password_set
-    #   This value is true if a password for the guest user “smbguest” is
-    #   set, and otherwise false.
+    #   This value is `true` if a password for the guest user `smbguest` is
+    #   set, otherwise `false`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] smb_security_strategy
     #   The type of security strategy that was specified for file gateway.
     #
-    #   ClientSpecified: if you use this option, requests are established
-    #   based on what is negotiated by the client. This option is
-    #   recommended when you want to maximize compatibility across different
-    #   clients in your environment.
+    #   * `ClientSpecified`\: If you use this option, requests are
+    #     established based on what is negotiated by the client. This option
+    #     is recommended when you want to maximize compatibility across
+    #     different clients in your environment.
     #
-    #   MandatorySigning: if you use this option, file gateway only allows
-    #   connections from SMBv2 or SMBv3 clients that have signing enabled.
-    #   This option works with SMB clients on Microsoft Windows Vista,
-    #   Windows Server 2008 or newer.
+    #   * `MandatorySigning`\: If you use this option, file gateway only
+    #     allows connections from SMBv2 or SMBv3 clients that have signing
+    #     enabled. This option works with SMB clients on Microsoft Windows
+    #     Vista, Windows Server 2008 or newer.
     #
-    #   MandatoryEncryption: if you use this option, file gateway only
-    #   allows connections from SMBv3 clients that have encryption enabled.
-    #   This option is highly recommended for environments that handle
-    #   sensitive data. This option works with SMB clients on Microsoft
-    #   Windows 8, Windows Server 2012 or newer.
+    #   * `MandatoryEncryption`\: If you use this option, file gateway only
+    #     allows connections from SMBv3 clients that have encryption
+    #     enabled. This option is highly recommended for environments that
+    #     handle sensitive data. This option works with SMB clients on
+    #     Microsoft Windows 8, Windows Server 2012 or newer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettingsOutput AWS API Documentation
@@ -2874,56 +2931,53 @@ module Aws::StorageGateway
     #   Describes a single unit of output from DescribeStorediSCSIVolumes.
     #   The following fields are returned:
     #
-    #   * **ChapEnabled**\: Indicates whether mutual CHAP is enabled for the
+    #   * `ChapEnabled`\: Indicates whether mutual CHAP is enabled for the
     #     iSCSI target.
     #
-    #   * **LunNumber**\: The logical disk number.
+    #   * `LunNumber`\: The logical disk number.
     #
-    #   * **NetworkInterfaceId**\: The network interface ID of the stored
+    #   * `NetworkInterfaceId`\: The network interface ID of the stored
     #     volume that initiator use to map the stored volume as an iSCSI
     #     target.
     #
-    #   * **NetworkInterfacePort**\: The port used to communicate with iSCSI
+    #   * `NetworkInterfacePort`\: The port used to communicate with iSCSI
     #     targets.
     #
-    #   * **PreservedExistingData**\: Indicates if when the stored volume
-    #     was created, existing data on the underlying local disk was
-    #     preserved.
+    #   * `PreservedExistingData`\: Indicates when the stored volume was
+    #     created, existing data on the underlying local disk was preserved.
     #
-    #   * **SourceSnapshotId**\: If the stored volume was created from a
+    #   * `SourceSnapshotId`\: If the stored volume was created from a
     #     snapshot, this field contains the snapshot ID used, e.g.
-    #     snap-1122aabb. Otherwise, this field is not included.
+    #     `snap-1122aabb`. Otherwise, this field is not included.
     #
-    #   * **StorediSCSIVolumes**\: An array of StorediSCSIVolume objects
-    #     where each object contains metadata about one stored volume.
+    #   * `StorediSCSIVolumes`\: An array of StorediSCSIVolume objects where
+    #     each object contains metadata about one stored volume.
     #
-    #   * **TargetARN**\: The Amazon Resource Name (ARN) of the volume
-    #     target.
+    #   * `TargetARN`\: The Amazon Resource Name (ARN) of the volume target.
     #
-    #   * **VolumeARN**\: The Amazon Resource Name (ARN) of the stored
-    #     volume.
+    #   * `VolumeARN`\: The Amazon Resource Name (ARN) of the stored volume.
     #
-    #   * **VolumeDiskId**\: The disk ID of the local disk that was
-    #     specified in the CreateStorediSCSIVolume operation.
+    #   * `VolumeDiskId`\: The disk ID of the local disk that was specified
+    #     in the CreateStorediSCSIVolume operation.
     #
-    #   * **VolumeId**\: The unique identifier of the storage volume, e.g.
-    #     vol-1122AABB.
+    #   * `VolumeId`\: The unique identifier of the storage volume, e.g.
+    #     `vol-1122AABB`.
     #
-    #   * **VolumeiSCSIAttributes**\: An VolumeiSCSIAttributes object that
+    #   * `VolumeiSCSIAttributes`\: An VolumeiSCSIAttributes object that
     #     represents a collection of iSCSI attributes for one stored volume.
     #
-    #   * **VolumeProgress**\: Represents the percentage complete if the
+    #   * `VolumeProgress`\: Represents the percentage complete if the
     #     volume is restoring or bootstrapping that represents the percent
     #     of data transferred. This field does not appear in the response if
     #     the stored volume is not restoring or bootstrapping.
     #
-    #   * **VolumeSizeInBytes**\: The size of the volume in bytes.
+    #   * `VolumeSizeInBytes`\: The size of the volume in bytes.
     #
-    #   * **VolumeStatus**\: One of the `VolumeStatus` values that indicates
+    #   * `VolumeStatus`\: One of the `VolumeStatus` values that indicates
     #     the state of the volume.
     #
-    #   * **VolumeType**\: One of the enumeration values describing the type
-    #     of the volume. Currently, on STORED volumes are supported.
+    #   * `VolumeType`\: One of the enumeration values describing the type
+    #     of the volume. Currently, only `STORED` volumes are supported.
     #   @return [Array<Types::StorediSCSIVolume>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeStorediSCSIVolumesOutput AWS API Documentation
@@ -2975,7 +3029,7 @@ module Aws::StorageGateway
     #   The description includes of the Amazon Resource Name (ARN) of the
     #   virtual tapes. The information returned includes the Amazon Resource
     #   Names (ARNs) of the tapes, size of the tapes, status of the tapes,
-    #   progress of the description and tape barcode.
+    #   progress of the description, and tape barcode.
     #   @return [Array<Types::TapeArchive>]
     #
     # @!attribute [rw] marker
@@ -3345,6 +3399,8 @@ module Aws::StorageGateway
     #   volume and detach the volume. The default is `false`. If this value
     #   is set to `false`, you must manually disconnect the iSCSI connection
     #   from the target volume.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DetachVolumeInput AWS API Documentation
@@ -3458,8 +3514,9 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] disk_allocation_type
     #   One of the `DiskAllocationType` enumeration values that identifies
-    #   how a local disk is used. Valid values: `UPLOAD_BUFFER`,
-    #   `CACHE_STORAGE`
+    #   how a local disk is used.
+    #
+    #   Valid Values: `UPLOAD_BUFFER` \| `CACHE_STORAGE`
     #   @return [String]
     #
     # @!attribute [rw] disk_allocation_resource
@@ -3502,8 +3559,9 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] file_share_status
-    #   The status of the file share. Possible values are `CREATING`,
-    #   `UPDATING`, `AVAILABLE` and `DELETING`.
+    #   The status of the file share.
+    #
+    #   Valid Values: `CREATING` \| `UPDATING` \| `AVAILABLE` \| `DELETING`
     #   @return [String]
     #
     # @!attribute [rw] gateway_arn
@@ -3544,7 +3602,7 @@ module Aws::StorageGateway
     # @!attribute [rw] gateway_operational_state
     #   The state of the gateway.
     #
-    #   Valid Values: DISABLED or ACTIVE
+    #   Valid Values: `DISABLED` \| `ACTIVE`
     #   @return [String]
     #
     # @!attribute [rw] gateway_name
@@ -3693,23 +3751,24 @@ module Aws::StorageGateway
     #   Indicates the status of the gateway as a member of the Active
     #   Directory domain.
     #
-    #   * ACCESS\_DENIED: Indicates that the `JoinDomain` operation failed
+    #   * `ACCESS_DENIED`\: Indicates that the `JoinDomain` operation failed
     #     due to an authentication error.
     #
-    #   * DETACHED: Indicates that gateway is not joined to a domain.
+    #   * `DETACHED`\: Indicates that gateway is not joined to a domain.
     #
-    #   * JOINED: Indicates that the gateway has successfully joined a
+    #   * `JOINED`\: Indicates that the gateway has successfully joined a
     #     domain.
     #
-    #   * JOINING: Indicates that a `JoinDomain` operation is in progress.
+    #   * `JOINING`\: Indicates that a `JoinDomain` operation is in
+    #     progress.
     #
-    #   * NETWORK\_ERROR: Indicates that `JoinDomain` operation failed due
+    #   * `NETWORK_ERROR`\: Indicates that `JoinDomain` operation failed due
     #     to a network or connectivity error.
     #
-    #   * TIMEOUT: Indicates that the `JoinDomain` operation failed because
-    #     the operation didn't complete within the allotted time.
+    #   * `TIMEOUT`\: Indicates that the `JoinDomain` operation failed
+    #     because the operation didn't complete within the allotted time.
     #
-    #   * UNKNOWN\_ERROR: Indicates that the `JoinDomain` operation failed
+    #   * `UNKNOWN_ERROR`\: Indicates that the `JoinDomain` operation failed
     #     due to another type of error.
     #   @return [String]
     #
@@ -4206,25 +4265,25 @@ module Aws::StorageGateway
     #       }
     #
     # @!attribute [rw] file_mode
-    #   The Unix file mode in the form "nnnn". For example, "0666"
+    #   The Unix file mode in the form "nnnn". For example, `0666`
     #   represents the default file mode inside the file share. The default
-    #   value is 0666.
+    #   value is `0666`.
     #   @return [String]
     #
     # @!attribute [rw] directory_mode
-    #   The Unix directory mode in the form "nnnn". For example, "0666"
+    #   The Unix directory mode in the form "nnnn". For example, `0666`
     #   represents the default access mode for all directories inside the
-    #   file share. The default value is 0777.
+    #   file share. The default value is `0777`.
     #   @return [String]
     #
     # @!attribute [rw] group_id
     #   The default group ID for the file share (unless the files have
-    #   another group ID specified). The default value is nfsnobody.
+    #   another group ID specified). The default value is `nfsnobody`.
     #   @return [Integer]
     #
     # @!attribute [rw] owner_id
     #   The default owner ID for files in the file share (unless the files
-    #   have another owner ID specified). The default value is nfsnobody.
+    #   have another owner ID specified). The default value is `nfsnobody`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareDefaults AWS API Documentation
@@ -4259,8 +4318,9 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] file_share_status
-    #   The status of the file share. Possible values are `CREATING`,
-    #   `UPDATING`, `AVAILABLE` and `DELETING`.
+    #   The status of the file share.
+    #
+    #   Valid Values: `CREATING` \| `UPDATING` \| `AVAILABLE` \| `DELETING`
     #   @return [String]
     #
     # @!attribute [rw] gateway_arn
@@ -4270,14 +4330,17 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -4296,15 +4359,17 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the file gateway. Possible values are `S3_STANDARD`,
-    #   `S3_STANDARD_IA`, or `S3_ONEZONE_IA`. If this field is not
-    #   populated, the default value `S3_STANDARD` is used. Optional.
+    #   by the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
+    #
+    #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
+    #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
     #   @return [String]
     #
     # @!attribute [rw] object_acl
-    #   A value that sets the access control list permission for objects in
-    #   the S3 bucket that a file gateway puts objects into. The default
-    #   value is "private".
+    #   A value that sets the access control list (ACL) permission for
+    #   objects in the S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #   @return [String]
     #
     # @!attribute [rw] client_list
@@ -4315,36 +4380,44 @@ module Aws::StorageGateway
     # @!attribute [rw] squash
     #   The user mapped to anonymous user. Valid options are the following:
     #
-    #   * `RootSquash` - Only root is mapped to anonymous user.
+    #   * `RootSquash`\: Only root is mapped to anonymous user.
     #
-    #   * `NoSquash` - No one is mapped to anonymous user
+    #   * `NoSquash`\: No one is mapped to anonymous user.
     #
-    #   * `AllSquash` - Everyone is mapped to anonymous user.
+    #   * `AllSquash`\: Everyone is mapped to anonymous user.
     #   @return [String]
     #
     # @!attribute [rw] read_only
-    #   A value that sets the write status of a file share. This value is
-    #   true if the write status is read-only, and otherwise false.
+    #   A value that sets the write status of a file share. Set this value
+    #   to `true` to set the write status to read-only, otherwise set to
+    #   `false`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] guess_mime_type_enabled
     #   A value that enables guessing of the MIME type for uploaded objects
-    #   based on file extensions. Set this value to true to enable MIME type
-    #   guessing, and otherwise to false. The default value is true.
+    #   based on file extensions. Set this value to `true` to enable MIME
+    #   type guessing, otherwise set to `false`. The default value is
+    #   `true`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_pays
     #   A value that sets who pays the cost of the request and the cost
     #   associated with data download from the S3 bucket. If this value is
-    #   set to true, the requester pays the costs. Otherwise the S3 bucket
-    #   owner pays. However, the S3 bucket owner always pays the cost of
-    #   storing data.
+    #   set to `true`, the requester pays the costs; otherwise, the S3
+    #   bucket owner pays. However, the S3 bucket owner always pays the cost
+    #   of storing data.
     #
     #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
     #   file share, so make sure that the configuration on the file share is
     #   the same as the S3 bucket configuration.
     #
     #    </note>
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -4461,19 +4534,21 @@ module Aws::StorageGateway
     #   A comma-separated list of the paths of folders to refresh in the
     #   cache. The default is \[`"/"`\]. The default refreshes objects and
     #   folders at the root of the Amazon S3 bucket. If `Recursive` is set
-    #   to "true", the entire S3 bucket that the file share has access to
-    #   is refreshed.
+    #   to `true`, the entire S3 bucket that the file share has access to is
+    #   refreshed.
     #   @return [Array<String>]
     #
     # @!attribute [rw] recursive
     #   A value that specifies whether to recursively refresh folders in the
     #   cache. The refresh includes folders that were in the cache the last
     #   time the gateway listed the folder's contents. If this value set to
-    #   "true", each folder that is listed in `FolderList` is recursively
+    #   `true`, each folder that is listed in `FolderList` is recursively
     #   updated. Otherwise, subfolders listed in `FolderList` are not
     #   refreshed. Only objects that are in folders listed directly under
     #   `FolderList` are found and used for the update. The default is
-    #   "true".
+    #   `true`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCacheInput AWS API Documentation
@@ -4680,8 +4755,9 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] file_share_status
-    #   The status of the file share. Possible values are `CREATING`,
-    #   `UPDATING`, `AVAILABLE` and `DELETING`.
+    #   The status of the file share.
+    #
+    #   Valid Values: `CREATING` \| `UPDATING` \| `AVAILABLE` \| `DELETING`
     #   @return [String]
     #
     # @!attribute [rw] gateway_arn
@@ -4691,14 +4767,17 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -4717,51 +4796,65 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the file gateway. Possible values are `S3_STANDARD`,
-    #   `S3_STANDARD_IA`, or `S3_ONEZONE_IA`. If this field is not
-    #   populated, the default value `S3_STANDARD` is used. Optional.
+    #   by the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
+    #
+    #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
+    #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
     #   @return [String]
     #
     # @!attribute [rw] object_acl
-    #   A value that sets the access control list permission for objects in
-    #   the S3 bucket that a file gateway puts objects into. The default
-    #   value is "private".
+    #   A value that sets the access control list (ACL) permission for
+    #   objects in the S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #   @return [String]
     #
     # @!attribute [rw] read_only
-    #   A value that sets the write status of a file share. This value is
-    #   true if the write status is read-only, and otherwise false.
+    #   A value that sets the write status of a file share. Set this value
+    #   to `true` to set the write status to read-only, otherwise set to
+    #   `false`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] guess_mime_type_enabled
     #   A value that enables guessing of the MIME type for uploaded objects
-    #   based on file extensions. Set this value to true to enable MIME type
-    #   guessing, and otherwise to false. The default value is true.
+    #   based on file extensions. Set this value to `true` to enable MIME
+    #   type guessing, otherwise set to `false`. The default value is
+    #   `true`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_pays
     #   A value that sets who pays the cost of the request and the cost
     #   associated with data download from the S3 bucket. If this value is
-    #   set to true, the requester pays the costs. Otherwise the S3 bucket
-    #   owner pays. However, the S3 bucket owner always pays the cost of
-    #   storing data.
+    #   set to `true`, the requester pays the costs; otherwise, the S3
+    #   bucket owner pays. However, the S3 bucket owner always pays the cost
+    #   of storing data.
     #
     #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
     #   file share, so make sure that the configuration on the file share is
     #   the same as the S3 bucket configuration.
     #
     #    </note>
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] smbacl_enabled
-    #   If this value is set to "true", indicates that ACL (access control
-    #   list) is enabled on the SMB file share. If it is set to "false",
-    #   it indicates that file and directory permissions are mapped to the
-    #   POSIX permission.
+    #   If this value is set to `true`, it indicates that access control
+    #   list (ACL) is enabled on the SMB file share. If it is set to
+    #   `false`, it indicates that file and directory permissions are mapped
+    #   to the POSIX permission.
     #
-    #   For more information, see
-    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
-    #   in the Storage Gateway User Guide.
+    #   For more information, see [Using Microsoft Windows ACLs to control
+    #   access to an SMB file share][1] in the *AWS Storage Gateway User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_user_list
@@ -4774,7 +4867,7 @@ module Aws::StorageGateway
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
-    #   character. For example `@group1`. Can only be set if Authentication
+    #   character. For example, `@group1`. Can only be set if Authentication
     #   is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
@@ -4791,10 +4884,10 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] authentication
-    #   The authentication method of the file share.
-    #
-    #   Valid values are `ActiveDirectory` or `GuestAccess`. The default is
+    #   The authentication method of the file share. The default is
     #   `ActiveDirectory`.
+    #
+    #   Valid Values: `ActiveDirectory` \| `GuestAccess`
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4908,7 +5001,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] password
-    #   The password that you want to set for your SMB Server.
+    #   The password that you want to set for your SMB server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetSMBGuestPasswordInput AWS API Documentation
@@ -5087,8 +5180,8 @@ module Aws::StorageGateway
     # @!attribute [rw] volume_attachment_status
     #   A value that indicates whether a storage volume is attached to,
     #   detached from, or is in the process of detaching from a gateway. For
-    #   more information, see [Moving Your Volumes to a Different
-    #   Gateway][1].
+    #   more information, see [Moving your volumes to a different
+    #   gateway][1].
     #
     #
     #
@@ -5121,7 +5214,7 @@ module Aws::StorageGateway
     #   Indicates if when the stored volume was created, existing data on
     #   the underlying local disk was preserved.
     #
-    #   Valid Values: true, false
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] volume_iscsi_attributes
@@ -5150,9 +5243,10 @@ module Aws::StorageGateway
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] target_name
@@ -5189,7 +5283,7 @@ module Aws::StorageGateway
 
     # A key-value pair that helps you manage, filter, and search for your
     # resource. Allowed characters: letters, white space, and numbers,
-    # representable in UTF-8, and the following characters: + - = . \_ : /
+    # representable in UTF-8, and the following characters: + - = . \_ : /.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -5200,7 +5294,7 @@ module Aws::StorageGateway
     #       }
     #
     # @!attribute [rw] key
-    #   Tag key (String). The key can't start with aws:.
+    #   Tag key. The key can't start with aws:.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -5258,9 +5352,10 @@ module Aws::StorageGateway
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] pool_id
@@ -5268,10 +5363,10 @@ module Aws::StorageGateway
     #   tapes in this pool are archived in the S3 storage class that is
     #   associated with the pool. When you use your backup application to
     #   eject the tape, the tape is archived directly into the storage class
-    #   (S3 Glacier or S# Glacier Deep Archive) that corresponds to the
+    #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the
     #   pool.
     #
-    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Tape AWS API Documentation
@@ -5336,9 +5431,10 @@ module Aws::StorageGateway
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] pool_id
@@ -5346,7 +5442,7 @@ module Aws::StorageGateway
     #   this pool are archived in the S3 storage class that is associated
     #   with the pool.
     #
-    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeArchive AWS API Documentation
@@ -5397,7 +5493,7 @@ module Aws::StorageGateway
     #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the
     #   pool.
     #
-    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeInfo AWS API Documentation
@@ -5656,7 +5752,7 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group
     #   that you want to use to monitor and log events in the gateway.
     #
-    #   For more information, see [What Is Amazon CloudWatch Logs?][1].
+    #   For more information, see [What is Amazon CloudWatch logs?][1].
     #
     #
     #
@@ -5673,7 +5769,8 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # A JSON object containing the ARN of the gateway that was updated.
+    # A JSON object containing the Amazon Resource Name (ARN) of the gateway
+    # that was updated.
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -5782,10 +5879,6 @@ module Aws::StorageGateway
     #   represented as an ordinal number from 1 to 28, where 1 represents
     #   the first day of the month and 28 represents the last day of the
     #   month.
-    #
-    #   <note markdown="1"> This value is only available for tape and volume gateways.
-    #
-    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateMaintenanceStartTimeInput AWS API Documentation
@@ -5844,14 +5937,17 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] nfs_file_share_defaults
@@ -5860,15 +5956,17 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the file gateway. Possible values are `S3_STANDARD`,
-    #   `S3_STANDARD_IA`, or `S3_ONEZONE_IA`. If this field is not
-    #   populated, the default value `S3_STANDARD` is used. Optional.
+    #   by the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
+    #
+    #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
+    #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
     #   @return [String]
     #
     # @!attribute [rw] object_acl
-    #   A value that sets the access control list permission for objects in
-    #   the S3 bucket that a file gateway puts objects into. The default
-    #   value is "private".
+    #   A value that sets the access control list (ACL) permission for
+    #   objects in the S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #   @return [String]
     #
     # @!attribute [rw] client_list
@@ -5877,38 +5975,48 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] squash
-    #   The user mapped to anonymous user. Valid options are the following:
+    #   The user mapped to anonymous user.
     #
-    #   * `RootSquash` - Only root is mapped to anonymous user.
+    #   Valid values are the following:
     #
-    #   * `NoSquash` - No one is mapped to anonymous user
+    #   * `RootSquash`\: Only root is mapped to anonymous user.
     #
-    #   * `AllSquash` - Everyone is mapped to anonymous user.
+    #   * `NoSquash`\: No one is mapped to anonymous user.
+    #
+    #   * `AllSquash`\: Everyone is mapped to anonymous user.
     #   @return [String]
     #
     # @!attribute [rw] read_only
-    #   A value that sets the write status of a file share. This value is
-    #   true if the write status is read-only, and otherwise false.
+    #   A value that sets the write status of a file share. Set this value
+    #   to `true` to set the write status to read-only, otherwise set to
+    #   `false`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] guess_mime_type_enabled
     #   A value that enables guessing of the MIME type for uploaded objects
-    #   based on file extensions. Set this value to true to enable MIME type
-    #   guessing, and otherwise to false. The default value is true.
+    #   based on file extensions. Set this value to `true` to enable MIME
+    #   type guessing, otherwise set to `false`. The default value is
+    #   `true`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_pays
     #   A value that sets who pays the cost of the request and the cost
     #   associated with data download from the S3 bucket. If this value is
-    #   set to true, the requester pays the costs. Otherwise the S3 bucket
-    #   owner pays. However, the S3 bucket owner always pays the cost of
-    #   storing data.
+    #   set to `true`, the requester pays the costs; otherwise, the S3
+    #   bucket owner pays. However, the S3 bucket owner always pays the cost
+    #   of storing data.
     #
     #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
     #   file share, so make sure that the configuration on the file share is
     #   the same as the S3 bucket configuration.
     #
     #    </note>
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareInput AWS API Documentation
@@ -5968,75 +6076,94 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
-    #   True to use Amazon S3 server-side encryption with your own AWS KMS
-    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   Set to `true` to use Amazon S3 server-side encryption with your own
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server-side encryption. This value can only be set when KMSEncrypted
-    #   is true. Optional.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) used for Amazon S3 server-side encryption. Storage Gateway
+    #   does not support asymmetric CMKs. This value can only be set when
+    #   `KMSEncrypted` is `true`. Optional.
     #   @return [String]
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the file gateway. Possible values are `S3_STANDARD`,
-    #   `S3_STANDARD_IA`, or `S3_ONEZONE_IA`. If this field is not
-    #   populated, the default value `S3_STANDARD` is used. Optional.
+    #   by the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
+    #
+    #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
+    #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
     #   @return [String]
     #
     # @!attribute [rw] object_acl
-    #   A value that sets the access control list permission for objects in
-    #   the S3 bucket that a file gateway puts objects into. The default
-    #   value is "private".
+    #   A value that sets the access control list (ACL) permission for
+    #   objects in the S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #   @return [String]
     #
     # @!attribute [rw] read_only
-    #   A value that sets the write status of a file share. This value is
-    #   true if the write status is read-only, and otherwise false.
+    #   A value that sets the write status of a file share. Set this value
+    #   to `true` to set write status to read-only, otherwise set to
+    #   `false`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] guess_mime_type_enabled
     #   A value that enables guessing of the MIME type for uploaded objects
-    #   based on file extensions. Set this value to true to enable MIME type
-    #   guessing, and otherwise to false. The default value is true.
+    #   based on file extensions. Set this value to `true` to enable MIME
+    #   type guessing, otherwise set to `false`. The default value is
+    #   `true`.
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_pays
     #   A value that sets who pays the cost of the request and the cost
     #   associated with data download from the S3 bucket. If this value is
-    #   set to true, the requester pays the costs. Otherwise the S3 bucket
-    #   owner pays. However, the S3 bucket owner always pays the cost of
-    #   storing data.
+    #   set to `true`, the requester pays the costs; otherwise, the S3
+    #   bucket owner pays. However, the S3 bucket owner always pays the cost
+    #   of storing data.
     #
     #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
     #   file share, so make sure that the configuration on the file share is
     #   the same as the S3 bucket configuration.
     #
     #    </note>
+    #
+    #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] smbacl_enabled
-    #   Set this value to "true to enable ACL (access control list) on the
-    #   SMB file share. Set it to "false" to map file and directory
+    #   Set this value to `true` to enable access control list (ACL) on the
+    #   SMB file share. Set it to `false` to map file and directory
     #   permissions to the POSIX permissions.
     #
-    #   For more information, see
-    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.htmlin
-    #   the Storage Gateway User Guide.
+    #   For more information, see [Using Microsoft Windows ACLs to control
+    #   access to an SMB file share][1] in the *AWS Storage Gateway User
+    #   Guide*.
+    #
+    #   Valid Values: `true` \| `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_user_list
     #   A list of users in the Active Directory that have administrator
     #   rights to the file share. A group must be prefixed with the @
-    #   character. For example `@group1`. Can only be set if Authentication
+    #   character. For example, `@group1`. Can only be set if Authentication
     #   is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
-    #   character. For example `@group1`. Can only be set if Authentication
+    #   character. For example, `@group1`. Can only be set if Authentication
     #   is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
@@ -6240,7 +6367,7 @@ module Aws::StorageGateway
     # @!attribute [rw] device_type
     #   The type of medium changer you want to select.
     #
-    #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
+    #   Valid Values: `STK-L700` \| `AWS-Gateway-VTL`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateVTLDeviceTypeInput AWS API Documentation

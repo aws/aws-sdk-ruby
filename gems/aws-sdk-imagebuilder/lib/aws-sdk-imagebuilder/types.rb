@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -738,6 +740,7 @@ module Aws::Imagebuilder
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         working_directory: "NonEmptyString",
     #         client_token: "ClientToken", # required
     #       }
     #
@@ -778,6 +781,10 @@ module Aws::Imagebuilder
     #   The tags of the image recipe.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] working_directory
+    #   The working directory to be used during build and test workflows.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   The idempotency token used to make this request idempotent.
     #
@@ -795,6 +802,7 @@ module Aws::Imagebuilder
       :parent_image,
       :block_device_mappings,
       :tags,
+      :working_directory,
       :client_token)
       include Aws::Structure
     end
@@ -931,6 +939,9 @@ module Aws::Imagebuilder
     #         key_pair: "NonEmptyString",
     #         terminate_instance_on_failure: false,
     #         sns_topic_arn: "SnsTopicArn",
+    #         resource_tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -986,6 +997,10 @@ module Aws::Imagebuilder
     #   The SNS topic on which to send image build events.
     #   @return [String]
     #
+    # @!attribute [rw] resource_tags
+    #   The tags attached to the resource created by Image Builder.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] tags
     #   The tags of the infrastructure configuration.
     #   @return [Hash<String,String>]
@@ -1010,6 +1025,7 @@ module Aws::Imagebuilder
       :key_pair,
       :terminate_instance_on_failure,
       :sns_topic_arn,
+      :resource_tags,
       :tags,
       :client_token)
       include Aws::Structure
@@ -1514,7 +1530,7 @@ module Aws::Imagebuilder
     #   data as a hash:
     #
     #       {
-    #         component_build_version_arn: "ComponentBuildVersionArn", # required
+    #         component_build_version_arn: "ComponentVersionArnOrBuildVersionArn", # required
     #       }
     #
     # @!attribute [rw] component_build_version_arn
@@ -1724,7 +1740,7 @@ module Aws::Imagebuilder
     #   data as a hash:
     #
     #       {
-    #         image_build_version_arn: "ImageBuildVersionArn", # required
+    #         image_build_version_arn: "ImageVersionArnOrBuildVersionArn", # required
     #       }
     #
     # @!attribute [rw] image_build_version_arn
@@ -2042,6 +2058,10 @@ module Aws::Imagebuilder
     #   The tags of the image recipe.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] working_directory
+    #   The working directory to be used during build and test workflows.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageRecipe AWS API Documentation
     #
     class ImageRecipe < Struct.new(
@@ -2055,7 +2075,8 @@ module Aws::Imagebuilder
       :parent_image,
       :block_device_mappings,
       :date_created,
-      :tags)
+      :tags,
+      :working_directory)
       include Aws::Structure
     end
 
@@ -2426,6 +2447,10 @@ module Aws::Imagebuilder
     #   The date on which the infrastructure configuration was last updated.
     #   @return [String]
     #
+    # @!attribute [rw] resource_tags
+    #   The tags attached to the resource created by Image Builder.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] tags
     #   The tags of the infrastructure configuration.
     #   @return [Hash<String,String>]
@@ -2446,6 +2471,7 @@ module Aws::Imagebuilder
       :sns_topic_arn,
       :date_created,
       :date_updated,
+      :resource_tags,
       :tags)
       include Aws::Structure
     end
@@ -2472,6 +2498,10 @@ module Aws::Imagebuilder
     #   The date on which the infrastructure configuration was last updated.
     #   @return [String]
     #
+    # @!attribute [rw] resource_tags
+    #   The tags attached to the image created by Image Builder.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] tags
     #   The tags of the infrastructure configuration.
     #   @return [Hash<String,String>]
@@ -2484,6 +2514,7 @@ module Aws::Imagebuilder
       :description,
       :date_created,
       :date_updated,
+      :resource_tags,
       :tags)
       include Aws::Structure
     end
@@ -3539,6 +3570,24 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # You have exceeded the number of permitted resources or operations for
+    # this service. For service quotas, see [EC2 Image Builder endpoints and
+    # quotas][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/imagebuilder.html#limits_imagebuilder
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The service is unable to process your request at this time.
     #
     # @!attribute [rw] message
@@ -3869,6 +3918,9 @@ module Aws::Imagebuilder
     #         terminate_instance_on_failure: false,
     #         sns_topic_arn: "SnsTopicArn",
     #         client_token: "ClientToken", # required
+    #         resource_tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] infrastructure_configuration_arn
@@ -3928,6 +3980,10 @@ module Aws::Imagebuilder
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] resource_tags
+    #   The tags attached to the resource created by Image Builder.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/UpdateInfrastructureConfigurationRequest AWS API Documentation
     #
     class UpdateInfrastructureConfigurationRequest < Struct.new(
@@ -3941,7 +3997,8 @@ module Aws::Imagebuilder
       :key_pair,
       :terminate_instance_on_failure,
       :sns_topic_arn,
-      :client_token)
+      :client_token,
+      :resource_tags)
       include Aws::Structure
     end
 

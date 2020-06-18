@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $LOAD_PATH.unshift(File.expand_path('../aws-sdk-code-generator/lib', __FILE__))
 
 require 'aws-sdk-code-generator'

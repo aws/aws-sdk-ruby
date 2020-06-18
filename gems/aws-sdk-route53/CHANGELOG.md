@@ -1,6 +1,27 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-06-18)
+------------------
+
+* Feature - Added a new ListHostedZonesByVPC API for customers to list all the private hosted zones that a specified VPC is associated with.
+
+1.37.0 (2020-06-17)
+------------------
+
+* Feature - Add PriorRequestNotComplete exception to AssociateVPCWithHostedZone API
+
+1.36.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.36.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.35.0 (2020-05-28)
 ------------------
 
@@ -260,4 +281,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-route53` gem.
-

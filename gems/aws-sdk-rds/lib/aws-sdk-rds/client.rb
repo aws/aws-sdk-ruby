@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-rds/plugins/cross_region_copying.rb'
@@ -70,6 +73,7 @@ module Aws::RDS
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
     add_plugin(Aws::RDS::Plugins::CrossRegionCopying)
@@ -163,7 +167,7 @@ module Aws::RDS
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -720,7 +724,7 @@ module Aws::RDS
     # For more information on backtracking, see [ Backtracking an Aurora DB
     # Cluster][1] in the *Amazon Aurora User Guide.*
     #
-    # <note markdown="1"> This action only applies to Aurora DB clusters.
+    # <note markdown="1"> This action only applies to Aurora MySQL DB clusters.
     #
     #  </note>
     #
@@ -2100,6 +2104,10 @@ module Aws::RDS
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
     #
+    #   <note markdown="1"> Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+    #
+    #    </note>
+    #
     #   Default: 0
     #
     #   Constraints:
@@ -2198,6 +2206,14 @@ module Aws::RDS
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
     #
+    # @option params [Boolean] :enable_global_write_forwarding
+    #   A value that indicates whether to enable write operations to be
+    #   forwarded from this cluster to the primary cluster in an Aurora global
+    #   database. The resulting changes are replicated back to this cluster.
+    #   This parameter only applies to DB clusters that are secondary clusters
+    #   in an Aurora global database. By default, Aurora disallows write
+    #   operations for secondary clusters.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2279,6 +2295,7 @@ module Aws::RDS
     #     copy_tags_to_snapshot: false,
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     enable_global_write_forwarding: false,
     #     source_region: "String",
     #   })
     #
@@ -2359,6 +2376,8 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -3280,11 +3299,16 @@ module Aws::RDS
     #
     # @option params [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
-    #   When the DB instance is publicly accessible, it is an Internet-facing
-    #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance isn't publicly accessible, it
-    #   is an internal instance with a DNS name that resolves to a private IP
-    #   address.
+    #
+    #   When the DB instance is publicly accessible, its DNS endpoint resolves
+    #   to the private IP address from within the DB instance's VPC, and to
+    #   the public IP address from outside of the DB instance's VPC. Access
+    #   to the DB instance is ultimately controlled by the security group it
+    #   uses, and that public access is not permitted if the security group
+    #   assigned to the DB instance doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
     #
     #   Default: The default behavior varies depending on whether
     #   `DBSubnetGroupName` is specified.
@@ -3895,11 +3919,18 @@ module Aws::RDS
     #
     # @option params [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
-    #   When the DB instance is publicly accessible, it is an Internet-facing
-    #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance isn't publicly accessible, it
-    #   is an internal instance with a DNS name that resolves to a private IP
-    #   address. For more information, see CreateDBInstance.
+    #
+    #   When the DB instance is publicly accessible, its DNS endpoint resolves
+    #   to the private IP address from within the DB instance's VPC, and to
+    #   the public IP address from outside of the DB instance's VPC. Access
+    #   to the DB instance is ultimately controlled by the security group it
+    #   uses, and that public access is not permitted if the security group
+    #   assigned to the DB instance doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
+    #
+    #   For more information, see CreateDBInstance.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
@@ -5108,6 +5139,7 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].readers #=> Array
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateGlobalCluster AWS API Documentation
     #
@@ -5436,6 +5468,8 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -6287,6 +6321,7 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].readers #=> Array
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteGlobalCluster AWS API Documentation
     #
@@ -6627,7 +6662,7 @@ module Aws::RDS
     # For more information on Amazon Aurora, see [ What Is Amazon
     # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
-    # <note markdown="1"> This action only applies to Aurora DB clusters.
+    # <note markdown="1"> This action only applies to Aurora MySQL DB clusters.
     #
     #  </note>
     #
@@ -7466,6 +7501,8 @@ module Aws::RDS
     #   resp.db_clusters[0].domain_memberships[0].status #=> String
     #   resp.db_clusters[0].domain_memberships[0].fqdn #=> String
     #   resp.db_clusters[0].domain_memberships[0].iam_role_name #=> String
+    #   resp.db_clusters[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.db_clusters[0].global_write_forwarding_requested #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -9603,6 +9640,7 @@ module Aws::RDS
     #   resp.global_clusters[0].global_cluster_members[0].readers #=> Array
     #   resp.global_clusters[0].global_cluster_members[0].readers[0] #=> String
     #   resp.global_clusters[0].global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_clusters[0].global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeGlobalClusters AWS API Documentation
     #
@@ -10823,6 +10861,8 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -11337,6 +11377,10 @@ module Aws::RDS
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
     #
+    #   <note markdown="1"> Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+    #
+    #    </note>
+    #
     #   Default: 0
     #
     #   Constraints:
@@ -11441,6 +11485,14 @@ module Aws::RDS
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
     #
+    # @option params [Boolean] :enable_global_write_forwarding
+    #   A value that indicates whether to enable write operations to be
+    #   forwarded from this cluster to the primary cluster in an Aurora global
+    #   database. The resulting changes are replicated back to this cluster.
+    #   This parameter only applies to DB clusters that are secondary clusters
+    #   in an Aurora global database. By default, Aurora disallows write
+    #   operations for secondary clusters.
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -11500,6 +11552,7 @@ module Aws::RDS
     #     deletion_protection: false,
     #     enable_http_endpoint: false,
     #     copy_tags_to_snapshot: false,
+    #     enable_global_write_forwarding: false,
     #   })
     #
     # @example Response structure
@@ -11579,6 +11632,8 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -11770,16 +11825,23 @@ module Aws::RDS
     # to add a list of IDs of the AWS accounts that are authorized to
     # restore the manual DB cluster snapshot. Use the value `all` to make
     # the manual DB cluster snapshot public, which means that it can be
-    # copied or restored by all AWS accounts. Do not add the `all` value for
-    # any manual DB cluster snapshots that contain private information that
-    # you don't want available to all AWS accounts. If a manual DB cluster
-    # snapshot is encrypted, it can be shared, but only by specifying a list
-    # of authorized AWS account IDs for the `ValuesToAdd` parameter. You
-    # can't use `all` as a value for that parameter in this case.
+    # copied or restored by all AWS accounts.
+    #
+    # <note markdown="1"> Don't add the `all` value for any manual DB cluster snapshots that
+    # contain private information that you don't want available to all AWS
+    # accounts.
+    #
+    #  </note>
+    #
+    # If a manual DB cluster snapshot is encrypted, it can be shared, but
+    # only by specifying a list of authorized AWS account IDs for the
+    # `ValuesToAdd` parameter. You can't use `all` as a value for that
+    # parameter in this case.
     #
     # To view which AWS accounts have access to copy or restore a manual DB
-    # cluster snapshot, or whether a manual DB cluster snapshot public or
-    # private, use the `DescribeDBClusterSnapshotAttributes` API action.
+    # cluster snapshot, or whether a manual DB cluster snapshot is public or
+    # private, use the DescribeDBClusterSnapshotAttributes API action. The
+    # accounts are returned as values for the `restore` attribute.
     #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
     #
@@ -11794,6 +11856,11 @@ module Aws::RDS
     #
     #   To manage authorization for other AWS accounts to copy or restore a
     #   manual DB cluster snapshot, set this value to `restore`.
+    #
+    #   <note markdown="1"> To view the list of attributes available to modify, use the
+    #   DescribeDBClusterSnapshotAttributes API action.
+    #
+    #    </note>
     #
     # @option params [Array<String>] :values_to_add
     #   A list of DB cluster snapshot attributes to add to the attribute
@@ -12353,11 +12420,16 @@ module Aws::RDS
     #
     # @option params [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
-    #   When the DB instance is publicly accessible, it is an Internet-facing
-    #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance isn't publicly accessible, it
-    #   is an internal instance with a DNS name that resolves to a private IP
-    #   address.
+    #
+    #   When the DB instance is publicly accessible, its DNS endpoint resolves
+    #   to the private IP address from within the DB instance's VPC, and to
+    #   the public IP address from outside of the DB instance's VPC. Access
+    #   to the DB instance is ultimately controlled by the security group it
+    #   uses, and that public access is not permitted if the security group
+    #   assigned to the DB instance doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
     #
     #   `PubliclyAccessible` only applies to DB instances in a VPC. The DB
     #   instance must be part of a public subnet and `PubliclyAccessible` must
@@ -13093,16 +13165,23 @@ module Aws::RDS
     # to add a list of IDs of the AWS accounts that are authorized to
     # restore the manual DB snapshot. Uses the value `all` to make the
     # manual DB snapshot public, which means it can be copied or restored by
-    # all AWS accounts. Do not add the `all` value for any manual DB
-    # snapshots that contain private information that you don't want
-    # available to all AWS accounts. If the manual DB snapshot is encrypted,
-    # it can be shared, but only by specifying a list of authorized AWS
-    # account IDs for the `ValuesToAdd` parameter. You can't use `all` as a
-    # value for that parameter in this case.
+    # all AWS accounts.
+    #
+    # <note markdown="1"> Don't add the `all` value for any manual DB snapshots that contain
+    # private information that you don't want available to all AWS
+    # accounts.
+    #
+    #  </note>
+    #
+    # If the manual DB snapshot is encrypted, it can be shared, but only by
+    # specifying a list of authorized AWS account IDs for the `ValuesToAdd`
+    # parameter. You can't use `all` as a value for that parameter in this
+    # case.
     #
     # To view which AWS accounts have access to copy or restore a manual DB
     # snapshot, or whether a manual DB snapshot public or private, use the
-    # `DescribeDBSnapshotAttributes` API action.
+    # DescribeDBSnapshotAttributes API action. The accounts are returned as
+    # values for the `restore` attribute.
     #
     # @option params [required, String] :db_snapshot_identifier
     #   The identifier for the DB snapshot to modify the attributes for.
@@ -13112,6 +13191,11 @@ module Aws::RDS
     #
     #   To manage authorization for other AWS accounts to copy or restore a
     #   manual DB snapshot, set this value to `restore`.
+    #
+    #   <note markdown="1"> To view the list of attributes available to modify, use the
+    #   DescribeDBSnapshotAttributes API action.
+    #
+    #    </note>
     #
     # @option params [Array<String>] :values_to_add
     #   A list of DB snapshot attributes to add to the attribute specified by
@@ -13428,6 +13512,7 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].readers #=> Array
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyGlobalCluster AWS API Documentation
     #
@@ -13884,6 +13969,8 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -14268,6 +14355,7 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].readers #=> Array
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveFromGlobalCluster AWS API Documentation
     #
@@ -14934,6 +15022,10 @@ module Aws::RDS
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
     #
+    #   <note markdown="1"> Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+    #
+    #    </note>
+    #
     #   Default: 0
     #
     #   Constraints:
@@ -15102,6 +15194,8 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -15275,6 +15369,10 @@ module Aws::RDS
     # @option params [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
+    #
+    #   <note markdown="1"> Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+    #
+    #    </note>
     #
     #   Default: 0
     #
@@ -15473,6 +15571,8 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -15647,6 +15747,10 @@ module Aws::RDS
     # @option params [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
+    #
+    #   <note markdown="1"> Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+    #
+    #    </note>
     #
     #   Default: 0
     #
@@ -15837,6 +15941,8 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -15945,11 +16051,18 @@ module Aws::RDS
     #
     # @option params [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
-    #   When the DB instance is publicly accessible, it is an Internet-facing
-    #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance isn't publicly accessible, it
-    #   is an internal instance with a DNS name that resolves to a private IP
-    #   address. For more information, see CreateDBInstance.
+    #
+    #   When the DB instance is publicly accessible, its DNS endpoint resolves
+    #   to the private IP address from within the DB instance's VPC, and to
+    #   the public IP address from outside of the DB instance's VPC. Access
+    #   to the DB instance is ultimately controlled by the security group it
+    #   uses, and that public access is not permitted if the security group
+    #   assigned to the DB instance doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
+    #
+    #   For more information, see CreateDBInstance.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   A value that indicates whether minor version upgrades are applied
@@ -16618,11 +16731,18 @@ module Aws::RDS
     #
     # @option params [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
-    #   When the DB instance is publicly accessible, it is an Internet-facing
-    #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance isn't publicly accessible, it
-    #   is an internal instance with a DNS name that resolves to a private IP
-    #   address. For more information, see CreateDBInstance.
+    #
+    #   When the DB instance is publicly accessible, its DNS endpoint resolves
+    #   to the private IP address from within the DB instance's VPC, and to
+    #   the public IP address from outside of the DB instance's VPC. Access
+    #   to the DB instance is ultimately controlled by the security group it
+    #   uses, and that public access is not permitted if the security group
+    #   assigned to the DB instance doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
+    #
+    #   For more information, see CreateDBInstance.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to associate with this DB instance. For more
@@ -17076,11 +17196,18 @@ module Aws::RDS
     #
     # @option params [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
-    #   When the DB instance is publicly accessible, it is an Internet-facing
-    #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance isn't publicly accessible, it
-    #   is an internal instance with a DNS name that resolves to a private IP
-    #   address. For more information, see CreateDBInstance.
+    #
+    #   When the DB instance is publicly accessible, its DNS endpoint resolves
+    #   to the private IP address from within the DB instance's VPC, and to
+    #   the public IP address from outside of the DB instance's VPC. Access
+    #   to the DB instance is ultimately controlled by the security group it
+    #   uses, and that public access is not permitted if the security group
+    #   assigned to the DB instance doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
+    #
+    #   For more information, see CreateDBInstance.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   A value that indicates whether minor version upgrades are applied
@@ -17803,6 +17930,8 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -18229,6 +18358,8 @@ module Aws::RDS
     #   resp.db_cluster.domain_memberships[0].status #=> String
     #   resp.db_cluster.domain_memberships[0].fqdn #=> String
     #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -18413,7 +18544,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

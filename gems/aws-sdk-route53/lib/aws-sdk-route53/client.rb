@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-route53/plugins/id_fix.rb'
@@ -70,6 +73,7 @@ module Aws::Route53
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestXml)
     add_plugin(Aws::Route53::Plugins::IdFix)
@@ -163,7 +167,7 @@ module Aws::Route53
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -2342,16 +2346,33 @@ module Aws::Route53
       req.send_request(options)
     end
 
-    # Disassociates a VPC from a Amazon Route 53 private hosted zone. Note
-    # the following:
+    # Disassociates an Amazon Virtual Private Cloud (Amazon VPC) from an
+    # Amazon Route 53 private hosted zone. Note the following:
     #
-    # * You can't disassociate the last VPC from a private hosted zone.
+    # * You can't disassociate the last Amazon VPC from a private hosted
+    #   zone.
     #
     # * You can't convert a private hosted zone into a public hosted zone.
     #
     # * You can submit a `DisassociateVPCFromHostedZone` request using
     #   either the account that created the hosted zone or the account that
-    #   created the VPC.
+    #   created the Amazon VPC.
+    #
+    # * Some services, such as AWS Cloud Map and Amazon Elastic File System
+    #   (Amazon EFS) automatically create hosted zones and associate VPCs
+    #   with the hosted zones. A service can create a hosted zone using your
+    #   account or using its own account. You can disassociate a VPC from a
+    #   hosted zone only if the service created the hosted zone using your
+    #   account.
+    #
+    #   When you run [DisassociateVPCFromHostedZone][1], if the hosted zone
+    #   has a value for `OwningAccount`, you can use
+    #   `DisassociateVPCFromHostedZone`. If the hosted zone has a value for
+    #   `OwningService`, you can't use `DisassociateVPCFromHostedZone`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListHostedZonesByVPC.html
     #
     # @option params [required, String] :hosted_zone_id
     #   The ID of the private hosted zone that you want to disassociate a VPC
@@ -3552,6 +3573,80 @@ module Aws::Route53
     # @param [Hash] params ({})
     def list_hosted_zones_by_name(params = {}, options = {})
       req = build_request(:list_hosted_zones_by_name, params)
+      req.send_request(options)
+    end
+
+    # Lists all the private hosted zones that a specified VPC is associated
+    # with, regardless of which AWS account or AWS service owns the hosted
+    # zones. The `HostedZoneOwner` structure in the response contains one of
+    # the following values:
+    #
+    # * An `OwningAccount` element, which contains the account number of
+    #   either the current AWS account or another AWS account. Some
+    #   services, such as AWS Cloud Map, create hosted zones using the
+    #   current account.
+    #
+    # * An `OwningService` element, which identifies the AWS service that
+    #   created and owns the hosted zone. For example, if a hosted zone was
+    #   created by Amazon Elastic File System (Amazon EFS), the value of
+    #   `Owner` is `efs.amazonaws.com`.
+    #
+    # @option params [required, String] :vpc_id
+    #   The ID of the Amazon VPC that you want to list hosted zones for.
+    #
+    # @option params [required, String] :vpc_region
+    #   For the Amazon VPC that you specified for `VPCId`, the AWS Region that
+    #   you created the VPC in.
+    #
+    # @option params [Integer] :max_items
+    #   (Optional) The maximum number of hosted zones that you want Amazon
+    #   Route 53 to return. If the specified VPC is associated with more than
+    #   `MaxItems` hosted zones, the response includes a `NextToken` element.
+    #   `NextToken` contains the hosted zone ID of the first hosted zone that
+    #   Route 53 will return if you submit another request.
+    #
+    # @option params [String] :next_token
+    #   If the previous response included a `NextToken` element, the specified
+    #   VPC is associated with more hosted zones. To get more hosted zones,
+    #   submit another `ListHostedZonesByVPC` request.
+    #
+    #   For the value of `NextToken`, specify the value of `NextToken` from
+    #   the previous response.
+    #
+    #   If the previous response didn't include a `NextToken` element, there
+    #   are no more hosted zones to get.
+    #
+    # @return [Types::ListHostedZonesByVPCResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHostedZonesByVPCResponse#hosted_zone_summaries #hosted_zone_summaries} => Array&lt;Types::HostedZoneSummary&gt;
+    #   * {Types::ListHostedZonesByVPCResponse#max_items #max_items} => Integer
+    #   * {Types::ListHostedZonesByVPCResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_hosted_zones_by_vpc({
+    #     vpc_id: "VPCId", # required
+    #     vpc_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #     max_items: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hosted_zone_summaries #=> Array
+    #   resp.hosted_zone_summaries[0].hosted_zone_id #=> String
+    #   resp.hosted_zone_summaries[0].name #=> String
+    #   resp.hosted_zone_summaries[0].owner.owning_account #=> String
+    #   resp.hosted_zone_summaries[0].owner.owning_service #=> String
+    #   resp.max_items #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesByVPC AWS API Documentation
+    #
+    # @overload list_hosted_zones_by_vpc(params = {})
+    # @param [Hash] params ({})
+    def list_hosted_zones_by_vpc(params = {}, options = {})
+      req = build_request(:list_hosted_zones_by_vpc, params)
       req.send_request(options)
     end
 
@@ -5134,7 +5229,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

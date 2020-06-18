@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../spec_helper'
 require 'base64'
 require 'openssl'
@@ -518,6 +520,13 @@ module Aws
             it 'delegates to S3 client' do
               expect(client.client).to receive(:head_object)
               client.head_object(bucket: 'bucket', key: 'key')
+            end
+          end
+
+          describe '#build_request' do
+            it 'delegates to S3 client' do
+              expect(client.client).to receive(:build_request)
+              client.build_request(:head_object, bucket: 'bucket', key: 'key')
             end
           end
         end

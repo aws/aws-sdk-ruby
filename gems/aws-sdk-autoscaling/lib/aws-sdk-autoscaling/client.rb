@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -69,6 +72,7 @@ module Aws::AutoScaling
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -161,7 +165,7 @@ module Aws::AutoScaling
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -557,6 +561,43 @@ module Aws::AutoScaling
     # @param [Hash] params ({})
     def batch_put_scheduled_update_group_action(params = {}, options = {})
       req = build_request(:batch_put_scheduled_update_group_action, params)
+      req.send_request(options)
+    end
+
+    # Cancels an instance refresh operation in progress. Cancellation does
+    # not roll back any replacements that have already been completed, but
+    # it prevents new replacements from being started.
+    #
+    # For more information, see [Replacing Auto Scaling Instances Based on
+    # an Instance Refresh][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html
+    #
+    # @option params [required, String] :auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #
+    # @return [Types::CancelInstanceRefreshAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelInstanceRefreshAnswer#instance_refresh_id #instance_refresh_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_instance_refresh({
+    #     auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_refresh_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CancelInstanceRefresh AWS API Documentation
+    #
+    # @overload cancel_instance_refresh(params = {})
+    # @param [Hash] params ({})
+    def cancel_instance_refresh(params = {}, options = {})
+      req = build_request(:cancel_instance_refresh, params)
       req.send_request(options)
     end
 
@@ -2142,6 +2183,77 @@ module Aws::AutoScaling
     # @param [Hash] params ({})
     def describe_auto_scaling_notification_types(params = {}, options = {})
       req = build_request(:describe_auto_scaling_notification_types, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more instance refreshes.
+    #
+    # You can determine the status of a request by looking at the `Status`
+    # parameter. The following are the possible statuses:
+    #
+    # * `Pending` - The request was created, but the operation has not
+    #   started.
+    #
+    # * `InProgress` - The operation is in progress.
+    #
+    # * `Successful` - The operation completed successfully.
+    #
+    # * `Failed` - The operation failed to complete. You can troubleshoot
+    #   using the status reason and the scaling activities.
+    #
+    # * `Cancelling` - An ongoing operation is being cancelled. Cancellation
+    #   does not roll back any replacements that have already been
+    #   completed, but it prevents new replacements from being started.
+    #
+    # * `Cancelled` - The operation is cancelled.
+    #
+    # @option params [required, String] :auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #
+    # @option params [Array<String>] :instance_refresh_ids
+    #   One or more instance refresh IDs.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of items to return with this call. The default
+    #   value is `50` and the maximum value is `100`.
+    #
+    # @return [Types::DescribeInstanceRefreshesAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstanceRefreshesAnswer#instance_refreshes #instance_refreshes} => Array&lt;Types::InstanceRefresh&gt;
+    #   * {Types::DescribeInstanceRefreshesAnswer#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_refreshes({
+    #     auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #     instance_refresh_ids: ["XmlStringMaxLen255"],
+    #     next_token: "XmlString",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_refreshes #=> Array
+    #   resp.instance_refreshes[0].instance_refresh_id #=> String
+    #   resp.instance_refreshes[0].auto_scaling_group_name #=> String
+    #   resp.instance_refreshes[0].status #=> String, one of "Pending", "InProgress", "Successful", "Failed", "Cancelling", "Cancelled"
+    #   resp.instance_refreshes[0].status_reason #=> String
+    #   resp.instance_refreshes[0].start_time #=> Time
+    #   resp.instance_refreshes[0].end_time #=> Time
+    #   resp.instance_refreshes[0].percentage_complete #=> Integer
+    #   resp.instance_refreshes[0].instances_to_update #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeInstanceRefreshes AWS API Documentation
+    #
+    # @overload describe_instance_refreshes(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_refreshes(params = {}, options = {})
+      req = build_request(:describe_instance_refreshes, params)
       req.send_request(options)
     end
 
@@ -4326,24 +4438,27 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [Array<String>] :scaling_processes
-    #   One or more of the following processes. If you omit this parameter,
-    #   all processes are specified.
+    #   One or more of the following processes:
     #
     #   * `Launch`
     #
     #   * `Terminate`
     #
-    #   * `HealthCheck`
-    #
-    #   * `ReplaceUnhealthy`
-    #
-    #   * `AZRebalance`
+    #   * `AddToLoadBalancer`
     #
     #   * `AlarmNotification`
     #
+    #   * `AZRebalance`
+    #
+    #   * `HealthCheck`
+    #
+    #   * `InstanceRefresh`
+    #
+    #   * `ReplaceUnhealthy`
+    #
     #   * `ScheduledActions`
     #
-    #   * `AddToLoadBalancer`
+    #   If you omit this parameter, all processes are specified.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4559,6 +4674,69 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
+    # Starts a new instance refresh operation, which triggers a rolling
+    # replacement of all previously launched instances in the Auto Scaling
+    # group with a new group of instances.
+    #
+    # If successful, this call creates a new instance refresh request with a
+    # unique ID that you can use to track its progress. To query its status,
+    # call the DescribeInstanceRefreshes API. To describe the instance
+    # refreshes that have already run, call the DescribeInstanceRefreshes
+    # API. To cancel an active instance refresh operation, use the
+    # CancelInstanceRefresh API.
+    #
+    # For more information, see [Replacing Auto Scaling Instances Based on
+    # an Instance Refresh][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html
+    #
+    # @option params [required, String] :auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #
+    # @option params [String] :strategy
+    #   The strategy to use for the instance refresh. The only valid value is
+    #   `Rolling`.
+    #
+    #   A rolling update is an update that is applied to all instances in an
+    #   Auto Scaling group until all instances have been updated. A rolling
+    #   update can fail due to failed health checks or if instances are on
+    #   standby or are protected from scale-in. If the rolling update process
+    #   fails, any instances that were already replaced are not rolled back to
+    #   their previous configuration.
+    #
+    # @option params [Types::RefreshPreferences] :preferences
+    #   Set of preferences associated with the instance refresh request.
+    #
+    # @return [Types::StartInstanceRefreshAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartInstanceRefreshAnswer#instance_refresh_id #instance_refresh_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_instance_refresh({
+    #     auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #     strategy: "Rolling", # accepts Rolling
+    #     preferences: {
+    #       min_healthy_percentage: 1,
+    #       instance_warmup: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_refresh_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/StartInstanceRefresh AWS API Documentation
+    #
+    # @overload start_instance_refresh(params = {})
+    # @param [Hash] params ({})
+    def start_instance_refresh(params = {}, options = {})
+      req = build_request(:start_instance_refresh, params)
+      req.send_request(options)
+    end
+
     # Suspends the specified automatic scaling processes, or all processes,
     # for the specified Auto Scaling group.
     #
@@ -4578,24 +4756,27 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [Array<String>] :scaling_processes
-    #   One or more of the following processes. If you omit this parameter,
-    #   all processes are specified.
+    #   One or more of the following processes:
     #
     #   * `Launch`
     #
     #   * `Terminate`
     #
-    #   * `HealthCheck`
-    #
-    #   * `ReplaceUnhealthy`
-    #
-    #   * `AZRebalance`
+    #   * `AddToLoadBalancer`
     #
     #   * `AlarmNotification`
     #
+    #   * `AZRebalance`
+    #
+    #   * `HealthCheck`
+    #
+    #   * `InstanceRefresh`
+    #
+    #   * `ReplaceUnhealthy`
+    #
     #   * `ScheduledActions`
     #
-    #   * `AddToLoadBalancer`
+    #   If you omit this parameter, all processes are specified.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5018,7 +5199,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

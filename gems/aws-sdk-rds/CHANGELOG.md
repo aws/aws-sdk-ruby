@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2020-06-18)
+------------------
+
+* Feature - Adding support for global write forwarding on secondary clusters in an Aurora global database.
+
+1.86.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.86.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.85.0 (2020-05-28)
 ------------------
 

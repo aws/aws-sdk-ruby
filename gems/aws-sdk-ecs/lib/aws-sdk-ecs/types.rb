@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -261,12 +263,37 @@ module Aws::ECS
     #
     # @!attribute [rw] status
     #   The current status of the capacity provider. Only capacity providers
-    #   in an `ACTIVE` state can be used in a cluster.
+    #   in an `ACTIVE` state can be used in a cluster. When a capacity
+    #   provider is successfully deleted, it will have an `INACTIVE` status.
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_group_provider
     #   The Auto Scaling group settings for the capacity provider.
     #   @return [Types::AutoScalingGroupProvider]
+    #
+    # @!attribute [rw] update_status
+    #   The update status of the capacity provider. The following are the
+    #   possible states that will be returned.
+    #
+    #   DELETE\_IN\_PROGRESS
+    #
+    #   : The capacity provider is in the process of being deleted.
+    #
+    #   DELETE\_COMPLETE
+    #
+    #   : The capacity provider has been successfully deleted and will have
+    #     an `INACTIVE` status.
+    #
+    #   DELETE\_FAILED
+    #
+    #   : The capacity provider was unable to be deleted. The update status
+    #     reason will provide further details about why the delete failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_status_reason
+    #   The update status reason. This provides further details about the
+    #   update status for the capacity provider.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   The metadata that you apply to the capacity provider to help you
@@ -306,6 +333,8 @@ module Aws::ECS
       :name,
       :status,
       :auto_scaling_group_provider,
+      :update_status,
+      :update_status_reason,
       :tags)
       include Aws::Structure
     end
@@ -1620,15 +1649,16 @@ module Aws::ECS
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] ulimits
-    #   A list of `ulimits` to set in the container. This parameter maps to
-    #   `Ulimits` in the [Create a container][1] section of the [Docker
-    #   Remote API][2] and the `--ulimit` option to [docker run][3]. Valid
-    #   naming values are displayed in the Ulimit data type. This parameter
-    #   requires version 1.18 of the Docker Remote API or greater on your
-    #   container instance. To check the Docker Remote API version on your
-    #   container instance, log in to your container instance and run the
-    #   following command: `sudo docker version --format
-    #   '\{\{.Server.APIVersion\}\}'`
+    #   A list of `ulimits` to set in the container. If a ulimit value is
+    #   specified in a task definition, it will override the default values
+    #   set by Docker. This parameter maps to `Ulimits` in the [Create a
+    #   container][1] section of the [Docker Remote API][2] and the
+    #   `--ulimit` option to [docker run][3]. Valid naming values are
+    #   displayed in the Ulimit data type. This parameter requires version
+    #   1.18 of the Docker Remote API or greater on your container instance.
+    #   To check the Docker Remote API version on your container instance,
+    #   log in to your container instance and run the following command:
+    #   `sudo docker version --format '\{\{.Server.APIVersion\}\}'`
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -3194,6 +3224,36 @@ module Aws::ECS
     #
     class DeleteAttributesResponse < Struct.new(
       :attributes)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCapacityProviderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_provider: "String", # required
+    #       }
+    #
+    # @!attribute [rw] capacity_provider
+    #   The short name or full Amazon Resource Name (ARN) of the capacity
+    #   provider to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCapacityProviderRequest AWS API Documentation
+    #
+    class DeleteCapacityProviderRequest < Struct.new(
+      :capacity_provider)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_provider
+    #   The details of a capacity provider.
+    #   @return [Types::CapacityProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCapacityProviderResponse AWS API Documentation
+    #
+    class DeleteCapacityProviderResponse < Struct.new(
+      :capacity_provider)
       include Aws::Structure
     end
 
@@ -5049,7 +5109,7 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] name
-    #   The resource name you want to list the account settings for.
+    #   The name of the account setting you want to list the settings for.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -7136,8 +7196,16 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
-    #   The Amazon Resource Name (ARN) of the task execution role that the
-    #   Amazon ECS container agent and the Docker daemon can assume.
+    #   The Amazon Resource Name (ARN) of the task execution role that
+    #   grants the Amazon ECS container agent permission to make AWS API
+    #   calls on your behalf. The task execution IAM role is required
+    #   depending on the requirements of your task. For more information,
+    #   see [Amazon ECS task execution IAM role][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
     #   @return [String]
     #
     # @!attribute [rw] network_mode
@@ -9401,8 +9469,15 @@ module Aws::ECS
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the task execution role that
-    #   containers in this task can assume. All containers in this task are
-    #   granted the permissions that are specified in this role.
+    #   grants the Amazon ECS container agent permission to make AWS API
+    #   calls on your behalf. The task execution IAM role is required
+    #   depending on the requirements of your task. For more information,
+    #   see [Amazon ECS task execution IAM role][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
     #   @return [String]
     #
     # @!attribute [rw] network_mode
@@ -9775,8 +9850,8 @@ module Aws::ECS
     #   @return [Array<Types::InferenceAcceleratorOverride>]
     #
     # @!attribute [rw] execution_role_arn
-    #   The Amazon Resource Name (ARN) of the task execution role that the
-    #   Amazon ECS container agent and the Docker daemon can assume.
+    #   The Amazon Resource Name (ARN) of the task execution IAM role
+    #   override for the task.
     #   @return [String]
     #
     # @!attribute [rw] memory
@@ -10635,10 +10710,12 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # A data volume used in a task definition. For tasks that use a Docker
-    # volume, specify a `DockerVolumeConfiguration`. For tasks that use a
-    # bind mount host volume, specify a `host` and optional `sourcePath`.
-    # For more information, see [Using Data Volumes in Tasks][1].
+    # A data volume used in a task definition. For tasks that use Amazon
+    # Elastic File System (Amazon EFS) file storage, specify an
+    # `efsVolumeConfiguration`. For tasks that use a Docker volume, specify
+    # a `DockerVolumeConfiguration`. For tasks that use a bind mount host
+    # volume, specify a `host` and optional `sourcePath`. For more
+    # information, see [Using Data Volumes in Tasks][1].
     #
     #
     #
@@ -10683,13 +10760,12 @@ module Aws::ECS
     #
     # @!attribute [rw] host
     #   This parameter is specified when you are using bind mount host
-    #   volumes. Bind mount host volumes are supported when you are using
-    #   either the EC2 or Fargate launch types. The contents of the `host`
-    #   parameter determine whether your bind mount host volume persists on
-    #   the host container instance and where it is stored. If the `host`
-    #   parameter is empty, then the Docker daemon assigns a host path for
-    #   your data volume. However, the data is not guaranteed to persist
-    #   after the containers associated with it stop running.
+    #   volumes. The contents of the `host` parameter determine whether your
+    #   bind mount host volume persists on the host container instance and
+    #   where it is stored. If the `host` parameter is empty, then the
+    #   Docker daemon assigns a host path for your data volume. However, the
+    #   data is not guaranteed to persist after the containers associated
+    #   with it stop running.
     #
     #   Windows containers can mount whole directories on the same drive as
     #   `$env:ProgramData`. Windows containers cannot mount directories on a
@@ -10707,18 +10783,7 @@ module Aws::ECS
     #
     # @!attribute [rw] efs_volume_configuration
     #   This parameter is specified when you are using an Amazon Elastic
-    #   File System (Amazon EFS) file storage. Amazon EFS file systems are
-    #   only supported when you are using the EC2 launch type.
-    #
-    #   `EFSVolumeConfiguration` remains in preview and is a Beta Service as
-    #   defined by and subject to the Beta Service Participation Service
-    #   Terms located at [https://aws.amazon.com/service-terms][1] ("Beta
-    #   Terms"). These Beta Terms apply to your participation in this
-    #   preview of `EFSVolumeConfiguration`.
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/service-terms
+    #   File System file system for task storage.
     #   @return [Types::EFSVolumeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Volume AWS API Documentation

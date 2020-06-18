@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2020-06-18)
+------------------
+
+* Feature - You can now configure Amazon SES to send event notifications when the delivery of an email is delayed because of a temporary issue. For example, you can receive a notification if the recipient's inbox is full, or if there's a temporary problem with the receiving email server.
+
+1.6.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.6.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.5.0 (2020-05-28)
 ------------------
 
@@ -30,4 +46,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-sesv2`.
-

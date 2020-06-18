@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -2378,6 +2380,7 @@ module Aws::S3
         o.name = "DeleteObjects"
         o.http_method = "POST"
         o.http_request_uri = "/{Bucket}?delete"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: DeleteObjectsRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteObjectsOutput)
       end)
@@ -2758,6 +2761,7 @@ module Aws::S3
         o.name = "PutBucketAcl"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?acl"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketAclRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2774,6 +2778,7 @@ module Aws::S3
         o.name = "PutBucketCors"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?cors"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketCorsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2782,6 +2787,7 @@ module Aws::S3
         o.name = "PutBucketEncryption"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?encryption"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketEncryptionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2798,6 +2804,7 @@ module Aws::S3
         o.name = "PutBucketLifecycle"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?lifecycle"
+        o.http_checksum_required = true
         o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketLifecycleRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -2807,6 +2814,7 @@ module Aws::S3
         o.name = "PutBucketLifecycleConfiguration"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?lifecycle"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketLifecycleConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2815,6 +2823,7 @@ module Aws::S3
         o.name = "PutBucketLogging"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?logging"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketLoggingRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2831,6 +2840,7 @@ module Aws::S3
         o.name = "PutBucketNotification"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?notification"
+        o.http_checksum_required = true
         o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketNotificationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -2848,6 +2858,7 @@ module Aws::S3
         o.name = "PutBucketPolicy"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?policy"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2856,6 +2867,7 @@ module Aws::S3
         o.name = "PutBucketReplication"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?replication"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketReplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2864,6 +2876,7 @@ module Aws::S3
         o.name = "PutBucketRequestPayment"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?requestPayment"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketRequestPaymentRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2872,6 +2885,7 @@ module Aws::S3
         o.name = "PutBucketTagging"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?tagging"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2880,6 +2894,7 @@ module Aws::S3
         o.name = "PutBucketVersioning"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?versioning"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketVersioningRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2888,6 +2903,7 @@ module Aws::S3
         o.name = "PutBucketWebsite"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?website"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutBucketWebsiteRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2904,6 +2920,7 @@ module Aws::S3
         o.name = "PutObjectAcl"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}/{Key+}?acl"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutObjectAclRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectAclOutput)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchKey)
@@ -2913,6 +2930,7 @@ module Aws::S3
         o.name = "PutObjectLegalHold"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}/{Key+}?legal-hold"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutObjectLegalHoldRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectLegalHoldOutput)
       end)
@@ -2921,6 +2939,7 @@ module Aws::S3
         o.name = "PutObjectLockConfiguration"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?object-lock"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutObjectLockConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectLockConfigurationOutput)
       end)
@@ -2929,6 +2948,7 @@ module Aws::S3
         o.name = "PutObjectRetention"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}/{Key+}?retention"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutObjectRetentionRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectRetentionOutput)
       end)
@@ -2937,6 +2957,7 @@ module Aws::S3
         o.name = "PutObjectTagging"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}/{Key+}?tagging"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutObjectTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectTaggingOutput)
       end)
@@ -2945,6 +2966,7 @@ module Aws::S3
         o.name = "PutPublicAccessBlock"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?publicAccessBlock"
+        o.http_checksum_required = true
         o.input = Shapes::ShapeRef.new(shape: PutPublicAccessBlockRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)

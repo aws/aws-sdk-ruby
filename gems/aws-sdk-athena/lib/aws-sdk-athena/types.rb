@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -76,6 +78,29 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # Contains metadata for a column in a table.
+    #
+    # @!attribute [rw] name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   Optional information about the column.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/Column AWS API Documentation
+    #
+    class Column < Struct.new(
+      :name,
+      :type,
+      :comment)
+      include Aws::Structure
+    end
+
     # Information about the columns in a query execution result.
     #
     # @!attribute [rw] catalog_name
@@ -135,6 +160,90 @@ module Aws::Athena
       :case_sensitive)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CreateDataCatalogInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "CatalogNameString", # required
+    #         type: "LAMBDA", # required, accepts LAMBDA, GLUE, HIVE
+    #         description: "DescriptionString",
+    #         parameters: {
+    #           "KeyString" => "ParametersMapValue",
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data catalog to create. The catalog name must be
+    #   unique for the AWS account and can use a maximum of 128
+    #   alphanumeric, underscore, at sign, or hyphen characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of data catalog to create: `LAMBDA` for a federated
+    #   catalog, `GLUE` for AWS Glue Catalog, or `HIVE` for an external hive
+    #   metastore.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the data catalog to be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Specifies the Lambda function or functions to use for creating the
+    #   data catalog. This is a mapping whose values depend on the catalog
+    #   type.
+    #
+    #   * For the `HIVE` data catalog type, use the following syntax. The
+    #     `metadata-function` parameter is required. `The sdk-version`
+    #     parameter is optional and defaults to the currently supported
+    #     version.
+    #
+    #     `metadata-function=lambda_arn, sdk-version=version_number `
+    #
+    #   * For the `LAMBDA` data catalog type, use one of the following sets
+    #     of required parameters, but not both.
+    #
+    #     * If you have one Lambda function that processes metadata and
+    #       another for reading the actual data, use the following syntax.
+    #       Both parameters are required.
+    #
+    #       `metadata-function=lambda_arn, record-function=lambda_arn `
+    #
+    #     * If you have a composite Lambda function that processes both
+    #       metadata and data, use the following syntax to specify your
+    #       Lambda function.
+    #
+    #       `function=lambda_arn `
+    #
+    #   * The `GLUE` type has no parameters.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of comma separated tags to add to the data catalog that is
+    #   created.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateDataCatalogInput AWS API Documentation
+    #
+    class CreateDataCatalogInput < Struct.new(
+      :name,
+      :type,
+      :description,
+      :parameters,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateDataCatalogOutput AWS API Documentation
+    #
+    class CreateDataCatalogOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreateNamedQueryInput
     #   data as a hash:
@@ -255,8 +364,8 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags, separated by commas, that you want to attach to
-    #   the workgroup as you create it.
+    #   A list of comma separated tags to add to the workgroup that is
+    #   created.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateWorkGroupInput AWS API Documentation
@@ -273,6 +382,104 @@ module Aws::Athena
     #
     class CreateWorkGroupOutput < Aws::EmptyStructure; end
 
+    # Contains information about a data catalog in an AWS account.
+    #
+    # @!attribute [rw] name
+    #   The name of the data catalog. The catalog name must be unique for
+    #   the AWS account and can use a maximum of 128 alphanumeric,
+    #   underscore, at sign, or hyphen characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description of the data catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of data catalog: `LAMBDA` for a federated catalog, `GLUE`
+    #   for AWS Glue Catalog, or `HIVE` for an external hive metastore.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Specifies the Lambda function or functions to use for the data
+    #   catalog. This is a mapping whose values depend on the catalog type.
+    #
+    #   * For the `HIVE` data catalog type, use the following syntax. The
+    #     `metadata-function` parameter is required. `The sdk-version`
+    #     parameter is optional and defaults to the currently supported
+    #     version.
+    #
+    #     `metadata-function=lambda_arn, sdk-version=version_number `
+    #
+    #   * For the `LAMBDA` data catalog type, use one of the following sets
+    #     of required parameters, but not both.
+    #
+    #     * If you have one Lambda function that processes metadata and
+    #       another for reading the actual data, use the following syntax.
+    #       Both parameters are required.
+    #
+    #       `metadata-function=lambda_arn, record-function=lambda_arn `
+    #
+    #     * If you have a composite Lambda function that processes both
+    #       metadata and data, use the following syntax to specify your
+    #       Lambda function.
+    #
+    #       `function=lambda_arn `
+    #
+    #   * The `GLUE` type has no parameters.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DataCatalog AWS API Documentation
+    #
+    class DataCatalog < Struct.new(
+      :name,
+      :description,
+      :type,
+      :parameters)
+      include Aws::Structure
+    end
+
+    # The summary information for the data catalog, which includes its name
+    # and type.
+    #
+    # @!attribute [rw] catalog_name
+    #   The name of the data catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data catalog type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DataCatalogSummary AWS API Documentation
+    #
+    class DataCatalogSummary < Struct.new(
+      :catalog_name,
+      :type)
+      include Aws::Structure
+    end
+
+    # Contains metadata information for a database in a data catalog.
+    #
+    # @!attribute [rw] name
+    #   The name of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   A set of custom key/value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/Database AWS API Documentation
+    #
+    class Database < Struct.new(
+      :name,
+      :description,
+      :parameters)
+      include Aws::Structure
+    end
+
     # A piece of data (a field in the table).
     #
     # @!attribute [rw] var_char_value
@@ -285,6 +492,28 @@ module Aws::Athena
       :var_char_value)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteDataCatalogInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "CatalogNameString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data catalog to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteDataCatalogInput AWS API Documentation
+    #
+    class DeleteDataCatalogInput < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteDataCatalogOutput AWS API Documentation
+    #
+    class DeleteDataCatalogOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteNamedQueryInput
     #   data as a hash:
@@ -375,6 +604,70 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetDataCatalogInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "CatalogNameString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data catalog to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetDataCatalogInput AWS API Documentation
+    #
+    class GetDataCatalogInput < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_catalog
+    #   The data catalog returned.
+    #   @return [Types::DataCatalog]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetDataCatalogOutput AWS API Documentation
+    #
+    class GetDataCatalogOutput < Struct.new(
+      :data_catalog)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDatabaseInput
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_name: "CatalogNameString", # required
+    #         database_name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] catalog_name
+    #   The name of the data catalog that contains the database to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetDatabaseInput AWS API Documentation
+    #
+    class GetDatabaseInput < Struct.new(
+      :catalog_name,
+      :database_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] database
+    #   The database returned.
+    #   @return [Types::Database]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetDatabaseOutput AWS API Documentation
+    #
+    class GetDatabaseOutput < Struct.new(
+      :database)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetNamedQueryInput
     #   data as a hash:
     #
@@ -447,8 +740,10 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token that specifies where to start pagination if a previous
-    #   request was truncated.
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -473,7 +768,10 @@ module Aws::Athena
     #   @return [Types::ResultSet]
     #
     # @!attribute [rw] next_token
-    #   A token to be used by the next request if this request is truncated.
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryResultsOutput AWS API Documentation
@@ -482,6 +780,48 @@ module Aws::Athena
       :update_count,
       :result_set,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTableMetadataInput
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_name: "CatalogNameString", # required
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] catalog_name
+    #   The name of the data catalog that contains the database and table
+    #   metadata to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database that contains the table metadata to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table for which metadata is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetTableMetadataInput AWS API Documentation
+    #
+    class GetTableMetadataInput < Struct.new(
+      :catalog_name,
+      :database_name,
+      :table_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_metadata
+    #   An object that contains table metadata.
+    #   @return [Types::TableMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetTableMetadataOutput AWS API Documentation
+    #
+    class GetTableMetadataOutput < Struct.new(
+      :table_metadata)
       include Aws::Structure
     end
 
@@ -546,6 +886,104 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListDataCatalogsInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the NextToken from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of data catalogs to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListDataCatalogsInput AWS API Documentation
+    #
+    class ListDataCatalogsInput < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_catalogs_summary
+    #   A summary list of data catalogs.
+    #   @return [Array<Types::DataCatalogSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the NextToken from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListDataCatalogsOutput AWS API Documentation
+    #
+    class ListDataCatalogsOutput < Struct.new(
+      :data_catalogs_summary,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDatabasesInput
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_name: "CatalogNameString", # required
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] catalog_name
+    #   The name of the data catalog that contains the databases to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListDatabasesInput AWS API Documentation
+    #
+    class ListDatabasesInput < Struct.new(
+      :catalog_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] database_list
+    #   A list of databases from a data catalog.
+    #   @return [Array<Types::Database>]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the NextToken from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListDatabasesOutput AWS API Documentation
+    #
+    class ListDatabasesOutput < Struct.new(
+      :database_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListNamedQueriesInput
     #   data as a hash:
     #
@@ -556,8 +994,10 @@ module Aws::Athena
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token that specifies where to start pagination if a previous
-    #   request was truncated.
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -565,9 +1005,9 @@ module Aws::Athena
     #   @return [Integer]
     #
     # @!attribute [rw] work_group
-    #   The name of the workgroup from which the named queries are returned.
-    #   If a workgroup is not specified, the saved queries for the primary
-    #   workgroup are returned.
+    #   The name of the workgroup from which the named queries are being
+    #   returned. If a workgroup is not specified, the saved queries for the
+    #   primary workgroup are returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNamedQueriesInput AWS API Documentation
@@ -584,7 +1024,10 @@ module Aws::Athena
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   A token to be used by the next request if this request is truncated.
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNamedQueriesOutput AWS API Documentation
@@ -605,8 +1048,10 @@ module Aws::Athena
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token that specifies where to start pagination if a previous
-    #   request was truncated.
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -614,9 +1059,9 @@ module Aws::Athena
     #   @return [Integer]
     #
     # @!attribute [rw] work_group
-    #   The name of the workgroup from which queries are returned. If a
-    #   workgroup is not specified, a list of available query execution IDs
-    #   for the queries in the primary workgroup is returned.
+    #   The name of the workgroup from which queries are being returned. If
+    #   a workgroup is not specified, a list of available query execution
+    #   IDs for the queries in the primary workgroup is returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListQueryExecutionsInput AWS API Documentation
@@ -644,6 +1089,73 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTableMetadataInput
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_name: "CatalogNameString", # required
+    #         database_name: "NameString", # required
+    #         expression: "ExpressionString",
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] catalog_name
+    #   The name of the data catalog for which table metadata should be
+    #   returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database for which table metadata should be
+    #   returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   A regex filter that pattern-matches table names. If no expression is
+    #   supplied, metadata for all tables are listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the NextToken from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListTableMetadataInput AWS API Documentation
+    #
+    class ListTableMetadataInput < Struct.new(
+      :catalog_name,
+      :database_name,
+      :expression,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_metadata_list
+    #   A list of table metadata.
+    #   @return [Array<Types::TableMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the NextToken from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListTableMetadataOutput AWS API Documentation
+    #
+    class ListTableMetadataOutput < Struct.new(
+      :table_metadata_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceInput
     #   data as a hash:
     #
@@ -654,18 +1166,18 @@ module Aws::Athena
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   Lists the tags for the workgroup resource with the specified ARN.
+    #   Lists the tags for the resource with the specified ARN.
     #   @return [String]
     #
     # @!attribute [rw] next_token
     #   The token for the next set of results, or null if there are no
     #   additional results for this request, where the request lists the
-    #   tags for the workgroup resource with the specified ARN.
+    #   tags for the resource with the specified ARN.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per request that lists
-    #   the tags for the workgroup resource.
+    #   the tags for the resource.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListTagsForResourceInput AWS API Documentation
@@ -678,7 +1190,7 @@ module Aws::Athena
     end
 
     # @!attribute [rw] tags
-    #   The list of tags associated with this workgroup.
+    #   The list of tags associated with the specified resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] next_token
@@ -702,7 +1214,10 @@ module Aws::Athena
     #       }
     #
     # @!attribute [rw] next_token
-    #   A token to be used by the next request if this request is truncated.
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -723,7 +1238,10 @@ module Aws::Athena
     #   @return [Array<Types::WorkGroupSummary>]
     #
     # @!attribute [rw] next_token
-    #   A token to be used by the next request if this request is truncated.
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the `NextToken` from the response
+    #   object of the previous page call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListWorkGroupsOutput AWS API Documentation
@@ -731,6 +1249,23 @@ module Aws::Athena
     class ListWorkGroupsOutput < Struct.new(
       :work_groups,
       :next_token)
+      include Aws::Structure
+    end
+
+    # An exception that Athena received when it called a custom metastore.
+    # Occurs if the error is not caused by user input
+    # (`InvalidRequestException`) or from the Athena platform
+    # (`InternalServerException`). For example, if a user-created Lambda
+    # function is missing permissions, the Lambda `4XX` exception is
+    # returned in a `MetadataException`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/MetadataException AWS API Documentation
+    #
+    class MetadataException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -833,23 +1368,30 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # The database in which the query execution occurs.
+    # The database and data catalog context in which the query execution
+    # occurs.
     #
     # @note When making an API call, you may pass QueryExecutionContext
     #   data as a hash:
     #
     #       {
     #         database: "DatabaseString",
+    #         catalog: "CatalogNameString",
     #       }
     #
     # @!attribute [rw] database
-    #   The name of the database.
+    #   The name of the database used in the query execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog
+    #   The name of the data catalog used in the query execution.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecutionContext AWS API Documentation
     #
     class QueryExecutionContext < Struct.new(
-      :database)
+      :database,
+      :catalog)
       include Aws::Structure
     end
 
@@ -927,6 +1469,12 @@ module Aws::Athena
     #   completed without errors. `FAILED` indicates that the query
     #   experienced an error and did not complete processing. `CANCELLED`
     #   indicates that a user input interrupted query execution.
+    #
+    #   <note markdown="1"> Athena automatically retries your queries in cases of certain
+    #   transient errors. As a result, you may see the query state
+    #   transition from `RUNNING` or `FAILED` to `QUEUED`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] state_change_reason
@@ -1101,7 +1649,8 @@ module Aws::Athena
     end
 
     # The metadata and rows that comprise a query result set. The metadata
-    # describes the column structure and data types.
+    # describes the column structure and data types. To return a `ResultSet`
+    # object, use GetQueryResults.
     #
     # @!attribute [rw] rows
     #   The rows in the table.
@@ -1121,7 +1670,8 @@ module Aws::Athena
     end
 
     # The metadata that describes the column structure and data types of a
-    # table of query results.
+    # table of query results. To return a `ResultSetMetadata` object, use
+    # GetQueryResults.
     #
     # @!attribute [rw] column_info
     #   Information about the columns returned in a query result metadata.
@@ -1155,6 +1705,7 @@ module Aws::Athena
     #         client_request_token: "IdempotencyToken",
     #         query_execution_context: {
     #           database: "DatabaseString",
+    #           catalog: "CatalogNameString",
     #         },
     #         result_configuration: {
     #           output_location: "String",
@@ -1251,17 +1802,65 @@ module Aws::Athena
     #
     class StopQueryExecutionOutput < Aws::EmptyStructure; end
 
-    # A tag that you can add to a resource. A tag is a label that you assign
-    # to an AWS Athena resource (a workgroup). Each tag consists of a key
-    # and an optional value, both of which you define. Tags enable you to
-    # categorize workgroups in Athena, for example, by purpose, owner, or
+    # Contains metadata for a table.
+    #
+    # @!attribute [rw] name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time that the table was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_access_time
+    #   The last time the table was accessed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] table_type
+    #   The type of table. In Athena, only `EXTERNAL_TABLE` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] columns
+    #   A list of the columns in the table.
+    #   @return [Array<Types::Column>]
+    #
+    # @!attribute [rw] partition_keys
+    #   A list of the partition keys in the table.
+    #   @return [Array<Types::Column>]
+    #
+    # @!attribute [rw] parameters
+    #   A set of custom key/value pairs for table properties.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/TableMetadata AWS API Documentation
+    #
+    class TableMetadata < Struct.new(
+      :name,
+      :create_time,
+      :last_access_time,
+      :table_type,
+      :columns,
+      :partition_keys,
+      :parameters)
+      include Aws::Structure
+    end
+
+    # A label that you assign to a resource. In Athena, a resource can be a
+    # workgroup or data catalog. Each tag consists of a key and an optional
+    # value, both of which you define. For example, you can use tags to
+    # categorize Athena workgroups or data catalogs by purpose, owner, or
     # environment. Use a consistent set of tag keys to make it easier to
-    # search and filter workgroups in your account. The maximum tag key
-    # length is 128 Unicode characters in UTF-8. The maximum tag value
-    # length is 256 Unicode characters in UTF-8. You can use letters and
-    # numbers representable in UTF-8, and the following characters: + - = .
-    # \_ : / @. Tag keys and values are case-sensitive. Tag keys must be
-    # unique per resource.
+    # search and filter workgroups or data catalogs in your account. For
+    # best practices, see [Tagging Best Practices][1]. Tag keys can be from
+    # 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256
+    # UTF-8 Unicode characters. Tags can use letters and numbers
+    # representable in UTF-8, and the following characters: + - = . \_ : /
+    # @. Tag keys and values are case-sensitive. Tag keys must be unique per
+    # resource. If you specify more than one tag, separate them by commas.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -1307,13 +1906,13 @@ module Aws::Athena
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   Requests that one or more tags are added to the resource (such as a
-    #   workgroup) for the specified ARN.
+    #   Specifies the ARN of the Athena resource (workgroup or data catalog)
+    #   to which tags are to be added.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags, separated by commas, to be added to the resource,
-    #   such as a workgroup.
+    #   A collection of one or more tags, separated by commas, to be added
+    #   to an Athena workgroup or data catalog resource.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/TagResourceInput AWS API Documentation
@@ -1405,13 +2004,12 @@ module Aws::Athena
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   Removes one or more tags from the workgroup resource for the
-    #   specified ARN.
+    #   Specifies the ARN of the resource from which tags are to be removed.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   Removes the tags associated with one or more tag keys from the
-    #   workgroup resource.
+    #   A comma-separated list of one or more tag keys whose tags are to be
+    #   removed from the specified resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UntagResourceInput AWS API Documentation
@@ -1425,6 +2023,78 @@ module Aws::Athena
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UntagResourceOutput AWS API Documentation
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateDataCatalogInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "CatalogNameString", # required
+    #         type: "LAMBDA", # required, accepts LAMBDA, GLUE, HIVE
+    #         description: "DescriptionString",
+    #         parameters: {
+    #           "KeyString" => "ParametersMapValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data catalog to update. The catalog name must be
+    #   unique for the AWS account and can use a maximum of 128
+    #   alphanumeric, underscore, at sign, or hyphen characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Specifies the type of data catalog to update. Specify `LAMBDA` for a
+    #   federated catalog, `GLUE` for AWS Glue Catalog, or `HIVE` for an
+    #   external hive metastore.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   New or modified text that describes the data catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Specifies the Lambda function or functions to use for updating the
+    #   data catalog. This is a mapping whose values depend on the catalog
+    #   type.
+    #
+    #   * For the `HIVE` data catalog type, use the following syntax. The
+    #     `metadata-function` parameter is required. `The sdk-version`
+    #     parameter is optional and defaults to the currently supported
+    #     version.
+    #
+    #     `metadata-function=lambda_arn, sdk-version=version_number `
+    #
+    #   * For the `LAMBDA` data catalog type, use one of the following sets
+    #     of required parameters, but not both.
+    #
+    #     * If you have one Lambda function that processes metadata and
+    #       another for reading the actual data, use the following syntax.
+    #       Both parameters are required.
+    #
+    #       `metadata-function=lambda_arn, record-function=lambda_arn `
+    #
+    #     * If you have a composite Lambda function that processes both
+    #       metadata and data, use the following syntax to specify your
+    #       Lambda function.
+    #
+    #       `function=lambda_arn `
+    #
+    #   * The `GLUE` type has no parameters.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateDataCatalogInput AWS API Documentation
+    #
+    class UpdateDataCatalogInput < Struct.new(
+      :name,
+      :type,
+      :description,
+      :parameters)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateDataCatalogOutput AWS API Documentation
+    #
+    class UpdateDataCatalogOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateWorkGroupInput
     #   data as a hash:

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -69,6 +72,7 @@ module Aws::Shield
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -161,7 +165,7 @@ module Aws::Shield
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -318,7 +322,7 @@ module Aws::Shield
 
     # @!group API Operations
 
-    # Authorizes the DDoS Response team (DRT) to access the specified Amazon
+    # Authorizes the DDoS Response Team (DRT) to access the specified Amazon
     # S3 bucket containing your AWS WAF logs. You can associate up to 10
     # Amazon S3 buckets with your subscription.
     #
@@ -351,7 +355,7 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Authorizes the DDoS Response team (DRT), using the specified role, to
+    # Authorizes the DDoS Response Team (DRT), using the specified role, to
     # access your AWS account to assist with DDoS attack mitigation during
     # potential attacks. This enables the DRT to inspect your AWS WAF
     # configuration and create or update AWS WAF rules and web ACLs.
@@ -463,6 +467,63 @@ module Aws::Shield
       req.send_request(options)
     end
 
+    # Initializes proactive engagement and sets the list of contacts for the
+    # DDoS Response Team (DRT) to use. You must provide at least one phone
+    # number in the emergency contact list.
+    #
+    # After you have initialized proactive engagement using this call, to
+    # disable or enable proactive engagement, use the calls
+    # `DisableProactiveEngagement` and `EnableProactiveEngagement`.
+    #
+    # <note markdown="1"> This call defines the list of email addresses and phone numbers that
+    # the DDoS Response Team (DRT) can use to contact you for escalations to
+    # the DRT and to initiate proactive customer support.
+    #
+    #  The contacts that you provide in the request replace any contacts that
+    # were already defined. If you already have contacts defined and want to
+    # use them, retrieve the list using `DescribeEmergencyContactSettings`
+    # and then provide it to this call.
+    #
+    #  </note>
+    #
+    # @option params [required, Array<Types::EmergencyContact>] :emergency_contact_list
+    #   A list of email addresses and phone numbers that the DDoS Response
+    #   Team (DRT) can use to contact you for escalations to the DRT and to
+    #   initiate proactive customer support.
+    #
+    #   To enable proactive engagement, the contact list must include at least
+    #   one phone number.
+    #
+    #   <note markdown="1"> The contacts that you provide here replace any contacts that were
+    #   already defined. If you already have contacts defined and want to use
+    #   them, retrieve the list using `DescribeEmergencyContactSettings` and
+    #   then provide it here.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_proactive_engagement_details({
+    #     emergency_contact_list: [ # required
+    #       {
+    #         email_address: "EmailAddress", # required
+    #         phone_number: "PhoneNumber",
+    #         contact_notes: "ContactNotes",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateProactiveEngagementDetails AWS API Documentation
+    #
+    # @overload associate_proactive_engagement_details(params = {})
+    # @param [Hash] params ({})
+    def associate_proactive_engagement_details(params = {}, options = {})
+      req = build_request(:associate_proactive_engagement_details, params)
+      req.send_request(options)
+    end
+
     # Enables AWS Shield Advanced for a specific AWS resource. The resource
     # can be an Amazon CloudFront distribution, Elastic Load Balancing load
     # balancer, AWS Global Accelerator accelerator, Elastic IP Address, or
@@ -533,25 +594,10 @@ module Aws::Shield
 
     # Activates AWS Shield Advanced for an account.
     #
-    # As part of this request you can specify `EmergencySettings` that
-    # automaticaly grant the DDoS response team (DRT) needed permissions to
-    # assist you during a suspected DDoS attack. For more information see
-    # [Authorize the DDoS Response Team to Create Rules and Web ACLs on Your
-    # Behalf][1].
-    #
-    # To use the services of the DRT, you must be subscribed to the
-    # [Business Support plan][2] or the [Enterprise Support plan][3].
-    #
     # When you initally create a subscription, your subscription is set to
     # be automatically renewed at the end of the existing subscription
     # period. You can change this by submitting an `UpdateSubscription`
     # request.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/authorize-DRT.html
-    # [2]: https://aws.amazon.com/premiumsupport/business-support/
-    # [3]: https://aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -669,7 +715,7 @@ module Aws::Shield
     end
 
     # Returns the current role and list of Amazon S3 log buckets used by the
-    # DDoS Response team (DRT) to access your AWS account while assisting
+    # DDoS Response Team (DRT) to access your AWS account while assisting
     # with attack mitigation.
     #
     # @return [Types::DescribeDRTAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -692,8 +738,10 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Lists the email addresses that the DRT can use to contact you during a
-    # suspected attack.
+    # A list of email addresses and phone numbers that the DDoS Response
+    # Team (DRT) can use to contact you if you have proactive engagement
+    # enabled, for escalations to the DRT and to initiate proactive customer
+    # support.
     #
     # @return [Types::DescribeEmergencyContactSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -703,6 +751,8 @@ module Aws::Shield
     #
     #   resp.emergency_contact_list #=> Array
     #   resp.emergency_contact_list[0].email_address #=> String
+    #   resp.emergency_contact_list[0].phone_number #=> String
+    #   resp.emergency_contact_list[0].contact_notes #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeEmergencyContactSettings AWS API Documentation
     #
@@ -770,6 +820,7 @@ module Aws::Shield
     #   resp.subscription.limits #=> Array
     #   resp.subscription.limits[0].type #=> String
     #   resp.subscription.limits[0].max #=> Integer
+    #   resp.subscription.proactive_engagement_status #=> String, one of "ENABLED", "DISABLED", "PENDING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscription AWS API Documentation
     #
@@ -780,7 +831,22 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Removes the DDoS Response team's (DRT) access to the specified Amazon
+    # Removes authorization from the DDoS Response Team (DRT) to notify
+    # contacts about escalations to the DRT and to initiate proactive
+    # customer support.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisableProactiveEngagement AWS API Documentation
+    #
+    # @overload disable_proactive_engagement(params = {})
+    # @param [Hash] params ({})
+    def disable_proactive_engagement(params = {}, options = {})
+      req = build_request(:disable_proactive_engagement, params)
+      req.send_request(options)
+    end
+
+    # Removes the DDoS Response Team's (DRT) access to the specified Amazon
     # S3 bucket containing your AWS WAF logs.
     #
     # To make a `DisassociateDRTLogBucket` request, you must be subscribed
@@ -815,7 +881,7 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Removes the DDoS Response team's (DRT) access to your AWS account.
+    # Removes the DDoS Response Team's (DRT) access to your AWS account.
     #
     # To make a `DisassociateDRTRole` request, you must be subscribed to the
     # [Business Support plan][1] or the [Enterprise Support plan][2].
@@ -877,6 +943,21 @@ module Aws::Shield
     # @param [Hash] params ({})
     def disassociate_health_check(params = {}, options = {})
       req = build_request(:disassociate_health_check, params)
+      req.send_request(options)
+    end
+
+    # Authorizes the DDoS Response Team (DRT) to use email and phone to
+    # notify contacts about escalations to the DRT and to initiate proactive
+    # customer support.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EnableProactiveEngagement AWS API Documentation
+    #
+    # @overload enable_proactive_engagement(params = {})
+    # @param [Hash] params ({})
+    def enable_proactive_engagement(params = {}, options = {})
+      req = build_request(:enable_proactive_engagement, params)
       req.send_request(options)
     end
 
@@ -947,6 +1028,8 @@ module Aws::Shield
     #   * {Types::ListAttacksResponse#attack_summaries #attack_summaries} => Array&lt;Types::AttackSummary&gt;
     #   * {Types::ListAttacksResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_attacks({
@@ -1004,6 +1087,8 @@ module Aws::Shield
     #   * {Types::ListProtectionsResponse#protections #protections} => Array&lt;Types::Protection&gt;
     #   * {Types::ListProtectionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_protections({
@@ -1030,12 +1115,19 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Updates the details of the list of email addresses that the DRT can
-    # use to contact you during a suspected attack.
+    # Updates the details of the list of email addresses and phone numbers
+    # that the DDoS Response Team (DRT) can use to contact you if you have
+    # proactive engagement enabled, for escalations to the DRT and to
+    # initiate proactive customer support.
     #
     # @option params [Array<Types::EmergencyContact>] :emergency_contact_list
-    #   A list of email addresses that the DRT can use to contact you during a
-    #   suspected attack.
+    #   A list of email addresses and phone numbers that the DDoS Response
+    #   Team (DRT) can use to contact you if you have proactive engagement
+    #   enabled, for escalations to the DRT and to initiate proactive customer
+    #   support.
+    #
+    #   If you have proactive engagement enabled, the contact list must
+    #   include at least one phone number.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1045,6 +1137,8 @@ module Aws::Shield
     #     emergency_contact_list: [
     #       {
     #         email_address: "EmailAddress", # required
+    #         phone_number: "PhoneNumber",
+    #         contact_notes: "ContactNotes",
     #       },
     #     ],
     #   })
@@ -1099,7 +1193,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.27.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

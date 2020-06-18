@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -25,6 +27,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency('aws-sdk-kms', '~> 1')
   spec.add_dependency('aws-sigv4', '~> 1.1')
-  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.96.1')
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.99.0')
 
 end

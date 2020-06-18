@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -763,24 +765,27 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :scaling_processes
-    #   One or more of the following processes. If you omit this parameter,
-    #   all processes are specified.
+    #   One or more of the following processes:
     #
     #   * `Launch`
     #
     #   * `Terminate`
     #
-    #   * `HealthCheck`
-    #
-    #   * `ReplaceUnhealthy`
-    #
-    #   * `AZRebalance`
+    #   * `AddToLoadBalancer`
     #
     #   * `AlarmNotification`
     #
+    #   * `AZRebalance`
+    #
+    #   * `HealthCheck`
+    #
+    #   * `InstanceRefresh`
+    #
+    #   * `ReplaceUnhealthy`
+    #
     #   * `ScheduledActions`
     #
-    #   * `AddToLoadBalancer`
+    #   If you omit this parameter, all processes are specified.
     # @return [EmptyStructure]
     def resume_processes(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -819,24 +824,27 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :scaling_processes
-    #   One or more of the following processes. If you omit this parameter,
-    #   all processes are specified.
+    #   One or more of the following processes:
     #
     #   * `Launch`
     #
     #   * `Terminate`
     #
-    #   * `HealthCheck`
-    #
-    #   * `ReplaceUnhealthy`
-    #
-    #   * `AZRebalance`
+    #   * `AddToLoadBalancer`
     #
     #   * `AlarmNotification`
     #
+    #   * `AZRebalance`
+    #
+    #   * `HealthCheck`
+    #
+    #   * `InstanceRefresh`
+    #
+    #   * `ReplaceUnhealthy`
+    #
     #   * `ScheduledActions`
     #
-    #   * `AddToLoadBalancer`
+    #   If you omit this parameter, all processes are specified.
     # @return [EmptyStructure]
     def suspend_processes(options = {})
       options = options.merge(auto_scaling_group_name: @name)

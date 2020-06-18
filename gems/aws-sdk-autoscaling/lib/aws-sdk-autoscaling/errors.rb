@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -25,7 +27,9 @@ module Aws::AutoScaling
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {ActiveInstanceRefreshNotFoundFault}
   # * {AlreadyExistsFault}
+  # * {InstanceRefreshInProgressFault}
   # * {InvalidNextToken}
   # * {LimitExceededFault}
   # * {ResourceContentionFault}
@@ -39,11 +43,41 @@ module Aws::AutoScaling
 
     extend Aws::Errors::DynamicErrors
 
+    class ActiveInstanceRefreshNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AutoScaling::Types::ActiveInstanceRefreshNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class AlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::AutoScaling::Types::AlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InstanceRefreshInProgressFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AutoScaling::Types::InstanceRefreshInProgressFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

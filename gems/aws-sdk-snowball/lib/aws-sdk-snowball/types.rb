@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -250,15 +252,12 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this cluster. Currently,
-    #   the only supported device type for cluster jobs is `EDGE`.
+    #   The type of AWS Snowball device to use for this cluster.
     #
-    #   For more information, see [Snowball Edge Device Options][1] in the
-    #   Snowball Edge Developer Guide.
+    #   <note markdown="1"> For cluster jobs, AWS Snowball currently supports only the `EDGE`
+    #   device type.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -433,7 +432,7 @@ module Aws::Snowball
     #         address_id: "AddressId", # required
     #         kms_key_arn: "KmsKeyARN",
     #         role_arn: "RoleARN", # required
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S
+    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD
     #         shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
@@ -489,15 +488,12 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this cluster. Currently,
-    #   the only supported device type for cluster jobs is `EDGE`.
+    #   The type of AWS Snowball device to use for this cluster.
     #
-    #   For more information, see [Snowball Edge Device Options][1] in the
-    #   Snowball Edge Developer Guide.
+    #   <note markdown="1"> For cluster jobs, AWS Snowball currently supports only the `EDGE`
+    #   device type.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] shipping_option
@@ -506,6 +502,20 @@ module Aws::Snowball
     #   rather it represents how quickly each device moves to its
     #   destination while in transit. Regional shipping speeds are as
     #   follows:
+    #
+    #   * In Australia, you have access to express shipping. Typically,
+    #     Snowballs shipped express are delivered in about a day.
+    #
+    #   * In the European Union (EU), you have access to express shipping.
+    #     Typically, Snowballs shipped express are delivered in about a day.
+    #     In addition, most countries in the EU have access to standard
+    #     shipping, which typically takes less than a week, one way.
+    #
+    #   * In India, Snowballs are delivered in one to seven days.
+    #
+    #   * In the United States of America (US), you have access to one-day
+    #     shipping and two-day shipping.
+    #   ^
     #
     #   * In Australia, you have access to express shipping. Typically,
     #     devices shipped express are delivered in about a day.
@@ -599,7 +609,7 @@ module Aws::Snowball
     #         address_id: "AddressId",
     #         kms_key_arn: "KmsKeyARN",
     #         role_arn: "RoleARN",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, NoPreference
+    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, NoPreference
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
@@ -607,11 +617,18 @@ module Aws::Snowball
     #           notify_all: false,
     #         },
     #         cluster_id: "ClusterId",
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S
+    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD
     #         forwarding_address_id: "AddressId",
     #         tax_documents: {
     #           ind: {
     #             gstin: "GSTIN",
+    #           },
+    #         },
+    #         device_configuration: {
+    #           snowcone_device_configuration: {
+    #             wireless_connection: {
+    #               is_wifi_enabled: false,
+    #             },
     #           },
     #         },
     #       }
@@ -701,6 +718,13 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
+    #   The type of AWS Snowball device to use for this job.
+    #
+    #   <note markdown="1"> For cluster jobs, AWS Snowball currently supports only the `EDGE`
+    #   device type.
+    #
+    #    </note>
+    #
     #   The type of AWS Snowball device to use for this job. Currently, the
     #   only supported device type for cluster jobs is `EDGE`.
     #
@@ -721,6 +745,10 @@ module Aws::Snowball
     #   The tax documents required in your AWS Region.
     #   @return [Types::TaxDocuments]
     #
+    # @!attribute [rw] device_configuration
+    #   Defines the device configuration for an AWS Snowcone job.
+    #   @return [Types::DeviceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -736,7 +764,8 @@ module Aws::Snowball
       :cluster_id,
       :snowball_type,
       :forwarding_address_id,
-      :tax_documents)
+      :tax_documents,
+      :device_configuration)
       include Aws::Structure
     end
 
@@ -926,6 +955,31 @@ module Aws::Snowball
     class DescribeJobResult < Struct.new(
       :job_metadata,
       :sub_job_metadata)
+      include Aws::Structure
+    end
+
+    # The container for `SnowconeDeviceConfiguration`.
+    #
+    # @note When making an API call, you may pass DeviceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         snowcone_device_configuration: {
+    #           wireless_connection: {
+    #             is_wifi_enabled: false,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] snowcone_device_configuration
+    #   Returns information about the device configuration for an AWS
+    #   Snowcone job.
+    #   @return [Types::SnowconeDeviceConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DeviceConfiguration AWS API Documentation
+    #
+    class DeviceConfiguration < Struct.new(
+      :snowcone_device_configuration)
       include Aws::Structure
     end
 
@@ -1145,7 +1199,7 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # Job or cluster creation failed. One ore more inputs were invalid.
+    # Job or cluster creation failed. One or more inputs were invalid.
     # Confirm that the CreateClusterRequest$SnowballType value supports your
     # CreateJobRequest$JobType, and try again.
     #
@@ -1413,6 +1467,10 @@ module Aws::Snowball
     #   Region.
     #   @return [Types::TaxDocuments]
     #
+    # @!attribute [rw] device_configuration
+    #   The container for `SnowconeDeviceConfiguration`.
+    #   @return [Types::DeviceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobMetadata AWS API Documentation
     #
     class JobMetadata < Struct.new(
@@ -1433,7 +1491,8 @@ module Aws::Snowball
       :job_log_info,
       :cluster_id,
       :forwarding_address_id,
-      :tax_documents)
+      :tax_documents,
+      :device_configuration)
       include Aws::Structure
     end
 
@@ -1915,6 +1974,28 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # Specifies the device configuration for an AWS Snowcone job.
+    #
+    # @note When making an API call, you may pass SnowconeDeviceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         wireless_connection: {
+    #           is_wifi_enabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] wireless_connection
+    #   Configures the wireless connection for the AWS Snowcone device.
+    #   @return [Types::WirelessConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/SnowconeDeviceConfiguration AWS API Documentation
+    #
+    class SnowconeDeviceConfiguration < Struct.new(
+      :wireless_connection)
+      include Aws::Structure
+    end
+
     # The tax documents required in your AWS Region.
     #
     # @note When making an API call, you may pass TaxDocuments
@@ -2096,7 +2177,7 @@ module Aws::Snowball
     #         address_id: "AddressId",
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         description: "String",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, NoPreference
+    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, NoPreference
     #         forwarding_address_id: "AddressId",
     #       }
     #
@@ -2164,6 +2245,26 @@ module Aws::Snowball
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobResult AWS API Documentation
     #
     class UpdateJobResult < Aws::EmptyStructure; end
+
+    # Configures the wireless connection on an AWS Snowcone device.
+    #
+    # @note When making an API call, you may pass WirelessConnection
+    #   data as a hash:
+    #
+    #       {
+    #         is_wifi_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] is_wifi_enabled
+    #   Enables the Wi-Fi adapter on an AWS Snowcone device.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/WirelessConnection AWS API Documentation
+    #
+    class WirelessConnection < Struct.new(
+      :is_wifi_enabled)
+      include Aws::Structure
+    end
 
   end
 end

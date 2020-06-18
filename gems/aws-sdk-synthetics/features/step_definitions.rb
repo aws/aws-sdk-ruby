@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@synthetics") do
   @service = Aws::Synthetics::Resource.new
   @client = @service.client

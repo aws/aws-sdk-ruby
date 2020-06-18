@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -28,6 +30,7 @@ module Aws::SSM
     AggregatorSchemaOnly = Shapes::BooleanShape.new(name: 'AggregatorSchemaOnly')
     AllowedPattern = Shapes::StringShape.new(name: 'AllowedPattern')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
+    ApplyOnlyAtCronInterval = Shapes::BooleanShape.new(name: 'ApplyOnlyAtCronInterval')
     ApproveAfterDays = Shapes::IntegerShape.new(name: 'ApproveAfterDays')
     AssociatedInstances = Shapes::StructureShape.new(name: 'AssociatedInstances')
     Association = Shapes::StructureShape.new(name: 'Association')
@@ -613,6 +616,7 @@ module Aws::SSM
     MaintenanceWindowLambdaQualifier = Shapes::StringShape.new(name: 'MaintenanceWindowLambdaQualifier')
     MaintenanceWindowMaxResults = Shapes::IntegerShape.new(name: 'MaintenanceWindowMaxResults')
     MaintenanceWindowName = Shapes::StringShape.new(name: 'MaintenanceWindowName')
+    MaintenanceWindowOffset = Shapes::IntegerShape.new(name: 'MaintenanceWindowOffset')
     MaintenanceWindowResourceType = Shapes::StringShape.new(name: 'MaintenanceWindowResourceType')
     MaintenanceWindowRunCommandParameters = Shapes::StructureShape.new(name: 'MaintenanceWindowRunCommandParameters')
     MaintenanceWindowSchedule = Shapes::StringShape.new(name: 'MaintenanceWindowSchedule')
@@ -1110,6 +1114,7 @@ module Aws::SSM
     AssociationDescription.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     AssociationDescription.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     AssociationDescription.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
+    AssociationDescription.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
     AssociationDescription.struct_class = Types::AssociationDescription
 
     AssociationDescriptionList.member = Shapes::ShapeRef.new(shape: AssociationDescription)
@@ -1198,6 +1203,7 @@ module Aws::SSM
     AssociationVersionInfo.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     AssociationVersionInfo.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     AssociationVersionInfo.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
+    AssociationVersionInfo.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
     AssociationVersionInfo.struct_class = Types::AssociationVersionInfo
 
     AssociationVersionLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1484,6 +1490,7 @@ module Aws::SSM
     CreateAssociationBatchRequestEntry.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     CreateAssociationBatchRequestEntry.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     CreateAssociationBatchRequestEntry.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
+    CreateAssociationBatchRequestEntry.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
     CreateAssociationBatchRequestEntry.struct_class = Types::CreateAssociationBatchRequestEntry
 
     CreateAssociationBatchResult.add_member(:successful, Shapes::ShapeRef.new(shape: AssociationDescriptionList, location_name: "Successful"))
@@ -1503,6 +1510,7 @@ module Aws::SSM
     CreateAssociationRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     CreateAssociationRequest.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     CreateAssociationRequest.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
+    CreateAssociationRequest.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
     CreateAssociationRequest.struct_class = Types::CreateAssociationRequest
 
     CreateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -1528,6 +1536,7 @@ module Aws::SSM
     CreateMaintenanceWindowRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "EndDate"))
     CreateMaintenanceWindowRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, required: true, location_name: "Schedule"))
     CreateMaintenanceWindowRequest.add_member(:schedule_timezone, Shapes::ShapeRef.new(shape: MaintenanceWindowTimezone, location_name: "ScheduleTimezone"))
+    CreateMaintenanceWindowRequest.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: MaintenanceWindowOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
     CreateMaintenanceWindowRequest.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, required: true, location_name: "Duration"))
     CreateMaintenanceWindowRequest.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, required: true, location_name: "Cutoff"))
     CreateMaintenanceWindowRequest.add_member(:allow_unassociated_targets, Shapes::ShapeRef.new(shape: MaintenanceWindowAllowUnassociatedTargets, required: true, location_name: "AllowUnassociatedTargets"))
@@ -2282,6 +2291,7 @@ module Aws::SSM
     GetMaintenanceWindowResult.add_member(:end_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "EndDate"))
     GetMaintenanceWindowResult.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, location_name: "Schedule"))
     GetMaintenanceWindowResult.add_member(:schedule_timezone, Shapes::ShapeRef.new(shape: MaintenanceWindowTimezone, location_name: "ScheduleTimezone"))
+    GetMaintenanceWindowResult.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: MaintenanceWindowOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
     GetMaintenanceWindowResult.add_member(:next_execution_time, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "NextExecutionTime"))
     GetMaintenanceWindowResult.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, location_name: "Duration"))
     GetMaintenanceWindowResult.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, location_name: "Cutoff"))
@@ -2960,6 +2970,7 @@ module Aws::SSM
     MaintenanceWindowIdentity.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, location_name: "Cutoff"))
     MaintenanceWindowIdentity.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, location_name: "Schedule"))
     MaintenanceWindowIdentity.add_member(:schedule_timezone, Shapes::ShapeRef.new(shape: MaintenanceWindowTimezone, location_name: "ScheduleTimezone"))
+    MaintenanceWindowIdentity.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: MaintenanceWindowOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
     MaintenanceWindowIdentity.add_member(:end_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "EndDate"))
     MaintenanceWindowIdentity.add_member(:start_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "StartDate"))
     MaintenanceWindowIdentity.add_member(:next_execution_time, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "NextExecutionTime"))
@@ -3856,6 +3867,7 @@ module Aws::SSM
     UpdateAssociationRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     UpdateAssociationRequest.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     UpdateAssociationRequest.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
+    UpdateAssociationRequest.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
     UpdateAssociationRequest.struct_class = Types::UpdateAssociationRequest
 
     UpdateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -3895,6 +3907,7 @@ module Aws::SSM
     UpdateMaintenanceWindowRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "EndDate"))
     UpdateMaintenanceWindowRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, location_name: "Schedule"))
     UpdateMaintenanceWindowRequest.add_member(:schedule_timezone, Shapes::ShapeRef.new(shape: MaintenanceWindowTimezone, location_name: "ScheduleTimezone"))
+    UpdateMaintenanceWindowRequest.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: MaintenanceWindowOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
     UpdateMaintenanceWindowRequest.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, location_name: "Duration", metadata: {"box"=>true}))
     UpdateMaintenanceWindowRequest.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, location_name: "Cutoff", metadata: {"box"=>true}))
     UpdateMaintenanceWindowRequest.add_member(:allow_unassociated_targets, Shapes::ShapeRef.new(shape: MaintenanceWindowAllowUnassociatedTargets, location_name: "AllowUnassociatedTargets", metadata: {"box"=>true}))
@@ -3909,6 +3922,7 @@ module Aws::SSM
     UpdateMaintenanceWindowResult.add_member(:end_date, Shapes::ShapeRef.new(shape: MaintenanceWindowStringDateTime, location_name: "EndDate"))
     UpdateMaintenanceWindowResult.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, location_name: "Schedule"))
     UpdateMaintenanceWindowResult.add_member(:schedule_timezone, Shapes::ShapeRef.new(shape: MaintenanceWindowTimezone, location_name: "ScheduleTimezone"))
+    UpdateMaintenanceWindowResult.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: MaintenanceWindowOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
     UpdateMaintenanceWindowResult.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, location_name: "Duration"))
     UpdateMaintenanceWindowResult.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, location_name: "Cutoff"))
     UpdateMaintenanceWindowResult.add_member(:allow_unassociated_targets, Shapes::ShapeRef.new(shape: MaintenanceWindowAllowUnassociatedTargets, location_name: "AllowUnassociatedTargets"))

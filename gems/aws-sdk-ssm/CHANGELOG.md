@@ -1,6 +1,27 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2020-06-18)
+------------------
+
+* Feature - Added offset support for specifying the number of days to wait after the date and time specified by a CRON expression before running the maintenance window.
+
+1.81.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.81.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2020-06-04)
+------------------
+
+* Feature - SSM State Manager support for executing an association only at specified CRON schedule after creating/updating an association.
+
 1.79.0 (2020-05-28)
 ------------------
 
@@ -475,4 +496,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-ssm` gem.
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -75,6 +77,7 @@ module Aws::Transfer
     ServerId = Shapes::StringShape.new(name: 'ServerId')
     ServiceErrorMessage = Shapes::StringShape.new(name: 'ServiceErrorMessage')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    SourceIp = Shapes::StringShape.new(name: 'SourceIp')
     SshPublicKey = Shapes::StructureShape.new(name: 'SshPublicKey')
     SshPublicKeyBody = Shapes::StringShape.new(name: 'SshPublicKeyBody')
     SshPublicKeyCount = Shapes::IntegerShape.new(name: 'SshPublicKeyCount')
@@ -323,9 +326,10 @@ module Aws::Transfer
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
     TestIdentityProviderRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    TestIdentityProviderRequest.add_member(:server_protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "ServerProtocol"))
+    TestIdentityProviderRequest.add_member(:source_ip, Shapes::ShapeRef.new(shape: SourceIp, location_name: "SourceIp"))
     TestIdentityProviderRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "UserName"))
     TestIdentityProviderRequest.add_member(:user_password, Shapes::ShapeRef.new(shape: UserPassword, location_name: "UserPassword"))
-    TestIdentityProviderRequest.add_member(:server_protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "ServerProtocol"))
     TestIdentityProviderRequest.struct_class = Types::TestIdentityProviderRequest
 
     TestIdentityProviderResponse.add_member(:response, Shapes::ShapeRef.new(shape: Response, location_name: "Response"))

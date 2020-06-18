@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::WorkLink
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::WorkLink
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -435,6 +439,9 @@ module Aws::WorkLink
     #   through the closest AWS Region to users, which may be outside of your
     #   home Region.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to add to the resource. A tag is a key-value pair.
+    #
     # @return [Types::CreateFleetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetResponse#fleet_arn #fleet_arn} => String
@@ -445,6 +452,9 @@ module Aws::WorkLink
     #     fleet_name: "FleetName", # required
     #     display_name: "DisplayName",
     #     optimize_for_end_user_location: false,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -667,7 +677,7 @@ module Aws::WorkLink
     # provider, networking, and device configuration details.
     #
     # @option params [required, String] :fleet_arn
-    #   The ARN of the fleet.
+    #   The Amazon Resource Name (ARN) of the fleet.
     #
     # @return [Types::DescribeFleetMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -678,6 +688,7 @@ module Aws::WorkLink
     #   * {Types::DescribeFleetMetadataResponse#optimize_for_end_user_location #optimize_for_end_user_location} => Boolean
     #   * {Types::DescribeFleetMetadataResponse#company_code #company_code} => String
     #   * {Types::DescribeFleetMetadataResponse#fleet_status #fleet_status} => String
+    #   * {Types::DescribeFleetMetadataResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -694,6 +705,8 @@ module Aws::WorkLink
     #   resp.optimize_for_end_user_location #=> Boolean
     #   resp.company_code #=> String
     #   resp.fleet_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "FAILED_TO_CREATE", "FAILED_TO_DELETE"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeFleetMetadata AWS API Documentation
     #
@@ -974,6 +987,8 @@ module Aws::WorkLink
     #   resp.fleet_summary_list[0].display_name #=> String
     #   resp.fleet_summary_list[0].company_code #=> String
     #   resp.fleet_summary_list[0].fleet_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "FAILED_TO_CREATE", "FAILED_TO_DELETE"
+    #   resp.fleet_summary_list[0].tags #=> Hash
+    #   resp.fleet_summary_list[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListFleets AWS API Documentation
@@ -982,6 +997,35 @@ module Aws::WorkLink
     # @param [Hash] params ({})
     def list_fleets(params = {}, options = {})
       req = build_request(:list_fleets, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of tags for the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the fleet.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "FleetArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1152,6 +1196,63 @@ module Aws::WorkLink
     # @param [Hash] params ({})
     def sign_out_user(params = {}, options = {})
       req = build_request(:sign_out_user, params)
+      req.send_request(options)
+    end
+
+    # Adds or overwrites one or more tags for the specified resource, such
+    # as a fleet. Each tag consists of a key and an optional value. If a
+    # resource already has a tag with the same key, this operation updates
+    # its value.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the fleet.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to add to the resource. A tag is a key-value pair.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "FleetArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the fleet.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tag keys to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "FleetArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1353,7 +1454,7 @@ module Aws::WorkLink
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-worklink'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.17.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

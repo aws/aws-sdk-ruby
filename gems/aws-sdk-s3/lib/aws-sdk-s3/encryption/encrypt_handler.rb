@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'base64'
 
 module Aws
@@ -10,6 +12,7 @@ module Aws
           envelope, cipher = context[:encryption][:cipher_provider].encryption_cipher
           apply_encryption_envelope(context, envelope, cipher)
           apply_encryption_cipher(context, cipher)
+          apply_cse_user_agent(context)
           @handler.call(context)
         end
 
@@ -41,6 +44,14 @@ module Aws
           end
           context.http_response.on_headers do
             context.params[:body].close
+          end
+        end
+
+        def apply_cse_user_agent(context)
+          if context.config.user_agent_suffix.nil?
+            context.config.user_agent_suffix = 'CSE_V1'
+          elsif !context.config.user_agent_suffix.include? 'CSE_V1'
+            context.config.user_agent_suffix += ' CSE_V1'
           end
         end
 

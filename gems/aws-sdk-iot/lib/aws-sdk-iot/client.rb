@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -24,6 +26,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -69,6 +72,7 @@ module Aws::IoT
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -161,7 +165,7 @@ module Aws::IoT
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be a valid HTTP(S) URI.
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -466,7 +470,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1455,7 +1459,7 @@ module Aws::IoT
     #   The description of the OTA update.
     #
     # @option params [required, Array<String>] :targets
-    #   The targeted devices to receive OTA updates.
+    #   The devices targeted to receive OTA updates.
     #
     # @option params [Array<String>] :protocols
     #   The protocol used to transfer the OTA update image. Valid values are
@@ -1477,11 +1481,22 @@ module Aws::IoT
     # @option params [Types::AwsJobPresignedUrlConfig] :aws_job_presigned_url_config
     #   Configuration information for pre-signed URLs.
     #
+    # @option params [Types::AwsJobAbortConfig] :aws_job_abort_config
+    #   The criteria that determine when and how a job abort takes place.
+    #
+    # @option params [Types::AwsJobTimeoutConfig] :aws_job_timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. A timer is started when the job execution status is set to
+    #   `IN_PROGRESS`. If the job execution status is not set to another
+    #   terminal state before the timer expires, it will be automatically set
+    #   to `TIMED_OUT`.
+    #
     # @option params [required, Array<Types::OTAUpdateFile>] :files
     #   The files to be streamed by the OTA update.
     #
     # @option params [required, String] :role_arn
-    #   The IAM role that allows access to the AWS IoT Jobs service.
+    #   The IAM role that grants AWS IoT access to the Amazon S3, AWS IoT jobs
+    #   and AWS Code Signing resources to create an OTA update job.
     #
     # @option params [Hash<String,String>] :additional_parameters
     #   A list of additional OTA update parameters which are name-value pairs.
@@ -1507,9 +1522,30 @@ module Aws::IoT
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #     aws_job_executions_rollout_config: {
     #       maximum_per_minute: 1,
+    #       exponential_rate: {
+    #         base_rate_per_minute: 1, # required
+    #         increment_factor: 1.0, # required
+    #         rate_increase_criteria: { # required
+    #           number_of_notified_things: 1,
+    #           number_of_succeeded_things: 1,
+    #         },
+    #       },
     #     },
     #     aws_job_presigned_url_config: {
     #       expires_in_sec: 1,
+    #     },
+    #     aws_job_abort_config: {
+    #       abort_criteria_list: [ # required
+    #         {
+    #           failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #           action: "CANCEL", # required, accepts CANCEL
+    #           threshold_percentage: 1.0, # required
+    #           min_number_of_executed_things: 1, # required
+    #         },
+    #       ],
+    #     },
+    #     aws_job_timeout_config: {
+    #       in_progress_timeout_in_minutes: 1,
     #     },
     #     files: [ # required
     #       {
@@ -2989,7 +3025,7 @@ module Aws::IoT
     # Delete an OTA update.
     #
     # @option params [required, String] :ota_update_id
-    #   The OTA update ID to delete.
+    #   The ID of the OTA update to delete.
     #
     # @option params [Boolean] :delete_stream
     #   Specifies if the stream associated with an OTA update should be
@@ -2997,7 +3033,7 @@ module Aws::IoT
     #
     # @option params [Boolean] :force_delete_aws_job
     #   Specifies if the AWS Job associated with the OTA update should be
-    #   deleted with the OTA update is deleted.
+    #   deleted when the OTA update is deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4880,6 +4916,10 @@ module Aws::IoT
     #   resp.ota_update_info.protocols #=> Array
     #   resp.ota_update_info.protocols[0] #=> String, one of "MQTT", "HTTP"
     #   resp.ota_update_info.aws_job_executions_rollout_config.maximum_per_minute #=> Integer
+    #   resp.ota_update_info.aws_job_executions_rollout_config.exponential_rate.base_rate_per_minute #=> Integer
+    #   resp.ota_update_info.aws_job_executions_rollout_config.exponential_rate.increment_factor #=> Float
+    #   resp.ota_update_info.aws_job_executions_rollout_config.exponential_rate.rate_increase_criteria.number_of_notified_things #=> Integer
+    #   resp.ota_update_info.aws_job_executions_rollout_config.exponential_rate.rate_increase_criteria.number_of_succeeded_things #=> Integer
     #   resp.ota_update_info.aws_job_presigned_url_config.expires_in_sec #=> Integer
     #   resp.ota_update_info.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
     #   resp.ota_update_info.ota_update_files #=> Array
@@ -7806,6 +7846,10 @@ module Aws::IoT
 
     # Remove the specified thing from the specified group.
     #
+    # You must specify either a `thingGroupArn` or a `thingGroupName` to
+    # identify the thing group and either a `thingArn` or a `thingName` to
+    # identify the thing to remove from the thing group.
+    #
     # @option params [String] :thing_group_name
     #   The group name.
     #
@@ -9925,7 +9969,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,27 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2020-06-17)
+------------------
+
+* Feature - nvmeSupport added to DescribeInstanceTypes API
+
+1.166.1 (2020-06-11)
+------------------
+
+* Issue - Republish previous version with correct dependency on `aws-sdk-core`.
+
+1.166.0 (2020-06-10)
+------------------
+
+* Issue - This version has been yanked. (#2327).
+* Feature - New C6g instances powered by AWS Graviton2 processors and ideal for running advanced, compute-intensive workloads; New R6g instances powered by AWS Graviton2 processors and ideal for running memory-intensive workloads.
+
+1.165.0 (2020-06-04)
+------------------
+
+* Feature - New C5a instances, the latest generation of EC2's compute-optimized instances featuring AMD's 2nd Generation EPYC processors. C5a instances offer up to 96 vCPUs, 192 GiB of instance memory, 20 Gbps in Network bandwidth; New G4dn.metal bare metal instance with 8 NVIDIA T4 GPUs.
+
 1.164.0 (2020-05-28)
 ------------------
 
@@ -929,4 +950,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-ec2` gem.
-

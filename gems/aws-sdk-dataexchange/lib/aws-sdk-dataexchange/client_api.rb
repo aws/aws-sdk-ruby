@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -249,7 +251,7 @@ module Aws::DataExchange
     ExportAssetsToS3ResponseDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
     ExportAssetsToS3ResponseDetails.struct_class = Types::ExportAssetsToS3ResponseDetails
 
-    ExportServerSideEncryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "KmsKeyArn"))
+    ExportServerSideEncryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: __string, location_name: "KmsKeyArn"))
     ExportServerSideEncryption.add_member(:type, Shapes::ShapeRef.new(shape: ServerSideEncryptionTypes, required: true, location_name: "Type"))
     ExportServerSideEncryption.struct_class = Types::ExportServerSideEncryption
 

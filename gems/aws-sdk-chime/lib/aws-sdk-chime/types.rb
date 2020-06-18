@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -971,11 +973,12 @@ module Aws::Chime
     #   @return [String]
     #
     # @!attribute [rw] media_region
-    #   The Region in which to create the meeting. Available values:
-    #   `ap-northeast-1`, `ap-southeast-1`, `ap-southeast-2`,
-    #   `ca-central-1`, `eu-central-1`, `eu-north-1`, `eu-west-1`,
-    #   `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`,
-    #   `us-west-1`, `us-west-2`.
+    #   The Region in which to create the meeting. Default: `us-east-1`.
+    #
+    #   Available values: `ap-northeast-1`, `ap-southeast-1`,
+    #   `ap-southeast-2`, `ca-central-1`, `eu-central-1`, `eu-north-1`,
+    #   `eu-west-1`, `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`,
+    #   `us-east-2`, `us-west-1`, `us-west-2`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1008,6 +1011,113 @@ module Aws::Chime
     #
     class CreateMeetingResponse < Struct.new(
       :meeting)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateMeetingWithAttendeesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken", # required
+    #         external_meeting_id: "ExternalMeetingIdType",
+    #         meeting_host_id: "ExternalUserIdType",
+    #         media_region: "String",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #         notifications_configuration: {
+    #           sns_topic_arn: "Arn",
+    #           sqs_queue_arn: "Arn",
+    #         },
+    #         attendees: [
+    #           {
+    #             external_user_id: "ExternalUserIdType", # required
+    #             tags: [
+    #               {
+    #                 key: "TagKey", # required
+    #                 value: "TagValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   The unique identifier for the client request. Use a different token
+    #   for different meetings.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_meeting_id
+    #   The external meeting ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] meeting_host_id
+    #   Reserved.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_region
+    #   The Region in which to create the meeting. Default: `us-east-1`.
+    #
+    #   Available values: `ap-northeast-1`, `ap-southeast-1`,
+    #   `ap-southeast-2`, `ca-central-1`, `eu-central-1`, `eu-north-1`,
+    #   `eu-west-1`, `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`,
+    #   `us-east-2`, `us-west-1`, `us-west-2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag key-value pairs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] notifications_configuration
+    #   The configuration for resource targets to receive notifications when
+    #   Amazon Chime SDK meeting and attendee events occur. The Amazon Chime
+    #   SDK supports resource targets located in the US East (N. Virginia)
+    #   AWS Region (`us-east-1`).
+    #   @return [Types::MeetingNotificationConfiguration]
+    #
+    # @!attribute [rw] attendees
+    #   The request containing the attendees to create.
+    #   @return [Array<Types::CreateAttendeeRequestItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeetingWithAttendeesRequest AWS API Documentation
+    #
+    class CreateMeetingWithAttendeesRequest < Struct.new(
+      :client_request_token,
+      :external_meeting_id,
+      :meeting_host_id,
+      :media_region,
+      :tags,
+      :notifications_configuration,
+      :attendees)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] meeting
+    #   A meeting created using the Amazon Chime SDK.
+    #   @return [Types::Meeting]
+    #
+    # @!attribute [rw] attendees
+    #   The attendee information, including attendees IDs and join tokens.
+    #   @return [Array<Types::Attendee>]
+    #
+    # @!attribute [rw] errors
+    #   If the action fails for one or more of the attendees in the request,
+    #   a list of the attendees is returned, along with error codes and
+    #   error messages.
+    #   @return [Array<Types::CreateAttendeeError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeetingWithAttendeesResponse AWS API Documentation
+    #
+    class CreateMeetingWithAttendeesResponse < Struct.new(
+      :meeting,
+      :attendees,
+      :errors)
       include Aws::Structure
     end
 
@@ -3482,7 +3592,9 @@ module Aws::Chime
     end
 
     # The configuration for resource targets to receive notifications when
-    # Amazon Chime SDK meeting and attendee events occur.
+    # Amazon Chime SDK meeting and attendee events occur. The Amazon Chime
+    # SDK supports resource targets located in the US East (N. Virginia) AWS
+    # Region (`us-east-1`).
     #
     # @note When making an API call, you may pass MeetingNotificationConfiguration
     #   data as a hash:
