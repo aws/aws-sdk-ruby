@@ -17,52 +17,44 @@ module Aws
       # end
 
       def initialize(options = {})
-        if options[:filter_sensitive] == false
-          @filters = {}
-          return
-        end
+        @filter_sensitive = options[:filter_sensitive] == true
+        @filters = options[:filter] || []
 
-        filters = options[:filter] || {}
         # Support backwards compatibility. Convert filters array into a hash
-        if filters.is_a?(Array)
-          filters = Hash[*SENSITIVE.map { |k, _v| [k, filters] }.flatten(1)]
-        end
-        @filters = filters.merge(
-          Hash[*SENSITIVE.map { |k, v| [k, v | filters.fetch(k, [])] }.flatten(1)]
-        )
+        # if filters.is_a?(Array)
+        #   filters = Hash[*SENSITIVE.map { |k, _v| [k, filters] }.flatten(1)]
+        # end
       end
 
-      def filter(value, service = nil)
+      def filter(value, service = nil, type = nil)
         case value
-        when Struct, Hash then filter_hash(value, service)
-        when Array then filter_array(value, service)
+        when Struct, Hash then filter_hash(value, type)
+        when Array then filter_array(value, type)
         else value
         end
       end
 
       private
 
-      def filter_hash(values, service)
-        filtered = {}
-        filters = if service.nil?
-          # If no service is given, take a conservative approach and filter
-          # using sensitive params from all services
-          Set.new(@filters.values.flatten)
-        else
-          @filters.fetch(service, [])
+      def filter_hash(values, type)
+        filters = []
+        if @filter_sensitive
+          filters = Set.new(@filters + type::SENSITIVE_PARAMS)
         end
+
+        filtered = {}
         values.each_pair do |key, value|
           filtered[key] = if filters.include?(key)
             '[FILTERED]'
           else
-            filter(value, service)
+            filter(value, type)
           end
         end
         filtered
       end
 
-      def filter_array(values, service)
-        values.map { |value| filter(value, service) }
+      def filter_array(values, type)
+        values.map { |value| filter(value, type) }
       end
 
     end

@@ -46,9 +46,11 @@ module AwsSdkCodeGenerator
           if shape['eventstream']
             list
           elsif struct_type?(shape)
+            struct_members = struct_members(shape)
             list << StructClass.new(
               class_name: shape_name,
-              members: struct_members(shape),
+              members: struct_members,
+              sensitive_params: struct_members.select(&:sensitive).map(&:member_name).map(&:to_sym),
               documentation: struct_class_docs(shape_name)
             )
           else
@@ -76,8 +78,14 @@ module AwsSdkCodeGenerator
 
       def struct_members(shape)
         return if shape['members'].nil?
-        members = shape['members'].map do |member_name, _|
-          StructMember.new(member_name: underscore(member_name))
+        members = shape['members'].map do |member_name, member_ref|
+          sensitive = false
+          if member_ref['sensitive'] || @api['shapes'][member_ref['shape']]['sensitive']
+            sensitive = true
+          end
+          StructMember.new(
+            member_name: underscore(member_name), sensitive: sensitive
+          )
         end
         members << StructMember.new(member_name: "event_type") if shape['event']
         members
@@ -234,6 +242,7 @@ module AwsSdkCodeGenerator
           @class_name = options.fetch(:class_name)
           @members = options.fetch(:members)
           @documentation = options.fetch(:documentation)
+          @sensitive_params = options.fetch(:sensitive_params)
           if @members.nil? || @members.empty?
             @empty = true
           else
@@ -251,6 +260,9 @@ module AwsSdkCodeGenerator
         # @return [String, nil]
         attr_accessor :documentation
 
+        # @return [Array<Symbol>]
+        attr_accessor :sensitive_params
+
         # @return [Boolean]
         def empty?
           @empty
@@ -262,11 +274,15 @@ module AwsSdkCodeGenerator
 
         def initialize(options)
           @member_name = options.fetch(:member_name)
+          @sensitive = options.fetch(:sensitive)
           @last = false
         end
 
         # @return [String]
         attr_accessor :member_name
+
+        # @return [Boolean]
+        attr_accessor :sensitive
 
         # @return [Boolean]
         attr_accessor :last
