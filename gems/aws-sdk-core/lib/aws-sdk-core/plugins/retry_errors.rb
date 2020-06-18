@@ -347,6 +347,7 @@ a clock skew correction and retry requests with skewed client clocks.
         def call(context)
           response = @handler.call(context)
           if response.error
+            puts "Retry_errors: Checking retry errors"
             error_inspector = Retries::ErrorInspector.new(
               response.error, response.context.http_response.status_code
             )
@@ -387,6 +388,7 @@ a clock skew correction and retry requests with skewed client clocks.
         end
 
         def should_retry?(context, error)
+          puts "should_retry? error=#{error} Truncatable: #{response_truncatable?(context)}"
           error.retryable?(context) &&
             context.retries < retry_limit(context) &&
             response_truncatable?(context)
