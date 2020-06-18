@@ -18,7 +18,11 @@ module Aws
 
         def write(chunk)
           # decrypt and write
-          @io.write(@cipher.update(chunk, @cipher_buffer))
+          if @cipher.method(:update).arity == 1
+            @io.write(@cipher.update(chunk))
+          else
+            @io.write(@cipher.update(chunk, @cipher_buffer))
+          end
         end
 
         def finalize
