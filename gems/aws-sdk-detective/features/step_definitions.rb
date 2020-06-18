@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@detective") do
   @service = Aws::Detective::Resource.new
   @client = @service.client

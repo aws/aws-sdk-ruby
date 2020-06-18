@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@codestarnotifications") do
   @service = Aws::CodeStarNotifications::Resource.new
   @client = @service.client

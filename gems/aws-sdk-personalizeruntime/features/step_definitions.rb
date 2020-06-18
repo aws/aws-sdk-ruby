@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@personalizeruntime") do
   @service = Aws::PersonalizeRuntime::Resource.new
   @client = @service.client

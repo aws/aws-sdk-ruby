@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@textract") do
   @service = Aws::Textract::Resource.new
   @client = @service.client

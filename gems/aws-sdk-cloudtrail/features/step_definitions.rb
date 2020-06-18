@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@cloudtrail") do
   @service = Aws::CloudTrail::Resource.new
   @client = @service.client

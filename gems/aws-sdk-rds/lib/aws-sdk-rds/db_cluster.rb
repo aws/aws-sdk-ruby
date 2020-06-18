@@ -440,6 +440,24 @@ module Aws::RDS
       data[:domain_memberships]
     end
 
+    # Specifies whether a secondary cluster in an Aurora global database has
+    # write forwarding enabled, not enabled, or is in the process of
+    # enabling it.
+    # @return [String]
+    def global_write_forwarding_status
+      data[:global_write_forwarding_status]
+    end
+
+    # Specifies whether you have requested to enable write forwarding for a
+    # secondary cluster in an Aurora global database. Because write
+    # forwarding takes time to enable, check the value of
+    # `GlobalWriteForwardingStatus` to confirm that the request has
+    # completed before using the write forwarding feature for this cluster.
+    # @return [Boolean]
+    def global_write_forwarding_requested
+      data[:global_write_forwarding_requested]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -619,6 +637,7 @@ module Aws::RDS
     #     copy_tags_to_snapshot: false,
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     enable_global_write_forwarding: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -868,6 +887,10 @@ module Aws::RDS
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
     #
+    #   <note markdown="1"> Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+    #
+    #    </note>
+    #
     #   Default: 0
     #
     #   Constraints:
@@ -956,6 +979,13 @@ module Aws::RDS
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
+    # @option options [Boolean] :enable_global_write_forwarding
+    #   A value that indicates whether to enable write operations to be
+    #   forwarded from this cluster to the primary cluster in an Aurora global
+    #   database. The resulting changes are replicated back to this cluster.
+    #   This parameter only applies to DB clusters that are secondary clusters
+    #   in an Aurora global database. By default, Aurora disallows write
+    #   operations for secondary clusters.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1113,6 +1143,7 @@ module Aws::RDS
     #     deletion_protection: false,
     #     enable_http_endpoint: false,
     #     copy_tags_to_snapshot: false,
+    #     enable_global_write_forwarding: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -1240,6 +1271,10 @@ module Aws::RDS
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
     #
+    #   <note markdown="1"> Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+    #
+    #    </note>
+    #
     #   Default: 0
     #
     #   Constraints:
@@ -1333,6 +1368,13 @@ module Aws::RDS
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
+    # @option options [Boolean] :enable_global_write_forwarding
+    #   A value that indicates whether to enable write operations to be
+    #   forwarded from this cluster to the primary cluster in an Aurora global
+    #   database. The resulting changes are replicated back to this cluster.
+    #   This parameter only applies to DB clusters that are secondary clusters
+    #   in an Aurora global database. By default, Aurora disallows write
+    #   operations for secondary clusters.
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)
@@ -1489,6 +1531,10 @@ module Aws::RDS
     # @option options [Integer] :backtrack_window
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
+    #
+    #   <note markdown="1"> Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+    #
+    #    </note>
     #
     #   Default: 0
     #

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@lambda") do
   @service = Aws::Lambda::Resource.new
   @client = @service.client

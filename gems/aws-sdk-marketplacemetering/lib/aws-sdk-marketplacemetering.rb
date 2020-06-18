@@ -47,6 +47,6 @@ require_relative 'aws-sdk-marketplacemetering/customizations'
 # @service
 module Aws::MarketplaceMetering
 
-  GEM_VERSION = '1.26.1'
+  GEM_VERSION = '1.27.0'
 
 end

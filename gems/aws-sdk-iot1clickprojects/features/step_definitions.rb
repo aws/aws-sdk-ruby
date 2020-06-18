@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@iot1clickprojects") do
   @service = Aws::IoT1ClickProjects::Resource.new
   @client = @service.client

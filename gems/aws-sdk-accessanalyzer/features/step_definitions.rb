@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@accessanalyzer") do
   @service = Aws::AccessAnalyzer::Resource.new
   @client = @service.client

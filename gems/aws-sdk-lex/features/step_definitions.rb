@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@lex") do
   @service = Aws::Lex::Resource.new
   @client = @service.client

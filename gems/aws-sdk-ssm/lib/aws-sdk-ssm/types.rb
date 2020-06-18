@@ -2948,6 +2948,7 @@ module Aws::SSM
     #         end_date: "MaintenanceWindowStringDateTime",
     #         schedule: "MaintenanceWindowSchedule", # required
     #         schedule_timezone: "MaintenanceWindowTimezone",
+    #         schedule_offset: 1,
     #         duration: 1, # required
     #         cutoff: 1, # required
     #         allow_unassociated_targets: false, # required
@@ -3000,6 +3001,19 @@ module Aws::SSM
     #
     #   [1]: https://www.iana.org/time-zones
     #   @return [String]
+    #
+    # @!attribute [rw] schedule_offset
+    #   The number of days to wait after the date and time specified by a
+    #   CRON expression before running the maintenance window.
+    #
+    #   For example, the following cron expression schedules a maintenance
+    #   window to run on the third Tuesday of every month at 11:30 PM.
+    #
+    #   `cron(0 30 23 ? * TUE#3 *)`
+    #
+    #   If the schedule offset is `2`, the maintenance window won't run
+    #   until two days later.
+    #   @return [Integer]
     #
     # @!attribute [rw] duration
     #   The duration of the maintenance window in hours.
@@ -3057,6 +3071,7 @@ module Aws::SSM
       :end_date,
       :schedule,
       :schedule_timezone,
+      :schedule_offset,
       :duration,
       :cutoff,
       :allow_unassociated_targets,
@@ -7699,6 +7714,11 @@ module Aws::SSM
     #   [1]: https://www.iana.org/time-zones
     #   @return [String]
     #
+    # @!attribute [rw] schedule_offset
+    #   The number of days to wait to run a maintenance window after the
+    #   scheduled CRON expression date and time.
+    #   @return [Integer]
+    #
     # @!attribute [rw] next_execution_time
     #   The next time the maintenance window will actually run, taking into
     #   account any specified times for the maintenance window to become
@@ -7741,6 +7761,7 @@ module Aws::SSM
       :end_date,
       :schedule,
       :schedule_timezone,
+      :schedule_offset,
       :next_execution_time,
       :duration,
       :cutoff,
@@ -11192,6 +11213,11 @@ module Aws::SSM
     #   based on, in Internet Assigned Numbers Authority (IANA) format.
     #   @return [String]
     #
+    # @!attribute [rw] schedule_offset
+    #   The number of days to wait to run a maintenance window after the
+    #   scheduled CRON expression date and time.
+    #   @return [Integer]
+    #
     # @!attribute [rw] end_date
     #   The date and time, in ISO-8601 Extended format, for when the
     #   maintenance window is scheduled to become inactive.
@@ -11219,6 +11245,7 @@ module Aws::SSM
       :cutoff,
       :schedule,
       :schedule_timezone,
+      :schedule_offset,
       :end_date,
       :start_date,
       :next_execution_time)
@@ -13553,15 +13580,19 @@ module Aws::SSM
     # @!attribute [rw] type
     #   The type of parameter that you want to add to the system.
     #
+    #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
+    #   templates or in the China Regions.
+    #
+    #    </note>
+    #
     #   Items in a `StringList` must be separated by a comma (,). You can't
     #   use other punctuation or special character to escape items in the
     #   list. If you have a parameter value that requires a comma, then use
     #   the `String` data type.
     #
-    #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
-    #   templates or in the China Regions.
-    #
-    #    </note>
+    #   Specifying a parameter type is not required when updating a
+    #   parameter. You must specify a parameter type when creating a
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -15655,8 +15686,9 @@ module Aws::SSM
     # @!attribute [rw] document_name
     #   The name of the SSM document to define the parameters and plugin
     #   settings for the session. For example, `SSM-SessionManagerRunShell`.
-    #   If no document name is provided, a shell to the instance is launched
-    #   by default.
+    #   You can call the GetDocument API to verify the document exists
+    #   before attempting to start a session. If no document name is
+    #   provided, a shell to the instance is launched by default.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -16651,6 +16683,7 @@ module Aws::SSM
     #         end_date: "MaintenanceWindowStringDateTime",
     #         schedule: "MaintenanceWindowSchedule",
     #         schedule_timezone: "MaintenanceWindowTimezone",
+    #         schedule_offset: 1,
     #         duration: 1,
     #         cutoff: 1,
     #         allow_unassociated_targets: false,
@@ -16706,6 +16739,19 @@ module Aws::SSM
     #   [1]: https://www.iana.org/time-zones
     #   @return [String]
     #
+    # @!attribute [rw] schedule_offset
+    #   The number of days to wait after the date and time specified by a
+    #   CRON expression before running the maintenance window.
+    #
+    #   For example, the following cron expression schedules a maintenance
+    #   window to run the third Tuesday of every month at 11:30 PM.
+    #
+    #   `cron(0 30 23 ? * TUE#3 *)`
+    #
+    #   If the schedule offset is `2`, the maintenance window won't run
+    #   until two days later.
+    #   @return [Integer]
+    #
     # @!attribute [rw] duration
     #   The duration of the maintenance window in hours.
     #   @return [Integer]
@@ -16740,6 +16786,7 @@ module Aws::SSM
       :end_date,
       :schedule,
       :schedule_timezone,
+      :schedule_offset,
       :duration,
       :cutoff,
       :allow_unassociated_targets,
@@ -16789,6 +16836,11 @@ module Aws::SSM
     #   [1]: https://www.iana.org/time-zones
     #   @return [String]
     #
+    # @!attribute [rw] schedule_offset
+    #   The number of days to wait to run a maintenance window after the
+    #   scheduled CRON expression date and time.
+    #   @return [Integer]
+    #
     # @!attribute [rw] duration
     #   The duration of the maintenance window in hours.
     #   @return [Integer]
@@ -16817,6 +16869,7 @@ module Aws::SSM
       :end_date,
       :schedule,
       :schedule_timezone,
+      :schedule_offset,
       :duration,
       :cutoff,
       :allow_unassociated_targets,

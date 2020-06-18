@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@iotdataplane") do
   @service = Aws::IoTDataPlane::Resource.new
   @client = @service.client

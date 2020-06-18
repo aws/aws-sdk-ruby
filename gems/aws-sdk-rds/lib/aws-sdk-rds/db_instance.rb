@@ -257,11 +257,19 @@ module Aws::RDS
       data[:secondary_availability_zone]
     end
 
-    # Specifies the accessibility options for the DB instance. A value of
-    # true specifies an Internet-facing instance with a publicly resolvable
-    # DNS name, which resolves to a public IP address. A value of false
-    # specifies an internal instance with a DNS name that resolves to a
-    # private IP address.
+    # Specifies the accessibility options for the DB instance.
+    #
+    # When the DB instance is publicly accessible, its DNS endpoint resolves
+    # to the private IP address from within the DB instance's VPC, and to
+    # the public IP address from outside of the DB instance's VPC. Access
+    # to the DB instance is ultimately controlled by the security group it
+    # uses, and that public access is not permitted if the security group
+    # assigned to the DB instance doesn't permit it.
+    #
+    # When the DB instance isn't publicly accessible, it is an internal DB
+    # instance with a DNS name that resolves to a private IP address.
+    #
+    # For more information, see CreateDBInstance.
     # @return [Boolean]
     def publicly_accessible
       data[:publicly_accessible]
@@ -1243,11 +1251,16 @@ module Aws::RDS
     #   more information, see `CreateDBCluster`.
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
-    #   When the DB instance is publicly accessible, it is an Internet-facing
-    #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance isn't publicly accessible, it
-    #   is an internal instance with a DNS name that resolves to a private IP
-    #   address.
+    #
+    #   When the DB instance is publicly accessible, its DNS endpoint resolves
+    #   to the private IP address from within the DB instance's VPC, and to
+    #   the public IP address from outside of the DB instance's VPC. Access
+    #   to the DB instance is ultimately controlled by the security group it
+    #   uses, and that public access is not permitted if the security group
+    #   assigned to the DB instance doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
     #
     #   Default: The default behavior varies depending on whether
     #   `DBSubnetGroupName` is specified.
@@ -1610,11 +1623,18 @@ module Aws::RDS
     #   * Can't end with a hyphen or contain two consecutive hyphens
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
-    #   When the DB instance is publicly accessible, it is an Internet-facing
-    #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance isn't publicly accessible, it
-    #   is an internal instance with a DNS name that resolves to a private IP
-    #   address. For more information, see CreateDBInstance.
+    #
+    #   When the DB instance is publicly accessible, its DNS endpoint resolves
+    #   to the private IP address from within the DB instance's VPC, and to
+    #   the public IP address from outside of the DB instance's VPC. Access
+    #   to the DB instance is ultimately controlled by the security group it
+    #   uses, and that public access is not permitted if the security group
+    #   assigned to the DB instance doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
+    #
+    #   For more information, see CreateDBInstance.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
     #   Resources][1] in the *Amazon RDS User Guide.*
@@ -2457,11 +2477,16 @@ module Aws::RDS
     #   Valid values: `1150-65535`
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
-    #   When the DB instance is publicly accessible, it is an Internet-facing
-    #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance isn't publicly accessible, it
-    #   is an internal instance with a DNS name that resolves to a private IP
-    #   address.
+    #
+    #   When the DB instance is publicly accessible, its DNS endpoint resolves
+    #   to the private IP address from within the DB instance's VPC, and to
+    #   the public IP address from outside of the DB instance's VPC. Access
+    #   to the DB instance is ultimately controlled by the security group it
+    #   uses, and that public access is not permitted if the security group
+    #   assigned to the DB instance doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
     #
     #   `PubliclyAccessible` only applies to DB instances in a VPC. The DB
     #   instance must be part of a public subnet and `PubliclyAccessible` must
@@ -2790,11 +2815,18 @@ module Aws::RDS
     #   DB instance is a Multi-AZ deployment.
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
-    #   When the DB instance is publicly accessible, it is an Internet-facing
-    #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance isn't publicly accessible, it
-    #   is an internal instance with a DNS name that resolves to a private IP
-    #   address. For more information, see CreateDBInstance.
+    #
+    #   When the DB instance is publicly accessible, its DNS endpoint resolves
+    #   to the private IP address from within the DB instance's VPC, and to
+    #   the public IP address from outside of the DB instance's VPC. Access
+    #   to the DB instance is ultimately controlled by the security group it
+    #   uses, and that public access is not permitted if the security group
+    #   assigned to the DB instance doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
+    #
+    #   For more information, see CreateDBInstance.
     # @option options [Boolean] :auto_minor_version_upgrade
     #   A value that indicates whether minor version upgrades are applied
     #   automatically to the DB instance during the maintenance window.

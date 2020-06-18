@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@mediastoredata") do
   @service = Aws::MediaStoreData::Resource.new
   @client = @service.client

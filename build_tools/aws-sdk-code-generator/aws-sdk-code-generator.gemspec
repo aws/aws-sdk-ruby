@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Gem::Specification.new do |spec|
   spec.name          = 'aws-sdk-code-generator'
   spec.version       = '0.1.0.pre'

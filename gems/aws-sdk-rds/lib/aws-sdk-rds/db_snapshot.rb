@@ -44,8 +44,8 @@ module Aws::RDS
     end
     alias :db_snapshot_identifier :snapshot_id
 
-    # Provides the time when the snapshot was taken, in Universal
-    # Coordinated Time (UTC).
+    # Specifies when the snapshot was taken in Coodinated Universal Time
+    # (UTC).
     # @return [Time]
     def snapshot_create_time
       data[:snapshot_create_time]
@@ -89,8 +89,8 @@ module Aws::RDS
       data[:vpc_id]
     end
 
-    # Specifies the time when the snapshot was taken, in Universal
-    # Coordinated Time (UTC).
+    # Specifies the time in Coordinated Universal Time (UTC) when the DB
+    # instance, from which the snapshot was taken, was created.
     # @return [Time]
     def instance_create_time
       data[:instance_create_time]
@@ -643,11 +643,18 @@ module Aws::RDS
     #   DB instance is a Multi-AZ deployment.
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
-    #   When the DB instance is publicly accessible, it is an Internet-facing
-    #   instance with a publicly resolvable DNS name, which resolves to a
-    #   public IP address. When the DB instance isn't publicly accessible, it
-    #   is an internal instance with a DNS name that resolves to a private IP
-    #   address. For more information, see CreateDBInstance.
+    #
+    #   When the DB instance is publicly accessible, its DNS endpoint resolves
+    #   to the private IP address from within the DB instance's VPC, and to
+    #   the public IP address from outside of the DB instance's VPC. Access
+    #   to the DB instance is ultimately controlled by the security group it
+    #   uses, and that public access is not permitted if the security group
+    #   assigned to the DB instance doesn't permit it.
+    #
+    #   When the DB instance isn't publicly accessible, it is an internal DB
+    #   instance with a DNS name that resolves to a private IP address.
+    #
+    #   For more information, see CreateDBInstance.
     # @option options [Boolean] :auto_minor_version_upgrade
     #   A value that indicates whether minor version upgrades are applied
     #   automatically to the DB instance during the maintenance window.

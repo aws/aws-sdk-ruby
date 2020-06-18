@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@servicecatalog") do
   @service = Aws::ServiceCatalog::Resource.new
   @client = @service.client

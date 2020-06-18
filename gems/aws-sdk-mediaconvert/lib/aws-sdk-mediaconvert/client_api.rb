@@ -386,6 +386,7 @@ module Aws::MediaConvert
     MsSmoothManifestEncoding = Shapes::StringShape.new(name: 'MsSmoothManifestEncoding')
     MxfAfdSignaling = Shapes::StringShape.new(name: 'MxfAfdSignaling')
     MxfSettings = Shapes::StructureShape.new(name: 'MxfSettings')
+    NexGuardFileMarkerSettings = Shapes::StructureShape.new(name: 'NexGuardFileMarkerSettings')
     NielsenConfiguration = Shapes::StructureShape.new(name: 'NielsenConfiguration')
     NoiseFilterPostTemporalSharpening = Shapes::StringShape.new(name: 'NoiseFilterPostTemporalSharpening')
     NoiseReducer = Shapes::StructureShape.new(name: 'NoiseReducer')
@@ -405,6 +406,7 @@ module Aws::MediaConvert
     OutputGroupType = Shapes::StringShape.new(name: 'OutputGroupType')
     OutputSdt = Shapes::StringShape.new(name: 'OutputSdt')
     OutputSettings = Shapes::StructureShape.new(name: 'OutputSettings')
+    PartnerWatermarking = Shapes::StructureShape.new(name: 'PartnerWatermarking')
     Preset = Shapes::StructureShape.new(name: 'Preset')
     PresetListBy = Shapes::StringShape.new(name: 'PresetListBy')
     PresetSettings = Shapes::StructureShape.new(name: 'PresetSettings')
@@ -487,6 +489,7 @@ module Aws::MediaConvert
     Vp9QualityTuningLevel = Shapes::StringShape.new(name: 'Vp9QualityTuningLevel')
     Vp9RateControlMode = Shapes::StringShape.new(name: 'Vp9RateControlMode')
     Vp9Settings = Shapes::StructureShape.new(name: 'Vp9Settings')
+    WatermarkingStrength = Shapes::StringShape.new(name: 'WatermarkingStrength')
     WavFormat = Shapes::StringShape.new(name: 'WavFormat')
     WavSettings = Shapes::StructureShape.new(name: 'WavSettings')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
@@ -517,6 +520,7 @@ module Aws::MediaConvert
     __integerMin0Max30000 = Shapes::IntegerShape.new(name: '__integerMin0Max30000')
     __integerMin0Max3600 = Shapes::IntegerShape.new(name: '__integerMin0Max3600')
     __integerMin0Max4 = Shapes::IntegerShape.new(name: '__integerMin0Max4')
+    __integerMin0Max4194303 = Shapes::IntegerShape.new(name: '__integerMin0Max4194303')
     __integerMin0Max47185920 = Shapes::IntegerShape.new(name: '__integerMin0Max47185920')
     __integerMin0Max500 = Shapes::IntegerShape.new(name: '__integerMin0Max500')
     __integerMin0Max50000 = Shapes::IntegerShape.new(name: '__integerMin0Max50000')
@@ -628,6 +632,7 @@ module Aws::MediaConvert
     __stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA = Shapes::StringShape.new(name: '__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA')
     __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI = Shapes::StringShape.new(name: '__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI')
     __stringMin16Max24PatternAZaZ0922AZaZ0916 = Shapes::StringShape.new(name: '__stringMin16Max24PatternAZaZ0922AZaZ0916')
+    __stringMin1Max100000 = Shapes::StringShape.new(name: '__stringMin1Max100000')
     __stringMin1Max256 = Shapes::StringShape.new(name: '__stringMin1Max256')
     __stringMin24Max512PatternAZaZ0902 = Shapes::StringShape.new(name: '__stringMin24Max512PatternAZaZ0902')
     __stringMin32Max32Pattern09aFAF32 = Shapes::StringShape.new(name: '__stringMin32Max32Pattern09aFAF32')
@@ -1684,6 +1689,12 @@ module Aws::MediaConvert
     MxfSettings.add_member(:afd_signaling, Shapes::ShapeRef.new(shape: MxfAfdSignaling, location_name: "afdSignaling"))
     MxfSettings.struct_class = Types::MxfSettings
 
+    NexGuardFileMarkerSettings.add_member(:license, Shapes::ShapeRef.new(shape: __stringMin1Max100000, location_name: "license"))
+    NexGuardFileMarkerSettings.add_member(:payload, Shapes::ShapeRef.new(shape: __integerMin0Max4194303, location_name: "payload"))
+    NexGuardFileMarkerSettings.add_member(:preset, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "preset"))
+    NexGuardFileMarkerSettings.add_member(:strength, Shapes::ShapeRef.new(shape: WatermarkingStrength, location_name: "strength"))
+    NexGuardFileMarkerSettings.struct_class = Types::NexGuardFileMarkerSettings
+
     NielsenConfiguration.add_member(:breakout_code, Shapes::ShapeRef.new(shape: __integerMin0Max0, location_name: "breakoutCode"))
     NielsenConfiguration.add_member(:distributor_id, Shapes::ShapeRef.new(shape: __string, location_name: "distributorId"))
     NielsenConfiguration.struct_class = Types::NielsenConfiguration
@@ -1752,6 +1763,9 @@ module Aws::MediaConvert
 
     OutputSettings.add_member(:hls_settings, Shapes::ShapeRef.new(shape: HlsSettings, location_name: "hlsSettings"))
     OutputSettings.struct_class = Types::OutputSettings
+
+    PartnerWatermarking.add_member(:nexguard_file_marker_settings, Shapes::ShapeRef.new(shape: NexGuardFileMarkerSettings, location_name: "nexguardFileMarkerSettings"))
+    PartnerWatermarking.struct_class = Types::PartnerWatermarking
 
     Preset.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Preset.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
@@ -1977,6 +1991,7 @@ module Aws::MediaConvert
     VideoPreprocessor.add_member(:dolby_vision, Shapes::ShapeRef.new(shape: DolbyVision, location_name: "dolbyVision"))
     VideoPreprocessor.add_member(:image_inserter, Shapes::ShapeRef.new(shape: ImageInserter, location_name: "imageInserter"))
     VideoPreprocessor.add_member(:noise_reducer, Shapes::ShapeRef.new(shape: NoiseReducer, location_name: "noiseReducer"))
+    VideoPreprocessor.add_member(:partner_watermarking, Shapes::ShapeRef.new(shape: PartnerWatermarking, location_name: "partnerWatermarking"))
     VideoPreprocessor.add_member(:timecode_burnin, Shapes::ShapeRef.new(shape: TimecodeBurnin, location_name: "timecodeBurnin"))
     VideoPreprocessor.struct_class = Types::VideoPreprocessor
 

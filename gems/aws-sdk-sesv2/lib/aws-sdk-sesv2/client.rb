@@ -417,7 +417,7 @@ module Aws::SESV2
     #     event_destination_name: "EventDestinationName", # required
     #     event_destination: { # required
     #       enabled: false,
-    #       matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE
+    #       matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY
     #       kinesis_firehose_destination: {
     #         iam_role_arn: "AmazonResourceName", # required
     #         delivery_stream_arn: "AmazonResourceName", # required
@@ -942,7 +942,7 @@ module Aws::SESV2
     #   resp.event_destinations[0].name #=> String
     #   resp.event_destinations[0].enabled #=> Boolean
     #   resp.event_destinations[0].matching_event_types #=> Array
-    #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "SEND", "REJECT", "BOUNCE", "COMPLAINT", "DELIVERY", "OPEN", "CLICK", "RENDERING_FAILURE"
+    #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "SEND", "REJECT", "BOUNCE", "COMPLAINT", "DELIVERY", "OPEN", "CLICK", "RENDERING_FAILURE", "DELIVERY_DELAY"
     #   resp.event_destinations[0].kinesis_firehose_destination.iam_role_arn #=> String
     #   resp.event_destinations[0].kinesis_firehose_destination.delivery_stream_arn #=> String
     #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations #=> Array
@@ -2505,7 +2505,7 @@ module Aws::SESV2
     #     event_destination_name: "EventDestinationName", # required
     #     event_destination: { # required
     #       enabled: false,
-    #       matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE
+    #       matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY
     #       kinesis_firehose_destination: {
     #         iam_role_arn: "AmazonResourceName", # required
     #         delivery_stream_arn: "AmazonResourceName", # required
@@ -2550,7 +2550,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.6.1'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
