@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@mediatailor") do
   @service = Aws::MediaTailor::Resource.new
   @client = @service.client

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@lightsail") do
   @service = Aws::Lightsail::Resource.new
   @client = @service.client

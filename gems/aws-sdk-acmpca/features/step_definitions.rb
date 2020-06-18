@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@acmpca") do
   @service = Aws::ACMPCA::Resource.new
   @client = @service.client

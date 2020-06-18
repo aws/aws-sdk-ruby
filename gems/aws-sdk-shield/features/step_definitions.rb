@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@shield") do
   @service = Aws::Shield::Resource.new
   @client = @service.client

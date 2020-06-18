@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@pinpointsmsvoice") do
   @service = Aws::PinpointSMSVoice::Resource.new
   @client = @service.client

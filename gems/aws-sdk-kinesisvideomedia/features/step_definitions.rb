@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@kinesisvideomedia") do
   @service = Aws::KinesisVideoMedia::Resource.new
   @client = @service.client

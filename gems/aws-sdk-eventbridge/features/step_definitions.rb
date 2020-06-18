@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@eventbridge") do
   @service = Aws::EventBridge::Resource.new
   @client = @service.client
