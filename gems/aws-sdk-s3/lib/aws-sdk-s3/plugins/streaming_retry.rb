@@ -4,13 +4,23 @@ module Aws
   module S3
     module Plugins
 
-      class RetryableBlockIO < Seahorse::Client::BlockIO
+      # @api private
+      class RetryableBlockIO
+        extend Forwardable
+        def_delegators :@block_io, :config, :delete_object, :head_object, :build_request
+
+        def initialize(block_io)
+          @block_io = block_io
+          super
+        end
+
         def truncate(integer)
           puts "RetryableBlockIO: truncate: #{integer}"
         end
       end
 
       # TODO: docs
+      # @api private
       class StreamingRetry < Seahorse::Client::Plugin
 
         class Handler < Seahorse::Client::Handler
@@ -34,7 +44,7 @@ module Aws
               puts "S3:  on_headers"
               if context.http_response.body.is_a? Seahorse::Client::BlockIO
                 puts "S3: Replacing body"
-                context.http_response.body = RetryableBlockIO.new(&target)
+                context.http_response.body = RetryableBlockIO.new(context.http_response.body)
               end
             end
 
