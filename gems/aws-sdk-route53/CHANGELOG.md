@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-06-18)
+------------------
+
+* Feature - Added a new ListHostedZonesByVPC API for customers to list all the private hosted zones that a specified VPC is associated with.
+
 1.37.0 (2020-06-17)
 ------------------
 

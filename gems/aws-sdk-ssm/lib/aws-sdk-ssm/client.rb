@@ -581,14 +581,19 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Associates the specified Systems Manager document with the specified
-    # instances or targets.
-    #
-    # When you associate a document with one or more instances, SSM Agent
-    # running on the instance processes the document and configures the
-    # instance as specified. If you associate a document with an instance
-    # that already has an associated document, the system returns the
-    # `AssociationAlreadyExists` exception.
+    # A State Manager association defines the state that you want to
+    # maintain on your instances. For example, an association can specify
+    # that anti-virus software must be installed and running on your
+    # instances, or that certain ports must be closed. For static targets,
+    # the association specifies a schedule for when the configuration is
+    # reapplied. For dynamic targets, such as an AWS Resource Group or an
+    # AWS Autoscaling Group, State Manager applies the configuration when
+    # new instances are added to the group. The association also specifies
+    # actions to take when applying the configuration. For example, an
+    # association for anti-virus software might run once a day. If the
+    # software is not installed, then State Manager installs it. If the
+    # software is installed, but the service is not running, then the
+    # association might instruct State Manager to start the service.
     #
     # @option params [required, String] :name
     #   The name of the SSM document that contains the configuration
@@ -1147,6 +1152,18 @@ module Aws::SSM
     #
     #   [1]: https://www.iana.org/time-zones
     #
+    # @option params [Integer] :schedule_offset
+    #   The number of days to wait after the date and time specified by a CRON
+    #   expression before running the maintenance window.
+    #
+    #   For example, the following cron expression schedules a maintenance
+    #   window to run on the third Tuesday of every month at 11:30 PM.
+    #
+    #   `cron(0 30 23 ? * TUE#3 *)`
+    #
+    #   If the schedule offset is `2`, the maintenance window won't run until
+    #   two days later.
+    #
     # @option params [required, Integer] :duration
     #   The duration of the maintenance window in hours.
     #
@@ -1202,6 +1219,7 @@ module Aws::SSM
     #     end_date: "MaintenanceWindowStringDateTime",
     #     schedule: "MaintenanceWindowSchedule", # required
     #     schedule_timezone: "MaintenanceWindowTimezone",
+    #     schedule_offset: 1,
     #     duration: 1, # required
     #     cutoff: 1, # required
     #     allow_unassociated_targets: false, # required
@@ -3682,6 +3700,7 @@ module Aws::SSM
     #   resp.window_identities[0].cutoff #=> Integer
     #   resp.window_identities[0].schedule #=> String
     #   resp.window_identities[0].schedule_timezone #=> String
+    #   resp.window_identities[0].schedule_offset #=> Integer
     #   resp.window_identities[0].end_date #=> String
     #   resp.window_identities[0].start_date #=> String
     #   resp.window_identities[0].next_execution_time #=> String
@@ -4856,6 +4875,7 @@ module Aws::SSM
     #   * {Types::GetMaintenanceWindowResult#end_date #end_date} => String
     #   * {Types::GetMaintenanceWindowResult#schedule #schedule} => String
     #   * {Types::GetMaintenanceWindowResult#schedule_timezone #schedule_timezone} => String
+    #   * {Types::GetMaintenanceWindowResult#schedule_offset #schedule_offset} => Integer
     #   * {Types::GetMaintenanceWindowResult#next_execution_time #next_execution_time} => String
     #   * {Types::GetMaintenanceWindowResult#duration #duration} => Integer
     #   * {Types::GetMaintenanceWindowResult#cutoff #cutoff} => Integer
@@ -4879,6 +4899,7 @@ module Aws::SSM
     #   resp.end_date #=> String
     #   resp.schedule #=> String
     #   resp.schedule_timezone #=> String
+    #   resp.schedule_offset #=> Integer
     #   resp.next_execution_time #=> String
     #   resp.duration #=> Integer
     #   resp.cutoff #=> Integer
@@ -6901,15 +6922,18 @@ module Aws::SSM
     # @option params [String] :type
     #   The type of parameter that you want to add to the system.
     #
+    #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
+    #   templates or in the China Regions.
+    #
+    #    </note>
+    #
     #   Items in a `StringList` must be separated by a comma (,). You can't
     #   use other punctuation or special character to escape items in the
     #   list. If you have a parameter value that requires a comma, then use
     #   the `String` data type.
     #
-    #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
-    #   templates or in the China Regions.
-    #
-    #    </note>
+    #   Specifying a parameter type is not required when updating a parameter.
+    #   You must specify a parameter type when creating a parameter.
     #
     # @option params [String] :key_id
     #   The KMS Key ID that you want to use to encrypt a parameter. Either the
@@ -8064,8 +8088,9 @@ module Aws::SSM
     # @option params [String] :document_name
     #   The name of the SSM document to define the parameters and plugin
     #   settings for the session. For example, `SSM-SessionManagerRunShell`.
-    #   If no document name is provided, a shell to the instance is launched
-    #   by default.
+    #   You can call the GetDocument API to verify the document exists before
+    #   attempting to start a session. If no document name is provided, a
+    #   shell to the instance is launched by default.
     #
     # @option params [Hash<String,Array>] :parameters
     #   Reserved for future use.
@@ -8635,6 +8660,18 @@ module Aws::SSM
     #
     #   [1]: https://www.iana.org/time-zones
     #
+    # @option params [Integer] :schedule_offset
+    #   The number of days to wait after the date and time specified by a CRON
+    #   expression before running the maintenance window.
+    #
+    #   For example, the following cron expression schedules a maintenance
+    #   window to run the third Tuesday of every month at 11:30 PM.
+    #
+    #   `cron(0 30 23 ? * TUE#3 *)`
+    #
+    #   If the schedule offset is `2`, the maintenance window won't run until
+    #   two days later.
+    #
     # @option params [Integer] :duration
     #   The duration of the maintenance window in hours.
     #
@@ -8663,6 +8700,7 @@ module Aws::SSM
     #   * {Types::UpdateMaintenanceWindowResult#end_date #end_date} => String
     #   * {Types::UpdateMaintenanceWindowResult#schedule #schedule} => String
     #   * {Types::UpdateMaintenanceWindowResult#schedule_timezone #schedule_timezone} => String
+    #   * {Types::UpdateMaintenanceWindowResult#schedule_offset #schedule_offset} => Integer
     #   * {Types::UpdateMaintenanceWindowResult#duration #duration} => Integer
     #   * {Types::UpdateMaintenanceWindowResult#cutoff #cutoff} => Integer
     #   * {Types::UpdateMaintenanceWindowResult#allow_unassociated_targets #allow_unassociated_targets} => Boolean
@@ -8678,6 +8716,7 @@ module Aws::SSM
     #     end_date: "MaintenanceWindowStringDateTime",
     #     schedule: "MaintenanceWindowSchedule",
     #     schedule_timezone: "MaintenanceWindowTimezone",
+    #     schedule_offset: 1,
     #     duration: 1,
     #     cutoff: 1,
     #     allow_unassociated_targets: false,
@@ -8694,6 +8733,7 @@ module Aws::SSM
     #   resp.end_date #=> String
     #   resp.schedule #=> String
     #   resp.schedule_timezone #=> String
+    #   resp.schedule_offset #=> Integer
     #   resp.duration #=> Integer
     #   resp.cutoff #=> Integer
     #   resp.allow_unassociated_targets #=> Boolean
@@ -9539,7 +9579,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.81.1'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-06-18)
+------------------
+
+* Feature - Documentation updates for meteringmarketplace
+
 1.26.1 (2020-06-11)
 ------------------
 

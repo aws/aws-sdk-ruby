@@ -71,8 +71,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # To be written.
-    #
     # @note When making an API call, you may pass AddCommunicationToCaseRequest
     #   data as a hash:
     #
@@ -260,7 +258,7 @@ module Aws::Support
     end
 
     # A JSON-formatted object that contains the metadata for a support case.
-    # It is contained the response from a DescribeCases request.
+    # It is contained in the response from a DescribeCases request.
     # **CaseDetails** contains the following fields:
     #
     # * **caseId.** The AWS Support case ID requested or returned in the
@@ -279,11 +277,11 @@ module Aws::Support
     #   and Japanese ("ja"). Language parameters must be passed explicitly
     #   for operations that take them.
     #
+    # * **nextToken.** A resumption point for pagination.
+    #
     # * **recentCommunications.** One or more Communication objects. Fields
     #   of these objects are `attachments`, `body`, `caseId`, `submittedBy`,
     #   and `timeCreated`.
-    #
-    # * **nextToken.** A resumption point for pagination.
     #
     # * **serviceCode.** The identifier for the AWS service that corresponds
     #   to the service code defined in the call to DescribeServices.
@@ -367,7 +365,7 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] time_created
-    #   The time that the case was case created in the AWS Support Center.
+    #   The time that the case was created in the AWS Support Center.
     #   @return [String]
     #
     # @!attribute [rw] recent_communications
@@ -697,8 +695,9 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] include_resolved_cases
-    #   Specifies whether resolved support cases should be included in the
-    #   DescribeCases results. The default is *false*.
+    #   Specifies whether to include resolved support cases in the
+    #   `DescribeCases` response. By default, resolved cases aren't
+    #   included.
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
@@ -717,8 +716,8 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] include_communications
-    #   Specifies whether communications should be included in the
-    #   DescribeCases results. The default is *true*.
+    #   Specifies whether to include communications in the `DescribeCases`
+    #   response. By default, communications are incuded.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCasesRequest AWS API Documentation
@@ -736,8 +735,12 @@ module Aws::Support
       include Aws::Structure
     end
 
-    # Returns an array of CaseDetails objects and a `nextToken` that defines
-    # a point for pagination in the result set.
+    # Returns an array of [CaseDetails][1] objects and a `nextToken` that
+    # defines a point for pagination in the result set.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html
     #
     # @!attribute [rw] cases
     #   The details for the cases that match the request.
@@ -907,8 +910,11 @@ module Aws::Support
     #
     # @!attribute [rw] check_ids
     #   The IDs of the Trusted Advisor checks to get the status of.
-    #   **Note:** Specifying the check ID of a check that is automatically
-    #   refreshed causes an `InvalidParameterValue` error.
+    #
+    #   <note markdown="1"> If you specify the check ID of a check that is automatically
+    #   refreshed, you might see an `InvalidParameterValue` error.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckRefreshStatusesRequest AWS API Documentation
@@ -1175,11 +1181,12 @@ module Aws::Support
 
     # A code and name pair that represents the severity level of a support
     # case. The available values depend on the support plan for the account.
-    # For more information, see [Choosing a Severity][1].
+    # For more information, see [Choosing a severity][1] in the *AWS Support
+    # User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity
+    # [1]: https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity
     #
     # @!attribute [rw] code
     #   The code for case severity level.
@@ -1209,11 +1216,12 @@ module Aws::Support
     #
     #    </note>
     #
-    #   For more information, see [Choosing a Severity][1]
+    #   For more information, see [Choosing a severity][1] in the *AWS
+    #   Support User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity
+    #   [1]: https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/SeverityLevel AWS API Documentation

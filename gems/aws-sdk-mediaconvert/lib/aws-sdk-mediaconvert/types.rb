@@ -1031,8 +1031,8 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
-    #   When set to INTERPOLATE, produces smoother motion during frame rate
-    #   conversion.
+    #   Optional. Specify how the transcoder performs framerate conversion.
+    #   The default behavior is to use duplicate drop conversion.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -3579,6 +3579,14 @@ module Aws::MediaConvert
     #                           strength: 1,
     #                         },
     #                       },
+    #                       partner_watermarking: {
+    #                         nexguard_file_marker_settings: {
+    #                           license: "__stringMin1Max100000",
+    #                           payload: 1,
+    #                           preset: "__stringMin1Max256",
+    #                           strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #                         },
+    #                       },
     #                       timecode_burnin: {
     #                         font_size: 1,
     #                         position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -4731,6 +4739,14 @@ module Aws::MediaConvert
     #                           strength: 1,
     #                         },
     #                       },
+    #                       partner_watermarking: {
+    #                         nexguard_file_marker_settings: {
+    #                           license: "__stringMin1Max100000",
+    #                           payload: 1,
+    #                           preset: "__stringMin1Max256",
+    #                           strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #                         },
+    #                       },
     #                       timecode_burnin: {
     #                         font_size: 1,
     #                         position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -5440,6 +5456,14 @@ module Aws::MediaConvert
     #                   post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                   speed: 1,
     #                   strength: 1,
+    #                 },
+    #               },
+    #               partner_watermarking: {
+    #                 nexguard_file_marker_settings: {
+    #                   license: "__stringMin1Max100000",
+    #                   payload: 1,
+    #                   preset: "__stringMin1Max256",
+    #                   strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
     #                 },
     #               },
     #               timecode_burnin: {
@@ -7584,18 +7608,29 @@ module Aws::MediaConvert
     #   Optional. Specify how the service determines the pixel aspect ratio
     #   (PAR) for this output. The default behavior, Follow source
     #   (INITIALIZE\_FROM\_SOURCE), uses the PAR from your input video for
-    #   your output. To use a different PAR, choose (SPECIFIED). In the
-    #   console, SPECIFIED corresponds to any value other than Follow
-    #   source. When you choose SPECIFIED for this setting, you must also
-    #   specify values for the parNumerator and parDenominator settings.
+    #   your output. To specify a different PAR in the console, choose any
+    #   value other than Follow source. To specify a different PAR by
+    #   editing the JSON job specification, choose SPECIFIED. When you
+    #   choose SPECIFIED for this setting, you must also specify values for
+    #   the parNumerator and parDenominator settings.
     #   @return [String]
     #
     # @!attribute [rw] par_denominator
-    #   Pixel Aspect Ratio denominator.
+    #   Required when you set Pixel aspect ratio (parControl) to SPECIFIED.
+    #   On the console, this corresponds to any value other than Follow
+    #   source. When you specify an output pixel aspect ratio (PAR) that is
+    #   different from your input video PAR, provide your output PAR as a
+    #   ratio. For example, for D1/DV NTSC widescreen, you would specify the
+    #   ratio 40:33. In this example, the value for parDenominator is 33.
     #   @return [Integer]
     #
     # @!attribute [rw] par_numerator
-    #   Pixel Aspect Ratio numerator.
+    #   Required when you set Pixel aspect ratio (parControl) to SPECIFIED.
+    #   On the console, this corresponds to any value other than Follow
+    #   source. When you specify an output pixel aspect ratio (PAR) that is
+    #   different from your input video PAR, provide your output PAR as a
+    #   ratio. For example, for D1/DV NTSC widescreen, you would specify the
+    #   ratio 40:33. In this example, the value for parNumerator is 40.
     #   @return [Integer]
     #
     # @!attribute [rw] quality_tuning_level
@@ -7887,8 +7922,8 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
-    #   When set to INTERPOLATE, produces smoother motion during frame rate
-    #   conversion.
+    #   Optional. Specify how the transcoder performs framerate conversion.
+    #   The default behavior is to use duplicate drop conversion.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -7980,18 +8015,29 @@ module Aws::MediaConvert
     #   Optional. Specify how the service determines the pixel aspect ratio
     #   (PAR) for this output. The default behavior, Follow source
     #   (INITIALIZE\_FROM\_SOURCE), uses the PAR from your input video for
-    #   your output. To use a different PAR, choose (SPECIFIED). In the
-    #   console, SPECIFIED corresponds to any value other than Follow
-    #   source. When you choose SPECIFIED for this setting, you must also
-    #   specify values for the parNumerator and parDenominator settings.
+    #   your output. To specify a different PAR in the console, choose any
+    #   value other than Follow source. To specify a different PAR by
+    #   editing the JSON job specification, choose SPECIFIED. When you
+    #   choose SPECIFIED for this setting, you must also specify values for
+    #   the parNumerator and parDenominator settings.
     #   @return [String]
     #
     # @!attribute [rw] par_denominator
-    #   Pixel Aspect Ratio denominator.
+    #   Required when you set Pixel aspect ratio (parControl) to SPECIFIED.
+    #   On the console, this corresponds to any value other than Follow
+    #   source. When you specify an output pixel aspect ratio (PAR) that is
+    #   different from your input video PAR, provide your output PAR as a
+    #   ratio. For example, for D1/DV NTSC widescreen, you would specify the
+    #   ratio 40:33. In this example, the value for parDenominator is 33.
     #   @return [Integer]
     #
     # @!attribute [rw] par_numerator
-    #   Pixel Aspect Ratio numerator.
+    #   Required when you set Pixel aspect ratio (parControl) to SPECIFIED.
+    #   On the console, this corresponds to any value other than Follow
+    #   source. When you specify an output pixel aspect ratio (PAR) that is
+    #   different from your input video PAR, provide your output PAR as a
+    #   ratio. For example, for D1/DV NTSC widescreen, you would specify the
+    #   ratio 40:33. In this example, the value for parNumerator is 40.
     #   @return [Integer]
     #
     # @!attribute [rw] quality_tuning_level
@@ -9047,9 +9093,9 @@ module Aws::MediaConvert
     #   @return [Hash<String,Types::AudioSelector>]
     #
     # @!attribute [rw] caption_selectors
-    #   Use Captions selectors (CaptionSelectors) to specify the captions
-    #   data from the input that you will use in your outputs. You can use
-    #   multiple captions selectors per input.
+    #   Use captions selectors to specify the captions data from your input
+    #   that you use in your outputs. You can use up to 20 captions
+    #   selectors per input.
     #   @return [Hash<String,Types::CaptionSelector>]
     #
     # @!attribute [rw] crop
@@ -9463,9 +9509,9 @@ module Aws::MediaConvert
     #   @return [Hash<String,Types::AudioSelector>]
     #
     # @!attribute [rw] caption_selectors
-    #   Use Captions selectors (CaptionSelectors) to specify the captions
-    #   data from the input that you will use in your outputs. You can use
-    #   multiple captions selectors per input.
+    #   Use captions selectors to specify the captions data from your input
+    #   that you use in your outputs. You can use up to 20 captions
+    #   selectors per input.
     #   @return [Hash<String,Types::CaptionSelector>]
     #
     # @!attribute [rw] crop
@@ -10900,6 +10946,14 @@ module Aws::MediaConvert
     #                         strength: 1,
     #                       },
     #                     },
+    #                     partner_watermarking: {
+    #                       nexguard_file_marker_settings: {
+    #                         license: "__stringMin1Max100000",
+    #                         payload: 1,
+    #                         preset: "__stringMin1Max256",
+    #                         strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #                       },
+    #                     },
     #                     timecode_burnin: {
     #                       font_size: 1,
     #                       position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -12067,6 +12121,14 @@ module Aws::MediaConvert
     #                         post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                         speed: 1,
     #                         strength: 1,
+    #                       },
+    #                     },
+    #                     partner_watermarking: {
+    #                       nexguard_file_marker_settings: {
+    #                         license: "__stringMin1Max100000",
+    #                         payload: 1,
+    #                         preset: "__stringMin1Max256",
+    #                         strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
     #                       },
     #                     },
     #                     timecode_burnin: {
@@ -13574,18 +13636,29 @@ module Aws::MediaConvert
     #   Optional. Specify how the service determines the pixel aspect ratio
     #   (PAR) for this output. The default behavior, Follow source
     #   (INITIALIZE\_FROM\_SOURCE), uses the PAR from your input video for
-    #   your output. To use a different PAR, choose (SPECIFIED). In the
-    #   console, SPECIFIED corresponds to any value other than Follow
-    #   source. When you choose SPECIFIED for this setting, you must also
-    #   specify values for the parNumerator and parDenominator settings.
+    #   your output. To specify a different PAR in the console, choose any
+    #   value other than Follow source. To specify a different PAR by
+    #   editing the JSON job specification, choose SPECIFIED. When you
+    #   choose SPECIFIED for this setting, you must also specify values for
+    #   the parNumerator and parDenominator settings.
     #   @return [String]
     #
     # @!attribute [rw] par_denominator
-    #   Pixel Aspect Ratio denominator.
+    #   Required when you set Pixel aspect ratio (parControl) to SPECIFIED.
+    #   On the console, this corresponds to any value other than Follow
+    #   source. When you specify an output pixel aspect ratio (PAR) that is
+    #   different from your input video PAR, provide your output PAR as a
+    #   ratio. For example, for D1/DV NTSC widescreen, you would specify the
+    #   ratio 40:33. In this example, the value for parDenominator is 33.
     #   @return [Integer]
     #
     # @!attribute [rw] par_numerator
-    #   Pixel Aspect Ratio numerator.
+    #   Required when you set Pixel aspect ratio (parControl) to SPECIFIED.
+    #   On the console, this corresponds to any value other than Follow
+    #   source. When you specify an output pixel aspect ratio (PAR) that is
+    #   different from your input video PAR, provide your output PAR as a
+    #   ratio. For example, for D1/DV NTSC widescreen, you would specify the
+    #   ratio 40:33. In this example, the value for parNumerator is 40.
     #   @return [Integer]
     #
     # @!attribute [rw] quality_tuning_level
@@ -13859,6 +13932,65 @@ module Aws::MediaConvert
     #
     class MxfSettings < Struct.new(
       :afd_signaling)
+      include Aws::Structure
+    end
+
+    # For forensic video watermarking, MediaConvert supports Nagra NexGuard
+    # File Marker watermarking. MediaConvert supports both PreRelease
+    # Content (NGPR/G2) and OTT Streaming workflows.
+    #
+    # @note When making an API call, you may pass NexGuardFileMarkerSettings
+    #   data as a hash:
+    #
+    #       {
+    #         license: "__stringMin1Max100000",
+    #         payload: 1,
+    #         preset: "__stringMin1Max256",
+    #         strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #       }
+    #
+    # @!attribute [rw] license
+    #   Use the base64 license string that Nagra provides you. Enter it
+    #   directly in your JSON job specification or in the console. Required
+    #   when you include Nagra NexGuard File Marker watermarking
+    #   (NexGuardWatermarkingSettings) in your job.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   Specify the payload ID that you want associated with this output.
+    #   Valid values vary depending on your Nagra NexGuard forensic
+    #   watermarking workflow. Required when you include Nagra NexGuard File
+    #   Marker watermarking (NexGuardWatermarkingSettings) in your job. For
+    #   PreRelease Content (NGPR/G2), specify an integer from 1 through
+    #   4,194,303. You must generate a unique ID for each asset you
+    #   watermark, and keep a record of which ID you have assigned to each
+    #   asset. Neither Nagra nor MediaConvert keep track of the relationship
+    #   between output files and your IDs. For OTT Streaming, create two
+    #   adaptive bitrate (ABR) stacks for each asset. Do this by setting up
+    #   two output groups. For one output group, set the value of Payload ID
+    #   (payload) to 0 in every output. For the other output group, set
+    #   Payload ID (payload) to 1 in every output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preset
+    #   Enter one of the watermarking preset strings that Nagra provides
+    #   you. Required when you include Nagra NexGuard File Marker
+    #   watermarking (NexGuardWatermarkingSettings) in your job.
+    #   @return [String]
+    #
+    # @!attribute [rw] strength
+    #   Optional. Ignore this setting unless Nagra support directs you to
+    #   specify a value. When you don't specify a value here, the Nagra
+    #   NexGuard library uses its default value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/NexGuardFileMarkerSettings AWS API Documentation
+    #
+    class NexGuardFileMarkerSettings < Struct.new(
+      :license,
+      :payload,
+      :preset,
+      :strength)
       include Aws::Structure
     end
 
@@ -14710,6 +14842,14 @@ module Aws::MediaConvert
     #                 post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                 speed: 1,
     #                 strength: 1,
+    #               },
+    #             },
+    #             partner_watermarking: {
+    #               nexguard_file_marker_settings: {
+    #                 license: "__stringMin1Max100000",
+    #                 payload: 1,
+    #                 preset: "__stringMin1Max256",
+    #                 strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
     #               },
     #             },
     #             timecode_burnin: {
@@ -15638,6 +15778,14 @@ module Aws::MediaConvert
     #                     strength: 1,
     #                   },
     #                 },
+    #                 partner_watermarking: {
+    #                   nexguard_file_marker_settings: {
+    #                     license: "__stringMin1Max100000",
+    #                     payload: 1,
+    #                     preset: "__stringMin1Max256",
+    #                     strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #                   },
+    #                 },
     #                 timecode_burnin: {
     #                   font_size: 1,
     #                   position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -15975,6 +16123,35 @@ module Aws::MediaConvert
     #
     class OutputSettings < Struct.new(
       :hls_settings)
+      include Aws::Structure
+    end
+
+    # If you work with a third party video watermarking partner, use the
+    # group of settings that correspond with your watermarking partner to
+    # include watermarks in your output.
+    #
+    # @note When making an API call, you may pass PartnerWatermarking
+    #   data as a hash:
+    #
+    #       {
+    #         nexguard_file_marker_settings: {
+    #           license: "__stringMin1Max100000",
+    #           payload: 1,
+    #           preset: "__stringMin1Max256",
+    #           strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #         },
+    #       }
+    #
+    # @!attribute [rw] nexguard_file_marker_settings
+    #   For forensic video watermarking, MediaConvert supports Nagra
+    #   NexGuard File Marker watermarking. MediaConvert supports both
+    #   PreRelease Content (NGPR/G2) and OTT Streaming workflows.
+    #   @return [Types::NexGuardFileMarkerSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/PartnerWatermarking AWS API Documentation
+    #
+    class PartnerWatermarking < Struct.new(
+      :nexguard_file_marker_settings)
       include Aws::Structure
     end
 
@@ -16614,6 +16791,14 @@ module Aws::MediaConvert
     #                 strength: 1,
     #               },
     #             },
+    #             partner_watermarking: {
+    #               nexguard_file_marker_settings: {
+    #                 license: "__stringMin1Max100000",
+    #                 payload: 1,
+    #                 preset: "__stringMin1Max256",
+    #                 strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #               },
+    #             },
     #             timecode_burnin: {
     #               font_size: 1,
     #               position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -16735,18 +16920,29 @@ module Aws::MediaConvert
     #   Optional. Specify how the service determines the pixel aspect ratio
     #   (PAR) for this output. The default behavior, Follow source
     #   (INITIALIZE\_FROM\_SOURCE), uses the PAR from your input video for
-    #   your output. To use a different PAR, choose (SPECIFIED). In the
-    #   console, SPECIFIED corresponds to any value other than Follow
-    #   source. When you choose SPECIFIED for this setting, you must also
-    #   specify values for the parNumerator and parDenominator settings.
+    #   your output. To specify a different PAR in the console, choose any
+    #   value other than Follow source. To specify a different PAR by
+    #   editing the JSON job specification, choose SPECIFIED. When you
+    #   choose SPECIFIED for this setting, you must also specify values for
+    #   the parNumerator and parDenominator settings.
     #   @return [String]
     #
     # @!attribute [rw] par_denominator
-    #   Pixel Aspect Ratio denominator.
+    #   Required when you set Pixel aspect ratio (parControl) to SPECIFIED.
+    #   On the console, this corresponds to any value other than Follow
+    #   source. When you specify an output pixel aspect ratio (PAR) that is
+    #   different from your input video PAR, provide your output PAR as a
+    #   ratio. For example, for D1/DV NTSC widescreen, you would specify the
+    #   ratio 40:33. In this example, the value for parDenominator is 33.
     #   @return [Integer]
     #
     # @!attribute [rw] par_numerator
-    #   Pixel Aspect Ratio numerator.
+    #   Required when you set Pixel aspect ratio (parControl) to SPECIFIED.
+    #   On the console, this corresponds to any value other than Follow
+    #   source. When you specify an output pixel aspect ratio (PAR) that is
+    #   different from your input video PAR, provide your output PAR as a
+    #   ratio. For example, for D1/DV NTSC widescreen, you would specify the
+    #   ratio 40:33. In this example, the value for parNumerator is 40.
     #   @return [Integer]
     #
     # @!attribute [rw] slow_pal
@@ -18725,6 +18921,14 @@ module Aws::MediaConvert
     #                           strength: 1,
     #                         },
     #                       },
+    #                       partner_watermarking: {
+    #                         nexguard_file_marker_settings: {
+    #                           license: "__stringMin1Max100000",
+    #                           payload: 1,
+    #                           preset: "__stringMin1Max256",
+    #                           strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #                         },
+    #                       },
     #                       timecode_burnin: {
     #                         font_size: 1,
     #                         position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -19423,6 +19627,14 @@ module Aws::MediaConvert
     #                   strength: 1,
     #                 },
     #               },
+    #               partner_watermarking: {
+    #                 nexguard_file_marker_settings: {
+    #                   license: "__stringMin1Max100000",
+    #                   payload: 1,
+    #                   preset: "__stringMin1Max256",
+    #                   strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #                 },
+    #               },
     #               timecode_burnin: {
     #                 font_size: 1,
     #                 position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -20098,6 +20310,14 @@ module Aws::MediaConvert
     #               strength: 1,
     #             },
     #           },
+    #           partner_watermarking: {
+    #             nexguard_file_marker_settings: {
+    #               license: "__stringMin1Max100000",
+    #               payload: 1,
+    #               preset: "__stringMin1Max256",
+    #               strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #             },
+    #           },
     #           timecode_burnin: {
     #             font_size: 1,
     #             position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -20348,6 +20568,14 @@ module Aws::MediaConvert
     #             strength: 1,
     #           },
     #         },
+    #         partner_watermarking: {
+    #           nexguard_file_marker_settings: {
+    #             license: "__stringMin1Max100000",
+    #             payload: 1,
+    #             preset: "__stringMin1Max256",
+    #             strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #           },
+    #         },
     #         timecode_burnin: {
     #           font_size: 1,
     #           position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -20383,6 +20611,12 @@ module Aws::MediaConvert
     #   each output individually. This setting is disabled by default.
     #   @return [Types::NoiseReducer]
     #
+    # @!attribute [rw] partner_watermarking
+    #   If you work with a third party video watermarking partner, use the
+    #   group of settings that correspond with your watermarking partner to
+    #   include watermarks in your output.
+    #   @return [Types::PartnerWatermarking]
+    #
     # @!attribute [rw] timecode_burnin
     #   Timecode burn-in (TimecodeBurnIn)--Burns the output timecode and
     #   specified prefix into the output.
@@ -20396,6 +20630,7 @@ module Aws::MediaConvert
       :dolby_vision,
       :image_inserter,
       :noise_reducer,
+      :partner_watermarking,
       :timecode_burnin)
       include Aws::Structure
     end

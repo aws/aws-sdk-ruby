@@ -615,6 +615,10 @@ module Aws::RDS
     #   The target backtrack window, in seconds. To disable backtracking, set
     #   this value to 0.
     #
+    #   <note markdown="1"> Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+    #
+    #    </note>
+    #
     #   Default: 0
     #
     #   Constraints:
