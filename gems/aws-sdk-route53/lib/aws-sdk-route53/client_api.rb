@@ -13,6 +13,7 @@ module Aws::Route53
 
     include Seahorse::Model
 
+    AWSAccountID = Shapes::StringShape.new(name: 'AWSAccountID')
     AccountLimit = Shapes::StructureShape.new(name: 'AccountLimit')
     AccountLimitType = Shapes::StringShape.new(name: 'AccountLimitType')
     AlarmIdentifier = Shapes::StructureShape.new(name: 'AlarmIdentifier')
@@ -162,7 +163,11 @@ module Aws::Route53
     HostedZoneNotEmpty = Shapes::StructureShape.new(name: 'HostedZoneNotEmpty')
     HostedZoneNotFound = Shapes::StructureShape.new(name: 'HostedZoneNotFound')
     HostedZoneNotPrivate = Shapes::StructureShape.new(name: 'HostedZoneNotPrivate')
+    HostedZoneOwner = Shapes::StructureShape.new(name: 'HostedZoneOwner')
+    HostedZoneOwningService = Shapes::StringShape.new(name: 'HostedZoneOwningService')
     HostedZoneRRSetCount = Shapes::IntegerShape.new(name: 'HostedZoneRRSetCount')
+    HostedZoneSummaries = Shapes::ListShape.new(name: 'HostedZoneSummaries')
+    HostedZoneSummary = Shapes::StructureShape.new(name: 'HostedZoneSummary')
     HostedZones = Shapes::ListShape.new(name: 'HostedZones')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
     IPAddressCidr = Shapes::StringShape.new(name: 'IPAddressCidr')
@@ -188,6 +193,8 @@ module Aws::Route53
     ListHealthChecksResponse = Shapes::StructureShape.new(name: 'ListHealthChecksResponse')
     ListHostedZonesByNameRequest = Shapes::StructureShape.new(name: 'ListHostedZonesByNameRequest')
     ListHostedZonesByNameResponse = Shapes::StructureShape.new(name: 'ListHostedZonesByNameResponse')
+    ListHostedZonesByVPCRequest = Shapes::StructureShape.new(name: 'ListHostedZonesByVPCRequest')
+    ListHostedZonesByVPCResponse = Shapes::StructureShape.new(name: 'ListHostedZonesByVPCResponse')
     ListHostedZonesRequest = Shapes::StructureShape.new(name: 'ListHostedZonesRequest')
     ListHostedZonesResponse = Shapes::StructureShape.new(name: 'ListHostedZonesResponse')
     ListQueryLoggingConfigsRequest = Shapes::StructureShape.new(name: 'ListQueryLoggingConfigsRequest')
@@ -752,6 +759,17 @@ module Aws::Route53
     HostedZoneNotPrivate.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     HostedZoneNotPrivate.struct_class = Types::HostedZoneNotPrivate
 
+    HostedZoneOwner.add_member(:owning_account, Shapes::ShapeRef.new(shape: AWSAccountID, location_name: "OwningAccount"))
+    HostedZoneOwner.add_member(:owning_service, Shapes::ShapeRef.new(shape: HostedZoneOwningService, location_name: "OwningService"))
+    HostedZoneOwner.struct_class = Types::HostedZoneOwner
+
+    HostedZoneSummaries.member = Shapes::ShapeRef.new(shape: HostedZoneSummary, location_name: "HostedZoneSummary")
+
+    HostedZoneSummary.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "HostedZoneId"))
+    HostedZoneSummary.add_member(:name, Shapes::ShapeRef.new(shape: DNSName, required: true, location_name: "Name"))
+    HostedZoneSummary.add_member(:owner, Shapes::ShapeRef.new(shape: HostedZoneOwner, required: true, location_name: "Owner"))
+    HostedZoneSummary.struct_class = Types::HostedZoneSummary
+
     HostedZones.member = Shapes::ShapeRef.new(shape: HostedZone, location_name: "HostedZone")
 
     IncompatibleVersion.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -830,6 +848,17 @@ module Aws::Route53
     ListHostedZonesByNameResponse.add_member(:next_hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "NextHostedZoneId"))
     ListHostedZonesByNameResponse.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, required: true, location_name: "MaxItems"))
     ListHostedZonesByNameResponse.struct_class = Types::ListHostedZonesByNameResponse
+
+    ListHostedZonesByVPCRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VPCId, required: true, location: "querystring", location_name: "vpcid"))
+    ListHostedZonesByVPCRequest.add_member(:vpc_region, Shapes::ShapeRef.new(shape: VPCRegion, required: true, location: "querystring", location_name: "vpcregion"))
+    ListHostedZonesByVPCRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location: "querystring", location_name: "maxitems"))
+    ListHostedZonesByVPCRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nexttoken"))
+    ListHostedZonesByVPCRequest.struct_class = Types::ListHostedZonesByVPCRequest
+
+    ListHostedZonesByVPCResponse.add_member(:hosted_zone_summaries, Shapes::ShapeRef.new(shape: HostedZoneSummaries, required: true, location_name: "HostedZoneSummaries"))
+    ListHostedZonesByVPCResponse.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, required: true, location_name: "MaxItems"))
+    ListHostedZonesByVPCResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListHostedZonesByVPCResponse.struct_class = Types::ListHostedZonesByVPCResponse
 
     ListHostedZonesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location: "querystring", location_name: "marker"))
     ListHostedZonesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location: "querystring", location_name: "maxitems"))
@@ -1745,6 +1774,16 @@ module Aws::Route53
         o.output = Shapes::ShapeRef.new(shape: ListHostedZonesByNameResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDomainName)
+      end)
+
+      api.add_operation(:list_hosted_zones_by_vpc, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListHostedZonesByVPC"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/hostedzonesbyvpc"
+        o.input = Shapes::ShapeRef.new(shape: ListHostedZonesByVPCRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListHostedZonesByVPCResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
       end)
 
       api.add_operation(:list_query_logging_configs, Seahorse::Model::Operation.new.tap do |o|

@@ -1438,6 +1438,14 @@ module Aws::MediaConvert
     #                       strength: 1,
     #                     },
     #                   },
+    #                   partner_watermarking: {
+    #                     nexguard_file_marker_settings: {
+    #                       license: "__stringMin1Max100000",
+    #                       payload: 1,
+    #                       preset: "__stringMin1Max256",
+    #                       strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #                     },
+    #                   },
     #                   timecode_burnin: {
     #                     font_size: 1,
     #                     position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -2214,6 +2222,10 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.payload #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.preset #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.strength #=> String, one of "LIGHTEST", "LIGHTER", "DEFAULT", "STRONGER", "STRONGEST"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -3289,6 +3301,14 @@ module Aws::MediaConvert
     #                       strength: 1,
     #                     },
     #                   },
+    #                   partner_watermarking: {
+    #                     nexguard_file_marker_settings: {
+    #                       license: "__stringMin1Max100000",
+    #                       payload: 1,
+    #                       preset: "__stringMin1Max256",
+    #                       strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #                     },
+    #                   },
     #                   timecode_burnin: {
     #                     font_size: 1,
     #                     position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -4035,6 +4055,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.payload #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.preset #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.strength #=> String, one of "LIGHTEST", "LIGHTER", "DEFAULT", "STRONGER", "STRONGEST"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -4667,6 +4691,14 @@ module Aws::MediaConvert
     #               strength: 1,
     #             },
     #           },
+    #           partner_watermarking: {
+    #             nexguard_file_marker_settings: {
+    #               license: "__stringMin1Max100000",
+    #               payload: 1,
+    #               preset: "__stringMin1Max256",
+    #               strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #             },
+    #           },
     #           timecode_burnin: {
     #             font_size: 1,
     #             position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -5140,6 +5172,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
+    #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.payload #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.preset #=> String
+    #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.strength #=> String, one of "LIGHTEST", "LIGHTER", "DEFAULT", "STRONGER", "STRONGEST"
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -6127,6 +6163,10 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.payload #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.preset #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.strength #=> String, one of "LIGHTEST", "LIGHTER", "DEFAULT", "STRONGER", "STRONGEST"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -6884,6 +6924,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.payload #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.preset #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.strength #=> String, one of "LIGHTEST", "LIGHTER", "DEFAULT", "STRONGER", "STRONGEST"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -7381,6 +7425,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
+    #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.payload #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.preset #=> String
+    #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.strength #=> String, one of "LIGHTEST", "LIGHTER", "DEFAULT", "STRONGER", "STRONGEST"
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -8197,6 +8245,10 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.payload #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.preset #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.strength #=> String, one of "LIGHTEST", "LIGHTER", "DEFAULT", "STRONGER", "STRONGEST"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -9004,6 +9056,10 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.payload #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.preset #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.strength #=> String, one of "LIGHTEST", "LIGHTER", "DEFAULT", "STRONGER", "STRONGEST"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -9539,6 +9595,10 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
+    #   resp.presets[0].settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.payload #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.preset #=> String
+    #   resp.presets[0].settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.strength #=> String, one of "LIGHTEST", "LIGHTER", "DEFAULT", "STRONGER", "STRONGEST"
     #   resp.presets[0].settings.video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.presets[0].settings.video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -10749,6 +10809,14 @@ module Aws::MediaConvert
     #                       strength: 1,
     #                     },
     #                   },
+    #                   partner_watermarking: {
+    #                     nexguard_file_marker_settings: {
+    #                       license: "__stringMin1Max100000",
+    #                       payload: 1,
+    #                       preset: "__stringMin1Max256",
+    #                       strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #                     },
+    #                   },
     #                   timecode_burnin: {
     #                     font_size: 1,
     #                     position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -11492,6 +11560,10 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.payload #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.preset #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.strength #=> String, one of "LIGHTEST", "LIGHTER", "DEFAULT", "STRONGER", "STRONGEST"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -12118,6 +12190,14 @@ module Aws::MediaConvert
     #               strength: 1,
     #             },
     #           },
+    #           partner_watermarking: {
+    #             nexguard_file_marker_settings: {
+    #               license: "__stringMin1Max100000",
+    #               payload: 1,
+    #               preset: "__stringMin1Max256",
+    #               strength: "LIGHTEST", # accepts LIGHTEST, LIGHTER, DEFAULT, STRONGER, STRONGEST
+    #             },
+    #           },
     #           timecode_burnin: {
     #             font_size: 1,
     #             position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
@@ -12588,6 +12668,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
+    #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.payload #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.preset #=> String
+    #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.strength #=> String, one of "LIGHTEST", "LIGHTER", "DEFAULT", "STRONGER", "STRONGEST"
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.font_size #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.position #=> String, one of "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"
     #   resp.preset.settings.video_description.video_preprocessors.timecode_burnin.prefix #=> String
@@ -12683,7 +12767,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.51.1'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

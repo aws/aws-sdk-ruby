@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2020-06-18)
+------------------
+
+* Feature - Adding support for global write forwarding on secondary clusters in an Aurora global database.
+
 1.86.1 (2020-06-11)
 ------------------
 

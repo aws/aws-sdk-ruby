@@ -219,7 +219,7 @@ module Aws::SESV2
     #         event_destination_name: "EventDestinationName", # required
     #         event_destination: { # required
     #           enabled: false,
-    #           matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE
+    #           matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY
     #           kinesis_firehose_destination: {
     #             iam_role_arn: "AmazonResourceName", # required
     #             delivery_stream_arn: "AmazonResourceName", # required
@@ -1314,12 +1314,12 @@ module Aws::SESV2
     end
 
     # In the Amazon SES API v2, *events* include message sends, deliveries,
-    # opens, clicks, bounces, and complaints. *Event destinations* are
-    # places that you can send information about these events to. For
-    # example, you can send event data to Amazon SNS to receive
-    # notifications when you receive bounces or complaints, or you can use
-    # Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term
-    # storage.
+    # opens, clicks, bounces, complaints and delivery delays. *Event
+    # destinations* are places that you can send information about these
+    # events to. For example, you can send event data to Amazon SNS to
+    # receive notifications when you receive bounces or complaints, or you
+    # can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for
+    # long-term storage.
     #
     # @!attribute [rw] name
     #   A name that identifies the event destination.
@@ -1394,7 +1394,7 @@ module Aws::SESV2
     #
     #       {
     #         enabled: false,
-    #         matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE
+    #         matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY
     #         kinesis_firehose_destination: {
     #           iam_role_arn: "AmazonResourceName", # required
     #           delivery_stream_arn: "AmazonResourceName", # required
@@ -4279,7 +4279,7 @@ module Aws::SESV2
     #         event_destination_name: "EventDestinationName", # required
     #         event_destination: { # required
     #           enabled: false,
-    #           matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE
+    #           matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY
     #           kinesis_firehose_destination: {
     #             iam_role_arn: "AmazonResourceName", # required
     #             delivery_stream_arn: "AmazonResourceName", # required

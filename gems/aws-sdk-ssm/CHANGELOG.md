@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2020-06-18)
+------------------
+
+* Feature - Added offset support for specifying the number of days to wait after the date and time specified by a CRON expression before running the maintenance window.
+
 1.81.1 (2020-06-11)
 ------------------
 
