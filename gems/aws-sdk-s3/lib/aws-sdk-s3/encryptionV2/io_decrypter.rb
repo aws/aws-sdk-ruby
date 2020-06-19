@@ -7,7 +7,7 @@ module Aws
         # @param [OpenSSL::Cipher] cipher
         # @param [IO#write] io An IO-like object that responds to `#write`.
         def initialize(cipher, io)
-          @cipher = cipher.clone
+          @cipher = cipher
           # Ensure that IO is reset between retries
           @io = io.tap { |io| io.truncate(0) if io.respond_to?(:truncate) }
         end

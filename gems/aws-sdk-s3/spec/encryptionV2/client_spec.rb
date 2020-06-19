@@ -139,8 +139,9 @@ module Aws
             expect(context).to include(encryption: {
                 cipher_provider: kind_of(DefaultCipherProvider),
                 envelope_location: :metadata,
-                instruction_file_suffix: '.instruction'}
-            )
+                instruction_file_suffix: '.instruction',
+                kms_encryption_context: nil
+            })
           end
 
           it 'returns the response' do
@@ -173,8 +174,9 @@ module Aws
             expect(context).to include(encryption: {
               cipher_provider: kind_of(DefaultCipherProvider),
               envelope_location: :metadata,
-              instruction_file_suffix: '.instruction'}
-            )
+              instruction_file_suffix: '.instruction',
+              kms_encryption_context: nil
+            })
           end
 
           it 'returns the response' do
@@ -212,8 +214,9 @@ module Aws
             expect(context).to include(encryption: {
               cipher_provider: kind_of(DefaultCipherProvider),
               envelope_location: :metadata,
-              instruction_file_suffix: '.instruction'}
-           )
+              instruction_file_suffix: '.instruction',
+              kms_encryption_context: nil
+            })
           end
 
           it 'uses the instruction_file_suffix from params' do

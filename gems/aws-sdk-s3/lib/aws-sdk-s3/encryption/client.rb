@@ -252,14 +252,12 @@ module Aws
         # @return (see S3::Client#put_object)
         # @see S3::Client#put_object
         def put_object(params = {})
-          encryption_context = params.delete(:encryption_context)
           req = @client.build_request(:put_object, params)
           req.handlers.add(EncryptHandler, priority: 95)
           req.context[:encryption] = {
             cipher_provider: @cipher_provider,
             envelope_location: @envelope_location,
             instruction_file_suffix: @instruction_file_suffix,
-            encryption_context: encryption_context,
           }
           req.send_request
         end
@@ -282,14 +280,12 @@ module Aws
             raise NotImplementedError, '#get_object with :range not supported yet'
           end
           envelope_location, instruction_file_suffix = envelope_options(params)
-          encryption_context = params.delete(:encryption_context)
           req = @client.build_request(:get_object, params)
           req.handlers.add(DecryptHandler)
           req.context[:encryption] = {
             cipher_provider: @cipher_provider,
             envelope_location: envelope_location,
             instruction_file_suffix: instruction_file_suffix,
-            encryption_context: encryption_context,
           }
           req.send_request(target: block)
         end

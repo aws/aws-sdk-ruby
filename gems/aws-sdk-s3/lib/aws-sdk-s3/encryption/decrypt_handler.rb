@@ -64,10 +64,7 @@ module Aws
 
         def decryption_cipher(context)
           if envelope = get_encryption_envelope(context)
-            context[:encryption][:cipher_provider].decryption_cipher(
-              envelope,
-              encryption_context: context[:encryption][:encryption_context]
-            )
+            context[:encryption][:cipher_provider].decryption_cipher(envelope)
           else
             raise Errors::DecryptionError, "unable to locate encryption envelope"
           end

@@ -14,7 +14,7 @@ module Aws
 
         # @return [Array<Hash,Cipher>] Creates an returns a new encryption
         #   envelope and encryption cipher.
-        def encryption_cipher(options = {})
+        def encryption_cipher
           cipher = Utils.aes_encryption_cipher(:CBC)
           envelope = {
             'x-amz-key' => encode64(encrypt(envelope_key(cipher))),
@@ -26,7 +26,7 @@ module Aws
 
         # @return [Cipher] Given an encryption envelope, returns a
         #   decryption cipher.
-        def decryption_cipher(envelope, options = {})
+        def decryption_cipher(envelope)
           master_key = @key_provider.key_for(envelope['x-amz-matdesc'])
           key = Utils.decrypt(master_key, decode64(envelope['x-amz-key']))
           iv = decode64(envelope['x-amz-iv'])
