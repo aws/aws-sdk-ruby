@@ -8,7 +8,7 @@ module Aws
       class SensitiveType < Struct.new(
         :peccy_id,
         :password)
-        SENSITIVE_PARAMS = [:password]
+        SENSITIVE = [:password]
         include Aws::Structure
       end
 

@@ -81,7 +81,7 @@ module Aws
       it 'filters sensitive parameters' do
         class Type < Structure.new(
           :trait, :access_token)
-          SENSITIVE_PARAMS = [:access_token]
+          SENSITIVE = [:access_token]
           include Aws::Structure
         end
         struct = Type.new(trait: 'trait', access_token: 'secret')

@@ -23,8 +23,8 @@ module Aws
 
       def filter_hash(values, type)
         filters = @additional_filters
-        if type.const_defined?('SENSITIVE_PARAMS')
-          filters = type::SENSITIVE_PARAMS + @additional_filters
+        if type.const_defined?('SENSITIVE')
+          filters = type::SENSITIVE + @additional_filters
         end
 
         filtered = {}

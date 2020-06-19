@@ -17,7 +17,7 @@ module {{module_name}}
       :{{member_name}}{{^last}},{{/last}}{{#last}}){{/last}}
       {{/members}}
       {{#sensitive_params?}}
-      SENSITIVE_PARAMS = {{sensitive_params}}
+      SENSITIVE = {{sensitive_params}}
       {{/sensitive_params?}}
       include Aws::Structure
     end
