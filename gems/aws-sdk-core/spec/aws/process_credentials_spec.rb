@@ -12,6 +12,13 @@ module Aws
 
     it 'works with open3' do
       raw_out, process_status = Open3.capture2('echo "Hello"')
+      puts "cap2: #{raw_out}"
+
+      raw_out, process_status = Open3.capture2e('echo "Hello"')
+      puts "cap2e: #{raw_out}"
+
+      raw_out, process_status = Open3.capture2e('echo "Hello"', binmode: true)
+      puts "cap2e, binmode: #{raw_out}"
       expect(raw_out).to eq("Hello\n")
     end
 
