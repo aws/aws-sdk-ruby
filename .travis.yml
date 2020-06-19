@@ -17,7 +17,7 @@ rvm:
   - 2.7
   - jruby-1.7.27
   - jruby-9.1
-  - jruby-9.2.11
+  - jruby-9.2
 
 sudo: false
 
@@ -39,7 +39,7 @@ matrix:
       env: KITCHEN_SINK=1
     - rvm: jruby-9.1
       env: KITCHEN_SINK=1
-    - rvm: jruby-9.2.11
+    - rvm: jruby-9.2
       env: KITCHEN_SINK=1
   include:
     - rvm: 2.3
