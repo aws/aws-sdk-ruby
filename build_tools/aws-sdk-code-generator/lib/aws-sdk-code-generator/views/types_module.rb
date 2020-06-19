@@ -49,10 +49,13 @@ module AwsSdkCodeGenerator
             list
           elsif struct_type?(shape)
             struct_members = struct_members(shape)
+            sensitive_params = struct_members.select(&:sensitive).map do |m|
+              m.member_name.to_sym
+            end
             list << StructClass.new(
               class_name: shape_name,
               members: struct_members,
-              sensitive_params: struct_members.select(&:sensitive).map(&:member_name).map(&:to_sym),
+              sensitive_params: sensitive_params,
               documentation: struct_class_docs(shape_name)
             )
           else
