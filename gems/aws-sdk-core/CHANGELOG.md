@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Moved sensitive param filters to request and response Types instead of on a large list.
+* Feature - Provide an option `:filter_sensitive_params` for `Aws::Log::Formatter` to allow disabling of the sensitive param filter (#2312, #2105, #2082).
+
 3.100.0 (2020-06-15)
 ------------------
 

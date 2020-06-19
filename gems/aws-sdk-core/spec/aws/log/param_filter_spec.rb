@@ -5,55 +5,90 @@ require_relative '../../spec_helper'
 module Aws
   module Log
     describe ParamFilter do
+      class SensitiveType < Struct.new(
+        :peccy_id,
+        :password)
+        SENSITIVE_PARAMS = [:password]
+        include Aws::Structure
+      end
+
+      class InsensitiveType < Struct.new(
+        :peccy_id)
+        include Aws::Structure
+      end
+
       describe '#filter' do
-        context 'with an array' do
-          context 'with a filtered parameter name' do
-            it 'filters lowercase parameter names' do
-              expect(subject.filter([{ password: 'p@assw0rd'}])).to eq([{ password: '[FILTERED]'} ])
-            end
+        it 'filters sensitive hash params' do
+          filtered = subject.filter({ password: 'peccy' }, SensitiveType)
+          expect(filtered).to eq(password: '[FILTERED]')
+        end
 
-            it 'filters uppercase parameter names' do
-              expect(subject.filter([{ PASSWORD: 'p@assw0rd'}])).to eq([{ PASSWORD: '[FILTERED]'} ])
-            end
+        it 'filters sensitive array params' do
+          filtered = subject.filter([{ password: 'peccy' }], SensitiveType)
+          expect(filtered).to eq([{ password: '[FILTERED]' }])
+        end
 
-            it 'filters mixed-case parameter names' do
-              expect(subject.filter([{ Password: 'p@assw0rd'}])).to eq([{ Password: '[FILTERED]'} ])
-            end
+        it 'filters sensitive Struct params' do
+          instance = Struct.new(:password).new('peccy')
+          filtered = subject.filter(instance, SensitiveType)
+          expect(filtered).to eq(password: '[FILTERED]')
+        end
+
+        context 'no sensitive params' do
+          it 'does not filter sensitive hash params' do
+            unfiltered = subject.filter({ peccy_id: 'peccy-id' }, InsensitiveType)
+            expect(unfiltered).to eq(peccy_id: 'peccy-id')
+          end
+
+          it 'does not filter sensitive array params' do
+            unfiltered = subject.filter([{ peccy_id: 'peccy-id' }], InsensitiveType)
+            expect(unfiltered).to eq([{ peccy_id: 'peccy-id' }])
+          end
+
+          it 'does not filter sensitive Struct params' do
+            instance = Struct.new(:peccy_id).new('peccy-id')
+            unfiltered = subject.filter(instance, InsensitiveType)
+            expect(unfiltered).to eq(peccy_id: 'peccy-id')
           end
         end
 
-        context 'with a Struct' do
-          context 'with a filtered parameter name' do
-            it 'filters lowercase parameter names' do
-              instance = Struct.new(:password).new('p@assw0rd')
-              expect(subject.filter(instance)).to eq(password: '[FILTERED]')
-            end
+        context 'with additional filters' do
+          subject { Aws::Log::ParamFilter.new(filter: [:peccy_id]) }
 
-            it 'filters uppercase parameter names' do
-              instance = Struct.new(:PASSWORD).new('p@assw0rd')
-              expect(subject.filter(instance)).to eq(PASSWORD: '[FILTERED]')
-            end
+          it 'filters sensitive hash params' do
+            filtered = subject.filter({ peccy_id: 'peccy-id' }, InsensitiveType)
+            expect(filtered).to eq(peccy_id: '[FILTERED]')
+          end
 
-            it 'filters mixed-case parameter names' do
-              instance = Struct.new(:Password).new('p@assw0rd')
-              expect(subject.filter(instance)).to eq(Password: '[FILTERED]')
-            end
+          it 'filters sensitive array params' do
+            filtered = subject.filter([{ peccy_id: 'peccy-id' }], InsensitiveType)
+            expect(filtered).to eq([{ peccy_id: '[FILTERED]' }])
+          end
+
+          it 'filters sensitive Struct params' do
+            instance = Struct.new(:peccy_id).new('peccy-id')
+            filtered = subject.filter(instance, InsensitiveType)
+            expect(filtered).to eq(peccy_id: '[FILTERED]')
           end
         end
 
-        context 'with a hash' do
-          context 'with a filtered parameter name' do
-            it 'filters lowercase parameter names' do
-              expect(subject.filter(password: 'p@ssw0rd')).to eq(password: '[FILTERED]')
-            end
+        context 'when disabled' do
+          subject { Aws::Log::ParamFilter.new(filter_sensitive_params: false) }
 
-            it 'filters uppercase parameter names' do
-              expect(subject.filter(PASSWORD: 'p@ssw0rd')).to eq(PASSWORD: '[FILTERED]')
-            end
+          it 'does not filter sensitive hash params' do
+            unfiltered = subject.filter({ password: 'peccy' }, SensitiveType)
+            expect(unfiltered).to eq(password: 'peccy')
+          end
 
-            it 'filters mixed-case parameter names' do
-              expect(subject.filter(Password: 'p@ssw0rd')).to eq(Password: '[FILTERED]')
-            end
+          it 'does not filter sensitive array params' do
+            unfiltered = subject.filter([{ password: 'peccy' }], SensitiveType)
+            expect(unfiltered).to eq([{ password: 'peccy' }])
+          end
+
+          it 'does not filter sensitive Struct params' do
+            instance = Struct.new(:password).new('peccy')
+            unfiltered = subject.filter(instance, SensitiveType)
+            expect(unfiltered).to eq(password: 'peccy')
           end
         end
       end
