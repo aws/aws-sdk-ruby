@@ -81,7 +81,7 @@ module Aws
       #   parameter names that should be filtered when logging
       #   `:request_params`.
       #
-      #       Formatter.new(pattern, filter: [:body])
+      #       Formatter.new(pattern, filter: [:password])
       #
       #   The default list of filtered parameters is documented on the
       #   {ParamFilter} class.
