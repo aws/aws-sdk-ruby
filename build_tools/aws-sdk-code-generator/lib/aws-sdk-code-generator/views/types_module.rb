@@ -268,6 +268,10 @@ module AwsSdkCodeGenerator
           @empty
         end
 
+        # @return [Boolean]
+        def sensitive_params?
+          @sensitive_params.any?
+        end
       end
 
       class StructMember
