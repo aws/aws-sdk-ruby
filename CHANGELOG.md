@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ElastiCache - Updated the documentation for Amazon ElastiCache.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::OpsWorksCM - Updated the API, and documentation for AWS OpsWorks CM.
+
 2.11.531 (2020-06-18)
 ------------------
 
