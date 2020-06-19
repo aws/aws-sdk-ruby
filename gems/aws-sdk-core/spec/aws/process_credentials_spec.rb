@@ -10,7 +10,12 @@ module Aws
       allow(Dir).to receive(:home).and_raise(ArgumentError)
     end
 
-    it 'will read credentials from a process' do 
+    it 'works with open3' do
+      raw_out, process_status = Open3.capture2('echo "Hello"')
+      expect(raw_out).to eq("Hello\n")
+    end
+
+    it 'will read credentials from a process' do
       creds = ProcessCredentials.new('echo \'{"Version":1,"AccessKeyId":"AK_PROC1","SecretAccessKey":"SECRET_AK_PROC1","SessionToken":"TOKEN_PROC1"}\'').credentials
       expect(creds.access_key_id).to eq('AK_PROC1')
       expect(creds.secret_access_key).to eq('SECRET_AK_PROC1')

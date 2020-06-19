@@ -43,6 +43,7 @@ module Aws
 
       if process_status.success?
         begin
+          puts "Raw_out: #{raw_out}"
           creds_json = JSON.parse(raw_out)
         rescue JSON::ParserError
           raise Errors::InvalidProcessCredentialsPayload.new("Invalid JSON response")
