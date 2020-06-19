@@ -77,9 +77,8 @@ module Aws
       #   request parameters, strings longer than this value will be
       #   truncated.
       #
-      # @option options [Array<Symbol>] :filter An array of additional
-      #   parameter names that should be filtered when logging
-      #   `:request_params`.
+      # @option options [Array<Symbol>] :filter A list of parameter
+      #   names that should be filtered when logging `:request_params`.
       #
       #       Formatter.new(pattern, filter: [:password])
       #

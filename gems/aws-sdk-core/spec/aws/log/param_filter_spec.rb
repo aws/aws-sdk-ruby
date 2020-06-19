@@ -5,64 +5,43 @@ require_relative '../../spec_helper'
 module Aws
   module Log
     describe ParamFilter do
-      let(:service) { 'Peccy Service' }
-      let(:hash_filter) { { service => [:password] } }
-      let(:array_filter) { [:password] }
+      class SensitiveTestType < Struct.new(
+        :peccy_id,
+        :super_secret_password)
+        SENSITIVE_PARAMS = [:super_secret_password]
+        include Aws::Structure
+      end
+
+      class PublicTestType < Struct.new(
+        :peccy_id)
+        include Aws::Structure
+      end
 
       describe '#initialize' do
-        context 'with a hash' do
-          it 'adds the filter for new services' do
-            filter = ParamFilter.new(filter: hash_filter)
-            filters = filter.instance_variable_get(:@filters)
-            expect(filters).to include(hash_filter)
-          end
-
-          it 'adds filters to existing sensitive params' do
-            filter = ParamFilter.new(filter: { 'STS' => [:peccy_token] })
-            filters = filter.instance_variable_get(:@filters)
-            expect(filters['STS']).to include(:peccy_token)
-            expect(filters['STS']).to include(*ParamFilter::SENSITIVE['STS'])
-          end
-        end
-
-        context 'with an array' do
-          it 'supports a filter as an array (legacy)' do
-            filter = ParamFilter.new(filter: array_filter)
-            filters = filter.instance_variable_get(:@filters)
-            expect(filters.values).to all(include(*array_filter))
-          end
-        end
+        it 'takes additional filters'
+        it 'allows disabling'
       end
 
       describe '#filter' do
-        subject { ParamFilter.new(filter: hash_filter) }
-
         context 'with an array' do
           it 'filters parameter names' do
-            filtered = subject.filter([{ password: 'p@assw0rd' }], service)
-            expect(filtered).to eq([{ password: '[FILTERED]' }])
+            filtered = subject.filter([{ super_secret_password: 'peccy' }], SensitiveTestType)
+            expect(filtered).to eq([{ super_secret_password: '[FILTERED]' }])
           end
         end
 
         context 'with a Struct' do
           it 'filters parameter names' do
-            instance = Struct.new(:password).new('p@assw0rd')
-            filtered = subject.filter(instance, service)
-            expect(filtered).to eq(password: '[FILTERED]')
+            instance = Struct.new(:super_secret_password).new('peccy')
+            filtered = subject.filter(instance, SensitiveTestType)
+            expect(filtered).to eq(super_secret_password: '[FILTERED]')
           end
         end
 
         context 'with a hash' do
           it 'filters parameter names' do
-            filtered = subject.filter({password: 'p@ssw0rd'}, service)
-            expect(filtered).to eq(password: '[FILTERED]')
-          end
-        end
-
-        context 'with no service' do
-          it 'filters parameter names from all services' do
-            filtered = subject.filter({password: 'p@ssw0rd', private_key: 'private'})
-            expect(filtered).to eq(password: '[FILTERED]', private_key: '[FILTERED]')
+            filtered = subject.filter({super_secret_password: 'peccy'}, SensitiveTestType)
+            expect(filtered).to eq(super_secret_password: '[FILTERED]')
           end
         end
       end
