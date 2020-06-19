@@ -11,7 +11,7 @@ module Aws
         @additional_filters = options[:filter] || []
       end
 
-      def filter(values, type = nil)
+      def filter(values, type)
         case values
         when Struct, Hash then filter_hash(values, type)
         when Array then filter_array(values, type)

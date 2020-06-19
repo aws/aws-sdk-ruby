@@ -6,7 +6,6 @@ require 'pathname'
 module Aws
   module Log
     describe Formatter do
-
       let(:operation_request_type) do
         class OperationRequestType < Struct
           include Aws::Structure
@@ -31,10 +30,6 @@ module Aws
 
       def format(pattern, options = {})
         Formatter.new(pattern, options).format(response)
-      end
-
-      before do
-
       end
 
       describe '#format' do
