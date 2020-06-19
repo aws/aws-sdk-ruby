@@ -7,21 +7,34 @@ module Aws
   module Log
     describe Formatter do
 
-      let(:response) { Seahorse::Client::Response.new }
+      let(:operation_request_type) do
+        class OperationRequestType < Struct
+          include Aws::Structure
+        end
+      end
+
+      let(:operation_request) do
+        shape = Seahorse::Model::Shapes::StructureShape.new(name: 'OperationRequest')
+        shape.struct_class = operation_request_type
+        shape
+      end
+
+      let(:response) do
+        resp = Seahorse::Client::Response.new
+        resp.context.operation = Seahorse::Model::Operation.new.tap do |o|
+          o.input = Seahorse::Model::Shapes::ShapeRef.new(
+            shape: operation_request
+          )
+        end
+        resp
+      end
 
       def format(pattern, options = {})
         Formatter.new(pattern, options).format(response)
       end
 
       before do
-        class OperationRequestType < Struct
-          include Aws::Structure
-        end
-        OperationRequest = Seahorse::Model::Shapes::StructureShape.new(name: 'OperationRequest')
-        response.context.operation = Seahorse::Model::Operation.new.tap do |o|
-          o.input = Seahorse::Model::Shapes::ShapeRef.new(shape: OperationRequest)
-        end
-        OperationRequest.struct_class = OperationRequestType
+
       end
 
       describe '#format' do
