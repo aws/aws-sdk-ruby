@@ -102,7 +102,7 @@ module Aws
       # @param [Seahorse::Client::Response] response
       # @return [String]
       def format(response)
-        pattern.gsub(/:(\w+)/) {|sym| send("_#{sym[1..-1]}", response) }
+        pattern.gsub(/:(\w+)/) { |sym| send("_#{sym[1..-1]}", response) }
       end
 
       # @api private

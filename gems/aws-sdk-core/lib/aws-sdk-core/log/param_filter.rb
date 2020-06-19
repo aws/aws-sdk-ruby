@@ -7,13 +7,11 @@ module Aws
   module Log
     class ParamFilter
       def initialize(options = {})
-        @disabled = options[:filter_sensitive_params] == false
+        @enabled = options[:filter_sensitive_params] != false
         @additional_filters = options[:filter] || []
       end
 
       def filter(values, type = nil)
-        return values if @disabled
-
         case values
         when Struct, Hash then filter_hash(values, type)
         when Array then filter_array(values, type)
@@ -31,7 +29,7 @@ module Aws
 
         filtered = {}
         values.each_pair do |key, value|
-          filtered[key] = if filters.include?(key)
+          filtered[key] = if @enabled && filters.include?(key)
             '[FILTERED]'
           else
             filter(value, type)

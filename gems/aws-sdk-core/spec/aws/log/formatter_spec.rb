@@ -13,6 +13,17 @@ module Aws
         Formatter.new(pattern, options).format(response)
       end
 
+      before do
+        class OperationRequestType < Struct
+          include Aws::Structure
+        end
+        OperationRequest = Seahorse::Model::Shapes::StructureShape.new(name: 'OperationRequest')
+        response.context.operation = Seahorse::Model::Operation.new.tap do |o|
+          o.input = Seahorse::Model::Shapes::ShapeRef.new(shape: OperationRequest)
+        end
+        OperationRequest.struct_class = OperationRequestType
+      end
+
       describe '#format' do
 
         it 'provides a :client_class replacement' do
