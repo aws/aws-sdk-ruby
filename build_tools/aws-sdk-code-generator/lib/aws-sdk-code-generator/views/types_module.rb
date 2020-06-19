@@ -81,16 +81,22 @@ module AwsSdkCodeGenerator
 
       def struct_members(shape)
         return if shape['members'].nil?
+        sensitive = false
         members = shape['members'].map do |member_name, member_ref|
-          sensitive = false
           if member_ref['sensitive'] || @api['shapes'][member_ref['shape']]['sensitive']
             sensitive = true
           end
           StructMember.new(
-            member_name: underscore(member_name), sensitive: sensitive
+            member_name: underscore(member_name),
+            sensitive: sensitive
           )
         end
-        members << StructMember.new(member_name: "event_type") if shape['event']
+        if shape['event']
+          members << StructMember.new(
+            member_name: 'event_type',
+            sensitive: sensitive
+          )
+        end
         members
       end
 
