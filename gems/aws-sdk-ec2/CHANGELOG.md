@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2020-06-19)
+------------------
+
+* Feature - Adds support to tag elastic-gpu on the RunInstances api
+
 1.167.0 (2020-06-17)
 ------------------
 

@@ -158,7 +158,7 @@ module Aws::OpsWorksCM
     CreateServerRequest.add_member(:custom_certificate, Shapes::ShapeRef.new(shape: CustomCertificate, location_name: "CustomCertificate"))
     CreateServerRequest.add_member(:custom_private_key, Shapes::ShapeRef.new(shape: CustomPrivateKey, location_name: "CustomPrivateKey"))
     CreateServerRequest.add_member(:disable_automated_backup, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableAutomatedBackup"))
-    CreateServerRequest.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    CreateServerRequest.add_member(:engine, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Engine"))
     CreateServerRequest.add_member(:engine_model, Shapes::ShapeRef.new(shape: String, location_name: "EngineModel"))
     CreateServerRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     CreateServerRequest.add_member(:engine_attributes, Shapes::ShapeRef.new(shape: EngineAttributes, location_name: "EngineAttributes"))
