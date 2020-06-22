@@ -36,14 +36,13 @@ module Aws
     private
     def credentials_from_process(proc_invocation)
       begin
-        raw_out, process_status = Open3.capture2e(proc_invocation, binmode: true)
+        raw_out, process_status = Open3.capture2(proc_invocation)
       rescue Errno::ENOENT
         raise Errors::InvalidProcessCredentialsPayload.new("Could not find process #{proc_invocation}")
       end
 
       if process_status.success?
         begin
-          puts "Raw_out: #{raw_out}"
           creds_json = JSON.parse(raw_out)
         rescue JSON::ParserError
           raise Errors::InvalidProcessCredentialsPayload.new("Invalid JSON response")

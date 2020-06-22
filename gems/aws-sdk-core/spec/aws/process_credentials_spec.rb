@@ -19,6 +19,16 @@ module Aws
 
       raw_out, process_status = Open3.capture2e('echo "Hello"', binmode: true)
       puts "cap2e, binmode: #{raw_out}"
+
+      raw_out = `echo "Hello"`
+      puts "backticks: #{raw_out}"
+
+      Open3.popen3("echo abc") do |i, o, e, t|
+        i.close
+        puts "popen3: #{o.read} err: #{e.read}"
+        puts "popen3 status: #{t.value}"
+      end
+          
       expect(raw_out).to eq("Hello\n")
     end
 
