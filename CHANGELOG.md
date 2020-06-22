@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
+
+* Feature - Aws::RDS - Updated the documentation, and API for Amazon Relational Database Service.
+
+* Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
+
+* Feature - Aws::SQS - Updated the API, and documentation for Amazon Simple Queue Service.
+
 2.11.532 (2020-06-19)
 ------------------
 
