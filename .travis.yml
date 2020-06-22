@@ -1,6 +1,8 @@
 language: ruby
 
 before_install:
+  - rvm get latest
+  - rvm use $TRAVIS_RUBY_VERSION --install --binary --fuzzy
   - gem install bundler -v '< 2'
 
 dist: xenial
