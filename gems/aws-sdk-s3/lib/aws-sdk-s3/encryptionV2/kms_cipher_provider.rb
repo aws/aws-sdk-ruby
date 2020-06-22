@@ -13,15 +13,13 @@ module Aws
 
         # @return [Array<Hash,Cipher>] Creates and returns a new encryption
         #   envelope and encryption cipher.
-        def encryption_cipher
+        def encryption_cipher(options = {})
           cek_alg = 'AES/GCM/NoPadding'
-          encryption_context = {
-            'aws:x-amz-cek-alg' => cek_alg
-          }
+          encryption_context = build_encryption_context(cek_alg, options)
           key_data = @kms_client.generate_data_key(
             key_id: @kms_key_id,
             encryption_context: encryption_context,
-            key_spec: 'AES_256',
+            key_spec: 'AES_256'
           )
           cipher = Utils.aes_encryption_cipher(:GCM)
           cipher.key = key_data.plaintext
@@ -39,18 +37,27 @@ module Aws
 
         # @return [Cipher] Given an encryption envelope, returns a
         #   decryption cipher.
-        def decryption_cipher(envelope)
+        def decryption_cipher(envelope, options={})
           encryption_context = Json.load(envelope['x-amz-matdesc'])
-          key = @kms_client.decrypt(
-            ciphertext_blob: decode64(envelope['x-amz-key-v2']),
-            encryption_context: encryption_context
-          ).plaintext
           cek_alg = envelope['x-amz-wrap-alg'] == 'kms+context' ?
             encryption_context['aws:x-amz-cek-alg'] : envelope['x-amz-cek-alg']
           if cek_alg != envelope['x-amz-cek-alg']
             raise Errors::DecryptionError, 'Value of cek-alg from envelope'\
               ' does not match the value in the encryption context'
           end
+
+          if envelope['x-amz-wrap-alg'] == 'kms+context' &&
+            encryption_context != build_encryption_context(cek_alg, options)
+            raise Errors::DecryptionError, 'Value of encryption context from'\
+              ' envelope does not match the provided encryption context'
+          end
+
+          key = @kms_client.decrypt(
+            ciphertext_blob: decode64(envelope['x-amz-key-v2']),
+            encryption_context: encryption_context
+          ).plaintext
+
+
           iv = decode64(envelope['x-amz-iv'])
           block_mode =
             case cek_alg
@@ -69,6 +76,14 @@ module Aws
         end
 
         private
+
+        def build_encryption_context(cek_alg, options = {})
+          kms_context = (options[:kms_encryption_context] || {})
+            .each_with_object({}) { |(k, v), h| h[k.to_s] = v }
+          {
+            'aws:x-amz-cek-alg' => cek_alg
+          }.merge(kms_context)
+        end
 
         def encode64(str)
           Base64.encode64(str).split("\n") * ""

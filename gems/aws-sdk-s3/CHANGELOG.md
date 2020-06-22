@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add support for user provided encryption context to `EncryptionV2::Client`.
+
 1.69.0 (2020-06-18)
 ------------------
 
