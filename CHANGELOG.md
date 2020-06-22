@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.533 (2020-06-22)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
