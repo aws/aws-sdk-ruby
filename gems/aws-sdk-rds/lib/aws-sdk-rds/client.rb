@@ -6528,6 +6528,8 @@ module Aws::RDS
     #   * {Types::CertificateMessage#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #   * {Types::CertificateMessage#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list certificates
     #
@@ -6745,6 +6747,8 @@ module Aws::RDS
     #   * {Types::DBClusterBacktrackMessage#marker #marker} => String
     #   * {Types::DBClusterBacktrackMessage#db_cluster_backtracks #db_cluster_backtracks} => Array&lt;Types::DBClusterBacktrack&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_cluster_backtracks({
@@ -6827,6 +6831,8 @@ module Aws::RDS
     #
     #   * {Types::DBClusterEndpointMessage#marker #marker} => String
     #   * {Types::DBClusterEndpointMessage#db_cluster_endpoints #db_cluster_endpoints} => Array&lt;Types::DBClusterEndpoint&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6919,6 +6925,8 @@ module Aws::RDS
     #
     #   * {Types::DBClusterParameterGroupsMessage#marker #marker} => String
     #   * {Types::DBClusterParameterGroupsMessage#db_cluster_parameter_groups #db_cluster_parameter_groups} => Array&lt;Types::DBClusterParameterGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list DB cluster parameter group settings
@@ -7017,6 +7025,8 @@ module Aws::RDS
     #
     #   * {Types::DBClusterParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #   * {Types::DBClusterParameterGroupDetails#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list DB cluster parameters
@@ -7256,6 +7266,8 @@ module Aws::RDS
     #
     #   * {Types::DBClusterSnapshotMessage#marker #marker} => String
     #   * {Types::DBClusterSnapshotMessage#db_cluster_snapshots #db_cluster_snapshots} => Array&lt;Types::DBClusterSnapshot&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list DB cluster snapshots
@@ -10128,6 +10140,8 @@ module Aws::RDS
     #   * {Types::PendingMaintenanceActionsMessage#pending_maintenance_actions #pending_maintenance_actions} => Array&lt;Types::ResourcePendingMaintenanceActions&gt;
     #   * {Types::PendingMaintenanceActionsMessage#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list information about pending maintenance actions
     #
@@ -10481,6 +10495,8 @@ module Aws::RDS
     #
     #   * {Types::SourceRegionMessage#marker #marker} => String
     #   * {Types::SourceRegionMessage#source_regions #source_regions} => Array&lt;Types::SourceRegion&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe source regions
@@ -14806,7 +14822,7 @@ module Aws::RDS
     #
     # @option params [required, String] :db_cluster_identifier
     #   The name of the DB cluster to create from the source data in the
-    #   Amazon S3 bucket. This parameter is isn't case-sensitive.
+    #   Amazon S3 bucket. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -14999,9 +15015,9 @@ module Aws::RDS
     # @option params [required, String] :source_engine_version
     #   The version of the database that the backup files were created from.
     #
-    #   MySQL version 5.5 and 5.6 are supported.
+    #   MySQL versions 5.5, 5.6, and 5.7 are supported.
     #
-    #   Example: `5.6.22`
+    #   Example: `5.6.40`
     #
     # @option params [required, String] :s3_bucket_name
     #   The name of the Amazon S3 bucket that contains the data used to create
@@ -16832,9 +16848,11 @@ module Aws::RDS
     #   Valid Values: `mysql`
     #
     # @option params [required, String] :source_engine_version
-    #   The engine version of your source database.
+    #   The version of the database that the backup files were created from.
     #
-    #   Valid Values: `5.6`
+    #   MySQL versions 5.6 and 5.7 are supported.
+    #
+    #   Example: `5.6.40`
     #
     # @option params [required, String] :s3_bucket_name
     #   The name of your Amazon S3 bucket that contains your database backup
@@ -18544,7 +18562,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

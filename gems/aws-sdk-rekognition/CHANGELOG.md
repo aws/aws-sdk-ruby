@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-06-22)
+------------------
+
+* Feature - This update adds the ability to detect black frames, end credits, shots, and color bars in stored videos
+
 1.39.1 (2020-06-11)
 ------------------
 

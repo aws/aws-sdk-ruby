@@ -342,6 +342,20 @@ module Aws::MediaLive
     #             hls_timed_metadata_settings: {
     #               id_3: "__string", # required
     #             },
+    #             input_prepare_settings: {
+    #               input_attachment_name_reference: "__string", # required
+    #               input_clipping_settings: {
+    #                 input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #                 start_timecode: {
+    #                   timecode: "__string",
+    #                 },
+    #                 stop_timecode: {
+    #                   last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #                   timecode: "__string",
+    #                 },
+    #               },
+    #               url_path: ["__string"],
+    #             },
     #             input_switch_settings: {
     #               input_attachment_name_reference: "__string", # required
     #               input_clipping_settings: {
@@ -442,6 +456,13 @@ module Aws::MediaLive
     #   resp.creates.schedule_actions[0].action_name #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.hls_id_3_segment_tagging_settings.tag #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_attachment_name_reference #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.start_timecode.timecode #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.stop_timecode.last_frame_clipping_behavior #=> String, one of "EXCLUDE_LAST_FRAME", "INCLUDE_LAST_FRAME"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.stop_timecode.timecode #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_prepare_settings.url_path #=> Array
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_prepare_settings.url_path[0] #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.start_timecode.timecode #=> String
@@ -490,6 +511,13 @@ module Aws::MediaLive
     #   resp.deletes.schedule_actions[0].action_name #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.hls_id_3_segment_tagging_settings.tag #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_attachment_name_reference #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.start_timecode.timecode #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.stop_timecode.last_frame_clipping_behavior #=> String, one of "EXCLUDE_LAST_FRAME", "INCLUDE_LAST_FRAME"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.stop_timecode.timecode #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_prepare_settings.url_path #=> Array
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_prepare_settings.url_path[0] #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.start_timecode.timecode #=> String
@@ -801,6 +829,9 @@ module Aws::MediaLive
     #           name: "__string", # required
     #         },
     #       ],
+    #       feature_activations: {
+    #         input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
+    #       },
     #       global_configuration: {
     #         initial_audio_gain: 1,
     #         input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
@@ -1546,6 +1577,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.channel.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.channel.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.channel.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -2453,6 +2485,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -3299,6 +3332,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -4165,6 +4199,13 @@ module Aws::MediaLive
     #   resp.schedule_actions[0].action_name #=> String
     #   resp.schedule_actions[0].schedule_action_settings.hls_id_3_segment_tagging_settings.tag #=> String
     #   resp.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_attachment_name_reference #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
+    #   resp.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.start_timecode.timecode #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.stop_timecode.last_frame_clipping_behavior #=> String, one of "EXCLUDE_LAST_FRAME", "INCLUDE_LAST_FRAME"
+    #   resp.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.stop_timecode.timecode #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.input_prepare_settings.url_path #=> Array
+    #   resp.schedule_actions[0].schedule_action_settings.input_prepare_settings.url_path[0] #=> String
     #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
     #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
     #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.start_timecode.timecode #=> String
@@ -4993,6 +5034,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -5626,6 +5668,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -6341,6 +6384,9 @@ module Aws::MediaLive
     #           name: "__string", # required
     #         },
     #       ],
+    #       feature_activations: {
+    #         input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
+    #       },
     #       global_configuration: {
     #         initial_audio_gain: 1,
     #         input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
@@ -7081,6 +7127,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.channel.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.channel.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.channel.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -7677,6 +7724,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.channel.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.channel.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.channel.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -8495,7 +8543,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.47.1'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

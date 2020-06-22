@@ -16206,7 +16206,7 @@ module Aws::RDS
     #
     # @!attribute [rw] db_cluster_identifier
     #   The name of the DB cluster to create from the source data in the
-    #   Amazon S3 bucket. This parameter is isn't case-sensitive.
+    #   Amazon S3 bucket. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -16416,9 +16416,9 @@ module Aws::RDS
     # @!attribute [rw] source_engine_version
     #   The version of the database that the backup files were created from.
     #
-    #   MySQL version 5.5 and 5.6 are supported.
+    #   MySQL versions 5.5, 5.6, and 5.7 are supported.
     #
-    #   Example: `5.6.22`
+    #   Example: `5.6.40`
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_name
@@ -17943,9 +17943,11 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] source_engine_version
-    #   The engine version of your source database.
+    #   The version of the database that the backup files were created from.
     #
-    #   Valid Values: `5.6`
+    #   MySQL versions 5.6 and 5.7 are supported.
+    #
+    #   Example: `5.6.40`
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_name

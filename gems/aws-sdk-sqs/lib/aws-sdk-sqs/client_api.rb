@@ -24,6 +24,7 @@ module Aws::SQS
     Binary = Shapes::BlobShape.new(name: 'Binary')
     BinaryList = Shapes::ListShape.new(name: 'BinaryList', flattened: true)
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
     ChangeMessageVisibilityBatchRequest = Shapes::StructureShape.new(name: 'ChangeMessageVisibilityBatchRequest')
     ChangeMessageVisibilityBatchRequestEntry = Shapes::StructureShape.new(name: 'ChangeMessageVisibilityBatchRequestEntry')
     ChangeMessageVisibilityBatchRequestEntryList = Shapes::ListShape.new(name: 'ChangeMessageVisibilityBatchRequestEntryList', flattened: true)
@@ -98,6 +99,7 @@ module Aws::SQS
     TagMap = Shapes::MapShape.new(name: 'TagMap', flattened: true)
     TagQueueRequest = Shapes::StructureShape.new(name: 'TagQueueRequest')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Token = Shapes::StringShape.new(name: 'Token')
     TooManyEntriesInBatchRequest = Shapes::StructureShape.new(name: 'TooManyEntriesInBatchRequest')
     UnsupportedOperation = Shapes::StructureShape.new(name: 'UnsupportedOperation')
     UntagQueueRequest = Shapes::StructureShape.new(name: 'UntagQueueRequest')
@@ -212,9 +214,12 @@ module Aws::SQS
     InvalidMessageContents.struct_class = Types::InvalidMessageContents
 
     ListDeadLetterSourceQueuesRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
+    ListDeadLetterSourceQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListDeadLetterSourceQueuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "MaxResults"))
     ListDeadLetterSourceQueuesRequest.struct_class = Types::ListDeadLetterSourceQueuesRequest
 
     ListDeadLetterSourceQueuesResult.add_member(:queue_urls, Shapes::ShapeRef.new(shape: QueueUrlList, required: true, location_name: "queueUrls"))
+    ListDeadLetterSourceQueuesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListDeadLetterSourceQueuesResult.struct_class = Types::ListDeadLetterSourceQueuesResult
 
     ListQueueTagsRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
@@ -224,9 +229,12 @@ module Aws::SQS
     ListQueueTagsResult.struct_class = Types::ListQueueTagsResult
 
     ListQueuesRequest.add_member(:queue_name_prefix, Shapes::ShapeRef.new(shape: String, location_name: "QueueNamePrefix"))
+    ListQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListQueuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "MaxResults"))
     ListQueuesRequest.struct_class = Types::ListQueuesRequest
 
     ListQueuesResult.add_member(:queue_urls, Shapes::ShapeRef.new(shape: QueueUrlList, location_name: "QueueUrls"))
+    ListQueuesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListQueuesResult.struct_class = Types::ListQueuesResult
 
     Message.add_member(:message_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageId"))
@@ -486,6 +494,12 @@ module Aws::SQS
         o.input = Shapes::ShapeRef.new(shape: ListDeadLetterSourceQueuesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDeadLetterSourceQueuesResult)
         o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_queue_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -502,6 +516,12 @@ module Aws::SQS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListQueuesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListQueuesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:purge_queue, Seahorse::Model::Operation.new.tap do |o|

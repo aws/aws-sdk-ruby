@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-06-19)
+------------------
+
+* Feature - Documentation updates for AWS OpsWorks CM.
+
 1.35.1 (2020-06-11)
 ------------------
 
