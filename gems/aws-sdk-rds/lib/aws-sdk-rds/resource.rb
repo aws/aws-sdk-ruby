@@ -1704,8 +1704,6 @@ module Aws::RDS
     #         values: ["String"], # required
     #       },
     #     ],
-    #     max_records: 1,
-    #     marker: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :certificate_identifier
@@ -1720,33 +1718,21 @@ module Aws::RDS
     #   ^
     # @option options [Array<Types::Filter>] :filters
     #   This parameter isn't currently supported.
-    # @option options [Integer] :max_records
-    #   The maximum number of records to include in the response. If more
-    #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so you can retrieve
-    #   the remaining results.
-    #
-    #   Default: 100
-    #
-    #   Constraints: Minimum 20, maximum 100.
-    # @option options [String] :marker
-    #   An optional pagination token provided by a previous
-    #   `DescribeCertificates` request. If this parameter is specified, the
-    #   response includes only records beyond the marker, up to the value
-    #   specified by `MaxRecords`.
     # @return [Certificate::Collection]
     def certificates(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_certificates(options)
-        resp.data.certificates.each do |c|
-          batch << Certificate.new(
-            id: c.certificate_identifier,
-            data: c,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.certificates.each do |c|
+            batch << Certificate.new(
+              id: c.certificate_identifier,
+              data: c,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       Certificate::Collection.new(batches)
     end
@@ -1779,8 +1765,6 @@ module Aws::RDS
     #         values: ["String"], # required
     #       },
     #     ],
-    #     max_records: 1,
-    #     marker: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_cluster_parameter_group_name
@@ -1795,33 +1779,21 @@ module Aws::RDS
     #   ^
     # @option options [Array<Types::Filter>] :filters
     #   This parameter isn't currently supported.
-    # @option options [Integer] :max_records
-    #   The maximum number of records to include in the response. If more
-    #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so you can retrieve
-    #   the remaining results.
-    #
-    #   Default: 100
-    #
-    #   Constraints: Minimum 20, maximum 100.
-    # @option options [String] :marker
-    #   An optional pagination token provided by a previous
-    #   `DescribeDBClusterParameterGroups` request. If this parameter is
-    #   specified, the response includes only records beyond the marker, up to
-    #   the value specified by `MaxRecords`.
     # @return [DBClusterParameterGroup::Collection]
     def db_cluster_parameter_groups(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_db_cluster_parameter_groups(options)
-        resp.data.db_cluster_parameter_groups.each do |d|
-          batch << DBClusterParameterGroup.new(
-            name: d.db_cluster_parameter_group_name,
-            data: d,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.db_cluster_parameter_groups.each do |d|
+            batch << DBClusterParameterGroup.new(
+              name: d.db_cluster_parameter_group_name,
+              data: d,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       DBClusterParameterGroup::Collection.new(batches)
     end
@@ -2754,8 +2726,6 @@ module Aws::RDS
     #         values: ["String"], # required
     #       },
     #     ],
-    #     marker: "String",
-    #     max_records: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :resource_identifier
@@ -2774,33 +2744,21 @@ module Aws::RDS
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
     #     ARNs. The results list will only include pending maintenance actions
     #     for the DB instances identified by these ARNs.
-    # @option options [String] :marker
-    #   An optional pagination token provided by a previous
-    #   `DescribePendingMaintenanceActions` request. If this parameter is
-    #   specified, the response includes only records beyond the marker, up to
-    #   a number of records specified by `MaxRecords`.
-    # @option options [Integer] :max_records
-    #   The maximum number of records to include in the response. If more
-    #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that you can
-    #   retrieve the remaining results.
-    #
-    #   Default: 100
-    #
-    #   Constraints: Minimum 20, maximum 100.
     # @return [ResourcePendingMaintenanceActionList::Collection]
     def resources_with_pending_maintenance_actions(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_pending_maintenance_actions(options)
-        resp.data.pending_maintenance_actions.each do |p|
-          batch << ResourcePendingMaintenanceActionList.new(
-            arn: p.resource_identifier,
-            data: p,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.pending_maintenance_actions.each do |p|
+            batch << ResourcePendingMaintenanceActionList.new(
+              arn: p.resource_identifier,
+              data: p,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       ResourcePendingMaintenanceActionList::Collection.new(batches)
     end

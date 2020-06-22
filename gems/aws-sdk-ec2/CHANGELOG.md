@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.169.0 (2020-06-22)
+------------------
+
+* Feature - This release adds Tag On Create feature support for the ImportImage, ImportSnapshot, ExportImage and CreateInstanceExportTask APIs.
+
 1.168.0 (2020-06-19)
 ------------------
 

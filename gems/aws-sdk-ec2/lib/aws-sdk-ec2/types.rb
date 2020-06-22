@@ -539,7 +539,7 @@ module Aws::EC2
     #         quantity: 1, # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -2162,7 +2162,7 @@ module Aws::EC2
     #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #           kms_key_id: "String",
     #           encrypted: false,
     #         },
@@ -4241,7 +4241,7 @@ module Aws::EC2
     #         source_snapshot_id: "String", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -4445,7 +4445,7 @@ module Aws::EC2
     #         instance_match_criteria: "open", # accepts open, targeted
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -4645,7 +4645,7 @@ module Aws::EC2
     #         client_token: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -5291,7 +5291,7 @@ module Aws::EC2
     #         replace_unhealthy_instances: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -5450,7 +5450,7 @@ module Aws::EC2
     #         log_format: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -5642,7 +5642,7 @@ module Aws::EC2
     #         client_token: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -5733,7 +5733,7 @@ module Aws::EC2
     #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #               kms_key_id: "String",
     #               encrypted: false,
     #             },
@@ -5820,11 +5820,22 @@ module Aws::EC2
     #         },
     #         instance_id: "InstanceId", # required
     #         target_environment: "citrix", # accepts citrix, vmware, microsoft
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] description
     #   A description for the conversion task or the resource being
-    #   exported. The maximum length is 255 bytes.
+    #   exported. The maximum length is 255 characters.
     #   @return [String]
     #
     # @!attribute [rw] export_to_s3_task
@@ -5839,13 +5850,18 @@ module Aws::EC2
     #   The target virtualization environment.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the instance export task during creation.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceExportTaskRequest AWS API Documentation
     #
     class CreateInstanceExportTaskRequest < Struct.new(
       :description,
       :export_to_s3_task,
       :instance_id,
-      :target_environment)
+      :target_environment,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -5900,7 +5916,7 @@ module Aws::EC2
     #         dry_run: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -5963,7 +5979,7 @@ module Aws::EC2
     #                 kms_key_id: "KmsKeyId",
     #                 snapshot_id: "SnapshotId",
     #                 volume_size: 1,
-    #                 volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #               },
     #               no_device: "String",
     #             },
@@ -6016,7 +6032,7 @@ module Aws::EC2
     #           user_data: "String",
     #           tag_specifications: [
     #             {
-    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #               tags: [
     #                 {
     #                   key: "String",
@@ -6077,7 +6093,7 @@ module Aws::EC2
     #         },
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -6181,7 +6197,7 @@ module Aws::EC2
     #                 kms_key_id: "KmsKeyId",
     #                 snapshot_id: "SnapshotId",
     #                 volume_size: 1,
-    #                 volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #               },
     #               no_device: "String",
     #             },
@@ -6234,7 +6250,7 @@ module Aws::EC2
     #           user_data: "String",
     #           tag_specifications: [
     #             {
-    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #               tags: [
     #                 {
     #                   key: "String",
@@ -6431,7 +6447,7 @@ module Aws::EC2
     #         vpc_id: "VpcId", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -6493,7 +6509,7 @@ module Aws::EC2
     #         subnet_id: "SubnetId", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -6905,7 +6921,7 @@ module Aws::EC2
     #         partition_count: 1,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -7247,7 +7263,7 @@ module Aws::EC2
     #         volume_id: "VolumeId", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -7299,7 +7315,7 @@ module Aws::EC2
     #         },
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -7545,7 +7561,7 @@ module Aws::EC2
     #         description: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -7764,7 +7780,7 @@ module Aws::EC2
     #         description: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -7895,7 +7911,7 @@ module Aws::EC2
     #         description: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -7986,7 +8002,7 @@ module Aws::EC2
     #         transit_gateway_id: "TransitGatewayId", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8043,7 +8059,7 @@ module Aws::EC2
     #         peer_region: "String", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8122,7 +8138,7 @@ module Aws::EC2
     #         },
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8238,7 +8254,7 @@ module Aws::EC2
     #         transit_gateway_id: "TransitGatewayId", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8298,7 +8314,7 @@ module Aws::EC2
     #         },
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8464,11 +8480,11 @@ module Aws::EC2
     #         outpost_arn: "String",
     #         size: 1,
     #         snapshot_id: "SnapshotId",
-    #         volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #         dry_run: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8706,7 +8722,7 @@ module Aws::EC2
     #         private_dns_enabled: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8839,7 +8855,7 @@ module Aws::EC2
     #         client_token: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -22812,7 +22828,7 @@ module Aws::EC2
     #         iops: 1,
     #         snapshot_id: "String",
     #         volume_size: 1,
-    #         volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #         kms_key_id: "String",
     #         encrypted: false,
     #       }
@@ -23861,6 +23877,17 @@ module Aws::EC2
     #           s3_prefix: "String",
     #         },
     #         role_name: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] client_token
@@ -23872,7 +23899,7 @@ module Aws::EC2
     #
     # @!attribute [rw] description
     #   A description of the image being exported. The maximum length is 255
-    #   bytes.
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] disk_image_format
@@ -23891,16 +23918,20 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] s3_export_location
-    #   Information about the destination S3 bucket. The bucket must exist
-    #   and grant WRITE and READ\_ACP permissions to the AWS account
+    #   Information about the destination Amazon S3 bucket. The bucket must
+    #   exist and grant WRITE and READ\_ACP permissions to the AWS account
     #   vm-import-export@amazon.com.
     #   @return [Types::ExportTaskS3LocationRequest]
     #
     # @!attribute [rw] role_name
     #   The name of the role that grants VM Import/Export permission to
-    #   export images to your S3 bucket. If this parameter is not specified,
-    #   the default role is named 'vmimport'.
+    #   export images to your Amazon S3 bucket. If this parameter is not
+    #   specified, the default role is named 'vmimport'.
     #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the image being exported.
+    #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImageRequest AWS API Documentation
     #
@@ -23911,7 +23942,8 @@ module Aws::EC2
       :dry_run,
       :image_id,
       :s3_export_location,
-      :role_name)
+      :role_name,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -23933,7 +23965,7 @@ module Aws::EC2
     #
     # @!attribute [rw] role_name
     #   The name of the role that grants VM Import/Export permission to
-    #   export images to your S3 bucket.
+    #   export images to your Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] progress
@@ -23941,7 +23973,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] s3_export_location
-    #   Information about the destination S3 bucket.
+    #   Information about the destination Amazon S3 bucket.
     #   @return [Types::ExportTaskS3Location]
     #
     # @!attribute [rw] status
@@ -23952,6 +23984,10 @@ module Aws::EC2
     # @!attribute [rw] status_message
     #   The status message for the export image task.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the image being exported.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImageResult AWS API Documentation
     #
@@ -23964,7 +24000,8 @@ module Aws::EC2
       :progress,
       :s3_export_location,
       :status,
-      :status_message)
+      :status_message,
+      :tags)
       include Aws::Structure
     end
 
@@ -23987,7 +24024,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] s3_export_location
-    #   Information about the destination S3 bucket.
+    #   Information about the destination Amazon S3 bucket.
     #   @return [Types::ExportTaskS3Location]
     #
     # @!attribute [rw] status
@@ -23999,6 +24036,10 @@ module Aws::EC2
     #   The status message for the export image task.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the image being exported.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImageTask AWS API Documentation
     #
     class ExportImageTask < Struct.new(
@@ -24008,7 +24049,8 @@ module Aws::EC2
       :progress,
       :s3_export_location,
       :status,
-      :status_message)
+      :status_message,
+      :tags)
       include Aws::Structure
     end
 
@@ -24058,7 +24100,7 @@ module Aws::EC2
     # Describes the destination for an export image task.
     #
     # @!attribute [rw] s3_bucket
-    #   The destination S3 bucket.
+    #   The destination Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
@@ -24084,7 +24126,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] s3_bucket
-    #   The destination S3 bucket.
+    #   The destination Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
@@ -24111,9 +24153,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket
-    #   The S3 bucket for the destination image. The destination bucket must
-    #   exist and grant WRITE and READ\_ACP permissions to the AWS account
-    #   `vm-import-export@amazon.com`.
+    #   The Amazon S3 bucket for the destination image. The destination
+    #   bucket must exist and grant WRITE and READ\_ACP permissions to the
+    #   AWS account `vm-import-export@amazon.com`.
     #   @return [String]
     #
     # @!attribute [rw] s3_key
@@ -24152,14 +24194,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket
-    #   The S3 bucket for the destination image. The destination bucket must
-    #   exist and grant WRITE and READ\_ACP permissions to the AWS account
-    #   `vm-import-export@amazon.com`.
+    #   The Amazon S3 bucket for the destination image. The destination
+    #   bucket must exist and grant WRITE and READ\_ACP permissions to the
+    #   AWS account `vm-import-export@amazon.com`.
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
-    #   The image is written to a single object in the S3 bucket at the S3
-    #   key s3prefix + exportTaskId + '.' + diskImageFormat.
+    #   The image is written to a single object in the Amazon S3 bucket at
+    #   the S3 key s3prefix + exportTaskId + '.' + diskImageFormat.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportToS3TaskSpecification AWS API Documentation
@@ -27013,7 +27055,7 @@ module Aws::EC2
     # @!attribute [rw] format
     #   The format of the disk image being imported.
     #
-    #   Valid values: `VHD` \| `VMDK` \| `OVA`
+    #   Valid values: `OVA` \| `VHD` \| `VHDX` \|`VMDK`
     #   @return [String]
     #
     # @!attribute [rw] snapshot_id
@@ -27164,6 +27206,17 @@ module Aws::EC2
     #             license_configuration_arn: "String",
     #           },
     #         ],
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] architecture
@@ -27285,6 +27338,10 @@ module Aws::EC2
     #   The ARNs of the license configurations.
     #   @return [Array<Types::ImportImageLicenseConfigurationRequest>]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the image being imported.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageRequest AWS API Documentation
     #
     class ImportImageRequest < Struct.new(
@@ -27300,7 +27357,8 @@ module Aws::EC2
       :license_type,
       :platform,
       :role_name,
-      :license_specifications)
+      :license_specifications,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -27313,7 +27371,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] encrypted
-    #   Indicates whether the AMI is encypted.
+    #   Indicates whether the AMI is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] hypervisor
@@ -27362,6 +27420,10 @@ module Aws::EC2
     #   The ARNs of the license configurations.
     #   @return [Array<Types::ImportImageLicenseConfigurationResponse>]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the image being imported.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageResult AWS API Documentation
     #
     class ImportImageResult < Struct.new(
@@ -27378,7 +27440,8 @@ module Aws::EC2
       :snapshot_details,
       :status,
       :status_message,
-      :license_specifications)
+      :license_specifications,
+      :tags)
       include Aws::Structure
     end
 
@@ -27743,7 +27806,7 @@ module Aws::EC2
     #         public_key_material: "data", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -27836,6 +27899,17 @@ module Aws::EC2
     #         encrypted: false,
     #         kms_key_id: "KmsKeyId",
     #         role_name: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] client_data
@@ -27916,6 +27990,10 @@ module Aws::EC2
     #   'vmimport'.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the snapshot being imported.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotRequest AWS API Documentation
     #
     class ImportSnapshotRequest < Struct.new(
@@ -27926,7 +28004,8 @@ module Aws::EC2
       :dry_run,
       :encrypted,
       :kms_key_id,
-      :role_name)
+      :role_name,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -27942,12 +28021,17 @@ module Aws::EC2
     #   Information about the import snapshot task.
     #   @return [Types::SnapshotTaskDetail]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the snapshot being imported.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotResult AWS API Documentation
     #
     class ImportSnapshotResult < Struct.new(
       :description,
       :import_task_id,
-      :snapshot_task_detail)
+      :snapshot_task_detail,
+      :tags)
       include Aws::Structure
     end
 
@@ -30283,7 +30367,7 @@ module Aws::EC2
     #           kms_key_id: "KmsKeyId",
     #           snapshot_id: "SnapshotId",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #         },
     #         no_device: "String",
     #       }
@@ -30533,7 +30617,7 @@ module Aws::EC2
     #         kms_key_id: "KmsKeyId",
     #         snapshot_id: "SnapshotId",
     #         volume_size: 1,
-    #         volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #       }
     #
     # @!attribute [rw] encrypted
@@ -31474,7 +31558,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -34072,7 +34156,7 @@ module Aws::EC2
     #         dry_run: false,
     #         volume_id: "VolumeId", # required
     #         size: 1,
-    #         volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #         iops: 1,
     #       }
     #
@@ -36717,7 +36801,7 @@ module Aws::EC2
     #         dry_run: false,
     #         pool_tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -37314,7 +37398,7 @@ module Aws::EC2
     #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #               kms_key_id: "String",
     #               encrypted: false,
     #             },
@@ -38362,7 +38446,7 @@ module Aws::EC2
     #               kms_key_id: "KmsKeyId",
     #               snapshot_id: "SnapshotId",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #             },
     #             no_device: "String",
     #           },
@@ -38415,7 +38499,7 @@ module Aws::EC2
     #         user_data: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -38744,7 +38828,7 @@ module Aws::EC2
     #                     iops: 1,
     #                     snapshot_id: "String",
     #                     volume_size: 1,
-    #                     volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #                     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #                     kms_key_id: "String",
     #                     encrypted: false,
     #                   },
@@ -38801,7 +38885,7 @@ module Aws::EC2
     #               weighted_capacity: 1.0,
     #               tag_specifications: [
     #                 {
-    #                   resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #                   resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #                   tags: [
     #                     {
     #                       key: "String",
@@ -38861,7 +38945,7 @@ module Aws::EC2
     #           instance_pools_to_use_count: 1,
     #           tag_specifications: [
     #             {
-    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #               tags: [
     #                 {
     #                   key: "String",
@@ -38930,7 +39014,7 @@ module Aws::EC2
     #                 iops: 1,
     #                 snapshot_id: "String",
     #                 volume_size: 1,
-    #                 volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #                 kms_key_id: "String",
     #                 encrypted: false,
     #               },
@@ -39151,7 +39235,7 @@ module Aws::EC2
     #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #               kms_key_id: "String",
     #               encrypted: false,
     #             },
@@ -40791,7 +40875,7 @@ module Aws::EC2
     #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #               kms_key_id: "String",
     #               encrypted: false,
     #             },
@@ -40878,7 +40962,7 @@ module Aws::EC2
     #         ],
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -43006,7 +43090,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_bucket
-    #   The S3 bucket for the disk image.
+    #   The Amazon S3 bucket for the disk image.
     #   @return [Types::UserBucketDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotDetail AWS API Documentation
@@ -43056,7 +43140,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_bucket
-    #   The S3 bucket for the disk image.
+    #   The Amazon S3 bucket for the disk image.
     #   @return [Types::UserBucket]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotDiskContainer AWS API Documentation
@@ -43173,7 +43257,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_bucket
-    #   The S3 bucket for the disk image.
+    #   The Amazon S3 bucket for the disk image.
     #   @return [Types::UserBucketDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotTaskDetail AWS API Documentation
@@ -43255,7 +43339,7 @@ module Aws::EC2
     #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #               kms_key_id: "String",
     #               encrypted: false,
     #             },
@@ -43312,7 +43396,7 @@ module Aws::EC2
     #         weighted_capacity: 1.0,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -43546,7 +43630,7 @@ module Aws::EC2
     #                   iops: 1,
     #                   snapshot_id: "String",
     #                   volume_size: 1,
-    #                   volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #                   volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #                   kms_key_id: "String",
     #                   encrypted: false,
     #                 },
@@ -43603,7 +43687,7 @@ module Aws::EC2
     #             weighted_capacity: 1.0,
     #             tag_specifications: [
     #               {
-    #                 resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #                 resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #                 tags: [
     #                   {
     #                     key: "String",
@@ -43663,7 +43747,7 @@ module Aws::EC2
     #         instance_pools_to_use_count: 1,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -43912,7 +43996,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -44991,7 +45075,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -46997,7 +47081,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the S3 bucket for the disk image.
+    # Describes the Amazon S3 bucket for the disk image.
     #
     # @note When making an API call, you may pass UserBucket
     #   data as a hash:
@@ -47008,7 +47092,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] s3_bucket
-    #   The name of the S3 bucket where the disk image is located.
+    #   The name of the Amazon S3 bucket where the disk image is located.
     #   @return [String]
     #
     # @!attribute [rw] s3_key
@@ -47023,10 +47107,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the S3 bucket for the disk image.
+    # Describes the Amazon S3 bucket for the disk image.
     #
     # @!attribute [rw] s3_bucket
-    #   The S3 bucket from which the disk image was created.
+    #   The Amazon S3 bucket from which the disk image was created.
     #   @return [String]
     #
     # @!attribute [rw] s3_key

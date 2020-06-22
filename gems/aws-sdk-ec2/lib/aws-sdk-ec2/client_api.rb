@@ -2978,6 +2978,7 @@ module Aws::EC2
     CreateInstanceExportTaskRequest.add_member(:export_to_s3_task, Shapes::ShapeRef.new(shape: ExportToS3TaskSpecification, location_name: "exportToS3"))
     CreateInstanceExportTaskRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
     CreateInstanceExportTaskRequest.add_member(:target_environment, Shapes::ShapeRef.new(shape: ExportEnvironment, location_name: "targetEnvironment"))
+    CreateInstanceExportTaskRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateInstanceExportTaskRequest.struct_class = Types::CreateInstanceExportTaskRequest
 
     CreateInstanceExportTaskResult.add_member(:export_task, Shapes::ShapeRef.new(shape: ExportTask, location_name: "exportTask"))
@@ -5435,6 +5436,7 @@ module Aws::EC2
     ExportImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
     ExportImageRequest.add_member(:s3_export_location, Shapes::ShapeRef.new(shape: ExportTaskS3LocationRequest, required: true, location_name: "S3ExportLocation"))
     ExportImageRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: String, location_name: "RoleName"))
+    ExportImageRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     ExportImageRequest.struct_class = Types::ExportImageRequest
 
     ExportImageResult.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -5446,6 +5448,7 @@ module Aws::EC2
     ExportImageResult.add_member(:s3_export_location, Shapes::ShapeRef.new(shape: ExportTaskS3Location, location_name: "s3ExportLocation"))
     ExportImageResult.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     ExportImageResult.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    ExportImageResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ExportImageResult.struct_class = Types::ExportImageResult
 
     ExportImageTask.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -5455,6 +5458,7 @@ module Aws::EC2
     ExportImageTask.add_member(:s3_export_location, Shapes::ShapeRef.new(shape: ExportTaskS3Location, location_name: "s3ExportLocation"))
     ExportImageTask.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     ExportImageTask.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    ExportImageTask.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ExportImageTask.struct_class = Types::ExportImageTask
 
     ExportImageTaskIdList.member = Shapes::ShapeRef.new(shape: ExportImageTaskId, location_name: "ExportImageTaskId")
@@ -6057,6 +6061,7 @@ module Aws::EC2
     ImportImageRequest.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "Platform"))
     ImportImageRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: String, location_name: "RoleName"))
     ImportImageRequest.add_member(:license_specifications, Shapes::ShapeRef.new(shape: ImportImageLicenseSpecificationListRequest, location_name: "LicenseSpecifications"))
+    ImportImageRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     ImportImageRequest.struct_class = Types::ImportImageRequest
 
     ImportImageResult.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "architecture"))
@@ -6064,8 +6069,8 @@ module Aws::EC2
     ImportImageResult.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     ImportImageResult.add_member(:hypervisor, Shapes::ShapeRef.new(shape: String, location_name: "hypervisor"))
     ImportImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
-    ImportImageResult.add_member(:import_task_id, Shapes::ShapeRef.new(shape: String, location_name: "importTaskId"))
-    ImportImageResult.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    ImportImageResult.add_member(:import_task_id, Shapes::ShapeRef.new(shape: ImportImageTaskId, location_name: "importTaskId"))
+    ImportImageResult.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     ImportImageResult.add_member(:license_type, Shapes::ShapeRef.new(shape: String, location_name: "licenseType"))
     ImportImageResult.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "platform"))
     ImportImageResult.add_member(:progress, Shapes::ShapeRef.new(shape: String, location_name: "progress"))
@@ -6073,6 +6078,7 @@ module Aws::EC2
     ImportImageResult.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     ImportImageResult.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
     ImportImageResult.add_member(:license_specifications, Shapes::ShapeRef.new(shape: ImportImageLicenseSpecificationListResponse, location_name: "licenseSpecifications"))
+    ImportImageResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ImportImageResult.struct_class = Types::ImportImageResult
 
     ImportImageTask.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "architecture"))
@@ -6154,11 +6160,13 @@ module Aws::EC2
     ImportSnapshotRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
     ImportSnapshotRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     ImportSnapshotRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: String, location_name: "RoleName"))
+    ImportSnapshotRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     ImportSnapshotRequest.struct_class = Types::ImportSnapshotRequest
 
     ImportSnapshotResult.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ImportSnapshotResult.add_member(:import_task_id, Shapes::ShapeRef.new(shape: String, location_name: "importTaskId"))
     ImportSnapshotResult.add_member(:snapshot_task_detail, Shapes::ShapeRef.new(shape: SnapshotTaskDetail, location_name: "snapshotTaskDetail"))
+    ImportSnapshotResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ImportSnapshotResult.struct_class = Types::ImportSnapshotResult
 
     ImportSnapshotTask.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
