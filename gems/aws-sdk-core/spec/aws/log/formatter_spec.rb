@@ -6,34 +6,18 @@ require 'pathname'
 module Aws
   module Log
     describe Formatter do
-      let(:operation_request_type) do
-        class OperationRequestType < Struct
-          include Aws::Structure
-        end
+      # Instead of using Response.new, create an example client and set the
+      # response to be a real one (with types) for sensitive param filtering
+      let(:client) do
+        ApiHelper.sample_service.const_get(:Client).new(stub_responses: true)
       end
-
-      let(:operation_request) do
-        shape = Seahorse::Model::Shapes::StructureShape.new(name: 'OperationRequest')
-        shape.struct_class = operation_request_type
-        shape
-      end
-
-      let(:response) do
-        resp = Seahorse::Client::Response.new
-        resp.context.operation = Seahorse::Model::Operation.new.tap do |o|
-          o.input = Seahorse::Model::Shapes::ShapeRef.new(
-            shape: operation_request
-          )
-        end
-        resp
-      end
+      let(:response) { client.example_operation }
 
       def format(pattern, options = {})
         Formatter.new(pattern, options).format(response)
       end
 
       describe '#format' do
-
         it 'provides a :client_class replacement' do
           response.context.client = String.new
           expect(format(':client_class')).to eq('String')
@@ -123,7 +107,7 @@ module Aws
 
         it 'provides a :http_response_headers replacement' do
           response.context.http_response.headers['foo'] = 'bar'
-          expect(format(':http_response_headers')).to eq('{"foo"=>"bar"}')
+          expect(format(':http_response_headers')).to include('"foo"=>"bar"')
         end
 
         it 'provides a :http_response_body replacement' do

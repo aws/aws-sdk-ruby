@@ -47,7 +47,7 @@ module AwsSdkCodeGenerator
           # eventstream shape will be inheriting from enumerator
           if shape['eventstream']
             list
-          elsif struct_type?(shape)
+          elsif shape['type'] == 'structure'
             struct_members = struct_members(shape)
             sensitive_params = struct_members.select(&:sensitive).map do |m|
               m.member_name.to_sym
@@ -83,21 +83,16 @@ module AwsSdkCodeGenerator
 
       def struct_members(shape)
         return if shape['members'].nil?
-        sensitive = false
         members = shape['members'].map do |member_name, member_ref|
-          if member_ref['sensitive'] || @api['shapes'][member_ref['shape']]['sensitive']
-            sensitive = true
-          end
+          sensitive = !!(member_ref['sensitive'] ||
+            @api['shapes'][member_ref['shape']]['sensitive'])
           StructMember.new(
             member_name: underscore(member_name),
             sensitive: sensitive
           )
         end
         if shape['event']
-          members << StructMember.new(
-            member_name: 'event_type',
-            sensitive: sensitive
-          )
+          members << StructMember.new(member_name: 'event_type')
         end
         members
       end
@@ -172,10 +167,6 @@ module AwsSdkCodeGenerator
         if @api['metadata']['protocol'] != 'api-gateway' && Crosslink.taggable?(uid)
           Crosslink.tag_string(uid, shape_name)
         end
-      end
-
-      def struct_type?(shape)
-        shape['type'] == 'structure'
       end
 
       def compute_input_shapes(api)
@@ -289,7 +280,7 @@ module AwsSdkCodeGenerator
 
         def initialize(options)
           @member_name = options.fetch(:member_name)
-          @sensitive = options.fetch(:sensitive)
+          @sensitive = options.fetch(:sensitive, false)
           @last = false
         end
 
