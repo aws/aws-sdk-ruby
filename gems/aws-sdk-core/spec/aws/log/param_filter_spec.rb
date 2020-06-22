@@ -12,62 +12,51 @@ module Aws
         include Aws::Structure
       end
 
-      class InsensitiveType < Struct.new(
-        :peccy_id)
+      class OldServiceType < Struct.new(
+        :peccy_id,
+        :password)
         include Aws::Structure
       end
 
       describe '#filter' do
         it 'filters sensitive hash params' do
-          filtered = subject.filter({ password: 'peccy' }, SensitiveType)
-          expect(filtered).to eq(password: '[FILTERED]')
+          filtered = subject.filter(
+            { password: 'peccy', peccy_id: 'peccy-id' }, SensitiveType
+          )
+          expect(filtered).to eq(password: '[FILTERED]', peccy_id: 'peccy-id')
         end
 
         it 'filters sensitive array params' do
-          filtered = subject.filter([{ password: 'peccy' }], SensitiveType)
-          expect(filtered).to eq([{ password: '[FILTERED]' }])
+          filtered = subject.filter(
+            [{ password: 'peccy', peccy_id: 'peccy-id' }], SensitiveType
+          )
+          expect(filtered).to eq(
+            [{ password: '[FILTERED]', peccy_id: 'peccy-id' }]
+          )
         end
 
         it 'filters sensitive Struct params' do
-          instance = Struct.new(:password).new('peccy')
+          instance = Struct.new(:peccy_id, :password).new('peccy-id', 'peccy')
           filtered = subject.filter(instance, SensitiveType)
-          expect(filtered).to eq(password: '[FILTERED]')
-        end
-
-        context 'no sensitive params' do
-          it 'does not filter sensitive hash params' do
-            unfiltered = subject.filter({ peccy_id: 'peccy-id' }, InsensitiveType)
-            expect(unfiltered).to eq(peccy_id: 'peccy-id')
-          end
-
-          it 'does not filter sensitive array params' do
-            unfiltered = subject.filter([{ peccy_id: 'peccy-id' }], InsensitiveType)
-            expect(unfiltered).to eq([{ peccy_id: 'peccy-id' }])
-          end
-
-          it 'does not filter sensitive Struct params' do
-            instance = Struct.new(:peccy_id).new('peccy-id')
-            unfiltered = subject.filter(instance, InsensitiveType)
-            expect(unfiltered).to eq(peccy_id: 'peccy-id')
-          end
+          expect(filtered).to eq(password: '[FILTERED]', peccy_id: 'peccy-id')
         end
 
         context 'with additional filters' do
           subject { Aws::Log::ParamFilter.new(filter: [:peccy_id]) }
 
           it 'filters sensitive hash params' do
-            filtered = subject.filter({ peccy_id: 'peccy-id' }, InsensitiveType)
+            filtered = subject.filter({ peccy_id: 'peccy-id' }, SensitiveType)
             expect(filtered).to eq(peccy_id: '[FILTERED]')
           end
 
           it 'filters sensitive array params' do
-            filtered = subject.filter([{ peccy_id: 'peccy-id' }], InsensitiveType)
+            filtered = subject.filter([{ peccy_id: 'peccy-id' }], SensitiveType)
             expect(filtered).to eq([{ peccy_id: '[FILTERED]' }])
           end
 
           it 'filters sensitive Struct params' do
             instance = Struct.new(:peccy_id).new('peccy-id')
-            filtered = subject.filter(instance, InsensitiveType)
+            filtered = subject.filter(instance, SensitiveType)
             expect(filtered).to eq(peccy_id: '[FILTERED]')
           end
         end
@@ -89,6 +78,31 @@ module Aws
             instance = Struct.new(:password).new('peccy')
             unfiltered = subject.filter(instance, SensitiveType)
             expect(unfiltered).to eq(password: 'peccy')
+          end
+        end
+
+        # hinges on :password being sensitive and :peccy_id never existing
+        context 'backwards compatible with old service gems' do
+          it 'filters sensitive hash params' do
+            filtered = subject.filter(
+              { password: 'peccy', peccy_id: 'peccy-id' }, OldServiceType
+            )
+            expect(filtered).to eq(password: '[FILTERED]', peccy_id: 'peccy-id')
+          end
+
+          it 'filters sensitive array params' do
+            filtered = subject.filter(
+              [{ password: 'peccy', peccy_id: 'peccy-id' }], OldServiceType
+            )
+            expect(filtered).to eq(
+              [{ password: '[FILTERED]', peccy_id: 'peccy-id' }]
+            )
+          end
+
+          it 'filters sensitive Struct params' do
+            instance = Struct.new(:peccy_id, :password).new('peccy-id', 'peccy')
+            filtered = subject.filter(instance, OldServiceType)
+            expect(filtered).to eq(password: '[FILTERED]', peccy_id: 'peccy-id')
           end
         end
       end

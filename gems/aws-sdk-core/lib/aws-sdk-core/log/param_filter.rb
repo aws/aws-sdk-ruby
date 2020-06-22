@@ -7,7 +7,9 @@ module Aws
   module Log
     class ParamFilter
       # DEPRECATED - this must exist for backwards compatibility. Sensitive
-      # members are now computed for each request/response type.
+      # members are now computed for each request/response type. This can be
+      # removed in a new major version.
+      #
       # A managed list of sensitive parameters that should be filtered from
       # logs. This is updated automatically as part of each release. See the
       # `tasks/update-sensitive-params.rake` for more information.
@@ -36,6 +38,7 @@ module Aws
         if type.const_defined?('SENSITIVE')
           filters = type::SENSITIVE + @additional_filters
         else
+          # Support backwards compatibility (new core + old service)
           filters = SENSITIVE + @additional_filters
         end
 
