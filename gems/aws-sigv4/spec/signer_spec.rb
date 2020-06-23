@@ -146,12 +146,12 @@ module Aws
 
         context 'when a Host header is provided' do
           
-          let(:headers) { {'host' => 'custom-host-value'} }
+          let(:headers) { { headers: { 'host' => 'custom-host-value' } } }
 
           it 'uses the original Host header' do
-            signature = Signer.new(options.merge(headers: headers)).sign_request(request)
+            signature = Signer.new(options).sign_request(request.merge(headers))
 
-            expect(signature.headers['host']).to eql(custom-host-value)
+            expect(signature.headers['host']).to eql('custom-host-value')
           end
         end
 
