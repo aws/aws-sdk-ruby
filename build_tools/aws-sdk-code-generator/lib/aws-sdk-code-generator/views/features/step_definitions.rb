@@ -11,14 +11,12 @@ module AwsSdkCodeGenerator
           service = options.fetch(:service)
           @var_name = service.identifier
           @module_name = service.module_name
-          smoke_tests = service.smoke_tests
-          if smoke_tests
-            @client_region = smoke_tests['defaultRegion']
-            @client_endpoint = smoke_tests['defaultEndpoint']
+          if service.smoke_tests
+            @client_endpoint = service.smoke_tests['defaultEndpoint']
           end
         end
 
-        attr_reader :var_name, :module_name, :client_region, :client_endpoint
+        attr_reader :var_name, :module_name, :client_endpoint
 
       end
     end
