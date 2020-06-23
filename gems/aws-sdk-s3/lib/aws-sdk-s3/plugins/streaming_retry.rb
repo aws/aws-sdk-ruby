@@ -14,9 +14,12 @@ module Aws
         end
 
         def truncate(_integer); end
+
+        def rewind; end
       end
 
       # TODO: docs
+      # TODO: This could be applied to file based targets as well: create a wrapper around managed file and no-op truncate.
       # @api private
       class StreamingRetry < Seahorse::Client::Plugin
 
@@ -44,13 +47,10 @@ module Aws
             end
 
             context.http_response.on_error do |error|
-              bytes_expected = context.http_response.headers['content-length'].to_i
               if context.http_response.body.is_a?(RetryableBlockIO) &&
                   error.is_a?(Seahorse::Client::NetworkingError) &&
-                  error.original_error.is_a?(Seahorse::Client::NetHttp::Handler::TruncatedBodyError) &&
-                  bytes_expected > context.http_response.body.size
+                  error.original_error.is_a?(Seahorse::Client::NetHttp::Handler::TruncatedBodyError)
                 context.http_request.headers[:range] = "bytes=#{context.http_response.body.size}-"
-
               else
                 context.http_response.body = StringIO.new # something to write the error to
               end
