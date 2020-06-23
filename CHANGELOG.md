@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.534 (2020-06-23)
+------------------
+
 * Feature - Aws::MediaTailor - Updated the API, and documentation for AWS MediaTailor.
 
 * Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
