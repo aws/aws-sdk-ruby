@@ -25,6 +25,7 @@ module Aws
           integer: 0,
           long: 0,
           string: "StringShape",
+          sensitive_string: 'SensitiveStringShape',
           timestamp: now,
         })
       end

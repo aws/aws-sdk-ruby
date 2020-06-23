@@ -7,7 +7,7 @@ module Aws
   module Plugins
     describe HttpChecksum do
       HttpChecksumClient = ApiHelper.sample_service(
-        metadata: {'protocol' => 'rest-xml'},
+        metadata: { 'protocol' => 'rest-xml' },
         operations: {
           'Operation' => {
             'http' => { 'method' => 'POST', 'requestUri' => '/' },
