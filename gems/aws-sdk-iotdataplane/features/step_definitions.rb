@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
 Before("@iotdataplane") do
-  @service = Aws::IoTDataPlane::Resource.new
+  @service = Aws::IoTDataPlane::Resource.new(region: 'us-west-2', endpoint: 'https://data.iot.us-west-2.amazonaws.com')
   @client = @service.client
 end
 

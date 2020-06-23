@@ -15,7 +15,7 @@ module AwsSdkCodeGenerator
           # This will only be called if this is defined
           smoke_json = service.smoke_tests
           @client_region = smoke_json["defaultRegion"]
-          @client_endpoint = smoke_json["endpoint"]
+          @client_endpoint = smoke_json["defaultEndpoint"]
           @smoke_tests = smoke_json["testCases"].map do |test|
             h = {
               operation: underscore(test["operationName"]),

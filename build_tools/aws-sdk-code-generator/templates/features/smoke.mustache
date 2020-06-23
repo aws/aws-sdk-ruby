@@ -5,7 +5,7 @@ Feature: Smoke tests for {{service}}
 
 Background:
 {{#client_endpoint}}
-  Given I create a client in region '{{client_region}}' with endpoint '{{client_endpoint}}'
+  Given I create a client with endpoint '{{client_endpoint}}'
 {{/client_endpoint}}
 {{^client_endpoint}}
   Given I create a client in region '{{client_region}}'
