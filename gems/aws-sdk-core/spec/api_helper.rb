@@ -56,6 +56,7 @@ module ApiHelper
             'NestedMap' => { 'shape' => 'StructureMap' },
             'NumberList' => { 'shape' => 'IntegerList' },
             'StringMap' => { 'shape' => 'StringMap' },
+            'SensitiveString' => { 'shape' => 'SensitiveStringShape' },
             # scalar members
             'Blob' => { 'shape' => 'BlobShape' },
             'Byte' => { 'shape' => 'ByteShape' },
@@ -120,6 +121,7 @@ module ApiHelper
         'IntegerShape' => { 'type' => 'integer' },
         'LongShape' => { 'type' => 'long' },
         'StringShape' => { 'type' => 'string' },
+        'SensitiveStringShape' => { 'type' => 'string', 'sensitive' => true },
         'TimestampShape' => { 'type' => 'timestamp' },
       }
     end

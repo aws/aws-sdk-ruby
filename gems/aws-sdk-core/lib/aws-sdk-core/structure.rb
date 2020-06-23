@@ -48,7 +48,7 @@ module Aws
 
     # Wraps the default #to_s logic with filtering of sensitive parameters.
     def to_s(obj = self)
-      Aws::Log::ParamFilter.new.filter(obj).to_s
+      Aws::Log::ParamFilter.new.filter(obj, obj.class).to_s
     end
 
     class << self
