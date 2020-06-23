@@ -146,7 +146,7 @@ module Aws
 
         context 'when a Host header is provided' do
           
-          let(:headers) { 'host' => 'custom-host-value' }
+          let(:headers) { {'host' => 'custom-host-value'} }
 
           it 'uses the original Host header' do
             signature = Signer.new(options.merge(headers: headers)).sign_request(request)
