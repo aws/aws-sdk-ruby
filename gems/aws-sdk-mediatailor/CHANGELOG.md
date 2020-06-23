@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-06-23)
+------------------
+
+* Feature - AWS Elemental MediaTailor SDK now allows configuration of Bumper.
+
 1.28.1 (2020-06-11)
 ------------------
 

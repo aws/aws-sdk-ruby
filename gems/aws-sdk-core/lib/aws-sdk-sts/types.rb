@@ -284,6 +284,7 @@ module Aws::STS
       :external_id,
       :serial_number,
       :token_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -323,6 +324,7 @@ module Aws::STS
       :credentials,
       :assumed_role_user,
       :packed_policy_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -477,6 +479,7 @@ module Aws::STS
       :policy_arns,
       :policy,
       :duration_seconds)
+      SENSITIVE = [:saml_assertion]
       include Aws::Structure
     end
 
@@ -557,6 +560,7 @@ module Aws::STS
       :issuer,
       :audience,
       :name_qualifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -726,6 +730,7 @@ module Aws::STS
       :policy_arns,
       :policy,
       :duration_seconds)
+      SENSITIVE = [:web_identity_token]
       include Aws::Structure
     end
 
@@ -793,6 +798,7 @@ module Aws::STS
       :packed_policy_size,
       :provider,
       :audience)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -821,6 +827,7 @@ module Aws::STS
     class AssumedRoleUser < Struct.new(
       :assumed_role_id,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -851,6 +858,7 @@ module Aws::STS
       :secret_access_key,
       :session_token,
       :expiration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -869,6 +877,7 @@ module Aws::STS
     #
     class DecodeAuthorizationMessageRequest < Struct.new(
       :encoded_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -884,6 +893,7 @@ module Aws::STS
     #
     class DecodeAuthorizationMessageResponse < Struct.new(
       :decoded_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -898,6 +908,7 @@ module Aws::STS
     #
     class ExpiredTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -924,6 +935,7 @@ module Aws::STS
     class FederatedUser < Struct.new(
       :federated_user_id,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -946,6 +958,7 @@ module Aws::STS
     #
     class GetAccessKeyInfoRequest < Struct.new(
       :access_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -957,6 +970,7 @@ module Aws::STS
     #
     class GetAccessKeyInfoResponse < Struct.new(
       :account)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -996,6 +1010,7 @@ module Aws::STS
       :user_id,
       :account,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1184,6 +1199,7 @@ module Aws::STS
       :policy_arns,
       :duration_seconds,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1222,6 +1238,7 @@ module Aws::STS
       :credentials,
       :federated_user,
       :packed_policy_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1278,6 +1295,7 @@ module Aws::STS
       :duration_seconds,
       :serial_number,
       :token_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1300,6 +1318,7 @@ module Aws::STS
     #
     class GetSessionTokenResponse < Struct.new(
       :credentials)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1317,6 +1336,7 @@ module Aws::STS
     #
     class IDPCommunicationErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1334,6 +1354,7 @@ module Aws::STS
     #
     class IDPRejectedClaimException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1348,6 +1369,7 @@ module Aws::STS
     #
     class InvalidAuthorizationMessageException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1362,6 +1384,7 @@ module Aws::STS
     #
     class InvalidIdentityTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1375,6 +1398,7 @@ module Aws::STS
     #
     class MalformedPolicyDocumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1402,6 +1426,7 @@ module Aws::STS
     #
     class PackedPolicyTooLargeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1430,6 +1455,7 @@ module Aws::STS
     #
     class PolicyDescriptorType < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1450,6 +1476,7 @@ module Aws::STS
     #
     class RegionDisabledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1499,6 +1526,7 @@ module Aws::STS
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 

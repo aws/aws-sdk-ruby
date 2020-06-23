@@ -66,6 +66,7 @@ module Aws::LambdaPreview
       :role,
       :batch_size,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -84,6 +85,7 @@ module Aws::LambdaPreview
     #
     class DeleteFunctionRequest < Struct.new(
       :function_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -148,6 +150,7 @@ module Aws::LambdaPreview
       :last_modified,
       :is_active,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -167,6 +170,7 @@ module Aws::LambdaPreview
     class FunctionCodeLocation < Struct.new(
       :repository_type,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -242,6 +246,7 @@ module Aws::LambdaPreview
       :timeout,
       :memory_size,
       :last_modified)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -260,6 +265,7 @@ module Aws::LambdaPreview
     #
     class GetEventSourceRequest < Struct.new(
       :uuid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +285,7 @@ module Aws::LambdaPreview
     #
     class GetFunctionConfigurationRequest < Struct.new(
       :function_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -297,6 +304,7 @@ module Aws::LambdaPreview
     #
     class GetFunctionRequest < Struct.new(
       :function_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -316,6 +324,7 @@ module Aws::LambdaPreview
     class GetFunctionResponse < Struct.new(
       :configuration,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -335,6 +344,7 @@ module Aws::LambdaPreview
     class InvalidParameterValueException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -351,6 +361,7 @@ module Aws::LambdaPreview
     class InvalidRequestContentException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -375,6 +386,7 @@ module Aws::LambdaPreview
     class InvokeAsyncRequest < Struct.new(
       :function_name,
       :invoke_args)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -389,6 +401,7 @@ module Aws::LambdaPreview
     #
     class InvokeAsyncResponse < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -428,6 +441,7 @@ module Aws::LambdaPreview
       :function_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -446,6 +460,7 @@ module Aws::LambdaPreview
     class ListEventSourcesResponse < Struct.new(
       :next_marker,
       :event_sources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -474,6 +489,7 @@ module Aws::LambdaPreview
     class ListFunctionsRequest < Struct.new(
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -493,6 +509,7 @@ module Aws::LambdaPreview
     class ListFunctionsResponse < Struct.new(
       :next_marker,
       :functions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -511,6 +528,7 @@ module Aws::LambdaPreview
     #
     class RemoveEventSourceRequest < Struct.new(
       :uuid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -528,6 +546,7 @@ module Aws::LambdaPreview
     class ResourceNotFoundException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -544,6 +563,7 @@ module Aws::LambdaPreview
     class ServiceException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -603,6 +623,7 @@ module Aws::LambdaPreview
       :description,
       :timeout,
       :memory_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -692,6 +713,7 @@ module Aws::LambdaPreview
       :description,
       :timeout,
       :memory_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 

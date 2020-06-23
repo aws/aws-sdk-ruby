@@ -30,6 +30,7 @@ module Aws::FraudDetector
       :name,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -57,6 +58,7 @@ module Aws::FraudDetector
     #
     class BatchCreateVariableRequest < Struct.new(
       :variable_entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -68,6 +70,7 @@ module Aws::FraudDetector
     #
     class BatchCreateVariableResult < Struct.new(
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -91,6 +94,7 @@ module Aws::FraudDetector
       :name,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -109,6 +113,7 @@ module Aws::FraudDetector
     #
     class BatchGetVariableRequest < Struct.new(
       :names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -125,6 +130,7 @@ module Aws::FraudDetector
     class BatchGetVariableResult < Struct.new(
       :variables,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -150,6 +156,7 @@ module Aws::FraudDetector
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -225,6 +232,7 @@ module Aws::FraudDetector
       :rules,
       :model_versions,
       :rule_execution_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -246,6 +254,7 @@ module Aws::FraudDetector
       :detector_id,
       :detector_version_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -276,6 +285,7 @@ module Aws::FraudDetector
       :model_id,
       :model_type,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -302,6 +312,7 @@ module Aws::FraudDetector
       :model_type,
       :model_version_number,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -350,6 +361,7 @@ module Aws::FraudDetector
       :expression,
       :language,
       :outcomes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -361,6 +373,7 @@ module Aws::FraudDetector
     #
     class CreateRuleResult < Struct.new(
       :rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -409,6 +422,7 @@ module Aws::FraudDetector
       :default_value,
       :description,
       :variable_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -431,6 +445,7 @@ module Aws::FraudDetector
     #
     class DeleteDetectorRequest < Struct.new(
       :detector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -459,6 +474,7 @@ module Aws::FraudDetector
     class DeleteDetectorVersionRequest < Struct.new(
       :detector_id,
       :detector_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -481,6 +497,7 @@ module Aws::FraudDetector
     #
     class DeleteEventRequest < Struct.new(
       :event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -515,6 +532,7 @@ module Aws::FraudDetector
       :detector_id,
       :rule_id,
       :rule_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -549,6 +567,7 @@ module Aws::FraudDetector
       :detector_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -570,6 +589,7 @@ module Aws::FraudDetector
       :detector_id,
       :detector_version_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -612,6 +632,7 @@ module Aws::FraudDetector
       :model_type,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -628,6 +649,7 @@ module Aws::FraudDetector
     class DescribeModelVersionsResult < Struct.new(
       :model_version_details,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -656,6 +678,7 @@ module Aws::FraudDetector
       :description,
       :last_updated_time,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -684,6 +707,7 @@ module Aws::FraudDetector
       :status,
       :description,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -732,6 +756,7 @@ module Aws::FraudDetector
       :model_endpoint_status,
       :last_updated_time,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -756,6 +781,7 @@ module Aws::FraudDetector
     class GetDetectorVersionRequest < Struct.new(
       :detector_id,
       :detector_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -823,6 +849,7 @@ module Aws::FraudDetector
       :last_updated_time,
       :created_time,
       :rule_execution_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -853,6 +880,7 @@ module Aws::FraudDetector
       :detector_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -869,6 +897,7 @@ module Aws::FraudDetector
     class GetDetectorsResult < Struct.new(
       :detectors,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -899,6 +928,7 @@ module Aws::FraudDetector
       :model_endpoint,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -915,6 +945,7 @@ module Aws::FraudDetector
     class GetExternalModelsResult < Struct.new(
       :external_models,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -945,6 +976,7 @@ module Aws::FraudDetector
       :model_id,
       :model_type,
       :model_version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -976,6 +1008,7 @@ module Aws::FraudDetector
       :model_version_number,
       :description,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1012,6 +1045,7 @@ module Aws::FraudDetector
       :model_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1028,6 +1062,7 @@ module Aws::FraudDetector
     class GetModelsResult < Struct.new(
       :next_token,
       :models)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1058,6 +1093,7 @@ module Aws::FraudDetector
       :name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1074,6 +1110,7 @@ module Aws::FraudDetector
     class GetOutcomesResult < Struct.new(
       :outcomes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1125,6 +1162,7 @@ module Aws::FraudDetector
       :event_id,
       :event_attributes,
       :external_model_endpoint_data_blobs)
+      SENSITIVE = [:external_model_endpoint_data_blobs]
       include Aws::Structure
     end
 
@@ -1146,6 +1184,7 @@ module Aws::FraudDetector
       :outcomes,
       :model_scores,
       :rule_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1188,6 +1227,7 @@ module Aws::FraudDetector
       :rule_version,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1204,6 +1244,7 @@ module Aws::FraudDetector
     class GetRulesResult < Struct.new(
       :rule_details,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1234,6 +1275,7 @@ module Aws::FraudDetector
       :name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1250,6 +1292,7 @@ module Aws::FraudDetector
     class GetVariablesResult < Struct.new(
       :variables,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1262,6 +1305,7 @@ module Aws::FraudDetector
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1297,6 +1341,7 @@ module Aws::FraudDetector
     class LabelSchema < Struct.new(
       :label_key,
       :label_mapper)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1345,6 +1390,7 @@ module Aws::FraudDetector
       :label_schema,
       :last_updated_time,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1375,6 +1421,7 @@ module Aws::FraudDetector
     class ModelEndpointDataBlob < Struct.new(
       :byte_buffer,
       :content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1425,6 +1472,7 @@ module Aws::FraudDetector
       :is_opaque,
       :json_input_template,
       :csv_input_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1463,6 +1511,7 @@ module Aws::FraudDetector
       :format,
       :json_key_to_variable_map,
       :csv_index_to_variable_map)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1481,6 +1530,7 @@ module Aws::FraudDetector
     class ModelScores < Struct.new(
       :model_version,
       :scores)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1507,6 +1557,7 @@ module Aws::FraudDetector
     class ModelVariable < Struct.new(
       :name,
       :index)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1539,6 +1590,7 @@ module Aws::FraudDetector
       :model_id,
       :model_type,
       :model_version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1607,6 +1659,7 @@ module Aws::FraudDetector
       :training_metrics,
       :last_updated_time,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1635,6 +1688,7 @@ module Aws::FraudDetector
       :description,
       :last_updated_time,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1659,6 +1713,7 @@ module Aws::FraudDetector
     class PutDetectorRequest < Struct.new(
       :detector_id,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1727,6 +1782,7 @@ module Aws::FraudDetector
       :input_configuration,
       :output_configuration,
       :model_endpoint_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1792,6 +1848,7 @@ module Aws::FraudDetector
       :training_data_source,
       :model_variables,
       :label_schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1820,6 +1877,7 @@ module Aws::FraudDetector
     class PutOutcomeRequest < Struct.new(
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1836,6 +1894,7 @@ module Aws::FraudDetector
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1862,6 +1921,7 @@ module Aws::FraudDetector
     class Role < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1894,6 +1954,7 @@ module Aws::FraudDetector
       :detector_id,
       :rule_id,
       :rule_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1947,6 +2008,7 @@ module Aws::FraudDetector
       :outcomes,
       :last_updated_time,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1965,6 +2027,7 @@ module Aws::FraudDetector
     class RuleResult < Struct.new(
       :rule_id,
       :outcomes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1977,6 +2040,7 @@ module Aws::FraudDetector
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2003,6 +2067,7 @@ module Aws::FraudDetector
     class TrainingDataSource < Struct.new(
       :data_location,
       :data_access_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2033,6 +2098,7 @@ module Aws::FraudDetector
       :detector_id,
       :detector_version_id,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2116,6 +2182,7 @@ module Aws::FraudDetector
       :description,
       :model_versions,
       :rule_execution_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2150,6 +2217,7 @@ module Aws::FraudDetector
       :detector_id,
       :detector_version_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2196,6 +2264,7 @@ module Aws::FraudDetector
       :model_version_number,
       :description,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2228,6 +2297,7 @@ module Aws::FraudDetector
     class UpdateRuleMetadataRequest < Struct.new(
       :rule,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2278,6 +2348,7 @@ module Aws::FraudDetector
       :expression,
       :language,
       :outcomes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2289,6 +2360,7 @@ module Aws::FraudDetector
     #
     class UpdateRuleVersionResult < Struct.new(
       :rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2325,6 +2397,7 @@ module Aws::FraudDetector
       :default_value,
       :description,
       :variable_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2341,6 +2414,7 @@ module Aws::FraudDetector
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2389,6 +2463,7 @@ module Aws::FraudDetector
       :variable_type,
       :last_updated_time,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2439,6 +2514,7 @@ module Aws::FraudDetector
       :default_value,
       :description,
       :variable_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 

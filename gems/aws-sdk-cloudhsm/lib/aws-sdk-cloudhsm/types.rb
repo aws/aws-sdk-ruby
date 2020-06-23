@@ -36,6 +36,7 @@ module Aws::CloudHSM
     class AddTagsToResourceRequest < Struct.new(
       :resource_arn,
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47,6 +48,7 @@ module Aws::CloudHSM
     #
     class AddTagsToResourceResponse < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -71,6 +73,7 @@ module Aws::CloudHSM
     class CloudHsmServiceException < Struct.new(
       :message,
       :retryable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -91,6 +94,7 @@ module Aws::CloudHSM
     #
     class CreateHapgRequest < Struct.new(
       :label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -104,6 +108,7 @@ module Aws::CloudHSM
     #
     class CreateHapgResponse < Struct.new(
       :hapg_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -177,6 +182,7 @@ module Aws::CloudHSM
       :subscription_type,
       :client_token,
       :syslog_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -190,6 +196,7 @@ module Aws::CloudHSM
     #
     class CreateHsmResponse < Struct.new(
       :hsm_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -217,6 +224,7 @@ module Aws::CloudHSM
     class CreateLunaClientRequest < Struct.new(
       :label,
       :certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -230,6 +238,7 @@ module Aws::CloudHSM
     #
     class CreateLunaClientResponse < Struct.new(
       :client_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -250,6 +259,7 @@ module Aws::CloudHSM
     #
     class DeleteHapgRequest < Struct.new(
       :hapg_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -263,6 +273,7 @@ module Aws::CloudHSM
     #
     class DeleteHapgResponse < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -283,6 +294,7 @@ module Aws::CloudHSM
     #
     class DeleteHsmRequest < Struct.new(
       :hsm_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -296,6 +308,7 @@ module Aws::CloudHSM
     #
     class DeleteHsmResponse < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -314,6 +327,7 @@ module Aws::CloudHSM
     #
     class DeleteLunaClientRequest < Struct.new(
       :client_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -325,6 +339,7 @@ module Aws::CloudHSM
     #
     class DeleteLunaClientResponse < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -345,6 +360,7 @@ module Aws::CloudHSM
     #
     class DescribeHapgRequest < Struct.new(
       :hapg_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -397,6 +413,7 @@ module Aws::CloudHSM
       :last_modified_timestamp,
       :partition_serial_list,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -425,6 +442,7 @@ module Aws::CloudHSM
     class DescribeHsmRequest < Struct.new(
       :hsm_arn,
       :hsm_serial_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -544,6 +562,7 @@ module Aws::CloudHSM
       :server_cert_uri,
       :server_cert_last_updated,
       :partitions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -568,6 +587,7 @@ module Aws::CloudHSM
     class DescribeLunaClientRequest < Struct.new(
       :client_arn,
       :certificate_fingerprint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -599,6 +619,7 @@ module Aws::CloudHSM
       :certificate_fingerprint,
       :last_modified_timestamp,
       :label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -630,6 +651,7 @@ module Aws::CloudHSM
       :client_arn,
       :client_version,
       :hapg_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -651,6 +673,7 @@ module Aws::CloudHSM
       :config_type,
       :config_file,
       :config_cred)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -677,6 +700,7 @@ module Aws::CloudHSM
     #
     class ListAvailableZonesResponse < Struct.new(
       :az_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -696,6 +720,7 @@ module Aws::CloudHSM
     #
     class ListHapgsRequest < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -713,6 +738,7 @@ module Aws::CloudHSM
     class ListHapgsResponse < Struct.new(
       :hapg_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -732,6 +758,7 @@ module Aws::CloudHSM
     #
     class ListHsmsRequest < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -751,6 +778,7 @@ module Aws::CloudHSM
     class ListHsmsResponse < Struct.new(
       :hsm_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -770,6 +798,7 @@ module Aws::CloudHSM
     #
     class ListLunaClientsRequest < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -787,6 +816,7 @@ module Aws::CloudHSM
     class ListLunaClientsResponse < Struct.new(
       :client_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -805,6 +835,7 @@ module Aws::CloudHSM
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -816,6 +847,7 @@ module Aws::CloudHSM
     #
     class ListTagsForResourceResponse < Struct.new(
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -847,6 +879,7 @@ module Aws::CloudHSM
       :hapg_arn,
       :label,
       :partition_serial_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -858,6 +891,7 @@ module Aws::CloudHSM
     #
     class ModifyHapgResponse < Struct.new(
       :hapg_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -915,6 +949,7 @@ module Aws::CloudHSM
       :iam_role_arn,
       :external_id,
       :syslog_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -928,6 +963,7 @@ module Aws::CloudHSM
     #
     class ModifyHsmResponse < Struct.new(
       :hsm_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -952,6 +988,7 @@ module Aws::CloudHSM
     class ModifyLunaClientRequest < Struct.new(
       :client_arn,
       :certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -963,6 +1000,7 @@ module Aws::CloudHSM
     #
     class ModifyLunaClientResponse < Struct.new(
       :client_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -990,6 +1028,7 @@ module Aws::CloudHSM
     class RemoveTagsFromResourceRequest < Struct.new(
       :resource_arn,
       :tag_key_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1001,6 +1040,7 @@ module Aws::CloudHSM
     #
     class RemoveTagsFromResourceResponse < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1028,6 +1068,7 @@ module Aws::CloudHSM
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 

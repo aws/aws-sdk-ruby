@@ -34,6 +34,7 @@ module Aws::ApplicationDiscoveryService
       :agent_id,
       :operation_succeeded,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -95,6 +96,7 @@ module Aws::ApplicationDiscoveryService
       :collection_status,
       :agent_type,
       :registered_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -111,6 +113,7 @@ module Aws::ApplicationDiscoveryService
     class AgentNetworkInfo < Struct.new(
       :ip_address,
       :mac_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -135,6 +138,7 @@ module Aws::ApplicationDiscoveryService
     class AssociateConfigurationItemsToApplicationRequest < Struct.new(
       :application_configuration_id,
       :configuration_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -148,6 +152,7 @@ module Aws::ApplicationDiscoveryService
     #
     class AuthorizationErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -171,6 +176,7 @@ module Aws::ApplicationDiscoveryService
       :import_task_id,
       :error_code,
       :error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -187,6 +193,7 @@ module Aws::ApplicationDiscoveryService
     #
     class BatchDeleteImportDataRequest < Struct.new(
       :import_task_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -197,6 +204,7 @@ module Aws::ApplicationDiscoveryService
     #
     class BatchDeleteImportDataResponse < Struct.new(
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -232,6 +240,7 @@ module Aws::ApplicationDiscoveryService
       :key,
       :value,
       :time_of_creation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +249,7 @@ module Aws::ApplicationDiscoveryService
     #
     class ConflictErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -361,6 +371,7 @@ module Aws::ApplicationDiscoveryService
       :stop_time,
       :data_source,
       :schema_storage_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -383,6 +394,7 @@ module Aws::ApplicationDiscoveryService
     class CreateApplicationRequest < Struct.new(
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -392,6 +404,7 @@ module Aws::ApplicationDiscoveryService
     #
     class CreateApplicationResponse < Struct.new(
       :configuration_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -423,6 +436,7 @@ module Aws::ApplicationDiscoveryService
     class CreateTagsRequest < Struct.new(
       :configuration_ids,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -466,6 +480,7 @@ module Aws::ApplicationDiscoveryService
       :unhealthy_agents,
       :total_agents,
       :unknown_agents)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -507,6 +522,7 @@ module Aws::ApplicationDiscoveryService
       :unhealthy_connectors,
       :total_connectors,
       :unknown_connectors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -523,6 +539,7 @@ module Aws::ApplicationDiscoveryService
     #
     class DeleteApplicationsRequest < Struct.new(
       :configuration_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -556,6 +573,7 @@ module Aws::ApplicationDiscoveryService
     class DeleteTagsRequest < Struct.new(
       :configuration_ids,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -608,6 +626,7 @@ module Aws::ApplicationDiscoveryService
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -631,6 +650,7 @@ module Aws::ApplicationDiscoveryService
     class DescribeAgentsResponse < Struct.new(
       :agents_info,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -647,6 +667,7 @@ module Aws::ApplicationDiscoveryService
     #
     class DescribeConfigurationsRequest < Struct.new(
       :configuration_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -656,6 +677,7 @@ module Aws::ApplicationDiscoveryService
     #
     class DescribeConfigurationsResponse < Struct.new(
       :configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -685,6 +707,7 @@ module Aws::ApplicationDiscoveryService
       :export_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -699,6 +722,7 @@ module Aws::ApplicationDiscoveryService
     class DescribeContinuousExportsResponse < Struct.new(
       :descriptions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -728,6 +752,7 @@ module Aws::ApplicationDiscoveryService
       :export_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -741,6 +766,7 @@ module Aws::ApplicationDiscoveryService
     class DescribeExportConfigurationsResponse < Struct.new(
       :exports_info,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -793,6 +819,7 @@ module Aws::ApplicationDiscoveryService
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -813,6 +840,7 @@ module Aws::ApplicationDiscoveryService
     class DescribeExportTasksResponse < Struct.new(
       :exports_info,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -849,6 +877,7 @@ module Aws::ApplicationDiscoveryService
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -864,6 +893,7 @@ module Aws::ApplicationDiscoveryService
     class DescribeImportTasksResponse < Struct.new(
       :next_token,
       :tasks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -901,6 +931,7 @@ module Aws::ApplicationDiscoveryService
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -918,6 +949,7 @@ module Aws::ApplicationDiscoveryService
     class DescribeTagsResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -942,6 +974,7 @@ module Aws::ApplicationDiscoveryService
     class DisassociateConfigurationItemsFromApplicationRequest < Struct.new(
       :application_configuration_id,
       :configuration_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -953,6 +986,7 @@ module Aws::ApplicationDiscoveryService
     #
     class ExportConfigurationsResponse < Struct.new(
       :export_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -994,6 +1028,7 @@ module Aws::ApplicationDiscoveryService
       :name,
       :values,
       :condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1048,6 +1083,7 @@ module Aws::ApplicationDiscoveryService
       :is_truncated,
       :requested_start_time,
       :requested_end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1094,6 +1130,7 @@ module Aws::ApplicationDiscoveryService
       :name,
       :values,
       :condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1133,6 +1170,7 @@ module Aws::ApplicationDiscoveryService
       :servers_mappedto_tags,
       :agent_summary,
       :connector_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1143,6 +1181,7 @@ module Aws::ApplicationDiscoveryService
     #
     class HomeRegionNotSetException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1248,6 +1287,7 @@ module Aws::ApplicationDiscoveryService
       :application_import_success,
       :application_import_failure,
       :errors_and_failed_entries_zip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1280,6 +1320,7 @@ module Aws::ApplicationDiscoveryService
     class ImportTaskFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1291,6 +1332,7 @@ module Aws::ApplicationDiscoveryService
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1302,6 +1344,7 @@ module Aws::ApplicationDiscoveryService
     #
     class InvalidParameterValueException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1375,6 +1418,7 @@ module Aws::ApplicationDiscoveryService
       :max_results,
       :next_token,
       :order_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1394,6 +1438,7 @@ module Aws::ApplicationDiscoveryService
     class ListConfigurationsResponse < Struct.new(
       :configurations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1440,6 +1485,7 @@ module Aws::ApplicationDiscoveryService
       :neighbor_configuration_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1466,6 +1512,7 @@ module Aws::ApplicationDiscoveryService
       :neighbors,
       :next_token,
       :known_dependency_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1497,6 +1544,7 @@ module Aws::ApplicationDiscoveryService
       :destination_port,
       :transport_protocol,
       :connections_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1507,6 +1555,7 @@ module Aws::ApplicationDiscoveryService
     #
     class OperationNotPermittedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1531,6 +1580,7 @@ module Aws::ApplicationDiscoveryService
     class OrderByElement < Struct.new(
       :field_name,
       :sort_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1545,6 +1595,7 @@ module Aws::ApplicationDiscoveryService
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1556,6 +1607,7 @@ module Aws::ApplicationDiscoveryService
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1566,6 +1618,7 @@ module Aws::ApplicationDiscoveryService
     #
     class ServerInternalErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1606,6 +1659,7 @@ module Aws::ApplicationDiscoveryService
       :start_time,
       :data_source,
       :schema_storage_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1629,6 +1683,7 @@ module Aws::ApplicationDiscoveryService
     #
     class StartDataCollectionByAgentIdsRequest < Struct.new(
       :agent_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1641,6 +1696,7 @@ module Aws::ApplicationDiscoveryService
     #
     class StartDataCollectionByAgentIdsResponse < Struct.new(
       :agents_configuration_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1692,6 +1748,7 @@ module Aws::ApplicationDiscoveryService
       :filters,
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1701,6 +1758,7 @@ module Aws::ApplicationDiscoveryService
     #
     class StartExportTaskResponse < Struct.new(
       :export_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1746,6 +1804,7 @@ module Aws::ApplicationDiscoveryService
       :client_request_token,
       :name,
       :import_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1757,6 +1816,7 @@ module Aws::ApplicationDiscoveryService
     #
     class StartImportTaskResponse < Struct.new(
       :task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1773,6 +1833,7 @@ module Aws::ApplicationDiscoveryService
     #
     class StopContinuousExportRequest < Struct.new(
       :export_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1788,6 +1849,7 @@ module Aws::ApplicationDiscoveryService
     class StopContinuousExportResponse < Struct.new(
       :start_time,
       :stop_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1805,6 +1867,7 @@ module Aws::ApplicationDiscoveryService
     #
     class StopDataCollectionByAgentIdsRequest < Struct.new(
       :agent_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1817,6 +1880,7 @@ module Aws::ApplicationDiscoveryService
     #
     class StopDataCollectionByAgentIdsResponse < Struct.new(
       :agents_configuration_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1841,6 +1905,7 @@ module Aws::ApplicationDiscoveryService
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1866,6 +1931,7 @@ module Aws::ApplicationDiscoveryService
     class TagFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1894,6 +1960,7 @@ module Aws::ApplicationDiscoveryService
       :configuration_id,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 

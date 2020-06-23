@@ -52,6 +52,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :upload_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -82,6 +83,7 @@ module Aws::Glacier
     class AbortVaultLockInput < Struct.new(
       :account_id,
       :vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -120,6 +122,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -151,6 +154,7 @@ module Aws::Glacier
       :location,
       :checksum,
       :archive_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -205,6 +209,7 @@ module Aws::Glacier
       :record_delimiter,
       :field_delimiter,
       :quote_character)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -252,6 +257,7 @@ module Aws::Glacier
       :record_delimiter,
       :field_delimiter,
       :quote_character)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -309,6 +315,7 @@ module Aws::Glacier
       :upload_id,
       :archive_size,
       :checksum)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -346,6 +353,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :lock_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -376,6 +384,7 @@ module Aws::Glacier
     class CreateVaultInput < Struct.new(
       :account_id,
       :vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -387,6 +396,7 @@ module Aws::Glacier
     #
     class CreateVaultOutput < Struct.new(
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -412,6 +422,7 @@ module Aws::Glacier
     #
     class DataRetrievalPolicy < Struct.new(
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -442,6 +453,7 @@ module Aws::Glacier
     class DataRetrievalRule < Struct.new(
       :strategy,
       :bytes_per_hour)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -478,6 +490,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :archive_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -507,6 +520,7 @@ module Aws::Glacier
     class DeleteVaultAccessPolicyInput < Struct.new(
       :account_id,
       :vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -536,6 +550,7 @@ module Aws::Glacier
     class DeleteVaultInput < Struct.new(
       :account_id,
       :vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -566,6 +581,7 @@ module Aws::Glacier
     class DeleteVaultNotificationsInput < Struct.new(
       :account_id,
       :vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -601,6 +617,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -631,6 +648,7 @@ module Aws::Glacier
     class DescribeVaultInput < Struct.new(
       :account_id,
       :vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -675,6 +693,7 @@ module Aws::Glacier
       :last_inventory_date,
       :number_of_archives,
       :size_in_bytes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -710,6 +729,7 @@ module Aws::Glacier
       :encryption_type,
       :kms_key_id,
       :kms_context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -734,6 +754,7 @@ module Aws::Glacier
     #
     class GetDataRetrievalPolicyInput < Struct.new(
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -746,6 +767,7 @@ module Aws::Glacier
     #
     class GetDataRetrievalPolicyOutput < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -817,6 +839,7 @@ module Aws::Glacier
       :vault_name,
       :job_id,
       :range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -889,6 +912,7 @@ module Aws::Glacier
       :accept_ranges,
       :content_type,
       :archive_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -918,6 +942,7 @@ module Aws::Glacier
     class GetVaultAccessPolicyInput < Struct.new(
       :account_id,
       :vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -929,6 +954,7 @@ module Aws::Glacier
     #
     class GetVaultAccessPolicyOutput < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -958,6 +984,7 @@ module Aws::Glacier
     class GetVaultLockInput < Struct.new(
       :account_id,
       :vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -987,6 +1014,7 @@ module Aws::Glacier
       :state,
       :expiration_date,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1017,6 +1045,7 @@ module Aws::Glacier
     class GetVaultNotificationsInput < Struct.new(
       :account_id,
       :vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1028,6 +1057,7 @@ module Aws::Glacier
     #
     class GetVaultNotificationsOutput < Struct.new(
       :vault_notification_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1184,6 +1214,7 @@ module Aws::Glacier
       :job_output_path,
       :select_parameters,
       :output_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1214,6 +1245,7 @@ module Aws::Glacier
     class Grant < Struct.new(
       :grantee,
       :permission)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1256,6 +1288,7 @@ module Aws::Glacier
       :uri,
       :id,
       :email_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1359,6 +1392,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :job_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1380,6 +1414,7 @@ module Aws::Glacier
       :location,
       :job_id,
       :job_output_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1428,6 +1463,7 @@ module Aws::Glacier
       :vault_name,
       :archive_description,
       :part_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1446,6 +1482,7 @@ module Aws::Glacier
     class InitiateMultipartUploadOutput < Struct.new(
       :location,
       :upload_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1485,6 +1522,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1496,6 +1534,7 @@ module Aws::Glacier
     #
     class InitiateVaultLockOutput < Struct.new(
       :lock_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1521,6 +1560,7 @@ module Aws::Glacier
     #
     class InputSerialization < Struct.new(
       :csv)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1541,6 +1581,7 @@ module Aws::Glacier
       :type,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1562,6 +1603,7 @@ module Aws::Glacier
       :type,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1611,6 +1653,7 @@ module Aws::Glacier
       :end_date,
       :limit,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1658,6 +1701,7 @@ module Aws::Glacier
       :end_date,
       :limit,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1816,6 +1860,7 @@ module Aws::Glacier
       :inventory_retrieval_parameters,
       :select_parameters,
       :output_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1839,6 +1884,7 @@ module Aws::Glacier
       :type,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1900,6 +1946,7 @@ module Aws::Glacier
       :marker,
       :statuscode,
       :completed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1921,6 +1968,7 @@ module Aws::Glacier
     class ListJobsOutput < Struct.new(
       :job_list,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1969,6 +2017,7 @@ module Aws::Glacier
       :vault_name,
       :marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1988,6 +2037,7 @@ module Aws::Glacier
     class ListMultipartUploadsOutput < Struct.new(
       :uploads_list,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2042,6 +2092,7 @@ module Aws::Glacier
       :upload_id,
       :marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2091,6 +2142,7 @@ module Aws::Glacier
       :creation_date,
       :parts,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2111,6 +2163,7 @@ module Aws::Glacier
     #
     class ListProvisionedCapacityInput < Struct.new(
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2120,6 +2173,7 @@ module Aws::Glacier
     #
     class ListProvisionedCapacityOutput < Struct.new(
       :provisioned_capacity_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2149,6 +2203,7 @@ module Aws::Glacier
     class ListTagsForVaultInput < Struct.new(
       :account_id,
       :vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2161,6 +2216,7 @@ module Aws::Glacier
     #
     class ListTagsForVaultOutput < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2202,6 +2258,7 @@ module Aws::Glacier
       :account_id,
       :marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2220,6 +2277,7 @@ module Aws::Glacier
     class ListVaultsOutput < Struct.new(
       :vault_list,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2242,6 +2300,7 @@ module Aws::Glacier
       :type,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2290,6 +2349,7 @@ module Aws::Glacier
     #
     class OutputLocation < Struct.new(
       :s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2314,6 +2374,7 @@ module Aws::Glacier
     #
     class OutputSerialization < Struct.new(
       :csv)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2331,6 +2392,7 @@ module Aws::Glacier
     class PartListElement < Struct.new(
       :range_in_bytes,
       :sha256_tree_hash)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2354,6 +2416,7 @@ module Aws::Glacier
       :type,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2377,6 +2440,7 @@ module Aws::Glacier
       :capacity_id,
       :start_date,
       :expiration_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2397,6 +2461,7 @@ module Aws::Glacier
     #
     class PurchaseProvisionedCapacityInput < Struct.new(
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2406,6 +2471,7 @@ module Aws::Glacier
     #
     class PurchaseProvisionedCapacityOutput < Struct.new(
       :capacity_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2442,6 +2508,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2465,6 +2532,7 @@ module Aws::Glacier
       :type,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2488,6 +2556,7 @@ module Aws::Glacier
       :type,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2569,6 +2638,7 @@ module Aws::Glacier
       :tagging,
       :user_metadata,
       :storage_class)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2622,6 +2692,7 @@ module Aws::Glacier
       :expression_type,
       :expression,
       :output_serialization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2643,6 +2714,7 @@ module Aws::Glacier
       :type,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2680,6 +2752,7 @@ module Aws::Glacier
     class SetDataRetrievalPolicyInput < Struct.new(
       :account_id,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2717,6 +2790,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2756,6 +2830,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :vault_notification_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2803,6 +2878,7 @@ module Aws::Glacier
       :archive_description,
       :checksum,
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2838,6 +2914,7 @@ module Aws::Glacier
       :archive_description,
       :part_size_in_bytes,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2896,6 +2973,7 @@ module Aws::Glacier
       :checksum,
       :range,
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2908,6 +2986,7 @@ module Aws::Glacier
     #
     class UploadMultipartPartOutput < Struct.new(
       :checksum)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2926,6 +3005,7 @@ module Aws::Glacier
     #
     class VaultAccessPolicy < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2944,6 +3024,7 @@ module Aws::Glacier
     #
     class VaultLockPolicy < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2970,6 +3051,7 @@ module Aws::Glacier
     class VaultNotificationConfig < Struct.new(
       :sns_topic,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 

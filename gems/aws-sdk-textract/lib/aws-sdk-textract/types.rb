@@ -70,6 +70,7 @@ module Aws::Textract
       :document,
       :feature_types,
       :human_loop_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -97,6 +98,7 @@ module Aws::Textract
       :blocks,
       :human_loop_activation_output,
       :analyze_document_model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -271,6 +273,7 @@ module Aws::Textract
       :entity_types,
       :selection_status,
       :page)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -318,6 +321,7 @@ module Aws::Textract
       :height,
       :left,
       :top)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -350,6 +354,7 @@ module Aws::Textract
     #
     class DetectDocumentTextRequest < Struct.new(
       :document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -372,6 +377,7 @@ module Aws::Textract
       :document_metadata,
       :blocks,
       :detect_document_text_model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -430,6 +436,7 @@ module Aws::Textract
     class Document < Struct.new(
       :bytes,
       :s3_object)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -458,6 +465,7 @@ module Aws::Textract
     #
     class DocumentLocation < Struct.new(
       :s3_object)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -471,6 +479,7 @@ module Aws::Textract
     #
     class DocumentMetadata < Struct.new(
       :pages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -501,6 +510,7 @@ module Aws::Textract
     class Geometry < Struct.new(
       :bounding_box,
       :polygon)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -539,6 +549,7 @@ module Aws::Textract
       :job_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -584,6 +595,7 @@ module Aws::Textract
       :warnings,
       :status_message,
       :analyze_document_model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -622,6 +634,7 @@ module Aws::Textract
       :job_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -668,6 +681,7 @@ module Aws::Textract
       :warnings,
       :status_message,
       :detect_document_text_model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -693,6 +707,7 @@ module Aws::Textract
       :human_loop_arn,
       :human_loop_activation_reasons,
       :human_loop_activation_conditions_evaluation_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -730,6 +745,7 @@ module Aws::Textract
       :human_loop_name,
       :flow_definition_arn,
       :data_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -753,6 +769,7 @@ module Aws::Textract
     #
     class HumanLoopDataAttributes < Struct.new(
       :content_classifiers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -774,6 +791,7 @@ module Aws::Textract
       :resource_type,
       :quota_code,
       :service_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -853,6 +871,7 @@ module Aws::Textract
     class NotificationChannel < Struct.new(
       :sns_topic_arn,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -880,6 +899,7 @@ module Aws::Textract
     class Point < Struct.new(
       :x,
       :y)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -916,6 +936,7 @@ module Aws::Textract
     class Relationship < Struct.new(
       :type,
       :ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -957,6 +978,7 @@ module Aws::Textract
       :bucket,
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1027,6 +1049,7 @@ module Aws::Textract
       :client_request_token,
       :job_tag,
       :notification_channel)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1040,6 +1063,7 @@ module Aws::Textract
     #
     class StartDocumentAnalysisResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1098,6 +1122,7 @@ module Aws::Textract
       :client_request_token,
       :job_tag,
       :notification_channel)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1112,6 +1137,7 @@ module Aws::Textract
     #
     class StartDocumentTextDetectionResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1147,6 +1173,7 @@ module Aws::Textract
     class Warning < Struct.new(
       :error_code,
       :pages)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -156,6 +156,7 @@ module Aws::MarketplaceCommerceAnalytics
       :destination_s3_prefix,
       :sns_topic_arn,
       :customer_defined_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -171,6 +172,7 @@ module Aws::MarketplaceCommerceAnalytics
     #
     class GenerateDataSetResult < Struct.new(
       :data_set_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -184,6 +186,7 @@ module Aws::MarketplaceCommerceAnalytics
     #
     class MarketplaceCommerceAnalyticsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -267,6 +270,7 @@ module Aws::MarketplaceCommerceAnalytics
       :destination_s3_prefix,
       :sns_topic_arn,
       :customer_defined_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -282,6 +286,7 @@ module Aws::MarketplaceCommerceAnalytics
     #
     class StartSupportDataExportResult < Struct.new(
       :data_set_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 

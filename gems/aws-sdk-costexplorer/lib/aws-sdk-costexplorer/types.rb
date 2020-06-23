@@ -19,6 +19,7 @@ module Aws::CostExplorer
     #
     class BillExpirationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -60,6 +61,7 @@ module Aws::CostExplorer
       :name,
       :rule_version,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -97,6 +99,7 @@ module Aws::CostExplorer
       :effective_start,
       :effective_end,
       :number_of_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -171,6 +174,7 @@ module Aws::CostExplorer
     class CostCategoryRule < Struct.new(
       :value,
       :rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -197,6 +201,7 @@ module Aws::CostExplorer
     class CostCategoryValues < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -221,6 +226,7 @@ module Aws::CostExplorer
       :coverage_hours,
       :coverage_normalized_units,
       :coverage_cost)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -244,6 +250,7 @@ module Aws::CostExplorer
       :time_period,
       :groups,
       :total)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -257,6 +264,7 @@ module Aws::CostExplorer
     #
     class CoverageCost < Struct.new(
       :on_demand_cost)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -287,6 +295,7 @@ module Aws::CostExplorer
       :reserved_hours,
       :total_running_hours,
       :coverage_hours_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -332,6 +341,7 @@ module Aws::CostExplorer
       :reserved_normalized_units,
       :total_running_normalized_units,
       :coverage_normalized_units_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -400,6 +410,7 @@ module Aws::CostExplorer
       :name,
       :rule_version,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -416,6 +427,7 @@ module Aws::CostExplorer
     class CreateCostCategoryDefinitionResponse < Struct.new(
       :cost_category_arn,
       :effective_start)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -479,6 +491,7 @@ module Aws::CostExplorer
       :total_running_hours_in_lookback_period,
       :monthly_cost,
       :currency_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -491,6 +504,7 @@ module Aws::CostExplorer
     #
     class DataUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -523,6 +537,7 @@ module Aws::CostExplorer
     class DateInterval < Struct.new(
       :start,
       :end)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -541,6 +556,7 @@ module Aws::CostExplorer
     #
     class DeleteCostCategoryDefinitionRequest < Struct.new(
       :cost_category_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -559,6 +575,7 @@ module Aws::CostExplorer
     class DeleteCostCategoryDefinitionResponse < Struct.new(
       :cost_category_arn,
       :effective_end)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -583,6 +600,7 @@ module Aws::CostExplorer
     class DescribeCostCategoryDefinitionRequest < Struct.new(
       :cost_category_arn,
       :effective_on)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -595,6 +613,7 @@ module Aws::CostExplorer
     #
     class DescribeCostCategoryDefinitionResponse < Struct.new(
       :cost_category)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -634,6 +653,7 @@ module Aws::CostExplorer
       :key,
       :values,
       :match_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -654,6 +674,7 @@ module Aws::CostExplorer
     class DimensionValuesWithAttributes < Struct.new(
       :value,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -705,6 +726,7 @@ module Aws::CostExplorer
       :tenancy,
       :current_generation,
       :size_flex_eligible)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -761,6 +783,7 @@ module Aws::CostExplorer
       :network_performance,
       :storage,
       :vcpu)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -785,6 +808,7 @@ module Aws::CostExplorer
       :max_cpu_utilization_percentage,
       :max_memory_utilization_percentage,
       :max_storage_utilization_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -807,6 +831,7 @@ module Aws::CostExplorer
     #
     class EC2Specification < Struct.new(
       :offering_class)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -841,6 +866,7 @@ module Aws::CostExplorer
       :region,
       :current_generation,
       :size_flex_eligible)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -880,6 +906,7 @@ module Aws::CostExplorer
       :product_description,
       :current_generation,
       :size_flex_eligible)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1064,6 +1091,7 @@ module Aws::CostExplorer
       :dimensions,
       :tags,
       :cost_categories)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1092,6 +1120,7 @@ module Aws::CostExplorer
       :mean_value,
       :prediction_interval_lower_bound,
       :prediction_interval_upper_bound)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1222,6 +1251,7 @@ module Aws::CostExplorer
       :metrics,
       :group_by,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1246,6 +1276,7 @@ module Aws::CostExplorer
       :next_page_token,
       :group_definitions,
       :results_by_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1374,6 +1405,7 @@ module Aws::CostExplorer
       :metrics,
       :group_by,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1398,6 +1430,7 @@ module Aws::CostExplorer
       :next_page_token,
       :group_definitions,
       :results_by_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1499,6 +1532,7 @@ module Aws::CostExplorer
       :granularity,
       :filter,
       :prediction_interval_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1518,6 +1552,7 @@ module Aws::CostExplorer
     class GetCostForecastResponse < Struct.new(
       :total,
       :forecast_results_by_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1676,6 +1711,7 @@ module Aws::CostExplorer
       :dimension,
       :context,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1805,6 +1841,7 @@ module Aws::CostExplorer
       :return_size,
       :total_size,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1970,6 +2007,7 @@ module Aws::CostExplorer
       :filter,
       :metrics,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1993,6 +2031,7 @@ module Aws::CostExplorer
       :coverages_by_time,
       :total,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2072,6 +2111,7 @@ module Aws::CostExplorer
       :service_specification,
       :page_size,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2094,6 +2134,7 @@ module Aws::CostExplorer
       :metadata,
       :recommendations,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2216,6 +2257,7 @@ module Aws::CostExplorer
       :granularity,
       :filter,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2239,6 +2281,7 @@ module Aws::CostExplorer
       :utilizations_by_time,
       :total,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2365,6 +2408,7 @@ module Aws::CostExplorer
       :service,
       :page_size,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2401,6 +2445,7 @@ module Aws::CostExplorer
       :rightsizing_recommendations,
       :next_page_token,
       :configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2523,6 +2568,7 @@ module Aws::CostExplorer
       :metrics,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2541,6 +2587,7 @@ module Aws::CostExplorer
     class GetSavingsPlansCoverageResponse < Struct.new(
       :savings_plans_coverages,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2648,6 +2695,7 @@ module Aws::CostExplorer
       :page_size,
       :lookback_period_in_days,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2672,6 +2720,7 @@ module Aws::CostExplorer
       :metadata,
       :savings_plans_purchase_recommendation,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2764,6 +2813,7 @@ module Aws::CostExplorer
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2793,6 +2843,7 @@ module Aws::CostExplorer
       :total,
       :time_period,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2882,6 +2933,7 @@ module Aws::CostExplorer
       :time_period,
       :granularity,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2900,6 +2952,7 @@ module Aws::CostExplorer
     class GetSavingsPlansUtilizationResponse < Struct.new(
       :savings_plans_utilizations_by_time,
       :total)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2945,6 +2998,7 @@ module Aws::CostExplorer
       :time_period,
       :tag_key,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2973,6 +3027,7 @@ module Aws::CostExplorer
       :tags,
       :return_size,
       :total_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3067,6 +3122,7 @@ module Aws::CostExplorer
       :granularity,
       :filter,
       :prediction_interval_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3085,6 +3141,7 @@ module Aws::CostExplorer
     class GetUsageForecastResponse < Struct.new(
       :total,
       :forecast_results_by_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3103,6 +3160,7 @@ module Aws::CostExplorer
     class Group < Struct.new(
       :keys,
       :metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3130,6 +3188,7 @@ module Aws::CostExplorer
     class GroupDefinition < Struct.new(
       :type,
       :key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3163,6 +3222,7 @@ module Aws::CostExplorer
       :redshift_instance_details,
       :elasticache_instance_details,
       :es_instance_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3175,6 +3235,7 @@ module Aws::CostExplorer
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3187,6 +3248,7 @@ module Aws::CostExplorer
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3219,6 +3281,7 @@ module Aws::CostExplorer
       :effective_on,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3238,6 +3301,7 @@ module Aws::CostExplorer
     class ListCostCategoryDefinitionsResponse < Struct.new(
       :cost_category_references,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3256,6 +3320,7 @@ module Aws::CostExplorer
     class MetricValue < Struct.new(
       :amount,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3270,6 +3335,7 @@ module Aws::CostExplorer
     #
     class ModifyRecommendationDetail < Struct.new(
       :target_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3326,6 +3392,7 @@ module Aws::CostExplorer
       :license_model,
       :current_generation,
       :size_flex_eligible)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3360,6 +3427,7 @@ module Aws::CostExplorer
       :region,
       :current_generation,
       :size_flex_eligible)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3373,6 +3441,7 @@ module Aws::CostExplorer
     #
     class RequestChangedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3464,6 +3533,7 @@ module Aws::CostExplorer
       :amortized_upfront_fee,
       :amortized_recurring_fee,
       :total_amortized_fee)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3482,6 +3552,7 @@ module Aws::CostExplorer
     class ReservationCoverageGroup < Struct.new(
       :attributes,
       :coverage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3531,6 +3602,7 @@ module Aws::CostExplorer
       :service_specification,
       :recommendation_details,
       :recommendation_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3654,6 +3726,7 @@ module Aws::CostExplorer
       :estimated_reservation_cost_for_lookback_period,
       :upfront_cost,
       :recurring_standard_monthly_cost)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3673,6 +3746,7 @@ module Aws::CostExplorer
     class ReservationPurchaseRecommendationMetadata < Struct.new(
       :recommendation_id,
       :generation_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3700,6 +3774,7 @@ module Aws::CostExplorer
       :total_estimated_monthly_savings_amount,
       :total_estimated_monthly_savings_percentage,
       :currency_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3728,6 +3803,7 @@ module Aws::CostExplorer
       :value,
       :attributes,
       :utilization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3741,6 +3817,7 @@ module Aws::CostExplorer
     #
     class ResourceDetails < Struct.new(
       :ec2_resource_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3753,6 +3830,7 @@ module Aws::CostExplorer
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3766,6 +3844,7 @@ module Aws::CostExplorer
     #
     class ResourceUtilization < Struct.new(
       :ec2_resource_utilization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3794,6 +3873,7 @@ module Aws::CostExplorer
       :total,
       :groups,
       :estimated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3827,6 +3907,7 @@ module Aws::CostExplorer
       :rightsizing_type,
       :modify_recommendation_detail,
       :terminate_recommendation_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3861,6 +3942,7 @@ module Aws::CostExplorer
     class RightsizingRecommendationConfiguration < Struct.new(
       :recommendation_target,
       :benefits_considered)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3886,6 +3968,7 @@ module Aws::CostExplorer
       :recommendation_id,
       :generation_timestamp,
       :lookback_period_in_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3917,6 +4000,7 @@ module Aws::CostExplorer
       :estimated_total_monthly_savings_amount,
       :savings_currency_code,
       :savings_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3944,6 +4028,7 @@ module Aws::CostExplorer
       :amortized_recurring_commitment,
       :amortized_upfront_commitment,
       :total_amortized_commitment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3970,6 +4055,7 @@ module Aws::CostExplorer
       :attributes,
       :coverage,
       :time_period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4004,6 +4090,7 @@ module Aws::CostExplorer
       :on_demand_cost,
       :total_cost,
       :coverage_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4028,6 +4115,7 @@ module Aws::CostExplorer
       :region,
       :instance_family,
       :offering_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4078,6 +4166,7 @@ module Aws::CostExplorer
       :lookback_period_in_days,
       :savings_plans_purchase_recommendation_details,
       :savings_plans_purchase_recommendation_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4181,6 +4270,7 @@ module Aws::CostExplorer
       :current_minimum_hourly_on_demand_spend,
       :current_maximum_hourly_on_demand_spend,
       :current_average_hourly_on_demand_spend)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4199,6 +4289,7 @@ module Aws::CostExplorer
     class SavingsPlansPurchaseRecommendationMetadata < Struct.new(
       :recommendation_id,
       :generation_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4275,6 +4366,7 @@ module Aws::CostExplorer
       :estimated_savings_percentage,
       :estimated_monthly_savings_amount,
       :estimated_on_demand_cost_with_current_commitment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4297,6 +4389,7 @@ module Aws::CostExplorer
     class SavingsPlansSavings < Struct.new(
       :net_savings,
       :on_demand_cost_equivalent)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4329,6 +4422,7 @@ module Aws::CostExplorer
       :used_commitment,
       :unused_commitment,
       :utilization_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4357,6 +4451,7 @@ module Aws::CostExplorer
       :utilization,
       :savings,
       :amortized_commitment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4390,6 +4485,7 @@ module Aws::CostExplorer
       :utilization,
       :savings,
       :amortized_commitment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4431,6 +4527,7 @@ module Aws::CostExplorer
       :utilization,
       :savings,
       :amortized_commitment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4444,6 +4541,7 @@ module Aws::CostExplorer
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4468,6 +4566,7 @@ module Aws::CostExplorer
     #
     class ServiceSpecification < Struct.new(
       :ec2_specification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4503,6 +4602,7 @@ module Aws::CostExplorer
       :key,
       :values,
       :match_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4543,6 +4643,7 @@ module Aws::CostExplorer
       :default_target_instance,
       :resource_details,
       :expected_resource_utilization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4562,6 +4663,7 @@ module Aws::CostExplorer
     class TerminateRecommendationDetail < Struct.new(
       :estimated_monthly_savings,
       :currency_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4576,6 +4678,7 @@ module Aws::CostExplorer
     #
     class UnresolvableUsageUnitException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4644,6 +4747,7 @@ module Aws::CostExplorer
       :cost_category_arn,
       :rule_version,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4660,6 +4764,7 @@ module Aws::CostExplorer
     class UpdateCostCategoryDefinitionResponse < Struct.new(
       :cost_category_arn,
       :effective_start)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4683,6 +4788,7 @@ module Aws::CostExplorer
       :time_period,
       :groups,
       :total)
+      SENSITIVE = []
       include Aws::Structure
     end
 

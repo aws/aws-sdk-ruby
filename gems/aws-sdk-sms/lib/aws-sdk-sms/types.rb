@@ -95,6 +95,7 @@ module Aws::SMS
       :role_name,
       :total_server_groups,
       :total_servers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -153,6 +154,7 @@ module Aws::SMS
       :ip_address,
       :mac_address,
       :associated_on)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -230,6 +232,7 @@ module Aws::SMS
       :client_token,
       :server_groups,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -251,6 +254,7 @@ module Aws::SMS
       :app_summary,
       :server_groups,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -337,6 +341,7 @@ module Aws::SMS
       :number_of_recent_amis_to_keep,
       :encrypted,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -348,6 +353,7 @@ module Aws::SMS
     #
     class CreateReplicationJobResponse < Struct.new(
       :replication_job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -366,6 +372,7 @@ module Aws::SMS
     #
     class DeleteAppLaunchConfigurationRequest < Struct.new(
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -388,6 +395,7 @@ module Aws::SMS
     #
     class DeleteAppReplicationConfigurationRequest < Struct.new(
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -424,6 +432,7 @@ module Aws::SMS
       :app_id,
       :force_stop_app_replication,
       :force_terminate_app)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -446,6 +455,7 @@ module Aws::SMS
     #
     class DeleteReplicationJobRequest < Struct.new(
       :replication_job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -478,6 +488,7 @@ module Aws::SMS
     #
     class DisassociateConnectorRequest < Struct.new(
       :connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -506,6 +517,7 @@ module Aws::SMS
     class GenerateChangeSetRequest < Struct.new(
       :app_id,
       :changeset_format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -517,6 +529,7 @@ module Aws::SMS
     #
     class GenerateChangeSetResponse < Struct.new(
       :s3_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -542,6 +555,7 @@ module Aws::SMS
     class GenerateTemplateRequest < Struct.new(
       :app_id,
       :template_format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -553,6 +567,7 @@ module Aws::SMS
     #
     class GenerateTemplateResponse < Struct.new(
       :s3_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -571,6 +586,7 @@ module Aws::SMS
     #
     class GetAppLaunchConfigurationRequest < Struct.new(
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -593,6 +609,7 @@ module Aws::SMS
       :app_id,
       :role_name,
       :server_group_launch_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -611,6 +628,7 @@ module Aws::SMS
     #
     class GetAppReplicationConfigurationRequest < Struct.new(
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -623,6 +641,7 @@ module Aws::SMS
     #
     class GetAppReplicationConfigurationResponse < Struct.new(
       :server_group_replication_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -641,6 +660,7 @@ module Aws::SMS
     #
     class GetAppRequest < Struct.new(
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -662,6 +682,7 @@ module Aws::SMS
       :app_summary,
       :server_groups,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -688,6 +709,7 @@ module Aws::SMS
     class GetConnectorsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -705,6 +727,7 @@ module Aws::SMS
     class GetConnectorsResponse < Struct.new(
       :connector_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -737,6 +760,7 @@ module Aws::SMS
       :replication_job_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -754,6 +778,7 @@ module Aws::SMS
     class GetReplicationJobsResponse < Struct.new(
       :replication_job_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -786,6 +811,7 @@ module Aws::SMS
       :replication_job_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -808,6 +834,7 @@ module Aws::SMS
       :replication_job,
       :replication_run_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -845,6 +872,7 @@ module Aws::SMS
       :next_token,
       :max_results,
       :vm_server_address_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -872,6 +900,7 @@ module Aws::SMS
       :server_catalog_status,
       :server_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -894,6 +923,7 @@ module Aws::SMS
     #
     class InternalError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -906,6 +936,7 @@ module Aws::SMS
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -924,6 +955,7 @@ module Aws::SMS
     #
     class LaunchAppRequest < Struct.new(
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -951,6 +983,7 @@ module Aws::SMS
       :latest_launch_time,
       :stack_name,
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -982,6 +1015,7 @@ module Aws::SMS
       :app_ids,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -999,6 +1033,7 @@ module Aws::SMS
     class ListAppsResponse < Struct.new(
       :apps,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1011,6 +1046,7 @@ module Aws::SMS
     #
     class MissingRequiredParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1023,6 +1059,7 @@ module Aws::SMS
     #
     class NoConnectorsAvailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1035,6 +1072,7 @@ module Aws::SMS
     #
     class OperationNotPermittedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1104,6 +1142,7 @@ module Aws::SMS
       :app_id,
       :role_name,
       :server_group_launch_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1166,6 +1205,7 @@ module Aws::SMS
     class PutAppReplicationConfigurationRequest < Struct.new(
       :app_id,
       :server_group_replication_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1283,6 +1323,7 @@ module Aws::SMS
       :encrypted,
       :kms_key_id,
       :replication_run_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1295,6 +1336,7 @@ module Aws::SMS
     #
     class ReplicationJobAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1307,6 +1349,7 @@ module Aws::SMS
     #
     class ReplicationJobNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1384,6 +1427,7 @@ module Aws::SMS
       :description,
       :encrypted,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1397,6 +1441,7 @@ module Aws::SMS
     #
     class ReplicationRunLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1416,6 +1461,7 @@ module Aws::SMS
     class ReplicationRunStageDetails < Struct.new(
       :stage,
       :stage_progress)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1442,6 +1488,7 @@ module Aws::SMS
     class S3Location < Struct.new(
       :bucket,
       :key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1495,6 +1542,7 @@ module Aws::SMS
       :vm_server,
       :replication_job_id,
       :replication_job_terminated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1507,6 +1555,7 @@ module Aws::SMS
     #
     class ServerCannotBeReplicatedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1556,6 +1605,7 @@ module Aws::SMS
       :server_group_id,
       :name,
       :server_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1621,6 +1671,7 @@ module Aws::SMS
       :server_group_id,
       :launch_order,
       :server_launch_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1676,6 +1727,7 @@ module Aws::SMS
     class ServerGroupReplicationConfiguration < Struct.new(
       :server_group_id,
       :server_replication_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1769,6 +1821,7 @@ module Aws::SMS
       :user_data,
       :instance_type,
       :associate_public_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1819,6 +1872,7 @@ module Aws::SMS
     class ServerReplicationConfiguration < Struct.new(
       :server,
       :server_replication_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1888,6 +1942,7 @@ module Aws::SMS
       :number_of_recent_amis_to_keep,
       :encrypted,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1906,6 +1961,7 @@ module Aws::SMS
     #
     class StartAppReplicationRequest < Struct.new(
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1934,6 +1990,7 @@ module Aws::SMS
     class StartOnDemandReplicationRunRequest < Struct.new(
       :replication_job_id,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1945,6 +2002,7 @@ module Aws::SMS
     #
     class StartOnDemandReplicationRunResponse < Struct.new(
       :replication_run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1963,6 +2021,7 @@ module Aws::SMS
     #
     class StopAppReplicationRequest < Struct.new(
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1993,6 +2052,7 @@ module Aws::SMS
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2017,6 +2077,7 @@ module Aws::SMS
     #
     class TerminateAppRequest < Struct.new(
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2034,6 +2095,7 @@ module Aws::SMS
     #
     class UnauthorizedOperationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2110,6 +2172,7 @@ module Aws::SMS
       :role_name,
       :server_groups,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2131,6 +2194,7 @@ module Aws::SMS
       :app_summary,
       :server_groups,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2212,6 +2276,7 @@ module Aws::SMS
       :number_of_recent_amis_to_keep,
       :encrypted,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2240,6 +2305,7 @@ module Aws::SMS
     #
     class UserData < Struct.new(
       :s3_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2288,6 +2354,7 @@ module Aws::SMS
       :vm_manager_name,
       :vm_manager_type,
       :vm_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2314,6 +2381,7 @@ module Aws::SMS
     class VmServerAddress < Struct.new(
       :vm_manager_id,
       :vm_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 

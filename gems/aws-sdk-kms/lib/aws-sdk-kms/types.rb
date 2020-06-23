@@ -30,6 +30,7 @@ module Aws::KMS
       :alias_name,
       :alias_arn,
       :target_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43,6 +44,7 @@ module Aws::KMS
     #
     class AlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -74,6 +76,7 @@ module Aws::KMS
     #
     class CancelKeyDeletionRequest < Struct.new(
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -90,6 +93,7 @@ module Aws::KMS
     #
     class CancelKeyDeletionResponse < Struct.new(
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -114,6 +118,7 @@ module Aws::KMS
     #
     class CloudHsmClusterInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -166,6 +171,7 @@ module Aws::KMS
     #
     class CloudHsmClusterInvalidConfigurationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -186,6 +192,7 @@ module Aws::KMS
     #
     class CloudHsmClusterNotActiveException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -200,6 +207,7 @@ module Aws::KMS
     #
     class CloudHsmClusterNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,6 +235,7 @@ module Aws::KMS
     #
     class CloudHsmClusterNotRelatedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -247,6 +256,7 @@ module Aws::KMS
     #
     class ConnectCustomKeyStoreRequest < Struct.new(
       :custom_key_store_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -286,6 +296,7 @@ module Aws::KMS
     class CreateAliasRequest < Struct.new(
       :alias_name,
       :target_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -348,6 +359,7 @@ module Aws::KMS
       :cloud_hsm_cluster_id,
       :trust_anchor_certificate,
       :key_store_password)
+      SENSITIVE = [:key_store_password]
       include Aws::Structure
     end
 
@@ -359,6 +371,7 @@ module Aws::KMS
     #
     class CreateCustomKeyStoreResponse < Struct.new(
       :custom_key_store_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -490,6 +503,7 @@ module Aws::KMS
       :constraints,
       :grant_tokens,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -516,6 +530,7 @@ module Aws::KMS
     class CreateGrantResponse < Struct.new(
       :grant_token,
       :grant_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -766,6 +781,7 @@ module Aws::KMS
       :custom_key_store_id,
       :bypass_policy_lockout_safety_check,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -777,6 +793,7 @@ module Aws::KMS
     #
     class CreateKeyResponse < Struct.new(
       :key_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -792,6 +809,7 @@ module Aws::KMS
     #
     class CustomKeyStoreHasCMKsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -821,6 +839,7 @@ module Aws::KMS
     #
     class CustomKeyStoreInvalidStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -835,6 +854,7 @@ module Aws::KMS
     #
     class CustomKeyStoreNameInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -848,6 +868,7 @@ module Aws::KMS
     #
     class CustomKeyStoreNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -983,6 +1004,7 @@ module Aws::KMS
       :connection_state,
       :connection_error_code,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1090,6 +1112,7 @@ module Aws::KMS
       :grant_tokens,
       :key_id,
       :encryption_algorithm)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1117,6 +1140,7 @@ module Aws::KMS
       :key_id,
       :plaintext,
       :encryption_algorithm)
+      SENSITIVE = [:plaintext]
       include Aws::Structure
     end
 
@@ -1136,6 +1160,7 @@ module Aws::KMS
     #
     class DeleteAliasRequest < Struct.new(
       :alias_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1155,6 +1180,7 @@ module Aws::KMS
     #
     class DeleteCustomKeyStoreRequest < Struct.new(
       :custom_key_store_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1190,6 +1216,7 @@ module Aws::KMS
     #
     class DeleteImportedKeyMaterialRequest < Struct.new(
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1203,6 +1230,7 @@ module Aws::KMS
     #
     class DependencyTimeoutException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1255,6 +1283,7 @@ module Aws::KMS
       :custom_key_store_name,
       :limit,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1280,6 +1309,7 @@ module Aws::KMS
       :custom_key_stores,
       :next_marker,
       :truncated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1338,6 +1368,7 @@ module Aws::KMS
     class DescribeKeyRequest < Struct.new(
       :key_id,
       :grant_tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1349,6 +1380,7 @@ module Aws::KMS
     #
     class DescribeKeyResponse < Struct.new(
       :key_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1379,6 +1411,7 @@ module Aws::KMS
     #
     class DisableKeyRequest < Struct.new(
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1417,6 +1450,7 @@ module Aws::KMS
     #
     class DisableKeyRotationRequest < Struct.new(
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1429,6 +1463,7 @@ module Aws::KMS
     #
     class DisabledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1449,6 +1484,7 @@ module Aws::KMS
     #
     class DisconnectCustomKeyStoreRequest < Struct.new(
       :custom_key_store_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1483,6 +1519,7 @@ module Aws::KMS
     #
     class EnableKeyRequest < Struct.new(
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1519,6 +1556,7 @@ module Aws::KMS
     #
     class EnableKeyRotationRequest < Struct.new(
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1615,6 +1653,7 @@ module Aws::KMS
       :encryption_context,
       :grant_tokens,
       :encryption_algorithm)
+      SENSITIVE = [:plaintext]
       include Aws::Structure
     end
 
@@ -1642,6 +1681,7 @@ module Aws::KMS
       :ciphertext_blob,
       :key_id,
       :encryption_algorithm)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1657,6 +1697,7 @@ module Aws::KMS
     #
     class ExpiredImportTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1744,6 +1785,7 @@ module Aws::KMS
       :key_id,
       :key_pair_spec,
       :grant_tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1784,6 +1826,7 @@ module Aws::KMS
       :public_key,
       :key_id,
       :key_pair_spec)
+      SENSITIVE = [:private_key_plaintext]
       include Aws::Structure
     end
 
@@ -1870,6 +1913,7 @@ module Aws::KMS
       :key_id,
       :key_pair_spec,
       :grant_tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1903,6 +1947,7 @@ module Aws::KMS
       :public_key,
       :key_id,
       :key_pair_spec)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1999,6 +2044,7 @@ module Aws::KMS
       :number_of_bytes,
       :key_spec,
       :grant_tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2030,6 +2076,7 @@ module Aws::KMS
       :ciphertext_blob,
       :plaintext,
       :key_id)
+      SENSITIVE = [:plaintext]
       include Aws::Structure
     end
 
@@ -2120,6 +2167,7 @@ module Aws::KMS
       :key_spec,
       :number_of_bytes,
       :grant_tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2142,6 +2190,7 @@ module Aws::KMS
     class GenerateDataKeyWithoutPlaintextResponse < Struct.new(
       :ciphertext_blob,
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2172,6 +2221,7 @@ module Aws::KMS
     class GenerateRandomRequest < Struct.new(
       :number_of_bytes,
       :custom_key_store_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2184,6 +2234,7 @@ module Aws::KMS
     #
     class GenerateRandomResponse < Struct.new(
       :plaintext)
+      SENSITIVE = [:plaintext]
       include Aws::Structure
     end
 
@@ -2221,6 +2272,7 @@ module Aws::KMS
     class GetKeyPolicyRequest < Struct.new(
       :key_id,
       :policy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2232,6 +2284,7 @@ module Aws::KMS
     #
     class GetKeyPolicyResponse < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2263,6 +2316,7 @@ module Aws::KMS
     #
     class GetKeyRotationStatusRequest < Struct.new(
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2274,6 +2328,7 @@ module Aws::KMS
     #
     class GetKeyRotationStatusResponse < Struct.new(
       :key_rotation_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2325,6 +2380,7 @@ module Aws::KMS
       :key_id,
       :wrapping_algorithm,
       :wrapping_key_spec)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2361,6 +2417,7 @@ module Aws::KMS
       :import_token,
       :public_key,
       :parameters_valid_to)
+      SENSITIVE = [:public_key]
       include Aws::Structure
     end
 
@@ -2411,6 +2468,7 @@ module Aws::KMS
     class GetPublicKeyRequest < Struct.new(
       :key_id,
       :grant_tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2478,6 +2536,7 @@ module Aws::KMS
       :key_usage,
       :encryption_algorithms,
       :signing_algorithms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2554,6 +2613,7 @@ module Aws::KMS
     class GrantConstraints < Struct.new(
       :encryption_context_subset,
       :encryption_context_equals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2622,6 +2682,7 @@ module Aws::KMS
       :issuing_account,
       :operations,
       :constraints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2693,6 +2754,7 @@ module Aws::KMS
       :encrypted_key_material,
       :valid_to,
       :expiration_model)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2712,6 +2774,7 @@ module Aws::KMS
     #
     class IncorrectKeyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2726,6 +2789,7 @@ module Aws::KMS
     #
     class IncorrectKeyMaterialException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2747,6 +2811,7 @@ module Aws::KMS
     #
     class IncorrectTrustAnchorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2760,6 +2825,7 @@ module Aws::KMS
     #
     class InvalidAliasNameException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2773,6 +2839,7 @@ module Aws::KMS
     #
     class InvalidArnException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2791,6 +2858,7 @@ module Aws::KMS
     #
     class InvalidCiphertextException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2803,6 +2871,7 @@ module Aws::KMS
     #
     class InvalidGrantIdException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2816,6 +2885,7 @@ module Aws::KMS
     #
     class InvalidGrantTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2829,6 +2899,7 @@ module Aws::KMS
     #
     class InvalidImportTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2856,6 +2927,7 @@ module Aws::KMS
     #
     class InvalidKeyUsageException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2869,6 +2941,7 @@ module Aws::KMS
     #
     class InvalidMarkerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2882,6 +2955,7 @@ module Aws::KMS
     #
     class KMSInternalException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2897,6 +2971,7 @@ module Aws::KMS
     #
     class KMSInvalidSignatureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2918,6 +2993,7 @@ module Aws::KMS
     #
     class KMSInvalidStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2936,6 +3012,7 @@ module Aws::KMS
     class KeyListEntry < Struct.new(
       :key_id,
       :key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3097,6 +3174,7 @@ module Aws::KMS
       :customer_master_key_spec,
       :encryption_algorithms,
       :signing_algorithms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3110,6 +3188,7 @@ module Aws::KMS
     #
     class KeyUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3128,6 +3207,7 @@ module Aws::KMS
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3172,6 +3252,7 @@ module Aws::KMS
       :key_id,
       :limit,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3197,6 +3278,7 @@ module Aws::KMS
       :aliases,
       :next_marker,
       :truncated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3248,6 +3330,7 @@ module Aws::KMS
       :limit,
       :marker,
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3273,6 +3356,7 @@ module Aws::KMS
       :grants,
       :next_marker,
       :truncated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3325,6 +3409,7 @@ module Aws::KMS
       :key_id,
       :limit,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3350,6 +3435,7 @@ module Aws::KMS
       :policy_names,
       :next_marker,
       :truncated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3382,6 +3468,7 @@ module Aws::KMS
     class ListKeysRequest < Struct.new(
       :limit,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3407,6 +3494,7 @@ module Aws::KMS
       :keys,
       :next_marker,
       :truncated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3459,6 +3547,7 @@ module Aws::KMS
       :key_id,
       :limit,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3486,6 +3575,7 @@ module Aws::KMS
       :tags,
       :next_marker,
       :truncated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3536,6 +3626,7 @@ module Aws::KMS
       :limit,
       :marker,
       :retiring_principal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3549,6 +3640,7 @@ module Aws::KMS
     #
     class MalformedPolicyDocumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3562,6 +3654,7 @@ module Aws::KMS
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3658,6 +3751,7 @@ module Aws::KMS
       :policy_name,
       :policy,
       :bypass_policy_lockout_safety_check)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3831,6 +3925,7 @@ module Aws::KMS
       :source_encryption_algorithm,
       :destination_encryption_algorithm,
       :grant_tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3869,6 +3964,7 @@ module Aws::KMS
       :key_id,
       :source_encryption_algorithm,
       :destination_encryption_algorithm)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3908,6 +4004,7 @@ module Aws::KMS
       :grant_token,
       :key_id,
       :grant_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3946,6 +4043,7 @@ module Aws::KMS
     class RevokeGrantRequest < Struct.new(
       :key_id,
       :grant_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3986,6 +4084,7 @@ module Aws::KMS
     class ScheduleKeyDeletionRequest < Struct.new(
       :key_id,
       :pending_window_in_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4008,6 +4107,7 @@ module Aws::KMS
     class ScheduleKeyDeletionResponse < Struct.new(
       :key_id,
       :deletion_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4088,6 +4188,7 @@ module Aws::KMS
       :message_type,
       :grant_tokens,
       :signing_algorithm)
+      SENSITIVE = [:message]
       include Aws::Structure
     end
 
@@ -4131,6 +4232,7 @@ module Aws::KMS
       :key_id,
       :signature,
       :signing_algorithm)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4167,6 +4269,7 @@ module Aws::KMS
     class Tag < Struct.new(
       :tag_key,
       :tag_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4179,6 +4282,7 @@ module Aws::KMS
     #
     class TagException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4220,6 +4324,7 @@ module Aws::KMS
     class TagResourceRequest < Struct.new(
       :key_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4233,6 +4338,7 @@ module Aws::KMS
     #
     class UnsupportedOperationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4269,6 +4375,7 @@ module Aws::KMS
     class UntagResourceRequest < Struct.new(
       :key_id,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4317,6 +4424,7 @@ module Aws::KMS
     class UpdateAliasRequest < Struct.new(
       :alias_name,
       :target_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4376,6 +4484,7 @@ module Aws::KMS
       :new_custom_key_store_name,
       :key_store_password,
       :cloud_hsm_cluster_id)
+      SENSITIVE = [:key_store_password]
       include Aws::Structure
     end
 
@@ -4416,6 +4525,7 @@ module Aws::KMS
     class UpdateKeyDescriptionRequest < Struct.new(
       :key_id,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4507,6 +4617,7 @@ module Aws::KMS
       :signature,
       :signing_algorithm,
       :grant_tokens)
+      SENSITIVE = [:message]
       include Aws::Structure
     end
 
@@ -4537,6 +4648,7 @@ module Aws::KMS
       :key_id,
       :signature_valid,
       :signing_algorithm)
+      SENSITIVE = []
       include Aws::Structure
     end
 

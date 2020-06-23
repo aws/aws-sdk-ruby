@@ -29,6 +29,7 @@ module Aws::IoTEventsData
       :message_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -53,6 +54,7 @@ module Aws::IoTEventsData
     #
     class BatchPutMessageRequest < Struct.new(
       :messages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -62,6 +64,7 @@ module Aws::IoTEventsData
     #
     class BatchPutMessageResponse < Struct.new(
       :batch_put_message_error_entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -86,6 +89,7 @@ module Aws::IoTEventsData
       :message_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -124,6 +128,7 @@ module Aws::IoTEventsData
     #
     class BatchUpdateDetectorRequest < Struct.new(
       :detectors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -134,6 +139,7 @@ module Aws::IoTEventsData
     #
     class BatchUpdateDetectorResponse < Struct.new(
       :batch_update_detector_error_entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -158,6 +164,7 @@ module Aws::IoTEventsData
     class DescribeDetectorRequest < Struct.new(
       :detector_model_name,
       :key_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -167,6 +174,7 @@ module Aws::IoTEventsData
     #
     class DescribeDetectorResponse < Struct.new(
       :detector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -206,6 +214,7 @@ module Aws::IoTEventsData
       :state,
       :creation_time,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,6 +236,7 @@ module Aws::IoTEventsData
       :state_name,
       :variables,
       :timers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -270,6 +280,7 @@ module Aws::IoTEventsData
       :state_name,
       :variables,
       :timers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -281,6 +292,7 @@ module Aws::IoTEventsData
     #
     class DetectorStateSummary < Struct.new(
       :state_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -320,6 +332,7 @@ module Aws::IoTEventsData
       :state,
       :creation_time,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -331,6 +344,7 @@ module Aws::IoTEventsData
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -342,6 +356,7 @@ module Aws::IoTEventsData
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -378,6 +393,7 @@ module Aws::IoTEventsData
       :state_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -393,6 +409,7 @@ module Aws::IoTEventsData
     class ListDetectorsResponse < Struct.new(
       :detector_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -426,6 +443,7 @@ module Aws::IoTEventsData
       :message_id,
       :input_name,
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -437,6 +455,7 @@ module Aws::IoTEventsData
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -448,6 +467,7 @@ module Aws::IoTEventsData
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -459,6 +479,7 @@ module Aws::IoTEventsData
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -475,6 +496,7 @@ module Aws::IoTEventsData
     class Timer < Struct.new(
       :name,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -500,6 +522,7 @@ module Aws::IoTEventsData
     class TimerDefinition < Struct.new(
       :name,
       :seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -554,6 +577,7 @@ module Aws::IoTEventsData
       :detector_model_name,
       :key_value,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -570,6 +594,7 @@ module Aws::IoTEventsData
     class Variable < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -594,6 +619,7 @@ module Aws::IoTEventsData
     class VariableDefinition < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 

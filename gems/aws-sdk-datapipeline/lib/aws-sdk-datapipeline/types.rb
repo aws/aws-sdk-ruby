@@ -45,6 +45,7 @@ module Aws::DataPipeline
       :pipeline_id,
       :parameter_values,
       :start_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -82,6 +83,7 @@ module Aws::DataPipeline
     class AddTagsInput < Struct.new(
       :pipeline_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -152,6 +154,7 @@ module Aws::DataPipeline
       :unique_id,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -166,6 +169,7 @@ module Aws::DataPipeline
     #
     class CreatePipelineOutput < Struct.new(
       :pipeline_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -195,6 +199,7 @@ module Aws::DataPipeline
     class DeactivatePipelineInput < Struct.new(
       :pipeline_id,
       :cancel_active)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -221,6 +226,7 @@ module Aws::DataPipeline
     #
     class DeletePipelineInput < Struct.new(
       :pipeline_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -265,6 +271,7 @@ module Aws::DataPipeline
       :object_ids,
       :evaluate_expressions,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -290,6 +297,7 @@ module Aws::DataPipeline
       :pipeline_objects,
       :marker,
       :has_more_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -312,6 +320,7 @@ module Aws::DataPipeline
     #
     class DescribePipelinesInput < Struct.new(
       :pipeline_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -325,6 +334,7 @@ module Aws::DataPipeline
     #
     class DescribePipelinesOutput < Struct.new(
       :pipeline_description_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -357,6 +367,7 @@ module Aws::DataPipeline
       :pipeline_id,
       :object_id,
       :expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -370,6 +381,7 @@ module Aws::DataPipeline
     #
     class EvaluateExpressionOutput < Struct.new(
       :evaluated_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -404,6 +416,7 @@ module Aws::DataPipeline
       :key,
       :string_value,
       :ref_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -433,6 +446,7 @@ module Aws::DataPipeline
     class GetPipelineDefinitionInput < Struct.new(
       :pipeline_id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -456,6 +470,7 @@ module Aws::DataPipeline
       :pipeline_objects,
       :parameter_objects,
       :parameter_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -496,6 +511,7 @@ module Aws::DataPipeline
     class InstanceIdentity < Struct.new(
       :document,
       :signature)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -509,6 +525,7 @@ module Aws::DataPipeline
     #
     class InternalServiceError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -525,6 +542,7 @@ module Aws::DataPipeline
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -548,6 +566,7 @@ module Aws::DataPipeline
     #
     class ListPipelinesInput < Struct.new(
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -576,6 +595,7 @@ module Aws::DataPipeline
       :pipeline_id_list,
       :marker,
       :has_more_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -635,6 +655,7 @@ module Aws::DataPipeline
     class Operator < Struct.new(
       :type,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -661,6 +682,7 @@ module Aws::DataPipeline
     class ParameterAttribute < Struct.new(
       :key,
       :string_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -692,6 +714,7 @@ module Aws::DataPipeline
     class ParameterObject < Struct.new(
       :id,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -718,6 +741,7 @@ module Aws::DataPipeline
     class ParameterValue < Struct.new(
       :id,
       :string_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -731,6 +755,7 @@ module Aws::DataPipeline
     #
     class PipelineDeletedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -772,6 +797,7 @@ module Aws::DataPipeline
       :fields,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -791,6 +817,7 @@ module Aws::DataPipeline
     class PipelineIdName < Struct.new(
       :id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -805,6 +832,7 @@ module Aws::DataPipeline
     #
     class PipelineNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -845,6 +873,7 @@ module Aws::DataPipeline
       :id,
       :name,
       :fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -895,6 +924,7 @@ module Aws::DataPipeline
       :worker_group,
       :hostname,
       :instance_identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -912,6 +942,7 @@ module Aws::DataPipeline
     #
     class PollForTaskOutput < Struct.new(
       :task_object)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -978,6 +1009,7 @@ module Aws::DataPipeline
       :pipeline_objects,
       :parameter_objects,
       :parameter_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1006,6 +1038,7 @@ module Aws::DataPipeline
       :validation_errors,
       :validation_warnings,
       :errored)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1035,6 +1068,7 @@ module Aws::DataPipeline
     #
     class Query < Struct.new(
       :selectors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1097,6 +1131,7 @@ module Aws::DataPipeline
       :sphere,
       :marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1123,6 +1158,7 @@ module Aws::DataPipeline
       :ids,
       :marker,
       :has_more_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1149,6 +1185,7 @@ module Aws::DataPipeline
     class RemoveTagsInput < Struct.new(
       :pipeline_id,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1189,6 +1226,7 @@ module Aws::DataPipeline
     class ReportTaskProgressInput < Struct.new(
       :task_id,
       :fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1204,6 +1242,7 @@ module Aws::DataPipeline
     #
     class ReportTaskProgressOutput < Struct.new(
       :canceled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1245,6 +1284,7 @@ module Aws::DataPipeline
       :taskrunner_id,
       :worker_group,
       :hostname)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1258,6 +1298,7 @@ module Aws::DataPipeline
     #
     class ReportTaskRunnerHeartbeatOutput < Struct.new(
       :terminate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1292,6 +1333,7 @@ module Aws::DataPipeline
     class Selector < Struct.new(
       :field_name,
       :operator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1327,6 +1369,7 @@ module Aws::DataPipeline
       :pipeline_id,
       :object_ids,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1382,6 +1425,7 @@ module Aws::DataPipeline
       :error_id,
       :error_message,
       :error_stack_trace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1433,6 +1477,7 @@ module Aws::DataPipeline
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1446,6 +1491,7 @@ module Aws::DataPipeline
     #
     class TaskNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1478,6 +1524,7 @@ module Aws::DataPipeline
       :pipeline_id,
       :attempt_id,
       :objects)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1544,6 +1591,7 @@ module Aws::DataPipeline
       :pipeline_objects,
       :parameter_objects,
       :parameter_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1567,6 +1615,7 @@ module Aws::DataPipeline
       :validation_errors,
       :validation_warnings,
       :errored)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1587,6 +1636,7 @@ module Aws::DataPipeline
     class ValidationError < Struct.new(
       :id,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1607,6 +1657,7 @@ module Aws::DataPipeline
     class ValidationWarning < Struct.new(
       :id,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 

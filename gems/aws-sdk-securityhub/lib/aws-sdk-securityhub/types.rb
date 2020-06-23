@@ -32,6 +32,7 @@ module Aws::SecurityHub
     class AcceptInvitationRequest < Struct.new(
       :master_id,
       :invitation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -53,6 +54,7 @@ module Aws::SecurityHub
     class AccessDeniedException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -79,6 +81,7 @@ module Aws::SecurityHub
     class AccountDetails < Struct.new(
       :account_id,
       :email)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -102,6 +105,7 @@ module Aws::SecurityHub
       :action_target_arn,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -129,6 +133,7 @@ module Aws::SecurityHub
     class AvailabilityZone < Struct.new(
       :zone_name,
       :subnet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -201,6 +206,7 @@ module Aws::SecurityHub
       :origins,
       :status,
       :web_acl_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -243,6 +249,7 @@ module Aws::SecurityHub
       :enabled,
       :include_cookies,
       :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +286,7 @@ module Aws::SecurityHub
       :domain_name,
       :id,
       :origin_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -307,6 +315,7 @@ module Aws::SecurityHub
     #
     class AwsCloudFrontDistributionOrigins < Struct.new(
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -380,6 +389,7 @@ module Aws::SecurityHub
       :source,
       :service_role,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -458,6 +468,7 @@ module Aws::SecurityHub
       :image_pull_credentials_type,
       :registry_credential,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -493,6 +504,7 @@ module Aws::SecurityHub
     class AwsCodeBuildProjectEnvironmentRegistryCredential < Struct.new(
       :credential,
       :credential_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -577,6 +589,7 @@ module Aws::SecurityHub
       :location,
       :git_clone_depth,
       :insecure_ssl)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -609,6 +622,7 @@ module Aws::SecurityHub
       :vpc_id,
       :subnets,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -677,6 +691,7 @@ module Aws::SecurityHub
       :vpc_id,
       :subnet_id,
       :launched_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -737,6 +752,7 @@ module Aws::SecurityHub
       :instance_id,
       :instance_owner_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -788,6 +804,7 @@ module Aws::SecurityHub
       :network_interface_id,
       :security_groups,
       :source_dest_check)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -814,6 +831,7 @@ module Aws::SecurityHub
     class AwsEc2NetworkInterfaceSecurityGroup < Struct.new(
       :group_name,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -926,6 +944,7 @@ module Aws::SecurityHub
       :vpc_id,
       :ip_permissions,
       :ip_permissions_egress)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1024,6 +1043,7 @@ module Aws::SecurityHub
       :ip_ranges,
       :ipv_6_ranges,
       :prefix_list_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1046,6 +1066,7 @@ module Aws::SecurityHub
     #
     class AwsEc2SecurityGroupIpRange < Struct.new(
       :cidr_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1068,6 +1089,7 @@ module Aws::SecurityHub
     #
     class AwsEc2SecurityGroupIpv6Range < Struct.new(
       :cidr_ipv_6)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1088,6 +1110,7 @@ module Aws::SecurityHub
     #
     class AwsEc2SecurityGroupPrefixListId < Struct.new(
       :prefix_list_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1145,6 +1168,7 @@ module Aws::SecurityHub
       :user_id,
       :vpc_id,
       :vpc_peering_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1248,6 +1272,7 @@ module Aws::SecurityHub
       :encryption_at_rest_options,
       :node_to_node_encryption_options,
       :vpc_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1282,6 +1307,7 @@ module Aws::SecurityHub
     class AwsElasticsearchDomainDomainEndpointOptions < Struct.new(
       :enforce_https,
       :tls_security_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1308,6 +1334,7 @@ module Aws::SecurityHub
     class AwsElasticsearchDomainEncryptionAtRestOptions < Struct.new(
       :enabled,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1328,6 +1355,7 @@ module Aws::SecurityHub
     #
     class AwsElasticsearchDomainNodeToNodeEncryptionOptions < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1369,6 +1397,7 @@ module Aws::SecurityHub
       :security_group_ids,
       :subnet_ids,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1455,6 +1484,7 @@ module Aws::SecurityHub
       :state,
       :type,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1509,6 +1539,7 @@ module Aws::SecurityHub
       :principal_id,
       :principal_type,
       :principal_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1562,6 +1593,7 @@ module Aws::SecurityHub
       :role_name,
       :max_session_duration,
       :path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1622,6 +1654,7 @@ module Aws::SecurityHub
       :key_manager,
       :key_state,
       :origin)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1664,6 +1697,7 @@ module Aws::SecurityHub
       :s3_key,
       :s3_object_version,
       :zip_file)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1685,6 +1719,7 @@ module Aws::SecurityHub
     #
     class AwsLambdaFunctionDeadLetterConfig < Struct.new(
       :target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1837,6 +1872,7 @@ module Aws::SecurityHub
       :tracing_config,
       :vpc_config,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1868,6 +1904,7 @@ module Aws::SecurityHub
     class AwsLambdaFunctionEnvironment < Struct.new(
       :variables,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1894,6 +1931,7 @@ module Aws::SecurityHub
     class AwsLambdaFunctionEnvironmentError < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1920,6 +1958,7 @@ module Aws::SecurityHub
     class AwsLambdaFunctionLayer < Struct.new(
       :arn,
       :code_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1940,6 +1979,7 @@ module Aws::SecurityHub
     #
     class AwsLambdaFunctionTracingConfig < Struct.new(
       :mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1973,6 +2013,7 @@ module Aws::SecurityHub
       :security_group_ids,
       :subnet_ids,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2011,6 +2052,7 @@ module Aws::SecurityHub
       :version,
       :compatible_runtimes,
       :created_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2057,6 +2099,7 @@ module Aws::SecurityHub
       :role_arn,
       :feature_name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2243,6 +2286,7 @@ module Aws::SecurityHub
       :storage_encrypted,
       :tde_credential_arn,
       :vpc_security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2276,6 +2320,7 @@ module Aws::SecurityHub
       :address,
       :port,
       :hosted_zone_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2302,6 +2347,7 @@ module Aws::SecurityHub
     class AwsRdsDbInstanceVpcSecurityGroup < Struct.new(
       :vpc_security_group_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2349,6 +2395,7 @@ module Aws::SecurityHub
       :owner_name,
       :created_at,
       :server_side_encryption_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2377,6 +2424,7 @@ module Aws::SecurityHub
     class AwsS3BucketServerSideEncryptionByDefault < Struct.new(
       :sse_algorithm,
       :kms_master_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2404,6 +2452,7 @@ module Aws::SecurityHub
     #
     class AwsS3BucketServerSideEncryptionConfiguration < Struct.new(
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2429,6 +2478,7 @@ module Aws::SecurityHub
     #
     class AwsS3BucketServerSideEncryptionRule < Struct.new(
       :apply_server_side_encryption_by_default)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2484,6 +2534,7 @@ module Aws::SecurityHub
       :content_type,
       :server_side_encryption,
       :ssekms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3196,6 +3247,7 @@ module Aws::SecurityHub
       :record_state,
       :related_findings,
       :note)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4243,6 +4295,7 @@ module Aws::SecurityHub
       :note_updated_at,
       :note_updated_by,
       :keyword)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4273,6 +4326,7 @@ module Aws::SecurityHub
     class AwsSecurityFindingIdentifier < Struct.new(
       :id,
       :product_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4318,6 +4372,7 @@ module Aws::SecurityHub
       :subscription,
       :topic_name,
       :owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4344,6 +4399,7 @@ module Aws::SecurityHub
     class AwsSnsTopicSubscription < Struct.new(
       :endpoint,
       :protocol)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4387,6 +4443,7 @@ module Aws::SecurityHub
       :kms_master_key_id,
       :queue_name,
       :dead_letter_target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4445,6 +4502,7 @@ module Aws::SecurityHub
       :default_action,
       :rules,
       :web_acl_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4528,6 +4586,7 @@ module Aws::SecurityHub
       :priority,
       :rule_id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4546,6 +4605,7 @@ module Aws::SecurityHub
     #
     class BatchDisableStandardsRequest < Struct.new(
       :standards_subscription_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4557,6 +4617,7 @@ module Aws::SecurityHub
     #
     class BatchDisableStandardsResponse < Struct.new(
       :standards_subscriptions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4582,6 +4643,7 @@ module Aws::SecurityHub
     #
     class BatchEnableStandardsRequest < Struct.new(
       :standards_subscription_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4593,6 +4655,7 @@ module Aws::SecurityHub
     #
     class BatchEnableStandardsResponse < Struct.new(
       :standards_subscriptions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5109,6 +5172,7 @@ module Aws::SecurityHub
     #
     class BatchImportFindingsRequest < Struct.new(
       :findings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5130,6 +5194,7 @@ module Aws::SecurityHub
       :failed_count,
       :success_count,
       :failed_findings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5266,6 +5331,7 @@ module Aws::SecurityHub
       :user_defined_fields,
       :workflow,
       :related_findings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5282,6 +5348,7 @@ module Aws::SecurityHub
     class BatchUpdateFindingsResponse < Struct.new(
       :processed_findings,
       :unprocessed_findings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5306,6 +5373,7 @@ module Aws::SecurityHub
       :finding_identifier,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5369,6 +5437,7 @@ module Aws::SecurityHub
       :status,
       :related_requirements,
       :status_reasons)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5407,6 +5476,7 @@ module Aws::SecurityHub
       :image_id,
       :image_name,
       :launched_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5437,6 +5507,7 @@ module Aws::SecurityHub
       :name,
       :description,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5448,6 +5519,7 @@ module Aws::SecurityHub
     #
     class CreateActionTargetResponse < Struct.new(
       :action_target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6038,6 +6110,7 @@ module Aws::SecurityHub
       :name,
       :filters,
       :group_by_attribute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6049,6 +6122,7 @@ module Aws::SecurityHub
     #
     class CreateInsightResponse < Struct.new(
       :insight_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6074,6 +6148,7 @@ module Aws::SecurityHub
     #
     class CreateMembersRequest < Struct.new(
       :account_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6086,6 +6161,7 @@ module Aws::SecurityHub
     #
     class CreateMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6121,6 +6197,7 @@ module Aws::SecurityHub
       :start,
       :end,
       :date_range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6147,6 +6224,7 @@ module Aws::SecurityHub
     class DateRange < Struct.new(
       :value,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6166,6 +6244,7 @@ module Aws::SecurityHub
     #
     class DeclineInvitationsRequest < Struct.new(
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6178,6 +6257,7 @@ module Aws::SecurityHub
     #
     class DeclineInvitationsResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6196,6 +6276,7 @@ module Aws::SecurityHub
     #
     class DeleteActionTargetRequest < Struct.new(
       :action_target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6207,6 +6288,7 @@ module Aws::SecurityHub
     #
     class DeleteActionTargetResponse < Struct.new(
       :action_target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6225,6 +6307,7 @@ module Aws::SecurityHub
     #
     class DeleteInsightRequest < Struct.new(
       :insight_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6236,6 +6319,7 @@ module Aws::SecurityHub
     #
     class DeleteInsightResponse < Struct.new(
       :insight_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6254,6 +6338,7 @@ module Aws::SecurityHub
     #
     class DeleteInvitationsRequest < Struct.new(
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6267,6 +6352,7 @@ module Aws::SecurityHub
     #
     class DeleteInvitationsResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6285,6 +6371,7 @@ module Aws::SecurityHub
     #
     class DeleteMembersRequest < Struct.new(
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6297,6 +6384,7 @@ module Aws::SecurityHub
     #
     class DeleteMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6334,6 +6422,7 @@ module Aws::SecurityHub
       :action_target_arns,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6352,6 +6441,7 @@ module Aws::SecurityHub
     class DescribeActionTargetsResponse < Struct.new(
       :action_targets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6370,6 +6460,7 @@ module Aws::SecurityHub
     #
     class DescribeHubRequest < Struct.new(
       :hub_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6386,6 +6477,7 @@ module Aws::SecurityHub
     class DescribeHubResponse < Struct.new(
       :hub_arn,
       :subscribed_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6416,6 +6508,7 @@ module Aws::SecurityHub
     class DescribeProductsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6432,6 +6525,7 @@ module Aws::SecurityHub
     class DescribeProductsResponse < Struct.new(
       :products,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6469,6 +6563,7 @@ module Aws::SecurityHub
       :standards_subscription_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6485,6 +6580,7 @@ module Aws::SecurityHub
     class DescribeStandardsControlsResponse < Struct.new(
       :controls,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6515,6 +6611,7 @@ module Aws::SecurityHub
     class DescribeStandardsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6531,6 +6628,7 @@ module Aws::SecurityHub
     class DescribeStandardsResponse < Struct.new(
       :standards,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6549,6 +6647,7 @@ module Aws::SecurityHub
     #
     class DisableImportFindingsForProductRequest < Struct.new(
       :product_subscription_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6592,6 +6691,7 @@ module Aws::SecurityHub
     #
     class DisassociateMembersRequest < Struct.new(
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6614,6 +6714,7 @@ module Aws::SecurityHub
     #
     class EnableImportFindingsForProductRequest < Struct.new(
       :product_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6626,6 +6727,7 @@ module Aws::SecurityHub
     #
     class EnableImportFindingsForProductResponse < Struct.new(
       :product_subscription_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6656,6 +6758,7 @@ module Aws::SecurityHub
     class EnableSecurityHubRequest < Struct.new(
       :tags,
       :enable_default_standards)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6697,6 +6800,7 @@ module Aws::SecurityHub
       :standards_subscription_arns,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6714,6 +6818,7 @@ module Aws::SecurityHub
     class GetEnabledStandardsResponse < Struct.new(
       :standards_subscriptions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7315,6 +7420,7 @@ module Aws::SecurityHub
       :sort_criteria,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7331,6 +7437,7 @@ module Aws::SecurityHub
     class GetFindingsResponse < Struct.new(
       :findings,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7349,6 +7456,7 @@ module Aws::SecurityHub
     #
     class GetInsightResultsRequest < Struct.new(
       :insight_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7360,6 +7468,7 @@ module Aws::SecurityHub
     #
     class GetInsightResultsResponse < Struct.new(
       :insight_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7397,6 +7506,7 @@ module Aws::SecurityHub
       :insight_arns,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7413,6 +7523,7 @@ module Aws::SecurityHub
     class GetInsightsResponse < Struct.new(
       :insights,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7431,6 +7542,7 @@ module Aws::SecurityHub
     #
     class GetInvitationsCountResponse < Struct.new(
       :invitations_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7449,6 +7561,7 @@ module Aws::SecurityHub
     #
     class GetMasterAccountResponse < Struct.new(
       :master)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7468,6 +7581,7 @@ module Aws::SecurityHub
     #
     class GetMembersRequest < Struct.new(
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7485,6 +7599,7 @@ module Aws::SecurityHub
     class GetMembersResponse < Struct.new(
       :members,
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7511,6 +7626,7 @@ module Aws::SecurityHub
       :id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7545,6 +7661,7 @@ module Aws::SecurityHub
       :name,
       :filters,
       :group_by_attribute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7566,6 +7683,7 @@ module Aws::SecurityHub
     class InsightResultValue < Struct.new(
       :group_by_attribute_value,
       :count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7592,6 +7710,7 @@ module Aws::SecurityHub
       :insight_arn,
       :group_by_attribute,
       :result_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7608,6 +7727,7 @@ module Aws::SecurityHub
     class InternalException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7625,6 +7745,7 @@ module Aws::SecurityHub
     class InvalidAccessException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7642,6 +7763,7 @@ module Aws::SecurityHub
     class InvalidInputException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7672,6 +7794,7 @@ module Aws::SecurityHub
       :invitation_id,
       :invited_at,
       :member_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7691,6 +7814,7 @@ module Aws::SecurityHub
     #
     class InviteMembersRequest < Struct.new(
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7703,6 +7827,7 @@ module Aws::SecurityHub
     #
     class InviteMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7723,6 +7848,7 @@ module Aws::SecurityHub
     #
     class IpFilter < Struct.new(
       :cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7743,6 +7869,7 @@ module Aws::SecurityHub
     #
     class KeywordFilter < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7761,6 +7888,7 @@ module Aws::SecurityHub
     class LimitExceededException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7791,6 +7919,7 @@ module Aws::SecurityHub
     class ListEnabledProductsForImportRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7808,6 +7937,7 @@ module Aws::SecurityHub
     class ListEnabledProductsForImportResponse < Struct.new(
       :product_subscriptions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7838,6 +7968,7 @@ module Aws::SecurityHub
     class ListInvitationsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7854,6 +7985,7 @@ module Aws::SecurityHub
     class ListInvitationsResponse < Struct.new(
       :invitations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7898,6 +8030,7 @@ module Aws::SecurityHub
       :only_associated,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7914,6 +8047,7 @@ module Aws::SecurityHub
     class ListMembersResponse < Struct.new(
       :members,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7932,6 +8066,7 @@ module Aws::SecurityHub
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7943,6 +8078,7 @@ module Aws::SecurityHub
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7975,6 +8111,7 @@ module Aws::SecurityHub
     class LoadBalancerState < Struct.new(
       :code,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8013,6 +8150,7 @@ module Aws::SecurityHub
       :type,
       :path,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8046,6 +8184,7 @@ module Aws::SecurityHub
       :key,
       :value,
       :comparison)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8088,6 +8227,7 @@ module Aws::SecurityHub
       :member_status,
       :invited_at,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8174,6 +8314,7 @@ module Aws::SecurityHub
       :destination_ip_v6,
       :destination_port,
       :destination_domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8206,6 +8347,7 @@ module Aws::SecurityHub
       :text,
       :updated_by,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8232,6 +8374,7 @@ module Aws::SecurityHub
     class NoteUpdate < Struct.new(
       :text,
       :updated_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8267,6 +8410,7 @@ module Aws::SecurityHub
       :gte,
       :lte,
       :eq)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8317,6 +8461,7 @@ module Aws::SecurityHub
       :parent_pid,
       :launched_at,
       :terminated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8378,6 +8523,7 @@ module Aws::SecurityHub
       :marketplace_url,
       :activation_url,
       :product_subscription_resource_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8407,6 +8553,7 @@ module Aws::SecurityHub
     class Recommendation < Struct.new(
       :text,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8433,6 +8580,7 @@ module Aws::SecurityHub
     class RelatedFinding < Struct.new(
       :product_arn,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8457,6 +8605,7 @@ module Aws::SecurityHub
     #
     class Remediation < Struct.new(
       :recommendation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8895,6 +9044,7 @@ module Aws::SecurityHub
       :region,
       :tags,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8912,6 +9062,7 @@ module Aws::SecurityHub
     class ResourceConflictException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9424,6 +9575,7 @@ module Aws::SecurityHub
       :aws_waf_web_acl,
       :container,
       :other)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9441,6 +9593,7 @@ module Aws::SecurityHub
     class ResourceNotFoundException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9459,6 +9612,7 @@ module Aws::SecurityHub
     class Result < Struct.new(
       :account_id,
       :processing_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9528,6 +9682,7 @@ module Aws::SecurityHub
       :label,
       :normalized,
       :original)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9587,6 +9742,7 @@ module Aws::SecurityHub
       :normalized,
       :product,
       :label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9613,6 +9769,7 @@ module Aws::SecurityHub
     class SortCriterion < Struct.new(
       :field,
       :sort_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9647,6 +9804,7 @@ module Aws::SecurityHub
       :name,
       :description,
       :enabled_by_default)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9715,6 +9873,7 @@ module Aws::SecurityHub
       :remediation_url,
       :severity_rating,
       :related_requirements)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9744,6 +9903,7 @@ module Aws::SecurityHub
       :standards_arn,
       :standards_input,
       :standards_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9774,6 +9934,7 @@ module Aws::SecurityHub
     class StandardsSubscriptionRequest < Struct.new(
       :standards_arn,
       :standards_input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9806,6 +9967,7 @@ module Aws::SecurityHub
     class StatusReason < Struct.new(
       :reason_code,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9833,6 +9995,7 @@ module Aws::SecurityHub
     class StringFilter < Struct.new(
       :value,
       :comparison)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9859,6 +10022,7 @@ module Aws::SecurityHub
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9915,6 +10079,7 @@ module Aws::SecurityHub
       :last_observed_at,
       :source,
       :source_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9939,6 +10104,7 @@ module Aws::SecurityHub
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9973,6 +10139,7 @@ module Aws::SecurityHub
       :action_target_arn,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10565,6 +10732,7 @@ module Aws::SecurityHub
       :filters,
       :note,
       :record_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11159,6 +11327,7 @@ module Aws::SecurityHub
       :name,
       :filters,
       :group_by_attribute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11194,6 +11363,7 @@ module Aws::SecurityHub
       :standards_control_arn,
       :control_status,
       :disabled_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11232,6 +11402,7 @@ module Aws::SecurityHub
     #
     class WafAction < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11252,6 +11423,7 @@ module Aws::SecurityHub
     #
     class WafExcludedRule < Struct.new(
       :rule_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11275,6 +11447,7 @@ module Aws::SecurityHub
     #
     class WafOverrideAction < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11309,6 +11482,7 @@ module Aws::SecurityHub
     #
     class Workflow < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11342,6 +11516,7 @@ module Aws::SecurityHub
     #
     class WorkflowUpdate < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -20,6 +20,7 @@ module Aws::MQ
     #
     class AvailabilityZone < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36,6 +37,7 @@ module Aws::MQ
     class BadRequestException < Struct.new(
       :error_attribute,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -54,6 +56,7 @@ module Aws::MQ
     class BrokerEngineType < Struct.new(
       :engine_type,
       :engine_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -80,6 +83,7 @@ module Aws::MQ
       :broker_engine_types,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -104,6 +108,7 @@ module Aws::MQ
       :console_url,
       :endpoints,
       :ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -142,6 +147,7 @@ module Aws::MQ
       :storage_type,
       :supported_deployment_modes,
       :supported_engine_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -168,6 +174,7 @@ module Aws::MQ
       :broker_instance_options,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -214,6 +221,7 @@ module Aws::MQ
       :created,
       :deployment_mode,
       :host_instance_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -273,6 +281,7 @@ module Aws::MQ
       :latest_revision,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -300,6 +309,7 @@ module Aws::MQ
     class ConfigurationId < Struct.new(
       :id,
       :revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -323,6 +333,7 @@ module Aws::MQ
       :created,
       :description,
       :revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -346,6 +357,7 @@ module Aws::MQ
       :current,
       :history,
       :pending)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -362,6 +374,7 @@ module Aws::MQ
     class ConflictException < Struct.new(
       :error_attribute,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -475,6 +488,7 @@ module Aws::MQ
       :subnet_ids,
       :tags,
       :users)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -493,6 +507,7 @@ module Aws::MQ
     class CreateBrokerOutput < Struct.new(
       :broker_arn,
       :broker_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -624,6 +639,7 @@ module Aws::MQ
       :subnet_ids,
       :tags,
       :users)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -638,6 +654,7 @@ module Aws::MQ
     class CreateBrokerResponse < Struct.new(
       :broker_arn,
       :broker_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -673,6 +690,7 @@ module Aws::MQ
       :engine_version,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -709,6 +727,7 @@ module Aws::MQ
       :id,
       :latest_revision,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -745,6 +764,7 @@ module Aws::MQ
       :engine_version,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -772,6 +792,7 @@ module Aws::MQ
       :id,
       :latest_revision,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -796,6 +817,7 @@ module Aws::MQ
     class CreateTagsRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -825,6 +847,7 @@ module Aws::MQ
       :console_access,
       :groups,
       :password)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -862,6 +885,7 @@ module Aws::MQ
       :groups,
       :password,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -879,6 +903,7 @@ module Aws::MQ
     #
     class DeleteBrokerOutput < Struct.new(
       :broker_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -896,6 +921,7 @@ module Aws::MQ
     #
     class DeleteBrokerRequest < Struct.new(
       :broker_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -906,6 +932,7 @@ module Aws::MQ
     #
     class DeleteBrokerResponse < Struct.new(
       :broker_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -928,6 +955,7 @@ module Aws::MQ
     class DeleteTagsRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -950,6 +978,7 @@ module Aws::MQ
     class DeleteUserRequest < Struct.new(
       :broker_id,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -981,6 +1010,7 @@ module Aws::MQ
       :engine_type,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -999,6 +1029,7 @@ module Aws::MQ
       :broker_engine_types,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1036,6 +1067,7 @@ module Aws::MQ
       :max_results,
       :next_token,
       :storage_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1054,6 +1086,7 @@ module Aws::MQ
       :broker_instance_options,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1205,6 +1238,7 @@ module Aws::MQ
       :subnet_ids,
       :tags,
       :users)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1222,6 +1256,7 @@ module Aws::MQ
     #
     class DescribeBrokerRequest < Struct.new(
       :broker_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1335,6 +1370,7 @@ module Aws::MQ
       :subnet_ids,
       :tags,
       :users)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1352,6 +1388,7 @@ module Aws::MQ
     #
     class DescribeConfigurationRequest < Struct.new(
       :configuration_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1397,6 +1434,7 @@ module Aws::MQ
       :latest_revision,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1427,6 +1465,7 @@ module Aws::MQ
       :created,
       :data,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1449,6 +1488,7 @@ module Aws::MQ
     class DescribeConfigurationRevisionRequest < Struct.new(
       :configuration_id,
       :configuration_revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1471,6 +1511,7 @@ module Aws::MQ
       :created,
       :data,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1510,6 +1551,7 @@ module Aws::MQ
       :groups,
       :pending,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1532,6 +1574,7 @@ module Aws::MQ
     class DescribeUserRequest < Struct.new(
       :broker_id,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1560,6 +1603,7 @@ module Aws::MQ
       :groups,
       :pending,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1589,6 +1633,7 @@ module Aws::MQ
     class EncryptionOptions < Struct.new(
       :kms_key_id,
       :use_aws_owned_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1602,6 +1647,7 @@ module Aws::MQ
     #
     class EngineVersion < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1620,6 +1666,7 @@ module Aws::MQ
     class Error < Struct.new(
       :error_attribute,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1636,6 +1683,7 @@ module Aws::MQ
     class ForbiddenException < Struct.new(
       :error_attribute,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1652,6 +1700,7 @@ module Aws::MQ
     class InternalServerErrorException < Struct.new(
       :error_attribute,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1671,6 +1720,7 @@ module Aws::MQ
     class ListBrokersOutput < Struct.new(
       :broker_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1693,6 +1743,7 @@ module Aws::MQ
     class ListBrokersRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1707,6 +1758,7 @@ module Aws::MQ
     class ListBrokersResponse < Struct.new(
       :broker_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1738,6 +1790,7 @@ module Aws::MQ
       :max_results,
       :next_token,
       :revisions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1765,6 +1818,7 @@ module Aws::MQ
       :configuration_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1787,6 +1841,7 @@ module Aws::MQ
       :max_results,
       :next_token,
       :revisions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1812,6 +1867,7 @@ module Aws::MQ
       :configurations,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1834,6 +1890,7 @@ module Aws::MQ
     class ListConfigurationsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1852,6 +1909,7 @@ module Aws::MQ
       :configurations,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1869,6 +1927,7 @@ module Aws::MQ
     #
     class ListTagsRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1879,6 +1938,7 @@ module Aws::MQ
     #
     class ListTagsResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1911,6 +1971,7 @@ module Aws::MQ
       :max_results,
       :next_token,
       :users)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1938,6 +1999,7 @@ module Aws::MQ
       :broker_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1960,6 +2022,7 @@ module Aws::MQ
       :max_results,
       :next_token,
       :users)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1988,6 +2051,7 @@ module Aws::MQ
     class Logs < Struct.new(
       :audit,
       :general)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2026,6 +2090,7 @@ module Aws::MQ
       :general,
       :general_log_group,
       :pending)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2042,6 +2107,7 @@ module Aws::MQ
     class NotFoundException < Struct.new(
       :error_attribute,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2062,6 +2128,7 @@ module Aws::MQ
     class PendingLogs < Struct.new(
       :audit,
       :general)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2079,6 +2146,7 @@ module Aws::MQ
     #
     class RebootBrokerRequest < Struct.new(
       :broker_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2108,6 +2176,7 @@ module Aws::MQ
       :attribute_name,
       :element_name,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2121,6 +2190,7 @@ module Aws::MQ
     #
     class Tags < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2137,6 +2207,7 @@ module Aws::MQ
     class UnauthorizedException < Struct.new(
       :error_attribute,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2183,6 +2254,7 @@ module Aws::MQ
       :host_instance_type,
       :logs,
       :security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2233,6 +2305,7 @@ module Aws::MQ
       :host_instance_type,
       :logs,
       :security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2289,6 +2362,7 @@ module Aws::MQ
       :host_instance_type,
       :logs,
       :security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2326,6 +2400,7 @@ module Aws::MQ
       :host_instance_type,
       :logs,
       :security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2344,6 +2419,7 @@ module Aws::MQ
     class UpdateConfigurationInput < Struct.new(
       :data,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2386,6 +2462,7 @@ module Aws::MQ
       :latest_revision,
       :name,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2413,6 +2490,7 @@ module Aws::MQ
       :configuration_id,
       :data,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2444,6 +2522,7 @@ module Aws::MQ
       :latest_revision,
       :name,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2473,6 +2552,7 @@ module Aws::MQ
       :console_access,
       :groups,
       :password)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2510,6 +2590,7 @@ module Aws::MQ
       :groups,
       :password,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2560,6 +2641,7 @@ module Aws::MQ
       :groups,
       :password,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2588,6 +2670,7 @@ module Aws::MQ
       :console_access,
       :groups,
       :pending_change)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2608,6 +2691,7 @@ module Aws::MQ
     class UserSummary < Struct.new(
       :pending_change,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2642,6 +2726,7 @@ module Aws::MQ
       :day_of_week,
       :time_of_day,
       :time_zone)
+      SENSITIVE = []
       include Aws::Structure
     end
 

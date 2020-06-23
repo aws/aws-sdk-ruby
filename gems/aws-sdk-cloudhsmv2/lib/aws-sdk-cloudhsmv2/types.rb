@@ -72,6 +72,7 @@ module Aws::CloudHSMV2
       :source_cluster,
       :delete_timestamp,
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -109,6 +110,7 @@ module Aws::CloudHSMV2
       :aws_hardware_certificate,
       :manufacturer_hardware_certificate,
       :cluster_certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -122,6 +124,7 @@ module Aws::CloudHSMV2
     #
     class CloudHsmAccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -135,6 +138,7 @@ module Aws::CloudHSMV2
     #
     class CloudHsmInternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -147,6 +151,7 @@ module Aws::CloudHSMV2
     #
     class CloudHsmInvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -160,6 +165,7 @@ module Aws::CloudHSMV2
     #
     class CloudHsmResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -172,6 +178,7 @@ module Aws::CloudHSMV2
     #
     class CloudHsmServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -182,6 +189,7 @@ module Aws::CloudHSMV2
     #
     class CloudHsmTagException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -264,6 +272,7 @@ module Aws::CloudHSMV2
       :vpc_id,
       :certificates,
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -299,6 +308,7 @@ module Aws::CloudHSMV2
       :destination_region,
       :backup_id,
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -317,6 +327,7 @@ module Aws::CloudHSMV2
     #
     class CopyBackupToRegionResponse < Struct.new(
       :destination_backup)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -366,6 +377,7 @@ module Aws::CloudHSMV2
       :hsm_type,
       :source_backup_id,
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -377,6 +389,7 @@ module Aws::CloudHSMV2
     #
     class CreateClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -412,6 +425,7 @@ module Aws::CloudHSMV2
       :cluster_id,
       :availability_zone,
       :ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -423,6 +437,7 @@ module Aws::CloudHSMV2
     #
     class CreateHsmResponse < Struct.new(
       :hsm)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -442,6 +457,7 @@ module Aws::CloudHSMV2
     #
     class DeleteBackupRequest < Struct.new(
       :backup_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -453,6 +469,7 @@ module Aws::CloudHSMV2
     #
     class DeleteBackupResponse < Struct.new(
       :backup)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -472,6 +489,7 @@ module Aws::CloudHSMV2
     #
     class DeleteClusterRequest < Struct.new(
       :cluster_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -483,6 +501,7 @@ module Aws::CloudHSMV2
     #
     class DeleteClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -522,6 +541,7 @@ module Aws::CloudHSMV2
       :hsm_id,
       :eni_id,
       :eni_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -533,6 +553,7 @@ module Aws::CloudHSMV2
     #
     class DeleteHsmResponse < Struct.new(
       :hsm_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -589,6 +610,7 @@ module Aws::CloudHSMV2
       :max_results,
       :filters,
       :sort_ascending)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -607,6 +629,7 @@ module Aws::CloudHSMV2
     class DescribeBackupsResponse < Struct.new(
       :backups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -652,6 +675,7 @@ module Aws::CloudHSMV2
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -670,6 +694,7 @@ module Aws::CloudHSMV2
     class DescribeClustersResponse < Struct.new(
       :clusters,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -702,6 +727,7 @@ module Aws::CloudHSMV2
       :source_region,
       :source_backup,
       :source_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -751,6 +777,7 @@ module Aws::CloudHSMV2
       :hsm_id,
       :state,
       :state_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -789,6 +816,7 @@ module Aws::CloudHSMV2
       :cluster_id,
       :signed_cert,
       :trust_anchor)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -805,6 +833,7 @@ module Aws::CloudHSMV2
     class InitializeClusterResponse < Struct.new(
       :state,
       :state_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -839,6 +868,7 @@ module Aws::CloudHSMV2
       :resource_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -857,6 +887,7 @@ module Aws::CloudHSMV2
     class ListTagsResponse < Struct.new(
       :tag_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -876,6 +907,7 @@ module Aws::CloudHSMV2
     #
     class RestoreBackupRequest < Struct.new(
       :backup_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -887,6 +919,7 @@ module Aws::CloudHSMV2
     #
     class RestoreBackupResponse < Struct.new(
       :backup)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -913,6 +946,7 @@ module Aws::CloudHSMV2
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -943,6 +977,7 @@ module Aws::CloudHSMV2
     class TagResourceRequest < Struct.new(
       :resource_id,
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -973,6 +1008,7 @@ module Aws::CloudHSMV2
     class UntagResourceRequest < Struct.new(
       :resource_id,
       :tag_key_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 

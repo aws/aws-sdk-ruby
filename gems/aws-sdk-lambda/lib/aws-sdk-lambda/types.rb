@@ -46,6 +46,7 @@ module Aws::Lambda
       :code_size_zipped,
       :concurrent_executions,
       :unreserved_concurrent_executions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -65,6 +66,7 @@ module Aws::Lambda
     class AccountUsage < Struct.new(
       :total_code_size,
       :function_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -124,6 +126,7 @@ module Aws::Lambda
       :principal,
       :organization_id,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -140,6 +143,7 @@ module Aws::Lambda
     class AddLayerVersionPermissionResponse < Struct.new(
       :statement,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -232,6 +236,7 @@ module Aws::Lambda
       :event_source_token,
       :qualifier,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -243,6 +248,7 @@ module Aws::Lambda
     #
     class AddPermissionResponse < Struct.new(
       :statement)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -289,6 +295,7 @@ module Aws::Lambda
       :description,
       :routing_config,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -316,6 +323,7 @@ module Aws::Lambda
     #
     class AliasRoutingConfiguration < Struct.new(
       :additional_version_weights)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -338,6 +346,7 @@ module Aws::Lambda
     class CodeStorageExceededException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -354,6 +363,7 @@ module Aws::Lambda
     #
     class Concurrency < Struct.new(
       :reserved_concurrent_executions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -416,6 +426,7 @@ module Aws::Lambda
       :function_version,
       :description,
       :routing_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -544,6 +555,7 @@ module Aws::Lambda
       :maximum_record_age_in_seconds,
       :bisect_batch_on_function_error,
       :maximum_retry_attempts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -735,6 +747,7 @@ module Aws::Lambda
       :tags,
       :layers,
       :file_system_configs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -760,6 +773,7 @@ module Aws::Lambda
     #
     class DeadLetterConfig < Struct.new(
       :target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -796,6 +810,7 @@ module Aws::Lambda
     class DeleteAliasRequest < Struct.new(
       :function_name,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -814,6 +829,7 @@ module Aws::Lambda
     #
     class DeleteEventSourceMappingRequest < Struct.new(
       :uuid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -844,6 +860,7 @@ module Aws::Lambda
     #
     class DeleteFunctionConcurrencyRequest < Struct.new(
       :function_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -882,6 +899,7 @@ module Aws::Lambda
     class DeleteFunctionEventInvokeConfigRequest < Struct.new(
       :function_name,
       :qualifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -921,6 +939,7 @@ module Aws::Lambda
     class DeleteFunctionRequest < Struct.new(
       :function_name,
       :qualifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -945,6 +964,7 @@ module Aws::Lambda
     class DeleteLayerVersionRequest < Struct.new(
       :layer_name,
       :version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -981,6 +1001,7 @@ module Aws::Lambda
     class DeleteProvisionedConcurrencyConfigRequest < Struct.new(
       :function_name,
       :qualifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1012,6 +1033,7 @@ module Aws::Lambda
     class DestinationConfig < Struct.new(
       :on_success,
       :on_failure)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1028,6 +1050,7 @@ module Aws::Lambda
     class EC2AccessDeniedException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1046,6 +1069,7 @@ module Aws::Lambda
     class EC2ThrottledException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1067,6 +1091,7 @@ module Aws::Lambda
       :type,
       :message,
       :ec2_error_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1084,6 +1109,7 @@ module Aws::Lambda
     class EFSIOException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1101,6 +1127,7 @@ module Aws::Lambda
     class EFSMountConnectivityException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1118,6 +1145,7 @@ module Aws::Lambda
     class EFSMountFailureException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1135,6 +1163,7 @@ module Aws::Lambda
     class EFSMountTimeoutException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1153,6 +1182,7 @@ module Aws::Lambda
     class ENILimitReachedException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1175,6 +1205,7 @@ module Aws::Lambda
     #
     class Environment < Struct.new(
       :variables)
+      SENSITIVE = [:variables]
       include Aws::Structure
     end
 
@@ -1193,6 +1224,7 @@ module Aws::Lambda
     class EnvironmentError < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = [:message]
       include Aws::Structure
     end
 
@@ -1214,6 +1246,7 @@ module Aws::Lambda
     class EnvironmentResponse < Struct.new(
       :variables,
       :error)
+      SENSITIVE = [:variables]
       include Aws::Structure
     end
 
@@ -1304,6 +1337,7 @@ module Aws::Lambda
       :maximum_record_age_in_seconds,
       :bisect_batch_on_function_error,
       :maximum_retry_attempts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1333,6 +1367,7 @@ module Aws::Lambda
     class FileSystemConfig < Struct.new(
       :arn,
       :local_mount_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1375,6 +1410,7 @@ module Aws::Lambda
       :s3_bucket,
       :s3_key,
       :s3_object_version)
+      SENSITIVE = [:zip_file]
       include Aws::Structure
     end
 
@@ -1393,6 +1429,7 @@ module Aws::Lambda
     class FunctionCodeLocation < Struct.new(
       :repository_type,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1552,6 +1589,7 @@ module Aws::Lambda
       :last_update_status_reason,
       :last_update_status_reason_code,
       :file_system_configs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1597,6 +1635,7 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1619,6 +1658,7 @@ module Aws::Lambda
     class GetAccountSettingsResponse < Struct.new(
       :account_limit,
       :account_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1655,6 +1695,7 @@ module Aws::Lambda
     class GetAliasRequest < Struct.new(
       :function_name,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1673,6 +1714,7 @@ module Aws::Lambda
     #
     class GetEventSourceMappingRequest < Struct.new(
       :uuid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1703,6 +1745,7 @@ module Aws::Lambda
     #
     class GetFunctionConcurrencyRequest < Struct.new(
       :function_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1715,6 +1758,7 @@ module Aws::Lambda
     #
     class GetFunctionConcurrencyResponse < Struct.new(
       :reserved_concurrent_executions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1754,6 +1798,7 @@ module Aws::Lambda
     class GetFunctionConfigurationRequest < Struct.new(
       :function_name,
       :qualifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1792,6 +1837,7 @@ module Aws::Lambda
     class GetFunctionEventInvokeConfigRequest < Struct.new(
       :function_name,
       :qualifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1831,6 +1877,7 @@ module Aws::Lambda
     class GetFunctionRequest < Struct.new(
       :function_name,
       :qualifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1865,6 +1912,7 @@ module Aws::Lambda
       :code,
       :tags,
       :concurrency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1883,6 +1931,7 @@ module Aws::Lambda
     #
     class GetLayerVersionByArnRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1907,6 +1956,7 @@ module Aws::Lambda
     class GetLayerVersionPolicyRequest < Struct.new(
       :layer_name,
       :version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1923,6 +1973,7 @@ module Aws::Lambda
     class GetLayerVersionPolicyResponse < Struct.new(
       :policy,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1947,6 +1998,7 @@ module Aws::Lambda
     class GetLayerVersionRequest < Struct.new(
       :layer_name,
       :version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1998,6 +2050,7 @@ module Aws::Lambda
       :version,
       :compatible_runtimes,
       :license_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2036,6 +2089,7 @@ module Aws::Lambda
     class GetPolicyRequest < Struct.new(
       :function_name,
       :qualifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2052,6 +2106,7 @@ module Aws::Lambda
     class GetPolicyResponse < Struct.new(
       :policy,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2088,6 +2143,7 @@ module Aws::Lambda
     class GetProvisionedConcurrencyConfigRequest < Struct.new(
       :function_name,
       :qualifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2130,6 +2186,7 @@ module Aws::Lambda
       :status,
       :status_reason,
       :last_modified)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2148,6 +2205,7 @@ module Aws::Lambda
     class InvalidParameterValueException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2166,6 +2224,7 @@ module Aws::Lambda
     class InvalidRequestContentException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2182,6 +2241,7 @@ module Aws::Lambda
     class InvalidRuntimeException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2199,6 +2259,7 @@ module Aws::Lambda
     class InvalidSecurityGroupIDException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2216,6 +2277,7 @@ module Aws::Lambda
     class InvalidSubnetIDException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2232,6 +2294,7 @@ module Aws::Lambda
     class InvalidZipFileException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2308,6 +2371,7 @@ module Aws::Lambda
       :client_context,
       :payload,
       :qualifier)
+      SENSITIVE = [:payload]
       include Aws::Structure
     end
 
@@ -2346,6 +2410,7 @@ module Aws::Lambda
       :log_result,
       :payload,
       :executed_version)
+      SENSITIVE = [:payload]
       include Aws::Structure
     end
 
@@ -2382,6 +2447,7 @@ module Aws::Lambda
     class InvokeAsyncRequest < Struct.new(
       :function_name,
       :invoke_args)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2396,6 +2462,7 @@ module Aws::Lambda
     #
     class InvokeAsyncResponse < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2413,6 +2480,7 @@ module Aws::Lambda
     class KMSAccessDeniedException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2430,6 +2498,7 @@ module Aws::Lambda
     class KMSDisabledException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2448,6 +2517,7 @@ module Aws::Lambda
     class KMSInvalidStateException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2465,6 +2535,7 @@ module Aws::Lambda
     class KMSNotFoundException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2487,6 +2558,7 @@ module Aws::Lambda
     class Layer < Struct.new(
       :arn,
       :code_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2533,6 +2605,7 @@ module Aws::Lambda
       :s3_key,
       :s3_object_version,
       :zip_file)
+      SENSITIVE = [:zip_file]
       include Aws::Structure
     end
 
@@ -2561,6 +2634,7 @@ module Aws::Lambda
       :location,
       :code_sha_256,
       :code_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2604,6 +2678,7 @@ module Aws::Lambda
       :created_date,
       :compatible_runtimes,
       :license_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2631,6 +2706,7 @@ module Aws::Lambda
       :layer_name,
       :layer_arn,
       :latest_matching_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2681,6 +2757,7 @@ module Aws::Lambda
       :function_version,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2697,6 +2774,7 @@ module Aws::Lambda
     class ListAliasesResponse < Struct.new(
       :next_marker,
       :aliases)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2755,6 +2833,7 @@ module Aws::Lambda
       :function_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2772,6 +2851,7 @@ module Aws::Lambda
     class ListEventSourceMappingsResponse < Struct.new(
       :next_marker,
       :event_source_mappings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2815,6 +2895,7 @@ module Aws::Lambda
       :function_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2831,6 +2912,7 @@ module Aws::Lambda
     class ListFunctionEventInvokeConfigsResponse < Struct.new(
       :function_event_invoke_configs,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2873,6 +2955,7 @@ module Aws::Lambda
       :function_version,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2891,6 +2974,7 @@ module Aws::Lambda
     class ListFunctionsResponse < Struct.new(
       :next_marker,
       :functions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2927,6 +3011,7 @@ module Aws::Lambda
       :layer_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2944,6 +3029,7 @@ module Aws::Lambda
     class ListLayerVersionsResponse < Struct.new(
       :next_marker,
       :layer_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2974,6 +3060,7 @@ module Aws::Lambda
       :compatible_runtime,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2991,6 +3078,7 @@ module Aws::Lambda
     class ListLayersResponse < Struct.new(
       :next_marker,
       :layers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3034,6 +3122,7 @@ module Aws::Lambda
       :function_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3050,6 +3139,7 @@ module Aws::Lambda
     class ListProvisionedConcurrencyConfigsResponse < Struct.new(
       :provisioned_concurrency_configs,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3068,6 +3158,7 @@ module Aws::Lambda
     #
     class ListTagsRequest < Struct.new(
       :resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3079,6 +3170,7 @@ module Aws::Lambda
     #
     class ListTagsResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3122,6 +3214,7 @@ module Aws::Lambda
       :function_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3138,6 +3231,7 @@ module Aws::Lambda
     class ListVersionsByFunctionResponse < Struct.new(
       :next_marker,
       :versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3158,6 +3252,7 @@ module Aws::Lambda
     #
     class OnFailure < Struct.new(
       :destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3178,6 +3273,7 @@ module Aws::Lambda
     #
     class OnSuccess < Struct.new(
       :destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3198,6 +3294,7 @@ module Aws::Lambda
     class PolicyLengthExceededException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3218,6 +3315,7 @@ module Aws::Lambda
     class PreconditionFailedException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3268,6 +3366,7 @@ module Aws::Lambda
       :status,
       :status_reason,
       :last_modified)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3284,6 +3383,7 @@ module Aws::Lambda
     class ProvisionedConcurrencyConfigNotFoundException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3347,6 +3447,7 @@ module Aws::Lambda
       :content,
       :compatible_runtimes,
       :license_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3398,6 +3499,7 @@ module Aws::Lambda
       :version,
       :compatible_runtimes,
       :license_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3453,6 +3555,7 @@ module Aws::Lambda
       :code_sha_256,
       :description,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3489,6 +3592,7 @@ module Aws::Lambda
     class PutFunctionConcurrencyRequest < Struct.new(
       :function_name,
       :reserved_concurrent_executions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3566,6 +3670,7 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3609,6 +3714,7 @@ module Aws::Lambda
       :function_name,
       :qualifier,
       :provisioned_concurrent_executions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3651,6 +3757,7 @@ module Aws::Lambda
       :status,
       :status_reason,
       :last_modified)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3689,6 +3796,7 @@ module Aws::Lambda
       :version_number,
       :statement_id,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3742,6 +3850,7 @@ module Aws::Lambda
       :statement_id,
       :qualifier,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3763,6 +3872,7 @@ module Aws::Lambda
     class RequestTooLargeException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3781,6 +3891,7 @@ module Aws::Lambda
     class ResourceConflictException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3800,6 +3911,7 @@ module Aws::Lambda
     class ResourceInUseException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3816,6 +3928,7 @@ module Aws::Lambda
     class ResourceNotFoundException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3835,6 +3948,7 @@ module Aws::Lambda
     class ResourceNotReadyException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3851,6 +3965,7 @@ module Aws::Lambda
     class ServiceException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3868,6 +3983,7 @@ module Aws::Lambda
     class SubnetIPAddressLimitReachedException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3894,6 +4010,7 @@ module Aws::Lambda
     class TagResourceRequest < Struct.new(
       :resource,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3919,6 +4036,7 @@ module Aws::Lambda
       :type,
       :message,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3940,6 +4058,7 @@ module Aws::Lambda
     #
     class TracingConfig < Struct.new(
       :mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3953,6 +4072,7 @@ module Aws::Lambda
     #
     class TracingConfigResponse < Struct.new(
       :mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3969,6 +4089,7 @@ module Aws::Lambda
     class UnsupportedMediaTypeException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3993,6 +4114,7 @@ module Aws::Lambda
     class UntagResourceRequest < Struct.new(
       :resource,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4063,6 +4185,7 @@ module Aws::Lambda
       :description,
       :routing_config,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4169,6 +4292,7 @@ module Aws::Lambda
       :bisect_batch_on_function_error,
       :maximum_retry_attempts,
       :parallelization_factor)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4249,6 +4373,7 @@ module Aws::Lambda
       :publish,
       :dry_run,
       :revision_id)
+      SENSITIVE = [:zip_file]
       include Aws::Structure
     end
 
@@ -4418,6 +4543,7 @@ module Aws::Lambda
       :revision_id,
       :layers,
       :file_system_configs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4495,6 +4621,7 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4526,6 +4653,7 @@ module Aws::Lambda
     class VpcConfig < Struct.new(
       :subnet_ids,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4550,6 +4678,7 @@ module Aws::Lambda
       :subnet_ids,
       :security_group_ids,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 

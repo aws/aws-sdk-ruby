@@ -19,6 +19,7 @@ module Aws::Signer
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33,6 +34,7 @@ module Aws::Signer
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -51,6 +53,7 @@ module Aws::Signer
     #
     class CancelSigningProfileRequest < Struct.new(
       :profile_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -69,6 +72,7 @@ module Aws::Signer
     #
     class DescribeSigningJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -145,6 +149,7 @@ module Aws::Signer
       :status,
       :status_reason,
       :signed_object)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -169,6 +174,7 @@ module Aws::Signer
     #
     class Destination < Struct.new(
       :s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -189,6 +195,7 @@ module Aws::Signer
     class EncryptionAlgorithmOptions < Struct.new(
       :allowed_values,
       :default_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -207,6 +214,7 @@ module Aws::Signer
     #
     class GetSigningPlatformRequest < Struct.new(
       :platform_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -254,6 +262,7 @@ module Aws::Signer
       :signing_configuration,
       :signing_image_format,
       :max_size_in_mb)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -272,6 +281,7 @@ module Aws::Signer
     #
     class GetSigningProfileRequest < Struct.new(
       :profile_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -321,6 +331,7 @@ module Aws::Signer
       :status,
       :arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -339,6 +350,7 @@ module Aws::Signer
     class HashAlgorithmOptions < Struct.new(
       :allowed_values,
       :default_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -351,6 +363,7 @@ module Aws::Signer
     #
     class InternalServiceErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -401,6 +414,7 @@ module Aws::Signer
       :requested_by,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -417,6 +431,7 @@ module Aws::Signer
     class ListSigningJobsResponse < Struct.new(
       :jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -462,6 +477,7 @@ module Aws::Signer
       :target,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -478,6 +494,7 @@ module Aws::Signer
     class ListSigningPlatformsResponse < Struct.new(
       :platforms,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -512,6 +529,7 @@ module Aws::Signer
       :include_canceled,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -530,6 +548,7 @@ module Aws::Signer
     class ListSigningProfilesResponse < Struct.new(
       :profiles,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -548,6 +567,7 @@ module Aws::Signer
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -559,6 +579,7 @@ module Aws::Signer
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -571,6 +592,7 @@ module Aws::Signer
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -636,6 +658,7 @@ module Aws::Signer
       :overrides,
       :signing_parameters,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -647,6 +670,7 @@ module Aws::Signer
     #
     class PutSigningProfileResponse < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -659,6 +683,7 @@ module Aws::Signer
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -687,6 +712,7 @@ module Aws::Signer
     class S3Destination < Struct.new(
       :bucket_name,
       :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -707,6 +733,7 @@ module Aws::Signer
     class S3SignedObject < Struct.new(
       :bucket_name,
       :key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -739,6 +766,7 @@ module Aws::Signer
       :bucket_name,
       :key,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -753,6 +781,7 @@ module Aws::Signer
     #
     class SignedObject < Struct.new(
       :s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -773,6 +802,7 @@ module Aws::Signer
     class SigningConfiguration < Struct.new(
       :encryption_algorithm_options,
       :hash_algorithm_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -802,6 +832,7 @@ module Aws::Signer
     class SigningConfigurationOverrides < Struct.new(
       :encryption_algorithm,
       :hash_algorithm)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -820,6 +851,7 @@ module Aws::Signer
     class SigningImageFormat < Struct.new(
       :supported_formats,
       :default_format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -861,6 +893,7 @@ module Aws::Signer
       :signing_material,
       :created_at,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -882,6 +915,7 @@ module Aws::Signer
     #
     class SigningMaterial < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -934,6 +968,7 @@ module Aws::Signer
       :signing_configuration,
       :signing_image_format,
       :max_size_in_mb)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -970,6 +1005,7 @@ module Aws::Signer
     class SigningPlatformOverrides < Struct.new(
       :signing_configuration,
       :signing_image_format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1015,6 +1051,7 @@ module Aws::Signer
       :status,
       :arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1040,6 +1077,7 @@ module Aws::Signer
     #
     class Source < Struct.new(
       :s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1094,6 +1132,7 @@ module Aws::Signer
       :destination,
       :profile_name,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1105,6 +1144,7 @@ module Aws::Signer
     #
     class StartSigningJobResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1131,6 +1171,7 @@ module Aws::Signer
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1147,6 +1188,7 @@ module Aws::Signer
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1171,6 +1213,7 @@ module Aws::Signer
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1187,6 +1230,7 @@ module Aws::Signer
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

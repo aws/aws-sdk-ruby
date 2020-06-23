@@ -39,6 +39,7 @@ module Aws::DocDB
     class AddTagsToResourceMessage < Struct.new(
       :resource_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -86,6 +87,7 @@ module Aws::DocDB
       :resource_identifier,
       :apply_action,
       :opt_in_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -97,6 +99,7 @@ module Aws::DocDB
     #
     class ApplyPendingMaintenanceActionResult < Struct.new(
       :resource_pending_maintenance_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -120,6 +123,7 @@ module Aws::DocDB
     #
     class AvailabilityZone < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -168,6 +172,7 @@ module Aws::DocDB
       :valid_from,
       :valid_till,
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -188,6 +193,7 @@ module Aws::DocDB
     class CertificateMessage < Struct.new(
       :certificates,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -225,6 +231,7 @@ module Aws::DocDB
     class CloudwatchLogsExportConfiguration < Struct.new(
       :enable_log_types,
       :disable_log_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -294,6 +301,7 @@ module Aws::DocDB
       :target_db_cluster_parameter_group_identifier,
       :target_db_cluster_parameter_group_description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -305,6 +313,7 @@ module Aws::DocDB
     #
     class CopyDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -438,6 +447,7 @@ module Aws::DocDB
       :pre_signed_url,
       :copy_tags,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -449,6 +459,7 @@ module Aws::DocDB
     #
     class CopyDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -675,6 +686,7 @@ module Aws::DocDB
       :kms_key_id,
       :enable_cloudwatch_logs_exports,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -728,6 +740,7 @@ module Aws::DocDB
       :db_parameter_group_family,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -739,6 +752,7 @@ module Aws::DocDB
     #
     class CreateDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -750,6 +764,7 @@ module Aws::DocDB
     #
     class CreateDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -807,6 +822,7 @@ module Aws::DocDB
       :db_cluster_snapshot_identifier,
       :db_cluster_identifier,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -818,6 +834,7 @@ module Aws::DocDB
     #
     class CreateDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -935,6 +952,7 @@ module Aws::DocDB
       :tags,
       :db_cluster_identifier,
       :promotion_tier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -946,6 +964,7 @@ module Aws::DocDB
     #
     class CreateDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -995,6 +1014,7 @@ module Aws::DocDB
       :db_subnet_group_description,
       :subnet_ids,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1006,6 +1026,7 @@ module Aws::DocDB
     #
     class CreateDBSubnetGroupResult < Struct.new(
       :db_subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1198,6 +1219,7 @@ module Aws::DocDB
       :cluster_create_time,
       :enabled_cloudwatch_logs_exports,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1236,6 +1258,7 @@ module Aws::DocDB
       :is_cluster_writer,
       :db_cluster_parameter_group_status,
       :promotion_tier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1256,6 +1279,7 @@ module Aws::DocDB
     class DBClusterMessage < Struct.new(
       :marker,
       :db_clusters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1292,6 +1316,7 @@ module Aws::DocDB
       :db_parameter_group_family,
       :description,
       :db_cluster_parameter_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1312,6 +1337,7 @@ module Aws::DocDB
     class DBClusterParameterGroupDetails < Struct.new(
       :parameters,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1337,6 +1363,7 @@ module Aws::DocDB
     #
     class DBClusterParameterGroupNameMessage < Struct.new(
       :db_cluster_parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1364,6 +1391,7 @@ module Aws::DocDB
     class DBClusterParameterGroupsMessage < Struct.new(
       :marker,
       :db_cluster_parameter_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1402,6 +1430,7 @@ module Aws::DocDB
     class DBClusterRole < Struct.new(
       :role_arn,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1504,6 +1533,7 @@ module Aws::DocDB
       :kms_key_id,
       :db_cluster_snapshot_arn,
       :source_db_cluster_snapshot_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1540,6 +1570,7 @@ module Aws::DocDB
     class DBClusterSnapshotAttribute < Struct.new(
       :attribute_name,
       :attribute_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1559,6 +1590,7 @@ module Aws::DocDB
     class DBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_identifier,
       :db_cluster_snapshot_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1579,6 +1611,7 @@ module Aws::DocDB
     class DBClusterSnapshotMessage < Struct.new(
       :marker,
       :db_cluster_snapshots)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1637,6 +1670,7 @@ module Aws::DocDB
       :valid_upgrade_target,
       :exportable_log_types,
       :supports_log_exports_to_cloudwatch_logs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1657,6 +1691,7 @@ module Aws::DocDB
     class DBEngineVersionMessage < Struct.new(
       :marker,
       :db_engine_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1818,6 +1853,7 @@ module Aws::DocDB
       :promotion_tier,
       :db_instance_arn,
       :enabled_cloudwatch_logs_exports)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1844,6 +1880,7 @@ module Aws::DocDB
     class DBInstanceMessage < Struct.new(
       :marker,
       :db_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1881,6 +1918,7 @@ module Aws::DocDB
       :normal,
       :status,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1957,6 +1995,7 @@ module Aws::DocDB
       :subnet_group_status,
       :subnets,
       :db_subnet_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1990,6 +2029,7 @@ module Aws::DocDB
     class DBSubnetGroupMessage < Struct.new(
       :marker,
       :db_subnet_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2080,6 +2120,7 @@ module Aws::DocDB
       :db_cluster_identifier,
       :skip_final_snapshot,
       :final_db_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2108,6 +2149,7 @@ module Aws::DocDB
     #
     class DeleteDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2119,6 +2161,7 @@ module Aws::DocDB
     #
     class DeleteDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2142,6 +2185,7 @@ module Aws::DocDB
     #
     class DeleteDBClusterSnapshotMessage < Struct.new(
       :db_cluster_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2153,6 +2197,7 @@ module Aws::DocDB
     #
     class DeleteDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2180,6 +2225,7 @@ module Aws::DocDB
     #
     class DeleteDBInstanceMessage < Struct.new(
       :db_instance_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2191,6 +2237,7 @@ module Aws::DocDB
     #
     class DeleteDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2222,6 +2269,7 @@ module Aws::DocDB
     #
     class DeleteDBSubnetGroupMessage < Struct.new(
       :db_subnet_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2286,6 +2334,7 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2346,6 +2395,7 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2413,6 +2463,7 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2434,6 +2485,7 @@ module Aws::DocDB
     #
     class DescribeDBClusterSnapshotAttributesMessage < Struct.new(
       :db_cluster_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2446,6 +2498,7 @@ module Aws::DocDB
     #
     class DescribeDBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_attributes_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2569,6 +2622,7 @@ module Aws::DocDB
       :marker,
       :include_shared,
       :include_public)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2637,6 +2691,7 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2732,6 +2787,7 @@ module Aws::DocDB
       :default_only,
       :list_supported_character_sets,
       :list_supported_timezones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2804,6 +2860,7 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2856,6 +2913,7 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2909,6 +2967,7 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2921,6 +2980,7 @@ module Aws::DocDB
     #
     class DescribeEngineDefaultClusterParametersResult < Struct.new(
       :engine_defaults)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2955,6 +3015,7 @@ module Aws::DocDB
     class DescribeEventCategoriesMessage < Struct.new(
       :source_type,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3067,6 +3128,7 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3147,6 +3209,7 @@ module Aws::DocDB
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3210,6 +3273,7 @@ module Aws::DocDB
       :filters,
       :marker,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3236,6 +3300,7 @@ module Aws::DocDB
       :address,
       :port,
       :hosted_zone_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3263,6 +3328,7 @@ module Aws::DocDB
       :db_parameter_group_family,
       :marker,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3301,6 +3367,7 @@ module Aws::DocDB
       :event_categories,
       :date,
       :source_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3319,6 +3386,7 @@ module Aws::DocDB
     class EventCategoriesMap < Struct.new(
       :source_type,
       :event_categories)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3332,6 +3400,7 @@ module Aws::DocDB
     #
     class EventCategoriesMessage < Struct.new(
       :event_categories_map_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3352,6 +3421,7 @@ module Aws::DocDB
     class EventsMessage < Struct.new(
       :marker,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3388,6 +3458,7 @@ module Aws::DocDB
     class FailoverDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       :target_db_instance_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3399,6 +3470,7 @@ module Aws::DocDB
     #
     class FailoverDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3429,6 +3501,7 @@ module Aws::DocDB
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3565,6 +3638,7 @@ module Aws::DocDB
     class ListTagsForResourceMessage < Struct.new(
       :resource_name,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3746,6 +3820,7 @@ module Aws::DocDB
       :cloudwatch_logs_export_configuration,
       :engine_version,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3785,6 +3860,7 @@ module Aws::DocDB
     class ModifyDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3796,6 +3872,7 @@ module Aws::DocDB
     #
     class ModifyDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3855,6 +3932,7 @@ module Aws::DocDB
       :attribute_name,
       :values_to_add,
       :values_to_remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3867,6 +3945,7 @@ module Aws::DocDB
     #
     class ModifyDBClusterSnapshotAttributeResult < Struct.new(
       :db_cluster_snapshot_attributes_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3996,6 +4075,7 @@ module Aws::DocDB
       :new_db_instance_identifier,
       :ca_certificate_identifier,
       :promotion_tier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4007,6 +4087,7 @@ module Aws::DocDB
     #
     class ModifyDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4045,6 +4126,7 @@ module Aws::DocDB
       :db_subnet_group_name,
       :db_subnet_group_description,
       :subnet_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4056,6 +4138,7 @@ module Aws::DocDB
     #
     class ModifyDBSubnetGroupResult < Struct.new(
       :db_subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4094,6 +4177,7 @@ module Aws::DocDB
       :license_model,
       :availability_zones,
       :vpc)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4114,6 +4198,7 @@ module Aws::DocDB
     class OrderableDBInstanceOptionsMessage < Struct.new(
       :orderable_db_instance_options,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4190,6 +4275,7 @@ module Aws::DocDB
       :is_modifiable,
       :minimum_engine_version,
       :apply_method)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4212,6 +4298,7 @@ module Aws::DocDB
     class PendingCloudwatchLogsExports < Struct.new(
       :log_types_to_enable,
       :log_types_to_disable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4260,6 +4347,7 @@ module Aws::DocDB
       :opt_in_status,
       :current_apply_date,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4280,6 +4368,7 @@ module Aws::DocDB
     class PendingMaintenanceActionsMessage < Struct.new(
       :pending_maintenance_actions,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4371,6 +4460,7 @@ module Aws::DocDB
       :ca_certificate_identifier,
       :db_subnet_group_name,
       :pending_cloudwatch_logs_exports)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4407,6 +4497,7 @@ module Aws::DocDB
     class RebootDBInstanceMessage < Struct.new(
       :db_instance_identifier,
       :force_failover)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4418,6 +4509,7 @@ module Aws::DocDB
     #
     class RebootDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4445,6 +4537,7 @@ module Aws::DocDB
     class RemoveTagsFromResourceMessage < Struct.new(
       :resource_name,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4495,6 +4588,7 @@ module Aws::DocDB
       :db_cluster_parameter_group_name,
       :reset_all_parameters,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4521,6 +4615,7 @@ module Aws::DocDB
     class ResourcePendingMaintenanceActions < Struct.new(
       :resource_identifier,
       :pending_maintenance_action_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4671,6 +4766,7 @@ module Aws::DocDB
       :kms_key_id,
       :enable_cloudwatch_logs_exports,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4682,6 +4778,7 @@ module Aws::DocDB
     #
     class RestoreDBClusterFromSnapshotResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4843,6 +4940,7 @@ module Aws::DocDB
       :kms_key_id,
       :enable_cloudwatch_logs_exports,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4854,6 +4952,7 @@ module Aws::DocDB
     #
     class RestoreDBClusterToPointInTimeResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4886,6 +4985,7 @@ module Aws::DocDB
     #
     class StartDBClusterMessage < Struct.new(
       :db_cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4897,6 +4997,7 @@ module Aws::DocDB
     #
     class StartDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4916,6 +5017,7 @@ module Aws::DocDB
     #
     class StopDBClusterMessage < Struct.new(
       :db_cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4927,6 +5029,7 @@ module Aws::DocDB
     #
     class StopDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4964,6 +5067,7 @@ module Aws::DocDB
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5007,6 +5111,7 @@ module Aws::DocDB
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5020,6 +5125,7 @@ module Aws::DocDB
     #
     class TagListMessage < Struct.new(
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5058,6 +5164,7 @@ module Aws::DocDB
       :description,
       :auto_upgrade,
       :is_major_version_upgrade)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5077,6 +5184,7 @@ module Aws::DocDB
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 

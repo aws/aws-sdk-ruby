@@ -22,6 +22,7 @@ module Aws::CognitoSync
     #
     class AlreadyStreamedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44,6 +45,7 @@ module Aws::CognitoSync
     #
     class BulkPublishRequest < Struct.new(
       :identity_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -59,6 +61,7 @@ module Aws::CognitoSync
     #
     class BulkPublishResponse < Struct.new(
       :identity_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -98,6 +101,7 @@ module Aws::CognitoSync
       :stream_name,
       :role_arn,
       :streaming_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -111,6 +115,7 @@ module Aws::CognitoSync
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -162,6 +167,7 @@ module Aws::CognitoSync
       :last_modified_by,
       :data_storage,
       :num_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -199,6 +205,7 @@ module Aws::CognitoSync
       :identity_pool_id,
       :identity_id,
       :dataset_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -217,6 +224,7 @@ module Aws::CognitoSync
     #
     class DeleteDatasetResponse < Struct.new(
       :dataset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -255,6 +263,7 @@ module Aws::CognitoSync
       :identity_pool_id,
       :identity_id,
       :dataset_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -272,6 +281,7 @@ module Aws::CognitoSync
     #
     class DescribeDatasetResponse < Struct.new(
       :dataset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -294,6 +304,7 @@ module Aws::CognitoSync
     #
     class DescribeIdentityPoolUsageRequest < Struct.new(
       :identity_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -307,6 +318,7 @@ module Aws::CognitoSync
     #
     class DescribeIdentityPoolUsageResponse < Struct.new(
       :identity_pool_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -337,6 +349,7 @@ module Aws::CognitoSync
     class DescribeIdentityUsageRequest < Struct.new(
       :identity_pool_id,
       :identity_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -350,6 +363,7 @@ module Aws::CognitoSync
     #
     class DescribeIdentityUsageResponse < Struct.new(
       :identity_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -364,6 +378,7 @@ module Aws::CognitoSync
     #
     class DuplicateRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -386,6 +401,7 @@ module Aws::CognitoSync
     #
     class GetBulkPublishDetailsRequest < Struct.new(
       :identity_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -432,6 +448,7 @@ module Aws::CognitoSync
       :bulk_publish_complete_time,
       :bulk_publish_status,
       :failure_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -452,6 +469,7 @@ module Aws::CognitoSync
     #
     class GetCognitoEventsRequest < Struct.new(
       :identity_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -465,6 +483,7 @@ module Aws::CognitoSync
     #
     class GetCognitoEventsResponse < Struct.new(
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -488,6 +507,7 @@ module Aws::CognitoSync
     #
     class GetIdentityPoolConfigurationRequest < Struct.new(
       :identity_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -513,6 +533,7 @@ module Aws::CognitoSync
       :identity_pool_id,
       :push_sync,
       :cognito_streams)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -543,6 +564,7 @@ module Aws::CognitoSync
       :sync_sessions_count,
       :data_storage,
       :last_modified_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -580,6 +602,7 @@ module Aws::CognitoSync
       :last_modified_date,
       :dataset_count,
       :data_storage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -593,6 +616,7 @@ module Aws::CognitoSync
     #
     class InternalErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -604,6 +628,7 @@ module Aws::CognitoSync
     #
     class InvalidConfigurationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -618,6 +643,7 @@ module Aws::CognitoSync
     #
     class InvalidLambdaFunctionOutputException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -632,6 +658,7 @@ module Aws::CognitoSync
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -645,6 +672,7 @@ module Aws::CognitoSync
     #
     class LambdaThrottledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -659,6 +687,7 @@ module Aws::CognitoSync
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -701,6 +730,7 @@ module Aws::CognitoSync
       :identity_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -724,6 +754,7 @@ module Aws::CognitoSync
       :datasets,
       :count,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -750,6 +781,7 @@ module Aws::CognitoSync
     class ListIdentityPoolUsageRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -778,6 +810,7 @@ module Aws::CognitoSync
       :max_results,
       :count,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -839,6 +872,7 @@ module Aws::CognitoSync
       :next_token,
       :max_results,
       :sync_session_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -892,6 +926,7 @@ module Aws::CognitoSync
       :dataset_exists,
       :dataset_deleted_after_requested_sync_count,
       :sync_session_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -905,6 +940,7 @@ module Aws::CognitoSync
     #
     class NotAuthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -932,6 +968,7 @@ module Aws::CognitoSync
     class PushSync < Struct.new(
       :application_arns,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -970,6 +1007,7 @@ module Aws::CognitoSync
       :last_modified_date,
       :last_modified_by,
       :device_last_modified_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1014,6 +1052,7 @@ module Aws::CognitoSync
       :value,
       :sync_count,
       :device_last_modified_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1054,6 +1093,7 @@ module Aws::CognitoSync
       :identity_id,
       :platform,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1067,6 +1107,7 @@ module Aws::CognitoSync
     #
     class RegisterDeviceResponse < Struct.new(
       :device_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1081,6 +1122,7 @@ module Aws::CognitoSync
     #
     class ResourceConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1094,6 +1136,7 @@ module Aws::CognitoSync
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1124,6 +1167,7 @@ module Aws::CognitoSync
     class SetCognitoEventsRequest < Struct.new(
       :identity_pool_id,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1165,6 +1209,7 @@ module Aws::CognitoSync
       :identity_pool_id,
       :push_sync,
       :cognito_streams)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1190,6 +1235,7 @@ module Aws::CognitoSync
       :identity_pool_id,
       :push_sync,
       :cognito_streams)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1230,6 +1276,7 @@ module Aws::CognitoSync
       :identity_id,
       :dataset_name,
       :device_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1249,6 +1296,7 @@ module Aws::CognitoSync
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1289,6 +1337,7 @@ module Aws::CognitoSync
       :identity_id,
       :dataset_name,
       :device_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1368,6 +1417,7 @@ module Aws::CognitoSync
       :record_patches,
       :sync_session_token,
       :client_context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1381,6 +1431,7 @@ module Aws::CognitoSync
     #
     class UpdateRecordsResponse < Struct.new(
       :records)
+      SENSITIVE = []
       include Aws::Structure
     end
 

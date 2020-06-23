@@ -38,6 +38,7 @@ module Aws::SageMaker
     class AddTagsInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -49,6 +50,7 @@ module Aws::SageMaker
     #
     class AddTagsOutput < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -167,6 +169,7 @@ module Aws::SageMaker
       :training_input_mode,
       :metric_definitions,
       :enable_sage_maker_metrics_time_series)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -185,6 +188,7 @@ module Aws::SageMaker
     class AlgorithmStatusDetails < Struct.new(
       :validation_statuses,
       :image_scan_statuses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -209,6 +213,7 @@ module Aws::SageMaker
       :name,
       :status,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -242,6 +247,7 @@ module Aws::SageMaker
       :algorithm_description,
       :creation_time,
       :algorithm_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -355,6 +361,7 @@ module Aws::SageMaker
       :profile_name,
       :training_job_definition,
       :transform_job_definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -464,6 +471,7 @@ module Aws::SageMaker
     class AlgorithmValidationSpecification < Struct.new(
       :validation_role,
       :validation_profiles)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -803,6 +811,7 @@ module Aws::SageMaker
     #
     class AnnotationConsolidationConfig < Struct.new(
       :annotation_consolidation_lambda_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -841,6 +850,7 @@ module Aws::SageMaker
       :app_name,
       :status,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -873,6 +883,7 @@ module Aws::SageMaker
       :image_uri,
       :container_entrypoint,
       :container_arguments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -897,6 +908,7 @@ module Aws::SageMaker
     class AssociateTrialComponentRequest < Struct.new(
       :trial_component_name,
       :trial_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -913,6 +925,7 @@ module Aws::SageMaker
     class AssociateTrialComponentResponse < Struct.new(
       :trial_component_arn,
       :trial_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -972,6 +985,7 @@ module Aws::SageMaker
       :end_time,
       :last_modified_time,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -997,6 +1011,7 @@ module Aws::SageMaker
       :candidate_step_type,
       :candidate_step_arn,
       :candidate_step_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1036,6 +1051,7 @@ module Aws::SageMaker
       :data_source,
       :compression_type,
       :target_attribute_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1064,6 +1080,7 @@ module Aws::SageMaker
       :image,
       :model_data_url,
       :environment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1091,6 +1108,7 @@ module Aws::SageMaker
     #
     class AutoMLDataSource < Struct.new(
       :s3_data_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1109,6 +1127,7 @@ module Aws::SageMaker
     class AutoMLJobArtifacts < Struct.new(
       :candidate_definition_notebook_location,
       :data_exploration_notebook_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1144,6 +1163,7 @@ module Aws::SageMaker
       :max_candidates,
       :max_runtime_per_training_job_in_seconds,
       :max_auto_ml_job_runtime_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1183,6 +1203,7 @@ module Aws::SageMaker
     class AutoMLJobConfig < Struct.new(
       :completion_criteria,
       :security_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1203,6 +1224,7 @@ module Aws::SageMaker
     #
     class AutoMLJobObjective < Struct.new(
       :metric_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1251,6 +1273,7 @@ module Aws::SageMaker
       :end_time,
       :last_modified_time,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1277,6 +1300,7 @@ module Aws::SageMaker
     class AutoMLOutputDataConfig < Struct.new(
       :kms_key_id,
       :s3_output_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1303,6 +1327,7 @@ module Aws::SageMaker
     class AutoMLS3DataSource < Struct.new(
       :s3_data_type,
       :s3_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1338,6 +1363,7 @@ module Aws::SageMaker
       :volume_kms_key_id,
       :enable_inter_container_traffic_encryption,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1360,6 +1386,7 @@ module Aws::SageMaker
     class CaptureContentTypeHeader < Struct.new(
       :csv_content_types,
       :json_content_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1377,6 +1404,7 @@ module Aws::SageMaker
     #
     class CaptureOption < Struct.new(
       :capture_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1403,6 +1431,7 @@ module Aws::SageMaker
     class CategoricalParameterRange < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1423,6 +1452,7 @@ module Aws::SageMaker
     #
     class CategoricalParameterRangeSpecification < Struct.new(
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1534,6 +1564,7 @@ module Aws::SageMaker
       :record_wrapper_type,
       :input_mode,
       :shuffle_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1593,6 +1624,7 @@ module Aws::SageMaker
       :supported_content_types,
       :supported_compression_types,
       :supported_input_modes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1622,6 +1654,7 @@ module Aws::SageMaker
     class CheckpointConfig < Struct.new(
       :s3_uri,
       :local_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1657,6 +1690,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :git_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1692,6 +1726,7 @@ module Aws::SageMaker
       :user_pool,
       :user_group,
       :client_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1723,6 +1758,7 @@ module Aws::SageMaker
     class CollectionConfiguration < Struct.new(
       :collection_name,
       :collection_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1772,6 +1808,7 @@ module Aws::SageMaker
       :compilation_target_device,
       :last_modified_time,
       :compilation_job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1785,6 +1822,7 @@ module Aws::SageMaker
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1889,6 +1927,7 @@ module Aws::SageMaker
       :model_data_url,
       :environment,
       :model_package_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1963,6 +2002,7 @@ module Aws::SageMaker
       :min_value,
       :max_value,
       :scaling_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1989,6 +2029,7 @@ module Aws::SageMaker
     class ContinuousParameterRangeSpecification < Struct.new(
       :min_value,
       :max_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2217,6 +2258,7 @@ module Aws::SageMaker
       :inference_specification,
       :validation_specification,
       :certify_for_marketplace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2228,6 +2270,7 @@ module Aws::SageMaker
     #
     class CreateAlgorithmOutput < Struct.new(
       :algorithm_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2286,6 +2329,7 @@ module Aws::SageMaker
       :app_name,
       :tags,
       :resource_spec)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2297,6 +2341,7 @@ module Aws::SageMaker
     #
     class CreateAppResponse < Struct.new(
       :app_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2408,6 +2453,7 @@ module Aws::SageMaker
       :role_arn,
       :generate_candidate_definitions_only,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2419,6 +2465,7 @@ module Aws::SageMaker
     #
     class CreateAutoMLJobResponse < Struct.new(
       :auto_ml_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2450,6 +2497,7 @@ module Aws::SageMaker
     class CreateCodeRepositoryInput < Struct.new(
       :code_repository_name,
       :git_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2461,6 +2509,7 @@ module Aws::SageMaker
     #
     class CreateCodeRepositoryOutput < Struct.new(
       :code_repository_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2539,6 +2588,7 @@ module Aws::SageMaker
       :input_config,
       :output_config,
       :stopping_condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2557,6 +2607,7 @@ module Aws::SageMaker
     #
     class CreateCompilationJobResponse < Struct.new(
       :compilation_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2646,6 +2697,7 @@ module Aws::SageMaker
       :vpc_id,
       :tags,
       :home_efs_file_system_kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2662,6 +2714,7 @@ module Aws::SageMaker
     class CreateDomainResponse < Struct.new(
       :domain_arn,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2782,6 +2835,7 @@ module Aws::SageMaker
       :data_capture_config,
       :tags,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2793,6 +2847,7 @@ module Aws::SageMaker
     #
     class CreateEndpointConfigOutput < Struct.new(
       :endpoint_config_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2836,6 +2891,7 @@ module Aws::SageMaker
       :endpoint_name,
       :endpoint_config_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2847,6 +2903,7 @@ module Aws::SageMaker
     #
     class CreateEndpointOutput < Struct.new(
       :endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2892,6 +2949,7 @@ module Aws::SageMaker
       :display_name,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2903,6 +2961,7 @@ module Aws::SageMaker
     #
     class CreateExperimentResponse < Struct.new(
       :experiment_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2996,6 +3055,7 @@ module Aws::SageMaker
       :output_config,
       :role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3007,6 +3067,7 @@ module Aws::SageMaker
     #
     class CreateFlowDefinitionResponse < Struct.new(
       :flow_definition_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3046,6 +3107,7 @@ module Aws::SageMaker
       :human_task_ui_name,
       :ui_template,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3058,6 +3120,7 @@ module Aws::SageMaker
     #
     class CreateHumanTaskUiResponse < Struct.new(
       :human_task_ui_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3394,6 +3457,7 @@ module Aws::SageMaker
       :training_job_definitions,
       :warm_start_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3406,6 +3470,7 @@ module Aws::SageMaker
     #
     class CreateHyperParameterTuningJobResponse < Struct.new(
       :hyper_parameter_tuning_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3585,6 +3650,7 @@ module Aws::SageMaker
       :labeling_job_algorithms_config,
       :human_task_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3597,6 +3663,7 @@ module Aws::SageMaker
     #
     class CreateLabelingJobResponse < Struct.new(
       :labeling_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3711,6 +3778,7 @@ module Aws::SageMaker
       :tags,
       :vpc_config,
       :enable_network_isolation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3722,6 +3790,7 @@ module Aws::SageMaker
     #
     class CreateModelOutput < Struct.new(
       :model_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3841,6 +3910,7 @@ module Aws::SageMaker
       :validation_specification,
       :source_algorithm_specification,
       :certify_for_marketplace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3852,6 +3922,7 @@ module Aws::SageMaker
     #
     class CreateModelPackageOutput < Struct.new(
       :model_package_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3958,6 +4029,7 @@ module Aws::SageMaker
       :monitoring_schedule_name,
       :monitoring_schedule_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3969,6 +4041,7 @@ module Aws::SageMaker
     #
     class CreateMonitoringScheduleResponse < Struct.new(
       :monitoring_schedule_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4152,6 +4225,7 @@ module Aws::SageMaker
       :default_code_repository,
       :additional_code_repositories,
       :root_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4193,6 +4267,7 @@ module Aws::SageMaker
       :notebook_instance_lifecycle_config_name,
       :on_create,
       :on_start)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4204,6 +4279,7 @@ module Aws::SageMaker
     #
     class CreateNotebookInstanceLifecycleConfigOutput < Struct.new(
       :notebook_instance_lifecycle_config_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4215,6 +4291,7 @@ module Aws::SageMaker
     #
     class CreateNotebookInstanceOutput < Struct.new(
       :notebook_instance_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4245,6 +4322,7 @@ module Aws::SageMaker
       :domain_id,
       :user_profile_name,
       :session_expiration_duration_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4256,6 +4334,7 @@ module Aws::SageMaker
     #
     class CreatePresignedDomainUrlResponse < Struct.new(
       :authorized_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4280,6 +4359,7 @@ module Aws::SageMaker
     class CreatePresignedNotebookInstanceUrlInput < Struct.new(
       :notebook_instance_name,
       :session_expiration_duration_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4291,6 +4371,7 @@ module Aws::SageMaker
     #
     class CreatePresignedNotebookInstanceUrlOutput < Struct.new(
       :authorized_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4437,6 +4518,7 @@ module Aws::SageMaker
       :role_arn,
       :tags,
       :experiment_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4448,6 +4530,7 @@ module Aws::SageMaker
     #
     class CreateProcessingJobResponse < Struct.new(
       :processing_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4774,6 +4857,7 @@ module Aws::SageMaker
       :debug_rule_configurations,
       :tensor_board_output_config,
       :experiment_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4785,6 +4869,7 @@ module Aws::SageMaker
     #
     class CreateTrainingJobResponse < Struct.new(
       :training_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4962,6 +5047,7 @@ module Aws::SageMaker
       :data_processing,
       :tags,
       :experiment_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4973,6 +5059,7 @@ module Aws::SageMaker
     #
     class CreateTransformJobResponse < Struct.new(
       :transform_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5075,6 +5162,7 @@ module Aws::SageMaker
       :input_artifacts,
       :output_artifacts,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5086,6 +5174,7 @@ module Aws::SageMaker
     #
     class CreateTrialComponentResponse < Struct.new(
       :trial_component_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5130,6 +5219,7 @@ module Aws::SageMaker
       :display_name,
       :experiment_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5141,6 +5231,7 @@ module Aws::SageMaker
     #
     class CreateTrialResponse < Struct.new(
       :trial_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5229,6 +5320,7 @@ module Aws::SageMaker
       :single_sign_on_user_value,
       :tags,
       :user_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5240,6 +5332,7 @@ module Aws::SageMaker
     #
     class CreateUserProfileResponse < Struct.new(
       :user_profile_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5316,6 +5409,7 @@ module Aws::SageMaker
       :description,
       :notification_configuration,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5328,6 +5422,7 @@ module Aws::SageMaker
     #
     class CreateWorkteamResponse < Struct.new(
       :workteam_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5377,6 +5472,7 @@ module Aws::SageMaker
       :kms_key_id,
       :capture_options,
       :capture_content_type_header)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5403,6 +5499,7 @@ module Aws::SageMaker
       :current_sampling_percentage,
       :destination_s3_uri,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5484,6 +5581,7 @@ module Aws::SageMaker
       :input_filter,
       :output_filter,
       :join_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5521,6 +5619,7 @@ module Aws::SageMaker
     class DataSource < Struct.new(
       :s3_data_source,
       :file_system_data_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5570,6 +5669,7 @@ module Aws::SageMaker
       :s3_output_path,
       :hook_parameters,
       :collection_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5632,6 +5732,7 @@ module Aws::SageMaker
       :instance_type,
       :volume_size_in_gb,
       :rule_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5665,6 +5766,7 @@ module Aws::SageMaker
       :rule_evaluation_status,
       :status_details,
       :last_modified_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5683,6 +5785,7 @@ module Aws::SageMaker
     #
     class DeleteAlgorithmInput < Struct.new(
       :algorithm_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5719,6 +5822,7 @@ module Aws::SageMaker
       :user_profile_name,
       :app_type,
       :app_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5737,6 +5841,7 @@ module Aws::SageMaker
     #
     class DeleteCodeRepositoryInput < Struct.new(
       :code_repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5765,6 +5870,7 @@ module Aws::SageMaker
     class DeleteDomainRequest < Struct.new(
       :domain_id,
       :retention_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5783,6 +5889,7 @@ module Aws::SageMaker
     #
     class DeleteEndpointConfigInput < Struct.new(
       :endpoint_config_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5801,6 +5908,7 @@ module Aws::SageMaker
     #
     class DeleteEndpointInput < Struct.new(
       :endpoint_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5819,6 +5927,7 @@ module Aws::SageMaker
     #
     class DeleteExperimentRequest < Struct.new(
       :experiment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5831,6 +5940,7 @@ module Aws::SageMaker
     #
     class DeleteExperimentResponse < Struct.new(
       :experiment_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5849,6 +5959,7 @@ module Aws::SageMaker
     #
     class DeleteFlowDefinitionRequest < Struct.new(
       :flow_definition_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5871,6 +5982,7 @@ module Aws::SageMaker
     #
     class DeleteModelInput < Struct.new(
       :model_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5890,6 +6002,7 @@ module Aws::SageMaker
     #
     class DeleteModelPackageInput < Struct.new(
       :model_package_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5908,6 +6021,7 @@ module Aws::SageMaker
     #
     class DeleteMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5926,6 +6040,7 @@ module Aws::SageMaker
     #
     class DeleteNotebookInstanceInput < Struct.new(
       :notebook_instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5944,6 +6059,7 @@ module Aws::SageMaker
     #
     class DeleteNotebookInstanceLifecycleConfigInput < Struct.new(
       :notebook_instance_lifecycle_config_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5969,6 +6085,7 @@ module Aws::SageMaker
     class DeleteTagsInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5991,6 +6108,7 @@ module Aws::SageMaker
     #
     class DeleteTrialComponentRequest < Struct.new(
       :trial_component_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6002,6 +6120,7 @@ module Aws::SageMaker
     #
     class DeleteTrialComponentResponse < Struct.new(
       :trial_component_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6020,6 +6139,7 @@ module Aws::SageMaker
     #
     class DeleteTrialRequest < Struct.new(
       :trial_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6031,6 +6151,7 @@ module Aws::SageMaker
     #
     class DeleteTrialResponse < Struct.new(
       :trial_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6055,6 +6176,7 @@ module Aws::SageMaker
     class DeleteUserProfileRequest < Struct.new(
       :domain_id,
       :user_profile_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6073,6 +6195,7 @@ module Aws::SageMaker
     #
     class DeleteWorkteamRequest < Struct.new(
       :workteam_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6085,6 +6208,7 @@ module Aws::SageMaker
     #
     class DeleteWorkteamResponse < Struct.new(
       :success)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6123,6 +6247,7 @@ module Aws::SageMaker
       :specified_image,
       :resolved_image,
       :resolution_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6141,6 +6266,7 @@ module Aws::SageMaker
     #
     class DescribeAlgorithmInput < Struct.new(
       :algorithm_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6203,6 +6329,7 @@ module Aws::SageMaker
       :algorithm_status_details,
       :product_id,
       :certify_for_marketplace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6239,6 +6366,7 @@ module Aws::SageMaker
       :user_profile_name,
       :app_type,
       :app_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6301,6 +6429,7 @@ module Aws::SageMaker
       :creation_time,
       :failure_reason,
       :resource_spec)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6319,6 +6448,7 @@ module Aws::SageMaker
     #
     class DescribeAutoMLJobRequest < Struct.new(
       :auto_ml_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6422,6 +6552,7 @@ module Aws::SageMaker
       :generate_candidate_definitions_only,
       :auto_ml_job_artifacts,
       :resolved_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6440,6 +6571,7 @@ module Aws::SageMaker
     #
     class DescribeCodeRepositoryInput < Struct.new(
       :code_repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6474,6 +6606,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :git_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6493,6 +6626,7 @@ module Aws::SageMaker
     #
     class DescribeCompilationJobRequest < Struct.new(
       :compilation_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6582,6 +6716,7 @@ module Aws::SageMaker
       :role_arn,
       :input_config,
       :output_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6600,6 +6735,7 @@ module Aws::SageMaker
     #
     class DescribeDomainRequest < Struct.new(
       :domain_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6683,6 +6819,7 @@ module Aws::SageMaker
       :subnet_ids,
       :url,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6701,6 +6838,7 @@ module Aws::SageMaker
     #
     class DescribeEndpointConfigInput < Struct.new(
       :endpoint_config_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6738,6 +6876,7 @@ module Aws::SageMaker
       :data_capture_config,
       :kms_key_id,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6756,6 +6895,7 @@ module Aws::SageMaker
     #
     class DescribeEndpointInput < Struct.new(
       :endpoint_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6840,6 +6980,7 @@ module Aws::SageMaker
       :failure_reason,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6858,6 +6999,7 @@ module Aws::SageMaker
     #
     class DescribeExperimentRequest < Struct.new(
       :experiment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6910,6 +7052,7 @@ module Aws::SageMaker
       :created_by,
       :last_modified_time,
       :last_modified_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6928,6 +7071,7 @@ module Aws::SageMaker
     #
     class DescribeFlowDefinitionRequest < Struct.new(
       :flow_definition_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6988,6 +7132,7 @@ module Aws::SageMaker
       :output_config,
       :role_arn,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7007,6 +7152,7 @@ module Aws::SageMaker
     #
     class DescribeHumanTaskUiRequest < Struct.new(
       :human_task_ui_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7033,6 +7179,7 @@ module Aws::SageMaker
       :human_task_ui_name,
       :creation_time,
       :ui_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7051,6 +7198,7 @@ module Aws::SageMaker
     #
     class DescribeHyperParameterTuningJobRequest < Struct.new(
       :hyper_parameter_tuning_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7148,6 +7296,7 @@ module Aws::SageMaker
       :overall_best_training_job,
       :warm_start_config,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7166,6 +7315,7 @@ module Aws::SageMaker
     #
     class DescribeLabelingJobRequest < Struct.new(
       :labeling_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7315,6 +7465,7 @@ module Aws::SageMaker
       :human_task_config,
       :tags,
       :labeling_job_output)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7333,6 +7484,7 @@ module Aws::SageMaker
     #
     class DescribeModelInput < Struct.new(
       :model_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7389,6 +7541,7 @@ module Aws::SageMaker
       :creation_time,
       :model_arn,
       :enable_network_isolation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7407,6 +7560,7 @@ module Aws::SageMaker
     #
     class DescribeModelPackageInput < Struct.new(
       :model_package_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7467,6 +7621,7 @@ module Aws::SageMaker
       :model_package_status,
       :model_package_status_details,
       :certify_for_marketplace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7485,6 +7640,7 @@ module Aws::SageMaker
     #
     class DescribeMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7538,6 +7694,7 @@ module Aws::SageMaker
       :monitoring_schedule_config,
       :endpoint_name,
       :last_monitoring_execution_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7556,6 +7713,7 @@ module Aws::SageMaker
     #
     class DescribeNotebookInstanceInput < Struct.new(
       :notebook_instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7574,6 +7732,7 @@ module Aws::SageMaker
     #
     class DescribeNotebookInstanceLifecycleConfigInput < Struct.new(
       :notebook_instance_lifecycle_config_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7613,6 +7772,7 @@ module Aws::SageMaker
       :on_start,
       :last_modified_time,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7780,6 +7940,7 @@ module Aws::SageMaker
       :default_code_repository,
       :additional_code_repositories,
       :root_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7799,6 +7960,7 @@ module Aws::SageMaker
     #
     class DescribeProcessingJobRequest < Struct.new(
       :processing_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7917,6 +8079,7 @@ module Aws::SageMaker
       :monitoring_schedule_arn,
       :auto_ml_job_arn,
       :training_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7936,6 +8099,7 @@ module Aws::SageMaker
     #
     class DescribeSubscribedWorkteamRequest < Struct.new(
       :workteam_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7947,6 +8111,7 @@ module Aws::SageMaker
     #
     class DescribeSubscribedWorkteamResponse < Struct.new(
       :subscribed_workteam)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7965,6 +8130,7 @@ module Aws::SageMaker
     #
     class DescribeTrainingJobRequest < Struct.new(
       :training_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8269,6 +8435,7 @@ module Aws::SageMaker
       :debug_rule_configurations,
       :tensor_board_output_config,
       :debug_rule_evaluation_statuses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8287,6 +8454,7 @@ module Aws::SageMaker
     #
     class DescribeTransformJobRequest < Struct.new(
       :transform_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8423,6 +8591,7 @@ module Aws::SageMaker
       :auto_ml_job_arn,
       :data_processing,
       :experiment_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8441,6 +8610,7 @@ module Aws::SageMaker
     #
     class DescribeTrialComponentRequest < Struct.new(
       :trial_component_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8530,6 +8700,7 @@ module Aws::SageMaker
       :input_artifacts,
       :output_artifacts,
       :metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8548,6 +8719,7 @@ module Aws::SageMaker
     #
     class DescribeTrialRequest < Struct.new(
       :trial_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8601,6 +8773,7 @@ module Aws::SageMaker
       :created_by,
       :last_modified_time,
       :last_modified_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8625,6 +8798,7 @@ module Aws::SageMaker
     class DescribeUserProfileRequest < Struct.new(
       :domain_id,
       :user_profile_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8687,6 +8861,7 @@ module Aws::SageMaker
       :single_sign_on_user_identifier,
       :single_sign_on_user_value,
       :user_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8707,6 +8882,7 @@ module Aws::SageMaker
     #
     class DescribeWorkforceRequest < Struct.new(
       :workforce_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8727,6 +8903,7 @@ module Aws::SageMaker
     #
     class DescribeWorkforceResponse < Struct.new(
       :workforce)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8745,6 +8922,7 @@ module Aws::SageMaker
     #
     class DescribeWorkteamRequest < Struct.new(
       :workteam_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8756,6 +8934,7 @@ module Aws::SageMaker
     #
     class DescribeWorkteamResponse < Struct.new(
       :workteam)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8788,6 +8967,7 @@ module Aws::SageMaker
       :variant_name,
       :desired_weight,
       :desired_instance_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8812,6 +8992,7 @@ module Aws::SageMaker
     class DisassociateTrialComponentRequest < Struct.new(
       :trial_component_name,
       :trial_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8828,6 +9009,7 @@ module Aws::SageMaker
     class DisassociateTrialComponentResponse < Struct.new(
       :trial_component_arn,
       :trial_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8871,6 +9053,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8894,6 +9077,7 @@ module Aws::SageMaker
       :endpoint_config_name,
       :endpoint_config_arn,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8938,6 +9122,7 @@ module Aws::SageMaker
       :local_path,
       :s3_input_mode,
       :s3_data_distribution_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9006,6 +9191,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :endpoint_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9068,6 +9254,7 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9100,6 +9287,7 @@ module Aws::SageMaker
       :experiment_name,
       :trial_name,
       :trial_component_display_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9118,6 +9306,7 @@ module Aws::SageMaker
     class ExperimentSource < Struct.new(
       :source_arn,
       :source_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9159,6 +9348,7 @@ module Aws::SageMaker
       :experiment_source,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9199,6 +9389,7 @@ module Aws::SageMaker
       :file_system_access_mode,
       :file_system_type,
       :directory_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9333,6 +9524,7 @@ module Aws::SageMaker
       :name,
       :operator,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9356,6 +9548,7 @@ module Aws::SageMaker
       :type,
       :metric_name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9383,6 +9576,7 @@ module Aws::SageMaker
       :type,
       :metric_name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9411,6 +9605,7 @@ module Aws::SageMaker
     class FlowDefinitionOutputConfig < Struct.new(
       :s3_output_path,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9445,6 +9640,7 @@ module Aws::SageMaker
       :flow_definition_status,
       :creation_time,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9473,6 +9669,7 @@ module Aws::SageMaker
     class GetSearchSuggestionsRequest < Struct.new(
       :resource,
       :suggestion_query)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9485,6 +9682,7 @@ module Aws::SageMaker
     #
     class GetSearchSuggestionsResponse < Struct.new(
       :property_name_suggestions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9523,6 +9721,7 @@ module Aws::SageMaker
       :repository_url,
       :branch,
       :secret_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9549,6 +9748,7 @@ module Aws::SageMaker
     #
     class GitConfigForUpdate < Struct.new(
       :secret_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9580,6 +9780,7 @@ module Aws::SageMaker
     #
     class HumanLoopActivationConditionsConfig < Struct.new(
       :human_loop_activation_conditions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9605,6 +9806,7 @@ module Aws::SageMaker
     #
     class HumanLoopActivationConfig < Struct.new(
       :human_loop_activation_conditions_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9890,6 +10092,7 @@ module Aws::SageMaker
       :task_time_limit_in_seconds,
       :task_keywords,
       :public_workforce_task_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9912,6 +10115,7 @@ module Aws::SageMaker
     #
     class HumanLoopRequestSource < Struct.new(
       :aws_managed_human_loop_request_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10334,6 +10538,7 @@ module Aws::SageMaker
       :max_concurrent_task_count,
       :annotation_consolidation_config,
       :public_workforce_task_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10357,6 +10562,7 @@ module Aws::SageMaker
       :human_task_ui_name,
       :human_task_ui_arn,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10433,6 +10639,7 @@ module Aws::SageMaker
       :training_input_mode,
       :algorithm_name,
       :metric_definitions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10504,6 +10711,7 @@ module Aws::SageMaker
       :is_tunable,
       :is_required,
       :default_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10742,6 +10950,7 @@ module Aws::SageMaker
       :enable_inter_container_traffic_encryption,
       :enable_managed_spot_training,
       :checkpoint_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10838,6 +11047,7 @@ module Aws::SageMaker
       :failure_reason,
       :final_hyper_parameter_tuning_job_objective_metric,
       :objective_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10948,6 +11158,7 @@ module Aws::SageMaker
       :parameter_ranges,
       :training_job_early_stopping_type,
       :tuning_job_completion_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10978,6 +11189,7 @@ module Aws::SageMaker
     class HyperParameterTuningJobObjective < Struct.new(
       :type,
       :metric_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11043,6 +11255,7 @@ module Aws::SageMaker
       :training_job_status_counters,
       :objective_status_counters,
       :resource_limits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11127,6 +11340,7 @@ module Aws::SageMaker
     class HyperParameterTuningJobWarmStartConfig < Struct.new(
       :parent_hyper_parameter_tuning_jobs,
       :warm_start_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11183,6 +11397,7 @@ module Aws::SageMaker
       :supported_realtime_inference_instance_types,
       :supported_content_types,
       :supported_response_mime_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11309,6 +11524,7 @@ module Aws::SageMaker
       :s3_uri,
       :data_input_config,
       :framework)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11373,6 +11589,7 @@ module Aws::SageMaker
       :min_value,
       :max_value,
       :scaling_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11399,6 +11616,7 @@ module Aws::SageMaker
     class IntegerParameterRangeSpecification < Struct.new(
       :min_value,
       :max_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11423,6 +11641,7 @@ module Aws::SageMaker
     #
     class JupyterServerAppSettings < Struct.new(
       :default_resource_spec)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11447,6 +11666,7 @@ module Aws::SageMaker
     #
     class KernelGatewayAppSettings < Struct.new(
       :default_resource_spec)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11481,6 +11701,7 @@ module Aws::SageMaker
       :machine_labeled,
       :failed_non_retryable_error,
       :unlabeled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11505,6 +11726,7 @@ module Aws::SageMaker
       :human_labeled,
       :pending_human,
       :total)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11561,6 +11783,7 @@ module Aws::SageMaker
       :labeling_job_algorithm_specification_arn,
       :initial_active_learning_model_arn,
       :labeling_job_resource_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11585,6 +11808,7 @@ module Aws::SageMaker
     #
     class LabelingJobDataAttributes < Struct.new(
       :content_classifiers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11607,6 +11831,7 @@ module Aws::SageMaker
     #
     class LabelingJobDataSource < Struct.new(
       :s3_data_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11645,6 +11870,7 @@ module Aws::SageMaker
       :creation_time,
       :label_counters,
       :number_of_human_workers_per_data_object)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11677,6 +11903,7 @@ module Aws::SageMaker
     class LabelingJobInputConfig < Struct.new(
       :data_source,
       :data_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11696,6 +11923,7 @@ module Aws::SageMaker
     class LabelingJobOutput < Struct.new(
       :output_dataset_s3_uri,
       :final_active_learning_model_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11745,6 +11973,7 @@ module Aws::SageMaker
     class LabelingJobOutputConfig < Struct.new(
       :s3_output_path,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11776,6 +12005,7 @@ module Aws::SageMaker
     #
     class LabelingJobResourceConfig < Struct.new(
       :volume_kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11797,6 +12027,7 @@ module Aws::SageMaker
     #
     class LabelingJobS3DataSource < Struct.new(
       :manifest_s3_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11830,6 +12061,7 @@ module Aws::SageMaker
     class LabelingJobStoppingConditions < Struct.new(
       :max_human_labeled_object_count,
       :max_percentage_of_input_dataset_labeled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11908,6 +12140,7 @@ module Aws::SageMaker
       :failure_reason,
       :labeling_job_output,
       :input_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11968,6 +12201,7 @@ module Aws::SageMaker
       :next_token,
       :sort_by,
       :sort_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11987,6 +12221,7 @@ module Aws::SageMaker
     class ListAlgorithmsOutput < Struct.new(
       :algorithm_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12037,6 +12272,7 @@ module Aws::SageMaker
       :sort_by,
       :domain_id_equals,
       :user_profile_name_equals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12054,6 +12290,7 @@ module Aws::SageMaker
     class ListAppsResponse < Struct.new(
       :apps,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12128,6 +12365,7 @@ module Aws::SageMaker
       :sort_by,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12145,6 +12383,7 @@ module Aws::SageMaker
     class ListAutoMLJobsResponse < Struct.new(
       :auto_ml_job_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12202,6 +12441,7 @@ module Aws::SageMaker
       :sort_by,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12219,6 +12459,7 @@ module Aws::SageMaker
     class ListCandidatesForAutoMLJobResponse < Struct.new(
       :candidates,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12292,6 +12533,7 @@ module Aws::SageMaker
       :next_token,
       :sort_by,
       :sort_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12323,6 +12565,7 @@ module Aws::SageMaker
     class ListCodeRepositoriesOutput < Struct.new(
       :code_repository_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12404,6 +12647,7 @@ module Aws::SageMaker
       :status_equals,
       :sort_by,
       :sort_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12423,6 +12667,7 @@ module Aws::SageMaker
     class ListCompilationJobsResponse < Struct.new(
       :compilation_job_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12448,6 +12693,7 @@ module Aws::SageMaker
     class ListDomainsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12465,6 +12711,7 @@ module Aws::SageMaker
     class ListDomainsResponse < Struct.new(
       :domains,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12525,6 +12772,7 @@ module Aws::SageMaker
       :name_contains,
       :creation_time_before,
       :creation_time_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12543,6 +12791,7 @@ module Aws::SageMaker
     class ListEndpointConfigsOutput < Struct.new(
       :endpoint_configs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12622,6 +12871,7 @@ module Aws::SageMaker
       :last_modified_time_before,
       :last_modified_time_after,
       :status_equals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12640,6 +12890,7 @@ module Aws::SageMaker
     class ListEndpointsOutput < Struct.new(
       :endpoints,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12694,6 +12945,7 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12710,6 +12962,7 @@ module Aws::SageMaker
     class ListExperimentsResponse < Struct.new(
       :experiment_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12758,6 +13011,7 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12774,6 +13028,7 @@ module Aws::SageMaker
     class ListFlowDefinitionsResponse < Struct.new(
       :flow_definition_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12822,6 +13077,7 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12838,6 +13094,7 @@ module Aws::SageMaker
     class ListHumanTaskUisResponse < Struct.new(
       :human_task_ui_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12918,6 +13175,7 @@ module Aws::SageMaker
       :last_modified_time_after,
       :last_modified_time_before,
       :status_equals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12938,6 +13196,7 @@ module Aws::SageMaker
     class ListHyperParameterTuningJobsResponse < Struct.new(
       :hyper_parameter_tuning_job_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13005,6 +13264,7 @@ module Aws::SageMaker
       :job_reference_code_contains,
       :sort_by,
       :sort_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13024,6 +13284,7 @@ module Aws::SageMaker
     class ListLabelingJobsForWorkteamResponse < Struct.new(
       :labeling_job_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13104,6 +13365,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :status_equals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13123,6 +13385,7 @@ module Aws::SageMaker
     class ListLabelingJobsResponse < Struct.new(
       :labeling_job_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13183,6 +13446,7 @@ module Aws::SageMaker
       :next_token,
       :sort_by,
       :sort_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13202,6 +13466,7 @@ module Aws::SageMaker
     class ListModelPackagesOutput < Struct.new(
       :model_package_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13261,6 +13526,7 @@ module Aws::SageMaker
       :name_contains,
       :creation_time_before,
       :creation_time_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13279,6 +13545,7 @@ module Aws::SageMaker
     class ListModelsOutput < Struct.new(
       :models,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13373,6 +13640,7 @@ module Aws::SageMaker
       :last_modified_time_before,
       :last_modified_time_after,
       :status_equals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13391,6 +13659,7 @@ module Aws::SageMaker
     class ListMonitoringExecutionsResponse < Struct.new(
       :monitoring_execution_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13479,6 +13748,7 @@ module Aws::SageMaker
       :last_modified_time_before,
       :last_modified_time_after,
       :status_equals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13497,6 +13767,7 @@ module Aws::SageMaker
     class ListMonitoringSchedulesResponse < Struct.new(
       :monitoring_schedule_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13572,6 +13843,7 @@ module Aws::SageMaker
       :creation_time_after,
       :last_modified_time_before,
       :last_modified_time_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13591,6 +13863,7 @@ module Aws::SageMaker
     class ListNotebookInstanceLifecycleConfigsOutput < Struct.new(
       :next_token,
       :notebook_instance_lifecycle_configs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13703,6 +13976,7 @@ module Aws::SageMaker
       :notebook_instance_lifecycle_config_name_contains,
       :default_code_repository_contains,
       :additional_code_repository_equals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13722,6 +13996,7 @@ module Aws::SageMaker
     class ListNotebookInstancesOutput < Struct.new(
       :next_token,
       :notebook_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13801,6 +14076,7 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13820,6 +14096,7 @@ module Aws::SageMaker
     class ListProcessingJobsResponse < Struct.new(
       :processing_job_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13854,6 +14131,7 @@ module Aws::SageMaker
       :name_contains,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13872,6 +14150,7 @@ module Aws::SageMaker
     class ListSubscribedWorkteamsResponse < Struct.new(
       :subscribed_workteams,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13905,6 +14184,7 @@ module Aws::SageMaker
       :resource_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13923,6 +14203,7 @@ module Aws::SageMaker
     class ListTagsOutput < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13979,6 +14260,7 @@ module Aws::SageMaker
       :status_equals,
       :sort_by,
       :sort_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14000,6 +14282,7 @@ module Aws::SageMaker
     class ListTrainingJobsForHyperParameterTuningJobResponse < Struct.new(
       :training_job_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14079,6 +14362,7 @@ module Aws::SageMaker
       :status_equals,
       :sort_by,
       :sort_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14098,6 +14382,7 @@ module Aws::SageMaker
     class ListTrainingJobsResponse < Struct.new(
       :training_job_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14178,6 +14463,7 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14196,6 +14482,7 @@ module Aws::SageMaker
     class ListTransformJobsResponse < Struct.new(
       :transform_job_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14274,6 +14561,7 @@ module Aws::SageMaker
       :sort_order,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14290,6 +14578,7 @@ module Aws::SageMaker
     class ListTrialComponentsResponse < Struct.new(
       :trial_component_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14355,6 +14644,7 @@ module Aws::SageMaker
       :sort_order,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14371,6 +14661,7 @@ module Aws::SageMaker
     class ListTrialsResponse < Struct.new(
       :trial_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14421,6 +14712,7 @@ module Aws::SageMaker
       :sort_by,
       :domain_id_equals,
       :user_profile_name_contains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14438,6 +14730,7 @@ module Aws::SageMaker
     class ListUserProfilesResponse < Struct.new(
       :user_profiles,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14484,6 +14777,7 @@ module Aws::SageMaker
       :name_contains,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14502,6 +14796,7 @@ module Aws::SageMaker
     class ListWorkteamsResponse < Struct.new(
       :workteams,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14526,6 +14821,7 @@ module Aws::SageMaker
     #
     class MemberDefinition < Struct.new(
       :cognito_member_definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14550,6 +14846,7 @@ module Aws::SageMaker
       :metric_name,
       :value,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14586,6 +14883,7 @@ module Aws::SageMaker
     class MetricDefinition < Struct.new(
       :name,
       :regex)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14605,6 +14903,7 @@ module Aws::SageMaker
     #
     class ModelArtifacts < Struct.new(
       :s3_model_artifacts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14664,6 +14963,7 @@ module Aws::SageMaker
       :image_digest,
       :model_data_url,
       :product_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14683,6 +14983,7 @@ module Aws::SageMaker
     class ModelPackageStatusDetails < Struct.new(
       :validation_statuses,
       :image_scan_statuses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14707,6 +15008,7 @@ module Aws::SageMaker
       :name,
       :status,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14740,6 +15042,7 @@ module Aws::SageMaker
       :model_package_description,
       :creation_time,
       :model_package_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14800,6 +15103,7 @@ module Aws::SageMaker
     class ModelPackageValidationProfile < Struct.new(
       :profile_name,
       :transform_job_definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14863,6 +15167,7 @@ module Aws::SageMaker
     class ModelPackageValidationSpecification < Struct.new(
       :validation_role,
       :validation_profiles)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14886,6 +15191,7 @@ module Aws::SageMaker
       :model_name,
       :model_arn,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14937,6 +15243,7 @@ module Aws::SageMaker
       :container_arguments,
       :record_preprocessor_source_uri,
       :post_analytics_processor_source_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14972,6 +15279,7 @@ module Aws::SageMaker
     class MonitoringBaselineConfig < Struct.new(
       :constraints_resource,
       :statistics_resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15015,6 +15323,7 @@ module Aws::SageMaker
       :instance_type,
       :volume_size_in_gb,
       :volume_kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15035,6 +15344,7 @@ module Aws::SageMaker
     #
     class MonitoringConstraintsResource < Struct.new(
       :s3_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15084,6 +15394,7 @@ module Aws::SageMaker
       :processing_job_arn,
       :endpoint_name,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15109,6 +15420,7 @@ module Aws::SageMaker
     #
     class MonitoringInput < Struct.new(
       :endpoint_input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15236,6 +15548,7 @@ module Aws::SageMaker
       :environment,
       :network_config,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15261,6 +15574,7 @@ module Aws::SageMaker
     #
     class MonitoringOutput < Struct.new(
       :s3_output)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15298,6 +15612,7 @@ module Aws::SageMaker
     class MonitoringOutputConfig < Struct.new(
       :monitoring_outputs,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15324,6 +15639,7 @@ module Aws::SageMaker
     #
     class MonitoringResources < Struct.new(
       :cluster_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15361,6 +15677,7 @@ module Aws::SageMaker
       :s3_uri,
       :local_path,
       :s3_upload_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15450,6 +15767,7 @@ module Aws::SageMaker
     class MonitoringScheduleConfig < Struct.new(
       :schedule_config,
       :monitoring_job_definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15488,6 +15806,7 @@ module Aws::SageMaker
       :last_modified_time,
       :monitoring_schedule_status,
       :endpoint_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15508,6 +15827,7 @@ module Aws::SageMaker
     #
     class MonitoringStatisticsResource < Struct.new(
       :s3_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15529,6 +15849,7 @@ module Aws::SageMaker
     #
     class MonitoringStoppingCondition < Struct.new(
       :max_runtime_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15578,6 +15899,7 @@ module Aws::SageMaker
     class NestedFilters < Struct.new(
       :nested_property_name,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15629,6 +15951,7 @@ module Aws::SageMaker
       :enable_inter_container_traffic_encryption,
       :enable_network_isolation,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15658,6 +15981,7 @@ module Aws::SageMaker
       :notebook_instance_lifecycle_config_arn,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15699,6 +16023,7 @@ module Aws::SageMaker
     #
     class NotebookInstanceLifecycleHook < Struct.new(
       :content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15790,6 +16115,7 @@ module Aws::SageMaker
       :notebook_instance_lifecycle_config_name,
       :default_code_repository,
       :additional_code_repositories)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15812,6 +16138,7 @@ module Aws::SageMaker
     #
     class NotificationConfiguration < Struct.new(
       :notification_topic_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15845,6 +16172,7 @@ module Aws::SageMaker
       :succeeded,
       :pending,
       :failed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15874,6 +16202,7 @@ module Aws::SageMaker
     class OutputConfig < Struct.new(
       :s3_output_location,
       :target_device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15944,6 +16273,7 @@ module Aws::SageMaker
     class OutputDataConfig < Struct.new(
       :kms_key_id,
       :s3_output_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15988,6 +16318,7 @@ module Aws::SageMaker
       :integer_parameter_range_specification,
       :continuous_parameter_range_specification,
       :categorical_parameter_range_specification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16055,6 +16386,7 @@ module Aws::SageMaker
       :integer_parameter_ranges,
       :continuous_parameter_ranges,
       :categorical_parameter_ranges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16075,6 +16407,7 @@ module Aws::SageMaker
     class Parent < Struct.new(
       :trial_name,
       :experiment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16097,6 +16430,7 @@ module Aws::SageMaker
     #
     class ParentHyperParameterTuningJob < Struct.new(
       :hyper_parameter_tuning_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16140,6 +16474,7 @@ module Aws::SageMaker
       :instance_type,
       :volume_size_in_gb,
       :volume_kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16173,6 +16508,7 @@ module Aws::SageMaker
     class ProcessingInput < Struct.new(
       :input_name,
       :s3_input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16316,6 +16652,7 @@ module Aws::SageMaker
       :auto_ml_job_arn,
       :training_job_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16367,6 +16704,7 @@ module Aws::SageMaker
       :processing_job_status,
       :failure_reason,
       :exit_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16397,6 +16735,7 @@ module Aws::SageMaker
     class ProcessingOutput < Struct.new(
       :output_name,
       :s3_output)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16435,6 +16774,7 @@ module Aws::SageMaker
     class ProcessingOutputConfig < Struct.new(
       :outputs,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16463,6 +16803,7 @@ module Aws::SageMaker
     #
     class ProcessingResources < Struct.new(
       :cluster_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16529,6 +16870,7 @@ module Aws::SageMaker
       :s3_input_mode,
       :s3_data_distribution_type,
       :s3_compression_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16566,6 +16908,7 @@ module Aws::SageMaker
       :s3_uri,
       :local_path,
       :s3_upload_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16587,6 +16930,7 @@ module Aws::SageMaker
     #
     class ProcessingStoppingCondition < Struct.new(
       :max_runtime_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16652,6 +16996,7 @@ module Aws::SageMaker
       :instance_type,
       :initial_variant_weight,
       :accelerator_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16697,6 +17042,7 @@ module Aws::SageMaker
       :desired_weight,
       :current_instance_count,
       :desired_instance_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16718,6 +17064,7 @@ module Aws::SageMaker
     #
     class PropertyNameQuery < Struct.new(
       :property_name_hint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16733,6 +17080,7 @@ module Aws::SageMaker
     #
     class PropertyNameSuggestion < Struct.new(
       :property_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16962,6 +17310,7 @@ module Aws::SageMaker
     #
     class PublicWorkforceTaskPrice < Struct.new(
       :amount_in_usd)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17006,6 +17355,7 @@ module Aws::SageMaker
       :task,
       :role_arn,
       :human_task_ui_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17024,6 +17374,7 @@ module Aws::SageMaker
     class RenderUiTemplateResponse < Struct.new(
       :rendered_content,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17048,6 +17399,7 @@ module Aws::SageMaker
     #
     class RenderableTask < Struct.new(
       :input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17066,6 +17418,7 @@ module Aws::SageMaker
     class RenderingError < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17090,6 +17443,7 @@ module Aws::SageMaker
       :auto_ml_job_objective,
       :problem_type,
       :completion_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17190,6 +17544,7 @@ module Aws::SageMaker
       :instance_count,
       :volume_size_in_gb,
       :volume_kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17202,6 +17557,7 @@ module Aws::SageMaker
     #
     class ResourceInUse < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17215,6 +17571,7 @@ module Aws::SageMaker
     #
     class ResourceLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17244,6 +17601,7 @@ module Aws::SageMaker
     class ResourceLimits < Struct.new(
       :max_number_of_training_jobs,
       :max_parallel_training_jobs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17256,6 +17614,7 @@ module Aws::SageMaker
     #
     class ResourceNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17285,6 +17644,7 @@ module Aws::SageMaker
     class ResourceSpec < Struct.new(
       :sage_maker_image_arn,
       :instance_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17309,6 +17669,7 @@ module Aws::SageMaker
     #
     class RetentionPolicy < Struct.new(
       :home_efs_file_system)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17420,6 +17781,7 @@ module Aws::SageMaker
       :s3_uri,
       :s3_data_distribution_type,
       :attribute_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17479,6 +17841,7 @@ module Aws::SageMaker
     #
     class ScheduleConfig < Struct.new(
       :schedule_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17585,6 +17948,7 @@ module Aws::SageMaker
       :nested_filters,
       :sub_expressions,
       :operator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17613,6 +17977,7 @@ module Aws::SageMaker
       :experiment,
       :trial,
       :trial_component)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17696,6 +18061,7 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17714,6 +18080,7 @@ module Aws::SageMaker
     class SearchResponse < Struct.new(
       :results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17833,6 +18200,7 @@ module Aws::SageMaker
       :start_time,
       :end_time,
       :status_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17873,6 +18241,7 @@ module Aws::SageMaker
       :notebook_output_option,
       :s3_output_path,
       :s3_kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17908,6 +18277,7 @@ module Aws::SageMaker
     #
     class ShuffleConfig < Struct.new(
       :seed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17942,6 +18312,7 @@ module Aws::SageMaker
     class SourceAlgorithm < Struct.new(
       :model_data_url,
       :algorithm_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17967,6 +18338,7 @@ module Aws::SageMaker
     #
     class SourceAlgorithmSpecification < Struct.new(
       :source_algorithms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18004,6 +18376,7 @@ module Aws::SageMaker
     #
     class SourceIpConfig < Struct.new(
       :cidrs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18022,6 +18395,7 @@ module Aws::SageMaker
     #
     class StartMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18040,6 +18414,7 @@ module Aws::SageMaker
     #
     class StartNotebookInstanceInput < Struct.new(
       :notebook_instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18058,6 +18433,7 @@ module Aws::SageMaker
     #
     class StopAutoMLJobRequest < Struct.new(
       :auto_ml_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18076,6 +18452,7 @@ module Aws::SageMaker
     #
     class StopCompilationJobRequest < Struct.new(
       :compilation_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18094,6 +18471,7 @@ module Aws::SageMaker
     #
     class StopHyperParameterTuningJobRequest < Struct.new(
       :hyper_parameter_tuning_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18112,6 +18490,7 @@ module Aws::SageMaker
     #
     class StopLabelingJobRequest < Struct.new(
       :labeling_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18130,6 +18509,7 @@ module Aws::SageMaker
     #
     class StopMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18148,6 +18528,7 @@ module Aws::SageMaker
     #
     class StopNotebookInstanceInput < Struct.new(
       :notebook_instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18166,6 +18547,7 @@ module Aws::SageMaker
     #
     class StopProcessingJobRequest < Struct.new(
       :processing_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18184,6 +18566,7 @@ module Aws::SageMaker
     #
     class StopTrainingJobRequest < Struct.new(
       :training_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18202,6 +18585,7 @@ module Aws::SageMaker
     #
     class StopTransformJobRequest < Struct.new(
       :transform_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18258,6 +18642,7 @@ module Aws::SageMaker
     class StoppingCondition < Struct.new(
       :max_runtime_in_seconds,
       :max_wait_time_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18292,6 +18677,7 @@ module Aws::SageMaker
       :seller_name,
       :marketplace_description,
       :listing_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18316,6 +18702,7 @@ module Aws::SageMaker
     #
     class SuggestionQuery < Struct.new(
       :property_name_query)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18342,6 +18729,7 @@ module Aws::SageMaker
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18366,6 +18754,7 @@ module Aws::SageMaker
     #
     class TensorBoardAppSettings < Struct.new(
       :default_resource_spec)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18393,6 +18782,7 @@ module Aws::SageMaker
     class TensorBoardOutputConfig < Struct.new(
       :local_path,
       :s3_output_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18700,6 +19090,7 @@ module Aws::SageMaker
       :tensor_board_output_config,
       :debug_rule_evaluation_statuses,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18809,6 +19200,7 @@ module Aws::SageMaker
       :output_data_config,
       :resource_config,
       :stopping_condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18850,6 +19242,7 @@ module Aws::SageMaker
       :retryable_error,
       :non_retryable_error,
       :stopped)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18890,6 +19283,7 @@ module Aws::SageMaker
       :training_end_time,
       :last_modified_time,
       :training_job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19003,6 +19397,7 @@ module Aws::SageMaker
       :metric_definitions,
       :training_channels,
       :supported_tuning_job_objective_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19027,6 +19422,7 @@ module Aws::SageMaker
     #
     class TransformDataSource < Struct.new(
       :s3_data_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19111,6 +19507,7 @@ module Aws::SageMaker
       :content_type,
       :compression_type,
       :split_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19199,6 +19596,7 @@ module Aws::SageMaker
       :transform_input,
       :transform_output,
       :transform_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19247,6 +19645,7 @@ module Aws::SageMaker
       :last_modified_time,
       :transform_job_status,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19336,6 +19735,7 @@ module Aws::SageMaker
       :accept,
       :assemble_with,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19386,6 +19786,7 @@ module Aws::SageMaker
       :instance_type,
       :instance_count,
       :volume_kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19459,6 +19860,7 @@ module Aws::SageMaker
     class TransformS3DataSource < Struct.new(
       :s3_data_type,
       :s3_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19527,6 +19929,7 @@ module Aws::SageMaker
       :last_modified_by,
       :tags,
       :trial_component_summaries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19632,6 +20035,7 @@ module Aws::SageMaker
       :source_detail,
       :tags,
       :parents)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19668,6 +20072,7 @@ module Aws::SageMaker
     class TrialComponentArtifact < Struct.new(
       :media_type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19721,6 +20126,7 @@ module Aws::SageMaker
       :count,
       :avg,
       :std_dev)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19754,6 +20160,7 @@ module Aws::SageMaker
     class TrialComponentParameterValue < Struct.new(
       :string_value,
       :number_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19789,6 +20196,7 @@ module Aws::SageMaker
       :trial_component_source,
       :creation_time,
       :created_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19808,6 +20216,7 @@ module Aws::SageMaker
     class TrialComponentSource < Struct.new(
       :source_arn,
       :source_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19834,6 +20243,7 @@ module Aws::SageMaker
       :source_arn,
       :training_job,
       :processing_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19860,6 +20270,7 @@ module Aws::SageMaker
     class TrialComponentStatus < Struct.new(
       :primary_status,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19933,6 +20344,7 @@ module Aws::SageMaker
       :created_by,
       :last_modified_time,
       :last_modified_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19951,6 +20363,7 @@ module Aws::SageMaker
     class TrialSource < Struct.new(
       :source_arn,
       :source_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19991,6 +20404,7 @@ module Aws::SageMaker
       :trial_source,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20011,6 +20425,7 @@ module Aws::SageMaker
     #
     class TuningJobCompletionCriteria < Struct.new(
       :target_objective_metric_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20043,6 +20458,7 @@ module Aws::SageMaker
       :dollars,
       :cents,
       :tenth_fractions_of_a_cent)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20080,6 +20496,7 @@ module Aws::SageMaker
     class UiConfig < Struct.new(
       :ui_template_s3_uri,
       :human_task_ui_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20100,6 +20517,7 @@ module Aws::SageMaker
     #
     class UiTemplate < Struct.new(
       :content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20118,6 +20536,7 @@ module Aws::SageMaker
     class UiTemplateInfo < Struct.new(
       :url,
       :content_sha_256)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20150,6 +20569,7 @@ module Aws::SageMaker
     class UpdateCodeRepositoryInput < Struct.new(
       :code_repository_name,
       :git_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20161,6 +20581,7 @@ module Aws::SageMaker
     #
     class UpdateCodeRepositoryOutput < Struct.new(
       :code_repository_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20211,6 +20632,7 @@ module Aws::SageMaker
     class UpdateDomainRequest < Struct.new(
       :domain_id,
       :default_user_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20222,6 +20644,7 @@ module Aws::SageMaker
     #
     class UpdateDomainResponse < Struct.new(
       :domain_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20272,6 +20695,7 @@ module Aws::SageMaker
       :endpoint_config_name,
       :retain_all_variant_properties,
       :exclude_retained_variant_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20283,6 +20707,7 @@ module Aws::SageMaker
     #
     class UpdateEndpointOutput < Struct.new(
       :endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20314,6 +20739,7 @@ module Aws::SageMaker
     class UpdateEndpointWeightsAndCapacitiesInput < Struct.new(
       :endpoint_name,
       :desired_weights_and_capacities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20325,6 +20751,7 @@ module Aws::SageMaker
     #
     class UpdateEndpointWeightsAndCapacitiesOutput < Struct.new(
       :endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20357,6 +20784,7 @@ module Aws::SageMaker
       :experiment_name,
       :display_name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20368,6 +20796,7 @@ module Aws::SageMaker
     #
     class UpdateExperimentResponse < Struct.new(
       :experiment_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20460,6 +20889,7 @@ module Aws::SageMaker
     class UpdateMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name,
       :monitoring_schedule_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20471,6 +20901,7 @@ module Aws::SageMaker
     #
     class UpdateMonitoringScheduleResponse < Struct.new(
       :monitoring_schedule_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20634,6 +21065,7 @@ module Aws::SageMaker
       :disassociate_default_code_repository,
       :disassociate_additional_code_repositories,
       :root_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20675,6 +21107,7 @@ module Aws::SageMaker
       :notebook_instance_lifecycle_config_name,
       :on_create,
       :on_start)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20784,6 +21217,7 @@ module Aws::SageMaker
       :input_artifacts_to_remove,
       :output_artifacts,
       :output_artifacts_to_remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20795,6 +21229,7 @@ module Aws::SageMaker
     #
     class UpdateTrialComponentResponse < Struct.new(
       :trial_component_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20820,6 +21255,7 @@ module Aws::SageMaker
     class UpdateTrialRequest < Struct.new(
       :trial_name,
       :display_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20831,6 +21267,7 @@ module Aws::SageMaker
     #
     class UpdateTrialResponse < Struct.new(
       :trial_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20887,6 +21324,7 @@ module Aws::SageMaker
       :domain_id,
       :user_profile_name,
       :user_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20898,6 +21336,7 @@ module Aws::SageMaker
     #
     class UpdateUserProfileResponse < Struct.new(
       :user_profile_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20933,6 +21372,7 @@ module Aws::SageMaker
     class UpdateWorkforceRequest < Struct.new(
       :workforce_name,
       :source_ip_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20953,6 +21393,7 @@ module Aws::SageMaker
     #
     class UpdateWorkforceResponse < Struct.new(
       :workforce)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21001,6 +21442,7 @@ module Aws::SageMaker
       :member_definitions,
       :description,
       :notification_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21012,6 +21454,7 @@ module Aws::SageMaker
     #
     class UpdateWorkteamResponse < Struct.new(
       :workteam)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21036,6 +21479,7 @@ module Aws::SageMaker
       :user_profile_arn,
       :user_profile_name,
       :domain_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21069,6 +21513,7 @@ module Aws::SageMaker
       :status,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21138,6 +21583,7 @@ module Aws::SageMaker
       :jupyter_server_app_settings,
       :kernel_gateway_app_settings,
       :tensor_board_app_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21174,6 +21620,7 @@ module Aws::SageMaker
     #
     class VariantProperty < Struct.new(
       :variant_property_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21218,6 +21665,7 @@ module Aws::SageMaker
     class VpcConfig < Struct.new(
       :security_group_ids,
       :subnets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21267,6 +21715,7 @@ module Aws::SageMaker
       :workforce_arn,
       :last_updated_date,
       :source_ip_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21322,6 +21771,7 @@ module Aws::SageMaker
       :create_date,
       :last_updated_date,
       :notification_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 

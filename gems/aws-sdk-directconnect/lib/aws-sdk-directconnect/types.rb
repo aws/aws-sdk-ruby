@@ -56,6 +56,7 @@ module Aws::DirectConnect
       :proposal_id,
       :associated_gateway_owner_account,
       :override_allowed_prefixes_to_direct_connect_gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -68,6 +69,7 @@ module Aws::DirectConnect
     #
     class AcceptDirectConnectGatewayAssociationProposalResult < Struct.new(
       :direct_connect_gateway_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -116,6 +118,7 @@ module Aws::DirectConnect
       :owner_account,
       :interconnect_id,
       :vlan)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -173,6 +176,7 @@ module Aws::DirectConnect
       :connection_name,
       :vlan,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -219,6 +223,7 @@ module Aws::DirectConnect
       :connection_id,
       :owner_account,
       :new_private_virtual_interface_allocation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -269,6 +274,7 @@ module Aws::DirectConnect
       :connection_id,
       :owner_account,
       :new_public_virtual_interface_allocation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -315,6 +321,7 @@ module Aws::DirectConnect
       :connection_id,
       :owner_account,
       :new_transit_virtual_interface_allocation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -326,6 +333,7 @@ module Aws::DirectConnect
     #
     class AllocateTransitVirtualInterfaceResult < Struct.new(
       :virtual_interface)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -350,6 +358,7 @@ module Aws::DirectConnect
     class AssociateConnectionWithLagRequest < Struct.new(
       :connection_id,
       :lag_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -374,6 +383,7 @@ module Aws::DirectConnect
     class AssociateHostedConnectionRequest < Struct.new(
       :connection_id,
       :parent_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -398,6 +408,7 @@ module Aws::DirectConnect
     class AssociateVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id,
       :connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -427,6 +438,7 @@ module Aws::DirectConnect
       :type,
       :owner_account,
       :region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -504,6 +516,7 @@ module Aws::DirectConnect
       :bgp_peer_state,
       :bgp_status,
       :aws_device_v2)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -522,6 +535,7 @@ module Aws::DirectConnect
     #
     class ConfirmConnectionRequest < Struct.new(
       :connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -559,6 +573,7 @@ module Aws::DirectConnect
     #
     class ConfirmConnectionResponse < Struct.new(
       :connection_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -589,6 +604,7 @@ module Aws::DirectConnect
       :virtual_interface_id,
       :virtual_gateway_id,
       :direct_connect_gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -632,6 +648,7 @@ module Aws::DirectConnect
     #
     class ConfirmPrivateVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -650,6 +667,7 @@ module Aws::DirectConnect
     #
     class ConfirmPublicVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -693,6 +711,7 @@ module Aws::DirectConnect
     #
     class ConfirmPublicVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -717,6 +736,7 @@ module Aws::DirectConnect
     class ConfirmTransitVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id,
       :direct_connect_gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -760,6 +780,7 @@ module Aws::DirectConnect
     #
     class ConfirmTransitVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -883,6 +904,7 @@ module Aws::DirectConnect
       :has_logical_redundancy,
       :tags,
       :provider_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -894,6 +916,7 @@ module Aws::DirectConnect
     #
     class Connections < Struct.new(
       :connections)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -924,6 +947,7 @@ module Aws::DirectConnect
     class CreateBGPPeerRequest < Struct.new(
       :virtual_interface_id,
       :new_bgp_peer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -935,6 +959,7 @@ module Aws::DirectConnect
     #
     class CreateBGPPeerResponse < Struct.new(
       :virtual_interface)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -989,6 +1014,7 @@ module Aws::DirectConnect
       :lag_id,
       :tags,
       :provider_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1040,6 +1066,7 @@ module Aws::DirectConnect
       :gateway_id,
       :add_allowed_prefixes_to_direct_connect_gateway,
       :remove_allowed_prefixes_to_direct_connect_gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1051,6 +1078,7 @@ module Aws::DirectConnect
     #
     class CreateDirectConnectGatewayAssociationProposalResult < Struct.new(
       :direct_connect_gateway_association_proposal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1101,6 +1129,7 @@ module Aws::DirectConnect
       :gateway_id,
       :add_allowed_prefixes_to_direct_connect_gateway,
       :virtual_gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1112,6 +1141,7 @@ module Aws::DirectConnect
     #
     class CreateDirectConnectGatewayAssociationResult < Struct.new(
       :direct_connect_gateway_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1139,6 +1169,7 @@ module Aws::DirectConnect
     class CreateDirectConnectGatewayRequest < Struct.new(
       :direct_connect_gateway_name,
       :amazon_side_asn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1150,6 +1181,7 @@ module Aws::DirectConnect
     #
     class CreateDirectConnectGatewayResult < Struct.new(
       :direct_connect_gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1203,6 +1235,7 @@ module Aws::DirectConnect
       :lag_id,
       :tags,
       :provider_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1276,6 +1309,7 @@ module Aws::DirectConnect
       :tags,
       :child_connection_tags,
       :provider_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1317,6 +1351,7 @@ module Aws::DirectConnect
     class CreatePrivateVirtualInterfaceRequest < Struct.new(
       :connection_id,
       :new_private_virtual_interface)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1360,6 +1395,7 @@ module Aws::DirectConnect
     class CreatePublicVirtualInterfaceRequest < Struct.new(
       :connection_id,
       :new_public_virtual_interface)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1400,6 +1436,7 @@ module Aws::DirectConnect
     class CreateTransitVirtualInterfaceRequest < Struct.new(
       :connection_id,
       :new_transit_virtual_interface)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1411,6 +1448,7 @@ module Aws::DirectConnect
     #
     class CreateTransitVirtualInterfaceResult < Struct.new(
       :virtual_interface)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1448,6 +1486,7 @@ module Aws::DirectConnect
       :asn,
       :customer_address,
       :bgp_peer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1459,6 +1498,7 @@ module Aws::DirectConnect
     #
     class DeleteBGPPeerResponse < Struct.new(
       :virtual_interface)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1477,6 +1517,7 @@ module Aws::DirectConnect
     #
     class DeleteConnectionRequest < Struct.new(
       :connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1495,6 +1536,7 @@ module Aws::DirectConnect
     #
     class DeleteDirectConnectGatewayAssociationProposalRequest < Struct.new(
       :proposal_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1506,6 +1548,7 @@ module Aws::DirectConnect
     #
     class DeleteDirectConnectGatewayAssociationProposalResult < Struct.new(
       :direct_connect_gateway_association_proposal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1536,6 +1579,7 @@ module Aws::DirectConnect
       :association_id,
       :direct_connect_gateway_id,
       :virtual_gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1547,6 +1591,7 @@ module Aws::DirectConnect
     #
     class DeleteDirectConnectGatewayAssociationResult < Struct.new(
       :direct_connect_gateway_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1565,6 +1610,7 @@ module Aws::DirectConnect
     #
     class DeleteDirectConnectGatewayRequest < Struct.new(
       :direct_connect_gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1576,6 +1622,7 @@ module Aws::DirectConnect
     #
     class DeleteDirectConnectGatewayResult < Struct.new(
       :direct_connect_gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1594,6 +1641,7 @@ module Aws::DirectConnect
     #
     class DeleteInterconnectRequest < Struct.new(
       :interconnect_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1624,6 +1672,7 @@ module Aws::DirectConnect
     #
     class DeleteInterconnectResponse < Struct.new(
       :interconnect_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1642,6 +1691,7 @@ module Aws::DirectConnect
     #
     class DeleteLagRequest < Struct.new(
       :lag_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1660,6 +1710,7 @@ module Aws::DirectConnect
     #
     class DeleteVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1703,6 +1754,7 @@ module Aws::DirectConnect
     #
     class DeleteVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1737,6 +1789,7 @@ module Aws::DirectConnect
       :connection_id,
       :provider_name,
       :loa_content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1749,6 +1802,7 @@ module Aws::DirectConnect
     #
     class DescribeConnectionLoaResponse < Struct.new(
       :loa)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1767,6 +1821,7 @@ module Aws::DirectConnect
     #
     class DescribeConnectionsOnInterconnectRequest < Struct.new(
       :interconnect_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1785,6 +1840,7 @@ module Aws::DirectConnect
     #
     class DescribeConnectionsRequest < Struct.new(
       :connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1832,6 +1888,7 @@ module Aws::DirectConnect
       :associated_gateway_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1849,6 +1906,7 @@ module Aws::DirectConnect
     class DescribeDirectConnectGatewayAssociationProposalsResult < Struct.new(
       :direct_connect_gateway_association_proposals,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1902,6 +1960,7 @@ module Aws::DirectConnect
       :max_results,
       :next_token,
       :virtual_gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1918,6 +1977,7 @@ module Aws::DirectConnect
     class DescribeDirectConnectGatewayAssociationsResult < Struct.new(
       :direct_connect_gateway_associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1959,6 +2019,7 @@ module Aws::DirectConnect
       :virtual_interface_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1975,6 +2036,7 @@ module Aws::DirectConnect
     class DescribeDirectConnectGatewayAttachmentsResult < Struct.new(
       :direct_connect_gateway_attachments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2010,6 +2072,7 @@ module Aws::DirectConnect
       :direct_connect_gateway_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2026,6 +2089,7 @@ module Aws::DirectConnect
     class DescribeDirectConnectGatewaysResult < Struct.new(
       :direct_connect_gateways,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2044,6 +2108,7 @@ module Aws::DirectConnect
     #
     class DescribeHostedConnectionsRequest < Struct.new(
       :connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2078,6 +2143,7 @@ module Aws::DirectConnect
       :interconnect_id,
       :provider_name,
       :loa_content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2090,6 +2156,7 @@ module Aws::DirectConnect
     #
     class DescribeInterconnectLoaResponse < Struct.new(
       :loa)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2108,6 +2175,7 @@ module Aws::DirectConnect
     #
     class DescribeInterconnectsRequest < Struct.new(
       :interconnect_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2126,6 +2194,7 @@ module Aws::DirectConnect
     #
     class DescribeLagsRequest < Struct.new(
       :lag_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2160,6 +2229,7 @@ module Aws::DirectConnect
       :connection_id,
       :provider_name,
       :loa_content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2178,6 +2248,7 @@ module Aws::DirectConnect
     #
     class DescribeTagsRequest < Struct.new(
       :resource_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2189,6 +2260,7 @@ module Aws::DirectConnect
     #
     class DescribeTagsResponse < Struct.new(
       :resource_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2213,6 +2285,7 @@ module Aws::DirectConnect
     class DescribeVirtualInterfacesRequest < Struct.new(
       :connection_id,
       :virtual_interface_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2225,6 +2298,7 @@ module Aws::DirectConnect
     #
     class DirectConnectClientException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2278,6 +2352,7 @@ module Aws::DirectConnect
       :owner_account,
       :direct_connect_gateway_state,
       :state_change_error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2353,6 +2428,7 @@ module Aws::DirectConnect
       :virtual_gateway_id,
       :virtual_gateway_region,
       :virtual_gateway_owner_account)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2408,6 +2484,7 @@ module Aws::DirectConnect
       :associated_gateway,
       :existing_allowed_prefixes_to_direct_connect_gateway,
       :requested_allowed_prefixes_to_direct_connect_gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2465,6 +2542,7 @@ module Aws::DirectConnect
       :attachment_state,
       :attachment_type,
       :state_change_error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2477,6 +2555,7 @@ module Aws::DirectConnect
     #
     class DirectConnectServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2501,6 +2580,7 @@ module Aws::DirectConnect
     class DisassociateConnectionFromLagRequest < Struct.new(
       :connection_id,
       :lag_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2607,6 +2687,7 @@ module Aws::DirectConnect
       :has_logical_redundancy,
       :tags,
       :provider_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2618,6 +2699,7 @@ module Aws::DirectConnect
     #
     class Interconnects < Struct.new(
       :interconnects)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2732,6 +2814,7 @@ module Aws::DirectConnect
       :has_logical_redundancy,
       :tags,
       :provider_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2743,6 +2826,7 @@ module Aws::DirectConnect
     #
     class Lags < Struct.new(
       :lags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2797,6 +2881,7 @@ module Aws::DirectConnect
       :status,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2814,6 +2899,7 @@ module Aws::DirectConnect
     class ListVirtualInterfaceTestHistoryResponse < Struct.new(
       :virtual_interface_test_history,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2834,6 +2920,7 @@ module Aws::DirectConnect
     class Loa < Struct.new(
       :loa_content,
       :loa_content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2868,6 +2955,7 @@ module Aws::DirectConnect
       :region,
       :available_port_speeds,
       :available_providers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2879,6 +2967,7 @@ module Aws::DirectConnect
     #
     class Locations < Struct.new(
       :locations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2926,6 +3015,7 @@ module Aws::DirectConnect
       :address_family,
       :amazon_address,
       :customer_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3019,6 +3109,7 @@ module Aws::DirectConnect
       :virtual_gateway_id,
       :direct_connect_gateway_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3101,6 +3192,7 @@ module Aws::DirectConnect
       :address_family,
       :customer_address,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3186,6 +3278,7 @@ module Aws::DirectConnect
       :address_family,
       :route_filter_prefixes,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3272,6 +3365,7 @@ module Aws::DirectConnect
       :address_family,
       :route_filter_prefixes,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3359,6 +3453,7 @@ module Aws::DirectConnect
       :address_family,
       :direct_connect_gateway_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3441,6 +3536,7 @@ module Aws::DirectConnect
       :customer_address,
       :address_family,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3460,6 +3556,7 @@ module Aws::DirectConnect
     class ResourceTag < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3482,6 +3579,7 @@ module Aws::DirectConnect
     #
     class RouteFilterPrefix < Struct.new(
       :cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3517,6 +3615,7 @@ module Aws::DirectConnect
       :virtual_interface_id,
       :bgp_peers,
       :test_duration_in_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3528,6 +3627,7 @@ module Aws::DirectConnect
     #
     class StartBgpFailoverTestResponse < Struct.new(
       :virtual_interface_test)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3546,6 +3646,7 @@ module Aws::DirectConnect
     #
     class StopBgpFailoverTestRequest < Struct.new(
       :virtual_interface_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3557,6 +3658,7 @@ module Aws::DirectConnect
     #
     class StopBgpFailoverTestResponse < Struct.new(
       :virtual_interface_test)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3583,6 +3685,7 @@ module Aws::DirectConnect
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3612,6 +3715,7 @@ module Aws::DirectConnect
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3646,6 +3750,7 @@ module Aws::DirectConnect
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3689,6 +3794,7 @@ module Aws::DirectConnect
       :association_id,
       :add_allowed_prefixes_to_direct_connect_gateway,
       :remove_allowed_prefixes_to_direct_connect_gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3701,6 +3807,7 @@ module Aws::DirectConnect
     #
     class UpdateDirectConnectGatewayAssociationResult < Struct.new(
       :direct_connect_gateway_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3732,6 +3839,7 @@ module Aws::DirectConnect
       :lag_id,
       :lag_name,
       :minimum_links)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3757,6 +3865,7 @@ module Aws::DirectConnect
     class UpdateVirtualInterfaceAttributesRequest < Struct.new(
       :virtual_interface_id,
       :mtu)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3788,6 +3897,7 @@ module Aws::DirectConnect
     class VirtualGateway < Struct.new(
       :virtual_gateway_id,
       :virtual_gateway_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3799,6 +3909,7 @@ module Aws::DirectConnect
     #
     class VirtualGateways < Struct.new(
       :virtual_gateways)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3972,6 +4083,7 @@ module Aws::DirectConnect
       :region,
       :aws_device_v2,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4021,6 +4133,7 @@ module Aws::DirectConnect
       :test_duration_in_minutes,
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4032,6 +4145,7 @@ module Aws::DirectConnect
     #
     class VirtualInterfaces < Struct.new(
       :virtual_interfaces)
+      SENSITIVE = []
       include Aws::Structure
     end
 

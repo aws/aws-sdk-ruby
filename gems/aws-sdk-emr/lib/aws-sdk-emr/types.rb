@@ -75,6 +75,7 @@ module Aws::EMR
     class AddInstanceFleetInput < Struct.new(
       :cluster_id,
       :instance_fleet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -96,6 +97,7 @@ module Aws::EMR
       :cluster_id,
       :instance_fleet_id,
       :cluster_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -193,6 +195,7 @@ module Aws::EMR
     class AddInstanceGroupsInput < Struct.new(
       :instance_groups,
       :job_flow_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -216,6 +219,7 @@ module Aws::EMR
       :job_flow_id,
       :instance_group_ids,
       :cluster_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -259,6 +263,7 @@ module Aws::EMR
     class AddJobFlowStepsInput < Struct.new(
       :job_flow_id,
       :steps)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -272,6 +277,7 @@ module Aws::EMR
     #
     class AddJobFlowStepsOutput < Struct.new(
       :step_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -307,6 +313,7 @@ module Aws::EMR
     class AddTagsInput < Struct.new(
       :resource_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -369,6 +376,7 @@ module Aws::EMR
       :version,
       :args,
       :additional_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -436,6 +444,7 @@ module Aws::EMR
     class AutoScalingPolicy < Struct.new(
       :constraints,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -466,6 +475,7 @@ module Aws::EMR
       :status,
       :constraints,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -489,6 +499,7 @@ module Aws::EMR
     class AutoScalingPolicyStateChangeReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -507,6 +518,7 @@ module Aws::EMR
     class AutoScalingPolicyStatus < Struct.new(
       :state,
       :state_change_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -556,6 +568,7 @@ module Aws::EMR
     class BlockPublicAccessConfiguration < Struct.new(
       :block_public_security_group_rules,
       :permitted_public_security_group_rule_ranges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -579,6 +592,7 @@ module Aws::EMR
     class BlockPublicAccessConfigurationMetadata < Struct.new(
       :creation_date_time,
       :created_by_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -608,6 +622,7 @@ module Aws::EMR
     class BootstrapActionConfig < Struct.new(
       :name,
       :script_bootstrap_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -622,6 +637,7 @@ module Aws::EMR
     #
     class BootstrapActionDetail < Struct.new(
       :bootstrap_action_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -647,6 +663,7 @@ module Aws::EMR
       :step_id,
       :status,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -682,6 +699,7 @@ module Aws::EMR
       :cluster_id,
       :step_ids,
       :step_cancellation_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -696,6 +714,7 @@ module Aws::EMR
     #
     class CancelStepsOutput < Struct.new(
       :cancel_steps_info_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -781,6 +800,7 @@ module Aws::EMR
       :threshold,
       :unit,
       :dimensions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1008,6 +1028,7 @@ module Aws::EMR
       :cluster_arn,
       :outpost_arn,
       :step_concurrency_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1026,6 +1047,7 @@ module Aws::EMR
     class ClusterStateChangeReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1050,6 +1072,7 @@ module Aws::EMR
       :state,
       :state_change_reason,
       :timeline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1095,6 +1118,7 @@ module Aws::EMR
       :normalized_instance_hours,
       :cluster_arn,
       :outpost_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1118,6 +1142,7 @@ module Aws::EMR
       :creation_date_time,
       :ready_date_time,
       :end_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1141,6 +1166,7 @@ module Aws::EMR
       :name,
       :script_path,
       :args)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1204,6 +1230,7 @@ module Aws::EMR
       :maximum_capacity_units,
       :maximum_on_demand_capacity_units,
       :maximum_core_capacity_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1263,6 +1290,7 @@ module Aws::EMR
       :classification,
       :configurations,
       :properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1293,6 +1321,7 @@ module Aws::EMR
     class CreateSecurityConfigurationInput < Struct.new(
       :name,
       :security_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1309,6 +1338,7 @@ module Aws::EMR
     class CreateSecurityConfigurationOutput < Struct.new(
       :name,
       :creation_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1327,6 +1357,7 @@ module Aws::EMR
     #
     class DeleteSecurityConfigurationInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1351,6 +1382,7 @@ module Aws::EMR
     #
     class DescribeClusterInput < Struct.new(
       :cluster_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1364,6 +1396,7 @@ module Aws::EMR
     #
     class DescribeClusterOutput < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1402,6 +1435,7 @@ module Aws::EMR
       :created_before,
       :job_flow_ids,
       :job_flow_states)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1415,6 +1449,7 @@ module Aws::EMR
     #
     class DescribeJobFlowsOutput < Struct.new(
       :job_flows)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1433,6 +1468,7 @@ module Aws::EMR
     #
     class DescribeSecurityConfigurationInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1454,6 +1490,7 @@ module Aws::EMR
       :name,
       :security_configuration,
       :creation_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1480,6 +1517,7 @@ module Aws::EMR
     class DescribeStepInput < Struct.new(
       :cluster_id,
       :step_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1493,6 +1531,7 @@ module Aws::EMR
     #
     class DescribeStepOutput < Struct.new(
       :step)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1514,6 +1553,7 @@ module Aws::EMR
     class EbsBlockDevice < Struct.new(
       :volume_specification,
       :device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1549,6 +1589,7 @@ module Aws::EMR
     class EbsBlockDeviceConfig < Struct.new(
       :volume_specification,
       :volumes_per_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1585,6 +1626,7 @@ module Aws::EMR
     class EbsConfiguration < Struct.new(
       :ebs_block_device_configs,
       :ebs_optimized)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1603,6 +1645,7 @@ module Aws::EMR
     class EbsVolume < Struct.new(
       :device,
       :volume_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1696,6 +1739,7 @@ module Aws::EMR
       :service_access_security_group,
       :additional_master_security_groups,
       :additional_slave_security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1725,6 +1769,7 @@ module Aws::EMR
       :reason,
       :message,
       :log_file)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1771,6 +1816,7 @@ module Aws::EMR
     class GetBlockPublicAccessConfigurationOutput < Struct.new(
       :block_public_access_configuration,
       :block_public_access_configuration_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1790,6 +1836,7 @@ module Aws::EMR
     #
     class GetManagedScalingPolicyInput < Struct.new(
       :cluster_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1802,6 +1849,7 @@ module Aws::EMR
     #
     class GetManagedScalingPolicyOutput < Struct.new(
       :managed_scaling_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1851,6 +1899,7 @@ module Aws::EMR
       :jar,
       :main_class,
       :args)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1885,6 +1934,7 @@ module Aws::EMR
       :properties,
       :main_class,
       :args)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1955,6 +2005,7 @@ module Aws::EMR
       :market,
       :instance_type,
       :ebs_volumes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2074,6 +2125,7 @@ module Aws::EMR
       :provisioned_spot_capacity,
       :instance_type_specifications,
       :launch_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2208,6 +2260,7 @@ module Aws::EMR
       :target_spot_capacity,
       :instance_type_configs,
       :launch_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2247,6 +2300,7 @@ module Aws::EMR
       :instance_fleet_id,
       :target_on_demand_capacity,
       :target_spot_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2278,6 +2332,7 @@ module Aws::EMR
     #
     class InstanceFleetProvisioningSpecifications < Struct.new(
       :spot_specification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2301,6 +2356,7 @@ module Aws::EMR
     class InstanceFleetStateChangeReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2352,6 +2408,7 @@ module Aws::EMR
       :state,
       :state_change_reason,
       :timeline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2382,6 +2439,7 @@ module Aws::EMR
       :creation_date_time,
       :ready_date_time,
       :end_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2497,6 +2555,7 @@ module Aws::EMR
       :ebs_optimized,
       :shrink_policy,
       :auto_scaling_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2638,6 +2697,7 @@ module Aws::EMR
       :configurations,
       :ebs_configuration,
       :auto_scaling_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2720,6 +2780,7 @@ module Aws::EMR
       :start_date_time,
       :ready_date_time,
       :end_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2783,6 +2844,7 @@ module Aws::EMR
       :ec2_instance_ids_to_terminate,
       :shrink_policy,
       :configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2801,6 +2863,7 @@ module Aws::EMR
     class InstanceGroupStateChangeReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2824,6 +2887,7 @@ module Aws::EMR
       :state,
       :state_change_reason,
       :timeline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2848,6 +2912,7 @@ module Aws::EMR
       :creation_date_time,
       :ready_date_time,
       :end_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2884,6 +2949,7 @@ module Aws::EMR
       :instances_to_terminate,
       :instances_to_protect,
       :instance_termination_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2902,6 +2968,7 @@ module Aws::EMR
     class InstanceStateChangeReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2925,6 +2992,7 @@ module Aws::EMR
       :state,
       :state_change_reason,
       :timeline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2948,6 +3016,7 @@ module Aws::EMR
       :creation_date_time,
       :ready_date_time,
       :end_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3042,6 +3111,7 @@ module Aws::EMR
       :bid_price_as_percentage_of_on_demand_price,
       :ebs_configuration,
       :configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3102,6 +3172,7 @@ module Aws::EMR
       :configurations,
       :ebs_block_devices,
       :ebs_optimized)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3123,6 +3194,7 @@ module Aws::EMR
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3141,6 +3213,7 @@ module Aws::EMR
     class InvalidRequestException < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3256,6 +3329,7 @@ module Aws::EMR
       :service_role,
       :auto_scaling_role,
       :scale_down_behavior)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3295,6 +3369,7 @@ module Aws::EMR
       :ready_date_time,
       :end_date_time,
       :last_state_change_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3568,6 +3643,7 @@ module Aws::EMR
       :service_access_security_group,
       :additional_master_security_groups,
       :additional_slave_security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3658,6 +3734,7 @@ module Aws::EMR
       :keep_job_flow_alive_when_no_steps,
       :termination_protected,
       :hadoop_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3715,6 +3792,7 @@ module Aws::EMR
       :cross_realm_trust_principal_password,
       :ad_domain_join_user,
       :ad_domain_join_password)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3741,6 +3819,7 @@ module Aws::EMR
     class KeyValue < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3768,6 +3847,7 @@ module Aws::EMR
     class ListBootstrapActionsInput < Struct.new(
       :cluster_id,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3787,6 +3867,7 @@ module Aws::EMR
     class ListBootstrapActionsOutput < Struct.new(
       :bootstrap_actions,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3828,6 +3909,7 @@ module Aws::EMR
       :created_before,
       :cluster_states,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3848,6 +3930,7 @@ module Aws::EMR
     class ListClustersOutput < Struct.new(
       :clusters,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3873,6 +3956,7 @@ module Aws::EMR
     class ListInstanceFleetsInput < Struct.new(
       :cluster_id,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3890,6 +3974,7 @@ module Aws::EMR
     class ListInstanceFleetsOutput < Struct.new(
       :instance_fleets,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3917,6 +4002,7 @@ module Aws::EMR
     class ListInstanceGroupsInput < Struct.new(
       :cluster_id,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3936,6 +4022,7 @@ module Aws::EMR
     class ListInstanceGroupsOutput < Struct.new(
       :instance_groups,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3996,6 +4083,7 @@ module Aws::EMR
       :instance_fleet_type,
       :instance_states,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4015,6 +4103,7 @@ module Aws::EMR
     class ListInstancesOutput < Struct.new(
       :instances,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4033,6 +4122,7 @@ module Aws::EMR
     #
     class ListSecurityConfigurationsInput < Struct.new(
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4052,6 +4142,7 @@ module Aws::EMR
     class ListSecurityConfigurationsOutput < Struct.new(
       :security_configurations,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4093,6 +4184,7 @@ module Aws::EMR
       :step_states,
       :step_ids,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4113,6 +4205,7 @@ module Aws::EMR
     class ListStepsOutput < Struct.new(
       :steps,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4145,6 +4238,7 @@ module Aws::EMR
     #
     class ManagedScalingPolicy < Struct.new(
       :compute_limits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4175,6 +4269,7 @@ module Aws::EMR
     class MetricDimension < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4200,6 +4295,7 @@ module Aws::EMR
     class ModifyClusterInput < Struct.new(
       :cluster_id,
       :step_concurrency_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4211,6 +4307,7 @@ module Aws::EMR
     #
     class ModifyClusterOutput < Struct.new(
       :step_concurrency_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4239,6 +4336,7 @@ module Aws::EMR
     class ModifyInstanceFleetInput < Struct.new(
       :cluster_id,
       :instance_fleet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4290,6 +4388,7 @@ module Aws::EMR
     class ModifyInstanceGroupsInput < Struct.new(
       :cluster_id,
       :instance_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4327,6 +4426,7 @@ module Aws::EMR
     class PlacementType < Struct.new(
       :availability_zone,
       :availability_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4355,6 +4455,7 @@ module Aws::EMR
     class PortRange < Struct.new(
       :min_range,
       :max_range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4424,6 +4525,7 @@ module Aws::EMR
       :cluster_id,
       :instance_group_id,
       :auto_scaling_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4452,6 +4554,7 @@ module Aws::EMR
       :instance_group_id,
       :auto_scaling_policy,
       :cluster_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4497,6 +4600,7 @@ module Aws::EMR
     #
     class PutBlockPublicAccessConfigurationInput < Struct.new(
       :block_public_access_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4534,6 +4638,7 @@ module Aws::EMR
     class PutManagedScalingPolicyInput < Struct.new(
       :cluster_id,
       :managed_scaling_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4564,6 +4669,7 @@ module Aws::EMR
     class RemoveAutoScalingPolicyInput < Struct.new(
       :cluster_id,
       :instance_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4587,6 +4693,7 @@ module Aws::EMR
     #
     class RemoveManagedScalingPolicyInput < Struct.new(
       :cluster_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4618,6 +4725,7 @@ module Aws::EMR
     class RemoveTagsInput < Struct.new(
       :resource_id,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5131,6 +5239,7 @@ module Aws::EMR
       :kerberos_attributes,
       :step_concurrency_level,
       :managed_scaling_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5149,6 +5258,7 @@ module Aws::EMR
     class RunJobFlowOutput < Struct.new(
       :job_flow_id,
       :cluster_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5182,6 +5292,7 @@ module Aws::EMR
     class ScalingAction < Struct.new(
       :market,
       :simple_scaling_policy_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5215,6 +5326,7 @@ module Aws::EMR
     class ScalingConstraints < Struct.new(
       :min_capacity,
       :max_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5283,6 +5395,7 @@ module Aws::EMR
       :description,
       :action,
       :trigger)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5320,6 +5433,7 @@ module Aws::EMR
     #
     class ScalingTrigger < Struct.new(
       :cloud_watch_alarm_definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5348,6 +5462,7 @@ module Aws::EMR
     class ScriptBootstrapActionConfig < Struct.new(
       :path,
       :args)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5366,6 +5481,7 @@ module Aws::EMR
     class SecurityConfigurationSummary < Struct.new(
       :name,
       :creation_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5396,6 +5512,7 @@ module Aws::EMR
     class SetTerminationProtectionInput < Struct.new(
       :job_flow_ids,
       :termination_protected)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5425,6 +5542,7 @@ module Aws::EMR
     class SetVisibleToAllUsersInput < Struct.new(
       :job_flow_ids,
       :visible_to_all_users)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5458,6 +5576,7 @@ module Aws::EMR
     class ShrinkPolicy < Struct.new(
       :decommission_timeout,
       :instance_resize_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5514,6 +5633,7 @@ module Aws::EMR
       :adjustment_type,
       :scaling_adjustment,
       :cool_down)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5571,6 +5691,7 @@ module Aws::EMR
       :timeout_duration_minutes,
       :timeout_action,
       :block_duration_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5607,6 +5728,7 @@ module Aws::EMR
       :config,
       :action_on_failure,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5652,6 +5774,7 @@ module Aws::EMR
       :name,
       :action_on_failure,
       :hadoop_jar_step)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5670,6 +5793,7 @@ module Aws::EMR
     class StepDetail < Struct.new(
       :step_config,
       :execution_status_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5703,6 +5827,7 @@ module Aws::EMR
       :start_date_time,
       :end_date_time,
       :last_state_change_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5722,6 +5847,7 @@ module Aws::EMR
     class StepStateChangeReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5751,6 +5877,7 @@ module Aws::EMR
       :state_change_reason,
       :failure_details,
       :timeline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5787,6 +5914,7 @@ module Aws::EMR
       :config,
       :action_on_failure,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5811,6 +5939,7 @@ module Aws::EMR
       :creation_date_time,
       :start_date_time,
       :end_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5839,6 +5968,7 @@ module Aws::EMR
     class SupportedProductConfig < Struct.new(
       :name,
       :args)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5883,6 +6013,7 @@ module Aws::EMR
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5903,6 +6034,7 @@ module Aws::EMR
     #
     class TerminateJobFlowsInput < Struct.new(
       :job_flow_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5939,6 +6071,7 @@ module Aws::EMR
       :volume_type,
       :iops,
       :size_in_gb)
+      SENSITIVE = []
       include Aws::Structure
     end
 

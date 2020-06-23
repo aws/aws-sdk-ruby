@@ -20,6 +20,7 @@ module Aws::CodeStarNotifications
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34,6 +35,7 @@ module Aws::CodeStarNotifications
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46,6 +48,7 @@ module Aws::CodeStarNotifications
     #
     class ConfigurationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +141,7 @@ module Aws::CodeStarNotifications
       :client_request_token,
       :tags,
       :status)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -149,6 +153,7 @@ module Aws::CodeStarNotifications
     #
     class CreateNotificationRuleResult < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -168,6 +173,7 @@ module Aws::CodeStarNotifications
     #
     class DeleteNotificationRuleRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -179,6 +185,7 @@ module Aws::CodeStarNotifications
     #
     class DeleteNotificationRuleResult < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -206,6 +213,7 @@ module Aws::CodeStarNotifications
     class DeleteTargetRequest < Struct.new(
       :target_address,
       :force_unsubscribe_all)
+      SENSITIVE = [:target_address]
       include Aws::Structure
     end
 
@@ -228,6 +236,7 @@ module Aws::CodeStarNotifications
     #
     class DescribeNotificationRuleRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -298,6 +307,7 @@ module Aws::CodeStarNotifications
       :created_timestamp,
       :last_modified_timestamp,
       :tags)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -327,6 +337,7 @@ module Aws::CodeStarNotifications
       :service_name,
       :event_type_name,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -340,6 +351,7 @@ module Aws::CodeStarNotifications
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -354,6 +366,7 @@ module Aws::CodeStarNotifications
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -382,6 +395,7 @@ module Aws::CodeStarNotifications
     class ListEventTypesFilter < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -421,6 +435,7 @@ module Aws::CodeStarNotifications
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -439,6 +454,7 @@ module Aws::CodeStarNotifications
     class ListEventTypesResult < Struct.new(
       :event_types,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -471,6 +487,7 @@ module Aws::CodeStarNotifications
     class ListNotificationRulesFilter < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -515,6 +532,7 @@ module Aws::CodeStarNotifications
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -533,6 +551,7 @@ module Aws::CodeStarNotifications
     class ListNotificationRulesResult < Struct.new(
       :next_token,
       :notification_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -551,6 +570,7 @@ module Aws::CodeStarNotifications
     #
     class ListTagsForResourceRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -562,6 +582,7 @@ module Aws::CodeStarNotifications
     #
     class ListTagsForResourceResult < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -597,6 +618,7 @@ module Aws::CodeStarNotifications
     class ListTargetsFilter < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -642,6 +664,7 @@ module Aws::CodeStarNotifications
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -659,6 +682,7 @@ module Aws::CodeStarNotifications
     class ListTargetsResult < Struct.new(
       :targets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -677,6 +701,7 @@ module Aws::CodeStarNotifications
     class NotificationRuleSummary < Struct.new(
       :id,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -690,6 +715,7 @@ module Aws::CodeStarNotifications
     #
     class ResourceAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -703,6 +729,7 @@ module Aws::CodeStarNotifications
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -739,6 +766,7 @@ module Aws::CodeStarNotifications
       :arn,
       :target,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -751,6 +779,7 @@ module Aws::CodeStarNotifications
     #
     class SubscribeResult < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -778,6 +807,7 @@ module Aws::CodeStarNotifications
     class TagResourceRequest < Struct.new(
       :arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -789,6 +819,7 @@ module Aws::CodeStarNotifications
     #
     class TagResourceResult < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -815,6 +846,7 @@ module Aws::CodeStarNotifications
     class Target < Struct.new(
       :target_type,
       :target_address)
+      SENSITIVE = [:target_address]
       include Aws::Structure
     end
 
@@ -838,6 +870,7 @@ module Aws::CodeStarNotifications
       :target_address,
       :target_type,
       :target_status)
+      SENSITIVE = [:target_address]
       include Aws::Structure
     end
 
@@ -862,6 +895,7 @@ module Aws::CodeStarNotifications
     class UnsubscribeRequest < Struct.new(
       :arn,
       :target_address)
+      SENSITIVE = [:target_address]
       include Aws::Structure
     end
 
@@ -874,6 +908,7 @@ module Aws::CodeStarNotifications
     #
     class UnsubscribeResult < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -899,6 +934,7 @@ module Aws::CodeStarNotifications
     class UntagResourceRequest < Struct.new(
       :arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -962,6 +998,7 @@ module Aws::CodeStarNotifications
       :event_type_ids,
       :targets,
       :detail_type)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -978,6 +1015,7 @@ module Aws::CodeStarNotifications
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

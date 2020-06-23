@@ -138,6 +138,7 @@ module Aws::StorageGateway
       :tape_drive_type,
       :medium_changer_type,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -163,6 +164,7 @@ module Aws::StorageGateway
     #
     class ActivateGatewayOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -191,6 +193,7 @@ module Aws::StorageGateway
     class AddCacheInput < Struct.new(
       :gateway_arn,
       :disk_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -204,6 +207,7 @@ module Aws::StorageGateway
     #
     class AddCacheOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -244,6 +248,7 @@ module Aws::StorageGateway
     class AddTagsToResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -258,6 +263,7 @@ module Aws::StorageGateway
     #
     class AddTagsToResourceOutput < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -286,6 +292,7 @@ module Aws::StorageGateway
     class AddUploadBufferInput < Struct.new(
       :gateway_arn,
       :disk_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -299,6 +306,7 @@ module Aws::StorageGateway
     #
     class AddUploadBufferOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -333,6 +341,7 @@ module Aws::StorageGateway
     class AddWorkingStorageInput < Struct.new(
       :gateway_arn,
       :disk_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -349,6 +358,7 @@ module Aws::StorageGateway
     #
     class AddWorkingStorageOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -381,6 +391,7 @@ module Aws::StorageGateway
     class AssignTapePoolInput < Struct.new(
       :tape_arn,
       :pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -393,6 +404,7 @@ module Aws::StorageGateway
     #
     class AssignTapePoolOutput < Struct.new(
       :tape_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -453,6 +465,7 @@ module Aws::StorageGateway
       :volume_arn,
       :network_interface_id,
       :disk_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -474,6 +487,7 @@ module Aws::StorageGateway
     class AttachVolumeOutput < Struct.new(
       :volume_arn,
       :target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -498,6 +512,7 @@ module Aws::StorageGateway
     class AutomaticTapeCreationPolicyInfo < Struct.new(
       :automatic_tape_creation_rules,
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -553,6 +568,7 @@ module Aws::StorageGateway
       :pool_id,
       :tape_size_in_bytes,
       :minimum_num_tapes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -662,6 +678,7 @@ module Aws::StorageGateway
       :volume_used_in_bytes,
       :kms_key,
       :target_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -691,6 +708,7 @@ module Aws::StorageGateway
     class CancelArchivalInput < Struct.new(
       :gateway_arn,
       :tape_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -705,6 +723,7 @@ module Aws::StorageGateway
     #
     class CancelArchivalOutput < Struct.new(
       :tape_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -734,6 +753,7 @@ module Aws::StorageGateway
     class CancelRetrievalInput < Struct.new(
       :gateway_arn,
       :tape_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -748,6 +768,7 @@ module Aws::StorageGateway
     #
     class CancelRetrievalOutput < Struct.new(
       :tape_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -783,6 +804,7 @@ module Aws::StorageGateway
       :secret_to_authenticate_initiator,
       :initiator_name,
       :secret_to_authenticate_target)
+      SENSITIVE = [:secret_to_authenticate_initiator, :secret_to_authenticate_target]
       include Aws::Structure
     end
 
@@ -904,6 +926,7 @@ module Aws::StorageGateway
       :kms_encrypted,
       :kms_key,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -921,6 +944,7 @@ module Aws::StorageGateway
     class CreateCachediSCSIVolumeOutput < Struct.new(
       :volume_arn,
       :target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1089,6 +1113,7 @@ module Aws::StorageGateway
       :guess_mime_type_enabled,
       :requester_pays,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1102,6 +1127,7 @@ module Aws::StorageGateway
     #
     class CreateNFSFileShareOutput < Struct.new(
       :file_share_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1302,6 +1328,7 @@ module Aws::StorageGateway
       :audit_destination_arn,
       :authentication,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1315,6 +1342,7 @@ module Aws::StorageGateway
     #
     class CreateSMBFileShareOutput < Struct.new(
       :file_share_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1363,6 +1391,7 @@ module Aws::StorageGateway
       :volume_arn,
       :snapshot_description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1386,6 +1415,7 @@ module Aws::StorageGateway
       :snapshot_id,
       :volume_arn,
       :volume_recovery_point_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1439,6 +1469,7 @@ module Aws::StorageGateway
       :volume_arn,
       :snapshot_description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1461,6 +1492,7 @@ module Aws::StorageGateway
     class CreateSnapshotOutput < Struct.new(
       :volume_arn,
       :snapshot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1590,6 +1622,7 @@ module Aws::StorageGateway
       :kms_encrypted,
       :kms_key,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1614,6 +1647,7 @@ module Aws::StorageGateway
       :volume_arn,
       :volume_size_in_bytes,
       :target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1706,6 +1740,7 @@ module Aws::StorageGateway
       :kms_key,
       :pool_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1720,6 +1755,7 @@ module Aws::StorageGateway
     #
     class CreateTapeWithBarcodeOutput < Struct.new(
       :tape_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1833,6 +1869,7 @@ module Aws::StorageGateway
       :kms_key,
       :pool_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1847,6 +1884,7 @@ module Aws::StorageGateway
     #
     class CreateTapesOutput < Struct.new(
       :tape_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1867,6 +1905,7 @@ module Aws::StorageGateway
     #
     class DeleteAutomaticTapeCreationPolicyInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1880,6 +1919,7 @@ module Aws::StorageGateway
     #
     class DeleteAutomaticTapeCreationPolicyOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1915,6 +1955,7 @@ module Aws::StorageGateway
     class DeleteBandwidthRateLimitInput < Struct.new(
       :gateway_arn,
       :bandwidth_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1931,6 +1972,7 @@ module Aws::StorageGateway
     #
     class DeleteBandwidthRateLimitOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1963,6 +2005,7 @@ module Aws::StorageGateway
     class DeleteChapCredentialsInput < Struct.new(
       :target_arn,
       :initiator_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1981,6 +2024,7 @@ module Aws::StorageGateway
     class DeleteChapCredentialsOutput < Struct.new(
       :target_arn,
       :initiator_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2013,6 +2057,7 @@ module Aws::StorageGateway
     class DeleteFileShareInput < Struct.new(
       :file_share_arn,
       :force_delete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2026,6 +2071,7 @@ module Aws::StorageGateway
     #
     class DeleteFileShareOutput < Struct.new(
       :file_share_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2048,6 +2094,7 @@ module Aws::StorageGateway
     #
     class DeleteGatewayInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2063,6 +2110,7 @@ module Aws::StorageGateway
     #
     class DeleteGatewayOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2081,6 +2129,7 @@ module Aws::StorageGateway
     #
     class DeleteSnapshotScheduleInput < Struct.new(
       :volume_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2092,6 +2141,7 @@ module Aws::StorageGateway
     #
     class DeleteSnapshotScheduleOutput < Struct.new(
       :volume_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2113,6 +2163,7 @@ module Aws::StorageGateway
     #
     class DeleteTapeArchiveInput < Struct.new(
       :tape_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2127,6 +2178,7 @@ module Aws::StorageGateway
     #
     class DeleteTapeArchiveOutput < Struct.new(
       :tape_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2156,6 +2208,7 @@ module Aws::StorageGateway
     class DeleteTapeInput < Struct.new(
       :gateway_arn,
       :tape_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2169,6 +2222,7 @@ module Aws::StorageGateway
     #
     class DeleteTapeOutput < Struct.new(
       :tape_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2190,6 +2244,7 @@ module Aws::StorageGateway
     #
     class DeleteVolumeInput < Struct.new(
       :volume_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2205,6 +2260,7 @@ module Aws::StorageGateway
     #
     class DeleteVolumeOutput < Struct.new(
       :volume_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2225,6 +2281,7 @@ module Aws::StorageGateway
     #
     class DescribeAvailabilityMonitorTestInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2250,6 +2307,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :status,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2273,6 +2331,7 @@ module Aws::StorageGateway
     #
     class DescribeBandwidthRateLimitInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2302,6 +2361,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :average_upload_rate_limit_in_bits_per_sec,
       :average_download_rate_limit_in_bits_per_sec)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2322,6 +2382,7 @@ module Aws::StorageGateway
     #
     class DescribeCacheInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2375,6 +2436,7 @@ module Aws::StorageGateway
       :cache_dirty_percentage,
       :cache_hit_percentage,
       :cache_miss_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2396,6 +2458,7 @@ module Aws::StorageGateway
     #
     class DescribeCachediSCSIVolumesInput < Struct.new(
       :volume_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2410,6 +2473,7 @@ module Aws::StorageGateway
     #
     class DescribeCachediSCSIVolumesOutput < Struct.new(
       :cached_iscsi_volumes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2433,6 +2497,7 @@ module Aws::StorageGateway
     #
     class DescribeChapCredentialsInput < Struct.new(
       :target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2464,6 +2529,7 @@ module Aws::StorageGateway
     #
     class DescribeChapCredentialsOutput < Struct.new(
       :chap_credentials)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2486,6 +2552,7 @@ module Aws::StorageGateway
     #
     class DescribeGatewayInformationInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2591,6 +2658,7 @@ module Aws::StorageGateway
       :cloud_watch_log_group_arn,
       :host_environment,
       :endpoint_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2614,6 +2682,7 @@ module Aws::StorageGateway
     #
     class DescribeMaintenanceStartTimeInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2675,6 +2744,7 @@ module Aws::StorageGateway
       :day_of_week,
       :day_of_month,
       :timezone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2696,6 +2766,7 @@ module Aws::StorageGateway
     #
     class DescribeNFSFileSharesInput < Struct.new(
       :file_share_arn_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2709,6 +2780,7 @@ module Aws::StorageGateway
     #
     class DescribeNFSFileSharesOutput < Struct.new(
       :nfs_file_share_info_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2730,6 +2802,7 @@ module Aws::StorageGateway
     #
     class DescribeSMBFileSharesInput < Struct.new(
       :file_share_arn_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2743,6 +2816,7 @@ module Aws::StorageGateway
     #
     class DescribeSMBFileSharesOutput < Struct.new(
       :smb_file_share_info_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2763,6 +2837,7 @@ module Aws::StorageGateway
     #
     class DescribeSMBSettingsInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2836,6 +2911,7 @@ module Aws::StorageGateway
       :active_directory_status,
       :smb_guest_password_set,
       :smb_security_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2858,6 +2934,7 @@ module Aws::StorageGateway
     #
     class DescribeSnapshotScheduleInput < Struct.new(
       :volume_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2900,6 +2977,7 @@ module Aws::StorageGateway
       :description,
       :timezone,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2924,6 +3002,7 @@ module Aws::StorageGateway
     #
     class DescribeStorediSCSIVolumesInput < Struct.new(
       :volume_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2984,6 +3063,7 @@ module Aws::StorageGateway
     #
     class DescribeStorediSCSIVolumesOutput < Struct.new(
       :stored_iscsi_volumes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3019,6 +3099,7 @@ module Aws::StorageGateway
       :tape_arns,
       :marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3045,6 +3126,7 @@ module Aws::StorageGateway
     class DescribeTapeArchivesOutput < Struct.new(
       :tape_archives,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3081,6 +3163,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3112,6 +3195,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :tape_recovery_point_infos,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3164,6 +3248,7 @@ module Aws::StorageGateway
       :tape_arns,
       :marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3186,6 +3271,7 @@ module Aws::StorageGateway
     class DescribeTapesOutput < Struct.new(
       :tapes,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3206,6 +3292,7 @@ module Aws::StorageGateway
     #
     class DescribeUploadBufferInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3239,6 +3326,7 @@ module Aws::StorageGateway
       :disk_ids,
       :upload_buffer_used_in_bytes,
       :upload_buffer_allocated_in_bytes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3288,6 +3376,7 @@ module Aws::StorageGateway
       :vtl_device_arns,
       :marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3318,6 +3407,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :vtl_devices,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3341,6 +3431,7 @@ module Aws::StorageGateway
     #
     class DescribeWorkingStorageInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3376,6 +3467,7 @@ module Aws::StorageGateway
       :disk_ids,
       :working_storage_used_in_bytes,
       :working_storage_allocated_in_bytes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3408,6 +3500,7 @@ module Aws::StorageGateway
     class DetachVolumeInput < Struct.new(
       :volume_arn,
       :force_detach)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3421,6 +3514,7 @@ module Aws::StorageGateway
     #
     class DetachVolumeOutput < Struct.new(
       :volume_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3450,6 +3544,7 @@ module Aws::StorageGateway
       :network_interface_id,
       :network_interface_port,
       :chap_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3472,6 +3567,7 @@ module Aws::StorageGateway
     #
     class DisableGatewayInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3485,6 +3581,7 @@ module Aws::StorageGateway
     #
     class DisableGatewayOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3541,6 +3638,7 @@ module Aws::StorageGateway
       :disk_allocation_type,
       :disk_allocation_resource,
       :disk_attribute_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3578,6 +3676,7 @@ module Aws::StorageGateway
       :file_share_id,
       :file_share_status,
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3628,6 +3727,7 @@ module Aws::StorageGateway
       :gateway_name,
       :ec2_instance_id,
       :ec2_instance_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3648,6 +3748,7 @@ module Aws::StorageGateway
     class InternalServerError < Struct.new(
       :message,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3668,6 +3769,7 @@ module Aws::StorageGateway
     class InvalidGatewayRequestException < Struct.new(
       :message,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3737,6 +3839,7 @@ module Aws::StorageGateway
       :timeout_in_seconds,
       :user_name,
       :password)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -3777,6 +3880,7 @@ module Aws::StorageGateway
     class JoinDomainOutput < Struct.new(
       :gateway_arn,
       :active_directory_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3797,6 +3901,7 @@ module Aws::StorageGateway
     #
     class ListAutomaticTapeCreationPoliciesInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3810,6 +3915,7 @@ module Aws::StorageGateway
     #
     class ListAutomaticTapeCreationPoliciesOutput < Struct.new(
       :automatic_tape_creation_policy_infos)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3847,6 +3953,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :limit,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3873,6 +3980,7 @@ module Aws::StorageGateway
       :marker,
       :next_marker,
       :file_share_info_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3905,6 +4013,7 @@ module Aws::StorageGateway
     class ListGatewaysInput < Struct.new(
       :marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3923,6 +4032,7 @@ module Aws::StorageGateway
     class ListGatewaysOutput < Struct.new(
       :gateways,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3946,6 +4056,7 @@ module Aws::StorageGateway
     #
     class ListLocalDisksInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3968,6 +4079,7 @@ module Aws::StorageGateway
     class ListLocalDisksOutput < Struct.new(
       :gateway_arn,
       :disks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4003,6 +4115,7 @@ module Aws::StorageGateway
       :resource_arn,
       :marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4028,6 +4141,7 @@ module Aws::StorageGateway
       :resource_arn,
       :marker,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4070,6 +4184,7 @@ module Aws::StorageGateway
       :tape_arns,
       :marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4097,6 +4212,7 @@ module Aws::StorageGateway
     class ListTapesOutput < Struct.new(
       :tape_infos,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4118,6 +4234,7 @@ module Aws::StorageGateway
     #
     class ListVolumeInitiatorsInput < Struct.new(
       :volume_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4132,6 +4249,7 @@ module Aws::StorageGateway
     #
     class ListVolumeInitiatorsOutput < Struct.new(
       :initiators)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4152,6 +4270,7 @@ module Aws::StorageGateway
     #
     class ListVolumeRecoveryPointsInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4170,6 +4289,7 @@ module Aws::StorageGateway
     class ListVolumeRecoveryPointsOutput < Struct.new(
       :gateway_arn,
       :volume_recovery_point_infos)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4211,6 +4331,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4244,6 +4365,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :marker,
       :volume_infos)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4293,6 +4415,7 @@ module Aws::StorageGateway
       :directory_mode,
       :group_id,
       :owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4448,6 +4571,7 @@ module Aws::StorageGateway
       :guess_mime_type_enabled,
       :requester_pays,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4476,6 +4600,7 @@ module Aws::StorageGateway
       :ipv_4_address,
       :mac_address,
       :ipv_6_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4494,6 +4619,7 @@ module Aws::StorageGateway
     #
     class NotifyWhenUploadedInput < Struct.new(
       :file_share_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4511,6 +4637,7 @@ module Aws::StorageGateway
     class NotifyWhenUploadedOutput < Struct.new(
       :file_share_arn,
       :notification_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4557,6 +4684,7 @@ module Aws::StorageGateway
       :file_share_arn,
       :folder_list,
       :recursive)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4576,6 +4704,7 @@ module Aws::StorageGateway
     class RefreshCacheOutput < Struct.new(
       :file_share_arn,
       :notification_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4604,6 +4733,7 @@ module Aws::StorageGateway
     class RemoveTagsFromResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4618,6 +4748,7 @@ module Aws::StorageGateway
     #
     class RemoveTagsFromResourceOutput < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4638,6 +4769,7 @@ module Aws::StorageGateway
     #
     class ResetCacheInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4651,6 +4783,7 @@ module Aws::StorageGateway
     #
     class ResetCacheOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4683,6 +4816,7 @@ module Aws::StorageGateway
     class RetrieveTapeArchiveInput < Struct.new(
       :tape_arn,
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4696,6 +4830,7 @@ module Aws::StorageGateway
     #
     class RetrieveTapeArchiveOutput < Struct.new(
       :tape_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4725,6 +4860,7 @@ module Aws::StorageGateway
     class RetrieveTapeRecoveryPointInput < Struct.new(
       :tape_arn,
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4739,6 +4875,7 @@ module Aws::StorageGateway
     #
     class RetrieveTapeRecoveryPointOutput < Struct.new(
       :tape_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4921,6 +5058,7 @@ module Aws::StorageGateway
       :audit_destination_arn,
       :authentication,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4941,6 +5079,7 @@ module Aws::StorageGateway
     class ServiceUnavailableError < Struct.new(
       :message,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4969,6 +5108,7 @@ module Aws::StorageGateway
     class SetLocalConsolePasswordInput < Struct.new(
       :gateway_arn,
       :local_console_password)
+      SENSITIVE = [:local_console_password]
       include Aws::Structure
     end
 
@@ -4982,6 +5122,7 @@ module Aws::StorageGateway
     #
     class SetLocalConsolePasswordOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5009,6 +5150,7 @@ module Aws::StorageGateway
     class SetSMBGuestPasswordInput < Struct.new(
       :gateway_arn,
       :password)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -5022,6 +5164,7 @@ module Aws::StorageGateway
     #
     class SetSMBGuestPasswordOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5045,6 +5188,7 @@ module Aws::StorageGateway
     #
     class ShutdownGatewayInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5061,6 +5205,7 @@ module Aws::StorageGateway
     #
     class ShutdownGatewayOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5081,6 +5226,7 @@ module Aws::StorageGateway
     #
     class StartAvailabilityMonitorTestInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5094,6 +5240,7 @@ module Aws::StorageGateway
     #
     class StartAvailabilityMonitorTestOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5117,6 +5264,7 @@ module Aws::StorageGateway
     #
     class StartGatewayInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5133,6 +5281,7 @@ module Aws::StorageGateway
     #
     class StartGatewayOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5154,6 +5303,7 @@ module Aws::StorageGateway
     class StorageGatewayError < Struct.new(
       :error_code,
       :error_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5278,6 +5428,7 @@ module Aws::StorageGateway
       :volume_used_in_bytes,
       :kms_key,
       :target_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5306,6 +5457,7 @@ module Aws::StorageGateway
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5382,6 +5534,7 @@ module Aws::StorageGateway
       :tape_used_in_bytes,
       :kms_key,
       :pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5458,6 +5611,7 @@ module Aws::StorageGateway
       :tape_used_in_bytes,
       :kms_key,
       :pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5505,6 +5659,7 @@ module Aws::StorageGateway
       :tape_status,
       :gateway_arn,
       :pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5537,6 +5692,7 @@ module Aws::StorageGateway
       :tape_recovery_point_time,
       :tape_size_in_bytes,
       :tape_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5572,6 +5728,7 @@ module Aws::StorageGateway
     class UpdateAutomaticTapeCreationPolicyInput < Struct.new(
       :automatic_tape_creation_rules,
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5585,6 +5742,7 @@ module Aws::StorageGateway
     #
     class UpdateAutomaticTapeCreationPolicyOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5623,6 +5781,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :average_upload_rate_limit_in_bits_per_sec,
       :average_download_rate_limit_in_bits_per_sec)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5639,6 +5798,7 @@ module Aws::StorageGateway
     #
     class UpdateBandwidthRateLimitOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5701,6 +5861,7 @@ module Aws::StorageGateway
       :secret_to_authenticate_initiator,
       :initiator_name,
       :secret_to_authenticate_target)
+      SENSITIVE = [:secret_to_authenticate_initiator, :secret_to_authenticate_target]
       include Aws::Structure
     end
 
@@ -5721,6 +5882,7 @@ module Aws::StorageGateway
     class UpdateChapCredentialsOutput < Struct.new(
       :target_arn,
       :initiator_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5766,6 +5928,7 @@ module Aws::StorageGateway
       :gateway_name,
       :gateway_timezone,
       :cloud_watch_log_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5787,6 +5950,7 @@ module Aws::StorageGateway
     class UpdateGatewayInformationOutput < Struct.new(
       :gateway_arn,
       :gateway_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5810,6 +5974,7 @@ module Aws::StorageGateway
     #
     class UpdateGatewaySoftwareNowInput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5826,6 +5991,7 @@ module Aws::StorageGateway
     #
     class UpdateGatewaySoftwareNowOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5889,6 +6055,7 @@ module Aws::StorageGateway
       :minute_of_hour,
       :day_of_week,
       :day_of_month)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5905,6 +6072,7 @@ module Aws::StorageGateway
     #
     class UpdateMaintenanceStartTimeOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6033,6 +6201,7 @@ module Aws::StorageGateway
       :read_only,
       :guess_mime_type_enabled,
       :requester_pays)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6046,6 +6215,7 @@ module Aws::StorageGateway
     #
     class UpdateNFSFileShareOutput < Struct.new(
       :file_share_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6195,6 +6365,7 @@ module Aws::StorageGateway
       :valid_user_list,
       :invalid_user_list,
       :audit_destination_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6208,6 +6379,7 @@ module Aws::StorageGateway
     #
     class UpdateSMBFileShareOutput < Struct.new(
       :file_share_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6250,6 +6422,7 @@ module Aws::StorageGateway
     class UpdateSMBSecurityStrategyInput < Struct.new(
       :gateway_arn,
       :smb_security_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6263,6 +6436,7 @@ module Aws::StorageGateway
     #
     class UpdateSMBSecurityStrategyOutput < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6333,6 +6507,7 @@ module Aws::StorageGateway
       :recurrence_in_hours,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6348,6 +6523,7 @@ module Aws::StorageGateway
     #
     class UpdateSnapshotScheduleOutput < Struct.new(
       :volume_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6375,6 +6551,7 @@ module Aws::StorageGateway
     class UpdateVTLDeviceTypeInput < Struct.new(
       :vtl_device_arn,
       :device_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6389,6 +6566,7 @@ module Aws::StorageGateway
     #
     class UpdateVTLDeviceTypeOutput < Struct.new(
       :vtl_device_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6424,6 +6602,7 @@ module Aws::StorageGateway
       :vtl_device_vendor,
       :vtl_device_product_identifier,
       :device_iscsi_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6490,6 +6669,7 @@ module Aws::StorageGateway
       :volume_type,
       :volume_size_in_bytes,
       :volume_attachment_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6523,6 +6703,7 @@ module Aws::StorageGateway
       :volume_size_in_bytes,
       :volume_usage_in_bytes,
       :volume_recovery_point_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6556,6 +6737,7 @@ module Aws::StorageGateway
       :network_interface_port,
       :lun_number,
       :chap_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 

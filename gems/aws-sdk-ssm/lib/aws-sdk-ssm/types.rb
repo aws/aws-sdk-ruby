@@ -26,6 +26,7 @@ module Aws::SSM
     class AccountSharingInfo < Struct.new(
       :account_id,
       :shared_document_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -91,6 +92,7 @@ module Aws::SSM
       :expired,
       :created_date,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -154,6 +156,7 @@ module Aws::SSM
       :resource_type,
       :resource_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -172,6 +175,7 @@ module Aws::SSM
     #
     class AlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -241,6 +245,7 @@ module Aws::SSM
       :overview,
       :schedule_expression,
       :association_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -407,6 +412,7 @@ module Aws::SSM
       :compliance_severity,
       :sync_compliance,
       :apply_only_at_cron_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -419,6 +425,7 @@ module Aws::SSM
     #
     class AssociationDoesNotExist < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -468,6 +475,7 @@ module Aws::SSM
       :created_time,
       :last_execution_date,
       :resource_count_by_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -481,6 +489,7 @@ module Aws::SSM
     #
     class AssociationExecutionDoesNotExist < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -513,6 +522,7 @@ module Aws::SSM
       :key,
       :value,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -567,6 +577,7 @@ module Aws::SSM
       :detailed_status,
       :last_execution_date,
       :output_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -593,6 +604,7 @@ module Aws::SSM
     class AssociationExecutionTargetsFilter < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -619,6 +631,7 @@ module Aws::SSM
     class AssociationFilter < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -652,6 +665,7 @@ module Aws::SSM
       :status,
       :detailed_status,
       :association_status_aggregated_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -690,6 +704,7 @@ module Aws::SSM
       :name,
       :message,
       :additional_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -816,6 +831,7 @@ module Aws::SSM
       :compliance_severity,
       :sync_compliance,
       :apply_only_at_cron_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -829,6 +845,7 @@ module Aws::SSM
     #
     class AssociationVersionLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -863,6 +880,7 @@ module Aws::SSM
       :hash,
       :hash_type,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -876,6 +894,7 @@ module Aws::SSM
     #
     class AttachmentInformation < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -938,6 +957,7 @@ module Aws::SSM
       :key,
       :values,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -950,6 +970,7 @@ module Aws::SSM
     #
     class AutomationDefinitionNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -963,6 +984,7 @@ module Aws::SSM
     #
     class AutomationDefinitionVersionNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1109,6 +1131,7 @@ module Aws::SSM
       :target,
       :target_locations,
       :progress_counters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1139,6 +1162,7 @@ module Aws::SSM
     class AutomationExecutionFilter < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1152,6 +1176,7 @@ module Aws::SSM
     #
     class AutomationExecutionLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1282,6 +1307,7 @@ module Aws::SSM
       :max_errors,
       :target,
       :automation_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1295,6 +1321,7 @@ module Aws::SSM
     #
     class AutomationExecutionNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1308,6 +1335,7 @@ module Aws::SSM
     #
     class AutomationStepNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1334,6 +1362,7 @@ module Aws::SSM
     class CancelCommandRequest < Struct.new(
       :command_id,
       :instance_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1359,6 +1388,7 @@ module Aws::SSM
     #
     class CancelMaintenanceWindowExecutionRequest < Struct.new(
       :window_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1370,6 +1400,7 @@ module Aws::SSM
     #
     class CancelMaintenanceWindowExecutionResult < Struct.new(
       :window_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1399,6 +1430,7 @@ module Aws::SSM
     class CloudWatchOutputConfig < Struct.new(
       :cloud_watch_log_group_name,
       :cloud_watch_output_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1605,6 +1637,7 @@ module Aws::SSM
       :notification_config,
       :cloud_watch_output_config,
       :timeout_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1670,6 +1703,7 @@ module Aws::SSM
     class CommandFilter < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1825,6 +1859,7 @@ module Aws::SSM
       :service_role,
       :notification_config,
       :cloud_watch_output_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1978,6 +2013,7 @@ module Aws::SSM
       :output_s3_region,
       :output_s3_bucket_name,
       :output_s3_key_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2017,6 +2053,7 @@ module Aws::SSM
       :execution_time,
       :execution_id,
       :execution_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2085,6 +2122,7 @@ module Aws::SSM
       :severity,
       :execution_summary,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2137,6 +2175,7 @@ module Aws::SSM
       :severity,
       :status,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2171,6 +2210,7 @@ module Aws::SSM
       :key,
       :values,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2195,6 +2235,7 @@ module Aws::SSM
       :compliance_type,
       :compliant_summary,
       :non_compliant_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2208,6 +2249,7 @@ module Aws::SSM
     #
     class ComplianceTypeCountLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2227,6 +2269,7 @@ module Aws::SSM
     class CompliantSummary < Struct.new(
       :compliant_count,
       :severity_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2321,6 +2364,7 @@ module Aws::SSM
       :registration_limit,
       :expiration_date,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2340,6 +2384,7 @@ module Aws::SSM
     class CreateActivationResult < Struct.new(
       :activation_id,
       :activation_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2388,6 +2433,7 @@ module Aws::SSM
     #
     class CreateAssociationBatchRequest < Struct.new(
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2560,6 +2606,7 @@ module Aws::SSM
       :compliance_severity,
       :sync_compliance,
       :apply_only_at_cron_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2576,6 +2623,7 @@ module Aws::SSM
     class CreateAssociationBatchResult < Struct.new(
       :successful,
       :failed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2766,6 +2814,7 @@ module Aws::SSM
       :compliance_severity,
       :sync_compliance,
       :apply_only_at_cron_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2777,6 +2826,7 @@ module Aws::SSM
     #
     class CreateAssociationResult < Struct.new(
       :association_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2924,6 +2974,7 @@ module Aws::SSM
       :document_format,
       :target_type,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2935,6 +2986,7 @@ module Aws::SSM
     #
     class CreateDocumentResult < Struct.new(
       :document_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3077,6 +3129,7 @@ module Aws::SSM
       :allow_unassociated_targets,
       :client_token,
       :tags)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -3088,6 +3141,7 @@ module Aws::SSM
     #
     class CreateMaintenanceWindowResult < Struct.new(
       :window_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3231,6 +3285,7 @@ module Aws::SSM
       :tags,
       :category,
       :severity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3242,6 +3297,7 @@ module Aws::SSM
     #
     class CreateOpsItemResponse < Struct.new(
       :ops_item_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3422,6 +3478,7 @@ module Aws::SSM
       :sources,
       :client_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3433,6 +3490,7 @@ module Aws::SSM
     #
     class CreatePatchBaselineResult < Struct.new(
       :baseline_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3499,6 +3557,7 @@ module Aws::SSM
       :s3_destination,
       :sync_type,
       :sync_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3516,6 +3575,7 @@ module Aws::SSM
     #
     class CustomSchemaCountLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3534,6 +3594,7 @@ module Aws::SSM
     #
     class DeleteActivationRequest < Struct.new(
       :activation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3568,6 +3629,7 @@ module Aws::SSM
       :name,
       :instance_id,
       :association_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3614,6 +3676,7 @@ module Aws::SSM
       :document_version,
       :version_name,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3673,6 +3736,7 @@ module Aws::SSM
       :schema_delete_option,
       :dry_run,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3703,6 +3767,7 @@ module Aws::SSM
       :deletion_id,
       :type_name,
       :deletion_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3721,6 +3786,7 @@ module Aws::SSM
     #
     class DeleteMaintenanceWindowRequest < Struct.new(
       :window_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3732,6 +3798,7 @@ module Aws::SSM
     #
     class DeleteMaintenanceWindowResult < Struct.new(
       :window_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3750,6 +3817,7 @@ module Aws::SSM
     #
     class DeleteParameterRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3772,6 +3840,7 @@ module Aws::SSM
     #
     class DeleteParametersRequest < Struct.new(
       :names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3789,6 +3858,7 @@ module Aws::SSM
     class DeleteParametersResult < Struct.new(
       :deleted_parameters,
       :invalid_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3807,6 +3877,7 @@ module Aws::SSM
     #
     class DeletePatchBaselineRequest < Struct.new(
       :baseline_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3818,6 +3889,7 @@ module Aws::SSM
     #
     class DeletePatchBaselineResult < Struct.new(
       :baseline_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3842,6 +3914,7 @@ module Aws::SSM
     class DeleteResourceDataSyncRequest < Struct.new(
       :sync_name,
       :sync_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3865,6 +3938,7 @@ module Aws::SSM
     #
     class DeregisterManagedInstanceRequest < Struct.new(
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3894,6 +3968,7 @@ module Aws::SSM
     class DeregisterPatchBaselineForPatchGroupRequest < Struct.new(
       :baseline_id,
       :patch_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3910,6 +3985,7 @@ module Aws::SSM
     class DeregisterPatchBaselineForPatchGroupResult < Struct.new(
       :baseline_id,
       :patch_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3942,6 +4018,7 @@ module Aws::SSM
       :window_id,
       :window_target_id,
       :safe)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3958,6 +4035,7 @@ module Aws::SSM
     class DeregisterTargetFromMaintenanceWindowResult < Struct.new(
       :window_id,
       :window_target_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3982,6 +4060,7 @@ module Aws::SSM
     class DeregisterTaskFromMaintenanceWindowRequest < Struct.new(
       :window_id,
       :window_task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3998,6 +4077,7 @@ module Aws::SSM
     class DeregisterTaskFromMaintenanceWindowResult < Struct.new(
       :window_id,
       :window_task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4024,6 +4104,7 @@ module Aws::SSM
     class DescribeActivationsFilter < Struct.new(
       :filter_key,
       :filter_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4062,6 +4143,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4079,6 +4161,7 @@ module Aws::SSM
     class DescribeActivationsResult < Struct.new(
       :activation_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4137,6 +4220,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4154,6 +4238,7 @@ module Aws::SSM
     class DescribeAssociationExecutionTargetsResult < Struct.new(
       :association_execution_targets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4207,6 +4292,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4224,6 +4310,7 @@ module Aws::SSM
     class DescribeAssociationExecutionsResult < Struct.new(
       :association_executions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4264,6 +4351,7 @@ module Aws::SSM
       :instance_id,
       :association_id,
       :association_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4275,6 +4363,7 @@ module Aws::SSM
     #
     class DescribeAssociationResult < Struct.new(
       :association_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4313,6 +4402,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4331,6 +4421,7 @@ module Aws::SSM
     class DescribeAutomationExecutionsResult < Struct.new(
       :automation_execution_metadata_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4384,6 +4475,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       :reverse_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4402,6 +4494,7 @@ module Aws::SSM
     class DescribeAutomationStepExecutionsResult < Struct.new(
       :step_executions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4438,6 +4531,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4455,6 +4549,7 @@ module Aws::SSM
     class DescribeAvailablePatchesResult < Struct.new(
       :patches,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4480,6 +4575,7 @@ module Aws::SSM
     class DescribeDocumentPermissionRequest < Struct.new(
       :name,
       :permission_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4498,6 +4594,7 @@ module Aws::SSM
     class DescribeDocumentPermissionResponse < Struct.new(
       :account_ids,
       :account_sharing_info_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4531,6 +4628,7 @@ module Aws::SSM
       :name,
       :document_version,
       :version_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4542,6 +4640,7 @@ module Aws::SSM
     #
     class DescribeDocumentResult < Struct.new(
       :document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4575,6 +4674,7 @@ module Aws::SSM
       :instance_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4592,6 +4692,7 @@ module Aws::SSM
     class DescribeEffectiveInstanceAssociationsResult < Struct.new(
       :associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4623,6 +4724,7 @@ module Aws::SSM
       :baseline_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4640,6 +4742,7 @@ module Aws::SSM
     class DescribeEffectivePatchesForPatchBaselineResult < Struct.new(
       :effective_patches,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4673,6 +4776,7 @@ module Aws::SSM
       :instance_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4690,6 +4794,7 @@ module Aws::SSM
     class DescribeInstanceAssociationsStatusResult < Struct.new(
       :instance_association_status_infos,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4750,6 +4855,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4767,6 +4873,7 @@ module Aws::SSM
     class DescribeInstanceInformationResult < Struct.new(
       :instance_information_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4817,6 +4924,7 @@ module Aws::SSM
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4834,6 +4942,7 @@ module Aws::SSM
     class DescribeInstancePatchStatesForPatchGroupResult < Struct.new(
       :instance_patch_states,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4866,6 +4975,7 @@ module Aws::SSM
       :instance_ids,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4883,6 +4993,7 @@ module Aws::SSM
     class DescribeInstancePatchStatesResult < Struct.new(
       :instance_patch_states,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4928,6 +5039,7 @@ module Aws::SSM
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4959,6 +5071,7 @@ module Aws::SSM
     class DescribeInstancePatchesResult < Struct.new(
       :patches,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4993,6 +5106,7 @@ module Aws::SSM
       :deletion_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5010,6 +5124,7 @@ module Aws::SSM
     class DescribeInventoryDeletionsResult < Struct.new(
       :inventory_deletions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5064,6 +5179,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5081,6 +5197,7 @@ module Aws::SSM
     class DescribeMaintenanceWindowExecutionTaskInvocationsResult < Struct.new(
       :window_execution_task_invocation_identities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5129,6 +5246,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5146,6 +5264,7 @@ module Aws::SSM
     class DescribeMaintenanceWindowExecutionTasksResult < Struct.new(
       :window_execution_task_identities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5199,6 +5318,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5216,6 +5336,7 @@ module Aws::SSM
     class DescribeMaintenanceWindowExecutionsResult < Struct.new(
       :window_executions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5280,6 +5401,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5298,6 +5420,7 @@ module Aws::SSM
     class DescribeMaintenanceWindowScheduleResult < Struct.new(
       :scheduled_window_executions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5344,6 +5467,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5361,6 +5485,7 @@ module Aws::SSM
     class DescribeMaintenanceWindowTargetsResult < Struct.new(
       :targets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5407,6 +5532,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5424,6 +5550,7 @@ module Aws::SSM
     class DescribeMaintenanceWindowTasksResult < Struct.new(
       :tasks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5469,6 +5596,7 @@ module Aws::SSM
       :resource_type,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5487,6 +5615,7 @@ module Aws::SSM
     class DescribeMaintenanceWindowsForTargetResult < Struct.new(
       :window_identities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5527,6 +5656,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5544,6 +5674,7 @@ module Aws::SSM
     class DescribeMaintenanceWindowsResult < Struct.new(
       :window_identities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5639,6 +5770,7 @@ module Aws::SSM
       :ops_item_filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5656,6 +5788,7 @@ module Aws::SSM
     class DescribeOpsItemsResponse < Struct.new(
       :next_token,
       :ops_item_summaries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5706,6 +5839,7 @@ module Aws::SSM
       :parameter_filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5722,6 +5856,7 @@ module Aws::SSM
     class DescribeParametersResult < Struct.new(
       :parameters,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5763,6 +5898,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5780,6 +5916,7 @@ module Aws::SSM
     class DescribePatchBaselinesResult < Struct.new(
       :baseline_identities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5799,6 +5936,7 @@ module Aws::SSM
     #
     class DescribePatchGroupStateRequest < Struct.new(
       :patch_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5866,6 +6004,7 @@ module Aws::SSM
       :instances_with_failed_patches,
       :instances_with_not_applicable_patches,
       :instances_with_unreported_not_applicable_patches)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5903,6 +6042,7 @@ module Aws::SSM
       :max_results,
       :filters,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5925,6 +6065,7 @@ module Aws::SSM
     class DescribePatchGroupsResult < Struct.new(
       :mappings,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5972,6 +6113,7 @@ module Aws::SSM
       :patch_set,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5990,6 +6132,7 @@ module Aws::SSM
     class DescribePatchPropertiesResult < Struct.new(
       :properties,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6036,6 +6179,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6053,6 +6197,7 @@ module Aws::SSM
     class DescribeSessionsResponse < Struct.new(
       :sessions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6065,6 +6210,7 @@ module Aws::SSM
     #
     class DocumentAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6088,6 +6234,7 @@ module Aws::SSM
       :name,
       :default_version,
       :default_version_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6230,6 +6377,7 @@ module Aws::SSM
       :tags,
       :attachments_information,
       :requires)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6256,6 +6404,7 @@ module Aws::SSM
     class DocumentFilter < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6330,6 +6479,7 @@ module Aws::SSM
       :target_type,
       :tags,
       :requires)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6386,6 +6536,7 @@ module Aws::SSM
     class DocumentKeyValuesFilter < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6398,6 +6549,7 @@ module Aws::SSM
     #
     class DocumentLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6430,6 +6582,7 @@ module Aws::SSM
       :type,
       :description,
       :default_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6445,6 +6598,7 @@ module Aws::SSM
     #
     class DocumentPermissionLimit < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6472,6 +6626,7 @@ module Aws::SSM
     class DocumentRequires < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6526,6 +6681,7 @@ module Aws::SSM
       :document_format,
       :status,
       :status_information)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6539,6 +6695,7 @@ module Aws::SSM
     #
     class DocumentVersionLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6559,6 +6716,7 @@ module Aws::SSM
     #
     class DoesNotExistException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6572,6 +6730,7 @@ module Aws::SSM
     #
     class DuplicateDocumentContent < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6585,6 +6744,7 @@ module Aws::SSM
     #
     class DuplicateDocumentVersionName < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6618,6 +6778,7 @@ module Aws::SSM
     class EffectivePatch < Struct.new(
       :patch,
       :patch_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6641,6 +6802,7 @@ module Aws::SSM
       :entry,
       :message,
       :fault)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6667,6 +6829,7 @@ module Aws::SSM
       :failure_stage,
       :failure_type,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6680,6 +6843,7 @@ module Aws::SSM
     #
     class FeatureNotAvailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6700,6 +6864,7 @@ module Aws::SSM
     #
     class GetAutomationExecutionRequest < Struct.new(
       :automation_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6712,6 +6877,7 @@ module Aws::SSM
     #
     class GetAutomationExecutionResult < Struct.new(
       :automation_execution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6744,6 +6910,7 @@ module Aws::SSM
     class GetCalendarStateRequest < Struct.new(
       :calendar_names,
       :at_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6780,6 +6947,7 @@ module Aws::SSM
       :state,
       :at_time,
       :next_transition_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6814,6 +6982,7 @@ module Aws::SSM
       :command_id,
       :instance_id,
       :plugin_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6990,6 +7159,7 @@ module Aws::SSM
       :standard_error_content,
       :standard_error_url,
       :cloud_watch_output_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7008,6 +7178,7 @@ module Aws::SSM
     #
     class GetConnectionStatusRequest < Struct.new(
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7025,6 +7196,7 @@ module Aws::SSM
     class GetConnectionStatusResponse < Struct.new(
       :target,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7044,6 +7216,7 @@ module Aws::SSM
     #
     class GetDefaultPatchBaselineRequest < Struct.new(
       :operating_system)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7060,6 +7233,7 @@ module Aws::SSM
     class GetDefaultPatchBaselineResult < Struct.new(
       :baseline_id,
       :operating_system)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7085,6 +7259,7 @@ module Aws::SSM
     class GetDeployablePatchSnapshotForInstanceRequest < Struct.new(
       :instance_id,
       :snapshot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7114,6 +7289,7 @@ module Aws::SSM
       :snapshot_id,
       :snapshot_download_url,
       :product)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7153,6 +7329,7 @@ module Aws::SSM
       :version_name,
       :document_version,
       :document_format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7218,6 +7395,7 @@ module Aws::SSM
       :document_format,
       :requires,
       :attachments_content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7297,6 +7475,7 @@ module Aws::SSM
       :result_attributes,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7315,6 +7494,7 @@ module Aws::SSM
     class GetInventoryResult < Struct.new(
       :entities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7363,6 +7543,7 @@ module Aws::SSM
       :max_results,
       :aggregator,
       :sub_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7380,6 +7561,7 @@ module Aws::SSM
     class GetInventorySchemaResult < Struct.new(
       :schemas,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7398,6 +7580,7 @@ module Aws::SSM
     #
     class GetMaintenanceWindowExecutionRequest < Struct.new(
       :window_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7435,6 +7618,7 @@ module Aws::SSM
       :status_details,
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7467,6 +7651,7 @@ module Aws::SSM
       :window_execution_id,
       :task_id,
       :invocation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7536,6 +7721,7 @@ module Aws::SSM
       :end_time,
       :owner_information,
       :window_target_id)
+      SENSITIVE = [:parameters, :owner_information]
       include Aws::Structure
     end
 
@@ -7561,6 +7747,7 @@ module Aws::SSM
     class GetMaintenanceWindowExecutionTaskRequest < Struct.new(
       :window_execution_id,
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7651,6 +7838,7 @@ module Aws::SSM
       :status_details,
       :start_time,
       :end_time)
+      SENSITIVE = [:task_parameters]
       include Aws::Structure
     end
 
@@ -7670,6 +7858,7 @@ module Aws::SSM
     #
     class GetMaintenanceWindowRequest < Struct.new(
       :window_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7769,6 +7958,7 @@ module Aws::SSM
       :enabled,
       :created_date,
       :modified_date)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -7793,6 +7983,7 @@ module Aws::SSM
     class GetMaintenanceWindowTaskRequest < Struct.new(
       :window_id,
       :window_task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7895,6 +8086,7 @@ module Aws::SSM
       :logging_info,
       :name,
       :description)
+      SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
 
@@ -7913,6 +8105,7 @@ module Aws::SSM
     #
     class GetOpsItemRequest < Struct.new(
       :ops_item_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7924,6 +8117,7 @@ module Aws::SSM
     #
     class GetOpsItemResponse < Struct.new(
       :ops_item)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8005,6 +8199,7 @@ module Aws::SSM
       :result_attributes,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8022,6 +8217,7 @@ module Aws::SSM
     class GetOpsSummaryResult < Struct.new(
       :entities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8062,6 +8258,7 @@ module Aws::SSM
       :with_decryption,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8079,6 +8276,7 @@ module Aws::SSM
     class GetParameterHistoryResult < Struct.new(
       :parameters,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8104,6 +8302,7 @@ module Aws::SSM
     class GetParameterRequest < Struct.new(
       :name,
       :with_decryption)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8115,6 +8314,7 @@ module Aws::SSM
     #
     class GetParameterResult < Struct.new(
       :parameter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8182,6 +8382,7 @@ module Aws::SSM
       :with_decryption,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8199,6 +8400,7 @@ module Aws::SSM
     class GetParametersByPathResult < Struct.new(
       :parameters,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8225,6 +8427,7 @@ module Aws::SSM
     class GetParametersRequest < Struct.new(
       :names,
       :with_decryption)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8242,6 +8445,7 @@ module Aws::SSM
     class GetParametersResult < Struct.new(
       :parameters,
       :invalid_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8268,6 +8472,7 @@ module Aws::SSM
     class GetPatchBaselineForPatchGroupRequest < Struct.new(
       :patch_group,
       :operating_system)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8291,6 +8496,7 @@ module Aws::SSM
       :baseline_id,
       :patch_group,
       :operating_system)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8309,6 +8515,7 @@ module Aws::SSM
     #
     class GetPatchBaselineRequest < Struct.new(
       :baseline_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8398,6 +8605,7 @@ module Aws::SSM
       :modified_date,
       :description,
       :sources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8421,6 +8629,7 @@ module Aws::SSM
     #
     class GetServiceSettingRequest < Struct.new(
       :setting_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8434,6 +8643,7 @@ module Aws::SSM
     #
     class GetServiceSettingResult < Struct.new(
       :service_setting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8459,6 +8669,7 @@ module Aws::SSM
     #
     class HierarchyLevelLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8478,6 +8689,7 @@ module Aws::SSM
     #
     class HierarchyTypeMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8492,6 +8704,7 @@ module Aws::SSM
     #
     class IdempotentParameterMismatch < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8506,6 +8719,7 @@ module Aws::SSM
     #
     class IncompatiblePolicyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8524,6 +8738,7 @@ module Aws::SSM
     class InstanceAggregatedAssociationOverview < Struct.new(
       :detailed_status,
       :instance_association_status_aggregated_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8552,6 +8767,7 @@ module Aws::SSM
       :instance_id,
       :content,
       :association_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8576,6 +8792,7 @@ module Aws::SSM
     #
     class InstanceAssociationOutputLocation < Struct.new(
       :s3_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8591,6 +8808,7 @@ module Aws::SSM
     #
     class InstanceAssociationOutputUrl < Struct.new(
       :s3_output_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8660,6 +8878,7 @@ module Aws::SSM
       :error_code,
       :output_url,
       :association_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8772,6 +8991,7 @@ module Aws::SSM
       :last_association_execution_date,
       :last_successful_association_execution_date,
       :association_overview)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8805,6 +9025,7 @@ module Aws::SSM
     class InstanceInformationFilter < Struct.new(
       :key,
       :value_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8835,6 +9056,7 @@ module Aws::SSM
     class InstanceInformationStringFilter < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8995,6 +9217,7 @@ module Aws::SSM
       :operation,
       :last_no_reboot_install_operation_time,
       :reboot_option)
+      SENSITIVE = [:owner_information]
       include Aws::Structure
     end
 
@@ -9032,6 +9255,7 @@ module Aws::SSM
       :key,
       :values,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9044,6 +9268,7 @@ module Aws::SSM
     #
     class InternalServerError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9057,6 +9282,7 @@ module Aws::SSM
     #
     class InvalidActivation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9070,6 +9296,7 @@ module Aws::SSM
     #
     class InvalidActivationId < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9084,6 +9311,7 @@ module Aws::SSM
     #
     class InvalidAggregatorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9097,6 +9325,7 @@ module Aws::SSM
     #
     class InvalidAllowedPatternException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9109,6 +9338,7 @@ module Aws::SSM
     #
     class InvalidAssociation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9124,6 +9354,7 @@ module Aws::SSM
     #
     class InvalidAssociationVersion < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9138,6 +9369,7 @@ module Aws::SSM
     #
     class InvalidAutomationExecutionParametersException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9150,6 +9382,7 @@ module Aws::SSM
     #
     class InvalidAutomationSignalException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9162,6 +9395,7 @@ module Aws::SSM
     #
     class InvalidAutomationStatusUpdateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9179,6 +9413,7 @@ module Aws::SSM
     #
     class InvalidDeleteInventoryParametersException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9192,6 +9427,7 @@ module Aws::SSM
     #
     class InvalidDeletionIdException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9209,6 +9445,7 @@ module Aws::SSM
     #
     class InvalidDocument < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9222,6 +9459,7 @@ module Aws::SSM
     #
     class InvalidDocumentContent < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9235,6 +9473,7 @@ module Aws::SSM
     #
     class InvalidDocumentOperation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9247,6 +9486,7 @@ module Aws::SSM
     #
     class InvalidDocumentSchemaVersion < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9260,6 +9500,7 @@ module Aws::SSM
     #
     class InvalidDocumentType < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9272,6 +9513,7 @@ module Aws::SSM
     #
     class InvalidDocumentVersion < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9285,6 +9527,7 @@ module Aws::SSM
     #
     class InvalidFilter < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9307,6 +9550,7 @@ module Aws::SSM
     #
     class InvalidFilterOption < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9319,6 +9563,7 @@ module Aws::SSM
     #
     class InvalidFilterValue < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9342,6 +9587,7 @@ module Aws::SSM
     #
     class InvalidInstanceId < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9354,6 +9600,7 @@ module Aws::SSM
     #
     class InvalidInstanceInformationFilterValue < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9366,6 +9613,7 @@ module Aws::SSM
     #
     class InvalidInventoryGroupException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9379,6 +9627,7 @@ module Aws::SSM
     #
     class InvalidInventoryItemContextException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9391,6 +9640,7 @@ module Aws::SSM
     #
     class InvalidInventoryRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9407,6 +9657,7 @@ module Aws::SSM
     class InvalidItemContentException < Struct.new(
       :type_name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9419,6 +9670,7 @@ module Aws::SSM
     #
     class InvalidKeyId < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9431,6 +9683,7 @@ module Aws::SSM
     #
     class InvalidNextToken < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9444,6 +9697,7 @@ module Aws::SSM
     #
     class InvalidNotificationConfig < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9457,6 +9711,7 @@ module Aws::SSM
     #
     class InvalidOptionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9483,6 +9738,7 @@ module Aws::SSM
     #
     class InvalidParameters < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9496,6 +9752,7 @@ module Aws::SSM
     #
     class InvalidPermissionType < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9514,6 +9771,7 @@ module Aws::SSM
     #
     class InvalidPolicyAttributeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9528,6 +9786,7 @@ module Aws::SSM
     #
     class InvalidPolicyTypeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9554,6 +9813,7 @@ module Aws::SSM
     #
     class InvalidResultAttributeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9574,6 +9834,7 @@ module Aws::SSM
     #
     class InvalidRole < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9587,6 +9848,7 @@ module Aws::SSM
     #
     class InvalidSchedule < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9601,6 +9863,7 @@ module Aws::SSM
     #
     class InvalidTarget < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9613,6 +9876,7 @@ module Aws::SSM
     #
     class InvalidTypeNameException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9625,6 +9889,7 @@ module Aws::SSM
     #
     class InvalidUpdate < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9691,6 +9956,7 @@ module Aws::SSM
       :expression,
       :aggregators,
       :groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9741,6 +10007,7 @@ module Aws::SSM
       :last_status_message,
       :deletion_summary,
       :last_status_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9765,6 +10032,7 @@ module Aws::SSM
       :total_count,
       :remaining_count,
       :summary_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9789,6 +10057,7 @@ module Aws::SSM
       :version,
       :count,
       :remaining_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9835,6 +10104,7 @@ module Aws::SSM
       :key,
       :values,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9872,6 +10142,7 @@ module Aws::SSM
     class InventoryGroup < Struct.new(
       :name,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9939,6 +10210,7 @@ module Aws::SSM
       :content_hash,
       :content,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9958,6 +10230,7 @@ module Aws::SSM
     class InventoryItemAttribute < Struct.new(
       :name,
       :data_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9993,6 +10266,7 @@ module Aws::SSM
       :version,
       :attributes,
       :display_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10013,6 +10287,7 @@ module Aws::SSM
     class InventoryResultEntity < Struct.new(
       :id,
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10050,6 +10325,7 @@ module Aws::SSM
       :capture_time,
       :content_hash,
       :content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10073,6 +10349,7 @@ module Aws::SSM
     class ItemContentMismatchException < Struct.new(
       :type_name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10089,6 +10366,7 @@ module Aws::SSM
     class ItemSizeLimitExceededException < Struct.new(
       :type_name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10121,6 +10399,7 @@ module Aws::SSM
       :name,
       :parameter_version,
       :labels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10143,6 +10422,7 @@ module Aws::SSM
     class LabelParameterVersionResult < Struct.new(
       :invalid_labels,
       :parameter_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10176,6 +10456,7 @@ module Aws::SSM
       :association_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10194,6 +10475,7 @@ module Aws::SSM
     class ListAssociationVersionsResult < Struct.new(
       :association_versions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10233,6 +10515,7 @@ module Aws::SSM
       :association_filter_list,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10250,6 +10533,7 @@ module Aws::SSM
     class ListAssociationsResult < Struct.new(
       :associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10308,6 +10592,7 @@ module Aws::SSM
       :next_token,
       :filters,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10325,6 +10610,7 @@ module Aws::SSM
     class ListCommandInvocationsResult < Struct.new(
       :command_invocations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10376,6 +10662,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10393,6 +10680,7 @@ module Aws::SSM
     class ListCommandsResult < Struct.new(
       :commands,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10447,6 +10735,7 @@ module Aws::SSM
       :resource_types,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10464,6 +10753,7 @@ module Aws::SSM
     class ListComplianceItemsResult < Struct.new(
       :compliance_items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10504,6 +10794,7 @@ module Aws::SSM
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10524,6 +10815,7 @@ module Aws::SSM
     class ListComplianceSummariesResult < Struct.new(
       :compliance_summary_items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10558,6 +10850,7 @@ module Aws::SSM
       :name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10575,6 +10868,7 @@ module Aws::SSM
     class ListDocumentVersionsResult < Struct.new(
       :document_versions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10630,6 +10924,7 @@ module Aws::SSM
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10647,6 +10942,7 @@ module Aws::SSM
     class ListDocumentsResult < Struct.new(
       :document_identifiers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10699,6 +10995,7 @@ module Aws::SSM
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10738,6 +11035,7 @@ module Aws::SSM
       :capture_time,
       :entries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10778,6 +11076,7 @@ module Aws::SSM
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10798,6 +11097,7 @@ module Aws::SSM
     class ListResourceComplianceSummariesResult < Struct.new(
       :resource_compliance_summary_items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10835,6 +11135,7 @@ module Aws::SSM
       :sync_type,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10853,6 +11154,7 @@ module Aws::SSM
     class ListResourceDataSyncResult < Struct.new(
       :resource_data_sync_items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10877,6 +11179,7 @@ module Aws::SSM
     class ListTagsForResourceRequest < Struct.new(
       :resource_type,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10888,6 +11191,7 @@ module Aws::SSM
     #
     class ListTagsForResourceResult < Struct.new(
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10929,6 +11233,7 @@ module Aws::SSM
       :s3_bucket_name,
       :s3_key_prefix,
       :s3_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10978,6 +11283,7 @@ module Aws::SSM
     class MaintenanceWindowAutomationParameters < Struct.new(
       :document_version,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11017,6 +11323,7 @@ module Aws::SSM
       :status_details,
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11068,6 +11375,7 @@ module Aws::SSM
       :end_time,
       :task_arn,
       :task_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11146,6 +11454,7 @@ module Aws::SSM
       :end_time,
       :owner_information,
       :window_target_id)
+      SENSITIVE = [:parameters, :owner_information]
       include Aws::Structure
     end
 
@@ -11173,6 +11482,7 @@ module Aws::SSM
     class MaintenanceWindowFilter < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11249,6 +11559,7 @@ module Aws::SSM
       :end_date,
       :start_date,
       :next_execution_time)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -11267,6 +11578,7 @@ module Aws::SSM
     class MaintenanceWindowIdentityForTarget < Struct.new(
       :window_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11326,6 +11638,7 @@ module Aws::SSM
       :client_context,
       :qualifier,
       :payload)
+      SENSITIVE = [:payload]
       include Aws::Structure
     end
 
@@ -11452,6 +11765,7 @@ module Aws::SSM
       :parameters,
       :service_role_arn,
       :timeout_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11499,6 +11813,7 @@ module Aws::SSM
     class MaintenanceWindowStepFunctionsParameters < Struct.new(
       :input,
       :name)
+      SENSITIVE = [:input]
       include Aws::Structure
     end
 
@@ -11553,6 +11868,7 @@ module Aws::SSM
       :owner_information,
       :name,
       :description)
+      SENSITIVE = [:owner_information, :description]
       include Aws::Structure
     end
 
@@ -11655,6 +11971,7 @@ module Aws::SSM
       :max_errors,
       :name,
       :description)
+      SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
 
@@ -11726,6 +12043,7 @@ module Aws::SSM
       :automation,
       :step_functions,
       :lambda)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11747,6 +12065,7 @@ module Aws::SSM
     #
     class MaintenanceWindowTaskParameterValueExpression < Struct.new(
       :values)
+      SENSITIVE = [:values]
       include Aws::Structure
     end
 
@@ -11759,6 +12078,7 @@ module Aws::SSM
     #
     class MaxDocumentSizeExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11808,6 +12128,7 @@ module Aws::SSM
       :account_ids_to_add,
       :account_ids_to_remove,
       :shared_document_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11831,6 +12152,7 @@ module Aws::SSM
     class NonCompliantSummary < Struct.new(
       :non_compliant_count,
       :severity_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11876,6 +12198,7 @@ module Aws::SSM
       :notification_arn,
       :notification_events,
       :notification_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11956,6 +12279,7 @@ module Aws::SSM
       :values,
       :filters,
       :aggregators)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11974,6 +12298,7 @@ module Aws::SSM
     class OpsEntity < Struct.new(
       :id,
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11992,6 +12317,7 @@ module Aws::SSM
     class OpsEntityItem < Struct.new(
       :capture_time,
       :content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12024,6 +12350,7 @@ module Aws::SSM
       :key,
       :values,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12161,6 +12488,7 @@ module Aws::SSM
       :operational_data,
       :category,
       :severity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12177,6 +12505,7 @@ module Aws::SSM
     class OpsItemAlreadyExistsException < Struct.new(
       :message,
       :ops_item_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12205,6 +12534,7 @@ module Aws::SSM
     class OpsItemDataValue < Struct.new(
       :value,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12237,6 +12567,7 @@ module Aws::SSM
       :key,
       :values,
       :operator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12254,6 +12585,7 @@ module Aws::SSM
     class OpsItemInvalidParameterException < Struct.new(
       :parameter_names,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12284,6 +12616,7 @@ module Aws::SSM
       :limit,
       :limit_type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12296,6 +12629,7 @@ module Aws::SSM
     #
     class OpsItemNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12317,6 +12651,7 @@ module Aws::SSM
     #
     class OpsItemNotification < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12391,6 +12726,7 @@ module Aws::SSM
       :operational_data,
       :category,
       :severity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12413,6 +12749,7 @@ module Aws::SSM
     #
     class OpsResultAttribute < Struct.new(
       :type_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12433,6 +12770,7 @@ module Aws::SSM
     class OutputSource < Struct.new(
       :output_source_id,
       :output_source_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12497,6 +12835,7 @@ module Aws::SSM
       :last_modified_date,
       :arn,
       :data_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12509,6 +12848,7 @@ module Aws::SSM
     #
     class ParameterAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12593,6 +12933,7 @@ module Aws::SSM
       :tier,
       :policies,
       :data_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12620,6 +12961,7 @@ module Aws::SSM
       :policy_text,
       :policy_type,
       :policy_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12633,6 +12975,7 @@ module Aws::SSM
     #
     class ParameterLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12645,6 +12988,7 @@ module Aws::SSM
     #
     class ParameterMaxVersionLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12714,6 +13058,7 @@ module Aws::SSM
       :tier,
       :policies,
       :data_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12726,6 +13071,7 @@ module Aws::SSM
     #
     class ParameterNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12739,6 +13085,7 @@ module Aws::SSM
     #
     class ParameterPatternMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12798,6 +13145,7 @@ module Aws::SSM
       :key,
       :option,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12810,6 +13158,7 @@ module Aws::SSM
     #
     class ParameterVersionLabelLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12823,6 +13172,7 @@ module Aws::SSM
     #
     class ParameterVersionNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12849,6 +13199,7 @@ module Aws::SSM
     class ParametersFilter < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12927,6 +13278,7 @@ module Aws::SSM
       :kb_number,
       :msrc_number,
       :language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12963,6 +13315,7 @@ module Aws::SSM
       :operating_system,
       :baseline_description,
       :default_baseline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13012,6 +13365,7 @@ module Aws::SSM
       :severity,
       :state,
       :installed_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13060,6 +13414,7 @@ module Aws::SSM
     class PatchFilter < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13085,6 +13440,7 @@ module Aws::SSM
     #
     class PatchFilterGroup < Struct.new(
       :patch_filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13104,6 +13460,7 @@ module Aws::SSM
     class PatchGroupPatchBaselineMapping < Struct.new(
       :patch_group,
       :baseline_identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13130,6 +13487,7 @@ module Aws::SSM
     class PatchOrchestratorFilter < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13192,6 +13550,7 @@ module Aws::SSM
       :approve_after_days,
       :approve_until_date,
       :enable_non_security)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13227,6 +13586,7 @@ module Aws::SSM
     #
     class PatchRuleGroup < Struct.new(
       :patch_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13272,6 +13632,7 @@ module Aws::SSM
       :name,
       :products,
       :configuration)
+      SENSITIVE = [:configuration]
       include Aws::Structure
     end
 
@@ -13297,6 +13658,7 @@ module Aws::SSM
       :deployment_status,
       :compliance_level,
       :approval_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13310,6 +13672,7 @@ module Aws::SSM
     #
     class PoliciesLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13350,6 +13713,7 @@ module Aws::SSM
       :failed_steps,
       :cancelled_steps,
       :timed_out_steps)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13441,6 +13805,7 @@ module Aws::SSM
       :items,
       :item_content_hash,
       :upload_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13484,6 +13849,7 @@ module Aws::SSM
     class PutInventoryRequest < Struct.new(
       :instance_id,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13495,6 +13861,7 @@ module Aws::SSM
     #
     class PutInventoryResult < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13788,6 +14155,7 @@ module Aws::SSM
       :tier,
       :policies,
       :data_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13810,6 +14178,7 @@ module Aws::SSM
     class PutParameterResult < Struct.new(
       :version,
       :tier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13829,6 +14198,7 @@ module Aws::SSM
     #
     class RegisterDefaultPatchBaselineRequest < Struct.new(
       :baseline_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13840,6 +14210,7 @@ module Aws::SSM
     #
     class RegisterDefaultPatchBaselineResult < Struct.new(
       :baseline_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13865,6 +14236,7 @@ module Aws::SSM
     class RegisterPatchBaselineForPatchGroupRequest < Struct.new(
       :baseline_id,
       :patch_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13881,6 +14253,7 @@ module Aws::SSM
     class RegisterPatchBaselineForPatchGroupResult < Struct.new(
       :baseline_id,
       :patch_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13987,6 +14360,7 @@ module Aws::SSM
       :name,
       :description,
       :client_token)
+      SENSITIVE = [:owner_information, :description]
       include Aws::Structure
     end
 
@@ -13998,6 +14372,7 @@ module Aws::SSM
     #
     class RegisterTargetWithMaintenanceWindowResult < Struct.new(
       :window_target_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14198,6 +14573,7 @@ module Aws::SSM
       :name,
       :description,
       :client_token)
+      SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
 
@@ -14209,6 +14585,7 @@ module Aws::SSM
     #
     class RegisterTaskWithMaintenanceWindowResult < Struct.new(
       :window_task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14231,6 +14608,7 @@ module Aws::SSM
     #
     class RelatedOpsItem < Struct.new(
       :ops_item_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14282,6 +14660,7 @@ module Aws::SSM
       :resource_type,
       :resource_id,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14310,6 +14689,7 @@ module Aws::SSM
     #
     class ResetServiceSettingRequest < Struct.new(
       :setting_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14324,6 +14704,7 @@ module Aws::SSM
     #
     class ResetServiceSettingResult < Struct.new(
       :service_setting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14345,6 +14726,7 @@ module Aws::SSM
     class ResolvedTargets < Struct.new(
       :parameter_values,
       :truncated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14394,6 +14776,7 @@ module Aws::SSM
       :execution_summary,
       :compliant_summary,
       :non_compliant_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14406,6 +14789,7 @@ module Aws::SSM
     #
     class ResourceDataSyncAlreadyExistsException < Struct.new(
       :sync_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14443,6 +14827,7 @@ module Aws::SSM
     class ResourceDataSyncAwsOrganizationsSource < Struct.new(
       :organization_source_type,
       :organizational_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14456,6 +14841,7 @@ module Aws::SSM
     #
     class ResourceDataSyncConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14468,6 +14854,7 @@ module Aws::SSM
     #
     class ResourceDataSyncCountExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14491,6 +14878,7 @@ module Aws::SSM
     #
     class ResourceDataSyncDestinationDataSharing < Struct.new(
       :destination_data_sharing_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14503,6 +14891,7 @@ module Aws::SSM
     #
     class ResourceDataSyncInvalidConfigurationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14567,6 +14956,7 @@ module Aws::SSM
       :last_status,
       :sync_created_time,
       :last_sync_status_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14587,6 +14977,7 @@ module Aws::SSM
       :sync_name,
       :sync_type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14607,6 +14998,7 @@ module Aws::SSM
     #
     class ResourceDataSyncOrganizationalUnit < Struct.new(
       :organizational_unit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14662,6 +15054,7 @@ module Aws::SSM
       :region,
       :awskms_key_arn,
       :destination_data_sharing)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14713,6 +15106,7 @@ module Aws::SSM
       :aws_organizations_source,
       :source_regions,
       :include_future_regions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14776,6 +15170,7 @@ module Aws::SSM
       :source_regions,
       :include_future_regions,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14789,6 +15184,7 @@ module Aws::SSM
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14810,6 +15206,7 @@ module Aws::SSM
     #
     class ResourceLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14831,6 +15228,7 @@ module Aws::SSM
     #
     class ResultAttribute < Struct.new(
       :type_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14849,6 +15247,7 @@ module Aws::SSM
     #
     class ResumeSessionRequest < Struct.new(
       :session_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14887,6 +15286,7 @@ module Aws::SSM
       :session_id,
       :token_value,
       :stream_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14921,6 +15321,7 @@ module Aws::SSM
       :output_s3_region,
       :output_s3_bucket_name,
       :output_s3_key_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14936,6 +15337,7 @@ module Aws::SSM
     #
     class S3OutputUrl < Struct.new(
       :output_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14960,6 +15362,7 @@ module Aws::SSM
       :window_id,
       :name,
       :execution_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15009,6 +15412,7 @@ module Aws::SSM
       :automation_execution_id,
       :signal_type,
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15206,6 +15610,7 @@ module Aws::SSM
       :service_role_arn,
       :notification_config,
       :cloud_watch_output_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15218,6 +15623,7 @@ module Aws::SSM
     #
     class SendCommandResult < Struct.new(
       :command)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15283,6 +15689,7 @@ module Aws::SSM
       :last_modified_user,
       :arn,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15296,6 +15703,7 @@ module Aws::SSM
     #
     class ServiceSettingNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15354,6 +15762,7 @@ module Aws::SSM
       :owner,
       :details,
       :output_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15409,6 +15818,7 @@ module Aws::SSM
     class SessionFilter < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15427,6 +15837,7 @@ module Aws::SSM
     class SessionManagerOutputUrl < Struct.new(
       :s3_output_url,
       :cloud_watch_output_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15478,6 +15889,7 @@ module Aws::SSM
       :low_count,
       :informational_count,
       :unspecified_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15497,6 +15909,7 @@ module Aws::SSM
     #
     class StartAssociationsOnceRequest < Struct.new(
       :association_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15654,6 +16067,7 @@ module Aws::SSM
       :max_errors,
       :target_locations,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15665,6 +16079,7 @@ module Aws::SSM
     #
     class StartAutomationExecutionResult < Struct.new(
       :automation_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15701,6 +16116,7 @@ module Aws::SSM
       :target,
       :document_name,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15739,6 +16155,7 @@ module Aws::SSM
       :session_id,
       :token_value,
       :stream_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15877,6 +16294,7 @@ module Aws::SSM
       :valid_next_steps,
       :targets,
       :target_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15906,6 +16324,7 @@ module Aws::SSM
     class StepExecutionFilter < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15931,6 +16350,7 @@ module Aws::SSM
     class StopAutomationExecutionRequest < Struct.new(
       :automation_execution_id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15947,6 +16367,7 @@ module Aws::SSM
     #
     class SubTypeCountLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15977,6 +16398,7 @@ module Aws::SSM
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16058,6 +16480,7 @@ module Aws::SSM
     class Target < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16072,6 +16495,7 @@ module Aws::SSM
     #
     class TargetInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16121,6 +16545,7 @@ module Aws::SSM
       :target_location_max_concurrency,
       :target_location_max_errors,
       :execution_role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16140,6 +16565,7 @@ module Aws::SSM
     #
     class TargetNotConnected < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16158,6 +16584,7 @@ module Aws::SSM
     #
     class TerminateSessionRequest < Struct.new(
       :session_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16169,6 +16596,7 @@ module Aws::SSM
     #
     class TerminateSessionResponse < Struct.new(
       :session_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16189,6 +16617,7 @@ module Aws::SSM
     #
     class TooManyUpdates < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16202,6 +16631,7 @@ module Aws::SSM
     #
     class TotalSizeLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16215,6 +16645,7 @@ module Aws::SSM
     #
     class UnsupportedCalendarException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16235,6 +16666,7 @@ module Aws::SSM
     #
     class UnsupportedFeatureRequiredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16253,6 +16685,7 @@ module Aws::SSM
     class UnsupportedInventoryItemContextException < Struct.new(
       :type_name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16267,6 +16700,7 @@ module Aws::SSM
     #
     class UnsupportedInventorySchemaVersionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16281,6 +16715,7 @@ module Aws::SSM
     #
     class UnsupportedOperatingSystem < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16293,6 +16728,7 @@ module Aws::SSM
     #
     class UnsupportedParameterType < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16307,6 +16743,7 @@ module Aws::SSM
     #
     class UnsupportedPlatformType < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16494,6 +16931,7 @@ module Aws::SSM
       :compliance_severity,
       :sync_compliance,
       :apply_only_at_cron_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16505,6 +16943,7 @@ module Aws::SSM
     #
     class UpdateAssociationResult < Struct.new(
       :association_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16540,6 +16979,7 @@ module Aws::SSM
       :name,
       :instance_id,
       :association_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16551,6 +16991,7 @@ module Aws::SSM
     #
     class UpdateAssociationStatusResult < Struct.new(
       :association_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16577,6 +17018,7 @@ module Aws::SSM
     class UpdateDocumentDefaultVersionRequest < Struct.new(
       :name,
       :document_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16589,6 +17031,7 @@ module Aws::SSM
     #
     class UpdateDocumentDefaultVersionResult < Struct.new(
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16658,6 +17101,7 @@ module Aws::SSM
       :document_version,
       :document_format,
       :target_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16669,6 +17113,7 @@ module Aws::SSM
     #
     class UpdateDocumentResult < Struct.new(
       :document_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16792,6 +17237,7 @@ module Aws::SSM
       :allow_unassociated_targets,
       :enabled,
       :replace)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -16874,6 +17320,7 @@ module Aws::SSM
       :cutoff,
       :allow_unassociated_targets,
       :enabled)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -16938,6 +17385,7 @@ module Aws::SSM
       :name,
       :description,
       :replace)
+      SENSITIVE = [:owner_information, :description]
       include Aws::Structure
     end
 
@@ -16974,6 +17422,7 @@ module Aws::SSM
       :owner_information,
       :name,
       :description)
+      SENSITIVE = [:owner_information, :description]
       include Aws::Structure
     end
 
@@ -17175,6 +17624,7 @@ module Aws::SSM
       :name,
       :description,
       :replace)
+      SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
 
@@ -17265,6 +17715,7 @@ module Aws::SSM
       :logging_info,
       :name,
       :description)
+      SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
 
@@ -17289,6 +17740,7 @@ module Aws::SSM
     class UpdateManagedInstanceRoleRequest < Struct.new(
       :instance_id,
       :iam_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17427,6 +17879,7 @@ module Aws::SSM
       :title,
       :category,
       :severity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17583,6 +18036,7 @@ module Aws::SSM
       :description,
       :sources,
       :replace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17667,6 +18121,7 @@ module Aws::SSM
       :modified_date,
       :description,
       :sources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17710,6 +18165,7 @@ module Aws::SSM
       :sync_name,
       :sync_type,
       :sync_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17761,6 +18217,7 @@ module Aws::SSM
     class UpdateServiceSettingRequest < Struct.new(
       :setting_id,
       :setting_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 

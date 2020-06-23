@@ -22,6 +22,7 @@ module Aws::TranscribeService
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34,6 +35,7 @@ module Aws::TranscribeService
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -68,6 +70,7 @@ module Aws::TranscribeService
     class ContentRedaction < Struct.new(
       :redaction_type,
       :redaction_output)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -126,6 +129,7 @@ module Aws::TranscribeService
       :vocabulary_name,
       :language_code,
       :vocabulary_file_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -163,6 +167,7 @@ module Aws::TranscribeService
       :vocabulary_state,
       :last_modified_time,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -226,6 +231,7 @@ module Aws::TranscribeService
       :language_code,
       :words,
       :vocabulary_filter_file_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -247,6 +253,7 @@ module Aws::TranscribeService
       :vocabulary_filter_name,
       :language_code,
       :last_modified_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -299,6 +306,7 @@ module Aws::TranscribeService
       :language_code,
       :phrases,
       :vocabulary_file_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -333,6 +341,7 @@ module Aws::TranscribeService
       :vocabulary_state,
       :last_modified_time,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -352,6 +361,7 @@ module Aws::TranscribeService
     #
     class DeleteMedicalTranscriptionJobRequest < Struct.new(
       :medical_transcription_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -370,6 +380,7 @@ module Aws::TranscribeService
     #
     class DeleteMedicalVocabularyRequest < Struct.new(
       :vocabulary_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -388,6 +399,7 @@ module Aws::TranscribeService
     #
     class DeleteTranscriptionJobRequest < Struct.new(
       :transcription_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -406,6 +418,7 @@ module Aws::TranscribeService
     #
     class DeleteVocabularyFilterRequest < Struct.new(
       :vocabulary_filter_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -424,6 +437,7 @@ module Aws::TranscribeService
     #
     class DeleteVocabularyRequest < Struct.new(
       :vocabulary_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -442,6 +456,7 @@ module Aws::TranscribeService
     #
     class GetMedicalTranscriptionJobRequest < Struct.new(
       :medical_transcription_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -454,6 +469,7 @@ module Aws::TranscribeService
     #
     class GetMedicalTranscriptionJobResponse < Struct.new(
       :medical_transcription_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -473,6 +489,7 @@ module Aws::TranscribeService
     #
     class GetMedicalVocabularyRequest < Struct.new(
       :vocabulary_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -513,6 +530,7 @@ module Aws::TranscribeService
       :last_modified_time,
       :failure_reason,
       :download_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -531,6 +549,7 @@ module Aws::TranscribeService
     #
     class GetTranscriptionJobRequest < Struct.new(
       :transcription_job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -542,6 +561,7 @@ module Aws::TranscribeService
     #
     class GetTranscriptionJobResponse < Struct.new(
       :transcription_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -560,6 +580,7 @@ module Aws::TranscribeService
     #
     class GetVocabularyFilterRequest < Struct.new(
       :vocabulary_filter_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -588,6 +609,7 @@ module Aws::TranscribeService
       :language_code,
       :last_modified_time,
       :download_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -607,6 +629,7 @@ module Aws::TranscribeService
     #
     class GetVocabularyRequest < Struct.new(
       :vocabulary_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -646,6 +669,7 @@ module Aws::TranscribeService
       :last_modified_time,
       :failure_reason,
       :download_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -659,6 +683,7 @@ module Aws::TranscribeService
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -701,6 +726,7 @@ module Aws::TranscribeService
     class JobExecutionSettings < Struct.new(
       :allow_deferred_execution,
       :data_access_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -715,6 +741,7 @@ module Aws::TranscribeService
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -760,6 +787,7 @@ module Aws::TranscribeService
       :job_name_contains,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -787,6 +815,7 @@ module Aws::TranscribeService
       :status,
       :next_token,
       :medical_transcription_job_summaries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -829,6 +858,7 @@ module Aws::TranscribeService
       :max_results,
       :state_equals,
       :name_contains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -856,6 +886,7 @@ module Aws::TranscribeService
       :status,
       :next_token,
       :vocabularies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -899,6 +930,7 @@ module Aws::TranscribeService
       :job_name_contains,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -926,6 +958,7 @@ module Aws::TranscribeService
       :status,
       :next_token,
       :transcription_job_summaries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -969,6 +1002,7 @@ module Aws::TranscribeService
       :max_results,
       :state_equals,
       :name_contains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -996,6 +1030,7 @@ module Aws::TranscribeService
       :status,
       :next_token,
       :vocabularies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1031,6 +1066,7 @@ module Aws::TranscribeService
       :next_token,
       :max_results,
       :name_contains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1056,6 +1092,7 @@ module Aws::TranscribeService
     class ListVocabularyFiltersResponse < Struct.new(
       :next_token,
       :vocabulary_filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1087,6 +1124,7 @@ module Aws::TranscribeService
     #
     class Media < Struct.new(
       :media_file_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1103,6 +1141,7 @@ module Aws::TranscribeService
     #
     class MedicalTranscript < Struct.new(
       :transcript_file_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1242,6 +1281,7 @@ module Aws::TranscribeService
       :settings,
       :specialty,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1306,6 +1346,7 @@ module Aws::TranscribeService
       :output_location_type,
       :specialty,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1386,6 +1427,7 @@ module Aws::TranscribeService
       :show_alternatives,
       :max_alternatives,
       :vocabulary_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1399,6 +1441,7 @@ module Aws::TranscribeService
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1495,6 +1538,7 @@ module Aws::TranscribeService
       :max_alternatives,
       :vocabulary_filter_name,
       :vocabulary_filter_method)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1639,6 +1683,7 @@ module Aws::TranscribeService
       :settings,
       :specialty,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1650,6 +1695,7 @@ module Aws::TranscribeService
     #
     class StartMedicalTranscriptionJobResponse < Struct.new(
       :medical_transcription_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1810,6 +1856,7 @@ module Aws::TranscribeService
       :settings,
       :job_execution_settings,
       :content_redaction)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1821,6 +1868,7 @@ module Aws::TranscribeService
     #
     class StartTranscriptionJobResponse < Struct.new(
       :transcription_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1851,6 +1899,7 @@ module Aws::TranscribeService
     class Transcript < Struct.new(
       :transcript_file_uri,
       :redacted_transcript_file_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1973,6 +2022,7 @@ module Aws::TranscribeService
       :settings,
       :job_execution_settings,
       :content_redaction)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2037,6 +2087,7 @@ module Aws::TranscribeService
       :failure_reason,
       :output_location_type,
       :content_redaction)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2093,6 +2144,7 @@ module Aws::TranscribeService
       :vocabulary_name,
       :language_code,
       :vocabulary_file_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2123,6 +2175,7 @@ module Aws::TranscribeService
       :language_code,
       :last_modified_time,
       :vocabulary_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2177,6 +2230,7 @@ module Aws::TranscribeService
       :vocabulary_filter_name,
       :words,
       :vocabulary_filter_file_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2198,6 +2252,7 @@ module Aws::TranscribeService
       :vocabulary_filter_name,
       :language_code,
       :last_modified_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2251,6 +2306,7 @@ module Aws::TranscribeService
       :language_code,
       :phrases,
       :vocabulary_file_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2279,6 +2335,7 @@ module Aws::TranscribeService
       :language_code,
       :last_modified_time,
       :vocabulary_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2303,6 +2360,7 @@ module Aws::TranscribeService
       :vocabulary_filter_name,
       :language_code,
       :last_modified_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2332,6 +2390,7 @@ module Aws::TranscribeService
       :language_code,
       :last_modified_time,
       :vocabulary_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 

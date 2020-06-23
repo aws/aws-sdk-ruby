@@ -48,6 +48,7 @@ module Aws::Route53
     class AccountLimit < Struct.new(
       :type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -103,6 +104,7 @@ module Aws::Route53
     class AlarmIdentifier < Struct.new(
       :region,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -511,6 +513,7 @@ module Aws::Route53
       :hosted_zone_id,
       :dns_name,
       :evaluate_target_health)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -552,6 +555,7 @@ module Aws::Route53
       :hosted_zone_id,
       :vpc,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -566,6 +570,7 @@ module Aws::Route53
     #
     class AssociateVPCWithHostedZoneResponse < Struct.new(
       :change_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -640,6 +645,7 @@ module Aws::Route53
     class Change < Struct.new(
       :action,
       :resource_record_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -698,6 +704,7 @@ module Aws::Route53
     class ChangeBatch < Struct.new(
       :comment,
       :changes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -743,6 +750,7 @@ module Aws::Route53
       :status,
       :submitted_at,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -806,6 +814,7 @@ module Aws::Route53
     class ChangeResourceRecordSetsRequest < Struct.new(
       :hosted_zone_id,
       :change_batch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -827,6 +836,7 @@ module Aws::Route53
     #
     class ChangeResourceRecordSetsResponse < Struct.new(
       :change_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -882,6 +892,7 @@ module Aws::Route53
       :resource_id,
       :add_tags,
       :remove_tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -956,6 +967,7 @@ module Aws::Route53
       :namespace,
       :statistic,
       :dimensions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -970,6 +982,7 @@ module Aws::Route53
     #
     class ConcurrentModification < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1004,6 +1017,7 @@ module Aws::Route53
     #
     class ConflictingDomainExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1020,6 +1034,7 @@ module Aws::Route53
     #
     class ConflictingTypes < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1087,6 +1102,7 @@ module Aws::Route53
     class CreateHealthCheckRequest < Struct.new(
       :caller_reference,
       :health_check_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1107,6 +1123,7 @@ module Aws::Route53
     class CreateHealthCheckResponse < Struct.new(
       :health_check,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1197,6 +1214,7 @@ module Aws::Route53
       :caller_reference,
       :hosted_zone_config,
       :delegation_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1234,6 +1252,7 @@ module Aws::Route53
       :delegation_set,
       :vpc,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1272,6 +1291,7 @@ module Aws::Route53
     class CreateQueryLoggingConfigRequest < Struct.new(
       :hosted_zone_id,
       :cloud_watch_logs_log_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1291,6 +1311,7 @@ module Aws::Route53
     class CreateQueryLoggingConfigResponse < Struct.new(
       :query_logging_config,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1321,6 +1342,7 @@ module Aws::Route53
     class CreateReusableDelegationSetRequest < Struct.new(
       :caller_reference,
       :hosted_zone_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1337,6 +1359,7 @@ module Aws::Route53
     class CreateReusableDelegationSetResponse < Struct.new(
       :delegation_set,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1391,6 +1414,7 @@ module Aws::Route53
       :ttl,
       :traffic_policy_id,
       :traffic_policy_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1411,6 +1435,7 @@ module Aws::Route53
     class CreateTrafficPolicyInstanceResponse < Struct.new(
       :traffic_policy_instance,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1450,6 +1475,7 @@ module Aws::Route53
       :name,
       :document,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1469,6 +1495,7 @@ module Aws::Route53
     class CreateTrafficPolicyResponse < Struct.new(
       :traffic_policy,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1511,6 +1538,7 @@ module Aws::Route53
       :id,
       :document,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1531,6 +1559,7 @@ module Aws::Route53
     class CreateTrafficPolicyVersionResponse < Struct.new(
       :traffic_policy,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1565,6 +1594,7 @@ module Aws::Route53
     class CreateVPCAssociationAuthorizationRequest < Struct.new(
       :hosted_zone_id,
       :vpc)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1585,6 +1615,7 @@ module Aws::Route53
     class CreateVPCAssociationAuthorizationResponse < Struct.new(
       :hosted_zone_id,
       :vpc)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1611,6 +1642,7 @@ module Aws::Route53
       :id,
       :caller_reference,
       :name_servers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1625,6 +1657,7 @@ module Aws::Route53
     #
     class DelegationSetAlreadyCreated < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1638,6 +1671,7 @@ module Aws::Route53
     #
     class DelegationSetAlreadyReusable < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1652,6 +1686,7 @@ module Aws::Route53
     #
     class DelegationSetInUse < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1669,6 +1704,7 @@ module Aws::Route53
     #
     class DelegationSetNotAvailable < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1682,6 +1718,7 @@ module Aws::Route53
     #
     class DelegationSetNotReusable < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1702,6 +1739,7 @@ module Aws::Route53
     #
     class DeleteHealthCheckRequest < Struct.new(
       :health_check_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1728,6 +1766,7 @@ module Aws::Route53
     #
     class DeleteHostedZoneRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1743,6 +1782,7 @@ module Aws::Route53
     #
     class DeleteHostedZoneResponse < Struct.new(
       :change_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1761,6 +1801,7 @@ module Aws::Route53
     #
     class DeleteQueryLoggingConfigRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1785,6 +1826,7 @@ module Aws::Route53
     #
     class DeleteReusableDelegationSetRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1815,6 +1857,7 @@ module Aws::Route53
     #
     class DeleteTrafficPolicyInstanceRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1847,6 +1890,7 @@ module Aws::Route53
     class DeleteTrafficPolicyRequest < Struct.new(
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1889,6 +1933,7 @@ module Aws::Route53
     class DeleteVPCAssociationAuthorizationRequest < Struct.new(
       :hosted_zone_id,
       :vpc)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1916,6 +1961,7 @@ module Aws::Route53
     class Dimension < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1954,6 +2000,7 @@ module Aws::Route53
       :hosted_zone_id,
       :vpc,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1969,6 +2016,7 @@ module Aws::Route53
     #
     class DisassociateVPCFromHostedZoneResponse < Struct.new(
       :change_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2039,6 +2087,7 @@ module Aws::Route53
       :continent_code,
       :country_code,
       :subdivision_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2080,6 +2129,7 @@ module Aws::Route53
       :country_name,
       :subdivision_code,
       :subdivision_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2119,6 +2169,7 @@ module Aws::Route53
     #
     class GetAccountLimitRequest < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2144,6 +2195,7 @@ module Aws::Route53
     class GetAccountLimitResponse < Struct.new(
       :limit,
       :count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2166,6 +2218,7 @@ module Aws::Route53
     #
     class GetChangeRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2180,6 +2233,7 @@ module Aws::Route53
     #
     class GetChangeResponse < Struct.new(
       :change_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2202,6 +2256,7 @@ module Aws::Route53
     #
     class GetCheckerIpRangesResponse < Struct.new(
       :checker_ip_ranges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2267,6 +2322,7 @@ module Aws::Route53
       :continent_code,
       :country_code,
       :subdivision_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2282,6 +2338,7 @@ module Aws::Route53
     #
     class GetGeoLocationResponse < Struct.new(
       :geo_location_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2305,6 +2362,7 @@ module Aws::Route53
     #
     class GetHealthCheckCountResponse < Struct.new(
       :health_check_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2334,6 +2392,7 @@ module Aws::Route53
     #
     class GetHealthCheckLastFailureReasonRequest < Struct.new(
       :health_check_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2349,6 +2408,7 @@ module Aws::Route53
     #
     class GetHealthCheckLastFailureReasonResponse < Struct.new(
       :health_check_observations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2372,6 +2432,7 @@ module Aws::Route53
     #
     class GetHealthCheckRequest < Struct.new(
       :health_check_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2387,6 +2448,7 @@ module Aws::Route53
     #
     class GetHealthCheckResponse < Struct.new(
       :health_check)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2416,6 +2478,7 @@ module Aws::Route53
     #
     class GetHealthCheckStatusRequest < Struct.new(
       :health_check_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2432,6 +2495,7 @@ module Aws::Route53
     #
     class GetHealthCheckStatusResponse < Struct.new(
       :health_check_observations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2456,6 +2520,7 @@ module Aws::Route53
     #
     class GetHostedZoneCountResponse < Struct.new(
       :hosted_zone_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2490,6 +2555,7 @@ module Aws::Route53
     class GetHostedZoneLimitRequest < Struct.new(
       :type,
       :hosted_zone_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2515,6 +2581,7 @@ module Aws::Route53
     class GetHostedZoneLimitResponse < Struct.new(
       :limit,
       :count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2535,6 +2602,7 @@ module Aws::Route53
     #
     class GetHostedZoneRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2561,6 +2629,7 @@ module Aws::Route53
       :hosted_zone,
       :delegation_set,
       :vp_cs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2580,6 +2649,7 @@ module Aws::Route53
     #
     class GetQueryLoggingConfigRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2597,6 +2667,7 @@ module Aws::Route53
     #
     class GetQueryLoggingConfigResponse < Struct.new(
       :query_logging_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2626,6 +2697,7 @@ module Aws::Route53
     class GetReusableDelegationSetLimitRequest < Struct.new(
       :type,
       :delegation_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2646,6 +2718,7 @@ module Aws::Route53
     class GetReusableDelegationSetLimitResponse < Struct.new(
       :limit,
       :count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2668,6 +2741,7 @@ module Aws::Route53
     #
     class GetReusableDelegationSetRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2683,6 +2757,7 @@ module Aws::Route53
     #
     class GetReusableDelegationSetResponse < Struct.new(
       :delegation_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2707,6 +2782,7 @@ module Aws::Route53
     #
     class GetTrafficPolicyInstanceCountResponse < Struct.new(
       :traffic_policy_instance_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2728,6 +2804,7 @@ module Aws::Route53
     #
     class GetTrafficPolicyInstanceRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2743,6 +2820,7 @@ module Aws::Route53
     #
     class GetTrafficPolicyInstanceResponse < Struct.new(
       :traffic_policy_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2770,6 +2848,7 @@ module Aws::Route53
     class GetTrafficPolicyRequest < Struct.new(
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2784,6 +2863,7 @@ module Aws::Route53
     #
     class GetTrafficPolicyResponse < Struct.new(
       :traffic_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2833,6 +2913,7 @@ module Aws::Route53
       :health_check_config,
       :health_check_version,
       :cloud_watch_alarm_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2856,6 +2937,7 @@ module Aws::Route53
     #
     class HealthCheckAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3268,6 +3350,7 @@ module Aws::Route53
       :regions,
       :alarm_identifier,
       :insufficient_data_health_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3281,6 +3364,7 @@ module Aws::Route53
     #
     class HealthCheckInUse < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3309,6 +3393,7 @@ module Aws::Route53
       :region,
       :ip_address,
       :status_report)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3322,6 +3407,7 @@ module Aws::Route53
     #
     class HealthCheckVersionMismatch < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3377,6 +3463,7 @@ module Aws::Route53
       :config,
       :resource_record_set_count,
       :linked_service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3392,6 +3479,7 @@ module Aws::Route53
     #
     class HostedZoneAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3420,6 +3508,7 @@ module Aws::Route53
     class HostedZoneConfig < Struct.new(
       :comment,
       :private_zone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3446,6 +3535,7 @@ module Aws::Route53
     class HostedZoneLimit < Struct.new(
       :type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3460,6 +3550,7 @@ module Aws::Route53
     #
     class HostedZoneNotEmpty < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3473,6 +3564,7 @@ module Aws::Route53
     #
     class HostedZoneNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3487,6 +3579,7 @@ module Aws::Route53
     #
     class HostedZoneNotPrivate < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3517,6 +3610,7 @@ module Aws::Route53
     class HostedZoneOwner < Struct.new(
       :owning_account,
       :owning_service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3547,6 +3641,7 @@ module Aws::Route53
       :hosted_zone_id,
       :name,
       :owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3560,6 +3655,7 @@ module Aws::Route53
     #
     class IncompatibleVersion < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3582,6 +3678,7 @@ module Aws::Route53
     #
     class InsufficientCloudWatchLogsResourcePolicy < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3595,6 +3692,7 @@ module Aws::Route53
     #
     class InvalidArgument < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3614,6 +3712,7 @@ module Aws::Route53
     class InvalidChangeBatch < Struct.new(
       :messages,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3627,6 +3726,7 @@ module Aws::Route53
     #
     class InvalidDomainName < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3640,6 +3740,7 @@ module Aws::Route53
     #
     class InvalidInput < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3653,6 +3754,7 @@ module Aws::Route53
     #
     class InvalidPaginationToken < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3667,6 +3769,7 @@ module Aws::Route53
     #
     class InvalidTrafficPolicyDocument < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3681,6 +3784,7 @@ module Aws::Route53
     #
     class InvalidVPCId < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3697,6 +3801,7 @@ module Aws::Route53
     #
     class LastVPCAssociation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3724,6 +3829,7 @@ module Aws::Route53
     #
     class LimitsExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3750,6 +3856,7 @@ module Aws::Route53
     class LinkedService < Struct.new(
       :service_principal,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3814,6 +3921,7 @@ module Aws::Route53
       :start_country_code,
       :start_subdivision_code,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3866,6 +3974,7 @@ module Aws::Route53
       :next_country_code,
       :next_subdivision_code,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3905,6 +4014,7 @@ module Aws::Route53
     class ListHealthChecksRequest < Struct.new(
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3949,6 +4059,7 @@ module Aws::Route53
       :is_truncated,
       :next_marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4003,6 +4114,7 @@ module Aws::Route53
       :dns_name,
       :hosted_zone_id,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4067,6 +4179,7 @@ module Aws::Route53
       :next_dns_name,
       :next_hosted_zone_id,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4119,6 +4232,7 @@ module Aws::Route53
       :vpc_region,
       :max_items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4145,6 +4259,7 @@ module Aws::Route53
       :hosted_zone_summaries,
       :max_items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4193,6 +4308,7 @@ module Aws::Route53
       :marker,
       :max_items,
       :delegation_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4236,6 +4352,7 @@ module Aws::Route53
       :is_truncated,
       :next_marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4290,6 +4407,7 @@ module Aws::Route53
       :hosted_zone_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4324,6 +4442,7 @@ module Aws::Route53
     class ListQueryLoggingConfigsResponse < Struct.new(
       :query_logging_configs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4411,6 +4530,7 @@ module Aws::Route53
       :start_record_type,
       :start_record_identifier,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4468,6 +4588,7 @@ module Aws::Route53
       :next_record_type,
       :next_record_identifier,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4508,6 +4629,7 @@ module Aws::Route53
     class ListReusableDelegationSetsRequest < Struct.new(
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4551,6 +4673,7 @@ module Aws::Route53
       :is_truncated,
       :next_marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4582,6 +4705,7 @@ module Aws::Route53
     class ListTagsForResourceRequest < Struct.new(
       :resource_type,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4597,6 +4721,7 @@ module Aws::Route53
     #
     class ListTagsForResourceResponse < Struct.new(
       :resource_tag_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4629,6 +4754,7 @@ module Aws::Route53
     class ListTagsForResourcesRequest < Struct.new(
       :resource_type,
       :resource_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4643,6 +4769,7 @@ module Aws::Route53
     #
     class ListTagsForResourcesResponse < Struct.new(
       :resource_tag_sets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4683,6 +4810,7 @@ module Aws::Route53
     class ListTrafficPoliciesRequest < Struct.new(
       :traffic_policy_id_marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4719,6 +4847,7 @@ module Aws::Route53
       :is_truncated,
       :traffic_policy_id_marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4784,6 +4913,7 @@ module Aws::Route53
       :traffic_policy_instance_name_marker,
       :traffic_policy_instance_type_marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4831,6 +4961,7 @@ module Aws::Route53
       :traffic_policy_instance_type_marker,
       :is_truncated,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4925,6 +5056,7 @@ module Aws::Route53
       :traffic_policy_instance_name_marker,
       :traffic_policy_instance_type_marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4979,6 +5111,7 @@ module Aws::Route53
       :traffic_policy_instance_type_marker,
       :is_truncated,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5052,6 +5185,7 @@ module Aws::Route53
       :traffic_policy_instance_name_marker,
       :traffic_policy_instance_type_marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5106,6 +5240,7 @@ module Aws::Route53
       :traffic_policy_instance_type_marker,
       :is_truncated,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5153,6 +5288,7 @@ module Aws::Route53
       :id,
       :traffic_policy_version_marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5195,6 +5331,7 @@ module Aws::Route53
       :is_truncated,
       :traffic_policy_version_marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5235,6 +5372,7 @@ module Aws::Route53
       :hosted_zone_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5265,6 +5403,7 @@ module Aws::Route53
       :hosted_zone_id,
       :next_token,
       :vp_cs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5277,6 +5416,7 @@ module Aws::Route53
     #
     class NoSuchChange < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5289,6 +5429,7 @@ module Aws::Route53
     #
     class NoSuchCloudWatchLogsLogGroup < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5302,6 +5443,7 @@ module Aws::Route53
     #
     class NoSuchDelegationSet < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5321,6 +5463,7 @@ module Aws::Route53
     #
     class NoSuchGeoLocation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5334,6 +5477,7 @@ module Aws::Route53
     #
     class NoSuchHealthCheck < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5347,6 +5491,7 @@ module Aws::Route53
     #
     class NoSuchHostedZone < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5359,6 +5504,7 @@ module Aws::Route53
     #
     class NoSuchQueryLoggingConfig < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5372,6 +5518,7 @@ module Aws::Route53
     #
     class NoSuchTrafficPolicy < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5385,6 +5532,7 @@ module Aws::Route53
     #
     class NoSuchTrafficPolicyInstance < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5399,6 +5547,7 @@ module Aws::Route53
     #
     class NotAuthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5416,6 +5565,7 @@ module Aws::Route53
     #
     class PriorRequestNotComplete < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5430,6 +5580,7 @@ module Aws::Route53
     #
     class PublicZoneVPCAssociation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5456,6 +5607,7 @@ module Aws::Route53
       :id,
       :hosted_zone_id,
       :cloud_watch_logs_log_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5469,6 +5621,7 @@ module Aws::Route53
     #
     class QueryLoggingConfigAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5509,6 +5662,7 @@ module Aws::Route53
     #
     class ResourceRecord < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6104,6 +6258,7 @@ module Aws::Route53
       :alias_target,
       :health_check_id,
       :traffic_policy_instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6131,6 +6286,7 @@ module Aws::Route53
       :resource_type,
       :resource_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6154,6 +6310,7 @@ module Aws::Route53
     class ReusableDelegationSetLimit < Struct.new(
       :type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6181,6 +6338,7 @@ module Aws::Route53
     class StatusReport < Struct.new(
       :status,
       :checked_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6230,6 +6388,7 @@ module Aws::Route53
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6304,6 +6463,7 @@ module Aws::Route53
       :resolver_ip,
       :edns0_client_subnet_ip,
       :edns0_client_subnet_mask)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6355,6 +6515,7 @@ module Aws::Route53
       :record_data,
       :response_code,
       :protocol)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6367,6 +6528,7 @@ module Aws::Route53
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6397,6 +6559,7 @@ module Aws::Route53
     #
     class TooManyHealthChecks < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6432,6 +6595,7 @@ module Aws::Route53
     #
     class TooManyHostedZones < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6460,6 +6624,7 @@ module Aws::Route53
     #
     class TooManyTrafficPolicies < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6490,6 +6655,7 @@ module Aws::Route53
     #
     class TooManyTrafficPolicyInstances < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6516,6 +6682,7 @@ module Aws::Route53
     #
     class TooManyTrafficPolicyVersionsForCurrentPolicy < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6534,6 +6701,7 @@ module Aws::Route53
     #
     class TooManyVPCAssociationAuthorizations < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6584,6 +6752,7 @@ module Aws::Route53
       :type,
       :document,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6597,6 +6766,7 @@ module Aws::Route53
     #
     class TrafficPolicyAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6611,6 +6781,7 @@ module Aws::Route53
     #
     class TrafficPolicyInUse < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6691,6 +6862,7 @@ module Aws::Route53
       :traffic_policy_id,
       :traffic_policy_version,
       :traffic_policy_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6704,6 +6876,7 @@ module Aws::Route53
     #
     class TrafficPolicyInstanceAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6743,6 +6916,7 @@ module Aws::Route53
       :type,
       :latest_version,
       :traffic_policy_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7137,6 +7311,7 @@ module Aws::Route53
       :alarm_identifier,
       :insufficient_data_health_status,
       :reset_elements)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7152,6 +7327,7 @@ module Aws::Route53
     #
     class UpdateHealthCheckResponse < Struct.new(
       :health_check)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7180,6 +7356,7 @@ module Aws::Route53
     class UpdateHostedZoneCommentRequest < Struct.new(
       :id,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7195,6 +7372,7 @@ module Aws::Route53
     #
     class UpdateHostedZoneCommentResponse < Struct.new(
       :hosted_zone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7230,6 +7408,7 @@ module Aws::Route53
       :id,
       :version,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7245,6 +7424,7 @@ module Aws::Route53
     #
     class UpdateTrafficPolicyCommentResponse < Struct.new(
       :traffic_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7290,6 +7470,7 @@ module Aws::Route53
       :ttl,
       :traffic_policy_id,
       :traffic_policy_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7305,6 +7486,7 @@ module Aws::Route53
     #
     class UpdateTrafficPolicyInstanceResponse < Struct.new(
       :traffic_policy_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7333,6 +7515,7 @@ module Aws::Route53
     class VPC < Struct.new(
       :vpc_region,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7347,6 +7530,7 @@ module Aws::Route53
     #
     class VPCAssociationAuthorizationNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7360,6 +7544,7 @@ module Aws::Route53
     #
     class VPCAssociationNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

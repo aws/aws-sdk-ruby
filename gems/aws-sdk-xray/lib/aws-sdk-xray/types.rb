@@ -30,6 +30,7 @@ module Aws::XRay
       :name,
       :names,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -54,6 +55,7 @@ module Aws::XRay
       :number_value,
       :boolean_value,
       :string_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -67,6 +69,7 @@ module Aws::XRay
     #
     class AvailabilityZoneDetail < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -109,6 +112,7 @@ module Aws::XRay
       :http_code_5_xx_count,
       :unknown_host_count,
       :other_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -133,6 +137,7 @@ module Aws::XRay
     class BatchGetTracesRequest < Struct.new(
       :trace_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -154,6 +159,7 @@ module Aws::XRay
       :traces,
       :unprocessed_trace_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -179,6 +185,7 @@ module Aws::XRay
     class CreateGroupRequest < Struct.new(
       :group_name,
       :filter_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -192,6 +199,7 @@ module Aws::XRay
     #
     class CreateGroupResult < Struct.new(
       :group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -226,6 +234,7 @@ module Aws::XRay
     #
     class CreateSamplingRuleRequest < Struct.new(
       :sampling_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -237,6 +246,7 @@ module Aws::XRay
     #
     class CreateSamplingRuleResult < Struct.new(
       :sampling_rule_record)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -261,6 +271,7 @@ module Aws::XRay
     class DeleteGroupRequest < Struct.new(
       :group_name,
       :group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -291,6 +302,7 @@ module Aws::XRay
     class DeleteSamplingRuleRequest < Struct.new(
       :rule_name,
       :rule_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -302,6 +314,7 @@ module Aws::XRay
     #
     class DeleteSamplingRuleResult < Struct.new(
       :sampling_rule_record)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -341,6 +354,7 @@ module Aws::XRay
       :summary_statistics,
       :response_time_histogram,
       :aliases)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -377,6 +391,7 @@ module Aws::XRay
       :fault_statistics,
       :total_count,
       :total_response_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -404,6 +419,7 @@ module Aws::XRay
       :key_id,
       :status,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -423,6 +439,7 @@ module Aws::XRay
     class ErrorRootCause < Struct.new(
       :services,
       :client_impacting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -447,6 +464,7 @@ module Aws::XRay
       :name,
       :exceptions,
       :remote)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -487,6 +505,7 @@ module Aws::XRay
       :account_id,
       :entity_path,
       :inferred)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -514,6 +533,7 @@ module Aws::XRay
       :throttle_count,
       :other_count,
       :total_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -533,6 +553,7 @@ module Aws::XRay
     class FaultRootCause < Struct.new(
       :services,
       :client_impacting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -557,6 +578,7 @@ module Aws::XRay
       :name,
       :exceptions,
       :remote)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -597,6 +619,7 @@ module Aws::XRay
       :account_id,
       :entity_path,
       :inferred)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -618,6 +641,7 @@ module Aws::XRay
     class FaultStatistics < Struct.new(
       :other_count,
       :total_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -635,6 +659,7 @@ module Aws::XRay
     #
     class GetEncryptionConfigResult < Struct.new(
       :encryption_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -659,6 +684,7 @@ module Aws::XRay
     class GetGroupRequest < Struct.new(
       :group_name,
       :group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -672,6 +698,7 @@ module Aws::XRay
     #
     class GetGroupResult < Struct.new(
       :group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -690,6 +717,7 @@ module Aws::XRay
     #
     class GetGroupsRequest < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -706,6 +734,7 @@ module Aws::XRay
     class GetGroupsResult < Struct.new(
       :groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -724,6 +753,7 @@ module Aws::XRay
     #
     class GetSamplingRulesRequest < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -740,6 +770,7 @@ module Aws::XRay
     class GetSamplingRulesResult < Struct.new(
       :sampling_rule_records,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -758,6 +789,7 @@ module Aws::XRay
     #
     class GetSamplingStatisticSummariesRequest < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -775,6 +807,7 @@ module Aws::XRay
     class GetSamplingStatisticSummariesResult < Struct.new(
       :sampling_statistic_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -803,6 +836,7 @@ module Aws::XRay
     #
     class GetSamplingTargetsRequest < Struct.new(
       :sampling_statistics_documents)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -828,6 +862,7 @@ module Aws::XRay
       :sampling_target_documents,
       :last_rule_modification,
       :unprocessed_statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -870,6 +905,7 @@ module Aws::XRay
       :group_name,
       :group_arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -904,6 +940,7 @@ module Aws::XRay
       :services,
       :contains_old_group_versions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -961,6 +998,7 @@ module Aws::XRay
       :entity_selector_expression,
       :period,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -984,6 +1022,7 @@ module Aws::XRay
       :time_series_service_statistics,
       :contains_old_group_versions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1008,6 +1047,7 @@ module Aws::XRay
     class GetTraceGraphRequest < Struct.new(
       :trace_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1024,6 +1064,7 @@ module Aws::XRay
     class GetTraceGraphResult < Struct.new(
       :services,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1086,6 +1127,7 @@ module Aws::XRay
       :sampling_strategy,
       :filter_expression,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1117,6 +1159,7 @@ module Aws::XRay
       :approximate_time,
       :traces_processed_count,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1140,6 +1183,7 @@ module Aws::XRay
       :group_name,
       :group_arn,
       :filter_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1163,6 +1207,7 @@ module Aws::XRay
       :group_name,
       :group_arn,
       :filter_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1183,6 +1228,7 @@ module Aws::XRay
     class HistogramEntry < Struct.new(
       :value,
       :count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1216,6 +1262,7 @@ module Aws::XRay
       :http_method,
       :user_agent,
       :client_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1229,6 +1276,7 @@ module Aws::XRay
     #
     class InstanceIdDetail < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1241,6 +1289,7 @@ module Aws::XRay
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1280,6 +1329,7 @@ module Aws::XRay
     class PutEncryptionConfigRequest < Struct.new(
       :key_id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1291,6 +1341,7 @@ module Aws::XRay
     #
     class PutEncryptionConfigResult < Struct.new(
       :encryption_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1339,6 +1390,7 @@ module Aws::XRay
       :ec2_instance_id,
       :hostname,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1362,6 +1414,7 @@ module Aws::XRay
     #
     class PutTraceSegmentsRequest < Struct.new(
       :trace_segment_documents)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1373,6 +1426,7 @@ module Aws::XRay
     #
     class PutTraceSegmentsResult < Struct.new(
       :unprocessed_trace_segments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1386,6 +1440,7 @@ module Aws::XRay
     #
     class ResourceARNDetail < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1405,6 +1460,7 @@ module Aws::XRay
     class ResponseTimeRootCause < Struct.new(
       :services,
       :client_impacting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1429,6 +1485,7 @@ module Aws::XRay
       :name,
       :coverage,
       :remote)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1469,6 +1526,7 @@ module Aws::XRay
       :account_id,
       :entity_path,
       :inferred)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1487,6 +1545,7 @@ module Aws::XRay
     class RootCauseException < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1499,6 +1558,7 @@ module Aws::XRay
     #
     class RuleLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1603,6 +1663,7 @@ module Aws::XRay
       :url_path,
       :version,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1626,6 +1687,7 @@ module Aws::XRay
       :sampling_rule,
       :created_at,
       :modified_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1721,6 +1783,7 @@ module Aws::XRay
       :http_method,
       :url_path,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1755,6 +1818,7 @@ module Aws::XRay
       :request_count,
       :borrow_count,
       :sampled_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1807,6 +1871,7 @@ module Aws::XRay
       :request_count,
       :sampled_count,
       :borrow_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1833,6 +1898,7 @@ module Aws::XRay
     class SamplingStrategy < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1871,6 +1937,7 @@ module Aws::XRay
       :reservoir_quota,
       :reservoir_quota_ttl,
       :interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1899,6 +1966,7 @@ module Aws::XRay
     class Segment < Struct.new(
       :id,
       :document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1989,6 +2057,7 @@ module Aws::XRay
       :summary_statistics,
       :duration_histogram,
       :response_time_histogram)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2011,6 +2080,7 @@ module Aws::XRay
       :names,
       :account_id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2047,6 +2117,7 @@ module Aws::XRay
       :fault_statistics,
       :total_count,
       :total_response_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2096,6 +2167,7 @@ module Aws::XRay
       :segments_spillover_count,
       :segments_rejected_count,
       :backend_connection_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2108,6 +2180,7 @@ module Aws::XRay
     #
     class ThrottledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2136,6 +2209,7 @@ module Aws::XRay
       :edge_summary_statistics,
       :service_summary_statistics,
       :response_time_histogram)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2162,6 +2236,7 @@ module Aws::XRay
       :id,
       :duration,
       :segments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2282,6 +2357,7 @@ module Aws::XRay
       :response_time_root_causes,
       :revision,
       :matched_event_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2300,6 +2376,7 @@ module Aws::XRay
     class TraceUser < Struct.new(
       :user_name,
       :service_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2324,6 +2401,7 @@ module Aws::XRay
       :rule_name,
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2347,6 +2425,7 @@ module Aws::XRay
       :id,
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2378,6 +2457,7 @@ module Aws::XRay
       :group_name,
       :group_arn,
       :filter_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2391,6 +2471,7 @@ module Aws::XRay
     #
     class UpdateGroupResult < Struct.new(
       :group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2424,6 +2505,7 @@ module Aws::XRay
     #
     class UpdateSamplingRuleRequest < Struct.new(
       :sampling_rule_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2435,6 +2517,7 @@ module Aws::XRay
     #
     class UpdateSamplingRuleResult < Struct.new(
       :sampling_rule_record)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2453,6 +2536,7 @@ module Aws::XRay
     class ValueWithServiceIds < Struct.new(
       :annotation_value,
       :service_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 

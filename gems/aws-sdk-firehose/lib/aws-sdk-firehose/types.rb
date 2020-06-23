@@ -49,6 +49,7 @@ module Aws::Firehose
     class BufferingHints < Struct.new(
       :size_in_m_bs,
       :interval_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -84,6 +85,7 @@ module Aws::Firehose
       :enabled,
       :log_group_name,
       :log_stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -98,6 +100,7 @@ module Aws::Firehose
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -157,6 +160,7 @@ module Aws::Firehose
       :data_table_name,
       :data_table_columns,
       :copy_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -584,6 +588,7 @@ module Aws::Firehose
       :elasticsearch_destination_configuration,
       :splunk_destination_configuration,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -595,6 +600,7 @@ module Aws::Firehose
     #
     class CreateDeliveryStreamOutput < Struct.new(
       :delivery_stream_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -692,6 +698,7 @@ module Aws::Firehose
       :input_format_configuration,
       :output_format_configuration,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -729,6 +736,7 @@ module Aws::Firehose
     class DeleteDeliveryStreamInput < Struct.new(
       :delivery_stream_name,
       :allow_force_delete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -824,6 +832,7 @@ module Aws::Firehose
       :source,
       :destinations,
       :has_more_destinations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -873,6 +882,7 @@ module Aws::Firehose
       :key_type,
       :status,
       :failure_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -931,6 +941,7 @@ module Aws::Firehose
     class DeliveryStreamEncryptionConfigurationInput < Struct.new(
       :key_arn,
       :key_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -964,6 +975,7 @@ module Aws::Firehose
       :delivery_stream_name,
       :limit,
       :exclusive_start_destination_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -975,6 +987,7 @@ module Aws::Firehose
     #
     class DescribeDeliveryStreamOutput < Struct.new(
       :delivery_stream_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1028,6 +1041,7 @@ module Aws::Firehose
     class Deserializer < Struct.new(
       :open_x_json_ser_de,
       :hive_json_ser_de)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1066,6 +1080,7 @@ module Aws::Firehose
       :redshift_destination_description,
       :elasticsearch_destination_description,
       :splunk_destination_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1101,6 +1116,7 @@ module Aws::Firehose
     class ElasticsearchBufferingHints < Struct.new(
       :interval_in_seconds,
       :size_in_m_bs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1287,6 +1303,7 @@ module Aws::Firehose
       :processing_configuration,
       :cloud_watch_logging_options,
       :vpc_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1378,6 +1395,7 @@ module Aws::Firehose
       :processing_configuration,
       :cloud_watch_logging_options,
       :vpc_configuration_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1540,6 +1558,7 @@ module Aws::Firehose
       :s3_update,
       :processing_configuration,
       :cloud_watch_logging_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1565,6 +1584,7 @@ module Aws::Firehose
     #
     class ElasticsearchRetryOptions < Struct.new(
       :duration_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1594,6 +1614,7 @@ module Aws::Firehose
     class EncryptionConfiguration < Struct.new(
       :no_encryption_config,
       :kms_encryption_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1802,6 +1823,7 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_backup_configuration,
       :data_format_conversion_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1898,6 +1920,7 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_backup_description,
       :data_format_conversion_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2106,6 +2129,7 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_backup_update,
       :data_format_conversion_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2126,6 +2150,7 @@ module Aws::Firehose
     class FailureDescription < Struct.new(
       :type,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2162,6 +2187,7 @@ module Aws::Firehose
     #
     class HiveJsonSerDe < Struct.new(
       :timestamp_formats)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2197,6 +2223,7 @@ module Aws::Firehose
     #
     class InputFormatConfiguration < Struct.new(
       :deserializer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2210,6 +2237,7 @@ module Aws::Firehose
     #
     class InvalidArgumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2230,6 +2258,7 @@ module Aws::Firehose
     class InvalidKMSResourceException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2257,6 +2286,7 @@ module Aws::Firehose
     #
     class KMSEncryptionConfig < Struct.new(
       :awskms_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2295,6 +2325,7 @@ module Aws::Firehose
     class KinesisStreamSourceConfiguration < Struct.new(
       :kinesis_stream_arn,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2332,6 +2363,7 @@ module Aws::Firehose
       :kinesis_stream_arn,
       :role_arn,
       :delivery_start_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2345,6 +2377,7 @@ module Aws::Firehose
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2388,6 +2421,7 @@ module Aws::Firehose
       :limit,
       :delivery_stream_type,
       :exclusive_start_delivery_stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2404,6 +2438,7 @@ module Aws::Firehose
     class ListDeliveryStreamsOutput < Struct.new(
       :delivery_stream_names,
       :has_more_delivery_streams)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2439,6 +2474,7 @@ module Aws::Firehose
       :delivery_stream_name,
       :exclusive_start_tag_key,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2459,6 +2495,7 @@ module Aws::Firehose
     class ListTagsForDeliveryStreamOutput < Struct.new(
       :tags,
       :has_more_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2510,6 +2547,7 @@ module Aws::Firehose
       :convert_dots_in_json_keys_to_underscores,
       :case_insensitive,
       :column_to_json_key_mappings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2617,6 +2655,7 @@ module Aws::Firehose
       :bloom_filter_false_positive_probability,
       :dictionary_key_threshold,
       :format_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2662,6 +2701,7 @@ module Aws::Firehose
     #
     class OutputFormatConfiguration < Struct.new(
       :serializer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2729,6 +2769,7 @@ module Aws::Firehose
       :enable_dictionary_compression,
       :max_padding_bytes,
       :writer_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2765,6 +2806,7 @@ module Aws::Firehose
     class ProcessingConfiguration < Struct.new(
       :enabled,
       :processors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2796,6 +2838,7 @@ module Aws::Firehose
     class Processor < Struct.new(
       :type,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2822,6 +2865,7 @@ module Aws::Firehose
     class ProcessorParameter < Struct.new(
       :parameter_name,
       :parameter_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2850,6 +2894,7 @@ module Aws::Firehose
     class PutRecordBatchInput < Struct.new(
       :delivery_stream_name,
       :records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2876,6 +2921,7 @@ module Aws::Firehose
       :failed_put_count,
       :encrypted,
       :request_responses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2903,6 +2949,7 @@ module Aws::Firehose
       :record_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2929,6 +2976,7 @@ module Aws::Firehose
     class PutRecordInput < Struct.new(
       :delivery_stream_name,
       :record)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2946,6 +2994,7 @@ module Aws::Firehose
     class PutRecordOutput < Struct.new(
       :record_id,
       :encrypted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2968,6 +3017,7 @@ module Aws::Firehose
     #
     class Record < Struct.new(
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3128,6 +3178,7 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_backup_configuration,
       :cloud_watch_logging_options)
+      SENSITIVE = [:username, :password]
       include Aws::Structure
     end
 
@@ -3194,6 +3245,7 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_backup_description,
       :cloud_watch_logging_options)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -3352,6 +3404,7 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_backup_update,
       :cloud_watch_logging_options)
+      SENSITIVE = [:username, :password]
       include Aws::Structure
     end
 
@@ -3378,6 +3431,7 @@ module Aws::Firehose
     #
     class RedshiftRetryOptions < Struct.new(
       :duration_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3391,6 +3445,7 @@ module Aws::Firehose
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3404,6 +3459,7 @@ module Aws::Firehose
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3509,6 +3565,7 @@ module Aws::Firehose
       :compression_format,
       :encryption_configuration,
       :cloud_watch_logging_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3584,6 +3641,7 @@ module Aws::Firehose
       :compression_format,
       :encryption_configuration,
       :cloud_watch_logging_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3689,6 +3747,7 @@ module Aws::Firehose
       :compression_format,
       :encryption_configuration,
       :cloud_watch_logging_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3750,6 +3809,7 @@ module Aws::Firehose
       :table_name,
       :region,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3813,6 +3873,7 @@ module Aws::Firehose
     class Serializer < Struct.new(
       :parquet_ser_de,
       :orc_ser_de)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3834,6 +3895,7 @@ module Aws::Firehose
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3849,6 +3911,7 @@ module Aws::Firehose
     #
     class SourceDescription < Struct.new(
       :kinesis_stream_source_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3969,6 +4032,7 @@ module Aws::Firehose
       :s3_configuration,
       :processing_configuration,
       :cloud_watch_logging_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4034,6 +4098,7 @@ module Aws::Firehose
       :s3_destination_description,
       :processing_configuration,
       :cloud_watch_logging_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4154,6 +4219,7 @@ module Aws::Firehose
       :s3_update,
       :processing_configuration,
       :cloud_watch_logging_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4180,6 +4246,7 @@ module Aws::Firehose
     #
     class SplunkRetryOptions < Struct.new(
       :duration_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4209,6 +4276,7 @@ module Aws::Firehose
     class StartDeliveryStreamEncryptionInput < Struct.new(
       :delivery_stream_name,
       :delivery_stream_encryption_configuration_input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4232,6 +4300,7 @@ module Aws::Firehose
     #
     class StopDeliveryStreamEncryptionInput < Struct.new(
       :delivery_stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4267,6 +4336,7 @@ module Aws::Firehose
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4296,6 +4366,7 @@ module Aws::Firehose
     class TagDeliveryStreamInput < Struct.new(
       :delivery_stream_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4325,6 +4396,7 @@ module Aws::Firehose
     class UntagDeliveryStreamInput < Struct.new(
       :delivery_stream_name,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4705,6 +4777,7 @@ module Aws::Firehose
       :redshift_destination_update,
       :elasticsearch_destination_update,
       :splunk_destination_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4762,6 +4835,7 @@ module Aws::Firehose
       :subnet_ids,
       :role_arn,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4811,6 +4885,7 @@ module Aws::Firehose
       :role_arn,
       :security_group_ids,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 

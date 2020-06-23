@@ -28,6 +28,7 @@ module Aws::AppConfig
       :id,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45,6 +46,7 @@ module Aws::AppConfig
     class Applications < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -58,6 +60,7 @@ module Aws::AppConfig
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -84,6 +87,7 @@ module Aws::AppConfig
       :content,
       :configuration_version,
       :content_type)
+      SENSITIVE = [:content]
       include Aws::Structure
     end
 
@@ -126,6 +130,7 @@ module Aws::AppConfig
       :location_uri,
       :retrieval_role_arn,
       :validators)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -159,6 +164,7 @@ module Aws::AppConfig
       :name,
       :location_uri,
       :validator_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -176,6 +182,7 @@ module Aws::AppConfig
     class ConfigurationProfiles < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -189,6 +196,7 @@ module Aws::AppConfig
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -223,6 +231,7 @@ module Aws::AppConfig
       :name,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -295,6 +304,7 @@ module Aws::AppConfig
       :retrieval_role_arn,
       :validators,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -388,6 +398,7 @@ module Aws::AppConfig
       :growth_type,
       :replicate_to,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -439,6 +450,7 @@ module Aws::AppConfig
       :description,
       :monitors,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -496,6 +508,7 @@ module Aws::AppConfig
       :content,
       :content_type,
       :latest_version_number)
+      SENSITIVE = [:content]
       include Aws::Structure
     end
 
@@ -514,6 +527,7 @@ module Aws::AppConfig
     #
     class DeleteApplicationRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -539,6 +553,7 @@ module Aws::AppConfig
     class DeleteConfigurationProfileRequest < Struct.new(
       :application_id,
       :configuration_profile_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -557,6 +572,7 @@ module Aws::AppConfig
     #
     class DeleteDeploymentStrategyRequest < Struct.new(
       :deployment_strategy_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -581,6 +597,7 @@ module Aws::AppConfig
     class DeleteEnvironmentRequest < Struct.new(
       :application_id,
       :environment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -611,6 +628,7 @@ module Aws::AppConfig
       :application_id,
       :configuration_profile_id,
       :version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -711,6 +729,7 @@ module Aws::AppConfig
       :percentage_complete,
       :started_at,
       :completed_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -748,6 +767,7 @@ module Aws::AppConfig
       :triggered_by,
       :description,
       :occurred_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -765,6 +785,7 @@ module Aws::AppConfig
     class DeploymentStrategies < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -814,6 +835,7 @@ module Aws::AppConfig
       :growth_factor,
       :final_bake_time_in_minutes,
       :replicate_to)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -880,6 +902,7 @@ module Aws::AppConfig
       :percentage_complete,
       :started_at,
       :completed_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -897,6 +920,7 @@ module Aws::AppConfig
     class Deployments < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -935,6 +959,7 @@ module Aws::AppConfig
       :description,
       :state,
       :monitors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -952,6 +977,7 @@ module Aws::AppConfig
     class Environments < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -970,6 +996,7 @@ module Aws::AppConfig
     #
     class GetApplicationRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -995,6 +1022,7 @@ module Aws::AppConfig
     class GetConfigurationProfileRequest < Struct.new(
       :application_id,
       :configuration_profile_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1062,6 +1090,7 @@ module Aws::AppConfig
       :configuration,
       :client_id,
       :client_configuration_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1094,6 +1123,7 @@ module Aws::AppConfig
       :application_id,
       :environment_id,
       :deployment_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1112,6 +1142,7 @@ module Aws::AppConfig
     #
     class GetDeploymentStrategyRequest < Struct.new(
       :deployment_strategy_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1137,6 +1168,7 @@ module Aws::AppConfig
     class GetEnvironmentRequest < Struct.new(
       :application_id,
       :environment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1167,6 +1199,7 @@ module Aws::AppConfig
       :application_id,
       :configuration_profile_id,
       :version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1208,6 +1241,7 @@ module Aws::AppConfig
       :description,
       :content,
       :content_type)
+      SENSITIVE = [:content]
       include Aws::Structure
     end
 
@@ -1246,6 +1280,7 @@ module Aws::AppConfig
       :version_number,
       :description,
       :content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1263,6 +1298,7 @@ module Aws::AppConfig
     class HostedConfigurationVersions < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1275,6 +1311,7 @@ module Aws::AppConfig
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1302,6 +1339,7 @@ module Aws::AppConfig
     class ListApplicationsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1335,6 +1373,7 @@ module Aws::AppConfig
       :application_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1362,6 +1401,7 @@ module Aws::AppConfig
     class ListDeploymentStrategiesRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1401,6 +1441,7 @@ module Aws::AppConfig
       :environment_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1434,6 +1475,7 @@ module Aws::AppConfig
       :application_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1473,6 +1515,7 @@ module Aws::AppConfig
       :configuration_profile_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1491,6 +1534,7 @@ module Aws::AppConfig
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1517,6 +1561,7 @@ module Aws::AppConfig
     class Monitor < Struct.new(
       :alarm_arn,
       :alarm_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1541,6 +1586,7 @@ module Aws::AppConfig
       :measure,
       :limit,
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1557,6 +1603,7 @@ module Aws::AppConfig
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1570,6 +1617,7 @@ module Aws::AppConfig
     #
     class ResourceTags < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1584,6 +1632,7 @@ module Aws::AppConfig
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1642,6 +1691,7 @@ module Aws::AppConfig
       :configuration_version,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1672,6 +1722,7 @@ module Aws::AppConfig
       :application_id,
       :environment_id,
       :deployment_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1700,6 +1751,7 @@ module Aws::AppConfig
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1724,6 +1776,7 @@ module Aws::AppConfig
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1754,6 +1807,7 @@ module Aws::AppConfig
       :application_id,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1808,6 +1862,7 @@ module Aws::AppConfig
       :description,
       :retrieval_role_arn,
       :validators)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1886,6 +1941,7 @@ module Aws::AppConfig
       :final_bake_time_in_minutes,
       :growth_factor,
       :growth_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1933,6 +1989,7 @@ module Aws::AppConfig
       :name,
       :description,
       :monitors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1963,6 +2020,7 @@ module Aws::AppConfig
       :application_id,
       :configuration_profile_id,
       :configuration_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1995,6 +2053,7 @@ module Aws::AppConfig
     class Validator < Struct.new(
       :type,
       :content)
+      SENSITIVE = [:content]
       include Aws::Structure
     end
 

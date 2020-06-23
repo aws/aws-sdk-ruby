@@ -34,6 +34,7 @@ module Aws::Redshift
     class AcceptReservedNodeExchangeInputMessage < Struct.new(
       :reserved_node_id,
       :target_reserved_node_offering_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44,6 +45,7 @@ module Aws::Redshift
     #
     class AcceptReservedNodeExchangeOutputMessage < Struct.new(
       :exchanged_reserved_node)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -69,6 +71,7 @@ module Aws::Redshift
     class AccountAttribute < Struct.new(
       :attribute_name,
       :attribute_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -80,6 +83,7 @@ module Aws::Redshift
     #
     class AccountAttributeList < Struct.new(
       :account_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -101,6 +105,7 @@ module Aws::Redshift
     class AccountWithRestoreAccess < Struct.new(
       :account_id,
       :account_alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -114,6 +119,7 @@ module Aws::Redshift
     #
     class AttributeValueTarget < Struct.new(
       :attribute_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -176,6 +182,7 @@ module Aws::Redshift
       :cidrip,
       :ec2_security_group_name,
       :ec2_security_group_owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -187,6 +194,7 @@ module Aws::Redshift
     #
     class AuthorizeClusterSecurityGroupIngressResult < Struct.new(
       :cluster_security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -224,6 +232,7 @@ module Aws::Redshift
       :snapshot_identifier,
       :snapshot_cluster_identifier,
       :account_with_restore_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -235,6 +244,7 @@ module Aws::Redshift
     #
     class AuthorizeSnapshotAccessResult < Struct.new(
       :snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -252,6 +262,7 @@ module Aws::Redshift
     class AvailabilityZone < Struct.new(
       :name,
       :supported_platforms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -275,6 +286,7 @@ module Aws::Redshift
     #
     class BatchDeleteClusterSnapshotsRequest < Struct.new(
       :identifiers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -291,6 +303,7 @@ module Aws::Redshift
     class BatchDeleteClusterSnapshotsResult < Struct.new(
       :resources,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -344,6 +357,7 @@ module Aws::Redshift
       :snapshot_identifier_list,
       :manual_snapshot_retention_period,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -360,6 +374,7 @@ module Aws::Redshift
     class BatchModifyClusterSnapshotsOutputMessage < Struct.new(
       :resources,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -385,6 +400,7 @@ module Aws::Redshift
     #
     class CancelResizeMessage < Struct.new(
       :cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -738,6 +754,7 @@ module Aws::Redshift
       :expected_next_snapshot_schedule_time_status,
       :next_maintenance_window_start_time,
       :resize_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -758,6 +775,7 @@ module Aws::Redshift
     class ClusterAssociatedToSchedule < Struct.new(
       :cluster_identifier,
       :schedule_association_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -789,6 +807,7 @@ module Aws::Redshift
       :db_user,
       :db_password,
       :expiration)
+      SENSITIVE = [:db_password]
       include Aws::Structure
     end
 
@@ -818,6 +837,7 @@ module Aws::Redshift
       :current_database_revision,
       :database_revision_release_date,
       :revision_targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -838,6 +858,7 @@ module Aws::Redshift
     class ClusterDbRevisionsMessage < Struct.new(
       :marker,
       :cluster_db_revisions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -869,6 +890,7 @@ module Aws::Redshift
     class ClusterIamRole < Struct.new(
       :iam_role_arn,
       :apply_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -892,6 +914,7 @@ module Aws::Redshift
       :node_role,
       :private_ip_address,
       :public_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -934,6 +957,7 @@ module Aws::Redshift
       :parameter_group_family,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -964,6 +988,7 @@ module Aws::Redshift
     class ClusterParameterGroupDetails < Struct.new(
       :parameters,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -982,6 +1007,7 @@ module Aws::Redshift
     class ClusterParameterGroupNameMessage < Struct.new(
       :parameter_group_name,
       :parameter_group_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1033,6 +1059,7 @@ module Aws::Redshift
       :parameter_group_name,
       :parameter_apply_status,
       :cluster_parameter_status_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1057,6 +1084,7 @@ module Aws::Redshift
     class ClusterParameterGroupsMessage < Struct.new(
       :marker,
       :parameter_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1104,6 +1132,7 @@ module Aws::Redshift
       :parameter_name,
       :parameter_apply_status,
       :parameter_apply_error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1153,6 +1182,7 @@ module Aws::Redshift
       :ec2_security_groups,
       :ip_ranges,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1177,6 +1207,7 @@ module Aws::Redshift
     class ClusterSecurityGroupMembership < Struct.new(
       :cluster_security_group_name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1198,6 +1229,7 @@ module Aws::Redshift
     class ClusterSecurityGroupMessage < Struct.new(
       :marker,
       :cluster_security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1260,6 +1292,7 @@ module Aws::Redshift
       :retention_period,
       :manual_snapshot_retention_period,
       :snapshot_copy_grant_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1313,6 +1346,7 @@ module Aws::Redshift
       :subnet_group_status,
       :subnets,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1343,6 +1377,7 @@ module Aws::Redshift
     class ClusterSubnetGroupMessage < Struct.new(
       :marker,
       :cluster_subnet_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1400,6 +1435,7 @@ module Aws::Redshift
       :cluster_version,
       :cluster_parameter_group_family,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1423,6 +1459,7 @@ module Aws::Redshift
     class ClusterVersionsMessage < Struct.new(
       :marker,
       :cluster_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1447,6 +1484,7 @@ module Aws::Redshift
     class ClustersMessage < Struct.new(
       :marker,
       :clusters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1516,6 +1554,7 @@ module Aws::Redshift
       :source_snapshot_cluster_identifier,
       :target_snapshot_identifier,
       :manual_snapshot_retention_period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1527,6 +1566,7 @@ module Aws::Redshift
     #
     class CopyClusterSnapshotResult < Struct.new(
       :snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1962,6 +2002,7 @@ module Aws::Redshift
       :iam_roles,
       :maintenance_track_name,
       :snapshot_schedule_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2027,6 +2068,7 @@ module Aws::Redshift
       :parameter_group_family,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2038,6 +2080,7 @@ module Aws::Redshift
     #
     class CreateClusterParameterGroupResult < Struct.new(
       :cluster_parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2049,6 +2092,7 @@ module Aws::Redshift
     #
     class CreateClusterResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2096,6 +2140,7 @@ module Aws::Redshift
       :cluster_security_group_name,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2107,6 +2152,7 @@ module Aws::Redshift
     #
     class CreateClusterSecurityGroupResult < Struct.new(
       :cluster_security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2166,6 +2212,7 @@ module Aws::Redshift
       :cluster_identifier,
       :manual_snapshot_retention_period,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2177,6 +2224,7 @@ module Aws::Redshift
     #
     class CreateClusterSnapshotResult < Struct.new(
       :snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2231,6 +2279,7 @@ module Aws::Redshift
       :description,
       :subnet_ids,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2242,6 +2291,7 @@ module Aws::Redshift
     #
     class CreateClusterSubnetGroupResult < Struct.new(
       :cluster_subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2343,6 +2393,7 @@ module Aws::Redshift
       :severity,
       :enabled,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2354,6 +2405,7 @@ module Aws::Redshift
     #
     class CreateEventSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2385,6 +2437,7 @@ module Aws::Redshift
     class CreateHsmClientCertificateMessage < Struct.new(
       :hsm_client_certificate_identifier,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2398,6 +2451,7 @@ module Aws::Redshift
     #
     class CreateHsmClientCertificateResult < Struct.new(
       :hsm_client_certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2461,6 +2515,7 @@ module Aws::Redshift
       :hsm_partition_password,
       :hsm_server_public_certificate,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2475,6 +2530,7 @@ module Aws::Redshift
     #
     class CreateHsmConfigurationResult < Struct.new(
       :hsm_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2561,6 +2617,7 @@ module Aws::Redshift
       :start_time,
       :end_time,
       :enable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2613,6 +2670,7 @@ module Aws::Redshift
       :snapshot_copy_grant_name,
       :kms_key_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2634,6 +2692,7 @@ module Aws::Redshift
     #
     class CreateSnapshotCopyGrantResult < Struct.new(
       :snapshot_copy_grant)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2688,6 +2747,7 @@ module Aws::Redshift
       :tags,
       :dry_run,
       :next_invocations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2727,6 +2787,7 @@ module Aws::Redshift
     class CreateTagsMessage < Struct.new(
       :resource_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2794,6 +2855,7 @@ module Aws::Redshift
       :period,
       :breach_action,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2810,6 +2872,7 @@ module Aws::Redshift
     class CustomerStorageMessage < Struct.new(
       :total_backup_size_in_mega_bytes,
       :total_provisioned_storage_in_mega_bytes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2853,6 +2916,7 @@ module Aws::Redshift
       :data_transferred_in_mega_bytes,
       :estimated_time_to_completion_in_seconds,
       :elapsed_time_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2882,6 +2946,7 @@ module Aws::Redshift
       :parameter_group_family,
       :marker,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2907,6 +2972,7 @@ module Aws::Redshift
       :defer_maintenance_identifier,
       :defer_maintenance_start_time,
       :defer_maintenance_end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2978,6 +3044,7 @@ module Aws::Redshift
       :skip_final_cluster_snapshot,
       :final_cluster_snapshot_identifier,
       :final_cluster_snapshot_retention_period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3002,6 +3069,7 @@ module Aws::Redshift
     #
     class DeleteClusterParameterGroupMessage < Struct.new(
       :parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3013,6 +3081,7 @@ module Aws::Redshift
     #
     class DeleteClusterResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3031,6 +3100,7 @@ module Aws::Redshift
     #
     class DeleteClusterSecurityGroupMessage < Struct.new(
       :cluster_security_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3063,6 +3133,7 @@ module Aws::Redshift
     class DeleteClusterSnapshotMessage < Struct.new(
       :snapshot_identifier,
       :snapshot_cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3074,6 +3145,7 @@ module Aws::Redshift
     #
     class DeleteClusterSnapshotResult < Struct.new(
       :snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3092,6 +3164,7 @@ module Aws::Redshift
     #
     class DeleteClusterSubnetGroupMessage < Struct.new(
       :cluster_subnet_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3111,6 +3184,7 @@ module Aws::Redshift
     #
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3129,6 +3203,7 @@ module Aws::Redshift
     #
     class DeleteHsmClientCertificateMessage < Struct.new(
       :hsm_client_certificate_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3148,6 +3223,7 @@ module Aws::Redshift
     #
     class DeleteHsmConfigurationMessage < Struct.new(
       :hsm_configuration_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3166,6 +3242,7 @@ module Aws::Redshift
     #
     class DeleteScheduledActionMessage < Struct.new(
       :scheduled_action_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3186,6 +3263,7 @@ module Aws::Redshift
     #
     class DeleteSnapshotCopyGrantMessage < Struct.new(
       :snapshot_copy_grant_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3204,6 +3282,7 @@ module Aws::Redshift
     #
     class DeleteSnapshotScheduleMessage < Struct.new(
       :schedule_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3232,6 +3311,7 @@ module Aws::Redshift
     class DeleteTagsMessage < Struct.new(
       :resource_name,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3250,6 +3330,7 @@ module Aws::Redshift
     #
     class DeleteUsageLimitMessage < Struct.new(
       :usage_limit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3283,6 +3364,7 @@ module Aws::Redshift
     #
     class DescribeAccountAttributesMessage < Struct.new(
       :attribute_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3333,6 +3415,7 @@ module Aws::Redshift
       :cluster_identifier,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3403,6 +3486,7 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3460,6 +3544,7 @@ module Aws::Redshift
       :source,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3535,6 +3620,7 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3692,6 +3778,7 @@ module Aws::Redshift
       :tag_values,
       :cluster_exists,
       :sorting_entities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3761,6 +3848,7 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3798,6 +3886,7 @@ module Aws::Redshift
       :maintenance_track_name,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3859,6 +3948,7 @@ module Aws::Redshift
       :cluster_parameter_group_family,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3932,6 +4022,7 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3976,6 +4067,7 @@ module Aws::Redshift
       :parameter_group_family,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3988,6 +4080,7 @@ module Aws::Redshift
     #
     class DescribeDefaultClusterParametersResult < Struct.new(
       :default_cluster_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4010,6 +4103,7 @@ module Aws::Redshift
     #
     class DescribeEventCategoriesMessage < Struct.new(
       :source_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4079,6 +4173,7 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4202,6 +4297,7 @@ module Aws::Redshift
       :duration,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4273,6 +4369,7 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4343,6 +4440,7 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4363,6 +4461,7 @@ module Aws::Redshift
     #
     class DescribeLoggingStatusMessage < Struct.new(
       :cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4446,6 +4545,7 @@ module Aws::Redshift
       :filters,
       :marker,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4503,6 +4603,7 @@ module Aws::Redshift
       :node_type,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4547,6 +4648,7 @@ module Aws::Redshift
       :reserved_node_offering_id,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4590,6 +4692,7 @@ module Aws::Redshift
       :reserved_node_id,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4612,6 +4715,7 @@ module Aws::Redshift
     #
     class DescribeResizeMessage < Struct.new(
       :cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4696,6 +4800,7 @@ module Aws::Redshift
       :filters,
       :marker,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4768,6 +4873,7 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4826,6 +4932,7 @@ module Aws::Redshift
       :tag_values,
       :marker,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4847,6 +4954,7 @@ module Aws::Redshift
     class DescribeSnapshotSchedulesOutputMessage < Struct.new(
       :snapshot_schedules,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4892,6 +5000,7 @@ module Aws::Redshift
       :table_restore_request_id,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4992,6 +5101,7 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5072,6 +5182,7 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5092,6 +5203,7 @@ module Aws::Redshift
     #
     class DisableLoggingMessage < Struct.new(
       :cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5114,6 +5226,7 @@ module Aws::Redshift
     #
     class DisableSnapshotCopyMessage < Struct.new(
       :cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5125,6 +5238,7 @@ module Aws::Redshift
     #
     class DisableSnapshotCopyResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5154,6 +5268,7 @@ module Aws::Redshift
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5172,6 +5287,7 @@ module Aws::Redshift
     class ElasticIpStatus < Struct.new(
       :elastic_ip,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5229,6 +5345,7 @@ module Aws::Redshift
       :cluster_identifier,
       :bucket_name,
       :s3_key_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5293,6 +5410,7 @@ module Aws::Redshift
       :retention_period,
       :snapshot_copy_grant_name,
       :manual_snapshot_retention_period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5304,6 +5422,7 @@ module Aws::Redshift
     #
     class EnableSnapshotCopyResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5322,6 +5441,7 @@ module Aws::Redshift
     class Endpoint < Struct.new(
       :address,
       :port)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5369,6 +5489,7 @@ module Aws::Redshift
       :severity,
       :date,
       :event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5388,6 +5509,7 @@ module Aws::Redshift
     class EventCategoriesMap < Struct.new(
       :source_type,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5399,6 +5521,7 @@ module Aws::Redshift
     #
     class EventCategoriesMessage < Struct.new(
       :event_categories_map_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5429,6 +5552,7 @@ module Aws::Redshift
       :event_categories,
       :event_description,
       :severity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5516,6 +5640,7 @@ module Aws::Redshift
       :severity,
       :enabled,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5550,6 +5675,7 @@ module Aws::Redshift
     class EventSubscriptionsMessage < Struct.new(
       :marker,
       :event_subscriptions_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5571,6 +5697,7 @@ module Aws::Redshift
     class EventsMessage < Struct.new(
       :marker,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5702,6 +5829,7 @@ module Aws::Redshift
       :duration_seconds,
       :auto_create,
       :db_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5735,6 +5863,7 @@ module Aws::Redshift
       :reserved_node_id,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5757,6 +5886,7 @@ module Aws::Redshift
     class GetReservedNodeExchangeOfferingsOutputMessage < Struct.new(
       :marker,
       :reserved_node_offerings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5783,6 +5913,7 @@ module Aws::Redshift
       :hsm_client_certificate_identifier,
       :hsm_client_certificate_public_key,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5813,6 +5944,7 @@ module Aws::Redshift
     class HsmClientCertificateMessage < Struct.new(
       :marker,
       :hsm_client_certificates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5870,6 +6002,7 @@ module Aws::Redshift
       :hsm_ip_address,
       :hsm_partition_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5898,6 +6031,7 @@ module Aws::Redshift
     class HsmConfigurationMessage < Struct.new(
       :marker,
       :hsm_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5946,6 +6080,7 @@ module Aws::Redshift
       :hsm_client_certificate_identifier,
       :hsm_configuration_identifier,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5969,6 +6104,7 @@ module Aws::Redshift
       :status,
       :cidrip,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6212,6 +6348,7 @@ module Aws::Redshift
       :last_successful_delivery_time,
       :last_failure_time,
       :last_failure_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6242,6 +6379,7 @@ module Aws::Redshift
       :maintenance_track_name,
       :database_version,
       :update_targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6270,6 +6408,7 @@ module Aws::Redshift
     class ModifyClusterDbRevisionMessage < Struct.new(
       :cluster_identifier,
       :revision_target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6281,6 +6420,7 @@ module Aws::Redshift
     #
     class ModifyClusterDbRevisionResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6316,6 +6456,7 @@ module Aws::Redshift
       :cluster_identifier,
       :add_iam_roles,
       :remove_iam_roles)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6327,6 +6468,7 @@ module Aws::Redshift
     #
     class ModifyClusterIamRolesResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6380,6 +6522,7 @@ module Aws::Redshift
       :defer_maintenance_start_time,
       :defer_maintenance_end_time,
       :defer_maintenance_duration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6391,6 +6534,7 @@ module Aws::Redshift
     #
     class ModifyClusterMaintenanceResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6721,6 +6865,7 @@ module Aws::Redshift
       :maintenance_track_name,
       :encrypted,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6765,6 +6910,7 @@ module Aws::Redshift
     class ModifyClusterParameterGroupMessage < Struct.new(
       :parameter_group_name,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6776,6 +6922,7 @@ module Aws::Redshift
     #
     class ModifyClusterResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6813,6 +6960,7 @@ module Aws::Redshift
       :snapshot_identifier,
       :manual_snapshot_retention_period,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6824,6 +6972,7 @@ module Aws::Redshift
     #
     class ModifyClusterSnapshotResult < Struct.new(
       :snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6857,6 +7006,7 @@ module Aws::Redshift
       :cluster_identifier,
       :schedule_identifier,
       :disassociate_schedule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6888,6 +7038,7 @@ module Aws::Redshift
       :cluster_subnet_group_name,
       :description,
       :subnet_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6899,6 +7050,7 @@ module Aws::Redshift
     #
     class ModifyClusterSubnetGroupResult < Struct.new(
       :cluster_subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6979,6 +7131,7 @@ module Aws::Redshift
       :event_categories,
       :severity,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6990,6 +7143,7 @@ module Aws::Redshift
     #
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7071,6 +7225,7 @@ module Aws::Redshift
       :start_time,
       :end_time,
       :enable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7128,6 +7283,7 @@ module Aws::Redshift
       :cluster_identifier,
       :retention_period,
       :manual)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7139,6 +7295,7 @@ module Aws::Redshift
     #
     class ModifySnapshotCopyRetentionPeriodResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7165,6 +7322,7 @@ module Aws::Redshift
     class ModifySnapshotScheduleMessage < Struct.new(
       :schedule_identifier,
       :schedule_definitions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7197,6 +7355,7 @@ module Aws::Redshift
       :usage_limit_id,
       :amount,
       :breach_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7225,6 +7384,7 @@ module Aws::Redshift
       :number_of_nodes,
       :estimated_disk_utilization_percent,
       :mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7264,6 +7424,7 @@ module Aws::Redshift
       :name,
       :operator,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7285,6 +7446,7 @@ module Aws::Redshift
     class NodeConfigurationOptionsMessage < Struct.new(
       :node_configuration_option_list,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7331,6 +7493,7 @@ module Aws::Redshift
       :cluster_type,
       :node_type,
       :availability_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7355,6 +7518,7 @@ module Aws::Redshift
     class OrderableClusterOptionsMessage < Struct.new(
       :orderable_cluster_options,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7435,6 +7599,7 @@ module Aws::Redshift
       :apply_type,
       :is_modifiable,
       :minimum_engine_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7453,6 +7618,7 @@ module Aws::Redshift
     #
     class PauseClusterMessage < Struct.new(
       :cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7464,6 +7630,7 @@ module Aws::Redshift
     #
     class PauseClusterResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7548,6 +7715,7 @@ module Aws::Redshift
       :enhanced_vpc_routing,
       :maintenance_track_name,
       :encryption_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7575,6 +7743,7 @@ module Aws::Redshift
     class PurchaseReservedNodeOfferingMessage < Struct.new(
       :reserved_node_offering_id,
       :node_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7588,6 +7757,7 @@ module Aws::Redshift
     #
     class PurchaseReservedNodeOfferingResult < Struct.new(
       :reserved_node)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7606,6 +7776,7 @@ module Aws::Redshift
     #
     class RebootClusterMessage < Struct.new(
       :cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7617,6 +7788,7 @@ module Aws::Redshift
     #
     class RebootClusterResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7636,6 +7808,7 @@ module Aws::Redshift
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7728,6 +7901,7 @@ module Aws::Redshift
       :offering_type,
       :recurring_charges,
       :reserved_node_offering_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7804,6 +7978,7 @@ module Aws::Redshift
       :offering_type,
       :recurring_charges,
       :reserved_node_offering_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7831,6 +8006,7 @@ module Aws::Redshift
     class ReservedNodeOfferingsMessage < Struct.new(
       :marker,
       :reserved_node_offerings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7864,6 +8040,7 @@ module Aws::Redshift
     class ReservedNodesMessage < Struct.new(
       :marker,
       :reserved_nodes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7914,6 +8091,7 @@ module Aws::Redshift
       :parameter_group_name,
       :reset_all_parameters,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7959,6 +8137,7 @@ module Aws::Redshift
       :node_type,
       :number_of_nodes,
       :classic)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7970,6 +8149,7 @@ module Aws::Redshift
     #
     class ResizeClusterResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7988,6 +8168,7 @@ module Aws::Redshift
     class ResizeInfo < Struct.new(
       :resize_type,
       :allow_cancel_resize)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8115,6 +8296,7 @@ module Aws::Redshift
       :message,
       :target_encryption_type,
       :data_transfer_progress_percent)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8427,6 +8609,7 @@ module Aws::Redshift
       :maintenance_track_name,
       :snapshot_schedule_identifier,
       :number_of_nodes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8438,6 +8621,7 @@ module Aws::Redshift
     #
     class RestoreFromClusterSnapshotResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8488,6 +8672,7 @@ module Aws::Redshift
       :progress_in_mega_bytes,
       :elapsed_time_in_seconds,
       :estimated_time_to_completion_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8554,6 +8739,7 @@ module Aws::Redshift
       :target_database_name,
       :target_schema_name,
       :new_table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8565,6 +8751,7 @@ module Aws::Redshift
     #
     class RestoreTableFromClusterSnapshotResult < Struct.new(
       :table_restore_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8583,6 +8770,7 @@ module Aws::Redshift
     #
     class ResumeClusterMessage < Struct.new(
       :cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8594,6 +8782,7 @@ module Aws::Redshift
     #
     class ResumeClusterResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8620,6 +8809,7 @@ module Aws::Redshift
       :database_revision,
       :description,
       :database_revision_release_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8668,6 +8858,7 @@ module Aws::Redshift
       :cidrip,
       :ec2_security_group_name,
       :ec2_security_group_owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8679,6 +8870,7 @@ module Aws::Redshift
     #
     class RevokeClusterSecurityGroupIngressResult < Struct.new(
       :cluster_security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8714,6 +8906,7 @@ module Aws::Redshift
       :snapshot_identifier,
       :snapshot_cluster_identifier,
       :account_with_restore_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8725,6 +8918,7 @@ module Aws::Redshift
     #
     class RevokeSnapshotAccessResult < Struct.new(
       :snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8747,6 +8941,7 @@ module Aws::Redshift
     #
     class RotateEncryptionKeyMessage < Struct.new(
       :cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8758,6 +8953,7 @@ module Aws::Redshift
     #
     class RotateEncryptionKeyResult < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8871,6 +9067,7 @@ module Aws::Redshift
       :next_invocations,
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8904,6 +9101,7 @@ module Aws::Redshift
     class ScheduledActionFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8959,6 +9157,7 @@ module Aws::Redshift
       :resize_cluster,
       :pause_cluster,
       :resume_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8987,6 +9186,7 @@ module Aws::Redshift
     class ScheduledActionsMessage < Struct.new(
       :marker,
       :scheduled_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9206,6 +9406,7 @@ module Aws::Redshift
       :manual_snapshot_retention_period,
       :manual_snapshot_remaining_days,
       :snapshot_retention_start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9259,6 +9460,7 @@ module Aws::Redshift
       :snapshot_copy_grant_name,
       :kms_key_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9291,6 +9493,7 @@ module Aws::Redshift
     class SnapshotCopyGrantMessage < Struct.new(
       :marker,
       :snapshot_copy_grants)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9334,6 +9537,7 @@ module Aws::Redshift
       :snapshot_cluster_identifier,
       :failure_code,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9357,6 +9561,7 @@ module Aws::Redshift
     class SnapshotMessage < Struct.new(
       :marker,
       :snapshots)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9402,6 +9607,7 @@ module Aws::Redshift
       :next_invocations,
       :associated_cluster_count,
       :associated_clusters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9452,6 +9658,7 @@ module Aws::Redshift
     class SnapshotSortingEntity < Struct.new(
       :attribute,
       :sort_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9480,6 +9687,7 @@ module Aws::Redshift
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9536,6 +9744,7 @@ module Aws::Redshift
     #
     class SupportedOperation < Struct.new(
       :operation_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9548,6 +9757,7 @@ module Aws::Redshift
     #
     class SupportedPlatform < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9653,6 +9863,7 @@ module Aws::Redshift
       :target_database_name,
       :target_schema_name,
       :new_table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9670,6 +9881,7 @@ module Aws::Redshift
     class TableRestoreStatusMessage < Struct.new(
       :table_restore_status_details,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9696,6 +9908,7 @@ module Aws::Redshift
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9754,6 +9967,7 @@ module Aws::Redshift
       :tag,
       :resource_name,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9775,6 +9989,7 @@ module Aws::Redshift
     class TaggedResourceListMessage < Struct.new(
       :tagged_resources,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9795,6 +10010,7 @@ module Aws::Redshift
     class TrackListMessage < Struct.new(
       :maintenance_tracks,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9842,6 +10058,7 @@ module Aws::Redshift
       :maintenance_track_name,
       :database_version,
       :supported_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9901,6 +10118,7 @@ module Aws::Redshift
       :period,
       :breach_action,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9928,6 +10146,7 @@ module Aws::Redshift
     class UsageLimitList < Struct.new(
       :usage_limits,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9952,6 +10171,7 @@ module Aws::Redshift
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -20,6 +20,7 @@ module Aws::CodeArtifact
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43,6 +44,7 @@ module Aws::CodeArtifact
       :name,
       :size,
       :hashes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -95,6 +97,7 @@ module Aws::CodeArtifact
       :domain_owner,
       :repository,
       :external_connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -107,6 +110,7 @@ module Aws::CodeArtifact
     #
     class AssociateExternalConnectionResult < Struct.new(
       :repository)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -129,6 +133,7 @@ module Aws::CodeArtifact
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -252,6 +257,7 @@ module Aws::CodeArtifact
       :version_revisions,
       :allow_overwrite,
       :include_from_upstream)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -283,6 +289,7 @@ module Aws::CodeArtifact
     class CopyPackageVersionsResult < Struct.new(
       :successful_versions,
       :failed_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -328,6 +335,7 @@ module Aws::CodeArtifact
     class CreateDomainRequest < Struct.new(
       :domain,
       :encryption_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -340,6 +348,7 @@ module Aws::CodeArtifact
     #
     class CreateDomainResult < Struct.new(
       :domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -395,6 +404,7 @@ module Aws::CodeArtifact
       :repository,
       :description,
       :upstreams)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -407,6 +417,7 @@ module Aws::CodeArtifact
     #
     class CreateRepositoryResult < Struct.new(
       :repository)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -441,6 +452,7 @@ module Aws::CodeArtifact
       :domain,
       :domain_owner,
       :policy_revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -453,6 +465,7 @@ module Aws::CodeArtifact
     #
     class DeleteDomainPermissionsPolicyResult < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -478,6 +491,7 @@ module Aws::CodeArtifact
     class DeleteDomainRequest < Struct.new(
       :domain,
       :domain_owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -490,6 +504,7 @@ module Aws::CodeArtifact
     #
     class DeleteDomainResult < Struct.new(
       :domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -578,6 +593,7 @@ module Aws::CodeArtifact
       :package,
       :versions,
       :expected_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -607,6 +623,7 @@ module Aws::CodeArtifact
     class DeletePackageVersionsResult < Struct.new(
       :successful_versions,
       :failed_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -649,6 +666,7 @@ module Aws::CodeArtifact
       :domain_owner,
       :repository,
       :policy_revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -660,6 +678,7 @@ module Aws::CodeArtifact
     #
     class DeleteRepositoryPermissionsPolicyResult < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -691,6 +710,7 @@ module Aws::CodeArtifact
       :domain,
       :domain_owner,
       :repository)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -703,6 +723,7 @@ module Aws::CodeArtifact
     #
     class DeleteRepositoryResult < Struct.new(
       :repository)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -728,6 +749,7 @@ module Aws::CodeArtifact
     class DescribeDomainRequest < Struct.new(
       :domain,
       :domain_owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -741,6 +763,7 @@ module Aws::CodeArtifact
     #
     class DescribeDomainResult < Struct.new(
       :domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -812,6 +835,7 @@ module Aws::CodeArtifact
       :namespace,
       :package,
       :package_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -824,6 +848,7 @@ module Aws::CodeArtifact
     #
     class DescribePackageVersionResult < Struct.new(
       :package_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -855,6 +880,7 @@ module Aws::CodeArtifact
       :domain,
       :domain_owner,
       :repository)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -867,6 +893,7 @@ module Aws::CodeArtifact
     #
     class DescribeRepositoryResult < Struct.new(
       :repository)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -907,6 +934,7 @@ module Aws::CodeArtifact
       :domain_owner,
       :repository,
       :external_connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -918,6 +946,7 @@ module Aws::CodeArtifact
     #
     class DisassociateExternalConnectionResult < Struct.new(
       :repository)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1015,6 +1044,7 @@ module Aws::CodeArtifact
       :versions,
       :version_revisions,
       :expected_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1045,6 +1075,7 @@ module Aws::CodeArtifact
     class DisposePackageVersionsResult < Struct.new(
       :successful_versions,
       :failed_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1101,6 +1132,7 @@ module Aws::CodeArtifact
       :encryption_key,
       :repository_count,
       :asset_size_bytes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1151,6 +1183,7 @@ module Aws::CodeArtifact
       :status,
       :created_time,
       :encryption_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1184,6 +1217,7 @@ module Aws::CodeArtifact
       :domain,
       :domain_owner,
       :duration_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1201,6 +1235,7 @@ module Aws::CodeArtifact
     class GetAuthorizationTokenResult < Struct.new(
       :authorization_token,
       :expiration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1226,6 +1261,7 @@ module Aws::CodeArtifact
     class GetDomainPermissionsPolicyRequest < Struct.new(
       :domain,
       :domain_owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1237,6 +1273,7 @@ module Aws::CodeArtifact
     #
     class GetDomainPermissionsPolicyResult < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1322,6 +1359,7 @@ module Aws::CodeArtifact
       :package_version,
       :asset,
       :package_version_revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1349,6 +1387,7 @@ module Aws::CodeArtifact
       :asset_name,
       :package_version,
       :package_version_revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1422,6 +1461,7 @@ module Aws::CodeArtifact
       :namespace,
       :package,
       :package_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1473,6 +1513,7 @@ module Aws::CodeArtifact
       :version,
       :version_revision,
       :readme)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1517,6 +1558,7 @@ module Aws::CodeArtifact
       :domain_owner,
       :repository,
       :format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1528,6 +1570,7 @@ module Aws::CodeArtifact
     #
     class GetRepositoryEndpointResult < Struct.new(
       :repository_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1561,6 +1604,7 @@ module Aws::CodeArtifact
       :domain,
       :domain_owner,
       :repository)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1572,6 +1616,7 @@ module Aws::CodeArtifact
     #
     class GetRepositoryPermissionsPolicyResult < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1585,6 +1630,7 @@ module Aws::CodeArtifact
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1603,6 +1649,7 @@ module Aws::CodeArtifact
     class LicenseInfo < Struct.new(
       :name,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1629,6 +1676,7 @@ module Aws::CodeArtifact
     class ListDomainsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1647,6 +1695,7 @@ module Aws::CodeArtifact
     class ListDomainsResult < Struct.new(
       :domains,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1735,6 +1784,7 @@ module Aws::CodeArtifact
       :package_version,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1791,6 +1841,7 @@ module Aws::CodeArtifact
       :version_revision,
       :next_token,
       :assets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1872,6 +1923,7 @@ module Aws::CodeArtifact
       :package,
       :package_version,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1935,6 +1987,7 @@ module Aws::CodeArtifact
       :version_revision,
       :next_token,
       :dependencies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2038,6 +2091,7 @@ module Aws::CodeArtifact
       :sort_by,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2101,6 +2155,7 @@ module Aws::CodeArtifact
       :package,
       :versions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2181,6 +2236,7 @@ module Aws::CodeArtifact
       :package_prefix,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2202,6 +2258,7 @@ module Aws::CodeArtifact
     class ListPackagesResult < Struct.new(
       :packages,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2256,6 +2313,7 @@ module Aws::CodeArtifact
       :repository_prefix,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2273,6 +2331,7 @@ module Aws::CodeArtifact
     class ListRepositoriesInDomainResult < Struct.new(
       :repositories,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2306,6 +2365,7 @@ module Aws::CodeArtifact
       :repository_prefix,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2327,6 +2387,7 @@ module Aws::CodeArtifact
     class ListRepositoriesResult < Struct.new(
       :repositories,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2368,6 +2429,7 @@ module Aws::CodeArtifact
       :package,
       :dependency_type,
       :version_requirement)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2411,6 +2473,7 @@ module Aws::CodeArtifact
       :format,
       :namespace,
       :package)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2512,6 +2575,7 @@ module Aws::CodeArtifact
       :licenses,
       :revision,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2542,6 +2606,7 @@ module Aws::CodeArtifact
     class PackageVersionError < Struct.new(
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2582,6 +2647,7 @@ module Aws::CodeArtifact
       :version,
       :revision,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2622,6 +2688,7 @@ module Aws::CodeArtifact
       :domain_owner,
       :policy_revision,
       :policy_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2633,6 +2700,7 @@ module Aws::CodeArtifact
     #
     class PutDomainPermissionsPolicyResult < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2681,6 +2749,7 @@ module Aws::CodeArtifact
       :repository,
       :policy_revision,
       :policy_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2692,6 +2761,7 @@ module Aws::CodeArtifact
     #
     class PutRepositoryPermissionsPolicyResult < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2756,6 +2826,7 @@ module Aws::CodeArtifact
       :description,
       :upstreams,
       :external_connections)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2788,6 +2859,7 @@ module Aws::CodeArtifact
       :external_connection_name,
       :package_format,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2833,6 +2905,7 @@ module Aws::CodeArtifact
       :domain_owner,
       :arn,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2856,6 +2929,7 @@ module Aws::CodeArtifact
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2880,6 +2954,7 @@ module Aws::CodeArtifact
       :resource_arn,
       :revision,
       :document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2903,6 +2978,7 @@ module Aws::CodeArtifact
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2931,6 +3007,7 @@ module Aws::CodeArtifact
     class SuccessfulPackageVersionInfo < Struct.new(
       :revision,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2949,6 +3026,7 @@ module Aws::CodeArtifact
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3047,6 +3125,7 @@ module Aws::CodeArtifact
       :version_revisions,
       :expected_status,
       :target_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3065,6 +3144,7 @@ module Aws::CodeArtifact
     class UpdatePackageVersionsStatusResult < Struct.new(
       :successful_versions,
       :failed_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3120,6 +3200,7 @@ module Aws::CodeArtifact
       :repository,
       :description,
       :upstreams)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3131,6 +3212,7 @@ module Aws::CodeArtifact
     #
     class UpdateRepositoryResult < Struct.new(
       :repository)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3158,6 +3240,7 @@ module Aws::CodeArtifact
     #
     class UpstreamRepository < Struct.new(
       :repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3171,6 +3254,7 @@ module Aws::CodeArtifact
     #
     class UpstreamRepositoryInfo < Struct.new(
       :repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3188,6 +3272,7 @@ module Aws::CodeArtifact
     class ValidationException < Struct.new(
       :message,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -36,6 +36,7 @@ module Aws::MediaPackage
     class Authorization < Struct.new(
       :cdn_identifier_secret,
       :secrets_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -69,6 +70,7 @@ module Aws::MediaPackage
       :hls_ingest,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -93,6 +95,7 @@ module Aws::MediaPackage
       :description,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -112,6 +115,7 @@ module Aws::MediaPackage
     class ChannelList < Struct.new(
       :channels,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -125,6 +129,7 @@ module Aws::MediaPackage
     #
     class ChannelUpdateParameters < Struct.new(
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -159,6 +164,7 @@ module Aws::MediaPackage
     class CmafEncryption < Struct.new(
       :key_rotation_interval_seconds,
       :speke_key_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -194,6 +200,7 @@ module Aws::MediaPackage
       :segment_duration_seconds,
       :segment_prefix,
       :stream_selection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -265,6 +272,7 @@ module Aws::MediaPackage
       :segment_duration_seconds,
       :segment_prefix,
       :stream_selection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -295,6 +303,7 @@ module Aws::MediaPackage
       :description,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -323,6 +332,7 @@ module Aws::MediaPackage
       :hls_ingest,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -366,6 +376,7 @@ module Aws::MediaPackage
       :origin_endpoint_id,
       :s3_destination,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -410,6 +421,7 @@ module Aws::MediaPackage
       :s3_destination,
       :start_time,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -607,6 +619,7 @@ module Aws::MediaPackage
       :tags,
       :time_delay_seconds,
       :whitelist)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -684,6 +697,7 @@ module Aws::MediaPackage
       :time_delay_seconds,
       :url,
       :whitelist)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -719,6 +733,7 @@ module Aws::MediaPackage
     class DashEncryption < Struct.new(
       :key_rotation_interval_seconds,
       :speke_key_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -857,6 +872,7 @@ module Aws::MediaPackage
       :segment_template_format,
       :stream_selection,
       :suggested_presentation_delay_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -874,6 +890,7 @@ module Aws::MediaPackage
     #
     class DeleteChannelRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -895,6 +912,7 @@ module Aws::MediaPackage
     #
     class DeleteOriginEndpointRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -916,6 +934,7 @@ module Aws::MediaPackage
     #
     class DescribeChannelRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -944,6 +963,7 @@ module Aws::MediaPackage
       :hls_ingest,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -961,6 +981,7 @@ module Aws::MediaPackage
     #
     class DescribeHarvestJobRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1005,6 +1026,7 @@ module Aws::MediaPackage
       :s3_destination,
       :start_time,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1022,6 +1044,7 @@ module Aws::MediaPackage
     #
     class DescribeOriginEndpointRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1099,6 +1122,7 @@ module Aws::MediaPackage
       :time_delay_seconds,
       :url,
       :whitelist)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1109,6 +1133,7 @@ module Aws::MediaPackage
     #
     class ForbiddenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1168,6 +1193,7 @@ module Aws::MediaPackage
       :s3_destination,
       :start_time,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1204,6 +1230,7 @@ module Aws::MediaPackage
       :origin_endpoint_id,
       :s3_destination,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1223,6 +1250,7 @@ module Aws::MediaPackage
     class HarvestJobList < Struct.new(
       :harvest_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1277,6 +1305,7 @@ module Aws::MediaPackage
       :key_rotation_interval_seconds,
       :repeat_ext_x_key,
       :speke_key_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1290,6 +1319,7 @@ module Aws::MediaPackage
     #
     class HlsIngest < Struct.new(
       :ingest_endpoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1357,6 +1387,7 @@ module Aws::MediaPackage
       :playlist_window_seconds,
       :program_date_time_interval_seconds,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1456,6 +1487,7 @@ module Aws::MediaPackage
       :playlist_type,
       :playlist_window_seconds,
       :program_date_time_interval_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1582,6 +1614,7 @@ module Aws::MediaPackage
       :segment_duration_seconds,
       :stream_selection,
       :use_audio_rendition_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1610,6 +1643,7 @@ module Aws::MediaPackage
       :password,
       :url,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1620,6 +1654,7 @@ module Aws::MediaPackage
     #
     class InternalServerErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1642,6 +1677,7 @@ module Aws::MediaPackage
     class ListChannelsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1656,6 +1692,7 @@ module Aws::MediaPackage
     class ListChannelsResponse < Struct.new(
       :channels,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1688,6 +1725,7 @@ module Aws::MediaPackage
       :include_status,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1702,6 +1740,7 @@ module Aws::MediaPackage
     class ListHarvestJobsResponse < Struct.new(
       :harvest_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1729,6 +1768,7 @@ module Aws::MediaPackage
       :channel_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1743,6 +1783,7 @@ module Aws::MediaPackage
     class ListOriginEndpointsResponse < Struct.new(
       :next_token,
       :origin_endpoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1760,6 +1801,7 @@ module Aws::MediaPackage
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1770,6 +1812,7 @@ module Aws::MediaPackage
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1798,6 +1841,7 @@ module Aws::MediaPackage
     #
     class MssEncryption < Struct.new(
       :speke_key_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1848,6 +1892,7 @@ module Aws::MediaPackage
       :manifest_window_seconds,
       :segment_duration_seconds,
       :stream_selection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1858,6 +1903,7 @@ module Aws::MediaPackage
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1956,6 +2002,7 @@ module Aws::MediaPackage
       :time_delay_seconds,
       :url,
       :whitelist)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2047,6 +2094,7 @@ module Aws::MediaPackage
       :tags,
       :time_delay_seconds,
       :whitelist)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2066,6 +2114,7 @@ module Aws::MediaPackage
     class OriginEndpointList < Struct.new(
       :next_token,
       :origin_endpoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2139,6 +2188,7 @@ module Aws::MediaPackage
       :startover_window_seconds,
       :time_delay_seconds,
       :whitelist)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2156,6 +2206,7 @@ module Aws::MediaPackage
     #
     class RotateChannelCredentialsRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2184,6 +2235,7 @@ module Aws::MediaPackage
       :hls_ingest,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2206,6 +2258,7 @@ module Aws::MediaPackage
     class RotateIngestEndpointCredentialsRequest < Struct.new(
       :id,
       :ingest_endpoint_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2234,6 +2287,7 @@ module Aws::MediaPackage
       :hls_ingest,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2269,6 +2323,7 @@ module Aws::MediaPackage
       :bucket_name,
       :manifest_key,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2279,6 +2334,7 @@ module Aws::MediaPackage
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2327,6 +2383,7 @@ module Aws::MediaPackage
       :role_arn,
       :system_ids,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2359,6 +2416,7 @@ module Aws::MediaPackage
       :max_video_bits_per_second,
       :min_video_bits_per_second,
       :stream_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2383,6 +2441,7 @@ module Aws::MediaPackage
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2393,6 +2452,7 @@ module Aws::MediaPackage
     #
     class TagsModel < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2403,6 +2463,7 @@ module Aws::MediaPackage
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2413,6 +2474,7 @@ module Aws::MediaPackage
     #
     class UnprocessableEntityException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2435,6 +2497,7 @@ module Aws::MediaPackage
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2457,6 +2520,7 @@ module Aws::MediaPackage
     class UpdateChannelRequest < Struct.new(
       :description,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2485,6 +2549,7 @@ module Aws::MediaPackage
       :hls_ingest,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2669,6 +2734,7 @@ module Aws::MediaPackage
       :startover_window_seconds,
       :time_delay_seconds,
       :whitelist)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2746,6 +2812,7 @@ module Aws::MediaPackage
       :time_delay_seconds,
       :url,
       :whitelist)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -61,6 +61,7 @@ module Aws::RDSDataService
       :double_values,
       :long_values,
       :string_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -74,6 +75,7 @@ module Aws::RDSDataService
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -175,6 +177,7 @@ module Aws::RDSDataService
       :secret_arn,
       :sql,
       :transaction_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -189,6 +192,7 @@ module Aws::RDSDataService
     #
     class BatchExecuteStatementResponse < Struct.new(
       :update_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -228,6 +232,7 @@ module Aws::RDSDataService
       :resource_arn,
       :schema,
       :secret_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -242,6 +247,7 @@ module Aws::RDSDataService
     #
     class BeginTransactionResponse < Struct.new(
       :transaction_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -320,6 +326,7 @@ module Aws::RDSDataService
       :table_name,
       :type,
       :type_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -353,6 +360,7 @@ module Aws::RDSDataService
       :resource_arn,
       :secret_arn,
       :transaction_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -367,6 +375,7 @@ module Aws::RDSDataService
     #
     class CommitTransactionResponse < Struct.new(
       :transaction_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -417,6 +426,7 @@ module Aws::RDSDataService
       :db_cluster_or_instance_arn,
       :schema,
       :sql_statements)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -431,6 +441,7 @@ module Aws::RDSDataService
     #
     class ExecuteSqlResponse < Struct.new(
       :sql_statement_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -548,6 +559,7 @@ module Aws::RDSDataService
       :secret_arn,
       :sql,
       :transaction_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -579,6 +591,7 @@ module Aws::RDSDataService
       :generated_fields,
       :number_of_records_updated,
       :records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -645,6 +658,7 @@ module Aws::RDSDataService
       :is_null,
       :long_value,
       :string_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -658,6 +672,7 @@ module Aws::RDSDataService
     #
     class ForbiddenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -678,6 +693,7 @@ module Aws::RDSDataService
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -691,6 +707,7 @@ module Aws::RDSDataService
     #
     class Record < Struct.new(
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -709,6 +726,7 @@ module Aws::RDSDataService
     class ResultFrame < Struct.new(
       :records,
       :result_set_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -727,6 +745,7 @@ module Aws::RDSDataService
     class ResultSetMetadata < Struct.new(
       :column_count,
       :column_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -755,6 +774,7 @@ module Aws::RDSDataService
     #
     class ResultSetOptions < Struct.new(
       :decimal_return_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -788,6 +808,7 @@ module Aws::RDSDataService
       :resource_arn,
       :secret_arn,
       :transaction_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -802,6 +823,7 @@ module Aws::RDSDataService
     #
     class RollbackTransactionResponse < Struct.new(
       :transaction_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -875,6 +897,7 @@ module Aws::RDSDataService
       :name,
       :type_hint,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -895,6 +918,7 @@ module Aws::RDSDataService
     class SqlStatementResult < Struct.new(
       :number_of_records_updated,
       :result_frame)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -914,6 +938,7 @@ module Aws::RDSDataService
     class StatementTimeoutException < Struct.new(
       :db_connection_id,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -927,6 +952,7 @@ module Aws::RDSDataService
     #
     class StructValue < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -940,6 +966,7 @@ module Aws::RDSDataService
     #
     class UpdateResult < Struct.new(
       :generated_fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1000,6 +1027,7 @@ module Aws::RDSDataService
       :real_value,
       :string_value,
       :struct_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 

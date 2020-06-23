@@ -19,6 +19,7 @@ module Aws::ConnectParticipant
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40,6 +41,7 @@ module Aws::ConnectParticipant
     class ConnectionCredentials < Struct.new(
       :connection_token,
       :expiry)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -69,6 +71,7 @@ module Aws::ConnectParticipant
     class CreateParticipantConnectionRequest < Struct.new(
       :type,
       :participant_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -86,6 +89,7 @@ module Aws::ConnectParticipant
     class CreateParticipantConnectionResponse < Struct.new(
       :websocket,
       :connection_credentials)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -115,6 +119,7 @@ module Aws::ConnectParticipant
     class DisconnectParticipantRequest < Struct.new(
       :client_token,
       :connection_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -182,6 +187,7 @@ module Aws::ConnectParticipant
       :sort_order,
       :start_position,
       :connection_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -204,6 +210,7 @@ module Aws::ConnectParticipant
       :initial_contact_id,
       :transcript,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -217,6 +224,7 @@ module Aws::ConnectParticipant
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -269,6 +277,7 @@ module Aws::ConnectParticipant
       :participant_id,
       :display_name,
       :participant_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -315,6 +324,7 @@ module Aws::ConnectParticipant
       :content,
       :client_token,
       :connection_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -334,6 +344,7 @@ module Aws::ConnectParticipant
     class SendEventResponse < Struct.new(
       :id,
       :absolute_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -374,6 +385,7 @@ module Aws::ConnectParticipant
       :content,
       :client_token,
       :connection_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -393,6 +405,7 @@ module Aws::ConnectParticipant
     class SendMessageResponse < Struct.new(
       :id,
       :absolute_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -430,6 +443,7 @@ module Aws::ConnectParticipant
       :id,
       :absolute_time,
       :most_recent)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -442,6 +456,7 @@ module Aws::ConnectParticipant
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -455,6 +470,7 @@ module Aws::ConnectParticipant
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -476,6 +492,7 @@ module Aws::ConnectParticipant
     class Websocket < Struct.new(
       :url,
       :connection_expiry)
+      SENSITIVE = []
       include Aws::Structure
     end
 

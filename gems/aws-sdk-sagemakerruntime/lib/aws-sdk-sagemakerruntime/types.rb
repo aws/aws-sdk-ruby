@@ -19,6 +19,7 @@ module Aws::SageMakerRuntime
     #
     class InternalFailure < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -105,6 +106,7 @@ module Aws::SageMakerRuntime
       :custom_attributes,
       :target_model,
       :target_variant)
+      SENSITIVE = [:body, :custom_attributes]
       include Aws::Structure
     end
 
@@ -155,6 +157,7 @@ module Aws::SageMakerRuntime
       :content_type,
       :invoked_production_variant,
       :custom_attributes)
+      SENSITIVE = [:body, :custom_attributes]
       include Aws::Structure
     end
 
@@ -183,6 +186,7 @@ module Aws::SageMakerRuntime
       :original_status_code,
       :original_message,
       :log_stream_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -195,6 +199,7 @@ module Aws::SageMakerRuntime
     #
     class ServiceUnavailable < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -207,6 +212,7 @@ module Aws::SageMakerRuntime
     #
     class ValidationError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

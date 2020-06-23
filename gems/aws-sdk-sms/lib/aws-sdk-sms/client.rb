@@ -1698,7 +1698,7 @@ module Aws::SMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sms'
-      context[:gem_version] = '1.21.1'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

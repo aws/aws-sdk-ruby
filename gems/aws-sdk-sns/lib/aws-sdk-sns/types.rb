@@ -47,6 +47,7 @@ module Aws::SNS
       :label,
       :aws_account_id,
       :action_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -60,6 +61,7 @@ module Aws::SNS
     #
     class AuthorizationErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -80,6 +82,7 @@ module Aws::SNS
     #
     class CheckIfPhoneNumberIsOptedOutInput < Struct.new(
       :phone_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -99,6 +102,7 @@ module Aws::SNS
     #
     class CheckIfPhoneNumberIsOptedOutResponse < Struct.new(
       :is_opted_out)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -112,6 +116,7 @@ module Aws::SNS
     #
     class ConcurrentAccessException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -148,6 +153,7 @@ module Aws::SNS
       :topic_arn,
       :token,
       :authenticate_on_unsubscribe)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -161,6 +167,7 @@ module Aws::SNS
     #
     class ConfirmSubscriptionResponse < Struct.new(
       :subscription_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -174,6 +181,7 @@ module Aws::SNS
     #
     class CreateEndpointResponse < Struct.new(
       :endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -216,6 +224,7 @@ module Aws::SNS
       :name,
       :platform,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -229,6 +238,7 @@ module Aws::SNS
     #
     class CreatePlatformApplicationResponse < Struct.new(
       :platform_application_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -281,6 +291,7 @@ module Aws::SNS
       :token,
       :custom_user_data,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -358,6 +369,7 @@ module Aws::SNS
       :name,
       :attributes,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -371,6 +383,7 @@ module Aws::SNS
     #
     class CreateTopicResponse < Struct.new(
       :topic_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -391,6 +404,7 @@ module Aws::SNS
     #
     class DeleteEndpointInput < Struct.new(
       :endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -411,6 +425,7 @@ module Aws::SNS
     #
     class DeletePlatformApplicationInput < Struct.new(
       :platform_application_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -429,6 +444,7 @@ module Aws::SNS
     #
     class DeleteTopicInput < Struct.new(
       :topic_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -447,6 +463,7 @@ module Aws::SNS
     class Endpoint < Struct.new(
       :endpoint_arn,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -460,6 +477,7 @@ module Aws::SNS
     #
     class EndpointDisabledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -474,6 +492,7 @@ module Aws::SNS
     #
     class FilterPolicyLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -494,6 +513,7 @@ module Aws::SNS
     #
     class GetEndpointAttributesInput < Struct.new(
       :endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -525,6 +545,7 @@ module Aws::SNS
     #
     class GetEndpointAttributesResponse < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -545,6 +566,7 @@ module Aws::SNS
     #
     class GetPlatformApplicationAttributesInput < Struct.new(
       :platform_application_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -571,6 +593,7 @@ module Aws::SNS
     #
     class GetPlatformApplicationAttributesResponse < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -601,6 +624,7 @@ module Aws::SNS
     #
     class GetSMSAttributesInput < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -614,6 +638,7 @@ module Aws::SNS
     #
     class GetSMSAttributesResponse < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -634,6 +659,7 @@ module Aws::SNS
     #
     class GetSubscriptionAttributesInput < Struct.new(
       :subscription_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -684,6 +710,7 @@ module Aws::SNS
     #
     class GetSubscriptionAttributesResponse < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -704,6 +731,7 @@ module Aws::SNS
     #
     class GetTopicAttributesInput < Struct.new(
       :topic_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -759,6 +787,7 @@ module Aws::SNS
     #
     class GetTopicAttributesResponse < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -771,6 +800,7 @@ module Aws::SNS
     #
     class InternalErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -784,6 +814,7 @@ module Aws::SNS
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -798,6 +829,7 @@ module Aws::SNS
     #
     class InvalidParameterValueException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -811,6 +843,7 @@ module Aws::SNS
     #
     class InvalidSecurityException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -824,6 +857,7 @@ module Aws::SNS
     #
     class KMSAccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -837,6 +871,7 @@ module Aws::SNS
     #
     class KMSDisabledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -856,6 +891,7 @@ module Aws::SNS
     #
     class KMSInvalidStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -869,6 +905,7 @@ module Aws::SNS
     #
     class KMSNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -881,6 +918,7 @@ module Aws::SNS
     #
     class KMSOptInRequired < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -899,6 +937,7 @@ module Aws::SNS
     #
     class KMSThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -928,6 +967,7 @@ module Aws::SNS
     class ListEndpointsByPlatformApplicationInput < Struct.new(
       :platform_application_arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -948,6 +988,7 @@ module Aws::SNS
     class ListEndpointsByPlatformApplicationResponse < Struct.new(
       :endpoints,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -970,6 +1011,7 @@ module Aws::SNS
     #
     class ListPhoneNumbersOptedOutInput < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -992,6 +1034,7 @@ module Aws::SNS
     class ListPhoneNumbersOptedOutResponse < Struct.new(
       :phone_numbers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1014,6 +1057,7 @@ module Aws::SNS
     #
     class ListPlatformApplicationsInput < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1035,6 +1079,7 @@ module Aws::SNS
     class ListPlatformApplicationsResponse < Struct.new(
       :platform_applications,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1061,6 +1106,7 @@ module Aws::SNS
     class ListSubscriptionsByTopicInput < Struct.new(
       :topic_arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1081,6 +1127,7 @@ module Aws::SNS
     class ListSubscriptionsByTopicResponse < Struct.new(
       :subscriptions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1101,6 +1148,7 @@ module Aws::SNS
     #
     class ListSubscriptionsInput < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1120,6 +1168,7 @@ module Aws::SNS
     class ListSubscriptionsResponse < Struct.new(
       :subscriptions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1138,6 +1187,7 @@ module Aws::SNS
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1149,6 +1199,7 @@ module Aws::SNS
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1167,6 +1218,7 @@ module Aws::SNS
     #
     class ListTopicsInput < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1186,6 +1238,7 @@ module Aws::SNS
     class ListTopicsResponse < Struct.new(
       :topics,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1243,6 +1296,7 @@ module Aws::SNS
       :data_type,
       :string_value,
       :binary_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1255,6 +1309,7 @@ module Aws::SNS
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1275,6 +1330,7 @@ module Aws::SNS
     #
     class OptInPhoneNumberInput < Struct.new(
       :phone_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1299,6 +1355,7 @@ module Aws::SNS
     class PlatformApplication < Struct.new(
       :platform_application_arn,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1312,6 +1369,7 @@ module Aws::SNS
     #
     class PlatformApplicationDisabledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1458,6 +1516,7 @@ module Aws::SNS
       :subject,
       :message_structure,
       :message_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1473,6 +1532,7 @@ module Aws::SNS
     #
     class PublishResponse < Struct.new(
       :message_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1499,6 +1559,7 @@ module Aws::SNS
     class RemovePermissionInput < Struct.new(
       :topic_arn,
       :label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1511,6 +1572,7 @@ module Aws::SNS
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1554,6 +1616,7 @@ module Aws::SNS
     class SetEndpointAttributesInput < Struct.new(
       :endpoint_arn,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1615,6 +1678,7 @@ module Aws::SNS
     class SetPlatformApplicationAttributesInput < Struct.new(
       :platform_application_arn,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1718,6 +1782,7 @@ module Aws::SNS
     #
     class SetSMSAttributesInput < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1780,6 +1845,7 @@ module Aws::SNS
       :subscription_arn,
       :attribute_name,
       :attribute_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1842,6 +1908,7 @@ module Aws::SNS
       :topic_arn,
       :attribute_name,
       :attribute_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1855,6 +1922,7 @@ module Aws::SNS
     #
     class StaleTagException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1982,6 +2050,7 @@ module Aws::SNS
       :endpoint,
       :attributes,
       :return_subscription_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1999,6 +2068,7 @@ module Aws::SNS
     #
     class SubscribeResponse < Struct.new(
       :subscription_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2032,6 +2102,7 @@ module Aws::SNS
       :protocol,
       :endpoint,
       :topic_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2045,6 +2116,7 @@ module Aws::SNS
     #
     class SubscriptionLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2071,6 +2143,7 @@ module Aws::SNS
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2083,6 +2156,7 @@ module Aws::SNS
     #
     class TagLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2096,6 +2170,7 @@ module Aws::SNS
     #
     class TagPolicyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2126,6 +2201,7 @@ module Aws::SNS
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2144,6 +2220,7 @@ module Aws::SNS
     #
     class ThrottledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2158,6 +2235,7 @@ module Aws::SNS
     #
     class Topic < Struct.new(
       :topic_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2171,6 +2249,7 @@ module Aws::SNS
     #
     class TopicLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2191,6 +2270,7 @@ module Aws::SNS
     #
     class UnsubscribeInput < Struct.new(
       :subscription_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2215,6 +2295,7 @@ module Aws::SNS
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -39,6 +39,7 @@ module Aws::SimpleDB
       :alternate_name_encoding,
       :value,
       :alternate_value_encoding)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -49,6 +50,7 @@ module Aws::SimpleDB
     #
     class AttributeDoesNotExist < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -83,6 +85,7 @@ module Aws::SimpleDB
     class BatchDeleteAttributesRequest < Struct.new(
       :domain_name,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -116,6 +119,7 @@ module Aws::SimpleDB
     class BatchPutAttributesRequest < Struct.new(
       :domain_name,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -134,6 +138,7 @@ module Aws::SimpleDB
     #
     class CreateDomainRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -161,6 +166,7 @@ module Aws::SimpleDB
     class DeletableItem < Struct.new(
       :name,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -213,6 +219,7 @@ module Aws::SimpleDB
       :item_name,
       :attributes,
       :expected)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -229,6 +236,7 @@ module Aws::SimpleDB
     #
     class DeleteDomainRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -245,6 +253,7 @@ module Aws::SimpleDB
     #
     class DomainMetadataRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -286,6 +295,7 @@ module Aws::SimpleDB
       :attribute_value_count,
       :attribute_values_size_bytes,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -296,6 +306,7 @@ module Aws::SimpleDB
     #
     class DuplicateItemName < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -330,6 +341,7 @@ module Aws::SimpleDB
       :item_name,
       :attribute_names,
       :consistent_read)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -339,6 +351,7 @@ module Aws::SimpleDB
     #
     class GetAttributesResult < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -349,6 +362,7 @@ module Aws::SimpleDB
     #
     class InvalidNextToken < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -359,6 +373,7 @@ module Aws::SimpleDB
     #
     class InvalidNumberPredicates < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -369,6 +384,7 @@ module Aws::SimpleDB
     #
     class InvalidNumberValueTests < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -379,6 +395,7 @@ module Aws::SimpleDB
     #
     class InvalidParameterValue < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -389,6 +406,7 @@ module Aws::SimpleDB
     #
     class InvalidQueryExpression < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -407,6 +425,7 @@ module Aws::SimpleDB
       :name,
       :alternate_name_encoding,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -431,6 +450,7 @@ module Aws::SimpleDB
     class ListDomainsRequest < Struct.new(
       :max_number_of_domains,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -445,6 +465,7 @@ module Aws::SimpleDB
     class ListDomainsResult < Struct.new(
       :domain_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -455,6 +476,7 @@ module Aws::SimpleDB
     #
     class MissingParameter < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -465,6 +487,7 @@ module Aws::SimpleDB
     #
     class NoSuchDomain < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -475,6 +498,7 @@ module Aws::SimpleDB
     #
     class NumberDomainAttributesExceeded < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -485,6 +509,7 @@ module Aws::SimpleDB
     #
     class NumberDomainBytesExceeded < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -495,6 +520,7 @@ module Aws::SimpleDB
     #
     class NumberDomainsExceeded < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -505,6 +531,7 @@ module Aws::SimpleDB
     #
     class NumberItemAttributesExceeded < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -515,6 +542,7 @@ module Aws::SimpleDB
     #
     class NumberSubmittedAttributesExceeded < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -525,6 +553,7 @@ module Aws::SimpleDB
     #
     class NumberSubmittedItemsExceeded < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -572,6 +601,7 @@ module Aws::SimpleDB
       :item_name,
       :attributes,
       :expected)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -600,6 +630,7 @@ module Aws::SimpleDB
       :name,
       :value,
       :replace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -628,6 +659,7 @@ module Aws::SimpleDB
     class ReplaceableItem < Struct.new(
       :name,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -639,6 +671,7 @@ module Aws::SimpleDB
     #
     class RequestTimeout < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -667,6 +700,7 @@ module Aws::SimpleDB
       :select_expression,
       :next_token,
       :consistent_read)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -681,6 +715,7 @@ module Aws::SimpleDB
     class SelectResult < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -691,6 +726,7 @@ module Aws::SimpleDB
     #
     class TooManyRequestedAttributes < Struct.new(
       :box_usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -730,6 +766,7 @@ module Aws::SimpleDB
       :name,
       :value,
       :exists)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -18,6 +18,7 @@ module Aws::IoTJobsDataPlane
     #
     class CertificateValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -56,6 +57,7 @@ module Aws::IoTJobsDataPlane
       :thing_name,
       :include_job_document,
       :execution_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -65,6 +67,7 @@ module Aws::IoTJobsDataPlane
     #
     class DescribeJobExecutionResponse < Struct.new(
       :execution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -81,6 +84,7 @@ module Aws::IoTJobsDataPlane
     #
     class GetPendingJobExecutionsRequest < Struct.new(
       :thing_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -95,6 +99,7 @@ module Aws::IoTJobsDataPlane
     class GetPendingJobExecutionsResponse < Struct.new(
       :in_progress_jobs,
       :queued_jobs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -108,6 +113,7 @@ module Aws::IoTJobsDataPlane
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -122,6 +128,7 @@ module Aws::IoTJobsDataPlane
     #
     class InvalidStateTransitionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -193,6 +200,7 @@ module Aws::IoTJobsDataPlane
       :version_number,
       :execution_number,
       :job_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -218,6 +226,7 @@ module Aws::IoTJobsDataPlane
       :status,
       :status_details,
       :version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -259,6 +268,7 @@ module Aws::IoTJobsDataPlane
       :last_updated_at,
       :version_number,
       :execution_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -270,6 +280,7 @@ module Aws::IoTJobsDataPlane
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -281,6 +292,7 @@ module Aws::IoTJobsDataPlane
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -320,6 +332,7 @@ module Aws::IoTJobsDataPlane
       :thing_name,
       :status_details,
       :step_timeout_in_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -329,6 +342,7 @@ module Aws::IoTJobsDataPlane
     #
     class StartNextPendingJobExecutionResponse < Struct.new(
       :execution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -339,6 +353,7 @@ module Aws::IoTJobsDataPlane
     #
     class TerminalStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -355,6 +370,7 @@ module Aws::IoTJobsDataPlane
     class ThrottlingException < Struct.new(
       :message,
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -442,6 +458,7 @@ module Aws::IoTJobsDataPlane
       :include_job_execution_state,
       :include_job_document,
       :execution_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -456,6 +473,7 @@ module Aws::IoTJobsDataPlane
     class UpdateJobExecutionResponse < Struct.new(
       :execution_state,
       :job_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -34,6 +34,7 @@ module Aws::ForecastService
     class CategoricalParameterRange < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -107,6 +108,7 @@ module Aws::ForecastService
       :max_value,
       :min_value,
       :scaling_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -147,6 +149,7 @@ module Aws::ForecastService
       :dataset_group_name,
       :domain,
       :dataset_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -158,6 +161,7 @@ module Aws::ForecastService
     #
     class CreateDatasetGroupResponse < Struct.new(
       :dataset_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,6 +231,7 @@ module Aws::ForecastService
       :dataset_arn,
       :data_source,
       :timestamp_format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -238,6 +243,7 @@ module Aws::ForecastService
     #
     class CreateDatasetImportJobResponse < Struct.new(
       :dataset_import_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -317,6 +323,7 @@ module Aws::ForecastService
       :data_frequency,
       :schema,
       :encryption_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -328,6 +335,7 @@ module Aws::ForecastService
     #
     class CreateDatasetResponse < Struct.new(
       :dataset_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -372,6 +380,7 @@ module Aws::ForecastService
       :forecast_export_job_name,
       :forecast_arn,
       :destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -383,6 +392,7 @@ module Aws::ForecastService
     #
     class CreateForecastExportJobResponse < Struct.new(
       :forecast_export_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -419,6 +429,7 @@ module Aws::ForecastService
       :forecast_name,
       :predictor_arn,
       :forecast_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -430,6 +441,7 @@ module Aws::ForecastService
     #
     class CreateForecastResponse < Struct.new(
       :forecast_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -634,6 +646,7 @@ module Aws::ForecastService
       :input_data_config,
       :featurization_config,
       :encryption_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -645,6 +658,7 @@ module Aws::ForecastService
     #
     class CreatePredictorResponse < Struct.new(
       :predictor_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -673,6 +687,7 @@ module Aws::ForecastService
     #
     class DataDestination < Struct.new(
       :s3_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -702,6 +717,7 @@ module Aws::ForecastService
     #
     class DataSource < Struct.new(
       :s3_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -736,6 +752,7 @@ module Aws::ForecastService
       :dataset_group_name,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -804,6 +821,7 @@ module Aws::ForecastService
       :message,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -848,6 +866,7 @@ module Aws::ForecastService
       :domain,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -866,6 +885,7 @@ module Aws::ForecastService
     #
     class DeleteDatasetGroupRequest < Struct.new(
       :dataset_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -884,6 +904,7 @@ module Aws::ForecastService
     #
     class DeleteDatasetImportJobRequest < Struct.new(
       :dataset_import_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -902,6 +923,7 @@ module Aws::ForecastService
     #
     class DeleteDatasetRequest < Struct.new(
       :dataset_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -920,6 +942,7 @@ module Aws::ForecastService
     #
     class DeleteForecastExportJobRequest < Struct.new(
       :forecast_export_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -938,6 +961,7 @@ module Aws::ForecastService
     #
     class DeleteForecastRequest < Struct.new(
       :forecast_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -956,6 +980,7 @@ module Aws::ForecastService
     #
     class DeletePredictorRequest < Struct.new(
       :predictor_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -974,6 +999,7 @@ module Aws::ForecastService
     #
     class DescribeDatasetGroupRequest < Struct.new(
       :dataset_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1035,6 +1061,7 @@ module Aws::ForecastService
       :status,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1053,6 +1080,7 @@ module Aws::ForecastService
     #
     class DescribeDatasetImportJobRequest < Struct.new(
       :dataset_import_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1148,6 +1176,7 @@ module Aws::ForecastService
       :message,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1166,6 +1195,7 @@ module Aws::ForecastService
     #
     class DescribeDatasetRequest < Struct.new(
       :dataset_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1254,6 +1284,7 @@ module Aws::ForecastService
       :status,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1272,6 +1303,7 @@ module Aws::ForecastService
     #
     class DescribeForecastExportJobRequest < Struct.new(
       :forecast_export_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1330,6 +1362,7 @@ module Aws::ForecastService
       :status,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1348,6 +1381,7 @@ module Aws::ForecastService
     #
     class DescribeForecastRequest < Struct.new(
       :forecast_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1415,6 +1449,7 @@ module Aws::ForecastService
       :message,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1434,6 +1469,7 @@ module Aws::ForecastService
     #
     class DescribePredictorRequest < Struct.new(
       :predictor_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1569,6 +1605,7 @@ module Aws::ForecastService
       :message,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1603,6 +1640,7 @@ module Aws::ForecastService
     class EncryptionConfig < Struct.new(
       :role_arn,
       :kms_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1642,6 +1680,7 @@ module Aws::ForecastService
     class EvaluationParameters < Struct.new(
       :number_of_backtest_windows,
       :back_test_window_offset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1663,6 +1702,7 @@ module Aws::ForecastService
     class EvaluationResult < Struct.new(
       :algorithm_arn,
       :test_windows)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1719,6 +1759,7 @@ module Aws::ForecastService
     class Featurization < Struct.new(
       :attribute_name,
       :featurization_pipeline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1801,6 +1842,7 @@ module Aws::ForecastService
       :forecast_frequency,
       :forecast_dimensions,
       :featurizations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1856,6 +1898,7 @@ module Aws::ForecastService
     class FeaturizationMethod < Struct.new(
       :featurization_method_name,
       :featurization_method_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1894,6 +1937,7 @@ module Aws::ForecastService
       :key,
       :value,
       :condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1952,6 +1996,7 @@ module Aws::ForecastService
       :message,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2019,6 +2064,7 @@ module Aws::ForecastService
       :message,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2037,6 +2083,7 @@ module Aws::ForecastService
     #
     class GetAccuracyMetricsRequest < Struct.new(
       :predictor_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2048,6 +2095,7 @@ module Aws::ForecastService
     #
     class GetAccuracyMetricsResponse < Struct.new(
       :predictor_evaluation_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2104,6 +2152,7 @@ module Aws::ForecastService
     #
     class HyperParameterTuningJobConfig < Struct.new(
       :parameter_ranges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2138,6 +2187,7 @@ module Aws::ForecastService
     class InputDataConfig < Struct.new(
       :dataset_group_arn,
       :supplementary_features)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2210,6 +2260,7 @@ module Aws::ForecastService
       :max_value,
       :min_value,
       :scaling_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2223,6 +2274,7 @@ module Aws::ForecastService
     #
     class InvalidInputException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2235,6 +2287,7 @@ module Aws::ForecastService
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2247,6 +2300,7 @@ module Aws::ForecastService
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2273,6 +2327,7 @@ module Aws::ForecastService
     class ListDatasetGroupsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2290,6 +2345,7 @@ module Aws::ForecastService
     class ListDatasetGroupsResponse < Struct.new(
       :dataset_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2349,6 +2405,7 @@ module Aws::ForecastService
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2367,6 +2424,7 @@ module Aws::ForecastService
     class ListDatasetImportJobsResponse < Struct.new(
       :dataset_import_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2393,6 +2451,7 @@ module Aws::ForecastService
     class ListDatasetsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2410,6 +2469,7 @@ module Aws::ForecastService
     class ListDatasetsResponse < Struct.new(
       :datasets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2471,6 +2531,7 @@ module Aws::ForecastService
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2488,6 +2549,7 @@ module Aws::ForecastService
     class ListForecastExportJobsResponse < Struct.new(
       :forecast_export_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2547,6 +2609,7 @@ module Aws::ForecastService
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2564,6 +2627,7 @@ module Aws::ForecastService
     class ListForecastsResponse < Struct.new(
       :forecasts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2623,6 +2687,7 @@ module Aws::ForecastService
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2640,6 +2705,7 @@ module Aws::ForecastService
     class ListPredictorsResponse < Struct.new(
       :predictors,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2661,6 +2727,7 @@ module Aws::ForecastService
     class Metrics < Struct.new(
       :rmse,
       :weighted_quantile_losses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2716,6 +2783,7 @@ module Aws::ForecastService
       :categorical_parameter_ranges,
       :continuous_parameter_ranges,
       :integer_parameter_ranges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2737,6 +2805,7 @@ module Aws::ForecastService
     class PredictorExecution < Struct.new(
       :algorithm_arn,
       :test_windows)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2756,6 +2825,7 @@ module Aws::ForecastService
     #
     class PredictorExecutionDetails < Struct.new(
       :predictor_executions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2819,6 +2889,7 @@ module Aws::ForecastService
       :message,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2832,6 +2903,7 @@ module Aws::ForecastService
     #
     class ResourceAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2844,6 +2916,7 @@ module Aws::ForecastService
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2857,6 +2930,7 @@ module Aws::ForecastService
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2904,6 +2978,7 @@ module Aws::ForecastService
       :path,
       :role_arn,
       :kms_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2931,6 +3006,7 @@ module Aws::ForecastService
     #
     class Schema < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2959,6 +3035,7 @@ module Aws::ForecastService
     class SchemaAttribute < Struct.new(
       :attribute_name,
       :attribute_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3008,6 +3085,7 @@ module Aws::ForecastService
       :max,
       :avg,
       :stddev)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3054,6 +3132,7 @@ module Aws::ForecastService
     class SupplementaryFeature < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3089,6 +3168,7 @@ module Aws::ForecastService
       :test_window_end,
       :status,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3114,6 +3194,7 @@ module Aws::ForecastService
     class UpdateDatasetGroupRequest < Struct.new(
       :dataset_group_arn,
       :dataset_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3142,6 +3223,7 @@ module Aws::ForecastService
     class WeightedQuantileLoss < Struct.new(
       :quantile,
       :loss_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3184,6 +3266,7 @@ module Aws::ForecastService
       :item_count,
       :evaluation_type,
       :metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 

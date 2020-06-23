@@ -71,6 +71,7 @@ module Aws::CloudFormation
     class AccountGateResult < Struct.new(
       :status,
       :status_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -108,6 +109,7 @@ module Aws::CloudFormation
     class AccountLimit < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -148,6 +150,7 @@ module Aws::CloudFormation
     class AutoDeployment < Struct.new(
       :enabled,
       :retain_stacks_on_account_removal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -160,6 +163,7 @@ module Aws::CloudFormation
     #
     class CFNRegistryException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -190,6 +194,7 @@ module Aws::CloudFormation
     class CancelUpdateStackInput < Struct.new(
       :stack_name,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -211,6 +216,7 @@ module Aws::CloudFormation
     class Change < Struct.new(
       :type,
       :resource_change)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +285,7 @@ module Aws::CloudFormation
       :status_reason,
       :creation_time,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -384,6 +391,7 @@ module Aws::CloudFormation
       :role_arn,
       :resources_to_skip,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -686,6 +694,7 @@ module Aws::CloudFormation
       :description,
       :change_set_type,
       :resources_to_import)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -704,6 +713,7 @@ module Aws::CloudFormation
     class CreateChangeSetOutput < Struct.new(
       :id,
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1047,6 +1057,7 @@ module Aws::CloudFormation
       :tags,
       :client_request_token,
       :enable_termination_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1178,6 +1189,7 @@ module Aws::CloudFormation
       :parameter_overrides,
       :operation_preferences,
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1189,6 +1201,7 @@ module Aws::CloudFormation
     #
     class CreateStackInstancesOutput < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1202,6 +1215,7 @@ module Aws::CloudFormation
     #
     class CreateStackOutput < Struct.new(
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1458,6 +1472,7 @@ module Aws::CloudFormation
       :permission_model,
       :auto_deployment,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1469,6 +1484,7 @@ module Aws::CloudFormation
     #
     class CreateStackSetOutput < Struct.new(
       :stack_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1503,6 +1519,7 @@ module Aws::CloudFormation
     class DeleteChangeSetInput < Struct.new(
       :change_set_name,
       :stack_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1579,6 +1596,7 @@ module Aws::CloudFormation
       :retain_resources,
       :role_arn,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1673,6 +1691,7 @@ module Aws::CloudFormation
       :operation_preferences,
       :retain_stacks,
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1684,6 +1703,7 @@ module Aws::CloudFormation
     #
     class DeleteStackInstancesOutput < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1703,6 +1723,7 @@ module Aws::CloudFormation
     #
     class DeleteStackSetInput < Struct.new(
       :stack_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1742,6 +1763,7 @@ module Aws::CloudFormation
     class DeploymentTargets < Struct.new(
       :accounts,
       :organizational_unit_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1791,6 +1813,7 @@ module Aws::CloudFormation
       :type,
       :type_name,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1816,6 +1839,7 @@ module Aws::CloudFormation
     #
     class DescribeAccountLimitsInput < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1837,6 +1861,7 @@ module Aws::CloudFormation
     class DescribeAccountLimitsOutput < Struct.new(
       :account_limits,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1872,6 +1897,7 @@ module Aws::CloudFormation
       :change_set_name,
       :stack_name,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1981,6 +2007,7 @@ module Aws::CloudFormation
       :tags,
       :changes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2004,6 +2031,7 @@ module Aws::CloudFormation
     #
     class DescribeStackDriftDetectionStatusInput < Struct.new(
       :stack_drift_detection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2084,6 +2112,7 @@ module Aws::CloudFormation
       :detection_status_reason,
       :drifted_stack_resource_count,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2119,6 +2148,7 @@ module Aws::CloudFormation
     class DescribeStackEventsInput < Struct.new(
       :stack_name,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2139,6 +2169,7 @@ module Aws::CloudFormation
     class DescribeStackEventsOutput < Struct.new(
       :stack_events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2171,6 +2202,7 @@ module Aws::CloudFormation
       :stack_set_name,
       :stack_instance_account,
       :stack_instance_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2182,6 +2214,7 @@ module Aws::CloudFormation
     #
     class DescribeStackInstanceOutput < Struct.new(
       :stack_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2235,6 +2268,7 @@ module Aws::CloudFormation
       :stack_resource_drift_status_filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2269,6 +2303,7 @@ module Aws::CloudFormation
     class DescribeStackResourceDriftsOutput < Struct.new(
       :stack_resource_drifts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2305,6 +2340,7 @@ module Aws::CloudFormation
     class DescribeStackResourceInput < Struct.new(
       :stack_name,
       :logical_resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2319,6 +2355,7 @@ module Aws::CloudFormation
     #
     class DescribeStackResourceOutput < Struct.new(
       :stack_resource_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2376,6 +2413,7 @@ module Aws::CloudFormation
       :stack_name,
       :logical_resource_id,
       :physical_resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2389,6 +2427,7 @@ module Aws::CloudFormation
     #
     class DescribeStackResourcesOutput < Struct.new(
       :stack_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2407,6 +2446,7 @@ module Aws::CloudFormation
     #
     class DescribeStackSetInput < Struct.new(
       :stack_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2432,6 +2472,7 @@ module Aws::CloudFormation
     class DescribeStackSetOperationInput < Struct.new(
       :stack_set_name,
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2443,6 +2484,7 @@ module Aws::CloudFormation
     #
     class DescribeStackSetOperationOutput < Struct.new(
       :stack_set_operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2454,6 +2496,7 @@ module Aws::CloudFormation
     #
     class DescribeStackSetOutput < Struct.new(
       :stack_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2489,6 +2532,7 @@ module Aws::CloudFormation
     class DescribeStacksInput < Struct.new(
       :stack_name,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2509,6 +2553,7 @@ module Aws::CloudFormation
     class DescribeStacksOutput < Struct.new(
       :stacks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2562,6 +2607,7 @@ module Aws::CloudFormation
       :type_name,
       :arn,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2706,6 +2752,7 @@ module Aws::CloudFormation
       :documentation_url,
       :last_updated,
       :time_created)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2727,6 +2774,7 @@ module Aws::CloudFormation
     #
     class DescribeTypeRegistrationInput < Struct.new(
       :registration_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2760,6 +2808,7 @@ module Aws::CloudFormation
       :description,
       :type_arn,
       :type_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2784,6 +2833,7 @@ module Aws::CloudFormation
     class DetectStackDriftInput < Struct.new(
       :stack_name,
       :logical_resource_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2800,6 +2850,7 @@ module Aws::CloudFormation
     #
     class DetectStackDriftOutput < Struct.new(
       :stack_drift_detection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2825,6 +2876,7 @@ module Aws::CloudFormation
     class DetectStackResourceDriftInput < Struct.new(
       :stack_name,
       :logical_resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2838,6 +2890,7 @@ module Aws::CloudFormation
     #
     class DetectStackResourceDriftOutput < Struct.new(
       :stack_resource_drift)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2886,6 +2939,7 @@ module Aws::CloudFormation
       :stack_set_name,
       :operation_preferences,
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2900,6 +2954,7 @@ module Aws::CloudFormation
     #
     class DetectStackSetDriftOutput < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2958,6 +3013,7 @@ module Aws::CloudFormation
       :template_body,
       :template_url,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2972,6 +3028,7 @@ module Aws::CloudFormation
     #
     class EstimateTemplateCostOutput < Struct.new(
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3011,6 +3068,7 @@ module Aws::CloudFormation
       :change_set_name,
       :stack_name,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3046,6 +3104,7 @@ module Aws::CloudFormation
       :exporting_stack_id,
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3067,6 +3126,7 @@ module Aws::CloudFormation
     #
     class GetStackPolicyInput < Struct.new(
       :stack_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3086,6 +3146,7 @@ module Aws::CloudFormation
     #
     class GetStackPolicyOutput < Struct.new(
       :stack_policy_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3135,6 +3196,7 @@ module Aws::CloudFormation
       :stack_name,
       :change_set_name,
       :template_stage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3165,6 +3227,7 @@ module Aws::CloudFormation
     class GetTemplateOutput < Struct.new(
       :template_body,
       :stages_available)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3233,6 +3296,7 @@ module Aws::CloudFormation
       :template_url,
       :stack_name,
       :stack_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3308,6 +3372,7 @@ module Aws::CloudFormation
       :metadata,
       :declared_transforms,
       :resource_identifier_summaries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3381,6 +3446,7 @@ module Aws::CloudFormation
     class ListChangeSetsInput < Struct.new(
       :stack_name,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3401,6 +3467,7 @@ module Aws::CloudFormation
     class ListChangeSetsOutput < Struct.new(
       :summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3421,6 +3488,7 @@ module Aws::CloudFormation
     #
     class ListExportsInput < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3439,6 +3507,7 @@ module Aws::CloudFormation
     class ListExportsOutput < Struct.new(
       :exports,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3466,6 +3535,7 @@ module Aws::CloudFormation
     class ListImportsInput < Struct.new(
       :export_name,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3484,6 +3554,7 @@ module Aws::CloudFormation
     class ListImportsOutput < Struct.new(
       :imports,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3536,6 +3607,7 @@ module Aws::CloudFormation
       :max_results,
       :stack_instance_account,
       :stack_instance_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3557,6 +3629,7 @@ module Aws::CloudFormation
     class ListStackInstancesOutput < Struct.new(
       :summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3592,6 +3665,7 @@ module Aws::CloudFormation
     class ListStackResourcesInput < Struct.new(
       :stack_name,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3612,6 +3686,7 @@ module Aws::CloudFormation
     class ListStackResourcesOutput < Struct.new(
       :stack_resource_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3658,6 +3733,7 @@ module Aws::CloudFormation
       :operation_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3680,6 +3756,7 @@ module Aws::CloudFormation
     class ListStackSetOperationResultsOutput < Struct.new(
       :summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3720,6 +3797,7 @@ module Aws::CloudFormation
       :stack_set_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3741,6 +3819,7 @@ module Aws::CloudFormation
     class ListStackSetOperationsOutput < Struct.new(
       :summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3780,6 +3859,7 @@ module Aws::CloudFormation
       :next_token,
       :max_results,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3801,6 +3881,7 @@ module Aws::CloudFormation
     class ListStackSetsOutput < Struct.new(
       :summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3831,6 +3912,7 @@ module Aws::CloudFormation
     class ListStacksInput < Struct.new(
       :next_token,
       :stack_status_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3852,6 +3934,7 @@ module Aws::CloudFormation
     class ListStacksOutput < Struct.new(
       :stack_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3921,6 +4004,7 @@ module Aws::CloudFormation
       :registration_status_filter,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3944,6 +4028,7 @@ module Aws::CloudFormation
     class ListTypeRegistrationsOutput < Struct.new(
       :registration_token_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4024,6 +4109,7 @@ module Aws::CloudFormation
       :max_results,
       :next_token,
       :deprecated_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4045,6 +4131,7 @@ module Aws::CloudFormation
     class ListTypeVersionsOutput < Struct.new(
       :type_version_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4130,6 +4217,7 @@ module Aws::CloudFormation
       :deprecated_status,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4151,6 +4239,7 @@ module Aws::CloudFormation
     class ListTypesOutput < Struct.new(
       :type_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4179,6 +4268,7 @@ module Aws::CloudFormation
     class LoggingConfig < Struct.new(
       :log_role_arn,
       :log_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4243,6 +4333,7 @@ module Aws::CloudFormation
       :output_value,
       :description,
       :export_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4291,6 +4382,7 @@ module Aws::CloudFormation
       :parameter_value,
       :use_previous_value,
       :resolved_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4307,6 +4399,7 @@ module Aws::CloudFormation
     #
     class ParameterConstraints < Struct.new(
       :allowed_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4347,6 +4440,7 @@ module Aws::CloudFormation
       :no_echo,
       :description,
       :parameter_constraints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4369,6 +4463,7 @@ module Aws::CloudFormation
     class PhysicalResourceIdContextKeyValuePair < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4417,6 +4512,7 @@ module Aws::CloudFormation
       :expected_value,
       :actual_value,
       :difference_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4499,6 +4595,7 @@ module Aws::CloudFormation
       :error_code,
       :resource_model,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4609,6 +4706,7 @@ module Aws::CloudFormation
       :logging_config,
       :execution_role_arn,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4624,6 +4722,7 @@ module Aws::CloudFormation
     #
     class RegisterTypeOutput < Struct.new(
       :registration_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4689,6 +4788,7 @@ module Aws::CloudFormation
       :replacement,
       :scope,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4769,6 +4869,7 @@ module Aws::CloudFormation
       :evaluation,
       :change_source,
       :causing_entity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4799,6 +4900,7 @@ module Aws::CloudFormation
       :resource_type,
       :logical_resource_ids,
       :resource_identifiers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4834,6 +4936,7 @@ module Aws::CloudFormation
       :attribute,
       :name,
       :requires_recreation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4872,6 +4975,7 @@ module Aws::CloudFormation
       :resource_type,
       :logical_resource_id,
       :resource_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4957,6 +5061,7 @@ module Aws::CloudFormation
     class RollbackConfiguration < Struct.new(
       :rollback_triggers,
       :monitoring_time_in_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4995,6 +5100,7 @@ module Aws::CloudFormation
     class RollbackTrigger < Struct.new(
       :arn,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5038,6 +5144,7 @@ module Aws::CloudFormation
       :stack_name,
       :stack_policy_body,
       :stack_policy_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5086,6 +5193,7 @@ module Aws::CloudFormation
       :type,
       :type_name,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5136,6 +5244,7 @@ module Aws::CloudFormation
       :logical_resource_id,
       :unique_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5301,6 +5410,7 @@ module Aws::CloudFormation
       :parent_id,
       :root_id,
       :drift_information)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5338,6 +5448,7 @@ module Aws::CloudFormation
     class StackDriftInformation < Struct.new(
       :stack_drift_status,
       :last_check_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5375,6 +5486,7 @@ module Aws::CloudFormation
     class StackDriftInformationSummary < Struct.new(
       :stack_drift_status,
       :last_check_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5458,6 +5570,7 @@ module Aws::CloudFormation
       :resource_status_reason,
       :resource_properties,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5571,6 +5684,7 @@ module Aws::CloudFormation
       :organizational_unit_id,
       :drift_status,
       :last_drift_check_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5678,6 +5792,7 @@ module Aws::CloudFormation
       :organizational_unit_id,
       :drift_status,
       :last_drift_check_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5750,6 +5865,7 @@ module Aws::CloudFormation
       :resource_status_reason,
       :description,
       :drift_information)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5833,6 +5949,7 @@ module Aws::CloudFormation
       :description,
       :metadata,
       :drift_information)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5940,6 +6057,7 @@ module Aws::CloudFormation
       :property_differences,
       :stack_resource_drift_status,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5981,6 +6099,7 @@ module Aws::CloudFormation
     class StackResourceDriftInformation < Struct.new(
       :stack_resource_drift_status,
       :last_check_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6028,6 +6147,7 @@ module Aws::CloudFormation
     class StackResourceDriftInformationSummary < Struct.new(
       :stack_resource_drift_status,
       :last_check_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6085,6 +6205,7 @@ module Aws::CloudFormation
       :resource_status,
       :resource_status_reason,
       :drift_information)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6226,6 +6347,7 @@ module Aws::CloudFormation
       :auto_deployment,
       :permission_model,
       :organizational_unit_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6338,6 +6460,7 @@ module Aws::CloudFormation
       :in_sync_stack_instances_count,
       :in_progress_stack_instances_count,
       :failed_stack_instances_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6493,6 +6616,7 @@ module Aws::CloudFormation
       :end_timestamp,
       :deployment_targets,
       :stack_set_drift_detection_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6588,6 +6712,7 @@ module Aws::CloudFormation
       :failure_tolerance_percentage,
       :max_concurrent_count,
       :max_concurrent_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6658,6 +6783,7 @@ module Aws::CloudFormation
       :status_reason,
       :account_gate_result,
       :organizational_unit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6734,6 +6860,7 @@ module Aws::CloudFormation
       :status,
       :creation_timestamp,
       :end_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6822,6 +6949,7 @@ module Aws::CloudFormation
       :permission_model,
       :drift_status,
       :last_drift_check_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6913,6 +7041,7 @@ module Aws::CloudFormation
       :parent_id,
       :root_id,
       :drift_information)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6945,6 +7074,7 @@ module Aws::CloudFormation
     class StopStackSetOperationInput < Struct.new(
       :stack_set_name,
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6979,6 +7109,7 @@ module Aws::CloudFormation
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7008,6 +7139,7 @@ module Aws::CloudFormation
       :default_value,
       :no_echo,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7061,6 +7193,7 @@ module Aws::CloudFormation
       :type_arn,
       :last_updated,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7107,6 +7240,7 @@ module Aws::CloudFormation
       :arn,
       :time_created,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7440,6 +7574,7 @@ module Aws::CloudFormation
       :notification_arns,
       :tags,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7581,6 +7716,7 @@ module Aws::CloudFormation
       :parameter_overrides,
       :operation_preferences,
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7592,6 +7728,7 @@ module Aws::CloudFormation
     #
     class UpdateStackInstancesOutput < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7605,6 +7742,7 @@ module Aws::CloudFormation
     #
     class UpdateStackOutput < Struct.new(
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7984,6 +8122,7 @@ module Aws::CloudFormation
       :operation_id,
       :accounts,
       :regions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7995,6 +8134,7 @@ module Aws::CloudFormation
     #
     class UpdateStackSetOutput < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8020,6 +8160,7 @@ module Aws::CloudFormation
     class UpdateTerminationProtectionInput < Struct.new(
       :enable_termination_protection,
       :stack_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8031,6 +8172,7 @@ module Aws::CloudFormation
     #
     class UpdateTerminationProtectionOutput < Struct.new(
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8076,6 +8218,7 @@ module Aws::CloudFormation
     class ValidateTemplateInput < Struct.new(
       :template_body,
       :template_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8121,6 +8264,7 @@ module Aws::CloudFormation
       :capabilities,
       :capabilities_reason,
       :declared_transforms)
+      SENSITIVE = []
       include Aws::Structure
     end
 

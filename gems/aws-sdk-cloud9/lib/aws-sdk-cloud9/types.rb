@@ -100,6 +100,7 @@ module Aws::Cloud9
       :automatic_stop_time_minutes,
       :owner_arn,
       :tags)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -111,6 +112,7 @@ module Aws::Cloud9
     #
     class CreateEnvironmentEC2Result < Struct.new(
       :environment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -148,6 +150,7 @@ module Aws::Cloud9
       :environment_id,
       :user_arn,
       :permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -159,6 +162,7 @@ module Aws::Cloud9
     #
     class CreateEnvironmentMembershipResult < Struct.new(
       :membership)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -184,6 +188,7 @@ module Aws::Cloud9
     class DeleteEnvironmentMembershipRequest < Struct.new(
       :environment_id,
       :user_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -206,6 +211,7 @@ module Aws::Cloud9
     #
     class DeleteEnvironmentRequest < Struct.new(
       :environment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -271,6 +277,7 @@ module Aws::Cloud9
       :permissions,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -290,6 +297,7 @@ module Aws::Cloud9
     class DescribeEnvironmentMembershipsResult < Struct.new(
       :memberships,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -308,6 +316,7 @@ module Aws::Cloud9
     #
     class DescribeEnvironmentStatusRequest < Struct.new(
       :environment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -338,6 +347,7 @@ module Aws::Cloud9
     class DescribeEnvironmentStatusResult < Struct.new(
       :status,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -356,6 +366,7 @@ module Aws::Cloud9
     #
     class DescribeEnvironmentsRequest < Struct.new(
       :environment_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -367,6 +378,7 @@ module Aws::Cloud9
     #
     class DescribeEnvironmentsResult < Struct.new(
       :environments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -415,6 +427,7 @@ module Aws::Cloud9
       :arn,
       :owner_arn,
       :lifecycle)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -451,6 +464,7 @@ module Aws::Cloud9
       :status,
       :reason,
       :failure_resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -494,6 +508,7 @@ module Aws::Cloud9
       :user_arn,
       :environment_id,
       :last_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -542,6 +557,7 @@ module Aws::Cloud9
     class ListEnvironmentsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -561,6 +577,7 @@ module Aws::Cloud9
     class ListEnvironmentsResult < Struct.new(
       :next_token,
       :environment_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -580,6 +597,7 @@ module Aws::Cloud9
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -592,6 +610,7 @@ module Aws::Cloud9
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -629,6 +648,7 @@ module Aws::Cloud9
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -660,6 +680,7 @@ module Aws::Cloud9
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -696,6 +717,7 @@ module Aws::Cloud9
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -737,6 +759,7 @@ module Aws::Cloud9
       :environment_id,
       :user_arn,
       :permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -749,6 +772,7 @@ module Aws::Cloud9
     #
     class UpdateEnvironmentMembershipResult < Struct.new(
       :membership)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -779,6 +803,7 @@ module Aws::Cloud9
       :environment_id,
       :name,
       :description)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 

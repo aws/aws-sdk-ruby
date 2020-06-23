@@ -24,6 +24,7 @@ module Aws::Macie
     class AccessDeniedException < Struct.new(
       :message,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43,6 +44,7 @@ module Aws::Macie
     #
     class AssociateMemberAccountRequest < Struct.new(
       :member_account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -78,6 +80,7 @@ module Aws::Macie
     class AssociateS3ResourcesRequest < Struct.new(
       :member_account_id,
       :s3_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -91,6 +94,7 @@ module Aws::Macie
     #
     class AssociateS3ResourcesResult < Struct.new(
       :failed_s3_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -122,6 +126,7 @@ module Aws::Macie
     class ClassificationType < Struct.new(
       :one_time,
       :continuous)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -154,6 +159,7 @@ module Aws::Macie
     class ClassificationTypeUpdate < Struct.new(
       :one_time,
       :continuous)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -173,6 +179,7 @@ module Aws::Macie
     #
     class DisassociateMemberAccountRequest < Struct.new(
       :member_account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -204,6 +211,7 @@ module Aws::Macie
     class DisassociateS3ResourcesRequest < Struct.new(
       :member_account_id,
       :associated_s3_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -217,6 +225,7 @@ module Aws::Macie
     #
     class DisassociateS3ResourcesResult < Struct.new(
       :failed_s3_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +249,7 @@ module Aws::Macie
       :failed_item,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -257,6 +267,7 @@ module Aws::Macie
     class InternalException < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -280,6 +291,7 @@ module Aws::Macie
       :error_code,
       :message,
       :field_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -304,6 +316,7 @@ module Aws::Macie
       :error_code,
       :message,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -333,6 +346,7 @@ module Aws::Macie
     class ListMemberAccountsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -354,6 +368,7 @@ module Aws::Macie
     class ListMemberAccountsResult < Struct.new(
       :member_accounts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -389,6 +404,7 @@ module Aws::Macie
       :member_account_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -409,6 +425,7 @@ module Aws::Macie
     class ListS3ResourcesResult < Struct.new(
       :s3_resources,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -422,6 +439,7 @@ module Aws::Macie
     #
     class MemberAccount < Struct.new(
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -451,6 +469,7 @@ module Aws::Macie
     class S3Resource < Struct.new(
       :bucket_name,
       :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -492,6 +511,7 @@ module Aws::Macie
       :bucket_name,
       :prefix,
       :classification_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -532,6 +552,7 @@ module Aws::Macie
       :bucket_name,
       :prefix,
       :classification_type_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -566,6 +587,7 @@ module Aws::Macie
     class UpdateS3ResourcesRequest < Struct.new(
       :member_account_id,
       :s3_resources_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -578,6 +600,7 @@ module Aws::Macie
     #
     class UpdateS3ResourcesResult < Struct.new(
       :failed_s3_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 

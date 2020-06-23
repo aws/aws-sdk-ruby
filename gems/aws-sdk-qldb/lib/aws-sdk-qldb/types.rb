@@ -31,6 +31,7 @@ module Aws::QLDB
     class CancelJournalKinesisStreamRequest < Struct.new(
       :ledger_name,
       :stream_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42,6 +43,7 @@ module Aws::QLDB
     #
     class CancelJournalKinesisStreamResponse < Struct.new(
       :stream_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -100,6 +102,7 @@ module Aws::QLDB
       :tags,
       :permissions_mode,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -142,6 +145,7 @@ module Aws::QLDB
       :state,
       :creation_date_time,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -160,6 +164,7 @@ module Aws::QLDB
     #
     class DeleteLedgerRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -184,6 +189,7 @@ module Aws::QLDB
     class DescribeJournalKinesisStreamRequest < Struct.new(
       :ledger_name,
       :stream_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -196,6 +202,7 @@ module Aws::QLDB
     #
     class DescribeJournalKinesisStreamResponse < Struct.new(
       :stream)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -220,6 +227,7 @@ module Aws::QLDB
     class DescribeJournalS3ExportRequest < Struct.new(
       :name,
       :export_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -232,6 +240,7 @@ module Aws::QLDB
     #
     class DescribeJournalS3ExportResponse < Struct.new(
       :export_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -250,6 +259,7 @@ module Aws::QLDB
     #
     class DescribeLedgerRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -292,6 +302,7 @@ module Aws::QLDB
       :state,
       :creation_date_time,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -369,6 +380,7 @@ module Aws::QLDB
       :exclusive_end_time,
       :s3_export_configuration,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -383,6 +395,7 @@ module Aws::QLDB
     #
     class ExportJournalToS3Response < Struct.new(
       :export_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -425,6 +438,7 @@ module Aws::QLDB
       :name,
       :block_address,
       :digest_tip_address)
+      SENSITIVE = [:block_address, :digest_tip_address]
       include Aws::Structure
     end
 
@@ -444,6 +458,7 @@ module Aws::QLDB
     class GetBlockResponse < Struct.new(
       :block,
       :proof)
+      SENSITIVE = [:block, :proof]
       include Aws::Structure
     end
 
@@ -462,6 +477,7 @@ module Aws::QLDB
     #
     class GetDigestRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -481,6 +497,7 @@ module Aws::QLDB
     class GetDigestResponse < Struct.new(
       :digest,
       :digest_tip_address)
+      SENSITIVE = [:digest_tip_address]
       include Aws::Structure
     end
 
@@ -529,6 +546,7 @@ module Aws::QLDB
       :block_address,
       :document_id,
       :digest_tip_address)
+      SENSITIVE = [:block_address, :digest_tip_address]
       include Aws::Structure
     end
 
@@ -548,6 +566,7 @@ module Aws::QLDB
     class GetRevisionResponse < Struct.new(
       :proof,
       :revision)
+      SENSITIVE = [:proof, :revision]
       include Aws::Structure
     end
 
@@ -565,6 +584,7 @@ module Aws::QLDB
     class InvalidParameterException < Struct.new(
       :message,
       :parameter_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -640,6 +660,7 @@ module Aws::QLDB
       :kinesis_configuration,
       :error_cause,
       :stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -703,6 +724,7 @@ module Aws::QLDB
       :exclusive_end_time,
       :s3_export_configuration,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -736,6 +758,7 @@ module Aws::QLDB
     class KinesisConfiguration < Struct.new(
       :stream_arn,
       :aggregation_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -762,6 +785,7 @@ module Aws::QLDB
       :name,
       :state,
       :creation_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -779,6 +803,7 @@ module Aws::QLDB
     class LimitExceededException < Struct.new(
       :message,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -814,6 +839,7 @@ module Aws::QLDB
       :ledger_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -836,6 +862,7 @@ module Aws::QLDB
     class ListJournalKinesisStreamsForLedgerResponse < Struct.new(
       :streams,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -871,6 +898,7 @@ module Aws::QLDB
       :name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -893,6 +921,7 @@ module Aws::QLDB
     class ListJournalS3ExportsForLedgerResponse < Struct.new(
       :journal_s3_exports,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -922,6 +951,7 @@ module Aws::QLDB
     class ListJournalS3ExportsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -944,6 +974,7 @@ module Aws::QLDB
     class ListJournalS3ExportsResponse < Struct.new(
       :journal_s3_exports,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -972,6 +1003,7 @@ module Aws::QLDB
     class ListLedgersRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -997,6 +1029,7 @@ module Aws::QLDB
     class ListLedgersResponse < Struct.new(
       :ledgers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1018,6 +1051,7 @@ module Aws::QLDB
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1030,6 +1064,7 @@ module Aws::QLDB
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1052,6 +1087,7 @@ module Aws::QLDB
       :message,
       :resource_type,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1074,6 +1110,7 @@ module Aws::QLDB
       :message,
       :resource_type,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1096,6 +1133,7 @@ module Aws::QLDB
       :message,
       :resource_type,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1118,6 +1156,7 @@ module Aws::QLDB
       :message,
       :resource_type,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1161,6 +1200,7 @@ module Aws::QLDB
     class S3EncryptionConfiguration < Struct.new(
       :object_encryption_type,
       :kms_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1224,6 +1264,7 @@ module Aws::QLDB
       :bucket,
       :prefix,
       :encryption_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1315,6 +1356,7 @@ module Aws::QLDB
       :exclusive_end_time,
       :kinesis_configuration,
       :stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1326,6 +1368,7 @@ module Aws::QLDB
     #
     class StreamJournalToKinesisResponse < Struct.new(
       :stream_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1358,6 +1401,7 @@ module Aws::QLDB
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1389,6 +1433,7 @@ module Aws::QLDB
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1426,6 +1471,7 @@ module Aws::QLDB
     class UpdateLedgerRequest < Struct.new(
       :name,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1468,6 +1514,7 @@ module Aws::QLDB
       :state,
       :creation_date_time,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1489,6 +1536,7 @@ module Aws::QLDB
     #
     class ValueHolder < Struct.new(
       :ion_text)
+      SENSITIVE = [:ion_text]
       include Aws::Structure
     end
 

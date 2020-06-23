@@ -44,6 +44,7 @@ module Aws::WorkLink
       :domain_name,
       :display_name,
       :acm_certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -79,6 +80,7 @@ module Aws::WorkLink
       :fleet_arn,
       :authorization_provider_type,
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -90,6 +92,7 @@ module Aws::WorkLink
     #
     class AssociateWebsiteAuthorizationProviderResponse < Struct.new(
       :authorization_provider_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -120,6 +123,7 @@ module Aws::WorkLink
       :fleet_arn,
       :certificate,
       :display_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -131,6 +135,7 @@ module Aws::WorkLink
     #
     class AssociateWebsiteCertificateAuthorityResponse < Struct.new(
       :website_ca_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -171,6 +176,7 @@ module Aws::WorkLink
       :display_name,
       :optimize_for_end_user_location,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -182,6 +188,7 @@ module Aws::WorkLink
     #
     class CreateFleetResponse < Struct.new(
       :fleet_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -200,6 +207,7 @@ module Aws::WorkLink
     #
     class DeleteFleetRequest < Struct.new(
       :fleet_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -222,6 +230,7 @@ module Aws::WorkLink
     #
     class DescribeAuditStreamConfigurationRequest < Struct.new(
       :fleet_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -234,6 +243,7 @@ module Aws::WorkLink
     #
     class DescribeAuditStreamConfigurationResponse < Struct.new(
       :audit_stream_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -252,6 +262,7 @@ module Aws::WorkLink
     #
     class DescribeCompanyNetworkConfigurationRequest < Struct.new(
       :fleet_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -274,6 +285,7 @@ module Aws::WorkLink
       :vpc_id,
       :subnet_ids,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -292,6 +304,7 @@ module Aws::WorkLink
     #
     class DescribeDevicePolicyConfigurationRequest < Struct.new(
       :fleet_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -305,6 +318,7 @@ module Aws::WorkLink
     #
     class DescribeDevicePolicyConfigurationResponse < Struct.new(
       :device_ca_certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -329,6 +343,7 @@ module Aws::WorkLink
     class DescribeDeviceRequest < Struct.new(
       :fleet_arn,
       :device_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -380,6 +395,7 @@ module Aws::WorkLink
       :first_accessed_time,
       :last_accessed_time,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -404,6 +420,7 @@ module Aws::WorkLink
     class DescribeDomainRequest < Struct.new(
       :fleet_arn,
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -436,6 +453,7 @@ module Aws::WorkLink
       :created_time,
       :domain_status,
       :acm_certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -454,6 +472,7 @@ module Aws::WorkLink
     #
     class DescribeFleetMetadataRequest < Struct.new(
       :fleet_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -502,6 +521,7 @@ module Aws::WorkLink
       :company_code,
       :fleet_status,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -520,6 +540,7 @@ module Aws::WorkLink
     #
     class DescribeIdentityProviderConfigurationRequest < Struct.new(
       :fleet_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -541,6 +562,7 @@ module Aws::WorkLink
       :identity_provider_type,
       :service_provider_saml_metadata,
       :identity_provider_saml_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -565,6 +587,7 @@ module Aws::WorkLink
     class DescribeWebsiteCertificateAuthorityRequest < Struct.new(
       :fleet_arn,
       :website_ca_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -586,6 +609,7 @@ module Aws::WorkLink
       :certificate,
       :created_time,
       :display_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -604,6 +628,7 @@ module Aws::WorkLink
     class DeviceSummary < Struct.new(
       :device_id,
       :device_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -628,6 +653,7 @@ module Aws::WorkLink
     class DisassociateDomainRequest < Struct.new(
       :fleet_arn,
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -656,6 +682,7 @@ module Aws::WorkLink
     class DisassociateWebsiteAuthorizationProviderRequest < Struct.new(
       :fleet_arn,
       :authorization_provider_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -684,6 +711,7 @@ module Aws::WorkLink
     class DisassociateWebsiteCertificateAuthorityRequest < Struct.new(
       :fleet_arn,
       :website_ca_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -716,6 +744,7 @@ module Aws::WorkLink
       :display_name,
       :created_time,
       :domain_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -764,6 +793,7 @@ module Aws::WorkLink
       :company_code,
       :fleet_status,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -776,6 +806,7 @@ module Aws::WorkLink
     #
     class InternalServerErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -788,6 +819,7 @@ module Aws::WorkLink
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -819,6 +851,7 @@ module Aws::WorkLink
       :fleet_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -836,6 +869,7 @@ module Aws::WorkLink
     class ListDevicesResponse < Struct.new(
       :devices,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -867,6 +901,7 @@ module Aws::WorkLink
       :fleet_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -884,6 +919,7 @@ module Aws::WorkLink
     class ListDomainsResponse < Struct.new(
       :domains,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -909,6 +945,7 @@ module Aws::WorkLink
     class ListFleetsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -926,6 +963,7 @@ module Aws::WorkLink
     class ListFleetsResponse < Struct.new(
       :fleet_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -944,6 +982,7 @@ module Aws::WorkLink
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -955,6 +994,7 @@ module Aws::WorkLink
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -986,6 +1026,7 @@ module Aws::WorkLink
       :fleet_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1003,6 +1044,7 @@ module Aws::WorkLink
     class ListWebsiteAuthorizationProvidersResponse < Struct.new(
       :website_authorization_providers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1034,6 +1076,7 @@ module Aws::WorkLink
       :fleet_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1051,6 +1094,7 @@ module Aws::WorkLink
     class ListWebsiteCertificateAuthoritiesResponse < Struct.new(
       :website_certificate_authorities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1063,6 +1107,7 @@ module Aws::WorkLink
     #
     class ResourceAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1075,6 +1120,7 @@ module Aws::WorkLink
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1099,6 +1145,7 @@ module Aws::WorkLink
     class RestoreDomainAccessRequest < Struct.new(
       :fleet_arn,
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1127,6 +1174,7 @@ module Aws::WorkLink
     class RevokeDomainAccessRequest < Struct.new(
       :fleet_arn,
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1155,6 +1203,7 @@ module Aws::WorkLink
     class SignOutUserRequest < Struct.new(
       :fleet_arn,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1185,6 +1234,7 @@ module Aws::WorkLink
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1201,6 +1251,7 @@ module Aws::WorkLink
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1213,6 +1264,7 @@ module Aws::WorkLink
     #
     class UnauthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1237,6 +1289,7 @@ module Aws::WorkLink
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1266,6 +1319,7 @@ module Aws::WorkLink
     class UpdateAuditStreamConfigurationRequest < Struct.new(
       :fleet_arn,
       :audit_stream_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1307,6 +1361,7 @@ module Aws::WorkLink
       :vpc_id,
       :subnet_ids,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1337,6 +1392,7 @@ module Aws::WorkLink
     class UpdateDevicePolicyConfigurationRequest < Struct.new(
       :fleet_arn,
       :device_ca_certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1371,6 +1427,7 @@ module Aws::WorkLink
       :fleet_arn,
       :domain_name,
       :display_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1408,6 +1465,7 @@ module Aws::WorkLink
       :fleet_arn,
       :display_name,
       :optimize_for_end_user_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1444,6 +1502,7 @@ module Aws::WorkLink
       :fleet_arn,
       :identity_provider_type,
       :identity_provider_saml_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1477,6 +1536,7 @@ module Aws::WorkLink
       :authorization_provider_type,
       :domain_name,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1500,6 +1560,7 @@ module Aws::WorkLink
       :website_ca_id,
       :created_time,
       :display_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 

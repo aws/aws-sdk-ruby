@@ -39,6 +39,7 @@ module Aws::Backup
       :arn,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -164,6 +165,7 @@ module Aws::Backup
       :start_by,
       :resource_type,
       :bytes_transferred)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -186,6 +188,7 @@ module Aws::Backup
     class BackupPlan < Struct.new(
       :backup_plan_name,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +243,7 @@ module Aws::Backup
     class BackupPlanInput < Struct.new(
       :backup_plan_name,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -258,6 +262,7 @@ module Aws::Backup
     class BackupPlanTemplatesListMember < Struct.new(
       :backup_plan_template_id,
       :backup_plan_template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -321,6 +326,7 @@ module Aws::Backup
       :backup_plan_name,
       :creator_request_id,
       :last_execution_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -391,6 +397,7 @@ module Aws::Backup
       :recovery_point_tags,
       :rule_id,
       :copy_actions)
+      SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
 
@@ -483,6 +490,7 @@ module Aws::Backup
       :lifecycle,
       :recovery_point_tags,
       :copy_actions)
+      SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
 
@@ -532,6 +540,7 @@ module Aws::Backup
       :iam_role_arn,
       :resources,
       :list_of_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -578,6 +587,7 @@ module Aws::Backup
       :creation_date,
       :creator_request_id,
       :iam_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -628,6 +638,7 @@ module Aws::Backup
       :encryption_key_arn,
       :creator_request_id,
       :number_of_recovery_points)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -658,6 +669,7 @@ module Aws::Backup
     class CalculatedLifecycle < Struct.new(
       :move_to_cold_storage_at,
       :delete_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -697,6 +709,7 @@ module Aws::Backup
       :condition_type,
       :condition_key,
       :condition_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -737,6 +750,7 @@ module Aws::Backup
     class CopyAction < Struct.new(
       :lifecycle,
       :destination_backup_vault_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -836,6 +850,7 @@ module Aws::Backup
       :iam_role_arn,
       :created_by,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -901,6 +916,7 @@ module Aws::Backup
       :backup_plan,
       :backup_plan_tags,
       :creator_request_id)
+      SENSITIVE = [:backup_plan_tags]
       include Aws::Structure
     end
 
@@ -933,6 +949,7 @@ module Aws::Backup
       :backup_plan_arn,
       :creation_date,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -978,6 +995,7 @@ module Aws::Backup
       :backup_plan_id,
       :backup_selection,
       :creator_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1003,6 +1021,7 @@ module Aws::Backup
       :selection_id,
       :backup_plan_id,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1049,6 +1068,7 @@ module Aws::Backup
       :backup_vault_tags,
       :encryption_key_arn,
       :creator_request_id)
+      SENSITIVE = [:backup_vault_tags]
       include Aws::Structure
     end
 
@@ -1078,6 +1098,7 @@ module Aws::Backup
       :backup_vault_name,
       :backup_vault_arn,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1096,6 +1117,7 @@ module Aws::Backup
     #
     class DeleteBackupPlanInput < Struct.new(
       :backup_plan_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1128,6 +1150,7 @@ module Aws::Backup
       :backup_plan_arn,
       :deletion_date,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1153,6 +1176,7 @@ module Aws::Backup
     class DeleteBackupSelectionInput < Struct.new(
       :backup_plan_id,
       :selection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1174,6 +1198,7 @@ module Aws::Backup
     #
     class DeleteBackupVaultAccessPolicyInput < Struct.new(
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1195,6 +1220,7 @@ module Aws::Backup
     #
     class DeleteBackupVaultInput < Struct.new(
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1216,6 +1242,7 @@ module Aws::Backup
     #
     class DeleteBackupVaultNotificationsInput < Struct.new(
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1245,6 +1272,7 @@ module Aws::Backup
     class DeleteRecoveryPointInput < Struct.new(
       :backup_vault_name,
       :recovery_point_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1270,6 +1298,7 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1288,6 +1317,7 @@ module Aws::Backup
     #
     class DescribeBackupJobInput < Struct.new(
       :backup_job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1411,6 +1441,7 @@ module Aws::Backup
       :bytes_transferred,
       :expected_completion_date,
       :start_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1432,6 +1463,7 @@ module Aws::Backup
     #
     class DescribeBackupVaultInput < Struct.new(
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1480,6 +1512,7 @@ module Aws::Backup
       :creation_date,
       :creator_request_id,
       :number_of_recovery_points)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1498,6 +1531,7 @@ module Aws::Backup
     #
     class DescribeCopyJobInput < Struct.new(
       :copy_job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1509,6 +1543,7 @@ module Aws::Backup
     #
     class DescribeCopyJobOutput < Struct.new(
       :copy_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1528,6 +1563,7 @@ module Aws::Backup
     #
     class DescribeProtectedResourceInput < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1554,6 +1590,7 @@ module Aws::Backup
       :resource_arn,
       :resource_type,
       :last_backup_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1583,6 +1620,7 @@ module Aws::Backup
     class DescribeRecoveryPointInput < Struct.new(
       :backup_vault_name,
       :recovery_point_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1716,6 +1754,7 @@ module Aws::Backup
       :is_encrypted,
       :storage_class,
       :last_restore_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1734,6 +1773,7 @@ module Aws::Backup
     #
     class DescribeRegionSettingsOutput < Struct.new(
       :resource_type_opt_in_preference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1752,6 +1792,7 @@ module Aws::Backup
     #
     class DescribeRestoreJobInput < Struct.new(
       :restore_job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1828,6 +1869,7 @@ module Aws::Backup
       :iam_role_arn,
       :expected_completion_time_minutes,
       :created_resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1846,6 +1888,7 @@ module Aws::Backup
     #
     class ExportBackupPlanTemplateInput < Struct.new(
       :backup_plan_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1862,6 +1905,7 @@ module Aws::Backup
     #
     class ExportBackupPlanTemplateOutput < Struct.new(
       :backup_plan_template_json)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1880,6 +1924,7 @@ module Aws::Backup
     #
     class GetBackupPlanFromJSONInput < Struct.new(
       :backup_plan_template_json)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1892,6 +1937,7 @@ module Aws::Backup
     #
     class GetBackupPlanFromJSONOutput < Struct.new(
       :backup_plan)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1910,6 +1956,7 @@ module Aws::Backup
     #
     class GetBackupPlanFromTemplateInput < Struct.new(
       :backup_plan_template_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1922,6 +1969,7 @@ module Aws::Backup
     #
     class GetBackupPlanFromTemplateOutput < Struct.new(
       :backup_plan_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1947,6 +1995,7 @@ module Aws::Backup
     class GetBackupPlanInput < Struct.new(
       :backup_plan_id,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2009,6 +2058,7 @@ module Aws::Backup
       :creation_date,
       :deletion_date,
       :last_execution_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2034,6 +2084,7 @@ module Aws::Backup
     class GetBackupSelectionInput < Struct.new(
       :backup_plan_id,
       :selection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2072,6 +2123,7 @@ module Aws::Backup
       :backup_plan_id,
       :creation_date,
       :creator_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2093,6 +2145,7 @@ module Aws::Backup
     #
     class GetBackupVaultAccessPolicyInput < Struct.new(
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2119,6 +2172,7 @@ module Aws::Backup
       :backup_vault_name,
       :backup_vault_arn,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2140,6 +2194,7 @@ module Aws::Backup
     #
     class GetBackupVaultNotificationsInput < Struct.new(
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2174,6 +2229,7 @@ module Aws::Backup
       :backup_vault_arn,
       :sns_topic_arn,
       :backup_vault_events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2203,6 +2259,7 @@ module Aws::Backup
     class GetRecoveryPointRestoreMetadataInput < Struct.new(
       :backup_vault_name,
       :recovery_point_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2228,6 +2285,7 @@ module Aws::Backup
       :backup_vault_arn,
       :recovery_point_arn,
       :restore_metadata)
+      SENSITIVE = [:restore_metadata]
       include Aws::Structure
     end
 
@@ -2249,6 +2307,7 @@ module Aws::Backup
     #
     class GetSupportedResourceTypesOutput < Struct.new(
       :resource_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2274,6 +2333,7 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2299,6 +2359,7 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2335,6 +2396,7 @@ module Aws::Backup
     class Lifecycle < Struct.new(
       :move_to_cold_storage_after_days,
       :delete_after_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2360,6 +2422,7 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2438,6 +2501,7 @@ module Aws::Backup
       :by_created_before,
       :by_created_after,
       :by_resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2458,6 +2522,7 @@ module Aws::Backup
     class ListBackupJobsOutput < Struct.new(
       :backup_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2485,6 +2550,7 @@ module Aws::Backup
     class ListBackupPlanTemplatesInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2505,6 +2571,7 @@ module Aws::Backup
     class ListBackupPlanTemplatesOutput < Struct.new(
       :next_token,
       :backup_plan_templates_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2538,6 +2605,7 @@ module Aws::Backup
       :backup_plan_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2558,6 +2626,7 @@ module Aws::Backup
     class ListBackupPlanVersionsOutput < Struct.new(
       :next_token,
       :backup_plan_versions_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2592,6 +2661,7 @@ module Aws::Backup
       :next_token,
       :max_results,
       :include_deleted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2612,6 +2682,7 @@ module Aws::Backup
     class ListBackupPlansOutput < Struct.new(
       :next_token,
       :backup_plans_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2645,6 +2716,7 @@ module Aws::Backup
       :backup_plan_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2665,6 +2737,7 @@ module Aws::Backup
     class ListBackupSelectionsOutput < Struct.new(
       :next_token,
       :backup_selections_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2692,6 +2765,7 @@ module Aws::Backup
     class ListBackupVaultsInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2714,6 +2788,7 @@ module Aws::Backup
     class ListBackupVaultsOutput < Struct.new(
       :backup_vault_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2788,6 +2863,7 @@ module Aws::Backup
       :by_created_after,
       :by_resource_type,
       :by_destination_vault_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2808,6 +2884,7 @@ module Aws::Backup
     class ListCopyJobsOutput < Struct.new(
       :copy_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2835,6 +2912,7 @@ module Aws::Backup
     class ListProtectedResourcesInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2856,6 +2934,7 @@ module Aws::Backup
     class ListProtectedResourcesOutput < Struct.new(
       :results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2926,6 +3005,7 @@ module Aws::Backup
       :by_backup_plan_id,
       :by_created_before,
       :by_created_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2946,6 +3026,7 @@ module Aws::Backup
     class ListRecoveryPointsByBackupVaultOutput < Struct.new(
       :next_token,
       :recovery_points)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2980,6 +3061,7 @@ module Aws::Backup
       :resource_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3000,6 +3082,7 @@ module Aws::Backup
     class ListRecoveryPointsByResourceOutput < Struct.new(
       :next_token,
       :recovery_points)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3027,6 +3110,7 @@ module Aws::Backup
     class ListRestoreJobsInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3047,6 +3131,7 @@ module Aws::Backup
     class ListRestoreJobsOutput < Struct.new(
       :restore_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3082,6 +3167,7 @@ module Aws::Backup
       :resource_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3102,6 +3188,7 @@ module Aws::Backup
     class ListTagsOutput < Struct.new(
       :next_token,
       :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -3126,6 +3213,7 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3155,6 +3243,7 @@ module Aws::Backup
       :resource_arn,
       :resource_type,
       :last_backup_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3182,6 +3271,7 @@ module Aws::Backup
     class PutBackupVaultAccessPolicyInput < Struct.new(
       :backup_vault_name,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3218,6 +3308,7 @@ module Aws::Backup
       :backup_vault_name,
       :sns_topic_arn,
       :backup_vault_events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3342,6 +3433,7 @@ module Aws::Backup
       :encryption_key_arn,
       :is_encrypted,
       :last_restore_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3390,6 +3482,7 @@ module Aws::Backup
       :encryption_key_arn,
       :backup_size_bytes,
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3423,6 +3516,7 @@ module Aws::Backup
       :backup_plan_arn,
       :backup_plan_version,
       :backup_rule_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3447,6 +3541,7 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3523,6 +3618,7 @@ module Aws::Backup
       :iam_role_arn,
       :expected_completion_time_minutes,
       :created_resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3547,6 +3643,7 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3631,6 +3728,7 @@ module Aws::Backup
       :complete_window_minutes,
       :lifecycle,
       :recovery_point_tags)
+      SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
 
@@ -3656,6 +3754,7 @@ module Aws::Backup
       :backup_job_id,
       :recovery_point_arn,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3725,6 +3824,7 @@ module Aws::Backup
       :iam_role_arn,
       :idempotency_token,
       :lifecycle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3744,6 +3844,7 @@ module Aws::Backup
     class StartCopyJobOutput < Struct.new(
       :copy_job_id,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3833,6 +3934,7 @@ module Aws::Backup
       :iam_role_arn,
       :idempotency_token,
       :resource_type)
+      SENSITIVE = [:metadata]
       include Aws::Structure
     end
 
@@ -3844,6 +3946,7 @@ module Aws::Backup
     #
     class StartRestoreJobOutput < Struct.new(
       :restore_job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3862,6 +3965,7 @@ module Aws::Backup
     #
     class StopBackupJobInput < Struct.new(
       :backup_job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3890,6 +3994,7 @@ module Aws::Backup
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -3916,6 +4021,7 @@ module Aws::Backup
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_key_list)
+      SENSITIVE = [:tag_key_list]
       include Aws::Structure
     end
 
@@ -3968,6 +4074,7 @@ module Aws::Backup
     class UpdateBackupPlanInput < Struct.new(
       :backup_plan_id,
       :backup_plan)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4000,6 +4107,7 @@ module Aws::Backup
       :backup_plan_arn,
       :creation_date,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4046,6 +4154,7 @@ module Aws::Backup
       :backup_vault_name,
       :recovery_point_arn,
       :lifecycle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4084,6 +4193,7 @@ module Aws::Backup
       :recovery_point_arn,
       :lifecycle,
       :calculated_lifecycle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4105,6 +4215,7 @@ module Aws::Backup
     #
     class UpdateRegionSettingsInput < Struct.new(
       :resource_type_opt_in_preference)
+      SENSITIVE = []
       include Aws::Structure
     end
 

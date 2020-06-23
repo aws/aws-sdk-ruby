@@ -19,6 +19,7 @@ module Aws::MigrationHubConfig
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -54,6 +55,7 @@ module Aws::MigrationHubConfig
       :home_region,
       :target,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -66,6 +68,7 @@ module Aws::MigrationHubConfig
     #
     class CreateHomeRegionControlResult < Struct.new(
       :home_region_control)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -116,6 +119,7 @@ module Aws::MigrationHubConfig
       :target,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -134,6 +138,7 @@ module Aws::MigrationHubConfig
     class DescribeHomeRegionControlsResult < Struct.new(
       :home_region_controls,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -147,6 +152,7 @@ module Aws::MigrationHubConfig
     #
     class DryRunOperation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -164,6 +170,7 @@ module Aws::MigrationHubConfig
     #
     class GetHomeRegionResult < Struct.new(
       :home_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -201,6 +208,7 @@ module Aws::MigrationHubConfig
       :home_region,
       :target,
       :requested_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -214,6 +222,7 @@ module Aws::MigrationHubConfig
     #
     class InternalServerError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,6 +236,7 @@ module Aws::MigrationHubConfig
     #
     class InvalidInputException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +250,7 @@ module Aws::MigrationHubConfig
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -269,6 +280,7 @@ module Aws::MigrationHubConfig
     class Target < Struct.new(
       :type,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -286,6 +298,7 @@ module Aws::MigrationHubConfig
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 

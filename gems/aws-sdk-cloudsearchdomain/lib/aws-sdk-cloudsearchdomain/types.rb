@@ -24,6 +24,7 @@ module Aws::CloudSearchDomain
     class Bucket < Struct.new(
       :value,
       :count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35,6 +36,7 @@ module Aws::CloudSearchDomain
     #
     class BucketInfo < Struct.new(
       :buckets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -53,6 +55,7 @@ module Aws::CloudSearchDomain
     class DocumentServiceException < Struct.new(
       :status,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -65,6 +68,7 @@ module Aws::CloudSearchDomain
     #
     class DocumentServiceWarning < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -149,6 +153,7 @@ module Aws::CloudSearchDomain
       :sum_of_squares,
       :mean,
       :stddev)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -177,6 +182,7 @@ module Aws::CloudSearchDomain
       :fields,
       :exprs,
       :highlights)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -204,6 +210,7 @@ module Aws::CloudSearchDomain
       :start,
       :cursor,
       :hit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -216,6 +223,7 @@ module Aws::CloudSearchDomain
     #
     class SearchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -637,6 +645,7 @@ module Aws::CloudSearchDomain
       :sort,
       :start,
       :stats)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -665,6 +674,7 @@ module Aws::CloudSearchDomain
       :hits,
       :facets,
       :stats)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -682,6 +692,7 @@ module Aws::CloudSearchDomain
     class SearchStatus < Struct.new(
       :timems,
       :rid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -704,6 +715,7 @@ module Aws::CloudSearchDomain
       :query,
       :found,
       :suggestions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -735,6 +747,7 @@ module Aws::CloudSearchDomain
       :query,
       :suggester,
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -752,6 +765,7 @@ module Aws::CloudSearchDomain
     class SuggestResponse < Struct.new(
       :status,
       :suggest)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -769,6 +783,7 @@ module Aws::CloudSearchDomain
     class SuggestStatus < Struct.new(
       :timems,
       :rid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -792,6 +807,7 @@ module Aws::CloudSearchDomain
       :suggestion,
       :score,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -820,6 +836,7 @@ module Aws::CloudSearchDomain
     class UploadDocumentsRequest < Struct.new(
       :documents,
       :content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -847,6 +864,7 @@ module Aws::CloudSearchDomain
       :adds,
       :deletes,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -41,6 +41,7 @@ module Aws::CloudTrail
     class AddTagsRequest < Struct.new(
       :resource_id,
       :tags_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -232,6 +233,7 @@ module Aws::CloudTrail
       :kms_key_id,
       :is_organization_trail,
       :tags_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -327,6 +329,7 @@ module Aws::CloudTrail
       :cloud_watch_logs_role_arn,
       :kms_key_id,
       :is_organization_trail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -446,6 +449,7 @@ module Aws::CloudTrail
     class DataResource < Struct.new(
       :type,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -468,6 +472,7 @@ module Aws::CloudTrail
     #
     class DeleteTrailRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -527,6 +532,7 @@ module Aws::CloudTrail
     class DescribeTrailsRequest < Struct.new(
       :trail_name_list,
       :include_shadow_trails)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -546,6 +552,7 @@ module Aws::CloudTrail
     #
     class DescribeTrailsResponse < Struct.new(
       :trail_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -604,6 +611,7 @@ module Aws::CloudTrail
       :username,
       :resources,
       :cloud_trail_event)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -689,6 +697,7 @@ module Aws::CloudTrail
       :include_management_events,
       :data_resources,
       :exclude_management_event_sources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -724,6 +733,7 @@ module Aws::CloudTrail
     #
     class GetEventSelectorsRequest < Struct.new(
       :trail_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -740,6 +750,7 @@ module Aws::CloudTrail
     class GetEventSelectorsResponse < Struct.new(
       :trail_arn,
       :event_selectors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -775,6 +786,7 @@ module Aws::CloudTrail
     #
     class GetInsightSelectorsRequest < Struct.new(
       :trail_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -794,6 +806,7 @@ module Aws::CloudTrail
     class GetInsightSelectorsResponse < Struct.new(
       :trail_arn,
       :insight_selectors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -813,6 +826,7 @@ module Aws::CloudTrail
     #
     class GetTrailRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -824,6 +838,7 @@ module Aws::CloudTrail
     #
     class GetTrailResponse < Struct.new(
       :trail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -849,6 +864,7 @@ module Aws::CloudTrail
     #
     class GetTrailStatusRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -987,6 +1003,7 @@ module Aws::CloudTrail
       :latest_delivery_attempt_succeeded,
       :time_logging_started,
       :time_logging_stopped)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1017,6 +1034,7 @@ module Aws::CloudTrail
     #
     class InsightSelector < Struct.new(
       :insight_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1262,6 +1280,7 @@ module Aws::CloudTrail
       :start_time,
       :end_time,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1285,6 +1304,7 @@ module Aws::CloudTrail
     class ListPublicKeysResponse < Struct.new(
       :public_key_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1314,6 +1334,7 @@ module Aws::CloudTrail
     class ListTagsRequest < Struct.new(
       :resource_id_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1333,6 +1354,7 @@ module Aws::CloudTrail
     class ListTagsResponse < Struct.new(
       :resource_tag_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1356,6 +1378,7 @@ module Aws::CloudTrail
     #
     class ListTrailsRequest < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1378,6 +1401,7 @@ module Aws::CloudTrail
     class ListTrailsResponse < Struct.new(
       :trails,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1404,6 +1428,7 @@ module Aws::CloudTrail
     class LookupAttribute < Struct.new(
       :attribute_key,
       :attribute_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1473,6 +1498,7 @@ module Aws::CloudTrail
       :event_category,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1498,6 +1524,7 @@ module Aws::CloudTrail
     class LookupEventsResponse < Struct.new(
       :events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1573,6 +1600,7 @@ module Aws::CloudTrail
       :validity_start_time,
       :validity_end_time,
       :fingerprint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1627,6 +1655,7 @@ module Aws::CloudTrail
     class PutEventSelectorsRequest < Struct.new(
       :trail_name,
       :event_selectors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1646,6 +1675,7 @@ module Aws::CloudTrail
     class PutEventSelectorsResponse < Struct.new(
       :trail_arn,
       :event_selectors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1677,6 +1707,7 @@ module Aws::CloudTrail
     class PutInsightSelectorsRequest < Struct.new(
       :trail_name,
       :insight_selectors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1696,6 +1727,7 @@ module Aws::CloudTrail
     class PutInsightSelectorsResponse < Struct.new(
       :trail_arn,
       :insight_selectors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1730,6 +1762,7 @@ module Aws::CloudTrail
     class RemoveTagsRequest < Struct.new(
       :resource_id,
       :tags_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1767,6 +1800,7 @@ module Aws::CloudTrail
     class Resource < Struct.new(
       :resource_type,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1791,6 +1825,7 @@ module Aws::CloudTrail
     class ResourceTag < Struct.new(
       :resource_id,
       :tags_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1828,6 +1863,7 @@ module Aws::CloudTrail
     #
     class StartLoggingRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1860,6 +1896,7 @@ module Aws::CloudTrail
     #
     class StopLoggingRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1897,6 +1934,7 @@ module Aws::CloudTrail
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2020,6 +2058,7 @@ module Aws::CloudTrail
       :has_custom_event_selectors,
       :has_insight_selectors,
       :is_organization_trail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2050,6 +2089,7 @@ module Aws::CloudTrail
       :trail_arn,
       :name,
       :home_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2227,6 +2267,7 @@ module Aws::CloudTrail
       :cloud_watch_logs_role_arn,
       :kms_key_id,
       :is_organization_trail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2322,6 +2363,7 @@ module Aws::CloudTrail
       :cloud_watch_logs_role_arn,
       :kms_key_id,
       :is_organization_trail)
+      SENSITIVE = []
       include Aws::Structure
     end
 

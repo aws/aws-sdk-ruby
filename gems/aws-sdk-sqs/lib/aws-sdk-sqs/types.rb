@@ -72,6 +72,7 @@ module Aws::SQS
       :label,
       :aws_account_ids,
       :actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -114,6 +115,7 @@ module Aws::SQS
       :sender_fault,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -148,6 +150,7 @@ module Aws::SQS
     class ChangeMessageVisibilityBatchRequest < Struct.new(
       :queue_url,
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -201,6 +204,7 @@ module Aws::SQS
       :id,
       :receipt_handle,
       :visibility_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -221,6 +225,7 @@ module Aws::SQS
     class ChangeMessageVisibilityBatchResult < Struct.new(
       :successful,
       :failed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -235,6 +240,7 @@ module Aws::SQS
     #
     class ChangeMessageVisibilityBatchResultEntry < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -271,6 +277,7 @@ module Aws::SQS
       :queue_url,
       :receipt_handle,
       :visibility_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -478,6 +485,7 @@ module Aws::SQS
       :queue_name,
       :attributes,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -491,6 +499,7 @@ module Aws::SQS
     #
     class CreateQueueResult < Struct.new(
       :queue_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -522,6 +531,7 @@ module Aws::SQS
     class DeleteMessageBatchRequest < Struct.new(
       :queue_url,
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -557,6 +567,7 @@ module Aws::SQS
     class DeleteMessageBatchRequestEntry < Struct.new(
       :id,
       :receipt_handle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -577,6 +588,7 @@ module Aws::SQS
     class DeleteMessageBatchResult < Struct.new(
       :successful,
       :failed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -590,6 +602,7 @@ module Aws::SQS
     #
     class DeleteMessageBatchResultEntry < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -616,6 +629,7 @@ module Aws::SQS
     class DeleteMessageRequest < Struct.new(
       :queue_url,
       :receipt_handle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -636,6 +650,7 @@ module Aws::SQS
     #
     class DeleteQueueRequest < Struct.new(
       :queue_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -785,6 +800,7 @@ module Aws::SQS
     class GetQueueAttributesRequest < Struct.new(
       :queue_url,
       :attribute_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -798,6 +814,7 @@ module Aws::SQS
     #
     class GetQueueAttributesResult < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -826,6 +843,7 @@ module Aws::SQS
     class GetQueueUrlRequest < Struct.new(
       :queue_name,
       :queue_owner_aws_account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -844,6 +862,7 @@ module Aws::SQS
     #
     class GetQueueUrlResult < Struct.new(
       :queue_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -901,6 +920,7 @@ module Aws::SQS
       :queue_url,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -920,6 +940,7 @@ module Aws::SQS
     class ListDeadLetterSourceQueuesResult < Struct.new(
       :queue_urls,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -938,6 +959,7 @@ module Aws::SQS
     #
     class ListQueueTagsRequest < Struct.new(
       :queue_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -949,6 +971,7 @@ module Aws::SQS
     #
     class ListQueueTagsResult < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -982,6 +1005,7 @@ module Aws::SQS
       :queue_name_prefix,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1001,6 +1025,7 @@ module Aws::SQS
     class ListQueuesResult < Struct.new(
       :queue_urls,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1085,6 +1110,7 @@ module Aws::SQS
       :attributes,
       :md5_of_message_attributes,
       :message_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1152,6 +1178,7 @@ module Aws::SQS
       :string_list_values,
       :binary_list_values,
       :data_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1223,6 +1250,7 @@ module Aws::SQS
       :string_list_values,
       :binary_list_values,
       :data_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1261,6 +1289,7 @@ module Aws::SQS
     #
     class PurgeQueueRequest < Struct.new(
       :queue_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1484,6 +1513,7 @@ module Aws::SQS
       :visibility_timeout,
       :wait_time_seconds,
       :receive_request_attempt_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1497,6 +1527,7 @@ module Aws::SQS
     #
     class ReceiveMessageResult < Struct.new(
       :messages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1524,6 +1555,7 @@ module Aws::SQS
     class RemovePermissionRequest < Struct.new(
       :queue_url,
       :label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1576,6 +1608,7 @@ module Aws::SQS
     class SendMessageBatchRequest < Struct.new(
       :queue_url,
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1775,6 +1808,7 @@ module Aws::SQS
       :message_system_attributes,
       :message_deduplication_id,
       :message_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1796,6 +1830,7 @@ module Aws::SQS
     class SendMessageBatchResult < Struct.new(
       :successful,
       :failed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1865,6 +1900,7 @@ module Aws::SQS
       :md5_of_message_attributes,
       :md5_of_message_system_attributes,
       :sequence_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2067,6 +2103,7 @@ module Aws::SQS
       :message_system_attributes,
       :message_deduplication_id,
       :message_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2131,6 +2168,7 @@ module Aws::SQS
       :md5_of_message_system_attributes,
       :message_id,
       :sequence_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2280,6 +2318,7 @@ module Aws::SQS
     class SetQueueAttributesRequest < Struct.new(
       :queue_url,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2306,6 +2345,7 @@ module Aws::SQS
     class TagQueueRequest < Struct.new(
       :queue_url,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2342,6 +2382,7 @@ module Aws::SQS
     class UntagQueueRequest < Struct.new(
       :queue_url,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 

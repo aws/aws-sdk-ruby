@@ -19,6 +19,7 @@ module Aws::MarketplaceCatalog
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45,6 +46,7 @@ module Aws::MarketplaceCatalog
     class CancelChangeSetRequest < Struct.new(
       :catalog,
       :change_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -61,6 +63,7 @@ module Aws::MarketplaceCatalog
     class CancelChangeSetResponse < Struct.new(
       :change_set_id,
       :change_set_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -99,6 +102,7 @@ module Aws::MarketplaceCatalog
       :change_type,
       :entity,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -148,6 +152,7 @@ module Aws::MarketplaceCatalog
       :end_time,
       :status,
       :entity_id_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -178,6 +183,7 @@ module Aws::MarketplaceCatalog
       :entity,
       :details,
       :error_detail_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -204,6 +210,7 @@ module Aws::MarketplaceCatalog
     class DescribeChangeSetRequest < Struct.new(
       :catalog,
       :change_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -258,6 +265,7 @@ module Aws::MarketplaceCatalog
       :status,
       :failure_description,
       :change_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -283,6 +291,7 @@ module Aws::MarketplaceCatalog
     class DescribeEntityRequest < Struct.new(
       :catalog,
       :entity_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -317,6 +326,7 @@ module Aws::MarketplaceCatalog
       :entity_arn,
       :last_modified_date,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -345,6 +355,7 @@ module Aws::MarketplaceCatalog
     class Entity < Struct.new(
       :type,
       :identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -391,6 +402,7 @@ module Aws::MarketplaceCatalog
       :entity_arn,
       :last_modified_date,
       :visibility)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -409,6 +421,7 @@ module Aws::MarketplaceCatalog
     class ErrorDetail < Struct.new(
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -463,6 +476,7 @@ module Aws::MarketplaceCatalog
     class Filter < Struct.new(
       :name,
       :value_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -475,6 +489,7 @@ module Aws::MarketplaceCatalog
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -528,6 +543,7 @@ module Aws::MarketplaceCatalog
       :sort,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -545,6 +561,7 @@ module Aws::MarketplaceCatalog
     class ListChangeSetsResponse < Struct.new(
       :change_set_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -604,6 +621,7 @@ module Aws::MarketplaceCatalog
       :sort,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -621,6 +639,7 @@ module Aws::MarketplaceCatalog
     class ListEntitiesResponse < Struct.new(
       :entity_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -633,6 +652,7 @@ module Aws::MarketplaceCatalog
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -645,6 +665,7 @@ module Aws::MarketplaceCatalog
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -657,6 +678,7 @@ module Aws::MarketplaceCatalog
     #
     class ResourceNotSupportedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -669,6 +691,7 @@ module Aws::MarketplaceCatalog
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -700,6 +723,7 @@ module Aws::MarketplaceCatalog
     class Sort < Struct.new(
       :sort_by,
       :sort_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -746,6 +770,7 @@ module Aws::MarketplaceCatalog
       :change_set,
       :change_set_name,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -763,6 +788,7 @@ module Aws::MarketplaceCatalog
     class StartChangeSetResponse < Struct.new(
       :change_set_id,
       :change_set_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -775,6 +801,7 @@ module Aws::MarketplaceCatalog
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -787,6 +814,7 @@ module Aws::MarketplaceCatalog
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

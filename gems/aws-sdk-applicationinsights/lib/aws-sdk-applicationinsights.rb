@@ -47,6 +47,6 @@ require_relative 'aws-sdk-applicationinsights/customizations'
 # @service
 module Aws::ApplicationInsights
 
-  GEM_VERSION = '1.11.1'
+  GEM_VERSION = '1.12.0'
 
 end

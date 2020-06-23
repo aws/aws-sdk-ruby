@@ -24,6 +24,7 @@ module Aws::ImportExport
     class Artifact < Struct.new(
       :description,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36,6 +37,7 @@ module Aws::ImportExport
     #
     class BucketPermissionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -60,6 +62,7 @@ module Aws::ImportExport
     class CancelJobInput < Struct.new(
       :job_id,
       :api_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -72,6 +75,7 @@ module Aws::ImportExport
     #
     class CancelJobOutput < Struct.new(
       :success)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -83,6 +87,7 @@ module Aws::ImportExport
     #
     class CanceledJobIdException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -126,6 +131,7 @@ module Aws::ImportExport
       :manifest_addendum,
       :validate_only,
       :api_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -166,6 +172,7 @@ module Aws::ImportExport
       :signature_file_contents,
       :warning_message,
       :artifact_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -179,6 +186,7 @@ module Aws::ImportExport
     #
     class CreateJobQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -190,6 +198,7 @@ module Aws::ImportExport
     #
     class ExpiredJobIdException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -277,6 +286,7 @@ module Aws::ImportExport
       :street2,
       :street3,
       :api_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -289,6 +299,7 @@ module Aws::ImportExport
     class GetShippingLabelOutput < Struct.new(
       :shipping_label_url,
       :warning)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -313,6 +324,7 @@ module Aws::ImportExport
     class GetStatusInput < Struct.new(
       :job_id,
       :api_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -412,6 +424,7 @@ module Aws::ImportExport
       :current_manifest,
       :creation_date,
       :artifact_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -425,6 +438,7 @@ module Aws::ImportExport
     #
     class InvalidAccessKeyIdException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -436,6 +450,7 @@ module Aws::ImportExport
     #
     class InvalidAddressException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -448,6 +463,7 @@ module Aws::ImportExport
     #
     class InvalidCustomsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -459,6 +475,7 @@ module Aws::ImportExport
     #
     class InvalidFileSystemException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -471,6 +488,7 @@ module Aws::ImportExport
     #
     class InvalidJobIdException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -482,6 +500,7 @@ module Aws::ImportExport
     #
     class InvalidManifestFieldException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -493,6 +512,7 @@ module Aws::ImportExport
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -504,6 +524,7 @@ module Aws::ImportExport
     #
     class InvalidVersionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -531,6 +552,7 @@ module Aws::ImportExport
       :creation_date,
       :is_canceled,
       :job_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -567,6 +589,7 @@ module Aws::ImportExport
       :max_jobs,
       :marker,
       :api_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -584,6 +607,7 @@ module Aws::ImportExport
     class ListJobsOutput < Struct.new(
       :jobs,
       :is_truncated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -595,6 +619,7 @@ module Aws::ImportExport
     #
     class MalformedManifestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -606,6 +631,7 @@ module Aws::ImportExport
     #
     class MissingCustomsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -618,6 +644,7 @@ module Aws::ImportExport
     #
     class MissingManifestFieldException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -629,6 +656,7 @@ module Aws::ImportExport
     #
     class MissingParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -641,6 +669,7 @@ module Aws::ImportExport
     #
     class MultipleRegionsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -655,6 +684,7 @@ module Aws::ImportExport
     #
     class NoSuchBucketException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -666,6 +696,7 @@ module Aws::ImportExport
     #
     class UnableToCancelJobIdException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -677,6 +708,7 @@ module Aws::ImportExport
     #
     class UnableToUpdateJobIdException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -720,6 +752,7 @@ module Aws::ImportExport
       :job_type,
       :validate_only,
       :api_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -743,6 +776,7 @@ module Aws::ImportExport
       :success,
       :warning_message,
       :artifact_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 

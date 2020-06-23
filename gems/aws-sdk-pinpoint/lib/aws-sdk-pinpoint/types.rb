@@ -42,6 +42,7 @@ module Aws::Pinpoint
       :client_id,
       :client_secret,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -105,6 +106,7 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -256,6 +258,7 @@ module Aws::Pinpoint
       :substitutions,
       :title,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -326,6 +329,7 @@ module Aws::Pinpoint
       :team_id,
       :token_key,
       :token_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -402,6 +406,7 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -669,6 +674,7 @@ module Aws::Pinpoint
       :time_to_live,
       :title,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -751,6 +757,7 @@ module Aws::Pinpoint
       :sound,
       :title,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -824,6 +831,7 @@ module Aws::Pinpoint
       :team_id,
       :token_key,
       :token_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -903,6 +911,7 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -974,6 +983,7 @@ module Aws::Pinpoint
       :team_id,
       :token_key,
       :token_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1051,6 +1061,7 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1124,6 +1135,7 @@ module Aws::Pinpoint
       :team_id,
       :token_key,
       :token_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1204,6 +1216,7 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1226,6 +1239,7 @@ module Aws::Pinpoint
     class ActivitiesResponse < Struct.new(
       :item,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1569,6 +1583,7 @@ module Aws::Pinpoint
       :random_split,
       :sms,
       :wait)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1652,6 +1667,7 @@ module Aws::Pinpoint
       :timezones_total_count,
       :total_endpoint_count,
       :treatment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1718,6 +1734,7 @@ module Aws::Pinpoint
       :raw_content,
       :substitutions,
       :title_override)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1815,6 +1832,7 @@ module Aws::Pinpoint
       :sound,
       :title,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1874,6 +1892,7 @@ module Aws::Pinpoint
       :kpi_result,
       :next_token,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1906,6 +1925,7 @@ module Aws::Pinpoint
       :id,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1964,6 +1984,7 @@ module Aws::Pinpoint
       :last_modified_date,
       :limits,
       :quiet_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1984,6 +2005,7 @@ module Aws::Pinpoint
     class ApplicationsResponse < Struct.new(
       :item,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2017,6 +2039,7 @@ module Aws::Pinpoint
     class AttributeDimension < Struct.new(
       :attribute_type,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2052,6 +2075,7 @@ module Aws::Pinpoint
       :application_id,
       :attribute_type,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2068,6 +2092,7 @@ module Aws::Pinpoint
     class BadRequestException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2103,6 +2128,7 @@ module Aws::Pinpoint
       :api_key,
       :enabled,
       :secret_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2172,6 +2198,7 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2307,6 +2334,7 @@ module Aws::Pinpoint
       :time_to_live,
       :title,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2323,6 +2351,7 @@ module Aws::Pinpoint
     #
     class BaseKpiResult < Struct.new(
       :rows)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2345,6 +2374,7 @@ module Aws::Pinpoint
     #
     class CampaignCustomMessage < Struct.new(
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2409,6 +2439,7 @@ module Aws::Pinpoint
       :kpi_result,
       :next_token,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2452,6 +2483,7 @@ module Aws::Pinpoint
       :from_address,
       :html_body,
       :title)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2500,6 +2532,7 @@ module Aws::Pinpoint
     class CampaignEventFilter < Struct.new(
       :dimensions,
       :filter_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2545,6 +2578,7 @@ module Aws::Pinpoint
       :lambda_function_name,
       :mode,
       :web_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2597,6 +2631,7 @@ module Aws::Pinpoint
       :maximum_duration,
       :messages_per_second,
       :total)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2740,6 +2775,7 @@ module Aws::Pinpoint
       :treatment_description,
       :treatment_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2777,6 +2813,7 @@ module Aws::Pinpoint
       :body,
       :message_type,
       :sender_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2796,6 +2833,7 @@ module Aws::Pinpoint
     #
     class CampaignState < Struct.new(
       :campaign_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2818,6 +2856,7 @@ module Aws::Pinpoint
     class CampaignsResponse < Struct.new(
       :item,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2875,6 +2914,7 @@ module Aws::Pinpoint
       :last_modified_by,
       :last_modified_date,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2892,6 +2932,7 @@ module Aws::Pinpoint
     #
     class ChannelsResponse < Struct.new(
       :channels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3014,6 +3055,7 @@ module Aws::Pinpoint
     class Condition < Struct.new(
       :conditions,
       :operator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3157,6 +3199,7 @@ module Aws::Pinpoint
       :evaluation_wait_time,
       :false_activity,
       :true_activity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3181,6 +3224,7 @@ module Aws::Pinpoint
     #
     class CreateAppRequest < Struct.new(
       :create_application_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3192,6 +3236,7 @@ module Aws::Pinpoint
     #
     class CreateAppResponse < Struct.new(
       :application_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3224,6 +3269,7 @@ module Aws::Pinpoint
     class CreateApplicationRequest < Struct.new(
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3557,6 +3603,7 @@ module Aws::Pinpoint
     class CreateCampaignRequest < Struct.new(
       :application_id,
       :write_campaign_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3569,6 +3616,7 @@ module Aws::Pinpoint
     #
     class CreateCampaignResponse < Struct.new(
       :campaign_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3603,6 +3651,7 @@ module Aws::Pinpoint
     class CreateEmailTemplateRequest < Struct.new(
       :email_template_request,
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3614,6 +3663,7 @@ module Aws::Pinpoint
     #
     class CreateEmailTemplateResponse < Struct.new(
       :create_template_message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3643,6 +3693,7 @@ module Aws::Pinpoint
     class CreateExportJobRequest < Struct.new(
       :application_id,
       :export_job_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3658,6 +3709,7 @@ module Aws::Pinpoint
     #
     class CreateExportJobResponse < Struct.new(
       :export_job_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3691,6 +3743,7 @@ module Aws::Pinpoint
     class CreateImportJobRequest < Struct.new(
       :application_id,
       :import_job_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3706,6 +3759,7 @@ module Aws::Pinpoint
     #
     class CreateImportJobResponse < Struct.new(
       :import_job_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4023,6 +4077,7 @@ module Aws::Pinpoint
     class CreateJourneyRequest < Struct.new(
       :application_id,
       :write_journey_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4035,6 +4090,7 @@ module Aws::Pinpoint
     #
     class CreateJourneyResponse < Struct.new(
       :journey_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4116,6 +4172,7 @@ module Aws::Pinpoint
     class CreatePushTemplateRequest < Struct.new(
       :push_notification_template_request,
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4127,6 +4184,7 @@ module Aws::Pinpoint
     #
     class CreatePushTemplateResponse < Struct.new(
       :create_template_message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4271,6 +4329,7 @@ module Aws::Pinpoint
       :recommendation_transformer_uri,
       :recommendations_display_name,
       :recommendations_per_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4302,6 +4361,7 @@ module Aws::Pinpoint
     #
     class CreateRecommenderConfigurationRequest < Struct.new(
       :create_recommender_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4314,6 +4374,7 @@ module Aws::Pinpoint
     #
     class CreateRecommenderConfigurationResponse < Struct.new(
       :recommender_configuration_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4491,6 +4552,7 @@ module Aws::Pinpoint
     class CreateSegmentRequest < Struct.new(
       :application_id,
       :write_segment_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4503,6 +4565,7 @@ module Aws::Pinpoint
     #
     class CreateSegmentResponse < Struct.new(
       :segment_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4535,6 +4598,7 @@ module Aws::Pinpoint
     class CreateSmsTemplateRequest < Struct.new(
       :sms_template_request,
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4546,6 +4610,7 @@ module Aws::Pinpoint
     #
     class CreateSmsTemplateResponse < Struct.new(
       :create_template_message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4572,6 +4637,7 @@ module Aws::Pinpoint
       :arn,
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4605,6 +4671,7 @@ module Aws::Pinpoint
     class CreateVoiceTemplateRequest < Struct.new(
       :template_name,
       :voice_template_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4616,6 +4683,7 @@ module Aws::Pinpoint
     #
     class CreateVoiceTemplateResponse < Struct.new(
       :create_template_message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4655,6 +4723,7 @@ module Aws::Pinpoint
     class CustomDeliveryConfiguration < Struct.new(
       :delivery_uri,
       :endpoint_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4735,6 +4804,7 @@ module Aws::Pinpoint
       :next_activity,
       :template_name,
       :template_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4764,6 +4834,7 @@ module Aws::Pinpoint
     class DefaultMessage < Struct.new(
       :body,
       :substitutions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4847,6 +4918,7 @@ module Aws::Pinpoint
       :substitutions,
       :title,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4919,6 +4991,7 @@ module Aws::Pinpoint
       :sound,
       :title,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4936,6 +5009,7 @@ module Aws::Pinpoint
     #
     class DeleteAdmChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4948,6 +5022,7 @@ module Aws::Pinpoint
     #
     class DeleteAdmChannelResponse < Struct.new(
       :adm_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4965,6 +5040,7 @@ module Aws::Pinpoint
     #
     class DeleteApnsChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4977,6 +5053,7 @@ module Aws::Pinpoint
     #
     class DeleteApnsChannelResponse < Struct.new(
       :apns_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4994,6 +5071,7 @@ module Aws::Pinpoint
     #
     class DeleteApnsSandboxChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5007,6 +5085,7 @@ module Aws::Pinpoint
     #
     class DeleteApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5024,6 +5103,7 @@ module Aws::Pinpoint
     #
     class DeleteApnsVoipChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5036,6 +5116,7 @@ module Aws::Pinpoint
     #
     class DeleteApnsVoipChannelResponse < Struct.new(
       :apns_voip_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5053,6 +5134,7 @@ module Aws::Pinpoint
     #
     class DeleteApnsVoipSandboxChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5066,6 +5148,7 @@ module Aws::Pinpoint
     #
     class DeleteApnsVoipSandboxChannelResponse < Struct.new(
       :apns_voip_sandbox_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5083,6 +5166,7 @@ module Aws::Pinpoint
     #
     class DeleteAppRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5094,6 +5178,7 @@ module Aws::Pinpoint
     #
     class DeleteAppResponse < Struct.new(
       :application_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5111,6 +5196,7 @@ module Aws::Pinpoint
     #
     class DeleteBaiduChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5123,6 +5209,7 @@ module Aws::Pinpoint
     #
     class DeleteBaiduChannelResponse < Struct.new(
       :baidu_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5145,6 +5232,7 @@ module Aws::Pinpoint
     class DeleteCampaignRequest < Struct.new(
       :application_id,
       :campaign_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5157,6 +5245,7 @@ module Aws::Pinpoint
     #
     class DeleteCampaignResponse < Struct.new(
       :campaign_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5174,6 +5263,7 @@ module Aws::Pinpoint
     #
     class DeleteEmailChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5186,6 +5276,7 @@ module Aws::Pinpoint
     #
     class DeleteEmailChannelResponse < Struct.new(
       :email_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5208,6 +5299,7 @@ module Aws::Pinpoint
     class DeleteEmailTemplateRequest < Struct.new(
       :template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5219,6 +5311,7 @@ module Aws::Pinpoint
     #
     class DeleteEmailTemplateResponse < Struct.new(
       :message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5241,6 +5334,7 @@ module Aws::Pinpoint
     class DeleteEndpointRequest < Struct.new(
       :application_id,
       :endpoint_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5253,6 +5347,7 @@ module Aws::Pinpoint
     #
     class DeleteEndpointResponse < Struct.new(
       :endpoint_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5270,6 +5365,7 @@ module Aws::Pinpoint
     #
     class DeleteEventStreamRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5282,6 +5378,7 @@ module Aws::Pinpoint
     #
     class DeleteEventStreamResponse < Struct.new(
       :event_stream)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5299,6 +5396,7 @@ module Aws::Pinpoint
     #
     class DeleteGcmChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5313,6 +5411,7 @@ module Aws::Pinpoint
     #
     class DeleteGcmChannelResponse < Struct.new(
       :gcm_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5335,6 +5434,7 @@ module Aws::Pinpoint
     class DeleteJourneyRequest < Struct.new(
       :application_id,
       :journey_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5347,6 +5447,7 @@ module Aws::Pinpoint
     #
     class DeleteJourneyResponse < Struct.new(
       :journey_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5369,6 +5470,7 @@ module Aws::Pinpoint
     class DeletePushTemplateRequest < Struct.new(
       :template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5380,6 +5482,7 @@ module Aws::Pinpoint
     #
     class DeletePushTemplateResponse < Struct.new(
       :message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5397,6 +5500,7 @@ module Aws::Pinpoint
     #
     class DeleteRecommenderConfigurationRequest < Struct.new(
       :recommender_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5409,6 +5513,7 @@ module Aws::Pinpoint
     #
     class DeleteRecommenderConfigurationResponse < Struct.new(
       :recommender_configuration_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5431,6 +5536,7 @@ module Aws::Pinpoint
     class DeleteSegmentRequest < Struct.new(
       :application_id,
       :segment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5443,6 +5549,7 @@ module Aws::Pinpoint
     #
     class DeleteSegmentResponse < Struct.new(
       :segment_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5460,6 +5567,7 @@ module Aws::Pinpoint
     #
     class DeleteSmsChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5472,6 +5580,7 @@ module Aws::Pinpoint
     #
     class DeleteSmsChannelResponse < Struct.new(
       :sms_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5494,6 +5603,7 @@ module Aws::Pinpoint
     class DeleteSmsTemplateRequest < Struct.new(
       :template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5505,6 +5615,7 @@ module Aws::Pinpoint
     #
     class DeleteSmsTemplateResponse < Struct.new(
       :message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5527,6 +5638,7 @@ module Aws::Pinpoint
     class DeleteUserEndpointsRequest < Struct.new(
       :application_id,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5539,6 +5651,7 @@ module Aws::Pinpoint
     #
     class DeleteUserEndpointsResponse < Struct.new(
       :endpoints_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5556,6 +5669,7 @@ module Aws::Pinpoint
     #
     class DeleteVoiceChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5568,6 +5682,7 @@ module Aws::Pinpoint
     #
     class DeleteVoiceChannelResponse < Struct.new(
       :voice_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5590,6 +5705,7 @@ module Aws::Pinpoint
     class DeleteVoiceTemplateRequest < Struct.new(
       :template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5601,6 +5717,7 @@ module Aws::Pinpoint
     #
     class DeleteVoiceTemplateResponse < Struct.new(
       :message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5829,6 +5946,7 @@ module Aws::Pinpoint
       :gcm_message,
       :sms_message,
       :voice_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5884,6 +6002,7 @@ module Aws::Pinpoint
       :from_address,
       :identity,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5985,6 +6104,7 @@ module Aws::Pinpoint
       :platform,
       :role_arn,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6064,6 +6184,7 @@ module Aws::Pinpoint
       :reply_to_addresses,
       :simple_email,
       :substitutions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6121,6 +6242,7 @@ module Aws::Pinpoint
       :next_activity,
       :template_name,
       :template_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6200,6 +6322,7 @@ module Aws::Pinpoint
       :tags,
       :template_description,
       :text_part)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6289,6 +6412,7 @@ module Aws::Pinpoint
       :template_type,
       :text_part,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6439,6 +6563,7 @@ module Aws::Pinpoint
       :opt_out,
       :request_id,
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6502,6 +6627,7 @@ module Aws::Pinpoint
     #
     class EndpointBatchRequest < Struct.new(
       :item)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6569,6 +6695,7 @@ module Aws::Pinpoint
       :platform,
       :platform_version,
       :timezone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6590,6 +6717,7 @@ module Aws::Pinpoint
     class EndpointItemResponse < Struct.new(
       :message,
       :status_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6645,6 +6773,7 @@ module Aws::Pinpoint
       :longitude,
       :postal_code,
       :region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6711,6 +6840,7 @@ module Aws::Pinpoint
       :status_code,
       :status_message,
       :updated_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6853,6 +6983,7 @@ module Aws::Pinpoint
       :opt_out,
       :request_id,
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6976,6 +7107,7 @@ module Aws::Pinpoint
       :opt_out,
       :request_id,
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7037,6 +7169,7 @@ module Aws::Pinpoint
       :raw_content,
       :substitutions,
       :title_override)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7078,6 +7211,7 @@ module Aws::Pinpoint
     class EndpointUser < Struct.new(
       :user_attributes,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7093,6 +7227,7 @@ module Aws::Pinpoint
     #
     class EndpointsResponse < Struct.new(
       :item)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7177,6 +7312,7 @@ module Aws::Pinpoint
       :sdk_name,
       :session,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7222,6 +7358,7 @@ module Aws::Pinpoint
     class EventCondition < Struct.new(
       :dimensions,
       :message_activity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7281,6 +7418,7 @@ module Aws::Pinpoint
       :attributes,
       :event_type,
       :metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7303,6 +7441,7 @@ module Aws::Pinpoint
     class EventItemResponse < Struct.new(
       :message,
       :status_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7357,6 +7496,7 @@ module Aws::Pinpoint
       :last_modified_date,
       :last_updated_by,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7443,6 +7583,7 @@ module Aws::Pinpoint
     class EventsBatch < Struct.new(
       :endpoint,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7529,6 +7670,7 @@ module Aws::Pinpoint
     #
     class EventsRequest < Struct.new(
       :batch_item)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7548,6 +7690,7 @@ module Aws::Pinpoint
     #
     class EventsResponse < Struct.new(
       :results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7597,6 +7740,7 @@ module Aws::Pinpoint
       :s3_url_prefix,
       :segment_id,
       :segment_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7639,6 +7783,7 @@ module Aws::Pinpoint
       :s3_url_prefix,
       :segment_id,
       :segment_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7726,6 +7871,7 @@ module Aws::Pinpoint
       :total_pieces,
       :total_processed,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7750,6 +7896,7 @@ module Aws::Pinpoint
     class ExportJobsResponse < Struct.new(
       :item,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7766,6 +7913,7 @@ module Aws::Pinpoint
     class ForbiddenException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7796,6 +7944,7 @@ module Aws::Pinpoint
     class GCMChannelRequest < Struct.new(
       :api_key,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7867,6 +8016,7 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8048,6 +8198,7 @@ module Aws::Pinpoint
       :time_to_live,
       :title,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8074,6 +8225,7 @@ module Aws::Pinpoint
     class GPSCoordinates < Struct.new(
       :latitude,
       :longitude)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8104,6 +8256,7 @@ module Aws::Pinpoint
     class GPSPointDimension < Struct.new(
       :coordinates,
       :range_in_kilometers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8121,6 +8274,7 @@ module Aws::Pinpoint
     #
     class GetAdmChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8133,6 +8287,7 @@ module Aws::Pinpoint
     #
     class GetAdmChannelResponse < Struct.new(
       :adm_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8150,6 +8305,7 @@ module Aws::Pinpoint
     #
     class GetApnsChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8162,6 +8318,7 @@ module Aws::Pinpoint
     #
     class GetApnsChannelResponse < Struct.new(
       :apns_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8179,6 +8336,7 @@ module Aws::Pinpoint
     #
     class GetApnsSandboxChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8192,6 +8350,7 @@ module Aws::Pinpoint
     #
     class GetApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8209,6 +8368,7 @@ module Aws::Pinpoint
     #
     class GetApnsVoipChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8221,6 +8381,7 @@ module Aws::Pinpoint
     #
     class GetApnsVoipChannelResponse < Struct.new(
       :apns_voip_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8238,6 +8399,7 @@ module Aws::Pinpoint
     #
     class GetApnsVoipSandboxChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8251,6 +8413,7 @@ module Aws::Pinpoint
     #
     class GetApnsVoipSandboxChannelResponse < Struct.new(
       :apns_voip_sandbox_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8268,6 +8431,7 @@ module Aws::Pinpoint
     #
     class GetAppRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8279,6 +8443,7 @@ module Aws::Pinpoint
     #
     class GetAppResponse < Struct.new(
       :application_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8321,6 +8486,7 @@ module Aws::Pinpoint
       :next_token,
       :page_size,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8334,6 +8500,7 @@ module Aws::Pinpoint
     #
     class GetApplicationDateRangeKpiResponse < Struct.new(
       :application_date_range_kpi_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8351,6 +8518,7 @@ module Aws::Pinpoint
     #
     class GetApplicationSettingsRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8363,6 +8531,7 @@ module Aws::Pinpoint
     #
     class GetApplicationSettingsResponse < Struct.new(
       :application_settings_resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8385,6 +8554,7 @@ module Aws::Pinpoint
     class GetAppsRequest < Struct.new(
       :page_size,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8396,6 +8566,7 @@ module Aws::Pinpoint
     #
     class GetAppsResponse < Struct.new(
       :applications_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8413,6 +8584,7 @@ module Aws::Pinpoint
     #
     class GetBaiduChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8425,6 +8597,7 @@ module Aws::Pinpoint
     #
     class GetBaiduChannelResponse < Struct.new(
       :baidu_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8457,6 +8630,7 @@ module Aws::Pinpoint
       :campaign_id,
       :page_size,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8469,6 +8643,7 @@ module Aws::Pinpoint
     #
     class GetCampaignActivitiesResponse < Struct.new(
       :activities_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8516,6 +8691,7 @@ module Aws::Pinpoint
       :next_token,
       :page_size,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8529,6 +8705,7 @@ module Aws::Pinpoint
     #
     class GetCampaignDateRangeKpiResponse < Struct.new(
       :campaign_date_range_kpi_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8551,6 +8728,7 @@ module Aws::Pinpoint
     class GetCampaignRequest < Struct.new(
       :application_id,
       :campaign_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8563,6 +8741,7 @@ module Aws::Pinpoint
     #
     class GetCampaignResponse < Struct.new(
       :campaign_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8590,6 +8769,7 @@ module Aws::Pinpoint
       :application_id,
       :campaign_id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8602,6 +8782,7 @@ module Aws::Pinpoint
     #
     class GetCampaignVersionResponse < Struct.new(
       :campaign_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8634,6 +8815,7 @@ module Aws::Pinpoint
       :campaign_id,
       :page_size,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8646,6 +8828,7 @@ module Aws::Pinpoint
     #
     class GetCampaignVersionsResponse < Struct.new(
       :campaigns_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8673,6 +8856,7 @@ module Aws::Pinpoint
       :application_id,
       :page_size,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8685,6 +8869,7 @@ module Aws::Pinpoint
     #
     class GetCampaignsResponse < Struct.new(
       :campaigns_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8702,6 +8887,7 @@ module Aws::Pinpoint
     #
     class GetChannelsRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8715,6 +8901,7 @@ module Aws::Pinpoint
     #
     class GetChannelsResponse < Struct.new(
       :channels_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8732,6 +8919,7 @@ module Aws::Pinpoint
     #
     class GetEmailChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8744,6 +8932,7 @@ module Aws::Pinpoint
     #
     class GetEmailChannelResponse < Struct.new(
       :email_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8766,6 +8955,7 @@ module Aws::Pinpoint
     class GetEmailTemplateRequest < Struct.new(
       :template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8779,6 +8969,7 @@ module Aws::Pinpoint
     #
     class GetEmailTemplateResponse < Struct.new(
       :email_template_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8801,6 +8992,7 @@ module Aws::Pinpoint
     class GetEndpointRequest < Struct.new(
       :application_id,
       :endpoint_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8813,6 +9005,7 @@ module Aws::Pinpoint
     #
     class GetEndpointResponse < Struct.new(
       :endpoint_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8830,6 +9023,7 @@ module Aws::Pinpoint
     #
     class GetEventStreamRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8842,6 +9036,7 @@ module Aws::Pinpoint
     #
     class GetEventStreamResponse < Struct.new(
       :event_stream)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8864,6 +9059,7 @@ module Aws::Pinpoint
     class GetExportJobRequest < Struct.new(
       :application_id,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8879,6 +9075,7 @@ module Aws::Pinpoint
     #
     class GetExportJobResponse < Struct.new(
       :export_job_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8906,6 +9103,7 @@ module Aws::Pinpoint
       :application_id,
       :page_size,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8919,6 +9117,7 @@ module Aws::Pinpoint
     #
     class GetExportJobsResponse < Struct.new(
       :export_jobs_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8936,6 +9135,7 @@ module Aws::Pinpoint
     #
     class GetGcmChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8950,6 +9150,7 @@ module Aws::Pinpoint
     #
     class GetGcmChannelResponse < Struct.new(
       :gcm_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8972,6 +9173,7 @@ module Aws::Pinpoint
     class GetImportJobRequest < Struct.new(
       :application_id,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8987,6 +9189,7 @@ module Aws::Pinpoint
     #
     class GetImportJobResponse < Struct.new(
       :import_job_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9014,6 +9217,7 @@ module Aws::Pinpoint
       :application_id,
       :page_size,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9028,6 +9232,7 @@ module Aws::Pinpoint
     #
     class GetImportJobsResponse < Struct.new(
       :import_jobs_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9075,6 +9280,7 @@ module Aws::Pinpoint
       :next_token,
       :page_size,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9088,6 +9294,7 @@ module Aws::Pinpoint
     #
     class GetJourneyDateRangeKpiResponse < Struct.new(
       :journey_date_range_kpi_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9125,6 +9332,7 @@ module Aws::Pinpoint
       :journey_id,
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9138,6 +9346,7 @@ module Aws::Pinpoint
     #
     class GetJourneyExecutionActivityMetricsResponse < Struct.new(
       :journey_execution_activity_metrics_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9170,6 +9379,7 @@ module Aws::Pinpoint
       :journey_id,
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9183,6 +9393,7 @@ module Aws::Pinpoint
     #
     class GetJourneyExecutionMetricsResponse < Struct.new(
       :journey_execution_metrics_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9205,6 +9416,7 @@ module Aws::Pinpoint
     class GetJourneyRequest < Struct.new(
       :application_id,
       :journey_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9217,6 +9429,7 @@ module Aws::Pinpoint
     #
     class GetJourneyResponse < Struct.new(
       :journey_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9239,6 +9452,7 @@ module Aws::Pinpoint
     class GetPushTemplateRequest < Struct.new(
       :template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9252,6 +9466,7 @@ module Aws::Pinpoint
     #
     class GetPushTemplateResponse < Struct.new(
       :push_notification_template_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9269,6 +9484,7 @@ module Aws::Pinpoint
     #
     class GetRecommenderConfigurationRequest < Struct.new(
       :recommender_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9281,6 +9497,7 @@ module Aws::Pinpoint
     #
     class GetRecommenderConfigurationResponse < Struct.new(
       :recommender_configuration_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9303,6 +9520,7 @@ module Aws::Pinpoint
     class GetRecommenderConfigurationsRequest < Struct.new(
       :page_size,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9315,6 +9533,7 @@ module Aws::Pinpoint
     #
     class GetRecommenderConfigurationsResponse < Struct.new(
       :list_recommender_configurations_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9347,6 +9566,7 @@ module Aws::Pinpoint
       :page_size,
       :segment_id,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9360,6 +9580,7 @@ module Aws::Pinpoint
     #
     class GetSegmentExportJobsResponse < Struct.new(
       :export_jobs_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9392,6 +9613,7 @@ module Aws::Pinpoint
       :page_size,
       :segment_id,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9406,6 +9628,7 @@ module Aws::Pinpoint
     #
     class GetSegmentImportJobsResponse < Struct.new(
       :import_jobs_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9428,6 +9651,7 @@ module Aws::Pinpoint
     class GetSegmentRequest < Struct.new(
       :application_id,
       :segment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9440,6 +9664,7 @@ module Aws::Pinpoint
     #
     class GetSegmentResponse < Struct.new(
       :segment_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9467,6 +9692,7 @@ module Aws::Pinpoint
       :application_id,
       :segment_id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9479,6 +9705,7 @@ module Aws::Pinpoint
     #
     class GetSegmentVersionResponse < Struct.new(
       :segment_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9511,6 +9738,7 @@ module Aws::Pinpoint
       :page_size,
       :segment_id,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9523,6 +9751,7 @@ module Aws::Pinpoint
     #
     class GetSegmentVersionsResponse < Struct.new(
       :segments_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9550,6 +9779,7 @@ module Aws::Pinpoint
       :application_id,
       :page_size,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9562,6 +9792,7 @@ module Aws::Pinpoint
     #
     class GetSegmentsResponse < Struct.new(
       :segments_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9579,6 +9810,7 @@ module Aws::Pinpoint
     #
     class GetSmsChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9591,6 +9823,7 @@ module Aws::Pinpoint
     #
     class GetSmsChannelResponse < Struct.new(
       :sms_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9613,6 +9846,7 @@ module Aws::Pinpoint
     class GetSmsTemplateRequest < Struct.new(
       :template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9626,6 +9860,7 @@ module Aws::Pinpoint
     #
     class GetSmsTemplateResponse < Struct.new(
       :sms_template_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9648,6 +9883,7 @@ module Aws::Pinpoint
     class GetUserEndpointsRequest < Struct.new(
       :application_id,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9660,6 +9896,7 @@ module Aws::Pinpoint
     #
     class GetUserEndpointsResponse < Struct.new(
       :endpoints_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9677,6 +9914,7 @@ module Aws::Pinpoint
     #
     class GetVoiceChannelRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9689,6 +9927,7 @@ module Aws::Pinpoint
     #
     class GetVoiceChannelResponse < Struct.new(
       :voice_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9711,6 +9950,7 @@ module Aws::Pinpoint
     class GetVoiceTemplateRequest < Struct.new(
       :template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9724,6 +9964,7 @@ module Aws::Pinpoint
     #
     class GetVoiceTemplateResponse < Struct.new(
       :voice_template_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9758,6 +9999,7 @@ module Aws::Pinpoint
     class HoldoutActivity < Struct.new(
       :next_activity,
       :percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9846,6 +10088,7 @@ module Aws::Pinpoint
       :s3_url,
       :segment_id,
       :segment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9924,6 +10167,7 @@ module Aws::Pinpoint
       :s3_url,
       :segment_id,
       :segment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10011,6 +10255,7 @@ module Aws::Pinpoint
       :total_pieces,
       :total_processed,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10035,6 +10280,7 @@ module Aws::Pinpoint
     class ImportJobsResponse < Struct.new(
       :item,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10051,6 +10297,7 @@ module Aws::Pinpoint
     class InternalServerErrorException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10072,6 +10319,7 @@ module Aws::Pinpoint
     class ItemResponse < Struct.new(
       :endpoint_item_response,
       :events_item_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10094,6 +10342,7 @@ module Aws::Pinpoint
     #
     class JourneyCustomMessage < Struct.new(
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10158,6 +10407,7 @@ module Aws::Pinpoint
       :kpi_result,
       :next_token,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10181,6 +10431,7 @@ module Aws::Pinpoint
     #
     class JourneyEmailMessage < Struct.new(
       :from_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10254,6 +10505,7 @@ module Aws::Pinpoint
       :journey_id,
       :last_evaluated_time,
       :metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10292,6 +10544,7 @@ module Aws::Pinpoint
       :journey_id,
       :last_evaluated_time,
       :metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10329,6 +10582,7 @@ module Aws::Pinpoint
       :daily_cap,
       :endpoint_reentry_cap,
       :messages_per_second)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10358,6 +10612,7 @@ module Aws::Pinpoint
     #
     class JourneyPushMessage < Struct.new(
       :time_to_live)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10493,6 +10748,7 @@ module Aws::Pinpoint
       :start_condition,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10530,6 +10786,7 @@ module Aws::Pinpoint
     class JourneySMSMessage < Struct.new(
       :message_type,
       :sender_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10571,6 +10828,7 @@ module Aws::Pinpoint
       :end_time,
       :start_time,
       :timezone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10604,6 +10862,7 @@ module Aws::Pinpoint
     #
     class JourneyStateRequest < Struct.new(
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10626,6 +10885,7 @@ module Aws::Pinpoint
     class JourneysResponse < Struct.new(
       :item,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10653,6 +10913,7 @@ module Aws::Pinpoint
       :application_id,
       :page_size,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10666,6 +10927,7 @@ module Aws::Pinpoint
     #
     class ListJourneysResponse < Struct.new(
       :journeys_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10688,6 +10950,7 @@ module Aws::Pinpoint
     class ListRecommenderConfigurationsResponse < Struct.new(
       :item,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10705,6 +10968,7 @@ module Aws::Pinpoint
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10717,6 +10981,7 @@ module Aws::Pinpoint
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags_model)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10749,6 +11014,7 @@ module Aws::Pinpoint
       :page_size,
       :template_name,
       :template_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10761,6 +11027,7 @@ module Aws::Pinpoint
     #
     class ListTemplateVersionsResponse < Struct.new(
       :template_versions_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10793,6 +11060,7 @@ module Aws::Pinpoint
       :page_size,
       :prefix,
       :template_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10805,6 +11073,7 @@ module Aws::Pinpoint
     #
     class ListTemplatesResponse < Struct.new(
       :templates_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10923,6 +11192,7 @@ module Aws::Pinpoint
       :time_to_live,
       :title,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10941,6 +11211,7 @@ module Aws::Pinpoint
     class MessageBody < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11095,6 +11366,7 @@ module Aws::Pinpoint
       :email_message,
       :gcm_message,
       :sms_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11358,6 +11630,7 @@ module Aws::Pinpoint
       :message_configuration,
       :template_configuration,
       :trace_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11394,6 +11667,7 @@ module Aws::Pinpoint
       :endpoint_result,
       :request_id,
       :result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11455,6 +11729,7 @@ module Aws::Pinpoint
       :status_code,
       :status_message,
       :updated_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11471,6 +11746,7 @@ module Aws::Pinpoint
     class MethodNotAllowedException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11501,6 +11777,7 @@ module Aws::Pinpoint
     class MetricDimension < Struct.new(
       :comparison_operator,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11618,6 +11895,7 @@ module Aws::Pinpoint
     class MultiConditionalBranch < Struct.new(
       :condition,
       :next_activity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11755,6 +12033,7 @@ module Aws::Pinpoint
       :branches,
       :default_activity,
       :evaluation_wait_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11771,6 +12050,7 @@ module Aws::Pinpoint
     class NotFoundException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11800,6 +12080,7 @@ module Aws::Pinpoint
     class NumberValidateRequest < Struct.new(
       :iso_country_code,
       :phone_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11894,6 +12175,7 @@ module Aws::Pinpoint
       :phone_type_code,
       :timezone,
       :zip_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11910,6 +12192,7 @@ module Aws::Pinpoint
     class PayloadTooLargeException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11931,6 +12214,7 @@ module Aws::Pinpoint
     #
     class PhoneNumberValidateRequest < Struct.new(
       :number_validate_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11942,6 +12226,7 @@ module Aws::Pinpoint
     #
     class PhoneNumberValidateResponse < Struct.new(
       :number_validate_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12070,6 +12355,7 @@ module Aws::Pinpoint
       :opt_out,
       :request_id,
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12127,6 +12413,7 @@ module Aws::Pinpoint
       :next_activity,
       :template_name,
       :template_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12265,6 +12552,7 @@ module Aws::Pinpoint
       :recommender_id,
       :tags,
       :template_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12374,6 +12662,7 @@ module Aws::Pinpoint
       :template_name,
       :template_type,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12402,6 +12691,7 @@ module Aws::Pinpoint
     class PutEventStreamRequest < Struct.new(
       :application_id,
       :write_event_stream)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12414,6 +12704,7 @@ module Aws::Pinpoint
     #
     class PutEventStreamResponse < Struct.new(
       :event_stream)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12503,6 +12794,7 @@ module Aws::Pinpoint
     class PutEventsRequest < Struct.new(
       :application_id,
       :events_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12515,6 +12807,7 @@ module Aws::Pinpoint
     #
     class PutEventsResponse < Struct.new(
       :events_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12548,6 +12841,7 @@ module Aws::Pinpoint
     class QuietTime < Struct.new(
       :end,
       :start)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12577,6 +12871,7 @@ module Aws::Pinpoint
     #
     class RandomSplitActivity < Struct.new(
       :branches)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12611,6 +12906,7 @@ module Aws::Pinpoint
     class RandomSplitEntry < Struct.new(
       :next_activity,
       :percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12633,6 +12929,7 @@ module Aws::Pinpoint
     #
     class RawEmail < Struct.new(
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12665,6 +12962,7 @@ module Aws::Pinpoint
     class RecencyDimension < Struct.new(
       :duration,
       :recency_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12779,6 +13077,7 @@ module Aws::Pinpoint
       :recommendation_transformer_uri,
       :recommendations_display_name,
       :recommendations_per_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12810,6 +13109,7 @@ module Aws::Pinpoint
       :application_id,
       :attribute_type,
       :update_attributes_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12823,6 +13123,7 @@ module Aws::Pinpoint
     #
     class RemoveAttributesResponse < Struct.new(
       :attributes_resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12847,6 +13148,7 @@ module Aws::Pinpoint
     class ResultRow < Struct.new(
       :grouped_bys,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12876,6 +13178,7 @@ module Aws::Pinpoint
       :key,
       :type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12911,6 +13214,7 @@ module Aws::Pinpoint
       :enabled,
       :sender_id,
       :short_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13000,6 +13304,7 @@ module Aws::Pinpoint
       :short_code,
       :transactional_messages_per_second,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13070,6 +13375,7 @@ module Aws::Pinpoint
       :origination_number,
       :sender_id,
       :substitutions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13128,6 +13434,7 @@ module Aws::Pinpoint
       :next_activity,
       :template_name,
       :template_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13188,6 +13495,7 @@ module Aws::Pinpoint
       :recommender_id,
       :tags,
       :template_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13265,6 +13573,7 @@ module Aws::Pinpoint
       :template_name,
       :template_type,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13372,6 +13681,7 @@ module Aws::Pinpoint
       :quiet_time,
       :start_time,
       :timezone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13397,6 +13707,7 @@ module Aws::Pinpoint
     #
     class SegmentBehaviors < Struct.new(
       :recency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13418,6 +13729,7 @@ module Aws::Pinpoint
     #
     class SegmentCondition < Struct.new(
       :segment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13489,6 +13801,7 @@ module Aws::Pinpoint
       :make,
       :model,
       :platform)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13600,6 +13913,7 @@ module Aws::Pinpoint
       :location,
       :metrics,
       :user_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13725,6 +14039,7 @@ module Aws::Pinpoint
       :source_segments,
       :source_type,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13834,6 +14149,7 @@ module Aws::Pinpoint
     class SegmentGroupList < Struct.new(
       :groups,
       :include)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13885,6 +14201,7 @@ module Aws::Pinpoint
       :role_arn,
       :s3_url,
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13921,6 +14238,7 @@ module Aws::Pinpoint
     class SegmentLocation < Struct.new(
       :country,
       :gps_point)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13947,6 +14265,7 @@ module Aws::Pinpoint
     class SegmentReference < Struct.new(
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14031,6 +14350,7 @@ module Aws::Pinpoint
       :segment_type,
       :tags,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14054,6 +14374,7 @@ module Aws::Pinpoint
     class SegmentsResponse < Struct.new(
       :item,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14283,6 +14604,7 @@ module Aws::Pinpoint
     class SendMessagesRequest < Struct.new(
       :application_id,
       :message_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14295,6 +14617,7 @@ module Aws::Pinpoint
     #
     class SendMessagesResponse < Struct.new(
       :message_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14535,6 +14858,7 @@ module Aws::Pinpoint
       :template_configuration,
       :trace_id,
       :users)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14563,6 +14887,7 @@ module Aws::Pinpoint
       :application_id,
       :request_id,
       :result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14779,6 +15104,7 @@ module Aws::Pinpoint
     class SendUsersMessagesRequest < Struct.new(
       :application_id,
       :send_users_message_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14791,6 +15117,7 @@ module Aws::Pinpoint
     #
     class SendUsersMessagesResponse < Struct.new(
       :send_users_message_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14829,6 +15156,7 @@ module Aws::Pinpoint
       :id,
       :start_timestamp,
       :stop_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14860,6 +15188,7 @@ module Aws::Pinpoint
     class SetDimension < Struct.new(
       :dimension_type,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14980,6 +15309,7 @@ module Aws::Pinpoint
       :event_condition,
       :segment_condition,
       :segment_dimensions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15027,6 +15357,7 @@ module Aws::Pinpoint
       :html_part,
       :subject,
       :text_part)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15054,6 +15385,7 @@ module Aws::Pinpoint
     class SimpleEmailPart < Struct.new(
       :charset,
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15086,6 +15418,7 @@ module Aws::Pinpoint
     class StartCondition < Struct.new(
       :description,
       :segment_start_condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15114,6 +15447,7 @@ module Aws::Pinpoint
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags_model)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15143,6 +15477,7 @@ module Aws::Pinpoint
     #
     class TagsModel < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15184,6 +15519,7 @@ module Aws::Pinpoint
     class Template < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15213,6 +15549,7 @@ module Aws::Pinpoint
     #
     class TemplateActiveVersionRequest < Struct.new(
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15265,6 +15602,7 @@ module Aws::Pinpoint
       :push_template,
       :sms_template,
       :voice_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15340,6 +15678,7 @@ module Aws::Pinpoint
       :template_name,
       :template_type,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15392,6 +15731,7 @@ module Aws::Pinpoint
       :template_name,
       :template_type,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15425,6 +15765,7 @@ module Aws::Pinpoint
       :message,
       :next_token,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15448,6 +15789,7 @@ module Aws::Pinpoint
     class TemplatesResponse < Struct.new(
       :item,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15464,6 +15806,7 @@ module Aws::Pinpoint
     class TooManyRequestsException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15522,6 +15865,7 @@ module Aws::Pinpoint
       :template_configuration,
       :treatment_description,
       :treatment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15544,6 +15888,7 @@ module Aws::Pinpoint
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15572,6 +15917,7 @@ module Aws::Pinpoint
     class UpdateAdmChannelRequest < Struct.new(
       :adm_channel_request,
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15584,6 +15930,7 @@ module Aws::Pinpoint
     #
     class UpdateAdmChannelResponse < Struct.new(
       :adm_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15617,6 +15964,7 @@ module Aws::Pinpoint
     class UpdateApnsChannelRequest < Struct.new(
       :apns_channel_request,
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15629,6 +15977,7 @@ module Aws::Pinpoint
     #
     class UpdateApnsChannelResponse < Struct.new(
       :apns_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15662,6 +16011,7 @@ module Aws::Pinpoint
     class UpdateApnsSandboxChannelRequest < Struct.new(
       :apns_sandbox_channel_request,
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15675,6 +16025,7 @@ module Aws::Pinpoint
     #
     class UpdateApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15708,6 +16059,7 @@ module Aws::Pinpoint
     class UpdateApnsVoipChannelRequest < Struct.new(
       :apns_voip_channel_request,
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15720,6 +16072,7 @@ module Aws::Pinpoint
     #
     class UpdateApnsVoipChannelResponse < Struct.new(
       :apns_voip_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15753,6 +16106,7 @@ module Aws::Pinpoint
     class UpdateApnsVoipSandboxChannelRequest < Struct.new(
       :apns_voip_sandbox_channel_request,
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15766,6 +16120,7 @@ module Aws::Pinpoint
     #
     class UpdateApnsVoipSandboxChannelResponse < Struct.new(
       :apns_voip_sandbox_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15806,6 +16161,7 @@ module Aws::Pinpoint
     class UpdateApplicationSettingsRequest < Struct.new(
       :application_id,
       :write_application_settings_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15818,6 +16174,7 @@ module Aws::Pinpoint
     #
     class UpdateApplicationSettingsResponse < Struct.new(
       :application_settings_resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15843,6 +16200,7 @@ module Aws::Pinpoint
     #
     class UpdateAttributesRequest < Struct.new(
       :blacklist)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15871,6 +16229,7 @@ module Aws::Pinpoint
     class UpdateBaiduChannelRequest < Struct.new(
       :application_id,
       :baidu_channel_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15883,6 +16242,7 @@ module Aws::Pinpoint
     #
     class UpdateBaiduChannelResponse < Struct.new(
       :baidu_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16221,6 +16581,7 @@ module Aws::Pinpoint
       :application_id,
       :campaign_id,
       :write_campaign_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16233,6 +16594,7 @@ module Aws::Pinpoint
     #
     class UpdateCampaignResponse < Struct.new(
       :campaign_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16263,6 +16625,7 @@ module Aws::Pinpoint
     class UpdateEmailChannelRequest < Struct.new(
       :application_id,
       :email_channel_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16275,6 +16638,7 @@ module Aws::Pinpoint
     #
     class UpdateEmailChannelResponse < Struct.new(
       :email_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16319,6 +16683,7 @@ module Aws::Pinpoint
       :email_template_request,
       :template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16330,6 +16695,7 @@ module Aws::Pinpoint
     #
     class UpdateEmailTemplateResponse < Struct.new(
       :message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16395,6 +16761,7 @@ module Aws::Pinpoint
       :application_id,
       :endpoint_id,
       :endpoint_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16406,6 +16773,7 @@ module Aws::Pinpoint
     #
     class UpdateEndpointResponse < Struct.new(
       :message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16472,6 +16840,7 @@ module Aws::Pinpoint
     class UpdateEndpointsBatchRequest < Struct.new(
       :application_id,
       :endpoint_batch_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16483,6 +16852,7 @@ module Aws::Pinpoint
     #
     class UpdateEndpointsBatchResponse < Struct.new(
       :message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16512,6 +16882,7 @@ module Aws::Pinpoint
     class UpdateGcmChannelRequest < Struct.new(
       :application_id,
       :gcm_channel_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16526,6 +16897,7 @@ module Aws::Pinpoint
     #
     class UpdateGcmChannelResponse < Struct.new(
       :gcm_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16848,6 +17220,7 @@ module Aws::Pinpoint
       :application_id,
       :journey_id,
       :write_journey_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16860,6 +17233,7 @@ module Aws::Pinpoint
     #
     class UpdateJourneyResponse < Struct.new(
       :journey_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16890,6 +17264,7 @@ module Aws::Pinpoint
       :application_id,
       :journey_id,
       :journey_state_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16902,6 +17277,7 @@ module Aws::Pinpoint
     #
     class UpdateJourneyStateResponse < Struct.new(
       :journey_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16993,6 +17369,7 @@ module Aws::Pinpoint
       :push_notification_template_request,
       :template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17004,6 +17381,7 @@ module Aws::Pinpoint
     #
     class UpdatePushTemplateResponse < Struct.new(
       :message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17148,6 +17526,7 @@ module Aws::Pinpoint
       :recommendation_transformer_uri,
       :recommendations_display_name,
       :recommendations_per_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17184,6 +17563,7 @@ module Aws::Pinpoint
     class UpdateRecommenderConfigurationRequest < Struct.new(
       :recommender_id,
       :update_recommender_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17196,6 +17576,7 @@ module Aws::Pinpoint
     #
     class UpdateRecommenderConfigurationResponse < Struct.new(
       :recommender_configuration_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17378,6 +17759,7 @@ module Aws::Pinpoint
       :application_id,
       :segment_id,
       :write_segment_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17390,6 +17772,7 @@ module Aws::Pinpoint
     #
     class UpdateSegmentResponse < Struct.new(
       :segment_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17418,6 +17801,7 @@ module Aws::Pinpoint
     class UpdateSmsChannelRequest < Struct.new(
       :application_id,
       :sms_channel_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17430,6 +17814,7 @@ module Aws::Pinpoint
     #
     class UpdateSmsChannelResponse < Struct.new(
       :sms_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17472,6 +17857,7 @@ module Aws::Pinpoint
       :sms_template_request,
       :template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17483,6 +17869,7 @@ module Aws::Pinpoint
     #
     class UpdateSmsTemplateResponse < Struct.new(
       :message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17514,6 +17901,7 @@ module Aws::Pinpoint
       :template_active_version_request,
       :template_name,
       :template_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17525,6 +17913,7 @@ module Aws::Pinpoint
     #
     class UpdateTemplateActiveVersionResponse < Struct.new(
       :message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17551,6 +17940,7 @@ module Aws::Pinpoint
     class UpdateVoiceChannelRequest < Struct.new(
       :application_id,
       :voice_channel_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17563,6 +17953,7 @@ module Aws::Pinpoint
     #
     class UpdateVoiceChannelResponse < Struct.new(
       :voice_channel_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17606,6 +17997,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       :voice_template_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17617,6 +18009,7 @@ module Aws::Pinpoint
     #
     class UpdateVoiceTemplateResponse < Struct.new(
       :message_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17638,6 +18031,7 @@ module Aws::Pinpoint
     #
     class VoiceChannelRequest < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17703,6 +18097,7 @@ module Aws::Pinpoint
       :last_modified_date,
       :platform,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17766,6 +18161,7 @@ module Aws::Pinpoint
       :origination_number,
       :substitutions,
       :voice_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17841,6 +18237,7 @@ module Aws::Pinpoint
       :tags,
       :template_description,
       :voice_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17935,6 +18332,7 @@ module Aws::Pinpoint
       :template_type,
       :version,
       :voice_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17968,6 +18366,7 @@ module Aws::Pinpoint
     class WaitActivity < Struct.new(
       :next_activity,
       :wait_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18000,6 +18399,7 @@ module Aws::Pinpoint
     class WaitTime < Struct.new(
       :wait_for,
       :wait_until)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18096,6 +18496,7 @@ module Aws::Pinpoint
       :cloud_watch_metrics_enabled,
       :limits,
       :quiet_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18512,6 +18913,7 @@ module Aws::Pinpoint
       :template_configuration,
       :treatment_description,
       :treatment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18550,6 +18952,7 @@ module Aws::Pinpoint
     class WriteEventStream < Struct.new(
       :destination_stream_arn,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18960,6 +19363,7 @@ module Aws::Pinpoint
       :start_activity,
       :start_condition,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19152,6 +19556,7 @@ module Aws::Pinpoint
       :name,
       :segment_groups,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19349,6 +19754,7 @@ module Aws::Pinpoint
       :template_configuration,
       :treatment_description,
       :treatment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 

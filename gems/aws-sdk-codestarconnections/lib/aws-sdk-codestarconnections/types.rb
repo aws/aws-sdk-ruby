@@ -56,6 +56,7 @@ module Aws::CodeStarconnections
       :provider_type,
       :owner_account_id,
       :connection_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -94,6 +95,7 @@ module Aws::CodeStarconnections
       :provider_type,
       :connection_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -116,6 +118,7 @@ module Aws::CodeStarconnections
     class CreateConnectionOutput < Struct.new(
       :connection_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +141,7 @@ module Aws::CodeStarconnections
     #
     class DeleteConnectionInput < Struct.new(
       :connection_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -160,6 +164,7 @@ module Aws::CodeStarconnections
     #
     class GetConnectionInput < Struct.new(
       :connection_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -171,6 +176,7 @@ module Aws::CodeStarconnections
     #
     class GetConnectionOutput < Struct.new(
       :connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -183,6 +189,7 @@ module Aws::CodeStarconnections
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -218,6 +225,7 @@ module Aws::CodeStarconnections
       :provider_type_filter,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -237,6 +245,7 @@ module Aws::CodeStarconnections
     class ListConnectionsOutput < Struct.new(
       :connections,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -256,6 +265,7 @@ module Aws::CodeStarconnections
     #
     class ListTagsForResourceInput < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -268,6 +278,7 @@ module Aws::CodeStarconnections
     #
     class ListTagsForResourceOutput < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -280,6 +291,7 @@ module Aws::CodeStarconnections
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -308,6 +320,7 @@ module Aws::CodeStarconnections
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -338,6 +351,7 @@ module Aws::CodeStarconnections
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -366,6 +380,7 @@ module Aws::CodeStarconnections
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 

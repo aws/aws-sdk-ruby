@@ -116,6 +116,7 @@ module Aws::Snowball
       :postal_code,
       :phone_number,
       :is_restricted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -135,6 +136,7 @@ module Aws::Snowball
     #
     class CancelClusterRequest < Struct.new(
       :cluster_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -158,6 +160,7 @@ module Aws::Snowball
     #
     class CancelJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -177,6 +180,7 @@ module Aws::Snowball
     #
     class ClusterLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -209,6 +213,7 @@ module Aws::Snowball
       :cluster_state,
       :creation_date,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -326,6 +331,7 @@ module Aws::Snowball
       :notification,
       :forwarding_address_id,
       :tax_documents)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -347,6 +353,7 @@ module Aws::Snowball
     class CompatibleImage < Struct.new(
       :ami_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -380,6 +387,7 @@ module Aws::Snowball
     #
     class CreateAddressRequest < Struct.new(
       :address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -393,6 +401,7 @@ module Aws::Snowball
     #
     class CreateAddressResult < Struct.new(
       :address_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -559,6 +568,7 @@ module Aws::Snowball
       :notification,
       :forwarding_address_id,
       :tax_documents)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -570,6 +580,7 @@ module Aws::Snowball
     #
     class CreateClusterResult < Struct.new(
       :cluster_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -766,6 +777,7 @@ module Aws::Snowball
       :forwarding_address_id,
       :tax_documents,
       :device_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -778,6 +790,7 @@ module Aws::Snowball
     #
     class CreateJobResult < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -812,6 +825,7 @@ module Aws::Snowball
       :objects_transferred,
       :total_bytes,
       :total_objects)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -830,6 +844,7 @@ module Aws::Snowball
     #
     class DescribeAddressRequest < Struct.new(
       :address_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -842,6 +857,7 @@ module Aws::Snowball
     #
     class DescribeAddressResult < Struct.new(
       :address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -869,6 +885,7 @@ module Aws::Snowball
     class DescribeAddressesRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -887,6 +904,7 @@ module Aws::Snowball
     class DescribeAddressesResult < Struct.new(
       :addresses,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -905,6 +923,7 @@ module Aws::Snowball
     #
     class DescribeClusterRequest < Struct.new(
       :cluster_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -917,6 +936,7 @@ module Aws::Snowball
     #
     class DescribeClusterResult < Struct.new(
       :cluster_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -936,6 +956,7 @@ module Aws::Snowball
     #
     class DescribeJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -955,6 +976,7 @@ module Aws::Snowball
     class DescribeJobResult < Struct.new(
       :job_metadata,
       :sub_job_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -980,6 +1002,7 @@ module Aws::Snowball
     #
     class DeviceConfiguration < Struct.new(
       :snowcone_device_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1009,6 +1032,7 @@ module Aws::Snowball
     class Ec2AmiResource < Struct.new(
       :ami_id,
       :snowball_ami_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1022,6 +1046,7 @@ module Aws::Snowball
     #
     class Ec2RequestFailedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1043,6 +1068,7 @@ module Aws::Snowball
     #
     class EventTriggerDefinition < Struct.new(
       :event_resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1062,6 +1088,7 @@ module Aws::Snowball
     #
     class GetJobManifestRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1074,6 +1101,7 @@ module Aws::Snowball
     #
     class GetJobManifestResult < Struct.new(
       :manifest_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1093,6 +1121,7 @@ module Aws::Snowball
     #
     class GetJobUnlockCodeRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1105,6 +1134,7 @@ module Aws::Snowball
     #
     class GetJobUnlockCodeResult < Struct.new(
       :unlock_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1128,6 +1158,7 @@ module Aws::Snowball
     class GetSnowballUsageResult < Struct.new(
       :snowball_limit,
       :snowballs_in_use)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1147,6 +1178,7 @@ module Aws::Snowball
     #
     class GetSoftwareUpdatesRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1162,6 +1194,7 @@ module Aws::Snowball
     #
     class GetSoftwareUpdatesResult < Struct.new(
       :updates_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1183,6 +1216,7 @@ module Aws::Snowball
     #
     class INDTaxDocuments < Struct.new(
       :gstin)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1196,6 +1230,7 @@ module Aws::Snowball
     #
     class InvalidAddressException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1210,6 +1245,7 @@ module Aws::Snowball
     #
     class InvalidInputCombinationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1223,6 +1259,7 @@ module Aws::Snowball
     #
     class InvalidJobStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1237,6 +1274,7 @@ module Aws::Snowball
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1255,6 +1293,7 @@ module Aws::Snowball
     class InvalidResourceException < Struct.new(
       :message,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1308,6 +1347,7 @@ module Aws::Snowball
       :snowball_type,
       :creation_date,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1355,6 +1395,7 @@ module Aws::Snowball
       :job_completion_report_uri,
       :job_success_log_uri,
       :job_failure_log_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1493,6 +1534,7 @@ module Aws::Snowball
       :forwarding_address_id,
       :tax_documents,
       :device_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1549,6 +1591,7 @@ module Aws::Snowball
       :s3_resources,
       :lambda_resources,
       :ec2_ami_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1562,6 +1605,7 @@ module Aws::Snowball
     #
     class KMSRequestFailedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1593,6 +1637,7 @@ module Aws::Snowball
     class KeyRange < Struct.new(
       :begin_marker,
       :end_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1626,6 +1671,7 @@ module Aws::Snowball
     class LambdaResource < Struct.new(
       :lambda_arn,
       :event_triggers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1659,6 +1705,7 @@ module Aws::Snowball
       :cluster_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1679,6 +1726,7 @@ module Aws::Snowball
     class ListClusterJobsResult < Struct.new(
       :job_list_entries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1705,6 +1753,7 @@ module Aws::Snowball
     class ListClustersRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1724,6 +1773,7 @@ module Aws::Snowball
     class ListClustersResult < Struct.new(
       :cluster_list_entries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1751,6 +1801,7 @@ module Aws::Snowball
     class ListCompatibleImagesRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1769,6 +1820,7 @@ module Aws::Snowball
     class ListCompatibleImagesResult < Struct.new(
       :compatible_images,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1795,6 +1847,7 @@ module Aws::Snowball
     class ListJobsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1815,6 +1868,7 @@ module Aws::Snowball
     class ListJobsResult < Struct.new(
       :job_list_entries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1868,6 +1922,7 @@ module Aws::Snowball
       :sns_topic_arn,
       :job_states_to_notify,
       :notify_all)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1905,6 +1960,7 @@ module Aws::Snowball
     class S3Resource < Struct.new(
       :bucket_arn,
       :key_range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1929,6 +1985,7 @@ module Aws::Snowball
     class Shipment < Struct.new(
       :status,
       :tracking_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1971,6 +2028,7 @@ module Aws::Snowball
       :shipping_option,
       :inbound_shipment,
       :outbound_shipment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1993,6 +2051,7 @@ module Aws::Snowball
     #
     class SnowconeDeviceConfiguration < Struct.new(
       :wireless_connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2015,6 +2074,7 @@ module Aws::Snowball
     #
     class TaxDocuments < Struct.new(
       :ind)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2029,6 +2089,7 @@ module Aws::Snowball
     #
     class UnsupportedAddressException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2129,6 +2190,7 @@ module Aws::Snowball
       :shipping_option,
       :notification,
       :forwarding_address_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2239,6 +2301,7 @@ module Aws::Snowball
       :description,
       :snowball_capacity_preference,
       :forwarding_address_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2263,6 +2326,7 @@ module Aws::Snowball
     #
     class WirelessConnection < Struct.new(
       :is_wifi_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 

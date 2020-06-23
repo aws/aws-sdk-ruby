@@ -142,6 +142,7 @@ module Aws::ElasticLoadBalancingV2
       :redirect_config,
       :fixed_response_config,
       :forward_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -173,6 +174,7 @@ module Aws::ElasticLoadBalancingV2
     class AddListenerCertificatesInput < Struct.new(
       :listener_arn,
       :certificates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -184,6 +186,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class AddListenerCertificatesOutput < Struct.new(
       :certificates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -213,6 +216,7 @@ module Aws::ElasticLoadBalancingV2
     class AddTagsInput < Struct.new(
       :resource_arns,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -304,6 +308,7 @@ module Aws::ElasticLoadBalancingV2
       :session_timeout,
       :authentication_request_extra_params,
       :on_unauthenticated_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -416,6 +421,7 @@ module Aws::ElasticLoadBalancingV2
       :authentication_request_extra_params,
       :on_unauthenticated_request,
       :use_existing_client_secret)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -444,6 +450,7 @@ module Aws::ElasticLoadBalancingV2
       :zone_name,
       :subnet_id,
       :load_balancer_addresses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -479,6 +486,7 @@ module Aws::ElasticLoadBalancingV2
     class Certificate < Struct.new(
       :certificate_arn,
       :is_default)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -503,6 +511,7 @@ module Aws::ElasticLoadBalancingV2
     class Cipher < Struct.new(
       :name,
       :priority)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -698,6 +707,7 @@ module Aws::ElasticLoadBalancingV2
       :certificates,
       :default_actions,
       :alpn_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -709,6 +719,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class CreateListenerOutput < Struct.new(
       :listeners)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -821,6 +832,7 @@ module Aws::ElasticLoadBalancingV2
       :tags,
       :type,
       :ip_address_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -832,6 +844,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class CreateLoadBalancerOutput < Struct.new(
       :load_balancers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -982,6 +995,7 @@ module Aws::ElasticLoadBalancingV2
       :conditions,
       :priority,
       :actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -993,6 +1007,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class CreateRuleOutput < Struct.new(
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1148,6 +1163,7 @@ module Aws::ElasticLoadBalancingV2
       :unhealthy_threshold_count,
       :matcher,
       :target_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1159,6 +1175,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class CreateTargetGroupOutput < Struct.new(
       :target_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1177,6 +1194,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class DeleteListenerInput < Struct.new(
       :listener_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1199,6 +1217,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class DeleteLoadBalancerInput < Struct.new(
       :load_balancer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1221,6 +1240,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class DeleteRuleInput < Struct.new(
       :rule_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1243,6 +1263,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class DeleteTargetGroupInput < Struct.new(
       :target_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1279,6 +1300,7 @@ module Aws::ElasticLoadBalancingV2
     class DeregisterTargetsInput < Struct.new(
       :target_group_arn,
       :targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1308,6 +1330,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeAccountLimitsInput < Struct.new(
       :marker,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1325,6 +1348,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeAccountLimitsOutput < Struct.new(
       :limits,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1356,6 +1380,7 @@ module Aws::ElasticLoadBalancingV2
       :listener_arn,
       :marker,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1373,6 +1398,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeListenerCertificatesOutput < Struct.new(
       :certificates,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1410,6 +1436,7 @@ module Aws::ElasticLoadBalancingV2
       :listener_arns,
       :marker,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1427,6 +1454,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeListenersOutput < Struct.new(
       :listeners,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1445,6 +1473,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class DescribeLoadBalancerAttributesInput < Struct.new(
       :load_balancer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1456,6 +1485,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class DescribeLoadBalancerAttributesOutput < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1494,6 +1524,7 @@ module Aws::ElasticLoadBalancingV2
       :names,
       :marker,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1511,6 +1542,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeLoadBalancersOutput < Struct.new(
       :load_balancers,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1548,6 +1580,7 @@ module Aws::ElasticLoadBalancingV2
       :rule_arns,
       :marker,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1565,6 +1598,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeRulesOutput < Struct.new(
       :rules,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1596,6 +1630,7 @@ module Aws::ElasticLoadBalancingV2
       :names,
       :marker,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1613,6 +1648,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeSSLPoliciesOutput < Struct.new(
       :ssl_policies,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1632,6 +1668,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class DescribeTagsInput < Struct.new(
       :resource_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1643,6 +1680,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class DescribeTagsOutput < Struct.new(
       :tag_descriptions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1661,6 +1699,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class DescribeTargetGroupAttributesInput < Struct.new(
       :target_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1672,6 +1711,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class DescribeTargetGroupAttributesOutput < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1715,6 +1755,7 @@ module Aws::ElasticLoadBalancingV2
       :names,
       :marker,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1732,6 +1773,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeTargetGroupsOutput < Struct.new(
       :target_groups,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1762,6 +1804,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeTargetHealthInput < Struct.new(
       :target_group_arn,
       :targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1773,6 +1816,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class DescribeTargetHealthOutput < Struct.new(
       :target_health_descriptions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1832,6 +1876,7 @@ module Aws::ElasticLoadBalancingV2
       :message_body,
       :status_code,
       :content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1867,6 +1912,7 @@ module Aws::ElasticLoadBalancingV2
     class ForwardActionConfig < Struct.new(
       :target_groups,
       :target_group_stickiness_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1900,6 +1946,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class HostHeaderConditionConfig < Struct.new(
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1945,6 +1992,7 @@ module Aws::ElasticLoadBalancingV2
     class HttpHeaderConditionConfig < Struct.new(
       :http_header_name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1981,6 +2029,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class HttpRequestMethodConditionConfig < Struct.new(
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2067,6 +2116,7 @@ module Aws::ElasticLoadBalancingV2
     class Limit < Struct.new(
       :name,
       :max)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2117,6 +2167,7 @@ module Aws::ElasticLoadBalancingV2
       :ssl_policy,
       :default_actions,
       :alpn_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2204,6 +2255,7 @@ module Aws::ElasticLoadBalancingV2
       :availability_zones,
       :security_groups,
       :ip_address_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2229,6 +2281,7 @@ module Aws::ElasticLoadBalancingV2
       :ip_address,
       :allocation_id,
       :private_i_pv_4_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2300,6 +2353,7 @@ module Aws::ElasticLoadBalancingV2
     class LoadBalancerAttribute < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2327,6 +2381,7 @@ module Aws::ElasticLoadBalancingV2
     class LoadBalancerState < Struct.new(
       :code,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2355,6 +2410,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class Matcher < Struct.new(
       :http_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2549,6 +2605,7 @@ module Aws::ElasticLoadBalancingV2
       :certificates,
       :default_actions,
       :alpn_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2560,6 +2617,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class ModifyListenerOutput < Struct.new(
       :listeners)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2589,6 +2647,7 @@ module Aws::ElasticLoadBalancingV2
     class ModifyLoadBalancerAttributesInput < Struct.new(
       :load_balancer_arn,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2600,6 +2659,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class ModifyLoadBalancerAttributesOutput < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2743,6 +2803,7 @@ module Aws::ElasticLoadBalancingV2
       :rule_arn,
       :conditions,
       :actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2754,6 +2815,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class ModifyRuleOutput < Struct.new(
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2783,6 +2845,7 @@ module Aws::ElasticLoadBalancingV2
     class ModifyTargetGroupAttributesInput < Struct.new(
       :target_group_arn,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2794,6 +2857,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class ModifyTargetGroupAttributesOutput < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2889,6 +2953,7 @@ module Aws::ElasticLoadBalancingV2
       :healthy_threshold_count,
       :unhealthy_threshold_count,
       :matcher)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2900,6 +2965,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class ModifyTargetGroupOutput < Struct.new(
       :target_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2934,6 +3000,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class PathPatternConditionConfig < Struct.new(
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2980,6 +3047,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class QueryStringConditionConfig < Struct.new(
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3006,6 +3074,7 @@ module Aws::ElasticLoadBalancingV2
     class QueryStringKeyValuePair < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3086,6 +3155,7 @@ module Aws::ElasticLoadBalancingV2
       :path,
       :query,
       :status_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3120,6 +3190,7 @@ module Aws::ElasticLoadBalancingV2
     class RegisterTargetsInput < Struct.new(
       :target_group_arn,
       :targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3155,6 +3226,7 @@ module Aws::ElasticLoadBalancingV2
     class RemoveListenerCertificatesInput < Struct.new(
       :listener_arn,
       :certificates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3183,6 +3255,7 @@ module Aws::ElasticLoadBalancingV2
     class RemoveTagsInput < Struct.new(
       :resource_arns,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3231,6 +3304,7 @@ module Aws::ElasticLoadBalancingV2
       :conditions,
       :actions,
       :is_default)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3361,6 +3435,7 @@ module Aws::ElasticLoadBalancingV2
       :query_string_config,
       :http_request_method_config,
       :source_ip_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3393,6 +3468,7 @@ module Aws::ElasticLoadBalancingV2
     class RulePriorityPair < Struct.new(
       :rule_arn,
       :priority)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3426,6 +3502,7 @@ module Aws::ElasticLoadBalancingV2
     class SetIpAddressTypeInput < Struct.new(
       :load_balancer_arn,
       :ip_address_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3437,6 +3514,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class SetIpAddressTypeOutput < Struct.new(
       :ip_address_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3460,6 +3538,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class SetRulePrioritiesInput < Struct.new(
       :rule_priorities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3471,6 +3550,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class SetRulePrioritiesOutput < Struct.new(
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3495,6 +3575,7 @@ module Aws::ElasticLoadBalancingV2
     class SetSecurityGroupsInput < Struct.new(
       :load_balancer_arn,
       :security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3506,6 +3587,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class SetSecurityGroupsOutput < Struct.new(
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3557,6 +3639,7 @@ module Aws::ElasticLoadBalancingV2
       :load_balancer_arn,
       :subnets,
       :subnet_mappings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3568,6 +3651,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class SetSubnetsOutput < Struct.new(
       :availability_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3600,6 +3684,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class SourceIpConditionConfig < Struct.new(
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3623,6 +3708,7 @@ module Aws::ElasticLoadBalancingV2
       :ssl_protocols,
       :ciphers,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3657,6 +3743,7 @@ module Aws::ElasticLoadBalancingV2
       :subnet_id,
       :allocation_id,
       :private_i_pv_4_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3689,6 +3776,7 @@ module Aws::ElasticLoadBalancingV2
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3707,6 +3795,7 @@ module Aws::ElasticLoadBalancingV2
     class TagDescription < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3761,6 +3850,7 @@ module Aws::ElasticLoadBalancingV2
       :id,
       :port,
       :availability_zone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3859,6 +3949,7 @@ module Aws::ElasticLoadBalancingV2
       :matcher,
       :load_balancer_arns,
       :target_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3952,6 +4043,7 @@ module Aws::ElasticLoadBalancingV2
     class TargetGroupAttribute < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3986,6 +4078,7 @@ module Aws::ElasticLoadBalancingV2
     class TargetGroupStickinessConfig < Struct.new(
       :enabled,
       :duration_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4013,6 +4106,7 @@ module Aws::ElasticLoadBalancingV2
     class TargetGroupTuple < Struct.new(
       :target_group_arn,
       :weight)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4099,6 +4193,7 @@ module Aws::ElasticLoadBalancingV2
       :state,
       :reason,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4122,6 +4217,7 @@ module Aws::ElasticLoadBalancingV2
       :target,
       :health_check_port,
       :target_health)
+      SENSITIVE = []
       include Aws::Structure
     end
 

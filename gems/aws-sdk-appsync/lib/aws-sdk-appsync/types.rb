@@ -19,6 +19,7 @@ module Aws::AppSync
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -61,6 +62,7 @@ module Aws::AppSync
       :authentication_type,
       :open_id_connect_config,
       :user_pool_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -132,6 +134,7 @@ module Aws::AppSync
       :at_rest_encryption_enabled,
       :type,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -194,6 +197,7 @@ module Aws::AppSync
       :id,
       :description,
       :expires)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -206,6 +210,7 @@ module Aws::AppSync
     #
     class ApiKeyLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -220,6 +225,7 @@ module Aws::AppSync
     #
     class ApiKeyValidityOutOfBoundsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -232,6 +238,7 @@ module Aws::AppSync
     #
     class ApiLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -266,6 +273,7 @@ module Aws::AppSync
     class AuthorizationConfig < Struct.new(
       :authorization_type,
       :aws_iam_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -292,6 +300,7 @@ module Aws::AppSync
     class AwsIamConfig < Struct.new(
       :signing_region,
       :signing_service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -305,6 +314,7 @@ module Aws::AppSync
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -336,6 +346,7 @@ module Aws::AppSync
     class CachingConfig < Struct.new(
       :ttl,
       :caching_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -369,6 +380,7 @@ module Aws::AppSync
       :user_pool_id,
       :aws_region,
       :app_id_client_regex)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -382,6 +394,7 @@ module Aws::AppSync
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -455,6 +468,7 @@ module Aws::AppSync
       :at_rest_encryption_enabled,
       :api_caching_behavior,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -468,6 +482,7 @@ module Aws::AppSync
     #
     class CreateApiCacheResponse < Struct.new(
       :api_cache)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -501,6 +516,7 @@ module Aws::AppSync
       :api_id,
       :description,
       :expires)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -512,6 +528,7 @@ module Aws::AppSync
     #
     class CreateApiKeyResponse < Struct.new(
       :api_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -618,6 +635,7 @@ module Aws::AppSync
       :elasticsearch_config,
       :http_config,
       :relational_database_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -629,6 +647,7 @@ module Aws::AppSync
     #
     class CreateDataSourceResponse < Struct.new(
       :data_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -685,6 +704,7 @@ module Aws::AppSync
       :request_mapping_template,
       :response_mapping_template,
       :function_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -696,6 +716,7 @@ module Aws::AppSync
     #
     class CreateFunctionResponse < Struct.new(
       :function_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -790,6 +811,7 @@ module Aws::AppSync
       :tags,
       :additional_authentication_providers,
       :xray_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -801,6 +823,7 @@ module Aws::AppSync
     #
     class CreateGraphqlApiResponse < Struct.new(
       :graphql_api)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -897,6 +920,7 @@ module Aws::AppSync
       :pipeline_config,
       :sync_config,
       :caching_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -908,6 +932,7 @@ module Aws::AppSync
     #
     class CreateResolverResponse < Struct.new(
       :resolver)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -945,6 +970,7 @@ module Aws::AppSync
       :api_id,
       :definition,
       :format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -956,6 +982,7 @@ module Aws::AppSync
     #
     class CreateTypeResponse < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1033,6 +1060,7 @@ module Aws::AppSync
       :elasticsearch_config,
       :http_config,
       :relational_database_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1053,6 +1081,7 @@ module Aws::AppSync
     #
     class DeleteApiCacheRequest < Struct.new(
       :api_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1083,6 +1112,7 @@ module Aws::AppSync
     class DeleteApiKeyRequest < Struct.new(
       :api_id,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1111,6 +1141,7 @@ module Aws::AppSync
     class DeleteDataSourceRequest < Struct.new(
       :api_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1139,6 +1170,7 @@ module Aws::AppSync
     class DeleteFunctionRequest < Struct.new(
       :api_id,
       :function_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1161,6 +1193,7 @@ module Aws::AppSync
     #
     class DeleteGraphqlApiRequest < Struct.new(
       :api_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1195,6 +1228,7 @@ module Aws::AppSync
       :api_id,
       :type_name,
       :field_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1223,6 +1257,7 @@ module Aws::AppSync
     class DeleteTypeRequest < Struct.new(
       :api_id,
       :type_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1260,6 +1295,7 @@ module Aws::AppSync
       :base_table_ttl,
       :delta_sync_table_name,
       :delta_sync_table_ttl)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1309,6 +1345,7 @@ module Aws::AppSync
       :use_caller_credentials,
       :delta_sync_config,
       :versioned)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1335,6 +1372,7 @@ module Aws::AppSync
     class ElasticsearchDataSourceConfig < Struct.new(
       :endpoint,
       :aws_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1355,6 +1393,7 @@ module Aws::AppSync
     #
     class FlushApiCacheRequest < Struct.new(
       :api_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1412,6 +1451,7 @@ module Aws::AppSync
       :request_mapping_template,
       :response_mapping_template,
       :function_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1432,6 +1472,7 @@ module Aws::AppSync
     #
     class GetApiCacheRequest < Struct.new(
       :api_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1445,6 +1486,7 @@ module Aws::AppSync
     #
     class GetApiCacheResponse < Struct.new(
       :api_cache)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1469,6 +1511,7 @@ module Aws::AppSync
     class GetDataSourceRequest < Struct.new(
       :api_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1480,6 +1523,7 @@ module Aws::AppSync
     #
     class GetDataSourceResponse < Struct.new(
       :data_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1504,6 +1548,7 @@ module Aws::AppSync
     class GetFunctionRequest < Struct.new(
       :api_id,
       :function_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1515,6 +1560,7 @@ module Aws::AppSync
     #
     class GetFunctionResponse < Struct.new(
       :function_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1533,6 +1579,7 @@ module Aws::AppSync
     #
     class GetGraphqlApiRequest < Struct.new(
       :api_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1544,6 +1591,7 @@ module Aws::AppSync
     #
     class GetGraphqlApiResponse < Struct.new(
       :graphql_api)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1575,6 +1623,7 @@ module Aws::AppSync
       :api_id,
       :format,
       :include_directives)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1592,6 +1641,7 @@ module Aws::AppSync
     #
     class GetIntrospectionSchemaResponse < Struct.new(
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1622,6 +1672,7 @@ module Aws::AppSync
       :api_id,
       :type_name,
       :field_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1633,6 +1684,7 @@ module Aws::AppSync
     #
     class GetResolverResponse < Struct.new(
       :resolver)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1651,6 +1703,7 @@ module Aws::AppSync
     #
     class GetSchemaCreationStatusRequest < Struct.new(
       :api_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1670,6 +1723,7 @@ module Aws::AppSync
     class GetSchemaCreationStatusResponse < Struct.new(
       :status,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1700,6 +1754,7 @@ module Aws::AppSync
       :api_id,
       :type_name,
       :format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1711,6 +1766,7 @@ module Aws::AppSync
     #
     class GetTypeResponse < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1723,6 +1779,7 @@ module Aws::AppSync
     #
     class GraphQLSchemaException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1788,6 +1845,7 @@ module Aws::AppSync
       :tags,
       :additional_authentication_providers,
       :xray_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1824,6 +1882,7 @@ module Aws::AppSync
     class HttpDataSourceConfig < Struct.new(
       :endpoint,
       :authorization_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1836,6 +1895,7 @@ module Aws::AppSync
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1857,6 +1917,7 @@ module Aws::AppSync
     #
     class LambdaConflictHandlerConfig < Struct.new(
       :lambda_conflict_handler_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1877,6 +1938,7 @@ module Aws::AppSync
     #
     class LambdaDataSourceConfig < Struct.new(
       :lambda_function_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1889,6 +1951,7 @@ module Aws::AppSync
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1921,6 +1984,7 @@ module Aws::AppSync
       :api_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1938,6 +2002,7 @@ module Aws::AppSync
     class ListApiKeysResponse < Struct.new(
       :api_keys,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1970,6 +2035,7 @@ module Aws::AppSync
       :api_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1987,6 +2053,7 @@ module Aws::AppSync
     class ListDataSourcesResponse < Struct.new(
       :data_sources,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2019,6 +2086,7 @@ module Aws::AppSync
       :api_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2037,6 +2105,7 @@ module Aws::AppSync
     class ListFunctionsResponse < Struct.new(
       :functions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2063,6 +2132,7 @@ module Aws::AppSync
     class ListGraphqlApisRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2080,6 +2150,7 @@ module Aws::AppSync
     class ListGraphqlApisResponse < Struct.new(
       :graphql_apis,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2118,6 +2189,7 @@ module Aws::AppSync
       :function_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2135,6 +2207,7 @@ module Aws::AppSync
     class ListResolversByFunctionResponse < Struct.new(
       :resolvers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2173,6 +2246,7 @@ module Aws::AppSync
       :type_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2190,6 +2264,7 @@ module Aws::AppSync
     class ListResolversResponse < Struct.new(
       :resolvers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2208,6 +2283,7 @@ module Aws::AppSync
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2219,6 +2295,7 @@ module Aws::AppSync
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2257,6 +2334,7 @@ module Aws::AppSync
       :format,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2274,6 +2352,7 @@ module Aws::AppSync
     class ListTypesResponse < Struct.new(
       :types,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2329,6 +2408,7 @@ module Aws::AppSync
       :field_log_level,
       :cloud_watch_logs_role_arn,
       :exclude_verbose_content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2342,6 +2422,7 @@ module Aws::AppSync
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2387,6 +2468,7 @@ module Aws::AppSync
       :client_id,
       :iat_ttl,
       :auth_ttl)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2407,6 +2489,7 @@ module Aws::AppSync
     #
     class PipelineConfig < Struct.new(
       :functions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2451,6 +2534,7 @@ module Aws::AppSync
       :database_name,
       :schema,
       :aws_secret_store_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2488,6 +2572,7 @@ module Aws::AppSync
     class RelationalDatabaseDataSourceConfig < Struct.new(
       :relational_database_source_type,
       :rds_http_endpoint_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2555,6 +2640,7 @@ module Aws::AppSync
       :pipeline_config,
       :sync_config,
       :caching_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2579,6 +2665,7 @@ module Aws::AppSync
     class StartSchemaCreationRequest < Struct.new(
       :api_id,
       :definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2592,6 +2679,7 @@ module Aws::AppSync
     #
     class StartSchemaCreationResponse < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2646,6 +2734,7 @@ module Aws::AppSync
       :conflict_handler,
       :conflict_detection,
       :lambda_conflict_handler_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2672,6 +2761,7 @@ module Aws::AppSync
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2709,6 +2799,7 @@ module Aws::AppSync
       :arn,
       :definition,
       :format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2721,6 +2812,7 @@ module Aws::AppSync
     #
     class UnauthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2745,6 +2837,7 @@ module Aws::AppSync
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2808,6 +2901,7 @@ module Aws::AppSync
       :ttl,
       :api_caching_behavior,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2821,6 +2915,7 @@ module Aws::AppSync
     #
     class UpdateApiCacheResponse < Struct.new(
       :api_cache)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2859,6 +2954,7 @@ module Aws::AppSync
       :id,
       :description,
       :expires)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2870,6 +2966,7 @@ module Aws::AppSync
     #
     class UpdateApiKeyResponse < Struct.new(
       :api_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2975,6 +3072,7 @@ module Aws::AppSync
       :elasticsearch_config,
       :http_config,
       :relational_database_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2986,6 +3084,7 @@ module Aws::AppSync
     #
     class UpdateDataSourceResponse < Struct.new(
       :data_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3048,6 +3147,7 @@ module Aws::AppSync
       :request_mapping_template,
       :response_mapping_template,
       :function_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3059,6 +3159,7 @@ module Aws::AppSync
     #
     class UpdateFunctionResponse < Struct.new(
       :function_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3152,6 +3253,7 @@ module Aws::AppSync
       :open_id_connect_config,
       :additional_authentication_providers,
       :xray_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3163,6 +3265,7 @@ module Aws::AppSync
     #
     class UpdateGraphqlApiResponse < Struct.new(
       :graphql_api)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3255,6 +3358,7 @@ module Aws::AppSync
       :pipeline_config,
       :sync_config,
       :caching_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3266,6 +3370,7 @@ module Aws::AppSync
     #
     class UpdateResolverResponse < Struct.new(
       :resolver)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3302,6 +3407,7 @@ module Aws::AppSync
       :type_name,
       :definition,
       :format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3313,6 +3419,7 @@ module Aws::AppSync
     #
     class UpdateTypeResponse < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3354,6 +3461,7 @@ module Aws::AppSync
       :aws_region,
       :default_action,
       :app_id_client_regex)
+      SENSITIVE = []
       include Aws::Structure
     end
 

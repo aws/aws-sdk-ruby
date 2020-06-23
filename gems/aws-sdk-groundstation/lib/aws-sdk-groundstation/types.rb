@@ -38,6 +38,7 @@ module Aws::GroundStation
     #
     class AntennaDownlinkConfig < Struct.new(
       :spectrum_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -85,6 +86,7 @@ module Aws::GroundStation
       :decode_config,
       :demodulation_config,
       :spectrum_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -120,6 +122,7 @@ module Aws::GroundStation
     class AntennaUplinkConfig < Struct.new(
       :spectrum_config,
       :target_eirp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +141,7 @@ module Aws::GroundStation
     #
     class CancelContactRequest < Struct.new(
       :contact_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -159,6 +163,7 @@ module Aws::GroundStation
       :config_arn,
       :config_id,
       :config_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -187,6 +192,7 @@ module Aws::GroundStation
       :config_id,
       :config_type,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -297,6 +303,7 @@ module Aws::GroundStation
       :dataflow_endpoint_config,
       :tracking_config,
       :uplink_echo_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -372,6 +379,7 @@ module Aws::GroundStation
       :satellite_arn,
       :start_time,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -383,6 +391,7 @@ module Aws::GroundStation
     #
     class ContactIdResponse < Struct.new(
       :contact_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -472,6 +481,7 @@ module Aws::GroundStation
       :config_data,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -514,6 +524,7 @@ module Aws::GroundStation
     class CreateDataflowEndpointGroupRequest < Struct.new(
       :endpoint_details,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -577,6 +588,7 @@ module Aws::GroundStation
       :name,
       :tags,
       :tracking_config_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -612,6 +624,7 @@ module Aws::GroundStation
       :address,
       :name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -638,6 +651,7 @@ module Aws::GroundStation
     class DataflowEndpointConfig < Struct.new(
       :dataflow_endpoint_name,
       :dataflow_endpoint_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -649,6 +663,7 @@ module Aws::GroundStation
     #
     class DataflowEndpointGroupIdResponse < Struct.new(
       :dataflow_endpoint_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -667,6 +682,7 @@ module Aws::GroundStation
     class DataflowEndpointListItem < Struct.new(
       :dataflow_endpoint_group_arn,
       :dataflow_endpoint_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -687,6 +703,7 @@ module Aws::GroundStation
     #
     class DecodeConfig < Struct.new(
       :unvalidated_json)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -711,6 +728,7 @@ module Aws::GroundStation
     class DeleteConfigRequest < Struct.new(
       :config_id,
       :config_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -729,6 +747,7 @@ module Aws::GroundStation
     #
     class DeleteDataflowEndpointGroupRequest < Struct.new(
       :dataflow_endpoint_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -747,6 +766,7 @@ module Aws::GroundStation
     #
     class DeleteMissionProfileRequest < Struct.new(
       :mission_profile_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -767,6 +787,7 @@ module Aws::GroundStation
     #
     class DemodulationConfig < Struct.new(
       :unvalidated_json)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -783,6 +804,7 @@ module Aws::GroundStation
     class DependencyException < Struct.new(
       :message,
       :parameter_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -801,6 +823,7 @@ module Aws::GroundStation
     #
     class DescribeContactRequest < Struct.new(
       :contact_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -874,6 +897,7 @@ module Aws::GroundStation
       :satellite_arn,
       :start_time,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -900,6 +924,7 @@ module Aws::GroundStation
     class Eirp < Struct.new(
       :units,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -918,6 +943,7 @@ module Aws::GroundStation
     class Elevation < Struct.new(
       :unit,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -955,6 +981,7 @@ module Aws::GroundStation
     class EndpointDetails < Struct.new(
       :endpoint,
       :security_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -981,6 +1008,7 @@ module Aws::GroundStation
     class Frequency < Struct.new(
       :units,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1007,6 +1035,7 @@ module Aws::GroundStation
     class FrequencyBandwidth < Struct.new(
       :units,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1031,6 +1060,7 @@ module Aws::GroundStation
     class GetConfigRequest < Struct.new(
       :config_id,
       :config_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1067,6 +1097,7 @@ module Aws::GroundStation
       :config_type,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1085,6 +1116,7 @@ module Aws::GroundStation
     #
     class GetDataflowEndpointGroupRequest < Struct.new(
       :dataflow_endpoint_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1111,6 +1143,7 @@ module Aws::GroundStation
       :dataflow_endpoint_group_id,
       :endpoints_details,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1135,6 +1168,7 @@ module Aws::GroundStation
     class GetMinuteUsageRequest < Struct.new(
       :month,
       :year)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1171,6 +1205,7 @@ module Aws::GroundStation
       :total_reserved_minute_allocation,
       :total_scheduled_minutes,
       :upcoming_minutes_scheduled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1189,6 +1224,7 @@ module Aws::GroundStation
     #
     class GetMissionProfileRequest < Struct.new(
       :mission_profile_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1250,6 +1286,7 @@ module Aws::GroundStation
       :region,
       :tags,
       :tracking_config_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1268,6 +1305,7 @@ module Aws::GroundStation
     #
     class GetSatelliteRequest < Struct.new(
       :satellite_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1294,6 +1332,7 @@ module Aws::GroundStation
       :norad_satellite_id,
       :satellite_arn,
       :satellite_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1317,6 +1356,7 @@ module Aws::GroundStation
       :ground_station_id,
       :ground_station_name,
       :region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1333,6 +1373,7 @@ module Aws::GroundStation
     class InvalidParameterException < Struct.new(
       :message,
       :parameter_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1358,6 +1399,7 @@ module Aws::GroundStation
     class ListConfigsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1375,6 +1417,7 @@ module Aws::GroundStation
     class ListConfigsResponse < Struct.new(
       :config_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1436,6 +1479,7 @@ module Aws::GroundStation
       :satellite_arn,
       :start_time,
       :status_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1453,6 +1497,7 @@ module Aws::GroundStation
     class ListContactsResponse < Struct.new(
       :contact_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1479,6 +1524,7 @@ module Aws::GroundStation
     class ListDataflowEndpointGroupsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1497,6 +1543,7 @@ module Aws::GroundStation
     class ListDataflowEndpointGroupsResponse < Struct.new(
       :dataflow_endpoint_group_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1528,6 +1575,7 @@ module Aws::GroundStation
       :max_results,
       :next_token,
       :satellite_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1545,6 +1593,7 @@ module Aws::GroundStation
     class ListGroundStationsResponse < Struct.new(
       :ground_station_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1570,6 +1619,7 @@ module Aws::GroundStation
     class ListMissionProfilesRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1587,6 +1637,7 @@ module Aws::GroundStation
     class ListMissionProfilesResponse < Struct.new(
       :mission_profile_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1612,6 +1663,7 @@ module Aws::GroundStation
     class ListSatellitesRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1629,6 +1681,7 @@ module Aws::GroundStation
     class ListSatellitesResponse < Struct.new(
       :next_token,
       :satellites)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1647,6 +1700,7 @@ module Aws::GroundStation
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1658,6 +1712,7 @@ module Aws::GroundStation
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1669,6 +1724,7 @@ module Aws::GroundStation
     #
     class MissionProfileIdResponse < Struct.new(
       :mission_profile_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1697,6 +1753,7 @@ module Aws::GroundStation
       :mission_profile_id,
       :name,
       :region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1747,6 +1804,7 @@ module Aws::GroundStation
       :satellite_arn,
       :start_time,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1763,6 +1821,7 @@ module Aws::GroundStation
     class ResourceLimitExceededException < Struct.new(
       :message,
       :parameter_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1775,6 +1834,7 @@ module Aws::GroundStation
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1803,6 +1863,7 @@ module Aws::GroundStation
       :norad_satellite_id,
       :satellite_arn,
       :satellite_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1836,6 +1897,7 @@ module Aws::GroundStation
       :role_arn,
       :security_group_ids,
       :subnet_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1862,6 +1924,7 @@ module Aws::GroundStation
     class SocketAddress < Struct.new(
       :name,
       :port)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1900,6 +1963,7 @@ module Aws::GroundStation
       :bandwidth,
       :center_frequency,
       :polarization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1926,6 +1990,7 @@ module Aws::GroundStation
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1951,6 +2016,7 @@ module Aws::GroundStation
     #
     class TrackingConfig < Struct.new(
       :autotrack)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1975,6 +2041,7 @@ module Aws::GroundStation
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2072,6 +2139,7 @@ module Aws::GroundStation
       :config_id,
       :config_type,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2133,6 +2201,7 @@ module Aws::GroundStation
       :mission_profile_id,
       :name,
       :tracking_config_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2163,6 +2232,7 @@ module Aws::GroundStation
     class UplinkEchoConfig < Struct.new(
       :antenna_uplink_config_arn,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2192,6 +2262,7 @@ module Aws::GroundStation
     class UplinkSpectrumConfig < Struct.new(
       :center_frequency,
       :polarization)
+      SENSITIVE = []
       include Aws::Structure
     end
 

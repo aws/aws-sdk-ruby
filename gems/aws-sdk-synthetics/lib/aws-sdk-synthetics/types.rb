@@ -117,6 +117,7 @@ module Aws::Synthetics
       :runtime_version,
       :vpc_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -176,6 +177,7 @@ module Aws::Synthetics
       :s3_version,
       :zip_file,
       :handler)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -196,6 +198,7 @@ module Aws::Synthetics
     class CanaryCodeOutput < Struct.new(
       :source_location_arn,
       :handler)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -215,6 +218,7 @@ module Aws::Synthetics
     class CanaryLastRun < Struct.new(
       :canary_name,
       :last_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -244,6 +248,7 @@ module Aws::Synthetics
       :status,
       :timeline,
       :artifact_s3_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -273,6 +278,7 @@ module Aws::Synthetics
     class CanaryRunConfigInput < Struct.new(
       :timeout_in_seconds,
       :memory_in_mb)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -292,6 +298,7 @@ module Aws::Synthetics
     class CanaryRunConfigOutput < Struct.new(
       :timeout_in_seconds,
       :memory_in_mb)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -318,6 +325,7 @@ module Aws::Synthetics
       :state,
       :state_reason,
       :state_reason_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -337,6 +345,7 @@ module Aws::Synthetics
     class CanaryRunTimeline < Struct.new(
       :started,
       :completed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -377,6 +386,7 @@ module Aws::Synthetics
     class CanaryScheduleInput < Struct.new(
       :expression,
       :duration_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -407,6 +417,7 @@ module Aws::Synthetics
     class CanaryScheduleOutput < Struct.new(
       :expression,
       :duration_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -432,6 +443,7 @@ module Aws::Synthetics
       :state,
       :state_reason,
       :state_reason_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -461,6 +473,7 @@ module Aws::Synthetics
       :last_modified,
       :last_started,
       :last_stopped)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -473,6 +486,7 @@ module Aws::Synthetics
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -624,6 +638,7 @@ module Aws::Synthetics
       :runtime_version,
       :vpc_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -635,6 +650,7 @@ module Aws::Synthetics
     #
     class CreateCanaryResponse < Struct.new(
       :canary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -658,6 +674,7 @@ module Aws::Synthetics
     #
     class DeleteCanaryRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -690,6 +707,7 @@ module Aws::Synthetics
     class DescribeCanariesLastRunRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -709,6 +727,7 @@ module Aws::Synthetics
     class DescribeCanariesLastRunResponse < Struct.new(
       :canaries_last_run,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -737,6 +756,7 @@ module Aws::Synthetics
     class DescribeCanariesRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -756,6 +776,7 @@ module Aws::Synthetics
     class DescribeCanariesResponse < Struct.new(
       :canaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -784,6 +805,7 @@ module Aws::Synthetics
     class DescribeRuntimeVersionsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -803,6 +825,7 @@ module Aws::Synthetics
     class DescribeRuntimeVersionsResponse < Struct.new(
       :runtime_versions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -821,6 +844,7 @@ module Aws::Synthetics
     #
     class GetCanaryRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -832,6 +856,7 @@ module Aws::Synthetics
     #
     class GetCanaryResponse < Struct.new(
       :canary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -866,6 +891,7 @@ module Aws::Synthetics
       :name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -885,6 +911,7 @@ module Aws::Synthetics
     class GetCanaryRunsResponse < Struct.new(
       :canary_runs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -897,6 +924,7 @@ module Aws::Synthetics
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -918,6 +946,7 @@ module Aws::Synthetics
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -930,6 +959,7 @@ module Aws::Synthetics
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -942,6 +972,7 @@ module Aws::Synthetics
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -981,6 +1012,7 @@ module Aws::Synthetics
       :description,
       :release_date,
       :deprecation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1004,6 +1036,7 @@ module Aws::Synthetics
     #
     class StartCanaryRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1031,6 +1064,7 @@ module Aws::Synthetics
     #
     class StopCanaryRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1064,6 +1098,7 @@ module Aws::Synthetics
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1095,6 +1130,7 @@ module Aws::Synthetics
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1222,6 +1258,7 @@ module Aws::Synthetics
       :success_retention_period_in_days,
       :failure_retention_period_in_days,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1238,6 +1275,7 @@ module Aws::Synthetics
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1270,6 +1308,7 @@ module Aws::Synthetics
     class VpcConfigInput < Struct.new(
       :subnet_ids,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1299,6 +1338,7 @@ module Aws::Synthetics
       :vpc_id,
       :subnet_ids,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 

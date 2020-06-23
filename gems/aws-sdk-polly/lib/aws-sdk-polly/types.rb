@@ -26,6 +26,7 @@ module Aws::Polly
     #
     class DeleteLexiconInput < Struct.new(
       :name)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -77,6 +78,7 @@ module Aws::Polly
       :language_code,
       :include_additional_language_codes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -95,6 +97,7 @@ module Aws::Polly
     class DescribeVoicesOutput < Struct.new(
       :voices,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -109,6 +112,7 @@ module Aws::Polly
     #
     class EngineNotSupportedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -127,6 +131,7 @@ module Aws::Polly
     #
     class GetLexiconInput < Struct.new(
       :name)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -146,6 +151,7 @@ module Aws::Polly
     class GetLexiconOutput < Struct.new(
       :lexicon,
       :lexicon_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -164,6 +170,7 @@ module Aws::Polly
     #
     class GetSpeechSynthesisTaskInput < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -177,6 +184,7 @@ module Aws::Polly
     #
     class GetSpeechSynthesisTaskOutput < Struct.new(
       :synthesis_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -190,6 +198,7 @@ module Aws::Polly
     #
     class InvalidLexiconException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -203,6 +212,7 @@ module Aws::Polly
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -216,6 +226,7 @@ module Aws::Polly
     #
     class InvalidS3BucketException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -229,6 +240,7 @@ module Aws::Polly
     #
     class InvalidS3KeyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -241,6 +253,7 @@ module Aws::Polly
     #
     class InvalidSampleRateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -254,6 +267,7 @@ module Aws::Polly
     #
     class InvalidSnsTopicArnException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -267,6 +281,7 @@ module Aws::Polly
     #
     class InvalidSsmlException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -280,6 +295,7 @@ module Aws::Polly
     #
     class InvalidTaskIdException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -293,6 +309,7 @@ module Aws::Polly
     #
     class LanguageNotSupportedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -318,6 +335,7 @@ module Aws::Polly
     class Lexicon < Struct.new(
       :content,
       :name)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -365,6 +383,7 @@ module Aws::Polly
       :lexicon_arn,
       :lexemes_count,
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -383,6 +402,7 @@ module Aws::Polly
     class LexiconDescription < Struct.new(
       :name,
       :attributes)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -400,6 +420,7 @@ module Aws::Polly
     #
     class LexiconNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -413,6 +434,7 @@ module Aws::Polly
     #
     class LexiconSizeExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -433,6 +455,7 @@ module Aws::Polly
     #
     class ListLexiconsInput < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -451,6 +474,7 @@ module Aws::Polly
     class ListLexiconsOutput < Struct.new(
       :lexicons,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -483,6 +507,7 @@ module Aws::Polly
       :max_results,
       :next_token,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -503,6 +528,7 @@ module Aws::Polly
     class ListSpeechSynthesisTasksOutput < Struct.new(
       :next_token,
       :synthesis_tasks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -516,6 +542,7 @@ module Aws::Polly
     #
     class MarksNotSupportedForFormatException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -528,6 +555,7 @@ module Aws::Polly
     #
     class MaxLexemeLengthExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -540,6 +568,7 @@ module Aws::Polly
     #
     class MaxLexiconsNumberExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -566,6 +595,7 @@ module Aws::Polly
     class PutLexiconInput < Struct.new(
       :name,
       :content)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -582,6 +612,7 @@ module Aws::Polly
     #
     class ServiceFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -594,6 +625,7 @@ module Aws::Polly
     #
     class SsmlMarksNotSupportedForTextTypeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -708,6 +740,7 @@ module Aws::Polly
       :text,
       :text_type,
       :voice_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -720,6 +753,7 @@ module Aws::Polly
     #
     class StartSpeechSynthesisTaskOutput < Struct.new(
       :synthesis_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -834,6 +868,7 @@ module Aws::Polly
       :text_type,
       :voice_id,
       :language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -846,6 +881,7 @@ module Aws::Polly
     #
     class SynthesisTaskNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -958,6 +994,7 @@ module Aws::Polly
       :text,
       :text_type,
       :voice_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -993,6 +1030,7 @@ module Aws::Polly
       :audio_stream,
       :content_type,
       :request_characters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1010,6 +1048,7 @@ module Aws::Polly
     #
     class TextLengthExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1023,6 +1062,7 @@ module Aws::Polly
     #
     class UnsupportedPlsAlphabetException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1040,6 +1080,7 @@ module Aws::Polly
     #
     class UnsupportedPlsLanguageException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1093,6 +1134,7 @@ module Aws::Polly
       :name,
       :additional_language_codes,
       :supported_engines)
+      SENSITIVE = []
       include Aws::Structure
     end
 

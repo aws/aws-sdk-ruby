@@ -31,6 +31,7 @@ module Aws::Greengrass
     class AssociateRoleToGroupRequest < Struct.new(
       :group_id,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43,6 +44,7 @@ module Aws::Greengrass
     #
     class AssociateRoleToGroupResponse < Struct.new(
       :associated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -61,6 +63,7 @@ module Aws::Greengrass
     #
     class AssociateServiceRoleToAccountRequest < Struct.new(
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -72,6 +75,7 @@ module Aws::Greengrass
     #
     class AssociateServiceRoleToAccountResponse < Struct.new(
       :associated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -89,6 +93,7 @@ module Aws::Greengrass
     class BadRequestException < Struct.new(
       :error_details,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -114,6 +119,7 @@ module Aws::Greengrass
       :bulk_deployment_arn,
       :bulk_deployment_id,
       :created_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -145,6 +151,7 @@ module Aws::Greengrass
       :invalid_input_records,
       :records_processed,
       :retry_attempts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -195,6 +202,7 @@ module Aws::Greengrass
       :error_details,
       :error_message,
       :group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -233,6 +241,7 @@ module Aws::Greengrass
       :id,
       :metadata,
       :port_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -271,6 +280,7 @@ module Aws::Greengrass
       :connector_arn,
       :id,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -301,6 +311,7 @@ module Aws::Greengrass
     #
     class ConnectorDefinitionVersion < Struct.new(
       :connectors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -342,6 +353,7 @@ module Aws::Greengrass
       :id,
       :sync_shadow,
       :thing_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -369,6 +381,7 @@ module Aws::Greengrass
     #
     class CoreDefinitionVersion < Struct.new(
       :cores)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -416,6 +429,7 @@ module Aws::Greengrass
       :initial_version,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -450,6 +464,7 @@ module Aws::Greengrass
       :latest_version,
       :latest_version_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -485,6 +500,7 @@ module Aws::Greengrass
       :amzn_client_token,
       :connector_definition_id,
       :connectors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -507,6 +523,7 @@ module Aws::Greengrass
       :creation_timestamp,
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -552,6 +569,7 @@ module Aws::Greengrass
       :initial_version,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -586,6 +604,7 @@ module Aws::Greengrass
       :latest_version,
       :latest_version_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -620,6 +639,7 @@ module Aws::Greengrass
       :amzn_client_token,
       :core_definition_id,
       :cores)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -642,6 +662,7 @@ module Aws::Greengrass
       :creation_timestamp,
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -686,6 +707,7 @@ module Aws::Greengrass
       :deployment_type,
       :group_id,
       :group_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -702,6 +724,7 @@ module Aws::Greengrass
     class CreateDeploymentResponse < Struct.new(
       :deployment_arn,
       :deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -747,6 +770,7 @@ module Aws::Greengrass
       :initial_version,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -781,6 +805,7 @@ module Aws::Greengrass
       :latest_version,
       :latest_version_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -815,6 +840,7 @@ module Aws::Greengrass
       :amzn_client_token,
       :device_definition_id,
       :devices)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -837,6 +863,7 @@ module Aws::Greengrass
       :creation_timestamp,
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -916,6 +943,7 @@ module Aws::Greengrass
       :initial_version,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -950,6 +978,7 @@ module Aws::Greengrass
       :latest_version,
       :latest_version_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1024,6 +1053,7 @@ module Aws::Greengrass
       :default_config,
       :function_definition_id,
       :functions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1046,6 +1076,7 @@ module Aws::Greengrass
       :creation_timestamp,
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1068,6 +1099,7 @@ module Aws::Greengrass
     class CreateGroupCertificateAuthorityRequest < Struct.new(
       :amzn_client_token,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1079,6 +1111,7 @@ module Aws::Greengrass
     #
     class CreateGroupCertificateAuthorityResponse < Struct.new(
       :group_certificate_authority_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1123,6 +1156,7 @@ module Aws::Greengrass
       :initial_version,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1157,6 +1191,7 @@ module Aws::Greengrass
       :latest_version,
       :latest_version_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1214,6 +1249,7 @@ module Aws::Greengrass
       :logger_definition_version_arn,
       :resource_definition_version_arn,
       :subscription_definition_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1236,6 +1272,7 @@ module Aws::Greengrass
       :creation_timestamp,
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1282,6 +1319,7 @@ module Aws::Greengrass
       :initial_version,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1316,6 +1354,7 @@ module Aws::Greengrass
       :latest_version,
       :latest_version_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1351,6 +1390,7 @@ module Aws::Greengrass
       :amzn_client_token,
       :logger_definition_id,
       :loggers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1373,6 +1413,7 @@ module Aws::Greengrass
       :creation_timestamp,
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1453,6 +1494,7 @@ module Aws::Greengrass
       :initial_version,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1487,6 +1529,7 @@ module Aws::Greengrass
       :latest_version,
       :latest_version_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1556,6 +1599,7 @@ module Aws::Greengrass
       :amzn_client_token,
       :resource_definition_id,
       :resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1578,6 +1622,7 @@ module Aws::Greengrass
       :creation_timestamp,
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1637,6 +1682,7 @@ module Aws::Greengrass
       :update_targets,
       :update_targets_architecture,
       :update_targets_operating_system)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1659,6 +1705,7 @@ module Aws::Greengrass
       :iot_job_arn,
       :iot_job_id,
       :platform_software_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1704,6 +1751,7 @@ module Aws::Greengrass
       :initial_version,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1738,6 +1786,7 @@ module Aws::Greengrass
       :latest_version,
       :latest_version_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1772,6 +1821,7 @@ module Aws::Greengrass
       :amzn_client_token,
       :subscription_definition_id,
       :subscriptions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1794,6 +1844,7 @@ module Aws::Greengrass
       :creation_timestamp,
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1844,6 +1895,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1861,6 +1913,7 @@ module Aws::Greengrass
     #
     class DeleteConnectorDefinitionRequest < Struct.new(
       :connector_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1882,6 +1935,7 @@ module Aws::Greengrass
     #
     class DeleteCoreDefinitionRequest < Struct.new(
       :core_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1903,6 +1957,7 @@ module Aws::Greengrass
     #
     class DeleteDeviceDefinitionRequest < Struct.new(
       :device_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1924,6 +1979,7 @@ module Aws::Greengrass
     #
     class DeleteFunctionDefinitionRequest < Struct.new(
       :function_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1945,6 +2001,7 @@ module Aws::Greengrass
     #
     class DeleteGroupRequest < Struct.new(
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1966,6 +2023,7 @@ module Aws::Greengrass
     #
     class DeleteLoggerDefinitionRequest < Struct.new(
       :logger_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1987,6 +2045,7 @@ module Aws::Greengrass
     #
     class DeleteResourceDefinitionRequest < Struct.new(
       :resource_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2008,6 +2067,7 @@ module Aws::Greengrass
     #
     class DeleteSubscriptionDefinitionRequest < Struct.new(
       :subscription_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2046,6 +2106,7 @@ module Aws::Greengrass
       :deployment_id,
       :deployment_type,
       :group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2087,6 +2148,7 @@ module Aws::Greengrass
       :id,
       :sync_shadow,
       :thing_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2114,6 +2176,7 @@ module Aws::Greengrass
     #
     class DeviceDefinitionVersion < Struct.new(
       :devices)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2131,6 +2194,7 @@ module Aws::Greengrass
     #
     class DisassociateRoleFromGroupRequest < Struct.new(
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2143,6 +2207,7 @@ module Aws::Greengrass
     #
     class DisassociateRoleFromGroupResponse < Struct.new(
       :disassociated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2160,6 +2225,7 @@ module Aws::Greengrass
     #
     class DisassociateServiceRoleFromAccountResponse < Struct.new(
       :disassociated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2184,6 +2250,7 @@ module Aws::Greengrass
     class ErrorDetail < Struct.new(
       :detailed_error_code,
       :detailed_error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2244,6 +2311,7 @@ module Aws::Greengrass
       :function_arn,
       :function_configuration,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2324,6 +2392,7 @@ module Aws::Greengrass
       :memory_size,
       :pinned,
       :timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2381,6 +2450,7 @@ module Aws::Greengrass
       :execution,
       :resource_access_policies,
       :variables)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2408,6 +2478,7 @@ module Aws::Greengrass
     #
     class FunctionDefaultConfig < Struct.new(
       :execution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2448,6 +2519,7 @@ module Aws::Greengrass
     class FunctionDefaultExecutionConfig < Struct.new(
       :isolation_mode,
       :run_as)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2516,6 +2588,7 @@ module Aws::Greengrass
     class FunctionDefinitionVersion < Struct.new(
       :default_config,
       :functions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2556,6 +2629,7 @@ module Aws::Greengrass
     class FunctionExecutionConfig < Struct.new(
       :isolation_mode,
       :run_as)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2589,6 +2663,7 @@ module Aws::Greengrass
     class FunctionRunAsConfig < Struct.new(
       :gid,
       :uid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2607,6 +2682,7 @@ module Aws::Greengrass
     class GeneralError < Struct.new(
       :error_details,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2624,6 +2700,7 @@ module Aws::Greengrass
     #
     class GetAssociatedRoleRequest < Struct.new(
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2640,6 +2717,7 @@ module Aws::Greengrass
     class GetAssociatedRoleResponse < Struct.new(
       :associated_at,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2657,6 +2735,7 @@ module Aws::Greengrass
     #
     class GetBulkDeploymentStatusRequest < Struct.new(
       :bulk_deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2696,6 +2775,7 @@ module Aws::Greengrass
       :error_details,
       :error_message,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2713,6 +2793,7 @@ module Aws::Greengrass
     #
     class GetConnectivityInfoRequest < Struct.new(
       :thing_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2731,6 +2812,7 @@ module Aws::Greengrass
     class GetConnectivityInfoResponse < Struct.new(
       :connectivity_info,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2748,6 +2830,7 @@ module Aws::Greengrass
     #
     class GetConnectorDefinitionRequest < Struct.new(
       :connector_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2787,6 +2870,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2814,6 +2898,7 @@ module Aws::Greengrass
       :connector_definition_id,
       :connector_definition_version_id,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2854,6 +2939,7 @@ module Aws::Greengrass
       :id,
       :next_token,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2871,6 +2957,7 @@ module Aws::Greengrass
     #
     class GetCoreDefinitionRequest < Struct.new(
       :core_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2910,6 +2997,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2932,6 +3020,7 @@ module Aws::Greengrass
     class GetCoreDefinitionVersionRequest < Struct.new(
       :core_definition_id,
       :core_definition_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2970,6 +3059,7 @@ module Aws::Greengrass
       :id,
       :next_token,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2992,6 +3082,7 @@ module Aws::Greengrass
     class GetDeploymentStatusRequest < Struct.new(
       :deployment_id,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3027,6 +3118,7 @@ module Aws::Greengrass
       :error_details,
       :error_message,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3044,6 +3136,7 @@ module Aws::Greengrass
     #
     class GetDeviceDefinitionRequest < Struct.new(
       :device_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3083,6 +3176,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3110,6 +3204,7 @@ module Aws::Greengrass
       :device_definition_id,
       :device_definition_version_id,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3148,6 +3243,7 @@ module Aws::Greengrass
       :id,
       :next_token,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3165,6 +3261,7 @@ module Aws::Greengrass
     #
     class GetFunctionDefinitionRequest < Struct.new(
       :function_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3204,6 +3301,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3231,6 +3329,7 @@ module Aws::Greengrass
       :function_definition_id,
       :function_definition_version_id,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3271,6 +3370,7 @@ module Aws::Greengrass
       :id,
       :next_token,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3293,6 +3393,7 @@ module Aws::Greengrass
     class GetGroupCertificateAuthorityRequest < Struct.new(
       :certificate_authority_id,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3316,6 +3417,7 @@ module Aws::Greengrass
       :group_certificate_authority_arn,
       :group_certificate_authority_id,
       :pem_encoded_certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3333,6 +3435,7 @@ module Aws::Greengrass
     #
     class GetGroupCertificateConfigurationRequest < Struct.new(
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3351,6 +3454,7 @@ module Aws::Greengrass
       :certificate_authority_expiry_in_milliseconds,
       :certificate_expiry_in_milliseconds,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3368,6 +3472,7 @@ module Aws::Greengrass
     #
     class GetGroupRequest < Struct.new(
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3407,6 +3512,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3429,6 +3535,7 @@ module Aws::Greengrass
     class GetGroupVersionRequest < Struct.new(
       :group_id,
       :group_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3463,6 +3570,7 @@ module Aws::Greengrass
       :definition,
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3480,6 +3588,7 @@ module Aws::Greengrass
     #
     class GetLoggerDefinitionRequest < Struct.new(
       :logger_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3519,6 +3628,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3546,6 +3656,7 @@ module Aws::Greengrass
       :logger_definition_id,
       :logger_definition_version_id,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3580,6 +3691,7 @@ module Aws::Greengrass
       :definition,
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3597,6 +3709,7 @@ module Aws::Greengrass
     #
     class GetResourceDefinitionRequest < Struct.new(
       :resource_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3636,6 +3749,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3658,6 +3772,7 @@ module Aws::Greengrass
     class GetResourceDefinitionVersionRequest < Struct.new(
       :resource_definition_id,
       :resource_definition_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3692,6 +3807,7 @@ module Aws::Greengrass
       :definition,
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3714,6 +3830,7 @@ module Aws::Greengrass
     class GetServiceRoleForAccountResponse < Struct.new(
       :associated_at,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3731,6 +3848,7 @@ module Aws::Greengrass
     #
     class GetSubscriptionDefinitionRequest < Struct.new(
       :subscription_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3770,6 +3888,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3797,6 +3916,7 @@ module Aws::Greengrass
       :next_token,
       :subscription_definition_id,
       :subscription_definition_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3837,6 +3957,7 @@ module Aws::Greengrass
       :id,
       :next_token,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3855,6 +3976,7 @@ module Aws::Greengrass
     class GroupCertificateAuthorityProperties < Struct.new(
       :group_certificate_authority_arn,
       :group_certificate_authority_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3880,6 +4002,7 @@ module Aws::Greengrass
       :certificate_authority_expiry_in_milliseconds,
       :certificate_expiry_in_milliseconds,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3925,6 +4048,7 @@ module Aws::Greengrass
       :latest_version,
       :latest_version_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3955,6 +4079,7 @@ module Aws::Greengrass
     class GroupOwnerSetting < Struct.new(
       :auto_add_group_owner,
       :group_owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4011,6 +4136,7 @@ module Aws::Greengrass
       :logger_definition_version_arn,
       :resource_definition_version_arn,
       :subscription_definition_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4028,6 +4154,7 @@ module Aws::Greengrass
     class InternalServerErrorException < Struct.new(
       :error_details,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4055,6 +4182,7 @@ module Aws::Greengrass
       :bulk_deployment_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4073,6 +4201,7 @@ module Aws::Greengrass
     class ListBulkDeploymentDetailedReportsResponse < Struct.new(
       :deployments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4095,6 +4224,7 @@ module Aws::Greengrass
     class ListBulkDeploymentsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4112,6 +4242,7 @@ module Aws::Greengrass
     class ListBulkDeploymentsResponse < Struct.new(
       :bulk_deployments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4139,6 +4270,7 @@ module Aws::Greengrass
       :connector_definition_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4153,6 +4285,7 @@ module Aws::Greengrass
     class ListConnectorDefinitionVersionsResponse < Struct.new(
       :next_token,
       :versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4175,6 +4308,7 @@ module Aws::Greengrass
     class ListConnectorDefinitionsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4189,6 +4323,7 @@ module Aws::Greengrass
     class ListConnectorDefinitionsResponse < Struct.new(
       :definitions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4216,6 +4351,7 @@ module Aws::Greengrass
       :core_definition_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4230,6 +4366,7 @@ module Aws::Greengrass
     class ListCoreDefinitionVersionsResponse < Struct.new(
       :next_token,
       :versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4252,6 +4389,7 @@ module Aws::Greengrass
     class ListCoreDefinitionsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4266,6 +4404,7 @@ module Aws::Greengrass
     class ListCoreDefinitionsResponse < Struct.new(
       :definitions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4285,6 +4424,7 @@ module Aws::Greengrass
     class ListDefinitionsResponse < Struct.new(
       :definitions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4312,6 +4452,7 @@ module Aws::Greengrass
       :group_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4329,6 +4470,7 @@ module Aws::Greengrass
     class ListDeploymentsResponse < Struct.new(
       :deployments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4356,6 +4498,7 @@ module Aws::Greengrass
       :device_definition_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4370,6 +4513,7 @@ module Aws::Greengrass
     class ListDeviceDefinitionVersionsResponse < Struct.new(
       :next_token,
       :versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4392,6 +4536,7 @@ module Aws::Greengrass
     class ListDeviceDefinitionsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4406,6 +4551,7 @@ module Aws::Greengrass
     class ListDeviceDefinitionsResponse < Struct.new(
       :definitions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4433,6 +4579,7 @@ module Aws::Greengrass
       :function_definition_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4447,6 +4594,7 @@ module Aws::Greengrass
     class ListFunctionDefinitionVersionsResponse < Struct.new(
       :next_token,
       :versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4469,6 +4617,7 @@ module Aws::Greengrass
     class ListFunctionDefinitionsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4483,6 +4632,7 @@ module Aws::Greengrass
     class ListFunctionDefinitionsResponse < Struct.new(
       :definitions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4500,6 +4650,7 @@ module Aws::Greengrass
     #
     class ListGroupCertificateAuthoritiesRequest < Struct.new(
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4511,6 +4662,7 @@ module Aws::Greengrass
     #
     class ListGroupCertificateAuthoritiesResponse < Struct.new(
       :group_certificate_authorities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4538,6 +4690,7 @@ module Aws::Greengrass
       :group_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4552,6 +4705,7 @@ module Aws::Greengrass
     class ListGroupVersionsResponse < Struct.new(
       :next_token,
       :versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4574,6 +4728,7 @@ module Aws::Greengrass
     class ListGroupsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4591,6 +4746,7 @@ module Aws::Greengrass
     class ListGroupsResponse < Struct.new(
       :groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4618,6 +4774,7 @@ module Aws::Greengrass
       :logger_definition_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4632,6 +4789,7 @@ module Aws::Greengrass
     class ListLoggerDefinitionVersionsResponse < Struct.new(
       :next_token,
       :versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4654,6 +4812,7 @@ module Aws::Greengrass
     class ListLoggerDefinitionsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4668,6 +4827,7 @@ module Aws::Greengrass
     class ListLoggerDefinitionsResponse < Struct.new(
       :definitions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4695,6 +4855,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       :resource_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4709,6 +4870,7 @@ module Aws::Greengrass
     class ListResourceDefinitionVersionsResponse < Struct.new(
       :next_token,
       :versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4731,6 +4893,7 @@ module Aws::Greengrass
     class ListResourceDefinitionsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4745,6 +4908,7 @@ module Aws::Greengrass
     class ListResourceDefinitionsResponse < Struct.new(
       :definitions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4772,6 +4936,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       :subscription_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4786,6 +4951,7 @@ module Aws::Greengrass
     class ListSubscriptionDefinitionVersionsResponse < Struct.new(
       :next_token,
       :versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4808,6 +4974,7 @@ module Aws::Greengrass
     class ListSubscriptionDefinitionsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4822,6 +4989,7 @@ module Aws::Greengrass
     class ListSubscriptionDefinitionsResponse < Struct.new(
       :definitions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4839,6 +5007,7 @@ module Aws::Greengrass
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4850,6 +5019,7 @@ module Aws::Greengrass
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4869,6 +5039,7 @@ module Aws::Greengrass
     class ListVersionsResponse < Struct.new(
       :next_token,
       :versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4900,6 +5071,7 @@ module Aws::Greengrass
     class LocalDeviceResourceData < Struct.new(
       :group_owner_setting,
       :source_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4939,6 +5111,7 @@ module Aws::Greengrass
       :destination_path,
       :group_owner_setting,
       :source_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4986,6 +5159,7 @@ module Aws::Greengrass
       :level,
       :space,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5014,6 +5188,7 @@ module Aws::Greengrass
     #
     class LoggerDefinitionVersion < Struct.new(
       :loggers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5044,6 +5219,7 @@ module Aws::Greengrass
       :amzn_client_token,
       :force,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5060,6 +5236,7 @@ module Aws::Greengrass
     class ResetDeploymentsResponse < Struct.new(
       :deployment_arn,
       :deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5134,6 +5311,7 @@ module Aws::Greengrass
       :id,
       :name,
       :resource_data_container)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5162,6 +5340,7 @@ module Aws::Greengrass
     class ResourceAccessPolicy < Struct.new(
       :permission,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5243,6 +5422,7 @@ module Aws::Greengrass
       :s3_machine_learning_model_resource_data,
       :sage_maker_machine_learning_model_resource_data,
       :secrets_manager_secret_resource_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5305,6 +5485,7 @@ module Aws::Greengrass
     #
     class ResourceDefinitionVersion < Struct.new(
       :resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5334,6 +5515,7 @@ module Aws::Greengrass
     class ResourceDownloadOwnerSetting < Struct.new(
       :group_owner,
       :group_permission)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5371,6 +5553,7 @@ module Aws::Greengrass
       :destination_path,
       :owner_setting,
       :s3_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5408,6 +5591,7 @@ module Aws::Greengrass
       :destination_path,
       :owner_setting,
       :sage_maker_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5440,6 +5624,7 @@ module Aws::Greengrass
     class SecretsManagerSecretResourceData < Struct.new(
       :arn,
       :additional_staging_labels_to_download)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5491,6 +5676,7 @@ module Aws::Greengrass
       :execution_role_arn,
       :input_file_uri,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5507,6 +5693,7 @@ module Aws::Greengrass
     class StartBulkDeploymentResponse < Struct.new(
       :bulk_deployment_arn,
       :bulk_deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5524,6 +5711,7 @@ module Aws::Greengrass
     #
     class StopBulkDeploymentRequest < Struct.new(
       :bulk_deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5572,6 +5760,7 @@ module Aws::Greengrass
       :source,
       :subject,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5599,6 +5788,7 @@ module Aws::Greengrass
     #
     class SubscriptionDefinitionVersion < Struct.new(
       :subscriptions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5624,6 +5814,7 @@ module Aws::Greengrass
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5646,6 +5837,7 @@ module Aws::Greengrass
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5678,6 +5870,7 @@ module Aws::Greengrass
     class UpdateConnectivityInfoRequest < Struct.new(
       :connectivity_info,
       :thing_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5694,6 +5887,7 @@ module Aws::Greengrass
     class UpdateConnectivityInfoResponse < Struct.new(
       :message,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5716,6 +5910,7 @@ module Aws::Greengrass
     class UpdateConnectorDefinitionRequest < Struct.new(
       :connector_definition_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5742,6 +5937,7 @@ module Aws::Greengrass
     class UpdateCoreDefinitionRequest < Struct.new(
       :core_definition_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5768,6 +5964,7 @@ module Aws::Greengrass
     class UpdateDeviceDefinitionRequest < Struct.new(
       :device_definition_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5794,6 +5991,7 @@ module Aws::Greengrass
     class UpdateFunctionDefinitionRequest < Struct.new(
       :function_definition_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5822,6 +6020,7 @@ module Aws::Greengrass
     class UpdateGroupCertificateConfigurationRequest < Struct.new(
       :certificate_expiry_in_milliseconds,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5840,6 +6039,7 @@ module Aws::Greengrass
       :certificate_authority_expiry_in_milliseconds,
       :certificate_expiry_in_milliseconds,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5862,6 +6062,7 @@ module Aws::Greengrass
     class UpdateGroupRequest < Struct.new(
       :group_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5888,6 +6089,7 @@ module Aws::Greengrass
     class UpdateLoggerDefinitionRequest < Struct.new(
       :logger_definition_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5914,6 +6116,7 @@ module Aws::Greengrass
     class UpdateResourceDefinitionRequest < Struct.new(
       :name,
       :resource_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5940,6 +6143,7 @@ module Aws::Greengrass
     class UpdateSubscriptionDefinitionRequest < Struct.new(
       :name,
       :subscription_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5973,6 +6177,7 @@ module Aws::Greengrass
       :creation_timestamp,
       :id,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 

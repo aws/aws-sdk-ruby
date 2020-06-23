@@ -51,6 +51,6 @@ require_relative 'aws-sdk-opsworks/customizations'
 # @service
 module Aws::OpsWorks
 
-  GEM_VERSION = '1.25.1'
+  GEM_VERSION = '1.26.0'
 
 end

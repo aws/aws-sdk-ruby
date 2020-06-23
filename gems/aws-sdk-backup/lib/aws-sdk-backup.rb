@@ -47,6 +47,6 @@ require_relative 'aws-sdk-backup/customizations'
 # @service
 module Aws::Backup
 
-  GEM_VERSION = '1.16.1'
+  GEM_VERSION = '1.17.0'
 
 end

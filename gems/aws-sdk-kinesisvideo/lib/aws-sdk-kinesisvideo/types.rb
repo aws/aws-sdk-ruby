@@ -19,6 +19,7 @@ module Aws::KinesisVideo
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32,6 +33,7 @@ module Aws::KinesisVideo
     #
     class AccountChannelLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44,6 +46,7 @@ module Aws::KinesisVideo
     #
     class AccountStreamLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -89,6 +92,7 @@ module Aws::KinesisVideo
       :creation_time,
       :single_master_configuration,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -120,6 +124,7 @@ module Aws::KinesisVideo
     class ChannelNameCondition < Struct.new(
       :comparison_operator,
       :comparison_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -133,6 +138,7 @@ module Aws::KinesisVideo
     #
     class ClientLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -180,6 +186,7 @@ module Aws::KinesisVideo
       :channel_type,
       :single_master_configuration,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -191,6 +198,7 @@ module Aws::KinesisVideo
     #
     class CreateSignalingChannelOutput < Struct.new(
       :channel_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -285,6 +293,7 @@ module Aws::KinesisVideo
       :kms_key_id,
       :data_retention_in_hours,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -296,6 +305,7 @@ module Aws::KinesisVideo
     #
     class CreateStreamOutput < Struct.new(
       :stream_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -324,6 +334,7 @@ module Aws::KinesisVideo
     class DeleteSignalingChannelInput < Struct.new(
       :channel_arn,
       :current_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -360,6 +371,7 @@ module Aws::KinesisVideo
     class DeleteStreamInput < Struct.new(
       :stream_arn,
       :current_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -388,6 +400,7 @@ module Aws::KinesisVideo
     class DescribeSignalingChannelInput < Struct.new(
       :channel_name,
       :channel_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -400,6 +413,7 @@ module Aws::KinesisVideo
     #
     class DescribeSignalingChannelOutput < Struct.new(
       :channel_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -424,6 +438,7 @@ module Aws::KinesisVideo
     class DescribeStreamInput < Struct.new(
       :stream_name,
       :stream_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -435,6 +450,7 @@ module Aws::KinesisVideo
     #
     class DescribeStreamOutput < Struct.new(
       :stream_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -447,6 +463,7 @@ module Aws::KinesisVideo
     #
     class DeviceStreamLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -480,6 +497,7 @@ module Aws::KinesisVideo
       :stream_name,
       :stream_arn,
       :api_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -492,6 +510,7 @@ module Aws::KinesisVideo
     #
     class GetDataEndpointOutput < Struct.new(
       :data_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -521,6 +540,7 @@ module Aws::KinesisVideo
     class GetSignalingChannelEndpointInput < Struct.new(
       :channel_arn,
       :single_master_channel_endpoint_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -532,6 +552,7 @@ module Aws::KinesisVideo
     #
     class GetSignalingChannelEndpointOutput < Struct.new(
       :resource_endpoint_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -544,6 +565,7 @@ module Aws::KinesisVideo
     #
     class InvalidArgumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -556,6 +578,7 @@ module Aws::KinesisVideo
     #
     class InvalidDeviceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -568,6 +591,7 @@ module Aws::KinesisVideo
     #
     class InvalidResourceFormatException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -606,6 +630,7 @@ module Aws::KinesisVideo
       :max_results,
       :next_token,
       :channel_name_condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -624,6 +649,7 @@ module Aws::KinesisVideo
     class ListSignalingChannelsOutput < Struct.new(
       :channel_info_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -663,6 +689,7 @@ module Aws::KinesisVideo
       :max_results,
       :next_token,
       :stream_name_condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -681,6 +708,7 @@ module Aws::KinesisVideo
     class ListStreamsOutput < Struct.new(
       :stream_info_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -709,6 +737,7 @@ module Aws::KinesisVideo
     class ListTagsForResourceInput < Struct.new(
       :next_token,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -729,6 +758,7 @@ module Aws::KinesisVideo
     class ListTagsForResourceOutput < Struct.new(
       :next_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -763,6 +793,7 @@ module Aws::KinesisVideo
       :next_token,
       :stream_arn,
       :stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -781,6 +812,7 @@ module Aws::KinesisVideo
     class ListTagsForStreamOutput < Struct.new(
       :next_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -793,6 +825,7 @@ module Aws::KinesisVideo
     #
     class NotAuthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -814,6 +847,7 @@ module Aws::KinesisVideo
     class ResourceEndpointListItem < Struct.new(
       :protocol,
       :resource_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -826,6 +860,7 @@ module Aws::KinesisVideo
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -839,6 +874,7 @@ module Aws::KinesisVideo
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -875,6 +911,7 @@ module Aws::KinesisVideo
     class SingleMasterChannelEndpointConfiguration < Struct.new(
       :protocols,
       :role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -897,6 +934,7 @@ module Aws::KinesisVideo
     #
     class SingleMasterConfiguration < Struct.new(
       :message_ttl_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -951,6 +989,7 @@ module Aws::KinesisVideo
       :status,
       :creation_time,
       :data_retention_in_hours)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -983,6 +1022,7 @@ module Aws::KinesisVideo
     class StreamNameCondition < Struct.new(
       :comparison_operator,
       :comparison_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1012,6 +1052,7 @@ module Aws::KinesisVideo
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1043,6 +1084,7 @@ module Aws::KinesisVideo
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1081,6 +1123,7 @@ module Aws::KinesisVideo
       :stream_arn,
       :stream_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1098,6 +1141,7 @@ module Aws::KinesisVideo
     #
     class TagsPerResourceExceededLimitException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1123,6 +1167,7 @@ module Aws::KinesisVideo
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_key_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1158,6 +1203,7 @@ module Aws::KinesisVideo
       :stream_arn,
       :stream_name,
       :tag_key_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1210,6 +1256,7 @@ module Aws::KinesisVideo
       :current_version,
       :operation,
       :data_retention_change_in_hours)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1249,6 +1296,7 @@ module Aws::KinesisVideo
       :channel_arn,
       :current_version,
       :single_master_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1315,6 +1363,7 @@ module Aws::KinesisVideo
       :current_version,
       :device_name,
       :media_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1336,6 +1385,7 @@ module Aws::KinesisVideo
     #
     class VersionMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

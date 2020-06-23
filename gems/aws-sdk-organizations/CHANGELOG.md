@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2020-06-23)
+------------------
+
+* Feature - Added a new error message to support the requirement for a Business License on AWS accounts in China to create an organization.
+
 1.42.1 (2020-06-11)
 ------------------
 
